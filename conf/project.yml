@@ -1,6 +1,6 @@
 project:
-  name: wundertools
-  file_sync_url: https://www.example1.com
+  name: fsa
+  file_sync_url: https://www.food.gov.uk
 ansible:
   remote: git@github.com:wunderkraut/WunderMachina.git
   branch: master
