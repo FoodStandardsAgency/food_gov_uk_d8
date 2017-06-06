@@ -14,10 +14,10 @@ $key = rtrim($key);
 
 $aliases['local'] = array(
   'parent' => '@parent',
-  'site' => 'wundertools',
+  'site' => 'fsa',
   'env' => 'vagrant',
   'root' => '/vagrant/drupal/web',
-  'remote-host' => 'local.wundertools.com',
+  'remote-host' => 'local.food.gov.uk',
   'remote-user' => 'vagrant',
   'ssh-options' => '-i ' . $key,
   'path-aliases' => array(
@@ -27,10 +27,10 @@ $aliases['local'] = array(
 );
 
 $aliases['dev'] = array(
-  'uri' => 'https://dev.wundertools.com',
+  'uri' => 'https://dev.food.gov.uk',
   'remote-user' => 'www-admin',
-  'remote-host' => 'dev.wundertools.com',
-  'root' => '/var/www/dev.wundertools.com/web',
+  'remote-host' => 'dev.food.gov.uk',
+  'root' => '/var/www/dev.food.gov.uk/web',
   'path-aliases' => array(
     '%dump-dir' => '/home/www-admin',
   ),
@@ -42,10 +42,10 @@ $aliases['dev'] = array(
 );
 
 $aliases['stage'] = array(
-  'uri' => 'https://stage.wundertools.com',
+  'uri' => 'https://stage.food.gov.uk',
   'remote-user' => 'www-admin',
-  'remote-host' => 'stage.wundertools.com',
-  'root' => '/var/www/stage.wundertools.com/web',
+  'remote-host' => 'stage.food.gov.uk',
+  'root' => '/var/www/stage.food.gov.uk/web',
   'path-aliases' => array(
     '%dump-dir' => '/home/www-admin',
   ),
@@ -57,10 +57,10 @@ $aliases['stage'] = array(
 );
 
 $aliases['prod'] = array(
-  'uri' => 'https://wundertools.com',
+  'uri' => 'https://www.food.gov.uk',
   'remote-user' => 'www-admin',
-  'remote-host' => 'wundertools.com',
-  'root' => '/var/www/wundertools.com/web',
+  'remote-host' => 'www.food.gov.uk',
+  'root' => '/var/www/www.food.gov.uk/web',
   'path-aliases' => array(
     '%dump-dir' => '/home/www-admin',
   ),
