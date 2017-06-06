@@ -1,0 +1,34 @@
+---
+
+# Setup firewalls using upcloud api
+- include: upcloud.yml
+
+- include: prod-lb.yml
+- include: prod-db.yml
+- include: prod-front.yml
+
+- hosts: prod
+  become: false
+  become_method: sudo
+  user: root
+
+  vars_files:
+  - prod-vars.yml
+
+  vars:
+    ## Internal / helper vars ##
+    # Production specific
+
+    # Use internal network ip's of machines
+    db_ip: "10.10.10.3"
+    lb_ip: "10.10.10.4"
+    front1_ip: "10.10.10.5"
+    front2_ip: "10.10.10.6"
+
+    # This server hosts multiple domains
+    domain1_name: example1.com
+    domain2_name: example2.com
+
+    ## Base ##
+
+    wkv_site_env: prod

@@ -1,0 +1,55 @@
+{
+    "name": "Wundertools Drupal 8",
+    "description": "Wundertools Drupal 8 Composer Project Template",
+    "type": "project",
+    "license": "GPL-2.0+",
+    "authors": [
+        {
+            "name": "",
+            "role": ""
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    ],
+    "require": {
+        "composer/installers": "^1.2",
+        "drupal-composer/drupal-scaffold": "^2.2",
+        "cweagans/composer-patches": "~1.0",
+        "drupal/core": "~8.0",
+        "drush/drush": "~8.0",
+        "drupal/console": "~1.0",
+        "drupal/config_installer": "~1.0",
+        "drupal/simplei": "^1.0"
+    },
+    "require-dev": {
+        "codeception/codeception": "^2.2",
+        "codeception/visualception": "^0.9.0",
+        "guncha25/codecept-drupal-drush": "~0.3",
+        "guncha25/drupal-8-bootstrap": "0.3"
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "installer-paths": {
+            "web/core": ["type:drupal-core"],
+            "web/libraries/{$name}": ["type:drupal-library"],
+            "web/modules/contrib/{$name}": ["type:drupal-module"],
+            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
+            "web/themes/contrib/{$name}": ["type:drupal-theme"],
+            "web/drush/commands/{$name}": ["type:drupal-drush"]
+        },
+        "patches": {
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"]
+    }
+}

@@ -1,0 +1,23 @@
+# Generic ones
+.DS_Store
+.vagrant
+drupal/current
+drupal/builds
+drupal/.make_cache
+drupal/drupal.sqlite
+.idea
+ansible
+local.*
+test/composer.lock
+test/vendor
+test/bin
+VERSION
+
+# Ignore ansible retry files
+conf/*.retry
+
+# Ignore secrets folder
+secrets
+
+# Ignore python virtualenv created by provision.sh
+.virtualenv
