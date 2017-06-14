@@ -1,25 +1,38 @@
 # Food Standards Agency
 
-FSA Drupal 8 site repo.
+Food Standards Agency (FSA) Drupal 8 site code repository.
 
 ### Getting started
 
-##### 1. Setup the local vagrant environment
+#### Requirements
+- [Vagrant](https://www.vagrantup.com/downloads.html) 1.9.2 or greater
+- [vagrant-cachier](https://github.com/fgrehm/vagrant-cachier)
+ `vagrant plugin install vagrant-cachier`
+- Ansible in host machine. For OS X:
+ `brew install ansible`
+- [Virtualbox](https://www.virtualbox.org/wiki/Downloads) 5.1 or greater 
 
-```$ vagrant up```
+#### 1. Setup local environment
 
-If everything went well, proceed to step 2.
+```$ git clone git@github.com:wunderkraut/WunderTools.git```
 
-##### 2. Setup the drupal project for the first time
+```$ vagrant up``` - default is fine reply to all prompts. 
+
+If you dont' use `vagrant-hostmanager` add following line to `/etc/hosts`
+```192.168.10.178	local.food.gov.uk```
+
+#### 2. First time setup
 
 ```$ vagrant ssh```
 
-Build the drupal project:
+```$ cd /vagrant/drupal/ && ./build.sh reset```
 
-```$ cd /vagrant/drupal/ && ./build.sh new```
+Access your local environment at https://local.food.gov.uk
 
-Access local environment at https://local.food.gov.uk
+## Project management
+
+Jira: https://wunder.atlassian.net/projects/FSA
 
 ## Development workflow
 
-Refer to WunderFlow for branching: http://wunderkraut.github.io/WunderFlow
+Refer WunderFlow for branching: http://wunderkraut.github.io/WunderFlow
