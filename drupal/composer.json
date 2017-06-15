@@ -49,6 +49,9 @@
             "web/drush/commands/{$name}": ["type:drupal-drush"]
         },
         "patches": {
+            "drupal/migrate_plus": {
+                "Allow setting request headers": "https://www.drupal.org/files/issues/fix_headers-2849153-3.patch"
+            }
         }
     },
     "scripts": {
