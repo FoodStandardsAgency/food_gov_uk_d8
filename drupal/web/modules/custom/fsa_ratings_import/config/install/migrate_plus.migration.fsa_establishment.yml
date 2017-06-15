@@ -1,0 +1,126 @@
+# Migration configuration for FSA Establishments.
+id: fsa_establishment
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - establishments
+migration_group: fsa
+label: 'FSA Establishments import'
+source:
+  plugin: establishment_api_url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  base_url: 'http://api.ratings.food.gov.uk/Establishments'
+  headers:
+    accept: application/json
+    x-api-version: '2'
+  item_selector: establishments
+  fields:
+    -
+      name: FHRSID
+      selector: FHRSID
+    -
+      name: BusinessName
+      selector: BusinessName
+    -
+      name: BusinessType
+      selector: BusinessType
+    -
+      name: RatingDate
+      selector: RatingDate
+    -
+      name: RatingValue
+      selector: RatingValue
+    -
+      name: AddressLine1
+      selector: AddressLine1
+    -
+      name: AddressLine2
+      selector: AddressLine2
+    -
+      name: AddressLine3
+      selector: AddressLine3
+    -
+      name: AddressLine4
+      selector: AddressLine4
+    -
+      name: PostCode
+      selector: PostCode
+    -
+      name: LocalAuthorityCode
+      selector: LocalAuthorityCode
+    -
+      name: SchemeType
+      selector: SchemeType
+    -
+      name: NewRatingPending
+      selector: NewRatingPending
+    -
+      name: Phone
+      selector: Phone
+    -
+      name: RatingKey
+      selector: RatingKey
+    -
+      name: scoreHygiene
+      selector: scores/Hygiene
+    -
+      name: scoreStructural
+      selector: scores/Structural
+    -
+      name: scoreConfidence
+      selector: scores/ConfidenceInManagement
+    -
+      name: longitude
+      selector: geocode/longitude
+    -
+      name: latitude
+      selector: geocode/latitude
+  ids:
+    FHRSID:
+      type: integer
+process:
+  type:
+    plugin: default_value
+    default_value: fsa_establishment
+  id: FHRSID
+  name: BusinessName
+  field_businesstype:
+    plugin: entity_generate
+    source: BusinessType
+    entity_type: taxonomy_term
+    bundle_key: vid
+    bundle: fhrs_businesstype
+    value_key: name
+  field_ratingdate: RatingDate
+  field_address:
+    plugin: concat
+    source:
+      - AddressLine1
+      - AddressLine2
+      - AddressLine3
+      - AddressLine4
+    delimiter: "\r\n"
+  field_postcode: PostCode
+  field_localauthoritycode: LocalAuthorityCode
+  field_newratingpending: NewRatingPending
+  field_phone: Phone
+  field_ratingkey: RatingKey
+  field_ratingvalue:
+    plugin: rating_value
+    source: RatingValue
+  field_score_confidence: scoreConfidence
+  field_score_hygiene: scoreHygiene
+  field_score_structural: scoreStructural
+  field_schemetype: SchemeType
+  field_geocode/lng: longitude
+  field_geocode/lat: latitude
+  uid:
+    plugin: default_value
+    default_value: 0
+destination:
+  plugin: 'entity:fsa_establishment'
+migration_dependencies:
+  required:
+    - rating_value
