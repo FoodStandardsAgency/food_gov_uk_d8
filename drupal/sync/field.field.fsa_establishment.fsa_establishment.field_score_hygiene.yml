@@ -1,0 +1,26 @@
+uuid: 434c6903-1bf6-4d7d-b234-47d80076c72b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.fsa_establishment.field_score_hygiene
+  module:
+    - fsa_ratings
+_core:
+  default_config_hash: hdYqrweiHBIB2lMPrHQ99liz9f2KTPBEpOshYMsvp24
+id: fsa_establishment.fsa_establishment.field_score_hygiene
+field_name: field_score_hygiene
+entity_type: fsa_establishment
+bundle: fsa_establishment
+label: 'Score: Hygiene'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

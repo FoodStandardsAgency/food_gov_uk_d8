@@ -1,0 +1,26 @@
+uuid: 60d566f9-33aa-4ef1-9165-d9383eb38626
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.fsa_establishment.field_score_confidence
+  module:
+    - fsa_ratings
+_core:
+  default_config_hash: ynv6hjhRCX_m1j1xGwugg18XPPfHvd-oC9X7596lvd0
+id: fsa_establishment.fsa_establishment.field_score_confidence
+field_name: field_score_confidence
+entity_type: fsa_establishment
+bundle: fsa_establishment
+label: 'Score: Confidence'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

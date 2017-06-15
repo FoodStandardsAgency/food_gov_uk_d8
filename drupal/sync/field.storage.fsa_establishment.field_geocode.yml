@@ -1,0 +1,21 @@
+uuid: 05ef21f6-bcb8-43ac-8856-0f9ddf6e9117
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_ratings
+    - geolocation
+_core:
+  default_config_hash: c6EyonAfSgu-SS6NVqmFreGxs-M29fxZ2dShLoyhJ9E
+id: fsa_establishment.field_geocode
+field_name: field_geocode
+entity_type: fsa_establishment
+type: geolocation
+settings: {  }
+module: geolocation
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

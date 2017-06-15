@@ -1,0 +1,22 @@
+uuid: 7f67e7da-b7cc-4139-a7e2-05051fc59fb6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.fsa_establishment.field_postcode
+  module:
+    - fsa_ratings
+_core:
+  default_config_hash: n0VpAjETypDT8lFvgyEMpN8lJWslF2NI6K6d1tu9x3g
+id: fsa_establishment.fsa_establishment.field_postcode
+field_name: field_postcode
+entity_type: fsa_establishment
+bundle: fsa_establishment
+label: PostCode
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

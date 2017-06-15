@@ -1,0 +1,31 @@
+uuid: 37f75f47-2bab-4f7d-a197-4668bf18d8db
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.fsa_establishment.field_businesstype
+    - taxonomy.vocabulary.fhrs_businesstype
+  module:
+    - fsa_ratings
+_core:
+  default_config_hash: 8c7SWQCCmpJ81_5lOKEFuGw3rqW2jVtDKoCh6lq0aqg
+id: fsa_establishment.fsa_establishment.field_businesstype
+field_name: field_businesstype
+entity_type: fsa_establishment
+bundle: fsa_establishment
+label: BusinessType
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      fhrs_businesstype: fhrs_businesstype
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

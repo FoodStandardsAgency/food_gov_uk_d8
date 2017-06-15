@@ -1,0 +1,11 @@
+uuid: 71acd42a-7d84-40b7-9342-e88d315cb414
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: hHeb5RfwYZDUwkjDeKjy17lpigrVth1IZSrYrMZNX2Y
+name: 'FHRS BusinessType'
+vid: fhrs_businesstype
+description: ''
+hierarchy: 0
+weight: 0

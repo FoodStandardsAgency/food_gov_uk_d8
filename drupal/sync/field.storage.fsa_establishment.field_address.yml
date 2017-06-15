@@ -1,0 +1,21 @@
+uuid: e09224b0-3b99-499a-ad68-c63323f18f56
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_ratings
+_core:
+  default_config_hash: Vd9xnEnoa99fUybtkChvmZcVD2aZQEkd9VkjVYsQSwI
+id: fsa_establishment.field_address
+field_name: field_address
+entity_type: fsa_establishment
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

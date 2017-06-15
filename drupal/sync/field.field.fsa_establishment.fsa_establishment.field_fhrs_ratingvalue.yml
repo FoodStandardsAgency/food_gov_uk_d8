@@ -1,0 +1,23 @@
+uuid: 3c40124d-884d-4ac5-b68b-10a02208a7e2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.fsa_establishment.field_fhrs_ratingvalue
+  module:
+    - fsa_ratings
+    - options
+_core:
+  default_config_hash: 6zqguIa9BmhAPeylOdh26eo5-hRrP7HELrYQBSoVVJE
+id: fsa_establishment.fsa_establishment.field_fhrs_ratingvalue
+field_name: field_fhrs_ratingvalue
+entity_type: fsa_establishment
+bundle: fsa_establishment
+label: 'FHRS rating'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

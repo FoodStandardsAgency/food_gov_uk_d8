@@ -1,0 +1,11 @@
+uuid: d82cff89-3e4c-4bcf-8906-936dfdab3f1d
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: KYiRPy2ACA3Fm7GSy_w22sEVmVstrHI_y4aQI32CIcE
+name: 'FHRS Region'
+vid: fhrs_region
+description: ''
+hierarchy: 0
+weight: 0

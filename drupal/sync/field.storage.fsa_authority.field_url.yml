@@ -1,0 +1,21 @@
+uuid: a8a883e8-503f-45e3-94a4-b9cfa73f8ec8
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_ratings
+    - link
+_core:
+  default_config_hash: GF4H65KrbnmTsOVoz5IIGKHlcRFKjefDKqqH5SIjlPU
+id: fsa_authority.field_url
+field_name: field_url
+entity_type: fsa_authority
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

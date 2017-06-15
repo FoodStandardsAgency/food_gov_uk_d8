@@ -1,0 +1,23 @@
+uuid: f793f9b7-a2a9-42e5-a7d4-f51c2fead03c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.fsa_establishment.field_ratingdate
+  module:
+    - datetime
+    - fsa_ratings
+_core:
+  default_config_hash: ts2MpevD0TmDsftwcTGBXi4yHuE_rEthWtkuWda_khI
+id: fsa_establishment.fsa_establishment.field_ratingdate
+field_name: field_ratingdate
+entity_type: fsa_establishment
+bundle: fsa_establishment
+label: 'Date of Inspection'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime
