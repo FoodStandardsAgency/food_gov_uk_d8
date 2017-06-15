@@ -1,0 +1,10 @@
+entity.fsa_authority.add_form:
+  route_name: entity.fsa_authority.add_form
+  title: 'Add FSA Authority'
+  appears_on:
+    - entity.fsa_authority.collection
+entity.fsa_establishment.add_form:
+  route_name: entity.fsa_establishment.add_form
+  title: 'Add FSA Establishment'
+  appears_on:
+    - entity.fsa_establishment.collection

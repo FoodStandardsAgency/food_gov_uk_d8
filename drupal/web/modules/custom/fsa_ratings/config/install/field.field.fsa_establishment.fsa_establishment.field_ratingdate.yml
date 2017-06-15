@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.fsa_establishment.field_ratingdate
+  module:
+    - datetime
+    - fsa_ratings
+id: fsa_establishment.fsa_establishment.field_ratingdate
+field_name: field_ratingdate
+entity_type: fsa_establishment
+bundle: fsa_establishment
+label: 'Date of Inspection'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime
