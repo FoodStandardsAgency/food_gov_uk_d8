@@ -8,7 +8,7 @@ Food Standards Agency (FSA) Drupal 8 site code repository.
 - [Vagrant](https://www.vagrantup.com/downloads.html) 1.9.2 or greater
 - [vagrant-cachier](https://github.com/fgrehm/vagrant-cachier)
  `vagrant plugin install vagrant-cachier`
-- Ansible in host machine. For OS X:
+- Ansible version 2.1.2 or greater in host machine. For OS X:
  `brew install ansible`
 - [Virtualbox](https://www.virtualbox.org/wiki/Downloads) 5.1 or greater 
 
