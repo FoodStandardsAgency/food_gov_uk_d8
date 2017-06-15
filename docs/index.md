@@ -1,14 +1,14 @@
-[PROJECT] DOCS
+FSA DOCS
 ==============
 
-This file contains the general documentation on the [project] project. It is
+This file contains the general documentation on the FSA project. It is
 intended for developers who are involved in the project, and to ease the
 handover of activities and support to colleagues.
 
 Our customer
 ------------
 
-The client is [client]. They are [describe the client in 1-3 lines].
+The client is Food Standards Agency. They are [describe the client in 1-3 lines].
 
 Website's goal
 --------------
@@ -18,11 +18,11 @@ The main objectives of the site are to [describe the main objectives].
 Project management
 ------------------
 
-The project is managed using the following tools:
+The project is managed using:
 
-* Git repo: [url1]
-* Ticket system: [url2]
-* Project documentation: [googledocsurls]
+* [Github](https://github.com/wunderio/client-UK-FSA-alpha)
+* [JIRA](https://wunder.atlassian.net/projects/FSA)
+* [Google docs](https://drive.google.com/drive/folders/0B1DPg56m9B33bmZlRFJYVVNuSmM)
 
 Hosting info
 ------------
