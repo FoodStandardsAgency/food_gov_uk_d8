@@ -26,16 +26,17 @@ class EstablishmentApiUrl extends Url {
     $length = $count/$pagesize;
     $calls = 0;
 
+    // @TODO: Don't try to fetch everything until module fully ready.
     // Use the Url plugin provided config option.
     $configuration['urls'] = [];
     for ($i = 1; $i <= $length; $i++) {
-      $configuration['urls'][] = $configuration['base_url'] . '?pageSize=' . $pagesize . '&pageNumber=' . $i;
+//      $configuration['urls'][] = $configuration['base_url'] . '?pageSize=' . $pagesize . '&pageNumber=' . $i;
 //      $calls++;
     }
 
 //    var_dump((int) $length);
 //    var_dump($calls);
-//    $configuration['urls'][] = $configuration['base_url'] . '?pageSize=2&pageNumber=1';
+    $configuration['urls'][] = $configuration['base_url'] . '?pageSize=2&pageNumber=1';
 
     // Pass in the URL's to fetch the content from.
     $this->sourceUrls = $configuration['urls'];
