@@ -1,0 +1,26 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Ceisio
+          reset_button_label: Ailosod
+          exposed_sorts_label: 'Dosbarthu drwy'
+      pager:
+        options:
+          expose:
+            items_per_page_label: 'Eitemau pob tudalen'
+            offset_label: Ongli
+      fields:
+        info:
+          label: 'Disgrifiad bloc'
+        changed:
+          label: Newidwyd
+        operations:
+          label: Gweithrediad
+      filters:
+        info:
+          expose:
+            label: 'Disgrifiad bloc'
+  page_1:
+    display_title: Tudalen

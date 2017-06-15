@@ -1,0 +1,54 @@
+label: Pobl
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Hidlydd
+          reset_button_label: Ailosod
+          exposed_sorts_label: 'Dosbarthu drwy'
+      pager:
+        options:
+          expose:
+            items_per_page_label: 'Eitemau pob tudalen'
+            offset_label: Ongli
+      fields:
+        name:
+          label: 'Enw defnyddiwr'
+        status:
+          label: Statws
+          settings:
+            format_custom_true: Gweithredol
+            format_custom_false: 'Wedi blocio'
+        roles_target_id:
+          label: Swyddogaethau
+        created:
+          label: 'Aelod o'
+        access:
+          label: 'Mynediad diwethaf'
+        operations:
+          label: Gweithrediad
+      filters:
+        status:
+          group_info:
+            label: Statws
+            group_items:
+              1:
+                title: Gweithredol
+              2:
+                title: 'Wedi blocio'
+        roles_target_id:
+          expose:
+            label: Swyddogaeth
+        permission:
+          expose:
+            label: Caniatâd
+      title: Pobl
+      use_more_text: mwy
+  page_1:
+    display_title: Tudalen
+    display_options:
+      menu:
+        title: Rhestr
+      tab_options:
+        title: Pobl

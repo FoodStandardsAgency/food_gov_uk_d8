@@ -1,0 +1,44 @@
+label: Cynnwys
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Hidlydd
+          reset_button_label: Ailosod
+          exposed_sorts_label: 'Dosbarthu drwy'
+      fields:
+        title:
+          label: Pennawd
+        name:
+          label: Awdur
+        status:
+          label: Statws
+          settings:
+            format_custom_true: 'Wedi ei gyhoeddi'
+        changed:
+          label: Newidwyd
+        operations:
+          label: Gweithrediad
+      filters:
+        title:
+          expose:
+            label: Pennawd
+        status:
+          expose:
+            label: Statws
+          group_info:
+            group_items:
+              1:
+                title: 'Wedi ei gyhoeddi'
+        langcode:
+          expose:
+            label: Iaith
+      title: Cynnwys
+  page_1:
+    display_options:
+      menu:
+        title: Cynnwys
+      tab_options:
+        title: Cynnwys
+    display_title: Tudalen
