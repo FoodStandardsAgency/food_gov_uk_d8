@@ -1,0 +1,64 @@
+uuid: 71070a2f-0c20-450e-b111-8dfeef94ccfd
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 9qsqclgzY4aEJtzkEuIKI0nWP5xtoV2fEhcRwlrBqlA
+id: fsa_authority
+migration_tags:
+  - authorities
+migration_group: fsa
+label: 'FSA Authorities import'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  urls:
+    - 'http://api.ratings.food.gov.uk/Authorities'
+  headers:
+    accept: application/json
+    x-api-version: '2'
+  item_selector: authorities
+  fields:
+    -
+      name: LocalAuthorityId
+      selector: LocalAuthorityId
+    -
+      name: LocalAuthorityIdCode
+      selector: LocalAuthorityIdCode
+    -
+      name: Name
+      selector: Name
+    -
+      name: Url
+      selector: Url
+    -
+      name: Email
+      selector: Email
+    -
+      name: RegionName
+      selector: RegionName
+  ids:
+    LocalAuthorityId:
+      type: integer
+process:
+  type:
+    plugin: default_value
+    default_value: fsa_authority
+  id: LocalAuthorityIdCode
+  name: Name
+  field_url: Url
+  field_email: Email
+  field_regionname:
+    plugin: entity_generate
+    source: RegionName
+    entity_type: taxonomy_term
+    bundle_key: vid
+    bundle: fhrs_region
+    value_key: name
+  uid:
+    plugin: default_value
+    default_value: 0
+destination:
+  plugin: 'entity:fsa_authority'
+migration_dependencies: null
