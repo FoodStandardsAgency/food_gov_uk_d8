@@ -31,12 +31,10 @@ class EstablishmentApiUrl extends Url {
     $configuration['urls'] = [];
     for ($i = 1; $i <= $length; $i++) {
 //      $configuration['urls'][] = $configuration['base_url'] . '?pageSize=' . $pagesize . '&pageNumber=' . $i;
-//      $calls++;
     }
 
-//    var_dump((int) $length);
-//    var_dump($calls);
-    $configuration['urls'][] = $configuration['base_url'] . '?pageSize=2&pageNumber=1';
+    // @todo: hardcoded small batch of import
+    $configuration['urls'][] = $configuration['base_url'] . '?pageSize=10&pageNumber=50000';
 
     // Pass in the URL's to fetch the content from.
     $this->sourceUrls = $configuration['urls'];
