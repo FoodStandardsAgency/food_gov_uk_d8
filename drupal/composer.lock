@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "edcda9ad79a97d9839e6ad2546db0114",
+    "content-hash": "2774a1547acc6a1032c778e90b2dc651",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -1616,33 +1616,36 @@
         },
         {
             "name": "drupal/migrate_plus",
-            "version": "2.0.0-beta2",
+            "version": "4.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/migrate_plus",
-                "reference": "8.x-2.0-beta2"
+                "reference": "8.x-4.0-beta1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/migrate_plus-8.x-2.0-beta2.zip",
-                "reference": "8.x-2.0-beta2",
-                "shasum": "0b29113a3c00c7ab3ba73e811da3450edca4c0bb"
+                "url": "https://ftp.drupal.org/files/projects/migrate_plus-8.x-4.0-beta1.zip",
+                "reference": "8.x-4.0-beta1",
+                "shasum": "e64bac006e3ef9ae697b0f2c4b3744af0524e208"
             },
             "require": {
-                "drupal/core": "^8.1"
+                "drupal/core": "^8.3"
             },
             "require-dev": {
                 "drupal/migrate_example_advanced_setup": "*",
                 "drupal/migrate_example_setup": "*"
             },
+            "suggest": {
+                "sainsburys/guzzle-oauth2-plugin": "3.0 required for the OAuth2 authentication plugin"
+            },
             "type": "drupal-module",
             "extra": {
                 "branch-alias": {
-                    "dev-2.x": "2.x-dev"
+                    "dev-4.x": "4.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.0-beta2",
-                    "datestamp": "1476307439"
+                    "version": "8.x-4.0-beta1",
+                    "datestamp": "1494450185"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -1670,30 +1673,30 @@
         },
         {
             "name": "drupal/migrate_tools",
-            "version": "2.0.0-beta1",
+            "version": "4.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/migrate_tools",
-                "reference": "8.x-2.0-beta1"
+                "reference": "8.x-4.0-beta1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/migrate_tools-8.x-2.0-beta1.zip",
+                "url": "https://ftp.drupal.org/files/projects/migrate_tools-8.x-4.0-beta1.zip",
                 "reference": null,
-                "shasum": "bf823a9d08d08b99d5ea1469729b30f9969ef519"
+                "shasum": "81ef335ea37053c26d4bcb4f5339fd77051e59e0"
             },
             "require": {
-                "drupal/core": "^8.1",
+                "drupal/core": "^8.3",
                 "drupal/migrate_plus": "*"
             },
             "type": "drupal-module",
             "extra": {
                 "branch-alias": {
-                    "dev-2.x": "2.x-dev"
+                    "dev-4.x": "4.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.0-beta1",
-                    "datestamp": "1476313439"
+                    "version": "8.x-4.0-beta1",
+                    "datestamp": "1494450185"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",

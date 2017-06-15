@@ -25,8 +25,8 @@
         "drupal/config_installer": "~1.0",
         "drupal/simplei": "^1.0",
         "drupal/geolocation": "^1.10",
-        "drupal/migrate_plus": "^2.0",
-        "drupal/migrate_tools": "^2.0"
+        "drupal/migrate_plus": "4.0-beta1",
+        "drupal/migrate_tools": "4.0-beta1"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
