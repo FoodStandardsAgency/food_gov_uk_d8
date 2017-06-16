@@ -28,10 +28,19 @@ class EstablishmentApiUrl extends Url {
     $page_size = self::RATINGS_API_MAX_PAGE_SIZE;
 
     $import_mode = \Drupal::config('fsa_ratings_import')->get('import_mode');
+    $import_random = \Drupal::config('fsa_ratings_import')->get('import_random');
     // For development we'll want to have less processing and import to happen
     if ($import_mode == 'development') {
       // Choose random page to be imported
-      $start_at_page = rand(100, $page_count-100);
+      // Add $config['fsa_ratings_import']['import_random'] = TRUE; to your settings.local.php
+      if ($import_random) {
+        $start_at_page = rand(100, $page_count-100);
+      }
+      else {
+        // first page(s) provide rather ugly content.
+        $start_at_page = 1;
+      }
+
       // Import only one page of 100 items
       $page_count = $start_at_page;
       $page_size = 100;
