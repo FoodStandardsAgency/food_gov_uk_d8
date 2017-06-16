@@ -1,0 +1,20 @@
+uuid: 02bd83d2-7e1f-4ae6-a601-feba352f384c
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.fhrs_businesstype
+  module:
+    - path
+id: taxonomy_term.fhrs_businesstype.path
+field_name: path
+entity_type: taxonomy_term
+bundle: fhrs_businesstype
+label: 'URL alias'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

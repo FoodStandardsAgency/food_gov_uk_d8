@@ -1,0 +1,18 @@
+uuid: 8af007d6-21e5-4911-ba16-8142b5151d07
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.fhrs_businesstype
+id: taxonomy_term.fhrs_businesstype.name
+field_name: name
+entity_type: taxonomy_term
+bundle: fhrs_businesstype
+label: Name
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

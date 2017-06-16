@@ -1,0 +1,18 @@
+uuid: dfb1fcf5-7979-4df7-8420-c0ce1e263769
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.fhrs_region
+id: taxonomy_term.fhrs_region.name
+field_name: name
+entity_type: taxonomy_term
+bundle: fhrs_region
+label: Name
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
