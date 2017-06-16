@@ -19,6 +19,7 @@
    - { role: php-fpm, tags: [ 'php-fpm' ] }
    - { role: drush, tags: [ 'drush' ] }
    - { role: drupal-log, tags: [ 'drupal-log' ] }
+   - { role: fsa_elasticsearch, tags: [ 'elasticsearch' ] }
 
   vars_files:
   - stage-vars.yml
@@ -107,3 +108,5 @@
           - "127.0.0.1"
           - "::1"
           - "localhost"
+
+    elasticsearch_heap_size: 512m

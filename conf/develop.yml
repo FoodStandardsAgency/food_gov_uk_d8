@@ -14,6 +14,7 @@
    - { role: nginx, tags: [ 'nginx' ] }
    - { role: php-fpm, tags: [ 'php-fpm' ] }
    - { role: drush, tags: [ 'drush' ] }
+   - { role: fsa_elasticsearch, tags: [ 'elasticsearch' ] }
 
   vars_files:
   - dev-vars.yml
@@ -56,3 +57,4 @@
               port: 8080
 
 
+    elasticsearch_heap_size: 512m
