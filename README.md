@@ -36,3 +36,11 @@ Jira: https://wunder.atlassian.net/projects/FSA
 ## Development workflow
 
 Refer WunderFlow for branching: http://wunderkraut.github.io/WunderFlow
+
+#### Drupal console & codeception on local environment
+
+Drupal console or codeception do not work out of the box as they cannot read `getenv()` from the `$databases` array. Workaround is to export db user & password to bash:
+ ```
+ export DB_USER_DRUPAL=drupal
+ export DB_PASS_DRUPAL=password
+ ```
