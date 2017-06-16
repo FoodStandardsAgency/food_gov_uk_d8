@@ -1,3 +1,13 @@
+entity.fsa_establishment.collection:
+  title: FSA Establishments
+  route_name: entity.fsa_establishment.collection
+  base_route: system.admin_content
+
+entity.fsa_authority.collection:
+  title: FSA Authorities
+  route_name: entity.fsa_authority.collection
+  base_route: system.admin_content
+
 # FSA Authority routing definition
 fsa_authority.settings_tab:
   route_name: fsa_authority.settings

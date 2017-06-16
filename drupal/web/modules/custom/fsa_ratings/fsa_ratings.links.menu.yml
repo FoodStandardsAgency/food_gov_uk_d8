@@ -1,10 +1,9 @@
 # FSA Authority menu items definition
 entity.fsa_authority.collection:
-  title: 'FSA Authority list'
+  title: 'FSA Authorities'
   route_name: entity.fsa_authority.collection
   description: 'List FSA Authority entities'
-  parent: system.admin_structure
-  weight: 100
+  parent: system.admin_content
 
 fsa_authority.admin.structure.settings:
   title: FSA Authority settings
@@ -16,9 +15,7 @@ fsa_authority.admin.structure.settings:
 entity.fsa_establishment.collection:
   title: 'FSA Establishment list'
   route_name: entity.fsa_establishment.collection
-  description: 'List FSA Establishment entities'
-  parent: system.admin_structure
-  weight: 100
+  parent: system.admin_content
 
 fsa_establishment.admin.structure.settings:
   title: FSA Establishment settings
