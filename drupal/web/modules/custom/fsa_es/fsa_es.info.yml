@@ -1,7 +1,7 @@
-name: FSA Ratings
+name: FSA Elasticsearch integration
 type: module
-description: FSA Food Hygiene Rating Scheme (FHRSA) API module. Creates entities for FSA Ratings items.
+description: FSA Elasticsearch integration
 core: 8.x
 package: FSA
 dependencies:
-  - geolocation
+  - elasticsearch_helper
