@@ -1,6 +1,6 @@
 # Migration configuration for FSA Authorities.
 id: fsa_authority
-label: 'FSA Authorities (welsh)'
+label: 'FSA Authorities (english)'
 migration_group: fsa
 migration_tags:
   - authorities
@@ -38,9 +38,6 @@ source:
   ids:
       LocalAuthorityId:
         type: integer
-destination:
-  plugin: 'entity:fsa_authority'
-  translations: true
 process:
   type:
     plugin: default_value
@@ -62,3 +59,6 @@ process:
   uid:
     plugin: default_value
     default_value: 0
+destination:
+  plugin: 'entity:fsa_authority'
+  translations: true
