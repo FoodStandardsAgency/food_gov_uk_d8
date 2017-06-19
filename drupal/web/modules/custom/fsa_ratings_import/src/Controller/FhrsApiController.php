@@ -6,6 +6,7 @@ use Drupal\Core\Controller\ControllerBase;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Drupal\Component\Serialization\Json;
+use Drupal\Component\Utility\UrlHelper;
 
 /**
  * Class FhrsApiController.
@@ -64,14 +65,19 @@ class FhrsApiController extends ControllerBase {
    * Get total count of FHRS items.
    *
    * @param array $filters
-   *   Array of filters.
+   *   Array of filters to build a querystring.
    *
    * @return int
    *   Total count
    */
   public static function totalCount(array $filters = []) {
 
-    $url = FhrsApiController::baseUrl() . 'Establishments?pageSize=1&name=' . $filters['name'] . '&ratingKey=' . $filters['rating'];
+    // Take filters and build a query for the API.
+    $query = UrlHelper::buildQuery($filters);
+
+    $url = FhrsApiController::baseUrl() . 'Establishments?' . $query;
+
+    // Add FHRS required headers.
     $headers = FhrsApiController::headers();
 
     $client = \Drupal::httpClient();
