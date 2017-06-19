@@ -1,0 +1,16 @@
+services:
+  fsa_es.fsa_ratings_index:
+    class: Drupal\fsa_es\Plugin\ElasticsearchIndex\FsaRatingsIndex
+    factory: plugin.manager.elasticsearch_index.processor:createInstance
+    arguments: [fsa_ratings_index]
+
+  fsa_es.normalizer.fsa_ratings_normalizer:
+    class: Drupal\fsa_es\Plugin\Normalizer\FsaRatingsNormalizer
+    tags:
+      - { name: normalizer, priority: 50 }
+    arguments: ['@entity.manager']
+
+  fsa_es.search_service:
+    class: Drupal\fsa_es\SearchService
+    arguments: []
+
