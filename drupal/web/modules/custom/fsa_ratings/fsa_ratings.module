@@ -37,5 +37,19 @@ function fsa_ratings_theme() {
     'fsa_ratings' => [
       'render element' => 'children',
     ],
+    'fsa_ratings_search_page' => [
+      'render element' => 'custom_element',
+      'variables' => [
+        'items' => [],
+        'categories' => [],
+        'keywords' => '',
+      ],
+    ],
+    'fsa_ratings_search_result_item' => [
+      'render element' => 'custom_element',
+      'variables' => [
+        'item' => NULL
+      ],
+    ],
   ];
 }

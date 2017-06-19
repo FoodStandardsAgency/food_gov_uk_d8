@@ -12,5 +12,5 @@ services:
 
   fsa_es.search_service:
     class: Drupal\fsa_es\SearchService
-    arguments: []
+    arguments: ['@elasticsearch_helper.elasticsearch_client']
 

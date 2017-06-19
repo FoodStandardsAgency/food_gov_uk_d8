@@ -52,6 +52,8 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
     $type = $object->getEntityTypeId();
 
     switch ($type) {
+      case 'node':
+        return NULL;
       case 'fsa_establishment':
         return $this->normalizeEstablishment($object, $format, $context);
       default:
@@ -60,9 +62,10 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
 
   }
 
-  protected function normalizeDefault(Entity $object, $format = NULL, array $context = []) {
+  protected function normalizeDefault(ContentEntityBase $object, $format = NULL, array $context = []) {
     $data =  [
       'id' => $object->id(),
+      'name' => $object->get('name')->getString(),
     ];
 
     return $data;

@@ -1,0 +1,9 @@
+
+fsa_ratings.ratings_search_ratingsSearch:
+  path: '/ratings/search/{keywords}'
+  defaults:
+    _controller: '\Drupal\fsa_ratings\Controller\RatingsSearch::ratingsSearch'
+    _title: 'Ratings search'
+    keywords: ''
+  requirements:
+    _permission: 'access content'
