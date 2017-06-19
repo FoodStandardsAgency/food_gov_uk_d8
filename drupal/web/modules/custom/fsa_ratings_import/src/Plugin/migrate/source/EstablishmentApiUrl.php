@@ -5,6 +5,7 @@ namespace Drupal\fsa_ratings_import\Plugin\migrate\source;
 use Drupal\fsa_ratings_import\Controller\FhrsApiController;
 use Drupal\migrate_plus\Plugin\migrate\source\Url;
 use Drupal\migrate\Plugin\MigrationInterface;
+use Drupal\Component\Utility\UrlHelper;
 
 /**
  * Source plugin for retrieving data via URLs.
@@ -22,7 +23,19 @@ class EstablishmentApiUrl extends Url {
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration) {
 
-    $count = FhrsApiController::totalCount();
+    $filters = [];
+    $process = $migration->getProcess();
+    if ($process['langcode'][0]['default_value'] == 'cy') {
+      // For welsh language migration limit establishments to only those located
+      // in Wales (countryID 4).
+      $filters['countryId'] = 4;
+      $count = FhrsApiController::totalCount($filters);
+    }
+    else {
+      $count = FhrsApiController::totalCount();
+    }
+
+
     $page_count = $count / self::RATINGS_API_MAX_PAGE_SIZE;
     $start_at_page = 1;
     $page_size = self::RATINGS_API_MAX_PAGE_SIZE;
@@ -46,18 +59,18 @@ class EstablishmentApiUrl extends Url {
       $page_size = 100;
     }
 
-    $welsh_only = FALSE;
-    $process = $migration->getProcess();
-    if ($process['langcode'][0]['default_value'] == 'cy') {
-      // For the welsh language migration limit establishments to only those
-      // located in Wales (countryID 4).
-      $welsh_only = '&countryId=4';
-    }
+    // Append pageSize to filters.
+    $filters['pageSize'] = $page_size;
+
+    // And build query for API calls.
+    $query = UrlHelper::buildQuery($filters);
 
     // Use the Url plugin provided config option.
     $configuration['urls'] = [];
     for ($i = $start_at_page; $i <= $page_count; $i++) {
-      $configuration['urls'][] = $configuration['base_url'] . '?pageSize=' . $page_size . '&pageNumber=' . $i . $welsh_only;
+      // Append pageNumber "manually", calling buildQuery() again for every item
+      // would double the excecution time.
+      $configuration['urls'][] = $configuration['base_url'] . '?' . $query . '&pageNumber' . $i;
     }
 
     // Pass in the URL's to fetch the content from.
