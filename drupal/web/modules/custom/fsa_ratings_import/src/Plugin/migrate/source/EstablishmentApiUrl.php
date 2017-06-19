@@ -46,10 +46,18 @@ class EstablishmentApiUrl extends Url {
       $page_size = 100;
     }
 
+    $welsh_only = FALSE;
+    $process = $migration->getProcess();
+    if ($process['langcode'][0]['default_value'] == 'cy') {
+      // For the welsh language migration limit establishments to only those
+      // located in Wales (countryID 4).
+      $welsh_only = '&countryId=4';
+    }
+
     // Use the Url plugin provided config option.
     $configuration['urls'] = [];
     for ($i = $start_at_page; $i <= $page_count; $i++) {
-      $configuration['urls'][] = $configuration['base_url'] . '?pageSize=' . $page_size . '&pageNumber=' . $i;
+      $configuration['urls'][] = $configuration['base_url'] . '?pageSize=' . $page_size . '&pageNumber=' . $i . $welsh_only;
     }
 
     // Pass in the URL's to fetch the content from.
