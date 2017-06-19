@@ -14,10 +14,12 @@ module:
   dblog: 0
   dynamic_page_cache: 0
   editor: 0
+  elasticsearch_helper: 0
   field: 0
   field_ui: 0
   file: 0
   filter: 0
+  fsa_es: 0
   fsa_ratings: 0
   fsa_ratings_import: 0
   geolocation: 0
@@ -38,6 +40,7 @@ module:
   quickedit: 0
   rdf: 0
   search: 0
+  serialization: 0
   shortcut: 0
   system: 0
   taxonomy: 0
