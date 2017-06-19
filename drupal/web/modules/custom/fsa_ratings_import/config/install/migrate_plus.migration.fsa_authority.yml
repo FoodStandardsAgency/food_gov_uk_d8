@@ -1,9 +1,10 @@
 # Migration configuration for FSA Authorities.
 id: fsa_authority
-label: FSA Authorities import
+label: 'FSA Authorities (welsh)'
 migration_group: fsa
 migration_tags:
   - authorities
+  - english
 source:
   plugin: url
   data_fetcher_plugin: http
@@ -13,6 +14,7 @@ source:
   headers:
     accept: 'application/json'
     x-api-version: '2'
+    accept-language: 'en-GB'
   item_selector: authorities
   fields:
       -
@@ -36,14 +38,16 @@ source:
   ids:
       LocalAuthorityId:
         type: integer
-
 destination:
-  plugin: entity:fsa_authority
-
+  plugin: 'entity:fsa_authority'
+  translations: true
 process:
   type:
     plugin: default_value
     default_value: fsa_authority
+  langcode:
+    plugin: default_value
+    default_value: 'en'
   id: LocalAuthorityIdCode
   name: Name
   field_url: Url

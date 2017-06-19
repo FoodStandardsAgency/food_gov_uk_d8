@@ -1,9 +1,9 @@
 # Migration configuration for FSA Establishments.
-id: fsa_establishment
+id: fsa_establishment_cy
 label: 'FSA Establishments import'
 migration_tags:
   - establishments
-  - english
+  - welsh
 migration_group: fsa
 source:
   plugin: establishment_api_url
@@ -13,7 +13,7 @@ source:
   headers:
     accept: application/json
     x-api-version: '2'
-    accept-language: 'en-GB'
+    accept-language: 'cy-GB'
   item_selector: establishments
   fields:
     -
@@ -85,7 +85,7 @@ process:
     default_value: fsa_establishment
   langcode:
     plugin: default_value
-    default_value: 'en'
+    default_value: 'cy'
   id: FHRSID
   name: BusinessName
   field_businesstype:
