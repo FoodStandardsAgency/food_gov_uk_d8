@@ -184,6 +184,7 @@ class FsaEstablishment extends ContentEntityBase implements FsaEstablishmentInte
         'text_processing' => 0,
       ])
       ->setDefaultValue('')
+      ->setTranslatable(TRUE)
       ->setDisplayOptions('view', [
         'label' => 'hidden',
         'type' => 'string',

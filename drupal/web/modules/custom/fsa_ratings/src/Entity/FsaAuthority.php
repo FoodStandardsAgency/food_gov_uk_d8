@@ -183,6 +183,7 @@ class FsaAuthority extends ContentEntityBase implements FsaAuthorityInterface {
         'max_length' => 255,
         'text_processing' => 0,
       ])
+      ->setTranslatable(TRUE)
       ->setDefaultValue('')
       ->setDisplayOptions('view', [
         'label' => 'hidden',
