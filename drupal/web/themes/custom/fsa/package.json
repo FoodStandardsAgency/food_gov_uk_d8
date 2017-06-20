@@ -1,0 +1,41 @@
+{
+  "name": "fsa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "browserslist": [
+    "> 1%",
+    "IE 8"
+  ],
+  "scripts": {
+    "dev": "browser-sync start --proxy 'https://local.food.gov.uk' --serveStatic 'dist' --files 'dist' --no-open & webpack --watch",
+    "build": "webpack -p"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.5.1",
+    "browser-sync": "^2.18.12",
+    "css-loader": "^0.28.4",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.2",
+    "image-webpack-loader": "^3.3.1",
+    "postcss": "^6.0.1",
+    "postcss-cssnext": "^2.11.0",
+    "postcss-import": "^10.0.0",
+    "postcss-loader": "^2.0.5",
+    "postcss-normalize": "^3.0.0",
+    "style-loader": "^0.18.1",
+    "svgo-loader": "^1.2.1",
+    "webpack": "^2.6.1"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "postcss-mixins": "^6.0.0",
+    "svg-sprite-loader": "^3.0.5",
+    "svg4everybody": "^2.1.8"
+  }
+}

@@ -1,0 +1,10 @@
+.site-hero {
+  @mixin responsive-declaration padding-top, 1em, 4em;
+  @mixin responsive-declaration padding-right, 1em, 2em;
+  @mixin responsive-declaration padding-bottom, 1em, 4em;
+  @mixin responsive-declaration padding-left, 1em, 2em;
+}
+
+.site-hero__title {
+  @mixin responsive-declaration font-size, 2em, 4em;
+}

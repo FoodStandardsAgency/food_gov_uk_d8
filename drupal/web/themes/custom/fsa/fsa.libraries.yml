@@ -1,0 +1,7 @@
+global:
+  version: 0.1.x
+  css:
+    base:
+      dist/main.css: {}
+  js:
+    dist/bundle.js: {}
