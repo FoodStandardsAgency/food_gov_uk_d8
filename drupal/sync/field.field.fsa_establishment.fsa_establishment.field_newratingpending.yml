@@ -1,0 +1,26 @@
+uuid: 4d977389-f4a2-4fad-bcbd-2db5f9870551
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.fsa_establishment.field_newratingpending
+  module:
+    - fsa_ratings
+_core:
+  default_config_hash: UYi8WpBrjJOo41tKkpSVB6zdKBSOjC4YZQ8NnxdVLrQ
+id: fsa_establishment.fsa_establishment.field_newratingpending
+field_name: field_newratingpending
+entity_type: fsa_establishment
+bundle: fsa_establishment
+label: NewRatingPending
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'true'
+  off_label: 'false'
+field_type: boolean

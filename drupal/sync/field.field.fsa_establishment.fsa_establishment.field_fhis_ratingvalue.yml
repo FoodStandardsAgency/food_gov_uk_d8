@@ -1,0 +1,23 @@
+uuid: e8a06f8a-3ae1-4b70-a663-b2a89d253690
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.fsa_establishment.field_fhis_ratingvalue
+  module:
+    - fsa_ratings
+    - options
+_core:
+  default_config_hash: 15MUgBEmOkE6U4xnx0l5q5RP-cGNbcl3q8IYjkmhMng
+id: fsa_establishment.fsa_establishment.field_fhis_ratingvalue
+field_name: field_fhis_ratingvalue
+entity_type: fsa_establishment
+bundle: fsa_establishment
+label: 'FHIS rating'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

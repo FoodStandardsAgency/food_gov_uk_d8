@@ -1,0 +1,26 @@
+uuid: a893db02-3c9b-4c2f-af1c-725de9ae028e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.fsa_establishment.field_score_structural
+  module:
+    - fsa_ratings
+_core:
+  default_config_hash: wOXU_K_dFw2wzWhX8weBiCfGMKg50VAAx-bfiq-g3zA
+id: fsa_establishment.fsa_establishment.field_score_structural
+field_name: field_score_structural
+entity_type: fsa_establishment
+bundle: fsa_establishment
+label: 'Score: Structural'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

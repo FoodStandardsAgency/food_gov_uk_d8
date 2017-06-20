@@ -1,0 +1,52 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.fsa_authority.fsa_authority.field_email
+    - field.field.fsa_authority.fsa_authority.field_regionname
+    - field.field.fsa_authority.fsa_authority.field_url
+  module:
+    - fsa_ratings
+    - link
+id: fsa_authority.fsa_authority.default
+targetEntityType: fsa_authority
+bundle: fsa_authority
+mode: default
+content:
+  field_email:
+    weight: 2
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_regionname:
+    weight: 3
+    label: inline
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_url:
+    weight: 1
+    label: inline
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  name:
+    label: inline
+    type: string
+    weight: 0
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  user_id: true

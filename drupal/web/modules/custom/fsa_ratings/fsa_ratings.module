@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * @file
+ * Contains fsa_ratings.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function fsa_ratings_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the fsa_ratings module.
+    case 'help.page.fsa_ratings':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('FSA Ratings module creates entities to store data from UK Food Hygiene Rating Scheme (FHRS) API V2') . '</p>';
+      $output .= '<ul>';
+      $output .= '<li>' . t('<strong>FSA Authorities</strong> for storing FHRS authorities as returned from <code><a href="http://api.ratings.food.gov.uk/Help/Api/GET-Authorities">GET Authorities</a></code>') .'</li>';
+      $output .= '<li>' . t('<strong>FSA Establishments</strong> for storing FHRS establishments as returned from <code><a href="http://api.ratings.food.gov.uk/Help/Api/GET-Establishments-id">GET Establishments</a></code>') .'</li>';
+      $output .= '</ul>';
+      $output .= '<p>' . t('FSA Food Hygiene Rating Scheme API module creates entities to store data from FHRS API') . '</p>';
+      $output .= '<p>' . t('<a href="http://api.ratings.food.gov.uk">Read more about FHRS API</a>') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function fsa_ratings_theme() {
+  return [
+    'fsa_ratings' => [
+      'render element' => 'children',
+    ],
+    'fsa_ratings_search_page' => [
+      'render element' => 'custom_element',
+      'variables' => [
+        'items' => [],
+        'categories' => [],
+        'keywords' => '',
+      ],
+    ],
+    'fsa_ratings_search_result_item' => [
+      'render element' => 'custom_element',
+      'variables' => [
+        'item' => NULL
+      ],
+    ],
+  ];
+}

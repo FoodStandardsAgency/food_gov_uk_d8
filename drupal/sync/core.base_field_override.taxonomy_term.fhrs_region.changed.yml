@@ -1,0 +1,18 @@
+uuid: d7d83d6e-68f6-47b5-8b22-d6dd200597e3
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.fhrs_region
+id: taxonomy_term.fhrs_region.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: fhrs_region
+label: Changed
+description: 'The time that the term was last edited.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

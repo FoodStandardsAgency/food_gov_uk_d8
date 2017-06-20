@@ -1,0 +1,7 @@
+name: FSA Elasticsearch integration
+type: module
+description: FSA Elasticsearch integration
+core: 8.x
+package: FSA
+dependencies:
+  - elasticsearch_helper

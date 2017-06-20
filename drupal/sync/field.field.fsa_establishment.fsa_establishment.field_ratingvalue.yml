@@ -1,0 +1,22 @@
+uuid: 744efb60-686d-488d-b80c-71e2daee21e3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.fsa_establishment.field_ratingvalue
+  module:
+    - fsa_ratings
+_core:
+  default_config_hash: Mr5lb8gb1EkFJ6xYqC46V9hGFdLeTbxocDBEYO2q0Ks
+id: fsa_establishment.fsa_establishment.field_ratingvalue
+field_name: field_ratingvalue
+entity_type: fsa_establishment
+bundle: fsa_establishment
+label: RatingValue
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

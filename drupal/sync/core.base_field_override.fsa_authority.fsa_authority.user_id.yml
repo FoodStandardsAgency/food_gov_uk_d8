@@ -1,0 +1,20 @@
+uuid: 1a9a97b0-d158-47e8-a514-24d25f80c8a6
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_ratings
+id: fsa_authority.fsa_authority.user_id
+field_name: user_id
+entity_type: fsa_authority
+bundle: fsa_authority
+label: 'Authored by'
+description: 'The user ID of author of the FSA Authority entity.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

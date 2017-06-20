@@ -1,0 +1,165 @@
+uuid: 907c3d5e-a81f-4e5a-8b41-7531a70c340e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.fsa_establishment.fsa_establishment.field_address
+    - field.field.fsa_establishment.fsa_establishment.field_businesstype
+    - field.field.fsa_establishment.fsa_establishment.field_fhis_ratingvalue
+    - field.field.fsa_establishment.fsa_establishment.field_fhrs_ratingvalue
+    - field.field.fsa_establishment.fsa_establishment.field_geocode
+    - field.field.fsa_establishment.fsa_establishment.field_localauthoritycode
+    - field.field.fsa_establishment.fsa_establishment.field_newratingpending
+    - field.field.fsa_establishment.fsa_establishment.field_phone
+    - field.field.fsa_establishment.fsa_establishment.field_postcode
+    - field.field.fsa_establishment.fsa_establishment.field_ratingdate
+    - field.field.fsa_establishment.fsa_establishment.field_ratingkey
+    - field.field.fsa_establishment.fsa_establishment.field_ratingvalue
+    - field.field.fsa_establishment.fsa_establishment.field_schemetype
+    - field.field.fsa_establishment.fsa_establishment.field_score_confidence
+    - field.field.fsa_establishment.fsa_establishment.field_score_hygiene
+    - field.field.fsa_establishment.fsa_establishment.field_score_structural
+  module:
+    - datetime
+    - fsa_ratings
+    - geolocation
+_core:
+  default_config_hash: fDOCJYkV8QCyOVS29HI4qqyPn6VdKooOQlWWjR9ls_Q
+id: fsa_establishment.fsa_establishment.default
+targetEntityType: fsa_establishment
+bundle: fsa_establishment
+mode: default
+content:
+  field_address:
+    weight: 2
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_businesstype:
+    weight: 6
+    label: inline
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_geocode:
+    type: geolocation_map
+    weight: 11
+    region: content
+    label: hidden
+    settings:
+      title: ''
+      set_marker: '1'
+      common_map: ''
+      info_text: ''
+      use_overridden_map_settings: 0
+      google_map_settings:
+        type: ROADMAP
+        zoom: '10'
+        minZoom: 0
+        maxZoom: 18
+        rotateControl: 0
+        mapTypeControl: 1
+        streetViewControl: 1
+        zoomControl: 1
+        fullscreenControl: 0
+        scrollwheel: 1
+        disableDoubleClickZoom: 0
+        draggable: 1
+        height: 400px
+        width: 100%
+        info_auto_display: 1
+        marker_icon_path: ''
+        disableAutoPan: 1
+        style: ''
+        preferScrollingToZooming: 0
+        gestureHandling: auto
+    third_party_settings: {  }
+  field_localauthoritycode:
+    weight: 10
+    label: above
+    settings:
+      link: false
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_phone:
+    weight: 4
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_postcode:
+    weight: 3
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_ratingdate:
+    weight: 5
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: short
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_ratingkey:
+    weight: 1
+    label: hidden
+    settings:
+      image_size: medium
+    third_party_settings: {  }
+    type: rating_key_formatter
+    region: content
+  field_score_confidence:
+    weight: 9
+    label: inline
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_score_hygiene:
+    weight: 7
+    label: inline
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_score_structural:
+    weight: 8
+    label: inline
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  name:
+    label: inline
+    type: string
+    weight: 0
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  field_fhis_ratingvalue: true
+  field_fhrs_ratingvalue: true
+  field_newratingpending: true
+  field_ratingvalue: true
+  field_schemetype: true
+  langcode: true
+  user_id: true

@@ -1,0 +1,9 @@
+elasticsearch_helper:
+  scheme: http
+  host: localhost
+  port: '9200'
+  authentication: '0'
+  user: ''
+  password: ''
+_core:
+  default_config_hash: 2ROBGBFIQb7sf6vEtDXAeYHoM1X0-Kh16SNBl5zWHqE

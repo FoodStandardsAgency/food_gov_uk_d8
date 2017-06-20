@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_ratings
+id: fsa_establishment.field_localauthoritycode
+field_name: field_localauthoritycode
+entity_type: fsa_establishment
+type: entity_reference
+settings:
+  target_type: fsa_authority
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

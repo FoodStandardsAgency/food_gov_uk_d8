@@ -1,0 +1,20 @@
+uuid: 933e361c-fabe-4cb2-b72b-832cfd99b614
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_ratings
+id: fsa_establishment.fsa_establishment.user_id
+field_name: user_id
+entity_type: fsa_establishment
+bundle: fsa_establishment
+label: 'Authored by'
+description: 'The user ID of author of the FSA Establishment entity.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

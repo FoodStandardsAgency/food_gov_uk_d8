@@ -1,0 +1,22 @@
+uuid: 406a19fe-0b4e-49f7-9ea8-32f6109dff43
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.fsa_establishment.field_address
+  module:
+    - fsa_ratings
+_core:
+  default_config_hash: tPGxYFABo8QuNuKfHVT12Ec_-iLMKcbRkQYRq1mXP-Q
+id: fsa_establishment.fsa_establishment.field_address
+field_name: field_address
+entity_type: fsa_establishment
+bundle: fsa_establishment
+label: Address
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

@@ -1,0 +1,28 @@
+uuid: e63d88fc-47d1-4159-954a-2961522e0656
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.fsa_establishment.field_localauthoritycode
+  module:
+    - fsa_ratings
+_core:
+  default_config_hash: PwrU9RB__SRmlm_98SK-YK2dzoKfwTkBd_f0stHP-FU
+id: fsa_establishment.fsa_establishment.field_localauthoritycode
+field_name: field_localauthoritycode
+entity_type: fsa_establishment
+bundle: fsa_establishment
+label: 'Local Authority'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:fsa_authority'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

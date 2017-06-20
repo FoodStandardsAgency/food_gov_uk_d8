@@ -1,0 +1,70 @@
+uuid: 0bdc3d6e-9d0c-46b3-b4b0-b08022a4c0e2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.fsa_authority.fsa_authority.field_email
+    - field.field.fsa_authority.fsa_authority.field_regionname
+    - field.field.fsa_authority.fsa_authority.field_url
+  module:
+    - fsa_ratings
+    - link
+_core:
+  default_config_hash: Bkk1Is9orRd-RV5gxSf_U344MphYQ5z2-oVngy3S9CU
+id: fsa_authority.fsa_authority.default
+targetEntityType: fsa_authority
+bundle: fsa_authority
+mode: default
+content:
+  field_email:
+    weight: 7
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+    region: content
+  field_regionname:
+    weight: 8
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_url:
+    weight: 6
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: -4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
+  user_id:
+    type: entity_reference_autocomplete
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    region: content
+    third_party_settings: {  }
+hidden: {  }

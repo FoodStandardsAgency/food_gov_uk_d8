@@ -1,0 +1,16 @@
+uuid: e64057b6-7253-4d72-b1a9-76907dbc2f17
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.fhrs_region
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+id: taxonomy_term.fhrs_region
+target_entity_type_id: taxonomy_term
+target_bundle: fhrs_region
+default_langcode: site_default
+language_alterable: false

@@ -17,3 +17,5 @@ permissions:
   - 'search content'
   - 'skip comment approval'
   - 'use text format basic_html'
+  - 'view published fsa authority entities'
+  - 'view published fsa establishment entities'

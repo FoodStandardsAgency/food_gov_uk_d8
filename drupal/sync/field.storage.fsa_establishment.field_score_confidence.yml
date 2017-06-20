@@ -1,0 +1,22 @@
+uuid: 4fab95c8-1b06-484b-8193-26ce714e4ace
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_ratings
+_core:
+  default_config_hash: g662iIaUSqJzwC0WTs4yUQgjO85OsIsRjfwI05OJjDQ
+id: fsa_establishment.field_score_confidence
+field_name: field_score_confidence
+entity_type: fsa_establishment
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,15 @@
+uuid: 2e345e31-94a9-478c-861a-0d2e7a005051
+langcode: en
+status: true
+dependencies:
+  module:
+    - content_translation
+    - fsa_ratings
+third_party_settings:
+  content_translation:
+    enabled: true
+id: fsa_establishment.fsa_establishment
+target_entity_type_id: fsa_establishment
+target_bundle: fsa_establishment
+default_langcode: site_default
+language_alterable: true
