@@ -1,0 +1,10 @@
+uuid: d6f0fa7e-dcc4-4174-98ac-9284280bf96b
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_ratings
+id: fsa_establishment.token
+label: Token
+targetEntityType: fsa_establishment
+cache: true
