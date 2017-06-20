@@ -2,10 +2,7 @@
 
 namespace Drupal\fsa_es\Plugin\ElasticsearchIndex;
 
-use Drupal\btapi\BtApi;
-use Drupal\elasticsearch_helper\Annotation\ElasticsearchIndex;
 use Drupal\elasticsearch_helper\Plugin\ElasticsearchIndexBase;
-use Drupal\node\Entity\Node;
 
 /**
  * @ElasticsearchIndex(

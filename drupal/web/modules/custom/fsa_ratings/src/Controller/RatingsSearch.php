@@ -52,6 +52,7 @@ class RatingsSearch extends ControllerBase {
         ];
       }
 
+      // Collect the aggregation items of the 'types' of business.
       foreach ($results['types'] as $type) {
         $categories[] = [
           'count' => $type['doc_count'],
@@ -63,9 +64,9 @@ class RatingsSearch extends ControllerBase {
 
     return [
       '#theme' => 'fsa_ratings_search_page',
-      '#items' => $items,
-      '#categories' => $categories,
-      '#keywords' => $keywords,
+      '#items' => $items, // The actual result items
+      '#categories' => $categories, // The aggregation results, list of categories of the result items
+      '#keywords' => $keywords, // The keywords given in the URL
     ];
   }
 

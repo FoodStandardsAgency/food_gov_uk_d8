@@ -2,19 +2,11 @@
 
 namespace Drupal\fsa_es\Plugin\Normalizer;
 
-use Drupal\btapi\ApiHelper;
-use Drupal\btapi\ApiHelper_v2;
-use Drupal\btapi\BtApi;
-use Drupal\btapi\ForbiddenException;
-use Drupal\btapi\GoogleMapAPI;
 use Drupal\Core\Entity\ContentEntityBase;
-use Drupal\Core\Entity\Entity;
 use Drupal\Core\Entity\EntityManager;
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\serialization\Normalizer\ContentEntityNormalizer;
-use Drupal\node\Entity\Node;
-use Drupal\user\Entity\User;
 
 /**
  * Normalizes / denormalizes Drupal entities into an array structure good for ES.
@@ -62,6 +54,14 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
 
   }
 
+  /**
+   * Normalize generic entity attributes
+   *
+   * @param \Drupal\Core\Entity\ContentEntityBase $object
+   * @param null $format
+   * @param array $context
+   * @return array
+   */
   protected function normalizeDefault(ContentEntityBase $object, $format = NULL, array $context = []) {
     $data =  [
       'id' => $object->id(),
@@ -72,6 +72,14 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
   }
 
 
+  /**
+   * Normalize the 'fsa_establishment' entity specific fields.
+   *
+   * @param \Drupal\Core\Entity\ContentEntityBase $object
+   * @param null $format
+   * @param array $context
+   * @return array
+   */
   protected function normalizeEstablishment(ContentEntityBase $object, $format = NULL, array $context = []) {
     $data = $this->normalizeDefault($object, $format, $context);
 
@@ -100,6 +108,8 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
 
 
   /**
+   * Helper method to retrieve field values with as flat structure as possible.
+   *
    * @param ContentEntityBase $content_entity
    *    Fully loaded content entity (Node, FieldCollectionItem etc).
    * @param string $field_name
