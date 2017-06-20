@@ -28,7 +28,7 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
   protected $format = ['elasticsearch_helper'];
 
   /**
-   * BtNodeNormalizer constructor.
+   * FsaRatingsNormalizer constructor.
    * @param \Drupal\Core\Entity\EntityManager $entityManager
    */
   public function __construct(EntityManager $entityManager) {
