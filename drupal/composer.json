@@ -27,7 +27,8 @@
         "drupal/geolocation": "^1.10",
         "drupal/migrate_plus": "4.0-beta1",
         "drupal/migrate_tools": "4.0-beta1",
-        "drupal/elasticsearch_helper": "5.x-dev"
+        "drupal/elasticsearch_helper": "5.x-dev",
+        "drupal/admin_toolbar": "^1.19"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
