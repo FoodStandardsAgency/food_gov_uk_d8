@@ -53,6 +53,7 @@ module:
   update: 0
   user: 0
   views_ui: 0
+  extlink: 1
   menu_link_content: 1
   pathauto: 1
   content_translation: 10
