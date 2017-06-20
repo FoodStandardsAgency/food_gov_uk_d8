@@ -28,7 +28,8 @@
         "drupal/migrate_plus": "4.0-beta1",
         "drupal/migrate_tools": "4.0-beta1",
         "drupal/elasticsearch_helper": "5.x-dev",
-        "drupal/admin_toolbar": "^1.19"
+        "drupal/admin_toolbar": "^1.19",
+        "drupal/pathauto": "^1.0"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
