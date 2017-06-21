@@ -34,6 +34,14 @@ function fsa_ratings_help($route_name, RouteMatchInterface $route_match) {
  */
 function fsa_ratings_theme() {
   return [
+    'fsa_ratings_field_score_display' => [
+      'render element' => 'children',
+      'variables' => [
+        'title' => NULL,
+        'description' => NULL,
+        'score' => NULL,
+      ],
+    ],
     'fsa_ratings' => [
       'render element' => 'children',
     ],
