@@ -43,6 +43,10 @@ function fsa_ratings_theme() {
         'items' => [],
         'categories' => [],
         'keywords' => '',
+        'available_filters' => [],
+        'applied_filters' => [],
+        'hits_total' => 0,
+        'hits_shown' => 0,
       ],
     ],
     'fsa_ratings_search_result_item' => [

@@ -1,8 +1,34 @@
-<form id="fsa-ratings-search">
-  <input type="text" id="fsa-ratings-search-keywords" value="{{ keywords }}" />
-  <input type="submit" value="{% trans %}Search{% endtrans %}" />
-</form>
+<!-- search form: -->
+<form id="fsa-ratings-search" action="/ratings/search">
 
+  <!-- Business type filter -->
+  <select name="business_type" id="fsa-ratings-search-filter-type">
+    <option value=""> - </option>
+    {% for type_filter in available_filters.business_types %}
+      <option value="{{ type_filter.key }}" {% if type_filter.key == applied_filters.business_type %} selected="selected" {% endif %}>
+        {{ type_filter.key }}
+      </option>
+    {% endfor %}
+  </select>
+
+  <!-- Local authority filter -->
+  <select name="local_authority" id="fsa-ratings-search-filter-la">
+    <option value=""> - </option>
+    {% for la_filter in available_filters.local_authorities %}
+      <option value="{{ la_filter.key }}" {% if la_filter.key == applied_filters.local_authority %} selected="selected" {% endif %}>
+        {{ la_filter.key }}
+      </option>
+    {% endfor %}
+  </select>
+
+  <input type="text" name="q" id="fsa-ratings-search-keywords" value="{{ keywords }}" />
+  <input type="submit" value="{% trans %}Search{% endtrans %}" />
+
+</form>
+<!-- / search form -->
+
+
+<!-- search result list: -->
 <div class="fsa-ratings-items">
   {% if keywords %}
     <h2>{% trans %}Search results for {{ keywords|placeholder }}{% endtrans %}</h2>
@@ -10,24 +36,10 @@
 
   {{ items }}
 </div>
+<!-- / search result list -->
 
-
-{% if categories %}
-<div class="fsa-ratings-categories">
-  <h2>{% trans %}Categories{% endtrans %}</h2>
-  <ul>
-  {% for cat in categories %}
-    <li>{{ cat.label }} ({{ cat.count }})</li>
-  {% endfor %}
-  </ul>
-</div>
+{% if hits_total > hits_shown %}
+  <button>{% trans %}Show more results{% endtrans %}</button>
+  {% trans %}Displaying {{ hits_shown }} of {{ hits_total }} items{% endtrans %}
 {% endif %}
 
-
-<script type="application/javascript">
-  document.getElementById('fsa-ratings-search').addEventListener('submit', function(event){
-    var keywords = document.getElementById('fsa-ratings-search-keywords').value;
-    location.href = '/ratings/search/' + keywords;
-    event.preventDefault();
-  });
-</script>
