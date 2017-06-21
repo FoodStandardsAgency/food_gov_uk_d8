@@ -34,8 +34,6 @@ function fsa_ratings_help($route_name, RouteMatchInterface $route_match) {
  */
 function fsa_ratings_theme() {
 
-
-
   return [
     'fsa_establishment' => [
       'render element' => 'children',
@@ -44,6 +42,8 @@ function fsa_ratings_theme() {
         'find_more_title' => t('Find out more about food hygiene ratings'),
         'find_more_link_ratings' => NULL,
         'find_more_link_fhrs' => NULL,
+        'righttoreply_title' => t('About comments made by the business'),
+        'righttoreply_copy' => t('A business has the right to reply to its local authority about the food hygiene rating given. This means a business may draw attention to improvements made since the inspection and/or explain particular circumstances at the time of inspection that might have affected the rating the business was given. The comments made by the business have been reviewed and may have been edited by a local authority food safety officer so they fit the terms and conditions of this website but the accuracy of any statements made has not been verified.'),
         'business_owner_title' => t('Are you the business owner or manager?'),
         'business_owner_copy1' => t('If any information on this page is incorrect you can email the correct information to your local authority by using the email address below.'),
         'business_owner_copy2' => t('You can find out how to appeal against the rating given and find out about your right to reply. You can also ask for a re-inspection.'),

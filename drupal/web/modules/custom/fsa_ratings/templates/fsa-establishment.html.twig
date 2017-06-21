@@ -8,6 +8,8 @@
  * - find_more_title: Title for "find more about ratings.
  * - find_more_link_ratings: Link to ratings meaning page.
  * - find_more_link_fhrs: Link to FHRS explanation page.
+ * - righttoreply_title: Right to reply explanatory title
+ * - righttoreply_copy: Right to reply explanatory copy
  * - business_owner_title: Title for business owner guidance.
  * - business_owner_copy1: Copy paragraph 1 for business owners.
  * - business_owner_copy2: Copy paragraph 1 for business owners.
@@ -23,7 +25,7 @@
  */
 #}
 <div{{ attributes.addClass('fsa_establishment') }}>
-    {{ content|without('field_geocode','field_localauthoritycode') }}
+    {{ content|without('field_geocode', 'field_localauthoritycode', 'field_righttoreply') }}
 
     <h4>{{ find_more_title }}</h4>
     <ul>
@@ -31,8 +33,13 @@
         <li>{{ find_more_link_fhrs }}</li>
     </ul>
 
-    <p></p>
     {{ content.field_geocode }}
+
+    {% if content.field_righttoreply|render %}
+        {{ content.field_righttoreply }}
+        <h4>{{ righttoreply_title }}</h4>
+        <p>{{ righttoreply_copy }}</p>
+    {% endif %}
 
     <h4>{{ business_owner_title }}</h4>
     <p>{{ business_owner_copy1 }}</p>
