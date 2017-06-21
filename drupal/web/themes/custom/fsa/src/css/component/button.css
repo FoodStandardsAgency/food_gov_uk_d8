@@ -7,6 +7,10 @@
   padding: 0.5em 1em;
   box-shadow: var(--box-shadow);
   cursor: pointer;
+
+  &:disabled {
+    opacity: 50%;
+  }
 }
 
 :--not-touch .button:--enter {

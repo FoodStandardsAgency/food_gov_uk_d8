@@ -105,12 +105,6 @@ Plugin documentation:
 
 }
 
-/*:focus {
-  outline: 0;
-  box-shadow: 0 0 0 0.2em currentColor;
-  transition: box-shadow 0.12s ease-in-out;
-}*/
-
 html {
   font-family: var(--font-family-content);
   font-size: var(--font-size-base);
