@@ -14,13 +14,33 @@ Drupal console or codeception do not work out of the box as they cannot read `ge
  ```
  
 
-FHRS Rating content/entities
+FSA Rating content/entities
 ---------------------
  
-[FHRS rating API](http://api.ratings.food.gov.uk/help) 
+FHRS rating API: [api.ratings.food.gov.uk](http://api.ratings.food.gov.uk) 
 
 The migrate/import pulls ~520K establishments to the database. To avoid migrating everything to your local environment make sure you have following lines on your `settings.local.php` file:
 
 ```$config['fsa_ratings_import']['import_mode'] = 'development';``` 
 
 And ```$config['fsa_ratings_import']['import_random'] = 'TRUE';``` if you want to import more variation to establishment entities.
+
+#### Import/migrate Rating content
+
+Import authorities:
+
+```drush mi --tag=authorities```
+
+Import establishments (if in development mode imports only 100 items to both languages).
+
+```drush mi --tag=establishments```
+
+To import only specific language content use
+
+`drush mi --tag=english` or `drush mi --tag=welsh`
+
+
+FSA Ratings search / Elasticsearch
+---------------------
+
+TBD
