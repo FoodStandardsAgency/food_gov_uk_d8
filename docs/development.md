@@ -3,7 +3,7 @@ Development instructions
 
 #### Local settings.php overrides
 
-`web/sites/default/settings.local.php` is not versioned, copy a [template from here](settings.local.php.txt) and modify to your needs.
+`drupal/conf/settings.local.php` is not versioned, copy a [template from here](settings.local.php.txt) and modify to your needs.
 
 #### Drupal console & codeception on local environment
 
