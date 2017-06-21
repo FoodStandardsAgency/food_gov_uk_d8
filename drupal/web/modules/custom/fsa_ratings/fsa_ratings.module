@@ -33,7 +33,28 @@ function fsa_ratings_help($route_name, RouteMatchInterface $route_match) {
  * Implements hook_theme().
  */
 function fsa_ratings_theme() {
+
+
+
   return [
+    'fsa_establishment' => [
+      'render element' => 'children',
+      'variables' => [
+        'content' => NULL,
+        'find_more_title' => t('Find out more about food hygiene ratings'),
+        'find_more_link_ratings' => 'What do the different ratings mean? (link)', // @todo: translate & add link once known.
+        'find_more_link_fhrs' => 'What is the Food Hygiene Rating Scheme?? (link)',
+        'business_owner_title' => t('Are you the business owner or manager?'),
+        'business_owner_copy1' => t('If any information on this page is incorrect you can email the correct information to your local authority by using the email address below.'),
+        'business_owner_copy2' => t('You can find out how to appeal against the rating given and find out about your right to reply. You can also ask for a re-inspection.'),
+        'rating_badge_title' => t('Display this rating on your website'),
+        'rating_badge_copy' => t('You can display this rating on your website. '),
+        'rating_badge_cta' => NULL, // create link in viewbuilder.
+        'copy_of_report_title' => t('Do you want to get a copy of the report?'),
+        'copy_of_report_copy' => t('If you wish to see the food safety officer’s report on which this rating is based, you can request this from the local authority that carried out the inspection. You can do this by sending an email to the address below. The local authority will consider your request and will usually send you a copy of the report. In some cases, the local authority may decide that they cannot do so but will let you know this and explain why.'),
+      ],
+    ],
+
     'fsa_ratings_field_score_display' => [
       'render element' => 'children',
       'variables' => [

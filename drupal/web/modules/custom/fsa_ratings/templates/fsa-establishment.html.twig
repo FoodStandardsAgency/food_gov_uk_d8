@@ -1,0 +1,38 @@
+{#
+/**
+ * @file fsa_establishment.html.twig
+ * Default theme implementation to present FSA Establishment entity
+ *
+ * Available variables:
+ * - content: All fields from establishment entity.
+ *
+ * @see template_preprocess_fsa_establishment()
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ attributes.addClass('fsa_establishment') }}>
+    {{ content|without('field_geocode','field_localauthoritycode') }}
+
+    <h4>{{ find_more_title }}</h4>
+    <ul>
+        <li>{{ find_more_link_ratings }}</li>
+        <li>{{ find_more_link_fhrs }}</li>
+    </ul>
+
+    <p></p>
+    {{ content.field_geocode }}
+
+    <h4>{{ business_owner_title }}</h4>
+    <p>{{ business_owner_copy1 }}</p>
+    <p>{{ business_owner_copy2 }}</p>
+
+    <h4>{{ rating_badge_title }}</h4>
+    <p>{{ rating_badge_copy }}</p>
+    {{ rating_badge_cta }}
+
+    <h4>{{ copy_of_report_title }}</h4>
+    <p>{{ copy_of_report_copy }}</p>
+
+    {{ content.field_localauthoritycode }}
+</div>
