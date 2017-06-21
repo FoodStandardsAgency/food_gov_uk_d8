@@ -1,18 +1,26 @@
 Development instructions
 ========================
 
-Clone the git repo and build the vagrant machine by running
+#### Local settings.php overrides
 
-vagrant up
+`web/sites/default/settings.local.php` is not versioned, copy a [template from here](settings.local.php.txt) and modify to your needs.
 
-Once the machine is built and provisioned you can login with
+#### Drupal console & codeception on local environment
 
-vagrant ssh
+Drupal console or codeception do not work out of the box as they cannot read `getenv()` from the `$databases` array. Workaround is to export db user & password to bash:
+ ```
+ export DB_USER_DRUPAL=drupal
+ export DB_PASS_DRUPAL=password
+ ```
+ 
 
-Git flow instructions
+FHRS Rating content/entities
 ---------------------
+ 
+[FHRS rating API](http://api.ratings.food.gov.uk/help) 
 
-By default we are using WunderFlow as our development workflow.
-See [WunderFlow](http://wunderkraut.github.io/WunderFlow) for reference.
+The migrate/import pulls ~520K establishments to the database. To avoid migrating everything to your local environment make sure you have following lines on your `settings.local.php` file:
 
-If the project uses something else please document it here.
+```$config['fsa_ratings_import']['import_mode'] = 'development';``` 
+
+And ```$config['fsa_ratings_import']['import_random'] = 'TRUE';``` if you want to import more variation to establishment entities.
