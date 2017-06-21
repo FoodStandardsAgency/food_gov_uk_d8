@@ -1,0 +1,20 @@
+uuid: 73974a85-90cb-424e-b2f0-8d8ef74d220b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.fsa_establishment.field_righttoreply
+  module:
+    - fsa_ratings
+id: fsa_establishment.fsa_establishment.field_righttoreply
+field_name: field_righttoreply
+entity_type: fsa_establishment
+bundle: fsa_establishment
+label: 'What the business says'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long
