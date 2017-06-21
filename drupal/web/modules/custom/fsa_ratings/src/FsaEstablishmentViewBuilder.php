@@ -33,12 +33,20 @@ class FsaEstablishmentViewBuilder extends EntityViewBuilder {
     }
     $build['#content'] = $content;
 
-    // Establishment ratings badge link.
-    $url = Url::fromUri('http://api');
-    $badge_cta = Link::fromTextAndUrl(t('Get the badges'), $url);
-    http://widget.ratings.food.gov.uk/?FHRSID=616044&Culture=en-GB
+    // Link for the "Get badges".
+    // @todo: correct link or get decicion if the page should allow user to copy-paste the widget code as in the old site?
+    $url = Url::fromUri('http://widget.ratings.food.gov.uk');
+    $link_options = array(
+      'attributes' => [
+        'class' => [
+          'call-to-action',
+        ],
+      ],
+    );
+    $url->setOptions($link_options);
+    $badge_cta = Link::fromTextAndUrl(t('Link title'), $url )->toString();
 
-    $build['#rating_badge_cta'] = $content;
+    $build['#rating_badge_cta'] = $badge_cta;
 
     return $build;
   }
