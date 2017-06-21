@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.fsa_authority.field_email
+  module:
+    - fsa_ratings
+id: fsa_authority.fsa_authority.field_email
+field_name: field_email
+entity_type: fsa_authority
+bundle: fsa_authority
+label: Email
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

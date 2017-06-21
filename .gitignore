@@ -12,6 +12,7 @@ test/composer.lock
 test/vendor
 test/bin
 VERSION
+*.sql
 
 # Ignore ansible retry files
 conf/*.retry
@@ -21,3 +22,6 @@ secrets
 
 # Ignore python virtualenv created by provision.sh
 .virtualenv
+
+# Ignore Drupal's local setting overrides
+drupal/conf/settings.local.php

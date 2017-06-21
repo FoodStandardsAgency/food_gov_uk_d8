@@ -1,0 +1,20 @@
+uuid: 9412d513-1a65-4273-92ed-cf899c6ccba9
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.fhrs_region
+  module:
+    - path
+id: taxonomy_term.fhrs_region.path
+field_name: path
+entity_type: taxonomy_term
+bundle: fhrs_region
+label: 'URL alias'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

@@ -8,7 +8,7 @@
    - { role: dbserver, tags: [ 'dbserver' ] }
    - { role: drupal-db, tags: [ 'drupal-db' ] }
    #- { role: solr, tags: [ 'solr' ] }
-   - { role: elasticsearch, tags: [ 'elasticsearch' ] }
+   - { role: fsa_elasticsearch, tags: [ 'elasticsearch' ] }
    - { role: nfs_server, tags: [ 'nfs_server' ] }
    - { role: monit, tags: [ 'monit' ] }
    - { role: newrelic-infra, tags: [ 'newrelic-infra' ] }
@@ -137,4 +137,4 @@
     newrelic_infra_enabled: True
     # newrelic_license_key defined in prod_vars.yml
 
-
+    elasticsearch_heap_size: 1g

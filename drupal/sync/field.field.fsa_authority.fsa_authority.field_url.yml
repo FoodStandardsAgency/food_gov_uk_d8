@@ -1,0 +1,25 @@
+uuid: 18226f6d-9048-48ca-9945-7f4781ebfe7a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.fsa_authority.field_url
+  module:
+    - fsa_ratings
+    - link
+_core:
+  default_config_hash: x3FMmfkP9EyyeGRJ2JOb_64AAasXujrdG1X9_JwIbq4
+id: fsa_authority.fsa_authority.field_url
+field_name: field_url
+entity_type: fsa_authority
+bundle: fsa_authority
+label: Website
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 0
+field_type: link

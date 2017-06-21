@@ -1,0 +1,53 @@
+entity.fsa_establishment.collection:
+  title: FSA Establishments
+  route_name: entity.fsa_establishment.collection
+  base_route: system.admin_content
+
+entity.fsa_authority.collection:
+  title: FSA Authorities
+  route_name: entity.fsa_authority.collection
+  base_route: system.admin_content
+
+# FSA Authority routing definition
+fsa_authority.settings_tab:
+  route_name: fsa_authority.settings
+  title: 'Settings'
+  base_route: fsa_authority.settings
+
+entity.fsa_authority.canonical:
+  route_name: entity.fsa_authority.canonical
+  base_route: entity.fsa_authority.canonical
+  title: 'View'
+
+entity.fsa_authority.edit_form:
+  route_name: entity.fsa_authority.edit_form
+  base_route: entity.fsa_authority.canonical
+  title: 'Edit'
+
+entity.fsa_authority.delete_form:
+  route_name:  entity.fsa_authority.delete_form
+  base_route:  entity.fsa_authority.canonical
+  title: Delete
+  weight: 10
+
+# FSA Establishment routing definition
+fsa_establishment.settings_tab:
+  route_name: fsa_establishment.settings
+  title: 'Settings'
+  base_route: fsa_establishment.settings
+
+entity.fsa_establishment.canonical:
+  route_name: entity.fsa_establishment.canonical
+  base_route: entity.fsa_establishment.canonical
+  title: 'View'
+
+entity.fsa_establishment.edit_form:
+  route_name: entity.fsa_establishment.edit_form
+  base_route: entity.fsa_establishment.canonical
+  title: 'Edit'
+
+entity.fsa_establishment.delete_form:
+  route_name:  entity.fsa_establishment.delete_form
+  base_route:  entity.fsa_establishment.canonical
+  title: Delete
+  weight: 10

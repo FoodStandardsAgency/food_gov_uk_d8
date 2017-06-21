@@ -14,3 +14,5 @@ permissions:
   - 'access site-wide contact form'
   - 'search content'
   - 'use text format restricted_html'
+  - 'view published fsa authority entities'
+  - 'view published fsa establishment entities'

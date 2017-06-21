@@ -1,0 +1,175 @@
+uuid: 80638aa3-b9e0-413a-a2d9-628a03cdb9f3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.fsa_establishment.fsa_establishment.field_address
+    - field.field.fsa_establishment.fsa_establishment.field_businesstype
+    - field.field.fsa_establishment.fsa_establishment.field_fhis_ratingvalue
+    - field.field.fsa_establishment.fsa_establishment.field_fhrs_ratingvalue
+    - field.field.fsa_establishment.fsa_establishment.field_geocode
+    - field.field.fsa_establishment.fsa_establishment.field_localauthoritycode
+    - field.field.fsa_establishment.fsa_establishment.field_newratingpending
+    - field.field.fsa_establishment.fsa_establishment.field_phone
+    - field.field.fsa_establishment.fsa_establishment.field_postcode
+    - field.field.fsa_establishment.fsa_establishment.field_ratingdate
+    - field.field.fsa_establishment.fsa_establishment.field_ratingkey
+    - field.field.fsa_establishment.fsa_establishment.field_ratingvalue
+    - field.field.fsa_establishment.fsa_establishment.field_schemetype
+    - field.field.fsa_establishment.fsa_establishment.field_score_confidence
+    - field.field.fsa_establishment.fsa_establishment.field_score_hygiene
+    - field.field.fsa_establishment.fsa_establishment.field_score_structural
+  module:
+    - datetime
+    - fsa_ratings
+    - geolocation
+_core:
+  default_config_hash: E7X-WEwfh0HsOM4EO2Xy94MuO5J3RM1DoG763_4ybnk
+id: fsa_establishment.fsa_establishment.default
+targetEntityType: fsa_establishment
+bundle: fsa_establishment
+mode: default
+content:
+  field_address:
+    weight: 2
+    settings:
+      rows: 4
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_businesstype:
+    weight: 1
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_fhis_ratingvalue:
+    weight: 15
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_fhrs_ratingvalue:
+    weight: 14
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_geocode:
+    weight: 17
+    settings: {  }
+    third_party_settings: {  }
+    type: geolocation_latlng
+    region: content
+  field_localauthoritycode:
+    weight: 8
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_newratingpending:
+    weight: 16
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_phone:
+    weight: 4
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_postcode:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_ratingdate:
+    weight: 7
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_ratingkey:
+    weight: 5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_ratingvalue:
+    weight: 12
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_schemetype:
+    weight: 13
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_score_confidence:
+    weight: 11
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_score_hygiene:
+    weight: 9
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_score_structural:
+    weight: 10
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
+  user_id:
+    type: entity_reference_autocomplete
+    weight: 6
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    region: content
+    third_party_settings: {  }
+hidden: {  }

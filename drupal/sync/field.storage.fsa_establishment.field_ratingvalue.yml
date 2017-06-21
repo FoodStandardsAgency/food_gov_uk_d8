@@ -1,0 +1,23 @@
+uuid: 2b11daa1-7ea0-4122-8a3e-0e28e0a4a35e
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_ratings
+_core:
+  default_config_hash: CwoCotRmN_tfoxkrPDohWfoIL1GIPjLQxo83XbSzbIk
+id: fsa_establishment.field_ratingvalue
+field_name: field_ratingvalue
+entity_type: fsa_establishment
+type: string
+settings:
+  max_length: 32
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

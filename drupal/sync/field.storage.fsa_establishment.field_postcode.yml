@@ -1,0 +1,23 @@
+uuid: 5d2ab42e-eaf3-497a-a27a-5caa6c0210a9
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_ratings
+_core:
+  default_config_hash: 4k7HYTwm-hbjoigrIdeWBqo58g2WJWWrz_M5frfyD9U
+id: fsa_establishment.field_postcode
+field_name: field_postcode
+entity_type: fsa_establishment
+type: string
+settings:
+  max_length: 12
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

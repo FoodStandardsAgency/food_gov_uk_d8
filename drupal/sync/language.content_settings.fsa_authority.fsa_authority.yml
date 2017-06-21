@@ -1,0 +1,15 @@
+uuid: aa865583-246d-419a-8bcd-07d8ade9aada
+langcode: en
+status: true
+dependencies:
+  module:
+    - content_translation
+    - fsa_ratings
+third_party_settings:
+  content_translation:
+    enabled: true
+id: fsa_authority.fsa_authority
+target_entity_type_id: fsa_authority
+target_bundle: fsa_authority
+default_langcode: site_default
+language_alterable: true

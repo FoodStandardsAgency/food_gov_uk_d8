@@ -1,0 +1,33 @@
+<form id="fsa-ratings-search">
+  <input type="text" id="fsa-ratings-search-keywords" value="{{ keywords }}" />
+  <input type="submit" value="{% trans %}Search{% endtrans %}" />
+</form>
+
+<div class="fsa-ratings-items">
+  {% if keywords %}
+    <h2>{% trans %}Search results for {{ keywords|placeholder }}{% endtrans %}</h2>
+  {% endif %}
+
+  {{ items }}
+</div>
+
+
+{% if categories %}
+<div class="fsa-ratings-categories">
+  <h2>{% trans %}Categories{% endtrans %}</h2>
+  <ul>
+  {% for cat in categories %}
+    <li>{{ cat.label }} ({{ cat.count }})</li>
+  {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+
+<script type="application/javascript">
+  document.getElementById('fsa-ratings-search').addEventListener('submit', function(event){
+    var keywords = document.getElementById('fsa-ratings-search-keywords').value;
+    location.href = '/ratings/search/' + keywords;
+    event.preventDefault();
+  });
+</script>

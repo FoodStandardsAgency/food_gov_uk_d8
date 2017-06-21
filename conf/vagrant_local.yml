@@ -2,7 +2,7 @@ name: fsa
 hostname: local.food.gov.uk
 mem: 2000
 cpus: 2
-ip: 192.168.10.178
+ip: 192.168.100.178
 box: "geerlingguy/centos7"
 box_version: 1.2.1
 # optional host aliases

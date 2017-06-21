@@ -1,0 +1,18 @@
+uuid: 203683b5-670a-47b6-b971-794228f4879b
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.fhrs_businesstype
+id: taxonomy_term.fhrs_businesstype.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: fhrs_businesstype
+label: Changed
+description: 'The time that the term was last edited.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

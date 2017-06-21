@@ -1,0 +1,20 @@
+uuid: ddc9bd9c-d38e-43e4-9fe1-759754984b13
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_ratings
+_core:
+  default_config_hash: xRiIy2v1CI_0b-fZ7FR0WN3JEs_qIuvz8wVmpiR8aQU
+id: fsa_authority.field_email
+field_name: field_email
+entity_type: fsa_authority
+type: email
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

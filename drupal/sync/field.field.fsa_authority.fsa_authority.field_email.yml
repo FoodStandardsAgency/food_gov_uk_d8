@@ -1,0 +1,22 @@
+uuid: 8ccf6d20-8733-4232-a5aa-4b5f6230b7d8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.fsa_authority.field_email
+  module:
+    - fsa_ratings
+_core:
+  default_config_hash: 8uCsIOZpRss8AI53FYfhGdsJo160P96z2W0BXnm2p8g
+id: fsa_authority.fsa_authority.field_email
+field_name: field_email
+entity_type: fsa_authority
+bundle: fsa_authority
+label: Email
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

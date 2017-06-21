@@ -1,0 +1,38 @@
+uuid: a367bb91-9917-4232-b109-7c0614d478d4
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_ratings
+    - options
+_core:
+  default_config_hash: h55WZ8jAgepQDV5CyqeepE5Kh_fuEDwSKvCa9ol28i0
+id: fsa_establishment.field_fhis_ratingvalue
+field_name: field_fhis_ratingvalue
+entity_type: fsa_establishment
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: Pass
+      label: Pass
+    -
+      value: ImprovementRequired
+      label: ImprovementRequired
+    -
+      value: AwaitingPublication
+      label: AwaitingPublication
+    -
+      value: AwaitingInspection
+      label: AwaitingInspection
+    -
+      value: Exempt
+      label: Exempt
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

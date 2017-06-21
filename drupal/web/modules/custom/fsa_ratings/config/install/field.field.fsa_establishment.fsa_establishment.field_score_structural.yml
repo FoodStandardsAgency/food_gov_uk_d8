@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.fsa_establishment.field_score_structural
+  module:
+    - fsa_ratings
+id: fsa_establishment.fsa_establishment.field_score_structural
+field_name: field_score_structural
+entity_type: fsa_establishment
+bundle: fsa_establishment
+label: 'Score: Structural'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

@@ -1,0 +1,22 @@
+uuid: 2357e5c1-defe-4da0-bddf-d256d8c984d4
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_ratings
+    - taxonomy
+_core:
+  default_config_hash: QnzKucnBj50TvhIuQmYIq6bdBqAantiaBq_1PvUnqdA
+id: fsa_establishment.field_businesstype
+field_name: field_businesstype
+entity_type: fsa_establishment
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

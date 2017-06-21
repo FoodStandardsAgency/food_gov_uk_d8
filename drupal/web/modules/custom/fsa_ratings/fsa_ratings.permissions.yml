@@ -1,0 +1,45 @@
+add fsa authority entities:
+  title: 'Create new FSA Authority entities'
+
+administer fsa authority entities:
+  title: 'Administer FSA Authority entities'
+  description: 'Allow to access the administration form to configure FSA Authority entities.'
+  restrict access: true
+
+delete fsa authority entities:
+  title: 'Delete FSA Authority entities'
+
+edit fsa authority entities:
+  title: 'Edit FSA Authority entities'
+
+access fsa authority overview:
+  title: 'Access the FSA Authority overview page'
+
+view published fsa authority entities:
+  title: 'View published FSA Authority entities'
+
+view unpublished fsa authority entities:
+  title: 'View unpublished FSA Authority entities'
+
+add fsa establishment entities:
+  title: 'Create new FSA Establishment entities'
+
+administer fsa establishment entities:
+  title: 'Administer FSA Establishment entities'
+  description: 'Allow to access the administration form to configure FSA Establishment entities.'
+  restrict access: true
+
+delete fsa establishment entities:
+  title: 'Delete FSA Establishment entities'
+
+edit fsa establishment entities:
+  title: 'Edit FSA Establishment entities'
+
+access fsa establishment overview:
+  title: 'Access the FSA Establishment overview page'
+
+view published fsa establishment entities:
+  title: 'View published FSA Establishment entities'
+
+view unpublished fsa establishment entities:
+  title: 'View unpublished FSA Establishment entities'

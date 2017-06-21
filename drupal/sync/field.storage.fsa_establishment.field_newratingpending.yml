@@ -1,0 +1,20 @@
+uuid: 4a5edb30-e223-40c6-a678-37769518e13b
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_ratings
+_core:
+  default_config_hash: IqFm7pzXgHQrLi-WEPfPMgxB1pUyno1wVmWPlp15BW8
+id: fsa_establishment.field_newratingpending
+field_name: field_newratingpending
+entity_type: fsa_establishment
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

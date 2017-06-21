@@ -1,0 +1,46 @@
+label: Ffeiliau
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Hidlydd
+          reset_button_label: Ailosod
+          exposed_sorts_label: 'Dosbarthu drwy'
+      pager:
+        options:
+          expose:
+            items_per_page_label: 'Eitemau pob tudalen'
+            offset_label: Ongli
+      fields:
+        filename:
+          label: Enw
+        filesize:
+          label: Maint
+        status:
+          label: Statws
+          settings:
+            format_custom_false: 'Dros dro'
+            format_custom_true: Parhaol
+        created:
+          label: 'Dyddiad llwytho i fyny'
+      filters:
+        status:
+          expose:
+            label: Statws
+      title: Ffeiliau
+  page_1:
+    display_options:
+      menu:
+        title: Ffeiliau
+  page_2:
+    display_options:
+      pager:
+        options:
+          expose:
+            items_per_page_label: 'Eitemau pob tudalen'
+            offset_label: Ongli
+      arguments:
+        fid:
+          exception:
+            title: 'I gyd'

@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.fsa_authority.field_regionname
+    - taxonomy.vocabulary.fhrs_region
+  module:
+    - fsa_ratings
+id: fsa_authority.fsa_authority.field_regionname
+field_name: field_regionname
+entity_type: fsa_authority
+bundle: fsa_authority
+label: Region
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      fhrs_region: fhrs_region
+    sort:
+      field: _none
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

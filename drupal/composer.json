@@ -23,7 +23,15 @@
         "drush/drush": "~8.0",
         "drupal/console": "~1.0",
         "drupal/config_installer": "~1.0",
-        "drupal/simplei": "^1.0"
+        "drupal/simplei": "^1.0",
+        "drupal/geolocation": "^1.10",
+        "drupal/migrate_plus": "4.0-beta1",
+        "drupal/migrate_tools": "4.0-beta1",
+        "drupal/elasticsearch_helper": "5.x-dev",
+        "drupal/admin_toolbar": "^1.19",
+        "drupal/pathauto": "^1.0",
+        "drupal/extlink": "^1.0",
+        "drupal/field_group": "^1.0@RC"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
@@ -46,6 +54,9 @@
             "web/drush/commands/{$name}": ["type:drupal-drush"]
         },
         "patches": {
+            "drupal/migrate_plus": {
+                "Allow setting request headers": "https://www.drupal.org/files/issues/fix_headers-2849153-3.patch"
+            }
         }
     },
     "scripts": {

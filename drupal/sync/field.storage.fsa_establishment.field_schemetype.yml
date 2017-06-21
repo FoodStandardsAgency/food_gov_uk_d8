@@ -1,0 +1,29 @@
+uuid: 6f3f5a8d-1e1e-4c02-b9c0-ff7c377146ca
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_ratings
+    - options
+_core:
+  default_config_hash: lS3IiVjTGNCiV1DVBncnrnQMG9zQvcR1M8zyqPdP7S4
+id: fsa_establishment.field_schemetype
+field_name: field_schemetype
+entity_type: fsa_establishment
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: FHRS
+      label: FHRS
+    -
+      value: FHIS
+      label: FHIS
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

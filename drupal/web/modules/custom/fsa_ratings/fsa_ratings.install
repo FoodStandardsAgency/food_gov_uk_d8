@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Uninstall hooks for FSA Ratingds module.
+ */
+
+use Drupal\taxonomy\Entity\Vocabulary;
+
+/**
+ * Implements hook_uninstall().
+ */
+function fsa_ratings_uninstall() {
+
+  // Delete the vocabularies this module created.
+  $vids = ['fhrs_region', 'fhrs_businesstype'];
+  foreach ($vids as $vid) {
+    $vocab = Vocabulary::load($vid);
+    if (is_object($vocab)) {
+      $vocab->delete();
+      drupal_set_message(t('Vocabulary @vid deleted', ['@vid' => $vid]), 'status');
+    }
+  }
+
+}
