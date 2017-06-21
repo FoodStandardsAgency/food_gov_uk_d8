@@ -4,6 +4,7 @@ namespace Drupal\fsa_ratings\Controller;
 
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Url;
 use Drupal\fsa_es\SearchService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -71,6 +72,8 @@ class RatingsSearch extends ControllerBase {
       $hits = $results['total'];
 
       foreach ($results['results'] as $result) {
+        // Add the link to the entity v:iew page
+        $result['url'] = Url::fromRoute('entity.fsa_establishment.canonical', ['fsa_establishment' => $result['id']]);
         $items[] = [
           '#theme' => 'fsa_ratings_search_result_item',
           '#item' => $result,

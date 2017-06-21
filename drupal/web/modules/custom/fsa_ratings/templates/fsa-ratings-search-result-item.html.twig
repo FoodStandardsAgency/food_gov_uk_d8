@@ -1,5 +1,5 @@
 <div class="item" style="background-color: #dedede;">
-  <h3>{{ item.name }}</h3>
+  <h3><a href="{{ item.url }}">{{ item.name }}</a></h3>
   <p class="address">{{ item.address }}<br>{{ item.postcode }}</p>
   <p class="category">
     {% for business_type in item.businesstype %}
