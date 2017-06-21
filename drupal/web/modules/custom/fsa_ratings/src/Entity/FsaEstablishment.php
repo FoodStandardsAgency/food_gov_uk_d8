@@ -18,7 +18,7 @@ use Drupal\user\UserInterface;
  *   id = "fsa_establishment",
  *   label = @Translation("FSA Establishment"),
  *   handlers = {
- *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
+ *     "view_builder" = "Drupal\fsa_ratings\FsaEstablishmentViewBuilder",
  *     "list_builder" = "Drupal\fsa_ratings\FsaEstablishmentListBuilder",
  *     "views_data" = "Drupal\fsa_ratings\Entity\FsaEstablishmentViewsData",
  *     "translation" = "Drupal\fsa_ratings\FsaEstablishmentTranslationHandler",
