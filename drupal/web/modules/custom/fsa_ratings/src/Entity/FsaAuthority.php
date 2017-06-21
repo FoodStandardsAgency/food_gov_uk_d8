@@ -177,7 +177,7 @@ class FsaAuthority extends ContentEntityBase implements FsaAuthorityInterface {
       ->setDisplayConfigurable('view', TRUE);
 
     $fields['name'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Local Authority'))
+      ->setLabel(t('Name'))
       ->setDescription(t('The name of the FSA Authority entity.'))
       ->setSettings([
         'max_length' => 255,
