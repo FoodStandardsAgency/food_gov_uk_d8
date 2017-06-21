@@ -1,0 +1,320 @@
+/*Breakpoints
+Using postcss-custom-media
+Plugin documentation:
+  https://github.com/postcss/postcss-custom-media*/
+@custom-media --breakpoint-xxs (min-width: 20em);
+@custom-media --breakpoint-xs (min-width: 30em);
+@custom-media --breakpoint-sm (min-width: 50em);
+@custom-media --breakpoint-md (min-width: 60em);
+@custom-media --breakpoint-lg (min-width: 80em);
+@custom-media --breakpoint-xl (min-width: 120em);
+
+/*Custom selectors
+Using postcss-custom-selectors
+Plugin documentation:
+  https://github.com/postcss/postcss-custom-selectors*/
+@custom-selector :--heading h1, h2, h3, h4, h5, h6;
+@custom-selector :--enter :hover, :focus;
+
+@custom-selector :--not-touch html:not(.is-touch);
+
+/*PostCSS Mixins
+Using postcss-mixins
+Plugin documentation:
+  https://github.com/postcss/postcss-mixins*/
+@define-mixin responsive-declaration $property, $valueMin, $valueMax {
+  $(property): $valueMin;
+
+  @media (--breakpoint-sm) {
+    $(property): calc($valueMin + (($valueMax - $valueMin) / 3) * 1);
+  }
+
+  @media (--breakpoint-md) {
+    $(property): calc($valueMin + (($valueMax - $valueMin) / 3) * 2);
+  }
+
+  @media (--breakpoint-lg) {
+    $(property): calc($valueMin + (($valueMax - $valueMin) / 3) * 3);
+  }
+}
+
+/*CSS Custom properties
+Using postcss-custom-properties
+Plugin documentation:
+  https://github.com/postcss/postcss-custom-properties*/
+
+/*Color palette*/
+:root {
+  --color-black: #000;
+  --color-white: #fff;
+
+  --color-gray-light: #EEEEEE;
+  --color-gray: #9E9E9E;
+
+  --color-red-light: #EF9A9A;
+  --color-red: #F44336;
+
+  --color-blue-light: #90CAF9;
+  --color-blue: #2196F3;
+
+  --color-yellow-light: #FFF59D;
+  --color-yellow: #FFEE58;
+
+  --color-orange-light: #FFCC80;
+  --color-orange: #FF9800;
+
+  --color-teal-light: #80CBC4;
+  --color-teal: #009688;
+
+  --color-green-light: #A5D6A7;
+  --color-green: #4CAF50;
+
+  --color-purple: #49176D;
+}
+
+:root {
+  --primary-color: var(--color-teal);
+
+  --secondary-color: var(--color-purple);
+}
+
+/*Typography*/
+:root {
+  --font-size-base: 112.5%;
+  --font-family-heading: 'Khula';
+  --font-family-content: 'Fira Sans';
+}
+
+/*Z-Index*/
+:root {
+  --z-bottom: 1;
+  --z-middle: 10;
+  --z-top: 20;
+}
+
+/*Box-shadow*/
+:root {
+  --box-shadow: 0 0 1em 0 color(#000 a(10%));
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+
+}
+
+html {
+  font-family: var(--font-family-content);
+  font-size: var(--font-size-base);
+  letter-spacing: 0.015em;
+  @mixin responsive-declaration font-size, 100%, var(--font-size-base);
+  @mixin responsive-declaration line-height, 1.2, 1.333;
+}
+
+body {
+  margin: 0;
+
+  & a {
+    color: var(--primary-color);
+    text-decoration: none;
+  }
+}
+
+:--heading {
+  font-family: var(--font-family-heading);
+  font-weight: 400;
+
+  &:first-child {
+    margin-top: 0em;
+  }
+}
+
+h1 {
+  @mixin responsive-declaration font-size, 1.5em, 3.333em;
+  @mixin responsive-declaration line-height, 1.2, 1.1;
+}
+
+h2 {
+  @mixin responsive-declaration font-size, 1.333em, 2.67em;
+  @mixin responsive-declaration line-height, 1.2, 1.1;
+}
+
+h3 {
+  @mixin responsive-declaration font-size, 1.25em, 1.7em;
+  @mixin responsive-declaration line-height, 1.2, 1.25;
+}
+
+h4 {
+  @mixin responsive-declaration font-size, 1.125em, 1.33em;
+  @mixin responsive-declaration line-height, 1.2, 1.17;
+}
+
+h5 {
+  font-size: 1em;
+  @mixin responsive-declaration line-height, 1.2, 1.225;
+}
+
+h6 {
+  font-size: 0.889em;
+  @mixin responsive-declaration line-height, 1.0, 1.125;
+}
+
+img {
+  max-width: 100%;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+}
+
+button {
+  font-size: 1em;
+}
+
+pre {
+  overflow-x: auto;
+}
+
+blockquote {
+  box-shadow: -0.3em 0 0 0 var(--primary-color);
+  padding-left: 1em;
+  @mixin responsive-declaration margin-left, 1em, 2em;
+  margin-right: 1em;
+}
+
+ol, ul {
+  @mixin responsive-declaration padding-left, 1.5em, 2.5em;
+}
+
+input, textarea, select {
+  max-width: 100%;
+  font-size: 1em;
+  padding: 0.5em;
+  border-radius: 0.1em;
+  box-shadow: 0em 0em 0em 0.1em var(--color-black);
+
+  &:focus {
+    box-shadow: 0em 0em 0em 0.1em var(--primary-color);
+  }
+}
+
+select {
+  background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='10px' height='6px' viewBox='0 0 10 6' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Styleguide' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg transform='translate%28-919.000000, -3891.000000%29' id='Basic-Elements' fill='%2318262C'%3E%3Cg transform='translate%2877.000000, 3029.000000%29'%3E%3Cg id='Basic-forms' transform='translate%280.000000, 757.000000%29'%3E%3Cg id='Select' transform='translate%28470.000000, 57.000000%29'%3E%3Cpolygon id='Triangle' points='377 54 372 48 382 48'%3E%3C/polygon%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
+  background-position: 90% 50%;
+  background-position: calc(100% - 0.5em) 50%;
+  background-size: 0.75em auto;
+  background-repeat: no-repeat;
+  appearance: none;
+  border: none;
+}
+
+textarea {
+  max-height: 20em;
+}
+
+input:not([type="radio"], [type="checkbox"], [type="submit"]),
+textarea {
+  max-width: 20em;
+  width: 100%;
+  border: 0;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+
+input[type="radio"]:focus + label,
+input[type="checkbox"]:focus + label {
+  box-shadow: inset 0em 0em 0em 0.1em var(--primary-color);
+}
+
+input[type="radio"] + label,
+input[type="checkbox"] + label {
+  position: relative;
+  padding-left: calc(1em + 0.5em);
+}
+
+input[type="radio"] + label:before,
+input[type="radio"] + label:after,
+input[type="checkbox"] + label:before,
+input[type="checkbox"] + label:after  {
+  content: "";
+  display: block;
+  width: 1em;
+  height: 1em;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  /*transition:
+    box-shadow 0.2s ease-in-out,
+    background-color 0.2s ease-in-out,
+    transform 2s ease-in-out;*/
+}
+
+input[type="radio"] {
+  & + label:before {
+    border-radius: 1em;
+    box-shadow: inset 0em 0em 0em 0.1em var(--color-black);
+  }
+
+  & + label:after {
+    border-radius: 50%;
+    box-shadow: inset 0em 0em 0em 0.1em var(--primary-color);
+    opacity: 0;
+  }
+
+  &:checked + label:after {
+    background-color: var(--color-white);
+    box-shadow: inset 0em 0em 0em 0.3em var(--primary-color);
+    opacity: 1;
+  }
+}
+
+input[type="checkbox"] {
+  & + label:before {
+    box-shadow: inset 0em 0em 0em 0.1em var(--color-black);
+    border-radius: 0.1em;
+  }
+
+  & + label:after {
+background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='12px' height='10px' viewBox='0 0 12 10' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Symbols' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='Checkbox-selected' transform='translate%28-4.000000, -5.000000%29' fill='%23FFFFFF'%3E%3Cpolygon id='Page-1' points='14.2341772 5 8.64248101 11.1189694 5.57594937 8.40159604 4 10.335509 7.94936709 13.8264412 8.82278481 14.6 9.62025316 13.7371685 16 6.75530417'%3E%3C/polygon%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-size: 70% 70%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    opacity: 0;
+  }
+
+  &:checked + label:before {
+    box-shadow: inset 0em 0em 0em 1em var(--primary-color);
+  }
+
+  &:checked + label:after {
+    opacity: 1;
+  }
+}
+
+
+figure {
+  margin: 0;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 70em;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
+}

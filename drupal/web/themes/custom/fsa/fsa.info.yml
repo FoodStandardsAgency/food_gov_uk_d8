@@ -1,0 +1,7 @@
+name: FSA
+type: theme
+description: "Theme for d8."
+core: 8.x
+version: 1.0
+libraries:
+  - fsa/global

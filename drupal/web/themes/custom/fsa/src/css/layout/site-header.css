@@ -1,0 +1,27 @@
+.site-header {
+  padding: 1em;
+}
+
+.site-header__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-header__menu-button {
+  width: 2em;
+  height: 2em;
+
+  @media (--breakpoint-sm) {
+    display: none;
+  }
+}
+
+.site-header__logo {
+}
+
+.site-header__search {
+}
+
+.site-header__links {
+}

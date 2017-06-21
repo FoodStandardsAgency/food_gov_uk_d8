@@ -1,0 +1,18 @@
+.button {
+  background-color: var(--primary-color);
+  color: var(--color-white);
+  font-size: 1em;
+  border: 0;
+  border-radius: 2em;
+  padding: 0.5em 1em;
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 50%;
+  }
+}
+
+:--not-touch .button:--enter {
+  background-color: var(--color-teal-light);
+}
