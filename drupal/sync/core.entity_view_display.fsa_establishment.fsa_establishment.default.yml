@@ -122,30 +122,24 @@ content:
     region: content
   field_score_confidence:
     weight: 9
-    label: inline
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
+    label: hidden
+    settings: {  }
     third_party_settings: {  }
-    type: number_integer
+    type: fsa_score_description_formatter
     region: content
   field_score_hygiene:
     weight: 7
-    label: inline
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
+    label: hidden
+    settings: {  }
     third_party_settings: {  }
-    type: number_integer
+    type: fsa_score_description_formatter
     region: content
   field_score_structural:
     weight: 8
-    label: inline
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
+    label: hidden
+    settings: {  }
     third_party_settings: {  }
-    type: number_integer
+    type: fsa_score_description_formatter
     region: content
   name:
     label: inline
