@@ -53,7 +53,9 @@ process:
   langcode:
     plugin: default_value
     default_value: en
-  id: LocalAuthorityIdCode
+  id:
+    plugin: local_authority_code
+    source: LocalAuthorityIdCode
   name: Name
   field_url: Url
   field_email: Email

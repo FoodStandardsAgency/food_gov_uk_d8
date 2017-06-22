@@ -116,7 +116,9 @@ process:
       - AddressLine4
     delimiter: "\r\n"
   field_postcode: PostCode
-  field_localauthoritycode: LocalAuthorityCode
+  field_localauthoritycode:
+    plugin: local_authority_code
+    source: LocalAuthorityCode
   field_newratingpending: NewRatingPending
   field_phone: Phone
   field_ratingkey: RatingKey
