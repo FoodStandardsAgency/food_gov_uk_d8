@@ -1,0 +1,14 @@
+.ratings {
+  background-color: red;
+  display: flex;
+}
+
+.ratings__search {
+  background-color: orange;
+  flex: 0 1 30em;
+}
+
+.ratings__listing {
+  background-color: yellow;
+  flex: 1 1 100%;
+}

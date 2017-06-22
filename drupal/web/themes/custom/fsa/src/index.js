@@ -5,7 +5,7 @@ import svg4everybody from 'svg4everybody';
 require.context("./img/", true, /\.(gif|png|svg|jpe?g)$/);
 require('./css/style.css');
 
-svg4everybody({ polyfill: true });
+//svg4everybody({ polyfill: true });
 
 // Add class if touch device
 document.addEventListener('touchstart', function addtouchclass(e) {
