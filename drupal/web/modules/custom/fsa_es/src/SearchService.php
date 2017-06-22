@@ -54,6 +54,11 @@ class SearchService {
               'field' => 'localauthoritycode.label.keyword'
             ],
           ],
+          'rating_values' => [
+            'terms' => [
+              'field' => 'ratingvalue.keyword'
+            ],
+          ],
         ],
       ]
     ];
@@ -84,6 +89,10 @@ class SearchService {
       $ids = explode(',', $filters['local_authority']);
       $query_must_filters[] = ['terms' => ['localauthoritycode.label.keyword' => $ids]];
     }
+    if (!empty($filters['rating_value'])) {
+      $ids = explode(',', $filters['rating_value']);
+      $query_must_filters[] = ['terms' => ['ratingvalue.keyword' => $ids]];
+    }
 
     // Assign the term filters to the query in the 'must' section
     foreach ($query_must_filters as $f) {
@@ -105,6 +114,7 @@ class SearchService {
       'aggs' => [
         'business_types' => $result['aggregations']['business_types']['buckets'],
         'local_authorities' => $result['aggregations']['local_authorities']['buckets'],
+        'rating_values' => $result['aggregations']['rating_values']['buckets'],
       ]
     ];
 
@@ -116,6 +126,12 @@ class SearchService {
     return $response;
   }
 
+  /**
+   * Get the list of possible categories in a format suitable for Form API (select and checkboxes elements)
+   *
+   * @return array
+   *  An associated array with the keys being the type of the category and the value suitable for Form API #options parameter.
+   */
   public function categories() {
 
     // Define the base query
@@ -138,6 +154,13 @@ class SearchService {
               'size' => 10000,
             ],
           ],
+          'rating_values' => [
+            'terms' => [
+              'field' => 'ratingvalue.keyword',
+              'order' => ['_term' => 'asc'],
+              'size' => 10000,
+            ],
+          ],
         ],
       ]
     ];
@@ -149,8 +172,11 @@ class SearchService {
     $response = [
       'business_types' => $result['aggregations']['business_types']['buckets'],
       'local_authorities' => $result['aggregations']['local_authorities']['buckets'],
+      'rating_values' => $result['aggregations']['rating_values']['buckets'],
     ];
 
     return $response;
   }
+
+
 }
