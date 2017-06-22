@@ -25,3 +25,6 @@ secrets
 
 # Ignore Drupal's local setting overrides
 drupal/conf/settings.local.php
+
+# Ignore local development services
+drupal/web/sites/development.services.yml
