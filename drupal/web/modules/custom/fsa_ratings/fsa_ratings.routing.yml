@@ -1,5 +1,5 @@
 
-fsa_ratings.ratings_search_ratingsSearch:
+fsa_ratings.ratings_search:
   path: '/ratings/search'
   defaults:
     _controller: '\Drupal\fsa_ratings\Controller\RatingsSearch::ratingsSearch'

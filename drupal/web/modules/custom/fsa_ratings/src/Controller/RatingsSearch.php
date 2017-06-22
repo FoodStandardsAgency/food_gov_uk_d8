@@ -2,7 +2,6 @@
 
 namespace Drupal\fsa_ratings\Controller;
 
-use Drupal\Component\Utility\Html;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
 use Drupal\fsa_es\SearchService;
@@ -57,7 +56,7 @@ class RatingsSearch extends ControllerBase {
 
     $filters = [];
     // See if the following parameters are provided by the user and add to the list of filters
-    $filter_param_names = ['local_authority', 'business_type'];
+    $filter_param_names = ['local_authority', 'business_type', 'rating_value'];
     foreach ($filter_param_names as $opt) {
       $value = \Drupal::request()->query->get($opt);
       if (!empty($value)) {
@@ -83,6 +82,7 @@ class RatingsSearch extends ControllerBase {
 
     return [
       '#theme' => 'fsa_ratings_search_page',
+      '#form' => \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchForm'),
       '#items' => $items,                         // Actual result items
       '#categories' => $categories,               // Aggregation results, list of categories of the result items
       '#keywords' => $keywords,                   // Keywords given in the URL
