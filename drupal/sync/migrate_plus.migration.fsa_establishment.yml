@@ -84,6 +84,9 @@ source:
     -
       name: latitude
       selector: geocode/latitude
+    -
+      name: RightToReply
+      selector: RightToReply
   ids:
     FHRSID:
       type: integer
@@ -126,6 +129,7 @@ process:
   field_schemetype: SchemeType
   field_geocode/lng: longitude
   field_geocode/lat: latitude
+  field_righttoreply: RightToReply
   uid:
     plugin: default_value
     default_value: 0
