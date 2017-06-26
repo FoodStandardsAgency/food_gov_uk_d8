@@ -3,7 +3,7 @@ Development instructions
 
 #### Local settings.php overrides
 
-`drupal/conf/settings.local.php` is not versioned, copy a [template from here](settings.local.php.txt) and modify to your needs.
+Copy local `drupal/conf/settings.local.php` [template from here](settings.local.php.txt).
 
 #### Drupal console & codeception on local environment
 
@@ -19,28 +19,40 @@ FSA Rating content/entities
  
 FHRS rating API: [api.ratings.food.gov.uk](http://api.ratings.food.gov.uk) 
 
-The migrate/import pulls ~520K establishments to the database. To avoid migrating everything to your local environment make sure you have following lines on your `settings.local.php` file:
+To import smaller batch of content for testing/development use following line(s) in your local `settings.local.php` file:
 
-```$config['fsa_ratings_import']['import_mode'] = 'development';``` 
+`$config['fsa_ratings_import']['import_mode'] = 'development';`
 
-And ```$config['fsa_ratings_import']['import_random'] = 'TRUE';``` if you want to import more variation to establishment entities.
+`$config['fsa_ratings_import']['import_random'] = 'TRUE';`
+
 
 #### Import/migrate Rating content
 
-Import authorities:
+Import authorities and establishments:
 
-```drush mi --tag=authorities```
+`drush mi --tag=authorities`
 
-Import establishments (if in development mode imports only 100 items to both languages).
+`drush mi --tag=establishments`
 
-```drush mi --tag=establishments```
-
-To import only specific language content use
+To import only specific language content use tags
 
 `drush mi --tag=english` or `drush mi --tag=welsh`
 
+For more verbose import use `--feedback` flag, e.g.
+ 
+`drush mi --tag=establishments --feedback="1000 items"`
+
+If import fails or is stopped set back to idle:
+
+`drush mrs fsa_establishment` or `drush mrs fsa_authority`
 
 FSA Ratings search / Elasticsearch
 ---------------------
 
-TBD
+Ratings search is located at domain.com/ratings/search.
+
+Drush commands to rebuild ES index.
+
+`drush eshd fsa_ratings_index -y; drush eshs; drush eshr fsa_ratings_index;` 
+
+And `drush cron`, multiple times if there are lots of establishment entities.
