@@ -25,61 +25,32 @@ class RatingsStaticPages extends ControllerBase {
     // Get language to be used in badge.
     $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
-    $ratings = [];
+    $ratings_table = [];
     $item_theme = 'fsa_ratings_meanings_item';
     $badge_size = 'medium';
 
-    $score = 5;
-    $ratings[0] = [
-      '#theme' => $item_theme,
-      '#rating_score' => $score,
-      '#rating_badge' => ['#markup' => RatingsHelper::ratingBadge('fhrs_' . $score . '_' . $lang .'-gb', $badge_size)],
-      '#rating_description' => $this->t('Top rating. The business is doing well in all three elements (food hygiene, cleanliness of premises and food safety management)'),
+    // Define the rating descriptions for each key
+    $ratings = [
+      '5' => $this->t('Top rating. The business is doing well in all three elements (food hygiene, cleanliness of premises and food safety management)'),
+      '4' => $this->t('This is an explanation text for this rating.'),
+      '3' => $this->t('This is an explanation text for this rating.'),
+      '2' => $this->t('This is an explanation text for this rating.'),
+      '1' => $this->t('This is an explanation text for this rating.'),
+      '0' => $this->t('This is an explanation text for this rating.'),
     ];
 
-    $score = 4;
-    $ratings[1] = [
-      '#theme' => $item_theme,
-      '#rating_score' => $score,
-      '#rating_badge' => ['#markup' => RatingsHelper::ratingBadge('fhrs_' . $score . '_' . $lang .'-gb', $badge_size)],
-      '#rating_description' => $this->t('lorem ipsum'),
-    ];
-
-    $score = 3;
-    $ratings[2] = [
-      '#theme' => $item_theme,
-      '#rating_score' => $score,
-      '#rating_badge' => ['#markup' => RatingsHelper::ratingBadge('fhrs_' . $score . '_' . $lang .'-gb', $badge_size)],
-      '#rating_description' => $this->t('lorem ipsum'),
-    ];
-
-    $score = 2;
-    $ratings[3] = [
-      '#theme' => $item_theme,
-      '#rating_score' => $score,
-      '#rating_badge' => ['#markup' => RatingsHelper::ratingBadge('fhrs_' . $score . '_' . $lang .'-gb', $badge_size)],
-      '#rating_description' => $this->t('lorem ipsum'),
-    ];
-
-    $score = 1;
-    $ratings[4] = [
-      '#theme' => $item_theme,
-      '#rating_score' => $score,
-      '#rating_badge' => ['#markup' => RatingsHelper::ratingBadge('fhrs_' . $score . '_' . $lang .'-gb', $badge_size)],
-      '#rating_description' => $this->t('lorem ipsum'),
-    ];
-
-    $score = 0;
-    $ratings[5] = [
-      '#theme' => $item_theme,
-      '#rating_score' => $score,
-      '#rating_badge' => ['#markup' => RatingsHelper::ratingBadge('fhrs_' . $score . '_' . $lang .'-gb', $badge_size)],
-      '#rating_description' => $this->t('lorem ipsum'),
-    ];
+    foreach ($ratings as $key => $description) {
+      $ratings_table[] = [
+        '#theme' => $item_theme,
+        '#rating_score' => $key,
+        '#rating_badge' => ['#markup' => RatingsHelper::ratingBadge('fhrs_' . $key . '_' . $lang .'-gb', $badge_size)],
+        '#rating_description' => $description,
+      ];
+    }
 
     return [
       '#theme' => 'fsa_ratings_meanings',
-      '#ratings' => $ratings,
+      '#ratings' => $ratings_table,
       '#backlink' => 'link back to establishment page',
     ];
   }
