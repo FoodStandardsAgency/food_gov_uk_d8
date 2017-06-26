@@ -84,6 +84,9 @@ source:
     -
       name: latitude
       selector: geocode/latitude
+    -
+      name: RightToReply
+      selector: RightToReply
   ids:
     FHRSID:
       type: integer
@@ -113,7 +116,9 @@ process:
       - AddressLine4
     delimiter: "\r\n"
   field_postcode: PostCode
-  field_localauthoritycode: LocalAuthorityCode
+  field_localauthoritycode:
+    plugin: local_authority_code
+    source: LocalAuthorityCode
   field_newratingpending: NewRatingPending
   field_phone: Phone
   field_ratingkey: RatingKey
@@ -126,6 +131,7 @@ process:
   field_schemetype: SchemeType
   field_geocode/lng: longitude
   field_geocode/lat: latitude
+  field_righttoreply: RightToReply
   uid:
     plugin: default_value
     default_value: 0

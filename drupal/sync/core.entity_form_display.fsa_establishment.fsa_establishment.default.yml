@@ -15,6 +15,7 @@ dependencies:
     - field.field.fsa_establishment.fsa_establishment.field_ratingdate
     - field.field.fsa_establishment.fsa_establishment.field_ratingkey
     - field.field.fsa_establishment.fsa_establishment.field_ratingvalue
+    - field.field.fsa_establishment.fsa_establishment.field_righttoreply
     - field.field.fsa_establishment.fsa_establishment.field_schemetype
     - field.field.fsa_establishment.fsa_establishment.field_score_confidence
     - field.field.fsa_establishment.fsa_establishment.field_score_hygiene
@@ -31,7 +32,7 @@ bundle: fsa_establishment
 mode: default
 content:
   field_address:
-    weight: 2
+    weight: 3
     settings:
       rows: 4
       placeholder: ''
@@ -48,25 +49,25 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_fhis_ratingvalue:
-    weight: 15
+    weight: 18
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_fhrs_ratingvalue:
-    weight: 14
+    weight: 17
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_geocode:
-    weight: 17
+    weight: 20
     settings: {  }
     third_party_settings: {  }
     type: geolocation_latlng
     region: content
   field_localauthoritycode:
-    weight: 8
+    weight: 9
     settings:
       match_operator: CONTAINS
       size: 60
@@ -75,35 +76,13 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_newratingpending:
-    weight: 16
+    weight: 19
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_phone:
-    weight: 4
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_postcode:
-    weight: 3
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_ratingdate:
-    weight: 7
-    settings: {  }
-    third_party_settings: {  }
-    type: datetime_default
-    region: content
-  field_ratingkey:
     weight: 5
     settings:
       size: 60
@@ -111,36 +90,66 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_ratingvalue:
-    weight: 12
+  field_postcode:
+    weight: 4
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_ratingdate:
+    weight: 8
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_ratingkey:
+    weight: 6
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_ratingvalue:
+    weight: 15
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_righttoreply:
+    weight: 10
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
   field_schemetype:
-    weight: 13
+    weight: 16
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_score_confidence:
-    weight: 11
+    weight: 13
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_score_hygiene:
-    weight: 9
+    weight: 11
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_score_structural:
-    weight: 10
+    weight: 12
     settings:
       placeholder: ''
     third_party_settings: {  }
@@ -161,11 +170,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 10
+    weight: 14
     region: content
+    settings: {  }
+    third_party_settings: {  }
   user_id:
     type: entity_reference_autocomplete
-    weight: 6
+    weight: 7
     settings:
       match_operator: CONTAINS
       size: 60

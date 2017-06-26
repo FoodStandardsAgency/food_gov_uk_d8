@@ -1,4 +1,15 @@
-<div class="item">
-  <h3>{{ item.name }}</h3>
-  <p class="address">{{ item.address }}</p>
+<div class="item" style="background-color: #dedede;">
+  <h3><a href="{{ item.url }}">{{ item.name }}</a></h3>
+  <p class="address">{{ item.address }}<br>{{ item.postcode }}</p>
+  <p class="category">
+    {% for business_type in item.businesstype %}
+      {{ business_type.label }}
+    {% endfor %}
+  </p>
+  <p class="localauthority">
+    {% for local_authority in item.localauthoritycode %}
+      {{ local_authority.label }}
+    {% endfor %}
+  </p>
+  <p class="ratingvalue">Rating: {{ item.ratingvalue }}</p>
 </div>

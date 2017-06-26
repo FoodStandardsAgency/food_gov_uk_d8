@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Component\Utility\Html;
 
 /**
  * Implements hook_help().
@@ -30,11 +31,20 @@ function fsa_ratings_help($route_name, RouteMatchInterface $route_match) {
 }
 
 /**
+ * Implements hook_preprocess_field().
+ */
+function fsa_ratings_preprocess_field(&$variables, $hook) {
+  if ($variables['element']['#field_name'] == 'field_righttoreply') {
+    // FHRS API has all html encoded in the rightToReply field, it is saved in
+    // entity as is so remove the crap before sending off to the field template.
+    $variables['items'][0]['content']['#context']['value'] = str_replace('&nbsp;', ' ', (strip_tags(Html::decodeEntities($variables['items'][0]['content']['#context']['value']))));
+  }
+}
+
+/**
  * Implements hook_theme().
  */
 function fsa_ratings_theme() {
-
-
 
   return [
     'fsa_establishment' => [
@@ -44,6 +54,8 @@ function fsa_ratings_theme() {
         'find_more_title' => t('Find out more about food hygiene ratings'),
         'find_more_link_ratings' => NULL,
         'find_more_link_fhrs' => NULL,
+        'righttoreply_title' => t('About comments made by the business'),
+        'righttoreply_copy' => t('A business has the right to reply to its local authority about the food hygiene rating given. This means a business may draw attention to improvements made since the inspection and/or explain particular circumstances at the time of inspection that might have affected the rating the business was given. The comments made by the business have been reviewed and may have been edited by a local authority food safety officer so they fit the terms and conditions of this website but the accuracy of any statements made has not been verified.'),
         'business_owner_title' => t('Are you the business owner or manager?'),
         'business_owner_copy1' => t('If any information on this page is incorrect you can email the correct information to your local authority by using the email address below.'),
         'business_owner_copy2' => t('You can find out how to appeal against the rating given and find out about your right to reply. You can also ask for a re-inspection.'),
@@ -72,6 +84,11 @@ function fsa_ratings_theme() {
         'items' => [],
         'categories' => [],
         'keywords' => '',
+        'available_filters' => [],
+        'applied_filters' => [],
+        'hits_total' => 0,
+        'hits_shown' => 0,
+        'form' => NULL,
       ],
     ],
     'fsa_ratings_search_result_item' => [
