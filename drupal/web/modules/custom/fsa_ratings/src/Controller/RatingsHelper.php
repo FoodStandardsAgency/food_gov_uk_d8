@@ -3,12 +3,9 @@
 namespace Drupal\fsa_ratings\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Url;
 
 /**
  * Controller class for the ratings helper.
- *
- * Helper functions to store fancy reusable stuff.
  *
  * @package Drupal\fsa_ratings\Controller
  */
@@ -26,7 +23,8 @@ class RatingsHelper extends ControllerBase {
    *   Rating image badge (@todo: use drupal image functionality)
    */
   public static function ratingBadge($rating, $image_size = 'medium') {
-    return '<img src="http://ratings.food.gov.uk/images/scores/' . $image_size . '/' . $rating . '.JPG" />';
+    $alt = t('Food hygiene Rating score @score', ['@score' => $rating]);
+    return '<img src="http://ratings.food.gov.uk/images/scores/' . $image_size . '/' . $rating . '.JPG" alt="' . $alt .'" />';
   }
 
 }

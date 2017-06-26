@@ -78,7 +78,7 @@ function fsa_ratings_theme() {
       ],
     ],
 
-    // Ratings meaning page. Created by fsa_ratings.ratings_meanings route.
+    // Ratings meaning item theme, passed for fsa_ratings_meanings template.
     'fsa_ratings_meanings_item' => [
       'render element' => 'custom_element',
       'variables' => [
