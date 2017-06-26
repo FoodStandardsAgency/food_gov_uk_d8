@@ -7,3 +7,12 @@ fsa_ratings.ratings_search:
     keywords: ''
   requirements:
     _permission: 'access content'
+
+# Ratings explanation page.
+fsa_ratings.ratings_meanings:
+  path: '/ratings/meanings'
+  defaults:
+    _controller: '\Drupal\fsa_ratings\Controller\RatingsStaticPages::ratingMeanings'
+    _title: 'What do the different ratings mean'
+  requirements:
+    _permission: 'access content'
