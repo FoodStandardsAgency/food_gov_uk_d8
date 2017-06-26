@@ -35,7 +35,7 @@ class FsaEstablishmentViewBuilder extends EntityViewBuilder {
 
     // Link for the "What do the ratings mean".
     // @todo: correct the link
-    $url = Url::fromUri('http://food.gov.uk');
+    $url = Url::fromUri('http://LOCAL.food.gov.uk/ratings/meanings');
     $build['#find_more_link_ratings'] = Link::fromTextAndUrl(t('What do the different ratings mean'), $url )->toString();
 
     // Link for the "What is FHRS".
