@@ -70,7 +70,7 @@ class EstablishmentApiUrl extends Url {
     for ($i = $start_at_page; $i <= $page_count; $i++) {
       // Append pageNumber "manually", calling buildQuery() again for every item
       // would double the excecution time.
-      $configuration['urls'][] = $configuration['base_url'] . '?' . $query . '&pageNumber' . $i;
+      $configuration['urls'][] = $configuration['base_url'] . '?' . $query . '&pageNumber=' . $i;
     }
 
     // Pass in the URL's to fetch the content from.
