@@ -33,9 +33,14 @@ class FsaEstablishmentViewBuilder extends EntityViewBuilder {
     }
     $build['#content'] = $content;
 
-    // Link for the "What do the ratings mean".
-    // @todo: correct the link
-    $url = Url::fromUri('http://LOCAL.food.gov.uk/ratings/meanings');
+    // Link to "What do the ratings mean" page.
+    $url = Url::fromRoute('fsa_ratings.ratings_meanings');
+    $link_options = array(
+      'query' => [
+        'fhrsid' => $entity->id(),
+      ],
+    );
+    $url->setOptions($link_options);
     $build['#find_more_link_ratings'] = Link::fromTextAndUrl(t('What do the different ratings mean'), $url )->toString();
 
     // Link for the "What is FHRS".
