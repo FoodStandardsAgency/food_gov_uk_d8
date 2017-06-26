@@ -8,7 +8,8 @@
     "IE 8"
   ],
   "scripts": {
-    "dev": "browser-sync start --proxy 'https://local.food.gov.uk' --serveStatic 'dist' --files 'dist' 'template' --no-open & webpack --watch",
+    "dev": "browser-sync --reload-delay 1000 start --proxy 'https://local.food.gov.uk' --serveStatic 'dist' --files 'dist' 'template' --no-open & webpack --watch",
+    "watch": "webpack --watch",
     "build": "webpack -p"
   },
   "keywords": [],

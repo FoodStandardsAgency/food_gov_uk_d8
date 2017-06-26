@@ -16,7 +16,13 @@
         <h2>{% trans %}Search results for {{ keywords|placeholder }}{% endtrans %}</h2>
       {% endif %}
 
-      {{ items }}
+      <div class="table js-table">
+        <div class="table__row table__row--header js-table-header">
+          <div class="table__item">{% trans %}Name{% endtrans %}</div>
+          <div class="table__item">{% trans %}Address{% endtrans %}</div>
+        </div>
+        {{ items }}
+      </div>
     </div>
 
     {% if categories %}
