@@ -104,6 +104,19 @@ class SearchService {
       $query['body']['query']['bool']['should'][] = $f;
     }
 
+    $sort = (\Drupal::request()->query->get('sort'));
+
+    switch ($sort) {
+      case 'ratings_asc':
+        $query['body']['sort'] = ['ratingvalue.keyword' => 'asc'];
+        break;
+      case 'ratings_desc':
+        $query['body']['sort'] = ['ratingvalue.keyword' => 'desc'];
+        break;
+    }
+
+
+
     // Execute the query.
     $result = $this->client->search($query);
 
