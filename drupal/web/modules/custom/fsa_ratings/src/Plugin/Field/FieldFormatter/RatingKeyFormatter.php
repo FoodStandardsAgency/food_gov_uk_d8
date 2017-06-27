@@ -7,6 +7,7 @@ use Drupal\Core\Field\FieldItemInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\fsa_ratings\Controller\RatingsHelper;
 
 /**
  * Plugin implementation of the 'rating_key_formatter' formatter.
@@ -70,7 +71,7 @@ class RatingKeyFormatter extends FormatterBase {
     $elements = [];
 
     foreach ($items as $delta => $item) {
-      $fieldValue = '<img src="http://ratings.food.gov.uk/images/scores/' . $this->getSetting('image_size') . '/' . $this->viewValue($item) . '.JPG" />';
+      $fieldValue = RatingsHelper::ratingBadge($this->viewValue($item), $this->getSetting('image_size'), FALSE);
       $elements[$delta] = ['#markup' => $fieldValue];
     }
 

@@ -67,6 +67,28 @@ function fsa_ratings_theme() {
       ],
     ],
 
+    // Ratings meaning page. Created by fsa_ratings.ratings_meanings route.
+    'fsa_ratings_meanings' => [
+      'render element' => 'custom_element',
+      'variables' => [
+        'ratings' => [],
+        'backlink' => NULL,
+        'paragraph_1' => NULL,
+        'paragraph_2' => NULL,
+      ],
+    ],
+
+    // Ratings meaning item theme, passed for fsa_ratings_meanings template.
+    'fsa_ratings_meanings_item' => [
+      'render element' => 'custom_element',
+      'variables' => [
+        'rating_score' => NULL,
+        'rating_badge' => NULL,
+        'rating_description' => NULL,
+      ],
+    ],
+
+
     'fsa_ratings_field_score_display' => [
       'render element' => 'children',
       'variables' => [

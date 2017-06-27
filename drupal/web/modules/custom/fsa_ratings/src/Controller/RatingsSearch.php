@@ -71,6 +71,10 @@ class RatingsSearch extends ControllerBase {
       $hits = $results['total'];
 
       foreach ($results['results'] as $result) {
+        // Use ratingvalue to get the badge.
+        $rating = $result['ratingvalue'];
+        $result['ratingvalue'] = ['#markup' => RatingsHelper::ratingBadge($rating, 'large')];
+
         // Add the link to the entity v:iew page
         $result['url'] = Url::fromRoute('entity.fsa_establishment.canonical', ['fsa_establishment' => $result['id']]);
         $items[] = [

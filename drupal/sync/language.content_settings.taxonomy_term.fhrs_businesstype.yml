@@ -8,7 +8,7 @@ dependencies:
     - content_translation
 third_party_settings:
   content_translation:
-    enabled: false
+    enabled: true
 id: taxonomy_term.fhrs_businesstype
 target_entity_type_id: taxonomy_term
 target_bundle: fhrs_businesstype
