@@ -51,9 +51,6 @@ class RatingsStaticPages extends ControllerBase {
    */
   public function ratingMeanings() {
 
-    // Get language to be used in badge.
-    $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
-
     $ratings_table = [];
     $item_theme = 'fsa_ratings_meanings_item';
     $badge_size = 'medium';
@@ -73,7 +70,7 @@ class RatingsStaticPages extends ControllerBase {
       $ratings_table[] = [
         '#theme' => $item_theme,
         '#rating_score' => $key,
-        '#rating_badge' => ['#markup' => RatingsHelper::ratingBadge('fhrs_' . $key . '_' . $lang . '-gb', $badge_size)],
+        '#rating_badge' => ['#markup' => RatingsHelper::ratingBadge($key, $badge_size)],
         '#rating_description' => $description,
       ];
     }

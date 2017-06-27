@@ -71,7 +71,7 @@ class RatingKeyFormatter extends FormatterBase {
     $elements = [];
 
     foreach ($items as $delta => $item) {
-      $fieldValue = RatingsHelper::ratingBadge($this->viewValue($item), $this->getSetting('image_size'));
+      $fieldValue = RatingsHelper::ratingBadge($this->viewValue($item), $this->getSetting('image_size'), FALSE);
       $elements[$delta] = ['#markup' => $fieldValue];
     }
 
