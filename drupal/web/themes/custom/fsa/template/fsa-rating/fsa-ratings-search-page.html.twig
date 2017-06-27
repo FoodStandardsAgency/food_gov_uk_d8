@@ -1,47 +1,37 @@
-<div class="ratings">
-  <div class="ratings__search">
+<div class="ratings js-sticky-container">
+  <div class="ratings__search js-sticky-element">
     <div class="logo">
       <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop"></use></svg>
     </div>
-    <h2>{% trans %}Food Hygiene Ratings Search{% endtrans %}</h2>
-    <form id="fsa-ratings-search">
-      <input type="text" id="fsa-ratings-search-keywords" value="{{ keywords }}" />
-      <input type="submit" value="{% trans %}Search{% endtrans %}" />
-    </form>
+    <h3 class="ratings__heading">{% trans %}Food Hygiene Ratings Search{% endtrans %}</h3>
+    {{ form }}
   </div>
 
   <div class="ratings__listing">
-    <div class="fsa-ratings-items">
+    <header class="ratings__header">
       {% if keywords %}
-        <h2>{% trans %}Search results for {{ keywords|placeholder }}{% endtrans %}</h2>
+        <div class="ratings__hits-total">{% trans %}{{ hits_total }} results{% endtrans %}</div>
       {% endif %}
-
-      <div class="table js-table">
-        <div class="table__row table__row--header js-table-header">
-          <div class="table__item">{% trans %}Name{% endtrans %}</div>
-          <div class="table__item">{% trans %}Address{% endtrans %}</div>
-        </div>
-        {{ items }}
+      <div class="ratings__sort-results">
+        <select>
+          <option value="Sort results by">Sort results by</option>
+        </select>
       </div>
-    </div>
+    </header>
 
-    {% if categories %}
-    <div class="fsa-ratings-categories">
-      <h2>{% trans %}Categories{% endtrans %}</h2>
-      <ul>
-      {% for cat in categories %}
-        <li>{{ cat.label }} ({{ cat.count }})</li>
-      {% endfor %}
-      </ul>
+    <div class="table js-table">
+      <div class="table__row table__row--header js-table-header">
+        <div class="table__item table__item--large">{% trans %}Name{% endtrans %}</div>
+        <div class="table__item">{% trans %}Rating{% endtrans %}</div>
+        <div class="table__item">{% trans %}Authority{% endtrans %}</div>
+      </div>
+      {{ items }}
     </div>
-    {% endif %}
   </div>
 </div>
 
-<script type="application/javascript">
-  document.getElementById('fsa-ratings-search').addEventListener('submit', function(event){
-    var keywords = document.getElementById('fsa-ratings-search-keywords').value;
-    location.href = '/ratings/search/' + keywords;
-    event.preventDefault();
-  });
-</script>
+
+{% if hits_total > hits_shown %}
+  <button>{% trans %}Show more results{% endtrans %}</button>
+  {% trans %}Displaying {{ hits_shown }} of {{ hits_total }} items{% endtrans %}
+{% endif %}

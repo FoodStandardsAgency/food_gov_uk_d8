@@ -48,28 +48,19 @@ Plugin documentation:
   --color-black: #000;
   --color-white: #fff;
 
-  --color-gray-light: #EEEEEE;
-  --color-gray: #9E9E9E;
+  --color-gray: #848B8E;
 
-  --color-red-light: #EF9A9A;
-  --color-red: #F44336;
+  --color-light-gray: #DEE2E5;
 
-  --color-blue-light: #90CAF9;
-  --color-blue: #2196F3;
-
-  --color-yellow-light: #FFF59D;
-  --color-yellow: #FFEE58;
-
-  --color-orange-light: #FFCC80;
-  --color-orange: #FF9800;
-
-  --color-teal-light: #80CBC4;
-  --color-teal: #009688;
-
-  --color-green-light: #A5D6A7;
-  --color-green: #4CAF50;
+  --color-teal: #00A39B;
 
   --color-purple: #49176D;
+
+  --color-red: #E31837;
+
+  --color-green: #6CB33F;
+
+  --color-dark-blue: #18262C;
 }
 
 :root {
@@ -124,7 +115,7 @@ body {
 
 :--heading {
   font-family: var(--font-family-heading);
-  font-weight: 400;
+  font-weight: 600;
 
   &:first-child {
     margin-top: 0em;
@@ -163,6 +154,16 @@ h5 {
 h6 {
   font-size: 0.889em;
   @mixin responsive-declaration line-height, 1.0, 1.125;
+}
+
+p {
+  &:first-child {
+    margin-top: 0em;
+  }
+
+  &:last-child {
+    margin-bottom: 0em;
+  }
 }
 
 img {
@@ -208,11 +209,12 @@ input, textarea, select {
 select {
   background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='10px' height='6px' viewBox='0 0 10 6' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Styleguide' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg transform='translate%28-919.000000, -3891.000000%29' id='Basic-Elements' fill='%2318262C'%3E%3Cg transform='translate%2877.000000, 3029.000000%29'%3E%3Cg id='Basic-forms' transform='translate%280.000000, 757.000000%29'%3E%3Cg id='Select' transform='translate%28470.000000, 57.000000%29'%3E%3Cpolygon id='Triangle' points='377 54 372 48 382 48'%3E%3C/polygon%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
   background-position: 90% 50%;
-  background-position: calc(100% - 0.5em) 50%;
+  background-position: calc(100% - 1em) 50%;
   background-size: 0.75em auto;
   background-repeat: no-repeat;
   appearance: none;
   border: none;
+  padding-right: 3em;
 }
 
 textarea {
@@ -270,7 +272,7 @@ input[type="checkbox"] + label:after  {
 input[type="radio"] {
   & + label:before {
     border-radius: 1em;
-    box-shadow: inset 0em 0em 0em 0.1em var(--color-black);
+    box-shadow: inset 0em 0em 0em 0.1em currentColor;
   }
 
   & + label:after {
@@ -288,7 +290,7 @@ input[type="radio"] {
 
 input[type="checkbox"] {
   & + label:before {
-    box-shadow: inset 0em 0em 0em 0.1em var(--color-black);
+    box-shadow: inset 0em 0em 0em 0.1em currentColor;
     border-radius: 0.1em;
   }
 

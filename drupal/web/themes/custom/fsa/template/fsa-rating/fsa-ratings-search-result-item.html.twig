@@ -1,4 +1,23 @@
 <div class="table__row">
-  <div class="table__item"><h3>{{ item.name }}</h3></div>
-  <div class="table__item">{{ item.address }}</div>
+  <div class="table__item table__item--large">
+    <div class="table__content">
+      {% if item.name %}
+        <h3>{{ item.name }}</h3>
+      {% endif %}
+      {% if item.address %}
+        <p>{{ item.address }}</p>
+      {% endif %}
+      {% if item.postcode %}
+        <p>{{ item.postcode }}</p>
+      {% endif %}
+    </div>
+  </div>
+  <div class="table__item">
+    <div class="table__content">Rating: {{ item.ratingvalue }}</div>
+  </div>
+  <div class="table__item">
+    {% for local_authority in item.localauthoritycode %}
+      <div class="table__content">{{ local_authority.label }}</div>
+    {% endfor %}
+  </div>
 </div>

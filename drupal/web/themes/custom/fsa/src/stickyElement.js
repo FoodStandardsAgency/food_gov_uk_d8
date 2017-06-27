@@ -1,0 +1,120 @@
+function stickyElement(containers, stickyElements) {
+  // Area class
+  class Area {
+    constructor(element) {
+      this.element = element;
+      this._relatedInstance;
+    }
+
+    set relatedInstance(item) {
+      this._relatedInstance = item;
+    }
+
+    get relatedInstance() {
+      return this._relatedInstance;
+    }
+
+    get thisElement() {
+      return this.element;
+    }
+
+    get offset() {
+      return this.calcOffset();
+    }
+
+    calcOffset() {
+      return this.element.getBoundingClientRect().top;
+    }
+
+    get inview() {
+      return this.calcInview();
+    }
+
+    calcInview() {
+      var rect = this.element.getBoundingClientRect();
+      return (
+          rect.top - window.innerHeight <= 0 &&
+          rect.bottom >= 0
+      );
+    }
+
+    get isBottom() {
+      return this.calcBottom();
+    }
+
+    calcBottom() {
+      var elementHeight = this._relatedInstance.element.offsetHeight;      
+      return this.element.getBoundingClientRect().bottom <= elementHeight;
+    }
+  }
+
+  // Content section class
+  class Section extends Area {
+
+  }
+
+  const containerArray = [],
+  stickyElementArray = [];
+
+  // Push all containerArray into an array
+  for (let i = 0; i < containers.length; i++) {
+    // Query all content sections inside area
+    let allSections = stickyElements;
+
+    // Loop through every sections inside current content area
+    for (let y = 0; y < allSections.length; y++) {
+      stickyElementArray.push(new Section(allSections[y]));
+    }
+
+    containerArray.push(new Area(containers[i]));
+  }
+
+  // Set related instance for each instance of the container
+  for (var i = 0; i < containerArray.length; i++) {
+    containerArray[i].relatedInstance = stickyElementArray[i];
+  }
+
+  // Function to toggle sticky navigation
+  const toggleStickyElement = () => {
+
+    containerArray.forEach(function(container){
+      console.log(container.isBottom);
+      // Check if element is bottom of the content area
+      if (container.isBottom) {
+        container.relatedInstance.element.classList.add('is-bottom');
+      } else {
+        container.relatedInstance.element.classList.remove('is-bottom');
+      }
+
+      // Check if element is in view
+      if (container.inview && container.offset < 0) {
+        container.relatedInstance.element.classList.add('is-sticky');
+      } else {
+        container.relatedInstance.element.classList.remove('is-sticky');
+      }
+    });
+    // for (let i = 0; i < containerArray.length; i++) {
+    //
+    //   // Check if navigation is bottom of the content area
+    //   if (containerArray[i].isBottom) {
+    //     containerArray[i].relatedInstance.classList.add('bottom');
+    //   } else {
+    //     containerArray[i].relatedInstance.classList.remove('bottom');
+    //   }
+    //
+    //   if (containerArray[i].inview && containerArray[i].offset < 0) {
+    //     containerArray[i].relatedInstance.classList.add('sticky');
+    //   } else {
+    //     containerArray[i].relatedInstance.classList.remove('sticky');
+    //   }
+    // }
+  }
+
+  // Add scroll listener
+  window.addEventListener("scroll", toggleStickyElement);
+
+  // Add load listener
+  window.addEventListener("load", toggleStickyElement);
+}
+
+module.exports = stickyElement;
