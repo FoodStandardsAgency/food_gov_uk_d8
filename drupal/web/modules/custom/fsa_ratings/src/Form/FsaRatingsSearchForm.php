@@ -53,45 +53,60 @@ class FsaRatingsSearchForm extends FormBase {
       }
     }
 
-    $form['container'] = [
+    $form['main'] = [
       '#type' => 'container',
       '#attributes' => [
         'class' => [
-          'fsa-rating-search-container'
+          'fsa-rating-search-main'
         ],
       ],
     ];
-    $form['container']['business_type'] = [
+    $form['main']['q'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Business name'),
+      '#default_value' => $keywords,
+    ];
+
+    $form['advanced'] = [
+      '#type' => 'details',
+      '#open' => FALSE,
+      '#title' => 'More search options',
+      '#collapsible' => TRUE,
+      '#attributes' => [
+        'class' => [
+          'fsa-rating-search-advanced'
+        ],
+      ],
+    ];
+    $form['advanced']['business_type'] = [
       '#type' => 'select',
       '#title' => $this->t('Business type'),
       '#options' => $this->aggsToOptions($available_filters['business_types']),
       '#default_value' => \Drupal::request()->query->get('business_type'),
       '#empty_value' => '',
     ];
-    $form['container']['local_authority'] = [
+    $form['advanced']['local_authority'] = [
       '#type' => 'select',
-      '#title' => $this->t('Local authorities'),
+      '#title' => $this->t('Local authority'),
       '#options' => $this->aggsToOptions($available_filters['local_authorities']),
       '#default_value' => \Drupal::request()->query->get('local_authority'),
       '#empty_value' => '',
     ];
-    $form['container']['rating_value'] = [
+    $form['advanced']['rating_value'] = [
       '#type' => 'checkboxes',
-      '#title' => $this->t('Rating value'),
+      '#title' => $this->t('Hygiene rating'),
       '#options' => $this->aggsToOptions($available_filters['rating_values']),
       '#default_value' => explode(',', \Drupal::request()->query->get('rating_value')),
     ];
-    $form['container']['q'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Name of the business'),
-      '#default_value' => $keywords,
-    ];
+
     $form['container']['actions']['#type'] = 'actions';
     $form['container']['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Search'),
       '#button_type' => 'primary',
     ];
+
+    $form['#theme'] = 'fsa_ratings_search_form';
 
     return $form;
 

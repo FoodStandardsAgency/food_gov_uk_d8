@@ -33,7 +33,7 @@ class FsaEstablishmentViewBuilder extends EntityViewBuilder {
     }
     $build['#content'] = $content;
 
-    // Link to "What do the ratings mean" page.
+    // "What do the ratings mean" link.
     $url = Url::fromRoute('fsa_ratings.ratings_meanings');
     $link_options = array(
       'query' => [
@@ -43,14 +43,13 @@ class FsaEstablishmentViewBuilder extends EntityViewBuilder {
     $url->setOptions($link_options);
     $build['#find_more_link_ratings'] = Link::fromTextAndUrl(t('What do the different ratings mean'), $url )->toString();
 
-    // Link for the "What is FHRS".
-    // @todo: correct the link
-    $url = Url::fromUri('http://food.gov.uk');
+    // "What is FHRS" link.
+    // @todo: For now link to existing site, correct the link once we have the business guidance page in place.
+    $url = Url::fromUri('https://www.food.gov.uk/business-industry/hygieneratings');
     $build['#find_more_link_fhrs'] = Link::fromTextAndUrl(t('What is the Food Hygiene Rating Scheme?'), $url )->toString();
 
-    // Link for the "Get badges".
-    // @todo: correct link or get decicion if the page should allow user to copy-paste the widget code as in the old site?
-    $url = Url::fromUri('http://widget.ratings.food.gov.uk');
+    // "Get badges" link.
+    $url = Url::fromUri('https://fhrs-online-display.food.gov.uk/confirm_business/?id=' . $entity->id());
     $link_options = array(
       'attributes' => [
         'class' => [

@@ -1,14 +1,48 @@
+{#
+/**
+ * @file fsa-ratings-search-page.html.twig
+ * Theme implementation for FSA Ratings search result page.
+ *
+ * Available variables:
+ * - form_header: Header content for the form.
+ * -- form_header.title: Title of above the form.
+ * -- form_header.subtitle: Subtitle (if search return results)
+ * -- form_header.copy: Header short copy (if search return results)
+ *
+ * - keywords: The search  keyword(s)
+ * - items: The actual search items.
+ * - hits_total: Total number of results.
+ * - hits_shown: Number of hits shown on page.
+ *
+ * @ingroup themeable
+ */
+#}
+<h2>{{ form_header.title }}
+  {% if form_header.subtitle %}<br />{{ form_header.subtitle }}{% endif %}
+</h2>
+
+{% if form_header.copy %}
+  <p>{{ form_header.copy }}</p>
+{% endif %}
+
 {{ form }}
 
-<!-- search result list: -->
-<div class="fsa-ratings-items">
-  {% if keywords %}
-    <h2>{% trans %}Search results for {{ keywords|placeholder }}{% endtrans %}</h2>
-  {% endif %}
+{% if sort_form %}
+  <div>{{ hits_total }} {{ 'Results'|t }}</div>
+  <div>{{ sort_form }}</div>
+{% endif %}
 
-  {{ items }}
-</div>
-<!-- / search result list -->
+{{ ratings_info_content }}
+
+{% if items %}
+  <div class="fsa-ratings-items">
+    {% if keywords %}
+      <h2>{% trans %}Search results for {{ keywords|placeholder }}{% endtrans %}</h2>
+    {% endif %}
+
+    {{ items }}
+  </div>
+{% endif %}
 
 {% if hits_total > hits_shown %}
   <button>{% trans %}Show more results{% endtrans %}</button>

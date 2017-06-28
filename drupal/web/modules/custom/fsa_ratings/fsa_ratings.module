@@ -100,6 +100,9 @@ function fsa_ratings_theme() {
     'fsa_ratings' => [
       'render element' => 'children',
     ],
+    'fsa_ratings_search_form' => [
+      'render element' => 'form',
+    ],
     'fsa_ratings_search_page' => [
       'render element' => 'custom_element',
       'variables' => [
@@ -111,6 +114,9 @@ function fsa_ratings_theme() {
         'hits_total' => 0,
         'hits_shown' => 0,
         'form' => NULL,
+        'form_header' => [],
+        'sort_form' => NULL,
+        'ratings_info_content' => NULL,
       ],
     ],
     'fsa_ratings_search_result_item' => [

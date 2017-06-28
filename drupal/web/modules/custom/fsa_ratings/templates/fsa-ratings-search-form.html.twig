@@ -1,0 +1,31 @@
+{#
+/**
+ * @file fsa-ratings-search-form.html.twig
+ * Theme implementation for FSA Ratings search form.
+ *
+ * Available variables:
+ * - form: The full form
+ * - attributes: HTML attributes for the container element.
+ * - form.main: Container wrapper for the main keyword form.
+ * - form.main.q: Keyword searchfield.
+ * - form.advanced: Details wrapper for advanced options.
+ * - form.advanced.business_type: Business type dropdown.
+ * - form.advanced.local_authority: Local authority dropdown.
+ * - form.advanced.rating_value: Rating value checkboxes.
+ * - form.container.actions: Submit etc. buttons.
+ *
+ * If printing individual form fields rememeber to add
+ *      {{ form.form_build_id }}
+ *      {{ form.form_token }}
+ *      {{ form.form_id }}
+ *
+ * @see template_preprocess_fsa_authority()
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ attributes }}>
+  {{ form }}
+</div>
+
+

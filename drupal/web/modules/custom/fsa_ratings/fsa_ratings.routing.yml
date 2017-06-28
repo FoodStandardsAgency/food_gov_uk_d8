@@ -1,9 +1,16 @@
+fsa_ratings.ratings_settings:
+ path: '/admin/config/fsa-ratings'
+ defaults:
+   _form: '\Drupal\fsa_ratings\Form\FsaRatingsConfigurations'
+   _title: 'FSA Ratings configurations'
+ requirements:
+   _permission: 'administer site configuration'
 
 fsa_ratings.ratings_search:
   path: '/ratings/search'
   defaults:
     _controller: '\Drupal\fsa_ratings\Controller\RatingsSearch::ratingsSearch'
-    _title: 'Ratings search'
+    _title: 'Food hygiene ratings search'
     keywords: ''
   requirements:
     _permission: 'access content'
