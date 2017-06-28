@@ -32,8 +32,8 @@ class FsaRatingsSearchFilterForm extends FormBase {
         'relevance' => $this->t('Relevance'),
         'ratings_desc' => $this->t('Ratings (highest to lowest)'),
         'ratings_asc' => $this->t('Rating (lowest to highest)'),
-        'name_desc' => $this->t('Name (A to Z)'),
-        'name_asc' => $this->t('Name (Z to A)'),
+//        'name_desc' => $this->t('Name (A to Z)'),
+//        'name_asc' => $this->t('Name (Z to A)'),
       ],
       '#default_value' => \Drupal::request()->query->get('sort'),
 

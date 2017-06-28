@@ -104,8 +104,10 @@ class SearchService {
       $query['body']['query']['bool']['should'][] = $f;
     }
 
-    $sort = (\Drupal::request()->query->get('sort'));
+    // Get sorting param from url.
+    $sort = Html::escape(\Drupal::request()->query->get('sort'));
 
+    // And pass sorting for ES.
     switch ($sort) {
       case 'ratings_asc':
         $query['body']['sort'] = ['ratingvalue.keyword' => 'asc'];
@@ -114,8 +116,6 @@ class SearchService {
         $query['body']['sort'] = ['ratingvalue.keyword' => 'desc'];
         break;
     }
-
-
 
     // Execute the query.
     $result = $this->client->search($query);
