@@ -84,9 +84,15 @@ class RatingsSearch extends ControllerBase {
       }
     }
 
+    $sort_form = NULL;
+    if ($hits > 0) {
+      $sort_form = \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchFilterForm');
+    }
+
     return [
       '#theme' => 'fsa_ratings_search_page',
       '#form' => \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchForm'),
+      '#sort_form' => $sort_form,
       '#items' => $items,                         // Actual result items
       '#categories' => $categories,               // Aggregation results, list of categories of the result items
       '#keywords' => $keywords,                   // Keywords given in the URL
