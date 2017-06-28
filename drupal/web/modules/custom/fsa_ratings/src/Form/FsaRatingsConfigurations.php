@@ -61,7 +61,8 @@ class FsaRatingsConfigurations extends ConfigFormBase {
     // Ratings form landing info content.
     // @todo: Use to WYSIWYG field?
     $form['fsa_ratings']['ratings_info_content'] = array(
-      '#type' => 'textarea',
+      '#type' => 'text_format',
+      '#format' => 'full_html',
       '#title' => t('Ratings search landing content'),
       '#maxlength' => NULL,
       '#default_value' => $fsa_ratings->get('ratings_info_content') ? $fsa_ratings->get('ratings_info_content') : $default_copy,
@@ -80,7 +81,7 @@ class FsaRatingsConfigurations extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->config('config.fsa_ratings')
-      ->set('ratings_info_content', $form_state->getValue('ratings_info_content'))
+      ->set('ratings_info_content', $form_state->getValue('ratings_info_content')['value'])
       ->save();
     parent::submitForm($form, $form_state);
   }
