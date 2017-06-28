@@ -22,3 +22,10 @@ fsa_establishment.admin.structure.settings:
   description: 'Configure FSA Establishment entities'
   route_name: fsa_establishment.settings
   parent: system.admin_structure
+
+# FSA Ratings configuration page menu item definition
+fsa_ratings.ratings_settings:
+ title: 'FSA Ratings'
+ parent: system.admin_config
+ route_name: fsa_ratings.ratings_settings
+ weight: -50

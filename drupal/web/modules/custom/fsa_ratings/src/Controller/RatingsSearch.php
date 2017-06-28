@@ -6,6 +6,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
 use Drupal\fsa_es\SearchService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 
 /**
  * Controller class for the ratings search.
@@ -85,14 +86,28 @@ class RatingsSearch extends ControllerBase {
     }
 
     $sort_form = NULL;
+    $ratings_info = NULL;
     if ($hits > 0) {
       $sort_form = \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchFilterForm');
+
+      // Slightly awkward, @todo: maybe there's simpler way to get the route title..
+      $form_header['title'] = \Drupal::service('title_resolver')->getTitle(\Drupal::request(), \Drupal::request()->attributes->get(RouteObjectInterface::ROUTE_OBJECT))->render();
+    }
+    else {
+      $form_header['title'] = $this->t('Eating out?');
+      $form_header['subtitle'] = $this->t('Check the hygiene rating.');
+      $form_header['copy'] = $this->t('Find out if a restaurant, takeaway or food shop you want to visit has good food hygiene standards.');
+
+      $fsa_ratings_config = $this->config('config.fsa_ratings');
+      $ratings_info = ['#markup' => $fsa_ratings_config->get('ratings_info_content')];
     }
 
     return [
       '#theme' => 'fsa_ratings_search_page',
       '#form' => \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchForm'),
+      '#form_header' => $form_header,
       '#sort_form' => $sort_form,
+      '#ratings_info_content' => $ratings_info,
       '#items' => $items,                         // Actual result items
       '#categories' => $categories,               // Aggregation results, list of categories of the result items
       '#keywords' => $keywords,                   // Keywords given in the URL
