@@ -4,6 +4,7 @@ namespace Drupal\fsa_ratings\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\fsa_ratings\Controller\RatingsHelper;
 
 /**
  * Form controller for FSA Search filter form
@@ -51,6 +52,8 @@ class FsaRatingsSearchFilterForm extends FormBase {
         'class' => ['invisible'],
       ]
     ];
+
+    $form['#cache'] = RatingsHelper::formCacheControl();
 
     return $form;
 
