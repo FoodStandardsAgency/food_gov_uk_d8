@@ -7,7 +7,7 @@
   display: flex;
   justify-content: space-between;
   flex-flow: column nowrap;
-  background-color: var(--color-light-gray);
+  background-color: var(--color-lighter-gray);
   margin-bottom: 1em;
 
   @media (--breakpoint-md) {
@@ -35,11 +35,15 @@
 
 .table__item {
   flex: 1 1 auto;
-  display: flex;
+  display: block;
   padding-top: 1em;
   padding-bottom: 1em;
   @mixin responsive-declaration padding-right, 1em, 2em;
   @mixin responsive-declaration padding-left, 1em, 2em;
+
+  @media (--breakpoint-xs) {
+    display: flex;
+  }
 
   @media (--breakpoint-md) {
     flex: 1 1 0;
@@ -47,11 +51,19 @@
 
   &:before {
     content: attr(data-header);
+    display: block;
+    width: 100%;
+    font-weight: 500;
+    text-transform: uppercase;
     margin-right: 1em;
-    width: 7em;
-    flex: 0 0 7em;
+    margin-bottom: 1em;
 
     @media (--breakpoint-xs) {
+      width: 7em;
+      flex: 0 0 7em;
+    }
+
+    @media (--breakpoint-sm) {
       width: 10em;
       flex: 0 0 10em;
     }
@@ -72,7 +84,15 @@
   font-size: 1em;
 
   & h3 {
-    font-size: 1em;
+    font-size: 1.25em;
     color: var(--primary-color);
+
+    @media (--breakpoint-xs) {
+      font-size: 1em;
+    }
   }
+}
+
+.table__mobile-header {
+  display: none;
 }

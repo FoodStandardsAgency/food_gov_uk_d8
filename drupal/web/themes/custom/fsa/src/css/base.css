@@ -51,6 +51,7 @@ Plugin documentation:
   --color-gray: #848B8E;
 
   --color-light-gray: #DEE2E5;
+  --color-lighter-gray: #F0F3F5;
 
   --color-teal: #00A39B;
 
@@ -311,9 +312,19 @@ background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-
   }
 }
 
-
 figure {
   margin: 0;
+}
+
+.svg {
+  position: relative;
+
+  & svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+  }
 }
 
 .container {

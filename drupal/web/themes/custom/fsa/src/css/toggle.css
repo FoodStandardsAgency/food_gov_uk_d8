@@ -1,0 +1,38 @@
+.toggle-button {
+  display: flex;
+  align-items: center;
+}
+
+.toggle-button__toggle-icon {
+  margin-left: auto;
+  width: 0.6em;
+  height: 0.6em;
+  flex: 0 0 auto;
+}
+
+.toggle-button.is-open {
+  background-color: var(--primary-color);
+  color: var(--color-white);
+}
+
+.toggle-button.is-open .toggle-button__toggle-icon {
+  transform: rotate(180deg);
+}
+
+.toggle-content {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+}
+
+.toggle-content.is-open {
+  position: initial;
+  overflow: initial;
+  clip: initial;
+  height: initial;
+  width: initial;
+  margin: initial;
+}

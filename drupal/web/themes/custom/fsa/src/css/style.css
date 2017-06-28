@@ -8,10 +8,12 @@
 @import "site-content.css";
 @import "site-footer.css";
 
+@import "button.css";
+@import "table.css";
+@import "toggle.css";
+
 /*Component*/
 @import "infobox.css";
 @import "featurebox.css";
-@import "button.css";
 @import "ratings.css";
-@import "table.css";
 @import "logo.css";

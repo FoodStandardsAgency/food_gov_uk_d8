@@ -43,7 +43,7 @@ function stickyElement(containers, stickyElements) {
     }
 
     calcBottom() {
-      var elementHeight = this._relatedInstance.element.offsetHeight;      
+      var elementHeight = this._relatedInstance.element.offsetHeight;
       return this.element.getBoundingClientRect().bottom <= elementHeight;
     }
   }
@@ -78,7 +78,6 @@ function stickyElement(containers, stickyElements) {
   const toggleStickyElement = () => {
 
     containerArray.forEach(function(container){
-      console.log(container.isBottom);
       // Check if element is bottom of the content area
       if (container.isBottom) {
         container.relatedInstance.element.classList.add('is-bottom');
@@ -93,21 +92,6 @@ function stickyElement(containers, stickyElements) {
         container.relatedInstance.element.classList.remove('is-sticky');
       }
     });
-    // for (let i = 0; i < containerArray.length; i++) {
-    //
-    //   // Check if navigation is bottom of the content area
-    //   if (containerArray[i].isBottom) {
-    //     containerArray[i].relatedInstance.classList.add('bottom');
-    //   } else {
-    //     containerArray[i].relatedInstance.classList.remove('bottom');
-    //   }
-    //
-    //   if (containerArray[i].inview && containerArray[i].offset < 0) {
-    //     containerArray[i].relatedInstance.classList.add('sticky');
-    //   } else {
-    //     containerArray[i].relatedInstance.classList.remove('sticky');
-    //   }
-    // }
   }
 
   // Add scroll listener

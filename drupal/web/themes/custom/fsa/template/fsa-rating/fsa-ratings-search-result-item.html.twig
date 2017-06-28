@@ -1,4 +1,12 @@
-<div class="table__row">
+<div class="ratings__mobile-header toggle-button js-toggle-button">
+  <div class="ratings__mobile-header-rating">5</div>
+  <h3 class="ratings__mobile-header-heading">{{ item.name }}</h3>
+  <div class="ratings__mobile-header-icon toggle-button__toggle-icon svg">
+    <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#toggle-icon"></use></svg>
+  </div>
+</div>
+
+<div class="ratings__item table__row toggle-content js-toggle-content">
   <div class="table__item table__item--large">
     <div class="table__content">
       {% if item.name %}
@@ -13,7 +21,7 @@
     </div>
   </div>
   <div class="table__item">
-    <div class="table__content">Rating: {{ item.ratingvalue }}</div>
+    <div class="table__content">{{ item.ratingvalue }}</div>
   </div>
   <div class="table__item">
     {% for local_authority in item.localauthoritycode %}
