@@ -98,8 +98,8 @@ class RatingsSearch extends ControllerBase {
       $form_header['subtitle'] = $this->t('Check the hygiene rating.');
       $form_header['copy'] = $this->t('Find out if a restaurant, takeaway or food shop you want to visit has good food hygiene standards.');
 
-      // @todo: create admin config page to store, modify and fetch this content from.
-      $ratings_info = ['#markup' => '<h2>What are the hygiene ratings?</h2><p>The Food Hygiene Ratings Scheme (FHRS) helps you choose where........ [CONTENT TBD]</p>'];
+      $fsa_ratings_config = $this->config('config.fsa_ratings');
+      $ratings_info = ['#markup' => $fsa_ratings_config->get('ratings_info_content')];
     }
 
     return [

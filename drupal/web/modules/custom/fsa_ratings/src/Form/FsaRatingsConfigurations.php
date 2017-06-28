@@ -57,6 +57,7 @@ class FsaRatingsConfigurations extends ConfigFormBase {
     $fsa_ratings = $this->config('config.fsa_ratings');
 
     // Ratings form landing info content.
+    // @todo: Use to WYSIWYG field?
     $form['fsa_ratings']['ratings_info_content'] = array(
       '#type' => 'textarea',
       '#title' => t('Ratings search landing content'),
