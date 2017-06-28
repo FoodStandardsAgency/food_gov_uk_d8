@@ -41,4 +41,13 @@ class RatingsHelper extends ControllerBase {
     return '<img src="http://ratings.food.gov.uk/images/scores/' . $image_size . '/' . $ratingkey . '.JPG" alt="' . $alt .'" />';
   }
 
+  /**
+   * Unified form cache setting.
+   */
+  public static function formCacheControl() {
+    // Disables form cache to make the form usable for anonymous.
+    // @todo: is this really the best way?
+    return ['max-age' => 0];
+  }
+
 }
