@@ -80,21 +80,6 @@
   }
 }
 
-.ratings__mobile-header {
-  padding: 1em;
-  border-top: 1px solid var(--color-light-gray);
-
-  @media (--breakpoint-sm) {
-    display: none;
-  }
-}
-
-.ratings__mobile-header h3 {
-  font-size: 1em;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
 .ratings__item {
   @media (--breakpoint-sm) {
     position: initial;

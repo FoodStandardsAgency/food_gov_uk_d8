@@ -1,10 +1,11 @@
 .toggle-button {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
-.toggle-button__toggle-icon {
-  margin-left: auto;
+.toggle-button__item--icon {
+  margin-left: auto !important;
   width: 0.6em;
   height: 0.6em;
   flex: 0 0 auto;
@@ -13,10 +14,10 @@
 .toggle-button.is-open {
   background-color: var(--primary-color);
   color: var(--color-white);
-}
 
-.toggle-button.is-open .toggle-button__toggle-icon {
-  transform: rotate(180deg);
+  & .toggle-button__item--icon {
+    transform: rotate(180deg);
+  }
 }
 
 .toggle-content {
@@ -35,4 +36,22 @@
   height: initial;
   width: initial;
   margin: initial;
+}
+
+.toggle-button--table {
+  padding: 1em 0;
+  border-top: 1px solid var(--color-light-gray);
+
+  @media (--breakpoint-sm) {
+    display: none;
+  }
+
+  & .toggle-button__item {
+    margin: 0 1em;
+
+    &:first-child {
+      width: 3em;
+      flex: 0 0 auto;
+    }
+  }
 }

@@ -3,9 +3,17 @@
     <div class="logo svg">
       <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop"></use></svg>
     </div>
-    <h3 class="ratings__heading">{% trans %}Food Hygiene Ratings Search{% endtrans %}</h3>
+    <h3 class="ratings__heading">{{ form_header.title }}
+      {% if form_header.subtitle %}<br />{{ form_header.subtitle }}{% endif %}</h3>
+
+    {% if form_header.copy %}
+      <p>{{ form_header.copy }}</p>
+    {% endif %}
+
     {{ form }}
   </div>
+
+  {{ ratings_info_content }}
 
   <div class="ratings__listing">
     <header class="ratings__header">
@@ -26,12 +34,11 @@
         <div class="table__item">{% trans %}Authority{% endtrans %}</div>
       </div>
       {{ items }}
+
+      {% if hits_total > hits_shown %}
+        <button>{% trans %}Show more results{% endtrans %}</button>
+        {% trans %}Displaying {{ hits_shown }} of {{ hits_total }} items{% endtrans %}
+      {% endif %}
     </div>
   </div>
 </div>
-
-
-{% if hits_total > hits_shown %}
-  <button>{% trans %}Show more results{% endtrans %}</button>
-  {% trans %}Displaying {{ hits_shown }} of {{ hits_total }} items{% endtrans %}
-{% endif %}
