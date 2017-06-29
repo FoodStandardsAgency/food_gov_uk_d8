@@ -25,6 +25,8 @@
  */
 #}
 <div{{ attributes.addClass('fsa_establishment') }}>
+    {{ backlink }}
+
     {{ content|without('field_geocode', 'field_localauthoritycode', 'field_righttoreply') }}
 
     <h4>{{ find_more_title }}</h4>

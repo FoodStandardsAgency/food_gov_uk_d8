@@ -68,9 +68,11 @@ class FsaRatingsSearchForm extends FormBase {
       '#default_value' => $keywords,
     ];
 
+    // Define advanced options to set the details wrapper #open TRUE or FALSE.
+    $advanced_options = ['business_type', 'local_authority', 'rating_value'];
     $form['advanced'] = [
       '#type' => 'details',
-      '#open' => FALSE,
+      '#open' => array_intersect($advanced_options, \Drupal::request()->query->keys()),
       '#title' => 'More search options',
       '#collapsible' => TRUE,
       '#attributes' => [
