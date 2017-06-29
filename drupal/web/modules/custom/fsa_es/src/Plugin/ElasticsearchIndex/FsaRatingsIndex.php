@@ -25,6 +25,11 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
         ],
         'name' => [
           'type' => 'text',
+          'fields' => [
+            'keyword' => [
+              'type' => 'keyword',
+            ],
+          ],
           'analyzer' => 'english',
         ],
         'address' => [

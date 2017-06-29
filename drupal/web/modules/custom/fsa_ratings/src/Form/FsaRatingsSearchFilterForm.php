@@ -4,6 +4,7 @@ namespace Drupal\fsa_ratings\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\fsa_ratings\Controller\RatingsHelper;
 
 /**
  * Form controller for FSA Search filter form
@@ -32,8 +33,8 @@ class FsaRatingsSearchFilterForm extends FormBase {
         'relevance' => $this->t('Relevance'),
         'ratings_desc' => $this->t('Ratings (highest to lowest)'),
         'ratings_asc' => $this->t('Rating (lowest to highest)'),
-//        'name_desc' => $this->t('Name (A to Z)'),
-//        'name_asc' => $this->t('Name (Z to A)'),
+        'name_asc' => $this->t('Name (A to Z)'),
+        'name_desc' => $this->t('Name (Z to A)'),
       ],
       '#default_value' => \Drupal::request()->query->get('sort'),
 
@@ -51,6 +52,8 @@ class FsaRatingsSearchFilterForm extends FormBase {
         'class' => ['invisible'],
       ]
     ];
+
+    $form['#cache'] = RatingsHelper::formCacheControl();
 
     return $form;
 

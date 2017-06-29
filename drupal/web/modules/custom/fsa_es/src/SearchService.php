@@ -115,6 +115,12 @@ class SearchService {
       case 'ratings_desc':
         $query['body']['sort'] = ['ratingvalue.keyword' => 'desc'];
         break;
+      case 'name_asc':
+        $query['body']['sort'] = ['name.keyword' => 'asc'];
+        break;
+      case 'name_desc':
+        $query['body']['sort'] = ['name.keyword' => 'desc'];
+        break;
     }
 
     // Execute the query.

@@ -5,6 +5,7 @@ namespace Drupal\fsa_ratings\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Drupal\fsa_ratings\Controller\RatingsHelper;
 
 /**
  * Form controller for FSA Establishment edit forms.
@@ -107,6 +108,8 @@ class FsaRatingsSearchForm extends FormBase {
     ];
 
     $form['#theme'] = 'fsa_ratings_search_form';
+
+    $form['#cache'] = RatingsHelper::formCacheControl();
 
     return $form;
 
