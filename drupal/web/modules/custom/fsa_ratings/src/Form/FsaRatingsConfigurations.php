@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\fsa_ratings\Form\FsaRatingsConfigurations.
- */
 
 namespace Drupal\fsa_ratings\Form;
 
@@ -19,6 +15,7 @@ class FsaRatingsConfigurations extends ConfigFormBase {
    * Constructor for FsaRatingsConfigurations.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   Configuration factory.
    */
   public function __construct(ConfigFactoryInterface $config_factory) {
     parent::__construct($config_factory);
@@ -35,8 +32,8 @@ class FsaRatingsConfigurations extends ConfigFormBase {
    * Gets the configuration names that will be editable.
    *
    * @return array
-   * An array of configuration object names that are editable if called in
-   * conjunction with the trait's config() method.
+   *   An array of configuration object names that are editable if called in
+   *   conjunction with the trait's config() method.
    */
   protected function getEditableConfigNames() {
     return ['config.fsa_ratings'];
@@ -46,12 +43,12 @@ class FsaRatingsConfigurations extends ConfigFormBase {
    * Form constructor.
    *
    * @param array $form
-   * An associative array containing the structure of the form.
+   *   An associative array containing the structure of the form.
    * @param \Drupal\Core\Form\FormStateInterface $form_state
-   * The current state of the form.
+   *   The current state of the form.
    *
    * @return array
-   * The form structure.
+   *   The form structure.
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $fsa_ratings = $this->config('config.fsa_ratings');
@@ -60,14 +57,14 @@ class FsaRatingsConfigurations extends ConfigFormBase {
 
     // Ratings form landing info content.
     // @todo: Use to WYSIWYG field?
-    $form['fsa_ratings']['ratings_info_content'] = array(
+    $form['fsa_ratings']['ratings_info_content'] = [
       '#type' => 'text_format',
       '#format' => 'full_html',
-      '#title' => t('Ratings search landing content'),
+      '#title' => $this->t('Ratings search landing content'),
       '#maxlength' => NULL,
       '#default_value' => $fsa_ratings->get('ratings_info_content') ? $fsa_ratings->get('ratings_info_content') : $default_copy,
-      '#description' => t('Informational content displayed on the Ratings search page'),
-    );
+      '#description' => $this->t('Informational content displayed on the Ratings search page'),
+    ];
     return parent::buildForm($form, $form_state);
   }
 
@@ -75,9 +72,9 @@ class FsaRatingsConfigurations extends ConfigFormBase {
    * Form submission handler.
    *
    * @param array $form
-   * An associative array containing the structure of the form.
+   *   An associative array containing the structure of the form.
    * @param \Drupal\Core\Form\FormStateInterface $form_state
-   * The current state of the form.
+   *   The current state of the form.
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->config('config.fsa_ratings')
@@ -85,4 +82,5 @@ class FsaRatingsConfigurations extends ConfigFormBase {
       ->save();
     parent::submitForm($form, $form_state);
   }
+
 }

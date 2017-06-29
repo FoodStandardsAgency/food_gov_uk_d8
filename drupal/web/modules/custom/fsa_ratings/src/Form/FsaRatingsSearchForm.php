@@ -4,7 +4,6 @@ namespace Drupal\fsa_ratings\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Url;
 use Drupal\fsa_ratings\Controller\RatingsHelper;
 
 /**
@@ -14,7 +13,11 @@ use Drupal\fsa_ratings\Controller\RatingsHelper;
  */
 class FsaRatingsSearchForm extends FormBase {
 
-  const FILTER_PARAM_NAMES = ['local_authority', 'business_type', 'rating_value'];
+  const FILTER_PARAM_NAMES = [
+    'local_authority',
+    'business_type',
+    'rating_value',
+  ];
 
   /**
    * {@inheritdoc}
@@ -30,13 +33,10 @@ class FsaRatingsSearchForm extends FormBase {
     /** @var \Drupal\fsa_es\SearchService $search_service */
     $search_service = \Drupal::service('fsa_es.search_service');
 
-    $items = [];
-    $categories = [];
-    $hits = 0;
     $filters = [];
     $available_filters = $search_service->categories();
 
-    // User provided search input
+    // User provided search input.
     $keywords = \Drupal::request()->query->get('q');
 
     // User provided max item count. Hard-limit is 1000. Default is 20.
@@ -45,8 +45,8 @@ class FsaRatingsSearchForm extends FormBase {
       $max_items = 20;
     }
 
-    // See if the following parameters are provided by the user and add to the list of filters
-
+    // See if the following parameters are provided by the user and add to the
+    // list of filters.
     foreach (self::FILTER_PARAM_NAMES as $opt) {
       $value = \Drupal::request()->query->get($opt);
       if (!empty($value)) {
@@ -58,7 +58,7 @@ class FsaRatingsSearchForm extends FormBase {
       '#type' => 'container',
       '#attributes' => [
         'class' => [
-          'fsa-rating-search-main'
+          'fsa-rating-search-main',
         ],
       ],
     ];
@@ -75,7 +75,7 @@ class FsaRatingsSearchForm extends FormBase {
       '#collapsible' => TRUE,
       '#attributes' => [
         'class' => [
-          'fsa-rating-search-advanced'
+          'fsa-rating-search-advanced',
         ],
       ],
     ];
@@ -120,13 +120,13 @@ class FsaRatingsSearchForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $query = [];
-    // Read all the single values
+    // Read all the single values.
     foreach (['q', 'business_type', 'local_authority'] as $p) {
       if (!empty($form_state->getValue($p))) {
         $query[$p] = $form_state->getValue($p);
       }
     }
-    // Checkboxes needs to handled differently
+    // Checkboxes needs to handled differently.
     if (!empty($form_state->getValue('rating_value'))) {
       $values = $form_state->getValue('rating_value');
       $selected = [];
@@ -136,13 +136,16 @@ class FsaRatingsSearchForm extends FormBase {
         }
       }
       if (!empty($selected)) {
-        $query['rating_value'] = join(',', $selected);
+        $query['rating_value'] = implode(',', $selected);
       }
     }
 
     $form_state->setRedirect('fsa_ratings.ratings_search', [], ['query' => $query]);
   }
 
+  /**
+   * Translate aggs to options.
+   */
   private function aggsToOptions($aggs_bucket = []) {
     $options = [];
     foreach ($aggs_bucket as $a) {
@@ -150,4 +153,5 @@ class FsaRatingsSearchForm extends FormBase {
     }
     return $options;
   }
+
 }
