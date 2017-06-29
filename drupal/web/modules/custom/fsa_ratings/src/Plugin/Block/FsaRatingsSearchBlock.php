@@ -18,7 +18,12 @@ class FsaRatingsSearchBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    return \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchForm');
+    return array(
+      '#title' => $this->t('Food hygiene ratings search'),
+      '#theme' => 'fsa_ratings_search_page',
+      '#form' => \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchForm'),
+      '#form_header' => ['title' => 'Food hygiene ratings search'],
+    );
   }
 
 }
