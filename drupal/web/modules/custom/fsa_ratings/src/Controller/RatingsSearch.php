@@ -80,10 +80,7 @@ class RatingsSearch extends ControllerBase {
         // Add the link to the entity view page (with search query params to
         // populate the search form).
         $url = Url::fromRoute('entity.fsa_establishment.canonical', ['fsa_establishment' => $result['id']]);
-        $link_options = array(
-          'query' => \Drupal::request()->query->all(),
-        );
-        $url->setOptions($link_options);
+        $url->setOptions(['query' => \Drupal::request()->query->all()]);
         $result['url'] = $url;
         $items[] = [
           '#theme' => 'fsa_ratings_search_result_item',
