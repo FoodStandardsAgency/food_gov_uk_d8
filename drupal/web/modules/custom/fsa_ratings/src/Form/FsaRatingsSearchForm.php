@@ -64,7 +64,7 @@ class FsaRatingsSearchForm extends FormBase {
     ];
     $form['main']['q'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Business name'),
+      '#title' => $this->t('Business name/or location'),
       '#default_value' => $keywords,
     ];
 

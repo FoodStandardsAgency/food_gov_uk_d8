@@ -25,16 +25,20 @@ Plugin documentation:
 @define-mixin responsive-declaration $property, $valueMin, $valueMax {
   $(property): $valueMin;
 
+  @media (--breakpoint-xs) {
+    $(property): calc($valueMin + (($valueMax - $valueMin) / 4) * 1);
+  }
+
   @media (--breakpoint-sm) {
-    $(property): calc($valueMin + (($valueMax - $valueMin) / 3) * 1);
+    $(property): calc($valueMin + (($valueMax - $valueMin) / 4) * 2);
   }
 
   @media (--breakpoint-md) {
-    $(property): calc($valueMin + (($valueMax - $valueMin) / 3) * 2);
+    $(property): calc($valueMin + (($valueMax - $valueMin) / 4) * 3);
   }
 
   @media (--breakpoint-lg) {
-    $(property): calc($valueMin + (($valueMax - $valueMin) / 3) * 3);
+    $(property): calc($valueMin + (($valueMax - $valueMin) / 4) * 4);
   }
 }
 
@@ -54,6 +58,7 @@ Plugin documentation:
   --color-lighter-gray: #F0F3F5;
 
   --color-teal: #00A39B;
+  --color-light-teal: #10c7be;
 
   --color-purple: #49176D;
 
@@ -66,6 +71,7 @@ Plugin documentation:
 
 :root {
   --primary-color: var(--color-teal);
+  --light-primary-color: var(--color-light-teal);
 
   --secondary-color: var(--color-purple);
 }
@@ -73,8 +79,8 @@ Plugin documentation:
 /*Typography*/
 :root {
   --font-size-base: 112.5%;
-  --font-family-heading: 'Khula';
-  --font-family-content: 'Fira Sans';
+  --font-family-heading: 'Fira Sans';
+  --font-family-content: 'Khula';
 }
 
 /*Z-Index*/
@@ -116,7 +122,7 @@ body {
 
 :--heading {
   font-family: var(--font-family-heading);
-  font-weight: 600;
+  font-weight: 700;
 
   &:first-child {
     margin-top: 0em;
@@ -165,6 +171,10 @@ p {
   &:last-child {
     margin-bottom: 0em;
   }
+
+  &.lead {
+    font-size: 1.1em;
+  }
 }
 
 img {
@@ -178,6 +188,8 @@ svg {
 
 button {
   font-size: 1em;
+  border: 0;
+  background-color: transparent;
 }
 
 pre {
@@ -224,7 +236,6 @@ textarea {
 
 input:not([type="radio"], [type="checkbox"], [type="submit"]),
 textarea {
-  max-width: 20em;
   width: 100%;
   border: 0;
 }
@@ -330,6 +341,10 @@ figure {
 .container {
   margin: 0 auto;
   max-width: 70em;
+}
+
+.container.container--search {
+  max-width: 30em;
 }
 
 .overflow-x-auto {

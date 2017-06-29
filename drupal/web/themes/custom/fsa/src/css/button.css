@@ -14,5 +14,5 @@
 }
 
 :--not-touch .button:--enter {
-  background-color: var(--color-teal-light);
+  background-color: var(--light-primary-color);
 }

@@ -1,0 +1,3 @@
+.establishment {
+  @mixin responsive-declaration padding, 1em, 2em;
+}
