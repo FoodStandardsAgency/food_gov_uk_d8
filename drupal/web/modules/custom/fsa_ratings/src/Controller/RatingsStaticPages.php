@@ -8,7 +8,6 @@ use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-
 /**
  * Controller class for the ratings pages.
  *
@@ -80,15 +79,15 @@ class RatingsStaticPages extends ControllerBase {
     // Loose check with if is numeric to avoid WSOD.
     if (is_numeric($fhrsid)) {
       $url = Url::fromRoute('entity.fsa_establishment.canonical', ['fsa_establishment' => $fhrsid]);
-      $backlink_text = 'Back';
+      $backlink_text = $this->t('Back');
     }
     else {
       // If not a proper referrer or empty fhrsid link to search page.
       $url = Url::fromRoute('fsa_ratings.ratings_search');
-      $backlink_text = 'Back to ratings search';
+      $backlink_text = $this->t('Back to ratings search');
     }
 
-    $backlink = Link::fromTextAndUrl(t($backlink_text), $url )->toString();
+    $backlink = Link::fromTextAndUrl($backlink_text, $url)->toString();
 
     return [
       '#theme' => 'fsa_ratings_meanings',

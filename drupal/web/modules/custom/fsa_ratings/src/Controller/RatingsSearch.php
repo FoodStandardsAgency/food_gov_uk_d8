@@ -66,6 +66,7 @@ class RatingsSearch extends ControllerBase {
     }
 
     // Ask results from the service only when either the filter values or keywords are given
+    $results = FALSE;
     if (!empty($keywords) || !empty($filters)) {
       // Execute the search using the SearchService. Maximum returned item count is
       $results = $this->searchService->search($keywords, $filters, $max_items);
@@ -87,7 +88,7 @@ class RatingsSearch extends ControllerBase {
 
     $sort_form = NULL;
     $ratings_info = NULL;
-    if ($hits > 0) {
+    if ($results) {
       $sort_form = \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchSortForm');
 
       // Slightly awkward, @todo: maybe there's simpler way to get the route title..
