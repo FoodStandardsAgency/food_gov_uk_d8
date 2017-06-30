@@ -2,6 +2,7 @@
 
 namespace Drupal\fsa_ratings\Controller;
 
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Controller\ControllerBase;
 
 /**
@@ -32,6 +33,16 @@ class RatingsHelper extends ControllerBase {
     if ($value_only) {
       // If value is numeric use FHIS scheme badge.
       $scheme = (is_numeric($rating)) ? 'fhrs' : 'fhis';
+
+      if ($scheme == 'fhis') {
+        $filter = [
+          ' ' => '_',
+          '/' => '_',
+          '[' => '_',
+          ']' => '',
+        ];
+        $rating = Html::cleanCssIdentifier($rating, $filter);
+      }
       $ratingkey = $scheme . '_' . $rating . '_' . $lang . '-gb';
     }
     else {
