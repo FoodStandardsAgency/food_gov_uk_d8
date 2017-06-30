@@ -67,9 +67,6 @@ source:
       name: Phone
       selector: Phone
     -
-      name: RatingKey
-      selector: RatingKey
-    -
       name: scoreHygiene
       selector: scores/Hygiene
     -
@@ -121,7 +118,6 @@ process:
     source: LocalAuthorityCode
   field_newratingpending: NewRatingPending
   field_phone: Phone
-  field_ratingkey: RatingKey
   field_ratingvalue:
     plugin: rating_value
     source: RatingValue
