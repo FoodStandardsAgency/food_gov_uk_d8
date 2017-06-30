@@ -12,7 +12,8 @@ use Drupal\Core\Controller\ControllerBase;
 class RatingsHelper extends ControllerBase {
 
   /**
-   * Get rating badge from FHRS API.
+   * Build a ratings badge.
+   *
    * @param string $rating
    *   The rating value.
    * @param string $image_size
@@ -38,7 +39,8 @@ class RatingsHelper extends ControllerBase {
       $ratingkey = $rating;
     }
     $alt = t('Food hygiene Rating score @score', ['@score' => $rating]);
-    return '<div class="badge rating ratingkey"><img src="http://ratings.food.gov.uk/images/scores/' . $image_size . '/' . $ratingkey . '.JPG" alt="' . $alt .'" /></div>';
+    // @todo: Store the rating badge images locally instead of pulling from FSA.
+    return '<div class="badge ratingkey"><img src="http://ratings.food.gov.uk/images/scores/' . $image_size . '/' . $ratingkey . '.JPG" alt="' . $alt .'" /></div>';
   }
 
   /**
