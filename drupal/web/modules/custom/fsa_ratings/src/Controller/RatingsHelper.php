@@ -2,6 +2,7 @@
 
 namespace Drupal\fsa_ratings\Controller;
 
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Controller\ControllerBase;
 
 /**
@@ -12,7 +13,8 @@ use Drupal\Core\Controller\ControllerBase;
 class RatingsHelper extends ControllerBase {
 
   /**
-   * Get rating badge from FHRS API.
+   * Build a ratings badge.
+   *
    * @param string $rating
    *   The rating value.
    * @param string $image_size
@@ -31,6 +33,16 @@ class RatingsHelper extends ControllerBase {
     if ($value_only) {
       // If value is numeric use FHIS scheme badge.
       $scheme = (is_numeric($rating)) ? 'fhrs' : 'fhis';
+
+      if ($scheme == 'fhis') {
+        $filter = [
+          ' ' => '_',
+          '/' => '_',
+          '[' => '_',
+          ']' => '_',
+        ];
+        $rating = Html::cleanCssIdentifier($rating, $filter);
+      }
       $ratingkey = $scheme . '_' . $rating . '_' . $lang . '-gb';
     }
     else {
@@ -38,7 +50,8 @@ class RatingsHelper extends ControllerBase {
       $ratingkey = $rating;
     }
     $alt = t('Food hygiene Rating score @score', ['@score' => $rating]);
-    return '<img src="http://ratings.food.gov.uk/images/scores/' . $image_size . '/' . $ratingkey . '.JPG" alt="' . $alt .'" />';
+    // @todo: Store the rating badge images locally instead of pulling from FSA.
+    return '<div class="badge ratingkey"><img src="http://ratings.food.gov.uk/images/scores/' . $image_size . '/' . $ratingkey . '.JPG" alt="' . $alt .'" /></div>';
   }
 
   /**

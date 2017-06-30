@@ -6,6 +6,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityViewBuilder;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
+use Drupal\fsa_ratings\Controller\RatingsHelper;
 
 /**
  * Extended class for establishment entity view builder.
@@ -23,7 +24,7 @@ class FsaEstablishmentViewBuilder extends EntityViewBuilder {
     $build['#theme'] = 'fsa_establishment';
     $fields = $entity->getFields();
     $content = [];
-    // Loop through all fields for overriding how fields are sit in display mode.
+    // Loop through all fields for overriding how fields are set in display mode.
     foreach ($fields as $field) {
       if ($field->getFieldDefinition()->getName() == 'name') {
         // Skip adding name since it is already sent for page.
@@ -32,6 +33,9 @@ class FsaEstablishmentViewBuilder extends EntityViewBuilder {
       $content[$field->getFieldDefinition()->getName()] = $field->view($view_mode);
     }
     $build['#content'] = $content;
+
+    // Build the badge for rating.
+    $build['#rating_badge'] = ['#markup' => RatingsHelper::ratingBadge($entity->get('field_ratingvalue')->getString(), 'large')];
 
     // "What do the ratings mean" link.
     $url = Url::fromRoute('fsa_ratings.ratings_meanings');

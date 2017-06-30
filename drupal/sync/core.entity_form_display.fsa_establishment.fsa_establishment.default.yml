@@ -13,7 +13,6 @@ dependencies:
     - field.field.fsa_establishment.fsa_establishment.field_phone
     - field.field.fsa_establishment.fsa_establishment.field_postcode
     - field.field.fsa_establishment.fsa_establishment.field_ratingdate
-    - field.field.fsa_establishment.fsa_establishment.field_ratingkey
     - field.field.fsa_establishment.fsa_establishment.field_ratingvalue
     - field.field.fsa_establishment.fsa_establishment.field_righttoreply
     - field.field.fsa_establishment.fsa_establishment.field_schemetype
@@ -103,14 +102,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
-    region: content
-  field_ratingkey:
-    weight: 6
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
     region: content
   field_ratingvalue:
     weight: 15

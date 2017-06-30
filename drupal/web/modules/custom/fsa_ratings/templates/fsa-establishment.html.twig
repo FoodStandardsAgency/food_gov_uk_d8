@@ -27,13 +27,16 @@
 <div{{ attributes.addClass('fsa_establishment') }}>
     {{ backlink }}
 
-    {{ content|without('field_geocode', 'field_localauthoritycode', 'field_righttoreply') }}
+    <div class="rating">
+        {{ rating_badge }}
+        <h4>{{ find_more_title }}</h4>
+        <ul>
+            <li>{{ find_more_link_ratings }}</li>
+            <li>{{ find_more_link_fhrs }}</li>
+        </ul>
+    </div>
 
-    <h4>{{ find_more_title }}</h4>
-    <ul>
-        <li>{{ find_more_link_ratings }}</li>
-        <li>{{ find_more_link_fhrs }}</li>
-    </ul>
+    {{ content|without('field_geocode', 'field_localauthoritycode', 'field_righttoreply') }}
 
     {{ content.field_geocode }}
 
