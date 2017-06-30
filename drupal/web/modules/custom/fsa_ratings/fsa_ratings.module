@@ -50,6 +50,7 @@ function fsa_ratings_theme() {
     'fsa_establishment' => [
       'render element' => 'children',
       'variables' => [
+        'search_form' => NULL,
         'content' => NULL,
         'rating_badge' => NULL,
         'backlink' => NULL,
@@ -73,6 +74,7 @@ function fsa_ratings_theme() {
     'fsa_ratings_meanings' => [
       'render element' => 'custom_element',
       'variables' => [
+        'search_form' => NULL,
         'ratings' => [],
         'backlink' => NULL,
         'paragraph_1' => NULL,

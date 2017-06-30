@@ -24,14 +24,14 @@ class FsaEstablishmentViewBuilder extends EntityViewBuilder {
 
     // Send entity to custom template.
     $build['#theme'] = 'fsa_establishment';
+
+    // Pass the search form for Establishment template.
+    $build['#search_form'] = \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchForm');
+
     $fields = $entity->getFields();
     $content = [];
     // Loop through fields for overriding how fields are set in display mode.
     foreach ($fields as $field) {
-      if ($field->getFieldDefinition()->getName() == 'name') {
-        // Skip adding name since it is already sent for page.
-        continue;
-      }
       $content[$field->getFieldDefinition()->getName()] = $field->view($view_mode);
     }
     $build['#content'] = $content;
@@ -41,7 +41,10 @@ class FsaEstablishmentViewBuilder extends EntityViewBuilder {
 
     // "What do the ratings mean" link.
     $url = Url::fromRoute('fsa_ratings.ratings_meanings');
-    $url->setOptions(['query' => ['fhrsid' => $entity->id()]]);
+    // Get query to preserve id for backlink and the rating form submission.
+    $query = \Drupal::request()->query->all();
+    $query['fhrsid'] = $entity->id();
+    $url->setOptions(['query' => $query]);
     $build['#find_more_link_ratings'] = Link::fromTextAndUrl(t('What do the different ratings mean'), $url)->toString();
 
     // "What is FHRS" link.
