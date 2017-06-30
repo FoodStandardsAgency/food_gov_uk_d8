@@ -39,7 +39,7 @@ class RatingsHelper extends ControllerBase {
           ' ' => '_',
           '/' => '_',
           '[' => '_',
-          ']' => '',
+          ']' => '_',
         ];
         $rating = Html::cleanCssIdentifier($rating, $filter);
       }
