@@ -6,6 +6,10 @@
  * Available variables:
  * - form: The full form
  * - attributes: HTML attributes for the container element.
+ * - form_header: Header content for the form.
+ * -- form_header.title: Title of above the form.
+ * -- form_header.subtitle: Subtitle (if search return results)
+ * -- form_header.copy: Header short copy (if search return results)
  * - form.main: Container wrapper for the main keyword form.
  * - form.main.q: Keyword searchfield.
  * - form.advanced: Details wrapper for advanced options.
@@ -25,7 +29,16 @@
  */
 #}
 <div{{ attributes }}>
-  {{ form }}
+
+  <h2>{{ form.header.title }}
+      {% if form.header.subtitle %}<br />{{ form.header.subtitle }}{% endif %}
+  </h2>
+
+  {% if form.header.copy %}
+    <p>{{ form.header.copy }}</p>
+  {% endif %}
+
+  {{ form|without('header') }}
 </div>
 
 

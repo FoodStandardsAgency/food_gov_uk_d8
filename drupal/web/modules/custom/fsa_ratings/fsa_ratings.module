@@ -118,7 +118,6 @@ function fsa_ratings_theme() {
         'hits_total' => 0,
         'hits_shown' => 0,
         'form' => NULL,
-        'form_header' => [],
         'sort_form' => NULL,
         'ratings_info_content' => NULL,
       ],

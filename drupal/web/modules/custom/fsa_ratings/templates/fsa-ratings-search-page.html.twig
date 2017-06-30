@@ -4,11 +4,7 @@
  * Theme implementation for FSA Ratings search result page.
  *
  * Available variables:
- * - form_header: Header content for the form.
- * -- form_header.title: Title of above the form.
- * -- form_header.subtitle: Subtitle (if search return results)
- * -- form_header.copy: Header short copy (if search return results)
- *
+ * - form: the search form with it's header.
  * - keywords: The search  keyword(s)
  * - items: The actual search items.
  * - hits_total: Total number of results.
@@ -17,14 +13,6 @@
  * @ingroup themeable
  */
 #}
-<h2>{{ form_header.title }}
-  {% if form_header.subtitle %}<br />{{ form_header.subtitle }}{% endif %}
-</h2>
-
-{% if form_header.copy %}
-  <p>{{ form_header.copy }}</p>
-{% endif %}
-
 {{ form }}
 
 {% if sort_form %}

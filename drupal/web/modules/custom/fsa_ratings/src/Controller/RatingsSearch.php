@@ -91,17 +91,10 @@ class RatingsSearch extends ControllerBase {
 
     $sort_form = NULL;
     $ratings_info = NULL;
-    // Get route title to form header.
-    // @todo: maybe there's simpler way to get the route title.
-    $form_header['title'] = \Drupal::service('title_resolver')->getTitle(\Drupal::request(), \Drupal::request()->attributes->get(RouteObjectInterface::ROUTE_OBJECT))->render();
     if ($results) {
       $sort_form = \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchSortForm');
     }
     else {
-      $form_header['title'] = $this->t('Eating out?');
-      $form_header['subtitle'] = $this->t('Check the hygiene rating.');
-      $form_header['copy'] = $this->t('Find out if a restaurant, takeaway or food shop you want to visit has good food hygiene standards.');
-
       $fsa_ratings_config = $this->config('config.fsa_ratings');
       $ratings_info = ['#markup' => $fsa_ratings_config->get('ratings_info_content')];
     }
@@ -109,7 +102,6 @@ class RatingsSearch extends ControllerBase {
     return [
       '#theme' => 'fsa_ratings_search_page',
       '#form' => \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchForm'),
-      '#form_header' => $form_header,
       '#sort_form' => $sort_form,
       '#ratings_info_content' => $ratings_info,
       '#items' => $items,                         // Actual result items

@@ -5,6 +5,7 @@ namespace Drupal\fsa_ratings\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\fsa_ratings\Controller\RatingsHelper;
+use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 
 /**
  * Form controller for FSA Establishment edit forms.
@@ -12,6 +13,13 @@ use Drupal\fsa_ratings\Controller\RatingsHelper;
  * @ingroup fsa_ratings
  */
 class FsaRatingsSearchForm extends FormBase {
+
+  const FORM_FIELDS = [
+    'q',
+    'local_authority',
+    'business_type',
+    'rating_value',
+  ];
 
   const FILTER_PARAM_NAMES = [
     'local_authority',
@@ -52,6 +60,34 @@ class FsaRatingsSearchForm extends FormBase {
       if (!empty($value)) {
         $filters[$opt] = $value;
       }
+    }
+
+    // Build search form header.
+    $form['header'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => [
+          'fsa-rating-search-header',
+        ],
+      ],
+    ];
+
+    // Detect from the query params if search was performed.
+    $search = FALSE;
+    foreach (self::FORM_FIELDS as $input) {
+      if (\Drupal::request()->query->get($input)) {
+        $search = TRUE;
+      }
+    }
+
+    // SEt default title
+    $form['header']['title'] = ['#markup' => $this->t('Food hygiene ratings search')];
+
+    // And if search was not performed pass additional header for the form.
+    if (!$search && \Drupal::routeMatch()->getRouteName() == 'fsa_ratings.ratings_search') {
+      $form['header']['title'] = ['#markup' => $this->t('Eating out?')];
+      $form['header']['subtitle'] = ['#markup' => $this->t('Check the hygiene rating.')];
+      $form['header']['copy'] = ['#markup' => $this->t('Find out if a restaurant, takeaway or food shop you want to visit has good food hygiene standards.')];
     }
 
     $form['main'] = [
