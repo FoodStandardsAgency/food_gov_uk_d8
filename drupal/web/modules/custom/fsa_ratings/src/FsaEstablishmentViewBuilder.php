@@ -41,7 +41,10 @@ class FsaEstablishmentViewBuilder extends EntityViewBuilder {
 
     // "What do the ratings mean" link.
     $url = Url::fromRoute('fsa_ratings.ratings_meanings');
-    $url->setOptions(['query' => ['fhrsid' => $entity->id()]]);
+    // Get query to preserve id for backlink and the rating form submission.
+    $query = \Drupal::request()->query->all();
+    $query['fhrsid'] = $entity->id();
+    $url->setOptions(['query' => $query]);
     $build['#find_more_link_ratings'] = Link::fromTextAndUrl(t('What do the different ratings mean'), $url)->toString();
 
     // "What is FHRS" link.

@@ -79,6 +79,10 @@ class RatingsStaticPages extends ControllerBase {
     // Loose check with if is numeric to avoid WSOD.
     if (is_numeric($fhrsid)) {
       $url = Url::fromRoute('entity.fsa_establishment.canonical', ['fsa_establishment' => $fhrsid]);
+      // Pass query params to preserve the form submission.
+      $query = \Drupal::request()->query->all();
+      unset($query['fhrsid']);
+      $url->setOptions(['query' => $query]);
       $backlink_text = $this->t('Back');
     }
     else {
