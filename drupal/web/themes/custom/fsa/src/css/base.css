@@ -171,10 +171,10 @@ p {
   &:last-child {
     margin-bottom: 0em;
   }
+}
 
-  &.lead {
-    font-size: 1.1em;
-  }
+p.lead {
+  @mixin responsive-declaration font-size, 1.0em, 1.2em;
 }
 
 img {
@@ -205,6 +205,10 @@ blockquote {
 
 ol, ul {
   @mixin responsive-declaration padding-left, 1.5em, 2.5em;
+
+  & li:not(:last-child) {
+    margin-bottom: 1em;
+  }
 }
 
 input, textarea, select {

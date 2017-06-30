@@ -1,0 +1,31 @@
+{# FHRS Ratings explanations template. #}
+<div class="ratings js-sticky-container">
+  <div class="ratings__search js-sticky-element">
+    <div class="logo svg">
+      <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop"></use></svg>
+    </div>
+    <h3 class="ratings__heading">{{ form_header.title }}
+      {% if form_header.subtitle %}<br />{{ form_header.subtitle }}{% endif %}</h3>
+
+    {% if form_header.copy %}
+      <p>{{ form_header.copy }}</p>
+    {% endif %}
+
+    {{ form }}
+  </div>
+
+  <div class="ratings__content">
+    <header class="ratings__header">
+      {{ backlink }}
+    </header>
+
+
+    <table>
+      {{ ratings }} {# See fsa-ratings-meanings-item.html.twig for each rating item #}
+    </table>
+
+    <p>{{ paragraph_1 }}</p>
+
+    <p>{{ paragraph_2 }}</p>
+  </div>
+</div>
