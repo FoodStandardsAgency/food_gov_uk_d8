@@ -38,7 +38,7 @@ class RatingsHelper extends ControllerBase {
       $ratingkey = $rating;
     }
     $alt = t('Food hygiene Rating score @score', ['@score' => $rating]);
-    return '<img src="http://ratings.food.gov.uk/images/scores/' . $image_size . '/' . $ratingkey . '.JPG" alt="' . $alt .'" />';
+    return '<div class="badge rating ratingkey"><img src="http://ratings.food.gov.uk/images/scores/' . $image_size . '/' . $ratingkey . '.JPG" alt="' . $alt .'" /></div>';
   }
 
   /**
