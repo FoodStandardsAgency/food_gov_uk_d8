@@ -1,3 +1,8 @@
 .establishment {
   @mixin responsive-declaration padding, 1em, 2em;
 }
+
+.establishment__rating {
+  background-color: var(--color-light-gray);
+  @mixin responsive-declaration padding, 1em, 1.5em;
+}

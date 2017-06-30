@@ -24,55 +24,42 @@
  * @ingroup themeable
  */
 #}
-<div class="ratings js-sticky-container">
-  <div class="ratings__search js-sticky-element">
-    <div class="logo svg">
-      <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop"></use></svg>
-    </div>
-    <h3 class="ratings__heading">{{ form_header.title }}
-      {% if form_header.subtitle %}<br />{{ form_header.subtitle }}{% endif %}</h3>
+<div class="ratings__content">
+  <header class="ratings__header">
+    {{ backlink }}
+  </header>
 
-    {% if form_header.copy %}
-      <p>{{ form_header.copy }}</p>
-    {% endif %}
-
-    {{ form }}
-  </div>
-
-  <div class="ratings__content">
-    <header class="ratings__header">
-      {{ backlink }}
-    </header>
-
-    <div class="establishment">
-      {{ content|without('field_geocode', 'field_localauthoritycode', 'field_righttoreply') }}
-
+  <div class="establishment">
+    <div class="estabglishment__rating">
+      {{ rating_badge }}
       <h4>{{ find_more_title }}</h4>
       <ul>
           <li>{{ find_more_link_ratings }}</li>
           <li>{{ find_more_link_fhrs }}</li>
       </ul>
-
-      {{ content.field_geocode }}
-
-      {% if content.field_righttoreply|render %}
-          {{ content.field_righttoreply }}
-          <h4>{{ righttoreply_title }}</h4>
-          <p>{{ righttoreply_copy }}</p>
-      {% endif %}
-
-      <h4>{{ business_owner_title }}</h4>
-      <p>{{ business_owner_copy1 }}</p>
-      <p>{{ business_owner_copy2 }}</p>
-
-      <h4>{{ rating_badge_title }}</h4>
-      <p>{{ rating_badge_copy }}</p>
-      {{ rating_badge_cta }}
-
-      <h4>{{ copy_of_report_title }}</h4>
-      <p>{{ copy_of_report_copy }}</p>
-
-      {{ content.field_localauthoritycode }}
     </div>
+
+    {{ content|without('field_geocode', 'field_localauthoritycode', 'field_righttoreply') }}
+
+    {{ content.field_geocode }}
+
+    {% if content.field_righttoreply|render %}
+        {{ content.field_righttoreply }}
+        <h4>{{ righttoreply_title }}</h4>
+        <p>{{ righttoreply_copy }}</p>
+    {% endif %}
+
+    <h4>{{ business_owner_title }}</h4>
+    <p>{{ business_owner_copy1 }}</p>
+    <p>{{ business_owner_copy2 }}</p>
+
+    <h4>{{ rating_badge_title }}</h4>
+    <p>{{ rating_badge_copy }}</p>
+    {{ rating_badge_cta }}
+
+    <h4>{{ copy_of_report_title }}</h4>
+    <p>{{ copy_of_report_copy }}</p>
+
+    {{ content.field_localauthoritycode }}
   </div>
 </div>
