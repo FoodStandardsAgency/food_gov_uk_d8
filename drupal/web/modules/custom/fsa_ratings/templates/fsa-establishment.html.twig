@@ -24,14 +24,19 @@
  * @ingroup themeable
  */
 #}
-<div{{ attributes.addClass('fsa_establishment') }}>heihei
-    {{ content|without('field_geocode', 'field_localauthoritycode', 'field_righttoreply') }}
+<div{{ attributes.addClass('fsa_establishment') }}>
+    {{ backlink }}
 
-    <h4>{{ find_more_title }}</h4>
-    <ul>
-        <li>{{ find_more_link_ratings }}</li>
-        <li>{{ find_more_link_fhrs }}</li>
-    </ul>
+    <div class="rating">
+        {{ rating_badge }}
+        <h4>{{ find_more_title }}</h4>
+        <ul>
+            <li>{{ find_more_link_ratings }}</li>
+            <li>{{ find_more_link_fhrs }}</li>
+        </ul>
+    </div>
+
+    {{ content|without('field_geocode', 'field_localauthoritycode', 'field_righttoreply') }}
 
     {{ content.field_geocode }}
 

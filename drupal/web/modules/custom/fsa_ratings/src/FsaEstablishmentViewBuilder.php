@@ -6,6 +6,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityViewBuilder;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
+use Drupal\fsa_ratings\Controller\RatingsHelper;
 
 /**
  * Extended class for establishment entity view builder.
@@ -23,7 +24,7 @@ class FsaEstablishmentViewBuilder extends EntityViewBuilder {
     $build['#theme'] = 'fsa_establishment';
     $fields = $entity->getFields();
     $content = [];
-    // Loop through all fields for overriding how fields are sit in display mode.
+    // Loop through all fields for overriding how fields are set in display mode.
     foreach ($fields as $field) {
       if ($field->getFieldDefinition()->getName() == 'name') {
         // Skip adding name since it is already sent for page.
@@ -33,14 +34,12 @@ class FsaEstablishmentViewBuilder extends EntityViewBuilder {
     }
     $build['#content'] = $content;
 
+    // Build the badge for rating.
+    $build['#rating_badge'] = ['#markup' => RatingsHelper::ratingBadge($entity->get('field_ratingvalue')->getString(), 'large')];
+
     // "What do the ratings mean" link.
     $url = Url::fromRoute('fsa_ratings.ratings_meanings');
-    $link_options = array(
-      'query' => [
-        'fhrsid' => $entity->id(),
-      ],
-    );
-    $url->setOptions($link_options);
+    $url->setOptions(['query' => ['fhrsid' => $entity->id()]]);
     $build['#find_more_link_ratings'] = Link::fromTextAndUrl(t('What do the different ratings mean'), $url )->toString();
 
     // "What is FHRS" link.
@@ -50,17 +49,13 @@ class FsaEstablishmentViewBuilder extends EntityViewBuilder {
 
     // "Get badges" link.
     $url = Url::fromUri('https://fhrs-online-display.food.gov.uk/confirm_business/?id=' . $entity->id());
-    $link_options = array(
-      'attributes' => [
-        'class' => [
-          'call-to-action',
-        ],
-      ],
-    );
-    $url->setOptions($link_options);
-    $badge_cta = Link::fromTextAndUrl(t('Get badges'), $url )->toString();
+    $url->setOptions(['attributes' => ['class' => ['call-to-action']]]);
+    $build['#rating_badge_cta'] = Link::fromTextAndUrl(t('Get badges'), $url)->toString();
 
-    $build['#rating_badge_cta'] = $badge_cta;
+    // "Back to search" link with query params.
+    $url = Url::fromRoute('fsa_ratings.ratings_search');
+    $url->setOptions(['query' => \Drupal::request()->query->all()]);
+    $build['#backlink'] = Link::fromTextAndUrl($this->t('Back to ratings search'), $url)->toString();
 
     return $build;
   }

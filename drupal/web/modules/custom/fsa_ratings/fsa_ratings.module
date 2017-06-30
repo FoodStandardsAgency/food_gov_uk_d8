@@ -51,6 +51,8 @@ function fsa_ratings_theme() {
       'render element' => 'children',
       'variables' => [
         'content' => NULL,
+        'rating_badge' => NULL,
+        'backlink' => NULL,
         'find_more_title' => t('Find out more about food hygiene ratings'),
         'find_more_link_ratings' => NULL,
         'find_more_link_fhrs' => NULL,

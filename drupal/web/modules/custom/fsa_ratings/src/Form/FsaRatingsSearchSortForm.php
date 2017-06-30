@@ -7,24 +7,23 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\fsa_ratings\Controller\RatingsHelper;
 
 /**
- * Form controller for FSA Search filter form
+ * Form controller for FSA Search sort form.
  *
  * @ingroup fsa_ratings
  */
-class FsaRatingsSearchFilterForm extends FormBase {
+class FsaRatingsSearchSortForm extends FormBase {
 
   /**
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'fsa_ratings_search_filter';
+    return 'fsa_ratings_search_sort';
   }
 
   /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-
 
     $form['sort'] = [
       '#type' => 'select',
@@ -38,19 +37,19 @@ class FsaRatingsSearchFilterForm extends FormBase {
       ],
       '#default_value' => \Drupal::request()->query->get('sort'),
 
-      // Autosubmit the filter.
+      // Autosubmit the form.
       '#attributes' => [
-        'onChange' => 'document.getElementById("fsa-ratings-search-filter").submit();',
+        'onChange' => 'document.getElementById("fsa-ratings-search-sort").submit();',
       ],
     ];
 
     $form['actions']['submit'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Filter'),
+      '#value' => $this->t('Sort'),
       '#button_type' => 'primary',
       '#attributes' => [
         'class' => ['invisible'],
-      ]
+      ],
     ];
 
     $form['#cache'] = RatingsHelper::formCacheControl();
@@ -62,17 +61,9 @@ class FsaRatingsSearchFilterForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    // If we ever want to validate anything.
-  }
-
-
-  /**
-   * {@inheritdoc}
-   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
-    // Get current search query
+    // Get current search query.
     $query = \Drupal::request()->query->all();
 
     // Add sorting.

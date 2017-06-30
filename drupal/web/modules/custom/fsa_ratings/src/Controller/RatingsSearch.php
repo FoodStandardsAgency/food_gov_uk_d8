@@ -66,6 +66,7 @@ class RatingsSearch extends ControllerBase {
     }
 
     // Ask results from the service only when either the filter values or keywords are given
+    $results = FALSE;
     if (!empty($keywords) || !empty($filters)) {
       // Execute the search using the SearchService. Maximum returned item count is
       $results = $this->searchService->search($keywords, $filters, $max_items);
@@ -76,8 +77,11 @@ class RatingsSearch extends ControllerBase {
         $rating = $result['ratingvalue'];
         $result['ratingvalue'] = ['#markup' => RatingsHelper::ratingBadge($rating, 'large')];
 
-        // Add the link to the entity v:iew page
-        $result['url'] = Url::fromRoute('entity.fsa_establishment.canonical', ['fsa_establishment' => $result['id']]);
+        // Add the link to the entity view page (with search query params to
+        // populate the search form).
+        $url = Url::fromRoute('entity.fsa_establishment.canonical', ['fsa_establishment' => $result['id']]);
+        $url->setOptions(['query' => \Drupal::request()->query->all()]);
+        $result['url'] = $url;
         $items[] = [
           '#theme' => 'fsa_ratings_search_result_item',
           '#item' => $result,
@@ -87,11 +91,11 @@ class RatingsSearch extends ControllerBase {
 
     $sort_form = NULL;
     $ratings_info = NULL;
-    if ($hits > 0) {
-      $sort_form = \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchFilterForm');
-
-      // Slightly awkward, @todo: maybe there's simpler way to get the route title..
-      $form_header['title'] = \Drupal::service('title_resolver')->getTitle(\Drupal::request(), \Drupal::request()->attributes->get(RouteObjectInterface::ROUTE_OBJECT))->render();
+    // Get route title to form header.
+    // @todo: maybe there's simpler way to get the route title.
+    $form_header['title'] = \Drupal::service('title_resolver')->getTitle(\Drupal::request(), \Drupal::request()->attributes->get(RouteObjectInterface::ROUTE_OBJECT))->render();
+    if ($results) {
+      $sort_form = \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchSortForm');
     }
     else {
       $form_header['title'] = $this->t('Eating out?');
