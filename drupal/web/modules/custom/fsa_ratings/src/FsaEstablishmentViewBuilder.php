@@ -24,14 +24,14 @@ class FsaEstablishmentViewBuilder extends EntityViewBuilder {
 
     // Send entity to custom template.
     $build['#theme'] = 'fsa_establishment';
+
+    // Pass the search form for Establishment template.
+    $build['#search_form'] = \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchForm');
+
     $fields = $entity->getFields();
     $content = [];
     // Loop through fields for overriding how fields are set in display mode.
     foreach ($fields as $field) {
-      if ($field->getFieldDefinition()->getName() == 'name') {
-        // Skip adding name since it is already sent for page.
-        continue;
-      }
       $content[$field->getFieldDefinition()->getName()] = $field->view($view_mode);
     }
     $build['#content'] = $content;

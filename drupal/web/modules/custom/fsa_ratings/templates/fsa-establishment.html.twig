@@ -25,7 +25,12 @@
  */
 #}
 <div{{ attributes.addClass('fsa_establishment') }}>
+
+    {{ search_form }}
+
     {{ backlink }}
+
+    <h1>{{ content.name }}</h1>
 
     <div class="rating">
         {{ rating_badge }}
@@ -36,7 +41,7 @@
         </ul>
     </div>
 
-    {{ content|without('field_geocode', 'field_localauthoritycode', 'field_righttoreply') }}
+    {{ content|without('name', 'field_geocode', 'field_localauthoritycode', 'field_righttoreply') }}
 
     {{ content.field_geocode }}
 
