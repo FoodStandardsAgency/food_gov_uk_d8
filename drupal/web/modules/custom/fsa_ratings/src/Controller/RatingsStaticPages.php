@@ -79,6 +79,10 @@ class RatingsStaticPages extends ControllerBase {
     // Loose check with if is numeric to avoid WSOD.
     if (is_numeric($fhrsid)) {
       $url = Url::fromRoute('entity.fsa_establishment.canonical', ['fsa_establishment' => $fhrsid]);
+      // Pass query params to preserve the form submission.
+      $query = \Drupal::request()->query->all();
+      unset($query['fhrsid']);
+      $url->setOptions(['query' => $query]);
       $backlink_text = $this->t('Back');
     }
     else {
@@ -91,6 +95,7 @@ class RatingsStaticPages extends ControllerBase {
 
     return [
       '#theme' => 'fsa_ratings_meanings',
+      '#search_form' => \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchForm'),
       '#ratings' => $ratings_table,
       '#paragraph_1' => $this->t('The food hygiene rating reflects the hygiene standards found at the time the business is inspected by a food safety officer. These officers are specially trained to assess food hygiene standards.'),
       '#paragraph_2' => $this->t('The rating given shows how well the business is doing overall but also takes account of the element or elements most in need of improving and also the level of risk to people’s health that these issues pose. This is because some businesses will do well in some areas and less well in others but each of the three elements checked is essential for making sure that food hygiene standards meet requirements and the food served or sold to you is safe to eat.'),
