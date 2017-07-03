@@ -9,10 +9,10 @@ id: fsa_establishment.fsa_establishment.field_localauthoritycode
 field_name: field_localauthoritycode
 entity_type: fsa_establishment
 bundle: fsa_establishment
-label: 'Local Authority'
+label: 'Inspecting council'
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
