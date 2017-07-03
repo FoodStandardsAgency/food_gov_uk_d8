@@ -19,8 +19,8 @@ function fsa_ratings_help($route_name, RouteMatchInterface $route_match) {
       $output .= '<h3>' . t('About') . '</h3>';
       $output .= '<p>' . t('FSA Ratings module creates entities to store data from UK Food Hygiene Rating Scheme (FHRS) API V2') . '</p>';
       $output .= '<ul>';
-      $output .= '<li>' . t('<strong>FSA Authorities</strong> for storing FHRS authorities as returned from <code><a href="http://api.ratings.food.gov.uk/Help/Api/GET-Authorities">GET Authorities</a></code>') .'</li>';
-      $output .= '<li>' . t('<strong>FSA Establishments</strong> for storing FHRS establishments as returned from <code><a href="http://api.ratings.food.gov.uk/Help/Api/GET-Establishments-id">GET Establishments</a></code>') .'</li>';
+      $output .= '<li>' . t('<strong>FSA Authorities</strong> for storing FHRS authorities as returned from <code><a href="http://api.ratings.food.gov.uk/Help/Api/GET-Authorities">GET Authorities</a></code>') . '</li>';
+      $output .= '<li>' . t('<strong>FSA Establishments</strong> for storing FHRS establishments as returned from <code><a href="http://api.ratings.food.gov.uk/Help/Api/GET-Establishments-id">GET Establishments</a></code>') . '</li>';
       $output .= '</ul>';
       $output .= '<p>' . t('FSA Food Hygiene Rating Scheme API module creates entities to store data from FHRS API') . '</p>';
       $output .= '<p>' . t('<a href="http://api.ratings.food.gov.uk">Read more about FHRS API</a>') . '</p>';
@@ -63,8 +63,8 @@ function fsa_ratings_theme() {
         'business_owner_copy1' => t('If any information on this page is incorrect you can email the correct information to your local authority by using the email address below.'),
         'business_owner_copy2' => t('You can find out how to appeal against the rating given and find out about your right to reply. You can also ask for a re-inspection.'),
         'rating_badge_title' => t('Display this rating on your website'),
-        'rating_badge_copy' => t('You can display this rating on your website. '),
-        'rating_badge_cta' => NULL, // create link in viewbuilder.
+        'rating_badge_copy' => t('You can display this rating on your website.'),
+        'rating_badge_cta' => NULL,
         'copy_of_report_title' => t('Do you want to get a copy of the report?'),
         'copy_of_report_copy' => t('If you wish to see the food safety officer’s report on which this rating is based, you can request this from the local authority that carried out the inspection. You can do this by sending an email to the address below. The local authority will consider your request and will usually send you a copy of the report. In some cases, the local authority may decide that they cannot do so but will let you know this and explain why.'),
       ],
@@ -92,7 +92,7 @@ function fsa_ratings_theme() {
       ],
     ],
 
-
+    // Textual representations for field_score_* values.
     'fsa_ratings_field_score_display' => [
       'render element' => 'children',
       'variables' => [
@@ -100,9 +100,6 @@ function fsa_ratings_theme() {
         'description' => NULL,
         'score' => NULL,
       ],
-    ],
-    'fsa_ratings' => [
-      'render element' => 'children',
     ],
     'fsa_ratings_search_form' => [
       'render element' => 'form',
@@ -125,7 +122,7 @@ function fsa_ratings_theme() {
     'fsa_ratings_search_result_item' => [
       'render element' => 'custom_element',
       'variables' => [
-        'item' => NULL
+        'item' => NULL,
       ],
     ],
   ];
