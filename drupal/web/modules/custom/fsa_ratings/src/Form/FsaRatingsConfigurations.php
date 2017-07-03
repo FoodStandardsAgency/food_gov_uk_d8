@@ -53,8 +53,6 @@ class FsaRatingsConfigurations extends ConfigFormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $fsa_ratings = $this->config('config.fsa_ratings');
 
-    $default_copy = '<h2>What are the hygiene ratings?</h2><p>Food hygiene ratings help you to choose where to eat out or shop for food by telling you how seriously the business takes their food hygiene standards.</p><p>The ratings are given by local authorities in England, Northern Ireland and Wales and they apply to restaurants, pubs, cafes, takeaways, hotels, supermarkets and other food shops.</p><p>The food hygiene rating reflects the hygiene standards found at the time the business is inspected by a food safety officer. These officers are specially trained to assess food hygiene standards.</p><p>These are the three elements that a food hygiene rating is based on</p><ul><li>how hygienically the food is handled – how it is prepared, cooked, re-heated, cooled and stored</li><li>the condition of the structure of the buildings – the cleanliness, layout, lighting, ventilation and other facilities</li><li>how the business manages what it does to make sure food is safe and so that the officer can be confident standards will be maintained in the future</li></ul><p>To get the top rating of ‘5’, businesses must do well in all three elements.</p><p>Those with ratings of ‘0’ are very likely to be performing poorly in all three elements and are likely to have a history of serious problem.</p><p><a href="#">Find out more about food hygiene ratings</a></p>';
-
     // Ratings form landing info content.
     // @todo: Use to WYSIWYG field?
     $form['fsa_ratings']['ratings_info_content'] = [
@@ -62,7 +60,7 @@ class FsaRatingsConfigurations extends ConfigFormBase {
       '#format' => 'full_html',
       '#title' => $this->t('Ratings search landing content'),
       '#maxlength' => NULL,
-      '#default_value' => $fsa_ratings->get('ratings_info_content') ? $fsa_ratings->get('ratings_info_content') : $default_copy,
+      '#default_value' => $fsa_ratings->get('ratings_info_content') ? $fsa_ratings->get('ratings_info_content') : '',
       '#description' => $this->t('Informational content displayed on the Ratings search page'),
     ];
     return parent::buildForm($form, $form_state);
