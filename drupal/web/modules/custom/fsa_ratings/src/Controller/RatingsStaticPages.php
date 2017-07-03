@@ -69,7 +69,7 @@ class RatingsStaticPages extends ControllerBase {
       $ratings_table[] = [
         '#theme' => $item_theme,
         '#rating_score' => $key,
-        '#rating_badge' => ['#markup' => RatingsHelper::ratingBadge($key, $badge_size)],
+        '#rating_badge' => RatingsHelper::ratingBadgeImageDisplay($key),
         '#rating_description' => $description,
       ];
     }

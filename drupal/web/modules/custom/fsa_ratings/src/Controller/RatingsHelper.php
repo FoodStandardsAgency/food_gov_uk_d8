@@ -22,8 +22,8 @@ class RatingsHelper extends ControllerBase {
    * @param bool $value_only
    *   True to parse the badge from value only.
    *
-   * @return string
-   *   Rating image badge (@todo: use drupal image functionality)
+   * @return array
+   *   Rating image badge #markup (@todo: use drupal image functionality)
    */
   public static function ratingBadge($rating, $image_size = 'medium', $value_only = TRUE) {
 
@@ -50,9 +50,42 @@ class RatingsHelper extends ControllerBase {
       $ratingkey = $rating;
     }
     $alt = t('Food hygiene Rating score @score', ['@score' => $rating]);
-    // @todo: Store the rating badge images locally instead of pulling from FSA.
-    return '<div class="badge ratingkey"><img src="http://ratings.food.gov.uk/images/scores/' . $image_size . '/' . $ratingkey . '.JPG" alt="' . $alt .'" /></div>';
+    return ['#markup' => '<div class="badge ratingkey"><img src="http://ratings.food.gov.uk/images/scores/' . $image_size . '/' . $ratingkey . '.JPG" alt="' . $alt .'" /></div>'];
   }
+
+  /**
+   * Display locally hosted ratings badge image.
+   *
+   * The images are fetched from
+   * https://s3-eu-west-1.amazonaws.com/assets.food.gov.uk, offered as
+   * downloadables at fhrs-online-display.food.gov.uk).
+   *
+   * @param integer $rating
+   *   The establishment fhrsid.
+   * @param int $embed_type
+   *   Embed type code (1|2|3|4)
+   *
+   * @return array
+   *   Rating image badge #markup as loaded from the API.
+   */
+  public static function ratingBadgeImageDisplay($rating, $embed_type = 4) {
+
+    $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
+    switch ($lang) {
+      case 'cy':
+        $language = 'welsh';
+        break;
+      default:
+        $language = 'english';
+        break;
+    }
+
+    return [
+      '#markup' => '<div class="badge ratingkey"><img src="/' . drupal_get_path('module', 'fsa_ratings') . '/images/badges/score-' . $rating . '-' . $embed_type . '-' . $language .'.png" alt="FHRS Rating score: ' . $rating . '" /></div>',
+    ];
+  }
+
 
   /**
    * Build a ratings badge (from fhrs-online-display.food.gov.uk).
