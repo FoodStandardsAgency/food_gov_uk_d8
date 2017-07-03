@@ -37,7 +37,8 @@ class FsaEstablishmentViewBuilder extends EntityViewBuilder {
     $build['#content'] = $content;
 
     // Build the badge for rating.
-    $build['#rating_badge'] = ['#markup' => RatingsHelper::ratingBadge($entity->get('field_ratingvalue')->getString(), 'large')];
+//    $build['#rating_badge'] = ['#markup' => RatingsHelper::ratingBadge($entity->get('field_ratingvalue')->getString(), 'large')];
+    $build['#rating_badge'] = RatingsHelper::ratingBadgeOnlineDisplay($entity->id(), 4);
 
     // "What do the ratings mean" link.
     $url = Url::fromRoute('fsa_ratings.ratings_meanings');
