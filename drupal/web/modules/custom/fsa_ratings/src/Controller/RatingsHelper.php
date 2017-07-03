@@ -81,8 +81,25 @@ class RatingsHelper extends ControllerBase {
         break;
     }
 
+    $literals = ['exempt', 'pending'];
+    if (is_numeric($rating) || in_array($rating, $literals)) {
+      // Only numeric, exempt & pending badges are available locally.
+      $image_path = '/' . drupal_get_path('module', 'fsa_ratings') . '/images/badges/score-' . $rating . '-' . $embed_type . '-' . $language .'.png';
+    }
+    else {
+      // Fall back to fetching the FHIS badges from ratings.food.gov.uk.
+      // @todo: Figure out what badge to display for FHIS businesses.
+      $filter = [
+        ' ' => '_',
+        '/' => '_',
+        '[' => '_',
+        ']' => '_',
+      ];
+      $image_path = 'http://ratings.food.gov.uk/images/scores/large/fhis_' . Html::cleanCssIdentifier($rating, $filter) . '_' . $lang . '-gb.JPG';
+    }
+
     return [
-      '#markup' => '<div class="badge ratingkey"><img src="/' . drupal_get_path('module', 'fsa_ratings') . '/images/badges/score-' . $rating . '-' . $embed_type . '-' . $language .'.png" alt="FHRS Rating score: ' . $rating . '" /></div>',
+      '#markup' => '<div class="badge ratingkey"><img src="' . $image_path .'" alt="FHRS Rating score: ' . $rating . '" /></div>',
     ];
   }
 
