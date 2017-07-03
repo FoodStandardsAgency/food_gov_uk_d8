@@ -1,0 +1,5 @@
+ratings_info_content.config:
+  title: 'FSA Ratings info content'
+  base_route_name: fsa_ratings.ratings_settings
+  names:
+    - config.fsa_ratings

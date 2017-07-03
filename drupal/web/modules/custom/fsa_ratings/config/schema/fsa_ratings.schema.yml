@@ -1,0 +1,7 @@
+config.fsa_ratings:
+  type: config_object
+  label: 'FSA Ratings config'
+  mapping:
+    ratings_info_content:
+      type: text
+      label: 'FSA Ratings info text'
