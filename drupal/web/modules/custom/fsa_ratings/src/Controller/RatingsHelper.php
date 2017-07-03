@@ -82,7 +82,7 @@ class RatingsHelper extends ControllerBase {
     }
 
     $literals = ['exempt', 'pending'];
-    if (is_numeric($rating) || in_array($rating, $literals)) {
+    if (is_numeric($rating) || in_array(strtolower($rating), $literals)) {
       // Only numeric, exempt & pending badges are available locally.
       $image_path = '/' . drupal_get_path('module', 'fsa_ratings') . '/images/badges/score-' . $rating . '-' . $embed_type . '-' . $language .'.png';
     }
