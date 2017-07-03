@@ -1,6 +1,6 @@
-# Migration configuration for FSA Establishments.
+# Migration configuration for FSA Establishments in English.
 id: fsa_establishment
-label: 'FSA Establishments import'
+label: 'FSA Establishments import (english)'
 migration_tags:
   - establishments
   - english
@@ -13,7 +13,7 @@ source:
   headers:
     accept: application/json
     x-api-version: '2'
-    accept-language: 'en-GB'
+    accept-language: en-GB
   item_selector: establishments
   fields:
     -
@@ -59,9 +59,6 @@ source:
       name: Phone
       selector: Phone
     -
-      name: RatingKey
-      selector: RatingKey
-    -
       name: scoreHygiene
       selector: scores/Hygiene
     -
@@ -76,6 +73,9 @@ source:
     -
       name: latitude
       selector: geocode/latitude
+    -
+      name: RightToReply
+      selector: RightToReply
   ids:
     FHRSID:
       type: integer
@@ -85,7 +85,7 @@ process:
     default_value: fsa_establishment
   langcode:
     plugin: default_value
-    default_value: 'en'
+    default_value: en
   id: FHRSID
   name: BusinessName
   field_businesstype:
@@ -105,10 +105,11 @@ process:
       - AddressLine4
     delimiter: "\r\n"
   field_postcode: PostCode
-  field_localauthoritycode: LocalAuthorityCode
+  field_localauthoritycode:
+    plugin: local_authority_code
+    source: LocalAuthorityCode
   field_newratingpending: NewRatingPending
   field_phone: Phone
-  field_ratingkey: RatingKey
   field_ratingvalue:
     plugin: rating_value
     source: RatingValue
@@ -118,6 +119,7 @@ process:
   field_schemetype: SchemeType
   field_geocode/lng: longitude
   field_geocode/lat: latitude
+  field_righttoreply: RightToReply
   uid:
     plugin: default_value
     default_value: 0

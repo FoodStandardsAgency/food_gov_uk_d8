@@ -10,42 +10,44 @@ source:
   data_fetcher_plugin: http
   data_parser_plugin: json
   urls:
-      - 'http://api.ratings.food.gov.uk/Authorities'
+    - 'http://api.ratings.food.gov.uk/Authorities'
   headers:
-    accept: 'application/json'
+    accept: application/json
     x-api-version: '2'
-    accept-language: 'cy-GB'
+    accept-language: cy-GB
   item_selector: authorities
   fields:
-      -
-        name: LocalAuthorityId
-        selector: LocalAuthorityId
-      -
-        name: LocalAuthorityIdCode
-        selector: LocalAuthorityIdCode
-      -
-        name: Name
-        selector: Name
-      -
-        name: Url
-        selector: Url
-      -
-        name: Email
-        selector: Email
-      -
-        name: RegionName
-        selector: RegionName
+    -
+      name: LocalAuthorityId
+      selector: LocalAuthorityId
+    -
+      name: LocalAuthorityIdCode
+      selector: LocalAuthorityIdCode
+    -
+      name: Name
+      selector: Name
+    -
+      name: Url
+      selector: Url
+    -
+      name: Email
+      selector: Email
+    -
+      name: RegionName
+      selector: RegionName
   ids:
-      LocalAuthorityId:
-        type: integer
+    LocalAuthorityId:
+      type: integer
 process:
   type:
     plugin: default_value
     default_value: fsa_authority
   langcode:
     plugin: default_value
-    default_value: 'cy'
-  id: LocalAuthorityIdCode
+    default_value: cy
+  id:
+    plugin: local_authority_code
+    source: LocalAuthorityIdCode
   name: Name
   field_url: Url
   field_email: Email
@@ -62,3 +64,4 @@ process:
 destination:
   plugin: 'entity:fsa_authority'
   translations: true
+migration_dependencies: null

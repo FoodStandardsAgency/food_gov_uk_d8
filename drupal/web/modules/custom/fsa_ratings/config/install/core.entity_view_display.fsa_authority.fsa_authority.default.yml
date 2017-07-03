@@ -18,7 +18,7 @@ content:
     label: inline
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
+    type: email_mailto
     region: content
   field_regionname:
     weight: 3
@@ -49,4 +49,5 @@ content:
       link_to_entity: false
     third_party_settings: {  }
 hidden:
+  langcode: true
   user_id: true
