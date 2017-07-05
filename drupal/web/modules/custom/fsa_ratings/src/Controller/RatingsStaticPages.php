@@ -20,14 +20,14 @@ class RatingsStaticPages extends ControllerBase {
   /**
    * Request stack.
    *
-   * @var RequestStack
+   * @var \Symfony\Component\HttpFoundation\RequestStack
    */
   public $request;
 
   /**
    * Class constructor.
    *
-   * @param RequestStack $request
+   * @param \Symfony\Component\HttpFoundation\RequestStack $request
    *   Request stack.
    */
   public function __construct(RequestStack $request) {
@@ -46,7 +46,6 @@ class RatingsStaticPages extends ControllerBase {
 
   /**
    * Page callback for Ratings meanings page.
-   *
    */
   public function ratingMeanings() {
 

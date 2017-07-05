@@ -2,7 +2,6 @@
 
 namespace Drupal\fsa_ratings\Form;
 
-use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\ConfigFormBase;
 
@@ -10,16 +9,6 @@ use Drupal\Core\Form\ConfigFormBase;
  * FSA Ratings feature configurations.
  */
 class FsaRatingsConfigurations extends ConfigFormBase {
-
-  /**
-   * Constructor for FsaRatingsConfigurations.
-   *
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   Configuration factory.
-   */
-  public function __construct(ConfigFactoryInterface $config_factory) {
-    parent::__construct($config_factory);
-  }
 
   /**
    * {@inheritdoc}
