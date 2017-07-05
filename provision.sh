@@ -74,7 +74,8 @@ self_update() {
   fi
 
   # Use secrets if it's defined in conf/project.yml
-  if [ "$wundersecrets_remote" != "" ]; then
+  # Do this for everything else than local vagrant provisioning
+  if [ "$ENVIRONMENT" != "vagrant" ] && [ "$wundersecrets_remote" != "" ]; then
     # Set defaults for WunderSecrets
     export wundersecrets_path=$ROOT/secrets
     export wundersecrets_branch=${wundersecrets_branch-master}
@@ -169,7 +170,10 @@ if [ ! $SKIP_REQUIREMENTS ] ; then
   # Check if pip is installed
   which -a pip >> /dev/null
   if [[ $? != 0 ]] ; then
-      echo "ERROR: pip is not installed!"
+      echo "ERROR: pip is not installed! Install it first."
+      echo "OSX:    $ easy_install pip"
+      echo "Ubuntu: $ sudo apt-get install python-setuptools python-dev build-essential && sudo easy_install pip"
+      echo "Centos: $ yum -y install python-pip"
       exit 1
   else
     # Install virtualenv
