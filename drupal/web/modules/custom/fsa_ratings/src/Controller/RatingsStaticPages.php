@@ -3,6 +3,7 @@
 namespace Drupal\fsa_ratings\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -20,18 +21,28 @@ class RatingsStaticPages extends ControllerBase {
   /**
    * Request stack.
    *
-   * @var RequestStack
+   * @var \Symfony\Component\HttpFoundation\RequestStack
    */
   public $request;
 
   /**
+   * Form builder.
+   *
+   * @var \Drupal\Core\Form\FormBuilderInterface
+   */
+  protected $formBuilder;
+
+  /**
    * Class constructor.
    *
-   * @param RequestStack $request
+   * @param \Symfony\Component\HttpFoundation\RequestStack $request
    *   Request stack.
+   * @param \Drupal\Core\Form\FormBuilderInterface $formBuilder
+   *   Form builder.
    */
-  public function __construct(RequestStack $request) {
+  public function __construct(RequestStack $request, FormBuilderInterface $formBuilder) {
     $this->request = $request;
+    $this->formBuilder = $formBuilder;
   }
 
   /**
@@ -39,20 +50,18 @@ class RatingsStaticPages extends ControllerBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-    // Load the service required to construct this class.
-      $container->get('request_stack')
+      $container->get('request_stack'),
+      $container->get('form_builder')
     );
   }
 
   /**
    * Page callback for Ratings meanings page.
-   *
    */
   public function ratingMeanings() {
 
     $ratings_table = [];
     $item_theme = 'fsa_ratings_meanings_item';
-    $badge_size = 'medium';
 
     // Define the rating descriptions for each key.
     // @todo: add copy texts for different rating explanations.
@@ -80,7 +89,7 @@ class RatingsStaticPages extends ControllerBase {
     if (is_numeric($fhrsid)) {
       $url = Url::fromRoute('entity.fsa_establishment.canonical', ['fsa_establishment' => $fhrsid]);
       // Pass query params to preserve the form submission.
-      $query = \Drupal::request()->query->all();
+      $query = $this->request->getCurrentRequest()->query->all();
       unset($query['fhrsid']);
       $url->setOptions(['query' => $query]);
       $backlink_text = $this->t('Back');
@@ -95,7 +104,7 @@ class RatingsStaticPages extends ControllerBase {
 
     return [
       '#theme' => 'fsa_ratings_meanings',
-      '#search_form' => \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchForm'),
+      '#search_form' => $this->formBuilder->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchForm'),
       '#ratings' => $ratings_table,
       '#paragraph_1' => $this->t('The food hygiene rating reflects the hygiene standards found at the time the business is inspected by a food safety officer. These officers are specially trained to assess food hygiene standards.'),
       '#paragraph_2' => $this->t('The rating given shows how well the business is doing overall but also takes account of the element or elements most in need of improving and also the level of risk to people’s health that these issues pose. This is because some businesses will do well in some areas and less well in others but each of the three elements checked is essential for making sure that food hygiene standards meet requirements and the food served or sold to you is safe to eat.'),

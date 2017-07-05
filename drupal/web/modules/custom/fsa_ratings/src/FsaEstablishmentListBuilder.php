@@ -40,20 +40,20 @@ class FsaEstablishmentListBuilder extends EntityListBuilder {
   public function buildHeader() {
 
     // Make sort clickable.
-    $header['id'] = array(
+    $header['id'] = [
       'data' => $this->t('ID'),
       'field' => 'id',
       'specifier' => 'id',
-      'class' => array(RESPONSIVE_PRIORITY_LOW),
-    );
+      'class' => [RESPONSIVE_PRIORITY_LOW],
+    ];
 
     // Make sort clickable.
-    $header['Name'] = array(
+    $header['Name'] = [
       'data' => $this->t('Establishment'),
       'field' => 'name',
       'specifier' => 'name',
-      'class' => array(RESPONSIVE_PRIORITY_LOW),
-    );
+      'class' => [RESPONSIVE_PRIORITY_LOW],
+    ];
 
     $header['langcode'] = $this->t('Language');
 

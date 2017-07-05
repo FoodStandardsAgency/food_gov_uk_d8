@@ -6,7 +6,6 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
 use Drupal\fsa_es\SearchService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 
 /**
  * Controller class for the ratings search.
@@ -15,7 +14,10 @@ use Symfony\Cmf\Component\Routing\RouteObjectInterface;
  */
 class RatingsSearch extends ControllerBase {
 
-  /** @var SearchService  */
+  /**
+   * {@inheritdoc}
+   *
+   * @var \Drupal\fsa_es\SearchService*/
   private $searchService;
 
   /**
@@ -27,7 +29,6 @@ class RatingsSearch extends ControllerBase {
     );
   }
 
-
   /**
    * {@inheritdoc}
    */
@@ -35,10 +36,8 @@ class RatingsSearch extends ControllerBase {
     $this->searchService = $searchService;
   }
 
-
   /**
-   * Page callback for /ratings/search
-   *
+   * Page callback for /ratings/search.
    */
   public function ratingsSearch() {
     $items = [];
@@ -46,7 +45,7 @@ class RatingsSearch extends ControllerBase {
     $hits = 0;
     $available_filters = $this->searchService->categories();
 
-    // User provided search input
+    // User provided search input.
     $keywords = \Drupal::request()->query->get('q');
 
     // User provided max item count. Hard-limit is 1000. Default is 20.
@@ -56,7 +55,8 @@ class RatingsSearch extends ControllerBase {
     }
 
     $filters = [];
-    // See if the following parameters are provided by the user and add to the list of filters
+    // See if the following parameters are provided by the user and add to the
+    // list of filters.
     $filter_param_names = ['local_authority', 'business_type', 'rating_value'];
     foreach ($filter_param_names as $opt) {
       $value = \Drupal::request()->query->get($opt);
@@ -65,10 +65,11 @@ class RatingsSearch extends ControllerBase {
       }
     }
 
-    // Ask results from the service only when either the filter values or keywords are given
+    // Fetch results from the service only when either the filter values or
+    // keywords are given.
     $results = FALSE;
     if (!empty($keywords) || !empty($filters)) {
-      // Execute the search using the SearchService. Maximum returned item count is
+      // Execute the search using the SearchService.
       $results = $this->searchService->search($keywords, $filters, $max_items);
       $hits = $results['total'];
 

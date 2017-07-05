@@ -5,7 +5,6 @@ namespace Drupal\fsa_ratings\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\fsa_ratings\Controller\RatingsHelper;
-use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 
 /**
  * Form controller for FSA Establishment edit forms.
@@ -80,7 +79,7 @@ class FsaRatingsSearchForm extends FormBase {
       }
     }
 
-    // SEt default title
+    // Set default title.
     $form['header']['title'] = ['#markup' => $this->t('Food hygiene ratings search')];
 
     // And if search was not performed pass additional header for the form.
