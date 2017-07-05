@@ -5,6 +5,8 @@ namespace Drupal\fsa_ratings\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\fsa_ratings\Controller\RatingsHelper;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Form controller for FSA Search sort form.
@@ -12,6 +14,33 @@ use Drupal\fsa_ratings\Controller\RatingsHelper;
  * @ingroup fsa_ratings
  */
 class FsaRatingsSearchSortForm extends FormBase {
+
+  /**
+   * Request stack.
+   *
+   * @var \Symfony\Component\HttpFoundation\RequestStack
+   */
+  public $request;
+
+  /**
+   * Class constructor.
+   *
+   * @param \Symfony\Component\HttpFoundation\RequestStack $request
+   *   Request stack.
+   */
+  public function __construct(RequestStack $request) {
+    $this->request = $request;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+    // Load the service required to construct this class.
+      $container->get('request_stack')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -35,7 +64,7 @@ class FsaRatingsSearchSortForm extends FormBase {
         'name_asc' => $this->t('Name (A to Z)'),
         'name_desc' => $this->t('Name (Z to A)'),
       ],
-      '#default_value' => \Drupal::request()->query->get('sort'),
+      '#default_value' => $this->request->getCurrentRequest()->query->get('sort'),
 
       // Autosubmit the form.
       '#attributes' => [
@@ -64,7 +93,7 @@ class FsaRatingsSearchSortForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
     // Get current search query.
-    $query = \Drupal::request()->query->all();
+    $query = $this->request->getCurrentRequest()->query->all();
 
     // Add sorting.
     if (!empty($form_state->getValue('sort'))) {
