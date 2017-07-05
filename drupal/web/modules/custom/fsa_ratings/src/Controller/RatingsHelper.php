@@ -50,7 +50,7 @@ class RatingsHelper extends ControllerBase {
       $ratingkey = $rating;
     }
     $alt = t('Food hygiene Rating score @score', ['@score' => $rating]);
-    return ['#markup' => '<div class="badge ratingkey"><img src="http://ratings.food.gov.uk/images/scores/' . $image_size . '/' . $ratingkey . '.JPG" alt="' . $alt .'" /></div>'];
+    return ['#markup' => '<div class="badge ratingkey"><img src="http://ratings.food.gov.uk/images/scores/' . $image_size . '/' . $ratingkey . '.JPG" alt="' . $alt . '" /></div>'];
   }
 
   /**
@@ -60,7 +60,7 @@ class RatingsHelper extends ControllerBase {
    * https://s3-eu-west-1.amazonaws.com/assets.food.gov.uk, offered as
    * downloadables at fhrs-online-display.food.gov.uk).
    *
-   * @param integer $rating
+   * @param int $rating
    *   The establishment fhrsid.
    * @param int $embed_type
    *   Embed type code (1|2|3|4)
@@ -76,6 +76,7 @@ class RatingsHelper extends ControllerBase {
       case 'cy':
         $language = 'welsh';
         break;
+
       default:
         $language = 'english';
         break;
@@ -84,7 +85,7 @@ class RatingsHelper extends ControllerBase {
     $literals = ['exempt', 'pending'];
     if (is_numeric($rating) || in_array(strtolower($rating), $literals)) {
       // Only numeric, exempt & pending badges are available locally.
-      $image_path = '/' . drupal_get_path('module', 'fsa_ratings') . '/images/badges/score-' . $rating . '-' . $embed_type . '-' . $language .'.png';
+      $image_path = '/' . drupal_get_path('module', 'fsa_ratings') . '/images/badges/score-' . $rating . '-' . $embed_type . '-' . $language . '.png';
     }
     else {
       // Fall back to fetching the FHIS badges from ratings.food.gov.uk.
@@ -99,18 +100,14 @@ class RatingsHelper extends ControllerBase {
     }
 
     return [
-      '#markup' => '<div class="badge ratingkey"><img src="' . $image_path .'" alt="FHRS Rating score: ' . $rating . '" /></div>',
+      '#markup' => '<div class="badge ratingkey"><img src="' . $image_path . '" alt="FHRS Rating score: ' . $rating . '" /></div>',
     ];
   }
-
 
   /**
    * Build a ratings badge (from fhrs-online-display.food.gov.uk).
    *
-   * Warning: Using this js conflicts with Drupal js,
-   * @todo: sort that out.
-   *
-   * @param integer $fhrsid
+   * @param int $fhrsid
    *   The establishment fhrsid.
    * @param int $embed_type
    *   Embed type code (1|2|3|4)
@@ -120,6 +117,8 @@ class RatingsHelper extends ControllerBase {
    */
   public static function ratingBadgeOnlineDisplay($fhrsid, $embed_type = 4) {
 
+    // @todo: sort out why using this ext js conflicts with Drupal js.
+
     // Get language to be used in badge.
     $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
@@ -127,6 +126,7 @@ class RatingsHelper extends ControllerBase {
       case 'cy':
         $language = 'welsh';
         break;
+
       default:
         $language = 'english';
         break;
@@ -159,11 +159,10 @@ class RatingsHelper extends ControllerBase {
     return [
       '#markup' => $markup,
       '#allowed_tags' => [
-        'script', 'noscript', 'iframe', 'div'
-      ]
+        'script', 'noscript', 'iframe', 'div',
+      ],
     ];
   }
-
 
   /**
    * Unified form cache setting.
