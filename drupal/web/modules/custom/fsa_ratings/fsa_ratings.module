@@ -35,9 +35,9 @@ function fsa_ratings_help($route_name, RouteMatchInterface $route_match) {
  */
 function fsa_ratings_preprocess_field(&$variables, $hook) {
   if ($variables['element']['#field_name'] == 'field_righttoreply') {
-    // FHRS API has all html encoded in the rightToReply field, it is saved in
-    // entity as is so remove the crap before sending off to the field template.
-    $variables['items'][0]['content']['#context']['value'] = str_replace('&nbsp;', ' ', (strip_tags(Html::decodeEntities($variables['items'][0]['content']['#context']['value']))));
+    // Remove line-breaks, empty paragrahps and HtmlDecode the field content.
+    $righttoreply = preg_replace( ["/\r|\n/", "/<p[^>]*>[\s|&nbsp;]*<\/p>/"], '', Html::decodeEntities($variables['items'][0]['content']['#context']['value']));
+    $variables['items'][0]['content']['#context']['value'] = ['#markup' => $righttoreply];
   }
 }
 
