@@ -27,7 +27,7 @@ class ScoreDescriptionFormatter extends FormatterBase {
    * {@inheritdoc}
    */
   public function settingsSummary() {
-    $summary[] = t('Translates FHRS API score keys (integer) to human-readable format with description');
+    $summary[] = $this->t('Translates FHRS API score keys (integer) to human-readable format with description');
 
     return $summary;
   }
