@@ -134,9 +134,13 @@ class ScoreDescriptionFormatter extends FormatterBase {
       case 10:
         $content = $this->t('Generally satisfactory');
         break;
+      case 15:
+        $content = $this->t('Improvement necessary');
+        break;
       case 20:
         $content = $this->t('Major improvement necessary');
         break;
+      case 25:
       case 30:
         $content = $this->t('Urgent improvement necessary');
         break;
