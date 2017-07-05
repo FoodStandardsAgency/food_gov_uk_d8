@@ -36,7 +36,7 @@ function fsa_ratings_help($route_name, RouteMatchInterface $route_match) {
 function fsa_ratings_preprocess_field(&$variables, $hook) {
   if ($variables['element']['#field_name'] == 'field_righttoreply') {
     // Remove line-breaks, empty paragrahps and HtmlDecode the field content.
-    $righttoreply = preg_replace( ["/\r|\n/", "/<p[^>]*>[\s|&nbsp;]*<\/p>/"], '', Html::decodeEntities($variables['items'][0]['content']['#context']['value']));
+    $righttoreply = preg_replace(["/\r|\n/", "/<p[^>]*>[\s|&nbsp;]*<\/p>/"], '', Html::decodeEntities($variables['items'][0]['content']['#context']['value']));
     $variables['items'][0]['content']['#context']['value'] = ['#markup' => $righttoreply];
   }
 }
