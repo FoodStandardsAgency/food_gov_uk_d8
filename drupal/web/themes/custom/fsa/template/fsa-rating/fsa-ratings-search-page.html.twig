@@ -1,14 +1,38 @@
+{% set randomID = [] %}
+{% for i in 1..10 %}
+    {% set alpha = 'abcdefghijklmnopqrstuvwxyz' %}
+    {% set alphaUpper = alpha|upper %}
+    {% set numbers = '0123456789' %}
+    {% set randomCharacter = random(alpha ~ alphaUpper ~ numbers ~ '-_') %}
+    {% set randomID = randomID|merge([randomCharacter]) %}
+{% endfor %}
+{% set randomID = randomID|join %}
+
 <div class="ratings {% if form_header.copy %}ratings--frontpage{% endif %} js-sticky-container">
-  <div class="ratings__search {% if form_header.copy %}ratings__search--frontpage{% endif %} js-sticky-element">
+
+  {% if form_header.copy %}
+  {% else %}
+  <button class="ratings__search-expand-button toggle-button js-toggle-button" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
+    <div class="toggle-button__item">{% trans %}Show search options{% endtrans %}</div>
+    <div class="toggle-button__item toggle-button__item--icon svg">
+      <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#toggle-icon"></use></svg>
+    </div>
+  </button>
+  {% endif %}
+
+  <div class="ratings__search {% if form_header.copy %}ratings__search--frontpage{% else %} js-sticky-element toggle-content toggle-content--only-mobile js-toggle-content" id="collapsible-{{ randomID }}" aria-hidden="true{% endif %}">
     <div class="container container--search">
       <div class="logo svg">
         <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop"></use></svg>
       </div>
-      <h2 class="ratings__heading">{{ form_header.title }}
-        {% if form_header.subtitle %}<br />{{ form_header.subtitle }}{% endif %}</h2>
 
       {% if form_header.copy %}
+        <h2 class="ratings__heading">{{ form_header.title }}
+        {% if form_header.subtitle %}<br />{{ form_header.subtitle }}{% endif %}</h2>
         <p class="lead">{{ form_header.copy }}</p>
+      {% else %}
+        <h3 class="ratings__heading">{{ form_header.title }}
+          {% if form_header.subtitle %}<br />{{ form_header.subtitle }}{% endif %}</h3>
       {% endif %}
 
       {{ form }}
@@ -20,18 +44,18 @@
       {{ ratings_info_content }}
     {% else %}
     <div class="ratings__listing">
-      <header class="ratings__header">
+      <header class="ratings__header" role="toolbar" aria-label="sorting options" aria-controls="sortable">
         {% if sort_form %}
           <div class="ratings__hits-total">{{ hits_total }} {{ 'Results'|t }}</div>
           <div class="ratings__sort-form">{{ sort_form }}</div>
         {% endif %}
       </header>
 
-      <div class="table js-table">
-        <div class="table__row table__row--header js-table-header">
+      <div class="table table--with-background js-table" id="sortable">
+        <div class="table__row table__row--header table__row--negative js-table-header">
           <div class="table__item table__item--large">{% trans %}Name{% endtrans %}</div>
           <div class="table__item">{% trans %}Rating{% endtrans %}</div>
-          <div class="table__item">{% trans %}Authority{% endtrans %}</div>
+          <div class="table__item">{% trans %}Inspection date{% endtrans %}</div>
         </div>
 
         {{ items }}

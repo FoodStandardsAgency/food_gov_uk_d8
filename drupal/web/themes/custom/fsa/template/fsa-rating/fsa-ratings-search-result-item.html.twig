@@ -1,12 +1,22 @@
-<button class="toggle-button toggle-button--table js-toggle-button">
-  <div class="toggle-button__item">{{ item.ratingvalue }}</div>
+{% set randomID = [] %}
+{% for i in 1..10 %}
+    {% set alpha = 'abcdefghijklmnopqrstuvwxyz' %}
+    {% set alphaUpper = alpha|upper %}
+    {% set numbers = '0123456789' %}
+    {% set randomCharacter = random(alpha ~ alphaUpper ~ numbers ~ '-_') %}
+    {% set randomID = randomID|merge([randomCharacter]) %}
+{% endfor %}
+{% set randomID = randomID|join %}
+
+<button class="toggle-button table__button js-toggle-button" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
+  <div class="toggle-button__item toggle-button__item--width-3">{{ item.ratingvalue }}</div>
   <div class="toggle-button__item">{{ item.name }}</div>
   <div class="toggle-button__item toggle-button__item--icon svg">
     <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#toggle-icon"></use></svg>
   </div>
 </button>
 
-<div class="ratings__item table__row toggle-content js-toggle-content">
+<div class="ratings__item table__row toggle-content toggle-content--only-mobile js-toggle-content" id="collapsible-{{ randomID }}" aria-hidden="true">
   <div class="table__item table__item--large">
     <div class="table__content">
       {% if item.name %}
@@ -24,8 +34,6 @@
     <div class="table__content">{{ item.ratingvalue }}</div>
   </div>
   <div class="table__item">
-    {% for local_authority in item.localauthoritycode %}
-      <div class="table__content">{{ local_authority.label }}</div>
-    {% endfor %}
+    <div class="table__content">{{ item.ratingdate }}</div>
   </div>
 </div>

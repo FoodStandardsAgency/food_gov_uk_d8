@@ -24,42 +24,131 @@
  * @ingroup themeable
  */
 #}
-<div class="ratings__content">
-  <header class="ratings__header">
-    {{ backlink }}
-  </header>
+{% set randomID = [] %}
+{% for i in 1..10 %}
+    {% set alpha = 'abcdefghijklmnopqrstuvwxyz' %}
+    {% set alphaUpper = alpha|upper %}
+    {% set numbers = '0123456789' %}
+    {% set randomCharacter = random(alpha ~ alphaUpper ~ numbers ~ '-_') %}
+    {% set randomID = randomID|merge([randomCharacter]) %}
+{% endfor %}
+{% set randomID = randomID|join %}
 
-  <div class="establishment">
-    <div class="estabglishment__rating">
-      {{ rating_badge }}
-      <h4>{{ find_more_title }}</h4>
-      <ul>
-          <li>{{ find_more_link_ratings }}</li>
-          <li>{{ find_more_link_fhrs }}</li>
-      </ul>
+<div class="ratings js-sticky-container">
+
+  <button class="ratings__search-expand-button toggle-button js-toggle-button" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
+    <div class="toggle-button__item">{% trans %}Show search options{% endtrans %}</div>
+    <div class="toggle-button__item toggle-button__item--icon svg">
+      <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#toggle-icon"></use></svg>
     </div>
+  </button>
 
-    {{ content|without('field_geocode', 'field_localauthoritycode', 'field_righttoreply') }}
+  <div class="ratings__search js-sticky-element toggle-content toggle-content--only-mobile js-toggle-content" id="collapsible-{{ randomID }}" aria-hidden="true">
+    <div class="container container--search">
+      <div class="logo svg">
+        <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop"></use></svg>
+      </div>
+      <h2 class="ratings__heading">{{ form_header.title }}
+        {% if form_header.subtitle %}<br />{{ form_header.subtitle }}{% endif %}</h2>
 
-    {{ content.field_geocode }}
+      {% if form_header.copy %}
+        <p class="lead">{{ form_header.copy }}</p>
+      {% endif %}
 
-    {% if content.field_righttoreply|render %}
-        {{ content.field_righttoreply }}
-        <h4>{{ righttoreply_title }}</h4>
-        <p>{{ righttoreply_copy }}</p>
-    {% endif %}
+      {{ search_form }}
+    </div>
+  </div>
 
-    <h4>{{ business_owner_title }}</h4>
-    <p>{{ business_owner_copy1 }}</p>
-    <p>{{ business_owner_copy2 }}</p>
+  <div class="ratings__content">
+    <header class="ratings__header rating__header--back-link">
+      {{ backlink }}
+    </header>
 
-    <h4>{{ rating_badge_title }}</h4>
-    <p>{{ rating_badge_copy }}</p>
-    {{ rating_badge_cta }}
+    <div class="establishment">
+      <h1>{{ content.name }}</h1>
 
-    <h4>{{ copy_of_report_title }}</h4>
-    <p>{{ copy_of_report_copy }}</p>
+      <div class="establishment__rating">
+        {{ rating_badge }}
+        <h4>{{ find_more_title }}</h4>
+        <ul>
+            <li>{{ find_more_link_ratings }}</li>
+            <li>{{ find_more_link_fhrs }}</li>
+        </ul>
+      </div>
 
-    {{ content.field_localauthoritycode }}
+      <div class="establishment__content">
+        {% if content.field_address %}
+          <p>
+            <strong>{% trans %}Address{% endtrans %}</strong><br />
+            {{ content.field_address }}<br />
+            {{ content.field_postcode }}
+          </p>
+        {% endif %}
+
+        {% if content.field_businesstype %}
+          <p>
+            <strong>{% trans %}Business type{% endtrans %}</strong><br />
+            {{ content.field_businesstype }}
+          </p>
+        {% endif %}
+
+        {% if content.field_ratingdate %}
+          <p>
+            <strong>{% trans %}Inspection date{% endtrans %}</strong><br />
+            {{ content.field_ratingdate }}
+          </p>
+        {% endif %}
+
+        <p>
+          {{ content|without(
+          'field_geocode',
+          'field_localauthoritycode',
+          'field_righttoreply',
+          'field_score_hygiene',
+          'field_score_structural',
+          'field_score_confidence',
+          'field_score_hygiene',
+          'field_address',
+          'field_postcode',
+          'field_phone',
+          'field_ratingdate',
+          'field_businesstype',
+          'name'
+          ) }}
+        </p>
+      </div>
+
+      <div class="table table--with-borders establishment__table js-table">
+        <div class="table__row table__row--header js-table-header">
+          <div class="table__item">{{ 'Area inspected by food safety officer'|t }}</div>
+          <div class="table__item">{{ 'Standards found'|t }}</div>
+        </div>
+        {{ content.field_score_hygiene }}
+        {{ content.field_score_structural }}
+        {{ content.field_score_confidence }}
+        {{ content.field_score_hygiene }}
+      </div>
+
+      {{ content.field_geocode }}
+
+      {% if content.field_righttoreply|render %}
+          {{ content.field_righttoreply }}
+          <h4>{{ righttoreply_title }}</h4>
+          <p>{{ righttoreply_copy }}</p>
+      {% endif %}
+
+      <h4>{{ business_owner_title }}</h4>
+      <p>{{ business_owner_copy1 }}</p>
+      <p>{{ business_owner_copy2 }}</p>
+
+      <h4>{{ rating_badge_title }}</h4>
+      <p>{{ rating_badge_copy }}</p>
+      {{ rating_badge_cta }}
+
+      <h4>{{ copy_of_report_title }}</h4>
+      <p>{{ copy_of_report_copy }}</p>
+
+      <p>{{ content.field_localauthoritycode }}</p>
+    </div>
   </div>
 </div>

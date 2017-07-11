@@ -9,20 +9,26 @@ require.context("./img/", true, /\.(gif|png|svg|jpe?g)$/);
 require('./css/style.css');
 
 // Polyfill svgs
-//svg4everybody({ polyfill: true });
+svg4everybody({ polyfill: true });
 
 // Responsive tables
 const tables = [...document.querySelectorAll('.js-table')];
-responsiveTables(tables);
+if (tables != null) {
+  responsiveTables(tables);
+}
 
 // Sticky element
 const container = document.querySelectorAll('.js-sticky-container');
 const stickyElem = document.querySelectorAll('.js-sticky-element');
-stickyElement(container, stickyElem);
+if (container != null || stickyElem != null) {
+  stickyElement(container, stickyElem);
+}
 
 // Toggle content
 const toggleButtons = document.querySelectorAll('.js-toggle-button');
-toggleContent(toggleButtons);
+if (toggleButtons != null) {
+  toggleContent(toggleButtons);
+}
 
 // Add class if touch device
 document.addEventListener('touchstart', function addtouchclass(e) {

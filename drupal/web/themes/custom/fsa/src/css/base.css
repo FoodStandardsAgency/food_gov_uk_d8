@@ -18,6 +18,8 @@ Plugin documentation:
 
 @custom-selector :--not-touch html:not(.is-touch);
 
+@custom-selector :--not-js html:not(.js);
+
 /*PostCSS Mixins
 Using postcss-mixins
 Plugin documentation:
@@ -212,6 +214,7 @@ ol, ul {
 }
 
 input, textarea, select {
+  display: block;
   max-width: 100%;
   font-size: 1em;
   padding: 0.5em;
