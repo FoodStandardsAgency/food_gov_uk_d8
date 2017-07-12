@@ -19,7 +19,7 @@ svg4everybody({ polyfill: true });
 // Responsive tables
 const tables = [...document.querySelectorAll('.js-table')];
 if (tables != null) {
-  responsiveTables(tables);
+  responsiveTables(tables, breakpoints);
 }
 
 // Sticky element

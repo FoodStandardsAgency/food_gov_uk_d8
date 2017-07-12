@@ -1,6 +1,6 @@
 {# Theme for FSA ratings explanation item #}
-<div class="table__row ratings-meanings__row">
-    <div class="table__item table__item--width-6 ratings-meanings__item ratings-meanings__item--score"><div class="ratings-meanings__content ratings-meanings__content--highlight">{{ rating_score }}</div></div>
-    <div class="table__item table__item--width-15 ratings-meanings__item ratings-meanings__item--badge">{{ rating_badge }}</div>
-    <div class="table__item ratings-meanings__item">{{ rating_description }}</div>
+<div class="table__row ratings-meanings__row" role="row">
+    <div class="table__item table__item--width-6 ratings-meanings__item ratings-meanings__item--score" role="gridcell"><div class="ratings-meanings__content ratings-meanings__content--highlight">{{ rating_score }}</div></div>
+    <div class="table__item table__item--width-15 ratings-meanings__item ratings-meanings__item--badge" role="gridcell">{{ rating_badge }}</div>
+    <div class="table__item ratings-meanings__item" role="gridcell">{{ rating_description }}</div>
 </div>
