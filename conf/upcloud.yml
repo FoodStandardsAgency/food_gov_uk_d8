@@ -26,8 +26,9 @@
   hosts: localhost
   connection: local
   become: False
+  tags: ['upcloud']
   roles:
-    - { role: upcloud-servers, tags: ['upcloud', 'server'] }
+    - { role: upcloud-servers, tags: ['server'] }
   tasks:
     # This task updates the inventory file
     - name: Update Upcloud Servers to server.inventory file
@@ -39,7 +40,7 @@
         allow_no_value: yes
       with_items:
         - "{{ upcloud_created_instances.results }}"
-      when: item['item'] | json_query( '[*].group' ) | length == 1
+      when: upcloud_created_instances is defined and item['item'] | json_query( '[*].group' ) | length == 1
       tags: ['create']
 
 # Creates firewalls for all machines
@@ -52,6 +53,7 @@
 # Setups disks for all servers and disallows SSH password access
 - name: Setup Upcloud Servers
   hosts: upcloud_created_servers
+  tags: ['upcloud']
   roles:
     - { role: upcloud-disks, tags: ['upcloud', 'disks'] }
     - { role: resize-root-disk, tags: ['disks'] }
@@ -64,6 +66,13 @@
         line: "PasswordAuthentication no"
         state: present
       notify: restart sshd
+    
+    # This circumvents DNS UPD issue: https://github.com/wunderkraut/WunderTools/issues/197
+    - name: Use TCP for dns requests
+      lineinfile:
+        dest: /etc/resolv.conf
+        line: "options use-vc"
+        state: present
 
   handlers:
     - name: restart sshd

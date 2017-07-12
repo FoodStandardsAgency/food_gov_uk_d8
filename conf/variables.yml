@@ -12,6 +12,8 @@ php_fpm_pm_max_spare_servers: "{{ php_fpm_pm_max_children|int // 2 }}"
 
 nginx_workers: "{{ ansible_processor_vcpus }}" # This should be equal to core count
 
+# Add database information for php
+php_env_vars_include_db: True
 
 # PHP version to be used. Available options: php56u, php70u
 php_package: "php70u"
@@ -23,6 +25,34 @@ upcloud_project_name: FSA
 # These are the specifications for servers in this project
 upcloud_server_spec_list:
   - group: stage
+    members:
+      - { name: web1, state: present }
+    settings:
+      plan: 2xCPU-2GB
+      zone: uk-lon1 #can be de-fra1, fi-hel1 too
+      # Allows ansible to reboot the machine when making changes to the disks
+      allow_reboot_on_resize: true
+      storage_devices:
+        - title: root
+          size: 50
+          os: CentOS 7.0
+          backup_rule: { interval: daily, time: '0430', retention: 14 }
+        - title: logs
+          size: 10
+          mount:
+            path: /var/log
+            fstype: ext4
+            opts: noatime
+        - title: database
+          size: 10
+          mount:
+            path: /var/lib/mysql
+            fstype: ext4
+            # Options for mysql performance
+            # These are the same as Mozilla is using for their mysql servers: https://bugzilla.mozilla.org/show_bug.cgi?id=874039
+            opts: defaults,noatime,data=writeback,barrier=0,dioread_nolock
+          backup_rule: { interval: daily, time: '0430', retention: 14 }
+  - group: develop
     members:
       - { name: web1, state: present }
     settings:
