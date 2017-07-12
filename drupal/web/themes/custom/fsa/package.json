@@ -34,6 +34,7 @@
     "webpack": "^2.6.1"
   },
   "dependencies": {
+    "babel-polyfill": "^6.23.0",
     "postcss-mixins": "^6.0.0",
     "svg-sprite-loader": "^3.0.5",
     "svg4everybody": "^2.1.8"
