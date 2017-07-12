@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import svg4everybody from 'svg4everybody';
 import responsiveTables from './responsiveTables';
 import stickyElement from './stickyElement';

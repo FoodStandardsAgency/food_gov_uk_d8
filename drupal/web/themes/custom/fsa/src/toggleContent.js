@@ -16,7 +16,7 @@ function toggleContent(toggleButtons, breakpoints) {
     }
   }
 
-  toggleButtons.forEach(function(button) {
+  [...toggleButtons].forEach(function(button) {
     let content = button.nextElementSibling;
 
     if (content.classList.contains('js-toggle-content-only-mobile')) {

@@ -34,7 +34,6 @@
     "webpack": "^2.6.1"
   },
   "dependencies": {
-    "lodash": "^4.17.4",
     "postcss-mixins": "^6.0.0",
     "svg-sprite-loader": "^3.0.5",
     "svg4everybody": "^2.1.8"
