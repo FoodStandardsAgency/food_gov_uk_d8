@@ -63,8 +63,10 @@
 }
 
 .table__item {
-  flex: 1 1 auto;
   display: block;
+  flex-flow: row nowrap;
+  flex-grow: 1;
+  flex-basis: auto;
   padding-top: 1em;
   padding-bottom: 1em;
   @mixin responsive-declaration padding-right, 1em, 2em;
@@ -75,7 +77,8 @@
   }
 
   @media (--breakpoint-md) {
-    flex: 1 1 0;
+    flex-shrink: 1;
+    flex-basis: 0;
   }
 
   &:before {
@@ -149,6 +152,7 @@
 }
 
 .table__content {
+  width: 100%;
   font-size: 1em;
 
   & h3 {
