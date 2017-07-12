@@ -28,7 +28,7 @@ install:
   - echo -e "Host *\n  PasswordAuthentication=no" >> ~/.ssh/config
 
   # Install build.sh dependencies into Python virtualenv
-  - pip install -r drupal/requirements.txt --user
+  - pip install pyyaml --user
 
   # Install drush
   - composer global require drush/drush
