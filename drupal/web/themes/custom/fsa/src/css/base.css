@@ -363,6 +363,11 @@ figure {
   max-width: 70em;
 }
 
+.container.container--text {
+  margin: 0;
+  max-width: 50em;
+}
+
 .container.container--search {
   max-width: 30em;
 }

@@ -65,90 +65,94 @@
     </header>
 
     <div class="establishment">
-      <h1>{{ content.name }}</h1>
+      <div class="establishment__container">
+        <h1>{{ content.name }}</h1>
 
-      <div class="establishment__rating">
-        {{ rating_badge }}
-        <h4>{{ find_more_title }}</h4>
-        <ul>
-            <li>{{ find_more_link_ratings }}</li>
-            <li>{{ find_more_link_fhrs }}</li>
-        </ul>
-      </div>
-
-      <div class="establishment__content">
-        {% if content.field_address %}
-          <p>
-            <strong>{% trans %}Address{% endtrans %}</strong><br />
-            {{ content.field_address }}<br />
-            {{ content.field_postcode }}
-          </p>
-        {% endif %}
-
-        {% if content.field_businesstype %}
-          <p>
-            <strong>{% trans %}Business type{% endtrans %}</strong><br />
-            {{ content.field_businesstype }}
-          </p>
-        {% endif %}
-
-        {% if content.field_ratingdate %}
-          <p>
-            <strong>{% trans %}Inspection date{% endtrans %}</strong><br />
-            {{ content.field_ratingdate }}
-          </p>
-        {% endif %}
-
-        <p>
-          {{ content|without(
-          'field_geocode',
-          'field_localauthoritycode',
-          'field_righttoreply',
-          'field_score_hygiene',
-          'field_score_structural',
-          'field_score_confidence',
-          'field_score_hygiene',
-          'field_address',
-          'field_postcode',
-          'field_phone',
-          'field_ratingdate',
-          'field_businesstype',
-          'name'
-          ) }}
-        </p>
-      </div>
-
-      <div class="table table--with-borders establishment__table js-table" role="grid">
-        <div class="table__row table__row--header js-table-header" role="row">
-          <div class="table__item" role="columnheader">{{ 'Area inspected by food safety officer'|t }}</div>
-          <div class="table__item" role="columnheader">{{ 'Standards found'|t }}</div>
+        <div class="establishment__rating">
+          {{ rating_badge }}
+          <h4>{{ find_more_title }}</h4>
+          <ul>
+              <li>{{ find_more_link_ratings }}</li>
+              <li>{{ find_more_link_fhrs }}</li>
+          </ul>
         </div>
-        {{ content.field_score_hygiene }}
-        {{ content.field_score_structural }}
-        {{ content.field_score_confidence }}
-        {{ content.field_score_hygiene }}
+
+        <div class="establishment__content">
+          {% if content.field_address %}
+            <p>
+              <strong>{% trans %}Address{% endtrans %}</strong><br />
+              {{ content.field_address }}<br />
+              {{ content.field_postcode }}
+            </p>
+          {% endif %}
+
+          {% if content.field_businesstype %}
+            <p>
+              <strong>{% trans %}Business type{% endtrans %}</strong><br />
+              {{ content.field_businesstype }}
+            </p>
+          {% endif %}
+
+          {% if content.field_ratingdate %}
+            <p>
+              <strong>{% trans %}Inspection date{% endtrans %}</strong><br />
+              {{ content.field_ratingdate }}
+            </p>
+          {% endif %}
+
+          <p>
+            {{ content|without(
+            'field_geocode',
+            'field_localauthoritycode',
+            'field_righttoreply',
+            'field_score_hygiene',
+            'field_score_structural',
+            'field_score_confidence',
+            'field_score_hygiene',
+            'field_address',
+            'field_postcode',
+            'field_phone',
+            'field_ratingdate',
+            'field_businesstype',
+            'name'
+            ) }}
+          </p>
+        </div>
+
+        <div class="table table--with-borders establishment__table js-table" role="grid">
+          <div class="table__row table__row--header js-table-header" role="row">
+            <div class="table__item" role="columnheader">{{ 'Area inspected by food safety officer'|t }}</div>
+            <div class="table__item" role="columnheader">{{ 'Standards found'|t }}</div>
+          </div>
+          {{ content.field_score_hygiene }}
+          {{ content.field_score_structural }}
+          {{ content.field_score_confidence }}
+          {{ content.field_score_hygiene }}
+        </div>
+
+        <div class="container container--text">
+          {{ content.field_geocode }}
+
+          {% if content.field_righttoreply|render %}
+              {{ content.field_righttoreply }}
+              <h4>{{ righttoreply_title }}</h4>
+              <p>{{ righttoreply_copy }}</p>
+          {% endif %}
+
+          <h4>{{ business_owner_title }}</h4>
+          <p>{{ business_owner_copy1 }}</p>
+          <p>{{ business_owner_copy2 }}</p>
+
+          <h4>{{ rating_badge_title }}</h4>
+          <p>{{ rating_badge_copy }}</p>
+          {{ rating_badge_cta }}
+
+          <h4>{{ copy_of_report_title }}</h4>
+          <p>{{ copy_of_report_copy }}</p>
+
+          <p>{{ content.field_localauthoritycode }}</p>
+        </div>
       </div>
-
-      {{ content.field_geocode }}
-
-      {% if content.field_righttoreply|render %}
-          {{ content.field_righttoreply }}
-          <h4>{{ righttoreply_title }}</h4>
-          <p>{{ righttoreply_copy }}</p>
-      {% endif %}
-
-      <h4>{{ business_owner_title }}</h4>
-      <p>{{ business_owner_copy1 }}</p>
-      <p>{{ business_owner_copy2 }}</p>
-
-      <h4>{{ rating_badge_title }}</h4>
-      <p>{{ rating_badge_copy }}</p>
-      {{ rating_badge_cta }}
-
-      <h4>{{ copy_of_report_title }}</h4>
-      <p>{{ copy_of_report_copy }}</p>
-
-      <p>{{ content.field_localauthoritycode }}</p>
     </div>
   </div>
 </div>

@@ -3,6 +3,10 @@
   background-color: var(--color-lighter-gray);
 }
 
+.ratings-meanings__container {
+  max-width: 80em;
+}
+
 .ratings-meanings__row {
   background-color: var(--color-white);
   margin-bottom: 0.5em;

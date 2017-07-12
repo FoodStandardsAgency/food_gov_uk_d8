@@ -187,3 +187,10 @@
     margin-left: 0;
   }
 }
+
+.ratings__badge {
+  & img {
+    border: 1px solid var(--color-light-gray);
+    border-radius: 0.2em;
+  }
+}

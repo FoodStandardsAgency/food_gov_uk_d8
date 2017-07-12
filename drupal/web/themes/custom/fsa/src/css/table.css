@@ -1,6 +1,7 @@
 .table {
   display: flex;
   flex-flow: column nowrap;
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
 }
 
 .table.table--with-borders .table__item {
@@ -39,7 +40,7 @@
 .table.table--with-borders .table__item {
   @media (--breakpoint-md) {
     margin-top: -1px;
-    border: 1px solid var(--color-gray);
+    border: 1px solid var(--color-light-gray);
   }
 }
 

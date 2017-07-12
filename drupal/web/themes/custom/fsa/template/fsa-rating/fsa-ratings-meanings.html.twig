@@ -40,14 +40,18 @@
     </header>
 
     <div class="ratings-meanings">
-      <h1>{% trans %}What do the different ratings mean{% endtrans %}</h1>
-      <div class="table" role="grid">
-        {{ ratings }} {# See fsa-ratings-meanings-item.html.twig for each rating item #}
+      <div class="ratings-meanings__container">
+        <h1>{% trans %}What do the different ratings mean{% endtrans %}</h1>
+        <div class="table" role="grid">
+          {{ ratings }} {# See fsa-ratings-meanings-item.html.twig for each rating item #}
+        </div>
+
+        <div class="container container--text">
+          <p>{{ paragraph_1 }}</p>
+
+          <p>{{ paragraph_2 }}</p>
+        </div>
       </div>
-
-      <p>{{ paragraph_1 }}</p>
-
-      <p>{{ paragraph_2 }}</p>
     </div>
   </div>
 </div>
