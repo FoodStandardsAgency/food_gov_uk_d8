@@ -120,6 +120,19 @@ body {
     color: var(--primary-color);
     text-decoration: none;
   }
+
+  @media (--breakpoint-md) {
+    flex-flow: row nowrap;
+    align-items: center;
+  }
+}
+
+body:after {
+  content: "sm";
+
+  @media (--breakpoint-md) {
+    content: "md";
+  }
 }
 
 :--heading {

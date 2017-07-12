@@ -70,13 +70,13 @@ class FsaRatingsSearchForm extends FormBase {
 
     $form['advanced_button'] = [
       '#type' => 'item',
-      '#prefix' => '<div class="ratings__advanced-search-button toggle-button js-toggle-button"><div class="toggle-button__item">More search options</div>',
+      '#prefix' => '<div class="ratings__advanced-search-button toggle-button js-toggle-button" role="button"  aria-expanded="false" aria-controls="collapsible-12345zxcv"><div class="toggle-button__item">More search options</div>',
       '#suffix' => '<div class="toggle-button__item toggle-button__item--icon"><div class="toggle-button__fallback-icon"></div></div></div>',
     ];
 
     $form['advanced'] = [
       '#type' => 'item',
-      '#prefix' => '<div class="toggle-content js-toggle-content">',
+      '#prefix' => '<div class="toggle-content js-toggle-content" id="collapsible-12345zxcv">',
       '#suffix' => '</div>',
       '#attributes' => [
         'class' => [

@@ -4,6 +4,11 @@ import responsiveTables from './responsiveTables';
 import stickyElement from './stickyElement';
 import toggleContent from './toggleContent';
 
+const breakpoints = {
+  small: "sm",
+  medium: "md"
+}
+
 // Require every image asset inside of img folder
 require.context("./img/", true, /\.(gif|png|svg|jpe?g)$/);
 require('./css/style.css');
@@ -27,7 +32,7 @@ if (container != null || stickyElem != null) {
 // Toggle content
 const toggleButtons = document.querySelectorAll('.js-toggle-button');
 if (toggleButtons != null) {
-  toggleContent(toggleButtons);
+  toggleContent(toggleButtons, breakpoints);
 }
 
 // Add class if touch device

@@ -16,8 +16,8 @@
   </div>
 </button>
 
-<div class="ratings__item table__row toggle-content toggle-content--only-mobile js-toggle-content" id="collapsible-{{ randomID }}" aria-hidden="true">
-  <div class="table__item table__item--large">
+<div class="ratings__item table__row toggle-content toggle-content--only-mobile js-toggle-content js-toggle-content-only-mobile" id="collapsible-{{ randomID }}" aria-hidden="true" role="row">
+  <div class="table__item table__item--large" role="gridcell">
     <div class="table__content">
       {% if item.name %}
         <h3><a href="{{ item.url }}">{{ item.name }}</a></h3>
@@ -30,10 +30,10 @@
       {% endif %}
     </div>
   </div>
-  <div class="table__item">
+  <div class="table__item" role="gridcell">
     <div class="table__content">{{ item.ratingvalue }}</div>
   </div>
-  <div class="table__item">
+  <div class="table__item" role="gridcell">
     <div class="table__content">{{ item.ratingdate }}</div>
   </div>
 </div>

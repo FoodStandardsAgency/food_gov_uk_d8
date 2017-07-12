@@ -20,7 +20,7 @@
   </button>
   {% endif %}
 
-  <div class="ratings__search {% if form_header.copy %}ratings__search--frontpage{% else %} js-sticky-element toggle-content toggle-content--only-mobile js-toggle-content" id="collapsible-{{ randomID }}" aria-hidden="true{% endif %}">
+  <div class="ratings__search {% if form_header.copy %}ratings__search--frontpage{% else %} js-sticky-element toggle-content toggle-content--only-mobile js-toggle-content js-toggle-content-only-mobile" id="collapsible-{{ randomID }}" aria-hidden="true{% endif %}">
     <div class="container container--search">
       <div class="logo svg">
         <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop"></use></svg>
@@ -51,11 +51,12 @@
         {% endif %}
       </header>
 
-      <div class="table table--with-background js-table" id="sortable">
-        <div class="table__row table__row--header table__row--negative js-table-header">
-          <div class="table__item table__item--large">{% trans %}Name{% endtrans %}</div>
-          <div class="table__item">{% trans %}Rating{% endtrans %}</div>
-          <div class="table__item">{% trans %}Inspection date{% endtrans %}</div>
+      <h2 class="visually-hidden" aria-labelledby="sortable">{% trans %}Food hygiene ratings search results{% endtrans %}</h2>
+      <div class="table table--with-background js-table" id="sortable" role="grid">
+        <div class="table__row table__row--header table__row--negative js-table-header" role="row">
+          <div class="table__item table__item--large" role="columnheader">{% trans %}Name{% endtrans %}</div>
+          <div class="table__item" role="columnheader">{% trans %}Rating{% endtrans %}</div>
+          <div class="table__item" role="columnheader">{% trans %}Inspection date{% endtrans %}</div>
         </div>
 
         {{ items }}
