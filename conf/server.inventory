@@ -1,23 +1,25 @@
-[wundertools-dev]
-10.10.10.1
+[firewall_web:children]
+production
+develop
+stage
 
-[wundertools-stage]
-10.10.10.2
-
-[wundertools-prod-db]
-10.10.10.3
-
-[wundertools-prod-lb]
-10.10.10.4
-
-[wundertools-prod-front]
-10.10.10.5
-10.10.10.6
-
-[prod:children]
-wundertools-prod-db
-wundertools-prod-lb
-wundertools-prod-front
+# Alias prod servers for all subgroups
+[wundertools-prod-db:children]
+production
+[wundertools-prod-lb:children]
+production
+[wundertools-prod-front:children]
+production
 
 [stage]
-83.136.254.245
+stage-web1.fsa.uk-lon1.fsa.lon.wunder.io ansible_host=83.136.254.252
+83.136.254.252
+
+[fsa-dev:children]
+develop
+
+[develop]
+develop-web1.fsa.uk-lon1.fsa.lon.wunder.io ansible_host=83.136.248.137
+83.136.248.137
+
+[production]

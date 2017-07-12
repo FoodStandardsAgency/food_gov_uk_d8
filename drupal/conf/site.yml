@@ -103,7 +103,7 @@ production:
 
   # Prod environment only symlinks files
   link:
-    - files: web/sites/default/files
+    - /var/www/fsa/files: web/sites/default/files
 
   local_commands:
     create:

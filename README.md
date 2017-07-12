@@ -37,5 +37,8 @@ Jira: https://wunder.atlassian.net/projects/FSA
 
 Refer WunderFlow for branching: http://wunderkraut.github.io/WunderFlow
 
+## Server Provisioning/Deployment
+See [docs/provisioning.md](docs/provisioning.md).
+
 
 More detailed documentation at [docs/development.md](docs/development.md)
