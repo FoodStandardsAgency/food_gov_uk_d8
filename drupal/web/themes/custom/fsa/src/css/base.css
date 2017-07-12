@@ -18,6 +18,8 @@ Plugin documentation:
 
 @custom-selector :--not-touch html:not(.is-touch);
 
+@custom-selector :--not-js html:not(.js);
+
 /*PostCSS Mixins
 Using postcss-mixins
 Plugin documentation:
@@ -25,16 +27,20 @@ Plugin documentation:
 @define-mixin responsive-declaration $property, $valueMin, $valueMax {
   $(property): $valueMin;
 
+  @media (--breakpoint-xs) {
+    $(property): calc($valueMin + (($valueMax - $valueMin) / 4) * 1);
+  }
+
   @media (--breakpoint-sm) {
-    $(property): calc($valueMin + (($valueMax - $valueMin) / 3) * 1);
+    $(property): calc($valueMin + (($valueMax - $valueMin) / 4) * 2);
   }
 
   @media (--breakpoint-md) {
-    $(property): calc($valueMin + (($valueMax - $valueMin) / 3) * 2);
+    $(property): calc($valueMin + (($valueMax - $valueMin) / 4) * 3);
   }
 
   @media (--breakpoint-lg) {
-    $(property): calc($valueMin + (($valueMax - $valueMin) / 3) * 3);
+    $(property): calc($valueMin + (($valueMax - $valueMin) / 4) * 4);
   }
 }
 
@@ -48,32 +54,26 @@ Plugin documentation:
   --color-black: #000;
   --color-white: #fff;
 
-  --color-gray-light: #EEEEEE;
-  --color-gray: #9E9E9E;
+  --color-gray: #848B8E;
 
-  --color-red-light: #EF9A9A;
-  --color-red: #F44336;
+  --color-light-gray: #DEE2E5;
+  --color-lighter-gray: #F0F3F5;
 
-  --color-blue-light: #90CAF9;
-  --color-blue: #2196F3;
-
-  --color-yellow-light: #FFF59D;
-  --color-yellow: #FFEE58;
-
-  --color-orange-light: #FFCC80;
-  --color-orange: #FF9800;
-
-  --color-teal-light: #80CBC4;
-  --color-teal: #009688;
-
-  --color-green-light: #A5D6A7;
-  --color-green: #4CAF50;
+  --color-teal: #00A39B;
+  --color-light-teal: #10c7be;
 
   --color-purple: #49176D;
+
+  --color-red: #E31837;
+
+  --color-green: #6CB33F;
+
+  --color-dark-blue: #18262C;
 }
 
 :root {
   --primary-color: var(--color-teal);
+  --light-primary-color: var(--color-light-teal);
 
   --secondary-color: var(--color-purple);
 }
@@ -81,8 +81,8 @@ Plugin documentation:
 /*Typography*/
 :root {
   --font-size-base: 112.5%;
-  --font-family-heading: 'Khula';
-  --font-family-content: 'Fira Sans';
+  --font-family-heading: 'Fira Sans';
+  --font-family-content: 'Khula';
 }
 
 /*Z-Index*/
@@ -120,14 +120,31 @@ body {
     color: var(--primary-color);
     text-decoration: none;
   }
+
+  @media (--breakpoint-md) {
+    flex-flow: row nowrap;
+    align-items: center;
+  }
+}
+
+body:after {
+  content: "sm";
+
+  @media (--breakpoint-md) {
+    content: "md";
+  }
 }
 
 :--heading {
   font-family: var(--font-family-heading);
-  font-weight: 400;
+  font-weight: 700;
 
   &:first-child {
     margin-top: 0em;
+  }
+
+  &:last-child {
+    margin-bottom: 0em;
   }
 }
 
@@ -161,6 +178,20 @@ h6 {
   @mixin responsive-declaration line-height, 1.0, 1.125;
 }
 
+p {
+  &:first-child {
+    margin-top: 0em;
+  }
+
+  &:last-child {
+    margin-bottom: 0em;
+  }
+}
+
+p.lead {
+  @mixin responsive-declaration font-size, 1.0em, 1.2em;
+}
+
 img {
   max-width: 100%;
 }
@@ -172,6 +203,8 @@ svg {
 
 button {
   font-size: 1em;
+  border: 0;
+  background-color: transparent;
 }
 
 pre {
@@ -187,9 +220,14 @@ blockquote {
 
 ol, ul {
   @mixin responsive-declaration padding-left, 1.5em, 2.5em;
+
+  & li:not(:last-child) {
+    margin-bottom: 1em;
+  }
 }
 
 input, textarea, select {
+  display: block;
   max-width: 100%;
   font-size: 1em;
   padding: 0.5em;
@@ -204,11 +242,12 @@ input, textarea, select {
 select {
   background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='10px' height='6px' viewBox='0 0 10 6' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Styleguide' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg transform='translate%28-919.000000, -3891.000000%29' id='Basic-Elements' fill='%2318262C'%3E%3Cg transform='translate%2877.000000, 3029.000000%29'%3E%3Cg id='Basic-forms' transform='translate%280.000000, 757.000000%29'%3E%3Cg id='Select' transform='translate%28470.000000, 57.000000%29'%3E%3Cpolygon id='Triangle' points='377 54 372 48 382 48'%3E%3C/polygon%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
   background-position: 90% 50%;
-  background-position: calc(100% - 0.5em) 50%;
+  background-position: calc(100% - 1em) 50%;
   background-size: 0.75em auto;
   background-repeat: no-repeat;
   appearance: none;
   border: none;
+  padding-right: 3em;
 }
 
 textarea {
@@ -217,7 +256,6 @@ textarea {
 
 input:not([type="radio"], [type="checkbox"], [type="submit"]),
 textarea {
-  max-width: 20em;
   width: 100%;
   border: 0;
 }
@@ -266,7 +304,7 @@ input[type="checkbox"] + label:after  {
 input[type="radio"] {
   & + label:before {
     border-radius: 1em;
-    box-shadow: inset 0em 0em 0em 0.1em var(--color-black);
+    box-shadow: inset 0em 0em 0em 0.1em currentColor;
   }
 
   & + label:after {
@@ -284,7 +322,7 @@ input[type="radio"] {
 
 input[type="checkbox"] {
   & + label:before {
-    box-shadow: inset 0em 0em 0em 0.1em var(--color-black);
+    box-shadow: inset 0em 0em 0em 0.1em currentColor;
     border-radius: 0.1em;
   }
 
@@ -305,14 +343,28 @@ background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-
   }
 }
 
-
 figure {
   margin: 0;
+}
+
+.svg {
+  position: relative;
+
+  & svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+  }
 }
 
 .container {
   margin: 0 auto;
   max-width: 70em;
+}
+
+.container.container--search {
+  max-width: 30em;
 }
 
 .overflow-x-auto {

@@ -1,0 +1,53 @@
+{# FHRS Ratings explanations template. #}
+{% set randomID = [] %}
+{% for i in 1..10 %}
+    {% set alpha = 'abcdefghijklmnopqrstuvwxyz' %}
+    {% set alphaUpper = alpha|upper %}
+    {% set numbers = '0123456789' %}
+    {% set randomCharacter = random(alpha ~ alphaUpper ~ numbers ~ '-_') %}
+    {% set randomID = randomID|merge([randomCharacter]) %}
+{% endfor %}
+{% set randomID = randomID|join %}
+
+<div class="ratings js-sticky-container">
+
+  <button class="ratings__search-expand-button toggle-button js-toggle-button" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
+    <div class="toggle-button__item">{% trans %}Show search options{% endtrans %}</div>
+    <div class="toggle-button__item toggle-button__item--icon svg">
+      <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#toggle-icon"></use></svg>
+    </div>
+  </button>
+
+  <div class="ratings__search js-sticky-element toggle-content toggle-content--only-mobile js-toggle-content js-toggle-content-only-mobile" id="collapsible-{{ randomID }}" aria-hidden="true">
+    <div class="container container--search">
+      <div class="logo svg">
+        <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop"></use></svg>
+      </div>
+      <h2 class="ratings__heading">{{ form_header.title }}
+        {% if form_header.subtitle %}<br />{{ form_header.subtitle }}{% endif %}</h2>
+
+      {% if form_header.copy %}
+        <p class="lead">{{ form_header.copy }}</p>
+      {% endif %}
+
+      {{ search_form }}
+    </div>
+  </div>
+
+  <div class="ratings__content">
+    <header class="ratings__header rating__header--back-link">
+      {{ backlink }}
+    </header>
+
+    <div class="ratings-meanings">
+      <h1>{% trans %}What do the different ratings mean{% endtrans %}</h1>
+      <div class="table">
+        {{ ratings }} {# See fsa-ratings-meanings-item.html.twig for each rating item #}
+      </div>
+
+      <p>{{ paragraph_1 }}</p>
+
+      <p>{{ paragraph_2 }}</p>
+    </div>
+  </div>
+</div>

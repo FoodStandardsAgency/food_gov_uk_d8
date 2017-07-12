@@ -99,17 +99,20 @@ class FsaRatingsSearchForm extends FormBase {
     ];
     $form['main']['q'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Business name'),
+      '#title' => $this->t('Business name/or location'),
       '#default_value' => $keywords,
     ];
 
-    // Define advanced options to set the details wrapper #open TRUE or FALSE.
-    $advanced_options = ['business_type', 'local_authority', 'rating_value'];
+    $form['advanced_button'] = [
+      '#type' => 'item',
+      '#prefix' => '<div class="ratings__advanced-search-button toggle-button js-toggle-button" role="button"  aria-expanded="false" aria-controls="collapsible-12345zxcv"><div class="toggle-button__item">More search options</div>',
+      '#suffix' => '<div class="toggle-button__item toggle-button__item--icon"><div class="toggle-button__fallback-icon"></div></div></div>',
+    ];
+
     $form['advanced'] = [
-      '#type' => 'details',
-      '#open' => array_intersect($advanced_options, \Drupal::request()->query->keys()),
-      '#title' => 'More search options',
-      '#collapsible' => TRUE,
+      '#type' => 'item',
+      '#prefix' => '<div class="toggle-content js-toggle-content" id="collapsible-12345zxcv">',
+      '#suffix' => '</div>',
       '#attributes' => [
         'class' => [
           'fsa-rating-search-advanced',

@@ -1,14 +1,21 @@
 /*Layout*/
-@import "layout/base.css";
-@import "layout/site-header.css";
-@import "layout/site-navigation.css";
-@import "layout/site-hero.css";
-@import "layout/site-promo.css";
-@import "layout/site-features.css";
-@import "layout/site-content.css";
-@import "layout/site-footer.css";
+@import "base.css";
+@import "site-header.css";
+@import "site-navigation.css";
+@import "site-hero.css";
+@import "site-promo.css";
+@import "site-features.css";
+@import "site-content.css";
+@import "site-footer.css";
+
+@import "button.css";
+@import "table.css";
+@import "toggle.css";
 
 /*Component*/
-@import "component/infobox.css";
-@import "component/featurebox.css";
-@import "component/button.css";
+@import "infobox.css";
+@import "establishment.css";
+@import "ratings-meanings.css";
+@import "featurebox.css";
+@import "ratings.css";
+@import "logo.css";

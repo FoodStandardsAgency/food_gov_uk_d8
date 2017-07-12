@@ -1,0 +1,49 @@
+.ratings-meanings {
+  @mixin responsive-declaration padding, 1em, 2em;
+  background-color: var(--color-lighter-gray);
+}
+
+.ratings-meanings__row {
+  background-color: var(--color-white);
+  margin-bottom: 0.5em;
+  flex-flow: column;
+
+  @media (--breakpoint-xs) {
+    flex-flow: row;
+  }
+}
+
+.ratings-meanings__item:last-child {
+  @media (--breakpoint-xs) {
+    box-shadow: -0.1em 0 0 0 var(--color-lighter-gray);
+  }
+}
+
+.ratings-meanings__item--score {
+  background-color: var(--primary-color);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
+
+  @media (--breakpoint-xs) {
+    flex: 0 0 6em;
+  }
+}
+
+.ratings-meanings__item--badge {
+  @media (--breakpoint-xs) {
+    flex: 0 0 10em;
+  }
+
+  @media (--breakpoint-sm) {
+    flex: 0 0 15em;
+  }
+}
+
+.ratings-meanings__content--highlight {
+  font-family: var(--font-family-heading);
+  font-size: 2.5em;
+  font-weight: bold;
+}
