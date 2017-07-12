@@ -52,6 +52,13 @@ default:
         - vendor/bin/codecept clean -c web/codeception.yml
         - vendor/bin/codecept run -c web/codeception.yml
 
+# Minimal build for Travis CI
+ci:
+  local_commands:
+    build:
+      - make
+      - shell: chmod -R a+w web
+
 # Test environment:
 test:
 
@@ -59,7 +66,7 @@ test:
 
   # Test environment only symlinks files
   link:
-    - files: web/sites/default/files
+    - /var/www/fsa/files: web/sites/default/files
 
 
   # You can use copy to put some custom files in place if needed
@@ -91,9 +98,9 @@ test:
       - cleanup
       - shell: chmod -R a-w web
       - shell: sudo systemctl restart nginx php-fpm varnish
-      - shell:
-        - vendor/bin/codecept clean -c web/codeception.yml
-        - vendor/bin/codecept run -c web/codeception.yml --env test
+      #- shell:
+      #  - vendor/bin/codecept clean -c web/codeception.yml
+      #  - vendor/bin/codecept run -c web/codeception.yml --env test
 
 
 # Production environment:

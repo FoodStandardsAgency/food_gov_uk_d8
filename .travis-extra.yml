@@ -1,0 +1,5 @@
+env:
+  branch:
+    master:
+      DEPLOY_HOST: 83.136.254.252
+      DEPLOY_BASE_PATH: /var/www/fsa

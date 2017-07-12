@@ -1,32 +1,68 @@
-language: python
-python:
-- 2.7
-- 3.6
-- 3.5
-- 3.4
-- 3.3
+language: php
+php:
+  - '7.1'
 sudo: false
+cache:
+  directories: 
+    - $HOME/.composer
+    - $HOME/.local
+env:
+  global:
+    # Few variables for the deploy target
+    - DEPLOY_VERSION=$(date +"%Y-%m-%d-%H-%M-%S")
+    - DEPLOY_USER=www-admin
+
+    # Use ci environment for drupal/build.sh
+    - WKV_SITE_ENV=ci
+    
+    # Deploy these files
+    - DEPLOY_SRC=${TRAVIS_BUILD_DIR}/drupal
+
+    # Make pip installed libs available to python
+    - PYTHONPATH=${HOME}/.local/lib/python2.7/site-packages
+
+    # Use composer installed packages
+    - PATH="$HOME/.composer/vendor/bin:$PATH"
 install:
-- travis_retry pip install pyflakes
-- travis_retry pip install yamllint
-- travis_retry pip install demjson
+  # Do not use PasswordAuthentication anywhere
+  - echo -e "Host *\n  PasswordAuthentication=no" >> ~/.ssh/config
+
+  # Install build.sh dependencies into Python virtualenv
+  - pip install -r drupal/requirements.txt --user
+
+  # Install drush
+  - composer global require drush/drush
+  
+  # Install imagick extensions
+  - printf "\n" | pecl install imagick
+
+  # Install travis-extra
+  - gem install travis-extra
+
+before_script:
+  # Enable custom branch based configs from .travis-extra.yml
+  - eval $(travis-extra --load-env)
+
 script:
-- pyflakes drupal/build.sh
-- yamllint .
-- find . -name \*.json | xargs -I {} jsonlint {}
-after_success:
-- travis_retry pip install pep8
-- pep8 --statistics --count drupal/build.sh
-matrix:
-  fast_finish: true
-  allow_failures:
-  - python: 3.6
-  - python: 3.5
-  - python: 3.4
-  - python: 3.3
+  # Install drupal components
+  - cd drupal
+  - ./build.sh build
+
+after_success:  
+  # Deploy this site using Travis CI ssh key
+  # Trust the hostkey of the machine where this will be deployed
+  # Then rsync contents of current folder and symlink them to current build
+  - if [[ $TRAVIS_BRANCH =~ (develop|master|production) ]]; then
+        DEPLOY_PATH=${DEPLOY_BASE_PATH}/releases/${DEPLOY_VERSION};
+        DEPLOY_CURRENT=${DEPLOY_BASE_PATH}/current;
+        set -x;
+        ssh-keyscan -H $DEPLOY_HOST >> ~/.ssh/known_hosts;
+        rsync -az --rsync-path="mkdir -p $DEPLOY_PATH && rsync" $DEPLOY_SRC/ ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}/;
+        ssh ${DEPLOY_USER}@${DEPLOY_HOST} "cd ${DEPLOY_PATH} && ./build.sh update";
+        ssh ${DEPLOY_USER}@${DEPLOY_HOST} "ln -sfn ${DEPLOY_PATH} ${DEPLOY_CURRENT}";
+        set +x;
+    fi
+
+# Disable email notifications
 notifications:
   email: false
-  slack:
-    on_success: never
-    on_failure: always
-    secure: Fv6McQHQdFOxeV0gjyfpPjN/80Ej4BPHdSSAutvQmR+RViK9gOMI3exmnMoOvp+BBbEJ47YhPqP2fCvlvstXyCMn/e5x7UswBvcpu8UR39f17cKw8jlCHDXAkUGuImasVvh2cPME6wy8QTOVj/7EwDd36VyChHyZA2BjnVF4Cxf3hOHlBKQ+juoLkge3etjCYubhCfCMRmm5tTYo9nR0OVVAad4wlqeyBkLhXfdXt4j3Fq8571OPCuHTciSOQASxAdGPD6FK+8MuKvo3XkUfmeuHNY/tapYoqyzfvy5hwTwAypcBzQX5wDZD7j3e9HScj+TAxLSbIgk9YC7/nqDmcHsR7H8+6HEJuxpaLmMUYI51VNXx+RtCcTrxHbxfC0G17C2I37ldHaJQbFW7cqDYZ2ZHbGQ4ovCqeKcbirRoIib3wy20lpDZKBXP+gcbBLh+n966w4j14G0h0mPBUxW0Ys19Sx+99rizciXn7xmILaO8k+sj55xui6AsSjqihlE1shEEruT0ijhGkxLf3RbDd8M58lnsrnlrxDfwYY4EPZoyPu1oWprgrIumz6EVr38gygFsPNPI95zlsXLMqzO4Od4+xUUB4vaV49Rv5c7rSRgNGfCXYBI79LR78rWjWPZYkbjzb8Piz63v202i1YkkADMQk87yDk/LQWM9Aa9IM6Y=
