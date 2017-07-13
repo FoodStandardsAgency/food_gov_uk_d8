@@ -37,8 +37,10 @@
     
     # Additional envs
     php_env_vars:
-       - key: "WKV_SITE_ENV"
-         value: "{{ wkv_site_env }}"
+      - key: "WKV_SITE_ENV"
+        value: "{{ wkv_site_env }}"
+      - key: "DRUPAL_HASH_SALT_STAGE"
+        value: "{{ drupal_hash_salt }}"
      
     php_env_vars_include_db: True
 

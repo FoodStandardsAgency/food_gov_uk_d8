@@ -60,11 +60,10 @@ after_success:
         set -ex;
         ssh-keyscan -H $DEPLOY_HOST >> ~/.ssh/known_hosts;
         rsync -az --rsync-path="mkdir -p $DEPLOY_PATH && rsync" $DEPLOY_SRC/ ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}/;
-        ssh ${DEPLOY_USER}@${DEPLOY_HOST} "cd ${DEPLOY_PATH} && WKV_SITE_ENV=${DEPLOY_SITE_ENV} ./build.sh update";
+        ssh ${DEPLOY_USER}@${DEPLOY_HOST} "cd ${DEPLOY_PATH} && ./build.sh update ${DEPLOY_SITE_ENV}";
+        ssh ${DEPLOY_USER}@${DEPLOY_HOST} "ln -sfn ${DEPLOY_PATH} ${DEPLOY_CURRENT}";
         set +ex;
     fi
-    # Test this first
-    # ssh ${DEPLOY_USER}@${DEPLOY_HOST} "ln -sfn ${DEPLOY_PATH} ${DEPLOY_CURRENT}";
 
 # Disable email notifications
 notifications:
