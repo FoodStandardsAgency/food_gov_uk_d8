@@ -3,3 +3,4 @@ env:
     master:
       DEPLOY_HOST: 83.136.254.252
       DEPLOY_BASE_PATH: /var/www/fsa
+      DEPLOY_SITE_ENV: stage

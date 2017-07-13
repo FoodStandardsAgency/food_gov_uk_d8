@@ -13,7 +13,8 @@ default:
   # In development environments we usually want to use symlinks, note the settings.php linking
   link:
     - files: web/sites/default/files
-    - conf/settings.local.php: web/sites/default/settings.local.php
+    - conf/settings.development.php: web/sites/default/settings.local.php
+    - conf/settings.global.php: web/sites/default/settings.global.php
 
   local_commands:
     new:
@@ -66,6 +67,8 @@ test:
 
   # Test environment only symlinks files
   link:
+    - conf/settings.stage.php: web/sites/default/settings.local.php
+    - conf/settings.global.php: web/sites/default/settings.global.php
     - /var/www/fsa/files: web/sites/default/files
 
 
@@ -110,6 +113,8 @@ production:
 
   # Prod environment only symlinks files
   link:
+    - conf/settings.production.php: web/sites/default/settings.local.php
+    - conf/settings.global.php: web/sites/default/settings.global.php
     - /var/www/fsa/files: web/sites/default/files
 
   local_commands:

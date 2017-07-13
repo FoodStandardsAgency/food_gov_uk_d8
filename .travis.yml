@@ -52,13 +52,15 @@ after_success:
   # Deploy this site using Travis CI ssh key
   # Trust the hostkey of the machine where this will be deployed
   # Then rsync contents of current folder and symlink them to current build
+  - DEPLOY_PATH=${DEPLOY_BASE_PATH}/releases/${DEPLOY_VERSION};
+  
+  - DEPLOY_CURRENT=${DEPLOY_BASE_PATH}/current;
+
   - if [[ $TRAVIS_BRANCH =~ (develop|master|production) ]]; then
-        DEPLOY_PATH=${DEPLOY_BASE_PATH}/releases/${DEPLOY_VERSION};
-        DEPLOY_CURRENT=${DEPLOY_BASE_PATH}/current;
         set -x;
         ssh-keyscan -H $DEPLOY_HOST >> ~/.ssh/known_hosts;
         rsync -az --rsync-path="mkdir -p $DEPLOY_PATH && rsync" $DEPLOY_SRC/ ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}/;
-        ssh ${DEPLOY_USER}@${DEPLOY_HOST} "cd ${DEPLOY_PATH} && ./build.sh update";
+        ssh ${DEPLOY_USER}@${DEPLOY_HOST} "cd ${DEPLOY_PATH} && WKV_SITE_ENV=${DEPLOY_SITE_ENV} ./build.sh update";
         ssh ${DEPLOY_USER}@${DEPLOY_HOST} "ln -sfn ${DEPLOY_PATH} ${DEPLOY_CURRENT}";
         set +x;
     fi

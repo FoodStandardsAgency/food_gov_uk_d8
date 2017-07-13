@@ -755,6 +755,7 @@ def main(argv):
 
 # Entry point.
 if __name__ == "__main__":
+    # Continue to main program
     main(sys.argv[1:])
 
 # vi:ft=python
