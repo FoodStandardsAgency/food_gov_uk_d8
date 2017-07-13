@@ -61,9 +61,9 @@ ci:
       - shell: chmod -R a+w web
 
 # Test environment:
-test:
+stage:
 
-  aliases: stage
+  aliases: test
 
   # Test environment only symlinks files
   link:
