@@ -271,6 +271,7 @@ select {
   appearance: none;
   border: none;
   padding-right: 3em;
+  background-color: var(--color-white);
 }
 
 textarea {
@@ -289,7 +290,7 @@ input[type="checkbox"] {
   overflow: hidden;
   clip: rect(0 0 0 0);
   height: 1px;
-  width: 1px;
+  width: 1px !important;
   margin: -1px;
   padding: 0;
   border: 0;
@@ -304,7 +305,10 @@ input[type="radio"] + label,
 input[type="checkbox"] + label {
   position: relative;
   padding-left: calc(1em + 1em);
+  @mixin responsive-declaration padding-left, 35px, 30px;
   padding-top: 0.3em;
+  @mixin responsive-declaration padding-top, 0.7em, 0.3em;
+  @mixin responsive-declaration padding-bottom, 0.5em, 0em;
 }
 
 input[type="radio"] + label:before,
@@ -313,8 +317,10 @@ input[type="checkbox"] + label:before,
 input[type="checkbox"] + label:after  {
   content: "";
   display: block;
-  width: 1.1em;
-  height: 1.1em;
+  width: 15px;
+  height: 15px;
+  @mixin responsive-declaration width, 20px, 15px;
+  @mixin responsive-declaration height, 20px, 15px;
   position: absolute;
   left: 0;
   top: 50%;
