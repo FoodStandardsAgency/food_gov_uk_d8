@@ -61,12 +61,17 @@
 }
 
 .ratings__search .ratings__advanced-search-button {
-  padding: 1em;
+  padding: 1em 0;
+  margin-bottom: 1em;
   box-shadow: 0 -0.1em 0 0 var(--color-lighter-gray);
 
   @media (--breakpoint-md) {
     box-shadow: none;
   }
+}
+
+.ratings__search .ratings__advanced-search-button-icon {
+  margin-left: 1em !important;
 }
 
 .ratings__search.is-sticky {
