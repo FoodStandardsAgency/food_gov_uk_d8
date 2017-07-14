@@ -16,6 +16,19 @@ require('./css/style.css');
 // Polyfill svgs
 svg4everybody({ polyfill: true });
 
+// Temperary fix
+const searchLogo = document.querySelector('.ratings.ratings--frontpage .ratings__logo');
+
+if (searchLogo != null) {
+  const searchHeading = document.querySelector('#fsa-ratings-search h2');
+  searchHeading.classList.add('small');
+  const searchLead = document.querySelector('#fsa-ratings-search p');
+  searchLead.classList.add('lead');
+
+  searchLogo.parentNode.insertBefore(searchLead, searchLogo.nextSibling);
+  searchLogo.parentNode.insertBefore(searchHeading, searchLogo.nextSibling);
+}
+
 // Responsive tables
 const tables = [...document.querySelectorAll('.js-table')];
 if (tables != null) {
@@ -35,18 +48,6 @@ if (toggleButtons != null) {
   toggleContent(toggleButtons, breakpoints);
 }
 
-// Temperary fix
-const searchLogo = document.querySelector('.ratings.ratings--frontpage .ratings__logo');
-
-if (searchLogo != null) {
-  const searchHeading = document.querySelector('#fsa-ratings-search h2');
-  searchHeading.classList.add('small');
-  const searchLead = document.querySelector('#fsa-ratings-search p');
-  searchLead.classList.add('lead');
-
-  searchLogo.parentNode.insertBefore(searchLead, searchLogo.nextSibling);
-  searchLogo.parentNode.insertBefore(searchHeading, searchLogo.nextSibling);
-}
 // Add class if touch device
 document.addEventListener('touchstart', function addtouchclass(e) {
   document.documentElement.classList.add('is-touch');

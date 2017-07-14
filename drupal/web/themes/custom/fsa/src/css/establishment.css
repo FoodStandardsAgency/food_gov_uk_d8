@@ -50,12 +50,14 @@
 .establishment__table {
   clear: both;
   margin-bottom: 1em;
+  @mixin responsive-declaration font-size, 0.8em, 1em;
 }
 
 .establishment__score {
   padding: 0.5em;
   color: var(--color-black);
   background-color: var(--color-lighter-gray);
+  flex: 0 0 auto;
 }
 
 .establishment__table-button.is-open {
