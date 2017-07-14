@@ -53,6 +53,10 @@
     margin-bottom: 0.5em;
   }
 
+  & input[type="checkbox"] + label:before {
+    background-color: var(--color-white);
+  }
+
   & input:not([type="submit"]),
   & select {
     width: 100%;

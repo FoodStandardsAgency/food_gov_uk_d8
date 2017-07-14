@@ -291,7 +291,8 @@ input[type="checkbox"]:focus + label {
 input[type="radio"] + label,
 input[type="checkbox"] + label {
   position: relative;
-  padding-left: calc(1em + 0.5em);
+  padding-left: calc(1em + 1em);
+  padding-top: 0.3em;
 }
 
 input[type="radio"] + label:before,
@@ -300,8 +301,8 @@ input[type="checkbox"] + label:before,
 input[type="checkbox"] + label:after  {
   content: "";
   display: block;
-  width: 1em;
-  height: 1em;
+  width: 1.1em;
+  height: 1.1em;
   position: absolute;
   left: 0;
   top: 50%;
