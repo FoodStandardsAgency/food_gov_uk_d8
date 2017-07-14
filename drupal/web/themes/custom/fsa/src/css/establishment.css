@@ -73,4 +73,5 @@
 
 .establishment__authority-content {
   display: inline-block;
+  word-break: break-word;
 }
