@@ -1,7 +1,10 @@
 .table {
   display: flex;
   flex-flow: column nowrap;
-  @mixin responsive-declaration margin-bottom, 1em, 2em;
+
+  &:not(:last-child) {
+    @mixin responsive-declaration margin-bottom, 1em, 2em;
+  }
 }
 
 .table.table--with-borders .table__item {

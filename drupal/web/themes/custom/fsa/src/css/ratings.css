@@ -172,6 +172,7 @@
   z-index: var(--z-bottom);
   background-color: var(--color-white);
   flex: 1 1 100%;
+  min-height: 100vh;
 
   @media (--breakpoint-md) {
     margin-left: 20em;
