@@ -226,6 +226,17 @@ ol, ul {
   }
 }
 
+fieldset {
+  margin: 0;
+  margin-bottom: 1em;
+
+  & legend {
+    margin-bottom: 0.5em;
+    display: block;
+    color: var(--primary-color);
+  }
+}
+
 input, textarea, select {
   display: block;
   max-width: 100%;
