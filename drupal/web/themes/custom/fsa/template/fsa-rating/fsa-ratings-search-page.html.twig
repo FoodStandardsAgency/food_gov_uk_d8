@@ -8,7 +8,7 @@
 {% endfor %}
 {% set randomID = randomID|join %}
 
-<div class="ratings {% if ratings_info_content %}ratings--frontpage{% endif %} js-sticky-container">
+<div class="ratings {% if ratings_info_content %}ratings--frontpage{% else %}js-sticky-container{% endif %}">
 
   {% if ratings_info_content %}
   {% else %}
@@ -23,7 +23,7 @@
   <div class="ratings__search {% if ratings_info_content %}ratings__search--frontpage{% else %} js-sticky-element toggle-content toggle-content--only-mobile js-toggle-content js-toggle-content-only-mobile" id="collapsible-{{ randomID }}" aria-hidden="true{% endif %}">
     <div class="container container--search">
       <div class="ratings__logo logo svg">
-        <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop"></use></svg>
+        <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop-white"></use></svg>
       </div>
 
       {{ form }}
