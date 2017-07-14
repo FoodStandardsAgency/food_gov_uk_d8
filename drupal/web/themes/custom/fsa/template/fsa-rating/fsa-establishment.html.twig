@@ -45,15 +45,9 @@
 
   <div class="ratings__search js-sticky-element toggle-content toggle-content--only-mobile js-toggle-content js-toggle-content-only-mobile" id="collapsible-{{ randomID }}" aria-hidden="true">
     <div class="container container--search">
-      <div class="logo svg">
+      <div class="ratings__logo logo svg">
         <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop"></use></svg>
       </div>
-      <h2 class="ratings__heading">{{ form_header.title }}
-        {% if form_header.subtitle %}<br />{{ form_header.subtitle }}{% endif %}</h2>
-
-      {% if form_header.copy %}
-        <p class="lead">{{ form_header.copy }}</p>
-      {% endif %}
 
       {{ search_form }}
     </div>

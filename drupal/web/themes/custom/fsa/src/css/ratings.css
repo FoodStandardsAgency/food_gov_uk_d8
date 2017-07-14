@@ -110,6 +110,10 @@
   }
 }
 
+.ratings__logo {
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
+}
+
 .ratings__header {
   display: flex;
   flex-flow: column nowrap;

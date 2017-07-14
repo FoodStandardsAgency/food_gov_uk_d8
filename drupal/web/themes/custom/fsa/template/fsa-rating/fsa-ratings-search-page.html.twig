@@ -8,9 +8,9 @@
 {% endfor %}
 {% set randomID = randomID|join %}
 
-<div class="ratings {% if form_header.copy %}ratings--frontpage{% endif %} js-sticky-container">
+<div class="ratings {% if ratings_info_content %}ratings--frontpage{% endif %} js-sticky-container">
 
-  {% if form_header.copy %}
+  {% if ratings_info_content %}
   {% else %}
   <button class="ratings__search-expand-button toggle-button js-toggle-button" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
     <div class="toggle-button__item">{% trans %}Show search options{% endtrans %}</div>
@@ -20,27 +20,18 @@
   </button>
   {% endif %}
 
-  <div class="ratings__search {% if form_header.copy %}ratings__search--frontpage{% else %} js-sticky-element toggle-content toggle-content--only-mobile js-toggle-content js-toggle-content-only-mobile" id="collapsible-{{ randomID }}" aria-hidden="true{% endif %}">
+  <div class="ratings__search {% if ratings_info_content %}ratings__search--frontpage{% else %} js-sticky-element toggle-content toggle-content--only-mobile js-toggle-content js-toggle-content-only-mobile" id="collapsible-{{ randomID }}" aria-hidden="true{% endif %}">
     <div class="container container--search">
-      <div class="logo svg">
+      <div class="ratings__logo logo svg">
         <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop"></use></svg>
       </div>
-
-      {% if form_header.copy %}
-        <h2 class="ratings__heading">{{ form_header.title }}
-        {% if form_header.subtitle %}<br />{{ form_header.subtitle }}{% endif %}</h2>
-        <p class="lead">{{ form_header.copy }}</p>
-      {% else %}
-        <h3 class="ratings__heading">{{ form_header.title }}
-          {% if form_header.subtitle %}<br />{{ form_header.subtitle }}{% endif %}</h3>
-      {% endif %}
 
       {{ form }}
     </div>
   </div>
 
-  <div class="ratings__content {% if form_header.copy %}ratings__content--frontpage{% endif %}">
-    {% if form_header.copy %}
+  <div class="ratings__content {% if ratings_info_content %}ratings__content--frontpage{% endif %}">
+    {% if ratings_info_content %}
       {{ ratings_info_content }}
     {% else %}
     <div class="ratings__listing">
