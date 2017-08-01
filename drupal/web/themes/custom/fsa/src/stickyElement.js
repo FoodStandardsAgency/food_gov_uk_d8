@@ -63,7 +63,8 @@ function stickyElement(containers, stickyElements) {
 
     // Loop through every sections inside current content area
     for (let y = 0; y < allSections.length; y++) {
-      stickyElementArray.push(new Section(allSections[y]));
+      let stickyScrollableElement = allSections[y];
+      stickyElementArray.push(new Section(stickyScrollableElement));
     }
 
     containerArray.push(new Area(containers[i]));
@@ -93,6 +94,8 @@ function stickyElement(containers, stickyElements) {
       }
     });
   }
+
+
 
   // Add scroll listener
   window.addEventListener("scroll", toggleStickyElement);
