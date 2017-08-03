@@ -40,6 +40,8 @@
     top: 0;
     left: 0;
     width: 20em;
+    height: 100vh;
+    overflow: auto;
   }
 
   @media (--breakpoint-lg) {
@@ -68,6 +70,7 @@
   padding: 1em 0;
   margin-bottom: 1em;
   box-shadow: 0 -0.1em 0 0 var(--color-lighter-gray);
+  text-transform: uppercase;
 
   @media (--breakpoint-md) {
     box-shadow: none;
@@ -93,6 +96,7 @@
 }
 
 .ratings__search.ratings__search--frontpage {
+  height: auto;
   background-color: var(--primary-color);
   @mixin responsive-declaration padding-right, 1em, 3em;
   @mixin responsive-declaration padding-left, 1em, 3em;
