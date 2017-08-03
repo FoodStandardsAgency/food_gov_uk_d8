@@ -96,6 +96,7 @@
 }
 
 .ratings__search.ratings__search--frontpage {
+  height: auto;
   background-color: var(--primary-color);
   @mixin responsive-declaration padding-right, 1em, 3em;
   @mixin responsive-declaration padding-left, 1em, 3em;
