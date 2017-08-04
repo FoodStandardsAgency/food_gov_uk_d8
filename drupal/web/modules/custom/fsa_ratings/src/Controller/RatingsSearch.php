@@ -74,9 +74,12 @@ class RatingsSearch extends ControllerBase {
       $hits = $results['total'];
 
       foreach ($results['results'] as $result) {
+        $rating_value = $result['ratingvalue'];
+        $result['ratingvalue'] = [
+          '#markup' => '<p class="ratingvalue"><span class="description">'. $this->t('FHRS Rating score:') .'</span> <span class="numeric">'. $rating_value .'</span></p>',
+        ];
         // Use ratingvalue to get the badge.
-        $rating = $result['ratingvalue'];
-        $result['ratingvalue'] = RatingsHelper::ratingBadgeImageDisplay($rating);
+        $result['ratingimage'] = RatingsHelper::ratingBadgeImageDisplay($rating_value);
 
         // Add the link to the entity view page (with search query params to
         // populate the search form).
