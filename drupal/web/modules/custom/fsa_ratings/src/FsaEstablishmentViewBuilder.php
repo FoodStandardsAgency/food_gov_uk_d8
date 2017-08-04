@@ -36,8 +36,18 @@ class FsaEstablishmentViewBuilder extends EntityViewBuilder {
     }
     $build['#content'] = $content;
 
+    // Rating value in textual format
+    $rating_value = $entity->get('field_ratingvalue')->getString();
+    if (!empty($rating_value)) {
+      $build['#rating_value'] = [
+        '#markup' => '<p class="ratingvalue"><span class="description">'. $this->t('FHRS Rating score:') .'</span> <span class="numeric">'. $rating_value .'</span></p>',
+      ];
+    }
+
     // Build the badge for rating.
-    $build['#rating_badge'] = RatingsHelper::ratingBadgeImageDisplay($entity->get('field_ratingvalue')->getString());
+    if (!empty($build['#rating_value'])) {
+      $build['#rating_badge'] = RatingsHelper::ratingBadgeImageDisplay($rating_value);
+    }
 
     // "What do the ratings mean" link.
     $url = Url::fromRoute('fsa_ratings.ratings_meanings');
