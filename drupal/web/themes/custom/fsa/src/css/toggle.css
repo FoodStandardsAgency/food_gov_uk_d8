@@ -21,8 +21,8 @@
 .toggle-button__item.toggle-button__item--icon {
   position: relative;
   margin-left: auto !important;
-  width: 0.6em;
-  height: 0.6em;
+  width: 12px;
+  height: 12px;
   flex: 0 0 auto;
 
   & svg path {
@@ -42,6 +42,11 @@
 
 :--not-js .toggle-button__item.toggle-button__item--icon {
   display: none;
+}
+
+.toggle-button__item.toggle-button__item--width-2 {
+  width: 2em;
+  flex: 0 0 auto;
 }
 
 .toggle-button__item.toggle-button__item--width-3 {
