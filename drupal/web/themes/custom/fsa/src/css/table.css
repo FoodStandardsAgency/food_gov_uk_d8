@@ -138,7 +138,11 @@
 
 .table__item.table__item--large {
   @media (--breakpoint-md) {
-    @mixin responsive-declaration flex-grow, 1.2, 2;
+    flex-grow: 1;
+  }
+
+  @media (--breakpoint-lg) {
+    flex-grow: 2;
   }
 }
 
