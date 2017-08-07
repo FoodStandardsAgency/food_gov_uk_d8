@@ -60,7 +60,7 @@ class RatingsSearch extends ControllerBase {
     $filter_param_names = ['local_authority', 'business_type', 'rating_value'];
     foreach ($filter_param_names as $opt) {
       $value = \Drupal::request()->query->get($opt);
-      if (!empty($value)) {
+      if (isset($value)) {
         $filters[$opt] = $value;
       }
     }

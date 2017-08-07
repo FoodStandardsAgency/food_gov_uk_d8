@@ -43,6 +43,13 @@ class FsaRatingsSearchForm extends FormBase {
     $filters = [];
     $available_filters = $search_service->categories();
 
+    // Remove entries with empty key
+    foreach ($available_filters as $key => $value) {
+      if (!$available_filters[$key][0]['key']) {
+        array_shift($available_filters[$key]);
+      }
+    }
+
     // User provided search input.
     $keywords = \Drupal::request()->query->get('q');
 
@@ -175,6 +182,12 @@ class FsaRatingsSearchForm extends FormBase {
           $selected[] = $name;
         }
       }
+
+      // If rating 0 set, make sure it gets selected.
+      if (is_string($values[0])) {
+        $selected[] = 0;
+      }
+
       if (!empty($selected)) {
         $query['rating_value'] = implode(',', $selected);
       }
