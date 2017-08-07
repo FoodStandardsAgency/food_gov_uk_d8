@@ -81,6 +81,9 @@ class RatingsSearch extends ControllerBase {
         // Use ratingvalue to get the badge.
         $result['ratingimage'] = RatingsHelper::ratingBadgeImageDisplay($rating_value);
 
+        // Format displayed date(s).
+        $result['ratingdate'] = \Drupal::service('date.formatter')->format(strtotime($result['ratingdate']), 'short');
+
         // Add the link to the entity view page (with search query params to
         // populate the search form).
         $url = Url::fromRoute('entity.fsa_establishment.canonical', ['fsa_establishment' => $result['id']]);
