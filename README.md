@@ -1,6 +1,12 @@
 # Food Standards Agency
+[![Build Status](https://travis-ci.com/wunderio/client-UK-FSA-alpha.svg?token=oxuHeqz2nYPYhP3SBFxr&branch=master)](https://travis-ci.com/wunderio/client-UK-FSA-alpha)
 
 Food Standards Agency (FSA) Drupal 8 site code repository.
+
+### Continuous integration
+This project is using Travis CI to deploy the code.
+
+See more here: [https://travis-ci.com/wunderio/client-UK-FSA-alpha](https://travis-ci.com/wunderio/client-UK-FSA-alpha.svg?token=oxuHeqz2nYPYhP3SBFxr&branch=master)
 
 ### Getting started
 
