@@ -82,14 +82,24 @@ class RatingsHelper extends ControllerBase {
         break;
     }
 
+    // Non-numeric FHRS badges.
     $literals = ['exempt', 'pending'];
+
+    // FHIS badges
+    $fhis_badges = ['AwaitingInspection', 'AwaitingPublication', 'Improvement Required', 'Pass', 'Pass and Eat Safe'];
+
     if (is_numeric($rating) || in_array(strtolower($rating), $literals)) {
-      // Only numeric, exempt & pending badges are available locally.
+      // FHRS numeric and few literal ratings as badges.
       $image_path = '/' . drupal_get_path('module', 'fsa_ratings') . '/images/badges/score-' . $rating . '-' . $embed_type . '-' . $language . '.png';
     }
+    else if (in_array($rating, $fhis_badges)) {
+      // FHIS badges as defined in $fhis_badges variable.
+      // Convert to proper image filenames, regexp "CamelCase" -> "camel_case".
+      $imgname = strtolower(str_replace(' ', '_', preg_replace('/(?<!^)[A-Z]/', '_$0', $rating)));
+      $image_path = '/' . drupal_get_path('module', 'fsa_ratings') . '/images/badges/fhis_' . $imgname . '.png';
+    }
     else {
-      // Fall back to fetching the FHIS badges from ratings.food.gov.uk.
-      // @todo: Figure out what badge to display for FHIS businesses.
+      // Fall back to fetching arbitrary badges from ratings.food.gov.uk.
       $filter = [
         ' ' => '_',
         '/' => '_',
