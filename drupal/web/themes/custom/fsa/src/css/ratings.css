@@ -71,6 +71,11 @@
   }
 }
 
+.ratings__search:not(.ratings__search--frontpage) h2 {
+  font-size: 1.6em;
+  color: inherit;
+}
+
 .ratings__search .ratings__advanced-search-button {
   padding: 1em 0;
   margin-bottom: 1em;
