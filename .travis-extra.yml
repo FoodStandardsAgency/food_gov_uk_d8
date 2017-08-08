@@ -7,4 +7,4 @@ env:
     develop:
       DEPLOY_HOST: 83.136.248.137
       DEPLOY_BASE_PATH: /var/www/fsa
-      DEPLOY_SITE_ENV: develop
+      DEPLOY_SITE_ENV: development

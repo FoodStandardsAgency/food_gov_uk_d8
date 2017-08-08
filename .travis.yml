@@ -59,7 +59,7 @@ after_success:
   - if [[ $TRAVIS_BRANCH =~ (develop|master|production) ]]; then
         set -ex;
         ssh-keyscan -H $DEPLOY_HOST >> ~/.ssh/known_hosts;
-        rsync -az --rsync-path="mkdir -p $DEPLOY_PATH && rsync" $DEPLOY_SRC/ ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}/;
+        rsync -az --rsync-path="mkdir -p $DEPLOY_PATH && mkdir -p ${DEPLOY_PATH}/files-private && rsync" $DEPLOY_SRC/ ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}/;
         ssh ${DEPLOY_USER}@${DEPLOY_HOST} "cd ${DEPLOY_PATH} && ./build.sh update ${DEPLOY_SITE_ENV}";
         ssh ${DEPLOY_USER}@${DEPLOY_HOST} "ln -sfn ${DEPLOY_PATH} ${DEPLOY_CURRENT}";
         set +ex;
