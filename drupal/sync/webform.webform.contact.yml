@@ -13,9 +13,9 @@ uid: null
 template: false
 id: contact
 title: 'FSA demo form'
-description: "Demo form for theming and generic sandboxing of webform for FSA purposes.<br />\r\n<br />\r\nSubmissions are not saved to the db."
+description: 'Demo form for theming and generic sandboxing of webform for FSA purposes.'
 category: ''
-elements: "page_1:\n  '#type': webform_wizard_page\n  '#title': 'First page'\n  name:\n    '#title': Name\n    '#type': textfield\n    '#required': true\n    '#default_value': '[webform-authenticated-user:display-name]'\n  email:\n    '#title': Email\n    '#type': email\n    '#required': true\n    '#default_value': '[webform-authenticated-user:mail]'\n  textfield:\n    '#title': Textfield\n    '#type': textfield\n    '#test': 'Testing textfield for [site:name]'\n  message:\n    '#title': Message\n    '#type': textarea\n    '#test': 'Please ignore this email.'\npage_2:\n  '#type': webform_wizard_page\n  '#title': 'Second page'\n  address:\n    '#type': webform_address\n    '#title': 'Address (composite field)'\npage_3:\n  '#type': webform_wizard_page\n  '#title': 'Third page'\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__label': 'Send form'"
+elements: "page_1:\n  '#type': webform_wizard_page\n  '#title': 'First page'\n  name:\n    '#type': textfield\n    '#title': Name\n    '#placeholder': 'Placeholder text'\n    '#description': 'This is a descriptive text for the field.'\n    '#default_value': '[webform-authenticated-user:display-name]'\n    '#required': true\n  email:\n    '#type': email\n    '#title': Email\n    '#description': 'This is a field with email validation.'\n    '#default_value': '[webform-authenticated-user:mail]'\n    '#required': true\n  textfield:\n    '#title': Textfield\n    '#type': textfield\n    '#test': 'Testing textfield for [site:name]'\n  message:\n    '#title': Message\n    '#type': textarea\n    '#test': 'Please ignore this email.'\n  select:\n    '#type': select\n    '#title': Select\n    '#description': 'Select a country, UK should be pre-selected for you.'\n    '#default_value': 'United Kingdom'\n    '#options': country_names\n  checkboxes:\n    '#type': checkboxes\n    '#title': Checkboxes\n    '#options':\n      value_1: 'Value 1'\n      value_2: 'Value 2'\n      value_3: 'Value 3'\n  radios:\n    '#type': radios\n    '#title': Radios\n    '#options': yes_no\n  image:\n    '#type': webform_image_file\n    '#title': Image\npage_2:\n  '#type': webform_wizard_page\n  '#title': 'Second page'\n  address:\n    '#type': webform_address\n    '#title': 'Address (composite field)'\npage_3:\n  '#type': webform_wizard_page\n  '#title': 'Third page'\n  last_textfield:\n    '#title': 'This is the last textfield'\n    '#type': textfield\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__label': 'Send form'\n"
 css: ''
 javascript: ''
 settings:
@@ -79,7 +79,7 @@ settings:
   purge_days: null
   entity_limit_total: null
   entity_limit_user: null
-  results_disabled: true
+  results_disabled: false
   results_disabled_ignore: false
   token_update: false
 access:
