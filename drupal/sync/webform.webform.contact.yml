@@ -12,17 +12,17 @@ close: null
 uid: null
 template: false
 id: contact
-title: Contact
-description: 'Basic email contact webform.'
+title: 'FSA demo form'
+description: "Demo form for theming and generic sandboxing of webform for FSA purposes.<br />\r\n<br />\r\nSubmissions are not saved to the db."
 category: ''
-elements: "name:\n  '#title': 'Your Name'\n  '#type': textfield\n  '#required': true\n  '#default_value': '[webform-authenticated-user:display-name]'\nemail:\n  '#title': 'Your Email'\n  '#type': email\n  '#required': true\n  '#default_value': '[webform-authenticated-user:mail]'\nsubject:\n  '#title': Subject\n  '#type': textfield\n  '#required': true\n  '#test': 'Testing contact webform from [site:name]'\nmessage:\n  '#title': Message\n  '#type': textarea\n  '#required': true\n  '#test': 'Please ignore this email.'\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__label': 'Send message'\n"
+elements: "page_1:\n  '#type': webform_wizard_page\n  '#title': 'First page'\n  name:\n    '#title': Name\n    '#type': textfield\n    '#required': true\n    '#default_value': '[webform-authenticated-user:display-name]'\n  email:\n    '#title': Email\n    '#type': email\n    '#required': true\n    '#default_value': '[webform-authenticated-user:mail]'\n  textfield:\n    '#title': Textfield\n    '#type': textfield\n    '#test': 'Testing textfield for [site:name]'\n  message:\n    '#title': Message\n    '#type': textarea\n    '#test': 'Please ignore this email.'\npage_2:\n  '#type': webform_wizard_page\n  '#title': 'Second page'\n  address:\n    '#type': webform_address\n    '#title': 'Address (composite field)'\npage_3:\n  '#type': webform_wizard_page\n  '#title': 'Third page'\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__label': 'Send form'"
 css: ''
 javascript: ''
 settings:
   ajax: false
   page: true
-  page_submit_path: ''
-  page_confirm_path: ''
+  page_submit_path: webform-demo
+  page_confirm_path: webform-demo/confirmation
   form_submit_once: false
   form_exception_message: ''
   form_open_message: ''
@@ -38,7 +38,7 @@ settings:
   form_reset: false
   form_disable_autocomplete: false
   form_novalidate: false
-  form_unsaved: false
+  form_unsaved: true
   form_disable_back: false
   form_autofocus: false
   form_details_toggle: false
@@ -63,9 +63,9 @@ settings:
   draft_auto_save: false
   draft_saved_message: ''
   draft_loaded_message: ''
-  confirmation_type: url_message
+  confirmation_type: inline
   confirmation_title: ''
-  confirmation_message: 'Your message has been sent.'
+  confirmation_message: 'Thank you for you submission!'
   confirmation_url: '<front>'
   confirmation_attributes: {  }
   confirmation_back: true
@@ -79,7 +79,7 @@ settings:
   purge_days: null
   entity_limit_total: null
   entity_limit_user: null
-  results_disabled: false
+  results_disabled: true
   results_disabled_ignore: false
   token_update: false
 access:
