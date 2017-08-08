@@ -51,13 +51,13 @@ settings:
   wizard_start_label: ''
   wizard_complete: true
   wizard_complete_label: ''
-  preview: 0
-  preview_label: ''
-  preview_title: ''
-  preview_message: ''
+  preview: 2
+  preview_label: Review
+  preview_title: Review
+  preview_message: 'Review the data you entered before submitting the form.'
   preview_attributes: {  }
   preview_excluded_elements: {  }
-  preview_exclude_empty: true
+  preview_exclude_empty: false
   draft: none
   draft_multiple: false
   draft_auto_save: false
