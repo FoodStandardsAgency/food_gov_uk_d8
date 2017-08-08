@@ -38,6 +38,10 @@ if (isset($_SERVER['REMOTE_ADDR'])) {
   $settings['reverse_proxy_addresses'] = array($_SERVER['REMOTE_ADDR']);
 }
 
+# Private filesystem
+# @todo: create private file dir for all environments.
+$settings['file_private_path'] = '/var/www/private-files';
+
 if(!empty($_SERVER['SERVER_ADDR'])){
   // This should return last section of IP, such as "198". (dont want/need to expose more info).
   //drupal_add_http_header('X-Webserver', end(explode('.', $_SERVER['SERVER_ADDR'])));
