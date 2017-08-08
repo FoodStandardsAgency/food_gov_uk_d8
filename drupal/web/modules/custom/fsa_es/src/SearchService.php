@@ -89,7 +89,7 @@ class SearchService {
       $ids = explode(',', $filters['local_authority']);
       $query_must_filters[] = ['terms' => ['localauthoritycode.label.keyword' => $ids]];
     }
-    if (!empty($filters['rating_value'])) {
+    if (isset($filters['rating_value'])) {
       $ids = explode(',', $filters['rating_value']);
       $query_must_filters[] = ['terms' => ['ratingvalue.keyword' => $ids]];
     }

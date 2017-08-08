@@ -45,7 +45,7 @@ class FsaEstablishmentViewBuilder extends EntityViewBuilder {
     }
 
     // Build the badge for rating.
-    if (!empty($build['#rating_value'])) {
+    if ($build['#rating_value'] !== 0) {
       $build['#rating_badge'] = RatingsHelper::ratingBadgeImageDisplay($rating_value);
     }
 
