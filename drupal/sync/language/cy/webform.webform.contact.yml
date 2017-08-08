@@ -1,0 +1,5 @@
+title: 'Ffurflen demo''r ASB'
+description: 'Demo ffurflen ar gyfer thema a thaflu tywodi generig ar y we ar gyfer dibenion yr ASB.'
+elements: "page_1:\n  '#title': 'Tudalen gyntaf'\nname:\n  '#placeholder': 'Testun deiliad y lle'\n  '#description': 'Mae hwn yn destun disgrifiadol ar gyfer y maes.'\nemail:\n  '#title': E-bost\n  '#description': 'Mae hwn yn faes gyda dilysiad e-bost.'\ntelephone:\n  '#title': Ffôn\ndate:\n  '#title': Dyddiad\ntextfield:\n  '#test': 'Profi maes testun ar gyfer [site:name]'\nmessage:\n  '#test': 'Anwybyddwch yr e-bost hwn.'\nselect:\n  '#description': 'Dewiswch wlad, dylai''r DU gael ei ddewis ymlaen llaw ar eich cyfer chi.'\ncheckboxes:\n  '#options':\n    value_1: 'Gwerth 1'\n    value_2: 'Gwerth 2'\n    value_3: 'Gwerth 3'\npage_2:\n  '#title': 'Ail dudalen'\n"
+settings:
+  confirmation_message: 'Diolch am eich cyflwyniad!'
