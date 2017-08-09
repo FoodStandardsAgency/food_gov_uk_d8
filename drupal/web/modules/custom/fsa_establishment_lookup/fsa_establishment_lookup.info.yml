@@ -1,0 +1,7 @@
+name: FSA Establishment lookup
+type: module
+description: Extend specified input field(s) to search for places from Google Maps and connect the result to Establishment lookup.
+core: 8.x
+package: FSA
+dependencies:
+  - webform

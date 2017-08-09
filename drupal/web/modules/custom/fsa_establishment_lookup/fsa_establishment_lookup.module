@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * @file
+ * Contains fsa_establishment_lookup.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function fsa_establishment_lookup_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the fsa_establishment_lookup module.
+    case 'help.page.fsa_establishment_lookup':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('fsa_establishment_lookup adds Google Places search to look for businesses.') . '</p>';
+
+      return $output;
+
+    default:
+  }
+
+  return false;
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function fsa_establishment_lookup_page_attachments(array &$attachments) {
+  // Add autocomplete libraries.
+  $attachments['#attached']['library'][] = 'fsa_establishment_lookup/googleplaces';
+}
+
+/**
+ * Implements hook_preprocess_input().
+ */
+function fsa_establishment_lookup_preprocess_input(&$variables) {
+
+  // Don't bother modifying the field on admin routes.
+  if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
+    $field = $variables['element'];
+    if (isset($field['#webform_key']) && $field['#webform_key'] == 'textfield') {
+
+    }
+  }
+}
