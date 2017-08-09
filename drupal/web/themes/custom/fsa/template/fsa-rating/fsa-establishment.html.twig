@@ -74,7 +74,6 @@
         <div class="establishment__content">
           {% if content.field_address %}
             <p>
-              <strong>{% trans %}Address{% endtrans %}</strong><br />
               {{ content.field_address }}<br />
               {{ content.field_postcode }}
             </p>
@@ -82,14 +81,12 @@
 
           {% if content.field_businesstype %}
             <p>
-              <strong>{% trans %}Business type{% endtrans %}</strong><br />
               {{ content.field_businesstype }}
             </p>
           {% endif %}
 
           {% if content.field_ratingdate %}
             <p>
-              <strong>{% trans %}Inspection date{% endtrans %}</strong><br />
               {{ content.field_ratingdate }}
             </p>
           {% endif %}
