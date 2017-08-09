@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "afc70d105ec97a8011ba690019a6c8ee",
+    "content-hash": "1aa7756670b70fab13c15808a7b3030c",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -1098,7 +1098,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/admin_toolbar-8.x-1.19.zip",
-                "reference": null,
+                "reference": "8.x-1.19",
                 "shasum": "87de41eab3c5cd49d4e1b5b764cb3b9d5ad683a0"
             },
             "require": {
@@ -1158,7 +1158,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/config_installer-8.x-1.4.zip",
-                "reference": null,
+                "reference": "8.x-1.4",
                 "shasum": "5371ced3d688f6c932992066fa0d5f44f7d6e7dd"
             },
             "require": {
@@ -1679,7 +1679,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/ctools-8.x-3.0.zip",
-                "reference": null,
+                "reference": "8.x-3.0",
                 "shasum": "302e869ecd1e59fe55663673999fee2ccac5daa8"
             },
             "require": {
@@ -1808,7 +1808,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/extlink-8.x-1.0.zip",
-                "reference": null,
+                "reference": "8.x-1.0",
                 "shasum": "72591d997e4c4fc2bbc93ca4e1602ada2cf5cbb4"
             },
             "require": {
@@ -1859,7 +1859,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/field_group-8.x-1.0-rc6.zip",
-                "reference": null,
+                "reference": "8.x-1.0-rc6",
                 "shasum": "1ce3c6387e745a04a1099956a5bf39bb50096d44"
             },
             "require": {
@@ -1918,7 +1918,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/geolocation-8.x-1.10.zip",
-                "reference": null,
+                "reference": "8.x-1.10",
                 "shasum": "030acbb1eb4e43766712472295842bf4248079bc"
             },
             "require": {
@@ -1965,7 +1965,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/migrate_plus-8.x-4.0-beta1.zip",
-                "reference": null,
+                "reference": "8.x-4.0-beta1",
                 "shasum": "e64bac006e3ef9ae697b0f2c4b3744af0524e208"
             },
             "require": {
@@ -2025,7 +2025,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/migrate_tools-8.x-4.0-beta1.zip",
-                "reference": null,
+                "reference": "8.x-4.0-beta1",
                 "shasum": "81ef335ea37053c26d4bcb4f5339fd77051e59e0"
             },
             "require": {
@@ -2050,10 +2050,6 @@
                 {
                     "name": "mikeryan",
                     "homepage": "https://www.drupal.org/user/4420"
-                },
-                {
-                    "name": "moshe weitzman",
-                    "homepage": "https://www.drupal.org/user/23"
                 }
             ],
             "description": "Tools to assist in developing and running migrations.",
@@ -2073,7 +2069,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/pathauto-8.x-1.0.zip",
-                "reference": null,
+                "reference": "8.x-1.0",
                 "shasum": "4c82a5689a18421c8c73fcc8be7b333bb21ae02a"
             },
             "require": {
@@ -2130,7 +2126,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/simplei-8.x-1.0.zip",
-                "reference": null,
+                "reference": "8.x-1.0",
                 "shasum": "f8d94a8a28767f32b33749770654c899fb0e556f"
             },
             "require": {
@@ -2177,7 +2173,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/token-8.x-1.0.zip",
-                "reference": null,
+                "reference": "8.x-1.0",
                 "shasum": "d24c7f1ffddbd0fc56bc92bacae1c4ff769a4442"
             },
             "require": {
@@ -2227,6 +2223,83 @@
             "homepage": "https://www.drupal.org/project/token",
             "support": {
                 "source": "http://cgit.drupalcode.org/token"
+            }
+        },
+        {
+            "name": "drupal/webform",
+            "version": "5.0.0-beta16",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/webform",
+                "reference": "8.x-5.0-beta16"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/webform-8.x-5.0-beta16.zip",
+                "reference": null,
+                "shasum": "b19798b8eba223b64a2c8ff8eb61e87948a434f9"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-5.x": "5.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-5.0-beta16",
+                    "datestamp": "1502154844"
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Jacob Rockowitz (jrockowitz)",
+                    "homepage": "https://www.drupal.org/u/jrockowitz",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Liam Morland",
+                    "homepage": "https://www.drupal.org/user/493050"
+                },
+                {
+                    "name": "fenstrat",
+                    "homepage": "https://www.drupal.org/user/362649"
+                },
+                {
+                    "name": "jrockowitz",
+                    "homepage": "https://www.drupal.org/user/371407"
+                },
+                {
+                    "name": "podarok",
+                    "homepage": "https://www.drupal.org/user/116002"
+                },
+                {
+                    "name": "quicksketch",
+                    "homepage": "https://www.drupal.org/user/35821"
+                },
+                {
+                    "name": "sanchiz",
+                    "homepage": "https://www.drupal.org/user/1671246"
+                },
+                {
+                    "name": "tedbow",
+                    "homepage": "https://www.drupal.org/user/240860"
+                },
+                {
+                    "name": "torotil",
+                    "homepage": "https://www.drupal.org/user/865256"
+                }
+            ],
+            "description": "Enables the creation of webforms and questionnaires.",
+            "homepage": "https://drupal.org/project/webform",
+            "support": {
+                "source": "http://cgit.drupalcode.org/webform",
+                "issues": "https://drupal.org/project/issues/webform"
             }
         },
         {
