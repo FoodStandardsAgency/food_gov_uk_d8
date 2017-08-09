@@ -140,10 +140,19 @@ class FsaRatingsSearchForm extends FormBase {
       '#default_value' => \Drupal::request()->query->get('local_authority'),
       '#empty_value' => '',
     ];
+
+    // @TODO: Temporary hack to prevent showing ratings of scottish establishments for the FHRS demo week 32/33, revert later.
+    $rating_values = $this->aggsToOptions($available_filters['rating_values']);
+    unset($rating_values['Awaiting Inspection']);
+    unset($rating_values['AwaitingInspection']);
+    unset($rating_values['AwaitingPublication']);
+    unset($rating_values['Improvement Required']);
+    unset($rating_values['Pass']);
+    unset($rating_values['Pass and Eat Safe']);
     $form['advanced']['rating_value'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Hygiene rating'),
-      '#options' => $this->aggsToOptions($available_filters['rating_values']),
+      '#options' => $rating_values,
       '#default_value' => explode(',', \Drupal::request()->query->get('rating_value')),
     ];
 
