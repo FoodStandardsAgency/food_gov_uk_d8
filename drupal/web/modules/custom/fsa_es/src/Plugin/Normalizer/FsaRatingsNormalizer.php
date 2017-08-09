@@ -102,6 +102,9 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
       $data[$field_name] = $this->getFieldValue($object, $field_name);
     }
 
+    // Merge the values of values from name, address, postcode and LA into single field for more robust search querying
+    $data['combinedvalues'] = $data['name'] .' '. $data['address'] .' '. $data['postcode'] .' '. $data['localauthoritycode'][0]['label'];
+
     return $data;
   }
 
