@@ -34,10 +34,10 @@ $aliases['local'] = array(
 );
 
 $aliases['dev'] = array(
-  'uri' => 'https://dev.food.gov.uk',
+  'uri' => 'https://fsa.dev.wunder.io',
   'remote-user' => 'www-admin',
-  'remote-host' => 'dev.food.gov.uk',
-  'root' => '/var/www/dev.food.gov.uk/web',
+  'remote-host' => 'fsa.dev.wunder.io',
+  'root' => '/var/www/fsa/current/web',
   'path-aliases' => array(
     '%dump-dir' => '/home/www-admin',
   ),
@@ -49,10 +49,10 @@ $aliases['dev'] = array(
 );
 
 $aliases['stage'] = array(
-  'uri' => 'https://stage.food.gov.uk',
+  'uri' => 'https://fsa.stage.wunder.io',
   'remote-user' => 'www-admin',
-  'remote-host' => 'stage.food.gov.uk',
-  'root' => '/var/www/stage.food.gov.uk/web',
+  'remote-host' => 'fsa.stage.wunder.io',
+  'root' => '/var/www/fsa/current/web',
   'path-aliases' => array(
     '%dump-dir' => '/home/www-admin',
   ),
