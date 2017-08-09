@@ -13,6 +13,12 @@ use Elasticsearch\Client;
 class SearchService {
 
   const DEFAULT_MAX_RESULT_ITEMS = 100;
+  const SEARCHABLE_FIELDS = [
+    'name^5',
+    'localauthoritycode.label.keyword^2',
+    'address',
+    'postcode',
+  ];
 
   /** @var Client */
   private $client;
@@ -31,7 +37,7 @@ class SearchService {
     $query_should_filters = [];
 
     // Build the query
-    $query = [
+    $query = $base_query = [
       'index' => ['ratings'],
       'size' => $max_items,
       'body' => [
@@ -63,54 +69,6 @@ class SearchService {
       ]
     ];
 
-    if (!empty($input)) {
-      $query_must_filters[] = ['match' => [
-        'name' => [
-          'query' => $input,
-          'fuzziness' => 'AUTO',
-          'prefix_length' => 1, // Don't let the first letter be fuzzy.
-        ],
-      ]];
-      $query_should_filters[] = ['match_phrase' => [
-        'name' => [
-          'query' => $input,
-          'slop' => 2,
-          'boost' => 5,
-        ],
-      ]];
-    }
-
-    // Apply the filters to the query:
-    if (!empty($filters['business_type'])) {
-      $ids = explode(',', $filters['business_type']);
-      $query_must_filters[] = ['terms' => ['businesstype.label.keyword' => $ids]];
-    }
-    if (!empty($filters['local_authority'])) {
-      $ids = explode(',', $filters['local_authority']);
-      $query_must_filters[] = ['terms' => ['localauthoritycode.label.keyword' => $ids]];
-    }
-    if (isset($filters['rating_value'])) {
-      $ids = explode(',', $filters['rating_value']);
-      $query_must_filters[] = ['terms' => ['ratingvalue.keyword' => $ids]];
-    }
-
-    // Assign the term filters to the query in the 'must' section
-    foreach ($query_must_filters as $f) {
-      $query['body']['query']['bool']['must'][] = $f;
-    }
-
-    // @TODO: Temporary hack to prevent showing scottish establishments for the FHRS demo week 32/33, revert later.
-    $query_must_not_filters[] = ['terms' => ['localauthoritycode.label.keyword' => ['Aberdeen City', 'Aberdeenshire', 'Angus', 'Argyll and Bute', 'East Ayrshire', 'North Ayrshire', 'South Ayrshire', 'Scottish Borders', 'Clackmannanshire', 'West Dunbartonshire', 'Dumfries and Galloway', 'East Dunbartonshire', 'Dundee City', 'Edinburgh (City of)', 'Falkirk', 'Fife', 'Glasgow City', 'Highland', 'Inverclyde', 'North Lanarkshire', 'South Lanarkshire', 'East Lothian', 'West Lothian', 'Midlothian', 'Moray', 'Orkney Islands', 'Perth and Kinross', 'East Renfrewshire', 'Renfrewshire', 'Shetland Islands', 'Stirling', 'Comhairle nan Eilean Siar (Western Isles)']]];
-    foreach ($query_must_not_filters as $f) {
-      $query['body']['query']['bool']['must_not'][] = $f;
-    }
-    // End tmp demo hack.
-
-    // Assign the term filters to the query in the 'should' section
-    foreach ($query_should_filters as $f) {
-      $query['body']['query']['bool']['should'][] = $f;
-    }
-
     // Get sorting param from url.
     $sort = Html::escape(\Drupal::request()->query->get('sort'));
 
@@ -130,8 +88,95 @@ class SearchService {
         break;
     }
 
+    // Apply the filters to the query:
+    if (!empty($filters['business_type'])) {
+      $ids = explode(',', $filters['business_type']);
+      $query_must_filters[] = ['terms' => ['businesstype.label.keyword' => $ids]];
+    }
+    if (!empty($filters['local_authority'])) {
+      $ids = explode(',', $filters['local_authority']);
+      $query_must_filters[] = ['terms' => ['localauthoritycode.label.keyword' => $ids]];
+    }
+    if (isset($filters['rating_value'])) {
+      $ids = explode(',', $filters['rating_value']);
+      $query_must_filters[] = ['terms' => ['ratingvalue.keyword' => $ids]];
+    }
+
+    $base_query_should_filters = $query_should_filters;
+    $base_query_must_filters = $query_must_filters;
+
+    if (!empty($input)) {
+      $query_must_filters[] = ['multi_match' => [
+        'query' => $input,
+        'fields' => self::SEARCHABLE_FIELDS,
+        'operator' => 'and'
+      ]];
+      $query_should_filters[] = ['match_phrase' => [
+        'name' => [
+          'query' => $input,
+          'slop' => 2,
+          'boost' => 5,
+        ],
+      ]];
+    }
+
+    // Assign the term filters to the query in the 'must' section
+    foreach ($query_must_filters as $f) {
+      $query['body']['query']['bool']['must'][] = $f;
+    }
+
+    // @TODO: Temporary hack to prevent showing scottish establishments for the FHRS demo week 32/33, revert later.
+    $query_must_not_filters[] = ['terms' => ['localauthoritycode.label.keyword' => ['Aberdeen City', 'Aberdeenshire', 'Angus', 'Argyll and Bute', 'East Ayrshire', 'North Ayrshire', 'South Ayrshire', 'Scottish Borders', 'Clackmannanshire', 'West Dunbartonshire', 'Dumfries and Galloway', 'East Dunbartonshire', 'Dundee City', 'Edinburgh (City of)', 'Falkirk', 'Fife', 'Glasgow City', 'Highland', 'Inverclyde', 'North Lanarkshire', 'South Lanarkshire', 'East Lothian', 'West Lothian', 'Midlothian', 'Moray', 'Orkney Islands', 'Perth and Kinross', 'East Renfrewshire', 'Renfrewshire', 'Shetland Islands', 'Stirling', 'Comhairle nan Eilean Siar (Western Isles)']]];
+    foreach ($query_must_not_filters as $f) {
+      $query['body']['query']['bool']['must_not'][] = $f;
+    }
+    // End tmp demo hack.
+
+    // Assign the term filters to the query in the 'should' section
+    foreach ($query_should_filters as $f) {
+      $query['body']['query']['bool']['should'][] = $f;
+    }
+
     // Execute the query.
     $result = $this->client->search($query);
+
+
+    // NO RESULTS FOUND:
+    if ($result['hits']['total'] == 0 && !empty($input)) {
+      // Reset the filtering to the base values
+      $query = $base_query;
+      $query_must_filters = $base_query_must_filters;
+      $query_should_filters = $base_query_should_filters;
+
+      // Assign looser settings to the multi match and match_phrase queries (with fuzziness)
+      /*
+      $query_must_filters[] = ['match_phrase' => [
+        'combinedvalues' => [
+          'query' => $input,
+          'slop' => 3,
+          'boost' => 5,
+        ],
+      ]];
+      */
+      $query_must_filters[] = ['match' => [
+        'combinedvalues' => [
+          'query' => $input,
+          'fuzziness' => 'AUTO',
+          'prefix_length' => 1, // Don't let the first letter be fuzzy.
+          'operator' => 'and'
+        ],
+      ]];
+      foreach ($query_must_filters as $f) {
+        $query['body']['query']['bool']['must'][] = $f;
+      }
+      foreach ($query_should_filters as $f) {
+        $query['body']['query']['bool']['should'][] = $f;
+      }
+
+      // Re-run the query
+      $result = $this->client->search($query);
+    }
+
 
     // Build the response
     $response = [
