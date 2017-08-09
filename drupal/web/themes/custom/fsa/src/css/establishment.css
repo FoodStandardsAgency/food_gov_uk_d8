@@ -47,6 +47,11 @@
   margin-bottom: 2em;
 }
 
+.establishment__content h4 {
+  font-size: 1em;
+  margin-bottom: 0.5em;
+}
+
 .establishment__table {
   clear: both;
   margin-bottom: 1em;
