@@ -88,7 +88,7 @@
     content: attr(data-header);
     display: none;
     width: 100%;
-    font-weight: 500;
+    font-weight: 600;
     text-transform: uppercase;
     margin-right: 1em;
     margin-bottom: 1em;

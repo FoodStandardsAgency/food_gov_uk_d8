@@ -99,7 +99,10 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
         'score_structural' => [
           'type' => 'integer',
         ],
-
+        'combinedvalues' => [
+          'type' => 'text',
+          'analyzer' => 'english',
+        ],
       ],
     ],
   ];

@@ -113,6 +113,7 @@
           </p>
         </div>
 
+        {% if (content.field_score_hygiene or content.field_score_structural or content.field_score_confidence) %}
         <div class="table table--with-borders establishment__table js-table" role="grid">
           <div class="table__row table__row--header js-table-header" role="row">
             <div class="table__item" role="columnheader">{{ 'Area inspected by food safety officer'|t }}</div>
@@ -121,8 +122,8 @@
           {{ content.field_score_hygiene }}
           {{ content.field_score_structural }}
           {{ content.field_score_confidence }}
-          {{ content.field_score_hygiene }}
         </div>
+        {% endif %}
 
         <div class="container container--text">
           {{ content.field_geocode }}

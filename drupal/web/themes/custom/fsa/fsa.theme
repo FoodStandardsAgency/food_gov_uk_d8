@@ -82,7 +82,7 @@ function fsa_page_attachments_alter(&$variables) {
     '#tag' => 'link',
     '#attributes' => array(
       'rel' => 'stylesheet',
-      'href' => 'https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700|Khula:300,400,600,700',
+      'href' => 'https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700|Open+Sans:300,400,600,700&amp;subset=latin-ext',
     ),
   );
   $variables['#attached']['html_head'][] = array($googlefonts, 'googlefonts');
