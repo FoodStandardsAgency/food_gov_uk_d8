@@ -99,6 +99,13 @@ class SearchService {
       $query['body']['query']['bool']['must'][] = $f;
     }
 
+    // @TODO: Temporary hack to prevent showing scottish establishments for the FHRS demo week 32/33, revert later.
+    $query_must_not_filters[] = ['terms' => ['localauthoritycode.label.keyword' => ['Aberdeen City', 'Aberdeenshire', 'Angus', 'Argyll and Bute', 'East Ayrshire', 'North Ayrshire', 'South Ayrshire', 'Scottish Borders', 'Clackmannanshire', 'West Dunbartonshire', 'Dumfries and Galloway', 'East Dunbartonshire', 'Dundee City', 'Edinburgh (City of)', 'Falkirk', 'Fife', 'Glasgow City', 'Highland', 'Inverclyde', 'North Lanarkshire', 'South Lanarkshire', 'East Lothian', 'West Lothian', 'Midlothian', 'Moray', 'Orkney Islands', 'Perth and Kinross', 'East Renfrewshire', 'Renfrewshire', 'Shetland Islands', 'Stirling', 'Comhairle nan Eilean Siar (Western Isles)']]];
+    foreach ($query_must_not_filters as $f) {
+      $query['body']['query']['bool']['must_not'][] = $f;
+    }
+    // End tmp demo hack.
+
     // Assign the term filters to the query in the 'should' section
     foreach ($query_should_filters as $f) {
       $query['body']['query']['bool']['should'][] = $f;
