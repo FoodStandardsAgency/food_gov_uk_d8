@@ -81,8 +81,8 @@ Plugin documentation:
 /*Typography*/
 :root {
   --font-size-base: 112.5%;
-  --font-family-heading: 'Fira Sans';
-  --font-family-content: 'Khula';
+  --font-family-heading: 'Fira Sans', sans-serif;
+  --font-family-content: 'Open Sans', sans-serif;
 }
 
 /*Z-Index*/

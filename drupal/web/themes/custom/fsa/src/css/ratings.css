@@ -202,9 +202,16 @@
   @media (--breakpoint-lg) {
     margin-left: 25.5em;
   }
+}
 
-  & h1 {
-    color: var(--primary-color);
+.ratings__content h1 {
+  color: var(--primary-color);
+}
+
+.ratings__content a {
+  &:hover {
+    color: var(--light-primary-color);
+    text-decoration: underline;
   }
 }
 
