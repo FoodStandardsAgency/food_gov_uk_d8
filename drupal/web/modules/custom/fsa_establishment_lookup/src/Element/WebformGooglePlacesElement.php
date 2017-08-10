@@ -34,8 +34,7 @@ class WebformGooglePlacesElement extends FormElement {
       '#input' => TRUE,
       '#size' => 60,
       '#process' => [
-        [$class, 'processWebformElementExample'],
-        [$class, 'processAjaxForm'],
+        [$class, 'processWebformGooglePlacesElement'],
       ],
       '#element_validate' => [
         [$class, 'validateWebformGooglePlacesElement'],
@@ -51,8 +50,9 @@ class WebformGooglePlacesElement extends FormElement {
   /**
    * Processes a 'webform_example_element' element.
    */
-  public static function processWebformElementExample(&$element, FormStateInterface $form_state, &$complete_form) {
-    // Here you can add and manipulate your element's properties and callbacks.
+  public static function processWebformGooglePlacesElement(&$element, FormStateInterface $form_state, &$complete_form) {
+    // Attach googleapi external & local js libs.
+    $element['#attached']['library'][] = 'fsa_establishment_lookup/googleplaces';
     return $element;
   }
 

@@ -1,5 +1,5 @@
 function initialize() {
-    var input = document.getElementById('edit-textfield'); // @todo: this is for testing, figure out how to control which field(s) should implement the autocomplete.
+    var input = document.getElementById('edit-google-places-test-element'); // @todo: this is for testing, figure out how to control which field(s) should implement the autocomplete.
     var options = {
         componentRestrictions: {
             country: "gb"
