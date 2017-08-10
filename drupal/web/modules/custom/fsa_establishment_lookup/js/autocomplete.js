@@ -25,10 +25,8 @@
                         establishment = place.name;
                     for (var i = 0; i < place.address_components.length; i++) {
                         for (var j = 0; j < place.address_components[i].types.length; j++) {
-                            console.log(place.address_components[i].types[j]);
                             switch (place.address_components[i].types[j]) {
                                 case  'postal_code':
-                                    // @todo: save this somewhere to map to an LA.
                                     postal_code = place.address_components[i].long_name;
                                     break;
                                 case 'route':
@@ -44,9 +42,10 @@
                     // Replace field values with more details of the establishment.
                     $('#'+element_id).val(establishment+', ' +address+', ' +postal_code+', '+postal_town);
 
-                    // And set postal code to a field for searching the local authority.
-                    // @todo: craete the field + functionality to search for the LA.
-                    $('#postal-code-for-la-search').val(postal_code);
+                    // Set postal code to respective field.
+                    // @todo: instead of creating the hidden field via configs extend the custom webform plugin.
+                    $('input[data-drupal-selector="edit-fsa-la-postal-code"]').val(postal_code)
+
                 });
             }
             google.maps.event.addDomListener(window, 'load', init_places_autocomplete);
