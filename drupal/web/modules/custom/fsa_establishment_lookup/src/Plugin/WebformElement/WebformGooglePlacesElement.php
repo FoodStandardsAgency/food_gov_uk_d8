@@ -7,10 +7,10 @@ use Drupal\webform\Plugin\WebformElementBase;
 use Drupal\webform\WebformSubmissionInterface;
 
 /**
- * Provides a 'webform_example_element' element.
+ * Provides a 'webform_googleplace' element.
  *
  * @WebformElement(
- *   id = "webform_example_element",
+ *   id = "webform_googleplace",
  *   label = @Translation("Google Places Search"),
  *   description = @Translation("Provides a Google Places webform element."),
  *   category = @Translation("FSA"),
@@ -50,7 +50,7 @@ class WebformGooglePlacesElement extends WebformElementBase {
     // Customize the webform element's properties here.
     // Or customize form/render element's properties via the FormElement.
     //
-    // @see \Drupal\webform_example_element\Element\WebformGooglePlacesElement::processWebformElementExample
+    // @see \Drupal\fsa_establishment_lookup\Element\WebformGooglePlacesElement::processWebformGooglePlacesElement
   }
 
 

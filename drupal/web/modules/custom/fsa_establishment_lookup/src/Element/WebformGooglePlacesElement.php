@@ -7,21 +7,21 @@ use Drupal\Core\Render\Element\FormElement;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Provides a 'webform_example_element'.
+ * Provides a 'webform_googleplace'.
  *
  * Webform elements are just wrappers around form elements, therefore every
  * webform element must have correspond FormElement.
  *
- * Below is the definition for a custom 'webform_example_element' which just
+ * Below is the definition for a custom 'webform_googleplace' which just
  * renders a simple text field.
  *
- * @FormElement("webform_example_element")
+ * @FormElement("webform_googleplace")
  *
  * @see \Drupal\Core\Render\Element\FormElement
  * @see https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Render%21Element%21FormElement.php/class/FormElement
  * @see \Drupal\Core\Render\Element\RenderElement
  * @see https://api.drupal.org/api/drupal/namespace/Drupal%21Core%21Render%21Element
- * @see \Drupal\webform_example_element\Element\WebformGooglePlacesElement
+ * @see \Drupal\fsa_establishment_lookup\Element\WebformGooglePlacesElement
  */
 class WebformGooglePlacesElement extends FormElement {
 
@@ -48,7 +48,7 @@ class WebformGooglePlacesElement extends FormElement {
   }
 
   /**
-   * Processes a 'webform_example_element' element.
+   * Processes a 'webform_googleplace' element.
    */
   public static function processWebformGooglePlacesElement(&$element, FormStateInterface $form_state, &$complete_form) {
     // Attach googleapi external & local js libs.
@@ -57,7 +57,7 @@ class WebformGooglePlacesElement extends FormElement {
   }
 
   /**
-   * Webform element validation handler for #type 'webform_example_element'.
+   * Webform element validation handler for #type 'webform_googleplace'.
    */
   public static function validateWebformGooglePlacesElement(&$element, FormStateInterface $form_state, &$complete_form) {
     // Here you can add custom validation logic.
@@ -77,7 +77,7 @@ class WebformGooglePlacesElement extends FormElement {
   public static function preRenderWebformGooglePlacesElement(array $element) {
     $element['#attributes']['type'] = 'text';
     Element::setAttributes($element, ['id', 'name', 'value', 'size', 'maxlength', 'placeholder']);
-    static::setAttributes($element, ['form-text', 'webform-googleplaces']);
+    static::setAttributes($element, ['form-text', 'webform-googleplace']);
     return $element;
   }
 
