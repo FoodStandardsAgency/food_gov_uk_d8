@@ -53,6 +53,7 @@ class WebformGooglePlacesElement extends FormElement {
   public static function processWebformGooglePlacesElement(&$element, FormStateInterface $form_state, &$complete_form) {
     // Attach googleapi external & local js libs.
     $element['#attached']['library'][] = 'fsa_establishment_lookup/googleplaces';
+    $element['#attached']['drupalSettings']['fsa_establishment_lookup']['googleplaces']['element_id'] = $element['#id'];
     return $element;
   }
 
