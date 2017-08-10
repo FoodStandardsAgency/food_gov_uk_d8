@@ -65,7 +65,7 @@ class WebformGooglePlacesElement extends FormElement {
   }
 
   /**
-   * Prepares a #type 'email_multiple' render element for theme_element().
+   * Prepares a #type 'text' render element for theme_element().
    *
    * @param array $element
    *   An associative array containing the properties of the element.
