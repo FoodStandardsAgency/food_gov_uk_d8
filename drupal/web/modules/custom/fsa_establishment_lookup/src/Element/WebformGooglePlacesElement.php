@@ -77,7 +77,15 @@ class WebformGooglePlacesElement extends FormElement {
    */
   public static function preRenderWebformGooglePlacesElement(array $element) {
     $element['#attributes']['type'] = 'text';
-    Element::setAttributes($element, ['id', 'name', 'value', 'size', 'maxlength', 'placeholder']);
+    Element::setAttributes($element, [
+      'id',
+      'name',
+      'value',
+      'size',
+      'maxlength',
+      'placeholder',
+    ]
+    );
     static::setAttributes($element, ['form-text', 'webform-googleplace']);
     return $element;
   }

@@ -23,5 +23,5 @@ function fsa_establishment_lookup_help($route_name, RouteMatchInterface $route_m
     default:
   }
 
-  return false;
+  return FALSE;
 }

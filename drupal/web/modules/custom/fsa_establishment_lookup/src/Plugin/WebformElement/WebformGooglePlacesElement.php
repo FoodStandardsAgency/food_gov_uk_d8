@@ -53,7 +53,6 @@ class WebformGooglePlacesElement extends WebformElementBase {
     // @see \Drupal\fsa_establishment_lookup\Element\WebformGooglePlacesElement::processWebformGooglePlacesElement
   }
 
-
   /**
    * {@inheritdoc}
    */
