@@ -10,7 +10,7 @@ id: google_places_testform
 title: 'Google Places testform'
 description: 'For testing the google places autocomplete webform element.'
 category: ''
-elements: "where_did_this_happen:\n  '#type': webform_wizard_page\n  '#title': 'Where did this happen'\n  where_did_this_happen_1:\n    '#type': webform_googleplace\n    '#title': 'Where did this happen'\n  fsa_la_postal_code:\n    '#type': hidden\n    '#title': fsa_la_postal_code\ndetails:\n  '#type': webform_wizard_page\n  '#title': Details\n  name:\n    '#type': textfield\n    '#title': Name\n"
+elements: "where_did_this_happen:\n  '#type': webform_wizard_page\n  '#title': 'Where did this happen'\n  where_did_this_happen_1:\n    '#type': webform_googleplace\n    '#title': 'Where did this happen'\n  fsa_establishment_postal_code:\n    '#type': hidden\n    '#title': 'Postal code'\n  fsa_establishment_la:\n    '#type': hidden\n    '#title': 'Local authority'\ndetails:\n  '#type': webform_wizard_page\n  '#title': Details\n  name:\n    '#type': textfield\n    '#title': Name\n"
 css: ''
 javascript: ''
 settings:
