@@ -61,7 +61,34 @@ class WebformGooglePlacesElement extends FormElement {
    * Webform element validation handler for #type 'webform_googleplace'.
    */
   public static function validateWebformGooglePlacesElement(&$element, FormStateInterface $form_state, &$complete_form) {
-    // Here you can add custom validation logic.
+
+    if ($element['#type'] == 'webform_googleplace') {
+
+      $la = '';
+
+      // Add the local authority on validate.
+      if ($form_state->getValue('fsa_establishment_postal_code') != '') {
+        $postcode = $form_state->getValue('fsa_establishment_postal_code');
+        // Get first match of establishment with the postcode.
+        $query = \Drupal::entityQuery('fsa_establishment')
+          ->condition('field_postcode', $postcode)
+          ->range(0,1);
+        $establishment = $query->execute();
+        $id = key($establishment);
+        // The matched authority.
+        $la = \Drupal::entityTypeManager()->getStorage('fsa_establishment')->load($id);
+        $la = $la->id();
+      }
+      else {
+        $la = 'N/A';
+      }
+
+      // Set the value to Local authority field.
+      if ($la != '') {
+        $form_state->setValue('fsa_establishment_la', $la);
+      }
+
+    }
   }
 
   /**

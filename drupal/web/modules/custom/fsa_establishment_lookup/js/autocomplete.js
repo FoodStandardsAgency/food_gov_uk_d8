@@ -44,7 +44,7 @@
 
                     // Set postal code to respective field.
                     // @todo: instead of creating the hidden field via configs extend the custom webform plugin.
-                    $('input[data-drupal-selector="edit-fsa-la-postal-code"]').val(postal_code)
+                    $('input[data-drupal-selector="edit-fsa-establishment-postal-code"]').val(postal_code)
 
                 });
             }
