@@ -64,8 +64,6 @@ class WebformGooglePlacesElement extends FormElement {
 
     if ($element['#type'] == 'webform_googleplace') {
 
-      $la = '';
-
       // Add the local authority on validate.
       if ($form_state->getValue('fsa_establishment_postal_code') != '') {
         $postcode = $form_state->getValue('fsa_establishment_postal_code');
@@ -75,16 +73,15 @@ class WebformGooglePlacesElement extends FormElement {
           ->range(0,1);
         $establishment = $query->execute();
         $id = key($establishment);
-        // The matched authority.
-        $la = \Drupal::entityTypeManager()->getStorage('fsa_establishment')->load($id);
-        $la = $la->id();
+        $establishment = \Drupal::entityTypeManager()->getStorage('fsa_establishment')->load($id);
+        // The authority as matched by establishment postal code.
+        $la = $establishment->get('field_localauthoritycode')->getValue()[0]['target_id'];
       }
       else {
         $la = 'N/A';
       }
 
-      // Set the value to Local authority field.
-      if ($la != '') {
+      if (isset($la)) {
         $form_state->setValue('fsa_establishment_la', $la);
       }
 
