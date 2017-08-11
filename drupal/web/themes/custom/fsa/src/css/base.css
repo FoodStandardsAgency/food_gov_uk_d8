@@ -257,10 +257,11 @@ input, textarea, select {
   font-size: 1em;
   padding: 0.5em;
   border-radius: 0.15em;
-  box-shadow: 0em 0em 0em 0.1em var(--color-black);
+  background-color: var(--color-white);
+  box-shadow: 0px 0px 0px 2px var(--color-black);
 
   &:focus {
-    box-shadow: 0em 0em 0em 0.1em var(--primary-color);
+    box-shadow: 0px 0px 0px 2px var(--primary-color);
   }
 }
 
@@ -310,8 +311,9 @@ input[type="checkbox"] + label {
   padding-left: calc(1em + 1em);
   padding-left: 38px;
   padding-top: 0.3em;
-  @mixin responsive-declaration padding-top, 0.7em, 0.3em;
-  @mixin responsive-declaration padding-bottom, 0.5em, 0em;
+  @mixin responsive-declaration padding-top, 0.7em, 0.2em;
+  @mixin responsive-declaration padding-bottom, 0.7em, 0.2em;
+  margin-bottom: 0em;
 }
 
 input[type="radio"] + label:before,
@@ -405,7 +407,7 @@ figure {
 
 /*Quick hiding for all default drupal stuff*/
 
-.contextual-region,
+/*.contextual-region,*/
 #block-fsa-page-title,
 .site-header,
 .site-navigation,
