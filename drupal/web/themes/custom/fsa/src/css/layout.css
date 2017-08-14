@@ -8,10 +8,6 @@
   position: relative;
   z-index: var(--z-middle);
   color: var(--color-white);
-  @mixin responsive-declaration padding-top, 1em, 3em;
-  @mixin responsive-declaration padding-bottom, 1em, 3em;
-  @mixin responsive-declaration padding-right, 1em, 2em;
-  @mixin responsive-declaration padding-left, 1em, 2em;
 
   @media (--breakpoint-md) {
     position: absolute;

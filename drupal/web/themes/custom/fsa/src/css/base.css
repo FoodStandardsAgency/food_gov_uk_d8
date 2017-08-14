@@ -399,6 +399,14 @@ figure {
 
 .container.container--search {
   max-width: 30em;
+  @mixin responsive-declaration padding-top, 1em, 3em;
+  @mixin responsive-declaration padding-bottom, 1em, 3em;
+  @mixin responsive-declaration padding-right, 1em, 2em;
+  @mixin responsive-declaration padding-left, 1em, 2em;
+}
+
+.container.container--side-navigation {
+  max-width: 30em;
 }
 
 .overflow-x-auto {
