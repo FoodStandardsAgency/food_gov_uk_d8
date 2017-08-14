@@ -1,0 +1,9 @@
+{#
+/**
+ * @file
+ * Theme override for a heading field (initially used on liftup paragraphs).
+ */
+#}
+{% for item in items %}
+  <h3{{ attributes }}>{{ item.content }}</h3>
+{% endfor %}
