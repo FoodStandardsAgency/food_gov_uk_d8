@@ -12,6 +12,40 @@ use Drupal\Core\Controller\ControllerBase;
  */
 class RatingsHelper extends ControllerBase {
 
+
+  /**
+   * Helper function to get entity details from the FSA ratings system
+   * (or any Drupal entity).
+   *
+   * @param $entity_name
+   *    The machine name of the entity.
+   * @param $id
+   *    The entity id.
+   * @param $field
+   *    The name of the field or property to get.
+   *
+   * @return string
+   *    Field or property value.
+   */
+  public static function getEntityDetail($entity_name, $id, $field) {
+
+    $value = '';
+    $entity = \Drupal::entityTypeManager()->getStorage($entity_name)->load($id);
+
+    if (is_object($entity)) {
+      if ($field == 'name') {
+        $value = $entity->getName();
+      }
+      else if ($entity->hasField($field)) {
+        $value = $entity->get($field);
+        // @todo: consider handling fields with multiple values?
+        $value = $value->first()->getValue()['value'];
+      }
+    }
+
+    return $value;
+  }
+
   /**
    * Build a ratings badge (old style, displayed as image).
    *
