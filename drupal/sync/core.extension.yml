@@ -53,6 +53,7 @@ module:
   user: 0
   views_ui: 0
   webform: 0
+  webform_node: 0
   webform_ui: 0
   extlink: 1
   menu_link_content: 1
