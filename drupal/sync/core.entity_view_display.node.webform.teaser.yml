@@ -24,7 +24,7 @@ content:
   body:
     label: hidden
     type: text_summary_or_trimmed
-    weight: 2
+    weight: 3
     settings:
       trim_length: 600
     third_party_settings: {  }
@@ -38,12 +38,19 @@ content:
       image_style: thumbnail
       image_link: ''
     third_party_settings: {  }
+  field_liftup_title:
+    type: string
+    weight: 2
+    region: content
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
   links:
     weight: 0
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
-  field_liftup_title: true
   langcode: true
   webform: true
