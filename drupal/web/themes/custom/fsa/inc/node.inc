@@ -6,11 +6,11 @@
  */
 
 /**
- * Implements hook_preprocess_node().
+ * Implements template_preprocess_node().
  */
 function fsa_preprocess_node(&$variables) {
 
-  // Set vars for easy access
+  // Set vars for easy access.
   $node = $variables['node'];
 
   if ($variables['teaser']) {
