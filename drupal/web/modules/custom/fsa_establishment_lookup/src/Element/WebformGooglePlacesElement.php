@@ -5,6 +5,7 @@ namespace Drupal\fsa_establishment_lookup\Element;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Render\Element\FormElement;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\fsa_ratings\Controller\RatingsHelper;
 
 /**
  * Provides a 'webform_googleplace'.
@@ -90,6 +91,7 @@ class WebformGooglePlacesElement extends FormElement {
 
       if (isset($la)) {
         $form_state->setValue('fsa_establishment_la', $la);
+        $form_state->setValue('fsa_establishment_la_name', RatingsHelper::getEntityDetail('fsa_authority', $la, 'name'));
       }
 
     }
