@@ -1,0 +1,17 @@
+{#
+/**
+ * @file
+ * Default node template override to display a teaser.
+ *
+ * @see template_preprocess_node()
+ */
+#}
+<a href="{{ url }}" rel="bookmark">
+  <div{{ attributes }}>
+    <div>{{ content.field_icon }}</div>
+    <h4{{ title_attributes }}>{{ label }}</h4>
+    <div{{ content_attributes }}>
+      {{ content|without('field_icon') }}
+    </div>
+  </div>
+</a>

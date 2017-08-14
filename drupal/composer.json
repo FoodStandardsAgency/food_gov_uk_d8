@@ -32,7 +32,8 @@
         "drupal/pathauto": "^1.0",
         "drupal/extlink": "^1.0",
         "drupal/field_group": "^1.0@RC",
-        "drupal/webform": "5.0-beta16"
+        "drupal/webform": "5.0-beta16",
+        "drupal/paragraphs": "^1.1"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",

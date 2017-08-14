@@ -1,0 +1,45 @@
+uuid: 995e197d-55fd-483d-a7ad-6d20c30858c0
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.webform.body
+    - field.field.node.webform.field_icon
+    - field.field.node.webform.field_liftup_title
+    - field.field.node.webform.webform
+    - image.style.thumbnail
+    - node.type.webform
+  module:
+    - image
+    - text
+    - user
+_core:
+  default_config_hash: Ls5l3Xs7-YstJnurxFLKj38Exqr2JMZs1j9YeX1Kh2o
+id: node.webform.teaser
+targetEntityType: node
+bundle: webform
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 1
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  field_icon:
+    type: image
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      image_style: thumbnail
+      image_link: ''
+    third_party_settings: {  }
+hidden:
+  field_liftup_title: true
+  langcode: true
+  links: true
+  webform: true
