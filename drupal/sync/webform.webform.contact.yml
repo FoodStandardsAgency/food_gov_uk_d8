@@ -5,6 +5,8 @@ dependencies:
   enforced:
     module:
       - webform
+  module:
+    - fsa_contactus_data
 _core:
   default_config_hash: TXbSSS0lYoFb39dSF4qf9kvAtJAkqMBR-Dg8drrFJko
 open: null
@@ -174,3 +176,12 @@ handlers:
       debug: false
       reply_to: ''
       return_path: ''
+  fsa_contact_us_form_data_handler:
+    id: fsa_contactus_data_handler
+    label: 'FSA Contact Us form data handler'
+    handler_id: fsa_contact_us_form_data_handler
+    status: true
+    weight: 2
+    settings:
+      channel: ''
+      message: ''
