@@ -1,0 +1,34 @@
+uuid: bc6928ad-267e-440d-af95-4b65f8df0f33
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.liftups.field_content_reference
+    - field.field.paragraph.liftups.field_heading
+    - paragraphs.paragraphs_type.liftups
+id: paragraph.liftups.default
+targetEntityType: paragraph
+bundle: liftups
+mode: default
+content:
+  field_content_reference:
+    weight: 1
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_heading:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

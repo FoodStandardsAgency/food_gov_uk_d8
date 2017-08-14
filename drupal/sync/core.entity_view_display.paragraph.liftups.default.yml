@@ -1,0 +1,31 @@
+uuid: 3dbb9b82-b3f2-4361-9e82-c2c69ef42943
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.liftups.field_content_reference
+    - field.field.paragraph.liftups.field_heading
+    - paragraphs.paragraphs_type.liftups
+id: paragraph.liftups.default
+targetEntityType: paragraph
+bundle: liftups
+mode: default
+content:
+  field_content_reference:
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_heading:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden: {  }
