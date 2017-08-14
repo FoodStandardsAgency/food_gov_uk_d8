@@ -8,9 +8,10 @@
 #}
 <a href="{{ url }}" rel="bookmark">
   <div{{ attributes }}>
+    <div>{{ content.field_icon }}</div>
     <h4{{ title_attributes }}>{{ label }}</h4>
     <div{{ content_attributes }}>
-      {{ content }}
+      {{ content|without('field_icon') }}
     </div>
   </div>
 </a>
