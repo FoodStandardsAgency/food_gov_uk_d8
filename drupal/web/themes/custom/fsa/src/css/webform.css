@@ -48,7 +48,7 @@
   z-index: 1;
 }
 
-/*Custom styles for input fields*/
+/*Custom styles webform*/
 .webform label {
   display: block;
   font-size: 0.8em;
@@ -83,4 +83,28 @@
 .webform .intl-tel-input .selected-flag {
   background-color: var(--color-white);
   box-shadow: inset -1px 0px 0px 0px var(--color-black);
+}
+
+.webform .form-actions {
+  display: flex;
+
+  @media (--breakpoint-md) {
+    justify-content: flex-end;
+  }
+}
+
+.webform .form-actions .webform-button--previous {
+  margin-right: auto;
+
+  @media (--breakpoint-md) {
+    margin-right: 1em;
+  }
+}
+
+.webform .form-actions .webform-button--next {
+  margin-left: auto;
+
+  @media (--breakpoint-md) {
+    margin-left: 0;
+  }
 }
