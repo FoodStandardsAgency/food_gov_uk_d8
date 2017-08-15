@@ -1,0 +1,5 @@
+name: fsa_contactus_data
+type: module
+description: FSA Contact Us Data module manages the submitted data fro statistical usages.
+core: 8.x
+package: FSA

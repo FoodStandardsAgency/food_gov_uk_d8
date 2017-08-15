@@ -21,6 +21,7 @@ module:
   field_ui: 0
   file: 0
   filter: 0
+  fsa_contactus_data: 0
   fsa_es: 0
   fsa_establishment_lookup: 0
   fsa_ratings: 0
