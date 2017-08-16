@@ -1,0 +1,55 @@
+.layout {
+  position: relative;
+  background-color: var(--color-dark-blue);
+}
+
+/*Site sidebar*/
+.layout__sidebar {
+  position: relative;
+  z-index: var(--z-middle);
+  color: var(--color-white);
+
+  @media (--breakpoint-md) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20em;
+    height: 100vh;
+    overflow: auto;
+  }
+
+  @media (--breakpoint-lg) {
+    width: 25.5em;
+  }
+}
+
+.layout__sidebar.is-sticky {
+  @media (--breakpoint-md) {
+    position: fixed;
+  }
+}
+
+.layout__sidebar.is-bottom {
+  @media (--breakpoint-md) {
+    position: absolute;
+    top: auto;
+    bottom: 0;
+  }
+}
+
+/*Webform content*/
+.layout__content {
+  position: relative;
+  z-index: var(--z-bottom);
+  background-color: var(--color-white);
+  flex: 1 1 100%;
+  min-height: 100vh;
+
+  @media (--breakpoint-md) {
+    margin-left: 20em;
+  }
+
+  @media (--breakpoint-lg) {
+    margin-left: 25.5em;
+  }
+}

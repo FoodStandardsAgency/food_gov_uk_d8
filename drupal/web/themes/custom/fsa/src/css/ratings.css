@@ -1,6 +1,5 @@
 .ratings {
-  position: relative;
-  background-color: var(--color-dark-blue);
+
 }
 
 .ratings.ratings--frontpage {
@@ -26,38 +25,15 @@
 }
 
 /*Ratings search*/
-.ratings__search {
-  position: relative;
-  z-index: var(--z-middle);
-  color: var(--color-white);
-  @mixin responsive-declaration padding-top, 1em, 3em;
-  @mixin responsive-declaration padding-bottom, 1em, 3em;
-  @mixin responsive-declaration padding-right, 1em, 2em;
-  @mixin responsive-declaration padding-left, 1em, 2em;
+.ratings__search label {
+  display: block;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  margin-bottom: 0.5em;
+}
 
-  @media (--breakpoint-md) {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 20em;
-    height: 100vh;
-    overflow: auto;
-  }
-
-  @media (--breakpoint-lg) {
-    width: 25.5em;
-  }
-
-  & label {
-    display: block;
-    font-size: 0.8em;
-    text-transform: uppercase;
-    margin-bottom: 0.5em;
-  }
-
-  & input[type="checkbox"] + label:before {
-    background-color: var(--color-white);
-  }
+.ratings__search input[type="checkbox"] + label:before {
+  background-color: var(--color-white);
 }
 
 .ratings__search input:not([type="submit"]),
@@ -90,20 +66,6 @@
 .ratings__search .ratings__advanced-search-button-icon {
   @media (--breakpoint-md) {
     margin-left: 1em !important;
-  }
-}
-
-.ratings__search.is-sticky {
-  @media (--breakpoint-md) {
-    position: fixed;
-  }
-}
-
-.ratings__search.is-bottom {
-  @media (--breakpoint-md) {
-    position: absolute;
-    top: auto;
-    bottom: 0;
   }
 }
 
@@ -189,19 +151,7 @@
 
 /*Rating listing*/
 .ratings__content {
-  position: relative;
-  z-index: var(--z-bottom);
-  background-color: var(--color-white);
-  flex: 1 1 100%;
-  min-height: 100vh;
 
-  @media (--breakpoint-md) {
-    margin-left: 20em;
-  }
-
-  @media (--breakpoint-lg) {
-    margin-left: 25.5em;
-  }
 }
 
 .ratings__content h1 {
