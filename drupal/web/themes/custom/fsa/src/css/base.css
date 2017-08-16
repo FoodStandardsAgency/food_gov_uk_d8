@@ -417,9 +417,6 @@ figure {
 
 /*.contextual-region,*/
 #block-fsa-page-title,
-.site-header,
-.site-navigation,
-.site-breadcrumb,
 .site-highlighted,
 .layout-sidebar-first {
   display: none !important;

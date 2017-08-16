@@ -1,14 +1,14 @@
-.site-header {
+.header {
 
 }
 
-.site-header__container {
+.header__container {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.site-header__menu-button {
+.header__menu-button {
   width: 2em;
   height: 2em;
 
@@ -17,11 +17,11 @@
   }
 }
 
-.site-header__logo {
+.header__logo {
 }
 
-.site-header__search {
+.header__search {
 }
 
-.site-header__links {
+.header__links {
 }
