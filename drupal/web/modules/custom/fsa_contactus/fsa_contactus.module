@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * Implements hook_webform_element_alter().
+ */
+function fsa_contactus_webform_element_alter(array &$element, \Drupal\Core\Form\FormStateInterface $form_state, array $context) {
+  // Add custom data attributes to all elements.
+  $extra_classes = [];
+  $extra_classes[] = $element['#type'];
+  if (isset($element['#format'])) {
+    $extra_classes[] = $element['#format'];
+  }
+  $extra_classes[] = $element['#webform_key'];
+  foreach ($extra_classes as $c) {
+    $element['#attributes']['class'][] = $c;
+  }
+}

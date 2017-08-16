@@ -1,0 +1,5 @@
+name: FSA Contact Us
+type: module
+description: FSA Contact Us module manages form modifications etc.
+core: 8.x
+package: FSA
