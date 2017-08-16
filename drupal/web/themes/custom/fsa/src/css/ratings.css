@@ -25,18 +25,15 @@
 }
 
 /*Ratings search*/
-.ratings__search {
+.ratings__search label {
+  display: block;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  margin-bottom: 0.5em;
+}
 
-  & label {
-    display: block;
-    font-size: 0.8em;
-    text-transform: uppercase;
-    margin-bottom: 0.5em;
-  }
-
-  & input[type="checkbox"] + label:before {
-    background-color: var(--color-white);
-  }
+.ratings__search input[type="checkbox"] + label:before {
+  background-color: var(--color-white);
 }
 
 .ratings__search input:not([type="submit"]),
@@ -69,20 +66,6 @@
 .ratings__search .ratings__advanced-search-button-icon {
   @media (--breakpoint-md) {
     margin-left: 1em !important;
-  }
-}
-
-.ratings__search.is-sticky {
-  @media (--breakpoint-md) {
-    position: fixed;
-  }
-}
-
-.ratings__search.is-bottom {
-  @media (--breakpoint-md) {
-    position: absolute;
-    top: auto;
-    bottom: 0;
   }
 }
 

@@ -301,7 +301,7 @@ input[type="checkbox"] {
 
 input[type="radio"]:focus + label,
 input[type="checkbox"]:focus + label {
-  box-shadow: inset 0em 0em 0em 0.1em var(--primary-color);
+  box-shadow: inset 0em 0em 0em 2px var(--primary-color);
 }
 
 input[type="radio"] + label,
@@ -333,25 +333,25 @@ input[type="checkbox"] + label:after  {
 input[type="radio"] {
   & + label:before {
     border-radius: 1em;
-    box-shadow: inset 0em 0em 0em 0.1em currentColor;
+    box-shadow: inset 0em 0em 0em 2px currentColor;
   }
 
   & + label:after {
     border-radius: 50%;
-    box-shadow: inset 0em 0em 0em 0.1em var(--primary-color);
+    box-shadow: inset 0em 0em 0em 2px var(--primary-color);
     opacity: 0;
   }
 
   &:checked + label:after {
     background-color: var(--color-white);
-    box-shadow: inset 0em 0em 0em 0.3em var(--primary-color);
+    box-shadow: inset 0em 0em 0em 6px var(--primary-color);
     opacity: 1;
   }
 }
 
 input[type="checkbox"] {
   & + label:before {
-    box-shadow: inset 0em 0em 0em 0.1em currentColor;
+    box-shadow: inset 0em 0em 0em 2px currentColor;
     border-radius: 0.15em;
   }
 

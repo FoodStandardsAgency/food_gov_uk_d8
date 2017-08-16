@@ -95,8 +95,6 @@ function stickyElement(containers, stickyElements) {
     });
   }
 
-
-
   // Add scroll listener
   window.addEventListener("scroll", toggleStickyElement);
 

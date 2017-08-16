@@ -1,4 +1,5 @@
 .webform {
+  min-height: 100vh;
   background-color: var(--color-lighter-gray);
   @mixin responsive-declaration padding-top, 1em, 3em;
   @mixin responsive-declaration padding-right, 1em, 4em;
@@ -43,6 +44,10 @@
   color: var(--primary-color);
 }
 
+.webform-progress .webform-progress-tracker .progress-step.is-complete:hover .progress-marker {
+  background-color: var(--color-dark-blue);
+}
+
 .webform-progress .progress-step:not(:last-child)::after {
   background-color: var(--color-dark-blue);
   z-index: 1;
@@ -56,10 +61,27 @@
   margin-bottom: 0.5em;
 }
 
-.webform .form-item {
+.webform legend {
+  @mixin responsive-declaration margin-bottom, 1.5em, 2em;
+}
+
+.webform .fieldset-legend {
+  @mixin responsive-declaration font-size, 1.8em, 2em;
+  @mixin responsive-declaration line-height, 1.2, 1.25;
+  color: inherit;
+}
+
+.webform .description {
   margin-bottom: 1em;
 }
 
+.webform fieldset ,
+.webform .form-item {
+  @mixin responsive-declaration margin-top, 1.5em, 4em;
+  @mixin responsive-declaration margin-bottom, 1.5em, 2em;
+}
+
+.webform .form-item.js-form-type-date input,
 .webform .form-item.form-item-date input {
   background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='18px' height='21px' viewBox='0 0 18 21' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Styleguide' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg transform='translate%28-1298.000000, -4569.000000%29' id='Basic-Elements' fill='%2300A39B'%3E%3Cg transform='translate%2877.000000, 3029.000000%29'%3E%3Cg id='Basic-forms' transform='translate%280.000000, 756.000000%29'%3E%3Cg id='calendar-normal' transform='translate%28956.000000, 745.000000%29'%3E%3Cpath d='M267.020548,59.9567328 L280.980512,59.9567328 C282.090826,59.9567328 283,59.049514 283,57.9415865 L283,43.8612552 C283,42.7533278 282.090826,41.8461089 280.980512,41.8461089 L278.809158,41.8461089 L278.809158,40.9644823 C278.809158,40.4105186 278.354572,39.9569092 277.799414,39.9569092 C277.244257,39.9569092 276.78967,40.4105186 276.78967,40.9644823 L276.78967,41.8461089 L271.21033,41.8461089 L271.21033,40.9644823 C271.21033,40.4105186 270.755743,39.9569092 270.200586,39.9569092 C269.645428,39.9569092 269.190842,40.4105186 269.190842,40.9644823 L269.190842,41.8461089 L267.019488,41.8461089 C265.909174,41.8461089 265,42.7533278 265,43.8612552 L265,57.9171529 C265.000987,59.0506727 265.909174,59.9569092 267.020473,59.9569092 L267.020548,59.9567328 Z M267.020548,57.9415865 L267.020548,49.4273413 L280.980512,49.4273413 L280.980512,57.9158934 L267.020548,57.9168783 L267.020548,57.9415865 Z M269.190917,43.8612552 L269.190917,45.2466683 C269.190917,45.8006321 269.645504,46.2542415 270.200661,46.2542415 C270.755819,46.2542415 271.210405,45.8006321 271.210405,45.2466683 L271.210405,43.8612552 L276.814232,43.8612552 L276.814232,45.2466683 C276.814232,45.8006321 277.268819,46.2542415 277.823976,46.2542415 C278.379134,46.2542415 278.83372,45.8006321 278.83372,45.2466683 L278.83372,43.8612552 L281.005074,43.8612552 L281.005074,47.4134544 L267.020624,47.4124695 L267.020624,43.8612779 L269.190917,43.8612552 Z' id='Page-1'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
   background-position: 90% 50%;
@@ -68,7 +90,9 @@
 }
 
 .webform .form-checkboxes .form-item,
-.webform .form-item.form-item-radios {
+.webform .form-item.form-item-radios,
+.webform .form-item.js-form-type-radio {
+  margin-top: 0em;
   margin-bottom: 0.5em;
 }
 
@@ -87,6 +111,7 @@
 
 .webform .form-actions {
   display: flex;
+  @mixin responsive-declaration margin-top, 1.5em, 4em;
 
   @media (--breakpoint-md) {
     justify-content: flex-end;
@@ -95,9 +120,14 @@
 
 .webform .form-actions .webform-button--previous {
   margin-right: auto;
+  background-color: var(--color-black);
 
   @media (--breakpoint-md) {
     margin-right: 1em;
+  }
+
+  &:hover {
+    background-color: var(--color-dark-blue);
   }
 }
 

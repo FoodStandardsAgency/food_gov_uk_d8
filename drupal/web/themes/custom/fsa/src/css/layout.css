@@ -23,6 +23,20 @@
   }
 }
 
+.layout__sidebar.is-sticky {
+  @media (--breakpoint-md) {
+    position: fixed;
+  }
+}
+
+.layout__sidebar.is-bottom {
+  @media (--breakpoint-md) {
+    position: absolute;
+    top: auto;
+    bottom: 0;
+  }
+}
+
 /*Webform content*/
 .layout__content {
   position: relative;
