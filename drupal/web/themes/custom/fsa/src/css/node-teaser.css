@@ -1,0 +1,20 @@
+.node-teaser {
+  display: block;
+  background-color: var(--color-white);
+  box-shadow: var(--box-shadow);
+  padding: 0.5em;
+  text-align: center;
+  @mixin responsive-declaration padding-top, 1em, 1.5em;
+  @mixin responsive-declaration padding-bottom, 1em, 1.5em;
+}
+
+.node-teaser img {
+  @mixin responsive-declaration margin-bottom, 1em, 1.5em;
+}
+
+.node-teaser__heading {
+  border-top: 1px solid var(--color-lighter-gray);
+  margin: 0;
+  font-weight: 500;
+  @mixin responsive-declaration padding-top, 1em, 1.5em;
+}

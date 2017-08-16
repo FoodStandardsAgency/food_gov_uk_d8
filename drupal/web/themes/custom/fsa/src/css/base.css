@@ -247,7 +247,9 @@ fieldset {
   & legend {
     margin-bottom: 0.5em;
     display: block;
-    color: var(--primary-color);
+    width: 100%;
+    /*color: var(--primary-color);*/
+    overflow: auto;
   }
 }
 
@@ -458,7 +460,6 @@ figure {
 /*Quick hiding for all default drupal stuff*/
 
 /*.contextual-region,*/
-#block-fsa-page-title,
 .site-highlighted,
 .layout-sidebar-first {
   display: none !important;

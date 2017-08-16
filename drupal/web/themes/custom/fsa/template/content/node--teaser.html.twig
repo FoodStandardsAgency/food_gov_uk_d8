@@ -6,12 +6,14 @@
  * @see template_preprocess_node()
  */
 #}
-<a href="{{ url }}" rel="bookmark">
-  <div{{ attributes }}>
-    <div>{{ content.field_icon }}</div>
-    <h4{{ title_attributes }}>{{ label }}</h4>
-    <div{{ content_attributes }}>
-      {{ content|without('field_icon') }}
-    </div>
+<a href="{{ url }}" rel="bookmark" class="node-teaser">
+  <article{{ attributes }}>
+  <figure>
+    {{ content.field_icon }}
+    <figcaption><h4{{ title_attributes }} class="node-teaser__heading">{{ label }}</h4></figcaption>
+  </figure>
+  <div{{ content_attributes }}>
+    {{ content|without('field_icon') }}
   </div>
+  </article>
 </a>

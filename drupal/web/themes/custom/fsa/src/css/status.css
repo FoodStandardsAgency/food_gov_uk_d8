@@ -1,0 +1,16 @@
+.status {
+  padding-top: 1em;
+  @mixin responsive-declaration padding-right, 1.25em, 5em;
+  padding-bottom: 1em;
+  @mixin responsive-declaration padding-left, 1.25em, 5em;
+  background-color: var(--primary-color);
+  color: var(--color-white);
+  box-shadow: var(--box-shadow);
+  z-index: 200;
+  position: relative;
+}
+
+.status a {
+  color: var(--color-white);
+  text-decoration: underline;
+}

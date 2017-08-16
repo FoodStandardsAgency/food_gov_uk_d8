@@ -21,52 +21,13 @@
  * @ingroup themeable
  */
 #}
-<div class="layout js-sticky-container">
-  <div class="layout__sidebar js-sticky-element">
-    <div class="sidebar">
-      <div class="sidebar__header">
-        <a href="#" class="sidebar__return-link ">
-          <div class="sidebar__return-icon svg">
-            <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#arrow-icon"></use></svg>
-          </div>
-        </a>
 
-        <a href="#" class="sidebar__home-link">
-          <div class="sidebar__icon svg">
-            <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#help-centre-icon"></use></svg>
-          </div>
-          <h3 class="sidebar__heading">Help Centre</h3>
-        </a>
-
-        <div class="sidebar__spacer"></div>
-      </div>
-
-      <div class="side-navigation">
-        <a href="#" class="side-navigation__link side-navigation__link--active">
-          <div class="side-navigation__text">For consumers</div>
-          <div class="side-navigation__icon svg">
-            <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#arrow-icon"></use></svg>
-          </div>
-        </a>
-        <a href="#" class="side-navigation__link">
-          <div class="side-navigation__text">For businesses</div>
-          <div class="side-navigation__icon svg">
-            <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#arrow-icon"></use></svg>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="layout__content">
-    <div class="webform">
-      <div class="webform__container">
-        <form{{ attributes }}>
-          {{ title_prefix }}
-          {{ children }}
-          {{ title_suffix }}
-        </form>
-      </div>
-    </div>
+<div class="webform">
+  <div class="webform__container">
+    <form{{ attributes }}>
+      {{ title_prefix }}
+      {{ children }}
+      {{ title_suffix }}
+    </form>
   </div>
 </div>
