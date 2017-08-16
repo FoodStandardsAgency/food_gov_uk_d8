@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
-    <title>search icon</title>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.1 (44463) - http://www.bohemiancoding.com/sketch -->
+    <title>Fill 1</title>
     <desc>Created with Sketch.</desc>
-    <defs>
-        <polygon id="path-1" points="0 15 0 0 15 0 15 15"></polygon>
-    </defs>
-    <g id="Frontpage" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="FSA-Green-Teal-mobile-320" transform="translate(-275.000000, -23.000000)">
+    <defs></defs>
+    <g id="Navigation" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Default" transform="translate(-973.000000, -82.000000)" fill="#FFFFFF">
             <g id="Header">
-                <g id="search-icon" transform="translate(275.000000, 23.000000)">
-                    <mask id="mask-2" fill="white">
-                        <use xlink:href="#path-1"></use>
-                    </mask>
-                    <g id="Clip-2"></g>
-                    <path d="M6.5625,11.25 C3.973125,11.25 1.875,9.151875 1.875,6.5625 C1.875,3.973125 3.973125,1.875 6.5625,1.875 C9.151875,1.875 11.25,3.973125 11.25,6.5625 C11.25,9.151875 9.151875,11.25 6.5625,11.25 M14.7253125,13.3996875 L11.8134375,10.4878125 C12.63375,9.391875 13.125,8.03625 13.125,6.5625 C13.125,2.938125 10.186875,0 6.5625,0 C2.938125,0 0,2.938125 0,6.5625 C0,10.186875 2.938125,13.125 6.5625,13.125 C8.03625,13.125 9.3928125,12.63375 10.4878125,11.8134375 L13.3996875,14.7253125 C13.76625,15.091875 14.35875,15.091875 14.7253125,14.7253125 C15.091875,14.35875 15.091875,13.76625 14.7253125,13.3996875" id="Fill-1" fill="#18262C" mask="url(#mask-2)"></path>
+                <g id="Searh" transform="translate(431.000000, 70.000000)">
+                    <g id="search" transform="translate(73.000000, 0.000000)">
+                        <g id="search-icon" transform="translate(469.000000, 12.000000)">
+                            <path d="M7,12 C4.238,12 2,9.762 2,7 C2,4.238 4.238,2 7,2 C9.762,2 12,4.238 12,7 C12,9.762 9.762,12 7,12 M15.707,14.293 L12.601,11.187 C13.476,10.018 14,8.572 14,7 C14,3.134 10.866,0 7,0 C3.134,0 0,3.134 0,7 C0,10.866 3.134,14 7,14 C8.572,14 10.019,13.476 11.187,12.601 L14.293,15.707 C14.684,16.098 15.316,16.098 15.707,15.707 C16.098,15.316 16.098,14.684 15.707,14.293" id="Fill-1"></path>
+                        </g>
+                    </g>
                 </g>
             </g>
         </g>

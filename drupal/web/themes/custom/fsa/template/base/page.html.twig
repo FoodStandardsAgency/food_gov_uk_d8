@@ -48,34 +48,61 @@
   <header class="header" role="banner">
     {{ page.header }}
 
-    <div class="container header__container">
-      <div class="header__logo">
-        <div class="logo svg">
-          <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop-white"></use></svg>
+    <div class="header__container">
+      <div class="header__menu-button">
+        <div class="svg">
+          <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#menu-icon"></use></svg>
         </div>
       </div>
+
+      <div class="header__logo">
+        <div class="svg">
+          <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop"></use></svg>
+        </div>
+      </div>
+
+      <button type="button" name="button" class="header__search-button button button--with-icon button--mobile-light">
+        <div class="button__icon svg">
+          <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#search-icon"></use></svg>
+        </div>
+        <span>Search</span>
+      </button>
 
       <div class="header__search">
-        <button class="header__sorting">A-Z</button>
-        <label for="">Search from</label>
-        <input type="text" name="" value="">
-        <select class="" name="">
-          <option value="food.gov.uk">food.gov.uk</option>
-          <option value="food.gov.cy">food.gov.cy</option>
-          <option value="food.gov.com">food.gov.com</option>
-        </select>
-        <button type="button" name="button" class="button">Search</button>
+        <button class="header__sorting-button button button--small button--light">A–Z</button>
+
+        <div class="input-group">
+          <input type="text" name="" value="" placeholder="Search from...">
+          <select class="" name="">
+            <option value="food.gov.uk">food.gov.uk</option>
+            <option value="food.gov.cy">food.gov.cy</option>
+            <option value="food.gov.com">food.gov.com</option>
+          </select>
+          <button type="button" name="button" class="button button--small button--with-icon">
+            <div class="button__icon svg">
+              <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#search-icon"></use></svg>
+            </div>
+          </button>
+        </div>
       </div>
 
-      <div class="header__links">
-        <div class="header__languge">
-          <a href="#" class="">En</a><a href="#" class="">Cy</a>
-        </div>
-        <div class="header__about">
-          <a href="#" class="">About us</a>
+      <div class="header__cta">
+        <div class="header__links">
+          <div class="header__language">
+            <a href="#" class="header__language-link header__language-link--active">En</a>
+            <a href="#" class="header__language-link">Cy</a>
+          </div>
+          <div class="header__about">
+            <a href="#" class="">About us</a>
+          </div>
         </div>
         <div class="header__help">
-          <a href="#" class="">Help centre</a>
+          <a href="#" class="button button--with-icon">
+            <div class="button__icon svg">
+              <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#help-centre-icon"></use></svg>
+            </div>
+            <span>Help centre</span>
+          </a>
         </div>
       </div>
     </div>
@@ -85,21 +112,41 @@
     {% if page.primary_menu %}
     {{ page.primary_menu }}
     {% endif %}
-    <div class="">
-
+    <div class="navigation__container">
+      <div class="navigation__item">
+        <a href="#" class="navigation__link">News & Alerts</a>
+      </div>
+      <div class="navigation__item">
+        <a href="#" class="navigation__link">Food safety & Hygiene</a>
+      </div>
+      <div class="navigation__item">
+        <a href="#" class="navigation__link">Business guidance</a>
+      </div>
+      <div class="navigation__item">
+        <a href="#" class="navigation__link">Science & Research</a>
+      </div>
     </div>
   </div>
 
   {% if page.secondary_menu %}
-    <div class="site-navigation">
-      {{ page.secondary_menu }}
-    </div>
+    {{ page.secondary_menu }}
   {% endif %}
 
   <div class="breadcrumb">
     {% if page.breadcrumb %}
       {{ page.breadcrumb }}
     {% endif %}
+    <div class="breadcrumb__container">
+      <div class="breadcrumb__item">
+        <a href="#" class="breadcrumb__link">Home</a>
+      </div>
+      <div class="breadcrumb__item">
+        <a href="#" class="breadcrumb__link">Help centre for consumers</a>
+      </div>
+      <div class="breadcrumb__item">
+        <a href="#" class="breadcrumb__link">Report a food safety</a>
+      </div>
+    </div>
   </div>
 
   {% if page.highlighted %}

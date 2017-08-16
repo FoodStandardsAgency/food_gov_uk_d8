@@ -14,7 +14,6 @@
     bottom: auto;
     left: auto;
     transform: none;
-    padding: 1em;
   }
 
   &.is-open {
@@ -25,27 +24,28 @@
 .navigation__container {
   @media (--breakpoint-sm) {
     display: flex;
+    justify-content: center;
   }
 }
 
 .navigation__container--mobile {
-  padding: 1em;
-
   @media (--breakpoint-sm) {
     display: none;
   }
 }
 
 .navigation__item {
-  display: block;
-  padding: 1em;
-
-  &:last-child {
-    margin-left: auto;
-  }
+  
 }
 
-:--not-touch .navigation__item:--enter {
+.navigation__link {
+  display: block;
+  padding: 1em 1em;
+  text-transform: uppercase;
+  color: var(--color-white);
+}
+
+:--not-touch .navigation__link:--enter {
   background-color: var(--color-teal-light);
-  color: var(--color-black);
+  color: var(--primary-color);
 }
