@@ -1,10 +1,10 @@
-uuid: 674ccc72-e1e0-4594-a16a-94296ef08093
+uuid: e7313f3c-1f2d-47ae-ab8a-227656681fd6
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_icon
-    - node.type.webform
+    - node.type.page
   module:
     - content_translation
     - image
@@ -14,10 +14,10 @@ third_party_settings:
       alt: alt
       title: title
       file: '0'
-id: node.webform.field_icon
+id: node.page.field_icon
 field_name: field_icon
 entity_type: node
-bundle: webform
+bundle: page
 label: 'Liftup icon'
 description: 'Icon that represents this content. Initially used when referencing to this piece of content. Preferably in square format to make it look nice on referencing page(s).'
 required: false
@@ -27,7 +27,7 @@ default_value_callback: ''
 settings:
   file_directory: icon
   file_extensions: 'png gif jpg jpeg'
-  max_filesize: '1 MB'
+  max_filesize: ''
   max_resolution: ''
   min_resolution: ''
   alt_field: true
