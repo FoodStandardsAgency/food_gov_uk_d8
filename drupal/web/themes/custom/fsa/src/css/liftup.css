@@ -9,5 +9,9 @@
 .liftup__item {
   @mixin responsive-declaration margin-left, 1em, 1.5em;
   @mixin responsive-declaration margin-bottom, 1em, 1.5em;
-  flex: 0 1 16em;
+  flex: 1 1 50%;
+
+  @media (--breakpoint-lg) {
+    flex: 0 1 16em;
+  }
 }

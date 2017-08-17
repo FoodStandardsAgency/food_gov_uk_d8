@@ -8,9 +8,14 @@
 #}
 <a href="{{ url }}" rel="bookmark" class="node-teaser">
   <article{{ attributes }}>
-    <figure>
-      {{ content.field_icon }}
-      <figcaption><h4{{ title_attributes }} class="node-teaser__heading">{{ label }}</h4></figcaption>
-    </figure>
+    <div class="node-teaser__container">
+      <div class="node-teaser__image">
+        {{ content.field_icon }}
+      </div>
+
+      <div class="node-teaser__content">
+        <h4{{ title_attributes }} class="node-teaser__heading">{{ label }}</h4>
+      </div>
+    </div>
   </article>
 </a>
