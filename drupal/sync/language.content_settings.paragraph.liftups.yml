@@ -1,16 +1,16 @@
-uuid: b4df65da-7a0c-460c-8424-ae8bd3e9b26e
+uuid: babd629c-4c16-4c3e-b21f-113d8b98a4ba
 langcode: en
 status: true
 dependencies:
   config:
-    - node.type.page
+    - paragraphs.paragraphs_type.liftups
   module:
     - content_translation
 third_party_settings:
   content_translation:
-    enabled: true
-id: node.page
-target_entity_type_id: node
-target_bundle: page
+    enabled: false
+id: paragraph.liftups
+target_entity_type_id: paragraph
+target_bundle: liftups
 default_langcode: site_default
 language_alterable: false
