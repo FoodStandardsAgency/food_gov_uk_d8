@@ -7,7 +7,7 @@
 @import "site-promo.css";
 @import "site-features.css";
 @import "site-content.css";
-@import "site-footer.css";
+@import "footer.css";
 
 @import "button.css";
 @import "table.css";
@@ -26,3 +26,4 @@
 @import "side-navigation.css";
 @import "node-teaser.css";
 @import "status.css";
+@import "liftup.css";

@@ -182,10 +182,29 @@
 
   </main>
 
-  {% if page.footer %}
-    <footer class="site-footer" role="contentinfo">
+  <footer class="footer" role="contentinfo">
+    {% if page.footer %}
       {{ page.footer }}
-    </footer>
-  {% endif %}
+    {% endif %}
+    <div class="footer__logo">
+      <div class="svg">
+        <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop"></use></svg>
+      </div>
+    </div>
+    <div class="footer__content">
+      <p>Food Standards Agency makes sure food is safe to eat and is what is says it is.</p>
+    </div>
+    <div class="footer__social-link">
+
+    </div>
+    <div class="footer__links">
+      <div class="footer__link-item"><a href="#" class="footer__link">Copyright</a></div>
+      <div class="footer__link-item"><a href="#" class="footer__link">Accessibility</a></div>
+      <div class="footer__link-item"><a href="#" class="footer__link">Freedom of information</a></div>
+      <div class="footer__link-item"><a href="#" class="footer__link">Terms and conditions</a></div>
+      <div class="footer__link-item"><a href="#" class="footer__link">Privacy</a></div>
+      <div class="footer__link-item"><a href="#" class="footer__link">Feedback</a></div>
+    </div>
+  </footer>
 
 </div>
