@@ -55,6 +55,12 @@ default:
 
 # Minimal build for Travis CI
 ci:
+
+  link:
+    - conf/settings.stage.php: web/sites/default/settings.local.php
+    - conf/settings.global.php: web/sites/default/settings.global.php
+    - /var/www/fsa/files: web/sites/default/files
+
   local_commands:
     build:
       - make
