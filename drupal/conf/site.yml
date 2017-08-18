@@ -63,6 +63,7 @@ ci:
 
   local_commands:
     build:
+      - shell: mkdir -p /var/www/fsa/files
       - shell: rm web/sites/default/files
       - make
       - shell: chmod -R a+w web
