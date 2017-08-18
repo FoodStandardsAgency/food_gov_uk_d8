@@ -461,6 +461,10 @@ figure {
   display: block;
 }
 
+.page-title {
+  color: var(--primary-color);
+}
+
 /*Quick hiding for all default drupal stuff*/
 
 /*.contextual-region,*/

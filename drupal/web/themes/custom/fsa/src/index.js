@@ -29,6 +29,15 @@ if (searchLogo != null) {
   searchLogo.parentNode.insertBefore(searchHeading, searchLogo.nextSibling);
 }
 
+// Second temperary fix
+const pageTitle = document.querySelector('.js-quickedit-page-title');
+
+if (pageTitle != null) {
+  pageTitle.classList.add('page-title');
+  const layoutArticle = document.querySelector('.layout__content').children[0];
+  layoutArticle.parentNode.insertBefore(pageTitle, layoutArticle);
+}
+
 // Responsive tables
 const tables = [...document.querySelectorAll('.js-table')];
 if (tables != null) {

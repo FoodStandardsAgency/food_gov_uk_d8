@@ -130,4 +130,8 @@
 
 .node-teaser__read-more-content.is-open {
   display: block;
+
+  @media (--breakpoint-lg) {
+    display: none;
+  }
 }

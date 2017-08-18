@@ -1,5 +1,5 @@
 .webform {
-
+  padding-top: 2em;
 }
 
 .webform__container {
@@ -183,4 +183,56 @@
   @mixin responsive-declaration margin-bottom, 1.5em, 2em;
   @mixin responsive-declaration padding-top, 1.5em, 2em;
   border-top: 1px solid var(--color-light-gray);
+}
+
+.webform .toggle-button {
+  background-color: var(--color-white);
+  @mixin responsive-declaration padding-top, 1em, 1.25em;
+  @mixin responsive-declaration padding-bottom, 1em, 1.25em;
+  @mixin responsive-declaration padding-right, 1em, 2em;
+  @mixin responsive-declaration padding-left, 1em, 2em;
+  color: var(--primary-color);
+  font-weight: 600;
+  box-shadow: var(--box-shadow);
+}
+
+.webform .toggle-button__item {
+  padding-right: 1em;
+}
+
+.webform .toggle-button.is-open {
+  background-color: var(--primary-color);
+  color: var(--color-white);
+}
+
+.webform .toggle-button__item--icon {
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  box-shadow: var(--box-shadow);
+}
+
+.webform .toggle-button.is-open .toggle-button__item--icon {
+  box-shadow: none;
+  background-color: var(--color-white);
+}
+
+.webform .toggle-button__item--icon svg {
+  transform: translateY(-50%) translateX(-50%) scale(0.3);
+}
+
+.webform .toggle-button__item--icon path {
+  color: var(--color-white);
+}
+
+.webform .toggle-button.is-open .toggle-button__item--icon path {
+  color: var(--primary-color);
+}
+
+.webform .toggle-content {
+  background-color: var(--color-white);
+  @mixin responsive-declaration padding, 1em, 2em;
+  font-weight: 400;
+  box-shadow: var(--box-shadow);
 }
