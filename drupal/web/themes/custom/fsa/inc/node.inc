@@ -18,5 +18,10 @@ function fsa_preprocess_node(&$variables) {
     if (isset($node->field_liftup_title->value) && $node->field_liftup_title->value != '') {
       $variables['label'] = $node->field_liftup_title->value;
     }
+
+    // Replace teaser body value with summary (even if no summary set).
+    if (isset($variables['content']['body']['#items'])) {
+      $variables['content']['body'][0]['#text'] = $variables['content']['body']['#items']->getValue()[0]['summary'];
+    }
   }
 }
