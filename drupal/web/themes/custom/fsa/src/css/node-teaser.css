@@ -7,10 +7,6 @@
   text-align: center;
 }
 
-:--not-touch .node-teaser:--enter {
-  color: var(--light-primary-color);
-}
-
 .node-teaser__container {
   display: flex;
   align-items: center;
@@ -22,16 +18,6 @@
 
 .node-teaser__image {
 
-}
-
-.node-teaser__content {
-  display: flex;
-  align-items: center;
-
-  @media (--breakpoint-lg) {
-    flex: 0 0 5em;
-    border-top: 1px solid var(--color-lighter-gray);
-  }
 }
 
 .node-teaser__image {
@@ -58,6 +44,24 @@
   height: auto;
 }
 
+.node-teaser__header {
+  display: flex;
+  align-items: center;
+
+  @media (--breakpoint-lg) {
+    flex: 0 0 5em;
+    border-top: 1px solid var(--color-lighter-gray);
+  }
+}
+
+.node-teaser--with-summary .node-teaser__header {
+  @media (--breakpoint-lg) {
+    flex: 0 0 5em;
+    border-top: none;
+    border-bottom: 1px solid var(--color-lighter-gray);
+  }
+}
+
 .node-teaser__heading {
   margin: 0;
   font-weight: 500;
@@ -66,4 +70,64 @@
 
 :--not-touch .node-teaser:--enter .node-teaser__heading {
   color: var(--primary-color);
+}
+
+.node-teaser--with-summary .node-teaser__heading {
+  font-size: 1.125em;
+  color: var(--primary-color);
+}
+
+:--not-touch .node-teaser.node-teaser--with-summary:--enter .node-teaser__heading {
+  color: var(--light-primary-color);
+}
+
+.node-teaser__content {
+  display: none;
+
+  @media (--breakpoint-lg) {
+    display: block;
+  }
+}
+
+.node-teaser--with-summary .node-teaser__content {
+  color: var(--color-dark-blue);
+  padding: 1em;
+}
+
+.node-teaser__read-more {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--color-lighter-gray);
+  padding: 1em;
+
+  @media (--breakpoint-lg) {
+    display: none;
+  }
+}
+
+.node-teaser__read-more.is-open .node-teaser__read-more-icon {
+  transform: rotate(0);
+}
+
+.node-teaser__read-more-text {
+  font-weight: 600;
+  color: var(--color-dark-blue);
+}
+
+.node-teaser__read-more-icon {
+  width: 1em;
+  height: 1em;
+  transform: rotate(-90deg);
+}
+
+.node-teaser__read-more-content {
+  display: none;
+  text-align: left;
+  padding: 1em;
+}
+
+.node-teaser__read-more-content.is-open {
+  display: block;
 }

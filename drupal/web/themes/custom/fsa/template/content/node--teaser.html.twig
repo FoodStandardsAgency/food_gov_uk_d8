@@ -6,16 +6,47 @@
  * @see template_preprocess_node()
  */
 #}
-<a href="{{ url }}" rel="bookmark" class="node-teaser">
-  <article{{ attributes }}>
-    <div class="node-teaser__container">
-      <div class="node-teaser__image">
-        {{ content.field_icon }}
-      </div>
+{% set randomID = [] %}
+{% for i in 1..10 %}
+    {% set alpha = 'abcdefghijklmnopqrstuvwxyz' %}
+    {% set alphaUpper = alpha|upper %}
+    {% set numbers = '0123456789' %}
+    {% set randomCharacter = random(alpha ~ alphaUpper ~ numbers ~ '-_') %}
+    {% set randomID = randomID|merge([randomCharacter]) %}
+{% endfor %}
+{% set randomID = randomID|join %}
 
-      <div class="node-teaser__content">
-        <h4{{ title_attributes }} class="node-teaser__heading">{{ label }}</h4>
+<div class="node-teaser{% if content.body|length > 2 %} node-teaser--with-summary{% endif %}">
+  <article{{ attributes }}>
+    <a href="{{ url }}" rel="bookmark" class="block-link">
+      <div class="node-teaser__container">
+        <div class="node-teaser__image">
+          {{ content.field_icon }}
+        </div>
+
+        <header class="node-teaser__header">
+          <h4{{ title_attributes }} class="node-teaser__heading">{{ label }}</h4>
+        </header>
+
+        {% if content.body|length > 2 %}
+          <div class="node-teaser__content">
+            {{ content|without('field_icon') }}
+          </div>
+        {% endif %}
       </div>
-    </div>
+    </a>
+
+    {% if content.body|length > 2 %}
+      <button class="node-teaser__read-more toggle-button js-toggle-button" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
+        <div class="node-teaser__read-more-text">More information</div>
+        <div class="node-teaser__read-more-icon svg">
+          <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#arrow-icon"></use></svg>
+        </div>
+      </button>
+
+      <div class="node-teaser__read-more-content toggle-content js-toggle-content" id="collapsible-{{ randomID }}" aria-hidden="true">
+        {{ content|without('field_icon') }}
+      </div>
+    {% endif %}
   </article>
-</a>
+</div>

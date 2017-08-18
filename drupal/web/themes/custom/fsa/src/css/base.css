@@ -457,6 +457,10 @@ figure {
   overflow-x: auto;
 }
 
+.block-link {
+  display: block;
+}
+
 /*Quick hiding for all default drupal stuff*/
 
 /*.contextual-region,*/
