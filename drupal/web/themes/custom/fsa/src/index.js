@@ -30,7 +30,11 @@ if (searchLogo != null) {
 }
 
 // Second temperary fix
-const pageTitle = document.querySelector('.js-quickedit-page-title');
+let pageTitle = document.querySelector('.js-quickedit-page-title');
+
+if (pageTitle == null) {
+  pageTitle = document.querySelector('#block-pagetitle');
+}
 
 if (pageTitle != null) {
   pageTitle.classList.add('page-title');

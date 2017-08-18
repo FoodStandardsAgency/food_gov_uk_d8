@@ -120,6 +120,7 @@
   width: 1em;
   height: 1em;
   transform: rotate(-90deg);
+  margin-left: auto;
 }
 
 .node-teaser__read-more-content {
