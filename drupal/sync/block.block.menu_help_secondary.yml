@@ -1,0 +1,29 @@
+uuid: a7557866-db64-4153-90b9-1cac18773588
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.help
+  module:
+    - system
+  theme:
+    - fsa
+id: menu_help_secondary
+theme: fsa
+region: sidebar_first
+weight: 0
+provider: null
+plugin: 'system_menu_block:help'
+settings:
+  id: 'system_menu_block:help'
+  label: 'Help menu 2nd level'
+  provider: system
+  label_display: visible
+  level: 1
+  depth: 2
+visibility:
+  request_path:
+    id: request_path
+    pages: "/help\r\n/help/*"
+    negate: false
+    context_mapping: {  }
