@@ -96,8 +96,8 @@ stage:
 
     update:
       - shell: 
-        rm web/sites/default/files
-        ln -s /var/www/fsa/files web/sites/default/files
+        - rm web/sites/default/files
+        - ln -s /var/www/fsa/files web/sites/default/files
       - drush: updb -y
       - drush: cim -y
       - drush: entity-updates -y
