@@ -1,3 +1,7 @@
+.paragraph--type-liftups {
+  @mixin responsive-declaration padding-top, 1em, 2em;
+}
+
 .liftup {
   display: flex;
   flex-flow: row wrap;

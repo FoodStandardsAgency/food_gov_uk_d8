@@ -465,6 +465,10 @@ figure {
   color: var(--primary-color);
 }
 
+div.page-title {
+  @mixin responsive-declaration padding-bottom, 1em, 2em;
+}
+
 /*Quick hiding for all default drupal stuff*/
 
 /*.contextual-region,*/
