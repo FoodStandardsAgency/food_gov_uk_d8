@@ -16,7 +16,7 @@
 {% endfor %}
 {% set randomID = randomID|join %}
 
-<div class="node-teaser{% if content.body|length > 2 %} node-teaser--with-summary{% endif %}">
+<div class="node-teaser{% if content.body['#object'].body.summary %} node-teaser--with-summary{% endif %}">
   <article{{ attributes }}>
     <a href="{{ url }}" rel="bookmark" class="block-link">
       <div class="node-teaser__container">
@@ -36,7 +36,7 @@
       </div>
     </a>
 
-    {% if content.body|length > 2 %}
+    {% if content.body['#object'].body.summary %}
       <button class="node-teaser__read-more toggle-button js-toggle-button" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
         <div class="node-teaser__read-more-text">More information</div>
         <div class="node-teaser__read-more-icon svg">
