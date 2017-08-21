@@ -22,9 +22,9 @@ See more here: [https://travis-ci.com/wunderio/client-UK-FSA-alpha](https://trav
 
 ```$ git clone git@github.com:wunderio/client-UK-FSA-alpha.git```
 
-```$ vagrant up``` - default is fine reply to all prompts. 
+```$ vagrant up``` 
 
-If you dont' use `vagrant-hostmanager` add following line to `/etc/hosts`
+Add to your host machine `/etc/hosts` file the following line  
 ```192.168.10.178	local.food.gov.uk```
 
 #### 2. First time setup
@@ -34,6 +34,10 @@ If you dont' use `vagrant-hostmanager` add following line to `/etc/hosts`
 ```$ cd /vagrant/drupal/ && ./build.sh reset```
 
 Access your local environment at https://local.food.gov.uk
+
+#### 3. Sync staging to local environment
+
+From your host machine, run: `./sync.sh`
 
 ## Project management
 
