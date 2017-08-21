@@ -11,6 +11,13 @@
 
 }
 
+/*Webfrom status*/
+.webform .webform-progress__status {
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-gray);
+}
+
 /*Progress bar*/
 .webform-progress .webform-progress-tracker .progress-step .progress-marker {
   background-color: var(--color-dark-blue);
