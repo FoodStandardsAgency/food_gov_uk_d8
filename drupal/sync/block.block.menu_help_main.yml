@@ -6,6 +6,7 @@ dependencies:
     - system.menu.help
   module:
     - system
+    - user
   theme:
     - fsa
 id: menu_help_main
@@ -21,4 +22,11 @@ settings:
   label_display: '0'
   level: 1
   depth: 1
-visibility: {  }
+visibility:
+  user_role:
+    id: user_role
+    roles:
+      administrator: administrator
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
