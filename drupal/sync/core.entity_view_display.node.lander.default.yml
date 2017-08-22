@@ -1,0 +1,35 @@
+uuid: 935ecb78-77c6-4bac-b44e-601fcf323d3f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.lander.field_intro
+    - field.field.node.lander.field_promo_block
+    - node.type.lander
+  module:
+    - entity_reference_revisions
+    - user
+id: node.lander.default
+targetEntityType: node
+bundle: lander
+mode: default
+content:
+  field_intro:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_promo_block:
+    type: entity_reference_revisions_entity_view
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  langcode: true
+  links: true

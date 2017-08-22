@@ -1,0 +1,16 @@
+uuid: 99dd3ac8-4415-4054-8a21-a9a8b2cdc1a2
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.lander
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: node.lander
+target_entity_type_id: node
+target_bundle: lander
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,19 @@
+uuid: eb814f8c-edef-4df1-900d-df1261c60d81
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_intro
+    - node.type.lander
+id: node.lander.field_intro
+field_name: field_intro
+entity_type: node
+bundle: lander
+label: Intro
+description: 'Introductional copy text displayed next to the page title.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long
