@@ -468,11 +468,3 @@ figure {
 div.page-title {
   @mixin responsive-declaration padding-bottom, 1em, 2em;
 }
-
-/*Quick hiding for all default drupal stuff*/
-
-/*.contextual-region,*/
-.site-highlighted,
-.layout-sidebar-first {
-  display: none !important;
-}
