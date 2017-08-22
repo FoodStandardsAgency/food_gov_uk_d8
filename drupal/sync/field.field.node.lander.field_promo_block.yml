@@ -1,0 +1,33 @@
+uuid: 7bc5a979-42c6-4261-9926-36f1fcf0044e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_promo_block
+    - node.type.lander
+    - paragraphs.paragraphs_type.manual_promo
+  module:
+    - entity_reference_revisions
+id: node.lander.field_promo_block
+field_name: field_promo_block
+entity_type: node
+bundle: lander
+label: 'Promotion blocks'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      manual_promo: manual_promo
+    target_bundles_drag_drop:
+      manual_promo:
+        enabled: true
+        weight: 3
+      liftups:
+        weight: 4
+        enabled: false
+field_type: entity_reference_revisions

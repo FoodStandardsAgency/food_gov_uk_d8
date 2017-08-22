@@ -1,0 +1,34 @@
+uuid: d646fecd-cc7f-4407-b19b-fc9dab0c199f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.manual_promo.field_heading
+    - field.field.paragraph.manual_promo.field_promo_block
+    - paragraphs.paragraphs_type.manual_promo
+id: paragraph.manual_promo.default
+targetEntityType: paragraph
+bundle: manual_promo
+mode: default
+content:
+  field_heading:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_promo_block:
+    weight: 1
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

@@ -3,25 +3,33 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.lander.body
+    - field.field.node.lander.field_intro
+    - field.field.node.lander.field_promo_block
     - node.type.lander
   module:
-    - text
+    - entity_reference_revisions
     - user
 id: node.lander.default
 targetEntityType: node
 bundle: lander
 mode: default
 content:
-  body:
+  field_intro:
+    weight: 0
     label: hidden
-    type: text_default
-    weight: 101
     settings: {  }
     third_party_settings: {  }
+    type: basic_string
     region: content
-  links:
-    weight: 100
+  field_promo_block:
+    type: entity_reference_revisions_entity_view
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
     region: content
 hidden:
   langcode: true
+  links: true
