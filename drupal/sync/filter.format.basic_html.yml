@@ -50,6 +50,6 @@ filters:
     status: true
     weight: 0
     settings:
-      type: simple
+      type: full
       auto: ''
       block: '1'
