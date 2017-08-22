@@ -1,0 +1,23 @@
+uuid: 8e5f7e60-c293-42c5-8b87-1dfedf9cfc52
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.promo_block
+    - field.storage.block_content.field_link
+  module:
+    - link
+id: block_content.promo_block.field_link
+field_name: field_link
+entity_type: block_content
+bundle: promo_block
+label: 'Link target'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 0
+field_type: link
