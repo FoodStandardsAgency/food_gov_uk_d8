@@ -1,5 +1,6 @@
 module:
   admin_toolbar: 0
+  anchor_link: 0
   automated_cron: 0
   block: 0
   block_content: 0
@@ -49,6 +50,8 @@ module:
   system: 0
   taxonomy: 0
   text: 0
+  toc_api: 0
+  toc_filter: 0
   token: 0
   toolbar: 0
   tour: 0

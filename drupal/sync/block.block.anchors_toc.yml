@@ -1,0 +1,20 @@
+uuid: 6b11f0ea-1f16-4f15-add0-003c716dfc6b
+langcode: en
+status: true
+dependencies:
+  module:
+    - toc_filter
+  theme:
+    - fsa
+id: anchors_toc
+theme: fsa
+region: sidebar_first
+weight: 0
+provider: null
+plugin: toc_filter
+settings:
+  id: toc_filter
+  label: 'Table of contents'
+  provider: toc_filter
+  label_display: visible
+visibility: {  }
