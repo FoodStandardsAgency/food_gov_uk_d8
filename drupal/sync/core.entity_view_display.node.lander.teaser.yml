@@ -1,0 +1,29 @@
+uuid: 51d25b97-2032-4d91-89b1-d842d1d84915
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.lander.body
+    - node.type.lander
+  module:
+    - text
+    - user
+id: node.lander.teaser
+targetEntityType: node
+bundle: lander
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden:
+  langcode: true

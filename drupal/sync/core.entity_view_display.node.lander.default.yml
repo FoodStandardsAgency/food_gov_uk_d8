@@ -1,0 +1,27 @@
+uuid: 935ecb78-77c6-4bac-b44e-601fcf323d3f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.lander.body
+    - node.type.lander
+  module:
+    - text
+    - user
+id: node.lander.default
+targetEntityType: node
+bundle: lander
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden:
+  langcode: true

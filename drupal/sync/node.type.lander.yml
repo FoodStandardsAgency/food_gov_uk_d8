@@ -1,0 +1,19 @@
+uuid: 1bbb4bb0-fbc5-4def-976f-d83bf4ea5a71
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - help
+      - main
+    parent: 'main:'
+name: 'Landing page'
+type: lander
+description: 'Use <em>Landing pages</em> for creating a collection page with promotions to deeper topics.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true
