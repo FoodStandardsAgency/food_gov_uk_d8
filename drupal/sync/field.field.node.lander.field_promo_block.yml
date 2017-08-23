@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_promo_block
     - node.type.lander
+    - paragraphs.paragraphs_type.liftups
     - paragraphs.paragraphs_type.manual_promo
   module:
     - entity_reference_revisions
@@ -23,11 +24,12 @@ settings:
   handler_settings:
     target_bundles:
       manual_promo: manual_promo
+      liftups: liftups
     target_bundles_drag_drop:
       manual_promo:
         enabled: true
         weight: 3
       liftups:
+        enabled: true
         weight: 4
-        enabled: false
 field_type: entity_reference_revisions
