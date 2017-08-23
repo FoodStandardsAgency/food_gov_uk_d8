@@ -1,0 +1,23 @@
+.hero {
+  background-color: var(--primary-color);
+  @mixin responsive-declaration padding-top, 1em, 3em;
+  @mixin responsive-declaration padding-right, 1em, 2em;
+  @mixin responsive-declaration padding-bottom, 1em, 3em;
+  @mixin responsive-declaration padding-left, 1em, 2em;
+  color: var(--color-white);
+}
+
+.hero a {
+  color: var(--color-white);
+  text-decoration: underline;
+}
+
+.hero__container {
+  display: flex;
+  flex-direction: column;
+
+  @media (--breakpoint-lg) {
+    flex: 0 1 16em;
+    flex-direction: row;
+  }
+}

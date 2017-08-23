@@ -1,0 +1,33 @@
+.modal {
+  @mixin responsive-declaration padding, 1em, 2em;
+  box-shadow: var(--box-shadow);
+}
+
+.modal.modal--hero {
+  @mixin responsive-declaration margin-bottom, -2em, -6em;
+}
+
+.modal.modal--report {
+  background-color: var(--color-dark-blue);
+  color: var(--color-white);
+}
+
+.modal.modal--report :--heading {
+  color: var(--primary-color);
+}
+
+.modal__header {
+  display: flex;
+  align-items: flex-start;
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
+}
+
+.modal__header h3 {
+  margin-top: 0;
+}
+
+.modal__icon {
+  width: 4em;
+  height: 4em;
+  @mixin responsive-declaration margin-right, 1em, 2em;
+}
