@@ -37,7 +37,8 @@
         "drupal/anchor_link": "^1.5",
         "drupal/toc_filter": "^2.0@beta",
         "drupal/inline_entity_form": "^1.0@beta",
-        "drupal/media_entity": "^1.6"
+        "drupal/media_entity": "^1.6",
+        "drupal/video_embed_field": "^1.5"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
