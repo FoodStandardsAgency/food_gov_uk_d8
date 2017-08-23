@@ -1,0 +1,8 @@
+uuid: d05bd9ce-916b-488c-89ab-eabb49a24304
+langcode: en
+status: true
+dependencies: {  }
+id: promo_block
+label: 'Promo block'
+revision: 0
+description: 'Block to promote internal or third party website content.'

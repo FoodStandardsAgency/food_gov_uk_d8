@@ -1,0 +1,7 @@
+uuid: 4f126610-b81a-4b22-890c-7022c422162d
+langcode: en
+status: true
+dependencies: {  }
+id: manual_promo
+label: 'Manual promo group'
+behavior_plugins: {  }

@@ -1,0 +1,28 @@
+uuid: af6c4e39-6b70-49c9-8204-b75b296e017b
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.promo_block
+    - field.storage.paragraph.field_promo_block
+    - paragraphs.paragraphs_type.manual_promo
+id: paragraph.manual_promo.field_promo_block
+field_name: field_promo_block
+entity_type: paragraph
+bundle: manual_promo
+label: 'Promo block'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:block_content'
+  handler_settings:
+    target_bundles:
+      promo_block: promo_block
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

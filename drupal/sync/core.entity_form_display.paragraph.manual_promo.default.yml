@@ -1,0 +1,40 @@
+uuid: d646fecd-cc7f-4407-b19b-fc9dab0c199f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.manual_promo.field_heading
+    - field.field.paragraph.manual_promo.field_promo_block
+    - paragraphs.paragraphs_type.manual_promo
+  module:
+    - inline_entity_form
+id: paragraph.manual_promo.default
+targetEntityType: paragraph
+bundle: manual_promo
+mode: default
+content:
+  field_heading:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_promo_block:
+    weight: 1
+    settings:
+      form_mode: default
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      override_labels: false
+    third_party_settings: {  }
+    type: inline_entity_form_complex
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

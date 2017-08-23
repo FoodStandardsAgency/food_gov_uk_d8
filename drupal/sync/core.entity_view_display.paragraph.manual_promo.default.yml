@@ -1,0 +1,31 @@
+uuid: ee7df983-3009-49f0-9254-04a29afc693d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.manual_promo.field_heading
+    - field.field.paragraph.manual_promo.field_promo_block
+    - paragraphs.paragraphs_type.manual_promo
+id: paragraph.manual_promo.default
+targetEntityType: paragraph
+bundle: manual_promo
+mode: default
+content:
+  field_heading:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_promo_block:
+    weight: 1
+    label: hidden
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+hidden: {  }

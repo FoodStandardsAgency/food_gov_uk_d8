@@ -33,7 +33,10 @@
         "drupal/extlink": "^1.0",
         "drupal/field_group": "^1.0@RC",
         "drupal/webform": "5.0-beta16",
-        "drupal/paragraphs": "^1.1"
+        "drupal/paragraphs": "^1.1",
+        "drupal/anchor_link": "^1.5",
+        "drupal/toc_filter": "^2.0@beta",
+        "drupal/inline_entity_form": "^1.0@beta"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
