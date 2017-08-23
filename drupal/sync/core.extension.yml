@@ -10,6 +10,8 @@ module:
   config_translation: 0
   contact: 0
   contextual: 0
+  crop: 0
+  crop_media_entity: 0
   ctools: 0
   datetime: 0
   dblog: 0
@@ -32,6 +34,7 @@ module:
   geolocation: 0
   help: 0
   image: 0
+  image_widget_crop: 0
   inline_entity_form: 0
   language: 0
   link: 0

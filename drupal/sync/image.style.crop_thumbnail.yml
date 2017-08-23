@@ -1,0 +1,17 @@
+uuid: 6dd3b1c1-b58e-45f9-82f1-25b2de9d7fa7
+langcode: fr
+status: true
+dependencies:
+  module:
+    - crop
+_core:
+  default_config_hash: yw6B1eEwE-yPTXWo01PMrpXqhtDUEDfeioNNmgQLby8
+name: crop_thumbnail
+label: 'Crop thumbnail'
+effects:
+  431bf825-2e8c-434d-ae83-fc5f32bb2d1f:
+    uuid: 431bf825-2e8c-434d-ae83-fc5f32bb2d1f
+    id: crop_crop
+    weight: 2
+    data:
+      crop_type: image

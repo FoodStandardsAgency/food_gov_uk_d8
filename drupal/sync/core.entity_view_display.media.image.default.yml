@@ -5,38 +5,28 @@ dependencies:
   config:
     - field.field.media.image.field_description
     - field.field.media.image.field_image
+    - image.style.crop_thumbnail
     - media_entity.bundle.image
   module:
     - image
-    - user
 id: media.image.default
 targetEntityType: media
 bundle: image
 mode: default
 content:
-  created:
-    label: hidden
-    type: timestamp
-    weight: 2
-    region: content
-    settings:
-      date_format: medium
-      custom_date_format: ''
-      timezone: ''
-    third_party_settings: {  }
   field_description:
-    weight: 4
-    label: above
+    weight: 2
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: basic_string
     region: content
   field_image:
-    weight: 3
-    label: above
+    weight: 1
+    label: hidden
     settings:
-      image_style: ''
-      image_link: ''
+      image_style: crop_thumbnail
+      image_link: file
     third_party_settings: {  }
     type: image
     region: content
@@ -48,13 +38,8 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-  uid:
-    label: hidden
-    type: author
-    weight: 1
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
+  created: true
   langcode: true
   thumbnail: true
+  uid: true
