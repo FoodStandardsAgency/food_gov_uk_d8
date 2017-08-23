@@ -5,6 +5,7 @@ dependencies:
   module:
     - editor
     - toc_filter
+    - video_embed_wysiwyg
 _core:
   default_config_hash: P8ddpAIKtawJDi5SzOwCzVnnNYqONewSTJ6Xn0dW_aQ
 name: 'Basic HTML'
@@ -53,3 +54,9 @@ filters:
       type: full
       auto: ''
       block: '1'
+  video_embed_wysiwyg:
+    id: video_embed_wysiwyg
+    provider: video_embed_wysiwyg
+    status: true
+    weight: 0
+    settings: {  }
