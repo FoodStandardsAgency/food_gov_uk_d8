@@ -10,12 +10,15 @@ module:
   config_translation: 0
   contact: 0
   contextual: 0
+  crop: 0
+  crop_media_entity: 0
   ctools: 0
   datetime: 0
   dblog: 0
   dynamic_page_cache: 0
   editor: 0
   elasticsearch_helper: 0
+  entity: 0
   entity_reference_revisions: 0
   field: 0
   field_group: 0
@@ -31,10 +34,13 @@ module:
   geolocation: 0
   help: 0
   image: 0
+  image_widget_crop: 0
   inline_entity_form: 0
   language: 0
   link: 0
   locale: 0
+  media_entity: 0
+  media_entity_image: 0
   menu_ui: 0
   migrate: 0
   migrate_plus: 0
