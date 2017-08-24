@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.page.body
+    - field.field.node.page.field_header_image
     - field.field.node.page.field_icon
     - field.field.node.page.field_liftup_title
     - field.field.node.page.field_liftups
@@ -36,6 +37,7 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  field_header_image: true
   field_icon: true
   field_liftup_title: true
   langcode: true

@@ -1,0 +1,12 @@
+uuid: 1f9ec5d8-64ae-46e7-a1e6-bbe95bc67d8d
+langcode: en
+status: true
+dependencies: {  }
+label: image
+id: image
+description: ''
+aspect_ratio: ''
+soft_limit_width: null
+soft_limit_height: null
+hard_limit_width: null
+hard_limit_height: null

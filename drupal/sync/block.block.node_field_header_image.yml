@@ -1,0 +1,25 @@
+uuid: 0ff70ba8-4c71-4c08-b27a-b0d4b44f462a
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.node_field
+  module:
+    - views
+  theme:
+    - fsa
+id: node_field_header_image
+theme: fsa
+region: hero
+weight: -2
+provider: null
+plugin: 'views_block:node_field-header_image'
+settings:
+  id: 'views_block:node_field-header_image'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility: {  }
