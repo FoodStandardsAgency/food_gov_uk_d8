@@ -4,6 +4,7 @@ status: true
 dependencies:
   module:
     - editor
+    - linkit
     - toc_filter
     - video_embed_wysiwyg
 _core:
@@ -60,3 +61,10 @@ filters:
     status: true
     weight: 0
     settings: {  }
+  linkit:
+    id: linkit
+    provider: linkit
+    status: true
+    weight: -15
+    settings:
+      title: true

@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.lander.field_header_image
     - field.field.node.lander.field_intro
     - field.field.node.lander.field_promo_block
     - node.type.lander
@@ -31,5 +32,6 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  field_header_image: true
   langcode: true
   links: true
