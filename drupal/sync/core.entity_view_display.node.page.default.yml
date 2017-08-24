@@ -23,22 +23,13 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 1
+    weight: 0
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_header_image:
-    weight: 0
-    label: hidden
-    settings:
-      view_mode: header_image
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_entity_view
-    region: content
   field_liftups:
     type: entity_reference_revisions_entity_view
-    weight: 2
+    weight: 1
     label: hidden
     settings:
       view_mode: default
@@ -46,6 +37,7 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  field_header_image: true
   field_icon: true
   field_liftup_title: true
   langcode: true
