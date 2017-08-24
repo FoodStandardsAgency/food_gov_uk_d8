@@ -24,6 +24,7 @@ settings:
           items:
             - Anchor
             - Link
+            - DrupalLink
             - Unlink
         -
           name: Lists
@@ -45,6 +46,9 @@ settings:
           items:
             - Source
   plugins:
+    drupallink:
+      linkit_enabled: true
+      linkit_profile: default
     language:
       language_list: un
     stylescombo:
