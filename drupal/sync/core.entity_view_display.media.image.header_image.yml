@@ -1,0 +1,33 @@
+uuid: eae6edc7-8dfa-4952-962d-5ceef8e08444
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.header_image
+    - field.field.media.image.field_description
+    - field.field.media.image.field_image
+    - image.style.header
+    - media_entity.bundle.image
+  module:
+    - image
+id: media.image.header_image
+targetEntityType: media
+bundle: image
+mode: header_image
+content:
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: header
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+hidden:
+  created: true
+  field_description: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true
