@@ -70,68 +70,28 @@
  *   in different view modes.
  */
 #}
-<div class="layout layout--with-sidebar js-sticky-container">
-  <div class="layout__sidebar js-sticky-element">
-    <div class="sidebar">
-      <div class="sidebar__header">
-        <a href="#" class="sidebar__return-link ">
-          <div class="sidebar__return-icon svg">
-            <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#arrow-icon"></use></svg>
-          </div>
-        </a>
+<article{{ attributes }}>
 
-        <a href="/help" class="sidebar__home-link">
-          <div class="sidebar__icon svg">
-            <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#help-centre-icon"></use></svg>
-          </div>
-          <h3 class="sidebar__heading">Help Centre</h3>
-        </a>
+  {{ title_prefix }}
+  {% if not page %}
+    <h2{{ title_attributes }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h2>
+  {% endif %}
+  {{ title_suffix }}
 
-        <div class="sidebar__spacer"></div>
+  {% if display_submitted %}
+    <footer>
+      {{ author_picture }}
+      <div{{ author_attributes }}>
+        {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+        {{ metadata }}
       </div>
+    </footer>
+  {% endif %}
 
-      <div class="side-navigation">
-        <a href="/node/5" class="side-navigation__link side-navigation__link--active">
-          <div class="side-navigation__text">For consumers</div>
-          <div class="side-navigation__icon svg">
-            <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#arrow-icon"></use></svg>
-          </div>
-        </a>
-        <a href="/node/15" class="side-navigation__link">
-          <div class="side-navigation__text">For businesses</div>
-          <div class="side-navigation__icon svg">
-            <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#arrow-icon"></use></svg>
-          </div>
-        </a>
-      </div>
-    </div>
+  <div{{ content_attributes }}>
+    {{ content }}
   </div>
 
-  <div class="layout__content">
-    <article{{ attributes }}>
-
-      {{ title_prefix }}
-      {% if not page %}
-        <h2{{ title_attributes }}>
-          <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-        </h2>
-      {% endif %}
-      {{ title_suffix }}
-
-      {% if display_submitted %}
-        <footer>
-          {{ author_picture }}
-          <div{{ author_attributes }}>
-            {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
-            {{ metadata }}
-          </div>
-        </footer>
-      {% endif %}
-
-      <div{{ content_attributes }}>
-        {{ content }}
-      </div>
-
-    </article>
-  </div>
-</div>
+</article>

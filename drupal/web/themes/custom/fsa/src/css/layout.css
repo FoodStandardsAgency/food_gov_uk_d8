@@ -3,7 +3,9 @@
 }
 
 .layout--with-sidebar {
-  background-color: var(--color-dark-blue);
+  @media (--breakpoint-md) {
+    background-color: var(--color-dark-blue);
+  }
 }
 
 /*Site sidebar*/
