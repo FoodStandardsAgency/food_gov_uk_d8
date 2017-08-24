@@ -4,16 +4,32 @@ status: true
 dependencies:
   config:
     - field.field.node.webform.body
+    - field.field.node.webform.field_content_type
     - field.field.node.webform.field_icon
     - field.field.node.webform.field_liftup_title
     - field.field.node.webform.webform
     - image.style.thumbnail
     - node.type.webform
   module:
+    - field_group
     - image
     - path
     - text
     - webform
+third_party_settings:
+  field_group:
+    group_taxonomies:
+      children: {  }
+      parent_name: ''
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: open
+        description: 'Select appropriate taxonomy metadata for this content type.'
+        required_fields: true
+      label: Taxonomies
 _core:
   default_config_hash: A3evv2pt6d-bKCPcgjXA5VGTemXWOxG3lSXvWiRWcck
 id: node.webform.default
@@ -35,6 +51,15 @@ content:
     weight: 7
     settings: {  }
     third_party_settings: {  }
+    region: content
+  field_content_type:
+    weight: 26
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_icon:
     weight: 2

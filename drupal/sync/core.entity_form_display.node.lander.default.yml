@@ -3,14 +3,31 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.lander.field_content_type
     - field.field.node.lander.field_header_image
     - field.field.node.lander.field_intro
     - field.field.node.lander.field_promo_block
     - node.type.lander
   module:
+    - field_group
     - inline_entity_form
     - paragraphs
     - path
+third_party_settings:
+  field_group:
+    group_taxonomies:
+      children:
+        - field_content_type
+      parent_name: ''
+      weight: 1
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: open
+        description: 'Select appropriate taxonomy metadata for this content type.'
+        required_fields: true
+      label: Taxonomies
 id: node.lander.default
 targetEntityType: node
 bundle: lander
@@ -18,12 +35,18 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 5
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_content_type:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_header_image:
-    weight: 1
+    weight: 2
     settings:
       form_mode: default
       label_singular: ''
@@ -36,7 +59,7 @@ content:
     type: inline_entity_form_complex
     region: content
   field_intro:
-    weight: 2
+    weight: 3
     settings:
       rows: 5
       placeholder: ''
@@ -45,7 +68,7 @@ content:
     region: content
   field_promo_block:
     type: entity_reference_paragraphs
-    weight: 10
+    weight: 11
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -57,13 +80,13 @@ content:
     region: content
   langcode:
     type: language_select
-    weight: 3
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 9
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -71,14 +94,14 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 7
+    weight: 8
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 8
+    weight: 9
     region: content
     third_party_settings: {  }
   title:
@@ -90,13 +113,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 6
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 4
+    weight: 5
     settings:
       match_operator: CONTAINS
       size: 60
