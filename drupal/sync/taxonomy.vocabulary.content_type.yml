@@ -1,0 +1,9 @@
+uuid: 6eefeb64-1cb5-46cb-a03f-effefebba838
+langcode: en
+status: true
+dependencies: {  }
+name: 'Content type'
+vid: content_type
+description: 'The main category of the content.'
+hierarchy: 0
+weight: 0
