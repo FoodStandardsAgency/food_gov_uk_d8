@@ -41,7 +41,8 @@
         "drupal/video_embed_field": "^1.5",
         "drupal/media_entity_image": "^1.2",
         "drupal/crop": "^1.2",
-        "drupal/image_widget_crop": "^2.0"
+        "drupal/image_widget_crop": "^2.0",
+        "drupal/linkit": "5.0.0-beta5"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
