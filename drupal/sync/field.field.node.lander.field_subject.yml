@@ -1,16 +1,16 @@
-uuid: 26edc68e-bdc4-4f42-93c6-8301ba7b8069
+uuid: a1b45ad6-93b7-4130-8e2e-0f44ef2be4e5
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_content_type
+    - field.storage.node.field_subject
     - node.type.lander
-    - taxonomy.vocabulary.content_type
-id: node.lander.field_content_type
-field_name: field_content_type
+    - taxonomy.vocabulary.subject
+id: node.lander.field_subject
+field_name: field_subject
 entity_type: node
 bundle: lander
-label: 'Content type'
+label: Subject
 description: ''
 required: false
 translatable: false
@@ -20,7 +20,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      content_type: content_type
+      subject: subject
     sort:
       field: _none
     auto_create: false

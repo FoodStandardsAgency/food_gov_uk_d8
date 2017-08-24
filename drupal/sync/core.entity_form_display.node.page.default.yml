@@ -4,11 +4,14 @@ status: true
 dependencies:
   config:
     - field.field.node.page.body
+    - field.field.node.page.field_audience
     - field.field.node.page.field_content_type
     - field.field.node.page.field_header_image
     - field.field.node.page.field_icon
     - field.field.node.page.field_liftup_title
     - field.field.node.page.field_liftups
+    - field.field.node.page.field_nation
+    - field.field.node.page.field_subject
     - image.style.thumbnail
     - node.type.page
   module:
@@ -23,6 +26,9 @@ third_party_settings:
     group_taxonomies:
       children:
         - field_content_type
+        - field_audience
+        - field_nation
+        - field_subject
       parent_name: ''
       weight: 1
       format_type: tab
@@ -56,6 +62,12 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_audience:
+    weight: 15
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
   field_content_type:
     weight: 14
     settings: {  }
@@ -102,6 +114,18 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
     third_party_settings: {  }
+    region: content
+  field_nation:
+    weight: 16
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_subject:
+    weight: 17
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
     region: content
   langcode:
     type: language_select

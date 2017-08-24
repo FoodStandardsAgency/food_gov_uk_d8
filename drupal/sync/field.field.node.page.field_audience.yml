@@ -1,16 +1,16 @@
-uuid: 26edc68e-bdc4-4f42-93c6-8301ba7b8069
+uuid: 2dd0326b-2ca8-43ed-ad3b-5a98fc88aca9
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_content_type
-    - node.type.lander
-    - taxonomy.vocabulary.content_type
-id: node.lander.field_content_type
-field_name: field_content_type
+    - field.storage.node.field_audience
+    - node.type.page
+    - taxonomy.vocabulary.audience
+id: node.page.field_audience
+field_name: field_audience
 entity_type: node
-bundle: lander
-label: 'Content type'
+bundle: page
+label: Audience
 description: ''
 required: false
 translatable: false
@@ -20,7 +20,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      content_type: content_type
+      audience: audience
     sort:
       field: _none
     auto_create: false

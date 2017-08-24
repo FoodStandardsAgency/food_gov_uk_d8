@@ -4,9 +4,12 @@ status: true
 dependencies:
   config:
     - field.field.node.webform.body
+    - field.field.node.webform.field_audience
     - field.field.node.webform.field_content_type
     - field.field.node.webform.field_icon
     - field.field.node.webform.field_liftup_title
+    - field.field.node.webform.field_nation
+    - field.field.node.webform.field_subject
     - field.field.node.webform.webform
     - image.style.thumbnail
     - node.type.webform
@@ -19,9 +22,13 @@ dependencies:
 third_party_settings:
   field_group:
     group_taxonomies:
-      children: {  }
+      children:
+        - field_content_type
+        - field_audience
+        - field_nation
+        - field_subject
       parent_name: ''
-      weight: 20
+      weight: 1
       format_type: tab
       format_settings:
         id: ''
@@ -39,7 +46,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 3
+    weight: 4
     settings:
       rows: 9
       summary_rows: 3
@@ -48,21 +55,24 @@ content:
     region: content
   created:
     type: datetime_timestamp
-    weight: 7
+    weight: 8
     settings: {  }
     third_party_settings: {  }
     region: content
+  field_audience:
+    weight: 27
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
   field_content_type:
     weight: 26
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: options_select
     region: content
   field_icon:
-    weight: 2
+    weight: 3
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
@@ -70,22 +80,34 @@ content:
     type: image_image
     region: content
   field_liftup_title:
-    weight: 1
+    weight: 2
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_nation:
+    weight: 28
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_subject:
+    weight: 29
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   langcode:
     type: language_select
-    weight: 5
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 11
+    weight: 12
     settings: {  }
     third_party_settings: {  }
     region: content
@@ -93,14 +115,14 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 9
+    weight: 10
     third_party_settings: {  }
     region: content
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 10
+    weight: 11
     third_party_settings: {  }
     region: content
   title:
@@ -112,13 +134,13 @@ content:
     third_party_settings: {  }
     region: content
   translation:
-    weight: 8
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 6
+    weight: 7
     settings:
       match_operator: CONTAINS
       size: 60
@@ -126,7 +148,7 @@ content:
     third_party_settings: {  }
     region: content
   webform:
-    weight: 4
+    weight: 5
     settings: {  }
     third_party_settings: {  }
     type: webform_entity_reference_select

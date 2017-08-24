@@ -1,16 +1,16 @@
-uuid: 26edc68e-bdc4-4f42-93c6-8301ba7b8069
+uuid: 30f24ee9-8a17-4134-84b3-f6befe931c34
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_content_type
+    - field.storage.node.field_nation
     - node.type.lander
-    - taxonomy.vocabulary.content_type
-id: node.lander.field_content_type
-field_name: field_content_type
+    - taxonomy.vocabulary.nation
+id: node.lander.field_nation
+field_name: field_nation
 entity_type: node
 bundle: lander
-label: 'Content type'
+label: Nation
 description: ''
 required: false
 translatable: false
@@ -20,7 +20,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      content_type: content_type
+      nation: nation
     sort:
       field: _none
     auto_create: false
