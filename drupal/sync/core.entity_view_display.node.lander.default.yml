@@ -13,6 +13,7 @@ dependencies:
     - node.type.lander
   module:
     - entity_reference_revisions
+    - hierarchical_term_formatter
     - user
 id: node.lander.default
 targetEntityType: node
@@ -64,8 +65,12 @@ content:
     label: above
     settings:
       link: true
+      display: all
+      wrap: none
+      separator: ' » '
+      reverse: false
     third_party_settings: {  }
-    type: entity_reference_label
+    type: hierarchical_term_formatter
     region: content
 hidden:
   field_header_image: true

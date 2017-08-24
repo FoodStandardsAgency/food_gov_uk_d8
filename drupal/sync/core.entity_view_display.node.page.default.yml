@@ -15,6 +15,7 @@ dependencies:
     - node.type.page
   module:
     - entity_reference_revisions
+    - hierarchical_term_formatter
     - text
     - user
 _core:
@@ -68,9 +69,13 @@ content:
     weight: 5
     label: above
     settings:
-      link: true
+      display: all
+      wrap: span
+      separator: ' » '
+      link: 0
+      reverse: 0
     third_party_settings: {  }
-    type: entity_reference_label
+    type: hierarchical_term_formatter
     region: content
 hidden:
   field_header_image: true
