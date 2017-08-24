@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.lander.field_header_image
     - field.field.node.lander.field_intro
     - field.field.node.lander.field_promo_block
     - node.type.lander
@@ -14,8 +15,17 @@ targetEntityType: node
 bundle: lander
 mode: default
 content:
-  field_intro:
+  field_header_image:
     weight: 0
+    label: hidden
+    settings:
+      view_mode: header_image
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_intro:
+    weight: 1
     label: hidden
     settings: {  }
     third_party_settings: {  }
@@ -23,7 +33,7 @@ content:
     region: content
   field_promo_block:
     type: entity_reference_revisions_entity_view
-    weight: 1
+    weight: 2
     label: hidden
     settings:
       view_mode: default
