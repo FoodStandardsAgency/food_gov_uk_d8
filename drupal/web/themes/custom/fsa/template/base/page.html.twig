@@ -151,7 +151,7 @@
   </div>
 
   {% if page.hero %}
-    <div class="site-hero">
+    <div class="hero">
         {{ page.hero }}
     </div>
   {% endif %}
@@ -176,23 +176,6 @@
         {% if page.sidebar_first or page.sidebar_second %}
           <aside class="layout__sidebar js-sticky-element" role="complementary">
             <div class="sidebar">
-              <!-- <div class="sidebar__header">
-                <a href="#" class="sidebar__return-link ">
-                  <div class="sidebar__return-icon svg">
-                    <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#arrow-icon"></use></svg>
-                  </div>
-                </a>
-
-                <a href="/help" class="sidebar__home-link">
-                  <div class="sidebar__icon svg">
-                    <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#help-centre-icon"></use></svg>
-                  </div>
-                  <h3 class="sidebar__heading">Help Centre</h3>
-                </a>
-
-                <div class="sidebar__spacer"></div>
-              </div> -->
-
               <div class="side-navigation">
 
                 {% if page.sidebar_first %}
@@ -208,7 +191,7 @@
           </aside>
         {% endif %}
 
-        <div class="layout__content {% if page.sidebar_first or page.sidebar_second %}layout__content--with-sidebar{% endif %}">
+        <div class="layout__content {% if page.sidebar_first or page.sidebar_second %}layout__content--with-sidebar{% endif %} js-content">
           {% if page.sidebar_first or page.sidebar_second %}{% else %}<div class="container">{% endif %}
             {{ page.content }}
           {% if page.sidebar_first or page.sidebar_second %}{% else %}</div>{% endif %}

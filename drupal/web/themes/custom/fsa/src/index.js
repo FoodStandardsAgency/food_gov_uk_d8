@@ -3,6 +3,7 @@ import svg4everybody from 'svg4everybody';
 import responsiveTables from './responsiveTables';
 import stickyElement from './stickyElement';
 import toggleContent from './toggleContent';
+import toc from './toc';
 
 const breakpoints = {
   small: "sm",
@@ -59,6 +60,13 @@ if (container != null || stickyElem != null) {
 const toggleButtons = document.querySelectorAll('.js-toggle-button');
 if (toggleButtons != null) {
   toggleContent(toggleButtons, breakpoints);
+}
+
+// Toggle content
+const tableOfContents = document.querySelectorAll('.toc');
+const contentElement = document.querySelectorAll('.toc-filter');
+if (tableOfContents != null || contentElement != null) {
+  toc(tableOfContents, contentElement);
 }
 
 // Add class if touch device
