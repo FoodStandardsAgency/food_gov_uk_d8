@@ -43,6 +43,8 @@
         "drupal/crop": "^1.2",
         "drupal/image_widget_crop": "^2.0",
         "drupal/linkit": "5.0.0-beta5",
+        "drupal/shs": "^1.0@alpha",
+        "drupal/hierarchical_term_formatter": "^1.0@alpha",
         "drupal/entity_embed": "^1.0@beta",
         "drupal/embed": "^1.0"
     },

@@ -1,0 +1,9 @@
+uuid: 7f495900-6b35-4b72-8d95-58a785d345ff
+langcode: en
+status: true
+dependencies: {  }
+name: Subject
+vid: subject
+description: 'FSA subject categorization'
+hierarchy: 1
+weight: 0

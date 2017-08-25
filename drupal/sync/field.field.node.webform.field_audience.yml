@@ -1,0 +1,28 @@
+uuid: 029cbacf-5f8b-4403-9da0-6b600f13ec8c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_audience
+    - node.type.webform
+    - taxonomy.vocabulary.audience
+id: node.webform.field_audience
+field_name: field_audience
+entity_type: node
+bundle: webform
+label: Audience
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      audience: audience
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
