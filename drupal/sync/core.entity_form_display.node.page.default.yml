@@ -12,9 +12,11 @@ dependencies:
     - field.field.node.page.field_liftups
     - field.field.node.page.field_nation
     - field.field.node.page.field_subject
+    - field.field.node.page.field_update_date
     - image.style.thumbnail
     - node.type.page
   module:
+    - datetime
     - field_group
     - image
     - inline_entity_form
@@ -50,7 +52,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 5
+    weight: 6
     region: content
     settings:
       rows: 9
@@ -59,7 +61,7 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 8
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -89,7 +91,7 @@ content:
     type: inline_entity_form_complex
     region: content
   field_icon:
-    weight: 4
+    weight: 5
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
@@ -97,7 +99,7 @@ content:
     type: image_image
     region: content
   field_liftup_title:
-    weight: 3
+    weight: 4
     settings:
       size: 60
       placeholder: ''
@@ -106,7 +108,7 @@ content:
     region: content
   field_liftups:
     type: entity_reference_paragraphs
-    weight: 13
+    weight: 14
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -132,15 +134,21 @@ content:
     third_party_settings: {  }
     type: options_shs
     region: content
+  field_update_date:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
   langcode:
     type: language_select
-    weight: 6
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 12
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -148,14 +156,14 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 10
+    weight: 11
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 11
+    weight: 12
     region: content
     third_party_settings: {  }
   title:
@@ -167,13 +175,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 9
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 7
+    weight: 8
     region: content
     settings:
       match_operator: CONTAINS
