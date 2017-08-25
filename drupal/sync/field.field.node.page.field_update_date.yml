@@ -1,0 +1,21 @@
+uuid: 619b1bf8-6b4a-440c-83f3-87daa677217d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_update_date
+    - node.type.page
+  module:
+    - datetime
+id: node.page.field_update_date
+field_name: field_update_date
+entity_type: node
+bundle: page
+label: 'Last updated'
+description: 'Display a date for user when this the content of this node has last been updated.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

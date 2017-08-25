@@ -12,8 +12,10 @@ dependencies:
     - field.field.node.page.field_liftups
     - field.field.node.page.field_nation
     - field.field.node.page.field_subject
+    - field.field.node.page.field_update_date
     - node.type.page
   module:
+    - datetime
     - entity_reference_revisions
     - hierarchical_term_formatter
     - text
@@ -28,12 +30,12 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 0
+    weight: 1
     region: content
     settings: {  }
     third_party_settings: {  }
   field_audience:
-    weight: 3
+    weight: 4
     label: above
     settings:
       display: all
@@ -45,7 +47,7 @@ content:
     type: hierarchical_term_formatter
     region: content
   field_content_type:
-    weight: 2
+    weight: 3
     label: above
     settings:
       link: false
@@ -54,7 +56,7 @@ content:
     region: content
   field_liftups:
     type: entity_reference_revisions_entity_view
-    weight: 1
+    weight: 2
     label: hidden
     settings:
       view_mode: default
@@ -62,7 +64,7 @@ content:
     third_party_settings: {  }
     region: content
   field_nation:
-    weight: 4
+    weight: 5
     label: above
     settings:
       link: false
@@ -70,7 +72,7 @@ content:
     type: entity_reference_label
     region: content
   field_subject:
-    weight: 5
+    weight: 6
     label: above
     settings:
       display: all
@@ -80,6 +82,15 @@ content:
       reverse: 0
     third_party_settings: {  }
     type: hierarchical_term_formatter
+    region: content
+  field_update_date:
+    weight: 0
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: short
+    third_party_settings: {  }
+    type: datetime_default
     region: content
 hidden:
   field_header_image: true
