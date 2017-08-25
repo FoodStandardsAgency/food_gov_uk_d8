@@ -17,5 +17,11 @@ content:
     weight: 100
     region: content
 hidden:
+  field_audience: true
+  field_content_type: true
+  field_header_image: true
+  field_intro: true
+  field_nation: true
   field_promo_block: true
+  field_subject: true
   langcode: true
