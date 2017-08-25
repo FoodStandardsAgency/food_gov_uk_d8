@@ -9,6 +9,7 @@ use Drupal\core\Url;
 use Drupal\Core\Link;
 
 // Add all preprocess hooks to respective files:
+require_once 'inc/html.inc';
 require_once 'inc/node.inc';
 
 function fsa_page_attachments_alter(&$variables) {
