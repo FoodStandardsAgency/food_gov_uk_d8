@@ -44,7 +44,9 @@
         "drupal/image_widget_crop": "^2.0",
         "drupal/linkit": "5.0.0-beta5",
         "drupal/shs": "^1.0@alpha",
-        "drupal/hierarchical_term_formatter": "^1.0@alpha"
+        "drupal/hierarchical_term_formatter": "^1.0@alpha",
+        "drupal/entity_embed": "^1.0@beta",
+        "drupal/embed": "^1.0"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
@@ -69,6 +71,12 @@
         "patches": {
             "drupal/migrate_plus": {
                 "Allow setting request headers": "https://www.drupal.org/files/issues/fix_headers-2849153-3.patch"
+            },
+            "drupal/media_entity": {
+                "Reset media thumbnails while changing media entity. Required by inline images.": "https://www.drupal.org/files/issues/2749695_14_media_entity.patch"
+            },
+            "drupal/media_entity_image": {
+                "Reset media thumbnails while changing media entity. Required by inline images.": "https://www.drupal.org/files/issues/2749695_14_media_entity_image.patch"
             }
         }
     },
