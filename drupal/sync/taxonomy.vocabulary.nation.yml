@@ -1,0 +1,9 @@
+uuid: 28f94774-a1f8-4cab-97e2-2b29c65b070b
+langcode: en
+status: true
+dependencies: {  }
+name: Nation
+vid: nation
+description: 'The nation a piece of content applies to'
+hierarchy: 0
+weight: 0

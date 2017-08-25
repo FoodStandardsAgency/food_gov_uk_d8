@@ -33,6 +33,7 @@ module:
   fsa_ratings_import: 0
   geolocation: 0
   help: 0
+  hierarchical_term_formatter: 0
   image: 0
   image_widget_crop: 0
   inline_entity_form: 0
@@ -55,6 +56,7 @@ module:
   search: 0
   serialization: 0
   shortcut: 0
+  shs: 0
   system: 0
   taxonomy: 0
   text: 0

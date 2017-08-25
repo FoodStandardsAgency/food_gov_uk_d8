@@ -1,0 +1,9 @@
+uuid: f3740c36-6674-4a57-905a-5d02f556df27
+langcode: en
+status: true
+dependencies: {  }
+name: Audience
+vid: audience
+description: 'The audience a content is designed for'
+hierarchy: 1
+weight: 0
