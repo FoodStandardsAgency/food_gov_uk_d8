@@ -36,6 +36,7 @@ settings:
           items:
             - DrupalImage
             - video_embed
+            - image
             - Blockquote
         -
           name: 'Block Formatting'
