@@ -1,0 +1,28 @@
+uuid: a1b45ad6-93b7-4130-8e2e-0f44ef2be4e5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_subject
+    - node.type.lander
+    - taxonomy.vocabulary.subject
+id: node.lander.field_subject
+field_name: field_subject
+entity_type: node
+bundle: lander
+label: Subject
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      subject: subject
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

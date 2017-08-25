@@ -4,11 +4,16 @@ status: true
 dependencies:
   config:
     - field.field.node.webform.body
+    - field.field.node.webform.field_audience
+    - field.field.node.webform.field_content_type
     - field.field.node.webform.field_icon
     - field.field.node.webform.field_liftup_title
+    - field.field.node.webform.field_nation
+    - field.field.node.webform.field_subject
     - field.field.node.webform.webform
     - node.type.webform
   module:
+    - hierarchical_term_formatter
     - text
     - user
     - webform
@@ -25,6 +30,46 @@ content:
     weight: 0
     settings: {  }
     third_party_settings: {  }
+    region: content
+  field_audience:
+    weight: 3
+    label: above
+    settings:
+      display: all
+      wrap: span
+      separator: ' » '
+      link: 0
+      reverse: 0
+    third_party_settings: {  }
+    type: hierarchical_term_formatter
+    region: content
+  field_content_type:
+    weight: 2
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_nation:
+    weight: 4
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_subject:
+    weight: 5
+    label: above
+    settings:
+      display: all
+      wrap: span
+      separator: ' » '
+      link: 0
+      reverse: 0
+    third_party_settings: {  }
+    type: hierarchical_term_formatter
     region: content
   webform:
     weight: 1

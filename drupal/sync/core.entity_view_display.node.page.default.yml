@@ -4,13 +4,20 @@ status: true
 dependencies:
   config:
     - field.field.node.page.body
+    - field.field.node.page.field_audience
+    - field.field.node.page.field_content_type
     - field.field.node.page.field_header_image
     - field.field.node.page.field_icon
     - field.field.node.page.field_liftup_title
     - field.field.node.page.field_liftups
+    - field.field.node.page.field_nation
+    - field.field.node.page.field_subject
+    - field.field.node.page.field_update_date
     - node.type.page
   module:
+    - datetime
     - entity_reference_revisions
+    - hierarchical_term_formatter
     - text
     - user
 _core:
@@ -23,18 +30,67 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 0
+    weight: 1
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_audience:
+    weight: 4
+    label: above
+    settings:
+      display: all
+      wrap: span
+      separator: ' » '
+      link: 0
+      reverse: 0
+    third_party_settings: {  }
+    type: hierarchical_term_formatter
+    region: content
+  field_content_type:
+    weight: 3
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_liftups:
     type: entity_reference_revisions_entity_view
-    weight: 1
+    weight: 2
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    region: content
+  field_nation:
+    weight: 5
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_subject:
+    weight: 6
+    label: above
+    settings:
+      display: all
+      wrap: span
+      separator: ' » '
+      link: 0
+      reverse: 0
+    third_party_settings: {  }
+    type: hierarchical_term_formatter
+    region: content
+  field_update_date:
+    weight: 0
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: short
+    third_party_settings: {  }
+    type: datetime_default
     region: content
 hidden:
   field_header_image: true
