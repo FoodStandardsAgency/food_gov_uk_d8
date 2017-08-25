@@ -69,6 +69,12 @@
         "patches": {
             "drupal/migrate_plus": {
                 "Allow setting request headers": "https://www.drupal.org/files/issues/fix_headers-2849153-3.patch"
+            },
+            "drupal/media_entity": {
+                "Reset media thumbnails while changing media entity. Required by inline images.": "https://www.drupal.org/files/issues/2749695_14_media_entity.patch"
+            },
+            "drupal/media_entity_image": {
+                "Reset media thumbnails while changing media entity. Required by inline images.": "https://www.drupal.org/files/issues/2749695_14_media_entity_image.patch"
             }
         }
     },
