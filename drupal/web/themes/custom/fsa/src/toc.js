@@ -2,81 +2,81 @@ import doScrolling from './scrollToElement';
 
 function tableOfContents(tableOfContents, contentElement) {
   // Area class
-  class Area {
-    constructor(element) {
-      this.element = element;
-      this._relatedInstance;
-    }
+  // class Area {
+  //   constructor(element) {
+  //     this.element = element;
+  //     this._relatedInstance;
+  //   }
+  //
+  //   set relatedInstance(item) {
+  //     this._relatedInstance = item;
+  //   }
+  //
+  //   get relatedInstance() {
+  //     return this._relatedInstance;
+  //   }
+  //
+  //   get thisElement() {
+  //     return this.element;
+  //   }
+  //
+  //   get offset() {
+  //     return this.calcOffset();
+  //   }
+  //
+  //   calcOffset() {
+  //     return this.element.getBoundingClientRect().top;
+  //   }
+  //
+  //   get inview() {
+  //     return this.calcInview();
+  //   }
+  //
+  //   calcInview() {
+  //     var rect = this.element.getBoundingClientRect();
+  //     return (
+  //         rect.top - window.innerHeight <= 0 &&
+  //         rect.bottom >= 0
+  //     );
+  //   }
+  //
+  //   get isBottom() {
+  //     return this.calcBottom();
+  //   }
+  //
+  //   calcBottom() {
+  //     var navigationHeight = this._relatedInstance.offsetHeight;
+  //     return this.element.getBoundingClientRect().bottom <= navigationHeight;
+  //   }
+  //
+  // }
+  //
+  // // Content section class
+  // class Section extends Area {
+  //
+  // }
+  //
+  // // Navigation class
+  // class Navigation {
+  //   constructor(element, relatedInstance) {
+  //     this.element = element;
+  //     this._navigationItems = [];
+  //   }
+  //
+  //   get navigationItems() {
+  //     return this._navigationItems;
+  //   }
+  //
+  //   set navigationItems(item) {
+  //     var all = this._navigationItems;
+  //     all.push(item);
+  //   }
+  // }
+  //
+  // // Init instance arrays
+  // const navigations = [],
+  // navigationItems = [];
 
-    set relatedInstance(item) {
-      this._relatedInstance = item;
-    }
-
-    get relatedInstance() {
-      return this._relatedInstance;
-    }
-
-    get thisElement() {
-      return this.element;
-    }
-
-    get offset() {
-      return this.calcOffset();
-    }
-
-    calcOffset() {
-      return this.element.getBoundingClientRect().top;
-    }
-
-    get inview() {
-      return this.calcInview();
-    }
-
-    calcInview() {
-      var rect = this.element.getBoundingClientRect();
-      return (
-          rect.top - window.innerHeight <= 0 &&
-          rect.bottom >= 0
-      );
-    }
-
-    get isBottom() {
-      return this.calcBottom();
-    }
-
-    calcBottom() {
-      var navigationHeight = this._relatedInstance.offsetHeight;
-      return this.element.getBoundingClientRect().bottom <= navigationHeight;
-    }
-
-  }
-
-  // Content section class
-  class Section extends Area {
-
-  }
-
-  // Navigation class
-  class Navigation {
-    constructor(element, relatedInstance) {
-      this.element = element;
-      this._navigationItems = [];
-    }
-
-    get navigationItems() {
-      return this._navigationItems;
-    }
-
-    set navigationItems(item) {
-      var all = this._navigationItems;
-      all.push(item);
-    }
-  }
-
-  // Init instance arrays
-  const navigations = [],
-  navigationItems = [];
-  
   //
   // // Check content area exists
   // if (document.querySelectorAll('.content-area')) {
@@ -229,16 +229,16 @@ function tableOfContents(tableOfContents, contentElement) {
   //   }
   }
 
-  console.log(tableOfContents);
-  console.log(contentElement);
-
-  // Add scroll listener
-  window.addEventListener("scroll", toggleStickyNavigation);
-  window.addEventListener("scroll", highlightNavigationItem);
-
-  // Add load listener
-  window.addEventListener("load", toggleStickyNavigation);
-  window.addEventListener("load", highlightNavigationItem);
+  // console.log(tableOfContents);
+  // console.log(contentElement);
+  //
+  // // Add scroll listener
+  // window.addEventListener("scroll", toggleStickyNavigation);
+  // window.addEventListener("scroll", highlightNavigationItem);
+  //
+  // // Add load listener
+  // window.addEventListener("load", toggleStickyNavigation);
+  // window.addEventListener("load", highlightNavigationItem);
 
 }
 
