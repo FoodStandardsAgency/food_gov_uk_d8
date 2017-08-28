@@ -1,16 +1,16 @@
-uuid: 5d694f87-ff5a-410c-b878-3024f62d0736
+uuid: bb23e994-5886-488e-8894-5de4187404c0
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_subject
-    - node.type.webform
-    - taxonomy.vocabulary.subject
-id: node.webform.field_subject
-field_name: field_subject
-entity_type: node
-bundle: webform
-label: Subject
+    - field.storage.media.field_topic
+    - media_entity.bundle.image
+    - taxonomy.vocabulary.topic
+id: media.image.field_topic
+field_name: field_topic
+entity_type: media
+bundle: image
+label: Topic
 description: ''
 required: false
 translatable: false
@@ -20,7 +20,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      subject: subject
+      topic: topic
     sort:
       field: _none
     auto_create: false

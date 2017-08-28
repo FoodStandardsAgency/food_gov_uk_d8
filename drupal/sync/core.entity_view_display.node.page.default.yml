@@ -11,7 +11,7 @@ dependencies:
     - field.field.node.page.field_liftup_title
     - field.field.node.page.field_liftups
     - field.field.node.page.field_nation
-    - field.field.node.page.field_subject
+    - field.field.node.page.field_topic
     - field.field.node.page.field_update_date
     - node.type.page
   module:
@@ -80,14 +80,14 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_subject:
-    weight: 7
+  field_topic:
+    weight: 8
     label: above
     settings:
       display: all
-      wrap: span
+      link: '1'
+      wrap: none
       separator: ' » '
-      link: 0
       reverse: 0
     third_party_settings: {  }
     type: hierarchical_term_formatter

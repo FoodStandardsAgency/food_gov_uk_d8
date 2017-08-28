@@ -11,7 +11,7 @@ dependencies:
     - field.field.node.page.field_liftup_title
     - field.field.node.page.field_liftups
     - field.field.node.page.field_nation
-    - field.field.node.page.field_subject
+    - field.field.node.page.field_topic
     - field.field.node.page.field_update_date
     - image.style.thumbnail
     - node.type.page
@@ -32,6 +32,7 @@ third_party_settings:
         - field_audience
         - field_nation
         - field_subject
+        - field_topic
       parent_name: ''
       weight: 1
       format_type: tab
@@ -124,8 +125,8 @@ content:
     third_party_settings: {  }
     type: options_buttons
     region: content
-  field_subject:
-    weight: 17
+  field_topic:
+    weight: 18
     settings:
       display_node_count: false
       create_new_items: false

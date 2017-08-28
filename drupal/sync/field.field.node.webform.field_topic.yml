@@ -1,16 +1,16 @@
-uuid: a1b45ad6-93b7-4130-8e2e-0f44ef2be4e5
+uuid: 0221b6cf-5bd1-4a98-804f-ccc630b97b71
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_subject
-    - node.type.lander
-    - taxonomy.vocabulary.subject
-id: node.lander.field_subject
-field_name: field_subject
+    - field.storage.node.field_topic
+    - node.type.webform
+    - taxonomy.vocabulary.topic
+id: node.webform.field_topic
+field_name: field_topic
 entity_type: node
-bundle: lander
-label: Subject
+bundle: webform
+label: Topic
 description: ''
 required: false
 translatable: false
@@ -20,7 +20,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      subject: subject
+      topic: topic
     sort:
       field: _none
     auto_create: false

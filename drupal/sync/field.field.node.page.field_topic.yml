@@ -1,16 +1,16 @@
-uuid: ba138424-f940-4c02-ad95-054fefdb440a
+uuid: 18dfbba4-716e-45fb-8c4f-04855d397ffe
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_subject
+    - field.storage.node.field_topic
     - node.type.page
-    - taxonomy.vocabulary.subject
-id: node.page.field_subject
-field_name: field_subject
+    - taxonomy.vocabulary.topic
+id: node.page.field_topic
+field_name: field_topic
 entity_type: node
 bundle: page
-label: Subject
+label: Topic
 description: ''
 required: false
 translatable: false
@@ -20,7 +20,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      subject: subject
+      topic: topic
     sort:
       field: _none
     auto_create: false
