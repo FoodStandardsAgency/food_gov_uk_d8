@@ -8,4 +8,4 @@ settings:
   default_paper_size: a4
   username: ''
   password: ''
-  binary_location: /usr/local/bin/wkhtmltopdf
+  binary_location: /bin/wkhtmltopdf
