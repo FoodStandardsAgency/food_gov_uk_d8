@@ -5,10 +5,28 @@ dependencies:
   config:
     - field.field.media.image.field_description
     - field.field.media.image.field_image
+    - field.field.media.image.field_subject
     - image.style.thumbnail
     - media_entity.bundle.image
   module:
+    - field_group
     - image_widget_crop
+    - shs
+third_party_settings:
+  field_group:
+    group_taxonomies:
+      children:
+        - field_subject
+      parent_name: ''
+      weight: 1
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: open
+        description: 'Select appropriate taxonomy metadata for this content type.'
+        required_fields: true
+      label: Taxonomies
 id: media.image.default
 targetEntityType: media
 bundle: image
@@ -16,12 +34,12 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 10
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
   field_description:
-    weight: 12
+    weight: 7
     settings:
       rows: 5
       placeholder: ''
@@ -29,7 +47,7 @@ content:
     type: string_textarea
     region: content
   field_image:
-    weight: 11
+    weight: 6
     settings:
       preview_image_style: thumbnail
       progress_indicator: throbber
@@ -41,6 +59,16 @@ content:
     third_party_settings: {  }
     type: image_widget_crop
     region: content
+  field_subject:
+    weight: 8
+    settings:
+      display_node_count: false
+      create_new_items: false
+      create_new_levels: false
+      force_deepest: false
+    third_party_settings: {  }
+    type: options_shs
+    region: content
   langcode:
     type: language_select
     weight: 2
@@ -49,20 +77,20 @@ content:
     third_party_settings: {  }
   name:
     type: string_textfield
-    weight: -5
+    weight: 0
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 10
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 3
     settings:
       match_operator: CONTAINS
       size: 60

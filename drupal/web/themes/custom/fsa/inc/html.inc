@@ -21,7 +21,8 @@ function fsa_preprocess_html(&$variables) {
 
     // Get content_type taxonomy term and set as body class.
     $tid = $node->get('field_content_type')->target_id;
-    if ($term = Term::load($tid)) {
+    if (is_numeric($tid)) {
+      $term = Term::load($tid);
 
       // Add content type based html class.
       $variables['attributes']['class'][] = 'theme--content-type-' . strtolower(Html::cleanCssIdentifier($term->getName()));

@@ -16,6 +16,7 @@ dependencies:
     - inline_entity_form
     - paragraphs
     - path
+    - shs
 third_party_settings:
   field_group:
     group_taxonomies:
@@ -98,9 +99,13 @@ content:
     region: content
   field_subject:
     weight: 29
-    settings: {  }
+    settings:
+      display_node_count: false
+      create_new_items: false
+      create_new_levels: false
+      force_deepest: false
     third_party_settings: {  }
-    type: options_select
+    type: options_shs
     region: content
   langcode:
     type: language_select
