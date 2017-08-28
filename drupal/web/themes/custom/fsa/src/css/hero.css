@@ -1,6 +1,6 @@
 .hero {
-  background-color: var(--primary-color);
-  color: var(--color-white);
+  /*background-color: var(--primary-color);
+  color: var(--color-white);*/
 }
 
 .hero a {
@@ -9,11 +9,11 @@
 }
 
 .hero__container {
-  display: flex;
-  flex-direction: column;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
 
-  @media (--breakpoint-lg) {
-    flex: 0 1 16em;
-    flex-direction: row;
-  }
+.hero img {
+  width: 100%;
+  height: auto;
 }

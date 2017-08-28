@@ -92,9 +92,10 @@ Plugin documentation:
   --z-top: 20;
 }
 
-/*Box-shadow*/
+/*Misc*/
 :root {
   --box-shadow: 0 0.5em 2em 0 color(#000 a(20%));
+  --max-width: 80em;
 }
 
 * {
@@ -434,7 +435,7 @@ figure {
 
 .container {
   margin: 0 auto;
-  max-width: 70em;
+  max-width: var(--max-width);
 }
 
 .container.container--text {

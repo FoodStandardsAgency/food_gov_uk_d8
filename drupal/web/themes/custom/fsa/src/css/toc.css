@@ -1,0 +1,9 @@
+.toc-tree {
+  padding-top: 1em;
+}
+
+.toc-tree ul,
+.toc-tree ol {
+  margin: 0;
+  padding: 0;
+}

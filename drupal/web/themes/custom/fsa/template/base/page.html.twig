@@ -107,7 +107,7 @@
         </div>
       </div>
     </div>
-</header>
+  </header>
 
   <div class="navigation">
     {% if page.primary_menu %}
@@ -152,7 +152,9 @@
 
   {% if page.hero %}
     <div class="hero">
+      <div class="hero__container">
         {{ page.hero }}
+      </div>
     </div>
   {% endif %}
 
@@ -173,28 +175,30 @@
 
     <div class="layout-content">
       <div class="layout{% if page.sidebar_first or page.sidebar_second %} layout--with-sidebar{% endif %} js-sticky-container">
-        {% if page.sidebar_first or page.sidebar_second %}
-          <aside class="layout__sidebar js-sticky-element" role="complementary">
-            <div class="sidebar">
-              <div class="side-navigation">
+        <div class="layout__container">
+          {% if page.sidebar_first or page.sidebar_second %}
+            <aside class="layout__sidebar js-sticky-element" role="complementary">
+              <div class="sidebar">
+                <div class="side-navigation">
 
-                {% if page.sidebar_first %}
-                  {{ page.sidebar_first }}
-                {% endif %}
+                  {% if page.sidebar_first %}
+                    {{ page.sidebar_first }}
+                  {% endif %}
 
-                {% if page.sidebar_second %}
-                  {{ page.sidebar_second }}
-                {% endif %}
+                  {% if page.sidebar_second %}
+                    {{ page.sidebar_second }}
+                  {% endif %}
 
+                </div>
               </div>
-            </div>
-          </aside>
-        {% endif %}
+            </aside>
+          {% endif %}
 
-        <div class="layout__content {% if page.sidebar_first or page.sidebar_second %}layout__content--with-sidebar{% endif %} js-content">
-          {% if page.sidebar_first or page.sidebar_second %}{% else %}<div class="container">{% endif %}
-            {{ page.content }}
-          {% if page.sidebar_first or page.sidebar_second %}{% else %}</div>{% endif %}
+          <div class="layout__content {% if page.sidebar_first or page.sidebar_second %}layout__content--with-sidebar{% endif %} js-content">
+            {% if page.sidebar_first or page.sidebar_second %}{% else %}<div class="container">{% endif %}
+              {{ page.content }}
+            {% if page.sidebar_first or page.sidebar_second %}{% else %}</div>{% endif %}
+          </div>
         </div>
       </div>
     </div>

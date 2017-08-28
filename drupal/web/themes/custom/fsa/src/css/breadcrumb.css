@@ -14,6 +14,8 @@
 .breadcrumb__container {
   display: flex;
   justify-content: flex-start;
+  margin: 0 auto;
+  max-width: var(--max-width);
 }
 
 .breadcrumb__item {
