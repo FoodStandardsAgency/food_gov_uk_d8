@@ -6,6 +6,7 @@ dependencies:
     - field.field.media.image.field_description
     - field.field.media.image.field_image
     - field.field.media.image.field_subject
+    - field.field.media.image.field_topic
     - image.style.thumbnail
     - media_entity.bundle.image
   module:
@@ -68,6 +69,15 @@ content:
       force_deepest: false
     third_party_settings: {  }
     type: options_shs
+    region: content
+  field_topic:
+    weight: 9
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   langcode:
     type: language_select

@@ -1,0 +1,28 @@
+uuid: 8fce1cc7-1cf0-4af9-a1ab-db90f0632d92
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_topic
+    - node.type.lander
+    - taxonomy.vocabulary.topic
+id: node.lander.field_topic
+field_name: field_topic
+entity_type: node
+bundle: lander
+label: Topic
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      topic: topic
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

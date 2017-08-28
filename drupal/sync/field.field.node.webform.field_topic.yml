@@ -1,0 +1,28 @@
+uuid: 0221b6cf-5bd1-4a98-804f-ccc630b97b71
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_topic
+    - node.type.webform
+    - taxonomy.vocabulary.topic
+id: node.webform.field_topic
+field_name: field_topic
+entity_type: node
+bundle: webform
+label: Topic
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      topic: topic
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

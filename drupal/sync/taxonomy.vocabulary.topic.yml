@@ -1,0 +1,9 @@
+uuid: e4a382f3-7522-4612-93de-abaad5da4d38
+langcode: en
+status: true
+dependencies: {  }
+name: Topic
+vid: topic
+description: 'The topic (subject) of a piece of content'
+hierarchy: 0
+weight: 0

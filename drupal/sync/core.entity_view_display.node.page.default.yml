@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.page.field_liftups
     - field.field.node.page.field_nation
     - field.field.node.page.field_subject
+    - field.field.node.page.field_topic
     - field.field.node.page.field_update_date
     - node.type.page
   module:
@@ -88,6 +89,18 @@ content:
       wrap: span
       separator: ' » '
       link: 0
+      reverse: 0
+    third_party_settings: {  }
+    type: hierarchical_term_formatter
+    region: content
+  field_topic:
+    weight: 8
+    label: above
+    settings:
+      display: all
+      link: '1'
+      wrap: none
+      separator: ' » '
       reverse: 0
     third_party_settings: {  }
     type: hierarchical_term_formatter

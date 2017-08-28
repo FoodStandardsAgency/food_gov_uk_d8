@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.webform.field_liftup_title
     - field.field.node.webform.field_nation
     - field.field.node.webform.field_subject
+    - field.field.node.webform.field_topic
     - field.field.node.webform.webform
     - image.style.thumbnail
     - node.type.webform
@@ -28,6 +29,7 @@ third_party_settings:
         - field_audience
         - field_nation
         - field_subject
+        - field_topic
       parent_name: ''
       weight: 1
       format_type: tab
@@ -96,6 +98,16 @@ content:
     region: content
   field_subject:
     weight: 29
+    settings:
+      display_node_count: false
+      create_new_items: false
+      create_new_levels: false
+      force_deepest: false
+    third_party_settings: {  }
+    type: options_shs
+    region: content
+  field_topic:
+    weight: 30
     settings:
       display_node_count: false
       create_new_items: false

@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.lander.field_nation
     - field.field.node.lander.field_promo_block
     - field.field.node.lander.field_subject
+    - field.field.node.lander.field_topic
     - node.type.lander
   module:
     - entity_reference_revisions
@@ -76,7 +77,22 @@ content:
     third_party_settings: {  }
     type: hierarchical_term_formatter
     region: content
+  field_topic:
+    weight: 6
+    label: above
+    settings:
+      display: all
+      wrap: none
+      separator: ' » '
+      link: 0
+      reverse: 0
+    third_party_settings: {  }
+    type: hierarchical_term_formatter
+    region: content
 hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
   field_header_image: true
   langcode: true
   links: true

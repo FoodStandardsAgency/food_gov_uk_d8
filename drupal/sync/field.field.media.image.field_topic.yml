@@ -1,0 +1,28 @@
+uuid: bb23e994-5886-488e-8894-5de4187404c0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_topic
+    - media_entity.bundle.image
+    - taxonomy.vocabulary.topic
+id: media.image.field_topic
+field_name: field_topic
+entity_type: media
+bundle: image
+label: Topic
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      topic: topic
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
