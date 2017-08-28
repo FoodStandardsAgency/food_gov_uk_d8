@@ -20,6 +20,7 @@
    - { role: drush, tags: [ 'drush' ] }
    - { role: drupal-log, tags: [ 'drupal-log' ] }
    - { role: fsa_elasticsearch, tags: [ 'elasticsearch' ] }
+   - { role: wkhtmltopdf, tags: [ 'wkhtmltopdf' ] }
 
   vars_files:
   - stage-vars.yml

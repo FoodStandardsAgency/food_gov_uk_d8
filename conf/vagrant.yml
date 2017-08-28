@@ -39,6 +39,7 @@
    # More in-depth instructions at https://github.com/wunderkraut/WunderTools/wiki/HHVM
    #- { role: hhvm, tags: [ 'hhvm' ] }
    #- { role: selenium, tags: [ 'selenium' ] }
+   - { role: wkhtmltopdf, tags: [ 'wkhtmltopdf' ] }
 
   tasks:
 
