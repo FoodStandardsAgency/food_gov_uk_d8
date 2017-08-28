@@ -11,11 +11,12 @@ dependencies:
   module:
     - field_group
     - image_widget_crop
+    - shs
 third_party_settings:
   field_group:
     group_taxonomies:
       children:
-        - field_subject
+        - field_topic
       parent_name: ''
       weight: 1
       format_type: tab
@@ -61,11 +62,12 @@ content:
   field_topic:
     weight: 9
     settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
+      display_node_count: false
+      create_new_items: false
+      create_new_levels: false
+      force_deepest: false
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: options_shs
     region: content
   langcode:
     type: language_select

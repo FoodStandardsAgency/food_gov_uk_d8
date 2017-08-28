@@ -9,6 +9,7 @@ dependencies:
     - image.style.crop_thumbnail
     - media_entity.bundle.image
   module:
+    - hierarchical_term_formatter
     - image
 id: media.image.default
 targetEntityType: media
@@ -36,8 +37,12 @@ content:
     label: above
     settings:
       link: true
+      display: all
+      wrap: none
+      separator: ' » '
+      reverse: false
     third_party_settings: {  }
-    type: entity_reference_label
+    type: hierarchical_term_formatter
     region: content
   name:
     label: hidden
