@@ -15,6 +15,7 @@
    - { role: newrelic, tags: [ 'newrelic' ] }
    - { role: newrelic-sysmon, tags: [ 'newrelic-sysmon' ] }
    - { role: newrelic-infra, tags: [ 'newrelic-infra' ] }
+   - { role: wkhtmltopdf, tags: [ 'wkhtmltopdf' ] }
 
 
 
