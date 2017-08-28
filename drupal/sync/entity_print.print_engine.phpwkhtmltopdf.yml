@@ -1,0 +1,11 @@
+uuid: 50b6c162-2dab-4b7d-b7a8-dc42e1efc7ff
+langcode: en
+status: true
+dependencies: {  }
+id: phpwkhtmltopdf
+settings:
+  orientation: portrait
+  default_paper_size: a4
+  username: ''
+  password: ''
+  binary_location: /bin/wkhtmltopdf
