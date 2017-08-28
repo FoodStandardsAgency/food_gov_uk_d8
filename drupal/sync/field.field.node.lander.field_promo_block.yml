@@ -13,8 +13,8 @@ id: node.lander.field_promo_block
 field_name: field_promo_block
 entity_type: node
 bundle: lander
-label: 'Promotion blocks'
-description: ''
+label: 'Content promos'
+description: 'Create custom promo blocks or references to existing content to display promotional boxes on this landing page.'
 required: false
 translatable: true
 default_value: {  }
