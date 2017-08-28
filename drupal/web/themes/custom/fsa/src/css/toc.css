@@ -1,9 +1,21 @@
 .toc-tree {
-  padding-top: 1em;
+
 }
 
 .toc-tree ul,
 .toc-tree ol {
   margin: 0;
   padding: 0;
+  padding-top: 1em;
+}
+
+.toc-tree ul ul,
+.toc-tree ol ol {
+  padding-left: 1em;
+}
+
+.toc-tree ul ul a,
+.toc-tree ol ol a {
+  color: var(--color-black);
+  text-decoration: underline;
 }
