@@ -9,7 +9,6 @@ dependencies:
     - field.field.node.webform.field_icon
     - field.field.node.webform.field_liftup_title
     - field.field.node.webform.field_nation
-    - field.field.node.webform.field_subject
     - field.field.node.webform.field_topic
     - field.field.node.webform.webform
     - node.type.webform
@@ -59,18 +58,6 @@ content:
       link: false
     third_party_settings: {  }
     type: entity_reference_label
-    region: content
-  field_subject:
-    weight: 5
-    label: above
-    settings:
-      display: all
-      wrap: span
-      separator: ' » '
-      link: 0
-      reverse: 0
-    third_party_settings: {  }
-    type: hierarchical_term_formatter
     region: content
   field_topic:
     weight: 6

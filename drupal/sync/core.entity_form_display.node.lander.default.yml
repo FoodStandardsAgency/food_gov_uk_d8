@@ -9,7 +9,6 @@ dependencies:
     - field.field.node.lander.field_intro
     - field.field.node.lander.field_nation
     - field.field.node.lander.field_promo_block
-    - field.field.node.lander.field_subject
     - field.field.node.lander.field_topic
     - node.type.lander
   module:
@@ -98,16 +97,6 @@ content:
       form_display_mode: default
       default_paragraph_type: manual_promo
     third_party_settings: {  }
-    region: content
-  field_subject:
-    weight: 29
-    settings:
-      display_node_count: false
-      create_new_items: false
-      create_new_levels: false
-      force_deepest: false
-    third_party_settings: {  }
-    type: options_shs
     region: content
   field_topic:
     weight: 30

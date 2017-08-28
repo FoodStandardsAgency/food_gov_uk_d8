@@ -9,7 +9,6 @@ dependencies:
     - field.field.node.lander.field_intro
     - field.field.node.lander.field_nation
     - field.field.node.lander.field_promo_block
-    - field.field.node.lander.field_subject
     - field.field.node.lander.field_topic
     - node.type.lander
   module:
@@ -64,18 +63,6 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    region: content
-  field_subject:
-    weight: 5
-    label: above
-    settings:
-      display: all
-      wrap: span
-      separator: ' » '
-      link: 0
-      reverse: 0
-    third_party_settings: {  }
-    type: hierarchical_term_formatter
     region: content
   field_topic:
     weight: 6

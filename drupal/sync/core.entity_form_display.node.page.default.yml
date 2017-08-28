@@ -11,7 +11,6 @@ dependencies:
     - field.field.node.page.field_liftup_title
     - field.field.node.page.field_liftups
     - field.field.node.page.field_nation
-    - field.field.node.page.field_subject
     - field.field.node.page.field_topic
     - field.field.node.page.field_update_date
     - image.style.thumbnail
@@ -125,16 +124,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
-    region: content
-  field_subject:
-    weight: 17
-    settings:
-      display_node_count: false
-      create_new_items: false
-      create_new_levels: false
-      force_deepest: false
-    third_party_settings: {  }
-    type: options_shs
     region: content
   field_topic:
     weight: 18

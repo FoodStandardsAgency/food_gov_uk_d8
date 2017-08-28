@@ -5,14 +5,12 @@ dependencies:
   config:
     - field.field.media.image.field_description
     - field.field.media.image.field_image
-    - field.field.media.image.field_subject
     - field.field.media.image.field_topic
     - image.style.thumbnail
     - media_entity.bundle.image
   module:
     - field_group
     - image_widget_crop
-    - shs
 third_party_settings:
   field_group:
     group_taxonomies:
@@ -59,16 +57,6 @@ content:
       warn_multiple_usages: true
     third_party_settings: {  }
     type: image_widget_crop
-    region: content
-  field_subject:
-    weight: 8
-    settings:
-      display_node_count: false
-      create_new_items: false
-      create_new_levels: false
-      force_deepest: false
-    third_party_settings: {  }
-    type: options_shs
     region: content
   field_topic:
     weight: 9
