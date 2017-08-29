@@ -12,7 +12,25 @@ function fsa_preprocess_field(&$variables) {
 
   // Set classes for node entity fields.
   if ($variables['entity_type'] == 'node' && isset($variables['field_name'])) {
-    $variables['attributes']['class'][] = 'field__' . $variables['field_name'];
-  }
+    $field_name = 'field__' . $variables['field_name'];
+    $variables['attributes']['class'][] = $field_name;
+    $variables['title_attributes']['class'][] = $field_name . '__heading';
 
+    // Control the field label element, defaults to 'div'
+    switch ($variables['field_name']) {
+      case 'field_topic_cloud':
+        $variables['title_element'] = 'h2';
+        break;
+      default:
+        $variables['title_element'] = 'div';
+        break;
+
+    }
+
+    // Add counting classes for fields with multiple items.
+    foreach(array_keys($variables['items']) as $delta) {
+      $variables['items'][$delta]['attributes']->setAttribute('class', $field_name);
+      $variables['items'][$delta]['attributes']->setAttribute('class', $field_name . '__item--' . $delta);
+    }
+  }
 }
