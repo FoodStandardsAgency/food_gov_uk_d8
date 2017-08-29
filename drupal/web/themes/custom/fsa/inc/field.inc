@@ -10,13 +10,13 @@
  */
 function fsa_preprocess_field(&$variables) {
 
-  // Control the field label element per field, defaults to 'div'.
+  // Control the field label element per field, defaults to 'h2'.
   switch ($variables['field_name']) {
-    case 'field_topic_cloud':
-      $variables['title_element'] = 'h2';
+    case 'field_update_date':
+      $variables['title_element'] = 'div';
       break;
     default:
-      $variables['title_element'] = 'div';
+      $variables['title_element'] = 'h2';
       break;
   }
 
