@@ -151,7 +151,11 @@
 
 /*Rating listing*/
 .ratings__content {
+  background-color: var(--color-white) !important;
+}
 
+.ratings__content.ratings__content--listing {
+  padding: 0 !important;
 }
 
 .ratings__content h1 {
@@ -165,7 +169,7 @@
   }
 }
 
-.ratings__content.ratings__content--frontpage {
+.layout__content.ratings__content.ratings__content--frontpage {
   @mixin responsive-declaration padding, 1em, 3em;
   @mixin responsive-declaration padding-top, 3em, 5em;
   flex: 1 1 100%;
@@ -173,10 +177,8 @@
   @media (--breakpoint-md) {
     margin-left: 0;
     flex: 1 1 50%;
-  }
-
-  @media (--breakpoint-lg) {
-    margin-left: 0;
+    margin-left: 0 !important;
+    padding-right: 3em !important;
   }
 }
 
