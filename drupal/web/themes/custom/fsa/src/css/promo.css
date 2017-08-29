@@ -46,7 +46,7 @@
   background-color: var(--color-white);
   @mixin responsive-declaration padding, 1em, 2em;
   box-shadow: var(--box-shadow);
-  transition: var(--transition-enter);
+  transition: box-shadow var(--transition-enter);
 
   @media (--breakpoint-lg) {
     flex: 0 1 16em;

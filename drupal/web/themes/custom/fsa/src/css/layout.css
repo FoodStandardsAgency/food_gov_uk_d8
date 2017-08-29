@@ -29,6 +29,10 @@
 }
 
 .theme-service .layout__container {
+  max-width: var(--max-width);
+}
+
+.theme-service .layout__container {
   margin: 0;
   max-width: none;
 }
