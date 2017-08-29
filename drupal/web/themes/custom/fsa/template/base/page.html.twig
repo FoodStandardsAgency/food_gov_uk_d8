@@ -150,7 +150,7 @@
     </div>
   </div>
 
-  {% if page.hero %}
+  {% if page.hero is defined and page.hero|render|striptags|trim %}
     <div class="hero">
       <div class="hero__container">
         {{ page.hero }}

@@ -117,7 +117,7 @@ html {
   font-size: var(--font-size-base);
   letter-spacing: 0.015em;
   @mixin responsive-declaration font-size, 100%, var(--font-size-base);
-  @mixin responsive-declaration line-height, 1.2, 1.333;
+  @mixin responsive-declaration line-height, 1.2, 1.4;
 }
 
 body {
@@ -480,4 +480,8 @@ div.page-title {
 img {
   display: inline-block;
   vertical-align: top;
+}
+
+.print__wrapper.print__wrapper--pdf {
+  
 }
