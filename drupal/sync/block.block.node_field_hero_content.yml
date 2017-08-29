@@ -5,9 +5,13 @@ dependencies:
   config:
     - views.view.node_field
   module:
+    - block_class
     - views
   theme:
     - fsa
+third_party_settings:
+  block_class:
+    classes: hero__content
 id: node_field_hero_content
 theme: fsa
 region: hero
