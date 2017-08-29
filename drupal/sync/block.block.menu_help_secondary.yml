@@ -18,7 +18,7 @@ settings:
   id: 'system_menu_block:help'
   label: 'Help menu 2nd level'
   provider: system
-  label_display: visible
+  label_display: '0'
   level: 1
   depth: 2
 visibility:
