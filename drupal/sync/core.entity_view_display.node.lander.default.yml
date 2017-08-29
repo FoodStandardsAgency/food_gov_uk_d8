@@ -22,7 +22,7 @@ bundle: lander
 mode: default
 content:
   field_audience:
-    weight: 3
+    weight: 4
     label: above
     settings:
       display: all
@@ -34,7 +34,7 @@ content:
     type: hierarchical_term_formatter
     region: content
   field_content_type:
-    weight: 2
+    weight: 3
     label: above
     settings:
       link: false
@@ -49,7 +49,7 @@ content:
     type: basic_string
     region: content
   field_nation:
-    weight: 4
+    weight: 5
     label: above
     settings:
       link: false
@@ -78,7 +78,7 @@ content:
     type: hierarchical_term_formatter
     region: content
   field_topic_cloud:
-    weight: 7
+    weight: 2
     label: above
     settings:
       link: true
