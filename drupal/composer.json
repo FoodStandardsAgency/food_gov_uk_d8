@@ -48,7 +48,8 @@
         "drupal/entity_embed": "^1.0@beta",
         "drupal/embed": "^1.0",
         "drupal/entity_print": "^2.0",
-        "mikehaertl/phpwkhtmltopdf": "^2.2"
+        "mikehaertl/phpwkhtmltopdf": "^2.2",
+        "drupal/block_class": "^1.0@alpha"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
