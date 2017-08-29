@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.page.field_liftup_title
     - field.field.node.page.field_liftups
     - field.field.node.page.field_nation
+    - field.field.node.page.field_subpages
     - field.field.node.page.field_topic
     - field.field.node.page.field_update_date
     - image.style.thumbnail
@@ -31,7 +32,6 @@ third_party_settings:
         - field_content_type
         - field_audience
         - field_nation
-        - field_subject
         - field_topic
       parent_name: ''
       weight: 1
@@ -62,7 +62,7 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 9
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -109,7 +109,7 @@ content:
     region: content
   field_liftups:
     type: entity_reference_paragraphs
-    weight: 14
+    weight: 15
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -124,6 +124,18 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
+    region: content
+  field_subpages:
+    type: entity_reference_paragraphs
+    weight: 7
+    settings:
+      title: Sub-page
+      title_plural: Sub-pages
+      edit_mode: closed
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: subpage
+    third_party_settings: {  }
     region: content
   field_topic:
     weight: 18
@@ -143,13 +155,13 @@ content:
     region: content
   langcode:
     type: language_select
-    weight: 7
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 13
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -157,14 +169,14 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 11
+    weight: 12
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 12
+    weight: 13
     region: content
     third_party_settings: {  }
   title:
@@ -176,13 +188,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 10
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 8
+    weight: 9
     region: content
     settings:
       match_operator: CONTAINS
