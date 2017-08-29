@@ -6,9 +6,8 @@
   height: 100%;
   text-align: center;
   position: relative;
-  transition: var(--transition-enter);
+  transition: box-shadow var(--transition-enter);
 }
-
 
 :--not-touch .node-teaser:--enter {
   box-shadow: var(--box-shadow-active);
