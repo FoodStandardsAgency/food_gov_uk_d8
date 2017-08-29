@@ -1,0 +1,28 @@
+uuid: 99c3063b-265d-40eb-9357-e60704ba9790
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_topic_cloud
+    - node.type.lander
+    - taxonomy.vocabulary.topic
+id: node.lander.field_topic_cloud
+field_name: field_topic_cloud
+entity_type: node
+bundle: lander
+label: 'Guidance and information by topic'
+description: 'Enter tags from topic taxonomy to create a cloud of topic links to their respective listing pages.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      topic: topic
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

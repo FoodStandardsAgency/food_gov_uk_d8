@@ -26,19 +26,19 @@ function fsa_preprocess_html(&$variables) {
 
       // Add content type based html class.
       $variables['attributes']['class'][] = 'theme--content-type-' . strtolower(Html::cleanCssIdentifier($term->getName()));
+
+      // Add body classes based on selected taxonomy term
+      switch ($term->id()) {
+        case 27: // Help
+          $variables['attributes']['class'][] = 'theme-service';
+          $variables['attributes']['class'][] = 'theme-service--help-centre';
+          break;
+      }
     }
   }
 
-  // @todo: before we know how content structures rely on paths to set body classes.
+  // Rely on URL aliases for FHRS ratings section.
   $uri_segments = explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-
-  // Help centre/contact us pages.
-  if ($uri_segments[1] === 'help') {
-    $variables['attributes']['class'][] = 'theme-service';
-    $variables['attributes']['class'][] = 'theme-service--help-centre';
-  }
-
-  // FHRS
   if ($uri_segments[1] === 'ratings' || $uri_segments[1] === 'fsa-ratings') {
     $variables['attributes']['class'][] = 'theme-service';
     $variables['attributes']['class'][] = 'theme-service--fhrs';
