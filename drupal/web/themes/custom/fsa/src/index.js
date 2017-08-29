@@ -31,17 +31,17 @@ if (searchLogo != null) {
 }
 
 // Second temperary fix
-let pageTitle = document.querySelector('.js-quickedit-page-title');
-
-if (pageTitle == null) {
-  pageTitle = document.querySelector('#block-pagetitle');
-}
-
-if (pageTitle != null) {
-  pageTitle.classList.add('page-title');
-  const layoutArticle = document.querySelector('.layout__content').children[0];
-  layoutArticle.parentNode.insertBefore(pageTitle, layoutArticle);
-}
+// let pageTitle = document.querySelector('.js-quickedit-page-title');
+//
+// if (pageTitle == null) {
+//   pageTitle = document.querySelector('#block-pagetitle');
+// }
+//
+// if (pageTitle != null) {
+//   pageTitle.classList.add('page-title');
+//   const layoutArticle = document.querySelector('.layout__content').children[0];
+//   layoutArticle.parentNode.insertBefore(pageTitle, layoutArticle);
+// }
 
 // Responsive tables
 const tables = [...document.querySelectorAll('.js-table')];
