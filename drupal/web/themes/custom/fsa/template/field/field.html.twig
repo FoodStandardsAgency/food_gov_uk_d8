@@ -3,21 +3,8 @@
  * @file
  * FSA theme override for a field.
  *
- * To override output, copy the "field.html.twig" from the templates directory
- * to your theme's directory and customize it, just like customizing other
- * Drupal templates such as page.html.twig or node.html.twig.
- *
- * Instead of overriding the theming for all fields, you can also just override
- * theming for a subset of fields using
- * @link themeable Theme hook suggestions. @endlink For example,
- * here are some theme hook suggestions that can be used for a field_foo field
- * on an article node type:
- * - field--node--field-foo--article.html.twig
- * - field--node--field-foo.html.twig
- * - field--node--article.html.twig
- * - field--field-foo.html.twig
- * - field--text-with-summary.html.twig
- * - field.html.twig
+ * Direct copy from stable theme, with added possibility to override the title dev element.
+ * Avoid modifying too much to keep compatible with Drupal field configurations.
  *
  * Available variables:
  * - attributes: HTML attributes for the containing element.
@@ -51,16 +38,16 @@
         {% endfor %}
     {% endif %}
 {% else %}
-    <div{{ attributes }}>
+<div{{ attributes }}>
     <{{ title_element }}{{ title_attributes }}>{{ label }}</{{ title_element }}>
-        {% if multiple %}
+    {% if multiple %}
         <div>
-            {% endif %}
-            {% for item in items %}
-                <div{{ item.attributes }}>{{ item.content }}</div>
-            {% endfor %}
-            {% if multiple %}
+    {% endif %}
+    {% for item in items %}
+        <div{{ item.attributes }}>{{ item.content }}</div>
+    {% endfor %}
+    {% if multiple %}
         </div>
-        {% endif %}
+    {% endif %}
     </div>
 {% endif %}
