@@ -1,0 +1,6 @@
+name: FSA Business Guidance Sub-pages
+type: module
+description: This module adds support for Business Guidance sub-pages
+core: 8.x
+package: FSA
+dependencies:

@@ -35,6 +35,7 @@ module:
   fsa_establishment_lookup: 0
   fsa_ratings: 0
   fsa_ratings_import: 0
+  fsa_subpages: 0
   geolocation: 0
   help: 0
   hierarchical_term_formatter: 0

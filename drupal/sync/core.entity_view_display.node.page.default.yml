@@ -19,6 +19,7 @@ dependencies:
     - datetime
     - entity_print
     - entity_reference_revisions
+    - fsa_subpages
     - hierarchical_term_formatter
     - text
     - user
@@ -82,7 +83,7 @@ content:
     type: entity_reference_label
     region: content
   field_subpages:
-    type: entity_reference_revisions_entity_view
+    type: entity_reference_revisions_subpages_entity_view
     weight: 3
     label: hidden
     settings:
