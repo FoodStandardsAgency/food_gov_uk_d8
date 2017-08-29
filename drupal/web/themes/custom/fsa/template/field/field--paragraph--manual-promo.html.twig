@@ -39,9 +39,9 @@
 
 {% if label_hidden %}
   {% if multiple %}
-    <div{{ attributes }} class="liftup">
+    <div{{ attributes }} class="promo">
       {% for item in items %}
-        <div{{ item.attributes }} class="liftup__item">{{ item.content }}</div>
+        <div{{ item.attributes }} class="promo__item">{{ item.content }}</div>
       {% endfor %}
     </div>
   {% else %}

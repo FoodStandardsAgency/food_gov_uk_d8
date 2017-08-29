@@ -92,9 +92,15 @@ Plugin documentation:
   --z-top: 20;
 }
 
+/*Transitions*/
+:root {
+  --transition-enter: 0.7s cubic-bezier(0.19,1,0.22,1);
+}
+
 /*Misc*/
 :root {
   --box-shadow: 0 0.5em 2em 0 color(#000 a(20%));
+  --box-shadow-active: 0 1em 3em 0 color(#000 a(10%));
   --max-width: 80em;
 }
 
