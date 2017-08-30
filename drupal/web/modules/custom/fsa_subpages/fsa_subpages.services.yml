@@ -1,0 +1,5 @@
+services:
+  fsa_subpages.subpages_redirect:
+    class: Drupal\fsa_subpages\EventSubscriber\FsaSubpagesRedirectSubscriber
+    tags:
+      - { name: event_subscriber }
