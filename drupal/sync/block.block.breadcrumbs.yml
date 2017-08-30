@@ -9,7 +9,7 @@ dependencies:
     - fsa
 third_party_settings:
   block_class:
-    classes: breadcrumb__container
+    classes: ''
 id: breadcrumbs
 theme: fsa
 region: breadcrumb
