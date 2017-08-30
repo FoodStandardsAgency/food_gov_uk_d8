@@ -1,0 +1,40 @@
+uuid: cfcacda0-9726-4257-9fcc-d907498913a2
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - ctools
+    - fsa_subpages
+    - node
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: subpagesblock
+theme: fsa
+region: sidebar_first
+weight: -1
+provider: null
+plugin: subpages_block
+settings:
+  id: subpages_block
+  label: 'Sub-pages navigation'
+  provider: fsa_subpages
+  label_display: visible
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      page: page
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+  node_type:
+    id: node_type
+    bundles:
+      page: page
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
