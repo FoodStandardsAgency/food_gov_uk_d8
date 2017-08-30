@@ -11,7 +11,7 @@ dependencies:
     - fsa
 third_party_settings:
   block_class:
-    classes: ''
+    classes: footer__links
 id: menu_footer
 theme: fsa
 region: footer
