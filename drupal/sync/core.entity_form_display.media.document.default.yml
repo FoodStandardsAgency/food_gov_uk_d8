@@ -6,11 +6,13 @@ dependencies:
     - field.field.media.document.field_description
     - field.field.media.document.field_document
     - field.field.media.document.field_document_category
+    - field.field.media.document.field_mime_type
     - field.field.media.document.field_nation
     - media_entity.bundle.document
   module:
     - field_group
     - file
+    - path
 third_party_settings:
   field_group:
     group_taxonomies:
@@ -41,7 +43,7 @@ content:
     type: string_textarea
     region: content
   field_document:
-    weight: 8
+    weight: 5
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
@@ -52,6 +54,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_select
+    region: content
+  field_mime_type:
+    weight: 6
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
     region: content
   field_nation:
     weight: 7
@@ -72,6 +82,12 @@ content:
     settings:
       size: 60
       placeholder: 'The name of the document displayed in download links'
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 7
+    region: content
+    settings: {  }
     third_party_settings: {  }
   translation:
     weight: 1

@@ -6,6 +6,7 @@ dependencies:
     - field.field.media.document.field_description
     - field.field.media.document.field_document
     - field.field.media.document.field_document_category
+    - field.field.media.document.field_mime_type
     - field.field.media.document.field_nation
     - media_entity.bundle.document
   module:
@@ -16,7 +17,7 @@ bundle: document
 mode: default
 content:
   field_description:
-    weight: 2
+    weight: 3
     label: hidden
     settings: {  }
     third_party_settings: {  }
@@ -30,15 +31,23 @@ content:
     type: file_default
     region: content
   field_document_category:
-    weight: 3
+    weight: 4
     label: above
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  field_mime_type:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
   field_nation:
-    weight: 4
+    weight: 5
     label: above
     settings:
       link: true
