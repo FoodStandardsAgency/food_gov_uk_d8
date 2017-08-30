@@ -1,0 +1,27 @@
+uuid: 777cfe99-b033-4dcf-be56-6e180008e646
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_document
+    - media_entity.bundle.document
+  module:
+    - file
+id: media.document.field_document
+field_name: field_document
+entity_type: media
+bundle: document
+label: Document
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: media/document
+  file_extensions: 'pdf doc docx xls xlsx ppt pptx txt rtf'
+  max_filesize: 50MB
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

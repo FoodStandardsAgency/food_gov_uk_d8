@@ -1,0 +1,28 @@
+uuid: f61759c7-6f81-4a98-aafd-40339bfb8da1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_nation
+    - media_entity.bundle.document
+    - taxonomy.vocabulary.nation
+id: media.document.field_nation
+field_name: field_nation
+entity_type: media
+bundle: document
+label: Nation
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      nation: nation
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

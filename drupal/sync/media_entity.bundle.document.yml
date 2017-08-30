@@ -1,0 +1,17 @@
+uuid: 7ae14f72-4b6e-401d-9c5a-cb5528a99ad4
+langcode: en
+status: true
+dependencies:
+  module:
+    - crop
+third_party_settings:
+  crop:
+    image_field: null
+id: document
+label: Document
+description: ''
+type: generic
+queue_thumbnail_downloads: false
+new_revision: false
+type_configuration: {  }
+field_map: {  }
