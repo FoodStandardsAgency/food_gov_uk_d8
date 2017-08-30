@@ -1,0 +1,35 @@
+uuid: ad538b27-fa93-4180-ba9e-c9356ff71724
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.subpage.field_body
+    - field.field.paragraph.subpage.field_title
+    - paragraphs.paragraphs_type.subpage
+  module:
+    - text
+id: paragraph.subpage.default
+targetEntityType: paragraph
+bundle: subpage
+mode: default
+content:
+  field_body:
+    weight: 1
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

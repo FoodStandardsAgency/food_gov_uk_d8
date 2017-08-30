@@ -1,0 +1,35 @@
+uuid: a37ead8e-f5ce-489b-8cc7-651909b09fd3
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.subpage.field_body
+    - field.field.paragraph.subpage.field_title
+    - paragraphs.paragraphs_type.subpage
+  module:
+    - text
+id: paragraph.subpage.preview
+targetEntityType: paragraph
+bundle: subpage
+mode: preview
+content:
+  field_body:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
