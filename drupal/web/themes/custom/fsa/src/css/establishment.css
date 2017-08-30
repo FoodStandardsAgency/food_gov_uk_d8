@@ -1,5 +1,5 @@
 .establishment {
-  @mixin responsive-declaration padding, 1em, 2em;
+  @mixin responsive-declaration padding, 1em, 4em;
 }
 
 .establishment__container {

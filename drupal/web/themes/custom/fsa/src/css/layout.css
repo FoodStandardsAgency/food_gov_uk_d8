@@ -137,3 +137,13 @@
   background-color: var(--color-lighter-gray);
   @mixin responsive-declaration padding-right, 1em, 4em;
 }
+
+
+
+
+/*Temp fix*/
+.theme-service.theme-service--fhrs .layout__container > .layout__content {
+  padding-top: 0!important;
+  padding-left: 0!important;
+  padding-right: 0!important;
+}

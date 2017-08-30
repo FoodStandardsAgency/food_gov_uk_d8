@@ -1,5 +1,5 @@
 .ratings-meanings {
-  @mixin responsive-declaration padding, 1em, 2em;
+  @mixin responsive-declaration padding, 1em, 4em;
   background-color: var(--color-lighter-gray);
 }
 
