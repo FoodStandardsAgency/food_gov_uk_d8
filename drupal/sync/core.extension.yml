@@ -48,6 +48,7 @@ module:
   locale: 0
   media_entity: 0
   media_entity_image: 0
+  menu_breadcrumb: 0
   menu_ui: 0
   migrate: 0
   migrate_plus: 0

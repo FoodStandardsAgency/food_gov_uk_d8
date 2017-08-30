@@ -1,0 +1,24 @@
+uuid: 85aae854-105e-47b0-a176-94869cf406a4
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - system
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: breadcrumb__container
+id: breadcrumbs
+theme: fsa
+region: breadcrumb
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  provider: system
+  label_display: '0'
+visibility: {  }
