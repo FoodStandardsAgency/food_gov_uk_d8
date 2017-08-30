@@ -9,7 +9,7 @@ dependencies:
 id: anchors_toc
 theme: fsa
 region: sidebar_first
-weight: 0
+weight: -2
 provider: null
 plugin: toc_filter
 settings:
