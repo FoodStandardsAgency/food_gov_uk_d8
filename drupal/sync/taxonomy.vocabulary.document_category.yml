@@ -1,0 +1,9 @@
+uuid: 2a3b02b4-5d72-4698-bcb9-6f5db20b6d4e
+langcode: en
+status: true
+dependencies: {  }
+name: 'Document category'
+vid: document_category
+description: 'Taxonomy to categorize documents in media library'
+hierarchy: 0
+weight: 0

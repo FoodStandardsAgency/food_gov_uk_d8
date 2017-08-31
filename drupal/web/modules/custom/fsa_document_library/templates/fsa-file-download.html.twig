@@ -1,0 +1,22 @@
+{#
+/**
+ * @file
+ * Theme for file download link.
+ *
+ * Available variables:
+ * - attributes: Attributes for main wrapper.
+ * - filename: The name of the file
+ * - url: Absolute URL to the file.
+ * - mimetype: The mime type of the file
+ * - filesize: The size of the file.
+ * - link: The download link of the file.
+ *
+ * @see fsa_document_library.module()
+ */
+#}
+<div{{ attributes }}>
+    <div>{{ filename }}</div>
+    <div>{{ link }}</div>
+    <div>{{ mimetype }}</div>
+    <div>{{ filesize }}</div>
+</div>
