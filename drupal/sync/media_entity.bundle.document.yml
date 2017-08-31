@@ -16,5 +16,4 @@ queue_thumbnail_downloads: false
 new_revision: false
 type_configuration:
   source_field: field_document
-field_map:
-  mime: field_mime_type
+field_map: {  }

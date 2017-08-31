@@ -6,7 +6,6 @@ dependencies:
     - field.field.media.document.field_description
     - field.field.media.document.field_document
     - field.field.media.document.field_document_category
-    - field.field.media.document.field_mime_type
     - field.field.media.document.field_nation
     - media_entity.bundle.document
   module:
@@ -54,14 +53,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_select
-    region: content
-  field_mime_type:
-    weight: 6
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
     region: content
   field_nation:
     weight: 7

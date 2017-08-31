@@ -6,11 +6,10 @@ dependencies:
     - field.field.media.document.field_description
     - field.field.media.document.field_document
     - field.field.media.document.field_document_category
-    - field.field.media.document.field_mime_type
     - field.field.media.document.field_nation
     - media_entity.bundle.document
   module:
-    - file
+    - fsa_document_library
 id: media.document.default
 targetEntityType: media
 bundle: document
@@ -28,7 +27,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: file_default
+    type: fsa_document_mime_type_formatter
     region: content
   field_document_category:
     weight: 4
@@ -37,14 +36,6 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
-    region: content
-  field_mime_type:
-    weight: 2
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
     region: content
   field_nation:
     weight: 5
