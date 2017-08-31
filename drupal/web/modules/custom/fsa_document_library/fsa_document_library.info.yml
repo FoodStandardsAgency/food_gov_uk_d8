@@ -1,0 +1,7 @@
+name: FSA Document Library
+type: module
+description: This module enhances the Document library functionality
+core: 8.x
+package: FSA
+dependencies:
+  - media_entity
