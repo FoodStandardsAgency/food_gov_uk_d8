@@ -1,6 +1,6 @@
 <?php
 
-$environment = "local";
+$environment = getenv("WKV_SITE_ENV");
 if ($environment == "local") {
   $home = drush_server_home();
   // Solve the key file to use
