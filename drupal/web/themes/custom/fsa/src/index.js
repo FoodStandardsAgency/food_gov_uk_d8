@@ -4,6 +4,7 @@ import responsiveTables from './responsiveTables';
 import stickyElement from './stickyElement';
 import toggleContent from './toggleContent';
 import toc from './toc';
+import mobileMenu from './mobile-menu';
 
 const breakpoints = {
   small: "sm",
@@ -67,6 +68,14 @@ const tableOfContents = document.querySelectorAll('.toc');
 const contentElement = document.querySelectorAll('.toc-filter');
 if (tableOfContents != null || contentElement != null) {
   toc(tableOfContents, contentElement);
+}
+
+// Mobile menu
+const menuButtonElements = document.querySelectorAll('.js-menu-button');
+const navigationElement = document.querySelector('.js-navigation');
+const siteElement = document.querySelector('.js-site');
+if (menuButtonElements != null || navigationElement != null || siteElement != null) {
+  mobileMenu(menuButtonElements, navigationElement, siteElement);
 }
 
 // Add class if touch device

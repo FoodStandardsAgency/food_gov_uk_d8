@@ -44,17 +44,15 @@
  * @see html.html.twig
  */
 #}
-<div class="site">
+<div class="site js-site">
 
   <header class="header" role="banner">
-    {{ page.header }}
-
     <div class="header__container">
-      <div class="header__menu-button">
+      <button class="header__menu-button js-menu-button">
         <div class="svg">
           <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#menu-icon"></use></svg>
         </div>
-      </div>
+      </button>
 
       <div class="header__logo">
         <div class="svg">
@@ -97,36 +95,19 @@
             <a href="#" class="">About us</a>
           </div>
         </div>
-        <div class="header__help">
-          <a href="/help" class="button button--with-icon">
-            <div class="button__icon svg">
-              <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#help-centre-icon"></use></svg>
-            </div>
-            <span>Help centre</span>
-          </a>
-        </div>
       </div>
     </div>
   </header>
 
-  <div class="navigation">
-    {% if page.primary_menu %}
-    {{ page.primary_menu }}
+  <div class="navigation-wrapper js-navigation">
+    <button class="header__menu-button header__menu-button--navigation js-menu-button">
+      <div class="svg">
+        <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#menu-icon"></use></svg>
+      </div>
+    </button>
+    {% if page.header %}
+      {{ page.header }}
     {% endif %}
-    <div class="navigation__container">
-      <div class="navigation__item">
-        <a href="#" class="navigation__link">News & Alerts</a>
-      </div>
-      <div class="navigation__item">
-        <a href="#" class="navigation__link">Food safety & Hygiene</a>
-      </div>
-      <div class="navigation__item">
-        <a href="#" class="navigation__link">Business guidance</a>
-      </div>
-      <div class="navigation__item">
-        <a href="#" class="navigation__link">Science & Research</a>
-      </div>
-    </div>
   </div>
 
   {% if page.secondary_menu %}
@@ -159,7 +140,7 @@
     </div>
   {% endif %}
 
-  <main class="site-content" role="main">
+  <main role="main">
     <a id="main-content" tabindex="-1"></a>
 
     <div class="layout-content">

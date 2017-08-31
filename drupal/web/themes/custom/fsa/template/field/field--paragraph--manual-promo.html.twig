@@ -41,7 +41,9 @@
   {% if multiple %}
     <div{{ attributes.addClass('promo') }}>
       {% for item in items %}
-        <div{{ item.attributes.addClass('promo__item') }}>{{ item.content }}</div>
+        <a href="{{ item.content.field_link[0]['#url']|render }}" {{ item.attributes.addClass('promo__item') }}>
+          {{ item.content|without('field_link') }}
+        </a>
       {% endfor %}
     </div>
   {% else %}

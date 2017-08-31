@@ -90,6 +90,7 @@ Plugin documentation:
   --z-bottom: 1;
   --z-middle: 10;
   --z-top: 20;
+  --z-topmost: 30;
 }
 
 /*Transitions*/
@@ -118,6 +119,11 @@ html {
   letter-spacing: 0.015em;
   @mixin responsive-declaration font-size, 100%, var(--font-size-base);
   @mixin responsive-declaration line-height, 1.2, 1.4;
+
+}
+
+html.is-fixed {
+  position: fixed;
 }
 
 body {
@@ -146,6 +152,14 @@ body:after {
   @media (--breakpoint-md) {
     content: "md";
   }
+}
+
+.site {
+  transition: transform var(--transition-enter);
+}
+
+.site.is-moved {
+  transform: translate(20%);
 }
 
 :--heading {
@@ -483,5 +497,5 @@ img {
 }
 
 .print__wrapper.print__wrapper--pdf {
-  
+
 }
