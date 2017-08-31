@@ -52,6 +52,19 @@ class SubpagesBlock extends BlockBase {
       $subpages[] = $render;
     }
 
+    // if there are no subpages
+    // return minimum array
+    // otherwise block title will be shown
+    if (empty($subpages)) {
+      return [
+        '#cache' => [
+          'tags' => [
+            "node:$nid",
+          ],
+        ],
+      ];
+    }
+
     return [
       '#theme' => 'item_list',
       '#list_type' => 'ul',
