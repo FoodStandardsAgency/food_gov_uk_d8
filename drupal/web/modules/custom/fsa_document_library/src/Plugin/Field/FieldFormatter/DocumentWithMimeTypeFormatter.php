@@ -39,10 +39,21 @@ class DocumentWithMimeTypeFormatter extends FileFormatterBase {
           'download' => TRUE,
         ),
       );
+
+      if ($items[0]->description != '') {
+        $link_text = $items[0]->description;
+      }
+      else {
+        $link_text = $file->getFilename();
+      }
+
+      $filesize = format_size($file->getSize());
+
       $url->setOptions($link_options);
-      $link = Link::fromTextAndUrl(t('Download'), $url )->toString();
+      $link = Link::fromTextAndUrl($link_text, $url )->toString();
 
       $attributes['class'] = 'file__type_' . Html::cleanCssIdentifier($file->getMimeType());
+
 
       $elements[$delta] = [
         '#theme' => 'fsa_file_download',
@@ -51,7 +62,7 @@ class DocumentWithMimeTypeFormatter extends FileFormatterBase {
         '#url' => $url,
         '#link' => $link,
         '#mimetype' => $file->getMimeType(),
-        '#filesize' => format_size($file->getSize()),
+        '#filesize' => $filesize,
       ];
     }
 
