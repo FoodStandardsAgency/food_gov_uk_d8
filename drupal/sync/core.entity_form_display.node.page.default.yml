@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.page.body
     - field.field.node.page.field_audience
     - field.field.node.page.field_content_type
+    - field.field.node.page.field_document
     - field.field.node.page.field_header_image
     - field.field.node.page.field_icon
     - field.field.node.page.field_liftup_title
@@ -77,6 +78,19 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_select
+    region: content
+  field_document:
+    weight: 26
+    settings:
+      form_mode: default
+      label_singular: ''
+      label_plural: ''
+      allow_existing: true
+      match_operator: CONTAINS
+      override_labels: false
+      allow_new: false
+    third_party_settings: {  }
+    type: inline_entity_form_complex
     region: content
   field_header_image:
     weight: 2
