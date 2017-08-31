@@ -1,5 +1,8 @@
 .header {
+  position: relative;
+  z-index: var(--z-top);
   padding: 0;
+  background-color: var(--color-white);
   border-bottom: 2px solid var(--color-lighter-gray);
 
   @media (--breakpoint-sm) {
@@ -22,10 +25,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  @media (--breakpoint-sm) {
-    align-items: flex-end;
-  }
 }
 
 .header__menu-button {
@@ -47,6 +46,10 @@
 
 .header__menu-button .svg path {
   fill: var(--primary-color);
+}
+
+.header__menu-button--navigation .svg path {
+  fill: var(--color-white);
 }
 
 .header__logo .svg {
@@ -100,7 +103,6 @@
   display: none;
 
   @media (--breakpoint-sm) {
-    align-self: stretch;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
