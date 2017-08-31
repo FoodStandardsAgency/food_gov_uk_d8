@@ -31,17 +31,17 @@ content:
     region: content
   field_document_category:
     weight: 4
-    label: above
+    label: inline
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
     type: entity_reference_label
     region: content
   field_nation:
     weight: 5
-    label: above
+    label: inline
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
     type: entity_reference_label
     region: content
