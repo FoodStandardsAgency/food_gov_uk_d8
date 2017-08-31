@@ -3,9 +3,13 @@ langcode: en
 status: true
 dependencies:
   module:
+    - block_class
     - toc_filter
   theme:
     - fsa
+third_party_settings:
+  block_class:
+    classes: ''
 id: anchors_toc
 theme: fsa
 region: sidebar_first

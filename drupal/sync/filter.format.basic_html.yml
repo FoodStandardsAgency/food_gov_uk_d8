@@ -60,7 +60,7 @@ filters:
     status: true
     weight: 0
     settings:
-      type: full
+      type: anchor_navigation
       auto: ''
       block: '1'
   video_embed_wysiwyg:
