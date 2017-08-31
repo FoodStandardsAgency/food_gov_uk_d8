@@ -54,7 +54,7 @@ class SubpagesBlock extends BlockBase {
 
     // if there are no subpages
     // return minimum array
-    // otherwise it will be cached
+    // otherwise block title will be shown
     if (empty($subpages)) {
       return [
         '#cache' => [
