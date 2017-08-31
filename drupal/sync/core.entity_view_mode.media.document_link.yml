@@ -1,0 +1,10 @@
+uuid: 2009fca8-f231-4803-aaed-a61906f918bb
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.document_link
+label: 'Document link'
+targetEntityType: media
+cache: true

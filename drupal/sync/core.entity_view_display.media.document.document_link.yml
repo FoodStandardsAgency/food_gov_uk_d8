@@ -1,0 +1,37 @@
+uuid: 0c645d64-3204-42f8-8867-9e3575817543
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.document_link
+    - field.field.media.document.field_description
+    - field.field.media.document.field_document
+    - field.field.media.document.field_document_category
+    - field.field.media.document.field_nation
+    - media_entity.bundle.document
+  module:
+    - fsa_document_library
+id: media.document.document_link
+targetEntityType: media
+bundle: document
+mode: document_link
+content:
+  field_document:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: fsa_document_mime_type_formatter
+    region: content
+hidden:
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_description: true
+  field_document_category: true
+  field_nation: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true
