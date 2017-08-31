@@ -14,7 +14,7 @@ entity_type: node
 bundle: page
 label: Sub-pages
 description: ''
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
@@ -27,10 +27,10 @@ settings:
       liftups:
         weight: 3
         enabled: false
-      subpage:
-        enabled: true
-        weight: 4
       manual_promo:
         weight: 4
         enabled: false
+      subpage:
+        enabled: true
+        weight: 4
 field_type: entity_reference_revisions
