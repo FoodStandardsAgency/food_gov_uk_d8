@@ -1,0 +1,27 @@
+uuid: c406896c-b98c-4b52-9fcf-bf51acc832af
+langcode: en
+status: true
+dependencies: {  }
+id: anchor_navigation
+label: 'Anchor navigation'
+options:
+  template: responsive
+  title: 'In this topic'
+  block: false
+  header_count: 2
+  header_min: 2
+  header_max: 2
+  header_allowed_tags: '<em> <b> <del> <i> <mark> <s> <span> <strong> <sup> <sub> <em> <b> <del> <i> <mark> <s> <span> <strong> <sup> <sub>'
+  header_id: title
+  header_id_prefix: section
+  top_min: 1
+  top_max: 2
+  top_label: 'Back to top'
+  default:
+    number_type: none
+    number_prefix: ''
+    number_suffix: ''
+  number_path_separator: ''
+  number_path: true
+  number_path_truncate: true
+  headers: {  }

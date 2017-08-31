@@ -5,10 +5,13 @@ dependencies:
   config:
     - system.menu.help
   module:
+    - block_class
     - system
-    - user
   theme:
     - fsa
+third_party_settings:
+  block_class:
+    classes: ''
 id: menu_help_main
 theme: fsa
 region: header
@@ -22,11 +25,4 @@ settings:
   label_display: '0'
   level: 1
   depth: 1
-visibility:
-  user_role:
-    id: user_role
-    roles:
-      administrator: administrator
-    negate: false
-    context_mapping:
-      user: '@user.current_user_context:current_user'
+visibility: {  }
