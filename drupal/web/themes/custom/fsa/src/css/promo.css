@@ -53,11 +53,16 @@
   transition: box-shadow var(--transition-enter);
   color: var(--color-black);
 
-  @media (--breakpoint-lg) {
+  @media (--breakpoint-sm) {
     flex: 1 1 0;
     max-width: 30em;
-    max-width: calc(33% - 1.5em);
+    max-width: calc(50% - 1.5em);
     min-width: 20em;
+    width: auto;
+  }
+
+  @media (--breakpoint-lg) {
+    max-width: calc(33% - 1.5em);
   }
 }
 
@@ -70,4 +75,8 @@
   font-weight: 700;
   margin-bottom: 1em;
   color: var(--primary-color);
+}
+
+:--not-touch .promo__item:--enter .field__field_title {
+color: var(--light-primary-color);
 }

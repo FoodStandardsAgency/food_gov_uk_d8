@@ -521,6 +521,8 @@ img {
   height: auto;
 }
 
+
+/*Content styles*/
 figure {}
 
 figure > figcaption {
@@ -542,6 +544,16 @@ figure:after {
   clear: both;
 }
 
+.print__wrapper {
+  float: right;
+  @mixin responsive-declaration margin-top, 1em, 2em;
+}
+
+.print__wrapper + *:not(.field__field_update_date) {
+  clear: both;
+  @mixin responsive-declaration padding-top, 1em, 2em;
+}
+
 .print__wrapper.print__wrapper--pdf a {
 
 }
@@ -558,6 +570,31 @@ figure:after {
   margin-right: 0.5em;
 }
 
+.field__field_update_date {
+  float: left;
+  @mixin responsive-declaration padding-left, 0em, 4em;
+  @mixin responsive-declaration margin-top, 1em, 2em;
+}
+
+.field__field_update_date + * {
+  clear: both;
+  @mixin responsive-declaration padding-top, 1em, 2em;
+}
+
+.field__field_update_date__heading {
+  display: inline-block;
+}
+
+.field__field_update_date__item {
+  display: inline-block;
+}
+
+.field__field_intro {
+  font-size: 1.25em;
+  margin-bottom: 1em;
+}
+
+/*Drupal tabs*/
 #block-tabs > ul {
   display: flex;
   flex-wrap: wrap;

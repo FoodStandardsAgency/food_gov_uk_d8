@@ -165,7 +165,7 @@
 
 /*Subpages*/
 .subpages:not(:first-child) {
-  @mixin responsive-declaration margin-top, 1em, 2em;
+  @mixin responsive-declaration margin-top, 1.5em, 4em;
 }
 
 .subpages > ul,
