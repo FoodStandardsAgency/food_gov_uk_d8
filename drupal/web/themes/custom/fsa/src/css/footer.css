@@ -21,16 +21,19 @@
   text-align: center;
 }
 
+.footer__links > ul > li,
 .footer__link-item {
   display: inline-block;
 }
 
+.footer__links > ul > li:not(:last-child):after,
 .footer__link-item:not(:last-child):after {
   content: "|";
   margin: 0 0.25em;
   margin: 0 0.5em;
 }
 
+.footer__links > ul > li > a,
 .footer__link {
   color: var(--color-black);
   font-size: 0.9em;
@@ -43,6 +46,7 @@
   }
 }
 
+:--not-touch .footer__links > ul > li > a:--enter,
 :--not-touch .footer__link:--enter {
   color: var(--primary-color);
   text-decoration: underline;

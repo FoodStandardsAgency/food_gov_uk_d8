@@ -19,3 +19,7 @@
   color: var(--color-black);
   text-decoration: underline;
 }
+
+.toc-filter .back-to-top {
+  display: none;
+}
