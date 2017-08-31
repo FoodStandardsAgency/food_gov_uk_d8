@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Contains fsa_document_library.module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function fsa_document_library_theme() {
+
+  return [
+    // File download template.
+    'fsa_file_download' => [
+      'variables' => [
+        'filename' => NULL,
+        'url' => NULL,
+        'mimetype' => NULL,
+        'filesize' => NULL,
+        'attributes' => NULL,
+        'link' => NULL,
+      ],
+    ],
+  ];
+}

@@ -1,7 +1,7 @@
 # FSA theming
 
 ## Development
-Develop with browsersync `npm run dev`
+Start watching theme files by running `npm run watch`.
 
 ## Build
-Build your assets with `npm run build` before committing
+Remember to build the theme assets before commiting. Build the assets by running `npm run build`.
