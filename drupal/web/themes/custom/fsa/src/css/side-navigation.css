@@ -161,3 +161,27 @@
 .side-navigation__link--active .side-navigation__icon:before {
   background-color: var(--color-white);
 }
+
+
+/*Subpages*/
+.subpages:not(:first-child) {
+  @mixin responsive-declaration margin-top, 1em, 2em;
+}
+
+.subpages > ul,
+.subpages > ol {
+  margin: 0;
+  padding: 0;
+  padding-top: 1em;
+}
+
+.subpages > ul ul,
+.subpages > ol ol {
+  padding-left: 1em;
+}
+
+.subpages > ul ul a,
+.subpages > ol ol a {
+  color: var(--color-black);
+  text-decoration: underline;
+}
