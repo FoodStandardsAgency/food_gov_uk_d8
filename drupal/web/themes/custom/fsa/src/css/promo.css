@@ -71,3 +71,7 @@
   margin-bottom: 1em;
   color: var(--primary-color);
 }
+
+:--not-touch .promo__item:--enter .field__field_title {
+color: var(--light-primary-color);
+}

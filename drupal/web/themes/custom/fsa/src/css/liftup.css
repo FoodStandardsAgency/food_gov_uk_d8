@@ -4,7 +4,7 @@
 
 .liftup-list:before {
   content: "";
-  background-color: var(--color-lighter-gray);
+  background-color: var(--color-purple);
   position: absolute;
   z-index: var(--z-bottom);
   top: 0;
@@ -28,6 +28,10 @@
 }
 
 .paragraph--type-liftups > h2 {
+  color: var(--color-white);
+}
+
+.theme-service--help-centre .paragraph--type-liftups > h2 {
   color: var(--color-black);
 }
 
