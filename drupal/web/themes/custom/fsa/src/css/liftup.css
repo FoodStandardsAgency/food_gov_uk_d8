@@ -46,9 +46,18 @@
 .liftup__item {
   @mixin responsive-declaration margin-left, 1em, 1.5em;
   @mixin responsive-declaration margin-bottom, 1em, 1.5em;
-  flex: 1 1 50%;
+  flex: 1 1 1;
+  width: 100%;
+
+  @media (--breakpoint-sm) {
+    flex: 1 1 0;
+    max-width: 30em;
+    max-width: calc(50% - 1.5em);
+    min-width: 20em;
+    width: auto;
+  }
 
   @media (--breakpoint-lg) {
-    flex: 0 1 16em;
+    max-width: calc(33% - 1.5em);
   }
 }
