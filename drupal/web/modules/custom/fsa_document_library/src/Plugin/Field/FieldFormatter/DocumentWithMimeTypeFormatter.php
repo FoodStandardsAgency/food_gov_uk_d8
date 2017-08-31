@@ -34,9 +34,15 @@ class DocumentWithMimeTypeFormatter extends FileFormatterBase {
 
       $file_uri = $file->getFileUri();
       $url = Url::fromUri(file_create_url($file_uri));
+      $link_options = array(
+        'attributes' => array(
+          'download' => TRUE,
+        ),
+      );
+      $url->setOptions($link_options);
+      $link = Link::fromTextAndUrl(t('Download'), $url )->toString();
 
-      $link = Link::fromTextAndUrl(t('Download'), $url);
-      $attributes['class'] = 'type__' . Html::cleanCssIdentifier($file->getMimeType());
+      $attributes['class'] = 'file__type_' . Html::cleanCssIdentifier($file->getMimeType());
 
       $elements[$delta] = [
         '#theme' => 'fsa_file_download',
