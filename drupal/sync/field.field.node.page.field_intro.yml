@@ -1,0 +1,19 @@
+uuid: bc414198-2c0d-4eeb-9131-fb193bb70e4c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_intro
+    - node.type.page
+id: node.page.field_intro
+field_name: field_intro
+entity_type: node
+bundle: page
+label: Intro
+description: 'Excerpt/intro copy for this page. Field content displays in larger font-size and should be used to briefly describe the content of this page.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long
