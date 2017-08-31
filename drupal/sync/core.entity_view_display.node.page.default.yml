@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.page.body
     - field.field.node.page.field_audience
     - field.field.node.page.field_content_type
+    - field.field.node.page.field_document
     - field.field.node.page.field_header_image
     - field.field.node.page.field_icon
     - field.field.node.page.field_liftup_title
@@ -64,6 +65,15 @@ content:
       link: false
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_document:
+    weight: 9
+    label: hidden
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
     region: content
   field_liftups:
     type: entity_reference_revisions_entity_view
