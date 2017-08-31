@@ -6,6 +6,7 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
+use Drupal\Component\Utility\Html;
 
 /**
  * Provides a 'SubpagesBlock' Block.
@@ -13,7 +14,7 @@ use Drupal\node\Entity\Node;
  * @Block(
  *   id = "subpages_block",
  *   admin_label = @Translation("Sub-pages block"),
- *   category = @Translation("Hello World"),
+ *   category = @Translation("Custom"),
  * )
  */
 class SubpagesBlock extends BlockBase {
@@ -44,11 +45,20 @@ class SubpagesBlock extends BlockBase {
     $subpages = [];
     foreach ($paragraphs as $p) {
       $params = ['node' => $nid];
-      $options = ['query' => ['subpage' => $page++]];
+      $alias = $p->get('field_url_alias')->getString();
+      $options = ['query' => [$alias => TRUE]];
       $url = Url::fromRoute($route, $params, $options);
+      $url = $url->toString();
+      // hack away "=1" part in url
+      $rx = preg_quote($alias, '/');
+      $rx = "/$alias=1/";
+      $url = preg_replace($rx, $alias, $url);
+      // aaargh!!! we cannot use drupal functions on hacked urls
       $title = $p->get('field_title')->getString();
-      $link = Link::fromTextAndUrl($title, $url);
-      $render = $link->toRenderable();
+      $title = Html::escape($title);
+      $render = [
+        '#markup' => "<a href='$url'>$title</a>",
+      ];
       $subpages[] = $render;
     }
 

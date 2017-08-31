@@ -27,31 +27,16 @@ class EntityReferenceRevisionsSubpagesEntityFormatter extends EntityReferenceRev
 
     $param = \Drupal::request()->query->all();
 
-    // subpage value must be:
-    // 1 <= subpage <= element_count
-
-    if (empty($param['subpage'])) {
-      return [];
-    }
-
-    $subpage = $param['subpage'];
-
-    if (!is_numeric($subpage) || $subpage != (int) $subpage) {
-      return [];
-    }
-
-    $subpage = (int) $subpage;
     $elements = parent::viewElements($items, $langcode);
-
-    if ($subpage < 1 || count($elements) < $subpage) {
-      return [];
+    foreach ($elements as $key => &$element) {
+      $alias = $element['#paragraph']->get('field_url_alias')->getString();
+      if (!isset($param[$alias])) {
+        unset($elements[$key]);
+      }
     }
 
-    $subpage = $subpage - 1;
-
-    $subpage = $elements[$subpage];
-    $subpage['#cache']['contexts'][] = 'url.query_args:subpage';
-    return [$subpage];
+    $elements['#cache']['contexts'][] = 'url.query_args';
+    return $elements;
   }
 
 }
