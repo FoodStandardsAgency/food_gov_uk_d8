@@ -84,13 +84,9 @@ class FsaSubpagesRedirectSubscriber implements EventSubscriberInterface {
     $route = 'entity.node.canonical';
     $params = ['node' => $nid];
     $alias = $paragraphs[0]->get('field_url_alias')->getString();
-    $options = ['query' => [$alias => TRUE]];
+    $options = ['query' => [$alias => NULL]];
     $url = Url::fromRoute($route, $params, $options);
     $url = $url->toString();
-    // hack away "=1" part in url
-    $rx = preg_quote($alias, '/');
-    $rx = "/$alias=1/";
-    $url = preg_replace($rx, $alias, $url);
     $response = new RedirectResponse($url, 301);
     $event->setResponse($response);
   }
