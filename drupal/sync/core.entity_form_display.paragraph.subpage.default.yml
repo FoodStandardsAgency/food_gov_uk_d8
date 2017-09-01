@@ -8,6 +8,7 @@ dependencies:
     - field.field.paragraph.subpage.field_url_alias
     - paragraphs.paragraphs_type.subpage
   module:
+    - fsa_subpages
     - text
 id: paragraph.subpage.default
 targetEntityType: paragraph
@@ -36,7 +37,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
+    type: string_textfield_url_alias
     region: content
 hidden:
   created: true

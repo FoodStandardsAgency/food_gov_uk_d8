@@ -46,19 +46,11 @@ class SubpagesBlock extends BlockBase {
     foreach ($paragraphs as $p) {
       $params = ['node' => $nid];
       $alias = $p->get('field_url_alias')->getString();
-      $options = ['query' => [$alias => TRUE]];
+      $options = ['query' => [$alias => NULL]];
       $url = Url::fromRoute($route, $params, $options);
-      $url = $url->toString();
-      // hack away "=1" part in url
-      $rx = preg_quote($alias, '/');
-      $rx = "/$alias=1/";
-      $url = preg_replace($rx, $alias, $url);
-      // aaargh!!! we cannot use drupal functions on hacked urls
       $title = $p->get('field_title')->getString();
-      $title = Html::escape($title);
-      $render = [
-        '#markup' => "<a href='$url'>$title</a>",
-      ];
+      $link = Link::fromTextAndUrl($title, $url);
+      $render = $link->toRenderable();
       $subpages[] = $render;
     }
 
