@@ -118,6 +118,11 @@
   padding-bottom: 1em;
 }
 
+.liftup-list.liftup-list--information .node-teaser__header {
+  padding-top: 0.5em;
+  padding-bottom: 1em;
+}
+
 .theme-service--help-centre .node-teaser__header {
   display: flex;
   align-items: center;
@@ -148,12 +153,15 @@
 }
 
 .liftup-list.liftup-list--information .node-teaser__heading {
-  color: var(--color-black);
   text-align: center;
   @mixin responsive-declaration font-size, 1em, 1.05em;
 }
 
-:--not-touch .liftup-list.liftup-list--information .node-teaser:--enter .node-teaser__heading {
+.liftup-list.liftup-list--information .node-teaser__heading a {
+  color: var(--color-black);
+}
+
+:--not-touch .liftup-list.liftup-list--information .node-teaser:--enter .node-teaser__heading a {
   color: var(--primary-color);
 }
 
