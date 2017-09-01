@@ -11,8 +11,10 @@ dependencies:
     - field.field.node.page.field_header_image
     - field.field.node.page.field_icon
     - field.field.node.page.field_intro
+    - field.field.node.page.field_liftup_image
     - field.field.node.page.field_liftup_title
     - field.field.node.page.field_liftups
+    - field.field.node.page.field_media_library_liftup_image
     - field.field.node.page.field_nation
     - field.field.node.page.field_subpages
     - field.field.node.page.field_topic
@@ -105,7 +107,9 @@ hidden:
   field_content_type: true
   field_header_image: true
   field_icon: true
+  field_liftup_image: true
   field_liftup_title: true
+  field_media_library_liftup_image: true
   field_nation: true
   field_topic: true
   langcode: true

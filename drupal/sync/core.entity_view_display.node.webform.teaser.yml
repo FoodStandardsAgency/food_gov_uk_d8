@@ -5,15 +5,38 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.webform.body
+    - field.field.node.webform.field_audience
+    - field.field.node.webform.field_content_type
     - field.field.node.webform.field_icon
     - field.field.node.webform.field_liftup_title
+    - field.field.node.webform.field_nation
+    - field.field.node.webform.field_topic
     - field.field.node.webform.webform
     - image.style.thumbnail
     - node.type.webform
   module:
+    - field_group
     - image
     - text
     - user
+third_party_settings:
+  field_group:
+    group_teaser_image:
+      children:
+        - field_icon
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: ''
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Teaser image'
 _core:
   default_config_hash: Ls5l3Xs7-YstJnurxFLKj38Exqr2JMZs1j9YeX1Kh2o
 id: node.webform.teaser
@@ -24,14 +47,14 @@ content:
   body:
     label: hidden
     type: text_summary_or_trimmed
-    weight: 1
+    weight: 2
     settings:
       trim_length: 600
     third_party_settings: {  }
     region: content
   field_icon:
     type: image
-    weight: 0
+    weight: 1
     region: content
     label: hidden
     settings:
@@ -39,7 +62,14 @@ content:
       image_link: ''
     third_party_settings: {  }
 hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_audience: true
+  field_content_type: true
   field_liftup_title: true
+  field_nation: true
+  field_topic: true
   langcode: true
   links: true
   webform: true
