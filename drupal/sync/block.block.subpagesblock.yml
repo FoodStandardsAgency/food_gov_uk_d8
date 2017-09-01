@@ -20,7 +20,7 @@ provider: null
 plugin: subpages_block
 settings:
   id: subpages_block
-  label: 'Sub-pages navigation'
+  label: 'In this topic'
   provider: fsa_subpages
   label_display: visible
 visibility:
