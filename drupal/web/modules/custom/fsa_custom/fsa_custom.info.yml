@@ -1,0 +1,7 @@
+name: FSA Custom
+type: module
+description: "Small, random customization for FSA site, anything that is too small for it's own module"
+core: 8.x
+package: FSA
+dependencies:
+  - drupal:block
