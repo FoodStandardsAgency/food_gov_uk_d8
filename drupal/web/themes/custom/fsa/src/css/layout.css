@@ -68,7 +68,7 @@
   }
 }
 
-.theme--page .layout__sidebar {
+.theme--page:not(.theme-service) .layout__sidebar {
   @media (--breakpoint-lg) {
     width: 19.5em;
   }
@@ -139,9 +139,9 @@
   }
 }
 
-.theme--page .layout--with-sidebar .layout__content {
+.theme--page:not(.theme-service) .layout--with-sidebar .layout__content {
   max-width: 45em;
-  
+
   @media (--breakpoint-lg) {
     margin-left: 19.5em;
   }
