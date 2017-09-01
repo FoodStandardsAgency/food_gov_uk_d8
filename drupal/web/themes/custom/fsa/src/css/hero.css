@@ -12,12 +12,24 @@
   max-width: var(--max-width);
   margin: 0 auto;
   position: relative;
-  background-color: var(--primary-color);
   display: flex;
   align-items: center;
 
   @media (--breakpoint-lg) {
     min-height: 18em;
+  }
+}
+
+.theme--page .hero__container {
+  align-items: flex-end;
+  background-color: var(--primary-color);
+  @mixin responsive-declaration padding-top, 1em, 4em;
+  @mixin responsive-declaration padding-right, 1.25em, 5em;
+  @mixin responsive-declaration padding-bottom, 1em, 4em;
+  @mixin responsive-declaration padding-left, 1.25em, 5em;
+
+  @media (--breakpoint-lg) {
+    min-height: 16em;
   }
 }
 
