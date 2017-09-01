@@ -8,6 +8,7 @@
   box-shadow: var(--box-shadow);
   z-index: 200;
   position: relative;
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
 }
 
 .status a {

@@ -6,8 +6,10 @@ dependencies:
     - field.field.node.page.body
     - field.field.node.page.field_audience
     - field.field.node.page.field_content_type
+    - field.field.node.page.field_document
     - field.field.node.page.field_header_image
     - field.field.node.page.field_icon
+    - field.field.node.page.field_intro
     - field.field.node.page.field_liftup_title
     - field.field.node.page.field_liftups
     - field.field.node.page.field_nation
@@ -53,7 +55,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 6
+    weight: 7
     region: content
     settings:
       rows: 9
@@ -62,7 +64,7 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 10
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -77,6 +79,19 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_select
+    region: content
+  field_document:
+    weight: 17
+    settings:
+      form_mode: default
+      label_singular: ''
+      label_plural: ''
+      allow_existing: true
+      match_operator: CONTAINS
+      override_labels: false
+      allow_new: false
+    third_party_settings: {  }
+    type: inline_entity_form_complex
     region: content
   field_header_image:
     weight: 2
@@ -99,6 +114,14 @@ content:
     third_party_settings: {  }
     type: image_image
     region: content
+  field_intro:
+    weight: 6
+    settings:
+      rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
   field_liftup_title:
     weight: 4
     settings:
@@ -109,7 +132,7 @@ content:
     region: content
   field_liftups:
     type: entity_reference_paragraphs
-    weight: 15
+    weight: 16
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -127,7 +150,7 @@ content:
     region: content
   field_subpages:
     type: entity_reference_paragraphs
-    weight: 7
+    weight: 8
     settings:
       title: Sub-page
       title_plural: Sub-pages
@@ -155,13 +178,13 @@ content:
     region: content
   langcode:
     type: language_select
-    weight: 8
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 14
+    weight: 15
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -169,14 +192,14 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 12
+    weight: 13
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 13
+    weight: 14
     region: content
     third_party_settings: {  }
   title:
@@ -188,13 +211,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 11
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 9
+    weight: 10
     region: content
     settings:
       match_operator: CONTAINS

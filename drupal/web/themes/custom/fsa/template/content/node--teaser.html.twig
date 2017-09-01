@@ -20,9 +20,11 @@
   <article{{ attributes }}>
     <a href="{{ url }}" rel="bookmark" class="block-link">
       <div class="node-teaser__container">
-        <div class="node-teaser__image">
-          {{ content.field_icon }}
-        </div>
+        {% if content.field_icon|length > 2 %}
+          <div class="node-teaser__image">
+            {{ content.field_icon }}
+          </div>
+        {% endif %}
 
         <header class="node-teaser__header">
           <h4{{ title_attributes }} class="node-teaser__heading">{{ label }}</h4>

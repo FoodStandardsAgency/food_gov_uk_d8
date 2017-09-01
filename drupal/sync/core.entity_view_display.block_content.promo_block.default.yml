@@ -5,11 +5,36 @@ dependencies:
   config:
     - block_content.type.promo_block
     - field.field.block_content.promo_block.body
+    - field.field.block_content.promo_block.field_image
     - field.field.block_content.promo_block.field_link
+    - field.field.block_content.promo_block.field_media_library_image
     - field.field.block_content.promo_block.field_title
+    - image.style.promo_medium
   module:
+    - field_group
+    - image
     - link
     - text
+third_party_settings:
+  field_group:
+    group_teaser_content:
+      children:
+        - field_title
+        - body
+      parent_name: ''
+      weight: 2
+      format_type: html_element
+      format_settings:
+        label: 'Teaser content'
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: teaser__content
+      label: 'Teaser content'
 id: block_content.promo_block.default
 targetEntityType: block_content
 bundle: promo_block
@@ -18,13 +43,22 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 1
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     region: content
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: promo_medium
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
   field_link:
     type: link
-    weight: 2
+    weight: 3
     region: content
     label: inline
     settings:
@@ -34,8 +68,17 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
+  field_media_library_image:
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: promo_image
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
   field_title:
-    weight: 0
+    weight: 2
     label: hidden
     settings:
       link_to_entity: false
@@ -43,4 +86,7 @@ content:
     type: string
     region: content
 hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
   langcode: true

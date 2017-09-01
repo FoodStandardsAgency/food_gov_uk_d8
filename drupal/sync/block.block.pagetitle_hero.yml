@@ -1,20 +1,19 @@
-uuid: 6c076e9e-e612-48b9-902d-a5f81641bb04
+uuid: 2a83866f-d244-4ba2-9378-8db8bae66e1d
 langcode: en
 status: true
 dependencies:
   module:
     - block_class
     - ctools
-    - system
   theme:
     - fsa
 third_party_settings:
   block_class:
     classes: ''
-id: pagetitle
+id: pagetitle_hero
 theme: fsa
-region: content
-weight: 0
+region: hero
+weight: -5
 provider: null
 plugin: page_title_block
 settings:
@@ -23,15 +22,11 @@ settings:
   provider: core
   label_display: '0'
 visibility:
-  request_path:
-    id: request_path
-    pages: "/ratings/search*\r\n/fsa-ratings/establishment*"
-    negate: true
-    context_mapping: {  }
   'entity_bundle:node':
     id: 'entity_bundle:node'
     bundles:
       lander: lander
-    negate: true
+      page: page
+    negate: false
     context_mapping:
       node: '@node.node_route_context:node'

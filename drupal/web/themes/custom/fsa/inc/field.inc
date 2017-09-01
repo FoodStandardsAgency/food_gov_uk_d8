@@ -29,7 +29,7 @@ function fsa_preprocess_field(&$variables) {
     // Add counting classes for fields with multiple items.
     foreach(array_keys($variables['items']) as $delta) {
       $variables['items'][$delta]['attributes']->setAttribute('class', $field_name);
-      $variables['items'][$delta]['attributes']->setAttribute('class', $field_name . '__item--' . $delta);
+      $variables['items'][$delta]['attributes']->setAttribute('class', $field_name . '__item' . ' ' . $field_name . '__item--' . $delta);
     }
   }
 }

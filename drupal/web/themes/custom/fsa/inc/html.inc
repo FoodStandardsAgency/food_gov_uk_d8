@@ -18,6 +18,7 @@ function fsa_preprocess_html(&$variables) {
   if (is_object($node)) {
 
     $variables['attributes']['class'][] = 'node-' . $node->id();
+    $variables['attributes']['class'][] = 'theme--' . $node->getType();
 
     // Get content_type taxonomy term and set as body class.
     $tid = $node->get('field_content_type')->target_id;
