@@ -48,6 +48,24 @@
   background-color: var(--light-primary-color);
 }
 
+.liftup-list.liftup-list--information .node-teaser__image {
+  background-color: transparent;
+  align-items: flex-end;
+  min-height: 4em;
+
+  @media (--breakpoint-sm) {
+    min-height: 6em;
+  }
+
+  @media (--breakpoint-md) {
+    min-height: 7em;
+  }
+}
+
+:--not-touch .liftup-list.liftup-list--information .node-teaser:--enter .node-teaser__image {
+  background-color: transparent;
+}
+
 .theme-service--help-centre .node-teaser__image {
   background-color: transparent;
   height: auto;
@@ -87,6 +105,11 @@
   height: auto;
 }
 
+.liftup-list.liftup-list--information .node-teaser__image img {
+  @mixin responsive-declaration max-width, 3em, 5em;
+  height: auto;
+}
+
 .node-teaser__header {
   @mixin responsive-declaration padding-top, 1em, 2em;
   @mixin responsive-declaration padding-right, 1em, 2em;
@@ -121,6 +144,16 @@
 
 :--not-touch .node-teaser:--enter .node-teaser__heading {
   color: var(--light-primary-color);
+}
+
+.liftup-list.liftup-list--information .node-teaser__heading {
+  color: var(--color-black);
+  text-align: center;
+  @mixin responsive-declaration font-size, 1em, 1.05em;
+}
+
+:--not-touch .liftup-list.liftup-list--information .node-teaser:--enter .node-teaser__heading {
+  color: var(--color-black);
 }
 
 .theme-service--help-centre .node-teaser__heading {
