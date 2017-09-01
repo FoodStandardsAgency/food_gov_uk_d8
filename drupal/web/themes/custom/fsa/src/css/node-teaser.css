@@ -34,13 +34,13 @@
 
 .node-teaser__image {
   background-color: var(--primary-color);
-  height: 6em;
+  min-height: 6em;
   display: flex;
   align-items: center;
   justify-content: center;
 
   @media (--breakpoint-lg) {
-    height: 12em;
+    min-height: 12em;
   }
 }
 

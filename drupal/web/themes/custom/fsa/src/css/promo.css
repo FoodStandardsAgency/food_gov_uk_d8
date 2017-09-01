@@ -33,14 +33,10 @@
 
 .promo {
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: row wrap;
   align-items: stretch;
   margin-left: -1em;
   @mixin responsive-declaration margin-left, -1em, -1.5em;
-
-  @media (--breakpoint-lg) {
-    flex-flow: row wrap;
-  }
 }
 
 .promo__item {
@@ -52,6 +48,7 @@
   box-shadow: var(--box-shadow);
   transition: box-shadow var(--transition-enter);
   color: var(--color-black);
+  width: 100%;
 
   @media (--breakpoint-sm) {
     flex: 1 1 0;
