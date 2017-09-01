@@ -73,3 +73,8 @@
   align-items: center;
   justify-content: center;
 }
+
+:--not-touch .field__field_topic_cloud__item a:--enter {
+  box-shadow: var(--box-shadow-active);
+  color: var(--primary-color);
+}
