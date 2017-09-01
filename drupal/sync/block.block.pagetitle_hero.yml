@@ -9,7 +9,7 @@ dependencies:
     - fsa
 third_party_settings:
   block_class:
-    classes: visually-hidden
+    classes: ''
 id: pagetitle_hero
 theme: fsa
 region: hero
@@ -26,6 +26,7 @@ visibility:
     id: 'entity_bundle:node'
     bundles:
       lander: lander
+      page: page
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
