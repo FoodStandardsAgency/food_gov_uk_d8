@@ -38,6 +38,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color var(--transition-enter);
 
   @media (--breakpoint-lg) {
     min-height: 12em;
@@ -153,7 +154,7 @@
 }
 
 :--not-touch .liftup-list.liftup-list--information .node-teaser:--enter .node-teaser__heading {
-  color: var(--color-black);
+  color: var(--primary-color);
 }
 
 .theme-service--help-centre .node-teaser__heading {

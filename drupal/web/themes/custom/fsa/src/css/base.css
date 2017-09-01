@@ -444,7 +444,7 @@ figure {
 }
 
 /*External links*/
-a[href*="//"]:not([href*="local.food.gov.uk"]),
+/*a[href*="//"]:not([href*="local.food.gov.uk"]),
 a[href*="//"]:not([href*="fsa.stage.wunder.io"]) {
   color: var(--color-black);
   text-decoration: underline;
@@ -460,7 +460,7 @@ a[href*="//"]:not([href*="fsa.stage.wunder.io"]):after  {
   display: inline-block;
   width: 1em;
   height: 1em;
-}
+}*/
 
 :--not-touch a[href*="//"]:not([href*="local.food.gov.uk"]):--enter,
 :--not-touch a[href*="//"]:not([href*="fsa.stage.wunder.io"]):--enter {
