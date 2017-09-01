@@ -1,0 +1,30 @@
+uuid: 73a4fa3e-9557-41ff-9e05-363804f27a94
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.basic
+    - block_content.type.promo_block
+    - field.storage.node.field_block
+    - node.type.lander
+id: node.lander.field_block
+field_name: field_block
+entity_type: node
+bundle: lander
+label: 'Custom block reference'
+description: 'Embed a custom block to this page. These custom blocks are managed at <a href="/admin/structure/block/block-content" target="_blank">Custom block library</a>'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:block_content'
+  handler_settings:
+    target_bundles:
+      basic: basic
+      promo_block: promo_block
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: basic
+field_type: entity_reference
