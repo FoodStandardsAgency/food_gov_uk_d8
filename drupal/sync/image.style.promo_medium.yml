@@ -3,12 +3,12 @@ langcode: en
 status: true
 dependencies: {  }
 name: promo_medium
-label: 'Promo medium (400×220)'
+label: 'Promo medium (460×220)'
 effects:
   687a8998-ce50-497e-9dc5-d582dac289f5:
     uuid: 687a8998-ce50-497e-9dc5-d582dac289f5
     id: image_scale_and_crop
     weight: 1
     data:
-      width: 400
+      width: 460
       height: 220
