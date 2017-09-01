@@ -153,8 +153,13 @@
 }
 
 .liftup-list.liftup-list--information .node-teaser__heading {
+  color: var(--color-black);
   text-align: center;
   @mixin responsive-declaration font-size, 1em, 1.05em;
+}
+
+:--not-touch .liftup-list.liftup-list--information .node-teaser:--enter .node-teaser__heading {
+  color: var(--primary-color);
 }
 
 .liftup-list.liftup-list--information .node-teaser__heading a {
