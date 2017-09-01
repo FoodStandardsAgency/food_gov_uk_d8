@@ -55,6 +55,7 @@
 
   @media (--breakpoint-lg) {
     height: auto;
+    min-height: 0;
   }
 }
 

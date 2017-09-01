@@ -44,7 +44,6 @@
   @mixin responsive-declaration margin-bottom, 1em, 1.5em;
   flex: 1 1 1;
   background-color: var(--color-white);
-  @mixin responsive-declaration padding, 1em, 2em;
   box-shadow: var(--box-shadow);
   transition: box-shadow var(--transition-enter);
   color: var(--color-black);
@@ -75,5 +74,42 @@
 }
 
 :--not-touch .promo__item:--enter .field__field_title {
-color: var(--light-primary-color);
+  color: var(--light-primary-color);
+}
+
+.promo__item .field__field_image {
+  position: relative;
+  overflow: hidden;
+  height: 8em;
+
+  @media (--breakpoint-sm) {
+    height: 9em;
+  }
+
+  @media (--breakpoint-md) {
+    height: 10em;
+  }
+
+  @media (--breakpoint-lg) {
+    position: static;
+    overflow: visible;
+    height: auto;
+  }
+}
+
+.promo__item .field__field_image img {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+
+  @media (--breakpoint-lg) {
+    position: static;
+    transform: none;
+  }
+}
+
+.promo__item .teaser__content {
+  @mixin responsive-declaration padding, 1em, 2em;
 }
