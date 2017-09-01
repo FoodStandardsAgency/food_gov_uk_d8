@@ -1,0 +1,40 @@
+uuid: 4f57e71c-3b7f-41b6-9728-463474c0cf93
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - ctools
+    - fsa_subpages
+    - node
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: subpagesprevnextblock
+theme: fsa
+region: content
+weight: 0
+provider: null
+plugin: subpages_prevnext_block
+settings:
+  id: subpages_prevnext_block
+  label: 'Sub-pages prev-next block'
+  provider: fsa_subpages
+  label_display: '0'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      page: page
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+  node_type:
+    id: node_type
+    bundles:
+      page: page
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
