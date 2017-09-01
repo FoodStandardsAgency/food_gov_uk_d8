@@ -64,6 +64,7 @@ Plugin documentation:
 
   --color-purple: #49176D;
 
+  --color-dark-red: #a91f2d;
   --color-red: #E31837;
 
   --color-green: #6CB33F;
@@ -443,7 +444,7 @@ figure {
 }
 
 /*External links*/
-a[href*="//"]:not([href*="local.food.gov.uk"]),
+/*a[href*="//"]:not([href*="local.food.gov.uk"]),
 a[href*="//"]:not([href*="fsa.stage.wunder.io"]) {
   color: var(--color-black);
   text-decoration: underline;
@@ -459,7 +460,7 @@ a[href*="//"]:not([href*="fsa.stage.wunder.io"]):after  {
   display: inline-block;
   width: 1em;
   height: 1em;
-}
+}*/
 
 :--not-touch a[href*="//"]:not([href*="local.food.gov.uk"]):--enter,
 :--not-touch a[href*="//"]:not([href*="fsa.stage.wunder.io"]):--enter {
@@ -592,6 +593,46 @@ figure:after {
 .field__field_intro {
   font-size: 1.25em;
   margin-bottom: 1em;
+}
+
+.field__field_document {
+  background-color: var(--color-lighter-gray);
+  padding-top: 1em;
+  @mixin responsive-declaration padding-right, 1.25em, 2em;
+  padding-bottom: 1em;
+  @mixin responsive-declaration padding-left, 1.25em, 2em;
+  border: 1px solid var(--color-light-gray);
+}
+
+.field__field_document > .field__field_document__item {
+
+}
+
+.field__field_document > .field__field_document__item .field__field_document {
+  padding-top: 1em;
+  padding-right: 1em;
+  padding-bottom: 1em;
+  padding-left: 1em;
+  border: 0;
+}
+
+.field__field_document > .field__field_document__item .file__type_application-pdf {
+  padding-left: 5em;
+  position: relative;
+}
+
+.field__field_document > .field__field_document__item .file__type_application-pdf:before {
+  content: "PDF";
+  background-color: var(--color-dark-red);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 3em;
+  height: 1.5em;
+  text-align: center;
+  font-weight: 600;
+  color: var(--color-white);
+  transform: translateY(-50%);
 }
 
 /*Drupal tabs*/

@@ -15,6 +15,10 @@
   transform: translateX(-50%);
 }
 
+.liftup-list.liftup-list--information:before {
+  background-color: var(--color-lighter-gray);
+}
+
 .layout--with-sidebar .liftup-list:before,
 .theme-service .liftup-list:before {
   display: none;
@@ -31,6 +35,7 @@
   color: var(--color-white);
 }
 
+.liftup-list.liftup-list--information .paragraph--type-liftups > h2,
 .theme-service--help-centre .paragraph--type-liftups > h2 {
   color: var(--color-black);
 }
@@ -59,5 +64,16 @@
 
   @media (--breakpoint-lg) {
     max-width: calc(33% - 1.5em);
+  }
+}
+
+.liftup-list.liftup-list--information .liftup__item {
+  @media (--breakpoint-xs) {
+    min-width: 11em;
+    max-width: calc(50% - 1.5em);
+  }
+
+  @media (--breakpoint-lg) {
+    max-width: calc(25% - 1.5em);
   }
 }

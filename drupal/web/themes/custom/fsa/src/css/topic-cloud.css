@@ -61,7 +61,7 @@
 .field__field_topic_cloud__item a {
   display: block;
   color: var(--color-black);
-  padding: 1em;
+  padding: 0.75em 1em;
   background-color: var(--color-white);
   box-shadow: var(--box-shadow);
   transition: box-shadow var(--transition-enter);
@@ -72,4 +72,9 @@
   text-align: center;
   align-items: center;
   justify-content: center;
+}
+
+:--not-touch .field__field_topic_cloud__item a:--enter {
+  box-shadow: var(--box-shadow-active);
+  color: var(--primary-color);
 }

@@ -34,18 +34,37 @@
 
 .node-teaser__image {
   background-color: var(--primary-color);
-  height: 6em;
+  min-height: 6em;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color var(--transition-enter);
 
   @media (--breakpoint-lg) {
-    height: 12em;
+    min-height: 12em;
   }
 }
 
 :--not-touch .node-teaser:--enter .node-teaser__image {
   background-color: var(--light-primary-color);
+}
+
+.liftup-list.liftup-list--information .node-teaser__image {
+  background-color: transparent;
+  align-items: flex-end;
+  min-height: 4em;
+
+  @media (--breakpoint-sm) {
+    min-height: 6em;
+  }
+
+  @media (--breakpoint-md) {
+    min-height: 7em;
+  }
+}
+
+:--not-touch .liftup-list.liftup-list--information .node-teaser:--enter .node-teaser__image {
+  background-color: transparent;
 }
 
 .theme-service--help-centre .node-teaser__image {
@@ -55,6 +74,7 @@
 
   @media (--breakpoint-lg) {
     height: auto;
+    min-height: 0;
   }
 }
 
@@ -86,10 +106,20 @@
   height: auto;
 }
 
+.liftup-list.liftup-list--information .node-teaser__image img {
+  @mixin responsive-declaration max-width, 3em, 5em;
+  height: auto;
+}
+
 .node-teaser__header {
   @mixin responsive-declaration padding-top, 1em, 2em;
   @mixin responsive-declaration padding-right, 1em, 2em;
   @mixin responsive-declaration padding-left, 1em, 2em;
+  padding-bottom: 1em;
+}
+
+.liftup-list.liftup-list--information .node-teaser__header {
+  padding-top: 0.5em;
   padding-bottom: 1em;
 }
 
@@ -120,6 +150,24 @@
 
 :--not-touch .node-teaser:--enter .node-teaser__heading {
   color: var(--light-primary-color);
+}
+
+.liftup-list.liftup-list--information .node-teaser__heading {
+  color: var(--color-black);
+  text-align: center;
+  @mixin responsive-declaration font-size, 1em, 1.05em;
+}
+
+:--not-touch .liftup-list.liftup-list--information .node-teaser:--enter .node-teaser__heading {
+  color: var(--primary-color);
+}
+
+.liftup-list.liftup-list--information .node-teaser__heading a {
+  color: var(--color-black);
+}
+
+:--not-touch .liftup-list.liftup-list--information .node-teaser:--enter .node-teaser__heading a {
+  color: var(--primary-color);
 }
 
 .theme-service--help-centre .node-teaser__heading {

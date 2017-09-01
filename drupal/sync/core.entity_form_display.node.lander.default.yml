@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.lander.field_audience
+    - field.field.node.lander.field_block
     - field.field.node.lander.field_content_type
     - field.field.node.lander.field_header_image
     - field.field.node.lander.field_hero_copy
@@ -69,6 +70,15 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
+    region: content
+  field_block:
+    weight: 3
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_content_type:
     weight: 26
