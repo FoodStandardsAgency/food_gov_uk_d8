@@ -1,4 +1,4 @@
-uuid: 73a4fa3e-9557-41ff-9e05-363804f27a94
+uuid: 34953e9e-19b0-4988-becd-82ae700f4794
 langcode: en
 status: true
 dependencies:
@@ -6,11 +6,11 @@ dependencies:
     - block_content.type.basic
     - block_content.type.promo_block
     - field.storage.node.field_block
-    - node.type.lander
-id: node.lander.field_block
+    - node.type.page
+id: node.page.field_block
 field_name: field_block
 entity_type: node
-bundle: lander
+bundle: page
 label: 'Custom block reference'
 description: 'Embed a custom block to this page. These custom blocks are managed at <a href="/admin/structure/block/block-content" target="_blank">Custom block library</a>'
 required: false
