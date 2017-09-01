@@ -1,0 +1,10 @@
+uuid: 024aa6a7-32c8-4687-809d-a48e355c203c
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.promo_image
+label: 'Promo image'
+targetEntityType: media
+cache: true
