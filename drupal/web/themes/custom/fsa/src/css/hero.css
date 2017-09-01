@@ -12,6 +12,9 @@
   max-width: var(--max-width);
   margin: 0 auto;
   position: relative;
+  background-color: var(--primary-color);
+  display: flex;
+  align-items: center;
 
   @media (--breakpoint-lg) {
     min-height: 18em;
@@ -32,6 +35,11 @@
   @media (--breakpoint-lg) {
     padding-right: 30%;
   }
+}
+
+.hero h1 {
+  color: var(--color-white);
+  margin-top: 0;
 }
 
 .hero .hero__content h1,
