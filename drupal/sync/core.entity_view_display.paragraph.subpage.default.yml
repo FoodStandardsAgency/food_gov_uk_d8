@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.paragraph.subpage.field_body
     - field.field.paragraph.subpage.field_title
+    - field.field.paragraph.subpage.field_url_alias
     - paragraphs.paragraphs_type.subpage
   module:
     - text
@@ -32,3 +33,4 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_url_alias: true
