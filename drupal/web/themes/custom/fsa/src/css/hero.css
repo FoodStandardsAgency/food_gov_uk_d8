@@ -24,12 +24,21 @@
   align-items: flex-end;
   background-color: var(--primary-color);
   @mixin responsive-declaration padding-top, 1em, 4em;
-  @mixin responsive-declaration padding-right, 1.25em, 5em;
+  @mixin responsive-declaration padding-right, 1em, 5em;
   @mixin responsive-declaration padding-bottom, 1em, 4em;
-  @mixin responsive-declaration padding-left, 1.25em, 5em;
+  @mixin responsive-declaration padding-left, 1em, 5em;
 
   @media (--breakpoint-lg) {
     min-height: 16em;
+  }
+}
+
+.hero__container > div {
+  display: flex;
+  flex-direction: column;
+
+  @media (--breakpoint-lg) {
+    display: block;
   }
 }
 
@@ -40,13 +49,19 @@
 
 .hero .hero__content {
   background-color: var(--primary-color);
-  padding: 2em;
   color: var(--color-white);
-  @mixin responsive-declaration font-size, 1em, 1.35em;
+  @mixin responsive-declaration padding-top, 1em, 4em;
+  @mixin responsive-declaration padding-right, 1em, 5em;
+  @mixin responsive-declaration padding-left, 1em, 5em;
+  @mixin responsive-declaration padding-bottom, 1em, 4em;
 
   @media (--breakpoint-lg) {
     padding-right: 30%;
   }
+}
+
+.hero .hero__content > * {
+  @mixin responsive-declaration font-size, 1em, 1.35em;
 }
 
 .hero h1 {
@@ -60,27 +75,40 @@
 }
 
 .hero .hero__image {
-  padding-bottom: 4em;
+  position: relative;
+  z-index: var(--z-middle);
+
+  @media (--breakpoint-lg) {
+    padding-bottom: 4em;
+  }
 }
 
 .hero .hero__image + .hero__content {
-  position: absolute;
-  bottom: 0;
-  left: 1em;
-  right: 1em;
+  order: -1;
+  position: relative;
+  z-index: var(--z-top);
+  bottom: auto;
+  left: auto;
+  right: auto;
   background-color: transparent;
-  padding: 0em;
-  font-size: 1em;
-  width: auto;
-  @mixin responsive-declaration font-size, 1em, 1.25em;
-  padding: 2em;
   background-color: var(--color-dark-blue);
+  box-shadow: var(--box-shadow);
+  /*@mixin responsive-declaration margin-right, 1em, 4em;
+  @mixin responsive-declaration margin-left, 1em, 4em;*/
 
   @media (--breakpoint-lg) {
-    left: 0;
-    right: auto;
-    width: 30em;
+    position: absolute;
+    bottom: 0;
+    left: 1em;
+    right: 1em;
+    width: 40em;
+    margin: 0;
+    padding-right: 4em;
   }
+}
+
+.hero .hero__image + .hero__content > * {
+  @mixin responsive-declaration font-size, 1em, 1.25em;
 }
 
 .hero .hero__image + .hero__content h1,

@@ -110,7 +110,7 @@
   z-index: var(--z-bottom);
   flex: 1 1 100%;
   min-height: 100vh;
-  @mixin responsive-declaration padding-top, 1em, 3em;
+  padding-top: 0em;
   @mixin responsive-declaration padding-right, 1em, 4em;
   @mixin responsive-declaration padding-left, 1em, 4em;
 
@@ -118,6 +118,14 @@
     padding-right: 0;
     padding-left: 0;
   }
+
+  @media (--breakpoint-lg) {
+    padding-top: 3em;
+  }
+}
+
+.theme-service .layout__content {
+  @mixin responsive-declaration padding-top, 1em, 4em;
 }
 
 .layout--with-sidebar .layout__content {
@@ -131,12 +139,16 @@
 
   @media (--breakpoint-md) {
     margin-left: 20em;
-    padding-right: 0em !important;
+    padding-right: 0em;
   }
 
   @media (--breakpoint-lg) {
     margin-left: 25.5em;
   }
+}
+
+.theme-service .layout--with-sidebar .layout__content {
+
 }
 
 .theme--page:not(.theme-service) .layout--with-sidebar .layout__content {
