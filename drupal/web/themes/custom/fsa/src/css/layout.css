@@ -124,7 +124,8 @@
   }
 }
 
-.theme-service .layout__content {
+.theme--page .layout__content,
+.theme--service .layout__content {
   @mixin responsive-declaration padding-top, 1em, 4em;
 }
 
