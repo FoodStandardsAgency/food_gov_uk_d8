@@ -66,7 +66,7 @@ if (toggleButtons != null) {
 // Toggle content
 const tableOfContentsElement = document.querySelectorAll('.toc-tree');
 const contentElement = document.querySelectorAll('.toc-filter');
-if (tableOfContentsElement != null || contentElement != null) {
+if (tableOfContentsElement.length > 0 || contentElement.length > 0) {
   toc(tableOfContentsElement, contentElement);
 }
 
