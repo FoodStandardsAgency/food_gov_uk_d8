@@ -1,6 +1,6 @@
 uuid: 4f57e71c-3b7f-41b6-9728-463474c0cf93
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - block_class
