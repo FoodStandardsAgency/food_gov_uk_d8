@@ -1,8 +1,8 @@
 .breadcrumb {
   padding-top: 1em;
-  @mixin responsive-declaration padding-right, 1.25em, 5em;
+  @mixin responsive-declaration padding-right, 1em, 5em;
   padding-bottom: 1em;
-  @mixin responsive-declaration padding-left, 1.25em, 5em;
+  @mixin responsive-declaration padding-left, 1em, 5em;
   display: none;
   border-bottom: 1px solid var(--color-light-gray);
 
@@ -19,19 +19,44 @@
 }
 
 .breadcrumb__item {
+  position: relative;
+  font-size: 0.8em;
+  font-weight: 400;
+  text-align: left;
+  padding-right: 2em;
 
+  @media (--breakpoint-sm) {
+    text-align: center;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+  }
+
+  @media (--breakpoint-lg) {
+    text-align: left;
+    font-weight: 400;
+    display: inline-block;
+  }
 }
 
 .breadcrumb__item:not(:last-child):after {
   content: "/";
-  margin: 0 0.25em;
-  margin: 0 0.5em;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 2em;
+  text-align: center;
   color: var(--color-light-gray);
+  transform: translateY(-50%);
 }
 
 .breadcrumb__link {
-  font-size: 1em;
-  font-weight: 400;
+
+}
+
+:--not-touch .breadcrumb__link:--enter {
+  text-decoration: underline;
+  color: var(--light-primary-color);
 }
 
 .breadcrumb__item:last-child .breadcrumb__link{
