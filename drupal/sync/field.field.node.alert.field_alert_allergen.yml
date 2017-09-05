@@ -1,0 +1,28 @@
+uuid: c0f2ba49-c289-49b2-8700-3e95e590fc60
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_alert_allergen
+    - node.type.alert
+    - taxonomy.vocabulary.alerts_allergen
+id: node.alert.field_alert_allergen
+field_name: field_alert_allergen
+entity_type: node
+bundle: alert
+label: 'Alert: allergen'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      alerts_allergen: alerts_allergen
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
