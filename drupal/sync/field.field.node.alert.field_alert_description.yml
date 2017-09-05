@@ -1,0 +1,22 @@
+uuid: 1b4605b0-3485-4bad-9062-75eff7546c42
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_alert_description
+    - node.type.alert
+  module:
+    - text
+id: node.alert.field_alert_description
+field_name: field_alert_description
+entity_type: node
+bundle: alert
+label: 'Alert description'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

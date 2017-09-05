@@ -1,0 +1,19 @@
+uuid: 06ee796d-8302-4bea-81cd-a3fb3599bde8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_alert_productdetails_raw
+    - node.type.alert
+id: node.alert.field_alert_productdetails_raw
+field_name: field_alert_productdetails_raw
+entity_type: node
+bundle: alert
+label: 'Alert productDetails raw'
+description: 'Alert item productDetails stored as raw json.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

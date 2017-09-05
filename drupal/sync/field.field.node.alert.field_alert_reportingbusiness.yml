@@ -1,0 +1,19 @@
+uuid: 8f1805e0-1cea-496f-a2f9-b7989a6df0ed
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_alert_reportingbusiness
+    - node.type.alert
+id: node.alert.field_alert_reportingbusiness
+field_name: field_alert_reportingbusiness
+entity_type: node
+bundle: alert
+label: 'Alert reportingBusiness'
+description: 'The food business reporting the alert. May not be present in the case of FAFAs.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

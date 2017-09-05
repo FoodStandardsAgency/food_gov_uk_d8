@@ -1,0 +1,19 @@
+uuid: ee5833f3-1ff3-463d-9f05-107944c0d01b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_alert_otherbusiness
+    - node.type.alert
+id: node.alert.field_alert_otherbusiness
+field_name: field_alert_otherbusiness
+entity_type: node
+bundle: alert
+label: 'Alert otherBusiness'
+description: 'Optional additional businesses involved, e.g. distributing supermarkets. If there are multiple values present this field value will be an array.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
