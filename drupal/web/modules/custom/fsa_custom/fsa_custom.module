@@ -19,7 +19,7 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
   if ($operation == 'view' && $block->getPluginId() == 'page_title_block') {
 
     $node = \Drupal::routeMatch()->getParameter('node');
-    if (is_object($node)) {
+    if (is_object($node) && $node->hasField('field_content_type')) {
 
       // Get content_type taxonomy term id.
       $tid = $node->get('field_content_type')->target_id;
