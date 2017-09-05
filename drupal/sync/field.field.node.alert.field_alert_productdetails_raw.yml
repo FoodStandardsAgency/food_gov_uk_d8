@@ -9,7 +9,7 @@ id: node.alert.field_alert_productdetails_raw
 field_name: field_alert_productdetails_raw
 entity_type: node
 bundle: alert
-label: 'Alert productDetails raw'
+label: 'Product details'
 description: 'Alert item productDetails stored as raw json.'
 required: false
 translatable: false

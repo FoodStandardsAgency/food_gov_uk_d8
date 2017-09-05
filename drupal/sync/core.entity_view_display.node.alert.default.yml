@@ -25,14 +25,14 @@ bundle: alert
 mode: default
 content:
   field_alert_actiontaken:
-    weight: 108
+    weight: 5
     label: above
     settings: {  }
     third_party_settings: {  }
     type: basic_string
     region: content
   field_alert_allergen:
-    weight: 110
+    weight: 6
     label: above
     settings:
       link: true
@@ -40,14 +40,14 @@ content:
     type: entity_reference_label
     region: content
   field_alert_description:
-    weight: 109
+    weight: 3
     label: above
     settings: {  }
     third_party_settings: {  }
     type: text_default
     region: content
   field_alert_notation:
-    weight: 102
+    weight: 1
     label: above
     settings:
       link_to_entity: false
@@ -55,7 +55,7 @@ content:
     type: string
     region: content
   field_alert_otherbusiness:
-    weight: 106
+    weight: 8
     label: above
     settings:
       link_to_entity: false
@@ -63,14 +63,14 @@ content:
     type: string
     region: content
   field_alert_productdetails_raw:
-    weight: 104
+    weight: 2
     label: above
     settings: {  }
     third_party_settings: {  }
     type: basic_string
     region: content
   field_alert_relatedmedia:
-    weight: 107
+    weight: 4
     label: above
     settings:
       trim_length: 80
@@ -82,7 +82,7 @@ content:
     type: link
     region: content
   field_alert_reportingbusiness:
-    weight: 103
+    weight: 7
     label: above
     settings:
       link_to_entity: false
@@ -90,24 +90,22 @@ content:
     type: string
     region: content
   field_alert_smstext:
-    weight: 105
+    weight: 9
     label: above
     settings: {  }
     third_party_settings: {  }
     type: basic_string
     region: content
   field_alert_type:
-    weight: 111
+    weight: 0
     label: above
     settings: {  }
     third_party_settings: {  }
     type: list_default
-    region: content
-  links:
-    weight: 100
     region: content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   langcode: true
+  links: true

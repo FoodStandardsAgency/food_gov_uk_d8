@@ -9,7 +9,7 @@ id: node.alert.field_alert_actiontaken
 field_name: field_alert_actiontaken
 entity_type: node
 bundle: alert
-label: 'Alert actionTaken'
+label: 'Action taken'
 description: 'Description of the action taken, or in the case of FAFAs actions to be taken by enforcement authority.'
 required: false
 translatable: false

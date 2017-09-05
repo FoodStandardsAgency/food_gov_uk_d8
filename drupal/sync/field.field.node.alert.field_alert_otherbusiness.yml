@@ -9,7 +9,7 @@ id: node.alert.field_alert_otherbusiness
 field_name: field_alert_otherbusiness
 entity_type: node
 bundle: alert
-label: 'Alert otherBusiness'
+label: 'Additional businesses involved'
 description: 'Optional additional businesses involved, e.g. distributing supermarkets. If there are multiple values present this field value will be an array.'
 required: false
 translatable: false

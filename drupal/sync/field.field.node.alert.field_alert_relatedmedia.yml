@@ -11,7 +11,7 @@ id: node.alert.field_alert_relatedmedia
 field_name: field_alert_relatedmedia
 entity_type: node
 bundle: alert
-label: 'Alert relatedMedia'
+label: 'Related media'
 description: 'Optional URL link to a supporting document or other media, typically a PDF of a product recall notice or Point of Sale notice from the reporting business. It may also be an image of the product, or other supporting documentation.'
 required: false
 translatable: false
