@@ -20,7 +20,7 @@ function tableOfContents(tableOfContentsElement, contentElement) {
 
   for (let i = 0; i < tocContentItems.length; i++) {
     if (tocContentItems[i].tagName == 'H2') {
-      //console.log(tocContentItems[i].id);
+      console.log(tocContentItems[i].id);
     }
   }
 

@@ -1,11 +1,15 @@
+.promo__item,
 .node-teaser {
   display: block;
   background-color: var(--color-white);
   box-shadow: var(--box-shadow);
   transition: box-shadow var(--transition-enter);
   color: var(--color-black);
-  height: 100%;
   position: relative;
+}
+
+.node-teaser {
+  height: 100%;
 }
 
 .theme-service--help-centre .node-teaser {
@@ -19,6 +23,7 @@
   transition: box-shadow var(--transition-enter);
 }
 
+:--not-touch .node-teaser:--enter,
 :--not-touch .theme-service--help-centre .node-teaser:--enter {
   box-shadow: var(--box-shadow-active);
 }
@@ -32,16 +37,18 @@
   }
 }
 
+.promo__item .field__field_image,
 .node-teaser__image {
-  background-color: var(--primary-color);
-  min-height: 6em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color var(--transition-enter);
+  position: relative;
+  overflow: hidden;
+  height: 8em;
 
-  @media (--breakpoint-lg) {
-    min-height: 12em;
+  @media (--breakpoint-sm) {
+    height: 9em;
+  }
+
+  @media (--breakpoint-md) {
+    height: 10em;
   }
 }
 
@@ -49,17 +56,32 @@
   background-color: var(--light-primary-color);
 }
 
+.node-teaser__image .field__field_icon {
+  position: absolute;
+  width: 4em;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+}
+
+.promo__item .field__field_image img,
+.node-teaser__image img {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+}
+
 .liftup-list.liftup-list--information .node-teaser__image {
-  background-color: transparent;
-  align-items: flex-end;
-  min-height: 4em;
+  height: 4em;
 
   @media (--breakpoint-sm) {
-    min-height: 6em;
+    height: 6em;
   }
 
   @media (--breakpoint-md) {
-    min-height: 7em;
+    height: 8em;
   }
 }
 
@@ -119,8 +141,8 @@
 }
 
 .liftup-list.liftup-list--information .node-teaser__header {
-  padding-top: 0.5em;
-  padding-bottom: 1em;
+  padding-top: 0em;
+  @mixin responsive-declaration padding-bottom, 1em, 3em;
 }
 
 .theme-service--help-centre .node-teaser__header {
@@ -142,19 +164,23 @@
   }
 }
 
+.promo__item .field__field_title,
 .node-teaser__heading {
-  margin: 0;
-  font-weight: 500;
+  @mixin responsive-declaration font-size, 1em, 1.25em;
+  font-weight: 700;
+  margin-bottom: 1em;
   color: var(--primary-color);
 }
 
-:--not-touch .node-teaser:--enter .node-teaser__heading {
+:--not-touch .promo__item:--enter .field__field_title,
+:--not-touch .node-teaser:--enter .node-teaser__heading  {
   color: var(--light-primary-color);
 }
 
 .liftup-list.liftup-list--information .node-teaser__heading {
   color: var(--color-black);
   text-align: center;
+  font-weight: 500;
   @mixin responsive-declaration font-size, 1em, 1.05em;
 }
 
@@ -189,10 +215,15 @@
   color: var(--light-primary-color);
 }
 
+.promo__item .teaser__content,
 .node-teaser__content {
   @mixin responsive-declaration padding-right, 1em, 2em;
   @mixin responsive-declaration padding-left, 1em, 2em;
   @mixin responsive-declaration padding-bottom, 1em, 3em;
+}
+
+.promo__item .teaser__content {
+  @mixin responsive-declaration padding-top, 1em, 2em;
 }
 
 .node-teaser--with-summary .node-teaser__content {
