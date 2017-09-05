@@ -12,9 +12,11 @@ dependencies:
     - field.field.node.alert.field_alert_relatedmedia
     - field.field.node.alert.field_alert_reportingbusiness
     - field.field.node.alert.field_alert_smstext
+    - field.field.node.alert.field_alert_type
     - node.type.alert
   module:
     - link
+    - options
     - text
     - user
 id: node.alert.default
@@ -93,6 +95,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: basic_string
+    region: content
+  field_alert_type:
+    weight: 111
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
     region: content
   links:
     weight: 100

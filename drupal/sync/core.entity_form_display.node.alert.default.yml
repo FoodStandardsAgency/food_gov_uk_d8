@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.alert.field_alert_relatedmedia
     - field.field.node.alert.field_alert_reportingbusiness
     - field.field.node.alert.field_alert_smstext
+    - field.field.node.alert.field_alert_type
     - node.type.alert
   module:
     - link
@@ -101,6 +102,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
+    region: content
+  field_alert_type:
+    weight: 41
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
     region: content
   langcode:
     type: language_select
