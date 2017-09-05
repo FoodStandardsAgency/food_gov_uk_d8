@@ -60,9 +60,10 @@ Plugin documentation:
   --color-lighter-gray: #F0F3F5;
 
   --color-teal: #00A39B;
-  --color-light-teal: #10c7be;
+  --color-light-teal: #00B2A9;
 
   --color-purple: #49176D;
+  --color-light-purple: #5B178C;
 
   --color-dark-red: #a91f2d;
   --color-red: #E31837;
@@ -77,6 +78,7 @@ Plugin documentation:
   --light-primary-color: var(--color-light-teal);
 
   --secondary-color: var(--color-purple);
+  --light-secondary-color: var(--color-light-purple);
 }
 
 /*Typography*/

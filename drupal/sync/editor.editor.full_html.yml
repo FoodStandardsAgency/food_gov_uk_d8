@@ -52,6 +52,7 @@ settings:
           name: 'Block Formatting'
           items:
             - Format
+            - Styles
         -
           name: Tools
           items:
@@ -64,7 +65,7 @@ settings:
     language:
       language_list: un
     stylescombo:
-      styles: ''
+      styles: "div.important|Important\r\ndiv.region.england|Region - England\r\ndiv.region.northern-ireland|Region - Northern Ireland\r\ndiv.region.wales|Region - Wales"
     video_embed:
       defaults:
         children:

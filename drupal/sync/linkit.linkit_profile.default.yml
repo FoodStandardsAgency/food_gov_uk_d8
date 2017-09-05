@@ -20,3 +20,13 @@ matchers:
       group_by_bundle: false
       include_unpublished: false
       substitution_type: canonical
+  371705ee-88f9-477f-abc4-0eab943807a7:
+    uuid: 371705ee-88f9-477f-abc4-0eab943807a7
+    id: 'entity:media'
+    weight: 0
+    settings:
+      metadata: '[media:field_nation] -- [media:field_document_category:entity:name]'
+      bundles:
+        document: document
+      group_by_bundle: false
+      substitution_type: canonical
