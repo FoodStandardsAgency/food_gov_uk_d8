@@ -1,0 +1,19 @@
+uuid: 0baf92f4-3365-4944-89f3-bc967dc6381a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_alert_notation
+    - taxonomy.vocabulary.alerts_allergen
+id: taxonomy_term.alerts_allergen.field_alert_notation
+field_name: field_alert_notation
+entity_type: taxonomy_term
+bundle: alerts_allergen
+label: 'Alert notation'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

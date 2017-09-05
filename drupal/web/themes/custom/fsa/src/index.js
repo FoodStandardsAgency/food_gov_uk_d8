@@ -64,10 +64,10 @@ if (toggleButtons != null) {
 }
 
 // Toggle content
-const tableOfContents = document.querySelectorAll('.toc');
+const tableOfContentsElement = document.querySelectorAll('.toc-tree');
 const contentElement = document.querySelectorAll('.toc-filter');
-if (tableOfContents != null || contentElement != null) {
-  toc(tableOfContents, contentElement);
+if (tableOfContentsElement.length > 0 || contentElement.length > 0) {
+  toc(tableOfContentsElement, contentElement);
 }
 
 // Mobile menu
