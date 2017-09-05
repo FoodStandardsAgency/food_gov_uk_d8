@@ -1,0 +1,9 @@
+uuid: 304a96e0-7315-4306-8287-0bbd6a9d7717
+langcode: en
+status: true
+dependencies: {  }
+name: 'Alerts: Type'
+vid: alerts_type
+description: ''
+hierarchy: 0
+weight: 0

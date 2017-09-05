@@ -1,0 +1,35 @@
+uuid: 4a54f637-1df7-4612-852b-7a3ccad30276
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.alerts_type
+  module:
+    - path
+id: taxonomy_term.alerts_type.default
+targetEntityType: taxonomy_term
+bundle: alerts_type
+mode: default
+content:
+  langcode:
+    type: language_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  description: true

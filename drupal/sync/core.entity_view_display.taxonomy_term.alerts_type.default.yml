@@ -1,0 +1,25 @@
+uuid: cc60bede-bb72-414b-ab26-cd342e32c510
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.alerts_type
+  module:
+    - text
+id: taxonomy_term.alerts_type.default
+targetEntityType: taxonomy_term
+bundle: alerts_type
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true
