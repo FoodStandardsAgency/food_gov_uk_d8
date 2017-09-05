@@ -12,6 +12,11 @@
   height: 100%;
 }
 
+.node-teaser > * {
+  height: 100%;
+}
+
+
 .theme-service--help-centre .node-teaser {
   display: block;
   background-color: var(--color-white);
@@ -52,9 +57,9 @@
   }
 }
 
-:--not-touch .node-teaser:--enter .node-teaser__image {
+/*:--not-touch .node-teaser:--enter .node-teaser__image {
   background-color: var(--light-primary-color);
-}
+}*/
 
 .node-teaser__image .field__field_icon {
   position: absolute;
@@ -175,6 +180,7 @@
 :--not-touch .promo__item:--enter .field__field_title,
 :--not-touch .node-teaser:--enter .node-teaser__heading  {
   color: var(--light-primary-color);
+  text-decoration: underline;
 }
 
 .liftup-list.liftup-list--information .node-teaser__heading {
