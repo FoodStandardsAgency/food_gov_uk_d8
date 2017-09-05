@@ -39,6 +39,9 @@ class SubpagesBlock extends BlockBase {
     $nid = $node->id();
     // Reload the node to be sure it is correct type
     $node = Node::load($nid);
+    if (!$node->hasField('field_subpages')) {
+      return [];
+    }
     $paragraphs = $node->get('field_subpages')->referencedEntities();
     $route = 'entity.node.canonical';
     $page = 1;
@@ -77,7 +80,7 @@ class SubpagesBlock extends BlockBase {
           "node:$nid",
         ],
         'contexts' => [
-          'url.query_args:subpage',
+          'url.query_args',
         ],
       ],
     ];
