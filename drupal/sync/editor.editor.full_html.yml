@@ -41,6 +41,7 @@ settings:
           items:
             - DrupalImage
             - image
+            - document
             - video_embed
         -
           name: Misc
