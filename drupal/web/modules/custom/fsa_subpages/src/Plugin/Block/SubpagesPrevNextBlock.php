@@ -39,6 +39,9 @@ class SubpagesPrevNextBlock extends BlockBase {
     $nid = $node->id();
     // Reload the node to be sure it is correct type
     $node = Node::load($nid);
+    if (!$node->hasField('field_subpages')) {
+      return [];
+    }
     $paragraphs = $node->get('field_subpages')->referencedEntities();
 
     $empty = [
