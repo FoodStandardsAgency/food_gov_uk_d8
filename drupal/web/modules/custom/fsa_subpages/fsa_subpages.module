@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Includes FSA Subpage module functionality.
+ */
+
+use \Drupal\block\Entity\Block;
+
+/**
+ * Implements template_preprocess_node().
+ */
+function fsa_subpages_preprocess_node(&$variables) {
+
+  // @todo: consider modifying FSA theme regions so blocks can be set below content from block management.
+  // Get prev/next block.
+  $block = Block::load('subpagesprevnextblock');
+  if (is_object($block)) {
+    $subpages_prevnext = \Drupal::entityTypeManager()
+    ->getViewBuilder('block')->view($block);
+
+    // Send the block content to node template.
+    $variables['subpages_prevnext'] =  $subpages_prevnext;
+  }
+}
