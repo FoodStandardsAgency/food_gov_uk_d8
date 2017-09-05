@@ -29,6 +29,7 @@ module:
   field_ui: 0
   file: 0
   filter: 0
+  fsa_alerts_import: 0
   fsa_contactus: 0
   fsa_contactus_data: 0
   fsa_custom: 0
