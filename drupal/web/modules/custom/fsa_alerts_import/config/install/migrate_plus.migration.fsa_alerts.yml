@@ -1,10 +1,5 @@
-uuid: 0001c44b-9809-4ed5-acca-a8d9793d360c
-langcode: en
-status: true
-dependencies: {  }
-_core:
-  default_config_hash: R7AdhDQ7IG_AaQAId0ww__XjbYxD7PqiZlTQF-H9rYE
-id: fsa_alert
+# Migration configuration for FSA Alerts.
+id: fsa_alerts
 class: null
 field_plugin_method: null
 cck_plugin_method: null
