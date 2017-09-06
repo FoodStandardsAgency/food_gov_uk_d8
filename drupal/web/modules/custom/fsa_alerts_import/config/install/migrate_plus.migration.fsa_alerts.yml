@@ -23,9 +23,6 @@ source:
     -
       name: type
       selector: type
-    -
-      name: reportingBusiness
-      selector: reportingBusiness
   ids:
     notation:
       type: string
@@ -35,15 +32,19 @@ process:
     default_value: alert
   id: notation
   title: title
-  field_alert_notation: notation
+  field_alert_notation:
+    plugin: alert_item_properties
+    source: notation
   field_alert_type:
     plugin: alert_type
     source: type
-  field_alert_reportingbusiness: reportingBusiness
   uid:
     plugin: default_value
     default_value: 0
 destination:
   plugin: 'entity:node'
   translations: false
-migration_dependencies: null
+migration_dependencies:
+  required:
+    - alert_type
+    - alert_item_properties

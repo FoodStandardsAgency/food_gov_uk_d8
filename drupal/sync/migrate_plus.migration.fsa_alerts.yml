@@ -1,9 +1,9 @@
-uuid: c1bad4b6-0dc4-4427-8f20-2c3926a4c293
+uuid: b1b03952-c67b-4e9a-a02f-b748a03e8924
 langcode: en
 status: true
 dependencies: {  }
 _core:
-  default_config_hash: bBDqle7Z6RA-uQXGcoqy31xX-r7HRqPTPMymzLH9GXk
+  default_config_hash: RBHWBmxOoTiWc_qGSwo5BiWJ8LkNrGfSiiQX0OfRZ1M
 id: fsa_alerts
 class: null
 field_plugin_method: null
@@ -16,7 +16,7 @@ source:
   plugin: url
   data_fetcher_plugin: http
   data_parser_plugin: json
-  urls: 'http://fsa-staging-alerts.epimorphics.net/food-alerts/id?_limit=2'
+  urls: 'http://fsa-staging-alerts.epimorphics.net/food-alerts/id?_limit=5'
   item_selector: items
   fields:
     -
@@ -53,4 +53,3 @@ migration_dependencies:
   required:
     - alert_type
     - alert_item_properties
-
