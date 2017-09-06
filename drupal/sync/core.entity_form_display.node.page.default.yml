@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.page.field_liftups
     - field.field.node.page.field_media_library_liftup_image
     - field.field.node.page.field_nation
+    - field.field.node.page.field_related_content
     - field.field.node.page.field_subpages
     - field.field.node.page.field_topic
     - field.field.node.page.field_update_date
@@ -192,6 +193,15 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
+    region: content
+  field_related_content:
+    weight: 26
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_subpages:
     type: entity_reference_paragraphs
