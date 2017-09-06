@@ -36,7 +36,9 @@ process:
   id: notation
   title: title
   field_alert_notation: notation
-  field_alert_type: null
+  field_alert_type:
+    plugin: alert_type
+    source: type
   field_alert_reportingbusiness: reportingBusiness
   uid:
     plugin: default_value
