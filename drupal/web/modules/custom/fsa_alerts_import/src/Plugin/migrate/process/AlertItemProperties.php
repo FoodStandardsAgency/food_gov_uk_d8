@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains Drupal\fsa_alerts_import\Plugin\migrate\process\AlertItemProperties.
- */
 
 namespace Drupal\fsa_alerts_import\Plugin\migrate\process;
 
@@ -44,18 +40,17 @@ class AlertItemProperties extends ProcessPluginBase {
     }
     catch (RequestException $exception) {
       // Log failure(s) to fetch individual alert data.
-      \Drupal::logger('fsa_alerts')->warning(t('Failed to fetch Alert properties: "%error"', array('%error' => $exception->getMessage())));
+      \Drupal::logger('fsa_alerts')->warning(t('Failed to fetch Alert properties: "%error"', ['%error' => $exception->getMessage()]));
     }
 
-    // Map single textfield values
+    // Map single textfield values.
     $mapping = [
       'SMStext' => 'field_alert_smstext',
       'actionTaken' => 'field_alert_actiontaken',
       'description' => 'field_alert_description',
     ];
-
     // Map single-values.
-    foreach ($mapping AS $key => $field) {
+    foreach ($mapping as $key => $field) {
       if (is_string($item[$key])) {
         $row->setDestinationProperty($field, $item[$key]);
       }
@@ -68,11 +63,11 @@ class AlertItemProperties extends ProcessPluginBase {
       'reportingBusiness' => 'field_alert_reportingbusiness',
       'otherBusiness' => 'field_alert_otherbusiness',
     ];
-    foreach ($mapping AS $key => $field) {
+    foreach ($mapping as $key => $field) {
       if (isset($item[$key])) {
         if (isset($item[$key][0])) {
           // Multiple values.
-          foreach ($item[$key] AS $item) {
+          foreach ($item[$key] as $item) {
             $business[] = $item['commonName'];
           }
         }
@@ -85,19 +80,17 @@ class AlertItemProperties extends ProcessPluginBase {
       }
     }
 
-
     // Store productdetails as raw json until we know what kind of data
     // the details will store.
-    if (isset($item['productDetails'])) {
-      $productDetails = Json::encode($item['productDetails']);
+    if ($productDetails = Json::encode($item['productDetails'])) {
       $row->setDestinationProperty('field_alert_productdetails_raw', $productDetails);
     }
 
     // field_alert_allergen
     // field_alert_relatedmedia
-    // field_alert_reportingbusiness
-
-    // Return the actual notation value
+    // field_alert_reportingbusiness.
+    // Return the actual notation value.
     return $value;
   }
+
 }

@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains Drupal\fsa_alerts_import\Plugin\migrate\process\AlertType.
- */
 
 namespace Drupal\fsa_alerts_import\Plugin\migrate\process;
 
@@ -38,4 +34,5 @@ class AlertType extends ProcessPluginBase {
       return $type;
     }
   }
+
 }
