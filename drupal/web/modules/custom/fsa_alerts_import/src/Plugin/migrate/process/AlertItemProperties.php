@@ -58,7 +58,7 @@ class AlertItemProperties extends ProcessPluginBase {
 
     // Store reportingBusiness & otherBusiness values.
     // Value can be an array or single value.
-    $business = [];
+    $businessname = [];
     $mapping = [
       'reportingBusiness' => 'field_alert_reportingbusiness',
       'otherBusiness' => 'field_alert_otherbusiness',
@@ -67,16 +67,16 @@ class AlertItemProperties extends ProcessPluginBase {
       if (isset($item[$key])) {
         if (isset($item[$key][0])) {
           // Multiple values.
-          foreach ($item[$key] as $item) {
-            $business[] = $item['commonName'];
+          foreach ($item[$key] as $business) {
+            $businessname[] = $business['commonName'];
           }
         }
         else {
           // Single-value.
-          $business = [$item[$key]['commonName']];
+          $businessname = [$item[$key]['commonName']];
         }
 
-        $row->setDestinationProperty($field, $business);
+        $row->setDestinationProperty($field, $businessname);
       }
     }
 
@@ -103,9 +103,22 @@ class AlertItemProperties extends ProcessPluginBase {
           $tids[] = $a;
         }
         $row->setDestinationProperty('field_alert_allergen', $tids);
-
       }
     }
+    
+    // Store relatedMedia.
+    if (isset($item['relatedMedia'])) {
+      $media_link = [];
+      foreach ($item['relatedMedia'] as $media) {
+        $media_link[] = [
+          'uri' => $media['@id'],
+          'title' => $media['title'],
+        ];
+      }
+      $row->setDestinationProperty('field_alert_relatedmedia', $media_link);
+    }
+
+
 
     // field_alert_allergen
     // field_alert_relatedmedia
