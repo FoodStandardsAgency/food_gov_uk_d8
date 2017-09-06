@@ -86,6 +86,27 @@ class AlertItemProperties extends ProcessPluginBase {
       $row->setDestinationProperty('field_alert_productdetails_raw', $productDetails);
     }
 
+    // Map to allergens by notation.
+    if (isset($item['problem'][0]['allergen'])) {
+      $tids = [];
+      foreach ($item['problem'][0]['allergen'] AS $key => $field) {
+        // Since we don't know the tid go hard way mapping to the terms with
+        // notation field match
+        $term_name = $field['notation'];
+        $term = \Drupal::entityTypeManager()
+          ->getStorage('taxonomy_term')
+          ->loadByProperties([
+            'name' => $term_name
+          ]);
+
+        foreach ($term AS $a => $b) {
+          $tids[] = $a;
+        }
+        $row->setDestinationProperty('field_alert_allergen', $tids);
+
+      }
+    }
+
     // field_alert_allergen
     // field_alert_relatedmedia
     // field_alert_reportingbusiness.

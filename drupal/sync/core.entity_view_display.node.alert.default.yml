@@ -35,9 +35,10 @@ content:
     weight: 6
     label: above
     settings:
-      link: true
+      view_mode: teaser
+      link: false
     third_party_settings: {  }
-    type: entity_reference_label
+    type: entity_reference_entity_view
     region: content
   field_alert_description:
     weight: 3
