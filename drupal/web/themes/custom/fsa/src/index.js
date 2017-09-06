@@ -5,6 +5,7 @@ import stickyElement from './stickyElement';
 import toggleContent from './toggleContent';
 import toc from './toc';
 import mobileMenu from './mobile-menu';
+import regionalVariation from './regionalVariation';
 
 const breakpoints = {
   small: "sm",
@@ -76,6 +77,13 @@ const navigationElement = document.querySelector('.js-navigation');
 const siteElement = document.querySelector('.js-site');
 if (menuButtonElements != null || navigationElement != null || siteElement != null) {
   mobileMenu(menuButtonElements, navigationElement, siteElement);
+}
+
+
+// Mobile menu
+const regionalVariationElements = [...document.querySelectorAll('.js-regional-variation')];
+if (regionalVariationElements.length > 0) {
+  regionalVariation(regionalVariationElements);
 }
 
 // Add class if touch device

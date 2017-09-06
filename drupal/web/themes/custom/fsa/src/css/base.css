@@ -59,6 +59,7 @@ Plugin documentation:
   --color-light-gray: #DEE2E5;
   --color-lighter-gray: #F0F3F5;
 
+  --color-dark-teal: #007c75;
   --color-teal: #00A39B;
   --color-light-teal: #00B2A9;
 
@@ -67,6 +68,8 @@ Plugin documentation:
 
   --color-dark-red: #a91f2d;
   --color-red: #E31837;
+
+  --color-orange: #ffb200;
 
   --color-green: #6CB33F;
 
@@ -636,6 +639,26 @@ figure:after {
   font-weight: 600;
   color: var(--color-white);
   transform: translateY(-50%);
+}
+
+/*Important*/
+.important {
+  @mixin responsive-declaration margin-left, -0em, -2em;
+  @mixin responsive-declaration margin-right, -0em, -2em;
+  @mixin responsive-declaration padding, 1em, 2em;
+  background-color: var(--color-lighter-gray);
+  border: 1px solid var(--color-light-gray);
+  margin-bottom: 1em;
+}
+
+.important .regional-variation {
+  background-color: var(--color-white);
+}
+
+.important .important {
+  background-color: var(--color-white);
+  margin-left: 0;
+  margin-right: 0;
 }
 
 /*Drupal tabs*/
