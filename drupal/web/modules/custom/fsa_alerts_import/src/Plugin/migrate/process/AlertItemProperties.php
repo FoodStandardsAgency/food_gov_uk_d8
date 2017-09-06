@@ -13,7 +13,7 @@ use Drupal\migrate\Row;
 use GuzzleHttp\Exception\RequestException;
 
 /**
- * Stores individual alert properties from API reqource URI
+ * Stores individual alert properties from API resource URI provided json.
  *
  * @MigrateProcessPlugin(
  *   id = "alert_item_properties",
@@ -30,14 +30,12 @@ class AlertItemProperties extends ProcessPluginBase {
     // API URL to single alert, @todo: consider storing base_path to var/config.
     $api_url = 'http://fsa-staging-alerts.epimorphics.net/food-alerts/id/' . $value;
 
-    // Get the alert item json
     try {
       $client = \Drupal::httpClient();
       $response = $client->get(
         $api_url
       );
 
-      // Read the json to array.
       $item = Json::decode($response->getBody());
 
       // API always return only one item here, set item for easy access.
@@ -45,9 +43,9 @@ class AlertItemProperties extends ProcessPluginBase {
 
     }
     catch (RequestException $exception) {
-      \Drupal::logger('fsa_alerts')->warning(t('Failed to fetch Alert properties, "%error"', array('%error' => $exception->getMessage())));
+      // Log failure(s) to fetch individual alert data.
+      \Drupal::logger('fsa_alerts')->warning(t('Failed to fetch Alert properties: "%error"', array('%error' => $exception->getMessage())));
     }
-
 
     // Map single textfield values
     $mapping = [
