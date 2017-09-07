@@ -1,0 +1,23 @@
+uuid: 40eefe95-bb13-43f5-b960-e4d63437bf59
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_alert_relatedmedia
+    - node.type.alert
+  module:
+    - link
+id: node.alert.field_alert_relatedmedia
+field_name: field_alert_relatedmedia
+entity_type: node
+bundle: alert
+label: 'Related media'
+description: 'Optional URL link to a supporting document or other media, typically a PDF of a product recall notice or Point of Sale notice from the reporting business. It may also be an image of the product, or other supporting documentation.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link
