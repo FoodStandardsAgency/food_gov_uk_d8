@@ -4,6 +4,6 @@ status: true
 dependencies: {  }
 name: 'Alerts: Allergen'
 vid: alerts_allergen
-description: ''
+description: 'Allergens imported from FSA Food Alerts API'
 hierarchy: 0
 weight: 0
