@@ -23,7 +23,11 @@ This will create a folder called `dist`, into which the required assets will be 
 ### JavaScript development
 The file `index.js` is the entry point for all the assests used by this theme. This file contains `require` function for style and image files. This function should not be removed ever.
 
-Npm dependencies and theme related [modular JavaScript files](https://github.com/lukehoban/es6features#modules) can be imported at the beginning of every JavaScript file with `import defaultMember from 'module-name'` [ES6 import syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import). To export a JavaScript module use [ES6 export syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) such as `module.exports = myFunction;`.
+Npm dependencies and theme related [modular JavaScript files](https://github.com/lukehoban/es6features#modules) can be imported at the beginning of every JavaScript file with following line of code:
+
+`import defaultMember from 'module-name'`
+
+[ES6 import syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import). To export a JavaScript module use [ES6 export syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) such as `module.exports = myFunction;`.
 
 There are number of other really useful ES6 features that can be also used, like:
 * [Arrows](https://github.com/lukehoban/es6features#arrows)
@@ -40,7 +44,7 @@ This theme uses number of [PostCSS plugins](http://cssnext.io/features/) to enab
 This theme uses [BEM](http://getbem.com/) as much as it is possible.
 
 ### Bitmap and vector assets
-Webpack loaders check for bitmap and vector images separately. Bitmap images and compressed and copied to `dist/img/` folder. All the vector images are turned into one sprite (`dist/sprite.svg`) on the other hand. Themer can reference to a specific vector image with this line of code:
+Webpack loaders check for bitmap and vector images separately. Bitmap images are compressed and copied to `dist/img/` folder. All the vector images on the other hand are turned into one sprite (`dist/sprite.svg`). Themer can reference to a specific vector image with this line of code:
 
 ```
 <div class="svg">
@@ -50,7 +54,7 @@ Webpack loaders check for bitmap and vector images separately. Bitmap images and
 To polyfill browsers that don't support `<use>` tags every svg reference will be turned into inline svg by browser with [svg4everybody](https://github.com/jonathantneal/svg4everybody) JavaScript plugin.
 
 
-## 📦 Deployment
+## 📦 Building the theme assets
 Remember to create the static assets of this theme before committing your changes to version control. Build the assets by running the following task:
 
 * `npm run build` or `yarn build`
