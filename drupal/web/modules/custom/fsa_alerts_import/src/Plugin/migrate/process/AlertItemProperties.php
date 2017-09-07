@@ -46,6 +46,7 @@ class AlertItemProperties extends ProcessPluginBase {
     // Map single textfield values.
     $mapping = [
       'SMStext' => 'field_alert_smstext',
+      'consumerAdvice' => 'field_alert_consumeradvice',
       'actionTaken' => 'field_alert_actiontaken',
       'description' => 'field_alert_description',
     ];
@@ -53,6 +54,9 @@ class AlertItemProperties extends ProcessPluginBase {
     foreach ($mapping as $key => $field) {
       if (is_string($item[$key])) {
         $row->setDestinationProperty($field, $item[$key]);
+      }
+      else {
+        $row->setDestinationProperty($field, '');
       }
     }
 
@@ -120,9 +124,7 @@ class AlertItemProperties extends ProcessPluginBase {
 
 
 
-    // field_alert_allergen
-    // field_alert_relatedmedia
-    // field_alert_reportingbusiness.
+
     // Return the actual notation value.
     return $value;
   }

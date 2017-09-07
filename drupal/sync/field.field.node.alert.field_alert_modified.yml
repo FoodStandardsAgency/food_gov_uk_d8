@@ -11,7 +11,7 @@ id: node.alert.field_alert_modified
 field_name: field_alert_modified
 entity_type: node
 bundle: alert
-label: 'Alert modified'
+label: 'Last updated'
 description: 'The date and time the alert was last modified.'
 required: false
 translatable: false
