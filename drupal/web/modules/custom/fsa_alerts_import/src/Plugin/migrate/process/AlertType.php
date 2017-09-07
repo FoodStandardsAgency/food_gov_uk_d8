@@ -20,6 +20,7 @@ class AlertType extends ProcessPluginBase {
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
 
+    // @todo: USE AlertImportHelpers::getIdFromUri() to get the types.
     // Alert type(s) are stored to API as array of URI resource.
     $uri = rtrim($value, '/');
 
