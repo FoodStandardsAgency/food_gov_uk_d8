@@ -1,0 +1,19 @@
+uuid: cd1767d3-3941-402c-85ec-f8151cbcb7b7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_alert_consumeradvice
+    - node.type.alert
+id: node.alert.field_alert_consumeradvice
+field_name: field_alert_consumeradvice
+entity_type: node
+bundle: alert
+label: 'Our advice to consumers'
+description: 'Text giving the advice to consumers.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

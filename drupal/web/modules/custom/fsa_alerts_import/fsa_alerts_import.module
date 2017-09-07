@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * @file
+ * Contains fsa_alerts_import.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function fsa_alerts_import_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the fsa_alerts_import module.
+    case 'help.page.fsa_alerts_import':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('FSA Alerts Import module pulls content from FSA Alerts API V1 to Drupal') . '</p>';
+      $output .= '<p>' . t('The module provides <strong>fsa_alerts</strong> migration configuration for importing alerts from FSA Alerts API built by Epimorphics');
+      $output .= '<h3>' . t('Uses') . '</h3>';
+      $output .= '<p>' . t('Import (migrate) the data using <code>drush migrate_tools</code> commands') . '</p>';
+      $output .= '<ul>';
+      $output .= '<li>' . t('Import Alerts: <code>drush mi --tag=alerts</code>') . '</li>';
+      $output .= '</ul>';
+      $output .= '<p>' . t('<a href="http://fsa-staging-alerts.epimorphics.net/food-alerts/ui/reference">Alerts API documentation</a>') . '</p>';
+      return $output;
+
+    default:
+  }
+}

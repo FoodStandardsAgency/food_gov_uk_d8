@@ -1,0 +1,10 @@
+name: FSA Alerts import
+type: module
+description: Import FSA Food Alerts to (<code>alert</code> content type) and Allergens to (<code></code> taxonomy terms) from Alerts API.
+core: 8.x
+package: FSA
+dependencies:
+  - drupal:taxonomy
+  - drupal:migrate
+  - drupal:migrate_plus
+  - drupal:migrate_tools
