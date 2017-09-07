@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.alert.field_alert_actiontaken
     - field.field.node.alert.field_alert_allergen
     - field.field.node.alert.field_alert_description
+    - field.field.node.alert.field_alert_modified
     - field.field.node.alert.field_alert_notation
     - field.field.node.alert.field_alert_otherbusiness
     - field.field.node.alert.field_alert_productdetails_raw
@@ -15,6 +16,7 @@ dependencies:
     - field.field.node.alert.field_alert_type
     - node.type.alert
   module:
+    - datetime
     - link
     - options
     - text
@@ -46,6 +48,15 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: text_default
+    region: content
+  field_alert_modified:
+    weight: 10
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
     region: content
   field_alert_notation:
     weight: 1

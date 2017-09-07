@@ -29,6 +29,9 @@ source:
       name: created
       selector: created
     -
+      name: modified
+      selector: modified
+    -
       name: type
       selector: type
   ids:
@@ -43,6 +46,7 @@ process:
   created:
     plugin: alert_timestamp
     source: created
+  field_alert_modified: modified
   field_alert_notation:
     plugin: alert_item_properties
     source: notation

@@ -1,0 +1,21 @@
+uuid: 3b995f91-a49f-4bb7-965f-6474f0352ce7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_alert_modified
+    - node.type.alert
+  module:
+    - datetime
+id: node.alert.field_alert_modified
+field_name: field_alert_modified
+entity_type: node
+bundle: alert
+label: 'Alert modified'
+description: 'The date and time the alert was last modified.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime
