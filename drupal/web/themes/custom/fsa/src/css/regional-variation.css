@@ -3,7 +3,8 @@
   background-color: var(--color-lighter-gray);
   @mixin responsive-declaration padding, 1em, 2em;
   border: 1px solid var(--color-light-gray);
-  margin-bottom: 1em;
+  @mixin responsive-declaration margin-top, 1em, 2em;
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
 }
 
 .regional-variation:before {

@@ -124,7 +124,7 @@ html {
   font-size: var(--font-size-base);
   letter-spacing: 0.015em;
   @mixin responsive-declaration font-size, 100%, var(--font-size-base);
-  @mixin responsive-declaration line-height, 1.2, 1.4;
+  @mixin responsive-declaration line-height, 1.3, 1.5;
 
 }
 
@@ -255,7 +255,9 @@ pre {
 blockquote {
   box-shadow: -0.3em 0 0 0 var(--primary-color);
   padding-left: 1em;
+  @mixin responsive-declaration margin-top, 1.5em, 2em;
   @mixin responsive-declaration margin-left, 1em, 2em;
+  @mixin responsive-declaration margin-bottom, 1.5em, 2em;
   margin-right: 1em;
 }
 
@@ -601,6 +603,8 @@ figure:after {
   margin-bottom: 1em;
 }
 
+/*Document reference*/
+
 .field__field_document {
   background-color: var(--color-lighter-gray);
   padding-top: 1em;
@@ -622,12 +626,12 @@ figure:after {
   border: 0;
 }
 
-.field__field_document > .field__field_document__item .file__type_application-pdf {
+.field__field_document  .file__type_application-pdf {
   padding-left: 5em;
   position: relative;
 }
 
-.field__field_document > .field__field_document__item .file__type_application-pdf:before {
+.field__field_document .file__type_application-pdf:before {
   content: "PDF";
   background-color: var(--color-dark-red);
   position: absolute;
@@ -641,6 +645,41 @@ figure:after {
   transform: translateY(-50%);
 }
 
+.embedded-entity {
+  position: relative;
+  @mixin responsive-declaration margin-top, 1em, 2em;
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
+}
+
+.embedded-entity > article + figcaption {
+  position: relative;
+  float: none;
+  width: 100%;
+  text-align: left;
+  margin-top: 0;
+  background-color: var(--color-lighter-gray);
+  color: var(--color-black);
+  max-width: none;
+  transform: none;
+  margin-top: -1px;
+  @mixin responsive-declaration padding-right, 1.25em, 2em;
+  padding-bottom: 1em;
+  @mixin responsive-declaration padding-left, 1.25em, 2em;
+  border-left: 1px solid var(--color-light-gray);
+  border-right: 1px solid var(--color-light-gray);
+  border-bottom: 1px solid var(--color-light-gray);
+}
+
+.embedded-entity > article + figcaption:before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  @mixin responsive-declaration right, 1.25em, 2em;
+  @mixin responsive-declaration left, 1.25em, 2em;
+  height: 1px;
+  background-color: var(--color-light-gray);
+}
+
 /*Important*/
 .important {
   @mixin responsive-declaration margin-left, -0em, -2em;
@@ -648,7 +687,8 @@ figure:after {
   @mixin responsive-declaration padding, 1em, 2em;
   background-color: var(--color-lighter-gray);
   border: 1px solid var(--color-light-gray);
-  margin-bottom: 1em;
+  @mixin responsive-declaration margin-top, 1em, 2em;
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
 }
 
 .important .regional-variation {
