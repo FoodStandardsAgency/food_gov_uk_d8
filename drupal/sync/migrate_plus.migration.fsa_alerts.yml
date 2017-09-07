@@ -26,6 +26,9 @@ source:
       name: title
       selector: title
     -
+      name: created
+      selector: created
+    -
       name: type
       selector: type
   ids:
@@ -37,6 +40,9 @@ process:
     default_value: alert
   id: notation
   title: title
+  created:
+    plugin: alert_timestamp
+    source: created
   field_alert_notation:
     plugin: alert_item_properties
     source: notation
