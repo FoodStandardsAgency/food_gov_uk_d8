@@ -2,6 +2,7 @@
 
 namespace Drupal\fsa_alerts_import\Plugin\migrate\process;
 
+use Drupal\fsa_alerts_import\AlertImportHelpers;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\Row;
@@ -20,20 +21,17 @@ class AlertType extends ProcessPluginBase {
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
 
-    // @todo: USE AlertImportHelpers::getIdFromUri() to get the types.
-    // Alert type(s) are stored to API as array of URI resource.
-    $uri = rtrim($value, '/');
+    // Get the Alert type from URI.
+    $type = AlertImportHelpers::getIdFromUri($value);
 
-    // Get last segment from that resource (should work even if entry !URL)
-    preg_match('/([^\/]*)$/', $uri, $types);
-
-    foreach ($types as $type) {
-      // Ignore alert type and use only the other stored type.
-      if ($type == 'Alert') {
-        continue;
-      }
-      return $type;
+    switch ($type) {
+      case 'Alert':
+        // Do not store "Alert" type, all items have that anyway.
+        return '';
+          break;
+      default:
+        // Return one of the expected type variation.
+        return $type;
     }
   }
-
 }

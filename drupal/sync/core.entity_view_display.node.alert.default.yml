@@ -19,8 +19,8 @@ dependencies:
   module:
     - datetime
     - entity_print
+    - fsa_alerts_import
     - link
-    - options
     - text
     - user
 third_party_settings:
@@ -123,7 +123,7 @@ content:
     label: inline
     settings: {  }
     third_party_settings: {  }
-    type: list_default
+    type: fsa_alert_type_formatter
     region: content
 hidden:
   entity_print_view_epub: true

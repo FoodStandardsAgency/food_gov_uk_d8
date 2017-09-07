@@ -29,3 +29,18 @@ function fsa_alerts_import_help($route_name, RouteMatchInterface $route_match) {
     default:
   }
 }
+
+/**
+ * Implements hook_theme().
+ */
+function fsa_alerts_import_theme() {
+  return [
+    'fsa_alert_type' => [
+      'variables' => [
+        'attributes' => NULL,
+        'title' => NULL,
+        'type' => NULL,
+        ],
+      ],
+    ];
+}
