@@ -100,6 +100,7 @@ class AlertItemProperties extends ProcessPluginBase {
         $term = \Drupal::entityTypeManager()
           ->getStorage('taxonomy_term')
           ->loadByProperties([
+            'vid' => 'alerts_allergen',
             'name' => $term_name
           ]);
 
