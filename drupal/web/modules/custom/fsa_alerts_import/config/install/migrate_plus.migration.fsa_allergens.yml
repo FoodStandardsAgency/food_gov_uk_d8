@@ -24,6 +24,10 @@ source:
     -
       name: riskStatement
       selector: riskStatement
+    -
+      name: broader
+      selector: broader
+
   ids:
     notation:
       type: string
@@ -34,6 +38,9 @@ process:
       default_value: alerts_allergen
   id: notation
   name: label
+  parent:
+    plugin: allergen_parent
+    source: broader
   field_alert_notation: notation
   field_alert_riskstatement: riskStatement
 destination:
