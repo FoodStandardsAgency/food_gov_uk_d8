@@ -31,7 +31,6 @@ source:
     -
       name: broader
       selector: broader
-
   ids:
     notation:
       type: string
