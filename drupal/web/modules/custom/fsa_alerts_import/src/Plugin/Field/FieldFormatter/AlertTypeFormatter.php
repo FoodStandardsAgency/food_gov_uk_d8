@@ -8,10 +8,9 @@ use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 
 /**
- * Plugin implementation of the 'fsa_score_description_formatter' formatter.
+ * Plugin implementation of 'fsa_alert_type_formatter'.
  *
- * Formats FHRS API Scores to textual representation.
- * repository.
+ * Formats FSA Alert types to human readable, themed representation.
  *
  * @FieldFormatter(
  *   id = "fsa_alert_type_formatter",
