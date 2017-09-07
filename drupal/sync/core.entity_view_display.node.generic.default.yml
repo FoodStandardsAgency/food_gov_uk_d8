@@ -1,0 +1,30 @@
+uuid: 0cc517f9-d66d-4cb3-89e2-b5cf949988fa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.generic.body
+    - node.type.generic
+  module:
+    - text
+    - user
+id: node.generic.default
+targetEntityType: node
+bundle: generic
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true

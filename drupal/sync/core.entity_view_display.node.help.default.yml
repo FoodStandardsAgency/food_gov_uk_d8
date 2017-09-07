@@ -1,0 +1,30 @@
+uuid: 27c8ec17-fa43-4062-98c7-6944ab374af4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.help.body
+    - node.type.help
+  module:
+    - text
+    - user
+id: node.help.default
+targetEntityType: node
+bundle: help
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true

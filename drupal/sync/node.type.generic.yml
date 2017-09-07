@@ -1,4 +1,4 @@
-uuid: 3021853a-918f-48bb-a5b4-9198db181338
+uuid: bd033505-8ace-4c77-8684-a6d1915483eb
 langcode: en
 status: true
 dependencies:
@@ -10,11 +10,9 @@ third_party_settings:
       - help
       - main
     parent: 'main:'
-_core:
-  default_config_hash: KuyA4NHPXcmKAjRtwa0vQc2ZcyrUJy6IlS2TAyMNRbc
-name: Page
-type: page
-description: 'Pages are mostly used for Consumer/Business Guidance.'
+name: 'Generic page'
+type: generic
+description: 'General text pages without lots of specific functionality fields.'
 help: ''
 new_revision: true
 preview_mode: 1

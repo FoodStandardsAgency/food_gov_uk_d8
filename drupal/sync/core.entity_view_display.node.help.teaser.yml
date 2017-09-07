@@ -1,0 +1,32 @@
+uuid: 6b37e905-ca85-4e59-aca9-e6529db6903e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.help.body
+    - node.type.help
+  module:
+    - text
+    - user
+id: node.help.teaser
+targetEntityType: node
+bundle: help
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true

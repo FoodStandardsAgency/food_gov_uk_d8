@@ -1,4 +1,4 @@
-uuid: 3021853a-918f-48bb-a5b4-9198db181338
+uuid: 847581a6-56ea-47ac-ac1e-bc6133f87e9a
 langcode: en
 status: true
 dependencies:
@@ -10,11 +10,9 @@ third_party_settings:
       - help
       - main
     parent: 'main:'
-_core:
-  default_config_hash: KuyA4NHPXcmKAjRtwa0vQc2ZcyrUJy6IlS2TAyMNRbc
-name: Page
-type: page
-description: 'Pages are mostly used for Consumer/Business Guidance.'
+name: 'Help page'
+type: help
+description: 'Pages for Help section.'
 help: ''
 new_revision: true
 preview_mode: 1
