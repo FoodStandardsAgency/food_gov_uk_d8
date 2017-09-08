@@ -1,0 +1,67 @@
+<?php
+
+use Drupal\user\Entity\User;
+use Drupal\node\Entity\Node;
+
+function getAllDigestedMessages(string $type, int $batch_size = 1000) {
+
+  // cache loaded alerts
+  $alerts = [];
+
+  $query = \Drupal::entityQuery('user');
+  $query->condition('uid', 0, '>');
+  $query->condition('status', 1);
+  $query->condition('field_notification_timing', $type);
+  $query->Exists('field_notification_cache');
+  $query->range(0, $batch_size);
+  // $query->sort('uid');
+  $uids = $query->execute();
+
+  $emails = [];
+  foreach ($uids as $uid) {
+    $u = User::load($uid);
+    $email = [];
+    foreach ($u->field_notification_cache->getValue() as $c) {
+      $nid = $c['target_id'];
+      if (empty($alerts[$nid])) { // caching
+        $alerts[$nid] = Node::load($nid);
+      }
+      $alert = $alerts[$nid];
+      $email[] = $alert->getTitle();
+    }
+    $email = implode("\n", $email);
+    $emails[$uid] = $email;
+  }
+
+  return $emails;
+
+}
+
+function storeDelayedMessage(Node $alert) {
+
+  $nid = $alert->id();
+  $allergys = $alert->field_alert_allergen->getValue();
+  $allergys = array_map(function ($a) {return $a['target_id'];}, $allergys);
+
+  $query = \Drupal::entityQuery('user');
+  $query->condition('uid', 0, '>');
+  $query->condition('status', 1);
+  $query->condition('field_notification_timing', ['daily', 'weekly'], 'in');
+  $query->condition('field_notification_allergys', $allergys, 'in');
+  // $query->sort('uid');
+  $uids = $query->execute();
+
+  foreach ($uids as $uid) {
+    $u = User::load($uid);
+    $u->field_notification_cache[] = $nid;
+    $u->save();
+  }
+
+}
+
+function clearMessages(User $user, bool $save = TRUE) {
+  $user->field_notification_cache = NULL;
+  if ($save) {
+    $user->save();
+  }
+}

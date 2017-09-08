@@ -1,0 +1,33 @@
+uuid: af11b5e1-b028-4063-ac93-2e28ad0cc272
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - user
+id: user.field_notification_timing
+field_name: field_notification_timing
+entity_type: user
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: none
+      label: 'No mail'
+    -
+      value: immediate
+      label: Immediate
+    -
+      value: daily
+      label: Daily
+    -
+      value: weekly
+      label: Weekly
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

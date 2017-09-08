@@ -1,0 +1,23 @@
+uuid: cb348219-032a-4d40-adb4-994ff169df89
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_notification_timing
+  module:
+    - options
+    - user
+id: user.user.field_notification_timing
+field_name: field_notification_timing
+entity_type: user
+bundle: user
+label: 'Notification timing'
+description: 'How often would you like to receive news and/or alerts?'
+required: true
+translatable: false
+default_value:
+  -
+    value: immediate
+default_value_callback: ''
+settings: {  }
+field_type: list_string
