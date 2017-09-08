@@ -6,6 +6,8 @@ use Drupal\node\Entity\Node;
 // due do large volume of data (entity loads)
 // system tends to crash -- out of memory
 // therefore need batching / chunking
+// it returns an array which has keys as uid and value as email text body
+// if no more digests are left, it return empty array
 function getAllDigestedMessages(string $type, int $batch_size = 1000) {
 
   // cache loaded alerts
