@@ -1,0 +1,19 @@
+{#
+/**
+ * @file fsa-alert-product-details.html.twig
+ * Theme implementation for FSA Alert Type field formatter.
+ *
+ * Available variables:
+ * - product: The products array.
+ * - product.name
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ attributes }}>
+    <ul>
+    {% for product in products %}
+        <li>{{ product }}</li>
+    {% endfor %}
+    </ul>
+</div>

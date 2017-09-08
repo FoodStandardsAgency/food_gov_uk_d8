@@ -96,7 +96,7 @@ content:
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
+    type: fsa_alert_json_formatter
     region: content
   field_alert_relatedmedia:
     weight: 6
