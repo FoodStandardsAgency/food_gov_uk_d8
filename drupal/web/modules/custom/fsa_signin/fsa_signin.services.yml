@@ -1,0 +1,6 @@
+services:
+  fsa_signin.route_subscriber:
+    class: Drupal\fsa_signin\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
+
