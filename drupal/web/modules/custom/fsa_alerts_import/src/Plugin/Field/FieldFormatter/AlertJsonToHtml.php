@@ -41,47 +41,56 @@ class AlertJsonToHtml extends FormatterBase {
 
     foreach ($items as $delta => $item) {
 
-      $data = json_decode($item->value,true);
+      $data = json_decode($item->value, TRUE);
 
-      foreach ($data AS $key => $value) {
+      if (json_last_error() != JSON_ERROR_NONE) {
+        drupal_set_message('Malformatted product details json', 'warning');
+        return $elements;
+      }
 
-        // Set only product name
-        // @todo: print out everything needed as in http://fsa-staging-alerts.epimorphics.net/food-alerts/ui/reference#alerts-product
-        $products[] = $value['productName'];
+      // Loop through each product entry.
+      foreach ($data as $key => $value) {
 
-        switch ($key) {
-          case 'productName':
+        $products[]['productName'] = [
+          '#markup' => $this->labelWrapper($value['productName'], 'h4', FALSE),
+        ];
 
-            break;
-          case 'productCodes':
-
-            break;
+        if (isset($value['packSizeDescription'])) {
+          $products[]['packSizeDescription'] = ['#markup' => $this->labelWrapper(t('Pack size')) . $value['packSizeDescription']];
         }
 
-        // Batch description.
-        if ($key == 'batchDescription') {
-          foreach ($value AS $b_key => $b_value) {
+        if (isset($value['productCodes'])) {
+          $products[]['productCode'] = [
+            '#markup' => $this->labelWrapper(t('Product code')) . $value['productCodes'],
+          ];
+        }
 
-            switch ($b_key) {
-              case 'productCodes':
-                // Batch description affected product codes.
-                break;
-              case 'productName':
-                // Batch description affected product names.
-                break;
-              case 'batchDescription':
-                // Batch descriptions (for BBE dates).
-                break;
-              case 'packSizeDescription':
-                // Pack size desc.
-                break;
-              default:
-                continue;
-            }
+        // Loop sub-arrays.
+        foreach ($value as $b_key => $b_value) {
+          // Print out only keys we care about.
+          switch ($b_key) {
+            case 'batchDescription':
+              foreach ($b_value as $ba_item) {
+                if (isset($ba_item['batchCode'])) {
+                  $products[]['batchCode'] = ['#markup' => $this->labelWrapper(t('Batch code')) . $ba_item['batchCode']];
+                }
+                if (isset($ba_item['bestBeforeDate'])) {
+                  $products[]['bestBeforeDate'] = ['#markup' => $this->labelWrapper(t('Best before date')) . $ba_item['bestBeforeDate']];
+                }
+                if (isset($ba_item['bestBeforeDescription'])) {
+                  $products[]['bestBeforeDescription'] = ['#markup' => $this->labelWrapper(t('Best before description')) . $ba_item['bestBeforeDescription']];
+                }
+                if (isset($ba_item['useByDate'])) {
+                  $products[]['useByDate'] = ['#markup' => $this->labelWrapper(t('Use by date')) . $ba_item['useByDate']];
+                }
+                if (isset($ba_item['useByDate'])) {
+                  $products[]['useByDate'] = ['#markup' => $this->labelWrapper(t('Use by description')) . $ba_item['useByDescription']];
+                }
+              }
+              break;
           }
         }
       }
-
 
       $elements[$delta] = [
         '#theme' => 'fsa_alert_product_details',
@@ -105,4 +114,16 @@ class AlertJsonToHtml extends FormatterBase {
   protected function viewValue(FieldItemInterface $item) {
     return nl2br(Html::escape($item->value));
   }
+
+  /**
+   * @param $label
+   * @param string $tag
+   * @param string $separator
+   *
+   * @return string
+   */
+  protected function labelWrapper($label, $tag = 'strong', $separator = ': ') {
+    return '<' . $tag . '>' . $label . $separator . '</' . $tag . '> ';
+  }
+
 }

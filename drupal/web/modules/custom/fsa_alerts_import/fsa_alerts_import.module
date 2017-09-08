@@ -46,7 +46,18 @@ function fsa_alerts_import_theme() {
     'fsa_alert_product_details' => [
       'variables' => [
         'products' => [
-          'productName' => NULL,
+          'product' => [
+            'productName' => NULL,
+            'productCode' => NULL,
+            'packSizeDescription' => NULL,
+            'batchDescription' => [
+              'batchCode' => NULL,
+              'bestBeforeDate' => NULL,
+              'bestBeforeDescription' => NULL,
+              'useByDate' => NULL,
+              'useByDescription' => NULL,
+            ],
+          ],
         ],
       ],
     ]
