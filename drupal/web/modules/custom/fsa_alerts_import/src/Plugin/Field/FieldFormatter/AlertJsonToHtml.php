@@ -39,6 +39,7 @@ class AlertJsonToHtml extends FormatterBase {
     $attributes = [];
     $products = [];
 
+    // Currently built for API product details only.
     foreach ($items as $delta => $item) {
 
       $data = json_decode($item->value, TRUE);
@@ -51,51 +52,61 @@ class AlertJsonToHtml extends FormatterBase {
       // Loop through each product entry.
       foreach ($data as $key => $value) {
 
-        $products[]['productName'] = [
-          '#markup' => $this->labelWrapper($value['productName'], 'h4', FALSE),
-        ];
-
-        if (isset($value['packSizeDescription'])) {
-          $products[]['packSizeDescription'] = ['#markup' => $this->labelWrapper(t('Pack size')) . $value['packSizeDescription']];
-        }
-
-        if (isset($value['productCodes'])) {
-          $products[]['productCode'] = [
-            '#markup' => $this->labelWrapper(t('Product code')) . $value['productCodes'],
-          ];
-        }
-
-        // Loop sub-arrays.
-        foreach ($value as $b_key => $b_value) {
-          // Print out only keys we care about.
-          switch ($b_key) {
-            case 'batchDescription':
-              foreach ($b_value as $ba_item) {
-                if (isset($ba_item['batchCode'])) {
-                  $products[]['batchCode'] = ['#markup' => $this->labelWrapper(t('Batch code')) . $ba_item['batchCode']];
-                }
-                if (isset($ba_item['bestBeforeDate'])) {
-                  $products[]['bestBeforeDate'] = ['#markup' => $this->labelWrapper(t('Best before date')) . $ba_item['bestBeforeDate']];
-                }
-                if (isset($ba_item['bestBeforeDescription'])) {
-                  $products[]['bestBeforeDescription'] = ['#markup' => $this->labelWrapper(t('Best before description')) . $ba_item['bestBeforeDescription']];
-                }
-                if (isset($ba_item['useByDate'])) {
-                  $products[]['useByDate'] = ['#markup' => $this->labelWrapper(t('Use by date')) . $ba_item['useByDate']];
-                }
-                if (isset($ba_item['useByDate'])) {
-                  $products[]['useByDate'] = ['#markup' => $this->labelWrapper(t('Use by description')) . $ba_item['useByDescription']];
-                }
-              }
-              break;
+        // Set the product name, when name is ridiculously long we could assume
+        // it does not want to be wrapped in heading. This occurs mainly when
+        // alert type if FAFA.
+        if (isset($value['productName'])) {
+          if (strlen($value['productName']) <= 128) {
+            $products[]['productName'] = $this->itemWrapper(t('Product'), nl2br($value['productName']), 'h4');
+          }
+          else {
+            $products[]['productName'] = $this->itemWrapper(FALSE, nl2br($value['productName']), 'p');
           }
         }
+        // Optional pack size description.
+        if (isset($value['packSizeDescription'])) {
+          $products[]['packSizeDescription'] = $this->itemWrapper(t('Pack size'), $value['packSizeDescription']);
+        }
+
+        // Optional product code(s).
+        if (isset($value['productCodes'])) {
+          $products[]['productCode'] = $this->itemWrapper(t('Product code'), $value['productCodes']);
+        }
+
+        if (isset($value['batchDescription'])) {
+          $batchdescription = FALSE;
+          // Loop through batch descriptions and get only content from keys we
+          // care about.
+          foreach ($value['batchDescription'] as $b_key => $b_value) {
+            if (isset($b_value['batchCode'])) {
+              $batchdescription .= $this->labelWrapper(t('Batch code')) . $b_value['batchCode'] . '<br />';
+            }
+            if (isset($b_value['bestBeforeDate'])) {
+              $batchdescription .= $this->labelWrapper(t('Best before date')) . $b_value['bestBeforeDate'] . '<br />';
+            }
+            if (isset($b_value['bestBeforeDescription'])) {
+              $batchdescription .= $this->labelWrapper(t('Best before description')) . $b_value['bestBeforeDescription'] . '<br />';
+            }
+            if (isset($b_value['useByDate'])) {
+              $batchdescription .= $this->labelWrapper(t('Use by date')) . $b_value['useByDate'] . '<br />';
+            }
+            if (isset($b_value['useByDate'])) {
+              $batchdescription .= $this->labelWrapper(t('Use by description')) . $b_value['useByDescription'] . '<br />';
+            }
+          }
+
+          // Make the batch sedcription a wrapped item.
+          if ($batchdescription) {
+            $products[]['batchDescription'] = $this->itemWrapper(FALSE, $batchdescription, 'div');
+          }
+        }
+
       }
 
       $elements[$delta] = [
         '#theme' => 'fsa_alert_product_details',
         '#attributes' => $attributes,
-        '#products' => $products,
+        '#product' => $products,
       ];
     }
 
@@ -116,14 +127,49 @@ class AlertJsonToHtml extends FormatterBase {
   }
 
   /**
-   * @param $label
-   * @param string $tag
-   * @param string $separator
+   * Product detail label.
+   *
+   * @param string $label
+   *   The label as a string.
+   * @param mixed $options
+   *   Label options.
    *
    * @return string
+   *   Label with separator and html tag.
    */
-  protected function labelWrapper($label, $tag = 'strong', $separator = ': ') {
-    return '<' . $tag . '>' . $label . $separator . '</' . $tag . '> ';
+  protected function labelWrapper($label, $options = FALSE) {
+    if (!$options) {
+      $options = [
+        'tag' => 'b',
+        'separator' => ': ',
+      ];
+    }
+    return '<' . $options['tag'] . '>' . $label . $options['separator'] . '</' . $options['tag'] . '> ';
+  }
+
+  /**
+   * Product detail item wrapper.
+   *
+   * @param string $label
+   *   The label.
+   * @param string $content
+   *   The item.
+   * @param string $tag
+   *   The tag to wrap the label and item.
+   * @param array $label_options
+   *   Options to be sent for label.
+   *
+   * @return array
+   *   Markup array of wrapped product detail.
+   */
+  protected function itemWrapper($label, $content, $tag = 'div', $label_options = ['tag' => 'b', 'separator' => ': ']) {
+    if (!$label) {
+      $markup = '<' . $tag . '>' . $content . '</' . $tag . '>';
+    }
+    else {
+      $markup = '<' . $tag . '>' . $this->labelWrapper($label, $label_options) . $content . '</' . $tag . '>';
+    }
+    return ['#markup' => $markup];
   }
 
 }
