@@ -4,16 +4,14 @@
  * Theme implementation for FSA Alert Type field formatter.
  *
  * Available variables:
- * - product: The products array.
- * - product.name
+ * - product: Product details array
  *
  * @ingroup themeable
+ * @see Drupal\fsa_alerts_import\src\Plugin\Field\FieldFormatter\AlertJsonToHtml.php
  */
 #}
 <div{{ attributes }}>
-    <ul>
-    {% for product in products %}
-        <li>{{ product }}</li>
+    {% for productdetail in product %}
+        {{ productdetail }}
     {% endfor %}
-    </ul>
 </div>
