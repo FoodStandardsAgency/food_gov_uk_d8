@@ -21,11 +21,32 @@ function fsa_alerts_import_help($route_name, RouteMatchInterface $route_match) {
       $output .= '<h3>' . t('Uses') . '</h3>';
       $output .= '<p>' . t('Import (migrate) the data using <code>drush migrate_tools</code> commands') . '</p>';
       $output .= '<ul>';
-      $output .= '<li>' . t('Import Alerts: <code>drush mi --tag=alerts</code>') . '</li>';
+      $output .= '<li>' . t('Import Allergens to terms: <code>drush mi --tag=allergens</code>') . '</li>';
+      $output .= '<li>' . t('Import Alerts to nodes: <code>drush mi --tag=alerts</code>') . '</li>';
       $output .= '</ul>';
       $output .= '<p>' . t('<a href="http://fsa-staging-alerts.epimorphics.net/food-alerts/ui/reference">Alerts API documentation</a>') . '</p>';
       return $output;
 
     default:
   }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function fsa_alerts_import_theme() {
+  return [
+    'fsa_alert_type' => [
+      'variables' => [
+        'attributes' => NULL,
+        'title' => NULL,
+        'type' => NULL,
+      ],
+    ],
+    'fsa_alert_product_details' => [
+      'variables' => [
+        'product' => [],
+      ],
+    ],
+  ];
 }
