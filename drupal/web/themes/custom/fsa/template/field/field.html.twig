@@ -44,7 +44,11 @@
         <div>
     {% endif %}
     {% for item in items %}
-        <div{{ item.attributes }}>{{ item.content }}</div>
+        {% if label_display == 'inline' %}
+            <span{{ item.attributes }}>{{ item.content }}</span>
+        {% else %}
+            <div{{ item.attributes }}>{{ item.content }}</div>
+        {% endif %}
     {% endfor %}
     {% if multiple %}
         </div>

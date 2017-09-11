@@ -38,8 +38,9 @@ function fsa_preprocess_html(&$variables) {
     }
   }
 
-  // Rely on URL aliases for FHRS ratings section.
-  $uri_segments = explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+  // Rely on URL paths for FHRS ratings section.
+  $current_path = \Drupal::service('path.current')->getPath();
+  $uri_segments = explode('/', $current_path);
   if ($uri_segments[1] === 'ratings' || $uri_segments[1] === 'fsa-ratings') {
     $variables['attributes']['class'][] = 'theme-service';
     $variables['attributes']['class'][] = 'theme-service--fhrs';
