@@ -16,7 +16,7 @@ source:
   plugin: fsa_alerts_api_url
   data_fetcher_plugin: http
   data_parser_plugin: json
-  api_resource: '/def/allergens'
+  api_resource: /def/allergens
   item_selector: items
   fields:
     -
