@@ -1,5 +1,4 @@
 function regionalVariation(elements) {
-  console.log(elements);
 
   for (let i = 0; i < elements.length; i++) {
     if (elements[i].classList.contains('js-england')) {

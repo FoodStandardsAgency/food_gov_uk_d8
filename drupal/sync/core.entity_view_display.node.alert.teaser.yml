@@ -28,6 +28,7 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_alert_actiontaken: true
+  field_alert_allergen: true
   field_alert_description: true
   field_alert_notation: true
   field_alert_otherbusiness: true
@@ -35,4 +36,5 @@ hidden:
   field_alert_relatedmedia: true
   field_alert_reportingbusiness: true
   field_alert_smstext: true
+  field_alert_type: true
   langcode: true

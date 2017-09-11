@@ -165,7 +165,6 @@
 .ratings__content a {
   &:hover {
     color: var(--light-primary-color);
-    text-decoration: underline;
   }
 }
 

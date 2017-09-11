@@ -20,5 +20,5 @@ settings:
   id: subpages_prevnext_block
   label: 'Sub-pages prev-next block'
   provider: fsa_subpages
-  label_display: visible
+  label_display: '0'
 visibility: {  }

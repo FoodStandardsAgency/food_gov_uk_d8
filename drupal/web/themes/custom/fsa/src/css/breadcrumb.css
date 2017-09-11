@@ -55,7 +55,6 @@
 }
 
 :--not-touch .breadcrumb__link:--enter {
-  text-decoration: underline;
   color: var(--light-primary-color);
 }
 

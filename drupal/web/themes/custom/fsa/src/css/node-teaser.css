@@ -53,7 +53,7 @@
   }
 
   @media (--breakpoint-md) {
-    height: 10em;
+    height: 14em;
   }
 }
 
@@ -71,10 +71,12 @@
 
 .promo__item .field__field_image img,
 .node-teaser__image img {
-  width: 100%;
+  width: auto;
+  height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
+  max-width: none;
   transform: translateY(-50%) translateX(-50%);
 }
 
@@ -180,7 +182,6 @@
 :--not-touch .promo__item:--enter .field__field_title,
 :--not-touch .node-teaser:--enter .node-teaser__heading  {
   color: var(--light-primary-color);
-  text-decoration: underline;
 }
 
 .liftup-list.liftup-list--information .node-teaser__heading {

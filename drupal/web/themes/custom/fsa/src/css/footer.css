@@ -72,7 +72,9 @@
   color: var(--color-white);
 
   @media (--breakpoint-sm) {
-    box-shadow: none;
-    color: var(--secondary-color);
+    background-color: transparent;
+    box-shadow: none !important;
+    color: var(--primary-color);
+    text-decoration: underline;
   }
 }

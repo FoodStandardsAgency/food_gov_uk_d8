@@ -153,7 +153,7 @@
 }
 
 .theme--page:not(.theme-service) .layout--with-sidebar .layout__content {
-  max-width: 45em;
+  max-width: var(--content-max-width);
 
   @media (--breakpoint-lg) {
     margin-left: 19.5em;

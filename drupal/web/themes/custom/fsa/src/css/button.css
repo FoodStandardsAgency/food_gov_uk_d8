@@ -9,6 +9,9 @@
   padding: 0.6em 2.5em;
   box-shadow: var(--box-shadow);
   cursor: pointer;
+  outline: 3px solid transparent;
+  transition:
+    outline var(--transition-enter-fast);
 
   &:disabled {
     opacity: 50%
@@ -24,6 +27,18 @@
   	width: 1px !important;
   	overflow: hidden;
   }
+}
+
+.button:focus,
+.call-to-action:focus {
+  background-color: var(--color-light-yellow);
+  color: var(--color-black);
+  outline: 3px solid var(--color-yellow);
+}
+
+.button:focus svg path,
+.call-to-action:focus svg path {
+  fill: var(--color-black);
 }
 
 :--not-touch .button:--enter,
