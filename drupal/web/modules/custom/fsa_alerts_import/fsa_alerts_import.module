@@ -24,12 +24,14 @@ function fsa_alerts_import_help($route_name, RouteMatchInterface $route_match) {
       $output .= '<li>' . t('Import Allergens to terms: <code>drush mi --tag=allergens</code>') . '</li>';
       $output .= '<li>' . t('Import Alerts to nodes: <code>drush mi --tag=alerts</code>') . '</li>';
       $output .= '</ul>';
+      // @todo: Update documentation URL once/if moved to non-staging.
       $output .= '<p>' . t('<a href="http://fsa-staging-alerts.epimorphics.net/food-alerts/ui/reference">Alerts API documentation</a>') . '</p>';
       return $output;
 
     default:
   }
 }
+
 
 /**
  * Implements hook_theme().
