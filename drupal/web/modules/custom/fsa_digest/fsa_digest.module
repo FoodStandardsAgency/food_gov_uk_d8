@@ -10,9 +10,6 @@ use Drupal\node\Entity\Node;
 // if no more digests are left, it return empty array
 function getAllDigestedMessages(string $type, int $batch_size = 1000) {
 
-  // cache loaded alerts
-  $alerts = [];
-
   $query = \Drupal::entityQuery('user');
   $query->condition('uid', 0, '>');
   $query->condition('status', 1);
@@ -25,20 +22,29 @@ function getAllDigestedMessages(string $type, int $batch_size = 1000) {
   $emails = [];
   foreach ($uids as $uid) {
     $u = User::load($uid);
-    $email = [];
-    foreach ($u->field_notification_cache->getValue() as $c) {
-      $nid = $c['target_id'];
-      if (empty($alerts[$nid])) { // caching
-        $alerts[$nid] = Node::load($nid);
-      }
-      $alert = $alerts[$nid];
-      $email[] = $alert->getTitle();
-    }
-    $email = implode("\n", $email);
+    $email = themeDigest($u);
     $emails[$uid] = $email;
   }
 
   return $emails;
+}
+
+function themeDigest(User $user) {
+
+  // cache loaded alerts
+  static $alerts = [];
+
+  $email = [];
+  foreach ($user->field_notification_cache->getValue() as $c) {
+    $nid = $c['target_id'];
+    if (empty($alerts[$nid])) { // caching
+      $alerts[$nid] = Node::load($nid);
+    }
+    $alert = $alerts[$nid];
+    $email[] = $alert->getTitle();
+  }
+  $email = implode("\n", $email);
+  return $email;
 }
 
 // and an alert to all relevant users
