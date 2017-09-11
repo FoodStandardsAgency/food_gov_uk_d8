@@ -1,0 +1,11 @@
+uuid: 85bf9ede-86b8-4b05-a2e2-82f0f1ec0b0b
+langcode: en
+status: true
+dependencies:
+  config:
+    - crop.type.square
+id: crop.square
+target_entity_type_id: crop
+target_bundle: square
+default_langcode: site_default
+language_alterable: false
