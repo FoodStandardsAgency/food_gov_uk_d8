@@ -13,10 +13,10 @@ migration_tags:
 migration_group: fsa
 label: 'FSA Alerts Allergen import'
 source:
-  plugin: url
+  plugin: fsa_alerts_api_url
   data_fetcher_plugin: http
   data_parser_plugin: json
-  urls: 'http://fsa-staging-alerts.epimorphics.net/food-alerts/def/allergens'
+  api_resource: '/def/allergens'
   item_selector: items
   fields:
     -
