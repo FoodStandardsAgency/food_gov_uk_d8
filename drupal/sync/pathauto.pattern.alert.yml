@@ -1,0 +1,22 @@
+uuid: d1b63473-0ffc-486f-a39d-f35ef386d82d
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: alert
+label: Alert
+type: 'canonical_entities:node'
+pattern: 'food-alert/[node:field_alert_notation]'
+selection_criteria:
+  68cc0440-b0f9-428b-8393-de90366ef468:
+    id: node_type
+    bundles:
+      alert: alert
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 68cc0440-b0f9-428b-8393-de90366ef468
+selection_logic: and
+weight: -5
+relationships: {  }

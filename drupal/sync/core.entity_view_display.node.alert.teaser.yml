@@ -30,6 +30,7 @@ hidden:
   field_alert_actiontaken: true
   field_alert_allergen: true
   field_alert_description: true
+  field_alert_modified: true
   field_alert_notation: true
   field_alert_otherbusiness: true
   field_alert_productdetails_raw: true

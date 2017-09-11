@@ -1,16 +1,14 @@
-uuid: 39b128d7-f603-44ee-a293-1389fcbc8528
+uuid: 736322b8-0d10-4846-8c25-665d02939e60
 langcode: en
 status: true
 dependencies:
   module:
-    - taxonomy
-id: taxonomy_term.field_alert_label
-field_name: field_alert_label
-entity_type: taxonomy_term
-type: string
+    - node
+id: node.field_alert_consumeradvice
+field_name: field_alert_consumeradvice
+entity_type: node
+type: string_long
 settings:
-  max_length: 255
-  is_ascii: false
   case_sensitive: false
 module: core
 locked: false

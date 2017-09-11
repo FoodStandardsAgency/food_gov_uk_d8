@@ -1,27 +1,20 @@
-uuid: 28b1be22-6e11-4002-bcf3-e3552c75fc63
+uuid: ebb84b15-d144-4503-adf0-9370a5fb2226
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.taxonomy_term.teaser
     - field.field.taxonomy_term.alerts_allergen.field_alert_notation
     - field.field.taxonomy_term.alerts_allergen.field_alert_riskstatement
     - taxonomy.vocabulary.alerts_allergen
-id: taxonomy_term.alerts_allergen.default
+id: taxonomy_term.alerts_allergen.teaser
 targetEntityType: taxonomy_term
 bundle: alerts_allergen
-mode: default
+mode: teaser
 content:
-  field_alert_notation:
-    weight: 0
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
   field_alert_riskstatement:
-    weight: 1
-    label: above
+    weight: 0
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: basic_string
@@ -31,4 +24,5 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_alert_notation: true
   langcode: true
