@@ -19,9 +19,7 @@ function fsa_alerts_import_requirements($phase) {
     $config = \Drupal::config('config.fsa_alerts_import');
     $api_base_path = $config->get('api_url');
 
-    $alerts_config_url = Url::fromRoute('fsa_alerts_import.alerts_settings')->toString();
-
-    $error = false;
+    $error = FALSE;
     if (!UrlHelper::isValid($api_base_path, TRUE)) {
       $error['title'] = t('FSA Alerts API URL');
       $error['value'] = t('Invalid');
@@ -38,7 +36,7 @@ function fsa_alerts_import_requirements($phase) {
         'title' => $error['title'],
         'value' => $error['value'],
         'severity' => REQUIREMENT_ERROR,
-        'description' => t('Configure API URL in <a href=":fsa_alerts_config_url">FSA Alerts settings page</a>.', [':fsa_alerts_config_url' => $alerts_config_url])
+        'description' => t('Configure API URL in <a href=":fsa_alerts_config_url">FSA Alerts settings page</a>.', [':fsa_alerts_config_url' => Url::fromRoute('fsa_alerts_import.alerts_settings')->toString()]),
       ];
     }
   }
