@@ -21,7 +21,7 @@ class AlertDate extends ProcessPluginBase {
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
 
     // Convert date to not include the timezone (prevent failure with date
-    // field length.
+    // field length).
     $date = date('Y-m-d\TH:i:s', strtotime($value));
 
     return $date;
