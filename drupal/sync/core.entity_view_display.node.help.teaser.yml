@@ -5,10 +5,35 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.help.body
+    - field.field.node.help.field_content_type
+    - field.field.node.help.field_icon
+    - field.field.node.help.field_liftup_title
+    - field.field.node.help.field_liftups
+    - image.style.thumbnail
     - node.type.help
   module:
+    - field_group
+    - image
     - text
     - user
+third_party_settings:
+  field_group:
+    group_teaser_image:
+      children:
+        - field_icon
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: teaser__content
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Teaser image'
 id: node.help.teaser
 targetEntityType: node
 bundle: help
@@ -17,16 +42,26 @@ content:
   body:
     label: hidden
     type: text_summary_or_trimmed
-    weight: 101
+    weight: 1
     settings:
       trim_length: 600
     third_party_settings: {  }
     region: content
-  links:
-    weight: 100
+  field_icon:
+    type: image
+    weight: 0
     region: content
+    label: hidden
+    settings:
+      image_style: thumbnail
+      image_link: ''
+    third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_content_type: true
+  field_liftup_title: true
+  field_liftups: true
   langcode: true
+  links: true
