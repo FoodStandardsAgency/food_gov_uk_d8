@@ -1,0 +1,80 @@
+<?php
+
+use Drupal\user\Entity\User;
+use Drupal\node\Entity\Node;
+
+// due do large volume of data (entity loads)
+// system tends to crash -- out of memory
+// therefore need batching / chunking
+// it returns an array which has keys as uid and value as string of email text body
+// if no more digests are left, it return empty array
+function getAllDigestedMessages(string $type, int $batch_size = 1000) {
+
+  $query = \Drupal::entityQuery('user');
+  $query->condition('uid', 0, '>');
+  $query->condition('status', 1);
+  $query->condition('field_notification_method', $type);
+  $query->Exists('field_notification_cache');
+  $query->range(0, $batch_size);
+  // $query->sort('uid');
+  $uids = $query->execute();
+
+  $emails = [];
+  foreach ($uids as $uid) {
+    $u = User::load($uid);
+    $email = themeDigest($u);
+    $emails[$uid] = $email;
+  }
+
+  return $emails;
+}
+
+function themeDigest(User $user) {
+
+  // cache loaded alerts
+  static $alerts = [];
+
+  $email = [];
+  foreach ($user->field_notification_cache->getValue() as $c) {
+    $nid = $c['target_id'];
+    if (empty($alerts[$nid])) { // caching
+      $alerts[$nid] = Node::load($nid);
+    }
+    $alert = $alerts[$nid];
+    $email[] = $alert->getTitle();
+  }
+  $email = implode("\n", $email);
+  return $email;
+}
+
+// and an alert to all relevant users
+// by matching allergy taxonomy terms
+function storeDelayedMessage(Node $alert) {
+
+  $nid = $alert->id();
+  $allergys = $alert->field_alert_allergen->getValue();
+  $allergys = array_map(function ($a) {return $a['target_id'];}, $allergys);
+
+  $query = \Drupal::entityQuery('user');
+  $query->condition('uid', 0, '>');
+  $query->condition('status', 1);
+  $query->condition('field_notification_method', ['daily', 'weekly'], 'in');
+  $query->condition('field_notification_allergys', $allergys, 'in');
+  // $query->sort('uid');
+  $uids = $query->execute();
+
+  foreach ($uids as $uid) {
+    $u = User::load($uid);
+    $u->field_notification_cache[] = $nid;
+    $u->save();
+  }
+
+}
+
+// clear message cache of particular user (after queueing his email)
+function clearMessages(User $user, bool $save = TRUE) {
+  $user->field_notification_cache = NULL;
+  if ($save) {
+    $user->save();
+  }
+}

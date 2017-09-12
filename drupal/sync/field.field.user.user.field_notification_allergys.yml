@@ -1,0 +1,29 @@
+uuid: cbc76af4-4b73-4559-a7af-591f84b665dc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_notification_allergys
+    - taxonomy.vocabulary.alerts_allergen
+  module:
+    - user
+id: user.user.field_notification_allergys
+field_name: field_notification_allergys
+entity_type: user
+bundle: user
+label: 'Allergy alerts'
+description: 'Please select allergy alerts you want to get notified about.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      alerts_allergen: alerts_allergen
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

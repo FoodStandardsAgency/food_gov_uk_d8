@@ -1,0 +1,29 @@
+uuid: a65addad-7da1-4f74-b7b2-553d24cbf60b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_notification_cache
+    - node.type.alert
+  module:
+    - user
+id: user.user.field_notification_cache
+field_name: field_notification_cache
+entity_type: user
+bundle: user
+label: 'Notification cache'
+description: "This field is not visible to user.\r\nIt accumulates references to nodes which are about to be sent out."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      alert: alert
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

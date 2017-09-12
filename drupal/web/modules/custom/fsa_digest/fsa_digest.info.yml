@@ -1,0 +1,6 @@
+name: FSA Digest functionality
+type: module
+description: Collect digests and send them
+core: 8.x
+package: FSA
+dependencies:
