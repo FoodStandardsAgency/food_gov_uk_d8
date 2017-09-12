@@ -6,6 +6,7 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
+use Drupal\Component\Utility\Html;
 
 /**
  * Provides a 'SubpagesBlock' Block.
@@ -13,7 +14,7 @@ use Drupal\node\Entity\Node;
  * @Block(
  *   id = "subpages_block",
  *   admin_label = @Translation("Sub-pages block"),
- *   category = @Translation("Hello World"),
+ *   category = @Translation("Custom"),
  * )
  */
 class SubpagesBlock extends BlockBase {
@@ -38,13 +39,17 @@ class SubpagesBlock extends BlockBase {
     $nid = $node->id();
     // Reload the node to be sure it is correct type
     $node = Node::load($nid);
+    if (!$node->hasField('field_subpages')) {
+      return [];
+    }
     $paragraphs = $node->get('field_subpages')->referencedEntities();
     $route = 'entity.node.canonical';
     $page = 1;
     $subpages = [];
     foreach ($paragraphs as $p) {
       $params = ['node' => $nid];
-      $options = ['query' => ['subpage' => $page++]];
+      $alias = $p->get('field_url_alias')->getString();
+      $options = ['query' => [$alias => NULL]];
       $url = Url::fromRoute($route, $params, $options);
       $title = $p->get('field_title')->getString();
       $link = Link::fromTextAndUrl($title, $url);
@@ -75,7 +80,7 @@ class SubpagesBlock extends BlockBase {
           "node:$nid",
         ],
         'contexts' => [
-          'url.query_args:subpage',
+          'url.query_args',
         ],
       ],
     ];

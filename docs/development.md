@@ -25,26 +25,44 @@ To import smaller batch of content for testing/development use following line(s)
 
 `$config['fsa_ratings_import']['import_random'] = 'TRUE';`
 
+### Import/migrate Rating content
 
-#### Import/migrate Rating content
+* Import authorities and establishments:
+  * `drush mi --tag=authorities`
+  * `drush mi --tag=establishments`
+* To import only specific language content use tags
+  * `drush mi --tag=english` or `drush mi --tag=welsh`
 
-Import authorities and establishments:
+* For more verbose import use `--feedback`, e.g.
+  * `drush mi --tag=establishments --feedback="1000 items"`
 
-`drush mi --tag=authorities`
+* If import fails or is stopped set back to idle:
+  * `drush mrs fsa_establishment` or `drush mrs fsa_authority`
 
-`drush mi --tag=establishments`
 
-To import only specific language content use tags
+FSA Alerts API
+---------------------
 
-`drush mi --tag=english` or `drush mi --tag=welsh`
+[Alert API documentation](http://fsa-staging-alerts.epimorphics.net/food-alerts/ui/reference)
 
-For more verbose import use `--feedback` flag, e.g.
+Alert API data is imported to Drupal `alerts_allergen` taxonomy and `alert` nodes.
+
+### Import/migrate Alerts from the API
  
-`drush mi --tag=establishments --feedback="1000 items"`
+Ensure the Alert API base path is set in FSA Alerts configuration `/admin/config/fsa-alerts`. Drupal status page will display error if this is not done.
 
-If import fails or is stopped set back to idle:
+* Import allergens:
+  * `drush mi --tag=allergens`
+  * Or update existing entries: `drush mi --tag=allergens --update`
+* Import alerts:
+  * `drush mi --tag=alerts`
+  * Or update existing entries: `drush mi --tag=alerts --update`
 
-`drush mrs fsa_establishment` or `drush mrs fsa_authority`
+* If import fails or is stopped set back to idle:
+  * `drush mrs fsa_alerts` or `drush mrs fsa_allergens`
+  
+* Remove/rollback migrated content with `drush mr --tag=[allergens|alerts]`
+  * Notice this will completely delete the created entries and next migrate recreates the entity id's.
 
 FSA Ratings search / Elasticsearch
 ---------------------

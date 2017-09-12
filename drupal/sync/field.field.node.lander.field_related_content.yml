@@ -1,0 +1,33 @@
+uuid: 1e8fbe97-c2b2-4e28-8ec0-77e543a83781
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_related_content
+    - node.type.alert
+    - node.type.lander
+    - node.type.page
+    - node.type.webform
+id: node.lander.field_related_content
+field_name: field_related_content
+entity_type: node
+bundle: lander
+label: 'Related content'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      alert: alert
+      page: page
+      lander: lander
+      webform: webform
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: alert
+field_type: entity_reference

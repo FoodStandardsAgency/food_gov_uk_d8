@@ -1,0 +1,14 @@
+uuid: 9690a42d-1191-4d74-81b1-447f8912fa41
+langcode: en
+status: true
+dependencies: {  }
+name: promo_medium
+label: 'Promo medium (460×220)'
+effects:
+  687a8998-ce50-497e-9dc5-d582dac289f5:
+    uuid: 687a8998-ce50-497e-9dc5-d582dac289f5
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 460
+      height: 220

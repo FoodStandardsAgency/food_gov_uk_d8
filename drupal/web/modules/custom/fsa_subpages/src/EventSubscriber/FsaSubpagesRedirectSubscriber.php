@@ -63,23 +63,28 @@ class FsaSubpagesRedirectSubscriber implements EventSubscriberInterface {
       return;
     }
 
-    // if user is already on valid subpage, dont redirect
+    // build a list of valid sub-page aliases
+    $aliases = [];
+    foreach ($paragraphs as $p) {
+      $alias = $p->get('field_url_alias')->getString();
+      $aliases[$alias] = TRUE;
+    }
+
+    // get URL query key-value pairs
     $param = \Drupal::request()->query->all();
-    if (!empty($param['subpage'])) {
-      $subpage = $param['subpage'];
-      if (is_numeric($subpage) && $subpage == (int) $subpage) {
-        $subpage = (int) $subpage;
-        $count = count($paragraphs);
-        if ( 1 <= $subpage && $subpage <= $count) {
-          return;
-        }
-      }
+
+    // check if query contains something that matches any sub-page alias
+    $match = array_intersect_key($aliases, $param);
+    if (!empty($match)) {
+      return;
     }
 
     // do the redirect
+    // be careful, or you get redirect loop
     $route = 'entity.node.canonical';
     $params = ['node' => $nid];
-    $options = ['query' => ['subpage' => 1]];
+    $alias = $paragraphs[0]->get('field_url_alias')->getString();
+    $options = ['query' => [$alias => NULL]];
     $url = Url::fromRoute($route, $params, $options);
     $url = $url->toString();
     $response = new RedirectResponse($url, 301);

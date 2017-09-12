@@ -1,0 +1,56 @@
+uuid: 4193f685-c466-4470-831f-8e22400c8d3a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.alerts_allergen.field_alert_notation
+    - field.field.taxonomy_term.alerts_allergen.field_alert_riskstatement
+    - taxonomy.vocabulary.alerts_allergen
+  module:
+    - path
+    - text
+id: taxonomy_term.alerts_allergen.default
+targetEntityType: taxonomy_term
+bundle: alerts_allergen
+mode: default
+content:
+  description:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      placeholder: ''
+      rows: 5
+    third_party_settings: {  }
+  field_alert_notation:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_alert_riskstatement:
+    weight: 3
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  langcode: true

@@ -20,17 +20,18 @@
   <article{{ attributes }}>
     <a href="{{ url }}" rel="bookmark" class="block-link">
       <div class="node-teaser__container">
-        <div class="node-teaser__image">
-          {{ content.field_icon }}
-        </div>
-
+        {% if content.group_teaser_image %}
+          <div class="node-teaser__image">
+            {{ content.group_teaser_image }}
+          </div>
+        {% endif %}
         <header class="node-teaser__header">
           <h4{{ title_attributes }} class="node-teaser__heading">{{ label }}</h4>
         </header>
 
         {% if content.body|length > 2 %}
           <div class="node-teaser__content">
-            {{ content|without('field_icon') }}
+            {{ content|without('group_teaser_image') }}
           </div>
         {% endif %}
       </div>
@@ -45,7 +46,7 @@
       </button>
 
       <div class="node-teaser__read-more-content toggle-content js-toggle-content" id="collapsible-{{ randomID }}" aria-hidden="true">
-        {{ content|without('field_icon') }}
+        {{ content|without('group_teaser_image') }}
       </div>
     {% endif %}
   </article>

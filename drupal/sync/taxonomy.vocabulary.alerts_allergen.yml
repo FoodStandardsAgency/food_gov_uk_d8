@@ -1,0 +1,9 @@
+uuid: 1df642ba-311d-43fd-a069-acee45a015a7
+langcode: en
+status: true
+dependencies: {  }
+name: 'Alerts: Allergen'
+vid: alerts_allergen
+description: 'Allergens imported from FSA Food Alerts API'
+hierarchy: 0
+weight: 0

@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.lander.field_audience
+    - field.field.node.lander.field_block
     - field.field.node.lander.field_content_type
     - field.field.node.lander.field_header_image
     - field.field.node.lander.field_hero_copy
@@ -11,6 +12,7 @@ dependencies:
     - field.field.node.lander.field_intro
     - field.field.node.lander.field_nation
     - field.field.node.lander.field_promo_block
+    - field.field.node.lander.field_related_content
     - field.field.node.lander.field_topic
     - field.field.node.lander.field_topic_cloud
     - node.type.lander
@@ -22,8 +24,17 @@ targetEntityType: node
 bundle: lander
 mode: default
 content:
-  field_intro:
+  field_block:
     weight: 0
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_intro:
+    weight: 1
     label: hidden
     settings: {  }
     third_party_settings: {  }
@@ -31,15 +42,24 @@ content:
     region: content
   field_promo_block:
     type: entity_reference_revisions_entity_view
-    weight: 1
+    weight: 2
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
     region: content
+  field_related_content:
+    weight: 4
+    label: above
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
   field_topic_cloud:
-    weight: 2
+    weight: 3
     label: above
     settings:
       link: true

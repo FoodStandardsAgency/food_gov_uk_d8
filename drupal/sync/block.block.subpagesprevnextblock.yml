@@ -1,0 +1,24 @@
+uuid: 46ae9d79-2e57-4990-bb80-5827edb1d14c
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - fsa_subpages
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: subpagesprevnextblock
+theme: fsa
+region: content_bottom
+weight: 0
+provider: null
+plugin: subpages_prevnext_block
+settings:
+  id: subpages_prevnext_block
+  label: 'Sub-pages prev-next block'
+  provider: fsa_subpages
+  label_display: '0'
+visibility: {  }

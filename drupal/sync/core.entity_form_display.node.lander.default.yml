@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.lander.field_audience
+    - field.field.node.lander.field_block
     - field.field.node.lander.field_content_type
     - field.field.node.lander.field_header_image
     - field.field.node.lander.field_hero_copy
@@ -11,6 +12,7 @@ dependencies:
     - field.field.node.lander.field_intro
     - field.field.node.lander.field_nation
     - field.field.node.lander.field_promo_block
+    - field.field.node.lander.field_related_content
     - field.field.node.lander.field_topic
     - field.field.node.lander.field_topic_cloud
     - node.type.lander
@@ -69,6 +71,15 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
+    region: content
+  field_block:
+    weight: 3
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_content_type:
     weight: 26
@@ -130,6 +141,15 @@ content:
       form_display_mode: default
       default_paragraph_type: manual_promo
     third_party_settings: {  }
+    region: content
+  field_related_content:
+    weight: 31
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_topic:
     weight: 30

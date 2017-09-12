@@ -1,0 +1,19 @@
+uuid: af36919b-dab7-4067-af6c-034bdf6e7ea5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_url_alias
+    - paragraphs.paragraphs_type.subpage
+id: paragraph.subpage.field_url_alias
+field_name: field_url_alias
+entity_type: paragraph
+bundle: subpage
+label: 'Subpage URL alias'
+description: 'This will be appended to main content URL alias. Use following characters: <code>a-z</code>, <code>0-9</code>, <code>/</code> and <code>-</code>. Other characters may have unwanted side-effects. Example: The value in this field: <code><em>the-subpage-alias</em></code> The whole URL: <code>http://site.name/main-node-alias?<em>the-subpage-alias</em></code><br>'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

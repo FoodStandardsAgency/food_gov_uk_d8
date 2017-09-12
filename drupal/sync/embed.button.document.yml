@@ -1,0 +1,21 @@
+uuid: f5906a7d-c9ac-4777-9743-58c259371776
+langcode: en
+status: true
+dependencies:
+  config:
+    - media_entity.bundle.document
+  module:
+    - entity_embed
+    - media_entity
+label: Document
+id: document
+type_id: entity
+type_settings:
+  entity_type: media
+  bundles:
+    - document
+  display_plugins:
+    - 'view_mode:media.document_link'
+  entity_browser: ''
+  entity_browser_settings: null
+icon_uuid: null

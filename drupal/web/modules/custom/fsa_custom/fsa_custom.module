@@ -1,0 +1,68 @@
+<?php
+
+/**
+ * @file
+ * Contains fsa_custom.module.
+ */
+
+use Drupal\Core\Session\AccountInterface;
+use Drupal\block\Entity\Block;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\Core\Access\AccessResult;
+
+/**
+ * Implements block_access().
+ */
+function fsa_custom_block_access(Block $block, $operation, AccountInterface $account) {
+
+  // Control page title block(s) visibility with certain requirements.
+  if ($operation == 'view' && $block->getPluginId() == 'page_title_block') {
+
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if (is_object($node) && $node->hasField('field_content_type')) {
+
+      // Get content_type taxonomy term id.
+      $tid = $node->get('field_content_type')->target_id;
+      if (is_numeric($tid)) {
+        $term = Term::load($tid);
+
+        // Use content_type taxonomy to define in which region the pagetitle
+        // should be displayed.
+        switch ($term->id()) {
+          // Guidance.
+          case 28:
+            if ($block->id() == 'pagetitle') {
+              return AccessResult::forbidden()
+                ->addCacheableDependency($block);
+            }
+            break;
+
+          default:
+            if ($block->id() == 'pagetitle_hero') {
+              // By default completely remove page title from hero region.
+              return AccessResult::forbidden()
+                ->addCacheableDependency($block);
+            }
+            break;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements template_preprocess_block().
+ */
+function fsa_custom_preprocess_block(&$variables) {
+
+  if ($variables['plugin_id'] == 'page_title_block') {
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if (is_object($node)) {
+      if ($variables['elements']['#id'] == 'pagetitle_hero' && $node->getType() == 'lander') {
+        // Visually hide hero region page title for lander CT.
+        // We want this h1 in dom for accessibility/SEO.
+        $variables['attributes']['class'][] = 'visually-hidden';
+      }
+    }
+  }
+}

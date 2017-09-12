@@ -1,16 +1,26 @@
 .sidebar {
-  @mixin responsive-declaration margin-top, 1em, 3em;
+  @mixin responsive-declaration padding-top, 1em, 3em;
   @mixin responsive-declaration padding-left, 1em, 4em;
   @mixin responsive-declaration padding-right, 1em, 4em;
   @mixin responsive-declaration padding-bottom, 1em, 3em;
-  border-right: 1px solid var(--color-light-gray);
+  background-color: var(--color-lighter-gray);
+  border-bottom: 1px solid var(--color-light-gray);
 
   @media (--breakpoint-md) {
-    padding-left: 0 !important;
+    padding-left: 0;
+    padding-top: 0;
+    margin-top: 3em;
+    border-right: 1px solid var(--color-light-gray);
+    border-bottom: 0;
+    background-color: transparent;
+  }
+
+  @media (--breakpoint-lg) {
+    margin-top: 4em;
   }
 }
 
-.theme-service .sidebar {
+.theme--service .sidebar {
   margin-top: 0em !important;
   padding-right: 0em !important;
   padding-bottom: 0em !important;

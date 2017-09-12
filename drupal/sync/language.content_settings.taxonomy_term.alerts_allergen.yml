@@ -1,0 +1,11 @@
+uuid: 98d5b2d4-9119-4384-9430-4fd4d2b10ad8
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.alerts_allergen
+id: taxonomy_term.alerts_allergen
+target_entity_type_id: taxonomy_term
+target_bundle: alerts_allergen
+default_langcode: site_default
+language_alterable: false

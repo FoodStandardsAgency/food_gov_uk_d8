@@ -1,0 +1,38 @@
+uuid: 09de83de-8fbe-4e80-80a1-c36e987c0cdf
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.promo_image
+    - field.field.media.image.field_description
+    - field.field.media.image.field_image
+    - field.field.media.image.field_topic
+    - image.style.promo_medium
+    - media_entity.bundle.image
+  module:
+    - image
+id: media.image.promo_image
+targetEntityType: media
+bundle: image
+mode: promo_image
+content:
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: promo_medium
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+hidden:
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_description: true
+  field_topic: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

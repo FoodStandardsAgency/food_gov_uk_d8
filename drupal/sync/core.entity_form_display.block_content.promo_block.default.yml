@@ -5,9 +5,13 @@ dependencies:
   config:
     - block_content.type.promo_block
     - field.field.block_content.promo_block.body
+    - field.field.block_content.promo_block.field_image
     - field.field.block_content.promo_block.field_link
+    - field.field.block_content.promo_block.field_media_library_image
     - field.field.block_content.promo_block.field_title
+    - image.style.thumbnail
   module:
+    - image
     - link
     - text
 id: block_content.promo_block.default
@@ -24,6 +28,14 @@ content:
       summary_rows: 3
     third_party_settings: {  }
     region: content
+  field_image:
+    weight: 26
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
   field_link:
     weight: 1
     settings:
@@ -31,6 +43,15 @@ content:
       placeholder_title: ''
     third_party_settings: {  }
     type: link_default
+    region: content
+  field_media_library_image:
+    weight: 27
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete_tags
     region: content
   field_title:
     weight: 2

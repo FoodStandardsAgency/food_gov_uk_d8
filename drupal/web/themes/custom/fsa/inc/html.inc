@@ -18,10 +18,11 @@ function fsa_preprocess_html(&$variables) {
   if (is_object($node)) {
 
     $variables['attributes']['class'][] = 'node-' . $node->id();
+    $variables['attributes']['class'][] = 'theme--' . $node->getType();
 
     // Get content_type taxonomy term and set as body class.
-    $tid = $node->get('field_content_type')->target_id;
-    if (is_numeric($tid)) {
+    $tid = ($node->hasField('field_content_type')) ? $node->get('field_content_type')->target_id : 0;
+    if ($tid != NULL) {
       $term = Term::load($tid);
 
       // Add content type based html class.
@@ -30,18 +31,19 @@ function fsa_preprocess_html(&$variables) {
       // Add body classes based on selected taxonomy term
       switch ($term->id()) {
         case 27: // Help
-          $variables['attributes']['class'][] = 'theme-service';
-          $variables['attributes']['class'][] = 'theme-service--help-centre';
+          $variables['attributes']['class'][] = 'theme--service';
+          $variables['attributes']['class'][] = 'theme--help-centre';
           break;
       }
     }
   }
 
-  // Rely on URL aliases for FHRS ratings section.
-  $uri_segments = explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+  // Rely on URL paths for FHRS ratings section.
+  $current_path = \Drupal::service('path.current')->getPath();
+  $uri_segments = explode('/', $current_path);
   if ($uri_segments[1] === 'ratings' || $uri_segments[1] === 'fsa-ratings') {
-    $variables['attributes']['class'][] = 'theme-service';
-    $variables['attributes']['class'][] = 'theme-service--fhrs';
+    $variables['attributes']['class'][] = 'theme--service';
+    $variables['attributes']['class'][] = 'theme--fhrs';
   }
 
 }
