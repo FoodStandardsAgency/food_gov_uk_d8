@@ -832,8 +832,8 @@ body.theme--service #block-tabs {
 #block-tabs > ul {
   display: flex;
   flex-wrap: wrap;
-  padding: 0em;
   margin-left: -1em;
+  padding: 1em;
 }
 
 body.theme--service #block-tabs > ul {
