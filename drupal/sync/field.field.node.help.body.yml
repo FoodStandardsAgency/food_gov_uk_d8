@@ -1,22 +1,20 @@
-uuid: 6b06c9fc-bb52-430f-81bc-07f3a793d28f
+uuid: 32a6bea8-9d37-4775-b2cf-2bb7aec2707b
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.body
-    - node.type.article
+    - node.type.help
   module:
     - text
-_core:
-  default_config_hash: Ay3b2hq42cpQTFB_lNu8S2ZxuVIY6-dlBsc7vLeJ-YY
-id: node.article.body
+id: node.help.body
 field_name: body
 entity_type: node
-bundle: article
+bundle: help
 label: Body
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

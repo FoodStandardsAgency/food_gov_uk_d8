@@ -5,7 +5,6 @@ dependencies:
   config:
     - field.storage.node.field_related_content
     - node.type.alert
-    - node.type.article
     - node.type.lander
     - node.type.page
     - node.type.webform
@@ -24,7 +23,6 @@ settings:
   handler_settings:
     target_bundles:
       alert: alert
-      article: article
       page: page
       lander: lander
       webform: webform

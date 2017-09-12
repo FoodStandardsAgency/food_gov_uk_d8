@@ -1,16 +1,16 @@
-uuid: 0619f9cd-d00b-4ad6-acfa-cacc46c8153b
+uuid: e898fdef-7d66-4f5d-b6a3-31cb09d7afe9
 langcode: en
 status: true
 dependencies:
   config:
-    - node.type.article
+    - node.type.generic
   module:
     - content_translation
 third_party_settings:
   content_translation:
-    enabled: false
-id: node.article
+    enabled: true
+id: node.generic
 target_entity_type_id: node
-target_bundle: article
+target_bundle: generic
 default_langcode: site_default
 language_alterable: false
