@@ -11,7 +11,7 @@ third_party_settings:
     parent: 'help:'
 name: 'Help page'
 type: help
-description: 'Pages for Help section.'
+description: 'Use <em>Help</em> content type to create pages for Help section.'
 help: ''
 new_revision: true
 preview_mode: 1

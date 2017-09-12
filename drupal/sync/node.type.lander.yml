@@ -12,7 +12,7 @@ third_party_settings:
     parent: 'main:'
 name: 'Landing page'
 type: lander
-description: 'Use <em>Landing pages</em> for creating a collection page with promotions to deeper topics.'
+description: 'Use <em>Landing pages</em> to create a collection page with promotions to deeper topics.'
 help: ''
 new_revision: true
 preview_mode: 1

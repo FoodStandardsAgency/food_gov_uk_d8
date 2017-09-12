@@ -10,7 +10,7 @@ third_party_settings:
     parent: ''
 name: News
 type: news
-description: 'News items.'
+description: 'Use <em>News</em> to create News items.'
 help: ''
 new_revision: true
 preview_mode: 1

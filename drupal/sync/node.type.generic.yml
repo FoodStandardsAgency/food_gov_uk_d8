@@ -13,7 +13,7 @@ third_party_settings:
     parent: 'main:'
 name: 'Generic page'
 type: generic
-description: 'General text pages without lots of specific functionality fields.'
+description: 'Use <em>Generic page</em> to create General text pages like legal information or anything that does not require complex layout options.'
 help: ''
 new_revision: true
 preview_mode: 1

@@ -5,10 +5,17 @@ dependencies:
   config:
     - field.field.node.generic.body
     - field.field.node.generic.field_content_type
+    - field.field.node.generic.field_liftup_image
+    - field.field.node.generic.field_liftup_title
+    - field.field.node.generic.field_media_library_liftup_image
     - node.type.generic
   module:
+    - entity_print
     - text
     - user
+third_party_settings:
+  entity_print:
+    pdf_label: 'View PDF'
 id: node.generic.default
 targetEntityType: node
 bundle: generic
@@ -21,14 +28,17 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
-  links:
+  entity_print_view_pdf:
     weight: 0
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
-  entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_content_type: true
+  field_liftup_image: true
+  field_liftup_title: true
+  field_media_library_liftup_image: true
   langcode: true
+  links: true
