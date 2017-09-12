@@ -14,4 +14,4 @@ description: 'FSA Alerts stored to system via Alerts API.'
 help: ''
 new_revision: false
 preview_mode: 0
-display_submitted: true
+display_submitted: false
