@@ -1,0 +1,49 @@
+uuid: 27c8ec17-fa43-4062-98c7-6944ab374af4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.help.body
+    - field.field.node.help.field_content_type
+    - field.field.node.help.field_icon
+    - field.field.node.help.field_liftup_title
+    - field.field.node.help.field_liftups
+    - node.type.help
+  module:
+    - entity_reference_revisions
+    - text
+    - user
+id: node.help.default
+targetEntityType: node
+bundle: help
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_liftups:
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    type: entity_reference_revisions_entity_view
+    region: content
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_content_type: true
+  field_icon: true
+  field_liftup_title: true
+  langcode: true
