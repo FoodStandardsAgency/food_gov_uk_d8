@@ -4,6 +4,9 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_content_reference
+    - node.type.generic
+    - node.type.help
+    - node.type.lander
     - node.type.page
     - node.type.webform
     - paragraphs.paragraphs_type.liftups
@@ -21,6 +24,9 @@ settings:
   handler: 'default:node'
   handler_settings:
     target_bundles:
+      generic: generic
+      help: help
+      lander: lander
       page: page
       webform: webform
     sort:
