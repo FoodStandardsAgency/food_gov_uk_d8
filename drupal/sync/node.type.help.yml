@@ -8,8 +8,7 @@ third_party_settings:
   menu_ui:
     available_menus:
       - help
-      - main
-    parent: 'main:'
+    parent: 'help:'
 name: 'Help page'
 type: help
 description: 'Pages for Help section.'

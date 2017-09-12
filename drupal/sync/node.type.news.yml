@@ -6,10 +6,8 @@ dependencies:
     - menu_ui
 third_party_settings:
   menu_ui:
-    available_menus:
-      - help
-      - main
-    parent: 'help:'
+    available_menus: {  }
+    parent: ''
 name: News
 type: news
 description: 'News items.'
