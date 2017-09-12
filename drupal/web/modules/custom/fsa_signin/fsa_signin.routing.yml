@@ -1,0 +1,26 @@
+
+fsa_signin.default_controller_signInPage:
+  path: 'signin'
+  defaults:
+    _controller: '\Drupal\fsa_signin\Controller\DefaultController::signInPage'
+    _title: 'Sign in'
+  requirements:
+    _permission: 'access content'
+
+#fsa_signin.send_password_email_form:
+#  path: '/fsa_signin/form/send_password_email'
+#  defaults:
+#    _form: '\Drupal\fsa_signin\Form\SendPasswordEmailForm'
+#    _title: 'SendPasswordEmailForm'
+#  requirements:
+#    _access: 'TRUE'
+  
+
+#fsa_signin.cta_register:
+#  path: '/fsa_signin/form/cta_register'
+#  defaults:
+#    _form: '\Drupal\fsa_signin\Form\CtaRegister'
+#    _title: 'CtaRegister'
+#  requirements:
+#    _access: 'TRUE'
+  
