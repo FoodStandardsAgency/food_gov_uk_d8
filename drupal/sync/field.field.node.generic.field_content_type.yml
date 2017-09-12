@@ -1,24 +1,20 @@
-uuid: a0220054-c1f6-4972-808f-3a073e446bd4
+uuid: 18228582-6631-44fd-b666-bde771a54ed6
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_content_type
-    - node.type.help
+    - node.type.generic
     - taxonomy.vocabulary.content_type
-  content:
-    - 'taxonomy_term:content_type:c62d13d9-beb4-43a3-9010-1e1b751836b6'
-id: node.help.field_content_type
+id: node.generic.field_content_type
 field_name: field_content_type
 entity_type: node
-bundle: help
+bundle: generic
 label: 'Content type'
 description: ''
 required: false
 translatable: false
-default_value:
-  -
-    target_uuid: c62d13d9-beb4-43a3-9010-1e1b751836b6
+default_value: {  }
 default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'

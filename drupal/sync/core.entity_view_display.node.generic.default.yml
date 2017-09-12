@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.generic.body
+    - field.field.node.generic.field_content_type
     - node.type.generic
   module:
     - text
@@ -16,15 +17,18 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 101
+    weight: 1
     settings: {  }
     third_party_settings: {  }
     region: content
   links:
-    weight: 100
+    weight: 0
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_content_type: true
   langcode: true
