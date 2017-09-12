@@ -1,28 +1,31 @@
-uuid: af11b5e1-b028-4063-ac93-2e28ad0cc272
+uuid: a89cf22f-7caa-477c-b0e7-7b490dcfa5c4
 langcode: en
 status: true
 dependencies:
   module:
     - options
     - user
-id: user.field_notification_timing
-field_name: field_notification_timing
+id: user.field_notification_method
+field_name: field_notification_method
 entity_type: user
 type: list_string
 settings:
   allowed_values:
     -
       value: none
-      label: 'No mail'
+      label: 'No notifications'
+    -
+      value: sms
+      label: SMS
     -
       value: immediate
-      label: Immediate
+      label: 'Immediate email'
     -
       value: daily
-      label: Daily
+      label: 'Daily email digest'
     -
       value: weekly
-      label: Weekly
+      label: 'Weekly email digest'
   allowed_values_function: ''
 module: options
 locked: false

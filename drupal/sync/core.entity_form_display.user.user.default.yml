@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.field.user.user.field_notification_allergys
     - field.field.user.user.field_notification_cache
-    - field.field.user.user.field_notification_timing
+    - field.field.user.user.field_notification_method
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -37,7 +37,7 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_notification_timing:
+  field_notification_method:
     weight: 5
     settings: {  }
     third_party_settings: {  }

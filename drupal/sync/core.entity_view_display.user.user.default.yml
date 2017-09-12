@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.field.user.user.field_notification_allergys
     - field.field.user.user.field_notification_cache
-    - field.field.user.user.field_notification_timing
+    - field.field.user.user.field_notification_method
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -38,5 +38,5 @@ hidden:
   entity_print_view_word_docx: true
   field_notification_allergys: true
   field_notification_cache: true
-  field_notification_timing: true
+  field_notification_method: true
   langcode: true

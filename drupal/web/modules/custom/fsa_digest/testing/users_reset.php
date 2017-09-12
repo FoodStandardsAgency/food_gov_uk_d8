@@ -8,8 +8,9 @@ if (empty($min_uid)) {
   $min_uid = 0;
 }
 
-$timings = [
+$methods = [
   'none',
+  'sms',
   'immediate',
   'daily',
   'weekly',
@@ -34,13 +35,13 @@ foreach ($uids as $uid) {
   stats($uid);
   $u = User::load($uid);
 
-  // timing
-  $timing = $timings[array_rand($timings)];
-  $u->field_notification_timing = $timing;
+  // method
+  $method = $methods[array_rand($methods)];
+  $u->field_notification_method = $method;
 
   // allergys
   $allergys = [];
-  if ($timing != 'none') {
+  if ($method != 'none') {
     $rand = rand(1, 5);
     $rand = array_rand($terms, $rand);
     if (!is_array($rand)) {
@@ -57,7 +58,7 @@ foreach ($uids as $uid) {
   // notification cache
   $rand = mt_rand() / mt_getrandmax();
   $cache = [];
-  if ($timing != 'none' && $rand > 0.2) {
+  if ($method != 'none' && $rand > 0.2) {
     $rand = rand(1, count($alerts));
     $rand = array_rand($alerts, $rand);
     if (!is_array($rand)) {

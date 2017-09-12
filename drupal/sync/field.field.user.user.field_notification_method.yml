@@ -1,23 +1,23 @@
-uuid: cb348219-032a-4d40-adb4-994ff169df89
+uuid: 73ebc756-961d-44ff-8449-9751cd6ab609
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.user.field_notification_timing
+    - field.storage.user.field_notification_method
   module:
     - options
     - user
-id: user.user.field_notification_timing
-field_name: field_notification_timing
+id: user.user.field_notification_method
+field_name: field_notification_method
 entity_type: user
 bundle: user
-label: 'Notification timing'
+label: 'Notification method'
 description: 'How often would you like to receive news and/or alerts?'
 required: true
 translatable: false
 default_value:
   -
-    value: immediate
+    value: none
 default_value_callback: ''
 settings: {  }
 field_type: list_string
