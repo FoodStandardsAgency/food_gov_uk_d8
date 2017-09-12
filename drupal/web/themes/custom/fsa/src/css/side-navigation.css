@@ -8,7 +8,7 @@
   color: var(--color-black);
 }
 
-.theme-service .side-navigation h2 {
+.theme--service .side-navigation h2 {
   color: var(--primary-color);
 }
 
@@ -181,6 +181,18 @@
   margin: 0;
   padding: 0;
   padding-top: 1em;
+}
+
+.subpages ul li,
+.subpages ol li {
+  list-style: none;
+  margin-bottom: 1em;
+}
+
+:--not-touch .subpages > ul a:--enter,
+:--not-touch .subpages > ul a:--enter {
+  color: var(--light-primary-color);
+  text-decoration: underline;
 }
 
 .subpages > ul ul,

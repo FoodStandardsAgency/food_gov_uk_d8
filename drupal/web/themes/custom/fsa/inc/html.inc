@@ -31,8 +31,8 @@ function fsa_preprocess_html(&$variables) {
       // Add body classes based on selected taxonomy term
       switch ($term->id()) {
         case 27: // Help
-          $variables['attributes']['class'][] = 'theme-service';
-          $variables['attributes']['class'][] = 'theme-service--help-centre';
+          $variables['attributes']['class'][] = 'theme--service';
+          $variables['attributes']['class'][] = 'theme--help-centre';
           break;
       }
     }
@@ -42,8 +42,8 @@ function fsa_preprocess_html(&$variables) {
   $current_path = \Drupal::service('path.current')->getPath();
   $uri_segments = explode('/', $current_path);
   if ($uri_segments[1] === 'ratings' || $uri_segments[1] === 'fsa-ratings') {
-    $variables['attributes']['class'][] = 'theme-service';
-    $variables['attributes']['class'][] = 'theme-service--fhrs';
+    $variables['attributes']['class'][] = 'theme--service';
+    $variables['attributes']['class'][] = 'theme--fhrs';
   }
 
 }

@@ -24,9 +24,9 @@
 }
 
 .layout--with-sidebar .promo-list:before,
-.theme-service .promo-list:before,
+.theme--service .promo-list:before,
 .layout--with-sidebar .liftup-list:before,
-.theme-service .liftup-list:before {
+.theme--service .liftup-list:before {
   display: none;
 }
 
@@ -44,7 +44,7 @@
 }
 
 .liftup-list.liftup-list--information .paragraph--type-liftups > h2,
-.theme-service--help-centre .paragraph--type-liftups > h2 {
+.theme--help-centre .paragraph--type-liftups > h2 {
   color: var(--color-black);
 }
 

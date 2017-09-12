@@ -153,7 +153,7 @@
 
   <main role="main" class="layout-content">
     <a id="main-content" tabindex="-1"></a>
-    <div class="layout{% if page.sidebar_first or page.sidebar_second %} layout--with-sidebar js-sticky-container{% endif %}">
+    <div class="layout{% if page.sidebar_first or page.sidebar_second %} layout--with-sidebar js-sticky-container{% else %} layout--with-no-sidebar{% endif %}">
       <div class="layout__container">
         {% if page.sidebar_first or page.sidebar_second %}
           <aside class="layout__sidebar js-sticky-element" role="complementary">
