@@ -102,6 +102,7 @@ hidden:
   field_liftup_title: true
   field_liftups: true
   field_nation: true
+  field_related_content: true
   field_subpages: true
   field_topic: true
   field_update_date: true
