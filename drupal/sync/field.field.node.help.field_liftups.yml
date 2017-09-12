@@ -1,0 +1,36 @@
+uuid: 2a7a19b2-d103-4977-8dea-412131e3c034
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_liftups
+    - node.type.help
+    - paragraphs.paragraphs_type.liftups
+  module:
+    - entity_reference_revisions
+id: node.help.field_liftups
+field_name: field_liftups
+entity_type: node
+bundle: help
+label: Liftups
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      liftups: liftups
+    target_bundles_drag_drop:
+      liftups:
+        enabled: true
+        weight: 4
+      manual_promo:
+        weight: 5
+        enabled: false
+      subpage:
+        weight: 6
+        enabled: false
+field_type: entity_reference_revisions

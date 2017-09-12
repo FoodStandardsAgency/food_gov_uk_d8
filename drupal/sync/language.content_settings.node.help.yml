@@ -1,0 +1,16 @@
+uuid: 3a44649b-72b5-4386-9b3e-d97d4e9597f6
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.help
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: node.help
+target_entity_type_id: node
+target_bundle: help
+default_langcode: site_default
+language_alterable: false

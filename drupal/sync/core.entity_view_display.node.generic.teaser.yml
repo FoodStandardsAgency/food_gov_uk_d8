@@ -1,0 +1,74 @@
+uuid: dce5c598-80eb-485a-944d-16ae29f6d47d
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.generic.body
+    - field.field.node.generic.field_content_type
+    - field.field.node.generic.field_liftup_image
+    - field.field.node.generic.field_liftup_title
+    - field.field.node.generic.field_media_library_liftup_image
+    - node.type.generic
+  module:
+    - field_group
+    - image
+    - text
+    - user
+third_party_settings:
+  field_group:
+    group_teaser_image:
+      children:
+        - field_liftup_image
+        - field_media_library_liftup_image
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: teaser__content
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Teaser image'
+id: node.generic.teaser
+targetEntityType: node
+bundle: generic
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 1
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  field_liftup_image:
+    type: image
+    weight: 0
+    region: content
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+  field_media_library_liftup_image:
+    type: entity_reference_label
+    weight: 1
+    region: content
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_content_type: true
+  field_liftup_title: true
+  langcode: true
+  links: true
