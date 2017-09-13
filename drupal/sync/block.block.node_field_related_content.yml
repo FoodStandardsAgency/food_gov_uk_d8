@@ -1,0 +1,29 @@
+uuid: 1eb51927-8218-4761-8bdb-6bdbd3c31468
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.node_field
+  module:
+    - block_class
+    - views
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: node_field_related_content
+theme: fsa
+region: content_bottom
+weight: 0
+provider: null
+plugin: 'views_block:node_field-related_content'
+settings:
+  id: 'views_block:node_field-related_content'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility: {  }

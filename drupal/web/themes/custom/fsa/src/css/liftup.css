@@ -1,10 +1,17 @@
 /*Liftup and manual promo styles*/
 
+.latest-block,
 .promo-list,
 .liftup-list {
   position: relative;
 }
 
+.latest-block {
+  @mixin responsive-declaration padding-top, 1em, 4em;
+  @mixin responsive-declaration padding-bottom, 1em, 4em;
+}
+
+.latest-block:before,
 .promo-list:before,
 .liftup-list:before {
   content: "";
@@ -19,6 +26,8 @@
   transform: translateX(-50%);
 }
 
+
+.latest-block:before,
 .liftup-list.liftup-list--information:before {
   background-color: var(--color-lighter-gray);
 }
@@ -41,6 +50,11 @@
   z-index: var(--z-middle);
   @mixin responsive-declaration padding-top, 1em, 4em;
   @mixin responsive-declaration padding-bottom, 1em, 4em;
+}
+
+.latest-block > * {
+  position: relative;
+  z-index: var(--z-middle);
 }
 
 .paragraph--type-manual-promo > h2,
