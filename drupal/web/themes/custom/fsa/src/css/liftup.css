@@ -52,7 +52,7 @@
   @mixin responsive-declaration padding-bottom, 1em, 4em;
 }
 
-.latest-block > * {
+.latest-block > *:not(.contextual) {
   position: relative;
   z-index: var(--z-middle);
 }

@@ -63,8 +63,8 @@
   padding-left: 1.5em;
 }
 
-:--not-touch .prev-next .next:--enter .direction,
-:--not-touch .prev-next .prev:--enter .direction {
+:--not-touch .prev-next .next:--enter .title,
+:--not-touch .prev-next .prev:--enter .title {
   text-decoration: underline;
 }
 
