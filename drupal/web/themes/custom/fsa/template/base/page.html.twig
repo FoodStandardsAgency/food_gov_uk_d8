@@ -89,7 +89,7 @@
           <div class="header__language">
             {{ language_switcher }}
           </div>
-          
+
           <div class="header__about">
             <a href="#" class="">{{ 'About us'|t }}</a>
           </div>
@@ -135,15 +135,14 @@
     {{ page.secondary_menu }}
   {% endif %}
 
-  <div class="breadcrumb">
-    {% if page.breadcrumb %}
-      {{ page.breadcrumb }}
-    {% endif %}
-  </div>
-
   {% if page.hero is defined and page.hero|render|striptags|trim %}
     <div class="hero">
       <div class="hero__container">
+        <div class="breadcrumb">
+          {% if page.breadcrumb %}
+            {{ page.breadcrumb }}
+          {% endif %}
+        </div>
         {{ page.hero }}
       </div>
     </div>

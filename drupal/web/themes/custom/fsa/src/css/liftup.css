@@ -23,6 +23,11 @@
   background-color: var(--color-lighter-gray);
 }
 
+.theme--content-type-alerts .promo-list:before,
+.theme--content-type-news .promo-list:before {
+  background-color: var(--color-white);
+}
+
 .layout--with-sidebar .promo-list:before,
 .theme--service .promo-list:before,
 .layout--with-sidebar .liftup-list:before,
@@ -77,6 +82,8 @@
   }
 }
 
+.theme--content-type-alerts .promo__item,
+.theme--content-type-news .promo__item,
 .liftup-list.liftup-list--information .liftup__item {
   @media (--breakpoint-xs) {
     min-width: 11em;
