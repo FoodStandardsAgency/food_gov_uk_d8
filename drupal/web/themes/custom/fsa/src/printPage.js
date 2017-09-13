@@ -1,6 +1,13 @@
 function printPage(printPDFWrapperElements) {
   for (let i = 0; i < printPDFWrapperElements.length; i++) {
-    // Create a button
+    // Create the wrapper
+    let printWrapper = document.createElement("div");
+    printWrapper.classList.add("print-wrapper");
+
+    // Add it to dom
+    printPDFWrapperElements[i].parentNode.insertBefore(printWrapper, printPDFWrapperElements[i]);
+
+    // Create the button
     let printButton = document.createElement("button");
     printButton.classList.add("print-page");
     printButton.innerHTML = `Print this page`;
@@ -8,7 +15,10 @@ function printPage(printPDFWrapperElements) {
       e.preventDefault();
       window.print();
     });
-    printPDFWrapperElements[i].parentNode.insertBefore(printButton, printPDFWrapperElements[i].nextSibling);
+
+    // Move both print and view pdf button inside of the wrapper
+    printWrapper.appendChild(printPDFWrapperElements[i]);
+    printWrapper.appendChild(printButton);
   }
 }
 

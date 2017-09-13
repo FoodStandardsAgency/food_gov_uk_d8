@@ -4,8 +4,8 @@
   position: relative;
 }
 
-.message-list a {
-  color: var(--color-white);
+:--not-touch .message-list a:--enter {
+  text-decoration: underline;
 }
 
 .message-list__item {

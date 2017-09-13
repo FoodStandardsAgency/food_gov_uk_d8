@@ -13,6 +13,11 @@ To get the started with theming, complete the following steps:
 2. Install project dependencies by running the following task
   * `npm install` or `yarn`
 
+## Workflow summary
+__Run__ `npm run watch` or `yarn watch` while developing.
+
+__Build__ before commiting `npm run build` or `yarn build`.
+
 ## 🏗 Development
 When developing FSA Theme, you may want assets automatically compiled. To do this, run the following watch task:
 
@@ -40,9 +45,14 @@ There are number of other really useful ES6 features that can be also used, like
 * [Block-scoped binding constructs](https://github.com/lukehoban/es6features#let--const)
 
 ### CSS development
-This theme uses number of postCSS plugins with  [postCSS-cssnext](http://cssnext.io/) plugin collection. Cssnext helps developer to use the latest CSS syntax today. Active plugins of the cssnext collection can be managed inside of a `postcss.config.js` file and available features can be browsed on [GitHub](https://github.com/MoOx/postcss-cssnext/blob/master/docs/content/features.md). All the css files are extracted and bundled into one file with Webpack [_extract-text-webpack-plugin_](https://github.com/webpack-contrib/extract-text-webpack-plugin).
+This theme uses number of postCSS plugins with  [postCSS-cssnext](http://cssnext.io/) plugin collection. Cssnext helps developer to use the latest CSS syntax today. Active plugins of the cssnext collection can be managed inside of a `postcss.config.js` file and available features can be browsed on [GitHub](https://github.com/MoOx/postcss-cssnext/blob/master/docs/content/features.md).
 
-#### Using CSS Custom Properties
+All the css files are extracted and bundled into one file with Webpack [_extract-text-webpack-plugin_](https://github.com/webpack-contrib/extract-text-webpack-plugin).
+
+#### Units
+Developer should choose a right unit to use depending on the context. _Em_ is great for responsive values such as _paddings_ and _margins_ while _px_ is good choice for fixed sized icons.
+
+#### CSS Custom Properties
 _Related PostCSS plugin: [postcss-custom-properties](https://github.com/postcss/postcss-custom-properties)_
 
 [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) can be used in this theme. To support [older IE browsers](http://caniuse.com/#feat=css-variables) CSS custom properties should only be used inside of a `:root` selector. Cssnext has been configurated to preserve custom property values.
@@ -81,7 +91,7 @@ Custom variables can be used with a following line of code inside of a css file:
 }
 ```
 
-#### Using PostCSS Mixins
+#### Mixins
 _Related PostCSS plugin: [postcss-custom-media](https://github.com/postcss/postcss-mixins)_
 
 Cssnext is providing a [PostCSS-apply](https://github.com/pascalduez/postcss-apply) plugin but it doesn't support arguments. That's why PostCSS-mixin plugin is also included in this theme.
@@ -119,6 +129,36 @@ h1 {
   @mixin responsive-declaration font-size, 2.2em, 3.333em;
 }
 ```
+
+#### Selector and nesting
+_Related PostCSS plugins: [postcss-nesting](https://github.com/jonathantneal/postcss-nesting) and [postcss-custom-selectors](https://github.com/postcss/postcss-custom-selectors)_
+
+Custom selectors can be declared with a following line of code:
+
+```
+@custom-selector :--not-js html:not(.js);
+```
+
+They can be used as a selectors like this:
+
+```
+:--not-js .toggle-content {
+  display: inherit;
+}
+```
+
+For now nesting is mainly used for media queries but selector nesting can also be used:
+
+```
+ul {
+  margin-top: 0.5em;
+
+  & li:not(:last-child) {
+    margin-bottom: 1em;
+  }
+}
+```
+
 
 #### CSS Naming conventions
 This theme uses [BEM](http://getbem.com/) as much as it is possible.
