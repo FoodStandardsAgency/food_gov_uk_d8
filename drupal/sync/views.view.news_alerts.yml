@@ -1071,6 +1071,19 @@ display:
       block_description: 'News & Alerts Centre'
       block_category: 'Lists (Views)'
       display_description: ''
+      footer:
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          content: 'Showing @start - @end of @total results'
+          plugin_id: result
+      defaults:
+        footer: false
     cache_metadata:
       max-age: -1
       contexts:
