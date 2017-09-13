@@ -8,6 +8,7 @@
  */
 #}
 {% if breadcrumb %}
+  <div class="breadcrumb">
     <div class="breadcrumb__container">
         <h2 class="visually-hidden">{{ 'Breadcrumb'|t }}</h2>
         {% for item in breadcrumb %}
@@ -20,4 +21,5 @@
           </div>
         {% endfor %}
     </div>
+  </div>
 {% endif %}

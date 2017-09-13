@@ -54,9 +54,17 @@
   background-color: var(--primary-color);
   color: var(--color-white);
   @mixin responsive-declaration padding-top, 1em, 4em;
-  @mixin responsive-declaration padding-right, 1em, 5em;
-  @mixin responsive-declaration padding-left, 1em, 5em;
   @mixin responsive-declaration padding-bottom, 1em, 4em;
+
+  @media (--breakpoint-md) {
+    padding-right: 2.5em;
+    padding-left: 2.5em;
+  }
+
+  @media (--breakpoint-lg) {
+    padding-right: 4em;
+    padding-left: 4em;
+  }
 
   @media (--breakpoint-lg) {
     padding-right: 30%;

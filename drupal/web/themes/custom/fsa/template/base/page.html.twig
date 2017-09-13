@@ -106,39 +106,40 @@
 
   </header>
 
-  <div class="navigation-wrapper js-navigation">
+  <!-- <div class="navigation-wrapper js-navigation">
     <button class="header__menu-button header__menu-button--navigation js-menu-button">
       <div class="svg">
         <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#arrow-back"></use></svg>
       </div>
     </button>
-    {% if page.primary_menu %}
-      {{ page.primary_menu }}
-    {% endif %}
-    <div class="header__cta header__cta--navigation">
-      <div class="header__links">
-        <div class="header__language">
-          {{ language_switcher }}
-        </div>
+  </div> -->
 
-        <div class="header__about">
-          <a href="#" class="">{{ 'About us'|t }}</a>
-        </div>
-        <div class="header__login">
-          <a href="#" class="">{{ 'Login'|t }}</a>
-        </div>
+  {% if page.primary_menu %}
+  <div class="layout">
+    <div class="layout__container">
+      <div class="navigation-wrapper">
+        {{ page.primary_menu }}
       </div>
     </div>
   </div>
+  {% endif %}
 
   {% if page.secondary_menu %}
-    {{ page.secondary_menu }}
+  <div class="layout">
+    <div class="layout__container">
+      <div class="navigation-wrapper navigation-wrapper--secondary">
+        {{ page.secondary_menu }}
+      </div>
+    </div>
+  </div>
   {% endif %}
 
   {% if page.hero is defined and page.hero|render|striptags|trim %}
-    <div class="hero">
-      <div class="hero__container">
+  <div class="layout">
+    <div class="layout__container">
+      <div class="hero">
         {{ page.hero }}
+        </div>
       </div>
     </div>
   {% endif %}

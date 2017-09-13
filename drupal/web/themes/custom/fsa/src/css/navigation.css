@@ -39,6 +39,21 @@
   }
 }
 
+.navigation-wrapper:after {
+  @media (--breakpoint-sm) {
+    content: "";
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    background-color: var(--color-light-gray);
+    transition:
+      opacity 0.12s ease-in-out,
+      transform 0.12s ease-in-out;
+  }
+}
+
 .toolbar-vertical .navigation-wrapper {
   height: calc(100vh - 39px);
 
@@ -140,7 +155,6 @@ nav#block-menu-help-main > ul > li > a,
   @media (--breakpoint-lg) {
     text-align: left;
     font-size: 1em;
-    font-weight: 400;
   }
 }
 
@@ -156,9 +170,10 @@ nav#block-menu-help-main > ul > li > a:after,
     height: 5px;
     background-color: var(--primary-color);
     transform: scaleY(0);
+    transform-origin: 50% 100%;
     transition:
-      opacity var(--transition-enter-fast),
-      transform var(--transition-enter-fast);
+      opacity 0.12s ease-in-out,
+      transform 0.12s ease-in-out;
   }
 }
 
@@ -171,15 +186,33 @@ nav#block-menu-help-main > ul > li > a:after,
   @media (--breakpoint-sm) {
     box-shadow: none;
     color: var(--color-black);
+    transition:
+      opacity var(--transition-enter-fast),
+      transform var(--transition-enter-fast);
+  }
+}
+
+:--not-touch nav#block-menu-help-main > ul > li > a:--enter,
+:--not-touch .navigation ul li a:--enter,
+:--not-touch .navigation__link:--enter {
+  @media (--breakpoint-sm) {
+    opacity: 0.7;
   }
 }
 
 :--not-touch nav#block-menu-help-main > ul > li > a:--enter:after,
 :--not-touch .navigation > ul > li > a:--enter:after,
+:--not-touch .navigation ul li a.is-active:after,
 :--not-touch .navigation__link:--enter:after {
   @media (--breakpoint-sm) {
     opacity: 1;
     transform: scaleY(1);
+  }
+}
+
+:--not-touch .navigation ul li a.is-active:--enter {
+  @media (--breakpoint-sm) {
+    opacity: 0.7;
   }
 }
 
@@ -213,4 +246,33 @@ nav#block-menu-help-main > ul > li > a {
   @media (--breakpoint-sm) {
     transform: translateX(0%);
   }
+}
+
+/*Secondary navigation*/
+.secondary-navigation > ul {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.secondary-navigation > ul > li {
+  list-style: none;
+  padding-top: 1em;
+  @mixin responsive-declaration padding-right, 1em, 2em;
+  padding-bottom: 1em;
+  @mixin responsive-declaration padding-left, 1em, 2em;
+}
+
+.secondary-navigation > ul > li > a {
+  font-size: 0.8em;
+  font-weight: 600;
+
+  @media (--breakpoint-lg) {
+    font-size: 0.9em;
+  }
+}
+
+:--not-touch .secondary-navigation > ul > li > a:--enter,
+.secondary-navigation > ul > li > a.is-active {
+  color: var(--color-black);
 }
