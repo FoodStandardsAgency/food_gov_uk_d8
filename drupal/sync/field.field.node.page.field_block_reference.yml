@@ -9,7 +9,7 @@ id: node.page.field_block_reference
 field_name: field_block_reference
 entity_type: node
 bundle: page
-label: 'Block reference'
+label: 'Code block reference'
 description: ''
 required: false
 translatable: true
