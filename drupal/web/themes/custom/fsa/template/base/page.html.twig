@@ -84,8 +84,6 @@
         </div>
       </form>
 
-      {{ language_switcher }}
-
       <div class="header__cta">
         <div class="header__links">
           <div class="header__about">
@@ -93,7 +91,11 @@
           </div>
         </div>
       </div>
+
+      {{ page.header }}
+
     </div>
+
   </header>
 
   <div class="navigation-wrapper js-navigation">
@@ -102,8 +104,8 @@
         <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#arrow-back"></use></svg>
       </div>
     </button>
-    {% if page.header %}
-      {{ page.header }}
+    {% if page.primary_menu %}
+      {{ page.primary_menu }}
     {% endif %}
     <div class="header__cta header__cta--navigation">
       <div class="header__links">
