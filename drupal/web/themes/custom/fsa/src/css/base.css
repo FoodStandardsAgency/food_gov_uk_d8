@@ -113,7 +113,7 @@ Plugin documentation:
   --box-shadow: 0 0em 2em 0 color(#000 a(10%));
   --box-shadow-active: 0 1em 3em 0 color(#000 a(10%));
   --max-width: 80em;
-  --content-max-width: 39em;
+  --content-max-width: 43em;
 }
 
 * {
@@ -651,17 +651,18 @@ figure:after {
 
 /*Print element*/
 .print-wrapper {
+  float: right;
   display: flex;
   justify-content: flex-end;
 
-  @media (--breakpoint-md) {
-    width: 150%;
+  @media (min-width: 95em) {
+    margin-right: -15em;
   }
 }
 
 /*Print page button*/
 .print-page {
-  /*float: right;*/
+  @mixin responsive-declaration margin-right, 1em, 2em;
   color: var(--primary-color);
 
   @media print {
@@ -689,12 +690,14 @@ figure:after {
 
 /*View pdf button*/
 .print__wrapper {
-  /*float: right;*/
-  @mixin responsive-declaration margin-top, 1em, 2em;
-
   @media print {
     display: none;
   }
+}
+
+:--not-js .print__wrapper {
+  float: right;
+  @mixin responsive-declaration margin-top, 1em, 2em;
 }
 
 .print__wrapper + *:not(.field__field_update_date) {
@@ -724,21 +727,25 @@ figure:after {
 }
 
 /*Updated date*/
+.field__field_alert_modified,
 .field__field_update_date {
   float: left;
   @mixin responsive-declaration padding-left, 0em, 4em;
   @mixin responsive-declaration margin-top, 1em, 2em;
 }
 
+.field__field_alert_modified + *,
 .field__field_update_date + * {
   clear: both;
   @mixin responsive-declaration padding-top, 1em, 2em;
 }
 
+.field__field_alert_modified__heading,
 .field__field_update_date__heading {
   display: inline-block;
 }
 
+.field__field_alert_modified__item,
 .field__field_update_date__item {
   display: inline-block;
 }

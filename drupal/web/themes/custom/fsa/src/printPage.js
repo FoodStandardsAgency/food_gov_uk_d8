@@ -17,8 +17,8 @@ function printPage(printPDFWrapperElements) {
     });
 
     // Move both print and view pdf button inside of the wrapper
-    printWrapper.appendChild(printPDFWrapperElements[i]);
     printWrapper.appendChild(printButton);
+    printWrapper.appendChild(printPDFWrapperElements[i]);
   }
 }
 
