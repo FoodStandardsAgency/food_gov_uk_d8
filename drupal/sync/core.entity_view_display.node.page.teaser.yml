@@ -95,6 +95,7 @@ hidden:
   entity_print_view_word_docx: true
   field_audience: true
   field_block: true
+  field_block_reference: true
   field_content_type: true
   field_document: true
   field_header_image: true
