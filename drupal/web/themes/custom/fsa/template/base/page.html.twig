@@ -138,11 +138,6 @@
   {% if page.hero is defined and page.hero|render|striptags|trim %}
     <div class="hero">
       <div class="hero__container">
-        <div class="breadcrumb">
-          {% if page.breadcrumb %}
-            {{ page.breadcrumb }}
-          {% endif %}
-        </div>
         {{ page.hero }}
       </div>
     </div>

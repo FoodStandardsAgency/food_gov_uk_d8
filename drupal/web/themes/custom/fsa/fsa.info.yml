@@ -3,6 +3,7 @@ type: theme
 description: "Theme for d8."
 core: 8.x
 version: 1.0
+base theme: stable
 regions:
   header: 'Header'
   primary_menu: 'Primary menu'
@@ -15,7 +16,6 @@ regions:
   sidebar_first: 'Left sidebar'
   sidebar_second: 'Right sidebar'
   footer: 'Footer'
-  breadcrumb: 'Breadcrumb'
   hidden: 'Hidden'
 libraries:
   - fsa/global

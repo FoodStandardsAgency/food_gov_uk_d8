@@ -53,6 +53,7 @@
   color: var(--color-black);
 }
 
+.views-row-wrapper,
 .promo,
 .liftup {
   display: flex;
@@ -62,6 +63,7 @@
   @mixin responsive-declaration margin-left, -1em, -1.5em;
 }
 
+.views-row-wrapper > .views-row,
 .promo__item,
 .liftup__item {
   @mixin responsive-declaration margin-left, 1em, 1.5em;
@@ -82,6 +84,7 @@
   }
 }
 
+.views-row-wrapper > .views-row,
 .theme--content-type-alerts .promo__item,
 .theme--content-type-news .promo__item,
 .liftup-list.liftup-list--information .liftup__item {
