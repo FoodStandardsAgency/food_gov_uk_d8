@@ -84,12 +84,18 @@
         </div>
       </form>
 
-      {{ language_switcher }}
-
       <div class="header__cta">
         <div class="header__links">
+          <div class="header__language">
+            {{ language_switcher }}
+          </div>
+          
           <div class="header__about">
             <a href="#" class="">{{ 'About us'|t }}</a>
+          </div>
+
+          <div class="header__login">
+            <a href="#" class="">{{ 'Login'|t }}</a>
           </div>
         </div>
       </div>
@@ -108,11 +114,14 @@
     <div class="header__cta header__cta--navigation">
       <div class="header__links">
         <div class="header__language">
-          <a href="#" class="header__language-link header__language-link--active">En</a>
-          <a href="#" class="header__language-link">Cy</a>
+          {{ language_switcher }}
         </div>
+
         <div class="header__about">
-          <a href="#" class="">About us</a>
+          <a href="#" class="">{{ 'About us'|t }}</a>
+        </div>
+        <div class="header__login">
+          <a href="#" class="">{{ 'Login'|t }}</a>
         </div>
       </div>
     </div>
