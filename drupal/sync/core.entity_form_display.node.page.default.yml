@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.page.body
     - field.field.node.page.field_audience
     - field.field.node.page.field_block
+    - field.field.node.page.field_block_reference
     - field.field.node.page.field_content_type
     - field.field.node.page.field_document
     - field.field.node.page.field_header_image
@@ -96,6 +97,15 @@ content:
     region: content
   field_block:
     weight: 19
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_block_reference:
+    weight: 27
     settings:
       match_operator: CONTAINS
       size: 60

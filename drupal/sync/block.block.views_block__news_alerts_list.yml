@@ -14,15 +14,15 @@ third_party_settings:
     classes: ''
 id: views_block__news_alerts_list
 theme: fsa
-region: content_bottom
-weight: 0
+region: hidden
+weight: -7
 provider: null
 plugin: 'views_block:news_alerts-list'
 settings:
   id: 'views_block:news_alerts-list'
   label: ''
   provider: views
-  label_display: visible
+  label_display: '0'
   views_label: ''
   items_per_page: none
 visibility: {  }

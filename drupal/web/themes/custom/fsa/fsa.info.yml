@@ -16,5 +16,6 @@ regions:
   sidebar_second: 'Right sidebar'
   footer: 'Footer'
   breadcrumb: 'Breadcrumb'
+  hidden: 'Hidden'
 libraries:
   - fsa/global
