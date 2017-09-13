@@ -23,8 +23,12 @@ class AlertItemProperties extends ProcessPluginBase {
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     $item = [];
 
-    // API URL to single alert, @todo: consider storing base_path to var/config.
-    $api_url = 'http://fsa-staging-alerts.epimorphics.net/food-alerts/id/' . $value;
+    // Get API URL (base path).
+    $config = \Drupal::config('config.fsa_alerts_import');
+    $api_base_path = $config->get('api_url');
+
+    // The URL to a single alert.
+    $api_url = $api_base_path . '/id/' . $value;
 
     try {
       $client = \Drupal::httpClient();

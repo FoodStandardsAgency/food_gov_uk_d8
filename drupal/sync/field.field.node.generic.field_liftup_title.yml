@@ -1,0 +1,19 @@
+uuid: b11cb6b6-4b43-42b7-aeb5-2c87aff1c9ce
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_liftup_title
+    - node.type.generic
+id: node.generic.field_liftup_title
+field_name: field_liftup_title
+entity_type: node
+bundle: generic
+label: 'Liftup title override'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

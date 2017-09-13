@@ -1,12 +1,10 @@
-uuid: 4f57e71c-3b7f-41b6-9728-463474c0cf93
+uuid: 46ae9d79-2e57-4990-bb80-5827edb1d14c
 langcode: en
-status: false
+status: true
 dependencies:
   module:
     - block_class
-    - ctools
     - fsa_subpages
-    - node
   theme:
     - fsa
 third_party_settings:
@@ -14,7 +12,7 @@ third_party_settings:
     classes: ''
 id: subpagesprevnextblock
 theme: fsa
-region: content
+region: content_bottom
 weight: 0
 provider: null
 plugin: subpages_prevnext_block
@@ -23,18 +21,4 @@ settings:
   label: 'Sub-pages prev-next block'
   provider: fsa_subpages
   label_display: '0'
-visibility:
-  'entity_bundle:node':
-    id: 'entity_bundle:node'
-    bundles:
-      page: page
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
-  node_type:
-    id: node_type
-    bundles:
-      page: page
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
+visibility: {  }

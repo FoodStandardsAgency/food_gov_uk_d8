@@ -49,6 +49,8 @@ Alert API data is imported to Drupal `alerts_allergen` taxonomy and `alert` node
 
 ### Import/migrate Alerts from the API
  
+Ensure the Alert API base path is set in FSA Alerts configuration `/admin/config/fsa-alerts`. Drupal status page will display error if this is not done.
+
 * Import allergens:
   * `drush mi --tag=allergens`
   * Or update existing entries: `drush mi --tag=allergens --update`
@@ -58,6 +60,9 @@ Alert API data is imported to Drupal `alerts_allergen` taxonomy and `alert` node
 
 * If import fails or is stopped set back to idle:
   * `drush mrs fsa_alerts` or `drush mrs fsa_allergens`
+  
+* Remove/rollback migrated content with `drush mr --tag=[allergens|alerts]`
+  * Notice this will completely delete the created entries and next migrate recreates the entity id's.
 
 FSA Ratings search / Elasticsearch
 ---------------------

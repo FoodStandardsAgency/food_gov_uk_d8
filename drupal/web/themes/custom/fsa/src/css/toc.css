@@ -9,6 +9,10 @@
   padding-top: 1em;
 }
 
+.toc-tree ul li,
+.toc-tree ol li {
+  margin-bottom: 1em;
+}
 
 :--not-touch .toc-tree ul a:--enter,
 :--not-touch .toc-tree ol a:--enter {
@@ -24,7 +28,6 @@
 .toc-tree ul ul a,
 .toc-tree ol ol a {
   color: var(--color-black);
-  text-decoration: underline;
 }
 
 .toc-filter .back-to-top {

@@ -133,6 +133,7 @@ nav#block-menu-help-main > ul > li > a,
     margin-top: 0em;
     transform: translateX(0%);
     box-shadow: none;
+    text-decoration: none !important;
   }
 
   @media (--breakpoint-lg) {
@@ -149,6 +150,7 @@ nav#block-menu-help-main > ul > li > a,
 
   @media (--breakpoint-sm) {
     color: var(--primary-color);
+    text-decoration: underline !important;
   }
 }
 

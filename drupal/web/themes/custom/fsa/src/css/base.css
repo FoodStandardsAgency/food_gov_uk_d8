@@ -14,7 +14,7 @@ Using postcss-custom-selectors
 Plugin documentation:
   https://github.com/postcss/postcss-custom-selectors*/
 @custom-selector :--heading h1, h2, h3, h4, h5, h6;
-@custom-selector :--enter :hover, :focus;
+@custom-selector :--enter :hover, :active;
 
 @custom-selector :--not-touch html:not(.is-touch);
 
@@ -59,6 +59,7 @@ Plugin documentation:
   --color-light-gray: #DEE2E5;
   --color-lighter-gray: #F0F3F5;
 
+  --color-dark-teal: #007c75;
   --color-teal: #00A39B;
   --color-light-teal: #00B2A9;
 
@@ -67,6 +68,11 @@ Plugin documentation:
 
   --color-dark-red: #a91f2d;
   --color-red: #E31837;
+
+  --color-orange: #ffb200;
+
+  --color-yellow: #ffbf47;
+  --color-light-yellow: #ffdfa2;
 
   --color-green: #6CB33F;
 
@@ -99,13 +105,15 @@ Plugin documentation:
 /*Transitions*/
 :root {
   --transition-enter: 0.7s cubic-bezier(0.19,1,0.22,1);
+  --transition-enter-fast: 0.2s cubic-bezier(0.19,1,0.22,1);
 }
 
 /*Misc*/
 :root {
-  --box-shadow: 0 0.5em 2em 0 color(#000 a(20%));
+  --box-shadow: 0 0em 2em 0 color(#000 a(10%));
   --box-shadow-active: 0 1em 3em 0 color(#000 a(10%));
   --max-width: 80em;
+  --content-max-width: 39em;
 }
 
 * {
@@ -121,7 +129,7 @@ html {
   font-size: var(--font-size-base);
   letter-spacing: 0.015em;
   @mixin responsive-declaration font-size, 100%, var(--font-size-base);
-  @mixin responsive-declaration line-height, 1.2, 1.4;
+  @mixin responsive-declaration line-height, 1.3, 1.5;
 
 }
 
@@ -131,11 +139,6 @@ html.is-fixed {
 
 body {
   margin: 0;
-
-  & a {
-    color: var(--primary-color);
-    text-decoration: none;
-  }
 
   @media (--breakpoint-md) {
     flex-flow: row nowrap;
@@ -215,6 +218,54 @@ h6 {
   @mixin responsive-declaration line-height, 1.0, 1.125;
 }
 
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.field__body a {
+  text-decoration: underline;
+}
+
+/*a:not(.block-link) {
+  color: var(--primary-color);
+  text-decoration: underline;
+  outline: 3px solid transparent;
+  outline-offset: 0;
+  transition:
+    color var(--transition-enter-fast),
+    outline var(--transition-enter-fast),
+    background-color var(--transition-enter-fast);
+}
+
+a:not(.block-link):focus {
+  background-color: var(--color-yellow);
+  outline: 3px solid var(--color-yellow);
+  color: var(--color-black);
+}
+
+:--not-touch a:not(.block-link):hover:--enter {
+  text-decoration: underline;
+  outline: 3px solid transparent;
+  color: var(--light-primary-color);
+}
+
+a.block-link {
+  display: block;
+  height: 100%;
+  text-decoration: none;
+}
+
+:--not-touch a.block-link:--enter {
+  text-decoration: none;
+}
+
+a.block-link:focus {
+  background-color: var(--color-light-yellow);
+  outline: 3px solid var(--color-yellow);
+  color: var(--color-black);
+}*/
+
 p {
   &:first-child {
     margin-top: 0em;
@@ -252,11 +303,52 @@ pre {
 blockquote {
   box-shadow: -0.3em 0 0 0 var(--primary-color);
   padding-left: 1em;
+  @mixin responsive-declaration margin-top, 1.5em, 2em;
   @mixin responsive-declaration margin-left, 1em, 2em;
+  @mixin responsive-declaration margin-bottom, 1.5em, 2em;
   margin-right: 1em;
 }
 
-ol, ul {
+/*Contnet List styles*/
+.field__body ol {
+  padding-left: 0;
+}
+
+.field__body ol li:not(:last-child) {
+  margin-bottom: 1em;
+}
+
+.field__body ul {
+  padding-left: 0;
+}
+
+.field__body ul li {
+  position: relative;
+  @mixin responsive-declaration padding-left, 1.3em, 1.5em;
+  list-style: none;
+}
+
+.field__body ul li:not(:last-child) {
+  margin-bottom: 0.5em;
+}
+
+.field__body ul li:after {
+  content: "";
+  display: block;
+  @mixin responsive-declaration width, 1.3em, 1.5em;
+  @mixin responsive-declaration height, 1.3em, 1.5em;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  transform: scale(0.3333);
+  box-shadow: inset 0em 0em 0em 2px var(--primary-color);
+}
+
+.field__body ol ol,
+.field__body ul ul {
+  margin-top: 0.5em;
   @mixin responsive-declaration padding-left, 1.5em, 2.5em;
 
   & li:not(:last-child) {
@@ -264,6 +356,7 @@ ol, ul {
   }
 }
 
+/*Form styles*/
 fieldset {
   margin: 0;
   @mixin responsive-declaration margin-top, 1em, 2em;
@@ -286,10 +379,18 @@ input, textarea, select {
   border-radius: 0.15em;
   background-color: var(--color-white);
   box-shadow: 0px 0px 0px 2px var(--color-black);
+  outline: 3px solid transparent;
+  transition:
+    outline var(--transition-enter-fast),
+    background-color var(--transition-enter-fast),
+    box-shadow var(--transition-enter-fast);
+}
 
-  &:focus {
-    box-shadow: 0px 0px 0px 2px var(--primary-color);
-  }
+input:focus,
+textarea:focus,
+select:focus {
+  background-color: var(--color-white);
+  outline: 3px solid var(--color-yellow);
 }
 
 select {
@@ -464,10 +565,10 @@ a[href*="//"]:not([href*="fsa.stage.wunder.io"]):after  {
   height: 1em;
 }*/
 
-:--not-touch a[href*="//"]:not([href*="local.food.gov.uk"]):--enter,
+/*:--not-touch a[href*="//"]:not([href*="local.food.gov.uk"]):--enter,
 :--not-touch a[href*="//"]:not([href*="fsa.stage.wunder.io"]):--enter {
   color: var(--primary-color);
-}
+}*/
 
 .svg {
   position: relative;
@@ -504,10 +605,6 @@ a[href*="//"]:not([href*="fsa.stage.wunder.io"]):after  {
 
 .overflow-x-auto {
   overflow-x: auto;
-}
-
-.block-link {
-  display: block;
 }
 
 .page-title {
@@ -573,6 +670,11 @@ figure:after {
   margin-right: 0.5em;
 }
 
+:--not-touch .print__wrapper.print__wrapper--pdf a:--enter {
+  color: var(--light-primary-color);
+  text-decoration: underline;
+}
+
 .field__field_update_date {
   float: left;
   @mixin responsive-declaration padding-left, 0em, 4em;
@@ -597,6 +699,8 @@ figure:after {
   margin-bottom: 1em;
 }
 
+/*Document reference*/
+
 .field__field_document {
   background-color: var(--color-lighter-gray);
   padding-top: 1em;
@@ -618,12 +722,17 @@ figure:after {
   border: 0;
 }
 
-.field__field_document > .field__field_document__item .file__type_application-pdf {
+:--not-touch .field__field_document > .field__field_document__item .field__field_document a:--enter {
+  color: var(--light-primary-color);
+  text-decoration: underline;
+}
+
+.field__field_document  .file__type_application-pdf {
   padding-left: 5em;
   position: relative;
 }
 
-.field__field_document > .field__field_document__item .file__type_application-pdf:before {
+.field__field_document .file__type_application-pdf:before {
   content: "PDF";
   background-color: var(--color-dark-red);
   position: absolute;
@@ -637,13 +746,109 @@ figure:after {
   transform: translateY(-50%);
 }
 
+.embedded-entity {
+  position: relative;
+  @mixin responsive-declaration margin-top, 2em, 4em;
+  @mixin responsive-declaration margin-bottom, 2em, 4em;
+}
+
+/*Content image*/
+.embedded-entity img {
+  margin-left: -2em;
+  width: 110%;
+  width: calc(100% + 4em);
+  max-width: none;
+}
+
+/*Iframe*/
+.video-embed-field-responsive-video {
+  @mixin responsive-declaration margin-top, 2em, 4em;
+  @mixin responsive-declaration margin-bottom, 2em, 4em;
+  @mixin responsive-declaration margin-left, -0em, -2em;
+  @mixin responsive-declaration margin-right, -0em, -2em;
+}
+
+/*Important*/
+.important {
+  @mixin responsive-declaration margin-left, -0em, -2em;
+  @mixin responsive-declaration margin-right, -0em, -2em;
+  @mixin responsive-declaration padding, 1em, 2em;
+  background-color: var(--color-lighter-gray);
+  border: 1px solid var(--color-light-gray);
+  @mixin responsive-declaration margin-top, 1em, 2em;
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
+}
+
+.important .regional-variation {
+  background-color: var(--color-white);
+}
+
+.important .video-embed-field-responsive-video {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.important .embedded-entity img {
+  margin-left: 0em;
+  width: 100%;
+}
+
+.important .important {
+  background-color: var(--color-white);
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/*Feed icon*/
+a.feed-icon {
+  display: inline-block;
+  margin-top: 2em;
+  font-family: var(--font-family-content);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  background-color: var(--primary-color);
+  color: var(--color-white);
+  border: 0;
+  border-radius: 2em;
+  padding: 0.6em 2.5em;
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+  outline: 3px solid transparent;
+  transition:
+    outline var(--transition-enter-fast);
+}
+
+:--not-touch a.feed-icon:--enter {
+  background-color: var(--light-primary-color);
+  color: var(--color-white) !important;
+}
+
 /*Drupal tabs*/
+body.theme--service #block-tabs {
+  background-color: var(--color-lighter-gray);
+  border-bottom: 0.1em solid var(--color-light-gray);
+}
+
 #block-tabs > ul {
   display: flex;
   flex-wrap: wrap;
   padding: 0em;
   margin-left: -1em;
 }
+
+body.theme--service #block-tabs > ul {
+  margin: 0;
+  @mixin responsive-declaration padding-top, 1em, 2em;
+  padding-bottom: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+
+  @media (--breakpoint-md) {
+    padding-left: 3em;
+    padding-right: 3em;
+  }
+}
+
 
 #block-tabs > ul > li {
   list-style: none;
@@ -663,8 +868,10 @@ figure:after {
   margin-left: 1em;
   margin-bottom: 1em;
   display: block;
+  text-decoration: none;
 }
 
 :--not-touch #block-tabs > ul > li > a:--enter {
   background-color: var(--light-primary-color);
+  text-decoration: none;
 }

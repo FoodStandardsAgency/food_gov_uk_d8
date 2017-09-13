@@ -1,0 +1,5 @@
+name: FSA language switcher
+description: Alters language switcher.
+package: FSA
+type: module
+core: 8.x
