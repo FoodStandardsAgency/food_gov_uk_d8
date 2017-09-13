@@ -34,9 +34,11 @@ module:
   fsa_contactus: 0
   fsa_contactus_data: 0
   fsa_custom: 0
+  fsa_digest: 0
   fsa_document_library: 0
   fsa_es: 0
   fsa_establishment_lookup: 0
+  fsa_language_switcher: 0
   fsa_ratings: 0
   fsa_ratings_import: 0
   fsa_signin: 0

@@ -24,6 +24,8 @@ display:
             format_custom_true: Parhaol
         created:
           label: 'Dyddiad llwytho i fyny'
+        count:
+          format_plural_string: "\x03"
       filters:
         status:
           expose:

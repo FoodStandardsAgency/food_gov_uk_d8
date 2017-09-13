@@ -3,6 +3,9 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.field_notification_allergys
+    - field.field.user.user.field_notification_cache
+    - field.field.user.user.field_notification_method
     - field.field.user.user.field_subscribed_notifications
   module:
     - user
@@ -22,7 +25,7 @@ content:
     type: entity_reference_label
     region: content
   member_for:
-    weight: 5
+    weight: 1
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -30,4 +33,7 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_notification_allergys: true
+  field_notification_cache: true
+  field_notification_method: true
   langcode: true

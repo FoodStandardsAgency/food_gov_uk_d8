@@ -56,7 +56,7 @@
 
       <a href="/" class="header__logo block-link">
         <div class="svg">
-          <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop"></use></svg>
+          <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop-{{ current_language }}"></use></svg>
         </div>
       </a>
 
@@ -64,14 +64,13 @@
         <div class="button__icon svg">
           <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#search-icon"></use></svg>
         </div>
-        <span>Search</span>
+        <span>{{ 'Search'|t }}</span>
       </a>
 
       <form class="header__search" role="search">
-        <button class="header__sorting-button button button--small button--light">A–Z</button>
-
+        <button class="header__sorting-button button button--small button--light">{{ 'A–Z'|t }}</button>
         <div class="input-group">
-          <input type="text" name="" value="" placeholder="Search from...">
+          <input type="text" name="" value="" placeholder="{{ 'Search from...'|t }}">
           <select class="" name="">
             <option value="food.gov.uk">food.gov.uk</option>
             <option value="food.gov.cy">food.gov.cy</option>
@@ -85,14 +84,12 @@
         </div>
       </form>
 
+      {{ language_switcher }}
+
       <div class="header__cta">
         <div class="header__links">
-          <div class="header__language">
-            <a href="#" class="header__language-link header__language-link--active">En</a>
-            <a href="#" class="header__language-link">Cy</a>
-          </div>
           <div class="header__about">
-            <a href="#" class="">About us</a>
+            <a href="#" class="">{{ 'About us'|t }}</a>
           </div>
         </div>
       </div>
