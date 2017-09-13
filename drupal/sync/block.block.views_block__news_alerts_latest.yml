@@ -1,0 +1,28 @@
+uuid: 4cf491f0-60e5-489d-b4ff-86b1d7254585
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.news_alerts
+  module:
+    - block_class
+    - views
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: views_block__news_alerts_latest
+theme: fsa
+region: hidden
+weight: 0
+provider: null
+plugin: 'views_block:news_alerts-latest'
+settings:
+  id: 'views_block:news_alerts-latest'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility: {  }

@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.lander.field_audience
     - field.field.node.lander.field_block
+    - field.field.node.lander.field_block_reference
     - field.field.node.lander.field_content_type
     - field.field.node.lander.field_header_image
     - field.field.node.lander.field_hero_copy
@@ -55,6 +56,19 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Hero
+    group_code_block_references:
+      children:
+        - field_block_reference
+      parent_name: ''
+      weight: 13
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: 'Add programmatically created blocks to the bottom of this page.'
+        required_fields: true
+      label: 'Code block references'
 id: node.lander.default
 targetEntityType: node
 bundle: lander
@@ -74,6 +88,15 @@ content:
     region: content
   field_block:
     weight: 3
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_block_reference:
+    weight: 32
     settings:
       match_operator: CONTAINS
       size: 60
@@ -132,7 +155,7 @@ content:
     region: content
   field_promo_block:
     type: entity_reference_paragraphs
-    weight: 13
+    weight: 14
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -143,7 +166,7 @@ content:
     third_party_settings: {  }
     region: content
   field_related_content:
-    weight: 31
+    weight: 15
     settings:
       match_operator: CONTAINS
       size: 60

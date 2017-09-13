@@ -1,0 +1,23 @@
+uuid: 86e9731e-7b57-4e76-a33d-349bcbcf6fd9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_block_reference
+    - node.type.lander
+id: node.lander.field_block_reference
+field_name: field_block_reference
+entity_type: node
+bundle: lander
+label: 'Code block reference'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:block'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: entity_reference
