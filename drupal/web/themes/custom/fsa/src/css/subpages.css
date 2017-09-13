@@ -15,6 +15,10 @@
   border-top: 1px solid var(--color-light-gray);
   @mixin responsive-declaration padding-top, 1em, 2em;
   @mixin responsive-declaration margin-top, 1em, 2em;
+
+  @media print {
+    display: none;
+  }
 }
 
 .prev-next .prev {

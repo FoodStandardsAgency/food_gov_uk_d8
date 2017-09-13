@@ -68,6 +68,10 @@ body:not(.theme--service, .theme--lander) .layout.layout--with-no-sidebar .layou
   @media (--breakpoint-lg) {
     width: 19.5em;
   }
+
+  @media print {
+    display: none;
+  }
 }
 
 .layout__sidebar.is-sticky {
@@ -136,12 +140,16 @@ body:not(.theme--service, .theme--lander) .layout.layout--with-no-sidebar .layou
   @media (--breakpoint-lg) {
     padding-top: 3em;
   }
+
+  @media print {
+    margin: 0 auto;
+  }
 }
 
 .theme--service .layout__content {
   padding-right: 0;
   padding-left: 0;
-  
+
   @media (--breakpoint-lg) {
     padding-top: 0;
   }
