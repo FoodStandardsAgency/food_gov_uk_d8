@@ -2,17 +2,6 @@
   color: var(--color-white);
   z-index: 200;
   position: relative;
-  border-bottom: 0.1em solid var(--color-light-gray);
-  @mixin responsive-declaration padding-bottom, 2em, 4em;
-}
-
-.theme--service.theme--fhrs .message-list {
-  background-color: var(--color-lighter-gray);
-  @mixin responsive-declaration padding-top, 1em, 2em;
-  @mixin responsive-declaration padding-right, 1.25em, 5em;
-  @mixin responsive-declaration padding-bottom, 1em, 2em;
-  @mixin responsive-declaration padding-left, 1.25em, 5em;
-  margin-bottom: 0;
 }
 
 .message-list a {
@@ -32,8 +21,19 @@
   overflow: hidden;
 }
 
+.theme--service.theme--fhrs .message-list__item {
+  @mixin responsive-declaration margin-top, 1em, 2em;
+  @mixin responsive-declaration margin-right, 1.25em, 5em;
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
+  @mixin responsive-declaration margin-left, 1.25em, 5em;
+}
+
 .message-list__item:not(:last-child) {
   @mixin responsive-declaration margin-bottom, 1em, 2em;
+}
+
+.message-list__item:last-child {
+  @mixin responsive-declaration margin-bottom, 2em, 4em;
 }
 
 .message-list__item:before {

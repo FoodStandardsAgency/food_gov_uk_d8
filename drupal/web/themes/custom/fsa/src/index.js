@@ -6,6 +6,7 @@ import toggleContent from './toggleContent';
 import toc from './toc';
 import mobileMenu from './mobile-menu';
 import regionalVariation from './regionalVariation';
+import printPage from './printPage';
 
 const breakpoints = {
   small: "sm",
@@ -66,11 +67,16 @@ if (menuButtonElements != null || navigationElement != null || siteElement != nu
   mobileMenu(menuButtonElements, navigationElement, siteElement);
 }
 
-
-// Mobile menu
+// Regional variations
 const regionalVariationElements = [...document.querySelectorAll('.js-regional-variation')];
 if (regionalVariationElements.length > 0) {
   regionalVariation(regionalVariationElements);
+}
+
+// Print page
+const printPDFWrapperElements = [...document.querySelectorAll('.print__wrapper--pdf')];
+if (printPDFWrapperElements.length > 0) {
+  printPage(printPDFWrapperElements);
 }
 
 // Add class if touch device
