@@ -19,6 +19,10 @@
 .footer__links {
   @mixin responsive-declaration padding, 1em, 2em;
   text-align: center;
+  
+  @media print {
+    display: none;
+  }
 }
 
 .footer__links > ul {

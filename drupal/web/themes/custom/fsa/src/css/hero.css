@@ -1,5 +1,9 @@
 .hero {
   background-color: var(--primary-color);
+
+  @media print {
+    background-color: transparent;
+  }
 }
 
 .theme--page .hero {
@@ -11,6 +15,10 @@
 
 .hero a {
   color: var(--color-white);
+
+  @media print {
+    background-color: var(--color-black);
+  }
 }
 
 .hero__container {
@@ -52,6 +60,11 @@
 
   @media (--breakpoint-lg) {
     padding-right: 30%;
+  }
+
+  @media print {
+    background-color: transparent;
+    color: var(--color-black);
   }
 }
 

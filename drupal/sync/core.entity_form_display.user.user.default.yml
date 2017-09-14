@@ -44,8 +44,8 @@ content:
     type: options_buttons
     region: content
 hidden:
-  field_notification_cache: true
   contact: true
+  field_notification_cache: true
   langcode: true
   language: true
   timezone: true

@@ -29,6 +29,7 @@ hidden:
   entity_print_view_word_docx: true
   field_alert_actiontaken: true
   field_alert_allergen: true
+  field_alert_consumeradvice: true
   field_alert_description: true
   field_alert_modified: true
   field_alert_notation: true

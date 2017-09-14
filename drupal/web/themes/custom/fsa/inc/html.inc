@@ -18,7 +18,13 @@ function fsa_preprocess_html(&$variables) {
   if (is_object($node)) {
 
     $variables['attributes']['class'][] = 'node-' . $node->id();
+
+    // Set node type as theme-class
     $variables['attributes']['class'][] = 'theme--' . $node->getType();
+    if ($node->getType() == 'news' || $node->getType() == 'alert') {
+      // Additionally add combined class for news and alert node types.
+      $variables['attributes']['class'][] = 'theme--news-alerts';
+    }
 
     // Get content_type taxonomy term and set as body class.
     $tid = ($node->hasField('field_content_type')) ? $node->get('field_content_type')->target_id : 0;
@@ -33,6 +39,9 @@ function fsa_preprocess_html(&$variables) {
         case 27: // Help
           $variables['attributes']['class'][] = 'theme--service';
           $variables['attributes']['class'][] = 'theme--help-centre';
+          break;
+        case 29: // News & Alerts
+          $variables['attributes']['class'][] = 'theme--news-alerts';
           break;
       }
     }
