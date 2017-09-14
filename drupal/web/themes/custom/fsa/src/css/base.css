@@ -97,6 +97,7 @@ Plugin documentation:
 
 /*Z-Index*/
 :root {
+  --z-under: -1;
   --z-bottom: 1;
   --z-middle: 10;
   --z-top: 20;

@@ -178,6 +178,7 @@ nav#block-menu-help-main > ul > li > a:after,
 :--not-touch nav#block-menu-help-main > ul > li > a:--enter,
 :--not-touch .navigation ul li a:--enter,
 :--not-touch .navigation ul li a.is-active,
+:--not-touch .navigation ul li.menu-item--active-trail a,
 :--not-touch .navigation__link:--enter {
   box-shadow: var(--box-shadow-active);
 
@@ -201,6 +202,7 @@ nav#block-menu-help-main > ul > li > a:after,
 :--not-touch nav#block-menu-help-main > ul > li > a:--enter:after,
 :--not-touch .navigation > ul > li > a:--enter:after,
 :--not-touch .navigation ul li a.is-active:after,
+:--not-touch .navigation ul li.menu-item--active-trail a:after,
 :--not-touch .navigation__link:--enter:after {
   @media (--breakpoint-sm) {
     opacity: 1;

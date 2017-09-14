@@ -6,6 +6,7 @@
 
   @media (--breakpoint-lg) {
     min-height: 18em;
+    margin-bottom: 4em;
   }
 
   @media print {
@@ -50,17 +51,15 @@
 }
 
 /*Hero image*/
-.hero .hero__image {
-  position: relative;
-  z-index: var(--z-middle);
-
-  @media (--breakpoint-lg) {
-    padding-bottom: 4em;
-    margin-top: -3.5em;
-  }
+.hero__image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
-.theme--lander .hero .hero__image:before {
+.theme--lander .hero__image:before {
   content: "";
   background-color: var(--color-white);
   position: absolute;
@@ -74,11 +73,17 @@
 }
 
 .hero .hero__image img {
-  width: 100%;
-  height: auto;
-  position: relative;
-  z-index: var(--z-top);
-  max-width: none;
+  @media (--breakpoint-lg) {
+    z-index: var(--z-middle);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: auto;
+    max-width: none;
+    height: 100%;
+    margin: 0;
+    transform: translateY(-50%) translateX(-50%);
+  }
 }
 
 /*Hero content*/
@@ -109,21 +114,31 @@
   bottom: auto;
   left: auto;
   right: auto;
-
   background-color: var(--color-dark-blue);
   box-shadow: var(--box-shadow);
 
   @media (--breakpoint-lg) {
-    position: absolute;
-    bottom: 0;
-    left: 1em;
-    right: 1em;
-    width: 40em;
-    margin: 0;
+    width: 50%;
+    margin-top: 7em;
     @mixin responsive-declaration padding-top, 1em, 3em;
     @mixin responsive-declaration padding-right, 1em, 3em;
-    @mixin responsive-declaration padding-bottom, 1em, 4em;
+    padding-bottom: 0;
     @mixin responsive-declaration padding-left, 1em, 3em;
+  }
+}
+
+.hero .hero__image + .hero__content:before {
+  @media (--breakpoint-lg) {
+    z-index: var(--z-under);
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: -4em;
+    left: 0;
+    display: block;
+    background-color: var(--color-dark-blue);
+    box-shadow: var(--box-shadow);
   }
 }
 
