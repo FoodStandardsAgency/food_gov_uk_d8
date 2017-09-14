@@ -3,10 +3,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  @mixin responsive-declaration padding-bottom, 1em, 4em;
 
   @media (--breakpoint-lg) {
     min-height: 18em;
     margin-bottom: 4em;
+    padding-bottom: 0;
   }
 
   @media print {
@@ -30,6 +32,12 @@
 .hero > * {
   position: relative;
   z-index: var(--z-middle);
+  display: flex;
+  flex-direction: column;
+
+  @media (--breakpoint-lg) {
+    display: block;
+  }
 }
 
 .hero a {
@@ -52,24 +60,30 @@
 
 /*Hero image*/
 .hero__image {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  order: 100;
+
+  @media (--breakpoint-lg) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
 }
 
 .theme--lander .hero__image:before {
-  content: "";
-  background-color: var(--color-white);
-  position: absolute;
-  z-index: var(--z-bottom);
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 100vw;
-  display: block;
-  transform: translateX(-50%);
+  @media (--breakpoint-lg) {
+    content: "";
+    background-color: var(--color-white);
+    position: absolute;
+    z-index: var(--z-bottom);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    display: block;
+    transform: translateX(-50%);
+  }
 }
 
 .hero .hero__image img {
@@ -108,16 +122,17 @@
 
 /*Hero content after image element*/
 .hero .hero__image + .hero__content {
-  order: -1;
   position: relative;
   z-index: var(--z-top);
   bottom: auto;
   left: auto;
   right: auto;
-  background-color: var(--color-dark-blue);
-  box-shadow: var(--box-shadow);
+  box-shadow: none;
+  background-color: var(--primary-color);
 
   @media (--breakpoint-lg) {
+    box-shadow: var(--box-shadow);
+    background-color: transparent;
     width: 50%;
     margin-top: 7em;
     @mixin responsive-declaration padding-top, 1em, 3em;
@@ -128,6 +143,7 @@
 }
 
 .hero .hero__image + .hero__content:before {
+
   @media (--breakpoint-lg) {
     z-index: var(--z-under);
     content: "";
@@ -148,5 +164,9 @@
 
 .hero .hero__image + .hero__content h1,
 .hero .hero__image + .hero__content h2 {
-  color: var(--primary-color);
+  color: var(--color-white);
+
+  @media (--breakpoint-lg) {
+    color: var(--primary-color);
+  }
 }

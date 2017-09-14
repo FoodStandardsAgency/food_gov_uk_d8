@@ -1,13 +1,13 @@
 .breadcrumb {
+  position: relative;
+  z-index: var(--z-top);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   padding-top: 1em;
   padding-bottom: 1em;
 
   @media (--breakpoint-lg) {
-    position: relative;
-    z-index: var(--z-top);
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
     min-height: 3.5em;
   }
 }

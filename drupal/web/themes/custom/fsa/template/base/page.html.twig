@@ -101,8 +101,10 @@
   {% if page.primary_menu %}
   <div class="layout">
     <div class="layout__container">
-      <div class="navigation-wrapper">
-        {{ page.primary_menu }}
+      <div class="layout__content">
+        <div class="navigation-wrapper">
+          {{ page.primary_menu }}
+        </div>
       </div>
     </div>
   </div>
@@ -111,8 +113,10 @@
   {% if page.secondary_menu %}
   <div class="layout">
     <div class="layout__container">
-      <div class="navigation-wrapper navigation-wrapper--secondary">
-        {{ page.secondary_menu }}
+      <div class="layout__content">
+        <div class="navigation-wrapper navigation-wrapper--secondary">
+          {{ page.secondary_menu }}
+        </div>
       </div>
     </div>
   </div>
@@ -121,11 +125,13 @@
   {% if page.hero is defined and page.hero|render|striptags|trim %}
   <div class="layout">
     <div class="layout__container">
-      <div class="hero">
-        {{ page.hero }}
+      <div class="layout__content">
+        <div class="hero">
+          {{ page.hero }}
         </div>
       </div>
     </div>
+  </div>
   {% endif %}
 
   {% if page.highlighted %}
@@ -162,7 +168,7 @@
           </aside>
         {% endif %}
 
-        <div class="layout__content {% if page.sidebar_first or page.sidebar_second %}layout__content--with-sidebar{% endif %} js-content">
+        <div class="layout__content layout__content--main {% if page.sidebar_first or page.sidebar_second %}layout__content--with-sidebar{% endif %} js-content">
           {{ page.content }}
         </div>
       </div>
@@ -171,7 +177,9 @@
 
   <div class="layout">
     <div class="layout__container">
-      {{ page.content_bottom }}
+      <div class="layout__content">
+        {{ page.content_bottom }}
+      </div>
     </div>
   </div>
 

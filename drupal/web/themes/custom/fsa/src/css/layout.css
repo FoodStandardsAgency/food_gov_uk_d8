@@ -127,8 +127,6 @@ body:not(.theme--service, .theme--lander) .layout.layout--with-no-sidebar .layou
   position: relative;
   z-index: var(--z-bottom);
   flex: 1 1 100%;
-  min-height: 100vh;
-  padding-top: 0em;
   @mixin responsive-declaration padding-right, 1em, 4em;
   @mixin responsive-declaration padding-left, 1em, 4em;
 
@@ -137,12 +135,17 @@ body:not(.theme--service, .theme--lander) .layout.layout--with-no-sidebar .layou
     padding-left: 0;
   }
 
-  @media (--breakpoint-lg) {
-    padding-top: 3em;
-  }
-
   @media print {
     margin: 0 auto;
+  }
+}
+
+.layout__content--main {
+  min-height: 100vh;
+  padding-top: 0em;
+
+  @media (--breakpoint-lg) {
+    padding-top: 3em;
   }
 }
 
@@ -155,7 +158,7 @@ body:not(.theme--service, .theme--lander) .layout.layout--with-no-sidebar .layou
   }
 }
 
-.theme--page .layout__content {
+.theme--page .layout__content--main {
   @mixin responsive-declaration padding-top, 1em, 4em;
 }
 
