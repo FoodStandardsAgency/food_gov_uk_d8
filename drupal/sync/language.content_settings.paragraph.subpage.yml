@@ -1,0 +1,16 @@
+uuid: adb10791-0faa-458e-959b-d4803f97b189
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.subpage
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+id: paragraph.subpage
+target_entity_type_id: paragraph
+target_bundle: subpage
+default_langcode: site_default
+language_alterable: false

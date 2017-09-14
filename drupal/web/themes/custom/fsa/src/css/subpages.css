@@ -1,0 +1,73 @@
+.field__field_subpages {
+  padding-top: 1em;
+}
+
+.field__field_subpages .field__field_title {
+  @mixin responsive-declaration font-size, 1.25em, 1.7em;
+  @mixin responsive-declaration line-height, 1.2, 1.25;
+  font-weight: 700;
+  margin-bottom: 1em;
+}
+
+.prev-next {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--color-light-gray);
+  @mixin responsive-declaration padding-top, 1em, 2em;
+  @mixin responsive-declaration margin-top, 1em, 2em;
+
+  @media print {
+    display: none;
+  }
+}
+
+.prev-next .prev {
+  margin-right: auto;
+  @mixin responsive-declaration padding, 0.5em, 1em;
+  max-width: 40%;
+  color: var(--primary-color);
+}
+
+:--not-touch .prev-next .prev:--enter {
+  color: var(--light-primary-color);
+}
+
+.prev-next .next {
+  margin-left: auto;
+  @mixin responsive-declaration padding, 0.5em, 1em;
+  max-width: 40%;
+  text-align: right;
+  color: var(--primary-color);
+}
+
+:--not-touch .prev-next .next:--enter {
+  color: var(--light-primary-color);
+}
+
+.prev-next .direction {
+  background-size: 1em auto;
+  background-repeat: no-repeat;
+  @mixin responsive-declaration font-size, 1em, 1.15em;
+  font-weight: 600;
+}
+
+.prev-next .next .direction {
+  background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='20px' height='15px' viewBox='0 0 20 15' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3C!-- Generator: Sketch 46.1 %2844463%29 - http://www.bohemiancoding.com/sketch --%3E%3Ctitle%3Earrow%3C/title%3E%3Cdesc%3ECreated with Sketch.%3C/desc%3E%3Cdefs%3E%3C/defs%3E%3Cg id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='FSA-BG-Elements' transform='translate%28-1048.000000, -20133.000000%29' fill='%2300A39B'%3E%3Cg id='Next' transform='translate%28926.000000, 20127.000000%29'%3E%3Cpath d='M137.754269,12.3687753 L122,12.3687753 L122,14.6030946 L137.755396,14.6030946 L132.949586,19.4080341 L134.514548,20.9729962 L142,13.4865249 L134.514548,6 L132.949586,7.56496206 L137.754269,12.3687753 Z' id='arrow'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-position: 100% 50%;
+  padding-right: 1.5em;
+}
+
+.prev-next .prev .direction {
+  background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='20px' height='15px' viewBox='0 0 20 15' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3C!-- Generator: Sketch 46.1 %2844463%29 - http://www.bohemiancoding.com/sketch --%3E%3Ctitle%3ECombined Shape Copy%3C/title%3E%3Cdesc%3ECreated with Sketch.%3C/desc%3E%3Cdefs%3E%3C/defs%3E%3Cg id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='FSA-BG-Elements' transform='translate%28-371.000000, -20133.000000%29' fill='%2300A39B'%3E%3Cg id='Prev' transform='translate%28370.000000, 20127.000000%29'%3E%3Cpath d='M16.7542691,12.3687753 L1,12.3687753 L1,14.6030946 L16.7553956,14.6030946 L11.9495857,19.4080341 L13.5145477,20.9729962 L21,13.4865249 L13.5145477,6 L11.9495857,7.56496206 L16.7542691,12.3687753 Z' id='Combined-Shape-Copy' transform='translate%2811.000000, 13.486498%29 rotate%28-180.000000%29 translate%28-11.000000, -13.486498%29 '%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-position: 0% 50%;
+  padding-left: 1.5em;
+}
+
+:--not-touch .prev-next .next:--enter .direction,
+:--not-touch .prev-next .prev:--enter .direction {
+  text-decoration: underline;
+}
+
+.prev-next .title {
+  margin-top: 0.5em;
+}

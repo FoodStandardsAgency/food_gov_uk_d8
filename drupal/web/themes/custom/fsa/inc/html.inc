@@ -18,11 +18,17 @@ function fsa_preprocess_html(&$variables) {
   if (is_object($node)) {
 
     $variables['attributes']['class'][] = 'node-' . $node->id();
+
+    // Set node type as theme-class
     $variables['attributes']['class'][] = 'theme--' . $node->getType();
+    if ($node->getType() == 'news' || $node->getType() == 'alert') {
+      // Additionally add combined class for news and alert node types.
+      $variables['attributes']['class'][] = 'theme--news-alerts';
+    }
 
     // Get content_type taxonomy term and set as body class.
-    $tid = ($node->hasField('field_content_type')) ? $node->get('field_content_type')->target_id : FALSE;
-    if ($tid !== FALSE) {
+    $tid = ($node->hasField('field_content_type')) ? $node->get('field_content_type')->target_id : 0;
+    if ($tid != NULL) {
       $term = Term::load($tid);
 
       // Add content type based html class.
@@ -31,8 +37,11 @@ function fsa_preprocess_html(&$variables) {
       // Add body classes based on selected taxonomy term
       switch ($term->id()) {
         case 27: // Help
-          $variables['attributes']['class'][] = 'theme-service';
-          $variables['attributes']['class'][] = 'theme-service--help-centre';
+          $variables['attributes']['class'][] = 'theme--service';
+          $variables['attributes']['class'][] = 'theme--help-centre';
+          break;
+        case 29: // News & Alerts
+          $variables['attributes']['class'][] = 'theme--news-alerts';
           break;
       }
     }
@@ -42,8 +51,8 @@ function fsa_preprocess_html(&$variables) {
   $current_path = \Drupal::service('path.current')->getPath();
   $uri_segments = explode('/', $current_path);
   if ($uri_segments[1] === 'ratings' || $uri_segments[1] === 'fsa-ratings') {
-    $variables['attributes']['class'][] = 'theme-service';
-    $variables['attributes']['class'][] = 'theme-service--fhrs';
+    $variables['attributes']['class'][] = 'theme--service';
+    $variables['attributes']['class'][] = 'theme--fhrs';
   }
 
 }

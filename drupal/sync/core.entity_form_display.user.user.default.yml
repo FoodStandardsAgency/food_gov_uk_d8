@@ -7,10 +7,9 @@ dependencies:
     - field.field.user.user.field_notification_cache
     - field.field.user.user.field_notification_method
     - field.field.user.user.field_notification_sms
-    - field.field.user.user.user_picture
     - image.style.thumbnail
+    - field.field.user.user.field_subscribed_notifications
   module:
-    - image
     - user
 _core:
   default_config_hash: K-1rBM8mTIkFp9RqOC2tMRUukOQ1xbRCfSKK8dEddnA
@@ -21,11 +20,6 @@ mode: default
 content:
   account:
     weight: 0
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  contact:
-    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -52,24 +46,15 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  language:
-    weight: 2
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  timezone:
-    weight: 4
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  user_picture:
-    type: image_image
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
+  field_subscribed_notifications:
     weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
     region: content
 hidden:
+  contact: true
   field_notification_cache: true
   langcode: true
+  language: true
+  timezone: true

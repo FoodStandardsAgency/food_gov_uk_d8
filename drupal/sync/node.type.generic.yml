@@ -1,0 +1,20 @@
+uuid: bd033505-8ace-4c77-8684-a6d1915483eb
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - footer
+      - help
+      - main
+    parent: 'main:'
+name: 'Generic page'
+type: generic
+description: 'Use <em>Generic page</em> to create General text pages like legal information or anything that does not require complex layout options.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

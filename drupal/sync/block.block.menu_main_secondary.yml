@@ -1,0 +1,28 @@
+uuid: 56f5ebc6-f439-4f4e-a2bf-2c8a09ece646
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - block_class
+    - system
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: menu_main_secondary
+theme: fsa
+region: secondary_menu
+weight: 0
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation secondary'
+  provider: system
+  label_display: '0'
+  level: 2
+  depth: 3
+visibility: {  }

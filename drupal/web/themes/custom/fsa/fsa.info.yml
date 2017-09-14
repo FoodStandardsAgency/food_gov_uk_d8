@@ -11,9 +11,11 @@ regions:
   highlighted: 'Highlighted'
   help: 'Help'
   content: 'Content'
+  content_bottom: 'Content bottom'
   sidebar_first: 'Left sidebar'
   sidebar_second: 'Right sidebar'
   footer: 'Footer'
   breadcrumb: 'Breadcrumb'
+  hidden: 'Hidden'
 libraries:
   - fsa/global

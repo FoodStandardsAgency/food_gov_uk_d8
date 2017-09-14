@@ -1,0 +1,33 @@
+
+fsa_signin.default_controller_signInPage:
+  path: 'signin'
+  defaults:
+    _controller: '\Drupal\fsa_signin\Controller\DefaultController::signInPage'
+    _title: 'Sign in'
+  requirements:
+    _permission: 'access content'
+
+fsa_signin.default_controller_emailSubscriptionsPage:
+  path: 'profile/subscriptions/email'
+  defaults:
+    _controller: '\Drupal\fsa_signin\Controller\DefaultController::emailSubscriptionsPage'
+    _title: 'Email subscriptions'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+fsa_signin.default_controller_smsSubscriptionsPage:
+  path: 'profile/subscriptions/sms'
+  defaults:
+    _controller: '\Drupal\fsa_signin\Controller\DefaultController::smsSubscriptionsPage'
+    _title: 'SMS subscriptions'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+fsa_signin.default_controller_myAccountPage:
+  path: 'profile'
+  defaults:
+    _controller: '\Drupal\fsa_signin\Controller\DefaultController::myAccountPage'
+    _title: 'My account'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+

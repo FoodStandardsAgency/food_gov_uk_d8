@@ -9,7 +9,7 @@
 {% endfor %}
 {% set randomID = randomID|join %}
 
-<div class="layout layout--with-sidebar ratings js-sticky-container">
+<div class="ratings js-sticky-container">
 
   <button class="ratings__search-expand-button toggle-button js-toggle-button" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
     <div class="toggle-button__item">{% trans %}Show search options{% endtrans %}</div>
@@ -18,7 +18,7 @@
     </div>
   </button>
 
-  <div class="layout__sidebar ratings__search js-sticky-element toggle-content toggle-content--only-mobile js-toggle-content js-toggle-content-only-mobile" id="collapsible-{{ randomID }}" aria-hidden="true">
+  <div class="ratings__search js-sticky-element toggle-content toggle-content--only-mobile js-toggle-content js-toggle-content-only-mobile" id="collapsible-{{ randomID }}" aria-hidden="true">
     <div class="container container--search">
       <div class="ratings__logo logo svg">
         <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop-white"></use></svg>
@@ -28,7 +28,7 @@
     </div>
   </div>
 
-  <div class="layout__content ratings__content ratings__content--listing">
+  <div class="ratings__content ratings__content--listing">
     <header class="ratings__header rating__header--back-link">
       {{ backlink }}
     </header>

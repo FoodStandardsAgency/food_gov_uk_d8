@@ -2,6 +2,7 @@ module:
   admin_toolbar: 0
   anchor_link: 0
   automated_cron: 0
+  better_exposed_filters: 0
   block: 0
   block_class: 0
   block_content: 0
@@ -19,6 +20,7 @@ module:
   dynamic_page_cache: 0
   editor: 0
   elasticsearch_helper: 0
+  email_registration: 0
   embed: 0
   entity: 0
   entity_embed: 0
@@ -38,8 +40,10 @@ module:
   fsa_es: 0
   fsa_establishment_lookup: 0
   fsa_notify: 0
+  fsa_language_switcher: 0
   fsa_ratings: 0
   fsa_ratings_import: 0
+  fsa_signin: 0
   fsa_subpages: 0
   geolocation: 0
   help: 0
@@ -55,6 +59,7 @@ module:
   media_entity_document: 0
   media_entity_image: 0
   menu_breadcrumb: 0
+  menu_trail_by_path: 0
   menu_ui: 0
   migrate: 0
   migrate_plus: 0

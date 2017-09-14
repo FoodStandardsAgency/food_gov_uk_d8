@@ -1,7 +1,11 @@
+/*Liftup and manual promo styles*/
+
+.promo-list,
 .liftup-list {
   position: relative;
 }
 
+.promo-list:before,
 .liftup-list:before {
   content: "";
   background-color: var(--color-purple);
@@ -19,11 +23,14 @@
   background-color: var(--color-lighter-gray);
 }
 
+.layout--with-sidebar .promo-list:before,
+.theme--service .promo-list:before,
 .layout--with-sidebar .liftup-list:before,
-.theme-service .liftup-list:before {
+.theme--service .liftup-list:before {
   display: none;
 }
 
+.paragraph--type-manual-promo,
 .paragraph--type-liftups {
   position: relative;
   z-index: var(--z-middle);
@@ -31,15 +38,17 @@
   @mixin responsive-declaration padding-bottom, 1em, 4em;
 }
 
+.paragraph--type-manual-promo > h2,
 .paragraph--type-liftups > h2 {
   color: var(--color-white);
 }
 
 .liftup-list.liftup-list--information .paragraph--type-liftups > h2,
-.theme-service--help-centre .paragraph--type-liftups > h2 {
+.theme--help-centre .paragraph--type-liftups > h2 {
   color: var(--color-black);
 }
 
+.promo,
 .liftup {
   display: flex;
   flex-flow: row wrap;
@@ -48,6 +57,7 @@
   @mixin responsive-declaration margin-left, -1em, -1.5em;
 }
 
+.promo__item,
 .liftup__item {
   @mixin responsive-declaration margin-left, 1em, 1.5em;
   @mixin responsive-declaration margin-bottom, 1em, 1.5em;

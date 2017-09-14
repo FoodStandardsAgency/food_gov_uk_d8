@@ -95,6 +95,7 @@ hidden:
   entity_print_view_word_docx: true
   field_audience: true
   field_block: true
+  field_block_reference: true
   field_content_type: true
   field_document: true
   field_header_image: true
@@ -102,6 +103,7 @@ hidden:
   field_liftup_title: true
   field_liftups: true
   field_nation: true
+  field_related_content: true
   field_subpages: true
   field_topic: true
   field_update_date: true

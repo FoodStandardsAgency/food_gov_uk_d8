@@ -64,7 +64,7 @@
   padding: 0.75em 1em;
   background-color: var(--color-white);
   box-shadow: var(--box-shadow);
-  transition: box-shadow var(--transition-enter);
+  border-radius: 0.2em;
   color: var(--color-black);
   font-weight: 600;
   height: 100%;
@@ -72,9 +72,11 @@
   text-align: center;
   align-items: center;
   justify-content: center;
+  transition: box-shadow var(--transition-enter);
 }
 
 :--not-touch .field__field_topic_cloud__item a:--enter {
+  background-color: var(--color-white) !important;
   box-shadow: var(--box-shadow-active);
   color: var(--primary-color);
 }

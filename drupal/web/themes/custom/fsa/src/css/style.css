@@ -13,7 +13,6 @@
 @import "toggle.css";
 
 /*Component*/
-@import "infobox.css";
 @import "establishment.css";
 @import "ratings-meanings.css";
 @import "featurebox.css";
@@ -24,10 +23,11 @@
 @import "sidebar.css";
 @import "side-navigation.css";
 @import "node-teaser.css";
-@import "status.css";
+@import "message-list.css";
 @import "liftup.css";
 @import "hero.css";
 @import "modal.css";
 @import "toc.css";
-@import "promo.css";
 @import "topic-cloud.css";
+@import "subpages.css";
+@import "regional-variation.css";

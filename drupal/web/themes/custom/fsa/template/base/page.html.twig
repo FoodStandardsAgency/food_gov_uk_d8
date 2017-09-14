@@ -54,24 +54,23 @@
         </div>
       </button>
 
-      <div class="header__logo">
+      <a href="/" class="header__logo block-link">
         <div class="svg">
-          <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop"></use></svg>
+          <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop-{{ current_language }}"></use></svg>
         </div>
-      </div>
+      </a>
 
-      <button type="button" name="button" class="header__search-button button button--with-icon button--mobile-light">
+      <a class="header__search-button button button--with-icon button--mobile-light">
         <div class="button__icon svg">
           <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#search-icon"></use></svg>
         </div>
-        <span>Search</span>
-      </button>
+        <span>{{ 'Search'|t }}</span>
+      </a>
 
-      <div class="header__search">
-        <button class="header__sorting-button button button--small button--light">A–Z</button>
-
+      <form class="header__search" role="search">
+        <button class="header__sorting-button button button--small button--light">{{ 'A–Z'|t }}</button>
         <div class="input-group">
-          <input type="text" name="" value="" placeholder="Search from...">
+          <input type="text" name="" value="" placeholder="{{ 'Search from...'|t }}">
           <select class="" name="">
             <option value="food.gov.uk">food.gov.uk</option>
             <option value="food.gov.cy">food.gov.cy</option>
@@ -83,20 +82,28 @@
             </div>
           </button>
         </div>
-      </div>
+      </form>
 
       <div class="header__cta">
         <div class="header__links">
           <div class="header__language">
-            <a href="#" class="header__language-link header__language-link--active">En</a>
-            <a href="#" class="header__language-link">Cy</a>
+            {{ language_switcher }}
           </div>
+          
           <div class="header__about">
-            <a href="#" class="">About us</a>
+            <a href="#" class="">{{ 'About us'|t }}</a>
+          </div>
+
+          <div class="header__login">
+            <a href="#" class="">{{ 'Login'|t }}</a>
           </div>
         </div>
       </div>
+
+      {{ page.header }}
+
     </div>
+
   </header>
 
   <div class="navigation-wrapper js-navigation">
@@ -105,17 +112,20 @@
         <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#arrow-back"></use></svg>
       </div>
     </button>
-    {% if page.header %}
-      {{ page.header }}
+    {% if page.primary_menu %}
+      {{ page.primary_menu }}
     {% endif %}
     <div class="header__cta header__cta--navigation">
       <div class="header__links">
         <div class="header__language">
-          <a href="#" class="header__language-link header__language-link--active">En</a>
-          <a href="#" class="header__language-link">Cy</a>
+          {{ language_switcher }}
         </div>
+
         <div class="header__about">
-          <a href="#" class="">About us</a>
+          <a href="#" class="">{{ 'About us'|t }}</a>
+        </div>
+        <div class="header__login">
+          <a href="#" class="">{{ 'Login'|t }}</a>
         </div>
       </div>
     </div>
@@ -151,37 +161,40 @@
     </div>
   {% endif %}
 
-  <main role="main">
+  <main role="main" class="layout-content">
     <a id="main-content" tabindex="-1"></a>
+    <div class="layout{% if page.sidebar_first or page.sidebar_second %} layout--with-sidebar js-sticky-container{% else %} layout--with-no-sidebar{% endif %}">
+      <div class="layout__container">
+        {% if page.sidebar_first or page.sidebar_second %}
+          <aside class="layout__sidebar js-sticky-element" role="complementary">
+            <div class="sidebar">
+              <div role="navigation" class="side-navigation">
 
-    <div class="layout-content">
-      <div class="layout{% if page.sidebar_first or page.sidebar_second %} layout--with-sidebar js-sticky-container{% endif %}">
-        <div class="layout__container">
-          {% if page.sidebar_first or page.sidebar_second %}
-            <aside class="layout__sidebar js-sticky-element" role="complementary">
-              <div class="sidebar">
-                <div class="side-navigation">
+                {% if page.sidebar_first %}
+                  {{ page.sidebar_first }}
+                {% endif %}
 
-                  {% if page.sidebar_first %}
-                    {{ page.sidebar_first }}
-                  {% endif %}
+                {% if page.sidebar_second %}
+                  {{ page.sidebar_second }}
+                {% endif %}
 
-                  {% if page.sidebar_second %}
-                    {{ page.sidebar_second }}
-                  {% endif %}
-
-                </div>
               </div>
-            </aside>
-          {% endif %}
+            </div>
+          </aside>
+        {% endif %}
 
-          <div class="layout__content {% if page.sidebar_first or page.sidebar_second %}layout__content--with-sidebar{% endif %} js-content">
-            {{ page.content }}
-          </div>
+        <div class="layout__content {% if page.sidebar_first or page.sidebar_second %}layout__content--with-sidebar{% endif %} js-content">
+          {{ page.content }}
         </div>
       </div>
     </div>
   </main>
+
+  <div class="layout">
+    <div class="layout__container">
+      {{ page.content_bottom }}
+    </div>
+  </div>
 
   <footer class="footer" role="contentinfo">
     <div class="footer__logo">

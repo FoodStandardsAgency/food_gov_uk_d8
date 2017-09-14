@@ -19,12 +19,18 @@
     padding-left: 5.5em;
     border-bottom: none;
   }
+
+  @media print {
+    display: none;
+  }
 }
 
 .header__container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  max-width: var(--max-width);
+  margin: 0 auto;
 }
 
 .header__menu-button {
@@ -172,7 +178,6 @@
 
 :--not-touch .header__cta.header__cta--navigation .header__language-link:--enter, {
   color: var(--color-white);
-  text-decoration: underline;
 }
 
 .header__cta.header__cta--navigation .header__about a {
@@ -181,5 +186,4 @@
 
 :--not-touch .header__cta.header__cta--navigation .header__about a:--enter, {
   color: var(--color-white);
-  text-decoration: underline;
 }
