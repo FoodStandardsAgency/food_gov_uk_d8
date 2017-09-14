@@ -58,6 +58,7 @@ module:
   media_entity_document: 0
   media_entity_image: 0
   menu_breadcrumb: 0
+  menu_trail_by_path: 0
   menu_ui: 0
   migrate: 0
   migrate_plus: 0
