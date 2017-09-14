@@ -1,0 +1,142 @@
+<?php
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\fsa_notify\FsaNotifyAPI;
+use Drupal\fsa_notify\FsaNotifyStorage;
+use Drupal\fsa_notify\Plugin\QueueWorker\FsaNotifyStorageQueue;
+use Drupal\node\NodeInterface;
+use Drupal\user\Entity\User;
+use Drupal\Core\Form\FormStateInterface;
+
+
+function fsa_notify_form_user_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['field_notification_sms']['#element_validate'][] = 'fsa_notify_validate';
+}
+
+// data integrity: require phone number if user chooses sms method.
+function fsa_notify_validate(&$form, FormStateInterface $form_state) {
+
+  $field = 'field_notification_method';
+  $method = $form_state->getValue($field);
+  if (empty($method[0]['value']) || $method[0]['value'] != 'sms') {
+    return;
+  }
+
+  $field = 'field_notification_sms';
+  $sms = $form_state->getValue($field);
+  if (!empty($sms[0]['value'])) {
+    return;
+  }
+
+  $form_state->setErrorByName($field, t('If "Notification method" is SMS then "Notification SMS" is required.'));
+}
+
+// collect inserted alerts
+function fsa_notify_entity_insert(EntityInterface $entity) {
+  if (!($entity instanceof NodeInterface)) {
+    return;
+  }
+  if ($entity->getType() != 'alert') {
+    return;
+  }
+  
+  $queue = \Drupal::service('queue')->get('fsa_notify_store');
+  $data = $entity->id();
+  $queue->createItem($data);
+}
+
+function fsa_notify_cron() {
+
+  $state_key = 'fsa_notify.killswitch';
+  $killswitch = \Drupal::state()->get($state_key);
+  if (empty($killswitch)) {
+    return;
+  }
+
+  // process alerts
+  // (insert it into each user cache who wants to be notified)
+  fsa_notify_queue_process();
+
+  /* now start sending */
+
+  $notifier = new FsaNotifyAPI();
+  $storage = new FsaNotifyStorage();
+
+  fsa_notify_send_sms($storage, $notifier);
+  fsa_notify_send_daily($storage, $notifier);
+  fsa_notify_send_weekly($storage, $notifier);
+
+}
+
+// process queued alerts
+function fsa_notify_queue_process() {
+
+  $queue = Drupal::service('queue')->get('fsa_notify_store');
+  $worker = Drupal::service('plugin.manager.queue_worker')->createInstance('fsa_notify_store');
+
+  while($item = $queue->claimItem()) {
+    try {
+      $worker->processItem($item->data);
+      $queue->deleteItem($item);
+    }
+    catch (SuspendQueueException $e) {
+      $queue->releaseItem($item);
+      break;
+    }
+    catch (\Exception $e) {
+      watchdog_exception('fsa_notify', $e);
+    }
+  }
+
+}
+
+function fsa_notify_send_sms($storage, $notifier) {
+  $reference = 'sms';
+  while ($recipients = $storage->getAllType('sms')) {
+    foreach ($recipients as $uid => $messages) {
+      $user = User::load($uid);
+      foreach ($messages as $m) {
+        $personalisation = [
+          'message' => $m,
+        ];
+        $notifier->sms($user, $reference, $personalisation);
+      }
+      $storage->reset($user);
+    }
+    \Drupal::entityManager()->getStorage('user')->resetCache();
+  }
+}
+
+function fsa_notify_send_daily($storage, $notifier) {
+  $reference = 'daily';
+  $subject = t('Daily notification @date', ['@date' => date('F j, Y')]);
+  while($emails = $storage->getAllType('daily')) {
+    foreach ($emails as $uid => $body) {
+      $user = User::load($uid);
+      $personalisation = [
+        'subject' => $subject,
+        'body' => $body,
+      ];
+      $notifier->email($user, $reference, $personalisation);
+      $storage->reset($user);
+    }
+    \Drupal::entityManager()->getStorage('user')->resetCache();
+  }
+}
+
+function fsa_notify_send_weekly($storage, $notifier) {
+  $reference = 'weekly';
+  $subject = t('Weekly notification: week @date', ['@date' => date('W')]);
+  while($emails = $storage->getAllType('weekly')) {
+    foreach ($emails as $uid => $body) {
+      $user = User::load($uid);
+      $personalisation = [
+        'subject' => $subject,
+        'body' => $body,
+      ];
+      $notifier->email($user, $reference, $personalisation);
+      $storage->reset($user);
+    }
+    \Drupal::entityManager()->getStorage('user')->resetCache();
+  }
+}

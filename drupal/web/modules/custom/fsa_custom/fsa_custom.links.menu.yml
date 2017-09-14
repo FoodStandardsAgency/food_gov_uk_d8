@@ -1,0 +1,5 @@
+system.admin_config_fsa:
+  title: 'FSA configuration'
+  parent: system.admin_config
+  route_name: system.admin_config_fsa
+  weight: -50

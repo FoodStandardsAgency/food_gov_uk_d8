@@ -51,7 +51,10 @@
         "mikehaertl/phpwkhtmltopdf": "^2.2",
         "drupal/block_class": "^1.0@alpha",
         "drupal/menu_breadcrumb": "^1.4",
-        "drupal/media_entity_document": "^1.1"
+        "drupal/media_entity_document": "^1.1",
+        "php-http/guzzle6-adapter": "^1.1",
+        "alphagov/notifications-php-client": "^1.1",
+        "drupal/field_validation": "^1.0@alpha"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",

@@ -27,16 +27,17 @@ module:
   field: 0
   field_group: 0
   field_ui: 0
+  field_validation: 0
   file: 0
   filter: 0
   fsa_alerts_import: 0
   fsa_contactus: 0
   fsa_contactus_data: 0
   fsa_custom: 0
-  fsa_digest: 0
   fsa_document_library: 0
   fsa_es: 0
   fsa_establishment_lookup: 0
+  fsa_notify: 0
   fsa_ratings: 0
   fsa_ratings_import: 0
   fsa_subpages: 0
