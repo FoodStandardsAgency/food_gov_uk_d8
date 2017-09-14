@@ -45,10 +45,5 @@ function fsa_alerts_import_theme() {
         'type' => NULL,
       ],
     ],
-    'fsa_alert_product_details' => [
-      'variables' => [
-        'product' => [],
-      ],
-    ],
   ];
 }
