@@ -31,6 +31,7 @@
   font-weight: 400;
   text-align: left;
   padding-right: 2em;
+  color: var(--color-white);
 
   @media (--breakpoint-sm) {
     text-align: center;
@@ -63,8 +64,4 @@
 
 :--not-touch .breadcrumb__link:--enter {
 
-}
-
-.breadcrumb__item:last-child .breadcrumb__link{
-  color: var(--color-black);
 }

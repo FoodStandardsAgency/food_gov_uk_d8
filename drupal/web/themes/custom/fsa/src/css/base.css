@@ -60,7 +60,7 @@ Plugin documentation:
   --color-lighter-gray: #F0F3F5;
 
   --color-dark-teal: #007c75;
-  --color-teal: #00A39B;
+  --color-teal: #00938C;
   --color-light-teal: #00B2A9;
 
   --color-purple: #49176D;
@@ -80,6 +80,7 @@ Plugin documentation:
 }
 
 :root {
+  --dark-primary-color: var(--color-dark-teal);
   --primary-color: var(--color-teal);
   --light-primary-color: var(--color-light-teal);
 
@@ -218,7 +219,7 @@ h6 {
 }
 
 a {
-  color: var(--primary-color);
+  color: var(--dark-primary-color);
   text-decoration: none;
 }
 
@@ -377,6 +378,7 @@ fieldset {
 }
 
 input, textarea, select {
+  font-family: var(--font-family-content);
   display: block;
   max-width: 100%;
   font-size: 1em;
@@ -390,6 +392,11 @@ input, textarea, select {
     background-color var(--transition-enter-fast),
     box-shadow var(--transition-enter-fast);
 }
+
+input::-webkit-input-placeholder {color:var(--color-black)}
+input::-moz-placeholder          {color:var(--color-black)}
+input:-moz-placeholder           {color:var(--color-black)}
+input:-ms-input-placeholder      {color:var(--color-black)}
 
 input:focus,
 textarea:focus,
@@ -525,16 +532,17 @@ background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-
 
 .input-group > input,
 .input-group > select {
+  box-shadow: 0px 0px 0px 1px var(--color-light-gray);
   padding: 0.6em 2em;
 }
 
 .input-group > .button {
   border-radius: 0;
-  box-shadow: 0px 0px 0px 2px var(--primary-color);
+  box-shadow: 0px 0px 0px 1px var(--dark-primary-color);
 }
 
 :--not-touch .input-group > .button:--enter {
-  box-shadow: 0px 0px 0px 2px var(--light-primary-color);
+  box-shadow: 0px 0px 0px 1px var(--light-primary-color);
 }
 
 .input-group > .button:first-child {
@@ -918,7 +926,7 @@ body.theme--service #block-tabs > ul {
 #block-tabs > ul > li > a {
   font-family: var(--font-family-content);
   letter-spacing: 0.02em;
-  background-color: var(--primary-color);
+  background-color: var(--dark-primary-color);
   color: var(--color-white);
   border: 0;
   border-radius: 2em;
@@ -929,6 +937,7 @@ body.theme--service #block-tabs > ul {
   margin-bottom: 1em;
   display: block;
   text-decoration: none;
+  transition: background-color var(--transition-enter);
 }
 
 :--not-touch #block-tabs > ul > li > a:--enter {

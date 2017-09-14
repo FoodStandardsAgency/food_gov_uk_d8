@@ -1,5 +1,5 @@
 .hero {
-  background-color: var(--primary-color);
+  position: relative;
 
   @media print {
     background-color: transparent;
@@ -11,6 +11,24 @@
   @mixin responsive-declaration padding-right, 1em, 5em;
   @mixin responsive-declaration padding-bottom, 1em, 4em;
   @mixin responsive-declaration padding-left, 1em, 5em;
+}
+
+.hero:before {
+  content: "";
+  background-color: var(--primary-color);
+  position: absolute;
+  z-index: var(--z-bottom);
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  display: block;
+  transform: translateX(-50%);
+}
+
+.hero > * {
+  position: relative;
+  z-index: var(--z-middle);
 }
 
 .hero a {
