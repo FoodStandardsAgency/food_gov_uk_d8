@@ -187,3 +187,32 @@
 :--not-touch .header__cta.header__cta--navigation .header__about a:--enter, {
   color: var(--color-white);
 }
+
+.header__region {
+  display: flex;
+}
+
+.header__region ul.links {
+  display: flex;
+  justify-content: center;
+  font-size: 1em;
+  padding: 2em;
+  font-weight: 600;
+}
+
+.header__region ul.links li {
+  list-style: none;
+  margin-right: 1.5em;
+}
+
+.header__region ul.links li:not(:last-child):after {
+  content: "|";
+  margin: 0 0.25em;
+  color: var(--primary-color);
+}
+
+.header__region ul.links li:not(:last-child):after {
+  margin: 0;
+  margin-left: 1.5em;
+  color: var(--color-white);
+}
