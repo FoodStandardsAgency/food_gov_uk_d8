@@ -7,20 +7,27 @@ fsa_signin.default_controller_signInPage:
   requirements:
     _permission: 'access content'
 
-#fsa_signin.send_password_email_form:
-#  path: '/fsa_signin/form/send_password_email'
-#  defaults:
-#    _form: '\Drupal\fsa_signin\Form\SendPasswordEmailForm'
-#    _title: 'SendPasswordEmailForm'
-#  requirements:
-#    _access: 'TRUE'
-  
+fsa_signin.default_controller_emailSubscriptionsPage:
+  path: 'profile/subscriptions/email'
+  defaults:
+    _controller: '\Drupal\fsa_signin\Controller\DefaultController::emailSubscriptionsPage'
+    _title: 'Email subscriptions'
+  requirements:
+    _user_is_logged_in: 'TRUE'
 
-#fsa_signin.cta_register:
-#  path: '/fsa_signin/form/cta_register'
-#  defaults:
-#    _form: '\Drupal\fsa_signin\Form\CtaRegister'
-#    _title: 'CtaRegister'
-#  requirements:
-#    _access: 'TRUE'
-  
+fsa_signin.default_controller_smsSubscriptionsPage:
+  path: 'profile/subscriptions/sms'
+  defaults:
+    _controller: '\Drupal\fsa_signin\Controller\DefaultController::smsSubscriptionsPage'
+    _title: 'SMS subscriptions'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+fsa_signin.default_controller_myAccountPage:
+  path: 'profile'
+  defaults:
+    _controller: '\Drupal\fsa_signin\Controller\DefaultController::myAccountPage'
+    _title: 'My account'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+

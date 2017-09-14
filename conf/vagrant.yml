@@ -52,6 +52,8 @@
     partition_var_log: False
     partition_var_lib_mysql: False
 
+    base_pubkeys_enable: False
+
     nginx_disable_content_security_policy: True
 
     # How to assign memory for each role and set the correct
