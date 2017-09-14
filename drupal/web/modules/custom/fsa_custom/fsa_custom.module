@@ -5,10 +5,45 @@
  * Contains fsa_custom.module.
  */
 
+use Drupal\Core\Url;
+use Drupal\node\Entity\Node;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\block\Entity\Block;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\Core\Access\AccessResult;
+
+
+/**
+ * Implements template_preprocess_breadcrumb().
+ */
+function fsa_custom_preprocess_breadcrumb(&$variables) {
+
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if (isset($node)) {
+    // Build news & alerts node breadcrumbs.
+    $cts = array(
+      'news',
+      'alert',
+    );
+    if (in_array($node->bundle(), $cts)) {
+      $request = \Drupal::request();
+      $route_match = \Drupal::routeMatch();
+
+      // Title to the parent node.
+      $nid = 44; // News & Alerts main item.
+      $parent_title = Node::load($nid)->title->value;
+
+      $page_title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
+      $variables['breadcrumb'][0]['text'] = t('Home');
+      $variables['breadcrumb'][0]['url'] = Url::fromRoute('<front>');
+
+      $variables['breadcrumb'][1]['text'] = $parent_title;
+      $variables['breadcrumb'][1]['url'] = Url::fromRoute('entity.node.canonical', ['node' => $nid]);
+      $variables['breadcrumb'][2]['text'] = $page_title;
+    }
+  }
+}
+
 
 /**
  * Implements block_access().
