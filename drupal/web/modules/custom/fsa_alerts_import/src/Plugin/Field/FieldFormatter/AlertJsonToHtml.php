@@ -36,8 +36,6 @@ class AlertJsonToHtml extends FormatterBase {
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
     $elements = [];
-    $attributes = [];
-    $products = [];
 
     // Currently built for API product details only.
     foreach ($items as $delta => $item) {
@@ -45,69 +43,58 @@ class AlertJsonToHtml extends FormatterBase {
       $data = json_decode($item->value, TRUE);
 
       if (json_last_error() != JSON_ERROR_NONE) {
-        drupal_set_message('Malformatted product details json', 'warning');
+        drupal_set_message('Failed formatting the product details.', 'warning');
         return $elements;
       }
 
       // Loop through each product entry.
       foreach ($data as $key => $value) {
+        $table_caption = '';
+        $table_rows = [];
 
-        // Set the product name, when name is ridiculously long we could assume
-        // it does not want to be wrapped in heading. This occurs mainly when
-        // alert type if FAFA.
         if (isset($value['productName'])) {
-          if (strlen($value['productName']) <= 128) {
-            $products[]['productName'] = $this->itemWrapper(t('Product'), nl2br($value['productName']), 'h4');
-          }
-          else {
-            $products[]['productName'] = $this->itemWrapper(FALSE, nl2br($value['productName']), 'p');
-          }
+          $table_caption = $this->itemWrapper(FALSE, nl2br($value['productName']), 'p');
         }
+
         // Optional pack size description.
         if (isset($value['packSizeDescription'])) {
-          $products[]['packSizeDescription'] = $this->itemWrapper(t('Pack size'), $value['packSizeDescription']);
+          $table_rows[] = [t('Pack size'), $value['packSizeDescription']];
         }
 
         // Optional product code(s).
         if (isset($value['productCodes'])) {
-          $products[]['productCode'] = $this->itemWrapper(t('Product code'), $value['productCodes']);
+          $table_rows[] = [t('Product code'), $value['productCodes']];
         }
 
         if (isset($value['batchDescription'])) {
-          $batchdescription = FALSE;
           // Loop through batch descriptions and get only content from keys we
           // care about.
           foreach ($value['batchDescription'] as $b_key => $b_value) {
             if (isset($b_value['batchCode'])) {
-              $batchdescription .= $this->labelWrapper(t('Batch code')) . $b_value['batchCode'] . '<br />';
+              $table_rows[] = [t('Batch code'), $b_value['batchCode']];
             }
             if (isset($b_value['bestBeforeDate'])) {
-              $batchdescription .= $this->labelWrapper(t('Best before date')) . $b_value['bestBeforeDate'] . '<br />';
+              $table_rows[] = [t('Best before date'), $b_value['bestBeforeDate']];
             }
             if (isset($b_value['bestBeforeDescription'])) {
-              $batchdescription .= $this->labelWrapper(t('Best before description')) . $b_value['bestBeforeDescription'] . '<br />';
+              $table_rows[] = [t('Best before description'), $b_value['bestBeforeDescription']];
             }
             if (isset($b_value['useByDate'])) {
-              $batchdescription .= $this->labelWrapper(t('Use by date')) . $b_value['useByDate'] . '<br />';
+              $table_rows[] = [t('Use by date'), $b_value['useByDate']];
             }
             if (isset($b_value['useByDate'])) {
-              $batchdescription .= $this->labelWrapper(t('Use by description')) . $b_value['useByDescription'] . '<br />';
+              $table_rows[] = [t('Use by description'), $b_value['useByDescription']];
             }
-          }
-
-          // Make the batch sedcription a wrapped item.
-          if ($batchdescription) {
-            $products[]['batchDescription'] = $this->itemWrapper(FALSE, $batchdescription, 'div');
           }
         }
 
+        $elements[$key] = [
+          '#theme' => 'table',
+          '#caption' => $table_caption,
+          '#header' => NULL,
+          '#rows' => $table_rows,
+        ];
       }
-
-      $elements[$delta] = [
-        '#theme' => 'fsa_alert_product_details',
-        '#attributes' => $attributes,
-        '#product' => $products,
-      ];
     }
 
     return $elements;
