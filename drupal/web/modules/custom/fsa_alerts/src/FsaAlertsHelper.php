@@ -29,7 +29,7 @@ class FsaAlertsHelper {
       $cta = Link::createFromRoute($text, 'fsa_signin.user_preregistration_alerts_form', [], $options);
     }
     catch (\Exception $e) {
-      // In case the link creation when route was non-existent
+      // In case the link creation when route was non-existent.
       $cta = Link::createFromRoute($text, 'user.register', [], $options);
     }
 

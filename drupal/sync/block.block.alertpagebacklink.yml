@@ -1,0 +1,32 @@
+uuid: 22072478-cba0-4b2c-bd9e-ef6109949dfd
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - ctools
+    - fsa_alerts
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: alertpagebacklink
+theme: fsa
+region: sidebar_first
+weight: 0
+provider: null
+plugin: alert_backlink
+settings:
+  id: alert_backlink
+  label: 'Alert page backlink'
+  provider: fsa_alerts
+  label_display: '0'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      alert: alert
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
