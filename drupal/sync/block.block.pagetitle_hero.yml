@@ -4,7 +4,6 @@ status: true
 dependencies:
   module:
     - block_class
-    - ctools
   theme:
     - fsa
 third_party_settings:
@@ -21,12 +20,4 @@ settings:
   label: 'Page title'
   provider: core
   label_display: '0'
-visibility:
-  'entity_bundle:node':
-    id: 'entity_bundle:node'
-    bundles:
-      lander: lander
-      page: page
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
+visibility: {  }

@@ -1,6 +1,6 @@
 
 fsa_signin.default_controller_signInPage:
-  path: '/signin'
+  path: '/news-alerts/signin'
   defaults:
     _controller: '\Drupal\fsa_signin\Controller\DefaultController::signInPage'
     _title: 'Sign in'
@@ -32,18 +32,25 @@ fsa_signin.default_controller_myAccountPage:
     _user_is_logged_in: 'TRUE'
 
 fsa_signin.user_preregistration_alerts_form:
-  path: '/subscribe/alerts'
+  path: '/news-alerts/subscribe/alerts'
   defaults:
     _form: '\Drupal\fsa_signin\Form\AlertsForRegistrationForm'
-    _title: 'Alerts'
+    _title: 'Subscribe to news & alerts'
   requirements:
     _permission: 'access content'
 
 fsa_signin.user_registration_form:
-  path: '/subscribe/personal'
+  path: '/news-alerts/subscribe/personal'
   defaults:
     _form: '\Drupal\fsa_signin\Form\UserRegistrationForm'
-    _title: 'Type and frequency'
+    _title: 'Subscribe to news & alerts'
   requirements:
     _permission: 'access content'
 
+fsa_signin.user_registration_thank_you:
+  path: '/news-alerts/subscribe/thankyou'
+  defaults:
+    _controller: '\Drupal\fsa_signin\Controller\DefaultController::thankYouPage'
+    _title: 'Thank you'
+  requirements:
+    _user_is_logged_in: 'TRUE'
