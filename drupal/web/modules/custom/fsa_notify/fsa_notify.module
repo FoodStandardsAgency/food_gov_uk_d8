@@ -74,6 +74,8 @@ function fsa_notify_queue_process() {
   $queue = Drupal::service('queue')->get('fsa_notify_store');
   $worker = Drupal::service('plugin.manager.queue_worker')->createInstance('fsa_notify_store');
 
+  fsa_notify_timer('start', 'queue');
+
   while($item = $queue->claimItem()) {
     try {
       $worker->processItem($item->data);
@@ -86,12 +88,16 @@ function fsa_notify_queue_process() {
     catch (\Exception $e) {
       watchdog_exception('fsa_notify', $e);
     }
+    fsa_notify_timer('count', 'queue');
   }
+
+  fsa_notify_timer('stop', 'queue');
 
 }
 
 function fsa_notify_send_sms($storage, $notifier) {
   $reference = 'sms';
+  fsa_notify_timer('start', $reference);
   while ($recipients = $storage->getAllType('sms')) {
     foreach ($recipients as $uid => $messages) {
       $user = User::load($uid);
@@ -100,16 +106,19 @@ function fsa_notify_send_sms($storage, $notifier) {
           'message' => $m,
         ];
         $notifier->sms($user, $reference, $personalisation);
+        fsa_notify_timer('count', $reference);
       }
       $storage->reset($user);
     }
     \Drupal::entityManager()->getStorage('user')->resetCache();
   }
+  fsa_notify_timer('stop', $reference);
 }
 
 function fsa_notify_send_daily($storage, $notifier) {
   $reference = 'daily';
   $subject = t('Daily notification @date', ['@date' => date('F j, Y')]);
+  fsa_notify_timer('start', $reference);
   while($emails = $storage->getAllType('daily')) {
     foreach ($emails as $uid => $body) {
       $user = User::load($uid);
@@ -118,15 +127,18 @@ function fsa_notify_send_daily($storage, $notifier) {
         'body' => $body,
       ];
       $notifier->email($user, $reference, $personalisation);
+      fsa_notify_timer('count', $reference);
       $storage->reset($user);
     }
     \Drupal::entityManager()->getStorage('user')->resetCache();
   }
+  fsa_notify_timer('stop', $reference);
 }
 
 function fsa_notify_send_weekly($storage, $notifier) {
   $reference = 'weekly';
   $subject = t('Weekly notification: week @date', ['@date' => date('W')]);
+  fsa_notify_timer('start', $reference);
   while($emails = $storage->getAllType('weekly')) {
     foreach ($emails as $uid => $body) {
       $user = User::load($uid);
@@ -135,8 +147,47 @@ function fsa_notify_send_weekly($storage, $notifier) {
         'body' => $body,
       ];
       $notifier->email($user, $reference, $personalisation);
+      fsa_notify_timer('count', $reference);
       $storage->reset($user);
     }
     \Drupal::entityManager()->getStorage('user')->resetCache();
   }
+  fsa_notify_timer('stop', $reference);
+}
+
+function fsa_notify_timer($event, $type) {
+
+  static $cache = [];
+
+  switch ($event) {
+
+    case 'start':
+      $cache[$type] = [
+        'start' => microtime(TRUE),
+        'count' => 0,
+      ];
+      break;
+
+    case 'count':
+      $cache[$type]['count']++;
+      break;
+
+    case 'stop':
+      $stop = microtime(TRUE);
+      $start = $cache[$type]['start'];
+      $items = $cache[$type]['count'];
+      unset($cache[$type]);
+      $elapsed = $stop - $start;
+      $rate = $elapsed > 0 ? $items / $elapsed : 'n/a';
+      $elapsed = sprintf('%.3f', $elapsed);
+      $rate = sprintf('%.3f', $rate);
+      \Drupal::logger('fsa_notify')->info('Timer: type %type; elapsed %elapsed; %items items; %rate items/sec.', [
+        '%type' => $type,
+        '%elapsed' => $elapsed,
+        '%items' => $items,
+        '%rate' => $rate,
+      ]);
+      break;
+  }
+
 }
