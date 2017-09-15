@@ -53,8 +53,9 @@ if (toggleButtons != null) {
 }
 
 // Toggle content
-const profileElementArray = [...document.getElementById('block-myprofile').children];
-if (profileElementArray != null) {
+const profileElement = document.getElementById('block-myprofile');
+if (profileElement != null) {
+  const profileElementArray = [...document.getElementById('block-myprofile').children];
   toggleContent(profileElementArray[0], breakpoints, profileElementArray[2]);
 }
 
