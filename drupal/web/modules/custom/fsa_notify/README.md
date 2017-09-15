@@ -29,11 +29,9 @@ That page contains two things:
 
 Basic configuration parameters are held in Drupal state variables and managed by drush.
 
-`drush state-set fsa_notify.api '...'`
-
-`drush state-set fsa_notify.template_sms '...'`
-
-`drush state-set fsa_notify.template_email '...'`
+* `drush state-set fsa_notify.api '...'`
+* `drush state-set fsa_notify.template_sms '...'`
+* `drush state-set fsa_notify.template_email '...'`
 
 ## API keys and Template IDs
 
@@ -99,7 +97,7 @@ Message body is constructed and then sent.
 
 ## Timing
 
-Since sending out messages are quite slow process in order to track percormance and have some stats there is timer functionality included which logs some stats only if something is sent out.
+Since sending out messages are quite slow process in order to track performance and have some stats there is timer functionality included which logs some stats only if something is sent out.
 
 ```
 Timer: type weekly; elapsed 164.101; 968 items; 5.899 items/sec.
