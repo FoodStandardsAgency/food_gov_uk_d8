@@ -16,6 +16,10 @@
   }
 }
 
+.theme--service .hero {
+  display: none;
+}
+
 .hero:before {
   content: "";
   background-color: var(--primary-color);

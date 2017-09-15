@@ -26,11 +26,11 @@ body:not(.theme--service, .theme--lander) .layout.layout--with-no-sidebar .layou
   max-width: var(--content-max-width);
 }
 
-.theme--service .layout__container {
+.theme--service .layout__container.layout__container--main {
   max-width: var(--max-width);
 }
 
-.theme--service .layout__container {
+.theme--service .layout__container.layout__container--main {
   margin: 0;
   max-width: none !important;
 }

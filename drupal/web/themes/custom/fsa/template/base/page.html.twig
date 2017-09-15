@@ -149,7 +149,7 @@
   <main role="main" class="layout-content">
     <a id="main-content" tabindex="-1"></a>
     <div class="layout{% if page.sidebar_first or page.sidebar_second %} layout--with-sidebar js-sticky-container{% else %} layout--with-no-sidebar{% endif %}">
-      <div class="layout__container">
+      <div class="layout__container layout__container--main">
         {% if page.sidebar_first or page.sidebar_second %}
           <aside class="layout__sidebar js-sticky-element" role="complementary">
             <div class="sidebar">
@@ -186,7 +186,7 @@
   <footer class="footer" role="contentinfo">
     <div class="footer__logo">
       <div class="svg">
-        <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop"></use></svg>
+        <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop-en"></use></svg>
       </div>
     </div>
     <div class="footer__content">
