@@ -23,30 +23,33 @@ function fsa_alerts_preprocess_node(&$variables) {
         $about_title = t('About allergy alerts');
         $about_copy = t("Sometimes there will be a problem with a food product that means it should not be sold. Then it might be 'withdrawn' (taken off the shelves) or 'recalled' (when customers are asked to return the product). Sometimes foods have to be withdrawn or recalled if there is a risk to consumers because the allergy labelling is missing or incorrect or if there is any other food allergy risk. When there is a food allergy risk, the FSA will issue an Allergy Alert.");
         break;
+
       case 'PRIN':
       case 'FAFA':
         $about_title = t('About product recalls and withdrawls');
         $about_copy = t("If there is a problem with a food product that means it should not be sold, then it might be 'withdrawn' (taken off the shelves) or 'recalled' (when customers are asked to return the product). The FSA issues Product Withdrawal Information Notices and Product Recall Information Notices to let consumers and local authorities know about problems associated with food. In some cases, a 'Food Alert for Action' is issued. This provides local authorities with details of specific action to be taken on behalf of consumers.");
         break;
+
       default:
+        $about_title = '';
         $about_copy = '';
         break;
     }
 
-    if ($about_copy != '') {
+    if ($about_title != '' && $about_copy != '') {
       $variables['content']['about_allergy_alerts'] = [
-        '#markup' => '<div class="field__about_alert_description"><h3>' . $about_title . '</h3><p>' . $about_copy . '</p>' . $cta . '</div>',
-        '#weight' => 49
+        '#markup' => '<div class="field__about_alert_description"><h3>' . $about_title . '</h3><p>' . $about_copy . '</p></div>',
+        '#weight' => 49,
       ];
     }
 
     // Add "Subscribe to alerts CTA".
     $variables['content']['subscribe_alerts'] = [
       '#markup' => '<div class="field__subscribe_alerts">' . FsaAlertsHelper::ctaSubscribe()->toString() . '</div>',
-      '#weight' => 50
+      '#weight' => 50,
     ];
-
   }
+
 }
 
 /**
