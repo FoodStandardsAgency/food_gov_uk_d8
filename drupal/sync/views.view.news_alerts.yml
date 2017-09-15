@@ -1135,6 +1135,8 @@ display:
           plugin_id: result
       defaults:
         footer: false
+        css_class: false
+      css_class: news-alerts-listing
     cache_metadata:
       max-age: -1
       contexts:
