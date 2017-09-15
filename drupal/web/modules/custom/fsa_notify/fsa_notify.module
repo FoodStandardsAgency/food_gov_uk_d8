@@ -117,14 +117,16 @@ function fsa_notify_send_sms($storage, $notifier) {
 
 function fsa_notify_send_daily($storage, $notifier) {
   $reference = 'daily';
-  $subject = t('Daily notification @date', ['@date' => date('F j, Y')]);
+  $date = date('j F Y');
+  $subject = t('Daily digest');
   fsa_notify_timer('start', $reference);
   while($emails = $storage->getAllType('daily')) {
     foreach ($emails as $uid => $body) {
       $user = User::load($uid);
       $personalisation = [
+        'date' => $date,
         'subject' => $subject,
-        'body' => $body,
+        'allergy_alerts' => $body,
       ];
       $notifier->email($user, $reference, $personalisation);
       fsa_notify_timer('count', $reference);
@@ -137,14 +139,16 @@ function fsa_notify_send_daily($storage, $notifier) {
 
 function fsa_notify_send_weekly($storage, $notifier) {
   $reference = 'weekly';
-  $subject = t('Weekly notification: week @date', ['@date' => date('W')]);
+  $date = date('j F Y');
+  $subject = t('Daily digest');
   fsa_notify_timer('start', $reference);
   while($emails = $storage->getAllType('weekly')) {
     foreach ($emails as $uid => $body) {
       $user = User::load($uid);
       $personalisation = [
+        'date' => $date,
         'subject' => $subject,
-        'body' => $body,
+        'allergy_alerts' => $body,
       ];
       $notifier->email($user, $reference, $personalisation);
       fsa_notify_timer('count', $reference);
