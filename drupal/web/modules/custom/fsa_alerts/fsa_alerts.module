@@ -10,6 +10,22 @@ use Drupal\fsa_alerts\FsaAlertsHelper;
 /**
  * Implements template_preprocess_node().
  */
+function fsa_alerts_preprocess_block(&$variables) {
+
+  if ($variables['plugin_id'] == 'page_title_block') {
+    $node = \Drupal::routeMatch()->getParameter('node');
+    // Override a generic title for page title block when alert type.
+    if (is_object($node) && $node->getType() == 'alert') {
+      if ($variables['elements']['#id'] == 'pagetitle_hero') {
+        $variables['content']['#title'] = t('News & alerts');
+      }
+    }
+  }
+}
+
+/**
+ * Implements template_preprocess_node().
+ */
 function fsa_alerts_preprocess_node(&$variables) {
 
   // Set vars for easy access.
