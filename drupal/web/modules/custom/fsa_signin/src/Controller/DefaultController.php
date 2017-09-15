@@ -3,13 +3,34 @@
 namespace Drupal\fsa_signin\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\fsa_signin\SignInService;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\user\Entity\User;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class DefaultController.
  */
 class DefaultController extends ControllerBase {
+
+  /** @var  SignInService */
+  protected $signInService;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(SignInService $signInService) {
+    $this->signInService = $signInService;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('fsa_signin.service')
+    );
+  }
 
   public function signInPage() {
     $title = ['#markup' => '<h1>' . $this->t('Sign in') . '</h1>'];
@@ -38,8 +59,8 @@ class DefaultController extends ControllerBase {
   public function emailSubscriptionsPage() {
     $uid = \Drupal::currentUser()->id();
     $account = User::load($uid);
-    $subscribed_term_ids = $this->subscribedTermIds($account);
-    $options = $this->allergenTermsAsOptions();
+    $subscribed_term_ids = $this->signInService->subscribedTermIds($account);
+    $options = $this->signInService->allergenTermsAsOptions();
 
     $subscription_form = \Drupal::formBuilder()->getForm(\Drupal\fsa_signin\Form\EmailSubscriptionsForm::class, $account, $options, $subscribed_term_ids);
     $preferences_form = \Drupal::formBuilder()->getForm(\Drupal\fsa_signin\Form\EmailPreferencesForm::class, $account);
@@ -55,8 +76,8 @@ class DefaultController extends ControllerBase {
   public function smsSubscriptionsPage() {
     $uid = \Drupal::currentUser()->id();
     $account = User::load($uid);
-    $subscribed_term_ids = $this->subscribedTermIds($account);
-    $options = $this->allergenTermsAsOptions();
+    $subscribed_term_ids = $this->signInService->subscribedTermIds($account);
+    $options = $this->signInService->allergenTermsAsOptions();
 
     $subscription_form = \Drupal::formBuilder()->getForm(\Drupal\fsa_signin\Form\SmsSubscriptionsForm::class, $account, $options, $subscribed_term_ids);
 
@@ -81,31 +102,4 @@ class DefaultController extends ControllerBase {
     ];
   }
 
-  /**
-   * @return array
-   */
-  protected function allergenTermsAsOptions() {
-    $all_terms = \Drupal::entityTypeManager()
-      ->getStorage('taxonomy_term')
-      ->loadTree('alerts_allergen', 0, 1, FALSE);
-    $options = [];
-    foreach ($all_terms as $term) {
-      $options[$term->tid] = $this->t($term->name);
-    }
-    return $options;
-  }
-
-  /**
-   * @param \Drupal\user\Entity\User $account
-   * @return int[] Term IDs
-   */
-  protected function subscribedTermIds(User $account) {
-    $subscriptions = $account->get('field_subscribed_notifications')
-      ->getValue();
-    $subscribed_term_ids = [];
-    foreach ($subscriptions as $s) {
-      $subscribed_term_ids[] = intval($s['target_id']);
-    }
-    return $subscribed_term_ids;
-  }
 }
