@@ -31,7 +31,7 @@ class UserRegistrationForm extends FormBase {
       '#value' => $alert_tids,
     ];
     $form['description'] = [
-      '#markup' => '<p>' . $this->t('By how and how often you want to receive information from us?') . '</p>',
+      '#markup' => '<h2>' . $this->t('Type and frequency') . '</h2><p>' . $this->t('By how and how often you want to receive information from us?') . '</p>',
     ];
 
     $form['alert_container'] = [

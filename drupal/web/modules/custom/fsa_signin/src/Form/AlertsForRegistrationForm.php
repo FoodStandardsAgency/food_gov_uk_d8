@@ -45,12 +45,14 @@ class AlertsForRegistrationForm extends FormBase {
     /** @var \Drupal\user\PrivateTempStore $tempstore */
     $tempstore = \Drupal::service('user.private_tempstore')->get('fsa_signin');
     $default_values = $tempstore->get('alert_tids_for_registration');
+    $options = array_merge(['all' => $this->t('All allergy alerts')], $this->signInService->allergenTermsAsOptions());
 
     $form['alert_tids_for_registration'] = [
       '#type' => 'checkboxes',
-      '#title' => $this->t('Alerts'),
-      '#options' => $this->signInService->allergenTermsAsOptions(),
+      '#title' => $this->t('Allergy alerts'),
+      '#options' => $options,
       '#default_value' => $default_values,
+      '#description' => $this->t('Select all that apply'),
     ];
     $form['actions'] = array('#type' => 'actions');
     $form['actions']['submit'] = array(

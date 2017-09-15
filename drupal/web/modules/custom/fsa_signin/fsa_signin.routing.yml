@@ -35,7 +35,7 @@ fsa_signin.user_preregistration_alerts_form:
   path: '/subscribe/alerts'
   defaults:
     _form: '\Drupal\fsa_signin\Form\AlertsForRegistrationForm'
-    _title: 'Alerts'
+    _title: 'Subscribe to news & alerts'
   requirements:
     _permission: 'access content'
 
@@ -43,7 +43,7 @@ fsa_signin.user_registration_form:
   path: '/subscribe/personal'
   defaults:
     _form: '\Drupal\fsa_signin\Form\UserRegistrationForm'
-    _title: 'Type and frequency'
+    _title: 'Subscribe to news & alerts'
   requirements:
     _permission: 'access content'
 
