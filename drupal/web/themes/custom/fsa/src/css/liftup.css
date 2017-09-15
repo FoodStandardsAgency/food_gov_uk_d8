@@ -32,8 +32,8 @@
   background-color: var(--color-lighter-gray);
 }
 
-.theme--content-type-alerts .promo-list:before,
-.theme--content-type-news .promo-list:before {
+.theme--news-alerts .liftup-list:before,
+.theme--news-alerts .promo-list:before {
   background-color: var(--color-white);
 }
 
@@ -98,9 +98,9 @@
   }
 }
 
+.theme--news-alerts .liftup__item,
 .latest-block .views-row-wrapper > .views-row,
-.theme--content-type-alerts .promo__item,
-.theme--content-type-news .promo__item,
+.theme--news-alerts .promo__item,
 .liftup-list.liftup-list--information .liftup__item {
   @media (--breakpoint-xs) {
     min-width: 11em;

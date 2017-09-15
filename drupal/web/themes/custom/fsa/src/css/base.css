@@ -896,7 +896,7 @@ a.feed-icon {
 
 body.theme--service #block-tabs {
   background-color: var(--color-lighter-gray);
-  border-bottom: 0.1em solid var(--color-light-gray);
+  border-bottom: 1px solid var(--color-light-gray);
 }
 
 #block-tabs > ul {
