@@ -1,11 +1,10 @@
 uuid: f814c8f7-7358-470e-8f7c-97982b1dae1e
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - block_class
     - fsa_signin
-    - user
   theme:
     - fsa
 third_party_settings:
@@ -22,11 +21,4 @@ settings:
   label: 'My account'
   provider: fsa_signin
   label_display: visible
-visibility:
-  user_role:
-    id: user_role
-    roles:
-      authenticated: authenticated
-    negate: false
-    context_mapping:
-      user: '@user.current_user_context:current_user'
+visibility: {  }
