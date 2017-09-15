@@ -47,12 +47,33 @@ function fsa_preprocess_html(&$variables) {
     }
   }
 
-  // Rely on URL paths for FHRS ratings section.
+  // Rely on URL paths for FHRS ratings and subscribe sections.
   $current_path = \Drupal::service('path.current')->getPath();
   $uri_segments = explode('/', $current_path);
   if ($uri_segments[1] === 'ratings' || $uri_segments[1] === 'fsa-ratings') {
     $variables['attributes']['class'][] = 'theme--service';
     $variables['attributes']['class'][] = 'theme--fhrs';
+  }
+
+
+  // Get service routes to set body classes for the section.
+  $service_urls = [];
+  $routes = [
+    'fsa_signin.default_controller_signInPage',
+    'fsa_signin.default_controller_myAccountPage',
+  ];
+  foreach ($routes AS $route) {
+    try {
+      $service_url = \Drupal\Core\Url::fromRoute($route)->toString();
+      $service_url = explode('/', $service_url);
+      $service_urls[] = $service_url[1];
+    }
+    catch (\Exception $e) {
+      // Just do nothing.
+    }
+  }
+  if (in_array($uri_segments[1], $service_urls)) {
+    $variables['attributes']['class'][] = 'theme--subscribe';
   }
 
 }
