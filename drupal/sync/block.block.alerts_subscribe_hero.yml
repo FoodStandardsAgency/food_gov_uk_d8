@@ -1,0 +1,30 @@
+uuid: a6e78d42-f714-40d0-904f-8af18fac09a6
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - fsa_alerts
+    - system
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: alerts_subscribe_hero
+theme: fsa
+region: hero
+weight: 0
+provider: null
+plugin: alerts_subscribe_hero
+settings:
+  id: alerts_subscribe_hero
+  label: 'Alerts subscribe hero'
+  provider: fsa_alerts
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: /node/44
+    negate: false
+    context_mapping: {  }

@@ -53,6 +53,13 @@ if (toggleButtons != null) {
 }
 
 // Toggle content
+const profileElement = document.getElementById('block-myprofile');
+if (profileElement != null) {
+  const profileElementArray = [...document.getElementById('block-myprofile').children];
+  toggleContent(profileElementArray[0], breakpoints, profileElementArray[2]);
+}
+
+// Table of contents
 const tableOfContentsElements = [...document.querySelectorAll('.toc-tree')];
 const contentElements = [...document.querySelectorAll('.toc-filter')];
 if (tableOfContentsElements.length > 0 || contentElements.length > 0) {

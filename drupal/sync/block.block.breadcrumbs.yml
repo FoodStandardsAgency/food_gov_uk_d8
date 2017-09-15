@@ -12,8 +12,8 @@ third_party_settings:
     classes: ''
 id: breadcrumbs
 theme: fsa
-region: breadcrumb
-weight: 0
+region: hero
+weight: -8
 provider: null
 plugin: system_breadcrumb_block
 settings:

@@ -32,6 +32,7 @@ module:
   field_validation: 0
   file: 0
   filter: 0
+  fsa_alerts: 0
   fsa_alerts_import: 0
   fsa_contactus: 0
   fsa_contactus_data: 0
