@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Contains fsa_alerts.module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function fsa_alerts_theme() {
+  return [
+    'fsa_alerts_subscribe_hero' => [
+      'variables' => [
+        'attributes' => NULL,
+        'title' => NULL,
+        'copy' => NULL,
+        'cta' => NULL,
+      ],
+    ],
+  ];
+}
