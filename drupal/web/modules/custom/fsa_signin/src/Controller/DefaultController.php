@@ -3,6 +3,7 @@
 namespace Drupal\fsa_signin\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Url;
 use Drupal\fsa_signin\SignInService;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\user\Entity\User;
@@ -99,6 +100,17 @@ class DefaultController extends ControllerBase {
       ['#markup' => '<div class="profile header account-delete"><h2>' . $this->t('Delete account') . '</h2></div>'],
       ['#markup' => '<p>' . $this->t('Unsubscribe from all topics delivered by email and SMS and delete your account below. This operation cannot be undone.') . '</p>'],
       $delete_acc_form,
+    ];
+  }
+
+  public function thankYouPage() {
+    $profile_page_url = Url::fromRoute('fsa_signin.default_controller_myAccountPage')->toString();
+    $markup  = '<h1>' . $this->t('Thank you!') . '</h1>';
+    $markup .= '<p>' . $this->t('Edit your subscriptions in your account page') . '</p>';
+    $markup .= '<p><a class="button" href="' .$profile_page_url. '">' . $this->t('My account') . '</a></p>';
+
+    return [
+      '#markup' => $markup,
     ];
   }
 

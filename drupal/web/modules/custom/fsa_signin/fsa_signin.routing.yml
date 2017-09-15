@@ -47,3 +47,10 @@ fsa_signin.user_registration_form:
   requirements:
     _permission: 'access content'
 
+fsa_signin.user_registration_thank_you:
+  path: '/subscribe/thankyou'
+  defaults:
+    _controller: '\Drupal\fsa_signin\Controller\DefaultController::thankYouPage'
+    _title: 'Thank you'
+  requirements:
+    _user_is_logged_in: 'TRUE'
