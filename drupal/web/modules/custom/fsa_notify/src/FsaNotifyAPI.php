@@ -96,7 +96,7 @@ class FsaNotifyAPI {
     }
 
     try {
-      $msg = sprintf('Notify API: sendSms(%s)', $email);
+      $msg = sprintf('Notify API: sendSms(%s)', $phoneNumber);
       $this->api->sendSms(
         $phoneNumber,
         $this->sms_template_id,
