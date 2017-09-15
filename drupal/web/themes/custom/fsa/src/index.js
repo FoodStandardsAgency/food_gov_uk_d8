@@ -18,7 +18,7 @@ require.context("./img/", true, /\.(gif|png|svg|jpe?g)$/);
 require('./css/style.css');
 
 // Polyfill svgs
-// svg4everybody({ polyfill: true });
+svg4everybody({ polyfill: true });
 
 // Temperary fix
 const searchLogoElement = document.querySelector('.ratings.ratings--frontpage .ratings__logo');
