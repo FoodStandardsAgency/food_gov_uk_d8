@@ -1,6 +1,6 @@
 import checkMediaQuery from './checkMediaQuery';
 
-function toggleContent(toggleButtons, breakpoints) {
+function toggleContent(toggleButtons, breakpoints, toggleContentElement = null) {
 
   const toggleContentVisibility = (button, content) => {
     if (content.classList.contains('is-open')) {
@@ -16,19 +16,37 @@ function toggleContent(toggleButtons, breakpoints) {
     }
   }
 
-  [...toggleButtons].forEach(function(button) {
-    let content = button.nextElementSibling;
+  if (toggleButtons.length != undefined) {
+    [...toggleButtons].forEach(function(button) {
+
+      let content = ((toggleContentElement === null) ? button.nextElementSibling : toggleContentElement);
+
+      if (content.classList.contains('js-toggle-content-only-mobile')) {
+        if (checkMediaQuery() == breakpoints.medium) {
+          content.removeAttribute('aria-hidden');
+        }
+      }
+      // Add click event
+      button.addEventListener("click", function() {
+        toggleContentVisibility(button, content);
+      });
+    });
+  } else {
+    let content = ((toggleContentElement === null) ? toggleButtons.nextElementSibling : toggleContentElement);
 
     if (content.classList.contains('js-toggle-content-only-mobile')) {
       if (checkMediaQuery() == breakpoints.medium) {
         content.removeAttribute('aria-hidden');
       }
     }
+    toggleButtons.setAttribute('role', 'button');
+
     // Add click event
-    button.addEventListener("click", function() {
-      toggleContentVisibility(button, content);
+    toggleButtons.addEventListener("click", function() {
+      toggleContentVisibility(toggleButtons, content);
     });
-  });
+  }
+
 }
 
 module.exports = toggleContent;

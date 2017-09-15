@@ -84,69 +84,54 @@
         </div>
       </form>
 
-      <div class="header__cta">
-        <div class="header__links">
-          <div class="header__language">
-            {{ language_switcher }}
-          </div>
-          
-          <div class="header__about">
-            <a href="#" class="">{{ 'About us'|t }}</a>
-          </div>
-
-          <div class="header__login">
-            <a href="#" class="">{{ 'Login'|t }}</a>
-          </div>
-        </div>
-      </div>
-
       {{ page.header }}
 
     </div>
 
   </header>
 
-  <div class="navigation-wrapper js-navigation">
+  <!-- <div class="navigation-wrapper js-navigation">
     <button class="header__menu-button header__menu-button--navigation js-menu-button">
       <div class="svg">
         <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#arrow-back"></use></svg>
       </div>
     </button>
-    {% if page.primary_menu %}
-      {{ page.primary_menu }}
-    {% endif %}
-    <div class="header__cta header__cta--navigation">
-      <div class="header__links">
-        <div class="header__language">
-          {{ language_switcher }}
-        </div>
+  </div> -->
 
-        <div class="header__about">
-          <a href="#" class="">{{ 'About us'|t }}</a>
-        </div>
-        <div class="header__login">
-          <a href="#" class="">{{ 'Login'|t }}</a>
+  {% if page.primary_menu %}
+  <div class="layout">
+    <div class="layout__container">
+      <div class="layout__content">
+        <div class="navigation-wrapper">
+          {{ page.primary_menu }}
         </div>
       </div>
     </div>
   </div>
-
-  {% if page.secondary_menu %}
-    {{ page.secondary_menu }}
   {% endif %}
 
-  <div class="breadcrumb">
-    {% if page.breadcrumb %}
-      {{ page.breadcrumb }}
-    {% endif %}
-  </div>
-
-  {% if page.hero is defined and page.hero|render|striptags|trim %}
-    <div class="hero">
-      <div class="hero__container">
-        {{ page.hero }}
+  {% if page.secondary_menu %}
+  <div class="layout">
+    <div class="layout__container">
+      <div class="layout__content">
+        <div class="navigation-wrapper navigation-wrapper--secondary">
+          {{ page.secondary_menu }}
+        </div>
       </div>
     </div>
+  </div>
+  {% endif %}
+
+  {% if page.hero is defined and page.hero|render|striptags|trim %}
+  <div class="layout">
+    <div class="layout__container">
+      <div class="layout__content">
+        <div class="hero">
+          {{ page.hero }}
+        </div>
+      </div>
+    </div>
+  </div>
   {% endif %}
 
   {% if page.highlighted %}
@@ -183,7 +168,7 @@
           </aside>
         {% endif %}
 
-        <div class="layout__content {% if page.sidebar_first or page.sidebar_second %}layout__content--with-sidebar{% endif %} js-content">
+        <div class="layout__content layout__content--main {% if page.sidebar_first or page.sidebar_second %}layout__content--with-sidebar{% endif %} js-content">
           {{ page.content }}
         </div>
       </div>
@@ -192,7 +177,9 @@
 
   <div class="layout">
     <div class="layout__container">
-      {{ page.content_bottom }}
+      <div class="layout__content">
+        {{ page.content_bottom }}
+      </div>
     </div>
   </div>
 

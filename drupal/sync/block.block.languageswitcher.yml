@@ -13,7 +13,7 @@ third_party_settings:
 id: languageswitcher
 theme: fsa
 region: header
-weight: -8
+weight: -9
 provider: null
 plugin: 'language_block:language_interface'
 settings:
