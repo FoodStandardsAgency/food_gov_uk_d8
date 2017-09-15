@@ -25,8 +25,13 @@ class FsaAlertsHelper {
     $text = t('Subscribe to news & alerts');
     $options = ['attributes' => ['class' => 'button']];
 
-    // @todo: Change route once we have it.
-    $cta = Link::createFromRoute($text, 'user.register', [], $options);
+    try {
+      $cta = Link::createFromRoute($text, 'fsa_signin.user_preregistration_alerts_form', [], $options);
+    }
+    catch (\Exception $e) {
+      // In case the link creation when route was non-existent
+      $cta = Link::createFromRoute($text, 'user.register', [], $options);
+    }
 
     return $cta;
 
