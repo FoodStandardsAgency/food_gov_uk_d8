@@ -1,6 +1,7 @@
 # Notify API and SMS/Email sending functionality
 
 This functionality is originally built by ragnar.kurm@wunder.io
+
 Tomi Mikola has been also involved.
 
 ## TODO
@@ -24,12 +25,14 @@ That page contains two things:
 * Overview of current configuration.
 * Option to turn off alerts collecting and sending.
 
-## Shell
+### Shell
 
 Basic configuration parameters are held in Drupal state variables and managed by drush.
 
 `drush state-set fsa_notify.api '...'`
+
 `drush state-set fsa_notify.template_sms '...'`
+
 `drush state-set fsa_notify.template_email '...'`
 
 ## API keys and Template IDs
@@ -62,6 +65,7 @@ This field has additional check by `Field validation` module for data integrity:
 ### user.field_notification_cache
 
 This field is not visible for user, but here we collect alerts per user to be sent.
+
 When alerts are sent out, this field is emptied.
 
 ### user.ield_notification_allergys
@@ -78,9 +82,9 @@ List of allergens user has signed up to.
 
 During cron run following things happen:
 * Queue is processed for each queued alert and the alerts will be reference from user caches according to user allergen signup field.
-* all SMS messages are sent out
-* all daily messages are sent out
-* all weekly messages are sent out.
+* All SMS messages are sent out
+* All daily messages are sent out
+* All weekly messages are sent out.
 
 ## Queue
 
@@ -112,6 +116,8 @@ This class takes care of following:
 * theming/assembling messages according to sending method
 * clearing user cache
 
+Chunking is used to prevent Drupal cache saturation subsequent OOM event.
+
 Everything here revolves around field `user.field_notification_cache`.
 
 ## Class FsaNotifyAPI
@@ -124,11 +130,11 @@ This class takes care of following:
 
 ## Related modules and packages
 
-drupal/field_validation
-alphagov/notifications-php-client
-php-http/guzzle6-adapter
+* alphagov/notifications-php-client
+* drupal/field_validation
+* php-http/guzzle6-adapter
 
 ## Related URL-s
 
-https://www.notifications.service.gov.uk
-https://github.com/alphagov/notifications-php-client
+* https://www.notifications.service.gov.uk
+* https://github.com/alphagov/notifications-php-client
