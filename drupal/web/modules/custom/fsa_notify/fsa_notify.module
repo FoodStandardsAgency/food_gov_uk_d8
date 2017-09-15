@@ -177,6 +177,10 @@ function fsa_notify_timer($event, $type) {
       $start = $cache[$type]['start'];
       $items = $cache[$type]['count'];
       unset($cache[$type]);
+      if ($items == 0) {
+        // dont fill logs with zeros
+        break;
+      }
       $elapsed = $stop - $start;
       $rate = $elapsed > 0 ? $items / $elapsed : 'n/a';
       $elapsed = sprintf('%.3f', $elapsed);
