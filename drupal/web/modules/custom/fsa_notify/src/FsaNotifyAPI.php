@@ -1,7 +1,11 @@
 <?php
 
+// https://github.com/alphagov/notifications-php-client
+
 namespace Drupal\fsa_notify;
 
+use Alphagov\Notifications\Exception\ApiException;
+use Alphagov\Notifications\Exception\NotifyException;
 use Drupal\Core\Url;
 use Drupal\user\Entity\User;
 
@@ -21,19 +25,19 @@ class FsaNotifyAPI {
     }
   
     try {
+      $msg = sprintf('Notify API: new \Alphagov\Notifications\Client(%s)', $api_key);
       $this->api = new \Alphagov\Notifications\Client([
         'apiKey' => $api_key,
         'httpClient' => new \Http\Adapter\Guzzle6\Client,
       ]);
     }
+    catch (ApiException $e) {
+      $this->api = NULL;
+      $this->logAndException($msg, $e);
+    }
     catch (Exception $e) {
       $this->api = NULL;
-      $msg = $e->getMessage();
-      if (!is_string($msg)) {
-        $msg = print_r($msg, TRUE);
-      }
-      $msg = sprintf('Notify API: new \Alphagov\Notifications\Client(%s): %s', $api_key, $msg);
-      $this->logAndException($msg);
+      $this->logAndException($msg, $e);
     }
 
     $state_key = "fsa_notify.template_email";
@@ -64,6 +68,7 @@ class FsaNotifyAPI {
     $personalisation['unsubscribe'] = $unsubscribe;
     
     try {
+      $msg = sprintf('Notify API: sendEmail(%s)', $email);
       $this->api->sendEmail(
         $email,
         $this->email_template_id,
@@ -71,13 +76,14 @@ class FsaNotifyAPI {
         $reference
       );
     }
+    catch (ApiException $e) {
+      $this->logAndException($msg, $e);
+    }
+    catch (NotifyException $e) {
+      $this->logAndException($msg, $e);
+    }
     catch (Exception $e) {
-      $msg = $e->getMessage();
-      if (!is_string($msg)) {
-        $msg = print_r($msg, TRUE);
-      }
-      $msg = sprintf('Notify API: sendEmail(%s): %s', $email, $msg);
-      $this->logAndException($msg);
+      $this->logAndException($msg, $e);
     }
   }
   
@@ -90,6 +96,7 @@ class FsaNotifyAPI {
     }
 
     try {
+      $msg = sprintf('Notify API: sendSms(%s)', $email);
       $this->api->sendSms(
         $phoneNumber,
         $this->sms_template_id,
@@ -97,19 +104,28 @@ class FsaNotifyAPI {
         $reference
       );
     }
+    catch (ApiException $e) {
+      $this->logAndException($msg, $e);
+    }
+    catch (NotifyException $e) {
+      $this->logAndException($msg, $e);
+    }
     catch (Exception $e) {
+      $this->logAndException($msg, $e);
+    }
+  }
+
+  protected function logAndException(string $msg, $e = NULL) {
+    $log = $msg;
+    if (!empty($e)) {
       $msg = $e->getMessage();
       if (!is_string($msg)) {
         $msg = print_r($msg, TRUE);
       }
-      $msg = sprintf('Notify API: sendSms(%s): %s', $phoneNumber, $msg);
-      $this->logAndException($msg);
+      $log = sprintf('%s :: %s', $log, $msg);
     }
-  }
-
-  protected function logAndException(string $msg) {
-    \Drupal::logger('fsa_notify')->error($msg);
-    throw new \Exception($msg);
+    \Drupal::logger('fsa_notify')->error($log);
+    throw new \Exception($log);
   }
 
 }
