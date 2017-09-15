@@ -5,6 +5,7 @@ namespace Drupal\fsa_signin\Form;
 use Drupal\Component\Utility\Random;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
 
 /**
  * Class EmailSubscriptionsForm.
@@ -36,9 +37,10 @@ class UserRegistrationForm extends FormBase {
 
     $form['alert_container'] = [
       '#type' => 'container',
+      '#attributes' => ['class' => ['alert-preferences']],
     ];
     $form['alert_container']['title'] = [
-      '#markup' => '<h2>' . $this->t('I want to receive food and allergy alerts via') . '</h2>',
+      '#markup' => '<h3>' . $this->t('I want to receive food and allergy alerts via') . '</h3>',
     ];
     $form['alert_container']['delivery_method'] = [
       '#type' => 'radios',
@@ -65,9 +67,10 @@ class UserRegistrationForm extends FormBase {
 
     $form['personal_container'] = [
       '#type' => 'container',
+      '#attributes' => ['class' => ['personal-info']],
     ];
     $form['personal_container']['title'] = [
-      '#markup' => '<h2>' . $this->t('Personal information') . '</h2>',
+      '#markup' => '<h3>' . $this->t('Personal information') . '</h3>',
     ];
     $form['personal_container']['email'] = [
       '#type' => 'email',
@@ -80,9 +83,10 @@ class UserRegistrationForm extends FormBase {
 
     $form['language_container'] = [
       '#type' => 'container',
+      '#attributes' => ['class' => ['language-info']],
     ];
     $form['language_container']['title'] = [
-      '#markup' => '<h2>' . $this->t('Choose language') . '</h2>',
+      '#markup' => '<h3>' . $this->t('Choose language') . '</h3>',
     ];
     $form['language_container']['language'] = [
       '#type' => 'radios',
@@ -90,6 +94,7 @@ class UserRegistrationForm extends FormBase {
         'en' => $this->t('English'),
         'cy' => $this->t('Cymraeg'),
       ],
+      '#default_value' => \Drupal::currentUser()->getPreferredLangcode(),
     ];
 
     $form['alert_tids'] = [
@@ -101,6 +106,9 @@ class UserRegistrationForm extends FormBase {
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
     );
+    $form['actions']['back'] = [
+      '#markup' => Link::createFromRoute($this->t('Previous'),'fsa_signin.default_controller_emailSubscriptionsPage', [], ['attributes' => ['class' => 'button black left']])->toString(),
+    ];
     return $form;
   }
 
