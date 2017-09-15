@@ -107,11 +107,13 @@
 /*Hero content*/
 .hero__content {
   color: var(--color-white);
-  @mixin responsive-declaration padding-top, 1em, 4em;
+  @mixin responsive-declaration padding-top, 1em, 2.5em;
   @mixin responsive-declaration padding-bottom, 1em, 4em;
 
   @media (--breakpoint-lg) {
-    padding-right: 30%;
+    /*padding-right: 30%;*/
+    width: 50%;
+    /*max-width: calc(100% - 22.5em);*/
   }
 }
 
