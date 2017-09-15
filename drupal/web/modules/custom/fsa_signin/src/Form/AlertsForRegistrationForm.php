@@ -47,6 +47,12 @@ class AlertsForRegistrationForm extends FormBase {
     $default_values = $tempstore->get('alert_tids_for_registration');
     $options = array_merge(['all' => $this->t('All allergy alerts')], $this->signInService->allergenTermsAsOptions());
 
+    $form['title'] = [
+      '#markup' => '<h2>' . $this->t('Alerts') . '</h2>',
+    ];
+    $form['description'] = [
+      '#markup' => '<p>' . $this->t('Get alerts for products recalled from sale because of an allergy risk, wrong labelling, contamination or food poisoning risk.') . '</p>',
+    ];
     $form['alert_tids_for_registration'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Allergy alerts'),
