@@ -14,6 +14,10 @@ function fsa_preprocess_field(&$variables) {
     // Force span on inline label display title_element.
     $variables['title_element'] = 'span';
   }
+  else if ($variables['element']['#bundle'] == 'alert') {
+    // All (non-inline) alert node labels forced to h3.
+    $variables['title_element'] = 'h3';
+  }
   else {
     // Define (non-inline) title_element per field here, defaults to 'h2'.
     switch ($variables['field_name']) {
