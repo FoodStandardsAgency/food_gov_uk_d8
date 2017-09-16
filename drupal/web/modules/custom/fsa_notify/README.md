@@ -6,13 +6,15 @@ Tomi Mikola has been also involved.
 
 ## TODO
 
+Can be done immediately:
 * Currently there is no timing for specifiyng when to send out dailys or weeklys. They are sent out by every cron run now.
 * Immediate email functionality is missing.
 * Immediate email template is missing.
-* There are duplicate fields for allergens, etc signup
-* There are no food nor news alerts
-* Detailed changes for Anne according to updated template design
 * Need to decide and work with what happens when sending fails to particular user. Stop sending altogether? Or continue? In FsaNotifyAPI.php, sms() and email() methods.
+
+Decisions needed:
+* There are overlapping fields: field_notification_allergys and	field_subscribed_notifications. This module is built with the former.
+* There are no food nor news alerts yet
 * Unsubscribe by email functionality
 * Optout by sms functionality
 
