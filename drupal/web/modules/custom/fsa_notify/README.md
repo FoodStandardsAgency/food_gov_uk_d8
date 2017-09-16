@@ -7,7 +7,7 @@ Tomi Mikola has been also involved.
 ## TODO
 
 Can be done immediately:
-* Currently there is no timing for specifiyng when to send out dailys or weeklys. They are sent out by every cron run now.
+* Currently there is no timing for specifiying when to send out dailys or weeklys. They are sent out by every cron run now. This needs a locking too - while sending messages no alert collecting and distributing - otherwise people might get double messages.
 * Immediate email functionality is missing.
 * Immediate email template is missing.
 * Need to decide and work with what happens when sending fails to particular user. Stop sending altogether? Or continue? In FsaNotifyAPI.php, sms() and email() methods.
@@ -87,6 +87,7 @@ List of allergens user has signed up to.
 During cron run following things happen:
 * Queue is processed for each queued alert and the alerts will be reference from user caches according to user allergen signup field.
 * All SMS messages are sent out
+* All immediate messages are sent out
 * All daily messages are sent out
 * All weekly messages are sent out.
 
@@ -108,6 +109,7 @@ Since sending out messages are quite slow process in order to track performance 
 ```
 Timer: type weekly; elapsed 164.101; 968 items; 5.899 items/sec.
 Timer: type daily; elapsed 168.791; 1020 items; 6.043 items/sec.
+Timer: type immediate; elapsed 1.250; 2 items; 1.600 items/sec.
 Timer: type sms; elapsed 17.924; 989 items; 55.177 items/sec.
 Timer: type queue; elapsed 73.326; 1 items; 0.014 items/sec.
 ```

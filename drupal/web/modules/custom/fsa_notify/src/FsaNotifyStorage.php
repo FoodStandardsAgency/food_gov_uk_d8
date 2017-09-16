@@ -21,7 +21,7 @@ class FsaNotifyStorage {
   // it returns an array which has keys as uid and value as string of email text body
   // if no more digests are left, it return empty array
   public function getAllType(string $type, int $batch_size = 1000) {
-  
+
     $query = \Drupal::entityQuery('user');
     $query->condition('uid', 0, '>');
     $query->condition('status', 1);
@@ -30,21 +30,23 @@ class FsaNotifyStorage {
     $query->range(0, $batch_size);
     // $query->sort('uid');
     $uids = $query->execute();
-  
+
     $theme_map = [
       'sms' => 'themeSms',
+      'immediate' => 'themeImmediate',
       'daily' => 'themeDaily',
       'weekly' => 'themeWeekly',
     ];
     $themer = $theme_map[$type];
-  
+
     $assembly_map = [
       'sms' => function (&$items) {return $items;},
+      'immediate' => function (&$items) {return $items;},
       'daily' => function (&$items) {return implode("\n", $items);},
       'weekly' => function (&$items) {return implode("\n", $items);},
     ];
     $assembler = $assembly_map[$type];
-  
+
     $notifications = [];
     foreach ($uids as $uid) {
       $u = User::load($uid);
@@ -69,7 +71,7 @@ class FsaNotifyStorage {
     // to prevent succumb to pressures of the memory
     \Drupal::entityManager()->getStorage('node')->resetCache();
     \Drupal::entityManager()->getStorage('user')->resetCache();
-  
+
     return $notifications;
   }
 
@@ -77,29 +79,41 @@ class FsaNotifyStorage {
     $link = $this->url($alert);
     return $link;
   }
-  
-  private function themeDaily($alert) {
+
+  private function themeImmediate($alert) {
     $title = $alert->getTitle();
     $line1 = sprintf('%s', $title);
-  
+
     $link = $this->url($alert);
     $more = t('Read more');
     $line2 = sprintf('%s: %s', $more, $link);
-  
+
     $item = "$line1\n$line2\n";
     return $item;
   }
-  
+
+  private function themeDaily($alert) {
+    $title = $alert->getTitle();
+    $line1 = sprintf('%s', $title);
+
+    $link = $this->url($alert);
+    $more = t('Read more');
+    $line2 = sprintf('%s: %s', $more, $link);
+
+    $item = "$line1\n$line2\n";
+    return $item;
+  }
+
   private function themeWeekly($alert) {
     $title = $alert->getTitle();
     $created = $alert->getCreatedTime();
     $created = \Drupal::service('date.formatter')->format($created, 'custom', 'F j, Y');
     $line1 = sprintf('%s: %s', $created, $title);
-  
+
     $link = $this->url($alert);
     $more = t('Read more');
     $line2 = sprintf('%s: %s', $more, $link);
-  
+
     $item = "$line1\n$line2\n";
     return $item;
   }
@@ -114,11 +128,11 @@ class FsaNotifyStorage {
   // store alert to all relevant users
   // by matching allergy taxonomy terms
   public function store(Node $alert) {
-  
+
     $nid = $alert->id();
     $allergens = $alert->field_alert_allergen->getValue();
     $allergens = array_map(function ($a) {return $a['target_id'];}, $allergens);
-  
+
     $query = \Drupal::entityQuery('user');
     $query->condition('uid', 0, '>');
     $query->condition('status', 1);
@@ -126,7 +140,7 @@ class FsaNotifyStorage {
     $query->condition('field_notification_allergys', $allergens, 'in');
     // $query->sort('uid');
     $uids = $query->execute();
-  
+
     foreach ($uids as $uid) {
       $u = User::load($uid);
       $u->field_notification_cache[] = $nid;
@@ -134,7 +148,7 @@ class FsaNotifyStorage {
     }
 
     \Drupal::entityManager()->getStorage('user')->resetCache();
-  
+
   }
 
   // clear cache of notifications for particular user

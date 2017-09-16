@@ -63,6 +63,7 @@ function fsa_notify_cron() {
   $storage = new FsaNotifyStorage();
 
   fsa_notify_send_sms($storage, $notifier);
+  fsa_notify_send_immediate($storage, $notifier);
   fsa_notify_send_daily($storage, $notifier);
   fsa_notify_send_weekly($storage, $notifier);
 
@@ -106,6 +107,30 @@ function fsa_notify_send_sms($storage, $notifier) {
           'message' => $m,
         ];
         $notifier->sms($user, $reference, $personalisation);
+        fsa_notify_timer('count', $reference);
+      }
+      $storage->reset($user);
+    }
+    \Drupal::entityManager()->getStorage('user')->resetCache();
+  }
+  fsa_notify_timer('stop', $reference);
+}
+
+function fsa_notify_send_immediate($storage, $notifier) {
+  $reference = 'immediate';
+  $date = date('j F Y');
+  $subject = t('Immediate');
+  fsa_notify_timer('start', $reference);
+  while ($recipients = $storage->getAllType('immediate')) {
+    foreach ($recipients as $uid => $emails) {
+      $user = User::load($uid);
+      foreach ($emails as $body) {
+        $personalisation = [
+          'date' => $date,
+          'subject' => $subject,
+          'allergy_alerts' => $body,
+        ];
+        $notifier->email($user, $reference, $personalisation);
         fsa_notify_timer('count', $reference);
       }
       $storage->reset($user);
