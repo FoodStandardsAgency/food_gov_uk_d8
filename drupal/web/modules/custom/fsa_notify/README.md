@@ -15,6 +15,7 @@ Tomi Mikola has been also involved.
 * Need to decide and work with what happens when sending fails to particular user. Stop sending altogether? Or continue? In FsaNotifyAPI.php, sms() and email() methods.
 * Unsubscribe by email functionality
 * Optout by sms functionality
+* URL shortening service
 
 All notification related stuff lives in one module `fsa_notify`.
 
