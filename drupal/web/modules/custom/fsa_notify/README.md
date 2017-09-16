@@ -26,7 +26,7 @@ All notification related stuff lives in one module `fsa_notify`.
 Configure > FSA configuration > Notify
 
 That page contains two things:
-* Edit current configuration settings (key an id-s)
+* Edit current configuration settings (key and id-s)
 * Option to turn off alerts collecting and sending.
 
 ### State
@@ -40,14 +40,15 @@ Basic configuration parameters are held in Drupal state variables and can be man
 ## API keys and Template IDs
 
 Those can be aquired from https://www.notifications.service.gov.uk/
+
 Consult LastPass, Luke or Sally for access.
 
-One set is API keys, which specify mode you want to use the service:
+1) One set is API keys, which specify mode you want to use the service:
 * Live – sends to anyone.
 * Team and whitelist – limits who you can send to
 * Test – pretends to send messages
 
-Other set is Template IDs which specify different kind of templates to use.
+2) Other set is Template IDs which specify different kind of templates to use.
 
 ## Fields used
 
@@ -70,7 +71,7 @@ This field is not visible for user, but here we collect alerts per user to be se
 
 When alerts are sent out, this field is emptied.
 
-### user.ield_notification_allergys
+### user.field_notification_allergys
 
 List of allergens user has signed up to.
 
@@ -92,7 +93,7 @@ During cron run following things happen:
 
 New alerts are queued. Drupal Queue is used. Because processing of them takes considerable time. Might be 1-2minutes per queue item.
 
-Queue processing distributing alert references to users who have signed up for them.
+Queue processing distributes alert references to users who have signed up for them.
 
 ## Sending out SMS and Email
 
@@ -110,18 +111,6 @@ Timer: type sms; elapsed 17.924; 989 items; 55.177 items/sec.
 Timer: type queue; elapsed 73.326; 1 items; 0.014 items/sec.
 ```
 
-## Class FsaNotifyStorage
-
-This class takes care of following:
-* storing/distributing alert items to users based on their preferences
-* retrieving messages for chunk of users with particular sending method
-* theming/assembling messages according to sending method
-* clearing user cache
-
-Chunking is used to prevent Drupal cache saturation subsequent OOM event.
-
-Everything here revolves around field `user.field_notification_cache`.
-
 ## If you need to change how a notification looks
 
 * Check the template in Notify API in web
@@ -133,6 +122,18 @@ Everything here revolves around field `user.field_notification_cache`.
   * email unsubscribe link
 * `fsa_notify.module`:
   * template placeholder replacements
+
+## Class FsaNotifyStorage
+
+This class takes care of following:
+* storing/distributing alert items to users based on their preferences
+* retrieving messages for chunk of users with particular sending method
+* theming/assembling messages according to sending method
+* clearing user cache
+
+Chunking is used to prevent Drupal cache saturation subsequent OOM event.
+
+Everything here revolves around field `user.field_notification_cache`.
 
 ## Class FsaNotifyAPI
 
