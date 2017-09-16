@@ -11,7 +11,11 @@ Tomi Mikola has been also involved.
 * Immediate email template is missing.
 * There are duplicate fields for allergens, etc signup
 * There are no food nor news alerts
+* Detailed changes for Anne according to updated template design
 * Need to decide and work with what happens when sending fails to particular user. Stop sending altogether? Or continue? In FsaNotifyAPI.php, sms() and email() methods.
+* Move other modules fsa conf to the fsa conf block in drupal configuration admin page
+* Unsubscribe by email functionality
+* Optout by sms functionality
 
 All notification related stuff lives in one module `fsa_notify`.
 
@@ -22,16 +26,16 @@ All notification related stuff lives in one module `fsa_notify`.
 Configure > FSA configuration > Notify
 
 That page contains two things:
-* Overview of current configuration.
+* Edit current configuration settings (key an id-s)
 * Option to turn off alerts collecting and sending.
 
-### Shell
+### State
 
-Basic configuration parameters are held in Drupal state variables and managed by drush.
+Basic configuration parameters are held in Drupal state variables and can be managed by UI (or `drush`).
 
-* `drush state-set fsa_notify.api '...'`
-* `drush state-set fsa_notify.template_sms '...'`
-* `drush state-set fsa_notify.template_email '...'`
+* `fsa_notify.api`
+* `fsa_notify.template_sms`
+* `fsa_notify.template_email`
 
 ## API keys and Template IDs
 
@@ -118,6 +122,18 @@ Chunking is used to prevent Drupal cache saturation subsequent OOM event.
 
 Everything here revolves around field `user.field_notification_cache`.
 
+## If you need to change how a notification looks
+
+* Check the template in Notify API in web
+* `src/FsaNotifyStorage.php`:
+  * `themeXXX()` functions
+  * `$assembly_map`
+* `src/FsaNotifyAPI.php`
+  * email login link
+  * email unsubscribe link
+* `fsa_notify.module`:
+  * template placeholder replacements
+
 ## Class FsaNotifyAPI
 
 This class takes care of following:
@@ -125,6 +141,28 @@ This class takes care of following:
 * Sending out an email
 * Sending out a SMS
 * Error-handling and logging
+
+## Files in this module
+
+* `fsa_notify.module`
+  * Phone number enforcement in user profile
+  * Highlevel execution of Queue processing
+  * Cron hook to initiate all functionality in this module - alert distribution and sending
+  * Highlevel sending of all types of notifications
+* `src/FsaNotifyAPI.php`
+  * Connect to Notify API
+  * General Email sending
+  * General SMS sending
+* `src/FsaNotifyStorage.php`
+  * Notification storing
+  * User cache clearing of notifications
+  * Notification retrieval in chunks per type in themed form
+  * Theming functions
+* `src/Form/FsaSettings.php`
+  * Edit key and id-s
+  * Enable/Disable distributing and sending notifications
+* `src/Plugin/QueueWorker/FsaNotifyStorageQueue.php`
+  * Item processing (storing / distributing)
 
 ## Related modules and packages
 
