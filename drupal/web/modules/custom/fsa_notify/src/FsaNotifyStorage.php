@@ -9,6 +9,11 @@ use Drupal\user\Entity\User;
 class FsaNotifyStorage {
 
   protected $themed = [];
+  protected $base_url;
+
+  public function __construct() {
+    $this->base_url = \Drupal::request()->getSchemeAndHttpHost();
+  }
 
   // due do large volume of data (entity loads)
   // system tends to crash -- out of memory
@@ -69,8 +74,7 @@ class FsaNotifyStorage {
   }
 
   private function themeSms($alert) {
-    $link = Url::fromRoute('entity.node.canonical', ['node' => $alert->id()], ['absolute' => TRUE]);
-    $link = $link->toString();
+    $link = $this->url($alert);
     return $link;
   }
   
@@ -78,10 +82,9 @@ class FsaNotifyStorage {
     $title = $alert->getTitle();
     $line1 = sprintf('%s', $title);
   
-    $link = Url::fromRoute('entity.node.canonical', ['node' => $alert->id()], ['absolute' => TRUE]);
-    $link = $link->toString();
+    $link = $this->url($alert);
     $more = t('Read more');
-    $line2 = sprintF('%s %s', $more, $link);
+    $line2 = sprintf('%s: %s', $more, $link);
   
     $item = "$line1\n$line2\n";
     return $item;
@@ -93,13 +96,19 @@ class FsaNotifyStorage {
     $created = \Drupal::service('date.formatter')->format($created, 'custom', 'F j, Y');
     $line1 = sprintf('%s: %s', $created, $title);
   
-    $link = Url::fromRoute('entity.node.canonical', ['node' => $alert->id()], ['absolute' => TRUE]);
-    $link = $link->toString();
+    $link = $this->url($alert);
     $more = t('Read more');
-    $line2 = sprintF('%s %s', $more, $link);
+    $line2 = sprintf('%s: %s', $more, $link);
   
     $item = "$line1\n$line2\n";
     return $item;
+  }
+
+  // generate "short" for nodes in messages
+  private function url($node) {
+    $nid = $node->id();
+    $url = sprintf('%s/node/%d', $this->base_url, $nid);
+    return $url;
   }
 
   // store alert to all relevant users

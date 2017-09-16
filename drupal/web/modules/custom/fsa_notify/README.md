@@ -15,7 +15,6 @@ Tomi Mikola has been also involved.
 * Need to decide and work with what happens when sending fails to particular user. Stop sending altogether? Or continue? In FsaNotifyAPI.php, sms() and email() methods.
 * Unsubscribe by email functionality
 * Optout by sms functionality
-* URL shortening service
 
 All notification related stuff lives in one module `fsa_notify`.
 
@@ -159,6 +158,7 @@ This class takes care of following:
   * User cache clearing of notifications
   * Notification retrieval in chunks per type in themed form
   * Theming functions
+  * "Short" link generation for messages
 * `src/Form/FsaSettings.php`
   * Edit key and id-s
   * Enable/Disable distributing and sending notifications
