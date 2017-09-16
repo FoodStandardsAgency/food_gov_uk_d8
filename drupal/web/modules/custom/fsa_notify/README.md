@@ -8,8 +8,6 @@ Tomi Mikola has been also involved.
 
 Can be done immediately:
 * Currently there is no timing for specifiying when to send out dailys or weeklys. They are sent out by every cron run now. This needs a locking too - while sending messages no alert collecting and distributing - otherwise people might get double messages.
-* Immediate email functionality is missing.
-* Immediate email template is missing.
 * Need to decide and work with what happens when sending fails to particular user. Stop sending altogether? Or continue? In FsaNotifyAPI.php, sms() and email() methods.
 
 Decisions needed:
