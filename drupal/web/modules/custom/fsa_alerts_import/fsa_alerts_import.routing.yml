@@ -1,5 +1,5 @@
 fsa_alerts_import.alerts_settings:
- path: '/admin/config/fsa-alerts'
+ path: '/admin/config/fsa/alerts'
  defaults:
    _form: '\Drupal\fsa_alerts_import\Form\FsaAlertsConfigurations'
    _title: 'FSA Alerts API configurations'
