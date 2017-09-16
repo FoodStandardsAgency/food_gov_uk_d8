@@ -13,7 +13,6 @@ Tomi Mikola has been also involved.
 * There are no food nor news alerts
 * Detailed changes for Anne according to updated template design
 * Need to decide and work with what happens when sending fails to particular user. Stop sending altogether? Or continue? In FsaNotifyAPI.php, sms() and email() methods.
-* Move other modules fsa conf to the fsa conf block in drupal configuration admin page
 * Unsubscribe by email functionality
 * Optout by sms functionality
 
