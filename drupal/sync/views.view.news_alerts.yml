@@ -1102,7 +1102,7 @@ display:
           empty: false
           tokenize: false
           content:
-            value: "<a data-entity-substitution=\"canonical\" data-entity-type=\"node\" data-entity-uuid=\"fd3f5507-4d2b-4f3f-979b-9f035792cfe7\" href=\"/node/45\">All News & Alerts</a>\n<!-- TODO: make this translatable/configurable from code instead of views header -->"
+            value: "<a data-entity-substitution=\"canonical\" data-entity-type=\"node\" data-entity-uuid=\"5427cabf-be8e-46ff-a722-2ce3ae019229\" href=\"/node/56\">All News & Alerts</a>\n<!-- TODO: make this translatable/configurable from code instead of views header -->"
             format: basic_html
           plugin_id: text
     cache_metadata:
