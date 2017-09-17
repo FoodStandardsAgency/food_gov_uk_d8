@@ -7,7 +7,7 @@ Tomi Mikola has been also involved.
 ## TODO
 
 Decisions and/or futher investigation needed:
-* Need to decide and work with what happens when sending fails to particular user. Stop sending altogether? Or continue? In FsaNotifyAPI.php, sms() and email() methods.
+* Need to decide and work with what happens when sending fails to particular user. Stop sending altogether? Or continue? We dont know if this is some common error or just isolated case. In `src/FsaNotifyAPI*.php`, see `send()` method.
 * There are overlapping fields: field_notification_allergys and	field_subscribed_notifications. This module is built with the former.
 * There are no food nor news alerts yet
 * Unsubscribe by email functionality
