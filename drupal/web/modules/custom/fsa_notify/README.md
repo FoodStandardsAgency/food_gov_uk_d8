@@ -187,10 +187,7 @@ Everything here revolves around field `user.field_notification_cache`.
   * Construct Weekly message
 * `src/FsaNotifyStorage.php`
   * Notification storing
-  * User cache clearing of notifications
   * Notification retrieval in chunks per type in themed form
-  * Theming functions
-  * "Short" link generation for messages
 * `src/Form/FsaSettings.php`
   * Edit key and id-s
   * Enable/Disable distributing and sending notifications
