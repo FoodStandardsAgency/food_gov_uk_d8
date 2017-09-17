@@ -24,9 +24,12 @@ class FsaSettings extends FormBase {
 
   public function buildForm(array $form, FormStateInterface $form_state) {
 
+    $weight = 0;
+
     $form['note'] = [
       '#type' => 'item',
       '#plain_text' => t('Please get following values from https://www.notifications.service.gov.uk/'),
+      '#weight' => $weight++,
     ];
 
     $keys = [
@@ -44,6 +47,7 @@ class FsaSettings extends FormBase {
         '#title' => $title,
         '#required' => TRUE,
         '#default_value' => $value,
+        '#weight' => $weight++,
       ];
     }
 
@@ -53,21 +57,74 @@ class FsaSettings extends FormBase {
     $form['status_old'] = [
       '#type' => 'value',
       '#value' => $killswitch,
+      '#weight' => $weight++,
     ];
 
     $form['status_new'] = [
       '#type' => 'checkbox',
       '#title' => t('Collect notifications and send out to subscribers.'),
       '#default_value' => $killswitch,
+      '#weight' => $weight++,
     ];
 
-    $form['actions']['#type'] = 'actions';
+    $form['actions'] = [
+      '#type' => 'actions',
+      '#weight' => $weight++,
+    ];
 
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Save'),
       '#button_type' => 'primary',
     ];
+
+    $query = \Drupal::entityQuery('user');
+    $query->condition('uid', 0, '>');
+    $query->condition('status', 1);
+    $query->count();
+    $count = $query->execute();
+    $form['user_status_enabled'] = [
+      '#type' => 'item',
+      '#title' => t('Enabled users'),
+      '#plain_text' => $count,
+      '#weight' => $weight++,
+    ];
+
+    $query = \Drupal::entityQuery('user');
+    $query->condition('uid', 0, '>');
+    $query->condition('status', 0);
+    $query->count();
+    $count = $query->execute();
+    $form['user_status_disabled'] = [
+      '#type' => 'item',
+      '#title' => t('Disabled users'),
+      '#plain_text' => $count,
+      '#weight' => $weight++,
+    ];
+
+    $form['stats_note'] = [
+      '#type' => 'item',
+      '#plain_text' => t('Following stats is counted only per enabled users:'),
+      '#weight' => $weight++,
+    ];
+
+    $entityManager = \Drupal::service('entity_field.manager');
+    $fields = $entityManager->getFieldStorageDefinitions('user', 'user');
+    $methods = options_allowed_values($fields['field_notification_method']);
+    foreach ($methods as $key => $description) {
+      $query = \Drupal::entityQuery('user');
+      $query->condition('uid', 0, '>');
+      $query->condition('status', 1);
+      $query->condition('field_notification_method', $key);
+      $query->count();
+      $count = $query->execute();
+      $form["user_method_$key"] = [
+        '#type' => 'item',
+        '#title' => $description,
+        '#plain_text' => $count,
+        '#weight' => $weight++,
+      ];
+    }
 
     return $form;
   }

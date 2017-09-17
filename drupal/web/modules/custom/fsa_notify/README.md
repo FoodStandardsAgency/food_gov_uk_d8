@@ -7,11 +7,10 @@ Tomi Mikola has been also involved.
 ## TODO
 
 Can be done immediately:
-* Need to decide and work with what happens when sending fails to particular user. Stop sending altogether? Or continue? In FsaNotifyAPI.php, sms() and email() methods.
-* Formtting - Theming, assembly etc, move to own classes
-* Statistics - create basic stats of blocked & methods to conf page
+* Formttang - Theming, assembly etc, move to own classes
 
 Decisions and/or futher investigation needed:
+* Need to decide and work with what happens when sending fails to particular user. Stop sending altogether? Or continue? In FsaNotifyAPI.php, sms() and email() methods.
 * There are overlapping fields: field_notification_allergys and	field_subscribed_notifications. This module is built with the former.
 * There are no food nor news alerts yet
 * Unsubscribe by email functionality
@@ -31,9 +30,10 @@ All notification related stuff lives in one module `fsa_notify`.
 
 Configure > FSA configuration > Notify
 
-That page contains two things:
+That page contains three things:
 * Edit current configuration settings (key and id-s)
 * Option to turn off alerts collecting and sending.
+* Basic stats of subscribers
 
 ### State
 
@@ -194,6 +194,7 @@ This class takes care of following:
 * `src/Form/FsaSettings.php`
   * Edit key and id-s
   * Enable/Disable distributing and sending notifications
+  * Basic stats
 * `src/Plugin/QueueWorker/FsaNotifyStorageQueue.php`
   * Item processing (storing / distributing)
 
