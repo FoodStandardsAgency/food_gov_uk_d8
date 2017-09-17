@@ -7,16 +7,23 @@ Tomi Mikola has been also involved.
 ## TODO
 
 Can be done immediately:
-* Currently there is no timing for specifiying when to send out dailys or weeklys. They are sent out by every cron run now. This needs a locking too - while sending messages no alert collecting and distributing - otherwise people might get double messages.
 * Need to decide and work with what happens when sending fails to particular user. Stop sending altogether? Or continue? In FsaNotifyAPI.php, sms() and email() methods.
+* Formtting - Theming, assembly etc, move to own classes
+* Statistics - create basic stats of blocked & methods to conf page
 
-Decisions needed:
+Decisions and/or futher investigation needed:
 * There are overlapping fields: field_notification_allergys and	field_subscribed_notifications. This module is built with the former.
 * There are no food nor news alerts yet
 * Unsubscribe by email functionality
 * Optout by sms functionality
+* Email bounce handling
+* SMS bounce handling
 
 All notification related stuff lives in one module `fsa_notify`.
+
+## Known bugs
+
+* In very rare cases people may get two non-overlapping digests for same period of time. It may happen when the system is not able to send all messages out in one cron shot (very exceptional cases). And inbetween multiple attempts there is added new content which goes to the digest.
 
 ## Configuration
 
@@ -32,9 +39,14 @@ That page contains two things:
 
 Basic configuration parameters are held in Drupal state variables and can be managed by UI (or `drush`).
 
-* `fsa_notify.api`
-* `fsa_notify.template_sms`
-* `fsa_notify.template_email`
+* `fsa_notify.api` - Notify API key
+* `fsa_notify.template_sms` - Notify API SMS Template ID
+* `fsa_notify.template_email` - Notify API Email Template ID
+
+Runtime state variables are:
+
+* `fsa_notify.last_daily` - timestamp of last time when daily was finished last time.
+* `fsa_notify.last_weekly` - timestamp of last time when weekly was finished last time.
 
 ## API keys and Template IDs
 
@@ -112,6 +124,23 @@ Timer: type sms; elapsed 17.924; 989 items; 55.177 items/sec.
 Timer: type queue; elapsed 73.326; 1 items; 0.014 items/sec.
 ```
 
+## Digest times
+
+In `fsa_notify.module` there is functionality which decides if it is time to send out daily or weekly.
+Here follows ho it is decided.
+There are 2 major factors:
+* There has to be passed enough time since last time (a bit less than a day or a bit less than a week).
+* It has to be certain time period of day or week when notification delivery may happen.
+
+There is time window (few hours) during which the sending may happen. It is few hours because if sending fails for whatever reason it will be attempted again.
+
+For details, please refer to following functions:
+* `fsa_notify_daily_is_ready_to_send()` - check if we can send out daily digests now
+* `fsa_notify_weekly_is_ready_to_send()` - check if we can send out weekly digests now
+* `fsa_notify_is_ready_to_send()` - underlying general functionality for previous functions
+
+When digest is sent (successfully finished), then is recorded by `fsa_notify_sent()`. It is needed to calclulate if enough time is passed since last time.
+
 ## If you need to change how a notification looks
 
 * Check the template in Notify API in web
@@ -150,6 +179,7 @@ This class takes care of following:
   * Phone number enforcement in user profile
   * Highlevel execution of Queue processing
   * Cron hook to initiate all functionality in this module - alert distribution and sending
+  * Functionality to decide when to send daily or weekly digests
   * Highlevel sending of all types of notifications
 * `src/FsaNotifyAPI.php`
   * Connect to Notify API

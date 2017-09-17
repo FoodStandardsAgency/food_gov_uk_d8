@@ -45,6 +45,9 @@ function fsa_notify_entity_insert(EntityInterface $entity) {
   $queue->createItem($data);
 }
 
+// keep all stuff as abstract as possible here
+// so that it would be easy to understand highlevel workflow
+// just major decisions and major tasks
 function fsa_notify_cron() {
 
   $state_key = 'fsa_notify.killswitch';
@@ -59,14 +62,90 @@ function fsa_notify_cron() {
 
   /* now start sending */
 
+  // prepare
   $notifier = new FsaNotifyAPI();
   $storage = new FsaNotifyStorage();
 
+  // sms
   fsa_notify_send_sms($storage, $notifier);
-  fsa_notify_send_immediate($storage, $notifier);
-  fsa_notify_send_daily($storage, $notifier);
-  fsa_notify_send_weekly($storage, $notifier);
 
+  // immediate
+  fsa_notify_send_immediate($storage, $notifier);
+
+  // daily
+  $state_key = 'fsa_notify.last_daily';
+  if (fsa_notify_daily_is_ready_to_send($state_key)) {
+    fsa_notify_send_daily($storage, $notifier);
+    fsa_notify_sent($state_key);
+  }
+
+  // weekly
+  $state_key = 'fsa_notify.last_weekly';
+  if (fsa_notify_weekly_is_ready_to_send($state_key)) {
+    fsa_notify_send_weekly($storage, $notifier);
+    fsa_notify_sent($state_key);
+  }
+}
+
+function fsa_notify_sent($state_key) {
+  $now = time();
+  $last = \Drupal::state()->set($state_key, $now);
+}
+
+function fsa_notify_daily_is_ready_to_send($state_key, $now = NULL) {
+  // $now argument is used only for algorithm testing purposes
+  if (empty($now)) {
+    $now = time();
+  }
+  $window = 3 * 60 * 60;
+  $interval = 24 * 60 * 60;
+  // Calculation base: seconds since 00:00:00
+  $start = 7 * 60 * 60;
+  $current = date('G', $now) * 60 * 60 + date('i', $now) * 60 + date('s', $now);
+  $ready = fsa_notify_is_ready_to_send($state_key, $window, $interval, $start, $current, $now);
+  return $ready;
+}
+
+function fsa_notify_weekly_is_ready_to_send($state_key, $now = NULL) {
+  // $now argument is used only for algorithm testing purposes
+  if (empty($now)) {
+    $now = time();
+  }
+  $window = 5 * 60 * 60;
+  $interval = 7 * 24 * 60 * 60;
+  // Calculation base: 1 (for Monday) through 7 (for Sunday)
+  $start = 1 * 24 * 60 * 60 + 7 * 60 * 60;
+  $current = date('N', $now) * 24 * 60 * 60 + date('G', $now) * 60 * 60 + date('i', $now) * 60 + date('s', $now);
+  $ready = fsa_notify_is_ready_to_send($state_key, $window, $interval, $start, $current, $now);
+  return $ready;
+}
+
+function fsa_notify_is_ready_to_send($state_key, $window, $interval, $start, $current, $now = NULL) {
+  // $state_key = drupal state to get/set related info
+  // $window = duration window for sending out emails
+  // $interval = duration between beginnings of two sendings
+  // $start = arbitrary start time, in context of interval
+  // $current = arbitrary current time, in context of interval
+  // $now argument is used only for algorithm testing purposes
+
+  if (empty($now)) {
+    $now = time();
+  }
+
+  $last = \Drupal::state()->get($state_key);
+  if (empty($last)) {
+    fsa_notify_sent($state_key);
+    return TRUE;
+  }
+
+  // is elapsed enough time since last time
+  $is_elapsed_enough = $now - $last;
+  // so that we wont send out emails each time later and later.
+  $is_elapsed_enough = $is_elapsed_enough > $interval - $window;
+
+  $is_in_window = $start <= $current && $current < $start + $window;
+
+  return $is_elapsed_enough && $is_in_window;
 }
 
 // process queued alerts
