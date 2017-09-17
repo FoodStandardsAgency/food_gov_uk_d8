@@ -4,6 +4,8 @@ This functionality is originally built by ragnar.kurm@wunder.io
 
 Tomi Mikola has been also involved.
 
+All notification related stuff lives in one module `fsa_notify`.
+
 ## TODO
 
 Decisions and/or futher investigation needed:
@@ -15,11 +17,9 @@ Decisions and/or futher investigation needed:
 * Email bounce handling
 * SMS bounce handling
 
-All notification related stuff lives in one module `fsa_notify`.
-
 ## Known bugs
 
-* In very rare cases people may get two non-overlapping digests for same period of time. It may happen when the system is not able to send all messages out in one cron shot (very exceptional cases). And inbetween multiple attempts there is added new content which goes to the digest.
+* In very rare cases people may get two non-overlapping digests for same period of time. It may happen when the system is not able to send all messages out in one cron shot (very exceptional cases). And inbetween multiple attempts there is added new content which goes to the digest. Likelihood for this event is virtually nonexistent as sending is expected almost always to succeed (within say 15min) in first attempt and there are only few alerts per day.
 
 ## Configuration
 
