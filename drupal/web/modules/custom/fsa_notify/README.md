@@ -6,9 +6,6 @@ Tomi Mikola has been also involved.
 
 ## TODO
 
-Can be done immediately:
-* Formttang - Theming, assembly etc, move to own classes
-
 Decisions and/or futher investigation needed:
 * Need to decide and work with what happens when sending fails to particular user. Stop sending altogether? Or continue? In FsaNotifyAPI.php, sms() and email() methods.
 * There are overlapping fields: field_notification_allergys and	field_subscribed_notifications. This module is built with the former.
@@ -143,15 +140,7 @@ When digest is sent (successfully finished), then is recorded by `fsa_notify_sen
 
 ## If you need to change how a notification looks
 
-* Check the template in Notify API in web
-* `src/FsaNotifyStorage.php`:
-  * `themeXXX()` functions
-  * `$assembly_map`
-* `src/FsaNotifyAPI.php`
-  * email login link
-  * email unsubscribe link
-* `fsa_notify.module`:
-  * template placeholder replacements
+Check following files `src/FsaNotifyMessage*.php`.
 
 ## Class FsaNotifyStorage
 
@@ -182,9 +171,24 @@ This class takes care of following:
   * Functionality to decide when to send daily or weekly digests
   * Highlevel sending of all types of notifications
 * `src/FsaNotifyAPI.php`
+  * Abstract class
   * Connect to Notify API
+* `src/FsaNotifyAPIemail.php`
   * General Email sending
+* `src/FsaNotifyAPIsms.php`
   * General SMS sending
+* `src/FsaNotifyMessage.php`
+  * Abstract class
+  * Themes a node
+  * Assembles nodes into a message / messages
+* `src/FsaNotifyMessageSms.php`
+  * Construct SMS messages
+* `src/FsaNotifyMessageImmediate.php`
+  * Construct Immediate messages
+* `src/FsaNotifyMessageDaily.php`
+  * Construct Daily message
+* `src/FsaNotifyMessageWeekly.php`
+  * Construct Weekly message
 * `src/FsaNotifyStorage.php`
   * Notification storing
   * User cache clearing of notifications

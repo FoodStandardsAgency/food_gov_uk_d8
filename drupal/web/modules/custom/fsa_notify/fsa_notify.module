@@ -1,13 +1,17 @@
 <?php
 
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\fsa_notify\FsaNotifyAPI;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\fsa_notify\FsaNotifyAPIemail;
+use Drupal\fsa_notify\FsaNotifyAPIsms;
+use Drupal\fsa_notify\FsaNotifyMessageDaily;
+use Drupal\fsa_notify\FsaNotifyMessageImmediate;
+use Drupal\fsa_notify\FsaNotifyMessageSms;
+use Drupal\fsa_notify\FsaNotifyMessageWeekly;
 use Drupal\fsa_notify\FsaNotifyStorage;
 use Drupal\fsa_notify\Plugin\QueueWorker\FsaNotifyStorageQueue;
 use Drupal\node\NodeInterface;
 use Drupal\user\Entity\User;
-use Drupal\Core\Form\FormStateInterface;
-
 
 function fsa_notify_form_user_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $form['field_notification_sms']['#element_validate'][] = 'fsa_notify_validate';
@@ -45,6 +49,8 @@ function fsa_notify_entity_insert(EntityInterface $entity) {
   $queue->createItem($data);
 }
 
+
+
 // keep all stuff as abstract as possible here
 // so that it would be easy to understand highlevel workflow
 // just major decisions and major tasks
@@ -63,29 +69,36 @@ function fsa_notify_cron() {
   /* now start sending */
 
   // prepare
-  $notifier = new FsaNotifyAPI();
+  $notifier_sms = new FsaNotifyAPIsms();
+  $notifier_email = new FsaNotifyAPIemail();
   $storage = new FsaNotifyStorage();
 
   // sms
-  fsa_notify_send_sms($storage, $notifier);
+  $formatter = new FsaNotifyMessageSms();
+  fsa_notify_send($storage, $notifier_sms, $formatter, 'sms');
 
   // immediate
-  fsa_notify_send_immediate($storage, $notifier);
+  $formatter = new FsaNotifyMessageImmediate();
+  fsa_notify_send($storage, $notifier_email, $formatter, 'immediate');
 
   // daily
   $state_key = 'fsa_notify.last_daily';
+  $formatter = new FsaNotifyMessageDaily();
   if (fsa_notify_daily_is_ready_to_send($state_key)) {
-    fsa_notify_send_daily($storage, $notifier);
+    fsa_notify_send($storage, $notifier_email, $formatter, 'daily');
     fsa_notify_sent($state_key);
   }
 
   // weekly
   $state_key = 'fsa_notify.last_weekly';
+  $formatter = new FsaNotifyMessageWeekly();
   if (fsa_notify_weekly_is_ready_to_send($state_key)) {
-    fsa_notify_send_weekly($storage, $notifier);
+    fsa_notify_send($storage, $notifier_email, $formatter, 'weekly');
     fsa_notify_sent($state_key);
   }
 }
+
+
 
 function fsa_notify_sent($state_key) {
   $now = time();
@@ -175,92 +188,22 @@ function fsa_notify_queue_process() {
 
 }
 
-function fsa_notify_send_sms($storage, $notifier) {
-  $reference = 'sms';
-  fsa_notify_timer('start', $reference);
-  while ($recipients = $storage->getAllType('sms')) {
-    foreach ($recipients as $uid => $messages) {
+function fsa_notify_send($storage, $notifier, $formatter, $type) {
+  fsa_notify_timer('start', $type);
+  while ($batch = $storage->getAllType($type)) {
+    foreach ($batch as $uid => $messages) {
       $user = User::load($uid);
-      foreach ($messages as $m) {
-        $personalisation = [
-          'message' => $m,
-        ];
-        $notifier->sms($user, $reference, $personalisation);
-        fsa_notify_timer('count', $reference);
+      $messages = $formatter->format($messages);
+      foreach ($messages as $personalisation) {
+        $notifier->send($user, $type, $personalisation);
+        fsa_notify_timer('count', $type);
       }
       $storage->reset($user);
     }
+    \Drupal::entityManager()->getStorage('node')->resetCache();
     \Drupal::entityManager()->getStorage('user')->resetCache();
   }
-  fsa_notify_timer('stop', $reference);
-}
-
-function fsa_notify_send_immediate($storage, $notifier) {
-  $reference = 'immediate';
-  $date = date('j F Y');
-  $subject = t('Immediate');
-  fsa_notify_timer('start', $reference);
-  while ($recipients = $storage->getAllType('immediate')) {
-    foreach ($recipients as $uid => $emails) {
-      $user = User::load($uid);
-      foreach ($emails as $body) {
-        $personalisation = [
-          'date' => $date,
-          'subject' => $subject,
-          'allergy_alerts' => $body,
-        ];
-        $notifier->email($user, $reference, $personalisation);
-        fsa_notify_timer('count', $reference);
-      }
-      $storage->reset($user);
-    }
-    \Drupal::entityManager()->getStorage('user')->resetCache();
-  }
-  fsa_notify_timer('stop', $reference);
-}
-
-function fsa_notify_send_daily($storage, $notifier) {
-  $reference = 'daily';
-  $date = date('j F Y');
-  $subject = t('Daily digest');
-  fsa_notify_timer('start', $reference);
-  while($emails = $storage->getAllType('daily')) {
-    foreach ($emails as $uid => $body) {
-      $user = User::load($uid);
-      $personalisation = [
-        'date' => $date,
-        'subject' => $subject,
-        'allergy_alerts' => $body,
-      ];
-      $notifier->email($user, $reference, $personalisation);
-      fsa_notify_timer('count', $reference);
-      $storage->reset($user);
-    }
-    \Drupal::entityManager()->getStorage('user')->resetCache();
-  }
-  fsa_notify_timer('stop', $reference);
-}
-
-function fsa_notify_send_weekly($storage, $notifier) {
-  $reference = 'weekly';
-  $date = date('j F Y');
-  $subject = t('Daily digest');
-  fsa_notify_timer('start', $reference);
-  while($emails = $storage->getAllType('weekly')) {
-    foreach ($emails as $uid => $body) {
-      $user = User::load($uid);
-      $personalisation = [
-        'date' => $date,
-        'subject' => $subject,
-        'allergy_alerts' => $body,
-      ];
-      $notifier->email($user, $reference, $personalisation);
-      fsa_notify_timer('count', $reference);
-      $storage->reset($user);
-    }
-    \Drupal::entityManager()->getStorage('user')->resetCache();
-  }
-  fsa_notify_timer('stop', $reference);
+  fsa_notify_timer('stop', $type);
 }
 
 function fsa_notify_timer($event, $type) {

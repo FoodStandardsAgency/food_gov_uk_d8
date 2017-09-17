@@ -9,13 +9,12 @@ use Alphagov\Notifications\Exception\NotifyException;
 use Drupal\Core\Url;
 use Drupal\user\Entity\User;
 
-class FsaNotifyAPI {
+abstract class FsaNotifyAPI {
 
-  private $api = NULL;
-  private $email_template_id = NULL;
-  private $sms_template_id = NULL;
+  protected $api = NULL;
+  protected $template_id = NULL;
 
-  public function __construct() {
+  public function __construct($template_state_key) {
   
     $state_key = 'fsa_notify.api';
     $api_key = \Drupal::state()->get($state_key);
@@ -40,81 +39,16 @@ class FsaNotifyAPI {
       $this->logAndException($msg, $e);
     }
 
-    $state_key = "fsa_notify.template_email";
-    $this->email_template_id = \Drupal::state()->get($state_key);
-    if (empty($this->email_template_id)) {
+    $state_key = $template_state_key;
+    $this->template_id = \Drupal::state()->get($state_key);
+    if (empty($this->template_id)) {
       $msg = sprintf('Notify API Template ID not specified in state "%s".', $state_key);
       $this->logAndException($msg);
     }
-
-    $state_key = "fsa_notify.template_sms";
-    $this->sms_template_id = \Drupal::state()->get($state_key);
-    if (empty($this->sms_template_id)) {
-      $msg = sprintf('Notify API Template ID not specified in state "%s".', $state_key);
-      $this->logAndException($msg);
-    }
-  
   }
   
-  public function email(User $user, string $reference, array $personalisation) {
+  abstract public function send(User $user, string $reference, array $personalisation);
   
-    $email = $user->getEmail();
-  
-    $login = Url::fromRoute('user.login', [], ['absolute' => TRUE]);
-    $login = $login->toString();
-    $personalisation['login'] = $login;
-  
-    $unsubscribe = 'http://.../unsubscribe';
-    $personalisation['unsubscribe'] = $unsubscribe;
-    
-    try {
-      $msg = sprintf('Notify API: sendEmail(%s)', $email);
-      $this->api->sendEmail(
-        $email,
-        $this->email_template_id,
-        $personalisation,
-        $reference
-      );
-    }
-    catch (ApiException $e) {
-      $this->logAndException($msg, $e);
-    }
-    catch (NotifyException $e) {
-      $this->logAndException($msg, $e);
-    }
-    catch (Exception $e) {
-      $this->logAndException($msg, $e);
-    }
-  }
-  
-  public function sms(User $user, string $reference, array $personalisation) {
-
-    $phoneNumber = $user->field_notification_sms->getString();
-    // Phone number is optional field!
-    if (empty($phoneNumber)) {
-      return;
-    }
-
-    try {
-      $msg = sprintf('Notify API: sendSms(%s)', $phoneNumber);
-      $this->api->sendSms(
-        $phoneNumber,
-        $this->sms_template_id,
-        $personalisation,
-        $reference
-      );
-    }
-    catch (ApiException $e) {
-      $this->logAndException($msg, $e);
-    }
-    catch (NotifyException $e) {
-      $this->logAndException($msg, $e);
-    }
-    catch (Exception $e) {
-      $this->logAndException($msg, $e);
-    }
-  }
-
   protected function logAndException(string $msg, $e = NULL) {
     $log = $msg;
     if (!empty($e)) {
