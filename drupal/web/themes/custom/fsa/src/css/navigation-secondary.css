@@ -1,8 +1,9 @@
 /*Secondary navigation*/
 .secondary-navigation > ul {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin: 0;
+    padding: 0;
   }
   
   .secondary-navigation > ul > li {
