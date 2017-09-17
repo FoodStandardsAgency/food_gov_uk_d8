@@ -115,7 +115,7 @@ Message body is constructed and then sent.
 
 ## Timing
 
-Since sending out messages are quite slow process in order to track performance and have some stats there is timer functionality included which logs some stats only if something is sent out.
+Since sending out messages are quite slow process and in order to track performance and have some stats there is timer functionality included which logs some stats only if something is sent out to Drupal Watchdog.
 
 ```
 Timer: type weekly; elapsed 164.101; 968 items; 5.899 items/sec.
