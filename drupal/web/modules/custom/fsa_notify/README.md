@@ -158,14 +158,6 @@ Chunking is used to prevent Drupal cache saturation subsequent OOM event.
 
 Everything here revolves around field `user.field_notification_cache`.
 
-## Class FsaNotifyAPI
-
-This class takes care of following:
-* Connects to Notify API
-* Sending out an email
-* Sending out a SMS
-* Error-handling and logging
-
 ## Files in this module
 
 * `fsa_notify.module`
