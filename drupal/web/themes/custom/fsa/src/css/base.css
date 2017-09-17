@@ -163,10 +163,18 @@ body:after {
 
 .site {
   transition: transform var(--transition-enter);
+
+  @media (--breakpoint-sm) {
+    transition: none;
+  }
 }
 
 .site.is-moved {
   transform: translate(20%);
+
+  @media (--breakpoint-sm) {
+    transform: none;
+  }
 }
 
 :--heading {

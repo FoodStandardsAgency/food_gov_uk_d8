@@ -50,6 +50,7 @@
     <div class="header__container">
       <button class="header__menu-button js-menu-button">
         <div class="svg">
+          <span class="visually-hidden">Open mobile navigation</span>
           <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#menu-icon"></use></svg>
         </div>
       </button>
@@ -84,27 +85,42 @@
         </div>
       </form>
 
-      {{ page.header }}
+
+      <div class="header__content">
+        {{ page.header }}
+      </div>
 
     </div>
-
   </header>
 
-  <!-- <div class="navigation-wrapper js-navigation">
-    <button class="header__menu-button header__menu-button--navigation js-menu-button">
-      <div class="svg">
-        <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#arrow-back"></use></svg>
-      </div>
-    </button>
-  </div> -->
-
   {% if page.primary_menu %}
-  <div class="layout">
-    <div class="layout__container">
-      <div class="layout__content">
-        <div class="navigation-wrapper js-navigation">
+  <div class="layout navigation-wrapper js-navigation">
+    <div class="layout__container navigation-wrapper__container">
+      <div class="layout__content navigation-wrapper__content">
+        <header class="navigation-mobile-header">
+          <button class="navigation-mobile-header__button js-menu-button">
+            <span class="visually-hidden">Close mobile navigation</span>
+            <div class="svg">
+              <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#arrow-back"></use></svg>
+            </div>
+          </button>
+
+          <div class="navigation-mobile-header__content">
+            {{ page.header }}
+          </div>
+        </header>
+
+        <div class="navigation-wrapper__main">
           {{ page.primary_menu }}
         </div>
+
+        <footer class="navigation-mobile-footer" role="contentinfo">
+      
+          {% if page.footer %}
+            {{ page.footer }}
+          {% endif %}
+      
+        </footer>
       </div>
     </div>
   </div>
@@ -189,11 +205,9 @@
         <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop-en"></use></svg>
       </div>
     </div>
+
     <div class="footer__content">
       <p>{{ "Food Standards Agency makes sure food is safe to eat and what it says it is."|t }}</p>
-    </div>
-    <div class="footer__social-link">
-
     </div>
 
     {% if page.footer %}
