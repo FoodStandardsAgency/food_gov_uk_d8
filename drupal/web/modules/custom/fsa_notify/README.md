@@ -95,8 +95,12 @@ During cron run following things happen:
 * Queue is processed for each queued alert and the alerts will be reference from user caches according to user allergen signup field.
 * All SMS messages are sent out
 * All immediate messages are sent out
-* All daily messages are sent out
-* All weekly messages are sent out.
+* All daily messages are sent out - if it is appropriate time
+* All weekly messages are sent out - if it is appropriate time
+
+Digest sending times can be configured in following functions:
+* `fsa_notify_daily_is_ready_to_send()`
+* `fsa_notify_weekly_is_ready_to_send()`
 
 ## Queue
 
