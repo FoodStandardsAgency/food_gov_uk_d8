@@ -51,6 +51,8 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
         switch ($term->id()) {
           // Guidance.
           case 28:
+          // News/Alerts.
+          case 29:
             if ($block->id() == 'pagetitle') {
               return AccessResult::forbidden()
                 ->addCacheableDependency($block);
