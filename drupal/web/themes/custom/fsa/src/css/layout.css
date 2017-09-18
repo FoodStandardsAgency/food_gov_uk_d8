@@ -64,6 +64,7 @@ body:not(.theme--service, .theme--lander) .layout.layout--with-no-sidebar .layou
   background-color: var(--color-dark-blue);
 }
 
+.theme--news-alerts  .layout__sidebar,
 .theme--page:not(.theme--service) .layout__sidebar {
   @media (--breakpoint-lg) {
     width: 19.5em;
@@ -181,6 +182,7 @@ body:not(.theme--service, .theme--lander) .layout.layout--with-no-sidebar .layou
   }
 }
 
+.theme--news-alerts .layout--with-sidebar .layout__content,
 .theme--page:not(.theme--service) .layout--with-sidebar .layout__content {
   max-width: var(--content-max-width);
 

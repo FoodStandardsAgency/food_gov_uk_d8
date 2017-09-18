@@ -33,6 +33,7 @@ function fsa_preprocess_field(&$variables) {
   // Set fields classes.
   if (isset($variables['field_name'])) {
     $field_name = 'field__' . $variables['field_name'];
+    $variables['attributes']['class'][] = 'field';
     $variables['attributes']['class'][] = $field_name;
     $variables['title_attributes']['class'][] = $field_name . '__heading';
     $variables['title_attributes']['class'][] = 'label__' . $variables['label_display'];

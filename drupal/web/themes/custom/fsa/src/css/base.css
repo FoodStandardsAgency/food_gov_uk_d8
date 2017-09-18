@@ -163,10 +163,18 @@ body:after {
 
 .site {
   transition: transform var(--transition-enter);
+
+  @media (--breakpoint-sm) {
+    transition: none;
+  }
 }
 
 .site.is-moved {
   transform: translate(20%);
+
+  @media (--breakpoint-sm) {
+    transform: none;
+  }
 }
 
 :--heading {
@@ -310,7 +318,35 @@ blockquote {
   margin-right: 1em;
 }
 
-/*Contnet List styles*/
+/*Content Table styles*/
+table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
+}
+
+td, th {
+  border: 1px solid var(--color-light-gray);
+  text-align: left;
+  padding: 1em;
+}
+
+td:first-child {
+  font-weight: 600;
+}
+
+table caption:not(:last-child) {
+  background-color: var(--color-lighter-gray);
+  color: var(--dark-primary-color);
+  font-weight: 600;
+  padding: 1em;
+  border: 1px solid var(--color-light-gray);
+  border-bottom: 0;
+}
+
+/*Content List styles*/
 .field__body ol {
   padding-left: 0;
 }
