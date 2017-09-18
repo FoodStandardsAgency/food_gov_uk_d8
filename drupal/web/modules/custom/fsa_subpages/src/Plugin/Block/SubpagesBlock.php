@@ -2,11 +2,12 @@
 
 namespace Drupal\fsa_subpages\Plugin\Block;
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Link;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
-use Drupal\Component\Utility\Html;
 
 /**
  * Provides a 'SubpagesBlock' Block.
@@ -84,6 +85,27 @@ class SubpagesBlock extends BlockBase {
         ],
       ],
     ];
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function blockAccess(AccountInterface $account) {
+
+    // Prevent empty block being placed on a page by checking if field_subpages
+    // is set.
+    $nid = \Drupal::routeMatch()->getParameter('node')->id();
+    $node = Node::load($nid);
+    $field_subpages = $node->get('field_subpages')->referencedEntities();
+
+    if (!empty($field_subpages)) {
+      return AccessResult::allowed();
+    }
+    else {
+      return AccessResult::forbidden();
+    }
+
 
   }
 
