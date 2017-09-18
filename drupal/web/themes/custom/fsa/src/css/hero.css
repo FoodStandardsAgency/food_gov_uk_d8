@@ -52,7 +52,7 @@
   @media (--breakpoint-sm) {
     position: absolute;
     right: 0;
-    @mixin responsive-declaration bottom, 0em, 3em;
+    bottom: 0;
     left: 0;
   }
 }
