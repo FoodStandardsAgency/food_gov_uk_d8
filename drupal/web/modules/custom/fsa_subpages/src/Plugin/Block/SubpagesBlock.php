@@ -102,8 +102,6 @@ class SubpagesBlock extends BlockBase {
     }
 
     $nid = $node->id();
-    // get fullblown node
-    $node = Node::load($nid);
 
     // prevent accidents / make sure we are on right page
     if (!$node->hasField('field_subpages')) {
