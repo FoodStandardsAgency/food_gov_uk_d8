@@ -107,7 +107,7 @@ class UserRegistrationForm extends FormBase {
       '#value' => $this->t('Submit'),
     );
     $form['actions']['back'] = [
-      '#markup' => Link::createFromRoute($this->t('Previous'),'fsa_signin.default_controller_emailSubscriptionsPage', [], ['attributes' => ['class' => 'button black left']])->toString(),
+      '#markup' => Link::createFromRoute($this->t('Previous'),'fsa_signin.user_preregistration_alerts_form', [], ['attributes' => ['class' => 'button black left']])->toString(),
     ];
     return $form;
   }
