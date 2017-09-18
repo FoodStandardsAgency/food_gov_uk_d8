@@ -45,8 +45,17 @@
   flex: 0 0 auto;
   border-top: 2px solid var(--color-white);
   box-shadow: 0 -1em 1em -1em rgba(0, 0, 0, 0.5);
+  overflow: auto;
 
   @media (--breakpoint-sm) {
     display: none;
   }
+}
+
+.navigation-mobile-footer .footer__links {
+  padding: 0;
+}
+
+.navigation-mobile-footer ul.menu {
+  white-space: nowrap;
 }

@@ -121,7 +121,12 @@
 
 .navigation-wrapper__main > div {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+
+  @media (--breakpoint-sm) {
+    flex-direction: row;
+  }
 }
 
 nav#block-menu-help-main {
