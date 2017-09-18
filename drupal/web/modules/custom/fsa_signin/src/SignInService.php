@@ -29,7 +29,7 @@ class SignInService {
       ->loadTree('alerts_allergen', 0, 1, FALSE);
     $options = [];
     foreach ($all_terms as $term) {
-      $options[$term->tid] = $this->t($term->name);
+      $options[$term->tid] = $this->t($term->name)->render();
     }
     return $options;
   }
