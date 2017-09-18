@@ -134,7 +134,8 @@ handlers:
       from_name: default
       subject: default
       body: default
-      excluded_elements: {  }
+      excluded_elements:
+        fsa_establishment_la: fsa_establishment_la
       ignore_access: false
       exclude_empty: true
       html: true
