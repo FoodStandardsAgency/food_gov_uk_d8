@@ -155,7 +155,7 @@ class UserRegistrationForm extends FormBase {
       //drupal_set_message($this->t('Thank you! Your selections has been saved.'));
     }
     catch (\Exception $e) {
-      drupal_set_message($this->t('An error occurred while creating an account.', 'error'));
+      drupal_set_message($this->t('An error occurred while creating an account.'), 'error');
     }
     $form_state->setRedirect('fsa_signin.user_registration_thank_you');
   }
