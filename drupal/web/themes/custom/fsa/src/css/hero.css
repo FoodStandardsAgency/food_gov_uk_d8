@@ -16,9 +16,9 @@
   }
 }
 
-.theme--lander.theme--news-alerts .hero {
+/* .theme--lander.theme--news-alerts .hero {
   text-align: center;
-}
+} */
 
 .theme--service .hero {
   display: none;
@@ -52,7 +52,7 @@
   @media (--breakpoint-sm) {
     position: absolute;
     right: 0;
-    @mixin responsive-declaration bottom, 0em, 3em;
+    bottom: 0;
     left: 0;
   }
 }
@@ -141,11 +141,11 @@
   }
 }
 
-.theme--lander.theme--news-alerts .hero__content {
+/* .theme--lander.theme--news-alerts .hero__content {
   @media (--breakpoint-lg) {
     width: 100%;
   }
-}
+} */
 
 .hero .hero__content > * {
   @mixin responsive-declaration font-size, 1em, 1.35em;
