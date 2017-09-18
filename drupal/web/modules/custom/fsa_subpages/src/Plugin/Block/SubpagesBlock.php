@@ -101,8 +101,6 @@ class SubpagesBlock extends BlockBase {
       return AccessResult::forbidden();
     }
 
-    $nid = $node->id();
-
     // prevent accidents / make sure we are on right page
     if (!$node->hasField('field_subpages')) {
       return AccessResult::forbidden();
