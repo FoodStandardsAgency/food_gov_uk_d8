@@ -39,7 +39,7 @@ class AlertTypeFormatter extends FormatterBase {
 
     foreach ($items as $delta => $item) {
 
-      $attributes['class'] = 'alert__type_' . strtolower(Html::cleanCssIdentifier($this->viewValue($item)));
+      $attributes['class'] = 'alert__type_badge alert__type_' . strtolower(Html::cleanCssIdentifier($this->viewValue($item)));
 
       $elements[$delta] = [
         '#theme' => 'fsa_alert_type',
