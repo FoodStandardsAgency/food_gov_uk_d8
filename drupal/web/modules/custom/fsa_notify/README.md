@@ -16,6 +16,7 @@ Decisions and/or futher investigation needed:
 * Optout by sms functionality
 * Email bounce handling
 * SMS bounce handling
+* Multilingual functionality
 
 ## Known bugs
 
