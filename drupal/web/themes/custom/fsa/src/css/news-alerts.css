@@ -15,12 +15,14 @@
 .theme--news-alerts .news-alerts-listing form {
   position: relative;
   z-index: var(--z-middle);
+  margin-bottom: 2em;
 
   @media (--breakpoint-md) {
     position: absolute;
     top: 0;
     left: 0;
     width: 20em;
+    margin-bottom: 0em;
   }
 
   @media (--breakpoint-lg) {

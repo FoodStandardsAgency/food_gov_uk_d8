@@ -14,7 +14,7 @@ Using postcss-custom-selectors
 Plugin documentation:
   https://github.com/postcss/postcss-custom-selectors*/
 @custom-selector :--heading h1, h2, h3, h4, h5, h6;
-@custom-selector :--enter :hover, :active;
+@custom-selector :--enter :hover, :focus, :active;
 
 @custom-selector :--not-touch html:not(.is-touch);
 
