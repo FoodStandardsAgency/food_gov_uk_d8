@@ -112,10 +112,12 @@ class SubpagesBlock extends BlockBase {
 
     $empty = $node->get('field_subpages')->isEmpty();
     if ($empty) {
-      return AccessResult::forbidden();
+      // cache until the node changes
+      return AccessResult::forbidden()->addCacheableDependency($node);
     }
     else {
-      return AccessResult::allowed();
+      // cache until the node changes
+      return AccessResult::allowed()->addCacheableDependency($node);
     }
   }
 
