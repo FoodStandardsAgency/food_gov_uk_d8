@@ -1,0 +1,44 @@
+label: Cyfryngau
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Ceisio
+          reset_button_label: Ailosod
+          exposed_sorts_label: 'Dosbarthu drwy'
+      pager:
+        options:
+          expose:
+            items_per_page_label: 'Eitemau pob tudalen'
+            offset_label: Ongli
+      fields:
+        thumbnail__target_id:
+          label: 'Disgrifiad Cryno'
+        uid:
+          label: Awdur
+        status:
+          label: Statws
+          settings:
+            format_custom_true: 'Wedi ei gyhoeddi'
+        changed:
+          label: Newidwyd
+        operations:
+          label: Gweithrediad
+      filters:
+        status:
+          expose:
+            label: Gwir
+          group_info:
+            group_items:
+              1:
+                title: 'Wedi ei gyhoeddi'
+        langcode:
+          expose:
+            label: Iaith
+      title: Cyfryngau
+  media_page_list:
+    display_title: Cyfryngau
+    display_options:
+      menu:
+        title: Cyfryngau

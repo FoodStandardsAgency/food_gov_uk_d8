@@ -8,7 +8,7 @@
   color: var(--color-black);
 }
 
-.theme-service .side-navigation h2 {
+.theme--service .side-navigation h2 {
   color: var(--primary-color);
 }
 
@@ -149,11 +149,19 @@
   background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='18px' height='24px' viewBox='0 0 18 24' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3C!-- Generator: Sketch 46.1 %2844463%29 - http://www.bohemiancoding.com/sketch --%3E%3Ctitle%3EPage 1%3C/title%3E%3Cdesc%3ECreated with Sketch.%3C/desc%3E%3Cdefs%3E%3C/defs%3E%3Cg id='Symbols' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='Arrow-down-white' transform='translate%28-16.000000, -13.000000%29' fill='%2300A39B'%3E%3Cg id='Button'%3E%3Cpath d='M16.3603044,27.6189522 L23.6288645,36.4409708 C23.9149704,36.789987 24.3353589,36.9933335 24.7779579,36.9999681 C25.2214813,37.0028057 25.6511143,36.8164744 25.9492618,36.4721822 L33.6141509,27.6491951 C34.1752693,27.0031736 34.1178585,26.0109931 33.4845191,25.4368622 C32.8520993,24.8646198 31.8808088,24.9242097 31.3196904,25.5702264 L26.372452,31.2643195 L26.372452,14.8491274 C26.372452,13.8295129 25.6844941,13 24.8390949,13 C23.992795,13 23.3048134,13.8295129 23.3048134,14.8491274 L23.3048134,31.1819929 L18.7067333,25.6004935 C18.4150569,25.2467556 17.9872729,25.0433847 17.5335805,25.0433847 C17.171551,25.0433847 16.8206149,25.1739111 16.5456024,25.4113119 C16.23264,25.6799386 16.0400459,26.0582776 16.0057938,26.4753828 C15.9706078,26.8925122 16.0965347,27.2982611 16.3604277,27.6189231' id='Page-1'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
-:--not-touch #block-menu-help-secondary > ul > li > ul > li a:hover,
+:--not-touch #block-menu-help-secondary > ul > li > ul > li a:focus,
+.side-navigation__link:focus {
+  background-color: var(--color-yellow);
+  outline: 3px solid var(--color-yellow);
+  color: var(--color-black);
+}
+
+:--not-touch #block-menu-help-secondary > ul > li > ul > li a:--enter,
 #block-menu-help-secondary > ul > li > ul > li a.is-active,
-.side-navigation__link:hover,
+.side-navigation__link:--enter,
 .side-navigation__link--active {
   background-color: var(--color-black);
+  outline: 3px solid transparent;
   color: var(--color-light-gray);
 }
 
@@ -175,6 +183,18 @@
   padding-top: 1em;
 }
 
+.subpages ul li,
+.subpages ol li {
+  list-style: none;
+  margin-bottom: 1em;
+}
+
+:--not-touch .subpages > ul a:--enter,
+:--not-touch .subpages > ul a:--enter {
+  color: var(--light-primary-color);
+  text-decoration: underline;
+}
+
 .subpages > ul ul,
 .subpages > ol ol {
   padding-left: 1em;
@@ -183,5 +203,4 @@
 .subpages > ul ul a,
 .subpages > ol ol a {
   color: var(--color-black);
-  text-decoration: underline;
 }

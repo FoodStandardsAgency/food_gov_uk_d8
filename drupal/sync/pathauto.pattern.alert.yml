@@ -1,0 +1,22 @@
+uuid: d1b63473-0ffc-486f-a39d-f35ef386d82d
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: alert
+label: Alert
+type: 'canonical_entities:node'
+pattern: 'news-alerts/alert/[node:field_alert_notation]'
+selection_criteria:
+  1fe6dba3-cd9a-48a6-9310-1110ea0c70f5:
+    id: node_type
+    bundles:
+      alert: alert
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 1fe6dba3-cd9a-48a6-9310-1110ea0c70f5
+selection_logic: and
+weight: -5
+relationships: {  }

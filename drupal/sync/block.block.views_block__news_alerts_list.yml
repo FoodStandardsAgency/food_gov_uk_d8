@@ -1,0 +1,28 @@
+uuid: 6ddca193-3f0b-46a8-9101-d9056fd93150
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.news_alerts
+  module:
+    - block_class
+    - views
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: views_block__news_alerts_list
+theme: fsa
+region: hidden
+weight: -7
+provider: null
+plugin: 'views_block:news_alerts-list'
+settings:
+  id: 'views_block:news_alerts-list'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility: {  }

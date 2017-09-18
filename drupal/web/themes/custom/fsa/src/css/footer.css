@@ -1,8 +1,15 @@
 .footer {
   @mixin responsive-declaration padding, 1em, 4em;
+  @mixin responsive-declaration padding-top, 2em, 4em;
+  @mixin responsive-declaration margin-top, 2em, 0em;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  border-top: 1px solid var(--color-light-gray);
+
+  @media (--breakpoint-sm) {
+    border: 0;
+  }
 }
 
 .footer__logo .svg {
@@ -19,6 +26,10 @@
 .footer__links {
   @mixin responsive-declaration padding, 1em, 2em;
   text-align: center;
+  
+  @media print {
+    display: none;
+  }
 }
 
 .footer__links > ul {
@@ -72,7 +83,9 @@
   color: var(--color-white);
 
   @media (--breakpoint-sm) {
-    box-shadow: none;
-    color: var(--secondary-color);
+    background-color: transparent;
+    box-shadow: none !important;
+    color: var(--primary-color);
+    text-decoration: underline;
   }
 }

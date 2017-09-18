@@ -5,10 +5,30 @@
  * Contains fsa_custom.module.
  */
 
+use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\block\Entity\Block;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\Core\Access\AccessResult;
+
+/**
+ * Implements template_preprocess_breadcrumb().
+ */
+function fsa_custom_preprocess_breadcrumb(&$variables) {
+
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if (isset($node)) {
+
+    // Node titles can be horribly long, if that's the case truncate with
+    // sensible amount of characters, word-safe.
+    $max_length = 90;
+    foreach ($variables['breadcrumb'] as $key => $value) {
+      if (is_string($variables['breadcrumb'][$key]['text']) && strlen($variables['breadcrumb'][$key]['text']) >= $max_length) {
+        $variables['breadcrumb'][$key]['text'] = Unicode::truncate($variables['breadcrumb'][$key]['text'], $max_length, TRUE, TRUE);
+      }
+    }
+  }
+}
 
 /**
  * Implements block_access().
@@ -31,6 +51,8 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
         switch ($term->id()) {
           // Guidance.
           case 28:
+          // News/Alerts.
+          case 29:
             if ($block->id() == 'pagetitle') {
               return AccessResult::forbidden()
                 ->addCacheableDependency($block);

@@ -1,0 +1,18 @@
+uuid: 847581a6-56ea-47ac-ac1e-bc6133f87e9a
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - help
+    parent: 'help:'
+name: 'Help page'
+type: help
+description: 'Use <em>Help</em> content type to create pages for Help section.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

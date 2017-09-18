@@ -102,7 +102,7 @@ class SubpagesPrevNextBlock extends BlockBase {
       $prev = $subpages[$index - 1];
       $paragraph = $prev['paragraph'];
       $text = t('Previous');
-      $class = 'prev';
+      $class = 'prev block-link';
       $link = $this->direction($paragraph, $text, $nid, $class);
       $nav['prev'] = $link;
     }
@@ -111,7 +111,7 @@ class SubpagesPrevNextBlock extends BlockBase {
       $prev = $subpages[$index + 1];
       $paragraph = $prev['paragraph'];
       $text = t('Next');
-      $class = 'next';
+      $class = 'next block-link';
       $link = $this->direction($paragraph, $text, $nid, $class);
       $nav['next'] = $link;
     }

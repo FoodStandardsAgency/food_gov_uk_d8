@@ -14,7 +14,7 @@ Using postcss-custom-selectors
 Plugin documentation:
   https://github.com/postcss/postcss-custom-selectors*/
 @custom-selector :--heading h1, h2, h3, h4, h5, h6;
-@custom-selector :--enter :hover, :focus;
+@custom-selector :--enter :hover, :active;
 
 @custom-selector :--not-touch html:not(.is-touch);
 
@@ -54,12 +54,13 @@ Plugin documentation:
   --color-black: #000;
   --color-white: #fff;
 
+  --color-dark-gray: #2c3a40;
   --color-gray: #848B8E;
-
   --color-light-gray: #DEE2E5;
   --color-lighter-gray: #F0F3F5;
 
-  --color-teal: #00A39B;
+  --color-dark-teal: #007c75;
+  --color-teal: #00938C;
   --color-light-teal: #00B2A9;
 
   --color-purple: #49176D;
@@ -68,12 +69,18 @@ Plugin documentation:
   --color-dark-red: #a91f2d;
   --color-red: #E31837;
 
+  --color-orange: #ffb200;
+
+  --color-yellow: #ffbf47;
+  --color-light-yellow: #ffdfa2;
+
   --color-green: #6CB33F;
 
   --color-dark-blue: #18262C;
 }
 
 :root {
+  --dark-primary-color: var(--color-dark-teal);
   --primary-color: var(--color-teal);
   --light-primary-color: var(--color-light-teal);
 
@@ -90,6 +97,7 @@ Plugin documentation:
 
 /*Z-Index*/
 :root {
+  --z-under: -1;
   --z-bottom: 1;
   --z-middle: 10;
   --z-top: 20;
@@ -99,13 +107,15 @@ Plugin documentation:
 /*Transitions*/
 :root {
   --transition-enter: 0.7s cubic-bezier(0.19,1,0.22,1);
+  --transition-enter-fast: 0.2s cubic-bezier(0.19,1,0.22,1);
 }
 
 /*Misc*/
 :root {
-  --box-shadow: 0 0.5em 2em 0 color(#000 a(20%));
+  --box-shadow: 0 0em 2em 0 color(#000 a(10%));
   --box-shadow-active: 0 1em 3em 0 color(#000 a(10%));
   --max-width: 80em;
+  --content-max-width: 43em;
 }
 
 * {
@@ -121,8 +131,7 @@ html {
   font-size: var(--font-size-base);
   letter-spacing: 0.015em;
   @mixin responsive-declaration font-size, 100%, var(--font-size-base);
-  @mixin responsive-declaration line-height, 1.2, 1.4;
-
+  @mixin responsive-declaration line-height, 1.3, 1.5;
 }
 
 html.is-fixed {
@@ -131,11 +140,6 @@ html.is-fixed {
 
 body {
   margin: 0;
-
-  & a {
-    color: var(--primary-color);
-    text-decoration: none;
-  }
 
   @media (--breakpoint-md) {
     flex-flow: row nowrap;
@@ -159,10 +163,18 @@ body:after {
 
 .site {
   transition: transform var(--transition-enter);
+
+  @media (--breakpoint-sm) {
+    transition: none;
+  }
 }
 
 .site.is-moved {
   transform: translate(20%);
+
+  @media (--breakpoint-sm) {
+    transform: none;
+  }
 }
 
 :--heading {
@@ -215,6 +227,54 @@ h6 {
   @mixin responsive-declaration line-height, 1.0, 1.125;
 }
 
+a {
+  color: var(--dark-primary-color);
+  text-decoration: none;
+}
+
+.field__body a {
+  text-decoration: underline;
+}
+
+/*a:not(.block-link) {
+  color: var(--primary-color);
+  text-decoration: underline;
+  outline: 3px solid transparent;
+  outline-offset: 0;
+  transition:
+    color var(--transition-enter-fast),
+    outline var(--transition-enter-fast),
+    background-color var(--transition-enter-fast);
+}
+
+a:not(.block-link):focus {
+  background-color: var(--color-yellow);
+  outline: 3px solid var(--color-yellow);
+  color: var(--color-black);
+}
+
+:--not-touch a:not(.block-link):hover:--enter {
+  text-decoration: underline;
+  outline: 3px solid transparent;
+  color: var(--light-primary-color);
+}
+
+a.block-link {
+  display: block;
+  height: 100%;
+  text-decoration: none;
+}
+
+:--not-touch a.block-link:--enter {
+  text-decoration: none;
+}
+
+a.block-link:focus {
+  background-color: var(--color-light-yellow);
+  outline: 3px solid var(--color-yellow);
+  color: var(--color-black);
+}*/
+
 p {
   &:first-child {
     margin-top: 0em;
@@ -252,11 +312,86 @@ pre {
 blockquote {
   box-shadow: -0.3em 0 0 0 var(--primary-color);
   padding-left: 1em;
+  @mixin responsive-declaration margin-top, 1.5em, 2em;
   @mixin responsive-declaration margin-left, 1em, 2em;
+  @mixin responsive-declaration margin-bottom, 1.5em, 2em;
   margin-right: 1em;
 }
 
-ol, ul {
+/*Content Table styles*/
+table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
+}
+
+td, th {
+  border: 1px solid var(--color-light-gray);
+  text-align: left;
+  padding: 1em;
+}
+
+td:first-child {
+  font-weight: 600;
+}
+
+table caption:not(:last-child) {
+  background-color: var(--color-lighter-gray);
+  color: var(--dark-primary-color);
+  font-weight: 600;
+  padding: 1em;
+  border: 1px solid var(--color-light-gray);
+  border-bottom: 0;
+}
+
+/*Content List styles*/
+.field__body ol {
+  padding-left: 0;
+}
+
+.field__body ol li:not(:last-child) {
+  margin-bottom: 1em;
+}
+
+.field__body ul {
+  padding-left: 0;
+}
+
+.field__body ul li {
+  position: relative;
+  @mixin responsive-declaration padding-left, 1.3em, 1.5em;
+  list-style: none;
+
+  @media print {
+    list-style: circle;
+    padding-left: 0;
+    margin-left: 1.5em;
+  }
+}
+
+.field__body ul li:not(:last-child) {
+  margin-bottom: 0.5em;
+}
+
+.field__body ul li:after {
+  content: "";
+  display: block;
+  @mixin responsive-declaration width, 1.3em, 1.5em;
+  @mixin responsive-declaration height, 1.3em, 1.5em;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  transform: scale(0.3333);
+  box-shadow: inset 0em 0em 0em 2px var(--primary-color);
+}
+
+.field__body ol ol,
+.field__body ul ul {
+  margin-top: 0.5em;
   @mixin responsive-declaration padding-left, 1.5em, 2.5em;
 
   & li:not(:last-child) {
@@ -264,6 +399,7 @@ ol, ul {
   }
 }
 
+/*Form styles*/
 fieldset {
   margin: 0;
   @mixin responsive-declaration margin-top, 1em, 2em;
@@ -279,6 +415,7 @@ fieldset {
 }
 
 input, textarea, select {
+  font-family: var(--font-family-content);
   display: block;
   max-width: 100%;
   font-size: 1em;
@@ -286,10 +423,23 @@ input, textarea, select {
   border-radius: 0.15em;
   background-color: var(--color-white);
   box-shadow: 0px 0px 0px 2px var(--color-black);
+  outline: 3px solid transparent;
+  transition:
+    outline var(--transition-enter-fast),
+    background-color var(--transition-enter-fast),
+    box-shadow var(--transition-enter-fast);
+}
 
-  &:focus {
-    box-shadow: 0px 0px 0px 2px var(--primary-color);
-  }
+input::-webkit-input-placeholder {color:var(--color-black)}
+input::-moz-placeholder          {color:var(--color-black)}
+input:-moz-placeholder           {color:var(--color-black)}
+input:-ms-input-placeholder      {color:var(--color-black)}
+
+input:focus,
+textarea:focus,
+select:focus {
+  background-color: var(--color-white);
+  outline: 3px solid var(--color-yellow);
 }
 
 select {
@@ -419,16 +569,17 @@ background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-
 
 .input-group > input,
 .input-group > select {
+  box-shadow: 0px 0px 0px 1px var(--color-light-gray);
   padding: 0.6em 2em;
 }
 
 .input-group > .button {
   border-radius: 0;
-  box-shadow: 0px 0px 0px 2px var(--primary-color);
+  box-shadow: 0px 0px 0px 1px var(--dark-primary-color);
 }
 
 :--not-touch .input-group > .button:--enter {
-  box-shadow: 0px 0px 0px 2px var(--light-primary-color);
+  box-shadow: 0px 0px 0px 1px var(--light-primary-color);
 }
 
 .input-group > .button:first-child {
@@ -464,10 +615,10 @@ a[href*="//"]:not([href*="fsa.stage.wunder.io"]):after  {
   height: 1em;
 }*/
 
-:--not-touch a[href*="//"]:not([href*="local.food.gov.uk"]):--enter,
+/*:--not-touch a[href*="//"]:not([href*="local.food.gov.uk"]):--enter,
 :--not-touch a[href*="//"]:not([href*="fsa.stage.wunder.io"]):--enter {
   color: var(--primary-color);
-}
+}*/
 
 .svg {
   position: relative;
@@ -504,10 +655,6 @@ a[href*="//"]:not([href*="fsa.stage.wunder.io"]):after  {
 
 .overflow-x-auto {
   overflow-x: auto;
-}
-
-.block-link {
-  display: block;
 }
 
 .page-title {
@@ -547,7 +694,53 @@ figure:after {
   clear: both;
 }
 
+/*Print element*/
+.print-wrapper {
+  float: right;
+  display: flex;
+  justify-content: flex-end;
+
+  @media (min-width: 95em) {
+    margin-right: -15em;
+  }
+}
+
+/*Print page button*/
+.print-page {
+  @mixin responsive-declaration margin-right, 1em, 2em;
+  color: var(--primary-color);
+
+  @media print {
+    display: none;
+  }
+}
+
+.print-page:before {
+  content: "";
+  background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='25px' height='20px' viewBox='0 0 25 20' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3C!-- Generator: Sketch 46.1 %2844463%29 - http://www.bohemiancoding.com/sketch --%3E%3Ctitle%3Eprint%3C/title%3E%3Cdesc%3ECreated with Sketch.%3C/desc%3E%3Cdefs%3E%3C/defs%3E%3Cg id='Symbols' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='print' transform='translate%280.000000, -1.000000%29'%3E%3Cg transform='translate%280.000000, 1.000000%29' id='Path'%3E%3Cpath d='M20.3684146,5.56689086 L20.3684146,0.868975825 C20.3684146,0.389231652 19.985985,0 19.5146246,0 L5.48514592,0 C5.0137855,0 4.63135584,0.389231652 4.63135584,0.868975825 L4.63135584,5.56689086 C2.01659526,5.95159225 0,8.24171432 0,11.0070271 C0,14.0416645 2.42573146,16.5105407 5.40733719,16.5105407 L6.06099888,16.5105407 L6.06099888,19.1310242 C6.06099888,19.6107683 6.44342853,20 6.91478896,20 L18.0852092,20 C18.5565696,20 18.9389993,19.6107683 18.9389993,19.1310242 L18.9389993,16.5105407 L19.592661,16.5105407 C22.5742667,16.5105407 24.9999982,14.0416645 24.9999982,11.0070271 C25.0022237,8.24171432 22.983346,5.95155749 20.3686423,5.56689086 L20.3684146,5.56689086 Z' fill='%2300A39B'%3E%3C/path%3E%3Cpolygon fill='%23FFFFFF' points='6.54761905 1.81818182 19.047619 1.81818182 19.047619 5.45454545 6.54761905 5.45454545'%3E%3C/polygon%3E%3Cpolygon fill='%23FFFFFF' points='17.2619048 18.1818182 7.73809524 18.1818182 7.73809524 13.9393939 17.2619048 13.9393939'%3E%3C/polygon%3E%3Cpath d='M19.5416073,14.5454545 L18.8927498,14.5454545 L18.8927498,13.7062937 L19.9521436,13.7062937 C20.4200398,13.7062937 20.7996587,13.3304168 20.7996587,12.8671329 C20.7996587,12.403849 20.4200398,12.027972 19.9521436,12.027972 L5.04774335,12.027972 C4.57984722,12.027972 4.20022826,12.403849 4.20022826,12.8671329 C4.20022826,13.3304168 4.57984722,13.7062937 5.04774335,13.7062937 L6.10713721,13.7062937 L6.10713721,14.5454545 L5.45827966,14.5454545 C3.43221009,14.5454545 1.78571429,12.9151888 1.78571429,10.9090909 C1.78571429,8.90299301 3.43221009,7.27272727 5.45827966,7.27272727 L19.5417203,7.27272727 C21.5677899,7.27272727 23.2142857,8.90299301 23.2142857,10.9090909 C23.2142857,12.913007 21.5655864,14.5454545 19.5417203,14.5454545 L19.5416073,14.5454545 Z' fill='%2300A39B'%3E%3C/path%3E%3Cpath d='M16.4416711,3.03030303 L16.2964241,3.03030303 C15.8435895,3.03030303 15.4761905,3.43750303 15.4761905,3.93939394 C15.4761905,4.44128485 15.8435895,4.84848485 16.2964241,4.84848485 L16.4416711,4.84848485 C16.8945057,4.84848485 17.2619048,4.44128485 17.2619048,3.93939394 C17.2619048,3.43750303 16.8945057,3.03030303 16.4416711,3.03030303 Z' fill='%23FFFFFF'%3E%3C/path%3E%3Cpath d='M14.0607187,3.03030303 L13.9154718,3.03030303 C13.4626372,3.03030303 13.0952381,3.43750303 13.0952381,3.93939394 C13.0952381,4.44128485 13.4626372,4.84848485 13.9154718,4.84848485 L14.0607187,4.84848485 C14.5135533,4.84848485 14.8809524,4.44128485 14.8809524,3.93939394 C14.8809524,3.43750303 14.5135533,3.03030303 14.0607187,3.03030303 Z' fill='%23FFFFFF'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-right: 0.5em;
+}
+
+:--not-touch .print-page:--enter {
+  color: var(--light-primary-color);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/*View pdf button*/
 .print__wrapper {
+  @media print {
+    display: none;
+  }
+}
+
+:--not-js .print__wrapper {
   float: right;
   @mixin responsive-declaration margin-top, 1em, 2em;
 }
@@ -573,21 +766,31 @@ figure:after {
   margin-right: 0.5em;
 }
 
+:--not-touch .print__wrapper.print__wrapper--pdf a:--enter {
+  color: var(--light-primary-color);
+  text-decoration: underline;
+}
+
+/*Updated date*/
+.field__field_alert_modified,
 .field__field_update_date {
   float: left;
   @mixin responsive-declaration padding-left, 0em, 4em;
   @mixin responsive-declaration margin-top, 1em, 2em;
 }
 
+.field__field_alert_modified + *,
 .field__field_update_date + * {
   clear: both;
   @mixin responsive-declaration padding-top, 1em, 2em;
 }
 
+.field__field_alert_modified__heading,
 .field__field_update_date__heading {
   display: inline-block;
 }
 
+.field__field_alert_modified__item,
 .field__field_update_date__item {
   display: inline-block;
 }
@@ -597,6 +800,7 @@ figure:after {
   margin-bottom: 1em;
 }
 
+/*Document reference*/
 .field__field_document {
   background-color: var(--color-lighter-gray);
   padding-top: 1em;
@@ -618,12 +822,17 @@ figure:after {
   border: 0;
 }
 
-.field__field_document > .field__field_document__item .file__type_application-pdf {
+:--not-touch .field__field_document > .field__field_document__item .field__field_document a:--enter {
+  color: var(--light-primary-color);
+  text-decoration: underline;
+}
+
+.field__field_document  .file__type_application-pdf {
   padding-left: 5em;
   position: relative;
 }
 
-.field__field_document > .field__field_document__item .file__type_application-pdf:before {
+.field__field_document .file__type_application-pdf:before {
   content: "PDF";
   background-color: var(--color-dark-red);
   position: absolute;
@@ -637,12 +846,113 @@ figure:after {
   transform: translateY(-50%);
 }
 
+.embedded-entity {
+  position: relative;
+  @mixin responsive-declaration margin-top, 2em, 4em;
+  @mixin responsive-declaration margin-bottom, 2em, 4em;
+}
+
+/*Content image*/
+.embedded-entity img {
+  margin-left: -2em;
+  width: 110%;
+  width: calc(100% + 4em);
+  max-width: none;
+}
+
+/*Iframe*/
+.video-embed-field-responsive-video {
+  @mixin responsive-declaration margin-top, 2em, 4em;
+  @mixin responsive-declaration margin-bottom, 2em, 4em;
+  @mixin responsive-declaration margin-left, -0em, -2em;
+  @mixin responsive-declaration margin-right, -0em, -2em;
+}
+
+/*Important*/
+.important {
+  @mixin responsive-declaration margin-left, -0em, -2em;
+  @mixin responsive-declaration margin-right, -0em, -2em;
+  @mixin responsive-declaration padding, 1em, 2em;
+  background-color: var(--color-lighter-gray);
+  border: 1px solid var(--color-light-gray);
+  @mixin responsive-declaration margin-top, 1em, 2em;
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
+}
+
+.important .regional-variation {
+  background-color: var(--color-white);
+}
+
+.important .video-embed-field-responsive-video {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.important .embedded-entity img {
+  margin-left: 0em;
+  width: 100%;
+}
+
+.important .important {
+  background-color: var(--color-white);
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/*Feed icon*/
+a.feed-icon {
+  display: inline-block;
+  margin-top: 2em;
+  font-family: var(--font-family-content);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  background-color: var(--primary-color);
+  color: var(--color-white);
+  border: 0;
+  border-radius: 2em;
+  padding: 0.6em 2.5em;
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+  outline: 3px solid transparent;
+  transition:
+    outline var(--transition-enter-fast);
+}
+
+:--not-touch a.feed-icon:--enter {
+  background-color: var(--light-primary-color);
+  color: var(--color-white) !important;
+}
+
 /*Drupal tabs*/
+#block-tabs {
+  @media print {
+    display: none;
+  }
+}
+
+body.theme--service #block-tabs {
+  background-color: var(--color-lighter-gray);
+  border-bottom: 1px solid var(--color-light-gray);
+}
+
 #block-tabs > ul {
   display: flex;
   flex-wrap: wrap;
-  padding: 0em;
   margin-left: -1em;
+  padding: 1em;
+}
+
+body.theme--service #block-tabs > ul {
+  margin: 0;
+  @mixin responsive-declaration padding-top, 1em, 2em;
+  padding-bottom: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+
+  @media (--breakpoint-md) {
+    padding-left: 3em;
+    padding-right: 3em;
+  }
 }
 
 #block-tabs > ul > li {
@@ -653,7 +963,7 @@ figure:after {
 #block-tabs > ul > li > a {
   font-family: var(--font-family-content);
   letter-spacing: 0.02em;
-  background-color: var(--primary-color);
+  background-color: var(--dark-primary-color);
   color: var(--color-white);
   border: 0;
   border-radius: 2em;
@@ -663,8 +973,11 @@ figure:after {
   margin-left: 1em;
   margin-bottom: 1em;
   display: block;
+  text-decoration: none;
+  transition: background-color var(--transition-enter);
 }
 
 :--not-touch #block-tabs > ul > li > a:--enter {
   background-color: var(--light-primary-color);
+  text-decoration: none;
 }

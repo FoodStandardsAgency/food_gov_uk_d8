@@ -1,0 +1,36 @@
+uuid: a89cf22f-7caa-477c-b0e7-7b490dcfa5c4
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - user
+id: user.field_notification_method
+field_name: field_notification_method
+entity_type: user
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: none
+      label: 'No notifications'
+    -
+      value: sms
+      label: SMS
+    -
+      value: immediate
+      label: 'Immediate email'
+    -
+      value: daily
+      label: 'Daily email digest'
+    -
+      value: weekly
+      label: 'Weekly email digest'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

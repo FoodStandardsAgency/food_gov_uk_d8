@@ -51,7 +51,10 @@
         "mikehaertl/phpwkhtmltopdf": "^2.2",
         "drupal/block_class": "^1.0@alpha",
         "drupal/menu_breadcrumb": "^1.4",
-        "drupal/media_entity_document": "^1.1"
+        "drupal/media_entity_document": "^1.1",
+        "drupal/email_registration": "^1.0@RC",
+        "drupal/better_exposed_filters": "^3.0@alpha",
+        "drupal/menu_trail_by_path": "^1.1"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
