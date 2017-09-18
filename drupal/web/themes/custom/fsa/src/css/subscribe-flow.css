@@ -1,0 +1,35 @@
+.user-registration-form .fieldgroup,
+.alert-for-registration-form .fieldgroup {
+
+}
+
+.user-registration-form legend,
+.alert-for-registration-form legend {
+  font-family: var(--font-family-heading);
+  font-weight: 700;
+  @mixin responsive-declaration font-size, 1.25em, 1.7em;
+  @mixin responsive-declaration line-height, 1.2, 1.25;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--color-light-gray);
+  margin-bottom: 1em;
+}
+
+.user-registration-form .fieldset-wrapper,
+.alert-for-registration-form .fieldset-wrapper {
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-registration-form .fieldset-wrapper > *:first-child,
+.alert-for-registration-form .fieldset-wrapper > *:first-child {
+  order: 100
+}
+
+.user-registration-form .description,
+.alert-for-registration-form .description {
+  order: 1;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 1em;
+}
