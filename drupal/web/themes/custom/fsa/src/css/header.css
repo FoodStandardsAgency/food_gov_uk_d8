@@ -1,4 +1,4 @@
-.header {
+.header:not(.profile) {
   position: relative;
   z-index: var(--z-top);
   padding: 0;
