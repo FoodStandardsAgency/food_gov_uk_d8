@@ -7,7 +7,11 @@
   background-color: var(--color-dark-blue);
   color: var(--color-white);
   text-align: center;
-  width: 22.5em;
+  width: 100%;
+
+  @media (--breakpoint-xs) {
+    width: 22.5em;
+  }
 
   @media (--breakpoint-lg) {
     position: absolute;
