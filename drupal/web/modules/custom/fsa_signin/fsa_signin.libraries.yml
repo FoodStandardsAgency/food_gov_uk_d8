@@ -1,0 +1,6 @@
+subscription_alerts:
+  version: 1.x
+  js:
+    js/fsa_signin.subscription_alerts.js: {}
+  dependencies:
+    - core/jquery
