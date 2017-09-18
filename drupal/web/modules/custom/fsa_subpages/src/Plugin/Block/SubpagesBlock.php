@@ -95,18 +95,26 @@ class SubpagesBlock extends BlockBase {
 
     // Prevent empty block being placed on a page by checking if field_subpages
     // is set.
-    $nid = \Drupal::routeMatch()->getParameter('node')->id();
-    $node = Node::load($nid);
-    $field_subpages = $node->get('field_subpages')->referencedEntities();
-
-    if (!empty($field_subpages)) {
-      return AccessResult::allowed();
-    }
-    else {
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if (empty($node)) {
+      // Dont crash if on non-node page
       return AccessResult::forbidden();
     }
 
+    // prevent accidents / make sure we are on right page
+    if (!$node->hasField('field_subpages')) {
+      return AccessResult::forbidden();
+    }
 
+    $empty = $node->get('field_subpages')->isEmpty();
+    if ($empty) {
+      // cache until the node changes
+      return AccessResult::forbidden()->addCacheableDependency($node);
+    }
+    else {
+      // cache until the node changes
+      return AccessResult::allowed()->addCacheableDependency($node);
+    }
   }
 
 }
