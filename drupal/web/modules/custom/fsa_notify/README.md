@@ -8,9 +8,9 @@ All notification related stuff lives in one module `fsa_notify`.
 
 ## TODO
 
-Decisions and/or futher investigation needed:
+Decisions and/or further investigation needed:
 * Need to decide and work with what happens when sending fails to particular user. Stop sending altogether? Or continue? We dont know if this is some common error or just isolated case. In `src/FsaNotifyAPI*.php`, see `send()` method.
-* There are overlapping fields: field_notification_allergys and	field_subscribed_notifications. This module is built with the former.
+* There are overlapping fields: `field_notification_allergys` and `field_subscribed_notifications`. This module is built with the former.
 * There are no food nor news alerts yet
 * Unsubscribe by email functionality
 * Optout by sms functionality
@@ -20,7 +20,7 @@ Decisions and/or futher investigation needed:
 
 ## Known bugs
 
-* In very rare cases people may get two non-overlapping digests for same period of time. It may happen when the system is not able to send all messages out in one cron shot (very exceptional cases). And inbetween multiple attempts there is added new content which goes to the digest. Likelihood for this event is virtually nonexistent as sending is expected almost always to succeed (within say 15min) in first attempt and there are only few alerts per day.
+* In very rare cases people may get two non-overlapping digests for same period. It may happen when the system is not able to send all messages out in one cron shot (very exceptional cases). And in between multiple attempts there is added new content which goes to the digest. Likelihood for this event is virtually nonexistent as sending is expected almost always to succeed (within say 15min) in first attempt and there are only few alerts per day.
 
 ## Configuration
 
@@ -48,7 +48,7 @@ Runtime state variables are:
 
 ## API keys and Template IDs
 
-Those can be aquired from https://www.notifications.service.gov.uk/
+This can be acquired from https://www.notifications.service.gov.uk/
 
 Consult LastPass, Luke or Sally for access.
 
@@ -93,7 +93,7 @@ List of allergens user has signed up to.
 ## Cron
 
 During cron run following things happen:
-* Queue is processed for each queued alert and the alerts will be reference from user caches according to user allergen signup field.
+* Queue is processed for each queued alert and the alerts will be reference from user caches according to user allergen sign up field.
 * All SMS messages are sent out
 * All immediate messages are sent out
 * All daily messages are sent out - if it is appropriate time
@@ -141,7 +141,7 @@ For details, please refer to following functions:
 * `fsa_notify_weekly_is_ready_to_send()` - check if we can send out weekly digests now
 * `fsa_notify_is_ready_to_send()` - underlying general functionality for previous functions
 
-When digest is sent (successfully finished), then is recorded by `fsa_notify_sent()`. It is needed to calclulate if enough time is passed since last time.
+When digest is sent (successfully finished), then is recorded by `fsa_notify_sent()`. It is needed to calculate if enough time is passed since last time.
 
 ## If you need to change how a notification looks
 
