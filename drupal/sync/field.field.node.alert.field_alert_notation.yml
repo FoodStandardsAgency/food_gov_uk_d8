@@ -9,8 +9,8 @@ id: node.alert.field_alert_notation
 field_name: field_alert_notation
 entity_type: node
 bundle: alert
-label: 'Alert notation'
-description: 'Unique identifier for the alert'
+label: 'Ref:'
+description: 'Alert notation, the unique identifier for this alert.'
 required: true
 translatable: false
 default_value: {  }
