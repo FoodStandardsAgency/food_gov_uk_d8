@@ -100,7 +100,7 @@ content:
     region: content
   field_alert_relatedmedia:
     weight: 6
-    label: above
+    label: hidden
     settings:
       trim_length: 80
       url_only: false

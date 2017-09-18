@@ -65,6 +65,7 @@ class AlertsForRegistrationForm extends FormBase {
       '#type' => 'submit',
       '#value' => $this->t('Next'),
     );
+    $form['#attached']['library'][] = 'fsa_signin/subscription_alerts';
     return $form;
   }
 

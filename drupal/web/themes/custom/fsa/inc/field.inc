@@ -17,6 +17,13 @@ function fsa_preprocess_field(&$variables) {
   else if ($variables['element']['#bundle'] == 'alert') {
     // All (non-inline) alert node labels forced to h3.
     $variables['title_element'] = 'h3';
+
+    switch ($variables['field_name']) {
+      case 'field_alert_relatedmedia':
+        // Fake alerts related media to use same class as field_document
+        $variables['attributes']['class'][] = 'field__field_document';
+        break;
+    }
   }
   else {
     // Define (non-inline) title_element per field here, defaults to 'h2'.
