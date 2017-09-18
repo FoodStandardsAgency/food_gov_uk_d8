@@ -139,9 +139,9 @@
   {% endif %}
 
   {% if page.hero is defined and page.hero|render|striptags|trim %}
-  <div class="layout">
+  <div class="layout hero-wrapper">
     <div class="layout__container">
-      <div class="layout__content">
+      <div class="layout__content hero-wrapper__content">
         <div class="hero">
           {{ page.hero }}
         </div>

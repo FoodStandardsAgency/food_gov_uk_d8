@@ -33,3 +33,25 @@
   text-transform: uppercase;
   margin-bottom: 1em;
 }
+
+.user-registration-form label,
+.alert-for-registration-form label {
+  display: block;
+}
+
+.user-registration-form .form-wrapper,
+.alert-for-registration-form .form-wrapper {
+  @mixin responsive-declaration padding-top, 1em, 1em;
+}
+
+.user-registration-form .form-item,
+.alert-for-registration-form .form-item {
+  margin-bottom: 1em;
+}
+
+.user-registration-form .form-actions,
+.alert-for-registration-form .form-actions {
+  @mixin responsive-declaration padding-top, 2em, 3em;
+  display: flex;
+  justify-content: space-between;
+}
