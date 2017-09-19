@@ -21,7 +21,7 @@ class RatingsHelper extends ControllerBase {
    *
    * @return \Drupal\Core\StringTranslation\TranslatableMarkup|false|int
    */
-  public static function ratingsDate($date, $format = 'short') {
+  public static function ratingsDate($date, $format = 'medium') {
 
     $date = strtotime($date);
     if ($date > -1893456000) {
