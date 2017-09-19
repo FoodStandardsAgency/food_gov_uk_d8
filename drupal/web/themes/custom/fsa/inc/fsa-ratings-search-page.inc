@@ -2,12 +2,12 @@
 
 /**
  * @file
- * Includes FSA theme page preprocess functionality.
+ * Includes FSA theme search page preprocess functionality.
  */
 
 /**
  * Implements template_preprocess_page().
  */
-function fsa_preprocess_page(&$variables) {
+function fsa_preprocess_fsa_ratings_search_page(&$variables) {
   $variables['current_language'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
 }
