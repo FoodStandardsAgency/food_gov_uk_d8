@@ -7,4 +7,4 @@ _core:
 id: long
 label: 'Default long date'
 locked: false
-pattern: 'l, j F, Y - H:i'
+pattern: 'j F, Y - H:i'
