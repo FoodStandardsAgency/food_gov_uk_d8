@@ -45,9 +45,7 @@ class FsaEstablishmentViewBuilder extends EntityViewBuilder {
     }
 
     // Build the badge for rating.
-    if ($build['#rating_value'] !== 0) {
-      $build['#rating_badge'] = RatingsHelper::ratingBadgeImageDisplay($rating_value);
-    }
+    $build['#rating_badge'] = RatingsHelper::ratingBadgeImageDisplay($rating_value);
 
     // "What do the ratings mean" link.
     $url = Url::fromRoute('fsa_ratings.ratings_meanings');
