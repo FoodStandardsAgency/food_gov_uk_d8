@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Includes FSA theme search page preprocess functionality.
+ * Includes FSA theme fsa ratings search page preprocess functionality.
  */
 
 /**
