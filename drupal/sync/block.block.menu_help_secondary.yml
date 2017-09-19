@@ -5,9 +5,13 @@ dependencies:
   config:
     - system.menu.help
   module:
+    - block_class
     - system
   theme:
     - fsa
+third_party_settings:
+  block_class:
+    classes: ''
 id: menu_help_secondary
 theme: fsa
 region: sidebar_first
@@ -24,6 +28,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: "/help\r\n/help/*"
+    pages: "/help\r\n/help/*\r\n/node/6"
     negate: false
     context_mapping: {  }
