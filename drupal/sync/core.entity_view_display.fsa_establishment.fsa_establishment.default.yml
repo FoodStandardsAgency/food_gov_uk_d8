@@ -20,7 +20,6 @@ dependencies:
     - field.field.fsa_establishment.fsa_establishment.field_score_hygiene
     - field.field.fsa_establishment.fsa_establishment.field_score_structural
   module:
-    - datetime
     - fsa_ratings
     - geolocation
 _core:
@@ -106,11 +105,9 @@ content:
   field_ratingdate:
     weight: 6
     label: above
-    settings:
-      timezone_override: ''
-      format_type: short
+    settings: {  }
     third_party_settings: {  }
-    type: datetime_default
+    type: fsa_ratingdate_formatter
     region: content
   field_righttoreply:
     weight: 11
@@ -149,6 +146,9 @@ content:
       link_to_entity: false
     third_party_settings: {  }
 hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
   field_fhis_ratingvalue: true
   field_fhrs_ratingvalue: true
   field_newratingpending: true

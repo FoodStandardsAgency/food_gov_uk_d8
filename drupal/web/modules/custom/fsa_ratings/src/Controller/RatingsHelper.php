@@ -12,6 +12,29 @@ use Drupal\Core\Controller\ControllerBase;
  */
 class RatingsHelper extends ControllerBase {
 
+  /**
+   * @param string $date
+   *    String in datetime format.
+   *
+   * @param string $format
+   *    Drupal date format to format the date.
+   *
+   * @return \Drupal\Core\StringTranslation\TranslatableMarkup|false|int
+   */
+  public static function ratingsDate($date, $format = 'short') {
+
+    $date = strtotime($date);
+    if ($date > -1893456000) {
+      // Format a nice date display if it is after year 1910.
+      $date = \Drupal::service('date.formatter')->format($date, $format);
+    }
+    else {
+      // Return "not available" label for years from the beginning of century.
+      $date = t('N/A');
+    }
+
+    return $date;
+  }
 
   /**
    * Helper function to get entity details from the FSA ratings system

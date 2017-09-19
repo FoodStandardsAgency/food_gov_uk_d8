@@ -43,13 +43,6 @@ class FsaRatingsSearchForm extends FormBase {
     $filters = [];
     $available_filters = $search_service->categories();
 
-    // Remove entries with empty key
-    foreach ($available_filters as $key => $value) {
-      if (!$available_filters[$key][0]['key']) {
-        array_shift($available_filters[$key]);
-      }
-    }
-
     // User provided search input.
     $keywords = \Drupal::request()->query->get('q');
 
@@ -81,7 +74,8 @@ class FsaRatingsSearchForm extends FormBase {
     // Detect from the query params if search was performed.
     $search = FALSE;
     foreach (self::FORM_FIELDS as $input) {
-      if (\Drupal::request()->query->get($input)) {
+      $query_input = \Drupal::request()->query->get($input);
+      if (isset($query_input)) {
         $search = TRUE;
       }
     }
@@ -89,8 +83,8 @@ class FsaRatingsSearchForm extends FormBase {
     // Set default title.
     $form['header']['title'] = ['#markup' => $this->t('Food hygiene ratings search')];
 
-    // And if search was not performed pass additional header for the form.
-    if (!$search && \Drupal::routeMatch()->getRouteName() == 'fsa_ratings.ratings_search') {
+    // ...and if search was not performed pass additional header texts to the form.
+    if ($search === FALSE && \Drupal::routeMatch()->getRouteName() == 'fsa_ratings.ratings_search') {
       $form['header']['title'] = ['#markup' => $this->t('Eating out?')];
       $form['header']['subtitle'] = ['#markup' => $this->t('Check the hygiene rating.')];
       $form['header']['copy'] = ['#markup' => $this->t('Find out if a restaurant, takeaway or food shop you want to visit has good food hygiene standards.')];
@@ -211,7 +205,7 @@ class FsaRatingsSearchForm extends FormBase {
   private function aggsToOptions($aggs_bucket = []) {
     $options = [];
     foreach ($aggs_bucket as $a) {
-      $options[$a['key']] = $a['key'];
+      $options[$a['key']] = (string) $a['key'];
     }
     return $options;
   }
