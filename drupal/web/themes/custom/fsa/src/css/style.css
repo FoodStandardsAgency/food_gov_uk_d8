@@ -1,39 +1,43 @@
-/*Layout*/
+/*Base*/
 @import "base.css";
-@import "header.css";
 
+/* Layout */
+@import "header.css";
+@import "hero.css";
+@import "layout.css";
 @import "breadcrumb.css";
-@import "site-promo.css";
-@import "site-features.css";
-@import "site-content.css";
+@import "sidebar.css";
 @import "footer.css";
 
+/* Ratings */
+@import "establishment.css";
+@import "ratings-meanings.css";
+@import "ratings.css";
+
+/* Profile and registration */
+@import "my-profile.css";
+@import "subscribe-flow.css";
+
+/* Alert */
+@import "news-alerts.css";
+
+/* Navigation */
+@import "navigation.css";
+@import "navigation-side.css";
+@import "navigation-mobile.css";
+@import "navigation-secondary.css";
+
+/*Component*/
 @import "button.css";
 @import "table.css";
 @import "toggle.css";
-
-/*Component*/
-@import "establishment.css";
-@import "ratings-meanings.css";
-@import "featurebox.css";
-@import "ratings.css";
-@import "layout.css";
-@import "webform.css";
-@import "logo.css";
-@import "sidebar.css";
-@import "side-navigation.css";
-@import "node-teaser.css";
-@import "message-list.css";
-@import "liftup.css";
-@import "hero.css";
-@import "modal.css";
 @import "toc.css";
+@import "modal.css";
 @import "topic-cloud.css";
 @import "subpages.css";
 @import "regional-variation.css";
-@import "my-profile.css";
-@import "news-alerts.css";
-@import "navigation.css";
-@import "navigation-mobile.css";
-@import "navigation-secondary.css";
-@import "subscribe-flow.css";
+@import "message-list.css";
+@import "teaser.css";
+@import "webform.css";
+
+

@@ -981,3 +981,10 @@ body.theme--service #block-tabs > ul {
   background-color: var(--light-primary-color);
   text-decoration: none;
 }
+
+/* Logo */
+.logo {
+  max-width: 8.5em;
+  height: 4em;
+  width: 100%;
+}

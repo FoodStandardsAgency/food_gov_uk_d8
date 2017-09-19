@@ -1,4 +1,0 @@
-.featurebox {
-  background-color: var(--color-white);
-  @mixin responsive-declaration padding, 1em, 2em;
-}
