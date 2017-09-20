@@ -137,7 +137,6 @@ class FsaRatingsSearchForm extends FormBase {
       '#empty_value' => '',
     ];
 
-    // @TODO: Temporary hack to prevent showing ratings of scottish establishments for the FHRS demo week 32/33, revert later.
     $rating_values = $this->aggsToOptions($available_filters['rating_values']);
     $form['advanced']['rating_value'] = [
       '#type' => 'checkboxes',

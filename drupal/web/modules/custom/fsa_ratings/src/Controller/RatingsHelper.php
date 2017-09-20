@@ -72,22 +72,20 @@ class RatingsHelper extends ControllerBase {
   /**
    * Display locally hosted ratings badge image.
    *
-   * The images are fetched from
-   * https://s3-eu-west-1.amazonaws.com/assets.food.gov.uk, offered as
-   * downloadables at fhrs-online-display.food.gov.uk).
-   *
    * @param int $rating
-   *   The establishment fhrsid.
+   *   Establishment rating value.
+   * @param string $scheme
+   *    Rating scheme.
    * @param int $embed_type
-   *   Embed type code (1|2|3|4)
+   *   Embed type code (1|3|4), define the FHRS badge type.
    *
    * @return array
-   *   Rating image badge #markup as loaded from the API.
+   *   Rating image badge #markup.
    */
-  public static function ratingBadgeImageDisplay($rating, $embed_type = 4) {
+  public static function ratingBadgeImageDisplay($rating, $scheme = 'FHRS', $embed_type = 4) {
 
+    // Language name to image path.
     $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
-
     switch ($lang) {
       case 'cy':
         $language = 'welsh';
@@ -98,36 +96,42 @@ class RatingsHelper extends ControllerBase {
         break;
     }
 
-    // Non-numeric FHRS badges.
-    $literals = ['exempt', 'pending'];
+    $badge_path = '';
 
-    // FHIS badges
-    $fhis_badges = ['AwaitingInspection', 'AwaitingPublication', 'Improvement Required', 'Pass', 'Pass and Eat Safe'];
+    // Build the badge based on scheme.
+    if ($scheme == 'FHRS') {
 
-    if (is_numeric($rating) || in_array(strtolower($rating), $literals)) {
-      // FHRS numeric and few literal ratings as badges.
-      $image_path = '/' . drupal_get_path('module', 'fsa_ratings') . '/images/badges/score-' . $rating . '-' . $embed_type . '-' . $language . '.png';
+      // Not all FHRS rating values match the badge name, rewrite.
+      switch ($rating) {
+        case 'AwaitingInspection':
+          $rating = 'pending';
+          break;
+      }
+
+      $badge_path = $scheme .  '/' . $rating . '/' . 'score-' . $rating . '-' . $embed_type . '-' . $language . '.png';
+
     }
-    else if (in_array($rating, $fhis_badges)) {
-      // FHIS badges as defined in $fhis_badges variable.
-      // Convert to proper image filenames, regexp "CamelCase" -> "camel_case".
-      $imgname = strtolower(str_replace(' ', '_', preg_replace('/(?<!^)[A-Z]/', '_$0', $rating)));
-      $image_path = '/' . drupal_get_path('module', 'fsa_ratings') . '/images/badges/fhis_' . $imgname . '.png';
-    }
-    else {
-      // Fall back to fetching arbitrary badges from ratings.food.gov.uk.
+    else if ($scheme == 'FHIS') {
       $filter = [
         ' ' => '_',
-        '/' => '_',
-        '[' => '_',
-        ']' => '_',
       ];
-      $image_path = 'http://ratings.food.gov.uk/images/scores/large/fhis_' . Html::cleanCssIdentifier($rating, $filter) . '_' . $lang . '-gb.JPG';
+      $filename = Html::cleanCssIdentifier('fhis_' . $rating, $filter);
+      $badge_path = $scheme .  '/' . $filename  . '.jpg';
+    }
+
+    if ($badge_path != '') {
+      $image_path = '/' . drupal_get_path('module', 'fsa_ratings') . '/images/badge/' . $badge_path;
+      $badge = '<img src="' . $image_path . '" alt="FHRS Rating score: ' . $rating . '" />';
+    }
+    else {
+      // In case we could not create a badge_path.
+      $badge = '<pre>' . t('Rating badge not available.') . '</pre>';
     }
 
     return [
-      '#markup' => '<div class="badge ratingkey"><img src="' . $image_path . '" alt="FHRS Rating score: ' . $rating . '" /></div>',
+      '#markup' => '<div class="badge ratingkey">' . $badge . '</div>',
     ];
+
   }
 
   /**
