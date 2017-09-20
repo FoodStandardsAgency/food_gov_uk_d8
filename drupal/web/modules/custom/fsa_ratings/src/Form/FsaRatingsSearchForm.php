@@ -145,8 +145,8 @@ class FsaRatingsSearchForm extends FormBase {
       '#empty_value' => '',
     ];
 
-    // Define the order the rating checkboxes.
-    $rating_values_sorted = $this->sortArrayByArray(
+    // Define FHRS options and their sorting.
+    $rating_values = $this->defineAndSortArrayItems(
       $this->aggsToOptions($available_filters['rating_values']),
       [
         5,
@@ -155,19 +155,33 @@ class FsaRatingsSearchForm extends FormBase {
         2,
         1,
         0,
-        'Exempt',
         'AwaitingInspection',
+        'Exempt',
+      ]
+    );
+
+    $form['advanced']['rating_value_fhrs'] = [
+      '#type' => 'checkboxes',
+      '#title' => $this->t('Hygiene rating') . ' <span class="regions">(' . $this->t('England, Northern Ireland, Wales') . ')</span>',
+      '#options' => $rating_values,
+      '#default_value' => explode(',', \Drupal::request()->query->get('rating_value')),
+    ];
+
+    // Define scottish ratings & their order.
+    $rating_values = $this->defineAndSortArrayItems(
+      $this->aggsToOptions($available_filters['rating_values']),
+      [
         'Pass',
         'Pass and Eat Safe',
         'Improvement Required',
         'Awaiting Inspection',
+        'Exempt',
       ]
     );
-
-    $form['advanced']['rating_value'] = [
+    $form['advanced']['rating_value_fhis'] = [
       '#type' => 'checkboxes',
-      '#title' => $this->t('Hygiene rating'),
-      '#options' => $rating_values_sorted,
+      '#title' => $this->t('Hygiene status') . ' <span class="regions">(' . $this->t('Scotland') . ')</span>',
+      '#options' => $rating_values,
       '#default_value' => explode(',', \Drupal::request()->query->get('rating_value')),
     ];
 
@@ -190,22 +204,22 @@ class FsaRatingsSearchForm extends FormBase {
    * Private helper function to sort array by another array.
    *
    * @param array $array
-   *   The array to sort.
-   * @param array $orderArray
-   *   The array with keys that define the sort.
+   *   The array to define..
+   * @param array $definingArray
+   *   The array with keys defining sort and items to keep.
    *
    * @return array
    *   Sorted array.
    */
-  private static function sortArrayByArray(array $array, array $orderArray) {
-    $ordered = array();
-    foreach ($orderArray as $key) {
+  private static function defineAndSortArrayItems(array $array, array $definingArray) {
+    $modified_array = array();
+    foreach ($definingArray as $key) {
       if (array_key_exists($key, $array)) {
-        $ordered[$key] = $array[$key];
+        $modified_array[$key] = $array[$key];
         unset($array[$key]);
       }
     }
-    return $ordered + $array;
+    return $modified_array;
   }
 
 
@@ -214,18 +228,22 @@ class FsaRatingsSearchForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $query = [];
+    $rating_fhrs = FALSE;
+    $rating_fhis = FALSE;
+
     // Read all the single values.
     foreach (['q', 'business_type', 'local_authority'] as $p) {
       if (!empty($form_state->getValue($p))) {
         $query[$p] = $form_state->getValue($p);
       }
     }
-    // Checkboxes needs to handled differently.
-    if (!empty($form_state->getValue('rating_value'))) {
-      $values = $form_state->getValue('rating_value');
+
+    // Read FHRS rating_value(s) from checkboxes.
+    if (!empty($form_state->getValue('rating_value_fhrs'))) {
       $selected = [];
+      $values = $form_state->getValue('rating_value_fhrs');
       foreach ($values as $name => $is_selected) {
-        if ((bool) $is_selected) {
+        if ($is_selected) {
           $selected[] = $name;
         }
       }
@@ -236,8 +254,30 @@ class FsaRatingsSearchForm extends FormBase {
       }
 
       if (!empty($selected)) {
-        $query['rating_value'] = implode(',', $selected);
+        // Build query for rating_value.
+        $rating_fhrs = implode(',', $selected);
       }
+    }
+
+    // Read FHIS rating_value(s) from checkboxes.
+    if (!empty($form_state->getValue('rating_value_fhis'))) {
+      $selected = [];
+      $values = $form_state->getValue('rating_value_fhis');
+      foreach ($values as $name => $is_selected) {
+        if ($is_selected) {
+          $selected[] = $name;
+        }
+      }
+
+      if (!empty($selected)) {
+        // Build query for rating_value.
+        $rating_fhis = implode(',', $selected);
+      }
+    }
+
+    // Merge FHRS & FHIS checkbox values to the query string.
+    if ($rating_fhrs || $rating_fhis) {
+      $query['rating_value'] = $rating_fhrs . ',' . $rating_fhis;
     }
 
     $form_state->setRedirect('fsa_ratings.ratings_search', [], ['query' => $query]);
