@@ -145,11 +145,29 @@ class FsaRatingsSearchForm extends FormBase {
       '#empty_value' => '',
     ];
 
-    $rating_values = $this->aggsToOptions($available_filters['rating_values']);
+    // Define the order the rating checkboxes.
+    $rating_values_sorted = $this->sortArrayByArray(
+      $this->aggsToOptions($available_filters['rating_values']),
+      [
+        5,
+        4,
+        3,
+        2,
+        1,
+        0,
+        'Exempt',
+        'AwaitingInspection',
+        'Pass',
+        'Pass and Eat Safe',
+        'Improvement Required',
+        'Awaiting Inspection',
+      ]
+    );
+
     $form['advanced']['rating_value'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Hygiene rating'),
-      '#options' => $rating_values,
+      '#options' => $rating_values_sorted,
       '#default_value' => explode(',', \Drupal::request()->query->get('rating_value')),
     ];
 
@@ -167,6 +185,29 @@ class FsaRatingsSearchForm extends FormBase {
     return $form;
 
   }
+
+  /**
+   * Private helper function to sort array by another array.
+   *
+   * @param array $array
+   *   The array to sort.
+   * @param array $orderArray
+   *   The array with keys that define the sort.
+   *
+   * @return array
+   *   Sorted array.
+   */
+  private static function sortArrayByArray(array $array, array $orderArray) {
+    $ordered = array();
+    foreach ($orderArray as $key) {
+      if (array_key_exists($key, $array)) {
+        $ordered[$key] = $array[$key];
+        unset($array[$key]);
+      }
+    }
+    return $ordered + $array;
+  }
+
 
   /**
    * {@inheritdoc}
@@ -208,7 +249,34 @@ class FsaRatingsSearchForm extends FormBase {
   private function aggsToOptions($aggs_bucket = []) {
     $options = [];
     foreach ($aggs_bucket as $a) {
-      $options[$a['key']] = (string) $a['key'];
+      // Add textual representation for numeric values.
+      switch ($a['key']) {
+        case '5':
+          $value = $a['key'] .' ' . t('Very good');
+          break;
+        case '4':
+          $value = $a['key'] .' ' . t('Good');
+          break;
+        case '3':
+          $value = $a['key'] .' ' . t('Generally satisfactory');
+          break;
+        case '2':
+          $value = $a['key'] .' ' . t('Improvement necessary');
+          break;
+        case '1':
+          $value = $a['key'] .' ' . t('Major improvement necessary');
+          break;
+        case '0':
+          $value = $a['key'] .' ' . t('Urgent improvement necessary');
+          break;
+        case 'AwaitingInspection':
+          // Make this label more human friendly.
+          $value = t('Awaiting Rating');
+          break;
+        default:
+          $value = $a['key'];
+      }
+      $options[$a['key']] = (string) $value;
     }
     return $options;
   }
