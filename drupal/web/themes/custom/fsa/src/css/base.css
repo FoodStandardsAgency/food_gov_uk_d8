@@ -81,6 +81,7 @@ Plugin documentation:
 }
 
 :root {
+  --darker-primary-color: var(--color-darker-teal);
   --dark-primary-color: var(--color-dark-teal);
   --primary-color: var(--color-teal);
   --light-primary-color: var(--color-light-teal);
@@ -181,8 +182,8 @@ body:after {
 :--heading {
   font-family: var(--font-family-heading);
   font-weight: 700;
-  margin-top: 2em;
-  margin-bottom: 1em;
+  margin-top: 1.6em;
+  margin-bottom: 0.8em;
 
   &:first-child {
     margin-top: 0em;
@@ -240,7 +241,7 @@ a {
 }
 
 :--not-touch .field__body a:--enter {
-  color: var(--color-darker-teal);
+  color: var(--darker-primary-color);
 }
 
 /*a:not(.block-link) {
@@ -787,7 +788,6 @@ figure:after {
 .field__field_alert_modified,
 .field__field_update_date {
   float: left;
-  @mixin responsive-declaration padding-left, 0em, 4em;
   @mixin responsive-declaration margin-top, 1em, 2em;
 }
 

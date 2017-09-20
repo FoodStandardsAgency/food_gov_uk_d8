@@ -398,7 +398,7 @@
 :--not-touch .latest-block .views-row-wrapper > .views-row > a:--enter .item__heading,
 :--not-touch .promo__item:--enter .field__field_title,
 :--not-touch .node-teaser:--enter .node-teaser__heading  {
-  color: var(--light-primary-color);
+  color: var(--darker-primary-color);
   text-decoration: underline;
 }
 
