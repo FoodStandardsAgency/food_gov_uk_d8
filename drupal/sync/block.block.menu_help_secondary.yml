@@ -28,6 +28,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: "/help\r\n/help/*\r\n/node/6"
+    pages: "/help\r\n/help/*"
     negate: false
     context_mapping: {  }
