@@ -45,10 +45,6 @@
 
   <div class="ratings__search js-sticky-element toggle-content toggle-content--only-mobile js-toggle-content js-toggle-content-only-mobile" id="collapsible-{{ randomID }}" aria-hidden="true">
     <div class="container container--search">
-      <div class="ratings__logo logo svg">
-        <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop-white"></use></svg>
-      </div>
-
       {{ search_form }}
     </div>
   </div>
@@ -64,7 +60,7 @@
 
         <div class="establishment__rating">
           {{ rating_badge }}
-          <h4>{{ find_more_title }}</h4>
+          <h5>{{ find_more_title }}</h5>
           <ul>
               <li>{{ find_more_link_ratings }}</li>
               <li>{{ find_more_link_fhrs }}</li>

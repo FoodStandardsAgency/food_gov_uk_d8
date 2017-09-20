@@ -11,6 +11,7 @@
   box-shadow: var(--box-shadow);
   cursor: pointer;
   outline: 3px solid transparent;
+  text-decoration: none !important;
   transition:
     background-color var(--transition-enter-fast);
 

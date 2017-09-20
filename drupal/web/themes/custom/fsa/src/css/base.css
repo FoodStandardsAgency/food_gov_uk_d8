@@ -181,6 +181,8 @@ body:after {
 :--heading {
   font-family: var(--font-family-heading);
   font-weight: 700;
+  margin-top: 2em;
+  margin-bottom: 1em;
 
   &:first-child {
     margin-top: 0em;
