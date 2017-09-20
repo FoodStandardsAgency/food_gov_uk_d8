@@ -1,21 +1,5 @@
 /* Navigation wrapper */
 .navigation-wrapper {
-  background-color: var(--primary-color);
-  position: absolute;
-  z-index: var(--z-topmost);
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  transform: translateX(-100%);
-  padding-top: 0em;
-  box-shadow: none;
-  transition:
-    box-shadow var(--transition-enter),
-    transform var(--transition-enter);
-
   @media (--breakpoint-sm) {
     background-color: transparent;
     position: relative;
@@ -57,9 +41,6 @@
 }
 
 .navigation-wrapper.is-open {
-  transform: translateX(-20%);
-  box-shadow: var(--box-shadow);
-
   @media (--breakpoint-sm) {
     transform: none;
     box-shadow: none;
@@ -67,14 +48,6 @@
 }
 
 .navigation-wrapper__container {
-  margin: 0;
-  max-width: none;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  overflow: auto;
-  height: 100%;
-
   @media (--breakpoint-sm) {
     display: flex;
     justify-content: center;
@@ -109,10 +82,6 @@
 }
 
 .navigation-wrapper__main {
-  flex: 1 1 auto;
-  overflow: auto;
-  padding-bottom: 3em;
-
   @media (--breakpoint-sm) {
     overflow: visible;
     padding-bottom: 0;
@@ -120,11 +89,9 @@
 }
 
 .navigation-wrapper__main > div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
   @media (--breakpoint-sm) {
+    display: flex;
+    justify-content: center;
     flex-direction: row;
   }
 }
@@ -170,19 +137,6 @@ nav#block-menu-help-main > ul > li,
 nav#block-menu-help-main > ul > li > a,
 .navigation > ul > li > a,
 .navigation__link {
-  display: inline-block;
-  padding: 0.6em 2.5em;
-  text-align: left;
-  background-color: var(--color-white);
-  font-weight: 400;
-  border-radius: 100em;
-  margin-top: 1em;
-  transform: translateX(-50%);
-  box-shadow: var(--box-shadow);
-  transition:
-    box-shadow var(--transition-enter),
-    transform var(--transition-enter);
-
   @media (--breakpoint-sm) {
     position: relative;
     padding: 1em 1em;
@@ -228,9 +182,8 @@ nav#block-menu-help-main > ul > li > a:after,
 .navigation ul li a.is-active,
 .navigation ul li.menu-item--active-trail a,
 :--not-touch .navigation__link:--enter {
-  box-shadow: var(--box-shadow-active);
-
   @media (--breakpoint-sm) {
+    background-color: transparent;
     box-shadow: none;
     color: var(--color-black);
     transition:
@@ -279,11 +232,6 @@ nav#block-menu-help-main > ul > li > a {
 .navigation-wrapper.is-open nav#block-menu-help-main > ul > li > a,
 .navigation-wrapper.is-open .navigation > ul > li > a,
 .navigation-wrapper.is-open .navigation__link {
-  transform: translateX(0%);
-  transition:
-    box-shadow var(--transition-enter),
-    transform 0.6s cubic-bezier(0.19,1,0.22,1) 0.1s;
-
   @media (--breakpoint-sm) {
     transform: translateX(0%);
   }

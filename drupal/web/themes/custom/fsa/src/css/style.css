@@ -22,10 +22,10 @@
 @import "news-alerts.css";
 
 /* Navigation */
-@import "navigation.css";
 @import "navigation-side.css";
 @import "navigation-mobile.css";
 @import "navigation-secondary.css";
+@import "navigation.css";
 
 /*Component*/
 @import "button.css";
