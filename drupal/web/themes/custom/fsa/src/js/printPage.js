@@ -10,7 +10,7 @@ function printPage(printPDFWrapperElements) {
     // Create the button
     let printButton = document.createElement("button");
     printButton.classList.add("print-page");
-    printButton.innerHTML = `Print this page`;
+    printButton.innerHTML = Drupal.t('Print this page');
     printButton.addEventListener("click", function(e) {
       e.preventDefault();
       window.print();

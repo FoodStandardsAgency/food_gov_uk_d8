@@ -16,8 +16,12 @@
 
 :--not-touch .toc-tree ul a:--enter,
 :--not-touch .toc-tree ol a:--enter {
-  color: var(--light-primary-color);
+  color: var(--darker-primary-color);
   text-decoration: underline;
+}
+
+.toc-tree ol a.is-active {
+  font-weight: 700;
 }
 
 .toc-tree ul ul,

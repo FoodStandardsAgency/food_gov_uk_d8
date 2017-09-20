@@ -59,6 +59,7 @@ Plugin documentation:
   --color-light-gray: #DEE2E5;
   --color-lighter-gray: #F0F3F5;
 
+  --color-darker-teal: #005e59;
   --color-dark-teal: #007c75;
   --color-teal: #00938C;
   --color-light-teal: #00B2A9;
@@ -80,6 +81,7 @@ Plugin documentation:
 }
 
 :root {
+  --darker-primary-color: var(--color-darker-teal);
   --dark-primary-color: var(--color-dark-teal);
   --primary-color: var(--color-teal);
   --light-primary-color: var(--color-light-teal);
@@ -180,6 +182,8 @@ body:after {
 :--heading {
   font-family: var(--font-family-heading);
   font-weight: 700;
+  margin-top: 1.6em;
+  margin-bottom: 0.8em;
 
   &:first-child {
     margin-top: 0em;
@@ -234,6 +238,10 @@ a {
 
 .field__body a {
   text-decoration: underline;
+}
+
+:--not-touch .field__body a:--enter {
+  color: var(--darker-primary-color);
 }
 
 /*a:not(.block-link) {
@@ -636,6 +644,11 @@ a[href*="//"]:not([href*="fsa.stage.wunder.io"]):after  {
   max-width: var(--max-width);
 }
 
+.container.container--content {
+  margin: 0;
+  max-width: var(--content-max-width);
+}
+
 .container.container--text {
   margin: 0;
   max-width: 50em;
@@ -643,7 +656,7 @@ a[href*="//"]:not([href*="fsa.stage.wunder.io"]):after  {
 
 .container.container--search {
   max-width: 30em;
-  @mixin responsive-declaration padding-top, 1em, 3em;
+  @mixin responsive-declaration padding-top, 2em, 5em;
   @mixin responsive-declaration padding-bottom, 1em, 3em;
   @mixin responsive-declaration padding-right, 1em, 2em;
   @mixin responsive-declaration padding-left, 1em, 2em;
@@ -696,19 +709,26 @@ figure:after {
 
 /*Print element*/
 .print-wrapper {
-  float: right;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  margin-bottom: 1em;
 
   @media (min-width: 95em) {
-    margin-right: -15em;
+    margin-right: -7em;
+  }
+
+  @media (--breakpoint-sm) {
+    float: right;
+    margin-bottom: 4em;
+    justify-content: flex-end;
   }
 }
 
 /*Print page button*/
 .print-page {
   @mixin responsive-declaration margin-right, 1em, 2em;
-  color: var(--primary-color);
+  color: var(--dark-primary-color);
+  transition: color var(--transition-enter-fast);
 
   @media print {
     display: none;
@@ -728,7 +748,7 @@ figure:after {
 }
 
 :--not-touch .print-page:--enter {
-  color: var(--light-primary-color);
+  color: var(--darker-primary-color);
   text-decoration: underline;
   cursor: pointer;
 }
@@ -742,7 +762,6 @@ figure:after {
 
 :--not-js .print__wrapper {
   float: right;
-  @mixin responsive-declaration margin-top, 1em, 2em;
 }
 
 .print__wrapper + *:not(.field__field_update_date) {
@@ -767,22 +786,25 @@ figure:after {
 }
 
 :--not-touch .print__wrapper.print__wrapper--pdf a:--enter {
-  color: var(--light-primary-color);
   text-decoration: underline;
+  color: var(--darker-primary-color);
 }
 
 /*Updated date*/
 .field__field_alert_modified,
 .field__field_update_date {
-  float: left;
-  @mixin responsive-declaration padding-left, 0em, 4em;
-  @mixin responsive-declaration margin-top, 1em, 2em;
+  color: var(--color-gray);
+  margin-bottom: 2em;
+
+  @media (--breakpoint-sm) {
+    float: left;
+    margin-bottom: 4em;
+  }
 }
 
 .field__field_alert_modified + *,
 .field__field_update_date + * {
   clear: both;
-  @mixin responsive-declaration padding-top, 1em, 2em;
 }
 
 .field__field_alert_modified__heading,
@@ -801,13 +823,14 @@ figure:after {
 }
 
 /*Document reference*/
-.field__field_document {
+.field.field__field_document {
   background-color: var(--color-lighter-gray);
   padding-top: 1em;
   @mixin responsive-declaration padding-right, 1.25em, 2em;
   padding-bottom: 1em;
   @mixin responsive-declaration padding-left, 1.25em, 2em;
   border: 1px solid var(--color-light-gray);
+  margin-bottom: 0 !important;
 }
 
 .field__field_document > .field__field_document__item {
@@ -846,6 +869,7 @@ figure:after {
   transform: translateY(-50%);
 }
 
+/* Embedded entity */
 .embedded-entity {
   position: relative;
   @mixin responsive-declaration margin-top, 2em, 4em;
@@ -858,6 +882,19 @@ figure:after {
   width: 110%;
   width: calc(100% + 4em);
   max-width: none;
+}
+
+/*Inline document reference*/
+.embedded-entity .media {
+
+}
+
+.embedded-entity + .embedded-entity > .media {
+  @mixin responsive-declaration margin-top, -2em, -3.5em;
+}
+
+.embedded-entity .media .field.field__field_document {
+  margin-bottom: 0.5em !important;
 }
 
 /*Iframe*/
@@ -980,4 +1017,11 @@ body.theme--service #block-tabs > ul {
 :--not-touch #block-tabs > ul > li > a:--enter {
   background-color: var(--light-primary-color);
   text-decoration: none;
+}
+
+/* Logo */
+.logo {
+  max-width: 8.5em;
+  height: 4em;
+  width: 100%;
 }
