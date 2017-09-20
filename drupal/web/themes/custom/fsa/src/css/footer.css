@@ -1,7 +1,7 @@
 .footer {
   @mixin responsive-declaration padding, 1em, 4em;
   @mixin responsive-declaration padding-top, 2em, 4em;
-  @mixin responsive-declaration margin-top, 2em, 0em;
+  @mixin responsive-declaration margin-top, 2em, 4em;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -52,36 +52,19 @@
 
 .footer__links > ul > li > a,
 .footer__link {
-  display: inline-block;
-  padding: 0.6em 2.5em;
-  background-color: var(--secondary-color);
-  color: var(--color-white);
-  border-radius: 100em;
-  box-shadow: var(--box-shadow);
-  transition:
-    box-shadow var(--transition-enter);
-
-  @media (--breakpoint-sm) {
-    padding: 1em 0em;
-    font-size: 0.8em;
-    font-weight: 600;
-    background-color: transparent;
-    color: var(--color-black);
-    border-radius: 0em;
-    transform: translateX(0%);
-    box-shadow: none;
-  }
+  padding: 1em 0em;
+  font-size: 0.8em;
+  font-weight: 600;
+  background-color: transparent;
+  color: var(--color-black);
+  border-radius: 0em;
+  transform: translateX(0%);
+  box-shadow: none;
 }
 
 :--not-touch .footer__links > ul > li > a:--enter {
-  background-color: var(--light-secondary-color);
-  box-shadow: var(--box-shadow-active);
-  color: var(--color-white);
-
-  @media (--breakpoint-sm) {
-    background-color: transparent;
-    box-shadow: none !important;
-    color: var(--primary-color);
-    text-decoration: underline;
-  }
+  background-color: transparent;
+  box-shadow: none !important;
+  color: var(--primary-color);
+  text-decoration: underline;
 }

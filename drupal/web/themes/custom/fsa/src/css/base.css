@@ -709,19 +709,26 @@ figure:after {
 
 /*Print element*/
 .print-wrapper {
-  float: right;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  margin-bottom: 1em;
 
   @media (min-width: 95em) {
-    margin-right: -15em;
+    margin-right: -7em;
+  }
+
+  @media (--breakpoint-sm) {
+    float: right;
+    margin-bottom: 4em;
+    justify-content: flex-end;
   }
 }
 
 /*Print page button*/
 .print-page {
   @mixin responsive-declaration margin-right, 1em, 2em;
-  color: var(--primary-color);
+  color: var(--dark-primary-color);
+  transition: color var(--transition-enter-fast);
 
   @media print {
     display: none;
@@ -741,7 +748,7 @@ figure:after {
 }
 
 :--not-touch .print-page:--enter {
-  color: var(--light-primary-color);
+  color: var(--darker-primary-color);
   text-decoration: underline;
   cursor: pointer;
 }
@@ -755,7 +762,6 @@ figure:after {
 
 :--not-js .print__wrapper {
   float: right;
-  @mixin responsive-declaration margin-top, 1em, 2em;
 }
 
 .print__wrapper + *:not(.field__field_update_date) {
@@ -780,21 +786,25 @@ figure:after {
 }
 
 :--not-touch .print__wrapper.print__wrapper--pdf a:--enter {
-  color: var(--light-primary-color);
   text-decoration: underline;
+  color: var(--darker-primary-color);
 }
 
 /*Updated date*/
 .field__field_alert_modified,
 .field__field_update_date {
-  float: left;
-  @mixin responsive-declaration margin-top, 1em, 2em;
+  color: var(--color-gray);
+  margin-bottom: 2em;
+
+  @media (--breakpoint-sm) {
+    float: left;
+    margin-bottom: 4em;
+  }
 }
 
 .field__field_alert_modified + *,
 .field__field_update_date + * {
   clear: both;
-  @mixin responsive-declaration padding-top, 1em, 2em;
 }
 
 .field__field_alert_modified__heading,
@@ -813,13 +823,14 @@ figure:after {
 }
 
 /*Document reference*/
-.field__field_document {
+.field.field__field_document {
   background-color: var(--color-lighter-gray);
   padding-top: 1em;
   @mixin responsive-declaration padding-right, 1.25em, 2em;
   padding-bottom: 1em;
   @mixin responsive-declaration padding-left, 1.25em, 2em;
   border: 1px solid var(--color-light-gray);
+  margin-bottom: 0 !important;
 }
 
 .field__field_document > .field__field_document__item {
@@ -858,6 +869,7 @@ figure:after {
   transform: translateY(-50%);
 }
 
+/* Embedded entity */
 .embedded-entity {
   position: relative;
   @mixin responsive-declaration margin-top, 2em, 4em;
@@ -870,6 +882,19 @@ figure:after {
   width: 110%;
   width: calc(100% + 4em);
   max-width: none;
+}
+
+/*Inline document reference*/
+.embedded-entity .media {
+
+}
+
+.embedded-entity + .embedded-entity > .media {
+  @mixin responsive-declaration margin-top, -2em, -3.5em;
+}
+
+.embedded-entity .media .field.field__field_document {
+  margin-bottom: 0.5em !important;
 }
 
 /*Iframe*/

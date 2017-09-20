@@ -7,7 +7,6 @@
 
   @media (--breakpoint-lg) {
     min-height: 18em;
-    margin-bottom: 4em;
     padding-bottom: 0;
   }
 
@@ -91,8 +90,10 @@
 /*Hero image*/
 .hero__image {
   order: 100;
+  display: none;
 
   @media (--breakpoint-lg) {
+    display: block;
     position: absolute;
     top: 0;
     right: 0;
@@ -168,12 +169,14 @@
 
   @media (--breakpoint-lg) {
     box-shadow: var(--box-shadow);
-    background-color: transparent;
+    background-color: var(--color-dark-blue);
     width: 50%;
-    margin-top: 7em;
+    margin-top: 1em;
+    margin-bottom: 3em;
+    margin-left: auto;
     @mixin responsive-declaration padding-top, 1em, 3em;
     @mixin responsive-declaration padding-right, 1em, 3em;
-    padding-bottom: 0;
+    @mixin responsive-declaration padding-left, 2em, 4em;
     @mixin responsive-declaration padding-left, 1em, 3em;
   }
 }
@@ -186,7 +189,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    bottom: -4em;
+    bottom: 0em;
     left: 0;
     display: block;
     background-color: var(--color-dark-blue);
@@ -201,8 +204,8 @@
 .hero .hero__image + .hero__content h1,
 .hero .hero__image + .hero__content h2 {
   color: var(--color-white);
+}
 
-  @media (--breakpoint-lg) {
-    color: var(--primary-color);
-  }
+.hero .hero__image + .hero__content p {
+  color: var(--color-light-gray);
 }
