@@ -131,13 +131,15 @@ class FsaRatingsSearchForm extends FormBase {
     $form['advanced']['business_type'] = [
       '#type' => 'select',
       '#title' => $this->t('Business type'),
+      '#empty_option' => $this->t('All'),
       '#options' => $this->aggsToOptions($available_filters['business_types']),
       '#default_value' => \Drupal::request()->query->get('business_type'),
       '#empty_value' => '',
     ];
     $form['advanced']['local_authority'] = [
       '#type' => 'select',
-      '#title' => $this->t('Local authority'),
+      '#title' => $this->t('Country or local authority'),
+      '#empty_option' => $this->t('All'),
       '#options' => $this->aggsToOptions($available_filters['local_authorities']),
       '#default_value' => \Drupal::request()->query->get('local_authority'),
       '#empty_value' => '',
