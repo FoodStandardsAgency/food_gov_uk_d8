@@ -69,19 +69,23 @@
 
         <div class="establishment__content">
           {% if content.field_address %}
-            <p>
-              {{ content.field_address }}<br />
-              {{ content.field_postcode }}
-            </p>
+            <h4>{{ 'Address'|t }}</h4>
+            <p>{{ content.field_address }}</p>
+          {% endif %}
+
+          {% if content.field_postcode %}
+            <p>{{ content.field_postcode }}</p>
           {% endif %}
 
           {% if content.field_businesstype %}
+              <h4>{{ 'Business type'|t }}</h4>
             <p>
               {{ content.field_businesstype }}
             </p>
           {% endif %}
 
           {% if content.field_ratingdate %}
+            <h4>{{ 'Inspection date'|t }}</h4>
             <p>
               {{ content.field_ratingdate }}
             </p>

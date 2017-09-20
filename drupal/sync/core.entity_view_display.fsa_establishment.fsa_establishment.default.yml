@@ -31,14 +31,14 @@ mode: default
 content:
   field_address:
     weight: 2
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: basic_string
     region: content
   field_businesstype:
     weight: 5
-    label: above
+    label: hidden
     settings:
       link: false
     third_party_settings: {  }
@@ -104,7 +104,7 @@ content:
     region: content
   field_ratingdate:
     weight: 6
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: fsa_ratingdate_formatter
