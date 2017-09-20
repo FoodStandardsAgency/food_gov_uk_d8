@@ -53,11 +53,17 @@ class FsaRatingsSearchForm extends FormBase {
     }
 
     // See if the following parameters are provided by the user and add to the
-    // list of filters.
+    // list of filters ("advanced search options"). Additionally send
+    // appropriate classes to html for keeping the options open if there was a
+    // value.
+    $is_open = '';
+    $aria_expanded = 'false';
     foreach (self::FILTER_PARAM_NAMES as $opt) {
       $value = \Drupal::request()->query->get($opt);
       if (!empty($value)) {
         $filters[$opt] = $value;
+        $is_open = ' is-open';
+        $aria_expanded = 'true';
       }
     }
 
@@ -108,13 +114,13 @@ class FsaRatingsSearchForm extends FormBase {
 
     $form['advanced_button'] = [
       '#type' => 'item',
-      '#prefix' => '<div class="toggle-button js-toggle-button ratings__advanced-search-button" role="button"  aria-expanded="false" aria-controls="collapsible-12345zxcv"><div class="toggle-button__item">' . $string . '</div>',
+      '#prefix' => '<div class="toggle-button js-toggle-button ratings__advanced-search-button' . $is_open . '" role="button" aria-expanded="' . $aria_expanded . '" aria-controls="collapsible-12345zxcv"><div class="toggle-button__item">' . $string . '</div>',
       '#suffix' => '<div class="toggle-button__item toggle-button__item--icon ratings__advanced-search-button-icon"><div class="toggle-button__fallback-icon"></div></div></div>',
     ];
 
     $form['advanced'] = [
       '#type' => 'item',
-      '#prefix' => '<div class="toggle-content js-toggle-content" id="collapsible-12345zxcv">',
+      '#prefix' => '<div class="toggle-content js-toggle-content' . $is_open . '" id="collapsible-12345zxcv">',
       '#suffix' => '</div>',
       '#attributes' => [
         'class' => [
