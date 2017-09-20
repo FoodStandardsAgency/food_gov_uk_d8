@@ -21,7 +21,7 @@ require('./css/style.css');
 svg4everybody({ polyfill: true });
 
 // Temperary fix
-const searchLogoElement = document.querySelector('.ratings.ratings--frontpage .ratings__logo');
+const searchLogoElement = document.querySelector('.ratings.ratings--frontpage .ratings__text');
 
 if (searchLogoElement != null) {
   const searchHeading = document.querySelector('#fsa-ratings-search h2');

@@ -6,10 +6,6 @@
   flex-flow: column nowrap;
   align-items: center;
   border-top: 1px solid var(--color-light-gray);
-
-  @media (--breakpoint-sm) {
-    border: 0;
-  }
 }
 
 .footer__logo .svg {

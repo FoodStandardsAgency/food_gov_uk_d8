@@ -22,8 +22,7 @@
 
   <div class="ratings__search {% if ratings_info_content %}ratings__search--frontpage{% else %} js-sticky-element toggle-content toggle-content--only-mobile js-toggle-content js-toggle-content-only-mobile" id="collapsible-{{ randomID }}" aria-hidden="true{% endif %}">
     <div class="container container--search">
-      <div class="ratings__logo logo svg">
-        <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop-white-{{ current_language }}"></use></svg>
+      <div class="ratings__text">
       </div>
       {{ form }}
     </div>
@@ -31,7 +30,9 @@
 
   <div class="ratings__content {% if ratings_info_content %}ratings__content--frontpage{% else %}ratings__content--listing{% endif %}">
     {% if ratings_info_content %}
-      {{ ratings_info_content }}
+      <div class="container container--content">
+        {{ ratings_info_content }}
+      </div>
     {% else %}
     <div class="ratings__listing">
       <header class="ratings__header" role="toolbar" aria-label="sorting options" aria-controls="sortable">

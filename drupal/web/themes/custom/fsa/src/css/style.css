@@ -1,6 +1,19 @@
 /*Base*/
 @import "base.css";
 
+/*Component*/
+@import "button.css";
+@import "table.css";
+@import "toggle.css";
+@import "toc.css";
+@import "modal.css";
+@import "topic-cloud.css";
+@import "subpages.css";
+@import "regional-variation.css";
+@import "message-list.css";
+@import "teaser.css";
+@import "webform.css";
+
 /* Layout */
 @import "header.css";
 @import "hero.css";
@@ -26,18 +39,3 @@
 @import "navigation-mobile.css";
 @import "navigation-secondary.css";
 @import "navigation.css";
-
-/*Component*/
-@import "button.css";
-@import "table.css";
-@import "toggle.css";
-@import "toc.css";
-@import "modal.css";
-@import "topic-cloud.css";
-@import "subpages.css";
-@import "regional-variation.css";
-@import "message-list.css";
-@import "teaser.css";
-@import "webform.css";
-
-
