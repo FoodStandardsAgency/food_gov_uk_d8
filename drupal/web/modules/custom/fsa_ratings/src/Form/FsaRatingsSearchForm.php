@@ -53,11 +53,17 @@ class FsaRatingsSearchForm extends FormBase {
     }
 
     // See if the following parameters are provided by the user and add to the
-    // list of filters.
+    // list of filters ("advanced search options"). Additionally send
+    // appropriate classes to html for keeping the options open if there was a
+    // value.
+    $is_open = '';
+    $aria_expanded = 'false';
     foreach (self::FILTER_PARAM_NAMES as $opt) {
       $value = \Drupal::request()->query->get($opt);
       if (!empty($value)) {
         $filters[$opt] = $value;
+        $is_open = ' is-open';
+        $aria_expanded = 'true';
       }
     }
 
@@ -108,13 +114,13 @@ class FsaRatingsSearchForm extends FormBase {
 
     $form['advanced_button'] = [
       '#type' => 'item',
-      '#prefix' => '<div class="toggle-button js-toggle-button ratings__advanced-search-button" role="button"  aria-expanded="false" aria-controls="collapsible-12345zxcv"><div class="toggle-button__item">' . $string . '</div>',
+      '#prefix' => '<div class="toggle-button js-toggle-button ratings__advanced-search-button' . $is_open . '" role="button" aria-expanded="' . $aria_expanded . '" aria-controls="collapsible-12345zxcv"><div class="toggle-button__item">' . $string . '</div>',
       '#suffix' => '<div class="toggle-button__item toggle-button__item--icon ratings__advanced-search-button-icon"><div class="toggle-button__fallback-icon"></div></div></div>',
     ];
 
     $form['advanced'] = [
       '#type' => 'item',
-      '#prefix' => '<div class="toggle-content js-toggle-content" id="collapsible-12345zxcv">',
+      '#prefix' => '<div class="toggle-content js-toggle-content' . $is_open . '" id="collapsible-12345zxcv">',
       '#suffix' => '</div>',
       '#attributes' => [
         'class' => [
@@ -125,23 +131,43 @@ class FsaRatingsSearchForm extends FormBase {
     $form['advanced']['business_type'] = [
       '#type' => 'select',
       '#title' => $this->t('Business type'),
+      '#empty_option' => $this->t('All'),
       '#options' => $this->aggsToOptions($available_filters['business_types']),
       '#default_value' => \Drupal::request()->query->get('business_type'),
       '#empty_value' => '',
     ];
     $form['advanced']['local_authority'] = [
       '#type' => 'select',
-      '#title' => $this->t('Local authority'),
+      '#title' => $this->t('Country or local authority'),
+      '#empty_option' => $this->t('All'),
       '#options' => $this->aggsToOptions($available_filters['local_authorities']),
       '#default_value' => \Drupal::request()->query->get('local_authority'),
       '#empty_value' => '',
     ];
 
-    $rating_values = $this->aggsToOptions($available_filters['rating_values']);
+    // Define the order the rating checkboxes.
+    $rating_values_sorted = $this->sortArrayByArray(
+      $this->aggsToOptions($available_filters['rating_values']),
+      [
+        5,
+        4,
+        3,
+        2,
+        1,
+        0,
+        'Exempt',
+        'AwaitingInspection',
+        'Pass',
+        'Pass and Eat Safe',
+        'Improvement Required',
+        'Awaiting Inspection',
+      ]
+    );
+
     $form['advanced']['rating_value'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Hygiene rating'),
-      '#options' => $rating_values,
+      '#options' => $rating_values_sorted,
       '#default_value' => explode(',', \Drupal::request()->query->get('rating_value')),
     ];
 
@@ -159,6 +185,29 @@ class FsaRatingsSearchForm extends FormBase {
     return $form;
 
   }
+
+  /**
+   * Private helper function to sort array by another array.
+   *
+   * @param array $array
+   *   The array to sort.
+   * @param array $orderArray
+   *   The array with keys that define the sort.
+   *
+   * @return array
+   *   Sorted array.
+   */
+  private static function sortArrayByArray(array $array, array $orderArray) {
+    $ordered = array();
+    foreach ($orderArray as $key) {
+      if (array_key_exists($key, $array)) {
+        $ordered[$key] = $array[$key];
+        unset($array[$key]);
+      }
+    }
+    return $ordered + $array;
+  }
+
 
   /**
    * {@inheritdoc}
@@ -200,7 +249,34 @@ class FsaRatingsSearchForm extends FormBase {
   private function aggsToOptions($aggs_bucket = []) {
     $options = [];
     foreach ($aggs_bucket as $a) {
-      $options[$a['key']] = (string) $a['key'];
+      // Add textual representation for numeric values.
+      switch ($a['key']) {
+        case '5':
+          $value = $a['key'] .' ' . t('Very good');
+          break;
+        case '4':
+          $value = $a['key'] .' ' . t('Good');
+          break;
+        case '3':
+          $value = $a['key'] .' ' . t('Generally satisfactory');
+          break;
+        case '2':
+          $value = $a['key'] .' ' . t('Improvement necessary');
+          break;
+        case '1':
+          $value = $a['key'] .' ' . t('Major improvement necessary');
+          break;
+        case '0':
+          $value = $a['key'] .' ' . t('Urgent improvement necessary');
+          break;
+        case 'AwaitingInspection':
+          // Make this label more human friendly.
+          $value = t('Awaiting Rating');
+          break;
+        default:
+          $value = $a['key'];
+      }
+      $options[$a['key']] = (string) $value;
     }
     return $options;
   }
