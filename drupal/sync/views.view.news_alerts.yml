@@ -735,6 +735,7 @@ display:
         filter_groups: false
         title: false
         header: false
+        footer: false
       fields:
         path:
           id: path
@@ -1091,7 +1092,8 @@ display:
       rendering_language: '***LANGUAGE_language_interface***'
       block_description: 'Latest Updates'
       title: 'Latest Updates'
-      header:
+      header: {  }
+      footer:
         area:
           id: area
           table: views
@@ -1102,8 +1104,8 @@ display:
           empty: false
           tokenize: false
           content:
-            value: "<a data-entity-substitution=\"canonical\" data-entity-type=\"node\" data-entity-uuid=\"5427cabf-be8e-46ff-a722-2ce3ae019229\" href=\"/node/56\">All News & Alerts</a>\n<!-- TODO: make this translatable/configurable from code instead of views header -->"
-            format: basic_html
+            value: "<a data-entity-substitution=\"canonical\" data-entity-type=\"node\" data-entity-uuid=\"5427cabf-be8e-46ff-a722-2ce3ae019229\" href=\"/node/56\" class=\"button\">All News & Alerts</a>\n<!-- TODO: make this translatable/configurable from code instead of views header -->"
+            format: full_html
           plugin_id: text
     cache_metadata:
       max-age: -1
