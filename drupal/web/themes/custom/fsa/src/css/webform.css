@@ -65,6 +65,12 @@
   color: inherit;
   display: block;
   margin-bottom: 1em;
+  text-transform: none;
+}
+
+.webform input[type="radio"] + label,
+.webform input[type="checkbox"] + label {
+  font-weight: 400;
 }
 
 .webform .fieldset-legend {

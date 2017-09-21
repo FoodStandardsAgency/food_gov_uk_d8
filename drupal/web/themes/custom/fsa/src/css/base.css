@@ -423,22 +423,35 @@ table caption:not(:last-child) {
 }
 
 /*Form styles*/
-.form-item {
+.form-item:not(.js-form-type-checkbox) {
   display: block;
   padding: 0;
   margin: 0;
-  @mixin responsive-declaration margin-top, 1.5em, 4em;
-  @mixin responsive-declaration margin-bottom, 1.5em, 2em
+  margin-bottom: 2em;
+}
+
+.form-actions {
+  @mixin responsive-declaration padding-top, 1em, 2em;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin-left: -0.5em;
+  margin-right: -0.5em;
+}
+
+.form-actions .button {
+  margin: 0.5em;
+}
+
+.form-actions .form-submit.button.button--primary {
+  order: 100;
 }
 
 label {
-  font-family: var(--font-family-heading);
-  @mixin responsive-declaration font-size, 1.4em, 1.8em;
-  @mixin responsive-declaration line-height, 1.2, 1.25;
-  font-weight: 700;
-  color: inherit;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  margin-bottom: 0.5em;
   display: block;
-  margin-bottom: 1em;
 }
 
 fieldset {
@@ -488,12 +501,17 @@ select {
 }
 
 textarea {
+  height: 9em;
   max-height: 20em;
 }
 
 input:not([type="radio"], [type="checkbox"], [type="submit"], [type="number"]),
 textarea {
   width: 100%;
+}
+
+input.date {
+  max-width: 16em;
 }
 
 input[type="radio"],
@@ -516,6 +534,7 @@ input[type="checkbox"]:focus + label {
 input[type="radio"] + label,
 input[type="checkbox"] + label {
   position: relative;
+  text-transform: none;
   font-size: 1em;
   padding-left: calc(1em + 1em);
   padding-left: 38px;
