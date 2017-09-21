@@ -6,7 +6,6 @@ dependencies:
     - field.field.user.user.field_notification_allergys
     - field.field.user.user.field_notification_cache
     - field.field.user.user.field_notification_method
-    - image.style.thumbnail
     - field.field.user.user.field_subscribed_notifications
   module:
     - user
@@ -23,7 +22,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_notification_allergys:
-    weight: 6
+    weight: 3
     settings:
       match_operator: CONTAINS
       size: 60
@@ -32,7 +31,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_notification_method:
-    weight: 5
+    weight: 2
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -43,9 +42,13 @@ content:
     third_party_settings: {  }
     type: options_buttons
     region: content
+  language:
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   contact: true
   field_notification_cache: true
   langcode: true
-  language: true
   timezone: true
