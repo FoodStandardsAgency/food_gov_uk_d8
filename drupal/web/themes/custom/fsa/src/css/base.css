@@ -70,6 +70,8 @@ Plugin documentation:
   --color-dark-red: #a91f2d;
   --color-red: #E31837;
 
+  --color-siren: #84003c;
+
   --color-orange: #ffb200;
 
   --color-yellow: #ffbf47;
@@ -78,6 +80,7 @@ Plugin documentation:
   --color-green: #6CB33F;
 
   --color-dark-blue: #18262C;
+  --color-blue: #007fb2;
 }
 
 :root {
