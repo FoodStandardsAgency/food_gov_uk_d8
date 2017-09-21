@@ -54,7 +54,7 @@ class YearSelect extends InOperator {
    * Helper function that generates the options.
    */
   public function generateOptions() {
-    $years = range(date('Y'), 1995);
+    $years = range(date('Y'), 1970);
     $years_processed = array();
 
     foreach ($years as $year) {
