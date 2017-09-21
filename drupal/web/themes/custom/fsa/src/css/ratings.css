@@ -102,6 +102,18 @@
   }
 }
 
+.ratings__search .form-actions {
+  padding-top: 0em;
+}
+
+.ratings__search .fieldgroup {
+  margin-top: 2em;
+}
+
+.ratings__search .form-item {
+  margin-bottom: 0;
+}
+
 .ratings__search:not(.ratings__search--frontpage) h2 {
   font-size: 1.6em;
   color: inherit;
@@ -315,6 +327,11 @@
     margin-left: 0 !important;
     padding-right: 3em !important;
   }
+}
+
+.ratings__item p {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .ratings__badge .ratingvalue {

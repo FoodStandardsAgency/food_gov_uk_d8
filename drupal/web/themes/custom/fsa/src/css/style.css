@@ -16,6 +16,7 @@
 @import "social-media.css";
 
 /* Layout */
+@import "phase-banner.css";
 @import "header.css";
 @import "hero.css";
 @import "layout.css";
