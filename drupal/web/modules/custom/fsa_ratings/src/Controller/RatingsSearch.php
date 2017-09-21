@@ -79,8 +79,13 @@ class RatingsSearch extends ControllerBase {
         $result['ratingvalue'] = [
           '#markup' => '<p class="ratingvalue"><span class="description">'. $this->t('FHRS Rating score:') .'</span> <span class="numeric">'. $rating_value .'</span></p>',
         ];
+
+        // Get scheme from the establishment.
+        // @todo: entity load not good performance vice, consider getting the scheme from ES (would though need to be indexed first).
+        $scheme = \Drupal::entityTypeManager()->getStorage('fsa_establishment')->load($result['id'])->get('field_schemetype')->getValue()[0]['value'];
+
         // Use ratingvalue to get the badge.
-        $result['ratingimage'] = RatingsHelper::ratingBadgeImageDisplay($rating_value);
+        $result['ratingimage'] = RatingsHelper::ratingBadgeImageDisplay($rating_value, $scheme);
 
         // Format displayed date(s).
         $result['ratingdate'] = RatingsHelper::ratingsDate($result['ratingdate']);

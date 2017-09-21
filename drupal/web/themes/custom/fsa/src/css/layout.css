@@ -141,15 +141,6 @@ body:not(.theme--service, .theme--lander) .layout.layout--with-no-sidebar .layou
   }
 }
 
-.layout__content--main {
-  min-height: 100vh;
-  padding-top: 0em;
-
-  @media (--breakpoint-lg) {
-    padding-top: 3em;
-  }
-}
-
 .theme--service .layout__content {
   padding-right: 0;
   padding-left: 0;
@@ -159,9 +150,27 @@ body:not(.theme--service, .theme--lander) .layout.layout--with-no-sidebar .layou
   }
 }
 
+.layout__content--main {
+  padding-top: 0em;
+
+  @media (--breakpoint-lg) {
+    padding-top: 3em;
+  }
+}
+
+.theme--service .layout__content--main {
+  min-height: 100vh;
+}
+
 .theme--subscribe .layout__content--main,
 .theme--page .layout__content--main {
   @mixin responsive-declaration padding-top, 1em, 4em;
+}
+
+.theme--lander .layout__content--main {
+  @media (--breakpoint-lg) {
+    padding-top: 0em;
+  }
 }
 
 .layout--with-sidebar .layout__content {

@@ -5,9 +5,13 @@ dependencies:
   config:
     - system.menu.help
   module:
+    - block_class
     - system
   theme:
     - fsa
+third_party_settings:
+  block_class:
+    classes: ''
 id: menu_help_secondary
 theme: fsa
 region: sidebar_first

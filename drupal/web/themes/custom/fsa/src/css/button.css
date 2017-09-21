@@ -11,8 +11,9 @@
   box-shadow: var(--box-shadow);
   cursor: pointer;
   outline: 3px solid transparent;
+  text-decoration: none !important;
   transition:
-    outline var(--transition-enter-fast);
+    background-color var(--transition-enter-fast);
 
   &:disabled {
     opacity: 50%
@@ -30,22 +31,15 @@
   }
 }
 
-.button:focus,
-.call-to-action:focus {
-  background-color: var(--color-light-yellow);
-  color: var(--color-black);
-  outline: 3px solid var(--color-yellow);
+:--not-touch .button:--enter,
+:--not-touch .call-to-action:--enter {
+  text-decoration: none;
+  background-color: var(--primary-color);
 }
 
 .button:focus svg path,
 .call-to-action:focus svg path {
   fill: var(--color-black);
-}
-
-:--not-touch a.button:--enter,
-:--not-touch .call-to-action:--enter {
-  text-decoration: none;
-  background-color: var(--light-primary-color);
 }
 
 .call-to-action {

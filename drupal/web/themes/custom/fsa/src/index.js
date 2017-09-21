@@ -1,12 +1,12 @@
 import "babel-polyfill";
 import svg4everybody from 'svg4everybody';
-import responsiveTables from './responsiveTables';
-import stickyElement from './stickyElement';
-import toggleContent from './toggleContent';
-import toc from './toc';
-import mobileMenu from './mobile-menu';
-import regionalVariation from './regionalVariation';
-import printPage from './printPage';
+import responsiveTables from './js/responsiveTables';
+import stickyElement from './js/stickyElement';
+import toggleContent from './js/toggleContent';
+import toc from './js/toc';
+import mobileMenu from './js/mobile-menu';
+import regionalVariation from './js/regionalVariation';
+import printPage from './js/printPage';
 
 const breakpoints = {
   small: "sm",
@@ -21,7 +21,7 @@ require('./css/style.css');
 svg4everybody({ polyfill: true });
 
 // Temperary fix
-const searchLogoElement = document.querySelector('.ratings.ratings--frontpage .ratings__logo');
+const searchLogoElement = document.querySelector('.ratings.ratings--frontpage .ratings__text');
 
 if (searchLogoElement != null) {
   const searchHeading = document.querySelector('#fsa-ratings-search h2');
