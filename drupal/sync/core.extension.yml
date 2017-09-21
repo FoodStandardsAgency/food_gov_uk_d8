@@ -38,14 +38,13 @@ module:
   fsa_custom: 0
   fsa_digest: 0
   fsa_document_library: 0
-  fsa_entity_print_translate: 0
   fsa_es: 0
   fsa_establishment_lookup: 0
-  fsa_language_switcher: 0
   fsa_ratings: 0
   fsa_ratings_import: 0
   fsa_signin: 0
   fsa_subpages: 0
+  fsa_translate: 0
   geolocation: 0
   help: 0
   hierarchical_term_formatter: 0

@@ -2,16 +2,26 @@
 
 /**
  * @file
- * Renders translatable entity print view pdf link.
+ * Alters default translation settings.
  */
 
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 
 /**
+ * Implements hook_language_switch_links_alter().
+ */
+function fsa_translate_language_switch_links_alter(array &$links, $type, $path) {
+  if (isset($links['cy']['title'])) {
+    $links['cy']['title'] = 'Cymraeg';
+  }
+  return $links;
+}
+
+/**
  * Implements hook_entity_view_alter().
  */
-function fsa_entity_print_translate_entity_view_alter(array &$build, $entity, $display) {
+function fsa_translate_entity_view_alter(array &$build, $entity, $display) {
   if ($build['#view_mode'] == 'full' && isset($build['entity_print_view_pdf'])) {
     if ($build['entity_print_view_pdf']['#title'] == 'View PDF') {
       $build['entity_print_view_pdf']['#title'] = t('View PDF');
