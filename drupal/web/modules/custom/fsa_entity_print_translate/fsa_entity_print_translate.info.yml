@@ -1,0 +1,5 @@
+name: FSA entity print translate
+description: Renders translatable entity print view pdf link.
+package: FSA
+type: module
+core: 8.x

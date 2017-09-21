@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Renders translatable entity print view pdf link.
+ */
+
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+
+/**
+ * Implements hook_entity_view_alter().
+ */
+function fsa_entity_print_translate_entity_view_alter(array &$build, $entity, $display) {
+  if ($build['#view_mode'] == 'full' && isset($build['entity_print_view_pdf'])) {
+    if ($build['entity_print_view_pdf']['#title'] == 'View PDF') {
+      $build['entity_print_view_pdf']['#title'] = t('View PDF');
+    }
+  }
+}
