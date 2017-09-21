@@ -33,7 +33,7 @@
 :--not-touch .button:--enter,
 :--not-touch .call-to-action:--enter {
   text-decoration: none;
-  background-color: var(--primary-color);
+  background-color: var(--darker-primary-color);
 }
 
 .button:focus svg path,
