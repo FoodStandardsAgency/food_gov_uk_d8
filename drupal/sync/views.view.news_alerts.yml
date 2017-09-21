@@ -569,7 +569,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"item__date\">{{ created }}</div>\n<div class=\"item__type\">\n  <div class=\"main__type\">{{ type }}</div>\n  <div class=\"sub__type sub__type__{{ field_alert_type_1 }}\">{{ field_alert_type }}</div>\n</div>"
+            text: "<div class=\"item__date\">{{ created }}</div>\n<div class=\"item__type\">\n  <div class=\"main__type\">{{ type }}</div>\n  <div class=\"sub__type\">{{ field_alert_type }}</div>\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -1247,7 +1247,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"item__type\">\n  <div class=\"main__type\">{{ type }}</div>\n  <div class=\"sub__type sub__type__{{ field_alert_type_1 }}\">{{ field_alert_type }}</div>\n</div>\n<h4 class=\"item__heading\">{{ title }}</h4>\n<div class=\"item__date\">{{ created }}</div>"
+            text: "<div class=\"item__type\">\n  <div class=\"main__type\">{{ type }}</div>\n  <div class=\"sub__type\">{{ field_alert_type }}</div>\n</div>\n<h4 class=\"item__heading\">{{ title }}</h4>\n<div class=\"item__date\">{{ created }}</div>"
             make_link: true
             path: '{{ path }}'
             absolute: false
