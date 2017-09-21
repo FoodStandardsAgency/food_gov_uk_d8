@@ -141,7 +141,7 @@ body:not(.theme--service, .theme--lander) .layout.layout--with-no-sidebar .layou
   }
 }
 
-.theme--service .layout__content {
+.theme--fhrs .layout__content {
   padding-right: 0;
   padding-left: 0;
 
@@ -151,11 +151,7 @@ body:not(.theme--service, .theme--lander) .layout.layout--with-no-sidebar .layou
 }
 
 .layout__content--main {
-  padding-top: 0em;
-
-  @media (--breakpoint-lg) {
-    padding-top: 3em;
-  }
+  @mixin responsive-declaration padding-top, 1em, 4em;
 }
 
 .theme--service .layout__content--main {
@@ -167,10 +163,8 @@ body:not(.theme--service, .theme--lander) .layout.layout--with-no-sidebar .layou
   @mixin responsive-declaration padding-top, 1em, 4em;
 }
 
-.theme--lander .layout__content--main {
-  @media (--breakpoint-lg) {
-    padding-top: 0em;
-  }
+.theme--lander:not(.theme--news-alerts) .layout__content--main {
+  padding-top: 0em;
 }
 
 .layout--with-sidebar .layout__content {
