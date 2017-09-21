@@ -122,7 +122,7 @@ class RatingsHelper extends ControllerBase {
 
     if ($badge_path != '') {
       $image_path = '/' . drupal_get_path('module', 'fsa_ratings') . '/images/badge/' . $badge_path;
-      $badge = '<img src="' . $image_path . '" alt="FHRS Rating score: ' . $rating . '" />';
+      $badge = '<img src="' . strtolower($image_path) . '" alt="FHRS Rating score: ' . $rating . '" />';
     }
     else {
       // In case we could not create a badge_path.
