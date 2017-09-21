@@ -48,12 +48,10 @@
 }
 
 .hero #block-alerts-subscribe-cta {
-  @media (--breakpoint-sm) {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
+  position: absolute;
+  right: 0;
+  @mixin responsive-declaration bottom, 0em, 2.5em;
+  left: 0;
 }
 
 .hero #block-alerts-subscribe-cta .button {
@@ -173,7 +171,6 @@
     width: 50%;
     margin-top: 1em;
     margin-bottom: 3em;
-    margin-left: auto;
     @mixin responsive-declaration padding-top, 1em, 3em;
     @mixin responsive-declaration padding-right, 1em, 3em;
     @mixin responsive-declaration padding-left, 2em, 4em;

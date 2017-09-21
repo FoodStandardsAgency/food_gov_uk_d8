@@ -61,15 +61,15 @@
 }
 
 .header__logo .svg {
-  width: 7em;
-  height: 4.75em;
+  width: 7.5em;
+  height: 3.5em;
 
   @media (--breakpoint-sm) {
-    width: 9em;
+    width: 8em;
   }
 
   @media (--breakpoint-lg) {
-    width: 12em;
+    width: 8.5em;
   }
 }
 
@@ -213,9 +213,7 @@
   line-height: 1.4em;
   font-weight: 600;
   margin: 0;
-  padding: 0;
-  @mixin responsive-declaration padding-right, 1em, 4em;
-  @mixin responsive-declaration padding-left, 1em, 4em;
+  padding: 0 1em;
 }
 
 .header__region ul.links li {
@@ -233,12 +231,16 @@
 }
 
 .header__region ul.links li a {
-  padding: 1em 1.5em;
-  color: var(--color-white);
-
   @media (--breakpoint-sm) {
     padding: 0.5em 0.75em;
     color: var(--dark-primary-color);
+  }
+}
+
+:--not-touch .header__region ul.links li a:--enter {
+  @media (--breakpoint-sm) {
+    color: var(--darker-primary-color);
+    text-decoration: underline;
   }
 }
 
