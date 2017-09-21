@@ -9,9 +9,9 @@
   .secondary-navigation > ul > li {
     list-style: none;
     padding-top: 1em;
-    @mixin responsive-declaration padding-right, 1em, 2em;
+    padding-right: 1em;
     padding-bottom: 1em;
-    @mixin responsive-declaration padding-left, 1em, 2em;
+    padding-left: 1em;
   }
   
   .secondary-navigation > ul > li > a {

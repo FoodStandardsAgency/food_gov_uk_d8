@@ -43,6 +43,7 @@
 .user-registration-form label,
 .alert-for-registration-form label {
   display: block;
+  margin-bottom: 0.5em;
 }
 
 .user-registration-form .form-wrapper,

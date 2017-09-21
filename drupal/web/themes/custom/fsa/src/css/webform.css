@@ -58,7 +58,8 @@
 /*Custom styles webform*/
 .webform label,
 .webform .fieldset-legend {
-  @mixin responsive-declaration font-size, 1.4em, 2em;
+  font-family: var(--font-family-heading);
+  @mixin responsive-declaration font-size, 1.4em, 1.8em;
   @mixin responsive-declaration line-height, 1.2, 1.25;
   font-weight: 700;
   color: inherit;
@@ -73,8 +74,8 @@
 }
 
 .webform .description {
-  margin-bottom: 1em;
-  font-weight: 600;
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
+  font-weight: 700;
 }
 
 .webform fieldset,
