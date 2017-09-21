@@ -46,6 +46,19 @@
 #}
 <div class="site js-site">
 
+  <div class="layout">
+    <div class="layout__container">
+      <div class="layout__content">
+        <div class="phase-banner">
+          <p>
+            <strong class="phase-tag">ALPHA</strong>
+            <span>This is a new service – your <a href="https://fsa.stage.wunder.io/contact">feedback</a> will help us to improve it.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <header class="header" role="banner">
     <div class="header__container">
       <button class="header__menu-button js-menu-button">
@@ -55,7 +68,7 @@
         </div>
       </button>
 
-      <a href="/" class="header__logo block-link">
+      <a href="{{ home_url }}" class="header__logo block-link">
         <div class="svg">
           <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop-{{ current_language }}"></use></svg>
         </div>

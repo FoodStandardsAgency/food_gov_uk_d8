@@ -70,6 +70,8 @@ Plugin documentation:
   --color-dark-red: #a91f2d;
   --color-red: #E31837;
 
+  --color-siren: #84003c;
+
   --color-orange: #ffb200;
 
   --color-yellow: #ffbf47;
@@ -78,6 +80,7 @@ Plugin documentation:
   --color-green: #6CB33F;
 
   --color-dark-blue: #18262C;
+  --color-blue: #007fb2;
 }
 
 :root {
@@ -423,6 +426,37 @@ table caption:not(:last-child) {
 }
 
 /*Form styles*/
+.form-item:not(.js-form-type-checkbox) {
+  display: block;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 2em;
+}
+
+.form-actions {
+  @mixin responsive-declaration padding-top, 1em, 2em;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin-left: -0.5em;
+  margin-right: -0.5em;
+}
+
+.form-actions .button {
+  margin: 0.5em;
+}
+
+.form-actions .form-submit.button.button--primary {
+  order: 100;
+}
+
+label {
+  font-size: 0.8em;
+  text-transform: uppercase;
+  margin-bottom: 0.5em;
+  display: block;
+}
+
 fieldset {
   margin: 0;
   @mixin responsive-declaration margin-top, 1em, 2em;
@@ -470,12 +504,17 @@ select {
 }
 
 textarea {
+  height: 9em;
   max-height: 20em;
 }
 
 input:not([type="radio"], [type="checkbox"], [type="submit"], [type="number"]),
 textarea {
   width: 100%;
+}
+
+input.date {
+  max-width: 16em;
 }
 
 input[type="radio"],
@@ -498,6 +537,7 @@ input[type="checkbox"]:focus + label {
 input[type="radio"] + label,
 input[type="checkbox"] + label {
   position: relative;
+  text-transform: none;
   font-size: 1em;
   padding-left: calc(1em + 1em);
   padding-left: 38px;
