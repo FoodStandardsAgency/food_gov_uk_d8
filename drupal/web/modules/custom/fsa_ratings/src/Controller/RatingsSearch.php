@@ -43,7 +43,8 @@ class RatingsSearch extends ControllerBase {
     $items = [];
     $categories = [];
     $hits = 0;
-    $available_filters = $this->searchService->categories();
+    $language = \Drupal::languageManager()->getCurrentLanguage();
+    $available_filters = $this->searchService->categories($language);
 
     // User provided search input.
     $keywords = \Drupal::request()->query->get('q');
@@ -70,7 +71,7 @@ class RatingsSearch extends ControllerBase {
     $results = FALSE;
     if (!empty($keywords) || !empty($filters)) {
       // Execute the search using the SearchService.
-      $results = $this->searchService->search($keywords, $filters, $max_items);
+      $results = $this->searchService->search($language, $keywords, $filters, $max_items);
       $hits = $results['total'];
 
       foreach ($results['results'] as $result) {

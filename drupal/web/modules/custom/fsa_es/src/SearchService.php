@@ -3,6 +3,7 @@
 namespace Drupal\fsa_es;
 
 use Drupal\Component\Utility\Html;
+use Drupal\Core\Language\LanguageInterface;
 use Elasticsearch\Client;
 
 /**
@@ -30,15 +31,29 @@ class SearchService {
     $this->client = $client;
   }
 
-  public function search($input = '', $filters = [], $max_items = self::DEFAULT_MAX_RESULT_ITEMS) {
+  /**
+   * @param \Drupal\Core\Language\LanguageInterface $language
+   *  The preferred language.
+   * @param string $input
+   *  Search keywords
+   * @param array $filters
+   *  Additional filters for the search query
+   * @param int $max_items
+   *  Returned max items
+   * @return array
+   *  An associated array containing results and metadata. Something like this: ['results' => [...], 'total' => 100, 'aggs' => [...]]
+   */
+  public function search(LanguageInterface $language, $input = '', $filters = [], $max_items = self::DEFAULT_MAX_RESULT_ITEMS) {
     // Sanitize the input.
     $input = Html::escape($input);
     $query_must_filters = [];
     $query_should_filters = [];
+    $language_code = $language->getId();
 
     // Build the query
     $query = $base_query = [
-      'index' => ['ratings'],
+      // Each language has a separate index
+      'index' => ['ratings-' . $language_code],
       'size' => $max_items,
       'body' => [
         'query' => [
@@ -200,14 +215,17 @@ class SearchService {
   /**
    * Get the list of possible categories in a format suitable for Form API (select and checkboxes elements)
    *
+   * @param \Drupal\Core\Language\LanguageInterface $language
+   *  The preferred language.
    * @return array
    *  An associated array with the keys being the type of the category and the value suitable for Form API #options parameter.
    */
-  public function categories() {
+  public function categories(LanguageInterface $language) {
+    $language_code = $language->getId();
 
     // Define the base query
     $base_query = $query = [
-      'index' => ['ratings'],
+      'index' => ['ratings-' . $language_code],
       'size' => 0,
       'body' => [
         'aggs' => [
