@@ -423,6 +423,24 @@ table caption:not(:last-child) {
 }
 
 /*Form styles*/
+.form-item {
+  display: block;
+  padding: 0;
+  margin: 0;
+  @mixin responsive-declaration margin-top, 1.5em, 4em;
+  @mixin responsive-declaration margin-bottom, 1.5em, 2em
+}
+
+label {
+  font-family: var(--font-family-heading);
+  @mixin responsive-declaration font-size, 1.4em, 1.8em;
+  @mixin responsive-declaration line-height, 1.2, 1.25;
+  font-weight: 700;
+  color: inherit;
+  display: block;
+  margin-bottom: 1em;
+}
+
 fieldset {
   margin: 0;
   @mixin responsive-declaration margin-top, 1em, 2em;
