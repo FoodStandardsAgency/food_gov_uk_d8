@@ -5,12 +5,15 @@ dependencies:
   config:
     - field.storage.node.body
     - field.storage.node.field_alert_description
+    - field.storage.node.field_alert_type
     - node.type.alert
     - node.type.news
   module:
     - better_exposed_filters
+    - fsa_alerts_import
     - fsa_custom
     - node
+    - options
     - search
     - text
     - user
@@ -102,7 +105,7 @@ display:
         type: default
         options:
           grouping: {  }
-          row_class: ''
+          row_class: 'type__{{ type }}'
           default_row_class: true
       row:
         type: fields
@@ -112,6 +115,130 @@ display:
           separator: ''
           hide_empty: false
       fields:
+        field_alert_type_1:
+          id: field_alert_type_1
+          table: node__field_alert_type
+          field: field_alert_type
+          relationship: none
+          group_type: group
+          admin_label: 'Content: Alert type key'
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_key
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_alert_type:
+          id: field_alert_type
+          table: node__field_alert_type
+          field: field_alert_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: fsa_alert_type_formatter
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
         created:
           id: created
           table: node_field_data
@@ -333,14 +460,14 @@ display:
             suffix: ''
             target: ''
             nl2br: false
-            max_length: 0
+            max_length: 300
             word_boundary: true
             ellipsis: true
             more_link: false
             more_link_text: ''
             more_link_path: ''
             strip_tags: false
-            trim: false
+            trim: true
             preserve_tags: ''
             html: false
           element_type: ''
@@ -442,7 +569,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"item__date\">{{ created }}</div>\n<div class=\"item__type\">{{ type }}</div>"
+            text: "<div class=\"item__date\">{{ created }}</div>\n<div class=\"item__type\">\n  <div class=\"main__type\">{{ type }}</div>\n  <div class=\"sub__type\">{{ field_alert_type }}</div>\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -716,6 +843,7 @@ display:
       tags:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_alert_description'
+        - 'config:field.storage.node.field_alert_type'
   latest:
     display_plugin: block
     id: latest
@@ -738,6 +866,130 @@ display:
         header: false
         footer: false
       fields:
+        field_alert_type_1:
+          id: field_alert_type_1
+          table: node__field_alert_type
+          field: field_alert_type
+          relationship: none
+          group_type: group
+          admin_label: 'Content: Alert type key'
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_key
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_alert_type:
+          id: field_alert_type
+          table: node__field_alert_type
+          field: field_alert_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: fsa_alert_type_formatter
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
         path:
           id: path
           table: node
@@ -995,7 +1247,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"item__type\">{{ type }}</div>\n<h4 class=\"item__heading\">{{ title }}</h4>\n<div class=\"item__date\">{{ created }}</div>"
+            text: "<div class=\"item__type\">\n  <div class=\"main__type\">{{ type }}</div>\n  <div class=\"sub__type\">{{ field_alert_type }}</div>\n</div>\n<h4 class=\"item__heading\">{{ title }}</h4>\n<div class=\"item__date\">{{ created }}</div>"
             make_link: true
             path: '{{ path }}'
             absolute: false
@@ -1114,7 +1366,8 @@ display:
         - 'languages:language_interface'
         - 'user.node_grants:view'
         - user.permissions
-      tags: {  }
+      tags:
+        - 'config:field.storage.node.field_alert_type'
   list:
     display_plugin: block
     id: list
@@ -1332,3 +1585,4 @@ display:
       tags:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_alert_description'
+        - 'config:field.storage.node.field_alert_type'
