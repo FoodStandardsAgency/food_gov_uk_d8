@@ -1,0 +1,17 @@
+.social-media {
+  padding-top: 1em;
+}
+
+.social-media__list {
+
+}
+
+.social-media__link {
+  display: inline-block;
+  padding: 0.25em;
+}
+  
+.social-media__link .svg {
+  @mixin responsive-declaration width, 2em, 2.2em;
+  @mixin responsive-declaration height, 2em, 2.2em;
+}
