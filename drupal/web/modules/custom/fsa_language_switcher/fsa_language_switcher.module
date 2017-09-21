@@ -9,11 +9,8 @@
  * Implements hook_language_switch_links_alter().
  */
 function fsa_language_switcher_language_switch_links_alter(array &$links, $type, $path) {
-  if (isset($links['en']['title'])) {
-    $links['en']['title'] = 'EN';
-  }
   if (isset($links['cy']['title'])) {
-    $links['cy']['title'] = 'CY';
+    $links['cy']['title'] = 'Cymraeg';
   }
   return $links;
 }
