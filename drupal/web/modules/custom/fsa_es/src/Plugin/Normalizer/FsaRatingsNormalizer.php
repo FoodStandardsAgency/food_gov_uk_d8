@@ -4,6 +4,7 @@ namespace Drupal\fsa_es\Plugin\Normalizer;
 
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityManager;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\serialization\Normalizer\ContentEntityNormalizer;
@@ -12,6 +13,8 @@ use Drupal\serialization\Normalizer\ContentEntityNormalizer;
  * Normalizes / denormalizes Drupal entities into an array structure good for ES.
  */
 class FsaRatingsNormalizer extends ContentEntityNormalizer {
+
+  use StringTranslationTrait;
 
   /**
    * The interface or class that this Normalizer supports.
@@ -99,7 +102,13 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
     ];
 
     foreach ($field_names as $field_name) {
-      $data[$field_name] = $this->getFieldValue($object, $field_name);
+      $value = $this->getFieldValue($object, $field_name);
+      if ($field_name == 'businesstype') {
+        $langcode = $object->language()->getId();
+        // Businesstype value needs translation since the establishment import doesn't bring in translation at the moment due technical issues.
+        $value[0]['label'] = $this->t($value[0]['label'], [], ['context' => 'FHRS business type', 'langcode' => $langcode])->render();
+      }
+      $data[$field_name] = $value;
     }
 
     // Merge the values of values from name, address, postcode and LA into single field for more robust search querying
