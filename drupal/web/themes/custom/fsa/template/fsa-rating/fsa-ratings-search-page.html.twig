@@ -51,10 +51,12 @@
         </div>
 
         {{ items }}
+        <div id="search-load-more-wrapper"></div>{# the ajax-wrapper for load-more content #}
 
         {% if hits_total > hits_shown %}
-          <button>{% trans %}Show more results{% endtrans %}</button>
-          {% trans %}Displaying {{ hits_shown }} of {{ hits_total }} items{% endtrans %}
+            <div class="result-counter">
+              {% trans %}Displaying <span class="hits-shown">{{ hits_shown }}</span> of <span class="hits-total">{{ hits_total }}</span> items{% endtrans %}
+            </div>
         {% endif %}
       </div>
     </div>

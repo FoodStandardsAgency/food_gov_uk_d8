@@ -28,12 +28,14 @@
       <h2>{% trans %}Search results for {{ keywords|placeholder }}{% endtrans %}</h2>
     {% endif %}
 
-    {{ items }}
+      {{ items }}
+    <div id="search-load-more-wrapper"></div>{# the ajax-wrapper for load-more content #}
   </div>
 {% endif %}
 
 {% if hits_total > hits_shown %}
-  <button>{% trans %}Show more results{% endtrans %}</button>
-  {% trans %}Displaying {{ hits_shown }} of {{ hits_total }} items{% endtrans %}
+  <div class="result-counter">
+      {% trans %}Displaying <span class="hits-shown">{{ hits_shown }}</span> of <span class="hits-total">{{ hits_total }}</span> items{% endtrans %}
+  </div>
 {% endif %}
 
