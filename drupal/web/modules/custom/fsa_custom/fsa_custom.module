@@ -35,6 +35,20 @@ function fsa_custom_preprocess_breadcrumb(&$variables) {
  */
 function fsa_custom_block_access(Block $block, $operation, AccountInterface $account) {
 
+  if ($operation == 'update' && \Drupal::routeMatch()->getRouteName() == 'entity.block.edit_form') {
+    // Let admins know these blocks configuration visibility is controlled in
+    // this custom module.
+    $controlled_block_ids = [
+      'menu_help_secondary',
+      'pagetitle',
+      'pagetitle_hero',
+    ];
+
+    if (in_array($block->id(), $controlled_block_ids)) {
+      drupal_set_message(t('<b>NB!</b> this block visibility is controlled in <code>@function</code>', ['@function' => __FUNCTION__  . '()']), 'warning');
+    }
+  }
+
   if ($operation == 'view') {
     // Control certain block visibilities based on node type, term etc.
 
