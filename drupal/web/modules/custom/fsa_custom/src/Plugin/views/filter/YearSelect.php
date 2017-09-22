@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\fsa_custom\Plugin\Views\Filter;
+namespace Drupal\fsa_custom\Plugin\views\filter;
 
 use Drupal\views\Plugin\views\filter\InOperator;
 use Drupal\views\ViewExecutable;
