@@ -27,6 +27,7 @@
 }
 
 .modal.modal--hero .button {
+  position: static;
   @mixin responsive-declaration margin-top, 1em, 2em;
   display: inline-block;
   background-color: var(--color-white);
