@@ -36,6 +36,33 @@ class RatingsSearch extends ControllerBase {
     $this->searchService = $searchService;
   }
 
+
+  /**
+   * Static function to get search parameters from URL.
+   *
+   * @return array
+   *   Array with appropriate search parameters.
+   */
+  public static function getSearchParameters() {
+    $params = [];
+
+    $params['language'] = \Drupal::languageManager()->getCurrentLanguage();
+    $params['keywords'] = \Drupal::request()->query->get('q');
+
+    $filters = [];
+    $filter_param_names = ['local_authority', 'business_type', 'rating_value'];
+    foreach ($filter_param_names as $opt) {
+      $value = \Drupal::request()->query->get($opt);
+      if (isset($value)) {
+        $filters[$opt] = $value;
+      }
+    }
+
+    $params['filters'] = $filters;
+
+    return $params;
+
+  }
   /**
    * Page callback for /ratings/search.
    */
