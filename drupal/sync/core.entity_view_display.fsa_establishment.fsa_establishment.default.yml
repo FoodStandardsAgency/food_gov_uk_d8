@@ -20,8 +20,12 @@ dependencies:
     - field.field.fsa_establishment.fsa_establishment.field_score_hygiene
     - field.field.fsa_establishment.fsa_establishment.field_score_structural
   module:
+    - entity_print
     - fsa_ratings
     - geolocation
+third_party_settings:
+  entity_print:
+    pdf_label: 'View PDF'
 _core:
   default_config_hash: fDOCJYkV8QCyOVS29HI4qqyPn6VdKooOQlWWjR9ls_Q
 id: fsa_establishment.fsa_establishment.default
@@ -29,6 +33,11 @@ targetEntityType: fsa_establishment
 bundle: fsa_establishment
 mode: default
 content:
+  entity_print_view_pdf:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_address:
     weight: 2
     label: hidden
@@ -140,14 +149,13 @@ content:
   name:
     label: hidden
     type: string
-    weight: 0
+    weight: 1
     region: content
     settings:
       link_to_entity: false
     third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
-  entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_fhis_ratingvalue: true
   field_fhrs_ratingvalue: true
