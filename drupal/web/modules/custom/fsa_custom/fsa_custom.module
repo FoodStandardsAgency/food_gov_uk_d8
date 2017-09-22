@@ -35,23 +35,45 @@ function fsa_custom_preprocess_breadcrumb(&$variables) {
  */
 function fsa_custom_block_access(Block $block, $operation, AccountInterface $account) {
 
-  // Control page title block(s) visibility with certain requirements.
-  if ($operation == 'view' && $block->getPluginId() == 'page_title_block') {
+  if ($operation == 'update' && \Drupal::routeMatch()->getRouteName() == 'entity.block.edit_form') {
+    // Let admins know these blocks configuration visibility is controlled in
+    // this custom module.
+    $controlled_block_ids = [
+      'menu_help_secondary',
+      'pagetitle',
+      'pagetitle_hero',
+    ];
+
+    if (in_array($block->id(), $controlled_block_ids)) {
+      drupal_set_message(t('<b>NB!</b> this block visibility is controlled in <code>@function</code>', ['@function' => __FUNCTION__  . '()']), 'warning');
+    }
+  }
+
+  if ($operation == 'view') {
+    // Control certain block visibilities based on node type, term etc.
 
     $node = \Drupal::routeMatch()->getParameter('node');
-    if (is_object($node) && $node->hasField('field_content_type')) {
+    if (is_object($node)) {
 
-      // Get content_type taxonomy term id.
-      $tid = $node->get('field_content_type')->target_id;
-      if (is_numeric($tid)) {
-        $term = Term::load($tid);
+      $term_id = FALSE;
+      if ($node->hasField('field_content_type')) {
+        // Get content_type taxonomy term id.
+        $tid = $node->get('field_content_type')->target_id;
+        if (is_numeric($tid)) {
+          $term = Term::load($tid);
+          $term_id = $term->id();
+        }
+      }
 
+
+      // Control the region for page title block.
+      if ($block->getPluginId() == 'page_title_block') {
         // Use content_type taxonomy to define in which region the pagetitle
         // should be displayed.
-        switch ($term->id()) {
+        switch ($term_id) {
           // Guidance.
           case 28:
-          // News/Alerts.
+            // News/Alerts.
           case 29:
             if ($block->id() == 'pagetitle') {
               return AccessResult::forbidden()
@@ -67,6 +89,28 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
             }
             break;
         }
+      }
+
+      if ($block->id() == 'menu_help_secondary') {
+        // Help nodes and nodes with "Content type" term should always show the
+        // left hand menu.
+        if ($term_id == 27 || $node->getType() == 'help') {
+          return AccessResult::allowed()
+            ->addCacheableDependency($block);
+        }
+        else {
+          return AccessResult::forbidden()
+            ->addCacheableDependency($block);
+        }
+      }
+
+    }
+    else {
+      // Additional access/visibility rules for non-node pages.
+
+      if ($block->id() == 'menu_help_secondary') {
+        return AccessResult::forbidden()
+          ->addCacheableDependency($block);
       }
     }
   }

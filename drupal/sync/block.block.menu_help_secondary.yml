@@ -25,9 +25,4 @@ settings:
   label_display: '0'
   level: 1
   depth: 2
-visibility:
-  request_path:
-    id: request_path
-    pages: "/help\r\n/help/*"
-    negate: false
-    context_mapping: {  }
+visibility: {  }
