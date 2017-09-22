@@ -8,6 +8,7 @@ id: feedback
 label: 'Website feedback'
 recipients:
   - digital.communications@foodstandards.gsi.gov.uk
+  - luke.branford@wunder.io
 reply: ''
 weight: 0
 message: 'Thank you for your feedback.'
