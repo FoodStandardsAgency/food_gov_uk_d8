@@ -106,7 +106,7 @@
 }
 
 :--not-touch .theme--news-alerts .news-alerts-listing .pager ul > li > a:--enter {
-  color: var(--light-primary-color);
+  color: var(--darker-primary-color);
 }
 
 .theme--news-alerts .news-alerts-listing footer {
@@ -181,6 +181,11 @@
 .theme--news-alerts .alert__type_badge.alert__type_prin {
   background-color: var(--color-blue);
   color: var(--color-white);
+}
+
+:--not-touch .theme--news-alerts .type__Alert.views-row a:--enter {
+  color: var(--darker-primary-color);
+  text-decoration: underline;
 }
 
 .theme--news-alerts .type__Alert.views-row .main__type {
