@@ -7,8 +7,8 @@ _core:
 id: feedback
 label: 'Website feedback'
 recipients:
-  - admin@example.com
+  - digital.communications@foodstandards.gsi.gov.uk
 reply: ''
 weight: 0
-message: 'Your message has been sent.'
-redirect: ''
+message: 'Thank you for your feedback.'
+redirect: /contact
