@@ -14,6 +14,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class RatingsSearch extends ControllerBase {
 
+  // Max number of initial search results items.
+  const DEF_RESULT_SIZE = 20;
+
+  // Default number if items to add on "Load more".
+  const DEF_RESULT_LOADMORE = 10;
+
   /**
    * {@inheritdoc}
    *
@@ -63,6 +69,7 @@ class RatingsSearch extends ControllerBase {
     return $params;
 
   }
+
   /**
    * Page callback for /ratings/search.
    */
@@ -76,10 +83,10 @@ class RatingsSearch extends ControllerBase {
     // User provided search input.
     $keywords = \Drupal::request()->query->get('q');
 
-    // User provided max item count. Hard-limit is 1000. Default is 20.
+    // User provided max item count. Hard-limit is 1000. Default is in DEF_RESULT_SIZE.
     $max_items = \Drupal::request()->query->get('max');
     if (empty($max_items) || $max_items > 1000) {
-      $max_items = 20;
+      $max_items = RatingsSearch::DEF_RESULT_SIZE;
     }
 
     $filters = [];
