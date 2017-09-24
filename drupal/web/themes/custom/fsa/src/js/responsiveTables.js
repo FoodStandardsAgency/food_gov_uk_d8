@@ -31,8 +31,8 @@ function responsiveTables(elements, breakpoints) {
       if (!elemChildren[i][y].classList.contains('js-table-header')) {
         const currentChildren = [...elemChildren[i][y].children];
         for (var x = 0; x < currentChildren.length; x++) {
-          currentChildren[x].dataset.header = headerTexts[i][x];
-          // currentChildren[x].setAttribute('aria-label', headerTexts[i][x]);
+          //currentChildren[x].dataset.header = headerTexts[i][x];
+          currentChildren[x].setAttribute('data-header', headerTexts[i][x]);
         }
       }
     }
