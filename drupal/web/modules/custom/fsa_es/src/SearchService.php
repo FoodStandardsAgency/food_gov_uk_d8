@@ -15,8 +15,8 @@ class SearchService {
 
   const DEFAULT_MAX_RESULT_ITEMS = 100;
   const SEARCHABLE_FIELDS = [
-    'name^5',
-    'localauthoritycode.label.keyword^2',
+    'name^3',
+    'localauthoritycode.label.keyword^5',
     'address',
     'postcode',
   ];
@@ -135,7 +135,28 @@ class SearchService {
         'name' => [
           'query' => $input,
           'slop' => 2,
+          'boost' => 10,
+        ],
+      ]];
+      $query_should_filters[] = ['match_phrase' => [
+        'combined_name_location' => [
+          'query' => $input,
+          'slop' => 1,
           'boost' => 5,
+        ],
+      ]];
+      $query_should_filters[] = ['match_phrase' => [
+        'combined_name_postcode' => [
+          'query' => $input,
+          'slop' => 0,
+          'boost' => 3,
+        ],
+      ]];
+      $query_should_filters[] = ['match_phrase' => [
+        'combined_location_postcode' => [
+          'query' => $input,
+          'slop' => 0,
+          'boost' => 1,
         ],
       ]];
     }
