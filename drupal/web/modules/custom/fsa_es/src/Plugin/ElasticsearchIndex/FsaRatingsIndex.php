@@ -110,13 +110,13 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
           'body' => [
             'number_of_shards' => 1,
             'number_of_replicas' => 0,
-          ],
+          ] + $this->getFiltersAndAnalyzers($langcode),
         ]);
 
-        $analyzer = ElasticsearchLanguageAnalyzer::get($langcode);
-        if ($analyzer == 'standard') {
+        $text_analyzer = ElasticsearchLanguageAnalyzer::get($langcode);
+        if ($text_analyzer == 'standard') {
           // Use English analyzer for languages with no specific analyzer found.
-          $analyzer = 'english';
+          $text_analyzer = 'english';
         }
 
         $mappingEstablishment = [
@@ -134,7 +134,7 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
                     'type' => 'keyword',
                   ],
                 ],
-                'analyzer' => $analyzer,
+                'analyzer' => $text_analyzer,
               ],
               'address' => [
                 'type' => 'text',
@@ -205,7 +205,7 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
               ],
               'combinedvalues' => [
                 'type' => 'text',
-                'analyzer' => $analyzer,
+                'analyzer' => $text_analyzer,
               ],
             ],
           ],
@@ -216,4 +216,153 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
     }
   }
 
+  protected function getFiltersAndAnalyzers($langcode) {
+    // Get full language name.
+    $language = $this->getLanguageName($langcode);
+    // Get filters.
+    $filters = $this->getFilters($langcode);
+    // Analyzer filters.
+    $partial_match_filters = [
+      'standard',
+      'lowercase',
+      isset($filters['synonym']) ? 'synonym' : NULL,
+      /*
+      'asciifolding',
+      $language . '_stop',
+      $language . '_stemmer',
+      */
+    ];
+    return [
+      'analysis' => [
+        'tokenizer' => [
+          'edge_ngram' => [
+            'type' => 'edge_ngram',
+            'min_gram' => 4,
+            'max_gram' => 10,
+            'token_chars' => [
+              'letter',
+            ],
+          ],
+        ],
+        'filter' => [
+          ] + $filters,
+        'analyzer' => [
+            'keyword_lower' => [
+              'type' => 'custom',
+              'tokenizer' => 'keyword',
+              'filter' => [
+                'standard',
+                'lowercase',
+              ],
+            ],
+            'partial_match' => [
+              'type' => 'custom',
+              'tokenizer' => 'standard',
+              'char_filter' => [
+                'html_strip',
+              ],
+              'filter' => array_filter($partial_match_filters),
+            ],
+            'synonym' => [
+              'tokenizer' => 'whitespace',
+              'filter' => ['synonym'],
+            ],
+          ] + $this->getLanguageAnalyzer($langcode),
+      ],
+    ];
+  }
+
+  /**
+   * Returns filters.
+   *
+   * @param $langcode
+   *
+   * @return array
+   *
+   * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-lang-analyzer.html
+   */
+  protected function getFilters($langcode) {
+    $filters = [];
+    // Get full language name.
+    $language = $this->getLanguageName($langcode);
+    // Add synonyms filter.
+    if ($synonyms = self::getSynonyms($langcode)) {
+      $filters['synonym'] = [
+        'type' => 'synonym',
+        'synonyms' => $synonyms,
+        'tokenizer' => 'standard',
+        'ignore_case' => TRUE,
+      ];
+    }
+    /*
+    $filters[$language . '_stop'] = [
+      'type' => 'stop',
+      'stopwords' => sprintf('_%s_', $language),
+    ];
+    $filters[$language . '_stemmer'] = [
+      'type' => 'stemmer',
+      'language' => $language,
+    ];
+    */
+    return $filters;
+  }
+
+  /**
+   * Returns language analyzer.
+   *
+   * @param $langcode
+   *
+   * @return array
+   *
+   * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-lang-analyzer.html
+   */
+  protected function getLanguageAnalyzer($langcode) {
+    $language = $this->getLanguageName($langcode);
+    return [
+      $language => [
+        'tokenizer' => 'standard',
+        'filter' => [
+          'lowercase',
+          'synonym'
+          /*
+          $language . '_stop',
+          $language . '_stemmer',
+          */
+        ],
+      ],
+    ];
+  }
+
+  /**
+   * Get the name of the language analyzer to be used for a given language code.
+   *
+   * @param $langcode
+   * @return mixed|string
+   */
+  protected function getLanguageName($langcode) {
+    $language_analyzers = [
+      'en' => 'english',
+      'cy' => 'welsh',
+    ];
+    if (isset($language_analyzers[$langcode])) {
+      return $language_analyzers[$langcode];
+    }
+    else {
+      return 'standard';
+    }
+  }
+
+  /**
+   * Returns synonyms.
+   *
+   * @param $langcode
+   *
+   * @return string
+   *
+   * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-synonym-tokenfilter.html#_solr_synonyms
+   */
+  protected static function getSynonyms($langcode) {
+    $synonym_file = drupal_get_path('module', 'fsa_es') . '/src/Plugin/ElasticsearchIndex/synonyms.txt';
+    return file($synonym_file, FILE_IGNORE_NEW_LINES);
+  }
 }
