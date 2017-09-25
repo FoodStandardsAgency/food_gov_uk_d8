@@ -134,19 +134,19 @@ class FsaRatingsSearchLoadMore extends FormBase {
     $size = $page + $items_to_add;
     $total_matches = $data['total_matches'];
 
+    // The offset, varies on first page and with loaded content.
+    $offset = ($page == 1) ? RatingsSearch::INITIAL_RESULTS_COUNT : RatingsSearch::ADDITIONAL_LOAD_COUNT + ($page * $items_to_add);
+
     if ($page == 1) {
       $hits_shown = RatingsSearch::INITIAL_RESULTS_COUNT + $items_to_add;
-      $offset = RatingsSearch::INITIAL_RESULTS_COUNT;
     }
     else {
       $hits_shown = RatingsSearch::INITIAL_RESULTS_COUNT + ($page * $items_to_add);
-      $offset = RatingsSearch::INITIAL_RESULTS_COUNT + ($page * $items_to_add);
     }
 
     // Check when we have loaded everything.
     if ($size >= $total_matches) {
       $last = TRUE;
-      $hits_shown = $total_matches;
     }
     else {
       $last = FALSE;
@@ -161,6 +161,11 @@ class FsaRatingsSearchLoadMore extends FormBase {
       $offset);
 
     $results = RatingsSearch::ratingSearchResults($results);
+    $result_count = count($results);
+
+    // How many items are loaded to page.
+    $hits_shown = RatingsSearch::INITIAL_RESULTS_COUNT + ($page * $items_to_add);
+
     $response = new AjaxResponse();
     $response->addCommand(new AppendCommand(
       '#sortable', $results
