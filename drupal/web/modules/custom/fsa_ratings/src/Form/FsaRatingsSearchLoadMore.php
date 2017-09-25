@@ -168,7 +168,7 @@ class FsaRatingsSearchLoadMore extends FormBase {
 
     $response = new AjaxResponse();
     $response->addCommand(new AppendCommand(
-      '#sortable', $results
+      '#ratings-search-load-more', $results
     ));
 
     // Update page-number for the next callback.
