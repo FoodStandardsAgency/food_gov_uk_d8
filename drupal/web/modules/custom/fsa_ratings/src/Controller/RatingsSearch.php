@@ -165,7 +165,13 @@ class RatingsSearch extends ControllerBase {
       // Add the link to the entity view page (with search query params to
       // populate the search form).
       $url = Url::fromRoute('entity.fsa_establishment.canonical', ['fsa_establishment' => $result['id']]);
-      $url->setOptions(['query' => \Drupal::request()->query->all()]);
+
+      // Get query params and remove the AJAX-added items.
+      $query = \Drupal::request()->query->all();
+      unset($query['ajax_form']);
+      unset($query['_wrapper_format']);
+
+      $url->setOptions(['query' => $query]);
       $result['url'] = $url;
       $items[] = [
         '#theme' => 'fsa_ratings_search_result_item',
