@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "browserslist": [
     "> 1%",
-    "IE 8"
+    "IE 10",
+    "IE 9"
   ],
   "scripts": {
     "dev": "browser-sync --reload-delay 1000 start --proxy 'https://local.food.gov.uk' --serveStatic 'dist' --files 'dist' 'template' --no-open & webpack --watch",

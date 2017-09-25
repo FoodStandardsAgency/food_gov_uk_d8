@@ -1,4 +1,5 @@
-import "babel-polyfill";
+import 'babel-polyfill';
+import './js/polyfill/classList';
 import svg4everybody from 'svg4everybody';
 import responsiveTables from './js/responsiveTables';
 import stickyElement from './js/stickyElement';
