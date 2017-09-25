@@ -5,6 +5,7 @@ namespace Drupal\fsa_ratings\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\fsa_ratings\Controller\RatingsHelper;
+use Drupal\fsa_ratings\Controller\RatingsSearch;
 
 /**
  * Form controller for FSA Establishment edit forms.
@@ -50,7 +51,7 @@ class FsaRatingsSearchForm extends FormBase {
     // User provided max item count. Hard-limit is 1000. Default is 20.
     $max_items = \Drupal::request()->query->get('max');
     if (empty($max_items) || $max_items > 1000) {
-      $max_items = 20;
+      $max_items = RatingsSearch::DEF_RESULT_SIZE;
     }
 
     // See if the following parameters are provided by the user and add to the
