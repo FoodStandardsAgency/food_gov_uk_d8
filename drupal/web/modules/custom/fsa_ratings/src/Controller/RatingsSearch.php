@@ -14,11 +14,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class RatingsSearch extends ControllerBase {
 
-  // Max number of initial search results items.
-  const DEF_RESULT_SIZE = 20;
+  // Number of initial search results items.
+  const INITIAL_RESULTS_COUNT = 20;
 
-  // Default number if items to add on "Load more".
-  const DEF_RESULT_LOADMORE = 10;
+  // Number of items to "Load more".
+  const ADDITIONAL_LOAD_COUNT = 10;
 
   /**
    * {@inheritdoc}
@@ -41,7 +41,6 @@ class RatingsSearch extends ControllerBase {
   public function __construct(SearchService $searchService) {
     $this->searchService = $searchService;
   }
-
 
   /**
    * Static function to get search parameters from URL.
@@ -83,10 +82,10 @@ class RatingsSearch extends ControllerBase {
     // User provided search input.
     $keywords = \Drupal::request()->query->get('q');
 
-    // User provided max item count. Hard-limit is 1000. Default is in DEF_RESULT_SIZE.
+    // User provided max item count. Hard-limit is 1000. Default is in constant.
     $max_items = \Drupal::request()->query->get('max');
     if (empty($max_items) || $max_items > 1000) {
-      $max_items = RatingsSearch::DEF_RESULT_SIZE;
+      $max_items = RatingsSearch::INITIAL_RESULTS_COUNT;
     }
 
     $filters = [];
@@ -132,6 +131,7 @@ class RatingsSearch extends ControllerBase {
       '#applied_filters' => $filters,             // Filters given by the user and used for the querying
       '#hits_total' => $hits,                     // Total count of the results
       '#hits_shown' => count($items),             // Item count to be shown now
+      '#load_more' => \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchLoadMore'),
     ];
   }
 
@@ -139,17 +139,17 @@ class RatingsSearch extends ControllerBase {
    * Build themed search results.
    *
    * @param array $results
-   *  The search results array.
+   *   The search results array.
    *
    * @return array
    *   Themed search items array.
    */
-  public static function ratingSearchResults($results) {
+  public static function ratingSearchResults(array $results) {
     $items = [];
     foreach ($results['results'] as $result) {
       $rating_value = $result['ratingvalue'];
       $result['ratingvalue'] = [
-        '#markup' => '<p class="ratingvalue"><span class="description">'. t('Rating:') .'</span> <span class="numeric">'. $rating_value .'</span></p>',
+        '#markup' => '<p class="ratingvalue"><span class="description">' . t('Rating:') . '</span> <span class="numeric">' . $rating_value . '</span></p>',
       ];
 
       // Get scheme from the establishment.

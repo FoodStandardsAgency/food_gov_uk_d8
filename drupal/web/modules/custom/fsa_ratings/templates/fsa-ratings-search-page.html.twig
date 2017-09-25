@@ -29,7 +29,6 @@
     {% endif %}
 
       {{ items }}
-    <div id="search-load-more-wrapper"></div>{# the ajax-wrapper for load-more content #}
   </div>
 {% endif %}
 
@@ -38,4 +37,5 @@
       {% trans %}Displaying <span class="hits-shown">{{ hits_shown }}</span> of <span class="hits-total">{{ hits_total }}</span> items{% endtrans %}
   </div>
 {% endif %}
+{{ load_more }}
 

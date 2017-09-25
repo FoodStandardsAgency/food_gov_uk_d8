@@ -2,7 +2,7 @@
 
 namespace Drupal\fsa_ratings\Form;
 
-use Drupal\Core\Ajax\ReplaceCommand;
+use Drupal\Core\Ajax\RemoveCommand;
 use Drupal\Core\Ajax\InvokeCommand;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\AppendCommand;
@@ -24,12 +24,11 @@ class FsaRatingsSearchLoadMore extends FormBase {
    * Form id getter.
    *
    * @return string
-   *    The unique ID
+   *   The unique ID
    */
   public function getFormId() {
     return 'fsa_ratings_ajax_load_more';
   }
-
 
   /**
    * {@inheritdoc}
@@ -53,58 +52,52 @@ class FsaRatingsSearchLoadMore extends FormBase {
     $this->searchService = $searchService;
   }
 
-
   /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    $def_result_size = RatingsSearch::DEF_RESULT_SIZE;
-    $def_result_loadmore = RatingsSearch::DEF_RESULT_LOADMORE;
+    $init_result_count = RatingsSearch::INITIAL_RESULTS_COUNT;
 
-    // Return false if there is less results than one page.
     $params = RatingsSearch::getSearchParameters();
-    $results = $this->searchService->search($params['language'], $params['keywords'], $params['filters'], 0, $def_result_size);
+    $results = $this->searchService->search($params['language'], $params['keywords'], $params['filters'], 0, $init_result_count);
     $total_matches = $results['total'];
 
     // If no search or less results than default do not build the form.
-    if (($params['keywords'] == '' && empty($params['filters'])) || $total_matches <= $def_result_size) {
+    if (($params['keywords'] == '' && empty($params['filters'])) || $total_matches <= $init_result_count) {
       return FALSE;
     }
 
     $form['actions']['#type'] = 'actions';
 
-    // Save total matches to
-    $form['total_matches'] = array(
-      '#title' => 'total_matches',
-      '#type' => 'textfield', // @todo: change to hidden once working
-      '#attributes' => array('class' => 'total-matches'),
-      // The default amount items per page.
+    // We need this on load more.
+    $form['total_matches'] = [
+      '#type' => 'hidden',
+      '#attributes' => ['class' => ['total-matches']],
       '#default_value' => $total_matches,
-    );
+    ];
 
-    $form['page_number'] = array(
-      '#title' => 'page_number',
-      '#type' => 'textfield', // @todo: change to hidden once working
-      '#attributes' => array('class' => 'page-number'),
-      // The default amount items per page.
+    // Set page number for AJAX load more.
+    $form['page_number'] = [
+      '#type' => 'hidden',
+      '#attributes' => ['class' => ['page-number']],
       '#default_value' => 1,
-    );
+    ];
 
-    // Create the loader button with callback.
-    $form['load_more'] = array(
+    // Create loader button with callback.
+    $form['load_more'] = [
       '#type' => 'submit',
       '#value' => t('Show more results'),
-      '#ajax' => array(
-        'callback' => array($this, 'ajaxSubmitForm'),
+      '#ajax' => [
+        'callback' => [$this, 'ajaxSubmitForm'],
         'event' => 'click',
         'effect' => 'slide',
         'speed' => 500,
-        'progress' => array(
+        'progress' => [
           'type' => 'throbber',
-        ),
-      ),
-    );
+        ],
+      ],
+    ];
 
     return $form;
   }
@@ -113,9 +106,9 @@ class FsaRatingsSearchLoadMore extends FormBase {
    * Form submit function.
    *
    * @param array $form
-   *    The form fields.
+   *   The form fields.
    * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *    Form state values.
+   *   Form state values.
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Build the non-js version later if really required.
@@ -125,25 +118,35 @@ class FsaRatingsSearchLoadMore extends FormBase {
    * Ajax submit functionality.
    *
    * @param array $form
-   *    Form fields.
+   *   Form fields.
    * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *    Form state values.
+   *   Form state values.
    *
    * @return \Drupal\Core\Ajax\AjaxResponse
-   *    The ajax response.
+   *   The ajax response.
    */
   public function ajaxSubmitForm(array &$form, FormStateInterface $form_state) {
 
-    $def_result_loadmore = RatingsSearch::DEF_RESULT_LOADMORE;
+    $items_to_add = RatingsSearch::ADDITIONAL_LOAD_COUNT;
 
     $data = $form_state->getValues();
     $page = $data['page_number'];
-    $size = $page + $def_result_loadmore;
+    $size = $page + $items_to_add;
     $total_matches = $data['total_matches'];
 
-    if ($total_matches < $size) {
+    if ($page == 1) {
+      $hits_shown = RatingsSearch::INITIAL_RESULTS_COUNT + $items_to_add;
+      $offset = RatingsSearch::INITIAL_RESULTS_COUNT;
+    }
+    else {
+      $hits_shown = RatingsSearch::INITIAL_RESULTS_COUNT + ($page * $items_to_add);
+      $offset = RatingsSearch::INITIAL_RESULTS_COUNT + ($page * $items_to_add);
+    }
+
+    // Check when we have loaded everything.
+    if ($size >= $total_matches) {
       $last = TRUE;
-      $size = $total_matches;
+      $hits_shown = $total_matches;
     }
     else {
       $last = FALSE;
@@ -154,41 +157,32 @@ class FsaRatingsSearchLoadMore extends FormBase {
       $params['language'],
       $params['keywords'],
       $params['filters'],
-      $def_result_loadmore,
-      RatingsSearch::DEF_RESULT_SIZE);
-
-    if ($page == 1) {
-      $hits_shown = RatingsSearch::DEF_RESULT_SIZE + $def_result_loadmore;
-    }
-    else {
-      $hits_shown = RatingsSearch::DEF_RESULT_SIZE + ($page * $def_result_loadmore);
-    }
+      $items_to_add,
+      $offset);
 
     $results = RatingsSearch::ratingSearchResults($results);
     $response = new AjaxResponse();
     $response->addCommand(new AppendCommand(
-      '#search-load-more-wrapper',
-      $results
+      '#sortable', $results
     ));
 
-    // Update form page-number field for the next callback.
+    // Update page-number for the next callback.
     $response->addCommand(new InvokeCommand(
-      '#fsa-ratings-ajax-load-more #edit-page-number',
+      '#fsa-ratings-ajax-load-more [name="page_number"]',
       'val',
-      array($data['page_number'] + 1)
+      [$data['page_number'] + 1]
     ));
 
-    // Increase result counter,
+    // Increase result counter,.
     $response->addCommand(new HtmlCommand(
       '.result-counter .hits-shown',
       $hits_shown
     ));
 
-    // Once we have loaded everything reset the info count to total.
     if ($last) {
-      $response->addCommand(new ReplaceCommand(
-        '#fsa-ratings-ajax-load-more #edit-load-more',
-        '<p class="small">' . t('Showing all @total@ results', ['@total@' => $total_matches]) . '</p>'
+      // Once everything is loaded remove the load-button.
+      $response->addCommand(new RemoveCommand(
+        '#fsa-ratings-ajax-load-more #edit-load-more'
       ));
     }
 
