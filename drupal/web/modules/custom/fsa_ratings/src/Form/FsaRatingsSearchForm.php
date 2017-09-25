@@ -41,7 +41,8 @@ class FsaRatingsSearchForm extends FormBase {
     $search_service = \Drupal::service('fsa_es.search_service');
 
     $filters = [];
-    $available_filters = $search_service->categories();
+    $language = \Drupal::languageManager()->getCurrentLanguage();
+    $available_filters = $search_service->categories($language);
 
     // User provided search input.
     $keywords = \Drupal::request()->query->get('q');
