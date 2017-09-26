@@ -207,6 +207,18 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
                 'type' => 'text',
                 'analyzer' => $text_analyzer,
               ],
+              'combined_name_postcode' => [
+                'type' => 'text',
+                'analyzer' => $text_analyzer,
+              ],
+              'combined_name_location' => [
+                'type' => 'text',
+                'analyzer' => $text_analyzer,
+              ],
+              'combined_location_postcode' => [
+                'type' => 'text',
+                'analyzer' => $text_analyzer,
+              ],
             ],
           ],
         ];
@@ -285,6 +297,10 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
     $filters = [];
     // Get full language name.
     $language = $this->getLanguageName($langcode);
+    if ($language == 'standard') {
+      // Use english stopper and stemmer since in our case there's a lot of English text in the 'cy' (Welsh) index.
+      $language = 'english';
+    }
     // Add synonyms filter.
     if ($synonyms = self::getSynonyms($langcode)) {
       $filters['synonym'] = [
@@ -294,7 +310,7 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
         'ignore_case' => TRUE,
       ];
     }
-    /*
+
     $filters[$language . '_stop'] = [
       'type' => 'stop',
       'stopwords' => sprintf('_%s_', $language),
@@ -303,7 +319,11 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
       'type' => 'stemmer',
       'language' => $language,
     ];
-    */
+    $filters[$language . '_possessive_stemmer'] = [
+      'type' => 'stemmer',
+      'language' => 'possessive_' . $language,
+    ];
+
     return $filters;
   }
 
@@ -318,16 +338,20 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
    */
   protected function getLanguageAnalyzer($langcode) {
     $language = $this->getLanguageName($langcode);
+    if ($language == 'standard') {
+      // Use english stopper and stemmer since in our case there's a lot of English text in the 'cy' (Welsh) index.
+      $language = 'english';
+    }
     return [
       $language => [
         'tokenizer' => 'standard',
         'filter' => [
           'lowercase',
-          'synonym'
-          /*
+          'synonym',
+          'lowercase',
           $language . '_stop',
           $language . '_stemmer',
-          */
+          $language . '_possessive_stemmer',
         ],
       ],
     ];
@@ -342,7 +366,8 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
   protected function getLanguageName($langcode) {
     $language_analyzers = [
       'en' => 'english',
-      'cy' => 'welsh',
+      // There's no language analyzer for Welsh implemented in ES
+      //'cy' => 'welsh',
     ];
     if (isset($language_analyzers[$langcode])) {
       return $language_analyzers[$langcode];

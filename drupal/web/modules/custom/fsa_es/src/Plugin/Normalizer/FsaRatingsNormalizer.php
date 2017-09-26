@@ -114,6 +114,15 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
     // Merge the values of values from name, address, postcode and LA into single field for more robust search querying
     $data['combinedvalues'] = $data['name'] .' '. $data['address'] .' '. $data['postcode'] .' '. $data['localauthoritycode'][0]['label'];
 
+    // Merge the values of values from name and postcode
+    $data['combined_name_postcode'] = $data['name'] .' '. $data['postcode'];
+
+    // Merge the values of values from name and location
+    $data['combined_name_location'] = $data['name'] .' '. $data['localauthoritycode'][0]['label'];
+
+    // Merge the values of values from location and postcode
+    $data['combined_location_postcode'] = $data['localauthoritycode'][0]['label'] . ' ' . $data['postcode'];
+
     return $data;
   }
 
