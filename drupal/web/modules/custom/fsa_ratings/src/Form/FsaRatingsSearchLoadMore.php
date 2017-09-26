@@ -131,26 +131,10 @@ class FsaRatingsSearchLoadMore extends FormBase {
 
     $data = $form_state->getValues();
     $page = $data['page_number'];
-    $size = $page + $items_to_add;
     $total_matches = $data['total_matches'];
 
     // The offset, varies on first page and with loaded content.
-    $offset = ($page == 1) ? RatingsSearch::INITIAL_RESULTS_COUNT : RatingsSearch::ADDITIONAL_LOAD_COUNT + ($page * $items_to_add);
-
-    if ($page == 1) {
-      $hits_shown = RatingsSearch::INITIAL_RESULTS_COUNT + $items_to_add;
-    }
-    else {
-      $hits_shown = RatingsSearch::INITIAL_RESULTS_COUNT + ($page * $items_to_add);
-    }
-
-    // Check when we have loaded everything.
-    if ($size >= $total_matches) {
-      $last = TRUE;
-    }
-    else {
-      $last = FALSE;
-    }
+    $offset = ($page == 1) ? RatingsSearch::INITIAL_RESULTS_COUNT : $page * $items_to_add;
 
     $params = RatingsSearch::getSearchParameters();
     $results = $this->searchService->search(
@@ -164,9 +148,11 @@ class FsaRatingsSearchLoadMore extends FormBase {
     $result_count = count($results);
 
     // How many items are loaded to page.
-    $hits_shown = RatingsSearch::INITIAL_RESULTS_COUNT + ($page * $items_to_add);
+    $hits_shown = RatingsSearch::INITIAL_RESULTS_COUNT + ($page * $result_count);
 
     $response = new AjaxResponse();
+
+    // Send new items for template.
     $response->addCommand(new AppendCommand(
       '#ratings-search-load-more', $results
     ));
@@ -178,18 +164,22 @@ class FsaRatingsSearchLoadMore extends FormBase {
       [$data['page_number'] + 1]
     ));
 
-    // Increase result counter,.
-    $response->addCommand(new HtmlCommand(
-      '.result-counter .hits-shown',
-      $hits_shown
-    ));
+    // Check if all results were loaded.
+    if ($hits_shown >= $total_matches) {
 
-    if ($last) {
-      // Once everything is loaded remove the load-button.
+      $hits_shown = $total_matches;
+
+      // Since everything is loaded remove the load more button.
       $response->addCommand(new RemoveCommand(
         '#fsa-ratings-ajax-load-more #edit-load-more'
       ));
     }
+
+    // Increase result counter.
+    $response->addCommand(new HtmlCommand(
+      '.result-counter .hits-shown',
+      $hits_shown
+    ));
 
     return $response;
   }
