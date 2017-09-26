@@ -43,7 +43,7 @@
       </header>
 
       <h2 class="visually-hidden" aria-labelledby="sortable">{% trans %}Food hygiene ratings search results{% endtrans %}</h2>
-      <div class="table table--with-background js-table" id="sortable" role="grid">
+      <div class="table table--with-background js-table ratings__table" id="sortable" role="grid">
         <div class="table__row table__row--header table__row--negative js-table-header" role="row">
           <div class="table__item table__item--large" role="columnheader">{% trans %}Name{% endtrans %}</div>
           <div class="table__item" role="columnheader">{% trans %}Rating{% endtrans %}</div>
@@ -51,14 +51,19 @@
         </div>
 
         {{ items }}
-        <div id="search-load-more-wrapper"></div>{# the ajax-wrapper for load-more content #}
 
-        {% if hits_total > hits_shown %}
-            <div class="result-counter">
-              {% trans %}Displaying <span class="hits-shown">{{ hits_shown }}</span> of <span class="hits-total">{{ hits_total }}</span> items{% endtrans %}
-            </div>
-        {% endif %}
+        <div id="ratings-search-load-more" class="ratings__table ratings__table--more-items"></div>
+
       </div>
+
+      <footer class="ratings__footer">
+        {% if hits_total > hits_shown %}
+          <div class="result-counter">
+            <p>{% trans %}Displaying <span class="hits-shown">{{ hits_shown }}</span> of <span class="hits-total">{{ hits_total }}</span> items{% endtrans %}</p>
+          </div>
+        {% endif %}
+        {{ load_more }}
+      </footer>
     </div>
     {% endif %}
   </div>

@@ -51,7 +51,7 @@ class FsaRatingsSearchForm extends FormBase {
     // User provided max item count. Hard-limit is 1000. Default is 20.
     $max_items = \Drupal::request()->query->get('max');
     if (empty($max_items) || $max_items > 1000) {
-      $max_items = RatingsSearch::DEF_RESULT_SIZE;
+      $max_items = RatingsSearch::INITIAL_RESULTS_COUNT;
     }
 
     // See if the following parameters are provided by the user and add to the

@@ -30,22 +30,6 @@ function fsa_ratings_help($route_name, RouteMatchInterface $route_match) {
   }
 }
 
-
-/**
- * Implements hook_preprocess_page().
- */
-function fsa_ratings_preprocess_page(&$variables) {
-
-  // Add Rating search load more ajax form, adding via template variable does
-  // something the AJAX did not like.
-  // @todo: maybe this could be added more beautifully?
-  $routename = \Drupal::routeMatch()->getRouteName();
-  if ($routename == 'fsa_ratings.ratings_search') {
-    $form = \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchLoadMore');
-    $variables['page']['content'][]['#markup'] = render($form);
-  }
-}
-
 /**
  * Implements hook_preprocess_field().
  */
@@ -134,6 +118,7 @@ function fsa_ratings_theme() {
         'form' => NULL,
         'sort_form' => NULL,
         'ratings_info_content' => NULL,
+        'load_more' => NULL,
       ],
     ],
     'fsa_ratings_search_result_item' => [

@@ -213,6 +213,10 @@
   }
 }
 
+.ratings__header .ratings__sort-form .form-item {
+  margin-bottom: 0;
+}
+
 .ratings__header .ratings__sort-form label {
   display: block;
   margin: 0;
@@ -373,4 +377,38 @@
   @media (--breakpoint-xs) {
     max-width: 120%;
   }
+}
+
+/* Ratings table */
+.ratings__table {
+
+}
+
+.ratings__table {
+
+}
+
+.ratings__table.ratings__table--more-items > div {
+  display: flex !important;
+  flex-flow: column nowrap !important;
+}
+
+/* Ratings footer */
+.ratings__footer {
+  text-align: center;
+}
+
+.ratings__footer .hits-shown,
+.ratings__footer .hits-total {
+  font-weight: 700;
+}
+
+.ratings__footer .hits-shown > div,
+.ratings__footer .hits-total > div {
+  display: inline !important;
+}
+
+.ratings__footer .button {
+  margin: 0 auto;
+  @mixin responsive-declaration margin-top, 1em, 2em;
 }
