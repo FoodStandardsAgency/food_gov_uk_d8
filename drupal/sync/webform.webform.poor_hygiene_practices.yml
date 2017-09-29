@@ -1,0 +1,143 @@
+uuid: 44d9cddb-52f5-4816-b2d1-bb99a4f5ea5f
+langcode: en
+status: open
+dependencies: {  }
+open: null
+close: null
+uid: 1
+template: false
+id: poor_hygiene_practices
+title: 'Report poor hygiene practices'
+description: 'Poor hygiene practices report form'
+category: 'Food problem'
+elements: "page_about:\n  '#type': webform_wizard_page\n  '#title': About\n  details_of_problem:\n    '#type': textarea\n    '#title': 'What is the problem you want to report?'\n    '#description': 'Please tell us as much as possible about your concerns.'\n  people_businesses_involved:\n    '#type': textarea\n    '#title': 'Who are the people and businesses involved?'\n    '#description': 'Please provide&nbsp;as much detail as possible.'\n  where_lookup:\n    '#type': webform_googleplace\n    '#title': 'Where is it happening?'\n  when_and_how_often:\n    '#type': textarea\n    '#title': 'When and how often is it happening?'\n    '#description': 'Please include the last time it happened.'\n  why_involved_and_how:\n    '#type': textarea\n    '#title': 'Please tell us why the people or businesses are involved, and how this is happening'\n  explain_how_you_know:\n    '#type': textarea\n    '#title': 'Please explain how you know this information'\n  how_many_aware:\n    '#type': number\n    '#title': 'Approximately, how many other people are aware of this?'\n    '#default_value': '1'\n    '#min': '1'\n    '#step': '1'\n  others_aware_unknown:\n    '#type': checkbox\n    '#title': 'I don''t know if others are also aware of this'\n  reported_to_anyone_else:\n    '#type': radios\n    '#title': 'Has it been reported to anyone else?'\n    '#options':\n      'Yes': 'Yes'\n      'No': 'No'\n  header_contact_info:\n    '#type': webform_markup\n    '#markup': \"<h3>Please tell us your contact information</h3>\\r\\n\\r\\n<p>In order to fully assess the information provided, it may be necessary to contact you to seek clarification.</p>\"\n  name:\n    '#type': textfield\n    '#title': 'What is your name?'\n    '#required': true\n  email:\n    '#type': email\n    '#title': 'What is your email?'\n    '#required': true\n  telephone:\n    '#type': tel\n    '#title': 'What is your phone number?'\n    '#international': true\n    '#international_initial_country': GB\n"
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  page: true
+  page_submit_path: help/report-food-problem/poor-hygiene
+  page_confirm_path: help/report-food-problem/poor-hygiene/summary
+  form_submit_once: true
+  form_exception_message: ''
+  form_open_message: ''
+  form_close_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_convert_anonymous: false
+  form_prepopulate: true
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_reset: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_unsaved: true
+  form_disable_back: false
+  form_autofocus: false
+  form_details_toggle: false
+  submission_label: ''
+  submission_log: false
+  submission_user_columns: {  }
+  wizard_progress_bar: false
+  wizard_progress_pages: true
+  wizard_progress_percentage: false
+  wizard_start_label: ''
+  wizard_complete: true
+  wizard_complete_label: ''
+  preview: 2
+  preview_label: Summary
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  confirmation_type: inline
+  confirmation_title: ''
+  confirmation_message: "<h2>Thank you for your report!</h2>\r\n\r\n<p>It has been sent to the FSA Food Crime Unit.</p>\r\n\r\n<p>Your reference number is<br />\r\n<strong>[webform_submission:sid]</strong></p>"
+  confirmation_url: ''
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  limit_total: null
+  limit_total_message: ''
+  limit_user: null
+  limit_user_message: ''
+  purge: none
+  purge_days: null
+  entity_limit_total: null
+  entity_limit_user: null
+  results_disabled: false
+  results_disabled_ignore: false
+  token_update: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  copy_of_report:
+    id: email
+    label: 'Copy of report'
+    handler_id: copy_of_report
+    status: true
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:email:raw]'
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      html: true
+      attachments: false
+      debug: false
+      reply_to: ''
+      return_path: ''
