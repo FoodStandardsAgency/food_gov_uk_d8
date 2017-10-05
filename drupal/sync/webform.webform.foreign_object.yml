@@ -1,0 +1,183 @@
+uuid: d2d999c1-4f0d-4019-b4ad-be78e6198ade
+langcode: en
+status: open
+dependencies: {  }
+open: null
+close: null
+uid: 1
+template: false
+id: foreign_object
+title: 'Report a foreign object found in an item of food'
+description: 'Foreign object in food report form'
+category: 'Food problem'
+elements: "page_business:\n  '#type': webform_wizard_page\n  '#title': Business\n  where_lookup:\n    '#type': webform_googleplace\n    '#title': 'Where did you purchase the item of food?'\n  not_found_details:\n    '#type': textarea\n    '#title': 'If not found above, please give details'\n  fsa_establishment_la_name:\n    '#type': hidden\n    '#title': 'Local authority name'\n  fsa_establishment_postal_code:\n    '#type': hidden\n    '#title': 'Postal code'\n  fsa_establishment_la_email:\n    '#type': hidden\n    '#title': 'Local authority email'\npage_description:\n  '#type': webform_wizard_page\n  '#title': Description\n  when_purchased:\n    '#type': datetime\n    '#title': 'When was it purchased?'\n    '#format': long\n  product_name:\n    '#type': textfield\n    '#title': 'What is the name of product?'\n    '#description': 'Please give the brand name, if known.'\n  problem_details:\n    '#type': textarea\n    '#title': 'What is the problem with the food? '\n    '#description': 'Please describe the issue.'\n  evidence_details:\n    '#type': textarea\n    '#title': 'Do you have evidence?'\n    '#description': 'For example,&nbsp; a&nbsp;receipt or photos.'\n  label_details:\n    '#type': textarea\n    '#title': 'Please provide any details on the label'\n    '#description': 'For example, batch codes, a barcode, use by/best before date, or health marks.'\n  premises_contacted_action_taken:\n    '#type': radios\n    '#title': 'Has the premises been contacted, or any action taken?'\n    '#options':\n      'yes': 'Yes'\n      'no': 'No'\n      dont-know: 'Don''t know'\n  where_item_stored:\n    '#type': textarea\n    '#title': 'Where was the item stored?'\npage_contact_details:\n  '#type': webform_wizard_page\n  '#title': 'Contact details'\n  header_contact_info:\n    '#type': webform_markup\n    '#markup': \"<h3>Please tell us your contact information</h3>\\r\\n\\r\\n<p>Your contact information will only be used by the local authority to contact you about your issue.</p>\"\n  name:\n    '#type': textfield\n    '#title': 'What is your name?'\n    '#required': true\n  email:\n    '#type': email\n    '#title': 'What is your email?'\n    '#required': true\n  telephone:\n    '#type': tel\n    '#title': 'What is your phone number?'\n"
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  page: true
+  page_submit_path: help/report-food-problem/foreign-object
+  page_confirm_path: help/report-food-problem/foreign-object/summary
+  form_submit_once: true
+  form_exception_message: ''
+  form_open_message: ''
+  form_close_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_convert_anonymous: false
+  form_prepopulate: true
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_reset: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_unsaved: true
+  form_disable_back: false
+  form_autofocus: false
+  form_details_toggle: false
+  submission_label: ''
+  submission_log: false
+  submission_user_columns: {  }
+  wizard_progress_bar: false
+  wizard_progress_pages: true
+  wizard_progress_percentage: false
+  wizard_start_label: ''
+  wizard_complete: true
+  wizard_complete_label: ''
+  preview: 2
+  preview_label: Summary
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  confirmation_type: inline
+  confirmation_title: ''
+  confirmation_message: "<h2>Thank you for your report!</h2>\r\n\r\n<p>Your reference number is<br />\r\n<strong>[webform_submission:sid]</strong></p>\r\n\r\n<p>We&rsquo;ve sent you a copy of your report via email.</p>\r\n\r\n<h4>What happens next?</h4>\r\n\r\n<p>We&rsquo;ve sent your report about <strong>[webform_submission:values:where_lookup]</strong>&nbsp;to the FSA Authority <strong>[webform_submission:values:fsa_establishment_la_name]</strong>.</p>\r\n\r\n<p>If you need to contact <strong>[webform_submission:values:fsa_establishment_la_name]</strong> about your report, you can do so at <strong>[webform_submission:values:fsa_establishment_la_address]</strong>.</p>"
+  confirmation_url: ''
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  limit_total: null
+  limit_total_message: ''
+  limit_user: null
+  limit_user_message: ''
+  purge: none
+  purge_days: null
+  entity_limit_total: null
+  entity_limit_user: null
+  results_disabled: false
+  results_disabled_ignore: false
+  token_update: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  copy_of_report:
+    id: email
+    label: 'Copy of report'
+    handler_id: copy_of_report
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:email:raw]'
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      subject: 'Thank you for reporting a food problem'
+      body: "<p>Thank you for reporting a food problem at:</p>\r\n\r\n<p><strong>[webform_submission:values:where_lookup:value]</strong></p>\r\n\r\n<p>Your report has been forwarded to <strong>[webform_submission:values:fsa_establishment_la_name:value] Council</strong>, who you may contact, if you wish to discuss your report further, at:</p>\r\n\r\n<p>@todo Add local authority address<br />\r\n[webform_submission:values:fsa_establishment_la_email:value]</p>\r\n\r\n<p>Please do not reply to this email.</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      html: true
+      attachments: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+  copy_to_la:
+    id: email
+    label: 'Copy to local authority'
+    handler_id: copy_to_la
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:email:raw]'
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      subject: 'This is a food problem report from a consumer via food.gov.uk'
+      body: "<p>[webform_submission:values]</p>\r\n\r\n<p>Please do not reply to this email.</p>\r\n\r\n<p><strong>Protect privacy:</strong> make sure you keep the information in this email appropriately secure and only use it for the purpose of investigating the complaint against the food business. If this issue is for another local authority to consider and take appropriate action, please securely share the information in this email with that local authority. Ensure that the personal details of the person who made the complaint are not revealed to the food business.</p>"
+      excluded_elements:
+        fsa_establishment_la_name: fsa_establishment_la_name
+        fsa_establishment_postal_code: fsa_establishment_postal_code
+        fsa_establishment_la_email: fsa_establishment_la_email
+        name: name
+        email: email
+        telephone: telephone
+      ignore_access: false
+      exclude_empty: true
+      html: true
+      attachments: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
