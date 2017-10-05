@@ -118,7 +118,6 @@ handlers:
     label: 'Copy of report'
     handler_id: copy_of_report
     status: true
-    conditions: {  }
     weight: 0
     settings:
       states:
@@ -133,7 +132,7 @@ handlers:
       from_options: {  }
       from_name: default
       subject: 'Thank you for reporting a food problem'
-      body: "<p>Thank you for reporting a food problem at:</p>\r\n\r\n<p><strong>[webform_submission:values:where_lookup:value]</strong></p>\r\n\r\n<p>Your report has been forwarded to <strong>[webform_submission:values:fsa_establishment_la_name:value] Council</strong>, who you may contact, if you wish to discuss your report further, at:</p>\r\n\r\n<p>@todo Add local authority address<br />\r\n[webform_submission:values:fsa_establishment_la_email:value]</p>\r\n\r\n<p>Please do not reply to this email.</p>"
+      body: "<p>Thank you for reporting a food problem at:</p>\r\n\r\n<p><strong>[webform_submission:values:where_lookup:value]</strong></p>\r\n\r\n<p>Your report has been forwarded to <strong>[webform_submission:values:fsa_establishment_la_name:value] Council</strong>, who you may contact, if you wish to discuss your report further, at: [webform_submission:values:fsa_establishment_la_email:value].</p>\r\n\r\n<p>Please do not reply to this email.</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
@@ -149,7 +148,6 @@ handlers:
     label: 'Copy to local authority'
     handler_id: copy_to_la
     status: true
-    conditions: {  }
     weight: 0
     settings:
       states:
