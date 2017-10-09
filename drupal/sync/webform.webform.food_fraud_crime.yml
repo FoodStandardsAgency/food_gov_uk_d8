@@ -132,7 +132,7 @@ handlers:
       from_options: {  }
       from_name: default
       subject: 'Thank you for reporting a food problem'
-      body: "<p>Thank you for reporting a food problem at:</p>\r\n\r\n<p><strong>[webform_submission:values:where_lookup:value]</strong></p>\r\n\r\n<p>Your report has been forwarded to the <strong>FSA&#39;s National Food Crime Unit (NFCU)</strong>, who you may contact, if you wish to discuss your report further, at: <a href=\"mailto:foodcrime@foodstandards.gsi.gov.uk\">foodcrime@foodstandards.gsi.gov.uk</a>, or on: <strong>0207 276 8787</strong>.</p>\r\n\r\n<p>Please do not reply to this email.</p>"
+      body: "<p>Thank you for reporting a food problem at: <strong>[webform_submission:values:where_lookup:value]</strong>.</p>\r\n\r\n<p>Your report has been forwarded to the <strong>FSA&#39;s National Food Crime Unit (NFCU)</strong>, who you may contact, if you wish to discuss your report further, at: <a href=\"mailto:foodcrime@foodstandards.gsi.gov.uk\">foodcrime@foodstandards.gsi.gov.uk</a>, or on: <strong>0207 276 8787</strong>.</p>\r\n\r\n<p>Please do not reply to this email.</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
