@@ -16,14 +16,8 @@ if ($environment == "local") {
 }
 
 $aliases['local'] = array(
-  'parent' => '@parent',
-  'site' => 'fsa',
-  'env' => 'vagrant',
-  'root' => '/vagrant/drupal/web',
-  'uri' => 'https://local.food.gov.uk',
-  'remote-host' => 'local.food.gov.uk',
-  'remote-user' => 'vagrant',
-  'ssh-options' => '-i ' . $key,
+  'root' => '~/PhpstormProjects/fsa/drupal/web',
+  'uri' => 'http://local.food.gov.uk',
 );
 
 $aliases['dev'] = array(
