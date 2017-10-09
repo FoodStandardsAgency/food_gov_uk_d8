@@ -10,7 +10,7 @@ id: food_fraud_crime
 title: 'Report food fraud crime'
 description: 'Food fraud crime report form'
 category: 'Food problem'
-elements: "page_about:\n  '#type': webform_wizard_page\n  '#title': About\n  details_of_problem:\n    '#type': textarea\n    '#title': 'What is the problem you want to report?'\n    '#description': 'Please tell us as much as possible about your concerns.'\n  people_businesses_involved:\n    '#type': textarea\n    '#title': 'Who are the people and businesses involved?'\n    '#description': 'Please provide&nbsp;as much detail as possible.'\n  where_lookup:\n    '#type': webform_googleplace\n    '#title': 'Where is it happening?'\n  when_and_how_often:\n    '#type': textarea\n    '#title': 'When and how often is it happening?'\n    '#description': 'Please include the last time it happened.'\n  why_involved_and_how:\n    '#type': textarea\n    '#title': 'Please tell us why the people or businesses are involved, and how this is happening'\n  explain_how_you_know:\n    '#type': textarea\n    '#title': 'Please explain how you know this information'\n  how_many_aware:\n    '#type': number\n    '#title': 'Approximately, how many other people are aware of this?'\n    '#default_value': '1'\n    '#min': '1'\n    '#step': '1'\n  reported_to_anyone_else:\n    '#type': radios\n    '#title': 'Has it been reported to anyone else?'\n    '#options':\n      'Yes': 'Yes'\n      'No': 'No'\n  header_contact_info:\n    '#type': webform_markup\n    '#markup': \"<h3>Please tell us your contact information</h3>\\r\\n\\r\\n<p>In order to fully assess the information provided, it may be necessary to contact you to seek clarification.</p>\"\n  name:\n    '#type': textfield\n    '#title': 'What is your name?'\n  email:\n    '#type': email\n    '#title': 'What is your email?'\n"
+elements: "page_about:\n  '#type': webform_wizard_page\n  '#title': About\n  details_of_problem:\n    '#type': textarea\n    '#title': 'What is the problem you want to report?'\n    '#description': 'Please tell us as much as possible about your concerns.'\n  people_businesses_involved:\n    '#type': textarea\n    '#title': 'Who are the people and businesses involved?'\n    '#description': 'Please provide&nbsp;as much detail as possible.'\n  where_lookup:\n    '#type': webform_googleplace\n    '#title': 'Where is it happening?'\n  when_and_how_often:\n    '#type': textarea\n    '#title': 'When and how often is it happening?'\n    '#description': 'Please include the last time it happened.'\n  why_involved_and_how:\n    '#type': textarea\n    '#title': 'Please tell us why the people or businesses are involved, and how this is happening'\n  explain_how_you_know:\n    '#type': textarea\n    '#title': 'Please explain how you know this information'\n  how_many_aware:\n    '#type': number\n    '#title': 'Approximately, how many other people are aware of this?'\n    '#default_value': '1'\n    '#min': '1'\n    '#step': '1'\n  reported_to_anyone_else:\n    '#type': radios\n    '#title': 'Has it been reported to anyone else?'\n    '#options':\n      'Yes': 'Yes'\n      'No': 'No'\n      dont-know: 'Don''t know'\n  header_contact_info:\n    '#type': webform_markup\n    '#markup': \"<h3>Please tell us your contact information</h3>\\r\\n\\r\\n<p>In order to fully assess the information provided, it may be necessary to contact you to seek clarification.</p>\"\n  name:\n    '#type': textfield\n    '#title': 'What is your name?'\n  email:\n    '#type': email\n    '#title': 'What is your email?'\n"
 css: ''
 javascript: ''
 settings:
@@ -60,7 +60,7 @@ settings:
   draft_loaded_message: ''
   confirmation_type: inline
   confirmation_title: ''
-  confirmation_message: "<h2>Thank you for your report!</h2>\r\n\r\n<p>It has been sent to the FSA Food Crime Unit.</p>\r\n\r\n<p>Your reference number is<br />\r\n<strong>[webform_submission:sid]</strong></p>"
+  confirmation_message: "<h2>Report complete</h2>\r\n\r\n<p>Thank you for your report, which will be forwarded to the <strong>FSA&#39;s National Food Crime Unit (NFCU)</strong>.</p>\r\nIf you need to contact the Food Crime Unit about your report, please email: <a href=\"mailto:foodcrime@foodstandards.gsi.gov.uk\">foodcrime@foodstandards.gsi.gov.uk</a>, or call: <strong>0207 276 8787</strong>.\r\n\r\n<p>A confirmation email has been sent to: <a href=\"mailto:[webform_submission:values:email:value]\">[webform_submission:values:email:value]</a>.</p>"
   confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
@@ -131,8 +131,8 @@ handlers:
       from_mail: default
       from_options: {  }
       from_name: default
-      subject: default
-      body: default
+      subject: 'Thank you for reporting a food problem'
+      body: "<p>Thank you for reporting a food problem at:</p>\r\n\r\n<p><strong>[webform_submission:values:where_lookup:value]</strong></p>\r\n\r\n<p>Your report has been forwarded to the <strong>FSA&#39;s National Food Crime Unit (NFCU)</strong>, who you may contact, if you wish to discuss your report further, at: <a href=\"mailto:foodcrime@foodstandards.gsi.gov.uk\">foodcrime@foodstandards.gsi.gov.uk</a>, or on: <strong>0207 276 8787</strong>.</p>\r\n\r\n<p>Please do not reply to this email.</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
