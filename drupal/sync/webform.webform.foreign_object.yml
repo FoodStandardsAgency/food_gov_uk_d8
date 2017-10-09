@@ -60,7 +60,7 @@ settings:
   draft_loaded_message: ''
   confirmation_type: inline
   confirmation_title: ''
-  confirmation_message: "<h2>Thank you for your report!</h2>\r\n\r\n<p>Your reference number is<br />\r\n<strong>[webform_submission:sid]</strong></p>\r\n\r\n<p>We&rsquo;ve sent you a copy of your report via email.</p>\r\n\r\n<h4>What happens next?</h4>\r\n\r\n<p>We&rsquo;ve sent your report about <strong>[webform_submission:values:where_lookup]</strong>&nbsp;to the FSA Authority <strong>[webform_submission:values:fsa_establishment_la_name]</strong>.</p>\r\n\r\n<p>If you need to contact <strong>[webform_submission:values:fsa_establishment_la_name]</strong> about your report, you can do so at <strong>[webform_submission:values:fsa_establishment_la_address]</strong>.</p>"
+  confirmation_message: "<h2>Report complete</h2>\r\n\r\n<p>Thank you for your report, which will be forwarded to: <strong>[webform_submission:values:fsa_establishment_la_name:value] Council</strong>.</p>\r\n\r\n<p>If you need to contact [webform_submission:values:fsa_establishment_la_name:value] Council about your report, you can do so at: <a href=\"mailto:[webform_submission:values:fsa_establishment_la_email:value]\">[webform_submission:values:fsa_establishment_la_email:value]</a></p>\r\n\r\n<p>A confirmation email has been sent to: <a href=\"mailto:[webform_submission:values:email:value]\">[webform_submission:values:email:value]</a>.</p>"
   confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true

@@ -10,7 +10,7 @@ id: food_poisoning
 title: 'Report suspected food poisoning'
 description: 'Food poisoning report form'
 category: 'Food problem'
-elements: "page_description:\n  '#type': webform_wizard_page\n  '#title': Description\n  '#prev_button_label': Previous\n  '#next_button_label': Continue\n  details_of_consumed_food:\n    '#type': textarea\n    '#title': 'Please tell us what you ate before getting sick'\n    '#description': 'Try to give us as much details as possible about the types of foods you’ve eaten over the last couple of days.'\n  consumed_food_instruction:\n    '#type': processed_text\n    '#text': \"<div aria-controls=\\\"collapsible-consumed-food-instruction\\\" aria-expanded=\\\"false\\\" class=\\\"toggle-button js-toggle-button\\\">\\n<div class=\\\"toggle-button__item\\\">Are you certain that your food poisoning is a consequence of your last meal?</div>\\n\\n<div class=\\\"toggle-button__item toggle-button__item--icon svg\\\"><svg><use xlink:href=\\\"/themes/custom/fsa/dist/sprite.svg#toggle-icon\\\" xmlns:xlink=\\\"http://www.w3.org/1999/xlink\\\"></use></svg></div>\\n</div>\\n\\n<div aria-hidden=\\\"true\\\" class=\\\"toggle-content js-toggle-content\\\" id=\\\"collapsible-consumed-food-instruction\\\">\\n<p>It is easy to assume that you have got food poisoning as a result of the last meal you ate, for example, burger and chips from your local takeaway.</p>\\n\\n<p>Another assumption is if you have become ill the same night you went out to a restaurant which means that the infection must have been picked up at this same restaurant.</p>\\n\\n<p>But, the symptoms of food poisoning can take a day or two (or even longer) to appear so the source of your illness may be from several days ago. This means it has developed from something you have eaten at home rather than from dining out.</p>\\n\\n<p>In some cases the symptoms of food poisoning may not appear for up to a week following the initial exposure.</p>\\n\\n<p>Plus there are several illnesses which cause symptoms that are very similar to those of food poisoning. Some viral infections cause nausea, vomiting and diarrhoea - which are also symptoms of food poisoning so it is easy to confuse the two.</p>\\n\\n<p>So, you need to consider these before you report any case of food poisoning.</p>\\n</div>\\n\"\n    '#format': full_html\n  where_lookup:\n    '#type': webform_googleplace\n    '#title': 'Where did this happen?'\n    '#description': 'If you believe you got a food poisoning from a restaurant, caf&eacute;, take-away or other food business, please tell us the name and address of the business.'\n  fsa_establishment_postal_code:\n    '#type': hidden\n    '#title': 'Postal code'\n  fsa_establishment_la:\n    '#type': hidden\n    '#title': 'LA ID'\n  fsa_establishment_la_name:\n    '#type': hidden\n    '#title': 'Local authority'\n  fsa_establishment_la_email:\n    '#type': hidden\n    '#title': 'Local authority email'\n  people_affected:\n    '#type': number\n    '#title': 'How many people were affected'\n    '#default_value': '1'\n    '#min': '0'\n    '#step': '1'\n  people_affected_others_unknown:\n    '#type': checkbox\n    '#title': 'I don''t know how many people were affected in addition to myself'\npage_symptoms:\n  '#type': webform_wizard_page\n  '#title': Symptoms\n  '#prev_button_label': Previous\n  '#next_button_label': Continue\n  '#description': 'What kind of symptoms did you have?'\n  symptoms_checkboxes:\n    '#type': checkboxes\n    '#title': 'What kind of symptoms are you having/did you have?'\n    '#description': '<p>Mark all that apply</p>'\n    '#options':\n      'Feeling sick': 'Feeling sick'\n      Vomiting: Vomiting\n      Diarrhoea: Diarrhoea\n      'Stomach cramps': 'Stomach cramps'\n      'Lack of energy and weakness': 'Lack of energy and weakness'\n      'Loss of appetite': 'Loss of appetite'\n      Fever: Fever\n      Chills: Chills\n    '#options_display': two_columns\n  symptoms_details:\n    '#type': textarea\n    '#title': 'Here you can also describe the symptoms with your own words.'\n  illness_start:\n    '#type': date\n    '#title': 'When did your illness start?'\n    '#max': today\n    '#datepicker': true\n    '#date_date_format': 'd F Y'\n  illness_end:\n    '#type': date\n    '#title': 'When did your illness end?'\n    '#max': today\n    '#datepicker': true\n    '#date_date_format': 'd F Y'\n  has_visited_gp:\n    '#type': radios\n    '#title': 'Have you visited a GP?'\n    '#options':\n      'Yes': 'Yes'\n      'No': 'No'\npage_contact_Details:\n  '#type': webform_wizard_page\n  '#title': 'Contact details'\n  '#prev_button_label': Previous\n  '#next_button_label': Continue\n  header_contact_info:\n    '#type': webform_markup\n    '#markup': \"<h3>Please tell us your contact information</h3>\\n\\n<p>Your contact information will only be used by the local authority to contact you about your issue.&nbsp;</p>\\n\"\n  name:\n    '#type': textfield\n    '#title': 'What is your name?'\n    '#required': true\n  email:\n    '#type': email\n    '#title': 'What is your email?'\n    '#required': true\n  telephone:\n    '#type': tel\n    '#title': 'What is your phone number?'\n    '#international': true\n    '#international_initial_country': GB\n"
+elements: "page_business:\n  '#type': webform_wizard_page\n  '#title': Business\n  where_lookup:\n    '#type': webform_googleplace\n    '#title': 'Where did the suspected food poisoning happen?'\n  not_found_details:\n    '#type': textarea\n    '#title': 'If not found above, please give details'\n  fsa_establishment_la_name:\n    '#type': hidden\n    '#title': 'Local authority name'\n  fsa_establishment_postal_code:\n    '#type': hidden\n    '#title': 'Postal code'\n  fsa_establishment_la_email:\n    '#type': hidden\n    '#title': 'Local authority email'\npage_description:\n  '#type': webform_wizard_page\n  '#title': Description\n  '#prev_button_label': Previous\n  '#next_button_label': Continue\n  when_did_you_eat:\n    '#type': date\n    '#title': 'When did you eat?'\n  what_did_you_eat:\n    '#type': textarea\n    '#title': 'What did you eat?'\n  people_affected:\n    '#type': number\n    '#title': 'How many people were affected'\n    '#default_value': '1'\n    '#min': '0'\n    '#step': '1'\n  people_affected_others_unknown:\n    '#type': checkbox\n    '#title': 'I don''t know how many people were affected in addition to myself'\n  symptoms_checkboxes:\n    '#type': checkboxes\n    '#title': 'What kind of symptoms are you having/did you have?'\n    '#description': '<p>Mark all that apply</p>'\n    '#options':\n      'Feeling sick': 'Feeling sick'\n      Vomiting: Vomiting\n      Diarrhoea: Diarrhoea\n      'Stomach cramps': 'Stomach cramps'\n      'Lack of energy and weakness': 'Lack of energy and weakness'\n      'Loss of appetite': 'Loss of appetite'\n      Fever: Fever\n      Chills: Chills\n    '#options_display': two_columns\n  illness_start:\n    '#type': date\n    '#title': 'When did your illness start?'\n    '#max': today\n    '#datepicker': true\n    '#date_date_format': 'd F Y'\n  illness_end:\n    '#type': date\n    '#title': 'When did your illness end?'\n    '#max': today\n    '#datepicker': true\n    '#date_date_format': 'd F Y'\n  has_visited_gp:\n    '#type': radios\n    '#title': 'Have you visited a GP?'\n    '#options':\n      'Yes': 'Yes'\n      'No': 'No'\npage_contact_details:\n  '#type': webform_wizard_page\n  '#title': 'Contact details'\n  header_contact_info:\n    '#type': webform_markup\n    '#markup': \"<h3>Please tell us your contact information</h3>\\r\\n\\r\\n<p>Your contact information will only be used by the local authority to contact you about your issue.</p>\"\n  name:\n    '#type': textfield\n    '#title': 'What is your name?'\n    '#required': true\n  email:\n    '#type': email\n    '#title': 'What is your email?'\n    '#required': true\n  telephone:\n    '#type': tel\n    '#title': 'What is your phone number?'\n"
 css: ''
 javascript: ''
 settings:
@@ -51,8 +51,7 @@ settings:
   preview_title: ''
   preview_message: ''
   preview_attributes: {  }
-  preview_excluded_elements:
-    fsa_establishment_la: fsa_establishment_la
+  preview_excluded_elements: {  }
   preview_exclude_empty: false
   draft: none
   draft_multiple: false
@@ -61,7 +60,7 @@ settings:
   draft_loaded_message: ''
   confirmation_type: inline
   confirmation_title: ''
-  confirmation_message: "<h2>Thank you for your report!</h2>\r\n\r\n<p>Your reference number is<br />\r\n<strong>[webform_submission:sid]</strong></p>\r\n\r\n<p>We&rsquo;ve sent you a copy of your report via email.</p>\r\n\r\n<h4>What happens next?</h4>\r\n\r\n<p>We&rsquo;ve sent your report about <strong>[webform_submission:values:where_lookup]</strong>&nbsp;to the FSA Authority <strong>[webform_submission:values:fsa_establishment_la_name]</strong>.<br />\r\nThey will contact you to ask for more information.</p>"
+  confirmation_message: "<h2>Report complete</h2>\r\n\r\n<p>Thank you for your report, which will be forwarded to: <strong>[webform_submission:values:fsa_establishment_la_name:value] Council</strong>.</p>\r\n\r\n<p>If you need to contact [webform_submission:values:fsa_establishment_la_name:value] Council about your report, you can do so at: <a href=\"mailto:[webform_submission:values:fsa_establishment_la_email:value]\">[webform_submission:values:fsa_establishment_la_email:value]</a></p>\r\n\r\n<p>A confirmation email has been sent to: <a href=\"mailto:[webform_submission:values:email:value]\">[webform_submission:values:email:value]</a>.</p>"
   confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
@@ -132,10 +131,43 @@ handlers:
       from_mail: default
       from_options: {  }
       from_name: default
-      subject: default
-      body: default
+      subject: 'Thank you for reporting a food problem'
+      body: "<p>Thank you for reporting a food problem at:</p>\r\n\r\n<p><strong>[webform_submission:values:where_lookup:value]</strong></p>\r\n\r\n<p>Your report has been forwarded to <strong>[webform_submission:values:fsa_establishment_la_name:value] Council</strong>, who you may contact, if you wish to discuss your report further, at: [webform_submission:values:fsa_establishment_la_email:value].</p>\r\n\r\n<p>Please do not reply to this email.</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      html: true
+      attachments: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+  copy_to_la:
+    id: email
+    label: 'Copy to local authority'
+    handler_id: copy_to_la
+    status: true
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:email:raw]'
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      subject: 'This is a food problem report from a consumer via food.gov.uk'
+      body: "<p>[webform_submission:values]</p>\r\n\r\n<p>Please do not reply to this email.</p>\r\n\r\n<p><strong>Protect privacy:</strong> make sure you keep the information in this email appropriately secure and only use it for the purpose of investigating the complaint against the food business. If this issue is for another local authority to consider and take appropriate action, please securely share the information in this email with that local authority. Ensure that the personal details of the person who made the complaint are not revealed to the food business.</p>"
       excluded_elements:
-        fsa_establishment_la: fsa_establishment_la
+        fsa_establishment_la_name: fsa_establishment_la_name
+        fsa_establishment_postal_code: fsa_establishment_postal_code
+        fsa_establishment_la_email: fsa_establishment_la_email
+        name: name
+        email: email
+        telephone: telephone
       ignore_access: false
       exclude_empty: true
       html: true
