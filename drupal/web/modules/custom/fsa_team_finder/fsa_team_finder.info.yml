@@ -1,0 +1,7 @@
+name: FSA team finder
+description: Finds a food safety team for a given postcode.
+type: module
+core: 8.x
+package: FSA
+dependencies:
+  - fsa_ratings
