@@ -4,13 +4,13 @@ namespace Drupal\fsa_team_finder\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\Component\Serialization\Json;
 use GuzzleHttp\Exception\RequestException;
 
 /**
  * Class TeamFinder.
- * @see https://mapit.mysociety.org/docs/
  */
 class TeamFinder extends FormBase {
 
@@ -25,8 +25,6 @@ class TeamFinder extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-
-
     $form['#prefix'] = '<div id="fsa-team-finder-wrapper">';
     $form['#suffix'] = '</div>';
     $form['progress'] = array(
@@ -58,6 +56,16 @@ class TeamFinder extends FormBase {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state) {}
+
+  /**
+   * {@inheritdoc}
+   */
+  public function submitForm(array &$form, FormStateInterface $form_state) {}
+
+  /**
    * Rebuilds form with query result.
    *
    * @param array $form
@@ -66,6 +74,13 @@ class TeamFinder extends FormBase {
    * @return array $form
    */
   public function rebuildForm(array $form, FormStateInterface $form_state) {
+
+    // get local authority identifier
+    $la = $this->getLocalAuthority($form_state->getValue('query'));
+    // get local authority id from gss??? add to FHRS API???
+    $id = 1760; // temporary fix
+
+    // reconstruct form
     $form['progress']['#markup'] = t('Step 2 of 2');
     unset($form['query']);
     unset($form['actions']);
@@ -75,13 +90,12 @@ class TeamFinder extends FormBase {
         '@query' => $form_state->getValue('query'),
       )),
     );
-    $la = $this->getLocalAuthority($form_state->getValue('query'));
-    $email = '';
-    $website = '';
     $form['details'] = array(
       '#type' => 'item',
-      '#markup' => t('<p><strong>@name</strong><br />Email address: ' . $email . '<br />Website: ' . $website . '</p>', array(
+      '#markup' => t('<p><strong>@name</strong><br />Email address: @mail<br />Website: @site</p>', array(
         '@name' => $la['name'],
+        '@mail' => $this->getLocalAuthorityLink($id, 'field_email'),
+        '@site' => $this->getLocalAuthorityLink($id, 'field_url'),
       )),
     );
     $form['back'] = array(
@@ -94,6 +108,7 @@ class TeamFinder extends FormBase {
 
   /**
    * Provides local authority ONS code and name.
+   * @see https://mapit.mysociety.org/docs/
    *
    * @param string
    *
@@ -108,7 +123,7 @@ class TeamFinder extends FormBase {
     $url = $base . '/postcode/' . $postcode . '?api_key=' . $key;
 
     // call mapit
-    /*$client = \Drupal::httpClient();
+    $client = \Drupal::httpClient();
     $client->request('GET', $url);
     try {
       $response = $client->get($url);
@@ -119,38 +134,26 @@ class TeamFinder extends FormBase {
     }
     $council = $data['shortcuts']['council'];
     return array(
-      'ons' => $data['areas'][$council]['codes']['ons'],
+      'gss' => $data['areas'][$council]['codes']['gss'],
       'name' => $data['areas'][$council]['name'],
-    );*/
-
-    // save on mapit api calls
-    return array(
-      'ons' => '00BG',
-      'name' => 'Tower Hamlets Borough Council',
     );
   }
 
   /**
-   * Maps local authority ONS code to identifier.
+   * Provides local authority mail or site link.
    *
-   * @param string
+   * @param integer
    *
-   * @return integer
+   * @return string
    */
-  public function MapOnsToId($ons) {
-    // create a mappings table in an install file
-    // query the id
-    return $id;
+  public function getLocalAuthorityLink($id, $field) {
+    $value = \Drupal::entityTypeManager()
+      ->getStorage('fsa_authority')
+      ->load($id)
+      ->get($field)
+      ->getString();
+    $scheme = $field == 'field_email' ? 'mailto:' : NULL;
+    return Link::fromTextAndUrl($value, Url::fromUri($scheme . $value, array()))
+      ->toString();
   }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function validateForm(array &$form, FormStateInterface $form_state) {}
-
-  /**
-   * {@inheritdoc}
-   */
-  public function submitForm(array &$form, FormStateInterface $form_state) {}
-
 }
