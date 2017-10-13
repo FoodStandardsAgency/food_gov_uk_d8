@@ -25,8 +25,6 @@ class TeamFinder extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $form['#prefix'] = '<div id="fsa-team-finder-wrapper">';
-    $form['#suffix'] = '</div>';
     $form['progress'] = array(
       '#type' => 'item',
       '#markup' => t('Step 1 of 2'),
@@ -45,66 +43,74 @@ class TeamFinder extends FormBase {
       'submit' => array(
         '#type' => 'submit',
         '#value' => $this->t('Submit'),
-        '#ajax' => array(
-          'callback' => '::rebuildForm',
-          'event' => 'click',
-          'wrapper' => 'fsa-team-finder-wrapper',
-        ),
       ),
     );
+    if ($form_state->getValue('query')) {
+
+      // get local authority identifier
+      $la = $this->getLocalAuthority($form_state->getValue('query'));
+
+      // for testing - spoof an entity identifier
+      $id = 1760;
+
+      // reconstruct form
+      $form['progress']['#markup'] = t('Step 2 of 2');
+      unset($form['query']);
+      unset($form['actions']);
+      $form['confirmation'] = array(
+        '#type' => 'item',
+        '#markup' => $this->t('<h2>Food safety team details</h2><p>Details of the food safety team covering <strong>@query</strong> are shown below. Please contact them to report the food problem.</p>', array(
+          '@query' => $form_state->getValue('query'),
+        )),
+      );
+      $form['details'] = array(
+        '#type' => 'item',
+        '#markup' => t('<p><strong>@name</strong><br />Email address: @mail<br />Website: @site</p>', array(
+          '@name' => $la['name'],
+          '@mail' => $this->getLocalAuthorityLink($id, 'field_email'),
+          '@site' => $this->getLocalAuthorityLink($id, 'field_url'),
+        )),
+      );
+      $form['back'] = array(
+        '#title' => $this->t('Back to form'),
+        '#type' => 'link',
+        '#url' => Url::fromRoute('fsa_team_finder.render')
+      );
+    }
     return $form;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {}
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+
+    // test for valid uk postcode
+    if (!$this->testValidUkPostcode($form_state->getValue('query'))) {
+      $form_state->setErrorByName('query', $this->t('Invalid postcode.'));
+    }
+  }
 
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {}
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    $form_state->setRebuild();
+  }
 
   /**
-   * Rebuilds form with query result.
+   * Test for valid UK postcode.
+   * @see https://stackoverflow.com/questions/164979/uk-postcode-regex-comprehensive/14257846#14257846
    *
-   * @param array $form
-   * @param $form_state
+   * @param string
    *
-   * @return array $form
+   * @return boolean
    */
-  public function rebuildForm(array $form, FormStateInterface $form_state) {
-
-    // get local authority identifier
-    $la = $this->getLocalAuthority($form_state->getValue('query'));
-    // get local authority id from gss??? add to FHRS API???
-    $id = 1760; // temporary fix
-
-    // reconstruct form
-    $form['progress']['#markup'] = t('Step 2 of 2');
-    unset($form['query']);
-    unset($form['actions']);
-    $form['confirmation'] = array(
-      '#type' => 'item',
-      '#markup' => $this->t('<h2>Food safety team details</h2><p>Details of the food safety team covering <strong>@query</strong> are shown below. Please contact them to report the food problem.</p>', array(
-        '@query' => $form_state->getValue('query'),
-      )),
-    );
-    $form['details'] = array(
-      '#type' => 'item',
-      '#markup' => t('<p><strong>@name</strong><br />Email address: @mail<br />Website: @site</p>', array(
-        '@name' => $la['name'],
-        '@mail' => $this->getLocalAuthorityLink($id, 'field_email'),
-        '@site' => $this->getLocalAuthorityLink($id, 'field_url'),
-      )),
-    );
-    $form['back'] = array(
-      '#title' => $this->t('Back to form'),
-      '#type' => 'link',
-      '#url' => Url::fromRoute('fsa_team_finder.render')
-    );
-    return $form;
-  }
+   public function testValidUkPostcode($query) {
+     $regex = '/^([g][i][r][0][a][a])$|^((([a-pr-uwyz]{1}([0]|[1-9]\d?))|([a-pr-uwyz]{1}[a-hk-y]{1}([0]|[1-9]\d?))|([a-pr-uwyz]{1}[1-9][a-hjkps-uw]{1})|([a-pr-uwyz]{1}[a-hk-y]{1}[1-9][a-z]{1}))(\d[abd-hjlnp-uw-z]{2})?)$/i';
+     $postcode = str_replace(' ', '', $query);
+     return preg_match($regex, $postcode);
+   }
 
   /**
    * Provides local authority ONS code and name.
@@ -137,6 +143,12 @@ class TeamFinder extends FormBase {
       'gss' => $data['areas'][$council]['codes']['gss'],
       'name' => $data['areas'][$council]['name'],
     );
+
+    // for testing - to save on mapit api calls
+    /*return array(
+      'gss' => 'Aberdeen City Council',
+      'name' => 'S12000033',
+    );*/
   }
 
   /**
