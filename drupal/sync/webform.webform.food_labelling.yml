@@ -1,4 +1,4 @@
-uuid: a93bd1d7-91f2-4f72-bd14-d83247b57122
+uuid: 647ed291-3c26-49e6-8511-78fcea5e0445
 langcode: en
 status: open
 dependencies: {  }
@@ -6,18 +6,18 @@ open: null
 close: null
 uid: 1
 template: false
-id: food_safety_team
-title: 'Find your food safety team'
-description: 'Food safety team form'
-category: ''
-elements: "page_find:\n  '#type': webform_wizard_page\n  '#title': Find\n"
+id: food_labelling
+title: 'Report a food labelling issue'
+description: ''
+category: 'Food problem'
+elements: "page_description:\n  '#type': webform_wizard_page\n  '#title': Description\n  what_is_your_concern:\n    '#type': textarea\n    '#title': 'What is your concern about the food labelling?'\n  link_to_tso:\n    '#type': webform_markup\n    '#markup': '<a href=\"https://www.gov.uk/find-local-trading-standards-office\" target=\"_blank\">Find your local Trading Standards office</a>'\n"
 css: ''
 javascript: ''
 settings:
   ajax: false
   page: true
-  page_submit_path: help/find-food-safety-team
-  page_confirm_path: help/find-food-safety-team/details
+  page_submit_path: help/report-food-problem/labelling
+  page_confirm_path: help/report-food-problem/labelling/summary
   form_submit_once: true
   form_exception_message: ''
   form_open_message: ''
@@ -46,8 +46,8 @@ settings:
   wizard_start_label: ''
   wizard_complete: true
   wizard_complete_label: ''
-  preview: 0
-  preview_label: ''
+  preview: 2
+  preview_label: Summary
   preview_title: ''
   preview_message: ''
   preview_attributes: {  }
@@ -60,7 +60,7 @@ settings:
   draft_loaded_message: ''
   confirmation_type: inline
   confirmation_title: ''
-  confirmation_message: ''
+  confirmation_message: "<h2>Report complete</h2>\r\n\r\n<p>Thank you for your report.</p>"
   confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
