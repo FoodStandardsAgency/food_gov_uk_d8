@@ -47,35 +47,38 @@ class TeamFinder extends FormBase {
     );
     if ($form_state->getValue('query')) {
 
-      // get local authority identifier
+      // get local authority details
       $la = $this->getLocalAuthority($form_state->getValue('query'));
+      if (!empty($la)) {
 
-      // for testing - spoof an entity identifier
-      $id = 1760;
+        // reconstruct form
+        $form['progress']['#markup'] = t('Step 2 of 2');
+        unset($form['query']);
+        unset($form['actions']);
+        $form['confirmation'] = array(
+          '#type' => 'item',
+          '#markup' => $this->t('<h2>Food safety team details</h2><p>Details of the food safety team covering <strong>@query</strong> are shown below. Please contact them to report the food problem.</p>', array(
+            '@query' => $form_state->getValue('query'),
+          )),
+        );
+        $form['details'] = array(
+          '#type' => 'item',
+          '#markup' => t('<p><strong>@name</strong><br />Email address: @mail<br />Website: @site</p>', array(
+            '@name' => $la['name'],
+            '@mail' => '@todo', // $this->getLocalAuthorityLink(1760, 'field_email'),
+            '@site' => '@todo', // $this->getLocalAuthorityLink(1760, 'field_url'),
+          )),
+        );
+        $form['back'] = array(
+          '#title' => $this->t('Back to form'),
+          '#type' => 'link',
+          '#url' => Url::fromRoute('fsa_team_finder.render')
+        );
+      } else {
 
-      // reconstruct form
-      $form['progress']['#markup'] = t('Step 2 of 2');
-      unset($form['query']);
-      unset($form['actions']);
-      $form['confirmation'] = array(
-        '#type' => 'item',
-        '#markup' => $this->t('<h2>Food safety team details</h2><p>Details of the food safety team covering <strong>@query</strong> are shown below. Please contact them to report the food problem.</p>', array(
-          '@query' => $form_state->getValue('query'),
-        )),
-      );
-      $form['details'] = array(
-        '#type' => 'item',
-        '#markup' => t('<p><strong>@name</strong><br />Email address: @mail<br />Website: @site</p>', array(
-          '@name' => $la['name'],
-          '@mail' => $this->getLocalAuthorityLink($id, 'field_email'),
-          '@site' => $this->getLocalAuthorityLink($id, 'field_url'),
-        )),
-      );
-      $form['back'] = array(
-        '#title' => $this->t('Back to form'),
-        '#type' => 'link',
-        '#url' => Url::fromRoute('fsa_team_finder.render')
-      );
+        // no mapit response warning
+        drupal_set_message(t('No food safety team found.'), 'error');
+      }
     }
     return $form;
   }
@@ -85,7 +88,7 @@ class TeamFinder extends FormBase {
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
 
-    // test for valid uk postcode
+    // check for valid uk postcode
     if (!$this->testValidUkPostcode($form_state->getValue('query'))) {
       $form_state->setErrorByName('query', $this->t('Invalid postcode.'));
     }
@@ -130,25 +133,32 @@ class TeamFinder extends FormBase {
 
     // call mapit
     $client = \Drupal::httpClient();
-    $client->request('GET', $url);
+    $client->request('GET', $url, array('http_errors' => FALSE));
     try {
       $response = $client->get($url);
       $data = Json::decode($response->getBody()->getContents());
     }
     catch (RequestException $e) {
-      watchdog_exception('fsa_team_finder', $e->getMessage());
+      watchdog_exception('fsa_team_finder', $e);
+      return array();
     }
-    $council = $data['shortcuts']['council'];
+    if (isset($data['shortcuts']['council'])) {
+
+      // negotiate two-tier local government
+      if (!is_array($data['shortcuts']['council'])) {
+        $council = $data['shortcuts']['council'];
+      } elseif (isset($data['shortcuts']['council']['county'])) {
+        $council = $data['shortcuts']['council']['county'];
+      } else {
+        return array();
+      }
+    } else {
+      return array();
+    }
     return array(
       'gss' => $data['areas'][$council]['codes']['gss'],
       'name' => $data['areas'][$council]['name'],
     );
-
-    // for testing - to save on mapit api calls
-    /*return array(
-      'gss' => 'Aberdeen City Council',
-      'name' => 'S12000033',
-    );*/
   }
 
   /**
