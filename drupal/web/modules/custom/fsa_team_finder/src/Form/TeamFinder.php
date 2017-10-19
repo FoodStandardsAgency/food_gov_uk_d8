@@ -25,6 +25,8 @@ class TeamFinder extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+
+    // construct form
     $form['progress'] = array(
       '#type' => 'item',
       '#markup' => t('Step 1 of 2'),
@@ -47,36 +49,58 @@ class TeamFinder extends FormBase {
     );
     if ($form_state->getValue('query')) {
 
-      // get local authority details
+      // get mapit local authority details
       $la = $this->getLocalAuthority($form_state->getValue('query'));
       if (!empty($la)) {
 
-        // reconstruct form
-        $form['progress']['#markup'] = t('Step 2 of 2');
-        unset($form['query']);
-        unset($form['actions']);
-        $form['confirmation'] = array(
-          '#type' => 'item',
-          '#markup' => $this->t('<h2>Food safety team details</h2><p>Details of the food safety team covering <strong>@query</strong> are shown below. Please contact them to report the food problem.</p>', array(
-            '@query' => $form_state->getValue('query'),
-          )),
-        );
-        $form['details'] = array(
-          '#type' => 'item',
-          '#markup' => t('<p><strong>@name</strong><br />Email address: @mail<br />Website: @site</p>', array(
-            '@name' => $la['name'],
-            '@mail' => '@todo', // $this->getLocalAuthorityLink(1760, 'field_email'),
-            '@site' => '@todo', // $this->getLocalAuthorityLink(1760, 'field_url'),
-          )),
-        );
-        $form['back'] = array(
-          '#title' => $this->t('Back to form'),
-          '#type' => 'link',
-          '#url' => Url::fromRoute('fsa_team_finder.render')
-        );
+        // entity query fsa local authority
+        $fsa_authority = \Drupal::entityTypeManager()
+          ->getStorage('fsa_authority')
+          ->loadByProperties(array(
+            'field_mapit_area' => $la['mapit_area'],
+          ));
+
+        // check result not null
+        if ($fsa_authority = reset($fsa_authority)) {
+
+          // generate links
+          $email = $fsa_authority->get('field_email')->getString();
+          $email_alt = $fsa_authority->get('field_email_alt')->getString();
+          $overridden = $fsa_authority->get('field_email_overridden')->getString();
+          $email_value = $overridden ? $email_alt : $email;
+          $email_link = Link::fromTextAndUrl($email_value, Url::fromUri('mailto:' . $email_value, array()))
+            ->toString();
+          $site_value = $fsa_authority->get('field_url')->getString();
+          $site_link = Link::fromTextAndUrl($site_value, Url::fromUri($site_value, array()))
+            ->toString();
+
+          // reconstruct form
+          $form['progress']['#markup'] = t('Step 2 of 2');
+          unset($form['query']);
+          unset($form['actions']);
+          $form['confirmation'] = array(
+            '#type' => 'item',
+            '#markup' => $this->t('<h2>Food safety team details</h2><p>Details of the food safety team covering <strong>@query</strong> are shown below. Please contact them to report the food problem.</p>', array(
+              '@query' => $form_state->getValue('query'),
+            )),
+          );
+          $form['details'] = array(
+            '#type' => 'item',
+            '#markup' => t('<p><strong>@name</strong><br />Email address: @mail<br />Website: @site</p>', array(
+              '@name' => $la['name'],
+              '@mail' => $email_link,
+              '@site' => $site_link,
+            )),
+          );
+          $form['back'] = array(
+            '#title' => $this->t('Back to form'),
+            '#type' => 'link',
+            '#url' => Url::fromRoute('fsa_team_finder.render')
+          );
+        }
       } else {
 
-        // no mapit response warning
+        // set (no mapit response) warning
         drupal_set_message(t('No food safety team found.'), 'error');
       }
     }
@@ -156,26 +180,8 @@ class TeamFinder extends FormBase {
       return array();
     }
     return array(
-      'gss' => $data['areas'][$council]['codes']['gss'],
       'name' => $data['areas'][$council]['name'],
+      'mapit_area' => $council,
     );
-  }
-
-  /**
-   * Provides local authority mail or site link.
-   *
-   * @param integer
-   *
-   * @return string
-   */
-  public function getLocalAuthorityLink($id, $field) {
-    $value = \Drupal::entityTypeManager()
-      ->getStorage('fsa_authority')
-      ->load($id)
-      ->get($field)
-      ->getString();
-    $scheme = $field == 'field_email' ? 'mailto:' : NULL;
-    return Link::fromTextAndUrl($value, Url::fromUri($scheme . $value, array()))
-      ->toString();
   }
 }
