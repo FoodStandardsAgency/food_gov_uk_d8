@@ -1,0 +1,18 @@
+uuid: b2588a02-336d-4737-a1ea-285d9e858749
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_ratings
+id: fsa_authority.field_email_overridden
+field_name: field_email_overridden
+entity_type: fsa_authority
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

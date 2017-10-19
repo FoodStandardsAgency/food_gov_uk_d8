@@ -1,0 +1,20 @@
+uuid: 1566d66a-e01f-47da-bcce-a24e5780d825
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_ratings
+id: fsa_authority.field_mapit_area
+field_name: field_mapit_area
+entity_type: fsa_authority
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -4,6 +4,9 @@ status: true
 dependencies:
   config:
     - field.field.fsa_authority.fsa_authority.field_email
+    - field.field.fsa_authority.fsa_authority.field_email_alt
+    - field.field.fsa_authority.fsa_authority.field_email_overridden
+    - field.field.fsa_authority.fsa_authority.field_mapit_area
     - field.field.fsa_authority.fsa_authority.field_regionname
     - field.field.fsa_authority.fsa_authority.field_url
   module:
@@ -17,15 +20,37 @@ bundle: fsa_authority
 mode: default
 content:
   field_email:
-    weight: 7
+    weight: 2
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: email_default
     region: content
+  field_email_alt:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+    region: content
+  field_email_overridden:
+    weight: 4
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_mapit_area:
+    weight: 5
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
   field_regionname:
-    weight: 8
+    weight: 6
     settings:
       match_operator: CONTAINS
       size: 60
@@ -34,37 +59,22 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_url:
-    weight: 6
+    weight: 1
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
     type: link_default
     region: content
-  langcode:
-    type: language_select
-    weight: 2
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   name:
     type: string_textfield
-    weight: -4
+    weight: 0
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  translation:
-    weight: 10
-    region: content
-  user_id:
-    type: entity_reference_autocomplete
-    weight: 5
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    region: content
-    third_party_settings: {  }
-hidden: {  }
+hidden:
+  langcode: true
+  translation: true
+  user_id: true

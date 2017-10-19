@@ -4,6 +4,9 @@ status: true
 dependencies:
   config:
     - field.field.fsa_authority.fsa_authority.field_email
+    - field.field.fsa_authority.fsa_authority.field_email_alt
+    - field.field.fsa_authority.fsa_authority.field_email_overridden
+    - field.field.fsa_authority.fsa_authority.field_mapit_area
     - field.field.fsa_authority.fsa_authority.field_regionname
     - field.field.fsa_authority.fsa_authority.field_url
   module:
@@ -23,8 +26,34 @@ content:
     third_party_settings: {  }
     type: email_mailto
     region: content
-  field_regionname:
+  field_email_alt:
     weight: 3
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: email_mailto
+    region: content
+  field_email_overridden:
+    weight: 4
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_mapit_area:
+    weight: 5
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_regionname:
+    weight: 6
     label: inline
     settings:
       link: false
@@ -52,5 +81,8 @@ content:
       link_to_entity: false
     third_party_settings: {  }
 hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
   langcode: true
   user_id: true

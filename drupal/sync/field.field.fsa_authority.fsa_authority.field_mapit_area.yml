@@ -1,0 +1,24 @@
+uuid: daf84639-ce5a-4696-ab95-2bb7a1421b95
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.fsa_authority.field_mapit_area
+  module:
+    - fsa_ratings
+id: fsa_authority.fsa_authority.field_mapit_area
+field_name: field_mapit_area
+entity_type: fsa_authority
+bundle: fsa_authority
+label: 'MapIt area'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer
