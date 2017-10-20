@@ -10,7 +10,7 @@ id: poor_hygiene_practices
 title: 'Report poor hygiene practices'
 description: 'Poor hygiene practices report form'
 category: 'Food problem'
-elements: "page_business:\n  '#type': webform_wizard_page\n  '#title': Business\n  where_lookup:\n    '#type': webform_googleplace\n    '#title': 'Where did you notice poor hygiene practices?'\n  not_found_details:\n    '#type': textarea\n    '#title': 'If not found above, please give details'\n  fsa_establishment_la_name:\n    '#type': hidden\n    '#title': 'Local authority name'\n  fsa_establishment_postal_code:\n    '#type': hidden\n    '#title': 'Postal code'\n  fsa_establishment_la_email:\n    '#type': hidden\n    '#title': 'Local authority email'\npage_about:\n  '#type': webform_wizard_page\n  '#title': About\n  when_noticed:\n    '#type': datetime\n    '#title': 'When did you notice this?'\n  what_noticed:\n    '#type': textarea\n    '#title': 'What did you notice?'\n  header_contact_info:\n    '#type': webform_markup\n    '#markup': \"<h3>Please tell us your contact information</h3>\\r\\n\\r\\n<p>In order to fully assess the information provided, it may be necessary to contact you to seek clarification.</p>\"\n  name:\n    '#type': textfield\n    '#title': 'What is your name?'\n    '#required': true\n  email:\n    '#type': email\n    '#title': 'What is your email?'\n    '#required': true\n  telephone:\n    '#type': tel\n    '#title': 'What is your phone number?'\n    '#international': true\n    '#international_initial_country': GB\n"
+elements: "page_about:\n  '#type': webform_wizard_page\n  '#title': Description\n  header_introduction:\n    '#type': webform_markup\n    '#markup': \"<p>You can use this form to report poor hygiene practices in a restaurant, store or other food outlet to your local authority. For example:</p>\\n\\n<ul>\\n\\t<li>Dirty premises</li>\\n\\t<li>Poor hand hygiene</li>\\n\\t<li>Poor food handling</li>\\n</ul>\\nIf you are unhappy about poor customer service in a food business, please contact the business directly.​​​​​​​\\n\"\n  what_noticed:\n    '#type': textarea\n    '#title': 'What poor hygiene practices have you noticed?'\n    '#description': 'Try to give us as much details as possible to help investigate the issue.'\n  where_lookup:\n    '#type': webform_googleplace\n    '#title': 'Where did you notice poor hygiene practices?'\n    '#description': 'Find the name and the address of the business or type in the details.'\n  fsa_establishment_la_name:\n    '#type': hidden\n    '#title': 'Local authority name'\n  fsa_establishment_postal_code:\n    '#type': hidden\n    '#title': 'Postal code'\n  fsa_establishment_la_email:\n    '#type': hidden\n    '#title': 'Local authority email'\n  when_noticed:\n    '#type': datetime\n    '#title': 'When did you notice this?'\n    '#date_time_element': none\ncontact_details:\n  '#type': webform_wizard_page\n  '#title': 'Contact details'\n  header_contact_info:\n    '#type': webform_markup\n    '#markup': \"<h3>Your contact details</h3>\\n\\n<p>This information will only be used by the local authority to contact you about your issue, and&nbsp;to send you a confirmation email about your report.</p>\\n\"\n  name:\n    '#type': textfield\n    '#title': 'Full name'\n  email:\n    '#type': email\n    '#title': 'Email address'\n    '#required': true\n  telephone:\n    '#type': tel\n    '#title': 'Phone number'\n    '#international': true\n    '#international_initial_country': GB\n"
 css: ''
 javascript: ''
 settings:
@@ -39,7 +39,16 @@ settings:
   form_details_toggle: false
   submission_label: ''
   submission_log: false
-  submission_user_columns: {  }
+  submission_user_columns:
+    - element__what_noticed
+    - element__where_lookup
+    - element__fsa_establishment_la_name
+    - element__fsa_establishment_postal_code
+    - element__fsa_establishment_la_email
+    - element__when_noticed
+    - element__name
+    - element__email
+    - element__telephone
   wizard_progress_bar: false
   wizard_progress_pages: true
   wizard_progress_percentage: false
@@ -66,7 +75,7 @@ settings:
   confirmation_message: "<h2>Report complete</h2>\r\n\r\n<p>Thank you for your report, which will be forwarded to: <strong>[webform_submission:values:fsa_establishment_la_name:value] Council</strong>.</p>\r\n\r\n<p>If you need to contact [webform_submission:values:fsa_establishment_la_name:value] Council about your report, you can do so at: <a href=\"mailto:[webform_submission:values:fsa_establishment_la_email:value]\">[webform_submission:values:fsa_establishment_la_email:value]</a>.</p>\r\n\r\n<p>A confirmation email has been sent to: <a href=\"mailto:[webform_submission:values:email:value]\">[webform_submission:values:email:value]</a>.</p>"
   confirmation_url: ''
   confirmation_attributes: {  }
-  confirmation_back: true
+  confirmation_back: false
   confirmation_back_label: ''
   confirmation_back_attributes: {  }
   limit_total: null

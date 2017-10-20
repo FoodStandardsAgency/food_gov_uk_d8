@@ -10,7 +10,7 @@ id: foreign_object
 title: 'Report a foreign object found in an item of food'
 description: 'Foreign object in food report form'
 category: 'Food problem'
-elements: "page_business:\n  '#type': webform_wizard_page\n  '#title': Business\n  where_lookup:\n    '#type': webform_googleplace\n    '#title': 'Where did you purchase the item of food?'\n  not_found_details:\n    '#type': textarea\n    '#title': 'If not found above, please give details'\n  fsa_establishment_la_name:\n    '#type': hidden\n    '#title': 'Local authority name'\n  fsa_establishment_postal_code:\n    '#type': hidden\n    '#title': 'Postal code'\n  fsa_establishment_la_email:\n    '#type': hidden\n    '#title': 'Local authority email'\npage_description:\n  '#type': webform_wizard_page\n  '#title': Description\n  when_purchased:\n    '#type': datetime\n    '#title': 'When was it purchased?'\n    '#format': long\n  product_name:\n    '#type': textfield\n    '#title': 'What is the name of product?'\n    '#description': 'Please give the brand name, if known.'\n  problem_details:\n    '#type': textarea\n    '#title': 'What is the problem with the food? '\n    '#description': 'Please describe the issue.'\n  evidence_details:\n    '#type': textarea\n    '#title': 'Do you have evidence?'\n    '#description': 'For example,&nbsp; a&nbsp;receipt or photos.'\n  label_details:\n    '#type': textarea\n    '#title': 'Please provide any details on the label'\n    '#description': 'For example, batch codes, a barcode, use by/best before date, or health marks.'\n  premises_contacted_action_taken:\n    '#type': radios\n    '#title': 'Has the premises been contacted, or any action taken?'\n    '#options':\n      'yes': 'Yes'\n      'no': 'No'\n      dont-know: 'Don''t know'\n  where_item_stored:\n    '#type': textarea\n    '#title': 'Where was the item stored?'\npage_contact_details:\n  '#type': webform_wizard_page\n  '#title': 'Contact details'\n  header_contact_info:\n    '#type': webform_markup\n    '#markup': \"<h3>Please tell us your contact information</h3>\\r\\n\\r\\n<p>Your contact information will only be used by the local authority to contact you about your issue.</p>\"\n  name:\n    '#type': textfield\n    '#title': 'What is your name?'\n    '#required': true\n  email:\n    '#type': email\n    '#title': 'What is your email?'\n    '#required': true\n  telephone:\n    '#type': tel\n    '#title': 'What is your phone number?'\n"
+elements: "page_description:\n  '#type': webform_wizard_page\n  '#title': Description\n  form_introduction:\n    '#type': webform_markup\n    '#markup': \"<p>Use this form to report a problem with food that you&#39;ve bought to your local authority.&nbsp;For example:</p>\\n\\n<ul>\\n\\t<li>Foreign object found in food</li>\\n\\t<li>Food that is not fit to eat</li>\\n\\t<li>Food that appears to be contaminated with chemicals</li>\\n</ul>\\n\\n<p><strong>If you are unhappy about poor customer service in a food business, please contact the business directly.</strong></p>\\n\"\n  problem_details:\n    '#type': textarea\n    '#title': 'Please tell us what is wrong with the food'\n    '#description': 'Try to give us as much details as possible to help investigate the issue.'\n  product_name:\n    '#type': textfield\n    '#title': 'What is the name of product?'\n    '#description': 'Please give the brand name, if known.'\n  label_details:\n    '#type': textarea\n    '#title': 'Please provide any details on the label'\n    '#description': 'For example batch codes, a barcode, use by/best before date, or health marks'\n  evidence_details:\n    '#type': textarea\n    '#title': 'Do you have any evidence?'\n    '#description': 'If yes, please explain here what evidence you might have.'\npage_business:\n  '#type': webform_wizard_page\n  '#title': Details\n  where_lookup:\n    '#type': webform_googleplace\n    '#title': 'Where did you purchase the food?'\n    '#description': 'Please tell us the name and the address of the business.'\n  fsa_establishment_la_name:\n    '#type': hidden\n    '#title': 'Local authority name'\n  fsa_establishment_postal_code:\n    '#type': hidden\n    '#title': 'Postal code'\n  fsa_establishment_la_email:\n    '#type': hidden\n    '#title': 'Local authority email'\n  when_purchased:\n    '#type': datetime\n    '#title': 'When did you purchase the food?'\n    '#format': long\n    '#date_time_element': none\n  where_item_stored:\n    '#type': textarea\n    '#title': 'Where was the item stored?'\n  premises_contacted_action_taken:\n    '#type': radios\n    '#title': 'Have you contacted the business directly?'\n    '#options':\n      'yes': 'Yes'\n      'no': 'No'\npage_contact_details:\n  '#type': webform_wizard_page\n  '#title': 'Contact details'\n  header_contact_info:\n    '#type': webform_markup\n    '#markup': \"<h3>Your contact details</h3>\\n\\n<p>This information will only be used by the local authority to contact you about your issue, and&nbsp;to send you a confirmation email about your report.</p>\\n\"\n  name:\n    '#type': textfield\n    '#title': 'Full name'\n  email:\n    '#type': email\n    '#title': 'Email address'\n    '#required': true\n  telephone:\n    '#type': tel\n    '#title': 'Phone number'\n"
 css: ''
 javascript: ''
 settings:
@@ -39,7 +39,21 @@ settings:
   form_details_toggle: false
   submission_label: ''
   submission_log: false
-  submission_user_columns: {  }
+  submission_user_columns:
+    - element__problem_details
+    - element__product_name
+    - element__label_details
+    - element__evidence_details
+    - element__where_lookup
+    - element__fsa_establishment_la_name
+    - element__fsa_establishment_postal_code
+    - element__fsa_establishment_la_email
+    - element__when_purchased
+    - element__where_item_stored
+    - element__premises_contacted_action_taken
+    - element__name
+    - element__email
+    - element__telephone
   wizard_progress_bar: false
   wizard_progress_pages: true
   wizard_progress_percentage: false
@@ -66,7 +80,7 @@ settings:
   confirmation_message: "<h2>Report complete</h2>\r\n\r\n<p>Thank you for your report, which will be forwarded to: <strong>[webform_submission:values:fsa_establishment_la_name:value] Council</strong>.</p>\r\n\r\n<p>If you need to contact [webform_submission:values:fsa_establishment_la_name:value] Council about your report, you can do so at: <a href=\"mailto:[webform_submission:values:fsa_establishment_la_email:value]\">[webform_submission:values:fsa_establishment_la_email:value]</a></p>\r\n\r\n<p>A confirmation email has been sent to: <a href=\"mailto:[webform_submission:values:email:value]\">[webform_submission:values:email:value]</a>.</p>"
   confirmation_url: ''
   confirmation_attributes: {  }
-  confirmation_back: true
+  confirmation_back: false
   confirmation_back_label: ''
   confirmation_back_attributes: {  }
   limit_total: null

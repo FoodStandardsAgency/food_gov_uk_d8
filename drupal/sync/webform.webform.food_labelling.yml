@@ -10,7 +10,7 @@ id: food_labelling
 title: 'Report a food labelling issue'
 description: ''
 category: 'Food problem'
-elements: "page_description:\n  '#type': webform_wizard_page\n  '#title': Description\n  what_is_your_concern:\n    '#type': textarea\n    '#title': 'What is your concern about the food labelling?'\n  link_to_tso:\n    '#type': webform_markup\n    '#markup': '<a href=\"https://www.gov.uk/find-local-trading-standards-office\" target=\"_blank\">Find your local Trading Standards office</a>'\n"
+elements: "page_description:\n  '#type': webform_wizard_page\n  '#title': Description\n  what_is_your_concern:\n    '#type': textarea\n    '#title': 'What is your concern about the food labelling?'\n  link_to_tso:\n    '#type': webform_markup\n    '#markup': '<a href=\"https://www.gov.uk/find-local-trading-standards-office\" target=\"_blank\">Find your local Trading Standards office</a>'"
 css: ''
 javascript: ''
 settings:

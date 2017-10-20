@@ -1,0 +1,20 @@
+uuid: 5a73fe59-ed9d-45b0-b38d-611215866e15
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.fsa_authority.field_email_alt
+  module:
+    - fsa_ratings
+id: fsa_authority.fsa_authority.field_email_alt
+field_name: field_email_alt
+entity_type: fsa_authority
+bundle: fsa_authority
+label: 'Alternative email'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email
