@@ -59,8 +59,6 @@ class TeamFinder extends FormBase {
           ->loadByProperties(array(
             'field_mapit_area' => $la['mapit_area'],
           ));
-
-        // check result not null
         if ($fsa_authority = reset($fsa_authority)) {
 
           // generate links
@@ -97,10 +95,14 @@ class TeamFinder extends FormBase {
             '#type' => 'link',
             '#url' => Url::fromRoute('fsa_team_finder.render')
           );
+        } else {
+
+          // null entity query
+          drupal_set_message(t('No food safety team found.'), 'error');
         }
       } else {
 
-        // set (no mapit response) warning
+        // no mapit response
         drupal_set_message(t('No food safety team found.'), 'error');
       }
     }
