@@ -50,7 +50,6 @@ settings:
     - element__reported_to_anyone_else
     - element__name
     - element__email
-    - element__what_is_your_phone_number_
   wizard_progress_bar: false
   wizard_progress_pages: true
   wizard_progress_percentage: false
@@ -63,7 +62,7 @@ settings:
   preview_message: ''
   preview_attributes: {  }
   preview_excluded_elements: {  }
-  preview_exclude_empty: true
+  preview_exclude_empty: false
   draft: none
   draft_multiple: false
   draft_auto_save: false
@@ -129,6 +128,7 @@ handlers:
     label: 'Copy of report'
     handler_id: copy_of_report
     status: true
+    conditions: {  }
     weight: 0
     settings:
       states:
@@ -152,3 +152,5 @@ handlers:
       debug: false
       reply_to: ''
       return_path: ''
+      sender_mail: ''
+      sender_name: ''

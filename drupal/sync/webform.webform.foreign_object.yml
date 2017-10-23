@@ -69,7 +69,7 @@ settings:
     fsa_establishment_la_name: fsa_establishment_la_name
     fsa_establishment_postal_code: fsa_establishment_postal_code
     fsa_establishment_la_email: fsa_establishment_la_email
-  preview_exclude_empty: true
+  preview_exclude_empty: false
   draft: none
   draft_multiple: false
   draft_auto_save: false
@@ -135,6 +135,7 @@ handlers:
     label: 'Copy of report'
     handler_id: copy_of_report
     status: true
+    conditions: {  }
     weight: 0
     settings:
       states:
@@ -165,6 +166,7 @@ handlers:
     label: 'Copy to local authority'
     handler_id: copy_to_la
     status: true
+    conditions: {  }
     weight: 0
     settings:
       states:
