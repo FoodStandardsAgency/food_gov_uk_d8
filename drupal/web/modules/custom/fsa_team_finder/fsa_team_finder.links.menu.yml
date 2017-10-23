@@ -1,0 +1,5 @@
+view.fsa_authorities.page_1:
+  title: 'FSA authorities'
+  parent: system.admin_reports
+  description: 'View and edit FSA authority data.'
+  route_name: view.fsa_authorities.page_1
