@@ -81,7 +81,6 @@
 
 .webform .description {
   @mixin responsive-declaration margin-bottom, 1em, 2em;
-  font-weight: 700;
 }
 
 .webform fieldset,
