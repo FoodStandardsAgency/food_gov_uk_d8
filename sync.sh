@@ -2,6 +2,14 @@
 # This file will sync local development environment with the stage server
 # SQL from the server + rsync.
 
+echo "
+*************************************************
+* This script will sync db and files            *
+* from staging to your local environment        *
+*                                               *
+* Next time consider using ./syncdb.sh [source] *
+*************************************************
+"
 drush sql-sync @fsa.stage @fsa.local --structure-tables-list=cache,cache_*,history,search_*,sessions,watchdog --sanitize
 echo 'SQL sync ready.';
 

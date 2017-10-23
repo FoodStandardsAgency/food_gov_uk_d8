@@ -1,6 +1,14 @@
 Development instructions
 ========================
 
+#### Database syncing
+Use `./syncdb.sh [SOURCE] [TARGET]` for syncing. Second parameter is optional.
+
+For example to sync staging to local run following outside the box:
+```bash
+./syncdb.sh stage
+```
+
 #### Local settings.php overrides
 
 Copy local `drupal/conf/settings.local.php` [template from here](settings.local.php.txt).

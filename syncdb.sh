@@ -35,7 +35,7 @@ if [ $# -gt 0 ]; then
   if [ $# -eq 2 ]; then
     if [ $2 == 'prod' ]; then
       echo "You tried to sync to a production environment!"
-      echo "This is probably newer the intention, so we always fail such attempts."
+      echo "This is probably never the intention, so we always fail such attempts."
       exit
     fi
     TARGET="@$project_name.$2"
@@ -66,18 +66,12 @@ rm -rf /tmp/syncdb/drupal
 
 # Let's not use -y here yet so that we have at least one confirmation in this
 # script before we destroy the $TARGET data.
+echo "Confirm syncing database to $TARGET"
 drush $TARGET sql-drop
 drush $TARGET importdb --dump-dir=/tmp/syncdb/drupal
 
 # Delete the exported sql files from target for security.
 drush $TARGET ssh "rm -rf /tmp/syncdb/drupal"
-
-# Sanitize users.
-drush $TARGET sqlq "UPDATE users SET mail = 'user@example.com' WHERE name != 'admin'"
-drush $TARGET sqlq "UPDATE users SET init = '' WHERE name != 'admin'"
-drush $TARGET sqlq "UPDATE users SET pass = '' WHERE name != 'admin'"
-drush $TARGET upwd admin --password=admin
-echo 'Sanitized users.'
 
 # Include any project specific sync commands.
 if [ -f syncdb_local.sh ]
@@ -86,10 +80,15 @@ then
 fi
 
 # Enable Stage File Proxy.
-drush $TARGET pm-download --yes stage_file_proxy
-drush $TARGET pm-enable --yes stage_file_proxy
-drush $TARGET variable-set stage_file_proxy_origin "$project_file_sync_url"
-echo 'Enabled Stage File Proxy.'
+# drush $TARGET pm-download --yes stage_file_proxy
+# drush $TARGET pm-enable --yes stage_file_proxy
+# echo 'Enabled Stage File Proxy.'
+
+# Import configurations
+drush $TARGET cim -y
 
 # Clear caches after sync.
-drush $TARGET cache-clear all
+drush $TARGET cr
+
+echo "Temporary root login url:"
+drush $TARGET uli
