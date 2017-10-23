@@ -125,6 +125,7 @@ handlers:
     label: 'Email confirmation'
     handler_id: email_confirmation
     status: true
+    conditions: {  }
     weight: 1
     settings:
       states:
@@ -148,11 +149,14 @@ handlers:
       debug: false
       reply_to: ''
       return_path: ''
+      sender_mail: ''
+      sender_name: ''
   email_notification:
     id: email
     label: 'Email notification'
     handler_id: email_notification
     status: true
+    conditions: {  }
     weight: 1
     settings:
       states:
@@ -176,11 +180,14 @@ handlers:
       debug: false
       reply_to: ''
       return_path: ''
+      sender_mail: ''
+      sender_name: ''
   fsa_contact_us_form_data_handler:
     id: fsa_contactus_data_handler
     label: 'FSA Contact Us form data handler'
     handler_id: fsa_contact_us_form_data_handler
     status: true
+    conditions: {  }
     weight: 2
     settings:
       channel: ''

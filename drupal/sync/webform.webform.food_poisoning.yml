@@ -132,6 +132,7 @@ handlers:
     label: 'Copy of report'
     handler_id: copy_of_report
     status: true
+    conditions: {  }
     weight: 0
     settings:
       states:
@@ -155,11 +156,14 @@ handlers:
       debug: false
       reply_to: ''
       return_path: ''
+      sender_mail: ''
+      sender_name: ''
   copy_to_la:
     id: email
     label: 'Copy to local authority'
     handler_id: copy_to_la
     status: true
+    conditions: {  }
     weight: 0
     settings:
       states:
@@ -189,3 +193,5 @@ handlers:
       debug: false
       reply_to: ''
       return_path: ''
+      sender_mail: ''
+      sender_name: ''
