@@ -2,6 +2,7 @@
 
 namespace Drupal\fsa_contactus\Plugin\WebformElement;
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\Plugin\WebformElement\WebformCompositeBase;
 use Drupal\webform\WebformSubmissionInterface;
 
@@ -10,10 +11,9 @@ use Drupal\webform\WebformSubmissionInterface;
  *
  * @WebformElement(
  *   id = "gds_date",
- *   label = @Translation("Webform GDS date (composite)"),
- *   description = @Translation("Provides a webform element example."),
+ *   label = @Translation("Webform GDS date"),
+ *   description = @Translation("GDS style date composite field."),
  *   category = @Translation("Date"),
- *   multiline = TRUE,
  *   composite = TRUE,
  *   states_wrapper = TRUE,
  * )
@@ -40,9 +40,9 @@ class GdsDate extends WebformCompositeBase {
     $value = $this->getValue($element, $webform_submission, $options);
 
     $lines = [];
-    $lines[] = ($value['day'] ? $value['day'] : '') .
-      ($value['month'] ? '-' . $value['month'] : '') .
-      ($value['year'] ? '-' . $value['year'] : '');
+    $lines[] = ($value['day'] ? $value['day'] . '-' : '') .
+      ($value['month'] ? $value['month'] . '-' : '') .
+      ($value['year'] ? $value['year'] : '');
     return $lines;
   }
 

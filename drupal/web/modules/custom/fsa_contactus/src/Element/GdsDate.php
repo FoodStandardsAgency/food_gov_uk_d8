@@ -3,12 +3,14 @@
 namespace Drupal\fsa_contactus\Element;
 
 use Drupal\Component\Utility\Html;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\Element\WebformCompositeBase;
 
 /**
  * Provides a 'gds_date'.
  *
- * Webform composites contain a group of sub-elements.
+ * GDS Date divides each date composite to their own numeric field.
+ * Input is concatenated and saved as a valid timedate entry.
  *
  * @FormElement("gds_date")
  *
@@ -21,14 +23,13 @@ class GdsDate extends WebformCompositeBase {
    * {@inheritdoc}
    */
   public function getInfo() {
-    return parent::getInfo() + ['#theme' => 'webform_example_composite'];
+    return parent::getInfo();
   }
 
   /**
    * {@inheritdoc}
    */
   public static function getCompositeElements() {
-    // Generate an unique ID that can be used by #states.
     $html_id = Html::getUniqueId('gds_date');
 
     $elements = [];
@@ -58,7 +59,7 @@ class GdsDate extends WebformCompositeBase {
       '#title' => t('Year'),
       '#attributes' => [
         'data-webform-composite-id' => $html_id . '--year',
-        'min' => 2010,
+        'min' => 0,
         'max' => 2050,
         'pattern' => '[0-9]*',
       ],
