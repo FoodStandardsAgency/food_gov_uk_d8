@@ -10,7 +10,7 @@ id: food_labelling
 title: 'Report a food labelling issue'
 description: ''
 category: 'Food problem'
-elements: "page_description:\n  '#type': webform_wizard_page\n  '#title': Description\n  what_is_your_concern:\n    '#type': textarea\n    '#title': 'What is your concern about the food labelling?'\n  link_to_tso:\n    '#type': webform_markup\n    '#markup': '<a href=\"https://www.gov.uk/find-local-trading-standards-office\" target=\"_blank\">Find your local Trading Standards office</a>'"
+elements: "page_description:\n  '#type': webform_wizard_page\n  '#title': Description\n  what_is_your_concern:\n    '#type': textarea\n    '#title': 'What is your concern about the food labelling?'\n  link_to_tso:\n    '#type': webform_markup\n    '#markup': '<a href=\"https://www.gov.uk/find-local-trading-standards-office\" target=\"_blank\">Find your local Trading Standards office</a>'\n"
 css: ''
 javascript: ''
 settings:
@@ -52,7 +52,7 @@ settings:
   preview_message: ''
   preview_attributes: {  }
   preview_excluded_elements: {  }
-  preview_exclude_empty: true
+  preview_exclude_empty: false
   draft: none
   draft_multiple: false
   draft_auto_save: false
@@ -63,7 +63,7 @@ settings:
   confirmation_message: "<h2>Report complete</h2>\r\n\r\n<p>Thank you for your report.</p>"
   confirmation_url: ''
   confirmation_attributes: {  }
-  confirmation_back: true
+  confirmation_back: false
   confirmation_back_label: ''
   confirmation_back_attributes: {  }
   limit_total: null
