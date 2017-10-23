@@ -135,6 +135,7 @@ handlers:
     label: 'Copy of report'
     handler_id: copy_of_report
     status: true
+    conditions: {  }
     weight: 0
     settings:
       states:
@@ -165,6 +166,7 @@ handlers:
     label: 'Copy to local authority'
     handler_id: copy_to_la
     status: true
+    conditions: {  }
     weight: 0
     settings:
       states:
