@@ -22,8 +22,10 @@ function fsa_contactus_webform_element_alter(array &$element, \Drupal\Core\Form\
  * Implements
  */
 function fsa_contactus_preprocess_webform_progress(array &$variables) {
-  // Change webform default "Page ..." to "Step ...".
-  $args = $variables['summary']->getArguments();
-  $variables['summary'] = t('Step @start of @end', $args);
+
+  if (isset($variables['summary'])) {
+    // Change webform default "Page ..." to "Step ...".
+    $variables['summary'] = t('Step @start of @end', $variables['summary']->getArguments());
+  }
 }
 
