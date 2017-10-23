@@ -69,7 +69,7 @@ settings:
     fsa_establishment_la_name: fsa_establishment_la_name
     fsa_establishment_postal_code: fsa_establishment_postal_code
     fsa_establishment_la_email: fsa_establishment_la_email
-  preview_exclude_empty: true
+  preview_exclude_empty: false
   draft: none
   draft_multiple: false
   draft_auto_save: false

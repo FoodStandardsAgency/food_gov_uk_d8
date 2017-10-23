@@ -43,7 +43,6 @@ settings:
     - element__details_of_consumed_food
     - element__where_lookup
     - element__fsa_establishment_postal_code
-    - element__fsa_establishment_la
     - element__fsa_establishment_la_name
     - element__fsa_establishment_la_email
     - element__people_affected
@@ -65,7 +64,9 @@ settings:
   preview_message: ''
   preview_attributes: {  }
   preview_excluded_elements:
-    fsa_establishment_la: fsa_establishment_la
+    fsa_establishment_la_name: fsa_establishment_la_name
+    fsa_establishment_postal_code: fsa_establishment_postal_code
+    fsa_establishment_la_email: fsa_establishment_la_email
   preview_exclude_empty: false
   draft: none
   draft_multiple: false
