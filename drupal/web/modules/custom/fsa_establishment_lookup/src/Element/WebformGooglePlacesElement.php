@@ -45,7 +45,7 @@ class WebformGooglePlacesElement extends FormElement {
       ],
       '#theme' => 'input__webform_googleplaces',
       '#theme_wrappers' => ['form_element'],
-      '#placeholder' => t('Enter a location'),
+      '#placeholder' => '', // GDS requires no placeholders.
     ];
   }
 
