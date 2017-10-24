@@ -68,13 +68,13 @@
   text-transform: none;
 }
 
-.webform .form-item.form-composite > label {
+.webform .form-item.js-form-type-gds-date > label {
   flex: 1 1 100%;
   @mixin responsive-declaration padding-right, 1.5rem, 2rem;
   @mixin responsive-declaration padding-left, 1.5rem, 2rem;
 }
 
-.webform .form-item.form-composite > .form-item label {
+.webform .form-item.js-form-type-gds-date > .form-item label {
 
 }
 
@@ -93,7 +93,7 @@
   @mixin responsive-declaration margin-bottom, 1em, 2em;
 }
 
-.webform .form-item.form-composite > .description {
+.webform .form-item.js-form-type-gds-date > .description {
   flex: 1 1 100%;
   @mixin responsive-declaration padding-right, 1.5em, 2em;
   @mixin responsive-declaration padding-left, 1.5em, 2em;
@@ -109,14 +109,14 @@
   @mixin responsive-declaration margin-bottom, 1.5em, 2em;
 }
 
-.webform .form-item.form-composite {
+.webform .form-item.js-form-type-gds-date {
   display: flex;
   flex-flow: row wrap;
   @mixin responsive-declaration margin-right, -1.5em, -2em;
   @mixin responsive-declaration margin-left, -1.5em, -2em;
 }
 
-.webform .form-item.form-composite > .form-item {
+.webform .form-item.js-form-type-gds-date > .form-item {
   flex: 1 1 100%;
   @mixin responsive-declaration margin-top, 1em, 2em;
   @mixin responsive-declaration margin-bottom, 0.5em, 1em;
@@ -128,7 +128,7 @@
   }
 }
 
-.webform .form-item.form-composite > .form-item input {
+.webform .form-item.js-form-type-gds-date > .form-item input {
   width: 100%;
 }
 
