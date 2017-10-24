@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function fsa_alt_mail_update_install() {
+
+}

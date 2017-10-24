@@ -1,0 +1,5 @@
+name: FSA alternative mail update
+description: Imports additional data into FSA authority entities.
+type: module
+core: 8.x
+package: FSA

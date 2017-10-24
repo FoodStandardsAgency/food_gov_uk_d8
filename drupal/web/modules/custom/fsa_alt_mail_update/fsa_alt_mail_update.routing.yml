@@ -1,0 +1,7 @@
+fsa_alt_mail_update.render:
+  path: '/test'
+  defaults:
+    _controller: Drupal\fsa_alt_mail_update\Controller\FsaAltMailUpdate::render
+    _title: 'Test'
+  requirements:
+    _permission: 'access content'
