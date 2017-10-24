@@ -3,7 +3,6 @@
 namespace Drupal\fsa_contactus\Element;
 
 use Drupal\Component\Utility\Html;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\Element\WebformCompositeBase;
 
 /**
@@ -23,7 +22,7 @@ class GdsDate extends WebformCompositeBase {
    * {@inheritdoc}
    */
   public function getInfo() {
-    return parent::getInfo();
+    return parent::getInfo() + ['#theme' => 'webform_example_composite'];
   }
 
   /**

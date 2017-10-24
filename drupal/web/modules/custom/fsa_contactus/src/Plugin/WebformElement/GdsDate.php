@@ -2,7 +2,6 @@
 
 namespace Drupal\fsa_contactus\Plugin\WebformElement;
 
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\Plugin\WebformElement\WebformCompositeBase;
 use Drupal\webform\WebformSubmissionInterface;
 
