@@ -1,7 +1,0 @@
-fsa_team_finder.render:
-  path: '/help/consumers/find-food-safety-team'
-  defaults:
-    _controller: Drupal\fsa_team_finder\Controller\FsaTeamFinder::render
-    _title: 'Contact a food safety team'
-  requirements:
-    _permission: 'access content'

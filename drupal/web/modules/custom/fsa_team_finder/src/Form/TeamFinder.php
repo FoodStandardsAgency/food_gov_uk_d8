@@ -33,8 +33,7 @@ class TeamFinder extends FormBase {
     );
     $form['query'] = array(
       '#type' => 'textfield',
-      '#title' => t('Find a food safety team'),
-      '#description' => t('<div>Please enter a postcode to find the food safety team in the area.</div><div>Enter a full postcode</div>'),
+      '#title' => t('Enter a full postcode'),
       '#description_display' => 'before',
       '#size' => 9,
       '#maxlength' => 9,
@@ -93,7 +92,7 @@ class TeamFinder extends FormBase {
           $form['back'] = array(
             '#title' => $this->t('Back to form'),
             '#type' => 'link',
-            '#url' => Url::fromRoute('fsa_team_finder.render')
+            '#url' => Url::fromRoute('<current>'),
           );
         } else {
 
