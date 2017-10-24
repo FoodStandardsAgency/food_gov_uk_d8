@@ -109,17 +109,8 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
       // Additional access/visibility rules for non-node pages.
 
       if ($block->id() == 'menu_help_secondary') {
-
-        // Make visible on fsa_team_finder.render
-        $current_route = \Drupal::routeMatch()->getRouteName();
-        if ($current_route == 'fsa_team_finder.render') {
-          return AccessResult::allowed()
-            ->addCacheableDependency($block);
-        }
-        else {
-          return AccessResult::forbidden()
-            ->addCacheableDependency($block);
-        }
+        return AccessResult::forbidden()
+          ->addCacheableDependency($block);
       }
     }
   }
