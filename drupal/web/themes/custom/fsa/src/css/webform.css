@@ -68,6 +68,16 @@
   text-transform: none;
 }
 
+.webform .form-item.form-composite > label {
+  flex: 1 1 100%;
+  @mixin responsive-declaration padding-right, 1.5rem, 2rem;
+  @mixin responsive-declaration padding-left, 1.5rem, 2rem;
+}
+
+.webform .form-item.form-composite > .form-item label {
+
+}
+
 .webform input[type="radio"] + label,
 .webform input[type="checkbox"] + label {
   font-weight: 400;
@@ -83,6 +93,13 @@
   @mixin responsive-declaration margin-bottom, 1em, 2em;
 }
 
+.webform .form-item.form-composite > .description {
+  flex: 1 1 100%;
+  @mixin responsive-declaration padding-right, 1.5em, 2em;
+  @mixin responsive-declaration padding-left, 1.5em, 2em;
+  margin-bottom: 0;
+}
+
 .webform fieldset,
 .webform .form-item {
   display: block;
@@ -90,6 +107,29 @@
   margin: 0;
   @mixin responsive-declaration margin-top, 1.5em, 4em;
   @mixin responsive-declaration margin-bottom, 1.5em, 2em;
+}
+
+.webform .form-item.form-composite {
+  display: flex;
+  flex-flow: row wrap;
+  @mixin responsive-declaration margin-right, -1.5em, -2em;
+  @mixin responsive-declaration margin-left, -1.5em, -2em;
+}
+
+.webform .form-item.form-composite > .form-item {
+  flex: 1 1 100%;
+  @mixin responsive-declaration margin-top, 1em, 2em;
+  @mixin responsive-declaration margin-bottom, 0.5em, 1em;
+  @mixin responsive-declaration padding-right, 1.5em, 2em;
+  @mixin responsive-declaration padding-left, 1.5em, 2em;
+
+  @media (--breakpoint-xxs) {
+    flex: 0 0 33%;
+  }
+}
+
+.webform .form-item.form-composite > .form-item input {
+  width: 100%;
 }
 
 .webform .form-item.js-form-type-date input,
