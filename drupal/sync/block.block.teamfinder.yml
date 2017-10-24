@@ -1,0 +1,24 @@
+uuid: 3c3dc813-923c-4f36-9d88-1fc089ae68ae
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - fsa_team_finder
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: teamfinder
+theme: fsa
+region: hidden
+weight: 0
+provider: null
+plugin: fsa_team_finder_block
+settings:
+  id: fsa_team_finder_block
+  label: 'Team finder'
+  provider: fsa_team_finder
+  label_display: '0'
+visibility: {  }
