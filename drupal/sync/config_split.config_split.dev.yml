@@ -1,0 +1,14 @@
+uuid: 310d3cfe-86b6-4719-8511-0c6bfbe89899
+langcode: en
+status: false
+dependencies: {  }
+id: dev
+label: Dev
+folder: ../sync-dev
+module: {  }
+theme: {  }
+blacklist: {  }
+graylist: {  }
+graylist_dependents: true
+graylist_skip_equal: true
+weight: 0

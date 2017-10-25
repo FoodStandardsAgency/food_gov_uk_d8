@@ -49,6 +49,9 @@ if(!empty($_SERVER['SERVER_ADDR'])){
   header('X-Webserver: '. end($pcs));
 }
 
+// Be sure to have config_split.dev disabled by default.
+$config['config_split.config_split.dev']['status'] = FALSE;
+
 $env = getenv('WKV_SITE_ENV');
 switch ($env) {
   case 'production':
@@ -62,6 +65,8 @@ switch ($env) {
 	break;
   case 'local':
 		$settings['simple_environment_indicator'] = '#88b700 Local';
+
+		$config['config_split.config_split.dev']['status'] = TRUE;
 	break;
 }
 /**
