@@ -20,8 +20,7 @@ $databases['default']['default'] = array (
   'driver' => 'mysql',
 );
 
-// CHANGE THIS.
-$settings['hash_salt'] = 'some-hash-salt-please-change-this';
+$settings['hash_salt'] = 'B081u6MDeLm3bRi5niieR-797DOulNMA-SGCoprrcy5Gjn-hDNAkiy1k8Pnb9y8n1zSXWu4aQQ';
 
 if ( (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) == "on")
   || (isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) && $_SERVER["HTTP_X_FORWARDED_PROTO"] == "https")
