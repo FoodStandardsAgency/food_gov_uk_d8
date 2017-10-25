@@ -36,6 +36,7 @@ module:
   filter: 0
   fsa_alerts: 0
   fsa_alerts_import: 0
+  fsa_authorities_exp_filter: 0
   fsa_contactus: 0
   fsa_contactus_data: 0
   fsa_custom: 0
