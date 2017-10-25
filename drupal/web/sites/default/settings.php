@@ -94,6 +94,15 @@ $config_directories = array(
 );
 
 /**
+ * Trusted hosts patterns.
+ */
+$settings['trusted_host_patterns'] = [
+  'food\.gov\.uk$',
+  'fsa\.dev\.wunder\.io$',
+  'fsa\.stage\.wunder\.io$',
+];
+
+/**
  * Access control for update.php script.
  */
 $settings['update_free_access'] = FALSE;
