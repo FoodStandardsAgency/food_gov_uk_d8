@@ -172,8 +172,8 @@ class TeamFinder extends FormBase {
       // negotiate two-tier local government
       if (!is_array($data['shortcuts']['council'])) {
         $council = $data['shortcuts']['council'];
-      } elseif (isset($data['shortcuts']['council']['county'])) {
-        $council = $data['shortcuts']['council']['county'];
+      } elseif (isset($data['shortcuts']['council']['district'])) {
+        $council = $data['shortcuts']['council']['district'];
       } else {
         return array();
       }
