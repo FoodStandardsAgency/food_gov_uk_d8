@@ -56,7 +56,8 @@
         "drupal/better_exposed_filters": "^3.0@alpha",
         "drupal/menu_trail_by_path": "^1.1",
         "drupal/redirect": "^1.0@beta",
-        "drupal/config_split": "^1.2"
+        "drupal/config_split": "^1.2",
+        "drupal/devel": "^1.2"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",

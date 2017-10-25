@@ -7,6 +7,8 @@ label: Dev
 folder: ../sync-dev
 module:
   views_ui: 0
+  devel: 0
+  kint: 0
 theme: {  }
 blacklist: {  }
 graylist: {  }
