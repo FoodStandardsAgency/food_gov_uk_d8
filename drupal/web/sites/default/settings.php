@@ -55,7 +55,9 @@ $settings['config_readonly'] = TRUE;
 // Define specific admin pages to always allow configuration changes.
 // @todo: follow issue https://www.drupal.org/node/2826274 for a fix on this.
 $config_allowed = [
+  '/admin/structure/menu/manage/account',
   '/admin/structure/menu/manage/main',
+  '/admin/structure/menu/manage/help',
   '/admin/structure/menu/manage/footer',
 ];
 
