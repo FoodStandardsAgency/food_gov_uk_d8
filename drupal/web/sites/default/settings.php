@@ -49,6 +49,21 @@ if(!empty($_SERVER['SERVER_ADDR'])){
   header('X-Webserver: '. end($pcs));
 }
 
+// Disallow configuration changes by default.
+$settings['config_readonly'] = TRUE;
+
+// Define specific admin pages to always allow configuration changes.
+// @todo: follow issue https://www.drupal.org/node/2826274 for a fix on this.
+$config_allowed = [
+  '/admin/structure/menu/manage/main',
+  '/admin/structure/menu/manage/footer',
+];
+
+// Allow config changes on specified path pattern and command line.
+if (in_array($_SERVER['REQUEST_URI'], $config_allowed) || PHP_SAPI === 'cli') {
+  $settings['config_readonly'] = FALSE;
+}
+
 // Be sure to have config_split.dev disabled by default.
 $config['config_split.config_split.dev']['status'] = FALSE;
 
@@ -67,6 +82,7 @@ switch ($env) {
 		$settings['simple_environment_indicator'] = '#88b700 Local';
 
 		$config['config_split.config_split.dev']['status'] = TRUE;
+    $settings['config_readonly'] = FALSE;
 	break;
 }
 /**
