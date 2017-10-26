@@ -4,6 +4,7 @@ namespace Drupal\fsa_team_finder\Form;
 
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\InvokeCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
@@ -28,6 +29,14 @@ class TeamFinder extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
+    // Set header/intro for the form (updated with AJAX).
+    $form['form-header'] = [
+      '#markup' => '<h3 class="form-title">' . $this->t('Find a food safety team') . '</h3>',
+      ];
+    $form['form-intro'] = [
+      '#markup' => '<p class="form-intro">' . $this->t('Please enter a postcode to find the food safety team in the area') . '</p>',
+      ]
+    ;
     $form['query'] = array(
       '#type' => 'textfield',
       '#title' => t('Enter a full postcode'),
@@ -45,8 +54,23 @@ class TeamFinder extends FormBase {
       'submit' => array(
         '#type' => 'submit',
         '#value' => $this->t('Submit'),
+        '#attributes' => ['class' => ['submit-finder']],
         '#ajax' => [
           'callback' => [$this, 'ajaxSubmitForm'],
+          'event' => 'click',
+          'effect' => 'fade',
+          'speed' => 500,
+          'progress' => [
+            'type' => 'throbber',
+          ],
+        ],
+      ),
+      'reset' => array(
+        '#type' => 'submit',
+        '#value' => $this->t('Reset'),
+        '#attributes' => ['class' => ['visually-hidden', 'submit-reset']],
+        '#ajax' => [
+          'callback' => [$this, 'ajaxResetForm'],
           'event' => 'click',
           'effect' => 'fade',
           'speed' => 500,
@@ -138,6 +162,48 @@ class TeamFinder extends FormBase {
   }
 
   /**
+   * Ajax reset functionality.
+   *
+   * @param array $form
+   *   Form fields.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   Form state values.
+   *
+   * @return \Drupal\Core\Ajax\AjaxResponse
+   *   The ajax response.
+   */
+  public function ajaxResetForm(array &$form, FormStateInterface $form_state) {
+    $response = new AjaxResponse();
+
+    // Toggle element visibilities.
+    $toggleClasses = [
+      '#fsa-team-finder .submit-reset',
+      '#fsa-team-finder .submit-finder',
+      '#fsa-team-finder .form-item-query',
+      '#fsa-team-finder .form-intro',
+    ];
+    foreach ($toggleClasses AS $class) {
+      $response->addCommand(new InvokeCommand(
+        $class, 'toggleClass', ['visually-hidden']
+      ));
+    }
+
+    // Clear query input.
+    $response->addCommand(new InvokeCommand(
+      '#fsa-team-finder .form-item-query input',
+      'val',
+      ['']
+    ));
+
+    // Clear results wrapper.
+    $response->addCommand(new HtmlCommand(
+      '#team-finder-results', ''
+    ));
+
+    return $response;
+  }
+
+  /**
    * Ajax submit functionality.
    *
    * @param array $form
@@ -150,6 +216,7 @@ class TeamFinder extends FormBase {
    */
   public function ajaxSubmitForm(array &$form, FormStateInterface $form_state) {
 
+    $response = new AjaxResponse();
     $result_name = NULL;
     $result_mail = NULL;
     $result_site = NULL;
@@ -181,9 +248,21 @@ class TeamFinder extends FormBase {
         $result_mail = $email_link;
         $result_site = $site_link;
 
+        // Toggle element visibilities.
+        $toggleClasses = [
+          '#fsa-team-finder .submit-reset',
+          '#fsa-team-finder .submit-finder',
+          '#fsa-team-finder .form-item-query',
+          '#fsa-team-finder .form-intro',
+        ];
+        foreach ($toggleClasses AS $class) {
+          $response->addCommand(new InvokeCommand(
+            $class, 'toggleClass', ['visually-hidden']
+          ));
+        }
       }
       else {
-        $result_message = $this->t('no safety team found');
+        $result_message = $this->t('No safety team found');
       }
     }
     else {
@@ -200,7 +279,6 @@ class TeamFinder extends FormBase {
       }
     }
 
-    $response = new AjaxResponse();
     $response->addCommand(new HtmlCommand(
       '#team-finder-results',
       [
