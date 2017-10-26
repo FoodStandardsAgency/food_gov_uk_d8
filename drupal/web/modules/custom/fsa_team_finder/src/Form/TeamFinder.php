@@ -2,10 +2,7 @@
 
 namespace Drupal\fsa_team_finder\Form;
 
-use Drupal\Core\Ajax\RemoveCommand;
-use Drupal\Core\Ajax\InvokeCommand;
 use Drupal\Core\Ajax\HtmlCommand;
-use Drupal\Core\Ajax\AppendCommand;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -31,11 +28,6 @@ class TeamFinder extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    // construct form
-    $form['progress'] = array(
-      '#type' => 'item',
-      '#markup' => t('Step 1 of 2'),
-    );
     $form['query'] = array(
       '#type' => 'textfield',
       '#title' => t('Enter a full postcode'),
@@ -45,9 +37,8 @@ class TeamFinder extends FormBase {
       '#required' => TRUE,
     );
     // The AJAX result placeholder.
-    $form['team-finder-results'] = [
-      '#suffix' => '<div id="team-finder-results">',
-      '#prefix' => '<div>',
+    $form['ajax-results'] = [
+      '#markup' => '<div id="team-finder-results"></div>',
     ];
     $form['actions'] = array(
       '#type' => 'actions',
@@ -65,6 +56,7 @@ class TeamFinder extends FormBase {
         ],
       ),
     );
+
     if ($form_state->getValue('query')) {
       // Leave as is for non-js fallback.
 
@@ -92,7 +84,6 @@ class TeamFinder extends FormBase {
             ->toString();
 
           // reconstruct form
-          $form['progress']['#markup'] = t('Step 2 of 2');
           unset($form['query']);
           unset($form['actions']);
           $form['confirmation'] = array(
@@ -143,7 +134,7 @@ class TeamFinder extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $form_state->setRebuild();
+//    $form_state->setRebuild();
   }
 
   /**
