@@ -195,6 +195,12 @@ class TeamFinder extends FormBase {
       ['']
     ));
 
+    // Revert form title.
+    $response->addCommand(new HtmlCommand(
+      '#fsa-team-finder .form-title',
+      $this->t('Find a food safety team')
+    ));
+
     // Clear results wrapper.
     $response->addCommand(new HtmlCommand(
       '#team-finder-results', ''
@@ -260,6 +266,12 @@ class TeamFinder extends FormBase {
             $class, 'toggleClass', ['visually-hidden']
           ));
         }
+
+        // Update form title.
+        $response->addCommand(new HtmlCommand(
+          '#fsa-team-finder .form-title',
+          $this->t('Food safety team details')
+        ));
       }
       else {
         $result_message = $this->t('No safety team found');
