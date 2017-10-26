@@ -274,7 +274,7 @@ class TeamFinder extends FormBase {
         ));
       }
       else {
-        $result_message = $this->t('No safety team found');
+        $result_message = $this->t('No results found.');
       }
     }
     else {
@@ -287,7 +287,7 @@ class TeamFinder extends FormBase {
         $result_message = $this->t('Invalid postcode.');
       }
       else {
-        $result_message = $this->t('No safety team found');
+        $result_message = $this->t('No food safety team found for postcode <strong>@query</strong>', ['@query' => $query]);
       }
     }
 
