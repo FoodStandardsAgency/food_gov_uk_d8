@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * Implements hook_theme().
+ */
+function fsa_team_finder_theme() {
+
+  return [
+    // Team finder ajax load template.
+    'fsa_team_finder_results' => [
+      'render element' => 'custom_element',
+      'variables' => [
+        'intro' => NULL,
+        'name' => NULL,
+        'email' => NULL,
+        'site' => NULL,
+      ],
+    ],
+  ];
+}

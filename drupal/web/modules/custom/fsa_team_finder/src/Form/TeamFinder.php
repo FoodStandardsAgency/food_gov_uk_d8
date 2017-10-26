@@ -2,6 +2,11 @@
 
 namespace Drupal\fsa_team_finder\Form;
 
+use Drupal\Core\Ajax\RemoveCommand;
+use Drupal\Core\Ajax\InvokeCommand;
+use Drupal\Core\Ajax\HtmlCommand;
+use Drupal\Core\Ajax\AppendCommand;
+use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
@@ -39,11 +44,25 @@ class TeamFinder extends FormBase {
       '#maxlength' => 9,
       '#required' => TRUE,
     );
+    // The AJAX result placeholder.
+    $form['team-finder-results'] = [
+      '#suffix' => '<div id="team-finder-results">',
+      '#prefix' => '<div>',
+    ];
     $form['actions'] = array(
       '#type' => 'actions',
       'submit' => array(
         '#type' => 'submit',
         '#value' => $this->t('Submit'),
+        '#ajax' => [
+          'callback' => [$this, 'ajaxSubmitForm'],
+          'event' => 'click',
+          'effect' => 'fade',
+          'speed' => 500,
+          'progress' => [
+            'type' => 'throbber',
+          ],
+        ],
       ),
     );
     if ($form_state->getValue('query')) {
@@ -124,6 +143,74 @@ class TeamFinder extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $form_state->setRebuild();
+  }
+
+  /**
+   * Ajax submit functionality.
+   *
+   * @param array $form
+   *   Form fields.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   Form state values.
+   *
+   * @return \Drupal\Core\Ajax\AjaxResponse
+   *   The ajax response.
+   */
+  public function ajaxSubmitForm(array &$form, FormStateInterface $form_state) {
+
+    $results = [];
+    $data = $form_state->getValues();
+    $la = $this->getLocalAuthority($data['query']);
+
+    // entity query fsa local authority
+    $fsa_authority = \Drupal::entityTypeManager()
+      ->getStorage('fsa_authority')
+      ->loadByProperties([
+        'field_mapit_area' => $la['mapit_area'],
+      ]);
+    if ($fsa_authority = reset($fsa_authority)) {
+
+      // generate links
+      $email = $fsa_authority->get('field_email')->getString();
+      $email_alt = $fsa_authority->get('field_email_alt')->getString();
+      $overridden = $fsa_authority->get('field_email_overridden')
+        ->getString();
+      $email_value = $overridden ? $email_alt : $email;
+      $email_link = Link::fromTextAndUrl($email_value, Url::fromUri('mailto:' . $email_value, []))
+        ->toString();
+      $site_value = $fsa_authority->get('field_url')->getString();
+      $site_link = Link::fromTextAndUrl($site_value, Url::fromUri($site_value, []))
+        ->toString();
+
+      $results = [
+        'name' => $la['name'],
+        'mail' => $email_link,
+        'site' => $site_link,
+      ];
+
+    }
+    else {
+      // null entity query, set empty text
+    }
+
+    $intro = $this->t('Details of the food safety team covering <strong>@query</strong> are shown below. Please contact them to report the food problem.',
+      ['@query' => $form_state->getValue('query')]
+    );
+
+    $result = [
+      '#theme' => 'fsa_team_finder_results',
+      '#intro' => $intro,
+      '#name' => $results['name'],
+      '#email' => $results['mail'],
+      '#site' => $results['site'],
+    ];
+
+    $response = new AjaxResponse();
+    $response->addCommand(new HtmlCommand(
+      '#team-finder-results', $result
+    ));
+
+    return $response;
   }
 
   /**
