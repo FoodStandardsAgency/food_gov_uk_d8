@@ -66,6 +66,7 @@ class TeamFinder extends FormBase {
       ),
     );
     if ($form_state->getValue('query')) {
+      // Leave as is for non-js fallback.
 
       // get mapit local authority details
       $la = $this->getLocalAuthority($form_state->getValue('query'));
@@ -158,59 +159,70 @@ class TeamFinder extends FormBase {
    */
   public function ajaxSubmitForm(array &$form, FormStateInterface $form_state) {
 
-    $results = [];
-    $data = $form_state->getValues();
-    $la = $this->getLocalAuthority($data['query']);
+    $result_name = NULL;
+    $result_mail = NULL;
+    $result_site = NULL;
+    $query = $form_state->getValue('query');
+    $la = $this->getLocalAuthority($query);
 
-    // entity query fsa local authority
-    $fsa_authority = \Drupal::entityTypeManager()
-      ->getStorage('fsa_authority')
-      ->loadByProperties([
-        'field_mapit_area' => $la['mapit_area'],
-      ]);
-    if ($fsa_authority = reset($fsa_authority)) {
+    // Use fsa-team-finder-results.html.twig for the result.
+    $result['#theme'] = 'fsa_team_finder_results';
 
-      // generate links
-      $email = $fsa_authority->get('field_email')->getString();
-      $email_alt = $fsa_authority->get('field_email_alt')->getString();
-      $overridden = $fsa_authority->get('field_email_overridden')
-        ->getString();
-      $email_value = $overridden ? $email_alt : $email;
-      $email_link = Link::fromTextAndUrl($email_value, Url::fromUri('mailto:' . $email_value, []))
-        ->toString();
-      $site_value = $fsa_authority->get('field_url')->getString();
-      $site_link = Link::fromTextAndUrl($site_value, Url::fromUri($site_value, []))
-        ->toString();
+    if (isset($la['mapit_area'])) {
+      $fsa_authority = \Drupal::entityTypeManager()
+        ->getStorage('fsa_authority')
+        ->loadByProperties(array(
+          'field_mapit_area' => $la['mapit_area'],
+        ));
+      if (is_numeric(key($fsa_authority))) {
+        $fsa_authority = reset($fsa_authority);
 
-      $results = [
-        'name' => $la['name'],
-        'mail' => $email_link,
-        'site' => $site_link,
-      ];
+        $overridden = $fsa_authority->field_email_overridden->getString();
+        $email_value = $overridden ? $fsa_authority->field_email_alt->getString() : $fsa_authority->field_email->getString();
+        $email_link = Link::fromTextAndUrl($email_value, Url::fromUri('mailto:' . $email_value, []))->toString();
 
+        $site_value = $fsa_authority->field_url->getString();
+        $site_link = Link::fromTextAndUrl($site_value, Url::fromUri($site_value, []))->toString();
+
+        // Set results.
+        $result_message = $this->t('Details of the food safety team covering <strong>@query</strong> are shown below.', ['@query' => $query]);
+        $result_name = $la['name'];
+        $result_mail = $email_link;
+        $result_site = $site_link;
+
+      }
+      else {
+        $result_message = $this->t('no safety team found');
+      }
     }
     else {
-      // null entity query, set empty text
+      // In case mapit_area value was not found display helpful error msgs.
+      if (!isset($query) || $query == '') {
+        // @todo: maybe not even allow submit before input has value entered.
+        $result_message = $this->t('Please enter value.');
+      }
+      else if (!$this->testValidUkPostcode($query)) {
+        $result_message = $this->t('Invalid postcode.');
+      }
+      else {
+        $result_message = $this->t('No safety team found');
+      }
     }
-
-    $intro = $this->t('Details of the food safety team covering <strong>@query</strong> are shown below. Please contact them to report the food problem.',
-      ['@query' => $form_state->getValue('query')]
-    );
-
-    $result = [
-      '#theme' => 'fsa_team_finder_results',
-      '#intro' => $intro,
-      '#name' => $results['name'],
-      '#email' => $results['mail'],
-      '#site' => $results['site'],
-    ];
 
     $response = new AjaxResponse();
     $response->addCommand(new HtmlCommand(
-      '#team-finder-results', $result
+      '#team-finder-results',
+      [
+        '#theme' => 'fsa_team_finder_results',
+        '#message' => $result_message,
+        '#name' => $result_name,
+        '#mail' => $result_mail,
+        '#site' => $result_site,
+        ]
     ));
 
     return $response;
+
   }
 
   /**

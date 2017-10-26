@@ -10,9 +10,10 @@ function fsa_team_finder_theme() {
     'fsa_team_finder_results' => [
       'render element' => 'custom_element',
       'variables' => [
-        'intro' => NULL,
+        'attributes' => NULL,
+        'message' => NULL,
         'name' => NULL,
-        'email' => NULL,
+        'mail' => NULL,
         'site' => NULL,
       ],
     ],
