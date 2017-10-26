@@ -2,6 +2,9 @@
 
 namespace Drupal\fsa_team_finder\Form;
 
+use Drupal\Core\Ajax\HtmlCommand;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\InvokeCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
@@ -26,11 +29,14 @@ class TeamFinder extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    // construct form
-    $form['progress'] = array(
-      '#type' => 'item',
-      '#markup' => t('Step 1 of 2'),
-    );
+    // Set header/intro for the form (updated with AJAX).
+    $form['form-header'] = [
+      '#markup' => '<h3 class="form-title">' . $this->t('Find a food safety team') . '</h3>',
+      ];
+    $form['form-intro'] = [
+      '#markup' => '<p class="form-intro">' . $this->t('Please enter a postcode to find the food safety team in the area') . '</p>',
+      ]
+    ;
     $form['query'] = array(
       '#type' => 'textfield',
       '#title' => t('Enter a full postcode'),
@@ -39,14 +45,44 @@ class TeamFinder extends FormBase {
       '#maxlength' => 9,
       '#required' => TRUE,
     );
+    // The AJAX result placeholder.
+    $form['ajax-results'] = [
+      '#markup' => '<div id="team-finder-results"></div>',
+    ];
     $form['actions'] = array(
       '#type' => 'actions',
       'submit' => array(
         '#type' => 'submit',
         '#value' => $this->t('Submit'),
+        '#attributes' => ['class' => ['submit-finder']],
+        '#ajax' => [
+          'callback' => [$this, 'ajaxSubmitForm'],
+          'event' => 'click',
+          'effect' => 'fade',
+          'speed' => 500,
+          'progress' => [
+            'type' => 'throbber',
+          ],
+        ],
+      ),
+      'reset' => array(
+        '#type' => 'submit',
+        '#value' => $this->t('Reset'),
+        '#attributes' => ['class' => ['visually-hidden', 'submit-reset']],
+        '#ajax' => [
+          'callback' => [$this, 'ajaxResetForm'],
+          'event' => 'click',
+          'effect' => 'fade',
+          'speed' => 500,
+          'progress' => [
+            'type' => 'throbber',
+          ],
+        ],
       ),
     );
+
     if ($form_state->getValue('query')) {
+      // Leave as is for non-js fallback.
 
       // get mapit local authority details
       $la = $this->getLocalAuthority($form_state->getValue('query'));
@@ -72,7 +108,6 @@ class TeamFinder extends FormBase {
             ->toString();
 
           // reconstruct form
-          $form['progress']['#markup'] = t('Step 2 of 2');
           unset($form['query']);
           unset($form['actions']);
           $form['confirmation'] = array(
@@ -123,7 +158,152 @@ class TeamFinder extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $form_state->setRebuild();
+//    $form_state->setRebuild();
+  }
+
+  /**
+   * Ajax reset functionality.
+   *
+   * @param array $form
+   *   Form fields.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   Form state values.
+   *
+   * @return \Drupal\Core\Ajax\AjaxResponse
+   *   The ajax response.
+   */
+  public function ajaxResetForm(array &$form, FormStateInterface $form_state) {
+    $response = new AjaxResponse();
+
+    // Toggle element visibilities.
+    $toggleClasses = [
+      '#fsa-team-finder .submit-reset',
+      '#fsa-team-finder .submit-finder',
+      '#fsa-team-finder .form-item-query',
+      '#fsa-team-finder .form-intro',
+    ];
+    foreach ($toggleClasses AS $class) {
+      $response->addCommand(new InvokeCommand(
+        $class, 'toggleClass', ['visually-hidden']
+      ));
+    }
+
+    // Clear query input.
+    $response->addCommand(new InvokeCommand(
+      '#fsa-team-finder .form-item-query input',
+      'val',
+      ['']
+    ));
+
+    // Revert form title.
+    $response->addCommand(new HtmlCommand(
+      '#fsa-team-finder .form-title',
+      $this->t('Find a food safety team')
+    ));
+
+    // Clear results wrapper.
+    $response->addCommand(new HtmlCommand(
+      '#team-finder-results', ''
+    ));
+
+    return $response;
+  }
+
+  /**
+   * Ajax submit functionality.
+   *
+   * @param array $form
+   *   Form fields.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   Form state values.
+   *
+   * @return \Drupal\Core\Ajax\AjaxResponse
+   *   The ajax response.
+   */
+  public function ajaxSubmitForm(array &$form, FormStateInterface $form_state) {
+
+    $response = new AjaxResponse();
+    $result_name = NULL;
+    $result_mail = NULL;
+    $result_site = NULL;
+    $query = $form_state->getValue('query');
+    $la = $this->getLocalAuthority($query);
+
+    // Use fsa-team-finder-results.html.twig for the result.
+    $result['#theme'] = 'fsa_team_finder_results';
+
+    if (isset($la['mapit_area'])) {
+      $fsa_authority = \Drupal::entityTypeManager()
+        ->getStorage('fsa_authority')
+        ->loadByProperties(array(
+          'field_mapit_area' => $la['mapit_area'],
+        ));
+      if (is_numeric(key($fsa_authority))) {
+        $fsa_authority = reset($fsa_authority);
+
+        $overridden = $fsa_authority->field_email_overridden->getString();
+        $email_value = $overridden ? $fsa_authority->field_email_alt->getString() : $fsa_authority->field_email->getString();
+        $email_link = Link::fromTextAndUrl($email_value, Url::fromUri('mailto:' . $email_value, []))->toString();
+
+        $site_value = $fsa_authority->field_url->getString();
+        $site_link = Link::fromTextAndUrl($site_value, Url::fromUri($site_value, []))->toString();
+
+        // Set results.
+        $result_message = $this->t('Details of the food safety team covering <strong>@query</strong> are shown below.', ['@query' => $query]);
+        $result_name = $la['name'];
+        $result_mail = $email_link;
+        $result_site = $site_link;
+
+        // Toggle element visibilities.
+        $toggleClasses = [
+          '#fsa-team-finder .submit-reset',
+          '#fsa-team-finder .submit-finder',
+          '#fsa-team-finder .form-item-query',
+          '#fsa-team-finder .form-intro',
+        ];
+        foreach ($toggleClasses AS $class) {
+          $response->addCommand(new InvokeCommand(
+            $class, 'toggleClass', ['visually-hidden']
+          ));
+        }
+
+        // Update form title.
+        $response->addCommand(new HtmlCommand(
+          '#fsa-team-finder .form-title',
+          $this->t('Food safety team details')
+        ));
+      }
+      else {
+        $result_message = $this->t('No results found.');
+      }
+    }
+    else {
+      // In case mapit_area value was not found display helpful error msgs.
+      if (!isset($query) || $query == '') {
+        // @todo: maybe not even allow submit before input has value entered.
+        $result_message = $this->t('Please enter value.');
+      }
+      else if (!$this->testValidUkPostcode($query)) {
+        $result_message = $this->t('Invalid postcode.');
+      }
+      else {
+        $result_message = $this->t('No food safety team found for postcode <strong>@query</strong>', ['@query' => $query]);
+      }
+    }
+
+    $response->addCommand(new HtmlCommand(
+      '#team-finder-results',
+      [
+        '#theme' => 'fsa_team_finder_results',
+        '#message' => $result_message,
+        '#name' => $result_name,
+        '#mail' => $result_mail,
+        '#site' => $result_site,
+        ]
+    ));
+
+    return $response;
+
   }
 
   /**
