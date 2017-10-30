@@ -58,7 +58,8 @@
         "drupal/redirect": "^1.0@beta",
         "drupal/config_split": "^1.2",
         "drupal/devel": "^1.2",
-        "drupal/config_readonly": "^1.0@beta"
+        "drupal/config_readonly": "^1.0@beta",
+        "drupal/metatag": "^1.3"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
