@@ -34,6 +34,7 @@ module:
   field_ui: 0
   file: 0
   filter: 0
+  fsa_40x: 0
   fsa_alerts: 0
   fsa_alerts_import: 0
   fsa_authorities_exp_filter: 0

@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * Implements hook_theme_suggestions_page_alter() to set 40x template suggestions.
+ * @see https://www.drupal.org/node/2363987#comment-12154462
+ *
+ * @param array $suggestions
+ * @param array $variables
+ */
+function fsa_40x_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+  $path_args = explode('/', trim(\Drupal::service('path.current')->getPath(), '/'));
+  $suggestions = theme_get_suggestions($path_args, 'page');
+  $http_error_suggestions = [
+    'fsa_40x.throw403' => 'page__40x',
+    'fsa_40x.throw404' => 'page__40x',
+  ];
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if (isset($http_error_suggestions[$route_name])) {
+    $suggestions[] = $http_error_suggestions[$route_name];
+  }
+}
+
+/**
+ * Implements hook_theme().
+ *
+ * @return array
+ */
+function fsa_40x_theme($existing, $type, $theme, $path) {
+  return [
+    'fsa_40x_response' => [
+      'variables' => [
+        'status_code' => NULL,
+        'status_description' => NULL,
+        'search' => NULL,
+      ],
+    ],
+  ];
+}
