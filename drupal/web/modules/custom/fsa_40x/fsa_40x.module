@@ -2,6 +2,7 @@
 
 /**
  * Implements hook_theme_suggestions_page_alter() to set 40x template suggestions.
+ * @see https://www.drupal.org/node/2363987#comment-12154462
  *
  * @param array $suggestions
  * @param array $variables
