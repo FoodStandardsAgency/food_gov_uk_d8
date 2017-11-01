@@ -1,4 +1,4 @@
-fsa_40x.system.403:
+fsa_40x.throw403:
   path: '/system/403'
   defaults:
     _controller: Drupal\fsa_40x\Controller\Fsa40x::throw403
@@ -6,7 +6,7 @@ fsa_40x.system.403:
   requirements:
     _access: 'TRUE'
 
-fsa_40x.system.404:
+fsa_40x.throw404:
   path: '/system/404'
   defaults:
     _controller: Drupal\fsa_40x\Controller\Fsa40x::throw404

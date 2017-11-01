@@ -10,8 +10,8 @@ function fsa_40x_theme_suggestions_page_alter(array &$suggestions, array $variab
   $path_args = explode('/', trim(\Drupal::service('path.current')->getPath(), '/'));
   $suggestions = theme_get_suggestions($path_args, 'page');
   $http_error_suggestions = [
-    'fsa_40x.system.403' => 'page__40x',
-    'fsa_40x.system.404' => 'page__40x',
+    'fsa_40x.throw403' => 'page__40x',
+    'fsa_40x.throw404' => 'page__40x',
   ];
   $route_name = \Drupal::routeMatch()->getRouteName();
   if (isset($http_error_suggestions[$route_name])) {
