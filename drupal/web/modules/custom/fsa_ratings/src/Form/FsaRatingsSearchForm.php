@@ -278,7 +278,7 @@ class FsaRatingsSearchForm extends FormBase {
     }
 
     // Merge FHRS & FHIS checkbox values to the query string.
-    if ($rating_fhrs || $rating_fhis) {
+    if (isset($rating_fhrs) || isset($rating_fhis)) {
       $query['rating_value'] = $rating_fhrs . ',' . $rating_fhis;
     }
 
