@@ -28,6 +28,7 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
 
   /**
    * MultilingualContentIndex constructor.
+   *
    * @param array $configuration
    * @param string $plugin_id
    * @param mixed $plugin_definition
@@ -99,6 +100,9 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
     }
   }
 
+  /**
+   *
+   */
   public function setup() {
 
     // Create one index per language, so that we can have different analyzers.
@@ -228,6 +232,9 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
     }
   }
 
+  /**
+   *
+   */
   protected function getFiltersAndAnalyzers($langcode) {
     // Get full language name.
     $language = $this->getLanguageName($langcode);
@@ -256,30 +263,29 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
             ],
           ],
         ],
-        'filter' => [
-          ] + $filters,
+        'filter' => [] + $filters,
         'analyzer' => [
-            'keyword_lower' => [
-              'type' => 'custom',
-              'tokenizer' => 'keyword',
-              'filter' => [
-                'standard',
-                'lowercase',
-              ],
+          'keyword_lower' => [
+            'type' => 'custom',
+            'tokenizer' => 'keyword',
+            'filter' => [
+              'standard',
+              'lowercase',
             ],
-            'partial_match' => [
-              'type' => 'custom',
-              'tokenizer' => 'standard',
-              'char_filter' => [
-                'html_strip',
-              ],
-              'filter' => array_filter($partial_match_filters),
+          ],
+          'partial_match' => [
+            'type' => 'custom',
+            'tokenizer' => 'standard',
+            'char_filter' => [
+              'html_strip',
             ],
-            'synonym' => [
-              'tokenizer' => 'whitespace',
-              'filter' => ['synonym'],
-            ],
-          ] + $this->getLanguageAnalyzer($langcode),
+            'filter' => array_filter($partial_match_filters),
+          ],
+          'synonym' => [
+            'tokenizer' => 'whitespace',
+            'filter' => ['synonym'],
+          ],
+        ] + $this->getLanguageAnalyzer($langcode),
       ],
     ];
   }
@@ -361,13 +367,14 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
    * Get the name of the language analyzer to be used for a given language code.
    *
    * @param $langcode
+   *
    * @return mixed|string
    */
   protected function getLanguageName($langcode) {
     $language_analyzers = [
       'en' => 'english',
       // There's no language analyzer for Welsh implemented in ES
-      //'cy' => 'welsh',
+      // 'cy' => 'welsh',.
     ];
     if (isset($language_analyzers[$langcode])) {
       return $language_analyzers[$langcode];
@@ -390,4 +397,5 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
     $synonym_file = drupal_get_path('module', 'fsa_es') . '/src/Plugin/ElasticsearchIndex/synonyms.txt';
     return file($synonym_file, FILE_IGNORE_NEW_LINES);
   }
+
 }
