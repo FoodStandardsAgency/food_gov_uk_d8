@@ -19,7 +19,7 @@ class AlertImportHelpers {
    *   Fully qualified URI string.
    *
    * @return array
-   *    Array of id's
+   *   Array of id's
    */
   public static function getIdFromUri($uri) {
 
@@ -31,4 +31,5 @@ class AlertImportHelpers {
     return $ids[0];
 
   }
+
 }

@@ -43,7 +43,7 @@ class FsaAlertsConfigurations extends ConfigFormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $fsa_alerts_import = $this->config('config.fsa_alerts_import');
 
-    // FSA Alerts API URL
+    // FSA Alerts API URL.
     $form['fsa_alerts_import']['api_url'] = [
       '#type' => 'textfield',
       '#title' => $this->t('FSA Alerts API base URL'),
