@@ -10,11 +10,11 @@
  */
 function fsa_preprocess_status_messages(&$variables) {
 
-  // unset webform preview warning message
+  // Unset webform preview warning message.
   if (isset($variables['message_list']['warning'][0])) {
     $warning_message = $variables['message_list']['warning'][0]->__toString();
     if ($warning_message == 'Here are the details you are about to report.') {
-      $variables['message_list'] = array();
+      $variables['message_list'] = [];
     }
   }
 }

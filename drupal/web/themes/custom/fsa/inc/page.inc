@@ -13,7 +13,8 @@ function fsa_preprocess_page(&$variables) {
   $variables['current_language'] = $language;
   if ($language == 'cy') {
     $variables['home_url'] = '/cy';
-  } else {
+  }
+  else {
     $variables['home_url'] = '/';
   }
 }

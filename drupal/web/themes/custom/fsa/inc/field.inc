@@ -14,13 +14,13 @@ function fsa_preprocess_field(&$variables) {
     // Force span on inline label display title_element.
     $variables['title_element'] = 'span';
   }
-  else if ($variables['element']['#bundle'] == 'alert') {
+  elseif ($variables['element']['#bundle'] == 'alert') {
     // All (non-inline) alert node labels forced to h3.
     $variables['title_element'] = 'h3';
 
     switch ($variables['field_name']) {
       case 'field_alert_relatedmedia':
-        // Fake alerts related media to use same class as field_document
+        // Fake alerts related media to use same class as field_document.
         $variables['attributes']['class'][] = 'field__field_document';
         break;
     }
@@ -31,6 +31,7 @@ function fsa_preprocess_field(&$variables) {
       case 'field_update_date':
         $variables['title_element'] = 'div';
         break;
+
       default:
         $variables['title_element'] = 'h2';
         break;
@@ -46,7 +47,7 @@ function fsa_preprocess_field(&$variables) {
     $variables['title_attributes']['class'][] = 'label__' . $variables['label_display'];
 
     // Add counting classes for fields with multiple items.
-    foreach(array_keys($variables['items']) as $delta) {
+    foreach (array_keys($variables['items']) as $delta) {
       $variables['items'][$delta]['attributes']->setAttribute('class', $field_name);
       $variables['items'][$delta]['attributes']->setAttribute('class', $field_name . '__item' . ' ' . $field_name . '__item--' . $delta);
     }
