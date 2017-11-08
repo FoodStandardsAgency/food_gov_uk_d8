@@ -4,7 +4,6 @@ namespace Drupal\fsa_subpages\Plugin\Field\FieldWidget;
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\Plugin\Field\FieldWidget\StringTextfieldWidget;
-use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
@@ -20,13 +19,19 @@ use Drupal\Core\Form\FormStateInterface;
  */
 class StringTextfieldUrlAliasWidget extends StringTextfieldWidget {
 
+  /**
+   * {@inheritdoc}
+   */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $render = parent::formElement($items, $delta, $element, $form, $form_state);
-    $render['#element_validate'][] = [static::class, 'validate_url_alias'];
+    $render['#element_validate'][] = [static::class, 'validateUrlAlias'];
     return $render;
   }
 
-  public static function validate_url_alias($element, FormStateInterface $form_state) {
+  /**
+   * Validate url alias.
+   */
+  public static function validateUrlAlias($element, FormStateInterface $form_state) {
     $alias = $element['value']['#value'];
     $rx = '/^[a-z][a-z0-9\/-]+[a-z0-9]$/';
     if (!preg_match($rx, $alias)) {

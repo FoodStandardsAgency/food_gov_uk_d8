@@ -45,13 +45,12 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
     ];
 
     if (in_array($block->id(), $controlled_block_ids)) {
-      drupal_set_message(t('<b>NB!</b> this block visibility is controlled in <code>@function</code>', ['@function' => __FUNCTION__  . '()']), 'warning');
+      drupal_set_message(t('<b>NB!</b> this block visibility is controlled in <code>@function</code>', ['@function' => __FUNCTION__ . '()']), 'warning');
     }
   }
 
   if ($operation == 'view') {
     // Control certain block visibilities based on node type, term etc.
-
     $node = \Drupal::routeMatch()->getParameter('node');
     if (is_object($node)) {
 
@@ -64,7 +63,6 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
           $term_id = $term->id();
         }
       }
-
 
       // Control the region for page title block.
       if ($block->getPluginId() == 'page_title_block') {
@@ -107,7 +105,6 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
     }
     else {
       // Additional access/visibility rules for non-node pages.
-
       if ($block->id() == 'menu_help_secondary') {
         return AccessResult::forbidden()
           ->addCacheableDependency($block);

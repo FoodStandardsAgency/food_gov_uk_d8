@@ -3,10 +3,8 @@
 namespace Drupal\fsa_subpages\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
-use Drupal\Component\Utility\Html;
 
 /**
  * Provides a 'PrevNextBlock' Block.
@@ -24,20 +22,20 @@ class SubpagesPrevNextBlock extends BlockBase {
    */
   public function build() {
 
-    // show block only on node pages
+    // Show block only on node pages.
     $route = \Drupal::routeMatch()->getRouteName();
     if ($route != 'entity.node.canonical') {
       return [];
     }
 
-    // make sure we have the node
+    // Make sure we have the node.
     $node = \Drupal::routeMatch()->getParameter('node');
     if (empty($node)) {
       return [];
     }
 
     $nid = $node->id();
-    // Reload the node to be sure it is correct type
+    // Reload the node to be sure it is correct type.
     $node = Node::load($nid);
     if (!$node->hasField('field_subpages')) {
       return [];
@@ -56,7 +54,7 @@ class SubpagesPrevNextBlock extends BlockBase {
       return $empty;
     }
 
-    // build a list of valid sub-page aliases
+    // Build a list of valid sub-page aliases.
     $aliases = [];
     $index_min = 1;
     $index = $index_min;
@@ -74,16 +72,16 @@ class SubpagesPrevNextBlock extends BlockBase {
     }
     $index_max = $index - 1;
 
-    // get URL query key-value pairs
+    // Get URL query key-value pairs.
     $param = \Drupal::request()->query->all();
 
-    // check if query contains something that matches any sub-page alias
+    // Check if query contains something that matches any sub-page alias.
     $match = array_intersect_key($aliases, $param);
     if (empty($match) || count($match) != 1) {
       return $empty;
     }
 
-    // current index
+    // Current index.
     $index = reset($match)['index'];
 
     $nav = [
@@ -120,6 +118,21 @@ class SubpagesPrevNextBlock extends BlockBase {
 
   }
 
+  /**
+   * Prev/next link.
+   *
+   * @param object $paragraph
+   *   Paragraph entity.
+   * @param string $text
+   *   Link text.
+   * @param int $nid
+   *   Node entity id.
+   * @param string $class
+   *   HTML class.
+   *
+   * @return array
+   *   The link array.
+   */
   private function direction($paragraph, $text, $nid, $class) {
 
     $arrow = [
@@ -140,7 +153,7 @@ class SubpagesPrevNextBlock extends BlockBase {
 
     $title = $paragraph->get('field_title')->getString();
     $title = [
-       '#markup' => $title,
+      '#markup' => $title,
     ];
     $title = [
       '#type' => 'container',
@@ -160,7 +173,7 @@ class SubpagesPrevNextBlock extends BlockBase {
       '#title' => [
         'direction' => $direction,
         'title' => $title,
-      ]
+      ],
     ];
 
     return $link;

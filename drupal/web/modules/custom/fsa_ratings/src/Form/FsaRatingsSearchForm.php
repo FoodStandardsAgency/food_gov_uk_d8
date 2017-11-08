@@ -91,7 +91,7 @@ class FsaRatingsSearchForm extends FormBase {
     // Set default title.
     $form['header']['title'] = ['#markup' => $this->t('Food hygiene ratings search')];
 
-    // ...and if search was not performed pass additional header texts to the form.
+    // ...and if search was not performed pass additional header texts.
     if ($search === FALSE && \Drupal::routeMatch()->getRouteName() == 'fsa_ratings.ratings_search') {
       $form['header']['title'] = ['#markup' => $this->t('Eating out?')];
       $form['header']['subtitle'] = ['#markup' => $this->t('Check the hygiene rating.')];
@@ -214,7 +214,7 @@ class FsaRatingsSearchForm extends FormBase {
    *   Sorted array.
    */
   private static function defineAndSortArrayItems(array $array, array $definingArray) {
-    $modified_array = array();
+    $modified_array = [];
     foreach ($definingArray as $key) {
       if (array_key_exists($key, $array)) {
         $modified_array[$key] = $array[$key];
@@ -223,7 +223,6 @@ class FsaRatingsSearchForm extends FormBase {
     }
     return $modified_array;
   }
-
 
   /**
    * {@inheritdoc}
@@ -294,27 +293,34 @@ class FsaRatingsSearchForm extends FormBase {
       // Add textual representation for numeric values.
       switch ($a['key']) {
         case '5':
-          $value = $a['key'] .' ' . t('Very good');
+          $value = $a['key'] . ' ' . t('Very good');
           break;
+
         case '4':
-          $value = $a['key'] .' ' . t('Good');
+          $value = $a['key'] . ' ' . t('Good');
           break;
+
         case '3':
-          $value = $a['key'] .' ' . t('Generally satisfactory');
+          $value = $a['key'] . ' ' . t('Generally satisfactory');
           break;
+
         case '2':
-          $value = $a['key'] .' ' . t('Improvement necessary');
+          $value = $a['key'] . ' ' . t('Improvement necessary');
           break;
+
         case '1':
-          $value = $a['key'] .' ' . t('Major improvement necessary');
+          $value = $a['key'] . ' ' . t('Major improvement necessary');
           break;
+
         case '0':
-          $value = $a['key'] .' ' . t('Urgent improvement necessary');
+          $value = $a['key'] . ' ' . t('Urgent improvement necessary');
           break;
+
         case 'AwaitingInspection':
           // Make this label more human friendly.
           $value = t('Awaiting Rating');
           break;
+
         default:
           $value = $a['key'];
       }

@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains Drupal\fsa_ratings_import\Plugin\migrate\process\RatingValue.
- */
 
 namespace Drupal\fsa_ratings_import\Plugin\migrate\process;
 

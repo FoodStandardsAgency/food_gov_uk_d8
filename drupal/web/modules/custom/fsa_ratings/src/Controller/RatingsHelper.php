@@ -13,13 +13,15 @@ use Drupal\Core\Controller\ControllerBase;
 class RatingsHelper extends ControllerBase {
 
   /**
-   * @param string $date
-   *    String in datetime format.
+   * Get formatted date or "N/A" for dates from the beginning of 20th Century.
    *
+   * @param string $date
+   *   String in datetime format.
    * @param string $format
-   *    Drupal date format to format the date.
+   *   Drupal date format to format the date.
    *
    * @return \Drupal\Core\StringTranslation\TranslatableMarkup|false|int
+   *   Formatted date or "N/A".
    */
   public static function ratingsDate($date, $format = 'medium') {
 
@@ -37,18 +39,19 @@ class RatingsHelper extends ControllerBase {
   }
 
   /**
-   * Helper function to get entity details from the FSA ratings system
-   * (or any Drupal entity).
+   * Helper function to get entity details from the FSA ratings system.
    *
-   * @param $entity_name
-   *    The machine name of the entity.
-   * @param $id
-   *    The entity id.
-   * @param $field
-   *    The name of the field or property to get.
+   * Usage does not limit to FSA, can be used for any Drupal entity.
+   *
+   * @param string $entity_name
+   *   The machine name of the entity.
+   * @param int $id
+   *   The entity id.
+   * @param string $field
+   *   The name of the field or property to get.
    *
    * @return string
-   *    Field or property value.
+   *   Field or property value.
    */
   public static function getEntityDetail($entity_name, $id, $field) {
 
@@ -59,7 +62,7 @@ class RatingsHelper extends ControllerBase {
       if ($field == 'name') {
         $value = $entity->getName();
       }
-      else if ($entity->hasField($field)) {
+      elseif ($entity->hasField($field)) {
         $value = $entity->get($field);
         // @todo: consider handling fields with multiple values?
         $value = $value->first()->getValue()['value'];
@@ -75,7 +78,7 @@ class RatingsHelper extends ControllerBase {
    * @param int $rating
    *   Establishment rating value.
    * @param string $scheme
-   *    Rating scheme.
+   *   Rating scheme.
    * @param int $embed_type
    *   Embed type code (1|3|4), define the FHRS badge type.
    *
@@ -109,15 +112,15 @@ class RatingsHelper extends ControllerBase {
           break;
       }
 
-      $badge_path = $scheme .  '/' . $rating . '/' . 'score-' . $rating . '-' . $embed_type . '-' . $language . '.png';
+      $badge_path = $scheme . '/' . $rating . '/' . 'score-' . $rating . '-' . $embed_type . '-' . $language . '.png';
 
     }
-    else if ($scheme == 'FHIS') {
+    elseif ($scheme == 'FHIS') {
       $filter = [
         ' ' => '_',
       ];
       $filename = Html::cleanCssIdentifier('fhis_' . $rating, $filter);
-      $badge_path = $scheme .  '/' . $filename  . '.jpg';
+      $badge_path = $scheme . '/' . $filename . '.jpg';
     }
 
     if ($badge_path != '') {

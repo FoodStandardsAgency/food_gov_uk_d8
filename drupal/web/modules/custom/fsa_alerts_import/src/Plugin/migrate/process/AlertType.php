@@ -28,10 +28,12 @@ class AlertType extends ProcessPluginBase {
       case 'Alert':
         // Do not store "Alert" type, all items have that anyway.
         return '';
-          break;
+
+      break;
       default:
         // Return one of the expected type variation.
         return $type;
     }
   }
+
 }

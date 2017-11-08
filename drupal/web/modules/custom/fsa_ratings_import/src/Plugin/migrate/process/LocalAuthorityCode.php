@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains Drupal\fsa_ratings_import\Plugin\migrate\process\LocalAuthorityCode.
- */
 
 namespace Drupal\fsa_ratings_import\Plugin\migrate\process;
 
@@ -11,8 +7,10 @@ use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\Row;
 
 /**
- * Prepends the LocalAuthorityCode with "1" to be sure it stores as integer to
- * avoid losing the leading zero's.
+ * Local AuthorityCode transform class.
+ *
+ * Transform function prepends LocalAuthorityCode with "1" to be sure it stores
+ * as integer in order to avoid losing the leading zero's.
  *
  * @MigrateProcessPlugin(
  *   id = "local_authority_code",

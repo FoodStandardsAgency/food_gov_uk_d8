@@ -96,5 +96,4 @@ class AlertTypeFormatter extends FormatterBase {
     return $content;
   }
 
-
 }
