@@ -45,7 +45,8 @@ class WebformGooglePlacesElement extends FormElement {
       ],
       '#theme' => 'input__webform_googleplaces',
       '#theme_wrappers' => ['form_element'],
-      '#placeholder' => '', // GDS requires no placeholders.
+      // GDS requires no placeholders.
+      '#placeholder' => '',
     ];
   }
 
@@ -73,7 +74,7 @@ class WebformGooglePlacesElement extends FormElement {
         // Get first match of establishment with the postcode.
         $query = \Drupal::entityQuery('fsa_establishment')
           ->condition('field_postcode', $postcode)
-          ->range(0,1);
+          ->range(0, 1);
         $establishment = $query->execute();
         $id = key($establishment);
         if (is_numeric($id)) {
