@@ -29,7 +29,7 @@ class YearSelect extends InOperator {
     }
 
     $this->valueTitle = t('Created year');
-    $this->definition['options callback'] = array($this, 'generateOptions');
+    $this->definition['options callback'] = [$this, 'generateOptions'];
   }
 
   /**
@@ -55,7 +55,7 @@ class YearSelect extends InOperator {
    */
   public function generateOptions() {
     $years = range(date('Y'), 1970);
-    $years_processed = array();
+    $years_processed = [];
 
     foreach ($years as $year) {
 
