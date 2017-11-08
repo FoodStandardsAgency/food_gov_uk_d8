@@ -43,8 +43,8 @@ class EstablishmentApiUrl extends Url {
     $import_random = \Drupal::config('fsa_ratings_import')->get('import_random');
     // For development we'll want to have less processing and import to happen.
     if ($import_mode == 'development') {
-      // Choose random page to be imported
-      // Add $config['fsa_ratings_import']['import_random'] = TRUE; to your settings.local.php.
+      // Add $config['fsa_ratings_import']['import_random'] = TRUE; to your
+      // local settings.local.php to choose random page to be imported.
       if ($import_random) {
         $start_at_page = rand(100, $page_count - 100);
       }

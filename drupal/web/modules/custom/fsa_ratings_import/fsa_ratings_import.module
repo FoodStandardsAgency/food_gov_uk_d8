@@ -23,7 +23,7 @@ function fsa_ratings_import_help($route_name, RouteMatchInterface $route_match) 
       $output .= '<li>' . t('<strong>fsa_establishment</strong> for importing FHRS Establishments from <code><a href="http://api.ratings.food.gov.uk/Help/Api/GET-Establishments-id">GET Establishments</a></code>') . '</li>';
       $output .= '</ul>';
       $output .= '<h3>' . t('Uses') . '</h3>';
-      $output .= '<p>' . t('Import (migrate) the data using <code>drush migrate_tools</code> commands') . ':</p>';
+      $output .= '<p>' . t('Import (migrate) the data using <code>drush migrate_tools</code> commands') . '</p>';
       $output .= '<ul>';
       $output .= '<li>' . t('Import Authorities: <code>drush mi --tag=authorities</code>') . '</li>';
       $output .= '<li>' . t('Import Establishments: <code>drush mi --tag=establishments</code>') . '</li>';
