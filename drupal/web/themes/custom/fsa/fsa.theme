@@ -17,7 +17,6 @@ require_once 'inc/status_messages.inc';
  * Implements hook_page_attachments_alter().
  */
 function fsa_page_attachments_alter(&$variables) {
-  global $base_url;
 
   $path_to_theme = '/' . drupal_get_path('theme', 'fsa') . '/';
   $path_to_images = '/' . drupal_get_path('theme', 'fsa') . '/dist/img/favicon/';
