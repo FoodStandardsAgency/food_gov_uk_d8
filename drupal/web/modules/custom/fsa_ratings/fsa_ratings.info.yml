@@ -4,4 +4,4 @@ description: FSA Food Hygiene Rating Scheme (FHRSA) API module. Creates entities
 core: 8.x
 package: FSA
 dependencies:
-  - geolocation
+  - drupal:geolocation
