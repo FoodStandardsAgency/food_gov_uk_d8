@@ -124,13 +124,20 @@ class RatingsSearch extends ControllerBase {
       '#form' => \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchForm'),
       '#sort_form' => $sort_form,
       '#ratings_info_content' => $ratings_info,
-      '#items' => $items,                         // Actual result items
-      '#categories' => $categories,               // Aggregation results, list of categories of the result items
-      '#keywords' => $keywords,                   // Keywords given in the URL
-      '#available_filters' => $available_filters, // Meaningful filters (which have content associated)
-      '#applied_filters' => $filters,             // Filters given by the user and used for the querying
-      '#hits_total' => $hits,                     // Total count of the results
-      '#hits_shown' => count($items),             // Item count to be shown now
+    // Actual result items.
+      '#items' => $items,
+    // Aggregation results, list of categories of the result items.
+      '#categories' => $categories,
+    // Keywords given in the URL.
+      '#keywords' => $keywords,
+    // Meaningful filters (which have content associated)
+      '#available_filters' => $available_filters,
+    // Filters given by the user and used for the querying.
+      '#applied_filters' => $filters,
+    // Total count of the results.
+      '#hits_total' => $hits,
+    // Item count to be shown now.
+      '#hits_shown' => count($items),
       '#load_more' => \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchLoadMore'),
     ];
   }

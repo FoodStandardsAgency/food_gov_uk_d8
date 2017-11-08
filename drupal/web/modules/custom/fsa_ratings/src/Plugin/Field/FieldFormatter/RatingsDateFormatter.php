@@ -20,6 +20,7 @@ use Drupal\fsa_ratings\Controller\RatingsHelper;
  * )
  */
 class RatingsDateFormatter extends FormatterBase {
+
   /**
    * {@inheritdoc}
    */
