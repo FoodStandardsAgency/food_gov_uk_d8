@@ -91,7 +91,7 @@ class FsaRatingsSearchForm extends FormBase {
     // Set default title.
     $form['header']['title'] = ['#markup' => $this->t('Food hygiene ratings search')];
 
-    // ...and if search was not performed pass additional header texts to the form.
+    // ...and if search was not performed pass additional header texts.
     if ($search === FALSE && \Drupal::routeMatch()->getRouteName() == 'fsa_ratings.ratings_search') {
       $form['header']['title'] = ['#markup' => $this->t('Eating out?')];
       $form['header']['subtitle'] = ['#markup' => $this->t('Check the hygiene rating.')];

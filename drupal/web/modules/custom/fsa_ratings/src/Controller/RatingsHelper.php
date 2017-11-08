@@ -13,13 +13,15 @@ use Drupal\Core\Controller\ControllerBase;
 class RatingsHelper extends ControllerBase {
 
   /**
+   * Get formatted date or "N/A" for dates from the beginning of 20th Century.
+   *
    * @param string $date
    *   String in datetime format.
-   *
    * @param string $format
    *   Drupal date format to format the date.
    *
    * @return \Drupal\Core\StringTranslation\TranslatableMarkup|false|int
+   *   Formatted date or "N/A".
    */
   public static function ratingsDate($date, $format = 'medium') {
 
@@ -37,14 +39,15 @@ class RatingsHelper extends ControllerBase {
   }
 
   /**
-   * Helper function to get entity details from the FSA ratings system
-   * (or any Drupal entity).
+   * Helper function to get entity details from the FSA ratings system.
    *
-   * @param $entity_name
+   * Usage does not limit to FSA, can be used for any Drupal entity.
+   *
+   * @param string $entity_name
    *   The machine name of the entity.
-   * @param $id
+   * @param int $id
    *   The entity id.
-   * @param $field
+   * @param string $field
    *   The name of the field or property to get.
    *
    * @return string
