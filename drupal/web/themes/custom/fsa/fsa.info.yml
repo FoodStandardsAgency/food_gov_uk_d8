@@ -1,8 +1,7 @@
 name: FSA
 type: theme
-description: "Theme for d8."
+description: "Theme for the Food Standards Agency"
 core: 8.x
-version: 1.0
 base theme: stable
 regions:
   header: 'Header'

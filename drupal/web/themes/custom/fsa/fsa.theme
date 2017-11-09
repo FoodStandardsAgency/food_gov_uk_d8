@@ -5,9 +5,6 @@
  * Functions to support theming in the fsa.
  */
 
-use Drupal\core\Url;
-use Drupal\Core\Link;
-
 // Add all preprocess hooks to respective files:
 require_once 'inc/html.inc';
 require_once 'inc/node.inc';
@@ -16,82 +13,84 @@ require_once 'inc/page.inc';
 require_once 'inc/fsa-ratings-search-page.inc';
 require_once 'inc/status_messages.inc';
 
+/**
+ * Implements hook_page_attachments_alter().
+ */
 function fsa_page_attachments_alter(&$variables) {
-  global $base_url;
 
   $path_to_theme = '/' . drupal_get_path('theme', 'fsa') . '/';
   $path_to_images = '/' . drupal_get_path('theme', 'fsa') . '/dist/img/favicon/';
 
-  // Normal favicon
+  // Normal favicon.
   foreach ($variables['#attached']['html_head_link'] as $key => $headitem) {
     if ($headitem[0]['rel'] == 'shortcut icon') {
-      $variables['#attached']['html_head_link'][$key][0]['href'] = $path_to_theme. 'favicon.ico';
+      $variables['#attached']['html_head_link'][$key][0]['href'] = $path_to_theme . 'favicon.ico';
     }
   }
 
-  // Apple touch icon
-  $apple = array(
+  // Apple touch icon.
+  $apple = [
     '#tag' => 'link',
-    '#attributes' => array(
+    '#attributes' => [
       'href' => $path_to_images . 'apple-touch-icon.png',
       'rel' => 'apple-touch-icon',
       'sizes' => '180x180',
-    ),
-  );
-  $variables['#attached']['html_head'][] = array($apple, 'apple-touch-icon');
+    ],
+  ];
+  $variables['#attached']['html_head'][] = [$apple, 'apple-touch-icon'];
 
-  // Larger favicons
-  $favicon_sizes = array(16, 32);
+  // Larger favicons.
+  $favicon_sizes = [16, 32];
   foreach ($favicon_sizes as $size) {
-   $favicon = array(
-     '#tag' => 'link',
-     '#attributes' => array(
-       'href' => $path_to_images . 'favicon-' . $size . 'x' . $size . '.png',
-       'rel' => 'icon',
-       'sizes' => $size . 'x' . $size,
-     ),
-   );
-   $variables['#attached']['html_head'][] = array($favicon, 'favicon-' . $size);
+    $favicon = [
+      '#tag' => 'link',
+      '#attributes' => [
+        'href' => $path_to_images . 'favicon-' . $size . 'x' . $size . '.png',
+        'rel' => 'icon',
+        'sizes' => $size . 'x' . $size,
+      ],
+    ];
+    $variables['#attached']['html_head'][] = [$favicon, 'favicon-' . $size];
   }
 
-  // Manifest
-  $manifest = array(
+  // Manifest.
+  $manifest = [
     '#tag' => 'link',
-    '#attributes' => array(
+    '#attributes' => [
       'href' => $path_to_theme . 'manifest.json',
       'rel' => 'manifest',
-    ),
-  );
-  $variables['#attached']['html_head'][] = array($manifest, 'manifest');
+    ],
+  ];
+  $variables['#attached']['html_head'][] = [$manifest, 'manifest'];
 
-  // Safari pinned tab
-  $safari = array(
+  // Safari pinned tab.
+  $safari = [
     '#tag' => 'link',
-    '#attributes' => array(
+    '#attributes' => [
       'href' => $path_to_theme . 'safari-pinned-tab.svg',
       'rel' => 'mask-icon',
       'color' => '#007ac9',
-    ),
-  );
-  $variables['#attached']['html_head'][] = array($safari, 'safari');
+    ],
+  ];
+  $variables['#attached']['html_head'][] = [$safari, 'safari'];
 
-  // Theme-color
-  $themecolor = array(
+  // Theme-color.
+  $themecolor = [
     '#tag' => 'meta',
-    '#attributes' => array(
+    '#attributes' => [
       'name' => 'theme-color',
       'content' => '#ffffff',
-    ),
-  );
-  $variables['#attached']['html_head'][] = array($themecolor, 'themecolor');
+    ],
+  ];
+  $variables['#attached']['html_head'][] = [$themecolor, 'themecolor'];
 
-  // Google fonts
-  $googlefonts = array(
+  // Google fonts.
+  $googlefonts = [
     '#tag' => 'link',
-    '#attributes' => array(
+    '#attributes' => [
       'rel' => 'stylesheet',
       'href' => 'https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700|Open+Sans:300,400,600,700&amp;subset=latin-ext',
-    ),
-  );
-  $variables['#attached']['html_head'][] = array($googlefonts, 'googlefonts');
- }
+    ],
+  ];
+  $variables['#attached']['html_head'][] = [$googlefonts, 'googlefonts'];
+}
