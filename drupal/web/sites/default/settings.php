@@ -65,6 +65,12 @@ if (in_array($_SERVER['REQUEST_URI'], $config_allowed) || PHP_SAPI === 'cli') {
   $settings['config_readonly'] = FALSE;
 }
 
+// We want to sometimes manage webforms on staging, temporarily allow config
+// changes. @todo: Remove before going production.
+if (strpos($_SERVER['REQUEST_URI'], '/admin/structure/webform/manage') === 0) {
+  $settings['config_readonly'] = FALSE;
+}
+
 // Be sure to have config_split.dev disabled by default.
 $config['config_split.config_split.dev']['status'] = FALSE;
 
