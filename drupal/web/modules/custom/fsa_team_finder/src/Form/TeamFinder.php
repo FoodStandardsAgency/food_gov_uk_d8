@@ -32,26 +32,26 @@ class TeamFinder extends FormBase {
     // Set header/intro for the form (updated with AJAX).
     $form['form-header'] = [
       '#markup' => '<h3 class="form-title">' . $this->t('Find a food safety team') . '</h3>',
-      ];
+    ];
     $form['form-intro'] = [
       '#markup' => '<p class="form-intro">' . $this->t('Please enter a postcode to find the food safety team in the area') . '</p>',
-      ]
-    ;
-    $form['query'] = array(
+    ];
+    $form['query'] = [
       '#type' => 'textfield',
       '#title' => t('Enter a full postcode'),
       '#description_display' => 'before',
       '#size' => 9,
       '#maxlength' => 9,
       '#required' => TRUE,
-    );
+    ];
+
     // The AJAX result placeholder.
     $form['ajax-results'] = [
       '#markup' => '<div id="team-finder-results"></div>',
     ];
-    $form['actions'] = array(
+    $form['actions'] = [
       '#type' => 'actions',
-      'submit' => array(
+      'submit' => [
         '#type' => 'submit',
         '#value' => $this->t('Submit'),
         '#attributes' => ['class' => ['submit-finder']],
@@ -64,8 +64,8 @@ class TeamFinder extends FormBase {
             'type' => 'throbber',
           ],
         ],
-      ),
-      'reset' => array(
+      ],
+      'reset' => [
         '#type' => 'submit',
         '#value' => $this->t('Reset'),
         '#attributes' => ['class' => ['visually-hidden', 'submit-reset']],
@@ -78,65 +78,65 @@ class TeamFinder extends FormBase {
             'type' => 'throbber',
           ],
         ],
-      ),
-    );
-
+      ],
+    ];
     if ($form_state->getValue('query')) {
-      // Leave as is for non-js fallback.
 
-      // get mapit local authority details
+      // Leave as is for non-js fallback. Get mapit local authority details.
       $la = $this->getLocalAuthority($form_state->getValue('query'));
       if (!empty($la)) {
 
-        // entity query fsa local authority
+        // Entity query fsa local authority.
         $fsa_authority = \Drupal::entityTypeManager()
           ->getStorage('fsa_authority')
-          ->loadByProperties(array(
+          ->loadByProperties([
             'field_mapit_area' => $la['mapit_area'],
-          ));
+          ]);
         if ($fsa_authority = reset($fsa_authority)) {
 
-          // generate links
+          // Generate links.
           $email = $fsa_authority->get('field_email')->getString();
           $email_alt = $fsa_authority->get('field_email_alt')->getString();
           $overridden = $fsa_authority->get('field_email_overridden')->getString();
           $email_value = $overridden ? $email_alt : $email;
-          $email_link = Link::fromTextAndUrl($email_value, Url::fromUri('mailto:' . $email_value, array()))
+          $email_link = Link::fromTextAndUrl($email_value, Url::fromUri('mailto:' . $email_value, []))
             ->toString();
           $site_value = $fsa_authority->get('field_url')->getString();
-          $site_link = Link::fromTextAndUrl($site_value, Url::fromUri($site_value, array()))
+          $site_link = Link::fromTextAndUrl($site_value, Url::fromUri($site_value, []))
             ->toString();
 
-          // reconstruct form
+          // Reconstruct form.
           unset($form['query']);
           unset($form['actions']);
-          $form['confirmation'] = array(
+          $form['confirmation'] = [
             '#type' => 'item',
-            '#markup' => $this->t('<h2>Food safety team details</h2><p>Details of the food safety team covering <strong>@query</strong> are shown below. Please contact them to report the food problem.</p>', array(
+            '#markup' => $this->t('<h2>Food safety team details</h2><p>Details of the food safety team covering <strong>@query</strong> are shown below. Please contact them to report the food problem.</p>', [
               '@query' => $form_state->getValue('query'),
-            )),
-          );
-          $form['details'] = array(
+            ]),
+          ];
+          $form['details'] = [
             '#type' => 'item',
-            '#markup' => t('<p><strong>@name</strong><br />Email address: @mail<br />Website: @site</p>', array(
+            '#markup' => t('<p><strong>@name</strong><br />Email address: @mail<br />Website: @site</p>', [
               '@name' => $la['name'],
               '@mail' => $email_link,
               '@site' => $site_link,
-            )),
-          );
-          $form['back'] = array(
+            ]),
+          ];
+          $form['back'] = [
             '#title' => $this->t('Back to form'),
             '#type' => 'link',
             '#url' => Url::fromRoute('<current>'),
-          );
-        } else {
+          ];
+        }
+        else {
 
-          // null entity query
+          // Null entity query.
           drupal_set_message(t('No food safety team found.'), 'error');
         }
-      } else {
+      }
+      else {
 
-        // no mapit response
+        // No mapit response.
         drupal_set_message(t('No food safety team found.'), 'error');
       }
     }
@@ -148,7 +148,7 @@ class TeamFinder extends FormBase {
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
 
-    // check for valid uk postcode
+    // Check for valid uk postcode.
     if (!$this->testValidUkPostcode($form_state->getValue('query'))) {
       $form_state->setErrorByName('query', $this->t('Invalid postcode.'));
     }
@@ -157,9 +157,7 @@ class TeamFinder extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
-//    $form_state->setRebuild();
-  }
+  public function submitForm(array &$form, FormStateInterface $form_state) {}
 
   /**
    * Ajax reset functionality.
@@ -182,7 +180,7 @@ class TeamFinder extends FormBase {
       '#fsa-team-finder .form-item-query',
       '#fsa-team-finder .form-intro',
     ];
-    foreach ($toggleClasses AS $class) {
+    foreach ($toggleClasses as $class) {
       $response->addCommand(new InvokeCommand(
         $class, 'toggleClass', ['visually-hidden']
       ));
@@ -205,7 +203,6 @@ class TeamFinder extends FormBase {
     $response->addCommand(new HtmlCommand(
       '#team-finder-results', ''
     ));
-
     return $response;
   }
 
@@ -221,7 +218,6 @@ class TeamFinder extends FormBase {
    *   The ajax response.
    */
   public function ajaxSubmitForm(array &$form, FormStateInterface $form_state) {
-
     $response = new AjaxResponse();
     $result_name = NULL;
     $result_mail = NULL;
@@ -231,20 +227,17 @@ class TeamFinder extends FormBase {
 
     // Use fsa-team-finder-results.html.twig for the result.
     $result['#theme'] = 'fsa_team_finder_results';
-
     if (isset($la['mapit_area'])) {
       $fsa_authority = \Drupal::entityTypeManager()
         ->getStorage('fsa_authority')
-        ->loadByProperties(array(
+        ->loadByProperties([
           'field_mapit_area' => $la['mapit_area'],
-        ));
+        ]);
       if (is_numeric(key($fsa_authority))) {
         $fsa_authority = reset($fsa_authority);
-
         $overridden = $fsa_authority->field_email_overridden->getString();
         $email_value = $overridden ? $fsa_authority->field_email_alt->getString() : $fsa_authority->field_email->getString();
         $email_link = Link::fromTextAndUrl($email_value, Url::fromUri('mailto:' . $email_value, []))->toString();
-
         $site_value = $fsa_authority->field_url->getString();
         $site_link = Link::fromTextAndUrl($site_value, Url::fromUri($site_value, []))->toString();
 
@@ -261,7 +254,7 @@ class TeamFinder extends FormBase {
           '#fsa-team-finder .form-item-query',
           '#fsa-team-finder .form-intro',
         ];
-        foreach ($toggleClasses AS $class) {
+        foreach ($toggleClasses as $class) {
           $response->addCommand(new InvokeCommand(
             $class, 'toggleClass', ['visually-hidden']
           ));
@@ -278,19 +271,19 @@ class TeamFinder extends FormBase {
       }
     }
     else {
+
       // In case mapit_area value was not found display helpful error msgs.
       if (!isset($query) || $query == '') {
         // @todo: maybe not even allow submit before input has value entered.
         $result_message = $this->t('Please enter value.');
       }
-      else if (!$this->testValidUkPostcode($query)) {
+      elseif (!$this->testValidUkPostcode($query)) {
         $result_message = $this->t('Invalid postcode.');
       }
       else {
         $result_message = $this->t('No food safety team found for postcode <strong>@query</strong>', ['@query' => $query]);
       }
     }
-
     $response->addCommand(new HtmlCommand(
       '#team-finder-results',
       [
@@ -299,70 +292,78 @@ class TeamFinder extends FormBase {
         '#name' => $result_name,
         '#mail' => $result_mail,
         '#site' => $result_site,
-        ]
+      ]
     ));
-
     return $response;
-
   }
 
   /**
    * Test for valid UK postcode.
+   *
+   * @param string $query
+   *   Unvalidated postcode.
+   *
+   * @return bool
+   *   Validation check.
+   *
    * @see https://stackoverflow.com/questions/164979/uk-postcode-regex-comprehensive/14257846#14257846
-   *
-   * @param string
-   *
-   * @return boolean
    */
-   public function testValidUkPostcode($query) {
-     $regex = '/^([g][i][r][0][a][a])$|^((([a-pr-uwyz]{1}([0]|[1-9]\d?))|([a-pr-uwyz]{1}[a-hk-y]{1}([0]|[1-9]\d?))|([a-pr-uwyz]{1}[1-9][a-hjkps-uw]{1})|([a-pr-uwyz]{1}[a-hk-y]{1}[1-9][a-z]{1}))(\d[abd-hjlnp-uw-z]{2})?)$/i';
-     $postcode = str_replace(' ', '', $query);
-     return preg_match($regex, $postcode);
-   }
+  public function testValidUkPostcode($query) {
+    $regex = '/^([g][i][r][0][a][a])$|^((([a-pr-uwyz]{1}([0]|[1-9]\d?))|([a-pr-uwyz]{1}[a-hk-y]{1}([0]|[1-9]\d?))|([a-pr-uwyz]{1}[1-9][a-hjkps-uw]{1})|([a-pr-uwyz]{1}[a-hk-y]{1}[1-9][a-z]{1}))(\d[abd-hjlnp-uw-z]{2})?)$/i';
+    $postcode = str_replace(' ', '', $query);
+    return preg_match($regex, $postcode);
+  }
 
   /**
    * Provides local authority ONS code and name.
-   * @see https://mapit.mysociety.org/docs/
    *
-   * @param string
+   * @param string $query
+   *   Query fragment.
    *
    * @return array
+   *   Council details.
+   *
+   * @see https://mapit.mysociety.org/docs/
    */
   public function getLocalAuthority($query) {
 
-    // build mapit request
+    // Build mapit request.
     $base = 'https://mapit.mysociety.org';
     $postcode = str_replace(' ', '', $query);
     $key = 'cGEi7enM22ZPLNJmm7i1t9g0E6K6MABwHeLhKFxI';
     $url = $base . '/postcode/' . $postcode . '?api_key=' . $key;
 
-    // call mapit
+    // Call mapit.
     $client = \Drupal::httpClient();
-    $client->request('GET', $url, array('http_errors' => FALSE));
+    $client->request('GET', $url, ['http_errors' => FALSE]);
     try {
       $response = $client->get($url);
       $data = Json::decode($response->getBody()->getContents());
     }
     catch (RequestException $e) {
       watchdog_exception('fsa_team_finder', $e);
-      return array();
+      return [];
     }
     if (isset($data['shortcuts']['council'])) {
 
-      // negotiate two-tier local government
+      // Negotiate two-tier local government.
       if (!is_array($data['shortcuts']['council'])) {
         $council = $data['shortcuts']['council'];
-      } elseif (isset($data['shortcuts']['council']['district'])) {
-        $council = $data['shortcuts']['council']['district'];
-      } else {
-        return array();
       }
-    } else {
-      return array();
+      elseif (isset($data['shortcuts']['council']['district'])) {
+        $council = $data['shortcuts']['council']['district'];
+      }
+      else {
+        return [];
+      }
     }
-    return array(
+    else {
+      return [];
+    }
+    return [
       'name' => $data['areas'][$council]['name'],
       'mapit_area' => $council,
-    );
+    ];
   }
+
 }
