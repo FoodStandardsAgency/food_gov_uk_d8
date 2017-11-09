@@ -5,9 +5,6 @@
  * Alters default translation settings.
  */
 
-use Drupal\Core\Entity\ContentEntityInterface;
-use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
-
 /**
  * Implements hook_language_switch_links_alter().
  */
