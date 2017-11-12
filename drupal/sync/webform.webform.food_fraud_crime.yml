@@ -1,4 +1,3 @@
-uuid: 04b09fa3-a0b6-41b5-acc6-475d3d8a1a0a
 langcode: en
 status: open
 dependencies: {  }
@@ -15,6 +14,7 @@ css: ''
 javascript: ''
 settings:
   ajax: false
+  ajax_scroll_top: form
   page: true
   page_submit_path: help/report-food-problem/food-fraud
   page_confirm_path: help/report-food-problem/food-fraud/summary
@@ -54,8 +54,9 @@ settings:
   wizard_progress_pages: true
   wizard_progress_percentage: false
   wizard_start_label: ''
-  wizard_complete: true
-  wizard_complete_label: ''
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_track: ''
   preview: 2
   preview_label: Summary
   preview_title: ''
@@ -87,6 +88,8 @@ settings:
   results_disabled: false
   results_disabled_ignore: false
   token_update: false
+  wizard_comfirmation: true
+  wizard_comfirmation_label: ''
 access:
   create:
     roles:
@@ -154,3 +157,4 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
+uuid: 04b09fa3-a0b6-41b5-acc6-475d3d8a1a0a
