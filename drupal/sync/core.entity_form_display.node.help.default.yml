@@ -123,7 +123,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 121
+    weight: 122
     third_party_settings: {  }
     region: content
   sticky:
