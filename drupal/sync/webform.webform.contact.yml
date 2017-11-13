@@ -1,4 +1,3 @@
-uuid: 3e28b35e-a31b-4f1d-8590-b829586caaad
 langcode: en
 status: open
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
       - webform
   module:
     - fsa_contactus_data
-_core:
-  default_config_hash: TXbSSS0lYoFb39dSF4qf9kvAtJAkqMBR-Dg8drrFJko
 open: null
 close: null
 uid: null
@@ -22,6 +19,7 @@ css: ''
 javascript: ''
 settings:
   ajax: false
+  ajax_scroll_top: form
   page: true
   page_submit_path: webform-demo
   page_confirm_path: webform-demo/confirmation
@@ -51,8 +49,9 @@ settings:
   wizard_progress_pages: false
   wizard_progress_percentage: false
   wizard_start_label: ''
-  wizard_complete: true
-  wizard_complete_label: ''
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_track: ''
   preview: 2
   preview_label: Review
   preview_title: Review
@@ -84,6 +83,8 @@ settings:
   results_disabled: false
   results_disabled_ignore: false
   token_update: false
+  wizard_comfirmation: true
+  wizard_comfirmation_label: ''
 access:
   create:
     roles:
@@ -192,3 +193,6 @@ handlers:
     settings:
       channel: ''
       message: ''
+uuid: 3e28b35e-a31b-4f1d-8590-b829586caaad
+_core:
+  default_config_hash: TXbSSS0lYoFb39dSF4qf9kvAtJAkqMBR-Dg8drrFJko

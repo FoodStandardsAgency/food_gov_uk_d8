@@ -103,7 +103,8 @@ content:
     type: language_select
     weight: 3
     region: content
-    settings: {  }
+    settings:
+      include_locked: true
     third_party_settings: {  }
   path:
     type: path
@@ -118,6 +119,13 @@ content:
     weight: 7
     region: content
     third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 122
+    third_party_settings: {  }
+    region: content
   sticky:
     type: boolean_checkbox
     settings:

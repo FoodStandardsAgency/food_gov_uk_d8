@@ -25,7 +25,7 @@ display:
         created:
           label: 'Dyddiad llwytho i fyny'
         count:
-          format_plural_string: "\x03"
+          format_plural_string: !!binary Aw==
       filters:
         status:
           expose:
