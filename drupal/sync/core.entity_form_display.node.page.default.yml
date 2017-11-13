@@ -70,7 +70,7 @@ third_party_settings:
     group_code_block_references:
       children:
         - field_block_reference
-      parent_name: ''
+      parent_name: group_development_required
       weight: 19
       format_type: tab
       format_settings:
@@ -80,6 +80,23 @@ third_party_settings:
         description: 'Add programmatically created blocks to the bottom of this page.'
         required_fields: true
       label: 'Code block references'
+    group_development_required:
+      children:
+        - field_liftups
+        - field_block
+        - field_related_content
+        - group_code_block_references
+      parent_name: ''
+      weight: 17
+      format_type: tab
+      format_settings:
+        label: 'Development required / do not use (liftups, related content, block references)'
+        formatter: closed
+        description: 'The fields in this tab require further development: do not use (unless you know what you are doing)'
+        required_fields: true
+        id: ''
+        classes: ''
+      label: 'Development required / do not use (liftups, related content, block references)'
 _core:
   default_config_hash: sWCotip3wyA0CvZUxyo-StTDU8TyTAhx5fcfOiHS6s4
 id: node.page.default
@@ -278,7 +295,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 20
+    weight: 16
     third_party_settings: {  }
     region: content
   sticky:
