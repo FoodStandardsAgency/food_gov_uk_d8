@@ -60,7 +60,7 @@ third_party_settings:
       children:
         - field_block_reference
       parent_name: ''
-      weight: 13
+      weight: 11
       format_type: tab
       format_settings:
         id: ''
@@ -155,7 +155,7 @@ content:
     region: content
   field_promo_block:
     type: entity_reference_paragraphs
-    weight: 14
+    weight: 12
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -166,7 +166,7 @@ content:
     third_party_settings: {  }
     region: content
   field_related_content:
-    weight: 15
+    weight: 13
     settings:
       match_operator: CONTAINS
       size: 60
@@ -202,31 +202,17 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 12
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  promote:
-    type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 10
     region: content
+    settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 122
+    weight: 14
     third_party_settings: {  }
     region: content
-  sticky:
-    type: boolean_checkbox
-    settings:
-      display_label: true
-    weight: 11
-    region: content
-    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0
@@ -249,4 +235,6 @@ content:
       placeholder: ''
     region: content
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  promote: true
+  sticky: true

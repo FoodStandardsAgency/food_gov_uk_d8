@@ -27,7 +27,6 @@ third_party_settings:
         - field_content_type
         - field_audience
         - field_nation
-        - field_subject
         - field_topic
       parent_name: ''
       weight: 1
@@ -114,25 +113,11 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 12
+    weight: 10
     settings: {  }
     third_party_settings: {  }
     region: content
-  promote:
-    type: boolean_checkbox
-    settings:
-      display_label: true
-    weight: 10
-    third_party_settings: {  }
-    region: content
   status:
-    type: boolean_checkbox
-    settings:
-      display_label: true
-    weight: 122
-    third_party_settings: {  }
-    region: content
-  sticky:
     type: boolean_checkbox
     settings:
       display_label: true
@@ -167,4 +152,6 @@ content:
     third_party_settings: {  }
     type: webform_entity_reference_select
     region: content
-hidden: {  }
+hidden:
+  promote: true
+  sticky: true

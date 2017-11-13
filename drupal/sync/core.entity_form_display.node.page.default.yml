@@ -87,7 +87,7 @@ third_party_settings:
         - field_related_content
         - group_code_block_references
       parent_name: ''
-      weight: 17
+      weight: 15
       format_type: tab
       format_settings:
         label: 'Development required / do not use (liftups, related content, block references)'
@@ -280,31 +280,17 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 15
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  promote:
-    type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 13
     region: content
+    settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 16
-    third_party_settings: {  }
-    region: content
-  sticky:
-    type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 14
-    region: content
     third_party_settings: {  }
+    region: content
   title:
     type: string_textfield
     weight: 0
@@ -327,4 +313,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  promote: true
+  sticky: true
