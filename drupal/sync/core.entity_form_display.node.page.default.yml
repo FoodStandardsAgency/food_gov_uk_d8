@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.page.field_icon
     - field.field.node.page.field_intro
     - field.field.node.page.field_liftup_image
+    - field.field.node.page.field_liftup_summary
     - field.field.node.page.field_liftup_title
     - field.field.node.page.field_liftups
     - field.field.node.page.field_media_library_liftup_image
@@ -54,6 +55,7 @@ third_party_settings:
     group_liftup_metadata:
       children:
         - field_liftup_title
+        - field_liftup_summary
         - field_icon
         - field_liftup_image
         - field_media_library_liftup_image
@@ -176,7 +178,7 @@ content:
     type: inline_entity_form_complex
     region: content
   field_icon:
-    weight: 6
+    weight: 7
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
@@ -192,12 +194,20 @@ content:
     type: string_textarea
     region: content
   field_liftup_image:
-    weight: 7
+    weight: 8
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
     type: image_image
+    region: content
+  field_liftup_summary:
+    weight: 6
+    settings:
+      rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
     region: content
   field_liftup_title:
     weight: 5
@@ -220,7 +230,7 @@ content:
     third_party_settings: {  }
     region: content
   field_media_library_liftup_image:
-    weight: 8
+    weight: 9
     settings:
       match_operator: CONTAINS
       size: 60
