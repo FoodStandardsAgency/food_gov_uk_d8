@@ -23,6 +23,11 @@ function fsa_contactus_webform_element_alter(array &$element, FormStateInterface
       $element['#attributes']['class'][] = $c;
     }
   }
+
+  // Mark optional elements as suggested by GDS.
+  if (!isset($element['#required']) && isset($element['#title'])) {
+    $element['#title'] = $element['#title'] . ' <span class="optional">(' . t('optional') . ')</span>';
+  }
 }
 
 /**
