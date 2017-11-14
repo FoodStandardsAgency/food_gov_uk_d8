@@ -39,6 +39,21 @@ function fsa_ratings_preprocess_field(&$variables, $hook) {
     $righttoreply = preg_replace(["/\r|\n/", "/<p[^>]*>[\s|&nbsp;]*<\/p>/"], '', Html::decodeEntities($variables['items'][0]['content']['#context']['value']));
     $variables['items'][0]['content']['#context']['value'] = ['#markup' => $righttoreply];
   }
+
+  // Process address field contents.
+  if ($variables['element']['#field_name'] == 'field_address') {
+    $address_value = $variables['items'][0]['content']['#context']['value'];
+
+    // Remove blank lines produced by API content.
+    $address_display = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $address_value);
+
+    // If API does not provide address we can assume it is a private property.
+    if (trim($address_value) == '') {
+      $address_display = t('Private address');
+    }
+
+    $variables['items'][0]['content']['#context']['value'] = ['#markup' => $address_display];
+  }
 }
 
 /**
