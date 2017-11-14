@@ -96,6 +96,7 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
       'geocode',
       'localauthoritycode',
       'newratingpending',
+      'schemetype',
       'phone',
       'postcode',
       'ratingdate',
