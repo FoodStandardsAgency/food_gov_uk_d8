@@ -18,3 +18,5 @@ regions:
   hidden: 'Hidden'
 libraries:
   - fsa/global
+ckeditor_stylesheets:
+  - dist/main.css
