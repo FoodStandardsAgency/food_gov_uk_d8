@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.webform.field_audience
     - field.field.node.webform.field_content_type
     - field.field.node.webform.field_icon
+    - field.field.node.webform.field_liftup_summary
     - field.field.node.webform.field_liftup_title
     - field.field.node.webform.field_nation
     - field.field.node.webform.field_topic
@@ -17,7 +18,6 @@ dependencies:
   module:
     - field_group
     - image
-    - text
     - user
 third_party_settings:
   field_group:
@@ -44,14 +44,6 @@ targetEntityType: node
 bundle: webform
 mode: teaser
 content:
-  body:
-    label: hidden
-    type: text_summary_or_trimmed
-    weight: 2
-    settings:
-      trim_length: 600
-    third_party_settings: {  }
-    region: content
   field_icon:
     type: image
     weight: 1
@@ -61,7 +53,15 @@ content:
       image_style: thumbnail
       image_link: ''
     third_party_settings: {  }
+  field_liftup_summary:
+    type: basic_string
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
 hidden:
+  body: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
