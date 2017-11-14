@@ -1,6 +1,6 @@
-#Workflows
+# Workflows
 
-##Editoral
+## Editoral
 
 Three roles are pertinent to the editorial workflow:
 1. Author
