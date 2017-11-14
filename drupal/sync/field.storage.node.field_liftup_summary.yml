@@ -1,0 +1,19 @@
+uuid: 8e38d773-6897-4cb4-8768-b8258b537652
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_liftup_summary
+field_name: field_liftup_summary
+entity_type: node
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

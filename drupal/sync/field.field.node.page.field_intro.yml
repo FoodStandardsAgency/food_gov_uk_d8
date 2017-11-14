@@ -10,7 +10,7 @@ field_name: field_intro
 entity_type: node
 bundle: page
 label: Intro
-description: 'Excerpt/intro copy for this page. Field content displays in larger font-size and should be used to briefly describe the content of this page.'
+description: 'Introductional copy text for this page displayed with larger typeface above body field. The content of this field is not displayed anywhere else but this page.'
 required: false
 translatable: true
 default_value: {  }

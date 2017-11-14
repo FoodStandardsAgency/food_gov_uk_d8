@@ -7,16 +7,19 @@ dependencies:
     - field.field.node.page.body
     - field.field.node.page.field_audience
     - field.field.node.page.field_block
+    - field.field.node.page.field_block_reference
     - field.field.node.page.field_content_type
     - field.field.node.page.field_document
     - field.field.node.page.field_header_image
     - field.field.node.page.field_icon
     - field.field.node.page.field_intro
     - field.field.node.page.field_liftup_image
+    - field.field.node.page.field_liftup_summary
     - field.field.node.page.field_liftup_title
     - field.field.node.page.field_liftups
     - field.field.node.page.field_media_library_liftup_image
     - field.field.node.page.field_nation
+    - field.field.node.page.field_related_content
     - field.field.node.page.field_subpages
     - field.field.node.page.field_topic
     - field.field.node.page.field_update_date
@@ -25,7 +28,6 @@ dependencies:
   module:
     - field_group
     - image
-    - text
     - user
 third_party_settings:
   field_group:
@@ -54,14 +56,6 @@ targetEntityType: node
 bundle: page
 mode: teaser
 content:
-  body:
-    label: hidden
-    type: text_summary_or_trimmed
-    weight: 3
-    region: content
-    settings:
-      trim_length: 600
-    third_party_settings: {  }
   field_icon:
     type: image
     weight: 1
@@ -80,6 +74,13 @@ content:
       image_style: promo_medium
       image_link: ''
     third_party_settings: {  }
+  field_liftup_summary:
+    type: basic_string
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
   field_media_library_liftup_image:
     type: entity_reference_entity_view
     weight: 3
@@ -90,6 +91,7 @@ content:
       link: false
     third_party_settings: {  }
 hidden:
+  body: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
