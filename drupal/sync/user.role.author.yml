@@ -1,0 +1,21 @@
+uuid: caff8d30-8361-4779-93b6-0b0291c77325
+langcode: en
+status: true
+dependencies: {  }
+id: author
+label: Author
+weight: -6
+is_admin: null
+permissions:
+  - 'access content overview'
+  - 'access toolbar'
+  - 'create news content'
+  - 'edit own news content'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition ready_for_review'
+  - 'use editorial transition restore_from_drafted'
+  - 'view all revisions'
+  - 'view latest version'
+  - 'view news revisions'
+  - 'view own unpublished content'
+  - 'view the administration theme'
