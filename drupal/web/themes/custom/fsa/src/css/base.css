@@ -457,10 +457,6 @@ label {
   display: block;
 }
 
-label.form-required:after {
-  content: " *";
-}
-
 fieldset {
   margin: 0;
   @mixin responsive-declaration margin-top, 1em, 2em;
