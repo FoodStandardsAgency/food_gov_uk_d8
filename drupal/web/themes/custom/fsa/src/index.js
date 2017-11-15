@@ -8,6 +8,11 @@ import toc from './core/helper/toc';
 import mobileMenu from './core/helper/mobile-menu';
 import regionalVariation from './core/helper/regionalVariation';
 import printPage from './core/helper/printPage';
+import peek from './component/parallax/parallax';
+
+document.addEventListener('DOMContentLoaded', () => {
+  peek();
+});
 
 const breakpoints = {
   small: "sm",

@@ -38,7 +38,7 @@
   {% endif %}
 
   <div class="ratings__search peek {% if ratings_info_content %}ratings__search--frontpage{% else %} toggle-content toggle-content--only-mobile js-toggle-content js-toggle-content-only-mobile" id="collapsible-{{ randomID }}" aria-hidden="true{% endif %}">
-    <div class="container container--small">
+    <div class="container peek__container">
       <div class="ratings__text">
       </div>
       {{ form }}
@@ -52,12 +52,12 @@
       </div>
     {% else %}
     <div class="ratings__listing">
-      <header class="ratings__header" role="toolbar" aria-label="sorting options" aria-controls="sortable">
+      <div class="ratings__toolbar" role="toolbar" aria-label="sorting options" aria-controls="sortable">
         {% if sort_form %}
           <div class="ratings__hits-total">{{ hits_total }} {{ 'Results'|t }}</div>
           <div class="ratings__sort-form">{{ sort_form }}</div>
         {% endif %}
-      </header>
+      </div>
 
       <h2 class="visually-hidden" aria-labelledby="sortable">{% trans %}Food hygiene ratings search results{% endtrans %}</h2>
       <div class="table table--with-background js-table ratings__table" id="sortable" role="grid">

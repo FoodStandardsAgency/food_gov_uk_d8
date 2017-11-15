@@ -313,8 +313,6 @@ table caption:not(:last-child) {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  margin-left: -0.5em;
-  margin-right: -0.5em;
 }
 
 .form-actions .button {

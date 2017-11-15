@@ -1,15 +1,6 @@
 @import "../../core/helper";
 @import "../../core/custom-property";
 
-.ratings-meanings {
-  @mixin responsive-declaration padding, 1em, 4em;
-  background-color: var(--color-lighter-gray);
-}
-
-.ratings-meanings__container {
-  max-width: 80em;
-}
-
 .ratings-meanings__row {
   background-color: var(--color-white);
   margin-bottom: 0.5em;
@@ -17,6 +8,22 @@
 
   @media (--breakpoint-xs) {
     flex-flow: row;
+  }
+}
+
+.ratings-meanings__table {
+  margin-right: 0;
+  margin-left: 0;
+  margin-bottom: 2em;
+
+  @media (--breakpoint-md) {
+    margin-right: -2em;
+    margin-left: -2em;
+  }
+
+  @media (--breakpoint-lg) {
+    margin-right: -5em;
+    margin-left: -5em;
   }
 }
 

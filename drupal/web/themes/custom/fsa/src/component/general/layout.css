@@ -30,7 +30,7 @@ body:not(.theme--service, .theme--lander) .layout.layout--with-no-sidebar .layou
 }
 
 .theme--service .layout__container.layout__container--main {
-  max-width: var(--max-width);
+  max-width: 61em;
 }
 
 /*Site sidebar*/
@@ -142,10 +142,10 @@ body:not(.theme--service, .theme--lander) .layout.layout--with-no-sidebar .layou
     padding-top: 0;
   }
 }
-
+/* 
 .layout__content--main {
   @mixin responsive-declaration padding-top, 1em, 4em;
-}
+} */
 
 .theme--service .layout__content--main {
   min-height: 100vh;
@@ -155,10 +155,10 @@ body:not(.theme--service, .theme--lander) .layout.layout--with-no-sidebar .layou
 .theme--page .layout__content--main {
   @mixin responsive-declaration padding-top, 1em, 4em;
 }
-
+/* 
 .theme--lander:not(.theme--news-alerts) .layout__content--main {
   padding-top: 0em;
-}
+} */
 
 .layout--with-sidebar .layout__content {
   position: relative;

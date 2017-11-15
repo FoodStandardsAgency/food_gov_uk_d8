@@ -88,16 +88,6 @@ class FsaRatingsSearchForm extends FormBase {
       }
     }
 
-    // Set default title.
-    $form['header']['title'] = ['#markup' => $this->t('Food hygiene ratings search')];
-
-    // ...and if search was not performed pass additional header texts.
-    if ($search === FALSE && \Drupal::routeMatch()->getRouteName() == 'fsa_ratings.ratings_search') {
-      $form['header']['title'] = ['#markup' => $this->t('Eating out?')];
-      $form['header']['subtitle'] = ['#markup' => $this->t('Check the hygiene rating.')];
-      $form['header']['copy'] = ['#markup' => $this->t('Find out if a restaurant, takeaway or food shop you want to visit has good food hygiene standards.')];
-    }
-
     $form['main'] = [
       '#type' => 'container',
       '#attributes' => [
