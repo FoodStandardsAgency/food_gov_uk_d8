@@ -36,78 +36,70 @@
 
 <div class="ratings js-sticky-container">
 
-  <button class="ratings__search-expand-button toggle-button js-toggle-button" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
-    <div class="toggle-button__item">{% trans %}Show search options{% endtrans %}</div>
-    <div class="toggle-button__item toggle-button__item--icon svg">
-      <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#toggle-icon"></use></svg>
-    </div>
-  </button>
-
-  <div class="ratings__search js-sticky-element toggle-content toggle-content--only-mobile js-toggle-content js-toggle-content-only-mobile" id="collapsible-{{ randomID }}" aria-hidden="true">
-    <div class="container container--search">
-      {{ search_form }}
-    </div>
-  </div>
-
   <div class="ratings__content ratings__content--listing">
-    <header class="ratings__header rating__header--back-link">
-      {{ backlink }}
-    </header>
-
     <div class="establishment">
       <div class="establishment__container">
-        <h1>{{ content.name }}</h1>
+        
+        <div class="peek">
+          <header class="ratings__header rating__header--back-link">
+            {{ backlink }}
+          </header>
+          
+          <h1>{{ content.name }}</h1>
 
-        <div class="establishment__rating">
-          {{ rating_badge }}
-          <h5>{{ find_more_title }}</h5>
-          <ul>
-              <li>{{ find_more_link_ratings }}</li>
-              <li>{{ find_more_link_fhrs }}</li>
-          </ul>
-        </div>
+          <div class="establishment__rating">
+            {{ rating_badge }}
+            <h5>{{ find_more_title }}</h5>
+            <ul>
+                <li>{{ find_more_link_ratings }}</li>
+                <li>{{ find_more_link_fhrs }}</li>
+            </ul>
+          </div>
 
-        <div class="establishment__content">
-          {% if content.field_address %}
-            <h4>{{ 'Address'|t }}</h4>
-            <p>{{ content.field_address }}</p>
-          {% endif %}
+          <div class="establishment__content">
+            {% if content.field_address %}
+              <h4>{{ 'Address'|t }}</h4>
+              <p>{{ content.field_address }}</p>
+            {% endif %}
 
-          {% if content.field_postcode %}
-            <p>{{ content.field_postcode }}</p>
-          {% endif %}
+            {% if content.field_postcode %}
+              <p>{{ content.field_postcode }}</p>
+            {% endif %}
 
-          {% if content.field_businesstype %}
-              <h4>{{ 'Business type'|t }}</h4>
+            {% if content.field_businesstype %}
+                <h4>{{ 'Business type'|t }}</h4>
+              <p>
+                {{ content.field_businesstype }}
+              </p>
+            {% endif %}
+
+            {% if content.field_ratingdate %}
+              <h4>{{ 'Inspection date'|t }}</h4>
+              <p>
+                {{ content.field_ratingdate }}
+              </p>
+            {% endif %}
+
             <p>
-              {{ content.field_businesstype }}
+              {{ content|without(
+              'field_geocode',
+              'field_localauthoritycode',
+              'field_righttoreply',
+              'field_score_hygiene',
+              'field_score_structural',
+              'field_score_confidence',
+              'field_score_hygiene',
+              'field_address',
+              'field_postcode',
+              'field_phone',
+              'field_ratingdate',
+              'field_businesstype',
+              'name'
+              ) }}
             </p>
-          {% endif %}
+          </div>
 
-          {% if content.field_ratingdate %}
-            <h4>{{ 'Inspection date'|t }}</h4>
-            <p>
-              {{ content.field_ratingdate }}
-            </p>
-          {% endif %}
-
-          <p>
-            {{ content|without(
-            'field_geocode',
-            'field_localauthoritycode',
-            'field_righttoreply',
-            'field_score_hygiene',
-            'field_score_structural',
-            'field_score_confidence',
-            'field_score_hygiene',
-            'field_address',
-            'field_postcode',
-            'field_phone',
-            'field_ratingdate',
-            'field_businesstype',
-            'name'
-            ) }}
-          </p>
+          {{ content.field_geocode }}
         </div>
 
         {% if (content.field_score_hygiene|length == 2 and content.field_score_structural|length == 2 and content.field_score_confidence|length == 2) %}
@@ -124,7 +116,6 @@
         {% endif %}
 
         <div class="container container--text">
-          {{ content.field_geocode }}
 
           {% if content.field_righttoreply|render %}
               {{ content.field_righttoreply }}
