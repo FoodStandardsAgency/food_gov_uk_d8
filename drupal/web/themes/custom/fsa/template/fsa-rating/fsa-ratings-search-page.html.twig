@@ -8,7 +8,7 @@
 {% endfor %}
 {% set randomID = randomID|join %}
 
-<div class="ratings {% if ratings_info_content %}ratings--frontpage{% else %}js-sticky-container{% endif %}">
+<div class="ratings {% if ratings_info_content %}ratings--frontpage{% else %}{% endif %}">
 
   {% if ratings_info_content %}
   {% else %}
@@ -20,8 +20,8 @@
   </button>
   {% endif %}
 
-  <div class="ratings__search {% if ratings_info_content %}ratings__search--frontpage{% else %} js-sticky-element toggle-content toggle-content--only-mobile js-toggle-content js-toggle-content-only-mobile" id="collapsible-{{ randomID }}" aria-hidden="true{% endif %}">
-    <div class="container container--search">
+  <div class="ratings__search {% if ratings_info_content %}ratings__search--frontpage{% else %} toggle-content toggle-content--only-mobile js-toggle-content js-toggle-content-only-mobile" id="collapsible-{{ randomID }}" aria-hidden="true{% endif %}">
+    <div class="container container--small">
       <div class="ratings__text">
       </div>
       {{ form }}

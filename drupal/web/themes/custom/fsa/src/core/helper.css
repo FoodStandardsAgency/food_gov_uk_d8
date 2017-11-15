@@ -1,0 +1,45 @@
+/*Breakpoints
+Using postcss-custom-media
+Plugin documentation:
+  https://github.com/postcss/postcss-custom-media*/
+  @custom-media --breakpoint-xxs (min-width: 20em);
+  @custom-media --breakpoint-xs (min-width: 30em);
+  @custom-media --breakpoint-sm (min-width: 50em);
+  @custom-media --breakpoint-md (min-width: 60em);
+  @custom-media --breakpoint-lg (min-width: 80em);
+  @custom-media --breakpoint-xl (min-width: 120em);
+  
+  /*Custom selectors
+  Using postcss-custom-selectors
+  Plugin documentation:
+    https://github.com/postcss/postcss-custom-selectors*/
+  @custom-selector :--heading h1, h2, h3, h4, h5, h6;
+  @custom-selector :--enter :hover, :focus, :active;
+  
+  @custom-selector :--not-touch html:not(.is-touch);
+  
+  @custom-selector :--not-js html:not(.js);
+  
+  /*PostCSS Mixins
+  Using postcss-mixins
+  Plugin documentation:
+    https://github.com/postcss/postcss-mixins*/
+  @define-mixin responsive-declaration $property, $valueMin, $valueMax {
+    $(property): $valueMin;
+  
+    @media (--breakpoint-xs) {
+      $(property): calc($valueMin + (($valueMax - $valueMin) / 4) * 1);
+    }
+  
+    @media (--breakpoint-sm) {
+      $(property): calc($valueMin + (($valueMax - $valueMin) / 4) * 2);
+    }
+  
+    @media (--breakpoint-md) {
+      $(property): calc($valueMin + (($valueMax - $valueMin) / 4) * 3);
+    }
+  
+    @media (--breakpoint-lg) {
+      $(property): calc($valueMin + (($valueMax - $valueMin) / 4) * 4);
+    }
+  }

@@ -1,13 +1,13 @@
 import 'babel-polyfill';
-import './js/polyfill/classList';
+import './core/helper/polyfill/classList';
 import svg4everybody from 'svg4everybody';
-import responsiveTables from './js/responsiveTables';
-import stickyElement from './js/stickyElement';
-import toggleContent from './js/toggleContent';
-import toc from './js/toc';
-import mobileMenu from './js/mobile-menu';
-import regionalVariation from './js/regionalVariation';
-import printPage from './js/printPage';
+import responsiveTables from './core/helper/responsiveTables';
+import stickyElement from './core/helper/stickyElement';
+import toggleContent from './core/helper/toggleContent';
+import toc from './core/helper/toc';
+import mobileMenu from './core/helper/mobile-menu';
+import regionalVariation from './core/helper/regionalVariation';
+import printPage from './core/helper/printPage';
 
 const breakpoints = {
   small: "sm",
@@ -16,23 +16,23 @@ const breakpoints = {
 
 // Require every image asset inside of img folder
 require.context("./img/", true, /\.(gif|png|svg|jpe?g)$/);
-require('./css/style.css');
+require('./style.css');
 
 // Polyfill svgs
 svg4everybody({ polyfill: true });
 
 // Temperary fix
-const searchLogoElement = document.querySelector('.ratings.ratings--frontpage .ratings__text');
+// const searchLogoElement = document.querySelector('.ratings.ratings--frontpage .ratings__text');
 
-if (searchLogoElement != null) {
-  const searchHeading = document.querySelector('#fsa-ratings-search h2');
-  searchHeading.classList.add('small');
-  const searchLead = document.querySelector('#fsa-ratings-search p');
-  searchLead.classList.add('lead');
+// if (searchLogoElement != null) {
+//   const searchHeading = document.querySelector('#fsa-ratings-search h2');
+//   searchHeading.classList.add('small');
+//   const searchLead = document.querySelector('#fsa-ratings-search p');
+//   searchLead.classList.add('lead');
 
-  searchLogoElement.parentNode.insertBefore(searchLead, searchLogoElement.nextSibling);
-  searchLogoElement.parentNode.insertBefore(searchHeading, searchLogoElement.nextSibling);
-}
+//   searchLogoElement.parentNode.insertBefore(searchLead, searchLogoElement.nextSibling);
+//   searchLogoElement.parentNode.insertBefore(searchHeading, searchLogoElement.nextSibling);
+// }
 
 // Responsive tableElements
 const tableElements = [...document.querySelectorAll('.js-table')];

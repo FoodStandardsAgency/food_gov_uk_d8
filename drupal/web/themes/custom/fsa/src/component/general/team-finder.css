@@ -1,0 +1,17 @@
+@import "../../core/helper";
+@import "../../core/custom-property";
+
+.fsa-team-finder .form-intro {
+    margin-bottom: 2em;
+}
+
+.fsa-team-finder .authority {
+    margin-top: 2em;
+}
+
+.fsa-team-finder .form-item-query {
+    @media (--breakpoint-md) {
+        width: 50%;
+        max-width: 400px;
+    }
+}
