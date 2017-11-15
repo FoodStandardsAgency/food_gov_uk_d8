@@ -40,6 +40,15 @@ function fsa_ratings_preprocess_field(&$variables, $hook) {
     $variables['items'][0]['content']['#context']['value'] = ['#markup' => $righttoreply];
   }
 
+  if ($variables['element']['#field_name'] == 'field_newratingpending') {
+    if ($variables['items'][0]['content']['#markup'] === 'true') {
+      $variables['items'][0]['content']['#markup'] = t('Recently inspected. New rating to be published soon.');
+    }
+    else {
+      unset($variables['items'][0]['content']);
+    }
+  }
+
   // Process address field contents.
   if ($variables['element']['#field_name'] == 'field_address') {
     $address_value = $variables['items'][0]['content']['#context']['value'];
