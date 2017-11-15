@@ -1,16 +1,31 @@
-<div class="item" style="background-color: #dedede;">
-  <h3><a href="{{ item.url }}">{{ item.name }}</a></h3>
-  <p class="address">{{ item.address }}<br>{{ item.postcode }}</p>
-  <p class="category">
-    {% for business_type in item.businesstype %}
-      {{ business_type.label }}
-    {% endfor %}
-  </p>
-  <p class="localauthority">
-    {% for local_authority in item.localauthoritycode %}
-      {{ local_authority.label }}
-    {% endfor %}
-  </p>
-  {{ item.ratingvalue }}
-  {{ item.ratingimage }}
-</div>
+{#
+/**
+ * @file fsa-ratings-search-result-item.html.twig
+ * Theme implementation for FSA Ratings search result item.
+ *
+ * Available variables:
+ * - item: Array of the item properties.
+ *
+ * @see fsa_ratings\Controller\RatingsSearch
+ * @ingroup themeable
+ */
+#}
+<h3><a href="{{ item.url }}</div>">{{ item.name }}</a></h3>
+
+<div>{{ 'Rating value'|t }}: {{ item.ratingvalue }}</div>
+
+<strong>{{ 'Address'|t }}</strong>
+<div>{{ item.address }}</div>
+<div>{{ item.postcode }}</div>
+
+<div>{{ item.ratingimage }}</div>
+
+<div>{{ 'Rating date'|t }}: {{ item.ratingdate }}</div>
+
+{% if item.newratingpending %}
+    <div>{{ item.newratingpending }}</div>
+{% endif %}
+
+{% if item.righttoreply %}
+    <div>{{ item.righttoreply }}</div>
+{% endif %}
