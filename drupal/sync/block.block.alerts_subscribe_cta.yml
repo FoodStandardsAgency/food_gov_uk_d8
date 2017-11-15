@@ -14,7 +14,7 @@ third_party_settings:
 id: alerts_subscribe_cta
 theme: fsa
 region: hero
-weight: 0
+weight: -7
 provider: null
 plugin: alerts_subscribe_cta
 settings:

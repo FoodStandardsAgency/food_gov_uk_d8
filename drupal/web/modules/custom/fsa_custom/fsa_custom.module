@@ -129,3 +129,19 @@ function fsa_custom_preprocess_block(&$variables) {
     }
   }
 }
+
+/**
+ * Implements hook_theme().
+ */
+function fsa_custom_theme() {
+  return [
+    'fsa_hero' => [
+      'variables' => [
+        'attributes' => NULL,
+        'title' => NULL,
+        'copy' => NULL,
+      ],
+    ],
+  ];
+}
+
