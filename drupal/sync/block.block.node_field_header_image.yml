@@ -15,7 +15,7 @@ third_party_settings:
 id: node_field_header_image
 theme: fsa
 region: hero
-weight: -6
+weight: -9
 provider: null
 plugin: 'views_block:node_field-header_image'
 settings:

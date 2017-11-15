@@ -12,7 +12,7 @@ third_party_settings:
 id: pagetitle_hero
 theme: fsa
 region: hero
-weight: -7
+weight: -11
 provider: null
 plugin: page_title_block
 settings:
