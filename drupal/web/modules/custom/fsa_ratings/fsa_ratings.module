@@ -39,6 +39,26 @@ function fsa_ratings_preprocess_field(&$variables, $hook) {
     $righttoreply = preg_replace(["/\r|\n/", "/<p[^>]*>[\s|&nbsp;]*<\/p>/"], '', Html::decodeEntities($variables['items'][0]['content']['#context']['value']));
     $variables['items'][0]['content']['#context']['value'] = ['#markup' => $righttoreply];
   }
+
+  // Process address field contents.
+  if ($variables['element']['#field_name'] == 'field_address') {
+    $address_value = $variables['items'][0]['content']['#context']['value'];
+
+    // Remove blank lines produced by API content.
+    $address_display = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $address_value);
+
+    // If API does not provide address we can assume it is a private property.
+    if (trim($address_value) == '') {
+
+      // Get the authority name to be displayed with "Private address" text.
+      $la_id = $variables['element']['#object']->get('field_localauthoritycode')->getValue()[0]['target_id'];
+      $la = Drupal::entityTypeManager()->getStorage('fsa_authority')->load($la_id);
+
+      $address_display = t('Private address: registered with <strong>@la</strong>', ['@la' => $la->getName()]);
+    }
+
+    $variables['items'][0]['content']['#context']['value'] = ['#markup' => $address_display];
+  }
 }
 
 /**

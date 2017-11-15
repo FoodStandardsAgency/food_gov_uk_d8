@@ -100,6 +100,8 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
       'postcode',
       'ratingdate',
       'ratingvalue',
+      'righttoreply',
+      'schemetype',
       'score_confidence',
       'score_hygiene',
       'score_structural',

@@ -1,3 +1,15 @@
+{#
+/**
+ * @file fsa-ratings-search-result-item.html.twig
+ * Theme implementation for FSA Ratings search result item.
+ *
+ * Available variables:
+ * - item: Array of the item properties.
+ *
+ * @see fsa_ratings\Controller\RatingsSearch
+ * @ingroup themeable
+ */
+#}
 {% set randomID = [] %}
 {% for i in 1..10 %}
     {% set alpha = 'abcdefghijklmnopqrstuvwxyz' %}
@@ -38,6 +50,14 @@
     </div>
   </div>
   <div class="table__item" role="gridcell">
-    <div class="table__content">{{ item.ratingdate }}</div>
+    <div class="table__content">
+        {{ item.ratingdate }}
+        {% if item.newratingpending %}
+            <p>{{ item.newratingpending }}</p>
+        {% endif %}
+        {% if item.righttoreply %}
+            <p>{{ item.righttoreply }}</p>
+        {% endif %}
+    </div>
   </div>
 </div>
