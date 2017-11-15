@@ -159,7 +159,17 @@ class RatingsSearch extends ControllerBase {
         '#markup' => '<p class="ratingvalue"><span class="description">' . t('Rating:') . '</span> <span class="numeric">' . $rating_value . '</span></p>',
       ];
 
+      // Get scheme type to create the badge(s).
       $scheme = $result['schemetype'][0];
+
+      // Static text if righttoreply data exists.
+      if ($result['righttoreply'] != '') {
+        $result['righttoreply'] = t('Right to reply published');
+      }
+
+      if ($result['newratingpending'] == TRUE) {
+        $result['newratingpending'] = t('Recently inspected. New rating to be published soon.');
+      }
 
       // Use ratingvalue to get the badge.
       $result['ratingimage'] = RatingsHelper::ratingBadgeImageDisplay($rating_value, $scheme);

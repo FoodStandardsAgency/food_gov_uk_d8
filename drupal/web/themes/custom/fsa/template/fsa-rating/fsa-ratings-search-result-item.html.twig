@@ -38,6 +38,14 @@
     </div>
   </div>
   <div class="table__item" role="gridcell">
-    <div class="table__content">{{ item.ratingdate }}</div>
+    <div class="table__content">
+        {{ item.ratingdate }}
+        {% if item.newratingpending %}
+            <p>{{ item.newratingpending }}</p>
+        {% endif %}
+        {% if item.righttoreply %}
+            <p>{{ item.righttoreply }}</p>
+        {% endif %}
+    </div>
   </div>
 </div>
