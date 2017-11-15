@@ -22,24 +22,32 @@ class FsaHero extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $build = [];
     $theme = 'fsa_hero';
+    $build = [];
+    $route = \Drupal::routeMatch();
+    $route_name = $route->getRouteName();
 
-    $node = \Drupal::routeMatch()->getParameter('node');
-    if (is_object($node)) {
-      if ($node->getType() == 'help') {
-        $build['fsa_hero'] = [
-          '#theme' => $theme,
-          '#attributes' => ['class' => ['extraclass']],
-          '#title' => $this->t('Contact us'),
-          '#copy' => $this->t('Example copy text'),
-        ];
-      }
-    }
+    // Example to display something on a help CT.
+    /*
+     *   // Get node object and continue only if it exists.
+     *   $node = $route->getParameter('node');
+     *   if (is_object($node)) {
+     *     if ($node->getType() == 'help') {
+     *       $build['fsa_hero'] = [
+     *         '#theme' => $theme,
+     *         '#attributes' => ['class' => ['extraclass']],
+     *         '#title' => $this->t('Contact us'),
+     *         '#copy' => $this->t('Example copy text'),
+     *       ];
+     *     }
+     *   }
+     */
 
-    // FHRS hero content.
-    if (\Drupal::routeMatch()->getRouteName() == 'fsa_ratings.ratings_search') {
-      dsm('hero');
+    // Static hero content for all hygiene rating related pages.
+    if ($route_name == 'fsa_ratings.ratings_search' ||
+      $route_name == 'fsa_ratings.ratings_meanings' ||
+      $route->getParameter('fsa_establishment') ||
+      $route->getParameter('fsa_authority')) {
       $build['fsa_hero'] = [
         '#theme' => $theme,
         '#title' => $this->t('Food hygiene ratings'),
