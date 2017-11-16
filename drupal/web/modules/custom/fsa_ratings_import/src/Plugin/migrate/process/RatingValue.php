@@ -19,13 +19,23 @@ class RatingValue extends ProcessPluginBase {
    * {@inheritdoc}
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
-    if (is_numeric($value)) {
-      // FHRS entries are always numeric.
-      $row->setDestinationProperty('field_fhrs_ratingvalue', $value);
-    }
-    elseif (is_string($value)) {
-      // FHIS entries are strings.
-      $row->setDestinationProperty('field_fhis_ratingvalue', $value);
+
+    drupal_set_message($row->getSourceProperty('FHRSID'));
+
+    $fhis = 'field_fhis_ratingvalue';
+    $fhrs = 'field_fhrs_ratingvalue';
+
+    switch ($row->getSourceProperty('SchemeType')) {
+      case 'FHIS':
+        $row->setDestinationProperty($fhis, $value);
+        $row->setEmptyDestinationProperty($fhrs);
+        break;
+
+      default:
+        $row->setDestinationProperty($fhrs, $value);
+        $row->setEmptyDestinationProperty($fhis);
+        break;
+
     }
 
     return $value;
