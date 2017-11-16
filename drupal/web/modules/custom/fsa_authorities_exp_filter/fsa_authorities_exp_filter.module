@@ -10,6 +10,8 @@ function fsa_authorities_exp_filter_form_alter(&$form, FormStateInterface $form_
     if ($form['#id'] == 'views-exposed-form-fsa-authorities-page-1') {
       $form['field_email_overridden_value']['#options'][1] = t('Yes');
       $form['field_email_overridden_value']['#options'][0] = t('No');
+      $form['field_contact_directly_value']['#options'][1] = t('Yes');
+      $form['field_contact_directly_value']['#options'][0] = t('No');
     }
   }
 }
