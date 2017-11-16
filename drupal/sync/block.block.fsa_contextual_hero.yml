@@ -20,5 +20,5 @@ settings:
   id: fsa_hero
   label: 'FSA static/contextual hero'
   provider: fsa_custom
-  label_display: visible
+  label_display: '0'
 visibility: {  }
