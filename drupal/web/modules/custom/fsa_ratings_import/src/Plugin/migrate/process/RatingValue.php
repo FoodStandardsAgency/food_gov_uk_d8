@@ -20,7 +20,8 @@ class RatingValue extends ProcessPluginBase {
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
 
-    drupal_set_message($row->getSourceProperty('FHRSID'));
+    // Get feedback to of imported id's.
+    /* drush_print($row->getSourceProperty('FHRSID')); */
 
     $fhis = 'field_fhis_ratingvalue';
     $fhrs = 'field_fhrs_ratingvalue';
