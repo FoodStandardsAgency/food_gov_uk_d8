@@ -34,6 +34,9 @@ settings:
     -
       value: Exempt
       label: Exempt
+    -
+      value: AwaitingInspection
+      label: AwaitingInspection
   allowed_values_function: ''
 module: options
 locked: false
