@@ -1,0 +1,23 @@
+uuid: 71dd62ff-f7b4-49eb-97bb-02c2a60e0ba9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.fsa_authority.field_contact_form_urls
+  module:
+    - fsa_ratings
+    - link
+id: fsa_authority.fsa_authority.field_contact_form_urls
+field_name: field_contact_form_urls
+entity_type: fsa_authority
+bundle: fsa_authority
+label: 'Contact forms'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 1
+field_type: link

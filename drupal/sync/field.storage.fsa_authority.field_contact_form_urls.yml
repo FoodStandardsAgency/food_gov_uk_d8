@@ -1,0 +1,19 @@
+uuid: f94a2aa0-0a43-4133-af27-9ad08dc8b5c8
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_ratings
+    - link
+id: fsa_authority.field_contact_form_urls
+field_name: field_contact_form_urls
+entity_type: fsa_authority
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
