@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Formats output of FSA authorites view email overriden exposed filter options.
+ */
+
 use \Drupal\Core\Form\FormStateInterface;
 
 /**
