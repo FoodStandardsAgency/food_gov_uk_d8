@@ -51,11 +51,11 @@ class FsaWebformValidationValidate {
     if ($error) {
       $args = [
         '%name' => $la['name'],
-        '@uri' => $fsa_authority->get('field_advice_url')->getString(),
+        '@path' => $fsa_authority->get('field_advice_url')->getString(),
       ];
       $formState->setError(
         $element,
-        t('<span>Sorry, %name requires you to make a report directly to them. Please see their <a href="@uri" target="_blank">advice page</a>.</span>', $args)
+        t('<span>Sorry, %name requires you to make a report directly to them. Please see their <a href="@path" target="_blank">advice page</a>.</span>', $args)
       );
     }
   }
