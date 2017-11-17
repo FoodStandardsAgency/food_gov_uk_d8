@@ -18,6 +18,8 @@ class FsaWebformValidationValidate {
    *   Form state.
    * @param array $form
    *   Form constructor.
+   *
+   * @see https://www.drupal.org/docs/8/modules/webform/webform-cookbook/how-to-add-custom-validation-to-a-webform-element
    */
   public static function validate(array &$element, FormStateInterface $formState, array &$form) {
     $webformKey = $element['#webform_key'];

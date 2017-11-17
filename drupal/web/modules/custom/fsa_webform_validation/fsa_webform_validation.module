@@ -3,6 +3,8 @@
 /**
  * @file
  * Adds custom webform validation.
+ *
+ * @see https://www.drupal.org/docs/8/modules/webform/webform-cookbook/how-to-add-custom-validation-to-a-webform-element
  */
 
 use Drupal\Core\Form\FormStateInterface;
