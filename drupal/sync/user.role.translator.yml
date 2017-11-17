@@ -34,7 +34,7 @@ permissions:
   - 'use editorial transition ready_for_publication'
   - 'use editorial transition restore_from_translated'
   - 'view all revisions'
-  - 'view any unpublished content'
+  - 'view any unpublished news content'
   - 'view latest version'
   - 'view news revisions'
   - 'view own unpublished content'
