@@ -3,8 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.fsa_authority.fsa_authority.field_advice_url
     - field.field.fsa_authority.fsa_authority.field_contact_directly
-    - field.field.fsa_authority.fsa_authority.field_contact_form_urls
     - field.field.fsa_authority.fsa_authority.field_email
     - field.field.fsa_authority.fsa_authority.field_email_alt
     - field.field.fsa_authority.fsa_authority.field_email_overridden
@@ -21,20 +21,20 @@ targetEntityType: fsa_authority
 bundle: fsa_authority
 mode: default
 content:
-  field_contact_directly:
-    weight: 8
-    settings:
-      display_label: true
-    third_party_settings: {  }
-    type: boolean_checkbox
-    region: content
-  field_contact_form_urls:
+  field_advice_url:
     weight: 9
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
     type: link_default
+    region: content
+  field_contact_directly:
+    weight: 8
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
     region: content
   field_email:
     weight: 2

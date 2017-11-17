@@ -1,18 +1,18 @@
-uuid: f94a2aa0-0a43-4133-af27-9ad08dc8b5c8
+uuid: f1b96217-df2b-4018-b954-9aa1f9cc8d72
 langcode: en
 status: true
 dependencies:
   module:
     - fsa_ratings
     - link
-id: fsa_authority.field_contact_form_urls
-field_name: field_contact_form_urls
+id: fsa_authority.field_advice_url
+field_name: field_advice_url
 entity_type: fsa_authority
 type: link
 settings: {  }
 module: link
 locked: false
-cardinality: -1
+cardinality: 1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

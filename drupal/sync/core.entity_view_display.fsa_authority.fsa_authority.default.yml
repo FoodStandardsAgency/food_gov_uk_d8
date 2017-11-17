@@ -3,8 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.fsa_authority.fsa_authority.field_advice_url
     - field.field.fsa_authority.fsa_authority.field_contact_directly
-    - field.field.fsa_authority.fsa_authority.field_contact_form_urls
     - field.field.fsa_authority.fsa_authority.field_email
     - field.field.fsa_authority.fsa_authority.field_email_alt
     - field.field.fsa_authority.fsa_authority.field_email_overridden
@@ -21,6 +21,18 @@ targetEntityType: fsa_authority
 bundle: fsa_authority
 mode: default
 content:
+  field_advice_url:
+    weight: 9
+    label: inline
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
   field_contact_directly:
     weight: 8
     label: inline
@@ -31,18 +43,6 @@ content:
     third_party_settings: {  }
     type: boolean
     region: content
-  field_contact_form_urls:
-    weight: 9
-    label: above
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-    type: link
-    region: content
   field_email:
     weight: 2
     label: inline
@@ -52,14 +52,14 @@ content:
     region: content
   field_email_alt:
     weight: 3
-    label: above
+    label: inline
     settings: {  }
     third_party_settings: {  }
     type: email_mailto
     region: content
   field_email_overridden:
     weight: 4
-    label: above
+    label: inline
     settings:
       format: default
       format_custom_false: ''
@@ -69,7 +69,7 @@ content:
     region: content
   field_mapit_area:
     weight: 5
-    label: above
+    label: inline
     settings:
       thousand_separator: ''
       prefix_suffix: true
