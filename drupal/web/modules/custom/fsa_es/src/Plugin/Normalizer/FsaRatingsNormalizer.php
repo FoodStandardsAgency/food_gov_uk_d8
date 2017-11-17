@@ -100,6 +100,8 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
       'postcode',
       'ratingdate',
       'ratingvalue',
+      'fhis_ratingvalue',
+      'fhrs_ratingvalue',
       'righttoreply',
       'schemetype',
       'score_confidence',
@@ -170,10 +172,21 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
           break;
 
         case 'list_string':
-          $ret = [];
-          foreach ($content_entity->{$field_name} as $ref) {
-            $ret[] = trim($ref->getString());
+          $store_plain = [
+            'field_schemetype',
+            'field_fhis_ratingvalue',
+            'field_fhrs_ratingvalue',
+          ];
+          if (in_array($field_name, $store_plain)) {
+            $ret = trim($content_entity->get($field_name)->getString());
           }
+          else {
+            $ret = [];
+            foreach ($content_entity->{$field_name} as $ref) {
+              $ret[] = trim($ref->getString());
+            }
+          }
+
           break;
 
         case 'entity_reference':

@@ -19,12 +19,16 @@ class FsaRatingsSearchForm extends FormBase {
     'local_authority',
     'business_type',
     'rating_value',
+    'fhis_rating_value',
+    'fhrs_rating_value',
   ];
 
   const FILTER_PARAM_NAMES = [
     'local_authority',
     'business_type',
     'rating_value',
+    'fhis_rating_value',
+    'fhrs_rating_value',
   ];
 
   /**
@@ -147,44 +151,39 @@ class FsaRatingsSearchForm extends FormBase {
       '#empty_value' => '',
     ];
 
-    // Define FHRS options and their sorting.
-    $rating_values = $this->defineAndSortArrayItems(
-      $this->aggsToOptions($available_filters['rating_values']),
-      [
-        5,
-        4,
-        3,
-        2,
-        1,
-        0,
-        'AwaitingInspection',
-        'Exempt',
-      ]
-    );
-
-    $form['advanced']['rating_value_fhrs'] = [
+    $form['advanced']['fhrs_rating_value'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Hygiene rating') . ' <span class="regions">(' . $this->t('England, Northern Ireland, Wales') . ')</span>',
-      '#options' => $rating_values,
-      '#default_value' => explode(',', \Drupal::request()->query->get('rating_value')),
+      '#options' => $this->defineAndSortArrayItems(
+        $this->aggsToOptions($available_filters['fhrs_rating_values']),
+        [
+          5,
+          4,
+          3,
+          2,
+          1,
+          0,
+          'AwaitingInspection',
+          'Exempt',
+        ]
+      ),
+      '#default_value' => explode(',', \Drupal::request()->query->get('fhrs_rating_value')),
     ];
 
-    // Define scottish ratings & their order.
-    $rating_values = $this->defineAndSortArrayItems(
-      $this->aggsToOptions($available_filters['rating_values']),
-      [
-        'Pass',
-        'Pass and Eat Safe',
-        'Improvement Required',
-        'Awaiting Inspection',
-        'Exempt',
-      ]
-    );
-    $form['advanced']['rating_value_fhis'] = [
+    $form['advanced']['fhis_rating_value'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Hygiene status') . ' <span class="regions">(' . $this->t('Scotland') . ')</span>',
-      '#options' => $rating_values,
-      '#default_value' => explode(',', \Drupal::request()->query->get('rating_value')),
+      '#options' => $this->defineAndSortArrayItems(
+        $this->aggsToOptions($available_filters['fhis_rating_values']),
+        [
+          'Pass',
+          'Pass and Eat Safe',
+          'Improvement Required',
+          'Awaiting Inspection',
+          'Exempt',
+        ]
+      ),
+      '#default_value' => explode(',', \Drupal::request()->query->get('fhis_rating_value')),
     ];
 
     $form['container']['actions']['#type'] = 'actions';
@@ -229,8 +228,6 @@ class FsaRatingsSearchForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $query = [];
-    $rating_fhrs = FALSE;
-    $rating_fhis = FALSE;
 
     // Read all the single values.
     foreach (['q', 'business_type', 'local_authority'] as $p) {
@@ -239,46 +236,31 @@ class FsaRatingsSearchForm extends FormBase {
       }
     }
 
-    // Read FHRS rating_value(s) from checkboxes.
-    if (!empty($form_state->getValue('rating_value_fhrs'))) {
-      $selected = [];
-      $values = $form_state->getValue('rating_value_fhrs');
-      foreach ($values as $name => $is_selected) {
-        if ($is_selected) {
-          $selected[] = $name;
+    // Read FHIS & FHRS rating values similarly.
+    $rating_values = [
+      'fhis',
+      'fhrs',
+    ];
+    foreach ($rating_values as $scheme) {
+      if (!empty($form_state->getValue($scheme . '_rating_value'))) {
+        $selected = [];
+        $values = $form_state->getValue($scheme . '_rating_value');
+        foreach ($values as $name => $is_selected) {
+          if ($is_selected) {
+            $selected[] = $name;
+          }
+        }
+
+        // If rating 0 set, make sure it gets selected.
+        if (isset($values[0]) && is_string($values[0])) {
+          $selected[] = 0;
+        }
+
+        if (!empty($selected)) {
+          // Build query for rating_value.
+          $query[$scheme . '_rating_value'] = implode(',', $selected);
         }
       }
-
-      // If rating 0 set, make sure it gets selected.
-      if (is_string($values[0])) {
-        $selected[] = 0;
-      }
-
-      if (!empty($selected)) {
-        // Build query for rating_value.
-        $rating_fhrs = implode(',', $selected);
-      }
-    }
-
-    // Read FHIS rating_value(s) from checkboxes.
-    if (!empty($form_state->getValue('rating_value_fhis'))) {
-      $selected = [];
-      $values = $form_state->getValue('rating_value_fhis');
-      foreach ($values as $name => $is_selected) {
-        if ($is_selected) {
-          $selected[] = $name;
-        }
-      }
-
-      if (!empty($selected)) {
-        // Build query for rating_value.
-        $rating_fhis = implode(',', $selected);
-      }
-    }
-
-    // Merge FHRS & FHIS checkbox values to the query string.
-    if ($rating_fhrs != '' || $rating_fhis != '') {
-      $query['rating_value'] = $rating_fhrs . ',' . $rating_fhis;
     }
 
     $form_state->setRedirect('fsa_ratings.ratings_search', [], ['query' => $query]);
