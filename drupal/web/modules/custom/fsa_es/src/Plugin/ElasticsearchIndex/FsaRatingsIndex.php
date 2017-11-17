@@ -198,6 +198,24 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
                   ],
                 ],
               ],
+              'fhrs_ratingvalue' => [
+                'type' => 'text',
+                'index' => 'not_analyzed',
+                'fields' => [
+                  'keyword' => [
+                    'type' => 'keyword',
+                  ],
+                ],
+              ],
+              'fhis_ratingvalue' => [
+                'type' => 'text',
+                'index' => 'not_analyzed',
+                'fields' => [
+                  'keyword' => [
+                    'type' => 'keyword',
+                  ],
+                ],
+              ],
               'score_confidence' => [
                 'type' => 'integer',
               ],

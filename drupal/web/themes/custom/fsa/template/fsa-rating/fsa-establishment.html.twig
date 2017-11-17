@@ -80,6 +80,10 @@
                 </p>
               {% endif %}
 
+              {% if content.field_newratingpending %}
+                <div>{{ content.field_newratingpending }}</div>
+              {% endif %}
+
               <p>
                 {{ content|without(
                 'field_geocode',
