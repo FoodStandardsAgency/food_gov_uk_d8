@@ -566,13 +566,15 @@ a[href*="//"]:not([href*="fsa.stage.wunder.io"]):after  {
 }
 
 .container.container--content {
-  margin: 0;
+  margin: 0 auto;
   max-width: var(--content-max-width);
-}
+  padding-right: 1em;
+  padding-left: 1em;
 
-.container.container--text {
-  margin: 0;
-  max-width: 50em;
+  @media (--breakpoint-lg) {
+    padding-right: 0em;
+    padding-left: 0em;
+  }
 }
 
 .container.container--small {

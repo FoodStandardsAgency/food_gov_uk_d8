@@ -69,6 +69,10 @@
   }
 }
 
+.table.table--with-borders .table__row.table__row--negative .table__item {
+  border-color: var(--dark-secondary-color) !important;
+}
+
 .table__item {
   display: block;
   flex-flow: row nowrap;

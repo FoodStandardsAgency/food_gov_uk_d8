@@ -39,14 +39,13 @@
   <div class="ratings__content ratings__content--listing">
     <div class="establishment">
       <div class="establishment__container">
-        
         <div class="peek">
           <div class="peek__container">
             <header class="ratings__header rating__header--back-link">
               {{ backlink }}
             </header>
             
-            <h1>{{ content.name }}</h1>
+            <h1 class="establishment__title">{{ content.name }}</h1>
 
             <div class="establishment__rating">
               {{ rating_badge }}
@@ -101,23 +100,34 @@
             </div>
           </div>
 
-          {{ content.field_geocode }}
-        </div>
+          <button class="establishment__button toggle-button js-toggle-button" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
+            <div class="toggle-button__item toggle-button__item--presentation-icon svg">
+              <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#map-icon"></use></svg>
+            </div>
+            <div class="toggle-button__item">{% trans %}Show on a map{% endtrans %}</div>
+            <div class="toggle-button__item toggle-button__item--icon svg">
+              <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#nav-arrow-icon"></use></svg>
+            </div>
+          </button>
 
-        {% if (content.field_score_hygiene|length == 2 and content.field_score_structural|length == 2 and content.field_score_confidence|length == 2) %}
-        {% else %}
-        <div class="table table--with-borders establishment__table js-table" role="grid">
-          <div class="table__row table__row--header js-table-header" role="row">
-            <div class="table__item" role="columnheader">{{ 'Area inspected by food safety officer'|t }}</div>
-            <div class="table__item" role="columnheader">{{ 'Standards found'|t }}</div>
+          <div class="establishment__map toggle-content js-toggle-content" id="collapsible-{{ randomID }}" aria-hidden="true">
+            {{ content.field_geocode }}
           </div>
-          {{ content.field_score_hygiene }}
-          {{ content.field_score_structural }}
-          {{ content.field_score_confidence }}
         </div>
-        {% endif %}
 
-        <div class="container container--text">
+        <div class="container container--content">
+          {% if (content.field_score_hygiene|length == 2 and content.field_score_structural|length == 2 and content.field_score_confidence|length == 2) %}
+          {% else %}
+          <div class="table table--with-borders establishment__table js-table" role="grid">
+            <div class="table__row table__row--header table__row--negative js-table-header" role="row">
+              <div class="table__item" role="columnheader">{{ 'Area inspected by food safety officer'|t }}</div>
+              <div class="table__item" role="columnheader">{{ 'Standards found'|t }}</div>
+            </div>
+            {{ content.field_score_hygiene }}
+            {{ content.field_score_structural }}
+            {{ content.field_score_confidence }}
+          </div>
+          {% endif %}
 
           {% if content.field_righttoreply|render %}
               {{ content.field_righttoreply }}

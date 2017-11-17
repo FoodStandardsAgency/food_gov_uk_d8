@@ -1,5 +1,5 @@
 @import "../../core/helper";
-@import "../../core/variable";
+@import "../../core/custom-property";
 
 .hero {
   background-color: var(--color-black);
