@@ -173,6 +173,7 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
 
         case 'list_string':
           $store_plain = [
+            'field_schemetype',
             'field_fhis_ratingvalue',
             'field_fhrs_ratingvalue',
           ];

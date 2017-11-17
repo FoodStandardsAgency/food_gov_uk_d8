@@ -172,7 +172,7 @@ class RatingsSearch extends ControllerBase {
       ];
 
       // Get scheme type to create the badge(s).
-      $scheme = $result['schemetype'][0];
+      $scheme = $result['schemetype'];
 
       // Static text if righttoreply data exists.
       if ($result['righttoreply'] != '') {
