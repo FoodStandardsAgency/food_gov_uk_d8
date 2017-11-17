@@ -9,8 +9,6 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
-use Drupal\Component\Serialization\Json;
-use GuzzleHttp\Exception\RequestException;
 
 /**
  * Class TeamFinder.
@@ -83,7 +81,8 @@ class TeamFinder extends FormBase {
     if ($form_state->getValue('query')) {
 
       // Leave as is for non-js fallback. Get mapit local authority details.
-      $la = $this->getLocalAuthority($form_state->getValue('query'));
+      $la = \Drupal::service('fsa_team_finder.get_local_authority')
+        ->get($form_state->getValue('query'));
       if (!empty($la)) {
 
         // Entity query fsa local authority.
@@ -223,7 +222,8 @@ class TeamFinder extends FormBase {
     $result_mail = NULL;
     $result_site = NULL;
     $query = $form_state->getValue('query');
-    $la = $this->getLocalAuthority($query);
+    $la = \Drupal::service('fsa_team_finder.get_local_authority')
+      ->get($form_state->getValue('query'));
 
     // Use fsa-team-finder-results.html.twig for the result.
     $result['#theme'] = 'fsa_team_finder_results';
@@ -312,58 +312,6 @@ class TeamFinder extends FormBase {
     $regex = '/^([g][i][r][0][a][a])$|^((([a-pr-uwyz]{1}([0]|[1-9]\d?))|([a-pr-uwyz]{1}[a-hk-y]{1}([0]|[1-9]\d?))|([a-pr-uwyz]{1}[1-9][a-hjkps-uw]{1})|([a-pr-uwyz]{1}[a-hk-y]{1}[1-9][a-z]{1}))(\d[abd-hjlnp-uw-z]{2})?)$/i';
     $postcode = str_replace(' ', '', $query);
     return preg_match($regex, $postcode);
-  }
-
-  /**
-   * Provides local authority ONS code and name.
-   *
-   * @param string $query
-   *   Query fragment.
-   *
-   * @return array
-   *   Council details.
-   *
-   * @see https://mapit.mysociety.org/docs/
-   */
-  public function getLocalAuthority($query) {
-
-    // Build mapit request.
-    $base = 'https://mapit.mysociety.org';
-    $postcode = str_replace(' ', '', $query);
-    $key = 'cGEi7enM22ZPLNJmm7i1t9g0E6K6MABwHeLhKFxI';
-    $url = $base . '/postcode/' . $postcode . '?api_key=' . $key;
-
-    // Call mapit.
-    $client = \Drupal::httpClient();
-    $client->request('GET', $url, ['http_errors' => FALSE]);
-    try {
-      $response = $client->get($url);
-      $data = Json::decode($response->getBody()->getContents());
-    }
-    catch (RequestException $e) {
-      watchdog_exception('fsa_team_finder', $e);
-      return [];
-    }
-    if (isset($data['shortcuts']['council'])) {
-
-      // Negotiate two-tier local government.
-      if (!is_array($data['shortcuts']['council'])) {
-        $council = $data['shortcuts']['council'];
-      }
-      elseif (isset($data['shortcuts']['council']['district'])) {
-        $council = $data['shortcuts']['council']['district'];
-      }
-      else {
-        return [];
-      }
-    }
-    else {
-      return [];
-    }
-    return [
-      'name' => $data['areas'][$council]['name'],
-      'mapit_area' => $council,
-    ];
   }
 
 }

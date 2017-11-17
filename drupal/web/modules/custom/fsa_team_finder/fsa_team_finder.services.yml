@@ -1,0 +1,3 @@
+services:
+  fsa_team_finder.get_local_authority:
+    class: Drupal\fsa_team_finder\GetLocalAuthority
