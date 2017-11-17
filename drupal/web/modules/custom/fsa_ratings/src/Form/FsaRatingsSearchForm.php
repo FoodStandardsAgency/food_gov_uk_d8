@@ -154,14 +154,35 @@ class FsaRatingsSearchForm extends FormBase {
     $form['advanced']['fhrs_rating_value'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Hygiene rating') . ' <span class="regions">(' . $this->t('England, Northern Ireland, Wales') . ')</span>',
-      '#options' => $this->aggsToOptions($available_filters['fhrs_rating_values']),
+      '#options' => $this->defineAndSortArrayItems(
+        $this->aggsToOptions($available_filters['fhrs_rating_values']),
+        [
+          5,
+          4,
+          3,
+          2,
+          1,
+          0,
+          'AwaitingInspection',
+          'Exempt',
+        ]
+      ),
       '#default_value' => explode(',', \Drupal::request()->query->get('fhrs_rating_value')),
     ];
 
     $form['advanced']['fhis_rating_value'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Hygiene status') . ' <span class="regions">(' . $this->t('Scotland') . ')</span>',
-      '#options' => $this->aggsToOptions($available_filters['fhis_rating_values']),
+      '#options' => $this->defineAndSortArrayItems(
+        $this->aggsToOptions($available_filters['fhis_rating_values']),
+        [
+          'Pass',
+          'Pass and Eat Safe',
+          'Improvement Required',
+          'Awaiting Inspection',
+          'Exempt',
+        ]
+      ),
       '#default_value' => explode(',', \Drupal::request()->query->get('fhis_rating_value')),
     ];
 
