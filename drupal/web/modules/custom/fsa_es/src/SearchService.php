@@ -86,6 +86,16 @@ class SearchService {
               'field' => 'ratingvalue.keyword',
             ],
           ],
+          'fhis_rating_values' => [
+            'terms' => [
+              'field' => 'fhis_ratingvalue.keyword',
+            ],
+          ],
+          'fhrs_rating_values' => [
+            'terms' => [
+              'field' => 'fhrs_ratingvalue.keyword',
+            ],
+          ],
         ],
       ],
     ];
@@ -124,6 +134,14 @@ class SearchService {
     if (isset($filters['rating_value'])) {
       $ids = explode(',', $filters['rating_value']);
       $query_must_filters[] = ['terms' => ['ratingvalue.keyword' => $ids]];
+    }
+    if (isset($filters['fhis_rating_value'])) {
+      $ids = explode(',', $filters['fhis_rating_value']);
+      $query_must_filters[] = ['terms' => ['fhis_ratingvalue.keyword' => $ids]];
+    }
+    if (isset($filters['fhrs_rating_value'])) {
+      $ids = explode(',', $filters['fhrs_rating_value']);
+      $query_must_filters[] = ['terms' => ['fhrs_ratingvalue.keyword' => $ids]];
     }
 
     $base_query_should_filters = $query_should_filters;
@@ -234,6 +252,8 @@ class SearchService {
         'business_types' => $result['aggregations']['business_types']['buckets'],
         'local_authorities' => $result['aggregations']['local_authorities']['buckets'],
         'rating_values' => $result['aggregations']['rating_values']['buckets'],
+        'fhis_rating_values' => $result['aggregations']['fhis_rating_values']['buckets'],
+        'fhrs_rating_values' => $result['aggregations']['fhis_rating_values']['buckets'],
       ],
     ];
 
@@ -284,6 +304,20 @@ class SearchService {
               'size' => 10000,
             ],
           ],
+          'fhis_rating_values' => [
+            'terms' => [
+              'field' => 'fhis_ratingvalue.keyword',
+              'order' => ['_term' => 'asc'],
+              'size' => 10000,
+            ],
+          ],
+          'fhrs_rating_values' => [
+            'terms' => [
+              'field' => 'fhrs_ratingvalue.keyword',
+              'order' => ['_term' => 'asc'],
+              'size' => 10000,
+            ],
+          ],
         ],
       ],
     ];
@@ -296,6 +330,8 @@ class SearchService {
       'business_types' => $result['aggregations']['business_types']['buckets'],
       'local_authorities' => $result['aggregations']['local_authorities']['buckets'],
       'rating_values' => $result['aggregations']['rating_values']['buckets'],
+      'fhis_rating_values' => $result['aggregations']['fhis_rating_values']['buckets'],
+      'fhrs_rating_values' => $result['aggregations']['fhrs_rating_values']['buckets'],
     ];
 
     return $response;
