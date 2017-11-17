@@ -1,0 +1,40 @@
+@import "../../core/helper";
+@import "../../core/custom-property";
+
+.phase-banner {
+  padding: 10px 0 8px;
+  border-bottom: 1px solid #bfc1c3;
+}
+
+.phase-banner .phase-tag {
+  display: inline-block;
+  margin: 0 8px 0 0;
+  padding: 2px 5px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #005ea5;
+}
+
+.phase-banner span {
+  display: table-cell;
+  vertical-align: baseline;
+}
+
+.phase-banner p {
+  display: table;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.phase-banner a {
+  text-decoration: underline;
+}
+
+:--not-touch .phase-banner a:--enter {
+  color: var(--darker-primary-color);
+}

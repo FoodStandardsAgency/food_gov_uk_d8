@@ -25,20 +25,20 @@
 {% endfor %}
 {% set randomID = randomID|join %}
 
-<div class="ratings {% if ratings_info_content %}ratings--frontpage{% else %}js-sticky-container{% endif %}">
+<div class="ratings {% if ratings_info_content %}ratings--frontpage{% else %}{% endif %}">
 
   {% if ratings_info_content %}
   {% else %}
   <button class="ratings__search-expand-button toggle-button js-toggle-button" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
     <div class="toggle-button__item">{% trans %}Show search options{% endtrans %}</div>
     <div class="toggle-button__item toggle-button__item--icon svg">
-      <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#toggle-icon"></use></svg>
+      <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#nav-arrow-icon"></use></svg>
     </div>
   </button>
   {% endif %}
 
-  <div class="ratings__search {% if ratings_info_content %}ratings__search--frontpage{% else %} js-sticky-element toggle-content toggle-content--only-mobile js-toggle-content js-toggle-content-only-mobile" id="collapsible-{{ randomID }}" aria-hidden="true{% endif %}">
-    <div class="container container--search">
+  <div class="ratings__search peek {% if ratings_info_content %}ratings__search--frontpage{% else %} toggle-content toggle-content--only-mobile js-toggle-content js-toggle-content-only-mobile" id="collapsible-{{ randomID }}" aria-hidden="true{% endif %}">
+    <div class="container peek__container">
       <div class="ratings__text">
       </div>
       {{ form }}
@@ -47,17 +47,17 @@
 
   <div class="ratings__content {% if ratings_info_content %}ratings__content--frontpage{% else %}ratings__content--listing{% endif %}">
     {% if ratings_info_content %}
-      <div class="container container--content">
+      <div class="container container--small">
         {{ ratings_info_content }}
       </div>
     {% else %}
     <div class="ratings__listing">
-      <header class="ratings__header" role="toolbar" aria-label="sorting options" aria-controls="sortable">
+      <div class="ratings__toolbar" role="toolbar" aria-label="sorting options" aria-controls="sortable">
         {% if sort_form %}
           <div class="ratings__hits-total">{{ hits_total }} {{ 'Results'|t }}</div>
           <div class="ratings__sort-form">{{ sort_form }}</div>
         {% endif %}
-      </header>
+      </div>
 
       <h2 class="visually-hidden" aria-labelledby="sortable">{% trans %}Food hygiene ratings search results{% endtrans %}</h2>
       <div class="table table--with-background js-table ratings__table" id="sortable" role="grid">

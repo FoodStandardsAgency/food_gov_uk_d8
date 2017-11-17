@@ -1,0 +1,229 @@
+@import "../../core/helper";
+@import "../../core/custom-property";
+
+/* Navigation wrapper */
+.navigation-wrapper {
+  @media (--breakpoint-sm) {
+    background-color: transparent;
+    position: relative;
+    top: auto;
+    right: auto;
+    left: auto;
+    height: auto;
+    transform: none;
+    min-height: 2.6em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0;
+    transition: none;
+    box-shadow: none;
+    display: block;
+    flex-direction: column;
+  }
+
+  @media (--breakpoint-lg) {
+    min-height: 3em;
+  }
+}
+
+:--not-js .navigation-wrapper {
+  width: calc(100% - 12em);
+
+  @media (--breakpoint-md) {
+    width: calc(100% - 19em);
+  }
+}
+
+.toolbar-vertical .navigation-wrapper {
+  height: calc(100vh - 39px);
+
+  @media (--breakpoint-sm) {
+    height: auto;
+  }
+}
+
+.navigation-wrapper.is-open {
+  @media (--breakpoint-sm) {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+.navigation-wrapper__container {
+  @media (--breakpoint-sm) {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    overflow: visible;
+    height: auto;
+    margin: 0 auto;
+    max-width: var(--max-width);
+  }
+}
+
+.navigation-wrapper__content {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+
+.navigation-wrapper__content:after {
+  @media (--breakpoint-sm) {
+    content: "";
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    background-color: var(--color-light-gray);
+    transition:
+      opacity 0.12s ease-in-out,
+      transform 0.12s ease-in-out;
+  }
+}
+
+.navigation-wrapper__main {
+  @media (--breakpoint-sm) {
+    overflow: visible;
+    padding-bottom: 0;
+  }
+}
+
+.navigation-wrapper__main > div {
+  @media (--breakpoint-sm) {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+  }
+}
+
+nav#block-menu-help-main {
+  order: 100;
+}
+
+.navigation {
+
+}
+
+nav#block-menu-help-main > ul,
+.navigation > ul,
+.navigation__container {
+  margin: 0;
+  padding: 0;
+
+  @media (--breakpoint-sm) {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.navigation__container--mobile {
+  @media (--breakpoint-sm) {
+    display: none;
+  }
+}
+
+nav#block-menu-help-main > ul > li,
+.navigation > ul > li,
+.navigation__item {
+  list-style: none;
+  text-align: center;
+  margin-bottom: 0;
+
+  @media (--breakpoint-sm) {
+    text-align: left;
+  }
+}
+
+nav#block-menu-help-main > ul > li > a,
+.navigation > ul > li > a,
+.navigation__link {
+  @media (--breakpoint-sm) {
+    position: relative;
+    padding: 1em 1em;
+    text-align: center;
+    font-size: 0.8em;
+    font-weight: 600;
+    background-color: transparent;
+    text-transform: uppercase;
+    border-radius: 0em;
+    margin-top: 0em;
+    transform: translateX(0%);
+    box-shadow: none;
+    text-decoration: none !important;
+  }
+
+  @media (--breakpoint-lg) {
+    text-align: left;
+    font-size: 1em;
+  }
+}
+
+nav#block-menu-help-main > ul > li > a:after,
+.navigation > ul > li > a:after,
+.navigation__link:after {
+  @media (--breakpoint-sm) {
+    content: "";
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 5px;
+    background-color: var(--primary-color);
+    transform: scaleY(0);
+    transform-origin: 50% 100%;
+    transition:
+      opacity 0.12s ease-in-out,
+      transform 0.12s ease-in-out;
+  }
+}
+
+:--not-touch nav#block-menu-help-main > ul > li > a:--enter,
+:--not-touch .navigation ul li a:--enter,
+.navigation ul li a.is-active,
+.navigation ul li.menu-item--active-trail a,
+:--not-touch .navigation__link:--enter {
+  @media (--breakpoint-sm) {
+    background-color: transparent;
+    box-shadow: none;
+    color: var(--color-black);
+    transition:
+      opacity var(--transition-enter-fast),
+      transform var(--transition-enter-fast);
+  }
+}
+
+/*:--not-touch nav#block-menu-help-main > ul > li > a:--enter,
+:--not-touch .navigation ul li a:--enter,
+:--not-touch .navigation__link:--enter {
+  @media (--breakpoint-sm) {
+    opacity: 0.7;
+  }
+}*/
+
+:--not-touch nav#block-menu-help-main > ul > li > a:--enter:after,
+:--not-touch .navigation > ul > li > a:--enter:after,
+.navigation ul li a.is-active:after,
+.navigation ul li.menu-item--active-trail a:after,
+:--not-touch .navigation__link:--enter:after {
+  @media (--breakpoint-sm) {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+/*:--not-touch .navigation ul li a.is-active:--enter {
+  @media (--breakpoint-sm) {
+    opacity: 0.7;
+  }
+}*/
+
+.navigation-wrapper.is-open nav#block-menu-help-main > ul > li > a,
+.navigation-wrapper.is-open .navigation > ul > li > a,
+.navigation-wrapper.is-open .navigation__link {
+  @media (--breakpoint-sm) {
+    transform: translateX(0%);
+  }
+}

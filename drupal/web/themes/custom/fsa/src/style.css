@@ -1,0 +1,46 @@
+@import "core/helper.css";
+@import "core/custom-property.css";
+@import "core/base.css";
+
+/*Component*/
+@import "component/general/button.css";
+@import "component/general/table.css";
+@import "component/general/toggle.css";
+@import "component/general/toc.css";
+@import "component/general/modal.css";
+@import "component/general/topic-cloud.css";
+@import "component/general/subpages.css";
+@import "component/general/regional-variation.css";
+@import "component/general/message-list.css";
+@import "component/general/teaser.css";
+@import "component/general/webform.css";
+@import "component/general/social-media.css";
+@import "component/general/team-finder.css";
+@import "component/general/peek.css";
+
+/* Layout */
+@import "component/general/phase-banner.css";
+@import "component/general/header.css";
+@import "component/general/hero.css";
+@import "component/general/layout.css";
+@import "component/general/breadcrumb.css";
+@import "component/general/sidebar.css";
+@import "component/general/footer.css";
+
+/* Ratings */
+@import "component/general/establishment.css";
+@import "component/general/ratings-meanings.css";
+@import "component/general/ratings.css";
+
+/* Profile and registration */
+@import "component/general/my-profile.css";
+@import "component/general/subscribe-flow.css";
+
+/* Alert */
+@import "component/general/news-alerts.css";
+
+/* Navigation */
+@import "component/general/navigation-side.css";
+@import "component/general/navigation-mobile.css";
+@import "component/general/navigation-secondary.css";
+@import "component/general/navigation.css";

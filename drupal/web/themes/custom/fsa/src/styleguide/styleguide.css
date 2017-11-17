@@ -1,0 +1,296 @@
+@import "../core/helper";
+/* @import "/vendor/highlightjs/solarized-dark"; */
+
+:root {
+  --styleguide-color-black: var(--color-black, #000);
+  --styleguide-color-white: var(--color-white, #fff);
+
+  --styleguide-color-gray-light: var(--color-gray-light, #EEEEEE);
+  --styleguide-color-gray: var(--color-gray, #9E9E9E);
+
+  --styleguide-color-blue-light: var(--color-blue-light, #6db2e7);
+  --styleguide-color-blue: var(--color-blue, #2572ad);
+  --styleguide-color-blue-dark: var(--color-blue-dark, #18507b);
+
+  --styleguide-primary-color-light: var(--styleguide-color-blue-light);
+  --styleguide-primary-color: var(--styleguide-color-blue);
+  --styleguide-primary-color-dark: var(--styleguide-color-blue-dark);
+
+  --styleguide-box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.1);
+}
+
+body.styleguide {
+  font-family: sans-serif;
+  font-weight: 300;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.code {
+  display: block;
+  height: 100%;
+  transition:
+    backround-color 0.2s ease-in-out,
+    color 0.2s ease-in-out;
+}
+
+.pre {
+  overflow: auto;
+  margin: 0;
+}
+
+.container {
+  max-width: 40em;
+  margin: 0 auto;
+}
+
+.hero {
+  /* background-color: var(--styleguide-primary-color-dark);
+  @mixin responsive-declaration padding, 1em, 3em;
+  text-align: center; */
+  display: flex;
+  align-items: center;
+
+  @mixin responsive-declaration padding, 1em, 2em;
+}
+
+.hero h1 {
+  @mixin responsive-declaration font-size, 1.5em, 3em;
+  /* color: var(--styleguide-color-white); */
+}
+
+.hero h2 {
+  @mixin responsive-declaration font-size, 1em, 2em;
+  /* color: var(--styleguide-primary-color-light); */
+}
+
+.layout {
+  position: relative;
+  @mixin responsive-declaration padding-left, 2em, 4em;
+  @mixin responsive-declaration padding-right, 2em, 4em;
+}
+
+.navigation {
+  position: relative;
+  z-index: var(--z-middle);
+  color: var(--color-white);
+  display: flex;
+  flex-flow: row wrap;
+  @mixin responsive-declaration padding, 1em, 2em;
+
+  @media (--breakpoint-md) {
+    flex-flow: column nowrap;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20em;
+    height: 100vh;
+    overflow: auto;
+  }
+
+  @media (--breakpoint-lg) {
+    width: 25.5em;
+  }
+}
+
+.navigation > *:first-child {
+  margin-top: 0;
+}
+
+:global .is-sticky {
+  @media (--breakpoint-md) {
+    position: fixed;
+  }
+}
+
+:global .is-bottom {
+  @media (--breakpoint-md) {
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+.navigation__heading {
+  color: var(--styleguide-color-black);
+}
+
+.navigationItem {
+  font-size: 1em;
+  text-decoration: none;
+  color: var(--styleguide-primary-color);
+  display: block;
+  padding: 0.5rem 2rem;
+}
+
+.navigationItem:hover {
+  text-decoration: underline;
+}
+
+.layout__content {
+  position: relative;
+  z-index: var(--z-bottom);
+  flex: 1 1 100%;
+  min-height: 100vh;
+  @mixin responsive-declaration padding-bottom, 1em, 3em;
+  @mixin responsive-declaration padding-right, 1em, 4em;
+  @mixin responsive-declaration padding-left, 1em, 4em;
+
+  @media (--breakpoint-md) {
+    margin-right: 20em;
+    padding-right: 0em;
+  }
+
+  @media (--breakpoint-lg) {
+    margin-right: 25.5em;
+  }
+}
+
+.main {
+  @mixin responsive-declaration padding, 1em, 2em;
+}
+
+.color {
+  flex: 1 1 25%;
+  min-height: 10em;
+  display: flex;
+  flex-flow: column nowrap;
+  margin-bottom: 1em;
+  border: 1px solid var(--styleguide-color-gray-light);
+}
+
+.color__example {
+  width: 100%;
+  height: 5em;
+  border-bottom: 1px solid var(--styleguide-color-gray-light);
+}
+
+.color__property {
+  text-align: center;
+  font-family: monospace;
+  margin: 0;
+  @mixin responsive-declaration padding, 1em, 1.5em;
+}
+
+.color__value {
+  font-family: monospace;
+  @mixin responsive-declaration padding, 1em, 1.5em;
+}
+
+.item {
+  background-color: var(--styleguide-color-white);
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
+  position: relative;
+}
+
+.item:not(:first-child) {
+  @mixin responsive-declaration margin-top, 3em, 6em;
+}
+
+.item__header {
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
+}
+
+.item__title {
+  @mixin responsive-declaration font-size, 1.5em, 2em;
+  margin: 0;
+  display: inline-block;
+  padding: 0.25em 0em;
+  display: block;
+  border-bottom: 1px solid var(--styleguide-color-gray);
+}
+
+.item__description {
+  margin: 0;
+  display: inline-block;
+  padding: 0.25em 1em;
+  @mixin responsive-declaration margin-top, 1em, 2em;
+  display: block;
+  border-left: 3px solid var(--styleguide-color-gray);
+}
+
+.item__description:empty {
+  display: none;
+}
+
+.item__element {
+  /* @mixin responsive-declaration padding, 1em, 2em; */
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  flex: 0 0 50%;
+  @mixin responsive-declaration margin-top, 1em, 2em;
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
+}
+
+.item__code {
+  flex: 0 0 50%;
+  border-top: 1px solid var(--styleguide-color-gray);
+  margin-bottom: 0;
+}
+
+.item__content {
+  max-width: 70em;
+}
+
+.item__content > *:first-child {
+  margin-top: 0;
+}
+
+.item__content h1,
+.item__content h2,
+.item__content h3,
+.item__content h4 {
+  font-weight: 600;
+  @mixin responsive-declaration margin-top, 1em, 2em;
+  @mixin responsive-declaration margin-bottom, 0.5em, 1.5em;
+}
+
+.item__input {
+  display: none;
+}
+
+.item__tabList {
+  display: flex;
+}
+
+.item__tabItem {
+  @mixin responsive-declaration padding, 0.5em, 1em;
+  cursor: pointer;
+  flex: 1 1 auto;
+  text-align: center;
+  font-weight: 400;
+}
+
+.item__input.item__html:checked ~ .item__tabList .item__tabItem.item__html,
+.item__input.item__css:checked ~ .item__tabList .item__tabItem.item__css,
+.item__input.item__js:checked ~ .item__tabList .item__tabItem.item__js {
+  background-color: var(--styleguide-primary-color);
+  color: var(--styleguide-color-white);
+  font-weight: 600;
+}
+
+.item__tabContent {
+  position: relative;
+  width: 100%;
+  height: 30em;
+  overflow-y: auto;
+}
+
+.item__tabCode {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.item__input.item__html:checked ~ .item__tabContent .item__tabCode.item__html,
+.item__input.item__css:checked ~ .item__tabContent .item__tabCode.item__css,
+.item__input.item__js:checked ~ .item__tabContent .item__tabCode.item__js  {
+  display: block;
+}
