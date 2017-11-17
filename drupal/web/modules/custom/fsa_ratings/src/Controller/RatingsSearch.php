@@ -55,7 +55,13 @@ class RatingsSearch extends ControllerBase {
     $params['keywords'] = \Drupal::request()->query->get('q');
 
     $filters = [];
-    $filter_param_names = ['local_authority', 'business_type', 'rating_value'];
+    $filter_param_names = [
+      'local_authority',
+      'business_type',
+      'rating_value',
+      'fhis_rating_value',
+      'fhrs_rating_value',
+    ];
     foreach ($filter_param_names as $opt) {
       $value = \Drupal::request()->query->get($opt);
       if (isset($value)) {
@@ -91,7 +97,13 @@ class RatingsSearch extends ControllerBase {
     $filters = [];
     // See if the following parameters are provided by the user and add to the
     // list of filters.
-    $filter_param_names = ['local_authority', 'business_type', 'rating_value'];
+    $filter_param_names = [
+      'local_authority',
+      'business_type',
+      'rating_value',
+      'fhis_rating_value',
+      'fhrs_rating_value',
+    ];
     foreach ($filter_param_names as $opt) {
       $value = \Drupal::request()->query->get($opt);
       if (isset($value)) {
