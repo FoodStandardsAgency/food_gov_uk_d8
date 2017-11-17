@@ -1,0 +1,7 @@
+name: FSA webform validation
+description: Adds custom webform validation.
+type: module
+core: 8.x
+package: FSA
+dependencies:
+  - webform
