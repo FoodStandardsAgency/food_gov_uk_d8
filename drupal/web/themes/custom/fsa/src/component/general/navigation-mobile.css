@@ -50,11 +50,13 @@
 
 /* Mobile navigation header */
 .navigation-mobile-header {
+  background-color: var(--dark-secondary-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   flex: 0 0 auto;
+  border-bottom: 3px solid var(--color-green);
 
   @media (--breakpoint-sm) {
     display: none;
@@ -75,7 +77,7 @@
 }
 
 .navigation-mobile-header__button .svg path {
-  fill: var(--dark-primary-color);
+  fill: var(--color-white);
 }
 
 .navigation-mobile-header__content {
