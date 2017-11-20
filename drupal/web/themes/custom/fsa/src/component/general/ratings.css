@@ -59,12 +59,10 @@
 }
 
 .ratings__search label.option {
-  color: var(--color-lighter-gray);
   text-transform: capitalize;
 }
 
 .ratings__search input[type="checkbox"] + label:before {
-  background-color: var(--color-white);
 }
 
 .ratings__search input:not([type="submit"]),
