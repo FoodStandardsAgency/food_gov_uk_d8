@@ -25,7 +25,7 @@ function fsa_contactus_webform_element_alter(array &$element, FormStateInterface
   }
 
   // Mark optional elements as suggested by GDS.
-  if (!isset($element['#required']) && isset($element['#title'])) {
+  if ((!isset($element['#required']) && isset($element['#title'])) && !isset($element['#states']['required'])) {
     $element['#title'] = $element['#title'] . ' <span class="optional">(' . t('optional') . ')</span>';
   }
 }
