@@ -4,7 +4,7 @@
 /* Navigation wrapper */
 .navigation-wrapper {
   @media (--breakpoint-sm) {
-    background-color: transparent;
+    background-color: map-get(--dark-secondary-color);
     position: relative;
     top: auto;
     right: auto;
