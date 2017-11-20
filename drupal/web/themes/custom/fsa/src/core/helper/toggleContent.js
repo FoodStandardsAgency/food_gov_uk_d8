@@ -1,6 +1,6 @@
 import checkMediaQuery from './checkMediaQuery';
 
-function toggleContent(toggleButtons, breakpoints, toggleContentElement = null) {
+function toggleContent(toggleButtons, breakpoints) {
 
   const toggleContentVisibility = (button, content) => {
     if (content.classList.contains('is-open')) {
@@ -19,7 +19,8 @@ function toggleContent(toggleButtons, breakpoints, toggleContentElement = null) 
   if (toggleButtons.length != undefined) {
     [...toggleButtons].forEach(function(button) {
 
-      let content = ((toggleContentElement === null) ? button.nextElementSibling : toggleContentElement);
+      let content = ((button.nextElementSibling === null) ? button.closest('.js-content-next').nextElementSibling : button.nextElementSibling);
+      console.log(content);
 
       if (content.classList.contains('js-toggle-content-only-mobile')) {
         if (checkMediaQuery() == breakpoints.medium) {
@@ -32,7 +33,7 @@ function toggleContent(toggleButtons, breakpoints, toggleContentElement = null) 
       });
     });
   } else {
-    let content = ((toggleContentElement === null) ? toggleButtons.nextElementSibling : toggleContentElement);
+    let content = toggleButtons.nextElementSibling;
 
     if (content.classList.contains('js-toggle-content-only-mobile')) {
       if (checkMediaQuery() == breakpoints.medium) {

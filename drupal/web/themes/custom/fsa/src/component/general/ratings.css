@@ -304,6 +304,24 @@
 
 }
 
+.ratings__mobile-item {
+  display: flex;
+  align-items: center;
+}
+
+
+.ratings__mobile-item a {
+  display: flex;
+}
+
+.ratings__toggle-button {
+  margin-left: auto !important;
+}
+
+.ratings__toggle-button.toggle-button__item.toggle-button__item--icon svg path {
+  color: var(--dark-primary-color) !important;
+}
+
 .ratings__table.ratings__table--more-items > div {
   display: flex !important;
   flex-flow: column nowrap !important;

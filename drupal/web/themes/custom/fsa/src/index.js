@@ -1,5 +1,6 @@
 import 'babel-polyfill';
 import './core/helper/polyfill/classList';
+import './core/helper/polyfill/closest';
 import svg4everybody from 'svg4everybody';
 import responsiveTables from './core/helper/responsiveTables';
 import stickyElement from './core/helper/stickyElement';
