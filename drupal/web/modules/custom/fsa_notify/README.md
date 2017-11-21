@@ -2,7 +2,9 @@
 
 This functionality is originally built by ragnar.kurm@wunder.io
 
-Tomi Mikola has been also involved.
+People involved:
+* Tomi Mikola 
+* Timo Kirkkala
 
 All notification related stuff lives in one module `fsa_notify`.
 
@@ -10,10 +12,8 @@ All notification related stuff lives in one module `fsa_notify`.
 
 Decisions and/or further investigation needed:
 * Need to decide and work with what happens when sending fails to particular user. Stop sending altogether? Or continue? We dont know if this is some common error or just isolated case. In `src/FsaNotifyAPI*.php`, see `send()` method.
-* There are overlapping fields: `field_notification_allergys` and `field_subscribed_notifications`. This module is built with the former.
-* There are no food nor news alerts yet
-* Unsubscribe by email functionality
-* Optout by sms functionality
+* Unsubscribe by email functionality (FSA-318)
+* Optout by sms functionality (FSA-321)
 * Email bounce handling
 * SMS bounce handling
 * Multilingual functionality
@@ -48,9 +48,9 @@ Runtime state variables are:
 
 ## API keys and Template IDs
 
-This can be acquired from https://www.notifications.service.gov.uk/
+Acquired from https://www.notifications.service.gov.uk/
 
-Consult LastPass, Luke or Sally for access.
+Consult LastPass, Luke or Sally for access. We have a shared team.
 
 1) One set is API keys, which specify mode you want to use the service:
 * Live – sends to anyone.
@@ -80,7 +80,7 @@ This field is not visible for user, but here we collect alerts per user to be se
 
 When alerts are sent out, this field is emptied.
 
-### user.field_notification_allergys
+### user.field_subscribed_notifications
 
 List of allergens user has signed up to.
 
@@ -159,6 +159,21 @@ Chunking is used to prevent Drupal cache saturation subsequent OOM event.
 
 Everything here revolves around field `user.field_notification_cache`.
 
+## Testing
+
+Use `Makefile` in `fsa_notify/testing` directory.
+
+* Use testing keys in `/admin/config/fsa/notify`
+* have 1 user in your local with at least 1 allergy.
+* clear local alerts and possibly migration data
+  * drush mr --tag=alerts
+* run the import
+  * `drush mi --tag=alerts`
+  * Or use `make alert_add` to add arbitrary nonsense-alert
+* Run `make test`
+  * Have `drush wd-show --tail --full --extended &` open in another tab
+* See message log at https://www.notifications.service.gov.uk/services/6f00837a-4b8f-4ddd-ae96-ca2d3035fe57/api
+
 ## Files in this module
 
 * `fsa_notify.module`
@@ -194,7 +209,7 @@ Everything here revolves around field `user.field_notification_cache`.
   * Enable/Disable distributing and sending notifications
   * Basic stats
 * `src/Plugin/QueueWorker/FsaNotifyStorageQueue.php`
-  * Item processing (storing / distributing)
+  * Item processing (storing / distributing)  
 
 ## Related modules and packages
 

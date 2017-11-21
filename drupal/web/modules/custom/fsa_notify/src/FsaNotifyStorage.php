@@ -52,7 +52,7 @@ class FsaNotifyStorage {
     $query->condition('uid', 0, '>');
     $query->condition('status', 1);
     $query->condition('field_notification_method', 'none', '!=');
-    $query->condition('field_notification_allergys', $allergens, 'in');
+    $query->condition('field_subscribed_notifications', $allergens, 'in');
     // $query->sort('uid');
     $uids = $query->execute();
 
