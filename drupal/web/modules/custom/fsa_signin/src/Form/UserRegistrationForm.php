@@ -107,7 +107,7 @@ class UserRegistrationForm extends FormBase {
       '#value' => $this->t('Submit'),
     );
     $form['actions']['back'] = [
-      '#markup' => Link::createFromRoute($this->t('Previous'),'fsa_signin.default_controller_emailSubscriptionsPage', [], ['attributes' => ['class' => 'button black left']])->toString(),
+      '#markup' => Link::createFromRoute($this->t('Previous'),'fsa_signin.user_preregistration_alerts_form', [], ['attributes' => ['class' => 'button black left']])->toString(),
     ];
     return $form;
   }
@@ -155,7 +155,7 @@ class UserRegistrationForm extends FormBase {
       //drupal_set_message($this->t('Thank you! Your selections has been saved.'));
     }
     catch (\Exception $e) {
-      drupal_set_message($this->t('An error occurred while creating an account.', 'error'));
+      drupal_set_message($this->t('An error occurred while creating an account.'), 'error');
     }
     $form_state->setRedirect('fsa_signin.user_registration_thank_you');
   }

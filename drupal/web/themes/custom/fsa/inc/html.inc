@@ -1,12 +1,13 @@
 <?php
 
-use Drupal\taxonomy\Entity\Term;
-use Drupal\Component\Utility\Html;
-
 /**
  * @file
  * Includes FSA theme html preprocess functionality.
  */
+
+use Drupal\Core\Url;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\Component\Utility\Html;
 
 /**
  * Implements of template_preprocess_html().
@@ -19,7 +20,7 @@ function fsa_preprocess_html(&$variables) {
 
     $variables['attributes']['class'][] = 'node-' . $node->id();
 
-    // Set node type as theme-class
+    // Set node type as theme-class.
     $variables['attributes']['class'][] = 'theme--' . $node->getType();
     if ($node->getType() == 'news' || $node->getType() == 'alert') {
       // Additionally add combined class for news and alert node types.
@@ -34,13 +35,16 @@ function fsa_preprocess_html(&$variables) {
       // Add content type based html class.
       $variables['attributes']['class'][] = 'theme--content-type-' . strtolower(Html::cleanCssIdentifier($term->getName()));
 
-      // Add body classes based on selected taxonomy term
+      // Add body classes based on selected taxonomy term.
       switch ($term->id()) {
-        case 27: // Help
+        // Help.
+        case 27:
           $variables['attributes']['class'][] = 'theme--service';
           $variables['attributes']['class'][] = 'theme--help-centre';
           break;
-        case 29: // News & Alerts
+
+        // News & Alerts.
+        case 29:
           $variables['attributes']['class'][] = 'theme--news-alerts';
           break;
       }
@@ -55,16 +59,15 @@ function fsa_preprocess_html(&$variables) {
     $variables['attributes']['class'][] = 'theme--fhrs';
   }
 
-
   // Get service routes to set body classes for the section.
   $service_urls = [];
   $routes = [
     'fsa_signin.default_controller_signInPage',
     'fsa_signin.default_controller_myAccountPage',
   ];
-  foreach ($routes AS $route) {
+  foreach ($routes as $route) {
     try {
-      $service_url = \Drupal\Core\Url::fromRoute($route)->toString();
+      $service_url = Url::fromRoute($route)->toString();
       $service_url = explode('/', $service_url);
       $service_urls[] = $service_url[1];
     }

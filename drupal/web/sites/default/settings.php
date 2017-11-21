@@ -20,8 +20,7 @@ $databases['default']['default'] = array (
   'driver' => 'mysql',
 );
 
-// CHANGE THIS.
-$settings['hash_salt'] = 'some-hash-salt-please-change-this';
+$settings['hash_salt'] = 'B081u6MDeLm3bRi5niieR-797DOulNMA-SGCoprrcy5Gjn-hDNAkiy1k8Pnb9y8n1zSXWu4aQQ';
 
 if ( (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) == "on")
   || (isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) && $_SERVER["HTTP_X_FORWARDED_PROTO"] == "https")
@@ -49,6 +48,34 @@ if(!empty($_SERVER['SERVER_ADDR'])){
   header('X-Webserver: '. end($pcs));
 }
 
+// Disallow configuration changes by default.
+$settings['config_readonly'] = TRUE;
+
+// Define specific admin pages to always allow configuration changes.
+// @todo: follow issue https://www.drupal.org/node/2826274 for a fix on this.
+$config_allowed = [
+  '/admin/structure/menu/manage/account',
+  '/admin/structure/menu/manage/main',
+  '/admin/structure/menu/manage/help',
+  '/admin/structure/menu/manage/footer',
+];
+
+// Allow config changes on specified path pattern and command line.
+if (in_array($_SERVER['REQUEST_URI'], $config_allowed) || PHP_SAPI === 'cli') {
+  $settings['config_readonly'] = FALSE;
+}
+
+// We want to sometimes manage webforms on staging, temporarily allow config
+// changes here.
+/*
+if (strpos($_SERVER['REQUEST_URI'], '/admin/structure/webform/manage') === 0) {
+  $settings['config_readonly'] = FALSE;
+}
+*/
+
+// Be sure to have config_split.dev disabled by default.
+$config['config_split.config_split.dev']['status'] = FALSE;
+
 $env = getenv('WKV_SITE_ENV');
 switch ($env) {
   case 'production':
@@ -62,6 +89,9 @@ switch ($env) {
 	break;
   case 'local':
 		$settings['simple_environment_indicator'] = '#88b700 Local';
+
+		$config['config_split.config_split.dev']['status'] = TRUE;
+    $settings['config_readonly'] = FALSE;
 	break;
 }
 /**
@@ -70,6 +100,15 @@ switch ($env) {
 $config_directories = array(
   CONFIG_SYNC_DIRECTORY => '../sync',
 );
+
+/**
+ * Trusted hosts patterns.
+ */
+$settings['trusted_host_patterns'] = [
+  'food\.gov\.uk$',
+  'fsa\.dev\.wunder\.io$',
+  'fsa\.stage\.wunder\.io$',
+];
 
 /**
  * Access control for update.php script.

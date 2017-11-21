@@ -6,12 +6,19 @@ _core:
   default_config_hash: j5zLMOdJBqC0bMvSdth5UebkprJB8g_2FXHqhfpJzow
 id: anonymous
 label: 'Anonymous user'
-weight: 0
+weight: -10
 is_admin: false
 permissions:
   - 'access comments'
   - 'access content'
   - 'access site-wide contact form'
+  - 'entity print access bundle alert'
+  - 'entity print access bundle generic'
+  - 'entity print access bundle help'
+  - 'entity print access bundle lander'
+  - 'entity print access bundle news'
+  - 'entity print access bundle page'
+  - 'entity print access type fsa_establishment'
   - 'search content'
   - 'use text format restricted_html'
   - 'view media'

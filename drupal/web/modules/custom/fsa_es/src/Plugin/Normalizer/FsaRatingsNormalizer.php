@@ -4,6 +4,7 @@ namespace Drupal\fsa_es\Plugin\Normalizer;
 
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityManager;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\serialization\Normalizer\ContentEntityNormalizer;
@@ -12,6 +13,8 @@ use Drupal\serialization\Normalizer\ContentEntityNormalizer;
  * Normalizes / denormalizes Drupal entities into an array structure good for ES.
  */
 class FsaRatingsNormalizer extends ContentEntityNormalizer {
+
+  use StringTranslationTrait;
 
   /**
    * The interface or class that this Normalizer supports.
@@ -29,25 +32,28 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
 
   /**
    * FsaRatingsNormalizer constructor.
+   *
    * @param \Drupal\Core\Entity\EntityManager $entityManager
    */
   public function __construct(EntityManager $entityManager) {
     parent::__construct($entityManager);
   }
-  
+
   /**
    * {@inheritdoc}
    */
   public function normalize($object, $format = NULL, array $context = []) {
-    // This normalizer supports only ContentEntityBase objects, see $this->supportedInterfaceOrClass
-    /** @var ContentEntityBase $object */
+    // This normalizer supports only ContentEntityBase objects, see $this->supportedInterfaceOrClass.
+    /** @var \Drupal\Core\Entity\ContentEntityBase $object */
     $type = $object->getEntityTypeId();
 
     switch ($type) {
       case 'node':
         return NULL;
+
       case 'fsa_establishment':
         return $this->normalizeEstablishment($object, $format, $context);
+
       default:
         return $this->normalizeDefault($object, $format, $context);
     }
@@ -55,15 +61,16 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
   }
 
   /**
-   * Normalize generic entity attributes
+   * Normalize generic entity attributes.
    *
    * @param \Drupal\Core\Entity\ContentEntityBase $object
    * @param null $format
    * @param array $context
+   *
    * @return array
    */
   protected function normalizeDefault(ContentEntityBase $object, $format = NULL, array $context = []) {
-    $data =  [
+    $data = [
       'id' => $object->id(),
       'name' => $object->get('name')->getString(),
     ];
@@ -71,13 +78,13 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
     return $data;
   }
 
-
   /**
    * Normalize the 'fsa_establishment' entity specific fields.
    *
    * @param \Drupal\Core\Entity\ContentEntityBase $object
    * @param null $format
    * @param array $context
+   *
    * @return array
    */
   protected function normalizeEstablishment(ContentEntityBase $object, $format = NULL, array $context = []) {
@@ -93,32 +100,50 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
       'postcode',
       'ratingdate',
       'ratingvalue',
+      'fhis_ratingvalue',
+      'fhrs_ratingvalue',
+      'righttoreply',
+      'schemetype',
       'score_confidence',
       'score_hygiene',
       'score_structural',
     ];
 
     foreach ($field_names as $field_name) {
-      $data[$field_name] = $this->getFieldValue($object, $field_name);
+      $value = $this->getFieldValue($object, $field_name);
+      if ($field_name == 'businesstype') {
+        $langcode = $object->language()->getId();
+        // Businesstype value needs translation since the establishment import doesn't bring in translation at the moment due technical issues.
+        $value[0]['label'] = $this->t($value[0]['label'], [], ['context' => 'FHRS business type', 'langcode' => $langcode])->render();
+      }
+      $data[$field_name] = $value;
     }
 
-    // Merge the values of values from name, address, postcode and LA into single field for more robust search querying
-    $data['combinedvalues'] = $data['name'] .' '. $data['address'] .' '. $data['postcode'] .' '. $data['localauthoritycode'][0]['label'];
+    // Merge the values of values from name, address, postcode and LA into single field for more robust search querying.
+    $data['combinedvalues'] = $data['name'] . ' ' . $data['address'] . ' ' . $data['postcode'] . ' ' . $data['localauthoritycode'][0]['label'];
+
+    // Merge the values of values from name and postcode.
+    $data['combined_name_postcode'] = $data['name'] . ' ' . $data['postcode'];
+
+    // Merge the values of values from name and location.
+    $data['combined_name_location'] = $data['name'] . ' ' . $data['localauthoritycode'][0]['label'];
+
+    // Merge the values of values from location and postcode.
+    $data['combined_location_postcode'] = $data['localauthoritycode'][0]['label'] . ' ' . $data['postcode'];
 
     return $data;
   }
 
-
-
   /**
    * Helper method to retrieve field values with as flat structure as possible.
    *
-   * @param ContentEntityBase $content_entity
-   *    Fully loaded content entity (Node, FieldCollectionItem etc).
+   * @param \Drupal\Core\Entity\ContentEntityBase $content_entity
+   *   Fully loaded content entity (Node, FieldCollectionItem etc).
    * @param string $field_name
-   *    Field name with or without the 'field_' in the beginning.
+   *   Field name with or without the 'field_' in the beginning.
+   *
    * @return mixed
-   *    Value of the given field.
+   *   Value of the given field.
    *
    * @TODO: move this into a service class
    */
@@ -147,10 +172,21 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
           break;
 
         case 'list_string':
-          $ret = [];
-          foreach ($content_entity->{$field_name} as $ref) {
-            $ret[] = trim($ref->getString());
+          $store_plain = [
+            'field_schemetype',
+            'field_fhis_ratingvalue',
+            'field_fhrs_ratingvalue',
+          ];
+          if (in_array($field_name, $store_plain)) {
+            $ret = trim($content_entity->get($field_name)->getString());
           }
+          else {
+            $ret = [];
+            foreach ($content_entity->{$field_name} as $ref) {
+              $ret[] = trim($ref->getString());
+            }
+          }
+
           break;
 
         case 'entity_reference':
@@ -164,7 +200,6 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
             }
           }
           break;
-
 
         case 'image':
           $img_arr = $content_entity->get($field_name)->getValue();
@@ -200,7 +235,7 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
                 $fields[$field_label] = $this->getFieldValue($collection_item, $key);
               }
             }
-            // name attribute is unneeded meta data
+            // Name attribute is unneeded meta data.
             unset($fields['name']);
 
             $ret[] = array_merge(
@@ -225,4 +260,5 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
     }
     return $ret;
   }
+
 }

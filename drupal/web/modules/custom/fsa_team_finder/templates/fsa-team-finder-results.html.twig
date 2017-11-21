@@ -1,0 +1,26 @@
+<div{{ attributes }}>
+    {% if message %}
+        <div class="message">
+            <p>{{ message }}</p>
+        </div>
+    {% endif %}
+    {% if (name or mail or site) %}
+        <div class="authority">
+            {% if name %}
+                <div class="name">
+                    <strong>{{ name }}</strong>
+                </div>
+            {% endif %}
+            {% if mail %}
+                <div class="mail">
+                    {{ 'Email address'|t }}: {{ mail }}
+                </div>
+            {% endif %}
+            {% if site %}
+                <div class="site">
+                    {{ 'Website'|t }}: {{ site }}
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>

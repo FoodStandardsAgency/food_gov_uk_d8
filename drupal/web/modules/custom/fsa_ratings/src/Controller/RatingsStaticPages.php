@@ -65,6 +65,7 @@ class RatingsStaticPages extends ControllerBase {
 
     // Define the rating descriptions for each key.
     // @todo: add copy texts for different rating explanations.
+    // @todo: Should the FHIS badges/descriptions be shown?
     $ratings = [
       '5' => $this->t('Top rating. The business is doing well in all three elements (food hygiene, cleanliness of premises and food safety management)'),
       '4' => $this->t('This is an explanation text for this rating.'),
@@ -78,7 +79,7 @@ class RatingsStaticPages extends ControllerBase {
       $ratings_table[] = [
         '#theme' => $item_theme,
         '#rating_score' => $key,
-        '#rating_badge' => RatingsHelper::ratingBadgeImageDisplay($key),
+        '#rating_badge' => RatingsHelper::ratingBadgeImageDisplay($key, 'FHRS'),
         '#rating_description' => $description,
       ];
     }

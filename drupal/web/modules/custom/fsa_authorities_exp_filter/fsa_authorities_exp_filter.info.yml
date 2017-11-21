@@ -1,0 +1,7 @@
+name: FSA authorites exposed filter
+description: Formats output of FSA authorites view email overriden exposed filter options.
+type: module
+core: 8.x
+package: FSA
+dependencies:
+  - views

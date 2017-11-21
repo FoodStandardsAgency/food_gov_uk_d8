@@ -1,0 +1,30 @@
+uuid: ec09c528-7c6f-418b-a85e-9d0a4f242443
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - fsa_team_finder
+    - system
+  theme:
+    - seven
+third_party_settings:
+  block_class:
+    classes: ''
+id: teamfinder_2
+theme: seven
+region: content
+weight: -1
+provider: null
+plugin: fsa_team_finder_block
+settings:
+  id: fsa_team_finder_block
+  label: 'Team finder'
+  provider: fsa_team_finder
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: "/admin/structure/webform/manage/foreign_object/submission/*/edit\r\n/admin/structure/webform/manage/hygiene_practices/submission/*/edit\r\n/admin/structure/webform/manage/food_poisoning/submission/*/edit"
+    negate: false
+    context_mapping: {  }

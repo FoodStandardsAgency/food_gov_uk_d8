@@ -7,7 +7,6 @@ dependencies:
     - field.field.user.user.field_notification_cache
     - field.field.user.user.field_notification_method
     - field.field.user.user.field_notification_sms
-    - image.style.thumbnail
     - field.field.user.user.field_subscribed_notifications
   module:
     - user
@@ -33,7 +32,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_notification_method:
-    weight: 5
+    weight: 2
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -52,9 +51,13 @@ content:
     third_party_settings: {  }
     type: options_buttons
     region: content
+  language:
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   contact: true
   field_notification_cache: true
   langcode: true
-  language: true
   timezone: true

@@ -25,7 +25,7 @@ class AlertBacklink extends BlockBase {
 
     // Link to News & Alerts listing page.
     $build['backlink'] = [
-      '#markup' => Link::createFromRoute(t('Back'), 'entity.node.canonical', ['node' => '56'], $options)->toString(),
+      '#markup' => Link::createFromRoute($this->t('Back'), 'entity.node.canonical', ['node' => '56'], $options)->toString(),
     ];
 
     return $build;

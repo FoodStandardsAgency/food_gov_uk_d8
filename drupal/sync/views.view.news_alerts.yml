@@ -5,11 +5,15 @@ dependencies:
   config:
     - field.storage.node.body
     - field.storage.node.field_alert_description
+    - field.storage.node.field_alert_type
     - node.type.alert
     - node.type.news
   module:
     - better_exposed_filters
+    - fsa_alerts_import
+    - fsa_custom
     - node
+    - options
     - search
     - text
     - user
@@ -101,7 +105,7 @@ display:
         type: default
         options:
           grouping: {  }
-          row_class: ''
+          row_class: 'type__{{ type }}'
           default_row_class: true
       row:
         type: fields
@@ -111,6 +115,130 @@ display:
           separator: ''
           hide_empty: false
       fields:
+        field_alert_type_1:
+          id: field_alert_type_1
+          table: node__field_alert_type
+          field: field_alert_type
+          relationship: none
+          group_type: group
+          admin_label: 'Content: Alert type key'
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_key
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_alert_type:
+          id: field_alert_type
+          table: node__field_alert_type
+          field: field_alert_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: fsa_alert_type_formatter
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
         created:
           id: created
           table: node_field_data
@@ -162,7 +290,7 @@ display:
           click_sort_column: value
           type: timestamp
           settings:
-            date_format: short
+            date_format: medium
             custom_date_format: ''
             timezone: ''
           group_column: value
@@ -332,14 +460,14 @@ display:
             suffix: ''
             target: ''
             nl2br: false
-            max_length: 0
+            max_length: 300
             word_boundary: true
             ellipsis: true
             more_link: false
             more_link_text: ''
             more_link_path: ''
             strip_tags: false
-            trim: false
+            trim: true
             preserve_tags: ''
             html: false
           element_type: ''
@@ -441,7 +569,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"item__date\">{{ created }}</div>\n<div class=\"item__type\">{{ type }}</div>"
+            text: "<div class=\"item__date\">{{ created }}</div>\n<div class=\"item__type\">\n  <div class=\"main__type\">{{ type }}</div>\n  <div class=\"sub__type\">{{ field_alert_type }}</div>\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -715,6 +843,7 @@ display:
       tags:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_alert_description'
+        - 'config:field.storage.node.field_alert_type'
   latest:
     display_plugin: block
     id: latest
@@ -735,7 +864,132 @@ display:
         filter_groups: false
         title: false
         header: false
+        footer: false
       fields:
+        field_alert_type_1:
+          id: field_alert_type_1
+          table: node__field_alert_type
+          field: field_alert_type
+          relationship: none
+          group_type: group
+          admin_label: 'Content: Alert type key'
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_key
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_alert_type:
+          id: field_alert_type
+          table: node__field_alert_type
+          field: field_alert_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: fsa_alert_type_formatter
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
         path:
           id: path
           table: node
@@ -966,7 +1220,7 @@ display:
           click_sort_column: value
           type: timestamp
           settings:
-            date_format: short
+            date_format: medium
             custom_date_format: ''
             timezone: ''
           group_column: value
@@ -993,7 +1247,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"item__type\">{{ type }}</div>\n<h4 class=\"item__heading\">{{ title }}</h4>\n<div class=\"item__date\">{{ created }}</div>"
+            text: "<div class=\"item__type\">\n  <div class=\"main__type\">{{ type }}</div>\n  <div class=\"sub__type\">{{ field_alert_type }}</div>\n</div>\n<h4 class=\"item__heading\">{{ title }}</h4>\n<div class=\"item__date\">{{ created }}</div>"
             make_link: true
             path: '{{ path }}'
             absolute: false
@@ -1091,7 +1345,8 @@ display:
       rendering_language: '***LANGUAGE_language_interface***'
       block_description: 'Latest Updates'
       title: 'Latest Updates'
-      header:
+      header: {  }
+      footer:
         area:
           id: area
           table: views
@@ -1102,8 +1357,8 @@ display:
           empty: false
           tokenize: false
           content:
-            value: "<a data-entity-substitution=\"canonical\" data-entity-type=\"node\" data-entity-uuid=\"5427cabf-be8e-46ff-a722-2ce3ae019229\" href=\"/node/56\">All News & Alerts</a>\n<!-- TODO: make this translatable/configurable from code instead of views header -->"
-            format: basic_html
+            value: "<a data-entity-substitution=\"canonical\" data-entity-type=\"node\" data-entity-uuid=\"5427cabf-be8e-46ff-a722-2ce3ae019229\" href=\"/node/56\" class=\"button\">All News & Alerts</a>\n<!-- TODO: make this translatable/configurable from code instead of views header -->"
+            format: full_html
           plugin_id: text
     cache_metadata:
       max-age: -1
@@ -1111,7 +1366,8 @@ display:
         - 'languages:language_interface'
         - 'user.node_grants:view'
         - user.permissions
-      tags: {  }
+      tags:
+        - 'config:field.storage.node.field_alert_type'
   list:
     display_plugin: block
     id: list
@@ -1136,7 +1392,187 @@ display:
       defaults:
         footer: false
         css_class: false
+        filters: false
+        filter_groups: false
       css_class: news-alerts-listing
+      filters:
+        type_1:
+          id: type_1
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            alert: alert
+            news: news
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+        status:
+          value: '1'
+          table: node_field_data
+          field: status
+          plugin_id: boolean
+          entity_type: node
+          entity_field: status
+          id: status
+          expose:
+            operator: ''
+          group: 1
+        keys:
+          id: keys
+          table: node_search_index
+          field: keys
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: optional
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: keys_op
+            label: 'Search by keyword'
+            description: ''
+            use_operator: false
+            operator: keys_op
+            identifier: keyword
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_keywords
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            alert: alert
+            news: news
+          group: 1
+          exposed: true
+          expose:
+            operator_id: type_op
+            label: 'News type'
+            description: ''
+            use_operator: false
+            operator: type_op
+            identifier: type
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+            reduce: true
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+        year_filter:
+          id: year_filter
+          table: node_field_data
+          field: year_filter
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: year_filter_op
+            label: Year
+            description: ''
+            use_operator: false
+            operator: year_filter_op
+            identifier: year
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+            reduce: 0
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          plugin_id: year_select
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
     cache_metadata:
       max-age: -1
       contexts:
@@ -1149,3 +1585,4 @@ display:
       tags:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_alert_description'
+        - 'config:field.storage.node.field_alert_type'

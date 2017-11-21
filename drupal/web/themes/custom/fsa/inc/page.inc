@@ -9,7 +9,12 @@
  * Implements template_preprocess_page().
  */
 function fsa_preprocess_page(&$variables) {
-
-  // current language
-  $variables['current_language'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $variables['current_language'] = $language;
+  if ($language == 'cy') {
+    $variables['home_url'] = '/cy';
+  }
+  else {
+    $variables['home_url'] = '/';
+  }
 }

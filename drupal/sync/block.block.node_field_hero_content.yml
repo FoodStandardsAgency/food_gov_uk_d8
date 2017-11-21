@@ -15,7 +15,7 @@ third_party_settings:
 id: node_field_hero_content
 theme: fsa
 region: hero
-weight: -5
+weight: -8
 provider: null
 plugin: 'views_block:node_field-hero_content'
 settings:

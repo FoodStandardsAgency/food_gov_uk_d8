@@ -2,11 +2,12 @@
 
 namespace Drupal\fsa_subpages\Plugin\Block;
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Link;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
-use Drupal\Component\Utility\Html;
 
 /**
  * Provides a 'SubpagesBlock' Block.
@@ -24,20 +25,20 @@ class SubpagesBlock extends BlockBase {
    */
   public function build() {
 
-    // show block only on node pages
+    // Show block only on node pages.
     $route = \Drupal::routeMatch()->getRouteName();
     if ($route != 'entity.node.canonical') {
       return [];
     }
 
-    // make sure we have the node
+    // Make sure we have the node.
     $node = \Drupal::routeMatch()->getParameter('node');
     if (empty($node)) {
       return [];
     }
 
     $nid = $node->id();
-    // Reload the node to be sure it is correct type
+    // Reload the node to be sure it is correct type.
     $node = Node::load($nid);
     if (!$node->hasField('field_subpages')) {
       return [];
@@ -57,9 +58,9 @@ class SubpagesBlock extends BlockBase {
       $subpages[] = $render;
     }
 
-    // if there are no subpages
+    // If there are no subpages
     // return minimum array
-    // otherwise block title will be shown
+    // otherwise block title will be shown.
     if (empty($subpages)) {
       return [
         '#cache' => [
@@ -85,6 +86,35 @@ class SubpagesBlock extends BlockBase {
       ],
     ];
 
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function blockAccess(AccountInterface $account) {
+
+    // Prevent empty block being placed on a page by checking if field_subpages
+    // is set.
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if (empty($node)) {
+      // Dont crash if on non-node page.
+      return AccessResult::forbidden();
+    }
+
+    // Prevent accidents / make sure we are on right page.
+    if (!$node->hasField('field_subpages')) {
+      return AccessResult::forbidden();
+    }
+
+    $empty = $node->get('field_subpages')->isEmpty();
+    if ($empty) {
+      // Cache until the node changes.
+      return AccessResult::forbidden()->addCacheableDependency($node);
+    }
+    else {
+      // Cache until the node changes.
+      return AccessResult::allowed()->addCacheableDependency($node);
+    }
   }
 
 }

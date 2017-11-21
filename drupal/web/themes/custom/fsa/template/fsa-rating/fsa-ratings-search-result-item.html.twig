@@ -1,3 +1,15 @@
+{#
+/**
+ * @file fsa-ratings-search-result-item.html.twig
+ * Theme implementation for FSA Ratings search result item.
+ *
+ * Available variables:
+ * - item: Array of the item properties.
+ *
+ * @see fsa_ratings\Controller\RatingsSearch
+ * @ingroup themeable
+ */
+#}
 {% set randomID = [] %}
 {% for i in 1..10 %}
     {% set alpha = 'abcdefghijklmnopqrstuvwxyz' %}
@@ -8,15 +20,30 @@
 {% endfor %}
 {% set randomID = randomID|join %}
 
-<button class="toggle-button table__button js-toggle-button" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
-  <div class="toggle-button__item toggle-button__item--width-2">
-    {{ item.ratingvalue }}
+<div class="ratings__mobile-item table__button js-content-next">
+  <a href="{{ item.url }}">
+    <div class="toggle-button__item toggle-button__item--width-2">
+      {{ item.ratingvalue }}
+    </div>
+    <div class="toggle-button__item">
+      {% if item.name %}
+        <h3>{{ item.name }}</h3>
+      {% endif %}
+      {% if item.address %}
+        <p>{{ item.address }}</p>
+      {% endif %}
+      {% if item.postcode %}
+        <p>{{ item.postcode }}</p>
+      {% endif %}
+    </div>
+  </a>
+  <div class="ratings__toggle-button toggle-button__item toggle-button__item--icon svg">
+    <button class="toggle-button table__button js-toggle-button" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
+      <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#toggle-icon"></use></svg>
+    </button>
   </div>
-  <div class="toggle-button__item">{{ item.name }}</div>
-  <div class="toggle-button__item toggle-button__item--icon svg">
-    <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#toggle-icon"></use></svg>
-  </div>
-</button>
+</div>
+
 
 <div class="ratings__item table__row toggle-content toggle-content--only-mobile js-toggle-content js-toggle-content-only-mobile" id="collapsible-{{ randomID }}" aria-hidden="true" role="row">
   <div class="table__item table__item--large" role="gridcell">
@@ -38,6 +65,14 @@
     </div>
   </div>
   <div class="table__item" role="gridcell">
-    <div class="table__content">{{ item.ratingdate }}</div>
+    <div class="table__content">
+        {{ item.ratingdate }}
+        {% if item.newratingpending %}
+            <p>{{ item.newratingpending }}</p>
+        {% endif %}
+        {% if item.righttoreply %}
+            <p>{{ item.righttoreply }}</p>
+        {% endif %}
+    </div>
   </div>
 </div>

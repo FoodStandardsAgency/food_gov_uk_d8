@@ -198,8 +198,9 @@ Theme folder/file structure
 |  |
 │  ├─ img/             # Bitmap and vector images
 │  │
-│  ├─ index.js         # Entrypoint JavaScript file
-│  └─ *.js             # Modular JavaScript files
+│  ├─ js/              # Modular JavaScript files
+│  │
+│  └─ index.js         # Entrypoint JavaScript file
 |
 ├─ template/           # Drupal Twig templates
 │

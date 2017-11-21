@@ -1,0 +1,18 @@
+uuid: 9953caaa-52c2-4152-8ed6-4d530fc7f39b
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_ratings
+id: fsa_authority.field_email_alt
+field_name: field_email_alt
+entity_type: fsa_authority
+type: email
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

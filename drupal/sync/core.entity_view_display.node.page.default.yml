@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.page.field_icon
     - field.field.node.page.field_intro
     - field.field.node.page.field_liftup_image
+    - field.field.node.page.field_liftup_summary
     - field.field.node.page.field_liftup_title
     - field.field.node.page.field_liftups
     - field.field.node.page.field_media_library_liftup_image
@@ -107,7 +108,7 @@ content:
     label: inline
     settings:
       timezone_override: ''
-      format_type: short
+      format_type: medium
     third_party_settings: {  }
     type: datetime_default
     region: content
@@ -119,6 +120,7 @@ hidden:
   field_header_image: true
   field_icon: true
   field_liftup_image: true
+  field_liftup_summary: true
   field_liftup_title: true
   field_media_library_liftup_image: true
   field_nation: true

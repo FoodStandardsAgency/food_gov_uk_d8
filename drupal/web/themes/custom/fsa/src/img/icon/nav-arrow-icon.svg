@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="7px" height="4px" viewBox="0 0 7 4" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>nav-arrow</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="FHRS" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="FHRS-content-page-map" transform="translate(-310.000000, -179.000000)" fill="#007c75">
+            <g id="Header">
+                <g id="content-links" transform="translate(83.000000, 169.000000)">
+                    <g id="Group" transform="translate(66.000000, 0.000000)">
+                        <path d="M164.499965,14 C164.374458,14 164.248957,13.9517682 164.152982,13.8555781 L161.144167,10.840018 C160.951944,10.6473643 160.951944,10.3368705 161.144167,10.1444903 C161.33639,9.95183656 161.646189,9.95183656 161.836767,10.1444903 L164.5,12.8136931 L167.163233,10.1444903 C167.355456,9.95183656 167.665255,9.95183656 167.855833,10.1444903 C168.048056,10.3371441 168.048056,10.6476379 167.855833,10.840018 L164.847018,13.8555781 C164.751043,13.9517682 164.625535,14 164.500035,14 L164.499965,14 Z" id="nav-arrow"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

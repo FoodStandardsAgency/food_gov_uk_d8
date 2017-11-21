@@ -1,0 +1,24 @@
+uuid: e9412063-2cdc-4361-b2fe-988132ef2a8f
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - fsa_custom
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: fsa_contextual_hero
+theme: fsa
+region: hero
+weight: -10
+provider: null
+plugin: fsa_hero
+settings:
+  id: fsa_hero
+  label: 'FSA static/contextual hero'
+  provider: fsa_custom
+  label_display: '0'
+visibility: {  }

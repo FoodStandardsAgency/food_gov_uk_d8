@@ -11,39 +11,27 @@
 
 <div class="ratings js-sticky-container">
 
-  <button class="ratings__search-expand-button toggle-button js-toggle-button" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
-    <div class="toggle-button__item">{% trans %}Show search options{% endtrans %}</div>
-    <div class="toggle-button__item toggle-button__item--icon svg">
-      <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#toggle-icon"></use></svg>
-    </div>
-  </button>
-
-  <div class="ratings__search js-sticky-element toggle-content toggle-content--only-mobile js-toggle-content js-toggle-content-only-mobile" id="collapsible-{{ randomID }}" aria-hidden="true">
-    <div class="container container--search">
-      <div class="ratings__logo logo svg">
-        <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop-white"></use></svg>
-      </div>
-
-      {{ search_form }}
-    </div>
-  </div>
-
   <div class="ratings__content ratings__content--listing">
-    <header class="ratings__header rating__header--back-link">
-      {{ backlink }}
-    </header>
+    <div class="peek">
+      <div class="peek__container">
+        <header class="ratings__header rating__header--back-link">
+          {{ backlink }}
+        </header>
 
-    <div class="ratings-meanings">
-      <div class="ratings-meanings__container">
-        <h1>{% trans %}What do the different ratings mean{% endtrans %}</h1>
-        <div class="table" role="grid">
-          {{ ratings }} {# See fsa-ratings-meanings-item.html.twig for each rating item #}
-        </div>
+        <div class="ratings-meanings">
+          <h1>{% trans %}What do the different ratings mean{% endtrans %}</h1>
+          
+          <div class="ratings-meanings__table">
+            <div class="table" role="grid">
+              {{ ratings }} {# See fsa-ratings-meanings-item.html.twig for each rating item #}
+            </div>
+          </div>
 
-        <div class="container container--text">
-          <p>{{ paragraph_1 }}</p>
+          <div class="container container--content">
+            <p>{{ paragraph_1 }}</p>
 
-          <p>{{ paragraph_2 }}</p>
+            <p>{{ paragraph_2 }}</p>
+          </div>
         </div>
       </div>
     </div>

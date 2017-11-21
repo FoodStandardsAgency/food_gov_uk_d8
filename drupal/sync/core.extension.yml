@@ -9,6 +9,9 @@ module:
   breakpoint: 0
   ckeditor: 0
   config: 0
+  config_filter: 0
+  config_readonly: 0
+  config_split: 0
   config_translation: 0
   contact: 0
   contextual: 0
@@ -32,8 +35,10 @@ module:
   field_validation: 0
   file: 0
   filter: 0
+  fsa_40x: 0
   fsa_alerts: 0
   fsa_alerts_import: 0
+  fsa_authorities_exp_filter: 0
   fsa_contactus: 0
   fsa_contactus_data: 0
   fsa_custom: 0
@@ -41,11 +46,12 @@ module:
   fsa_es: 0
   fsa_establishment_lookup: 0
   fsa_notify: 0
-  fsa_language_switcher: 0
   fsa_ratings: 0
   fsa_ratings_import: 0
   fsa_signin: 0
   fsa_subpages: 0
+  fsa_team_finder: 0
+  fsa_translate: 0
   geolocation: 0
   help: 0
   hierarchical_term_formatter: 0
@@ -62,6 +68,7 @@ module:
   menu_breadcrumb: 0
   menu_trail_by_path: 0
   menu_ui: 0
+  metatag: 0
   migrate: 0
   migrate_plus: 0
   migrate_tools: 0
@@ -71,10 +78,12 @@ module:
   path: 0
   quickedit: 0
   rdf: 0
+  redirect: 0
   search: 0
   serialization: 0
   shortcut: 0
   shs: 0
+  simple_sitemap: 0
   system: 0
   taxonomy: 0
   text: 0
@@ -87,10 +96,10 @@ module:
   user: 0
   video_embed_field: 0
   video_embed_wysiwyg: 0
-  views_ui: 0
   webform: 0
   webform_node: 0
   webform_ui: 0
+  webform_views: 0
   extlink: 1
   menu_link_content: 1
   pathauto: 1

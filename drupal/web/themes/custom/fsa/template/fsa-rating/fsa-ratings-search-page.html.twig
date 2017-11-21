@@ -1,3 +1,20 @@
+{#
+/**
+ * @file fsa-ratings-search-page.html.twig
+ * Theme implementation for FSA Ratings search result page.
+ *
+ * Available variables:
+ * - form: the search form with it's header.
+ * - sort_form: Result sotring form.
+ * - keywords: The search  keyword(s)
+ * - items: The actual search items.
+ * - ratings_info_content: Introductional content copy for Ratings search.
+ * - hits_total: Total number of results.
+ * - hits_shown: Number of hits shown on page.
+ *
+ * @ingroup themeable
+ */
+#}
 {% set randomID = [] %}
 {% for i in 1..10 %}
     {% set alpha = 'abcdefghijklmnopqrstuvwxyz' %}
@@ -8,22 +25,21 @@
 {% endfor %}
 {% set randomID = randomID|join %}
 
-<div class="ratings {% if ratings_info_content %}ratings--frontpage{% else %}js-sticky-container{% endif %}">
+<div class="ratings {% if ratings_info_content %}ratings--frontpage{% else %}{% endif %}">
 
   {% if ratings_info_content %}
   {% else %}
   <button class="ratings__search-expand-button toggle-button js-toggle-button" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
     <div class="toggle-button__item">{% trans %}Show search options{% endtrans %}</div>
     <div class="toggle-button__item toggle-button__item--icon svg">
-      <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#toggle-icon"></use></svg>
+      <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#nav-arrow-icon"></use></svg>
     </div>
   </button>
   {% endif %}
 
-  <div class="ratings__search {% if ratings_info_content %}ratings__search--frontpage{% else %} js-sticky-element toggle-content toggle-content--only-mobile js-toggle-content js-toggle-content-only-mobile" id="collapsible-{{ randomID }}" aria-hidden="true{% endif %}">
-    <div class="container container--search">
-      <div class="ratings__logo logo svg">
-        <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop-white"></use></svg>
+  <div class="ratings__search peek {% if ratings_info_content %}ratings__search--frontpage{% else %} toggle-content toggle-content--only-mobile js-toggle-content js-toggle-content-only-mobile" id="collapsible-{{ randomID }}" aria-hidden="true{% endif %}">
+    <div class="container peek__container">
+      <div class="ratings__text">
       </div>
       {{ form }}
     </div>
@@ -31,18 +47,20 @@
 
   <div class="ratings__content {% if ratings_info_content %}ratings__content--frontpage{% else %}ratings__content--listing{% endif %}">
     {% if ratings_info_content %}
-      {{ ratings_info_content }}
+      <div class="container container--small">
+        {{ ratings_info_content }}
+      </div>
     {% else %}
     <div class="ratings__listing">
-      <header class="ratings__header" role="toolbar" aria-label="sorting options" aria-controls="sortable">
+      <div class="ratings__toolbar" role="toolbar" aria-label="sorting options" aria-controls="sortable">
         {% if sort_form %}
           <div class="ratings__hits-total">{{ hits_total }} {{ 'Results'|t }}</div>
           <div class="ratings__sort-form">{{ sort_form }}</div>
         {% endif %}
-      </header>
+      </div>
 
       <h2 class="visually-hidden" aria-labelledby="sortable">{% trans %}Food hygiene ratings search results{% endtrans %}</h2>
-      <div class="table table--with-background js-table" id="sortable" role="grid">
+      <div class="table table--with-background js-table ratings__table" id="sortable" role="grid">
         <div class="table__row table__row--header table__row--negative js-table-header" role="row">
           <div class="table__item table__item--large" role="columnheader">{% trans %}Name{% endtrans %}</div>
           <div class="table__item" role="columnheader">{% trans %}Rating{% endtrans %}</div>
@@ -51,11 +69,18 @@
 
         {{ items }}
 
-        {% if hits_total > hits_shown %}
-          <button>{% trans %}Show more results{% endtrans %}</button>
-          {% trans %}Displaying {{ hits_shown }} of {{ hits_total }} items{% endtrans %}
-        {% endif %}
+        <div id="ratings-search-load-more" class="ratings__table ratings__table--more-items"></div>
+
       </div>
+
+      <footer class="ratings__footer">
+        {% if hits_total > hits_shown %}
+          <div class="result-counter">
+            <p>{% trans %}Displaying <span class="hits-shown">{{ hits_shown }}</span> of <span class="hits-total">{{ hits_total }}</span> items{% endtrans %}</p>
+          </div>
+        {% endif %}
+        {{ load_more }}
+      </footer>
     </div>
     {% endif %}
   </div>

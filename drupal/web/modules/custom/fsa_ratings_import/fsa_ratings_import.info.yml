@@ -4,6 +4,6 @@ description: Import ratings to FSA entityes from FHRS API
 core: 8.x
 package: FSA
 dependencies:
-  - migrate
-  - migrate_plus
-  - migrate_tools
+  - drupal:migrate
+  - drupal:migrate_plus
+  - drupal:migrate_tools

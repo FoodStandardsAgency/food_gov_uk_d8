@@ -1,0 +1,102 @@
+@import "../../core/helper";
+@import "../../core/custom-property";
+
+.toggle-button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+.toggle-button__item {
+  text-align: left;
+}
+
+.toggle-button__item.toggle-button__item--align-right {
+  margin-left: auto !important;
+  text-align: center;
+
+  & + .toggle-button__item--icon {
+    margin-left: 0 !important;
+  }
+}
+
+.toggle-button__item.toggle-button__item--presentation-icon {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  flex: 0 0 auto;
+
+  & svg path {
+    fill: currentColor;
+  }
+}
+
+.toggle-button__item.toggle-button__item--icon {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  flex: 0 0 auto;
+
+  & svg path {
+    fill: currentColor;
+  }
+
+  & .toggle-button__fallback-icon {
+    position: absolute;
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='7px' height='4px' viewBox='0 0 7 4' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3C!-- Generator: Sketch 47.1 %2845422%29 - http://www.bohemiancoding.com/sketch --%3E%3Ctitle%3Enav-arrow%3C/title%3E%3Cdesc%3ECreated with Sketch.%3C/desc%3E%3Cdefs%3E%3C/defs%3E%3Cg id='FHRS' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='FHRS-content-page-map' transform='translate%28-310.000000, -179.000000%29' fill='%23007c75'%3E%3Cg id='Header'%3E%3Cg id='content-links' transform='translate%2883.000000, 169.000000%29'%3E%3Cg id='Group' transform='translate%2866.000000, 0.000000%29'%3E%3Cpath d='M164.499965,14 C164.374458,14 164.248957,13.9517682 164.152982,13.8555781 L161.144167,10.840018 C160.951944,10.6473643 160.951944,10.3368705 161.144167,10.1444903 C161.33639,9.95183656 161.646189,9.95183656 161.836767,10.1444903 L164.5,12.8136931 L167.163233,10.1444903 C167.355456,9.95183656 167.665255,9.95183656 167.855833,10.1444903 C168.048056,10.3371441 168.048056,10.6476379 167.855833,10.840018 L164.847018,13.8555781 C164.751043,13.9517682 164.625535,14 164.500035,14 L164.499965,14 Z' id='nav-arrow'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-size: 100% auto;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.toggle-button__item.toggle-button__item--align-right {
+  margin-left: auto !important;
+}
+
+:--not-js .toggle-button__item.toggle-button__item--icon {
+  display: none;
+}
+
+.toggle-button__item.toggle-button__item--width-2 {
+  width: 2em;
+  flex: 0 0 auto;
+}
+
+.toggle-button__item.toggle-button__item--width-3 {
+  width: 3em;
+  flex: 0 0 auto;
+}
+
+:--not-js .toggle-button,
+.toggle-button.is-open {
+  & .toggle-button__item--icon {
+    transform: rotate(180deg);
+  }
+}
+
+:--not-js .toggle-button.toggle-button--open-background,
+.toggle-button.toggle-button--open-background.is-open {
+  background-color: var(--primary-color) !important;
+  color: var(--color-white);
+}
+
+.toggle-content {
+  display: none;
+}
+
+.toggle-content.toggle-content--only-mobile {
+  display: none;
+
+  @media (--breakpoint-md) {
+    display: inherit;
+  }
+}
+
+:--not-js .toggle-content,
+.toggle-content.is-open {
+  display: inherit;
+}

@@ -46,18 +46,20 @@ class FSAContactUsHandler extends WebformHandlerBase {
       // Prepare the values and store them.
       $fields = $webform_submission->toArray(TRUE);
       foreach ($fields['data'] as $field_name => $field_value) {
-        // Don't process the value when the field name is defined in the excluded fields' list
+        // Don't process the value when the field name is defined in the
+        // excluded fields' list.
         if (in_array($field_name, $personal_data_field_names)) {
           continue;
         }
 
-        // Select fields, checkboxes and similar multi value fields are arrays
+        // Select fields, checkboxes and similar multi value fields are arrays.
         if (is_array($field_value)) {
           $tmp = [];
           foreach ($field_value as $arr_field_value) {
             $tmp[] = $arr_field_value;
           }
-          // Concatenate multi value field into single string separated with commas
+          // Concatenate multi value field into single string separated with
+          // commas.
           $values[$field_name] = implode(', ', $tmp);
         }
         else {
@@ -65,21 +67,24 @@ class FSAContactUsHandler extends WebformHandlerBase {
         }
       }
 
-      // Use the form id to separate submissions of each different forms
+      // Use the form id to separate submissions of each different forms.
       $identifier = 'form_' . $webform_submission->getWebform()->id();
 
-      // Store anonymous submission data per each form
+      // Store anonymous submission data per each form.
       $this->saveDataToFile($identifier, implode(';', $values));
     }
   }
 
+  /**
+   *
+   */
   protected function saveDataToFile($form_id, $value) {
-    // Retrieve the system file path to the file
+    // Retrieve the system file path to the file.
     $path = drupal_realpath("private://contact_us_submission_$form_id");
 
     // Write the contents to the file,
     // using the FILE_APPEND flag to append the content to the end of the file
-    // and the LOCK_EX flag to prevent anyone else writing to the file at the same time
+    // and the LOCK_EX flag to prevent anyone else writing to the file at the same time.
     file_put_contents($path, $value . PHP_EOL, FILE_APPEND | LOCK_EX);
   }
 

@@ -28,7 +28,7 @@ class FsaAlertsApiUrl extends Url {
 
     $configuration['urls'] = [];
 
-    // Build full Alerts API URL,
+    // Build full Alerts API URL.
     // @todo: Extend to a loop if need to fetch paged alerts.
     $configuration['urls'][] = $api_base_path . $api_resource;
 

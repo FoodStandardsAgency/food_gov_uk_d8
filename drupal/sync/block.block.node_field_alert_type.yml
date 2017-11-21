@@ -1,0 +1,29 @@
+uuid: bc9f6384-1455-44a7-bbf2-5c403310921d
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.node_field
+  module:
+    - block_class
+    - views
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: node_field_alert_type
+theme: fsa
+region: content
+weight: 0
+provider: null
+plugin: 'views_block:node_field-alert_type'
+settings:
+  id: 'views_block:node_field-alert_type'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility: {  }

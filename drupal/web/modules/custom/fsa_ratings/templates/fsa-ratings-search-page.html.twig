@@ -5,10 +5,13 @@
  *
  * Available variables:
  * - form: the search form with it's header.
+ * - sort_form: Result sotring form.
  * - keywords: The search  keyword(s)
  * - items: The actual search items.
+ * - ratings_info_content: Introductional content copy for Ratings search.
  * - hits_total: Total number of results.
  * - hits_shown: Number of hits shown on page.
+ * - load_more: Load more ajax trigger.
  *
  * @ingroup themeable
  */
@@ -28,12 +31,14 @@
       <h2>{% trans %}Search results for {{ keywords|placeholder }}{% endtrans %}</h2>
     {% endif %}
 
-    {{ items }}
+      {{ items }}
   </div>
 {% endif %}
 
 {% if hits_total > hits_shown %}
-  <button>{% trans %}Show more results{% endtrans %}</button>
-  {% trans %}Displaying {{ hits_shown }} of {{ hits_total }} items{% endtrans %}
+  <div class="result-counter">
+      {% trans %}Displaying <span class="hits-shown">{{ hits_shown }}</span> of <span class="hits-total">{{ hits_total }}</span> items{% endtrans %}
+  </div>
 {% endif %}
+{{ load_more }}
 

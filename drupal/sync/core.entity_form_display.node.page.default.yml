@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.page.field_icon
     - field.field.node.page.field_intro
     - field.field.node.page.field_liftup_image
+    - field.field.node.page.field_liftup_summary
     - field.field.node.page.field_liftup_title
     - field.field.node.page.field_liftups
     - field.field.node.page.field_media_library_liftup_image
@@ -54,6 +55,7 @@ third_party_settings:
     group_liftup_metadata:
       children:
         - field_liftup_title
+        - field_liftup_summary
         - field_icon
         - field_liftup_image
         - field_media_library_liftup_image
@@ -70,8 +72,8 @@ third_party_settings:
     group_code_block_references:
       children:
         - field_block_reference
-      parent_name: ''
-      weight: 20
+      parent_name: group_development_required
+      weight: 19
       format_type: tab
       format_settings:
         id: ''
@@ -80,6 +82,23 @@ third_party_settings:
         description: 'Add programmatically created blocks to the bottom of this page.'
         required_fields: true
       label: 'Code block references'
+    group_development_required:
+      children:
+        - field_liftups
+        - field_block
+        - field_related_content
+        - group_code_block_references
+      parent_name: ''
+      weight: 15
+      format_type: tab
+      format_settings:
+        label: 'Development required / do not use (liftups, related content, block references)'
+        formatter: closed
+        description: 'The fields in this tab require further development: do not use (unless you know what you are doing)'
+        required_fields: true
+        id: ''
+        classes: ''
+      label: 'Development required / do not use (liftups, related content, block references)'
 _core:
   default_config_hash: sWCotip3wyA0CvZUxyo-StTDU8TyTAhx5fcfOiHS6s4
 id: node.page.default
@@ -98,7 +117,7 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 10
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -133,7 +152,7 @@ content:
     type: options_select
     region: content
   field_document:
-    weight: 16
+    weight: 7
     settings:
       form_mode: default
       label_singular: ''
@@ -159,7 +178,7 @@ content:
     type: inline_entity_form_complex
     region: content
   field_icon:
-    weight: 6
+    weight: 7
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
@@ -175,12 +194,20 @@ content:
     type: string_textarea
     region: content
   field_liftup_image:
-    weight: 7
+    weight: 8
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
     type: image_image
+    region: content
+  field_liftup_summary:
+    weight: 6
+    settings:
+      rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
     region: content
   field_liftup_title:
     weight: 5
@@ -192,7 +219,7 @@ content:
     region: content
   field_liftups:
     type: entity_reference_paragraphs
-    weight: 15
+    weight: 16
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -203,7 +230,7 @@ content:
     third_party_settings: {  }
     region: content
   field_media_library_liftup_image:
-    weight: 8
+    weight: 9
     settings:
       match_operator: CONTAINS
       size: 60
@@ -228,7 +255,7 @@ content:
     region: content
   field_subpages:
     type: entity_reference_paragraphs
-    weight: 7
+    weight: 8
     settings:
       title: Sub-page
       title_plural: Sub-pages
@@ -256,30 +283,24 @@ content:
     region: content
   langcode:
     type: language_select
-    weight: 8
+    weight: 9
     region: content
-    settings: {  }
+    settings:
+      include_locked: true
     third_party_settings: {  }
   path:
     type: path
-    weight: 14
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }
-  promote:
+  status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 12
-    region: content
+    weight: 14
     third_party_settings: {  }
-  sticky:
-    type: boolean_checkbox
-    settings:
-      display_label: true
-    weight: 13
     region: content
-    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0
@@ -289,17 +310,19 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 11
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 9
+    weight: 10
     region: content
     settings:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  promote: true
+  sticky: true

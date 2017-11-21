@@ -97,24 +97,24 @@ class AlertItemProperties extends ProcessPluginBase {
     // Map to allergens by notation.
     if (isset($item['problem'][0]['allergen'])) {
       $tids = [];
-      foreach ($item['problem'][0]['allergen'] AS $key => $field) {
+      foreach ($item['problem'][0]['allergen'] as $key => $field) {
         // Since we don't know the tid go hard way mapping to the terms with
-        // notation field match
+        // notation field match.
         $term_name = $field['notation'];
         $term = \Drupal::entityTypeManager()
           ->getStorage('taxonomy_term')
           ->loadByProperties([
             'vid' => 'alerts_allergen',
-            'name' => $term_name
+            'name' => $term_name,
           ]);
 
-        foreach ($term AS $a => $b) {
+        foreach ($term as $a => $b) {
           $tids[] = $a;
         }
         $row->setDestinationProperty('field_alert_allergen', $tids);
       }
     }
-    
+
     // Store relatedMedia.
     if (isset($item['relatedMedia'])) {
       $media_link = [];
@@ -126,9 +126,6 @@ class AlertItemProperties extends ProcessPluginBase {
       }
       $row->setDestinationProperty('field_alert_relatedmedia', $media_link);
     }
-
-
-
 
     // Return the actual notation value.
     return $value;

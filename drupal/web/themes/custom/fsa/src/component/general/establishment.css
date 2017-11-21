@@ -1,0 +1,106 @@
+@import "../../core/helper";
+@import "../../core/custom-property";
+
+.establishment__container {
+  max-width: 80em;
+  /* @mixin responsive-declaration padding-right, 1em, 2em;
+  @mixin responsive-declaration padding-left, 1em, 2em; */
+}
+
+/* .establishment__content {
+  @mixin responsive-declaration padding-right, 1em, 2em;
+  @mixin responsive-declaration padding-left, 1em, 2em;
+} */
+
+.establishment__rating {
+  background-color: var(--color-lighter-gray);
+
+  @mixin responsive-declaration margin-right, 1em, 2em;
+  @mixin responsive-declaration padding-right, 1em, 2em;
+  margin-bottom: 2em;
+
+  @media (--breakpoint-md) {
+    border-right: 0;
+  }
+
+  @media (--breakpoint-lg) {
+    width: 20em;
+    float: left;
+    border-right: 1px solid var(--color-light-gray);
+  }
+
+  & img {
+    border: 1px solid var(--color-light-gray);
+    border-radius: 0.2em;
+  }
+
+  & ul {
+    padding-left: 0;
+  }
+
+  & li {
+    list-style: none;
+  }
+
+  & a {
+    padding: 0.5em 0;
+    display: block;
+  }
+}
+
+.establishment__title {
+  margin-top: 0;
+}
+
+
+.establishment__button {
+  background-color: var(--dark-primary-color);
+  color: var(--color-white);
+  width: 100%;
+  justify-content: center;
+  padding: 1em;
+  transition: background-color var(--transition-enter-fast);
+}
+
+.establishment__button.is-open {
+  background-color: var(--dark-secondary-color);
+}
+
+.establishment__content {
+  margin-bottom: 2em;
+}
+
+.establishment__content h4 {
+  font-size: 1em;
+  margin-bottom: 0.5em;
+}
+
+.establishment__table {
+  clear: both;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  @mixin responsive-declaration font-size, 0.8em, 1em;
+}
+
+.establishment__score {
+  padding: 0.5em;
+  color: var(--color-black);
+  background-color: var(--color-lighter-gray);
+  flex: 0 0 auto;
+}
+
+.establishment__table-button.is-open {
+  & .establishment__score {
+    background-color: color(white alpha(-70%));
+    color: white;
+  }
+}
+
+.establishment__authority-label {
+  display: inline-block;
+}
+
+.establishment__authority-content {
+  display: inline-block;
+  word-break: break-word;
+}

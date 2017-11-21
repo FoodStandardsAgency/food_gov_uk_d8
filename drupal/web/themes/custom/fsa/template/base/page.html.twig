@@ -46,15 +46,29 @@
 #}
 <div class="site js-site">
 
+  <div class="layout">
+    <div class="layout__container">
+      <div class="layout__content">
+        <div class="phase-banner">
+          <p>
+            <strong class="phase-tag">{{ 'ALPHA'|t }}</strong>
+            <span>{{ 'This is a new service – your <a href="/contact">feedback</a> will help us to improve it.'|t }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <header class="header" role="banner">
     <div class="header__container">
       <button class="header__menu-button js-menu-button">
         <div class="svg">
+          <span class="visually-hidden">{{ 'Open mobile navigation'|t }}</span>
           <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#menu-icon"></use></svg>
         </div>
       </button>
 
-      <a href="/" class="header__logo block-link">
+      <a href="{{ home_url }}" class="header__logo block-link">
         <div class="svg">
           <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop-{{ current_language }}"></use></svg>
         </div>
@@ -84,27 +98,80 @@
         </div>
       </form>
 
-      {{ page.header }}
+
+      <div class="header__content">
+        {{ page.header }}
+      </div>
 
     </div>
-
   </header>
 
-  <!-- <div class="navigation-wrapper js-navigation">
-    <button class="header__menu-button header__menu-button--navigation js-menu-button">
-      <div class="svg">
-        <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#arrow-back"></use></svg>
-      </div>
-    </button>
-  </div> -->
-
   {% if page.primary_menu %}
-  <div class="layout">
-    <div class="layout__container">
-      <div class="layout__content">
-        <div class="navigation-wrapper">
+  <div class="layout navigation-wrapper js-navigation">
+    <div class="layout__container navigation-wrapper__container">
+      <div class="layout__content navigation-wrapper__content">
+        <header class="navigation-mobile-header">
+          <button class="navigation-mobile-header__button js-menu-button">
+            <span class="visually-hidden">Close mobile navigation</span>
+            <div class="svg">
+              <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#menu-icon"></use></svg>
+            </div>
+          </button>
+
+          <a href="/" class="header__logo block-link">
+            <div class="svg">
+              <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop-white-{{ current_language }}"></use></svg>
+            </div>
+          </a>
+        </header>
+
+        <div class="navigation-wrapper__main">
           {{ page.primary_menu }}
         </div>
+
+        <footer class="navigation-mobile-footer" role="contentinfo">
+          <div class="navigation-mobile-footer__content">
+            {{ page.header }}
+            {% if page.footer %}
+              {{ page.footer }}
+            {% endif %}
+            <p>{{ "Food Standards Agency makes sure food is safe to eat and what it says it is."|t }}</p>            
+            <div class="social-media">
+              <div class="social-media__list">
+                <a href="https://www.facebook.com/FoodStandardsAgency" class="social-media__link">
+                  <div class="svg">
+                    <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Facebook_icon"></use></svg>
+                  </div>
+                </a>
+        
+                <a href="https://twitter.com/foodgov" class="social-media__link">
+                  <div class="svg">
+                    <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Twitter_icon"></use></svg>
+                  </div>
+                </a>
+        
+                <a href="https://www.linkedin.com/company/food-standards-agency" class="social-media__link">
+                  <div class="svg">
+                    <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#LinkedIN_icon"></use></svg>
+                  </div>
+                </a>
+        
+                <a href="https://www.youtube.com/user/FoodStandardsAgency" class="social-media__link">
+                  <div class="svg">
+                    <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Youtube_icon"></use></svg>
+                  </div>
+                </a>
+        
+                <a href="https://www.instagram.com/foodgov/" class="social-media__link">
+                  <div class="svg">
+                    <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Instagram_icon"></use></svg>
+                  </div>
+                </a>
+                  
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
   </div>
@@ -123,10 +190,15 @@
   {% endif %}
 
   {% if page.hero is defined and page.hero|render|striptags|trim %}
-  <div class="layout">
+  <div class="layout hero-wrapper">
     <div class="layout__container">
-      <div class="layout__content">
+      <div class="layout__content hero-wrapper__content">
         <div class="hero">
+          <div class="hero__background">
+            <div class="svg">
+              <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#pattern"></use></svg>
+            </div>
+          </div>
           {{ page.hero }}
         </div>
       </div>
@@ -153,7 +225,7 @@
         {% if page.sidebar_first or page.sidebar_second %}
           <aside class="layout__sidebar js-sticky-element" role="complementary">
             <div class="sidebar">
-              <div role="navigation" class="side-navigation">
+              <div role="navigation" class="navigation-side">
 
                 {% if page.sidebar_first %}
                   {{ page.sidebar_first }}
@@ -186,14 +258,47 @@
   <footer class="footer" role="contentinfo">
     <div class="footer__logo">
       <div class="svg">
-        <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop-en"></use></svg>
+        <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop-{{ current_language }}"></use></svg>
       </div>
     </div>
+
     <div class="footer__content">
       <p>{{ "Food Standards Agency makes sure food is safe to eat and what it says it is."|t }}</p>
     </div>
-    <div class="footer__social-link">
 
+    <div class="social-media">
+      <div class="social-media__list">
+        <a href="https://www.facebook.com/FoodStandardsAgency" class="social-media__link">
+          <div class="svg">
+            <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Facebook_icon"></use></svg>
+          </div>
+        </a>
+
+        <a href="https://twitter.com/foodgov" class="social-media__link">
+          <div class="svg">
+            <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Twitter_icon"></use></svg>
+          </div>
+        </a>
+
+        <a href="https://www.linkedin.com/company/food-standards-agency" class="social-media__link">
+          <div class="svg">
+            <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#LinkedIN_icon"></use></svg>
+          </div>
+        </a>
+
+        <a href="https://www.youtube.com/user/FoodStandardsAgency" class="social-media__link">
+          <div class="svg">
+            <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Youtube_icon"></use></svg>
+          </div>
+        </a>
+
+        <a href="https://www.instagram.com/foodgov/" class="social-media__link">
+          <div class="svg">
+            <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Instagram_icon"></use></svg>
+          </div>
+        </a>
+          
+      </div>
     </div>
 
     {% if page.footer %}

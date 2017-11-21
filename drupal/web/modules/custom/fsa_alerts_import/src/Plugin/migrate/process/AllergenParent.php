@@ -29,7 +29,7 @@ class AllergenParent extends ProcessPluginBase {
         ->getStorage('taxonomy_term')
         ->loadByProperties([
           'vid' => 'alerts_allergen',
-          'name' => $term_name
+          'name' => $term_name,
         ]);
 
       $tid = key($term);

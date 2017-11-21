@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Finds a food safety team for a given postcode.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function fsa_team_finder_theme() {
+  return [
+
+    // Team finder ajax load template.
+    'fsa_team_finder_results' => [
+      'render element' => 'custom_element',
+      'variables' => [
+        'attributes' => NULL,
+        'message' => NULL,
+        'name' => NULL,
+        'mail' => NULL,
+        'site' => NULL,
+      ],
+    ],
+  ];
+}

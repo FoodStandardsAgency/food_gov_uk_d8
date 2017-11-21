@@ -1,6 +1,21 @@
 Development instructions
 ========================
 
+#### Database syncing
+Use `./syncdb.sh [SOURCE] [TARGET]` for syncing. Second parameter is optional.
+
+For example to sync staging to local run following outside the box:
+```bash
+./syncdb.sh stage
+```
+
+#### Configuration management
+
+* Project uses `config_readonly` module to prevent configuration changes on other than local dev environments. See `$settings['config_readonly']` in `settings.php`
+* Project uses `config_split` module to prevent development module configurations exports to live environments.
+  * With `drush >= 8.1.10` normal `drush cex` & `drush cim` procedure can be used.
+  * Earlier drush versions require use of `drush csex|csim`
+
 #### Local settings.php overrides
 
 Copy local `drupal/conf/settings.local.php` [template from here](settings.local.php.txt).

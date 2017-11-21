@@ -4,5 +4,5 @@ description: Extend specified input field(s) to search for places from Google Ma
 core: 8.x
 package: FSA
 dependencies:
-  - webform
-  - fsa_ratings
+  - drupal:webform
+  - drupal:fsa_ratings

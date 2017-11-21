@@ -20,9 +20,12 @@ dependencies:
     - field.field.fsa_establishment.fsa_establishment.field_score_hygiene
     - field.field.fsa_establishment.fsa_establishment.field_score_structural
   module:
-    - datetime
+    - entity_print
     - fsa_ratings
     - geolocation
+third_party_settings:
+  entity_print:
+    pdf_label: 'View PDF'
 _core:
   default_config_hash: fDOCJYkV8QCyOVS29HI4qqyPn6VdKooOQlWWjR9ls_Q
 id: fsa_establishment.fsa_establishment.default
@@ -30,16 +33,21 @@ targetEntityType: fsa_establishment
 bundle: fsa_establishment
 mode: default
 content:
+  entity_print_view_pdf:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_address:
     weight: 2
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: basic_string
     region: content
   field_businesstype:
     weight: 5
-    label: above
+    label: hidden
     settings:
       link: false
     third_party_settings: {  }
@@ -47,7 +55,7 @@ content:
     region: content
   field_geocode:
     type: geolocation_map
-    weight: 10
+    weight: 11
     region: content
     label: hidden
     settings:
@@ -79,7 +87,7 @@ content:
       common_map: ''
     third_party_settings: {  }
   field_localauthoritycode:
-    weight: 12
+    weight: 13
     label: above
     settings:
       link: false
@@ -87,6 +95,16 @@ content:
     third_party_settings: {  }
     type: entity_reference_entity_view
     region: content
+  field_newratingpending:
+    type: boolean
+    weight: 7
+    region: content
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
   field_phone:
     weight: 4
     label: above
@@ -105,36 +123,34 @@ content:
     region: content
   field_ratingdate:
     weight: 6
-    label: above
-    settings:
-      timezone_override: ''
-      format_type: short
+    label: hidden
+    settings: {  }
     third_party_settings: {  }
-    type: datetime_default
+    type: fsa_ratingdate_formatter
     region: content
   field_righttoreply:
-    weight: 11
+    weight: 12
     label: above
     settings: {  }
     third_party_settings: {  }
     type: basic_string
     region: content
   field_score_confidence:
-    weight: 9
+    weight: 10
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: fsa_score_description_formatter
     region: content
   field_score_hygiene:
-    weight: 7
+    weight: 8
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: fsa_score_description_formatter
     region: content
   field_score_structural:
-    weight: 8
+    weight: 9
     label: hidden
     settings: {  }
     third_party_settings: {  }
@@ -143,15 +159,16 @@ content:
   name:
     label: hidden
     type: string
-    weight: 0
+    weight: 1
     region: content
     settings:
       link_to_entity: false
     third_party_settings: {  }
 hidden:
+  entity_print_view_epub: true
+  entity_print_view_word_docx: true
   field_fhis_ratingvalue: true
   field_fhrs_ratingvalue: true
-  field_newratingpending: true
   field_ratingvalue: true
   field_schemetype: true
   langcode: true

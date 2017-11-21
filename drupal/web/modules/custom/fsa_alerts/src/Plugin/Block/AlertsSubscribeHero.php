@@ -22,7 +22,7 @@ class AlertsSubscribeHero extends BlockBase {
     $build = [];
 
     $title = $this->t('Be updated');
-    $copy = $this->t("Get email and SMS from FSA's latest news, campaigns, consultations, food recalls and allergy alerts.");
+    $copy = $this->t("Get email and SMS updates on latest news, food recalls and allergy alerts.");
 
     $cta = FsaAlertsHelper::ctaSubscribe();
 

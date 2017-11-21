@@ -1,12 +1,19 @@
-import "babel-polyfill";
+import 'babel-polyfill';
+import './core/helper/polyfill/classList';
+import './core/helper/polyfill/closest';
 import svg4everybody from 'svg4everybody';
-import responsiveTables from './responsiveTables';
-import stickyElement from './stickyElement';
-import toggleContent from './toggleContent';
-import toc from './toc';
-import mobileMenu from './mobile-menu';
-import regionalVariation from './regionalVariation';
-import printPage from './printPage';
+import responsiveTables from './core/helper/responsiveTables';
+import stickyElement from './core/helper/stickyElement';
+import toggleContent from './core/helper/toggleContent';
+import toc from './core/helper/toc';
+import mobileMenu from './core/helper/mobile-menu';
+import regionalVariation from './core/helper/regionalVariation';
+import printPage from './core/helper/printPage';
+import peek from './component/parallax/parallax';
+
+document.addEventListener('DOMContentLoaded', () => {
+  peek();
+});
 
 const breakpoints = {
   small: "sm",
@@ -15,23 +22,23 @@ const breakpoints = {
 
 // Require every image asset inside of img folder
 require.context("./img/", true, /\.(gif|png|svg|jpe?g)$/);
-require('./css/style.css');
+require('./style.css');
 
 // Polyfill svgs
-// svg4everybody({ polyfill: true });
+svg4everybody({ polyfill: true });
 
 // Temperary fix
-const searchLogoElement = document.querySelector('.ratings.ratings--frontpage .ratings__logo');
+// const searchLogoElement = document.querySelector('.ratings.ratings--frontpage .ratings__text');
 
-if (searchLogoElement != null) {
-  const searchHeading = document.querySelector('#fsa-ratings-search h2');
-  searchHeading.classList.add('small');
-  const searchLead = document.querySelector('#fsa-ratings-search p');
-  searchLead.classList.add('lead');
+// if (searchLogoElement != null) {
+//   const searchHeading = document.querySelector('#fsa-ratings-search h2');
+//   searchHeading.classList.add('small');
+//   const searchLead = document.querySelector('#fsa-ratings-search p');
+//   searchLead.classList.add('lead');
 
-  searchLogoElement.parentNode.insertBefore(searchLead, searchLogoElement.nextSibling);
-  searchLogoElement.parentNode.insertBefore(searchHeading, searchLogoElement.nextSibling);
-}
+//   searchLogoElement.parentNode.insertBefore(searchLead, searchLogoElement.nextSibling);
+//   searchLogoElement.parentNode.insertBefore(searchHeading, searchLogoElement.nextSibling);
+// }
 
 // Responsive tableElements
 const tableElements = [...document.querySelectorAll('.js-table')];

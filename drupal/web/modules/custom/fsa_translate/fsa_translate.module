@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Alters default translation settings.
+ */
+
+/**
+ * Implements hook_language_switch_links_alter().
+ */
+function fsa_translate_language_switch_links_alter(array &$links, $type, $path) {
+  if (isset($links['cy']['title'])) {
+    $links['cy']['title'] = 'Cymraeg';
+  }
+  return $links;
+}
+
+/**
+ * Implements hook_entity_view_alter().
+ */
+function fsa_translate_entity_view_alter(array &$build, $entity, $display) {
+  if ($build['#view_mode'] == 'full' && isset($build['entity_print_view_pdf'])) {
+    if ($build['entity_print_view_pdf']['#title'] == 'View PDF') {
+      $build['entity_print_view_pdf']['#title'] = t('View PDF');
+    }
+  }
+}

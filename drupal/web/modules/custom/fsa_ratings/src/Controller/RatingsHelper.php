@@ -12,20 +12,46 @@ use Drupal\Core\Controller\ControllerBase;
  */
 class RatingsHelper extends ControllerBase {
 
+  /**
+   * Get formatted date or "N/A" for dates from the beginning of 20th Century.
+   *
+   * @param string $date
+   *   String in datetime format.
+   * @param string $format
+   *   Drupal date format to format the date.
+   *
+   * @return \Drupal\Core\StringTranslation\TranslatableMarkup|false|int
+   *   Formatted date or "N/A".
+   */
+  public static function ratingsDate($date, $format = 'medium') {
+
+    $date = strtotime($date);
+    if ($date > -1893456000) {
+      // Format a nice date display if it is after year 1910.
+      $date = \Drupal::service('date.formatter')->format($date, $format);
+    }
+    else {
+      // Return "not available" label for years from the beginning of century.
+      $date = t('N/A');
+    }
+
+    return $date;
+  }
 
   /**
-   * Helper function to get entity details from the FSA ratings system
-   * (or any Drupal entity).
+   * Helper function to get entity details from the FSA ratings system.
    *
-   * @param $entity_name
-   *    The machine name of the entity.
-   * @param $id
-   *    The entity id.
-   * @param $field
-   *    The name of the field or property to get.
+   * Usage does not limit to FSA, can be used for any Drupal entity.
+   *
+   * @param string $entity_name
+   *   The machine name of the entity.
+   * @param int $id
+   *   The entity id.
+   * @param string $field
+   *   The name of the field or property to get.
    *
    * @return string
-   *    Field or property value.
+   *   Field or property value.
    */
   public static function getEntityDetail($entity_name, $id, $field) {
 
@@ -36,7 +62,7 @@ class RatingsHelper extends ControllerBase {
       if ($field == 'name') {
         $value = $entity->getName();
       }
-      else if ($entity->hasField($field)) {
+      elseif ($entity->hasField($field)) {
         $value = $entity->get($field);
         // @todo: consider handling fields with multiple values?
         $value = $value->first()->getValue()['value'];
@@ -47,65 +73,22 @@ class RatingsHelper extends ControllerBase {
   }
 
   /**
-   * Build a ratings badge (old style, displayed as image).
-   *
-   * @param string $rating
-   *   The rating value.
-   * @param string $image_size
-   *   Image size (small|medium|large)
-   * @param bool $value_only
-   *   True to parse the badge from value only.
-   *
-   * @return array
-   *   Rating image badge #markup (@todo: use drupal image functionality)
-   */
-  public static function ratingBadge($rating, $image_size = 'medium', $value_only = TRUE) {
-
-    // Get language to be used in badge.
-    $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
-
-    if ($value_only) {
-      // If value is numeric use FHIS scheme badge.
-      $scheme = (is_numeric($rating)) ? 'fhrs' : 'fhis';
-
-      if ($scheme == 'fhis') {
-        $filter = [
-          ' ' => '_',
-          '/' => '_',
-          '[' => '_',
-          ']' => '_',
-        ];
-        $rating = Html::cleanCssIdentifier($rating, $filter);
-      }
-      $ratingkey = $scheme . '_' . $rating . '_' . $lang . '-gb';
-    }
-    else {
-      // If full rating badge name passed.
-      $ratingkey = $rating;
-    }
-    $alt = t('Food hygiene Rating score @score', ['@score' => $rating]);
-    return ['#markup' => '<div class="badge ratingkey"><img src="http://ratings.food.gov.uk/images/scores/' . $image_size . '/' . $ratingkey . '.JPG" alt="' . $alt . '" /></div>'];
-  }
-
-  /**
    * Display locally hosted ratings badge image.
    *
-   * The images are fetched from
-   * https://s3-eu-west-1.amazonaws.com/assets.food.gov.uk, offered as
-   * downloadables at fhrs-online-display.food.gov.uk).
-   *
    * @param int $rating
-   *   The establishment fhrsid.
+   *   Establishment rating value.
+   * @param string $scheme
+   *   Rating scheme.
    * @param int $embed_type
-   *   Embed type code (1|2|3|4)
+   *   Embed type code (1|3|4), define the FHRS badge type.
    *
    * @return array
-   *   Rating image badge #markup as loaded from the API.
+   *   Rating image badge #markup.
    */
-  public static function ratingBadgeImageDisplay($rating, $embed_type = 4) {
+  public static function ratingBadgeImageDisplay($rating, $scheme = 'FHRS', $embed_type = 4) {
 
+    // Language name to image path.
     $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
-
     switch ($lang) {
       case 'cy':
         $language = 'welsh';
@@ -116,36 +99,43 @@ class RatingsHelper extends ControllerBase {
         break;
     }
 
-    // Non-numeric FHRS badges.
-    $literals = ['exempt', 'pending'];
+    $badge_path = '';
 
-    // FHIS badges
-    $fhis_badges = ['AwaitingInspection', 'AwaitingPublication', 'Improvement Required', 'Pass', 'Pass and Eat Safe'];
+    // Build the badge based on scheme.
+    if ($scheme == 'FHRS') {
 
-    if (is_numeric($rating) || in_array(strtolower($rating), $literals)) {
-      // FHRS numeric and few literal ratings as badges.
-      $image_path = '/' . drupal_get_path('module', 'fsa_ratings') . '/images/badges/score-' . $rating . '-' . $embed_type . '-' . $language . '.png';
+      // Not all FHRS rating values match the badge name, rewrite.
+      switch ($rating) {
+        case 'AwaitingInspection':
+        case 'AwaitingPublication':
+          $rating = 'pending';
+          break;
+      }
+
+      $badge_path = $scheme . '/' . $rating . '/' . 'score-' . $rating . '-' . $embed_type . '-' . $language . '.png';
+
     }
-    else if (in_array($rating, $fhis_badges)) {
-      // FHIS badges as defined in $fhis_badges variable.
-      // Convert to proper image filenames, regexp "CamelCase" -> "camel_case".
-      $imgname = strtolower(str_replace(' ', '_', preg_replace('/(?<!^)[A-Z]/', '_$0', $rating)));
-      $image_path = '/' . drupal_get_path('module', 'fsa_ratings') . '/images/badges/fhis_' . $imgname . '.png';
-    }
-    else {
-      // Fall back to fetching arbitrary badges from ratings.food.gov.uk.
+    elseif ($scheme == 'FHIS') {
       $filter = [
         ' ' => '_',
-        '/' => '_',
-        '[' => '_',
-        ']' => '_',
       ];
-      $image_path = 'http://ratings.food.gov.uk/images/scores/large/fhis_' . Html::cleanCssIdentifier($rating, $filter) . '_' . $lang . '-gb.JPG';
+      $filename = Html::cleanCssIdentifier('fhis_' . $rating, $filter);
+      $badge_path = $scheme . '/' . $filename . '.jpg';
+    }
+
+    if ($badge_path != '') {
+      $image_path = '/' . drupal_get_path('module', 'fsa_ratings') . '/images/badge/' . $badge_path;
+      $badge = '<img src="' . strtolower($image_path) . '" alt="FHRS Rating score: ' . $rating . '" />';
+    }
+    else {
+      // In case we could not create a badge_path.
+      $badge = '<pre>' . t('Rating badge not available.') . '</pre>';
     }
 
     return [
-      '#markup' => '<div class="badge ratingkey"><img src="' . $image_path . '" alt="FHRS Rating score: ' . $rating . '" /></div>',
+      '#markup' => '<div class="badge ratingkey">' . $badge . '</div>',
     ];
+
   }
 
   /**

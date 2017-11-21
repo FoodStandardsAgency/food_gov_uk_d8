@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Contains fsa_subpages.module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Alter 'node add page' form.
+ */
+function fsa_subpages_form_node_page_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  unset($form['field_subpages']['widget'][0]);
+}
