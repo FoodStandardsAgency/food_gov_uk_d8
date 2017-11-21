@@ -26,7 +26,8 @@ class GetLocalAuthority {
     // Build mapit request.
     $base = 'https://mapit.mysociety.org';
     $postcode = str_replace(' ', '', $query);
-    $key = 'cGEi7enM22ZPLNJmm7i1t9g0E6K6MABwHeLhKFxI';
+    $config = \Drupal::config('fsa_team_finder.settings');
+    $key = $config->get('mapit_api_key');
     $url = $base . '/postcode/' . $postcode . '?api_key=' . $key;
 
     // Call mapit.
