@@ -89,6 +89,10 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
     $account = $form_state->getValue('account');
     $uid = $account->id();
     $email = $account->getEmail();
+
+    // "Anonymise the email.
+    $email = '***' . strstr($email, '@');
+
     $account->delete();
     \Drupal::logger('fsa_signing')->notice(
       t(
