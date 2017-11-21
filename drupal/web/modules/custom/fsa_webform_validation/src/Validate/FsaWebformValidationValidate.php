@@ -37,26 +37,24 @@ class FsaWebformValidationValidate {
         ->getStorage('fsa_authority')
         ->loadByProperties(['field_mapit_area' => $la['mapit_area']]);
       if ($fsa_authority = reset($fsa_authority)) {
-        $error = $fsa_authority->get('field_contact_directly')->getString();
+        if ($fsa_authority->hasField('field_contact_directly')) {
+          $error = $fsa_authority->get('field_contact_directly')->getString();
+        }
       }
-      else {
-        $error = FALSE;
-      }
-    }
-    else {
-      $error = FALSE;
     }
 
     // Set error message.
-    if ($error) {
-      $args = [
-        '%name' => $la['name'],
-        '@path' => $fsa_authority->get('field_advice_url')->getString(),
-      ];
-      $formState->setError(
-        $element,
-        t('<span>Sorry, %name requires you to make a report directly to them. Please see their <a href="@path" target="_blank">advice page</a>.</span>', $args)
-      );
+    if (isset($error)) {
+      if ($error) {
+        $args = [
+          '%name' => $la['name'],
+          '@path' => $fsa_authority->get('field_advice_url')->getString(),
+        ];
+        $formState->setError(
+          $element,
+          t('<span>Sorry, %name requires you to make a report directly to them. Please see their <a href="@path" target="_blank">advice page</a>.</span>', $args)
+        );
+      }
     }
   }
 
