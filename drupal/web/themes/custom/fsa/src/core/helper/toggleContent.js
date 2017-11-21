@@ -18,9 +18,16 @@ function toggleContent(toggleButtons, breakpoints) {
 
   if (toggleButtons.length != undefined) {
     [...toggleButtons].forEach(function(button) {
+      let content;
+      let toggleButton;
 
-      let content = ((button.nextElementSibling === null) ? button.closest('.js-content-next').nextElementSibling : button.nextElementSibling);
-      console.log(content);
+      if (button.nextElementSibling === null) {
+        content = button.closest('.js-content-next').nextElementSibling;
+        toggleButton = button.closest('.js-content-next');
+      } else {
+        content = button.nextElementSibling;
+        toggleButton = button;
+      }
 
       if (content.classList.contains('js-toggle-content-only-mobile')) {
         if (checkMediaQuery() == breakpoints.medium) {
@@ -29,7 +36,7 @@ function toggleContent(toggleButtons, breakpoints) {
       }
       // Add click event
       button.addEventListener("click", function() {
-        toggleContentVisibility(button, content);
+        toggleContentVisibility(toggleButton, content);
       });
     });
   } else {

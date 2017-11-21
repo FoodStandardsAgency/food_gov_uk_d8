@@ -20,7 +20,7 @@
 
 .hero:before {
   content: "";
-  background-color: var(--primary-color);
+  background-color: var(--dark-primary-color);
   position: absolute;
   z-index: var(--z-bottom);
   top: 0;
