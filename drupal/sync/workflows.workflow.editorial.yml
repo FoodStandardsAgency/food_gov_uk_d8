@@ -33,99 +33,57 @@ type_settings:
       published: true
       default_revision: true
       weight: 4
-    translated:
-      published: false
-      default_revision: false
-      label: Translated
-      weight: 3
-    untranslated:
-      published: false
-      default_revision: false
-      label: Untranslated
-      weight: 2
   transitions:
     archive:
       label: Archive
       from:
         - published
       to: archived
-      weight: 8
+      weight: 5
     archived_draft:
       label: 'Restore from archived to draft'
       from:
         - archived
       to: draft
-      weight: 10
+      weight: 7
     archived_published:
       label: 'Restore from archived'
       from:
         - archived
       to: published
-      weight: 9
+      weight: 6
     create_new_draft:
       label: 'Create new draft'
       to: draft
-      weight: -2
+      weight: 0
       from:
         - draft
     publish:
       label: Publish
       to: published
-      weight: 5
+      weight: 3
       from:
         - drafted
         - published
-        - translated
-    ready_for_publication:
-      label: 'Ready for publication'
-      from:
-        - untranslated
-      to: translated
-      weight: 3
     ready_for_review:
       label: 'Ready for review'
       from:
         - draft
         - drafted
       to: drafted
-      weight: -1
-    ready_for_translation:
-      label: 'Ready for translation'
-      from:
-        - drafted
-        - untranslated
-      to: untranslated
       weight: 1
     restore_from_drafted:
       label: 'Restore from drafted'
       from:
         - drafted
       to: draft
-      weight: 0
-    restore_from_published:
-      label: 'Restore from published to translated'
-      from:
-        - published
-      to: translated
-      weight: 7
+      weight: 2
     restore_from_published_to_drafted:
       label: 'Restore from published to drafted'
       from:
         - published
       to: drafted
-      weight: 6
-    restore_from_translated:
-      label: 'Restore from translated'
-      from:
-        - translated
-      to: untranslated
       weight: 4
-    restore_from_untranslated:
-      label: 'Restore from untranslated'
-      from:
-        - untranslated
-      to: drafted
-      weight: 2
   entity_types:
     node:
       - news
