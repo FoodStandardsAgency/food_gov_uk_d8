@@ -4,6 +4,7 @@ namespace Drupal\fsa_signin\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\fsa_signin\Controller\DefaultController;
 use Drupal\user\Entity\User;
 
 /**
@@ -21,17 +22,14 @@ class DeleteMyAccountForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, User $account = NULL) {
-    if (count(\Drupal::currentUser()->getRoles()) > 1) {
+  public function buildForm(array $form, FormStateInterface $form_state) {
+    $user = \Drupal::currentUser();
+    if (DefaultController::isMoreThanRegistered($user)) {
       $form['message'] = [
         '#markup' => '<p><strong>' . $this->t('This functionality is not available for users with multiple roles.') . '</strong></p>',
       ];
     }
     else {
-      $form['account'] = [
-        '#type' => 'value',
-        '#value' => $account,
-      ];
       $form['actions'] = array('#type' => 'actions');
       $form['actions']['submit'] = array(
         '#type' => 'submit',
@@ -53,11 +51,7 @@ class DeleteMyAccountForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    /** @var \Drupal\user\Entity\User $account */
-    $account = $form_state->getValue('account');
-    $account->delete();
-    drupal_set_message($this->t('Your account has been deleted.'));
-    $form_state->setRedirect('<front>');
+    $form_state->setRedirect('fsa_signin.delete_account_confirmation');
   }
 
 }

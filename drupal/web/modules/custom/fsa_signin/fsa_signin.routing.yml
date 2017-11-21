@@ -31,6 +31,14 @@ fsa_signin.default_controller_myAccountPage:
   requirements:
     _user_is_logged_in: 'TRUE'
 
+fsa_signin.delete_account_confirmation:
+  path: '/profile/delete'
+  defaults:
+    _title: 'Delete profile'
+    _form: '\Drupal\fsa_signin\Form\DeleteAccountConfirmation'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
 fsa_signin.user_preregistration_alerts_form:
   path: '/news-alerts/subscribe/alerts'
   defaults:
