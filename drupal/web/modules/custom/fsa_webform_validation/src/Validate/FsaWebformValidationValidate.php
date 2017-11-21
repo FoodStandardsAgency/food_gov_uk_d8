@@ -44,8 +44,8 @@ class FsaWebformValidationValidate {
     }
 
     // Set error message.
-    if (isset($error)) {
-      if ($error) {
+    if (isset($error) && isset($fsa_authority)) {
+      if ($error && $fsa_authority->hasField('field_advice_url')) {
         $args = [
           '%name' => $la['name'],
           '@path' => $fsa_authority->get('field_advice_url')->getString(),
