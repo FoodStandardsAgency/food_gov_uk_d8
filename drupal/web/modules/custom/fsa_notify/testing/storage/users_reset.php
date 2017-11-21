@@ -76,6 +76,10 @@ foreach ($uids as $uid) {
   $rand = mt_rand() / mt_getrandmax();
   $rand > 0.1 ? $u->activate() : $u->block();
 
+  if ($u->field_notification_method->getString() == 'sms') {
+    $u->field_notification_method = '+44999999999999';
+  }
+
   $u->save();
 }
 print "\n";

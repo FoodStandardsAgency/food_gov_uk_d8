@@ -1,0 +1,7 @@
+fsa_notify.settings:
+ path: '/admin/config/fsa/notify'
+ defaults:
+   _title: 'Notify settings'
+   _form: '\Drupal\fsa_notify\Form\FsaSettings'
+ requirements:
+   _permission: 'administer site configuration'

@@ -1,0 +1,248 @@
+<?php
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\fsa_notify\FsaNotifyAPIemail;
+use Drupal\fsa_notify\FsaNotifyAPIsms;
+use Drupal\fsa_notify\FsaNotifyMessageDaily;
+use Drupal\fsa_notify\FsaNotifyMessageImmediate;
+use Drupal\fsa_notify\FsaNotifyMessageSms;
+use Drupal\fsa_notify\FsaNotifyMessageWeekly;
+use Drupal\fsa_notify\FsaNotifyStorage;
+use Drupal\fsa_notify\Plugin\QueueWorker\FsaNotifyStorageQueue;
+use Drupal\node\NodeInterface;
+use Drupal\user\Entity\User;
+
+function fsa_notify_form_user_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['field_notification_sms']['#element_validate'][] = 'fsa_notify_validate';
+}
+
+// data integrity: require phone number if user chooses sms method.
+function fsa_notify_validate(&$form, FormStateInterface $form_state) {
+
+  $field = 'field_notification_method';
+  $method = $form_state->getValue($field);
+  if (empty($method[0]['value']) || $method[0]['value'] != 'sms') {
+    return;
+  }
+
+  $field = 'field_notification_sms';
+  $sms = $form_state->getValue($field);
+  if (!empty($sms[0]['value'])) {
+    return;
+  }
+
+  $form_state->setErrorByName($field, t('If "Notification method" is SMS then "Notification SMS" is required.'));
+}
+
+// collect inserted alerts
+function fsa_notify_entity_insert(EntityInterface $entity) {
+  if (!($entity instanceof NodeInterface)) {
+    return;
+  }
+  if ($entity->getType() != 'alert') {
+    return;
+  }
+  
+  $queue = \Drupal::service('queue')->get('fsa_notify_store');
+  $data = $entity->id();
+  $queue->createItem($data);
+}
+
+
+
+// keep all stuff as abstract as possible here
+// so that it would be easy to understand highlevel workflow
+// just major decisions and major tasks
+function fsa_notify_cron() {
+
+  $state_key = 'fsa_notify.killswitch';
+  $killswitch = \Drupal::state()->get($state_key);
+  if (empty($killswitch)) {
+    return;
+  }
+
+  // process alerts
+  // (insert it into each user cache who wants to be notified)
+  fsa_notify_queue_process();
+
+  /* now start sending */
+
+  // prepare
+  $notifier_sms = new FsaNotifyAPIsms();
+  $notifier_email = new FsaNotifyAPIemail();
+  $storage = new FsaNotifyStorage();
+
+  // sms
+  $formatter = new FsaNotifyMessageSms();
+  fsa_notify_send($storage, $notifier_sms, $formatter, 'sms');
+
+  // immediate
+  $formatter = new FsaNotifyMessageImmediate();
+  fsa_notify_send($storage, $notifier_email, $formatter, 'immediate');
+
+  // daily
+  $state_key = 'fsa_notify.last_daily';
+  $formatter = new FsaNotifyMessageDaily();
+  if (fsa_notify_daily_is_ready_to_send($state_key)) {
+    fsa_notify_send($storage, $notifier_email, $formatter, 'daily');
+    fsa_notify_sent($state_key);
+  }
+
+  // weekly
+  $state_key = 'fsa_notify.last_weekly';
+  $formatter = new FsaNotifyMessageWeekly();
+  if (fsa_notify_weekly_is_ready_to_send($state_key)) {
+    fsa_notify_send($storage, $notifier_email, $formatter, 'weekly');
+    fsa_notify_sent($state_key);
+  }
+}
+
+
+
+function fsa_notify_sent($state_key) {
+  $now = time();
+  $last = \Drupal::state()->set($state_key, $now);
+}
+
+function fsa_notify_daily_is_ready_to_send($state_key, $now = NULL) {
+  // $now argument is used only for algorithm testing purposes
+  if (empty($now)) {
+    $now = time();
+  }
+  $window = 3 * 60 * 60;
+  $interval = 24 * 60 * 60;
+  // Calculation base: seconds since 00:00:00
+  $start = 7 * 60 * 60;
+  $current = date('G', $now) * 60 * 60 + date('i', $now) * 60 + date('s', $now);
+  $ready = fsa_notify_is_ready_to_send($state_key, $window, $interval, $start, $current, $now);
+  return $ready;
+}
+
+function fsa_notify_weekly_is_ready_to_send($state_key, $now = NULL) {
+  // $now argument is used only for algorithm testing purposes
+  if (empty($now)) {
+    $now = time();
+  }
+  $window = 5 * 60 * 60;
+  $interval = 7 * 24 * 60 * 60;
+  // Calculation base: 1 (for Monday) through 7 (for Sunday)
+  $start = 1 * 24 * 60 * 60 + 7 * 60 * 60;
+  $current = date('N', $now) * 24 * 60 * 60 + date('G', $now) * 60 * 60 + date('i', $now) * 60 + date('s', $now);
+  $ready = fsa_notify_is_ready_to_send($state_key, $window, $interval, $start, $current, $now);
+  return $ready;
+}
+
+function fsa_notify_is_ready_to_send($state_key, $window, $interval, $start, $current, $now = NULL) {
+  // $state_key = drupal state to get/set related info
+  // $window = duration window for sending out emails
+  // $interval = duration between beginnings of two sendings
+  // $start = arbitrary start time, in context of interval
+  // $current = arbitrary current time, in context of interval
+  // $now argument is used only for algorithm testing purposes
+
+  if (empty($now)) {
+    $now = time();
+  }
+
+  $last = \Drupal::state()->get($state_key);
+  if (empty($last)) {
+    fsa_notify_sent($state_key);
+    return TRUE;
+  }
+
+  // is elapsed enough time since last time
+  $is_elapsed_enough = $now - $last;
+  // so that we wont send out emails each time later and later.
+  $is_elapsed_enough = $is_elapsed_enough > $interval - $window;
+
+  $is_in_window = $start <= $current && $current < $start + $window;
+
+  return $is_elapsed_enough && $is_in_window;
+}
+
+// process queued alerts
+function fsa_notify_queue_process() {
+
+  $queue = Drupal::service('queue')->get('fsa_notify_store');
+  $worker = Drupal::service('plugin.manager.queue_worker')->createInstance('fsa_notify_store');
+
+  fsa_notify_timer('start', 'queue');
+
+  while($item = $queue->claimItem()) {
+    try {
+      $worker->processItem($item->data);
+      $queue->deleteItem($item);
+    }
+    catch (SuspendQueueException $e) {
+      $queue->releaseItem($item);
+      break;
+    }
+    catch (\Exception $e) {
+      watchdog_exception('fsa_notify', $e);
+    }
+    fsa_notify_timer('count', 'queue');
+  }
+
+  fsa_notify_timer('stop', 'queue');
+
+}
+
+function fsa_notify_send($storage, $notifier, $formatter, $type) {
+  fsa_notify_timer('start', $type);
+  while ($batch = $storage->getAllType($type)) {
+    foreach ($batch as $uid => $messages) {
+      $user = User::load($uid);
+      $messages = $formatter->format($messages);
+      foreach ($messages as $personalisation) {
+        $notifier->send($user, $type, $personalisation);
+        fsa_notify_timer('count', $type);
+      }
+      $storage->reset($user);
+    }
+    \Drupal::entityManager()->getStorage('node')->resetCache();
+    \Drupal::entityManager()->getStorage('user')->resetCache();
+  }
+  fsa_notify_timer('stop', $type);
+}
+
+function fsa_notify_timer($event, $type) {
+
+  static $cache = [];
+
+  switch ($event) {
+
+    case 'start':
+      $cache[$type] = [
+        'start' => microtime(TRUE),
+        'count' => 0,
+      ];
+      break;
+
+    case 'count':
+      $cache[$type]['count']++;
+      break;
+
+    case 'stop':
+      $stop = microtime(TRUE);
+      $start = $cache[$type]['start'];
+      $items = $cache[$type]['count'];
+      unset($cache[$type]);
+      if ($items == 0) {
+        // dont fill logs with zeros
+        break;
+      }
+      $elapsed = $stop - $start;
+      $rate = $elapsed > 0 ? $items / $elapsed : 'n/a';
+      $elapsed = sprintf('%.3f', $elapsed);
+      $rate = sprintf('%.3f', $rate);
+      \Drupal::logger('fsa_notify')->info('Timer: type %type; elapsed %elapsed; %items items; %rate items/sec.', [
+        '%type' => $type,
+        '%elapsed' => $elapsed,
+        '%items' => $items,
+        '%rate' => $rate,
+      ]);
+      break;
+  }
+
+}

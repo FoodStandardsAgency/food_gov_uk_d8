@@ -6,6 +6,7 @@ dependencies:
     - field.field.user.user.field_notification_allergys
     - field.field.user.user.field_notification_cache
     - field.field.user.user.field_notification_method
+    - field.field.user.user.field_notification_sms
     - field.field.user.user.field_subscribed_notifications
   module:
     - user
@@ -22,7 +23,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_notification_allergys:
-    weight: 3
+    weight: 7
     settings:
       match_operator: CONTAINS
       size: 60
@@ -35,6 +36,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_select
+    region: content
+  field_notification_sms:
+    weight: 6
+    settings:
+      size: 20
+      placeholder: +44xxxxxxxxxx
+    third_party_settings: {  }
+    type: string_textfield
     region: content
   field_subscribed_notifications:
     weight: 1

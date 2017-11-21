@@ -1,0 +1,6 @@
+name: FSA Notify
+type: module
+description: Base functionality for endimg out notification emails and SMSes.
+core: 8.x
+package: FSA
+dependencies:
