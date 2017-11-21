@@ -115,10 +115,10 @@ class DefaultController extends ControllerBase {
   }
 
   /**
-   * Check if user is more than just authenticated user.
+   * Check if user is more than just authenticated user (alert subscriber).
    *
    * @return bool
-   *   Boolean if has more than one role
+   *   TRUE if user has more than one role
    */
   public static function isMoreThanRegistered($user) {
     return count($user->getRoles()) > 1;
