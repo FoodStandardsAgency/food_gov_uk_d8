@@ -4,4 +4,5 @@ type: module
 core: 8.x
 package: FSA
 dependencies:
-  - webform
+  - drupal:webform
+  - fsa_team_finder
