@@ -1,6 +1,7 @@
 # FSA Alerts configuration page menu item definition
 fsa_alerts_import.alerts_settings:
- title: 'FSA Alerts'
- parent: system.admin_config
- route_name: fsa_alerts_import.alerts_settings
- weight: -50
+  title: 'Alerts'
+  parent: system.admin_config_fsa
+  route_name: fsa_alerts_import.alerts_settings
+  description: 'Alerts import stuff ...'
+  weight: -50

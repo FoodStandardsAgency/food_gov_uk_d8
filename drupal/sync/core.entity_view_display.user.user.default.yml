@@ -6,6 +6,8 @@ dependencies:
     - field.field.user.user.field_notification_allergys
     - field.field.user.user.field_notification_cache
     - field.field.user.user.field_notification_method
+    - field.field.user.user.field_notification_sms
+    - image.style.thumbnail
     - field.field.user.user.field_subscribed_notifications
   module:
     - user
@@ -36,4 +38,5 @@ hidden:
   field_notification_allergys: true
   field_notification_cache: true
   field_notification_method: true
+  field_notification_sms: true
   langcode: true

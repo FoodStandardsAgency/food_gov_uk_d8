@@ -1,0 +1,20 @@
+uuid: a64b19c4-f92c-4825-8f82-9437597431bd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_notification_sms
+  module:
+    - user
+id: user.user.field_notification_sms
+field_name: field_notification_sms
+entity_type: user
+bundle: user
+label: 'Notification SMS'
+description: "Fill in if you want to receive SMS notifications and please choose \"Notification method\" accordingly.<br>\r\nEnter phone numbers with plus sign followed by international prefix followed by your number.<br>\r\nExample: +449988776655<br>"
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
