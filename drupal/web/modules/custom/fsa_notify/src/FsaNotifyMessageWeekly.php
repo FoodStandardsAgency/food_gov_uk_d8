@@ -31,7 +31,7 @@ class FsaNotifyMessageWeekly extends FsaNotifyMessage {
   protected function theme($item) {
     $title = $item->getTitle();
     $created = $item->getCreatedTime();
-    $created = \Drupal::service('date.formatter')->format($created, 'custom', 'F j, Y');
+    $created = \Drupal::service('date.formatter')->format($created, 'medium');
     $line1 = sprintf('%s: %s', $created, $title);
 
     $link = $this->url($item);
