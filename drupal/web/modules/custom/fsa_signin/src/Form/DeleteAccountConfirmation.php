@@ -87,7 +87,18 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     /** @var \Drupal\user\Entity\User $account */
     $account = $form_state->getValue('account');
+    $uid = $account->id();
+    $email = $account->getEmail();
     $account->delete();
+    \Drupal::logger('fsa_signing')->notice(
+      t(
+        'User @id with email @email self-deleted their account.',
+        [
+          '@id' => $uid,
+          '@email' => $email,
+        ]
+      )
+    );
     drupal_set_message($this->t('Your account has been deleted.'));
     $form_state->setRedirect('<front>');
   }
