@@ -10,8 +10,6 @@ All notification related stuff lives in one module `fsa_notify`.
 
 Decisions and/or further investigation needed:
 * Need to decide and work with what happens when sending fails to particular user. Stop sending altogether? Or continue? We dont know if this is some common error or just isolated case. In `src/FsaNotifyAPI*.php`, see `send()` method.
-* There are overlapping fields: `field_notification_allergys` and `field_subscribed_notifications`. This module is built with the former.
-* There are no food nor news alerts yet
 * Unsubscribe by email functionality
 * Optout by sms functionality
 * Email bounce handling
@@ -80,7 +78,7 @@ This field is not visible for user, but here we collect alerts per user to be se
 
 When alerts are sent out, this field is emptied.
 
-### user.field_notification_allergys
+### user.field_subscribed_notifications
 
 List of allergens user has signed up to.
 
