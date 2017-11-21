@@ -16,7 +16,7 @@
     border-right: 1px solid var(--color-gray);
   }
 }
-
+/* 
 .table.table--with-background .table__button:nth-of-type(odd) {
   background-color: var(--color-lighter-gray);
 
@@ -29,7 +29,7 @@
   @media (--breakpoint-md) {
     background-color: var(--color-lighter-gray);
   }
-}
+} */
 
 .table__row {
   display: flex;
@@ -137,12 +137,6 @@
     margin: 0 1em;
   }
 }
-
-.table__button.is-open {
-  background-color: var(--primary-color) !important;
-  color: var(--color-white);
-}
-
 
 .table__item.table__item--large {
   @media (--breakpoint-md) {
