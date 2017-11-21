@@ -53,7 +53,7 @@ foreach ($uids as $uid) {
     }
   }
   $allergys = empty($allergys) ? NULL : $allergys;
-  $u->field_notification_allergys = $allergys;
+  $u->field_subscribed_notifications = $allergys;
 
   // notification cache
   $rand = mt_rand() / mt_getrandmax();
