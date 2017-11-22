@@ -14,8 +14,8 @@ third_party_settings:
     classes: ''
 id: menu_help_main
 theme: fsa
-region: primary_menu
-weight: -6
+region: header
+weight: -10
 provider: null
 plugin: 'system_menu_block:help'
 settings:

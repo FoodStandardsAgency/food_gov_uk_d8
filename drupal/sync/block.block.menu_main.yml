@@ -1,4 +1,4 @@
-uuid: cc34c2a5-ca28-4856-81eb-bb8c3fc56576
+uuid: ec734300-7c21-4792-b93c-fd35ba27a59a
 langcode: en
 status: true
 dependencies:
@@ -6,7 +6,7 @@ dependencies:
     - system.menu.main
   module:
     - block_class
-    - system
+    - menu_block
   theme:
     - fsa
 third_party_settings:
@@ -15,14 +15,17 @@ third_party_settings:
 id: menu_main
 theme: fsa
 region: primary_menu
-weight: -7
+weight: -12
 provider: null
-plugin: 'system_menu_block:main'
+plugin: 'menu_block:main'
 settings:
-  id: 'system_menu_block:main'
+  id: 'menu_block:main'
   label: 'Main navigation'
-  provider: system
+  provider: menu_block
   label_display: '0'
   level: 1
-  depth: 1
+  depth: 2
+  expand: 1
+  parent: 'main:'
+  suggestion: main
 visibility: {  }
