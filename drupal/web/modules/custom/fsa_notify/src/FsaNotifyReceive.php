@@ -58,13 +58,14 @@ class FsaNotifyReceive extends ControllerBase {
    */
   public function sms(Request $request) {
 
-    // @todo: Store as configuration.
+    // @todo: Store bearer token as configuration.
     $bearer_token = '0kZPJBYd8VxEZ4V3r0APMA';
+    $auth_bearer = 'Bearer ' . $bearer_token;
 
     $content = $request->getContent();
 
     // Require bearer token set in Notify settings.
-    if ($request->headers->get('authorisation') != $bearer_token) {
+    if ($request->headers->get('authorization') != $auth_bearer) {
       return new JsonResponse([
         'status' => 'error',
         'message' => $this->t('Incorrect token.'),
