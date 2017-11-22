@@ -1,4 +1,4 @@
-uuid: a7557866-db64-4153-90b9-1cac18773588
+uuid: 8e43b907-e72c-42ee-a995-60354fc3073c
 langcode: en
 status: true
 dependencies:
@@ -6,7 +6,7 @@ dependencies:
     - system.menu.help
   module:
     - block_class
-    - system
+    - menu_block
   theme:
     - fsa
 third_party_settings:
@@ -14,15 +14,18 @@ third_party_settings:
     classes: ''
 id: menu_help_secondary
 theme: fsa
-region: sidebar_first
-weight: -3
+region: content_top
+weight: 0
 provider: null
-plugin: 'system_menu_block:help'
+plugin: 'menu_block:help'
 settings:
-  id: 'system_menu_block:help'
-  label: 'Help menu 2nd level'
-  provider: system
+  id: 'menu_block:help'
+  label: 'Help/contact menu'
+  provider: menu_block
   label_display: '0'
-  level: 1
+  level: 2
   depth: 2
+  expand: 1
+  parent: 'help:'
+  suggestion: help
 visibility: {  }

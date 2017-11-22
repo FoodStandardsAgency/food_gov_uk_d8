@@ -13,7 +13,7 @@ third_party_settings:
 id: myprofile
 theme: fsa
 region: header
-weight: 0
+weight: -11
 provider: null
 plugin: my_profile_block
 settings:

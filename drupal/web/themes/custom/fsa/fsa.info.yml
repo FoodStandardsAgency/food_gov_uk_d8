@@ -9,7 +9,7 @@ regions:
   secondary_menu: 'Secondary menu'
   hero: 'Hero'
   highlighted: 'Highlighted'
-  help: 'Help'
+  content_top: 'Content top'
   content: 'Content'
   content_bottom: 'Content bottom'
   sidebar_first: 'Left sidebar'
