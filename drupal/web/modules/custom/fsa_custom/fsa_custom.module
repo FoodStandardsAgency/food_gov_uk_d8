@@ -27,7 +27,7 @@ function fsa_custom_preprocess_page(&$variables) {
     '#wrapper_attributes' => [
       'class' => [
         'item',
-        'rating',
+        'contact',
       ],
     ],
   ],
