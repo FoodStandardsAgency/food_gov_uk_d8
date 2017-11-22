@@ -17,7 +17,6 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
-  field_notification_allergys: true
   field_notification_cache: true
   field_notification_method: true
   field_subscribed_notifications: true
