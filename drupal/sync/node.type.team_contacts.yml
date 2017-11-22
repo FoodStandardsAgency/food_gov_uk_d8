@@ -1,0 +1,17 @@
+uuid: 8d5bbd51-6cb3-4db0-8fef-cb27caea519e
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'Team contacts'
+type: team_contacts
+description: 'Use <em>team contacts</em> to list a team''s contact details.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false
