@@ -14,7 +14,7 @@ third_party_settings:
 id: alertpagebacklink
 theme: fsa
 region: sidebar_first
-weight: 0
+weight: -10
 provider: null
 plugin: alert_backlink
 settings:

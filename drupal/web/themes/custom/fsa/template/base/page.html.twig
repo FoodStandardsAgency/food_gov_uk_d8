@@ -74,6 +74,8 @@
         </div>
       </a>
 
+      {{ utility_menu }}
+
       <a class="header__search-button button button--with-icon button--mobile-light">
         <div class="button__icon svg">
           <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#search-icon"></use></svg>
@@ -215,6 +217,16 @@
   {% if page.help %}
     <div class="site-highlighted">
       {{ page.help }}
+    </div>
+  {% endif %}
+
+  {% if page.content_top %}
+    <div class="layout">
+      <div class="layout__container">
+        <div class="layout__content">
+          {{ page.content_top }}
+        </div>
+      </div>
     </div>
   {% endif %}
 
