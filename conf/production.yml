@@ -7,7 +7,7 @@
   tasks: [ ]
 
 # Setup firewalls and using upcloud api
-- include: upcloud.yml
+#- include: upcloud.yml
 
 - name: Common
   hosts: prod
