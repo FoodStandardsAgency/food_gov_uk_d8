@@ -58,17 +58,17 @@ class FsaNotifyReceive extends ControllerBase {
    */
   public function sms(Request $request) {
 
-    // @todo: Store bearer token as configuration.
-    $bearer_token = '0kZPJBYd8VxEZ4V3r0APMA';
-    $auth_bearer = 'Bearer ' . $bearer_token;
-
+    // Store request content to a var.
     $content = $request->getContent();
 
-    // Require bearer token set in Notify settings.
-    if ($request->headers->get('authorization') != $auth_bearer) {
+    // @todo: Store bearer token as configuration.
+    $bearer_token_notify = '0kZPJBYd8VxEZ4V3r0APMA';
+    $bearer_token_request = $this->getBearerToken($request);
+
+    if ($bearer_token_request != $bearer_token_notify) {
       return new JsonResponse([
         'status' => 'error',
-        'message' => $this->t('Incorrect token.'),
+        'message' => $this->t('Invalid access token.'),
       ]);
     }
 
@@ -107,6 +107,28 @@ class FsaNotifyReceive extends ControllerBase {
       ]);
     }
 
+  }
+
+  /**
+   * Get Bearer access token.
+   *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The Drupal request.
+   *
+   * @return string|null
+   *   The Bearer token or null.
+   */
+  public function getBearerToken(Request $request) {
+
+    // Get the Authorization header.
+    $auth_header = $request->headers->get('Authorization');
+
+    if (!empty($auth_header)) {
+      if (preg_match('/Bearer\s(\S+)/', $auth_header, $matches)) {
+        return $matches[1];
+      }
+    }
+    return NULL;
   }
 
 }
