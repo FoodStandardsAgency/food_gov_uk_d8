@@ -58,6 +58,9 @@ class FsaNotifyReceive extends ControllerBase {
    */
   public function sms(Request $request) {
 
+    // For logging all errors. @todo: move to settings.
+    $logger = TRUE;
+
     // Store request content to a var.
     $content = $request->getContent();
 
@@ -66,17 +69,37 @@ class FsaNotifyReceive extends ControllerBase {
     $bearer_token_request = $this->getBearerToken($request);
 
     if ($bearer_token_request != $bearer_token_notify) {
+      if ($bearer_token_request === NULL) {
+        $error_msg = $this->t('No access token in Authentication header.');
+      }
+      else {
+        $error_msg = $this->t('Request with invalid access token');
+      }
+
+
+      if ($logger) {
+        \Drupal::logger('fsa_notify')->warning(
+          $this->t('Notify callback: @msg', ['@msg' => $error_msg])
+        );
+      }
+
       return new JsonResponse([
         'status' => 'error',
-        'message' => $this->t('Invalid access token.'),
+        'message' => $error_msg,
       ]);
     }
 
-    // Error for empty content.
     if (empty($content)) {
+      $error_msg = $this->t('Request with empty content');
+      if ($logger) {
+        \Drupal::logger('fsa_notify')->warning(
+          $this->t('Notify callback: @msg', ['@msg' => $error_msg])
+        );
+      }
+
       return new JsonResponse([
         'status' => 'error',
-        'message' => $this->t('No content.'),
+        'message' => $error_msg,
       ]);
     }
 
@@ -85,7 +108,7 @@ class FsaNotifyReceive extends ControllerBase {
     if (!empty($params)) {
       // Log the succesful event with message values.
       \Drupal::logger('fsa_notify')->info(
-        $this->t('Received Notify SMS from @source_number.<br />Callback message:<pre>@params</pre>',
+        $this->t('Notify callback: Received SMS from @source_number.<br />Message body:<pre>@params</pre>',
           [
             '@source_number' => $params['source_number'],
             '@params' => var_export($params, TRUE),
@@ -100,10 +123,16 @@ class FsaNotifyReceive extends ControllerBase {
       ]);
     }
     else {
-      // Log failure.
+      $error_msg = $this->t('No parameters in message body');
+
+      if ($logger) {
+        \Drupal::logger('fsa_notify')->warning(
+          $this->t('Notify callback: @msg', ['@msg' => $error_msg])
+        );
+      }
       return new JsonResponse([
         'status' => 'error',
-        'message' => $this->t('error'),
+        'message' => $error_msg,
       ]);
     }
 
