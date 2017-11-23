@@ -58,13 +58,11 @@ class FsaNotifyReceive extends ControllerBase {
    */
   public function sms(Request $request) {
 
-    // For logging all errors. @todo: move to settings.
-    $logger = TRUE;
+    // For logging all errors.
+    $logger = \Drupal::state()->get('fsa_notify.log_callback_errors');
 
     // Store request content to a var.
     $content = $request->getContent();
-
-    // @todo: Store bearer token as configuration.
     $bearer_token_notify = \Drupal::state()->get('fsa_notify.bearer_token');
 
     $bearer_token_request = $this->getBearerToken($request);

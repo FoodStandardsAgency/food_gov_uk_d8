@@ -68,6 +68,13 @@ class FsaSettings extends FormBase {
       '#weight' => $weight++,
     ];
 
+    $form['log_callback_errors'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Log all Notify callback errors.'),
+      '#default_value' => \Drupal::state()->get('fsa_notify.log_callback_errors'),
+      '#weight' => $weight++,
+    ];
+
     $form['actions'] = [
       '#type' => 'actions',
       '#weight' => $weight++,
@@ -162,6 +169,16 @@ class FsaSettings extends FormBase {
     if (!empty($status_old) && empty($status_new)) {
       drupal_set_message(t('Notification system is now DISABLED.'));
     }
+
+    if (empty($form_state->getValue('log_callback_errors'))) {
+      \Drupal::state()->delete('fsa_notify.log_callback_errors');
+    }
+    else {
+      \Drupal::state()->set('fsa_notify.log_callback_errors', 1);
+    }
+
+    // Let the user know something happened.
+    drupal_set_message($this->t('Notify settings updated.'));
 
   }
 
