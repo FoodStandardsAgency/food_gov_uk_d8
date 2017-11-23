@@ -63,18 +63,9 @@ class FsaNotifyReceive extends ControllerBase {
 
     // Store request content to a var.
     $content = $request->getContent();
-    $bearer_token_notify = \Drupal::state()->get('fsa_notify.bearer_token');
 
-    $bearer_token_request = $this->getBearerToken($request);
-
-    if ($bearer_token_request != $bearer_token_notify) {
-      if ($bearer_token_request === NULL) {
-        $error_msg = $this->t('No access token in Authentication header.');
-      }
-      else {
-        $error_msg = $this->t('Request with invalid access token');
-      }
-
+    if (!$this->notifyAuthentication($request)) {
+      $error_msg = $this->t('Authentication failure.');
 
       if ($logger) {
         \Drupal::logger('fsa_notify')->warning(
@@ -138,25 +129,39 @@ class FsaNotifyReceive extends ControllerBase {
   }
 
   /**
-   * Get Bearer access token.
+   * Check for Notify authentication.
    *
    * @param \Symfony\Component\HttpFoundation\Request $request
    *   The Drupal request.
    *
-   * @return string|null
-   *   The Bearer token or null.
+   * @return bool
+   *   TRUE or FALSE for authentiaction.
    */
-  public function getBearerToken(Request $request) {
-
-    // Get the Authorization header.
+  public function notifyAuthentication(Request $request) {
+    // Get the Authorization header from request.
     $auth_header = $request->headers->get('Authorization');
 
     if (!empty($auth_header)) {
+
+      // Cannot use 2 auth mechanisms, check for either Bearer token OR httpauth
+      // required in Wunder environments.
       if (preg_match('/Bearer\s(\S+)/', $auth_header, $matches)) {
-        return $matches[1];
+        // Notify Bearer token matching.
+        $bearer_token = \Drupal::state()->get('fsa_notify.bearer_token');
+        if ($bearer_token == $matches[1]) {
+          return TRUE;
+        }
+
+      }
+      elseif (preg_match('/Basic\s(\S+)/', $auth_header, $matches)) {
+        // Wunder environment httpauth matching.
+        if (base64_encode('wunder:tools') == $matches[1]) {
+          return TRUE;
+        }
       }
     }
-    return NULL;
+
+    return FALSE;
   }
 
 }
