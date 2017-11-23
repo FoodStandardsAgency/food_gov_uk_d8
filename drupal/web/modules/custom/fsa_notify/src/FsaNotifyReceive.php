@@ -65,7 +65,8 @@ class FsaNotifyReceive extends ControllerBase {
     $content = $request->getContent();
 
     // @todo: Store bearer token as configuration.
-    $bearer_token_notify = '0kZPJBYd8VxEZ4V3r0APMA';
+    $bearer_token_notify = \Drupal::state()->get('fsa_notify.bearer_token');
+
     $bearer_token_request = $this->getBearerToken($request);
 
     if ($bearer_token_request != $bearer_token_notify) {

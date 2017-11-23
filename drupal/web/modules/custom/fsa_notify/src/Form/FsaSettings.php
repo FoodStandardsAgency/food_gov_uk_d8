@@ -33,6 +33,7 @@ class FsaSettings extends FormBase {
     ];
 
     $keys = [
+      'fsa_notify.bearer_token' => t('Notify: Bearer token'),
       'fsa_notify.api' => t('Notify API: API key'),
       'fsa_notify.template_email' => t('Notify API: Template ID: Email'),
       'fsa_notify.template_sms' => t('Notify API: Template ID: Sms'),
@@ -132,6 +133,7 @@ class FsaSettings extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
     $keys = [
+      'fsa_notify.bearer_token',
       'fsa_notify.api',
       'fsa_notify.template_email',
       'fsa_notify.template_sms',
