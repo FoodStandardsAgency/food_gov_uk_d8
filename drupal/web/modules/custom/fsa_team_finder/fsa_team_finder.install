@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Installs FSA team finder.
+ */
+
+/**
+ * Implements hook_update_N().
+ */
+function fsa_team_finder_update_8001() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('fsa_team_finder.settings');
+  $config->set('mapit_api_key', 'cGEi7enM22ZPLNJmm7i1t9g0E6K6MABwHeLhKFxI');
+  $config->save(TRUE);
+}

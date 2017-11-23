@@ -1,0 +1,18 @@
+uuid: 5c22d80d-a89b-4bc7-9439-973253e057cd
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_ratings
+id: fsa_authority.field_contact_directly
+field_name: field_contact_directly
+entity_type: fsa_authority
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
