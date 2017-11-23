@@ -46,7 +46,6 @@ class FsaSettings extends FormBase {
       $form[$key2] = [
         '#type' => 'textfield',
         '#title' => $title,
-        '#required' => TRUE,
         '#default_value' => $value,
         '#weight' => $weight++,
       ];
