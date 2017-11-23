@@ -21,68 +21,12 @@ targetEntityType: fsa_authority
 bundle: fsa_authority
 mode: default
 content:
-  field_advice_url:
-    weight: 9
-    label: inline
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-    type: link
-    region: content
-  field_contact_directly:
-    weight: 8
-    label: inline
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
   field_email:
     weight: 2
     label: inline
     settings: {  }
     third_party_settings: {  }
     type: email_mailto
-    region: content
-  field_email_alt:
-    weight: 3
-    label: inline
-    settings: {  }
-    third_party_settings: {  }
-    type: email_mailto
-    region: content
-  field_email_overridden:
-    weight: 4
-    label: inline
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
-  field_mapit_area:
-    weight: 5
-    label: inline
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    type: number_integer
-    region: content
-  field_regionname:
-    weight: 6
-    label: inline
-    settings:
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_label
     region: content
   field_url:
     weight: 1
@@ -108,5 +52,11 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_advice_url: true
+  field_contact_directly: true
+  field_email_alt: true
+  field_email_overridden: true
+  field_mapit_area: true
+  field_regionname: true
   langcode: true
   user_id: true
