@@ -1,0 +1,16 @@
+uuid: 446b402d-c133-4328-8188-a73d5650a5b5
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.team_contacts
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: node.team_contacts
+target_entity_type_id: node
+target_bundle: team_contacts
+default_langcode: site_default
+language_alterable: false

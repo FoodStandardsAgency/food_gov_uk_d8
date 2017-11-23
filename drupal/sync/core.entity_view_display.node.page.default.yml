@@ -20,6 +20,7 @@ dependencies:
     - field.field.node.page.field_nation
     - field.field.node.page.field_related_content
     - field.field.node.page.field_subpages
+    - field.field.node.page.field_team_contacts
     - field.field.node.page.field_topic
     - field.field.node.page.field_update_date
     - node.type.page
@@ -102,6 +103,15 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    region: content
+  field_team_contacts:
+    weight: 9
+    label: above
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
     region: content
   field_update_date:
     weight: 1
