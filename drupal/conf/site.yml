@@ -119,6 +119,7 @@ production:
     - /var/www/fsa.prod.wunder.io/files: web/sites/default/files
 
 
+  local_commands:
     # Basic site update functionality
     build:
       - backup:
