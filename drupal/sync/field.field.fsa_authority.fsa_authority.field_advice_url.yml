@@ -1,0 +1,23 @@
+uuid: db28cee2-9ecd-472c-bc2b-a904618efba6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.fsa_authority.field_advice_url
+  module:
+    - fsa_ratings
+    - link
+id: fsa_authority.fsa_authority.field_advice_url
+field_name: field_advice_url
+entity_type: fsa_authority
+bundle: fsa_authority
+label: 'Advice page'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

@@ -1,0 +1,40 @@
+uuid: 49ee2ad6-a64f-40ef-b229-6aaac8ff2d02
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_team_contact
+    - node.type.team_contacts
+    - paragraphs.paragraphs_type.team_contact
+  module:
+    - entity_reference_revisions
+id: node.team_contacts.field_team_contact
+field_name: field_team_contact
+entity_type: node
+bundle: team_contacts
+label: 'Team contact'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      team_contact: team_contact
+    target_bundles_drag_drop:
+      team_contact:
+        enabled: true
+        weight: 5
+      liftups:
+        weight: 6
+        enabled: false
+      manual_promo:
+        weight: 7
+        enabled: false
+      subpage:
+        weight: 8
+        enabled: false
+field_type: entity_reference_revisions

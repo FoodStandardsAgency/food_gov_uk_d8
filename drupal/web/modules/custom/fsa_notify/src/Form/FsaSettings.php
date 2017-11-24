@@ -33,6 +33,7 @@ class FsaSettings extends FormBase {
     ];
 
     $keys = [
+      'fsa_notify.bearer_token' => t('Notify: Bearer token'),
       'fsa_notify.api' => t('Notify API: API key'),
       'fsa_notify.template_email' => t('Notify API: Template ID: Email'),
       'fsa_notify.template_sms' => t('Notify API: Template ID: Sms'),
@@ -45,7 +46,6 @@ class FsaSettings extends FormBase {
       $form[$key2] = [
         '#type' => 'textfield',
         '#title' => $title,
-        '#required' => TRUE,
         '#default_value' => $value,
         '#weight' => $weight++,
       ];
@@ -64,6 +64,13 @@ class FsaSettings extends FormBase {
       '#type' => 'checkbox',
       '#title' => t('Collect notifications and send out to subscribers.'),
       '#default_value' => $killswitch,
+      '#weight' => $weight++,
+    ];
+
+    $form['log_callback_errors'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Log all Notify callback errors.'),
+      '#default_value' => \Drupal::state()->get('fsa_notify.log_callback_errors'),
       '#weight' => $weight++,
     ];
 
@@ -132,6 +139,7 @@ class FsaSettings extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
     $keys = [
+      'fsa_notify.bearer_token',
       'fsa_notify.api',
       'fsa_notify.template_email',
       'fsa_notify.template_sms',
@@ -160,6 +168,16 @@ class FsaSettings extends FormBase {
     if (!empty($status_old) && empty($status_new)) {
       drupal_set_message(t('Notification system is now DISABLED.'));
     }
+
+    if (empty($form_state->getValue('log_callback_errors'))) {
+      \Drupal::state()->delete('fsa_notify.log_callback_errors');
+    }
+    else {
+      \Drupal::state()->set('fsa_notify.log_callback_errors', 1);
+    }
+
+    // Let the user know something happened.
+    drupal_set_message($this->t('Notify settings updated.'));
 
   }
 

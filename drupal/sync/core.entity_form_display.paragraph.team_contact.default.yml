@@ -1,0 +1,40 @@
+uuid: 8e56a581-2b93-43c6-883c-3ea8ee8312de
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.team_contact.field_team_contact_email
+    - field.field.paragraph.team_contact.field_team_contact_region
+    - field.field.paragraph.team_contact.field_team_contact_telephone
+    - paragraphs.paragraphs_type.team_contact
+id: paragraph.team_contact.default
+targetEntityType: paragraph
+bundle: team_contact
+mode: default
+content:
+  field_team_contact_email:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+    region: content
+  field_team_contact_region:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_team_contact_telephone:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

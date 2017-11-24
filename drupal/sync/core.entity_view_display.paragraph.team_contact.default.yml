@@ -1,0 +1,41 @@
+uuid: da1876da-3d5e-4f88-9e4e-68ab643ce462
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.team_contact.field_team_contact_email
+    - field.field.paragraph.team_contact.field_team_contact_region
+    - field.field.paragraph.team_contact.field_team_contact_telephone
+    - paragraphs.paragraphs_type.team_contact
+id: paragraph.team_contact.default
+targetEntityType: paragraph
+bundle: team_contact
+mode: default
+content:
+  field_team_contact_email:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_team_contact_region:
+    weight: 0
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_team_contact_telephone:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true

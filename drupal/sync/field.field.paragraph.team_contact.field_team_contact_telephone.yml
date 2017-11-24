@@ -1,0 +1,19 @@
+uuid: 6e330e7f-45f9-429c-be94-c365d3e71e13
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_team_contact_telephone
+    - paragraphs.paragraphs_type.team_contact
+id: paragraph.team_contact.field_team_contact_telephone
+field_name: field_team_contact_telephone
+entity_type: paragraph
+bundle: team_contact
+label: Telephone
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

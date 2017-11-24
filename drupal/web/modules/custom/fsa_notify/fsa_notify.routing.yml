@@ -5,3 +5,10 @@ fsa_notify.settings:
    _form: '\Drupal\fsa_notify\Form\FsaSettings'
  requirements:
    _permission: 'administer site configuration'
+
+fsa_notify.callback_url:
+  path: '/notify_callback'
+  defaults:
+    _controller: '\Drupal\fsa_notify\FsaNotifyReceive::sms'
+  requirements:
+    _permission: 'access content'

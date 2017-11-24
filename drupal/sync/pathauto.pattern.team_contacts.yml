@@ -1,0 +1,22 @@
+uuid: e2917614-e5b0-4383-9d2a-0c8dadc71a93
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: team_contacts
+label: 'Team contacts'
+type: 'canonical_entities:node'
+pattern: 'team-contacts/[node:title]'
+selection_criteria:
+  9bfd0826-79cf-4806-8ac6-0889db5d2ca6:
+    id: node_type
+    bundles:
+      team_contacts: team_contacts
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 9bfd0826-79cf-4806-8ac6-0889db5d2ca6
+selection_logic: and
+weight: -5
+relationships: {  }

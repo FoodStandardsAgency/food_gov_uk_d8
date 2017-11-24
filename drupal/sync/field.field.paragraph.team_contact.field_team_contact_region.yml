@@ -1,0 +1,29 @@
+uuid: 7ac9662c-bca3-4355-9efb-78b015c99e43
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_team_contact_region
+    - paragraphs.paragraphs_type.team_contact
+    - taxonomy.vocabulary.nation
+id: paragraph.team_contact.field_team_contact_region
+field_name: field_team_contact_region
+entity_type: paragraph
+bundle: team_contact
+label: Region
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      nation: nation
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

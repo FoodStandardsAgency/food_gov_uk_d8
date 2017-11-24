@@ -1,0 +1,24 @@
+uuid: 74aa6c22-b23d-475c-a6a0-eaabe06ab062
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.fsa_authority.field_contact_directly
+  module:
+    - fsa_ratings
+id: fsa_authority.fsa_authority.field_contact_directly
+field_name: field_contact_directly
+entity_type: fsa_authority
+bundle: fsa_authority
+label: 'Contact directly'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

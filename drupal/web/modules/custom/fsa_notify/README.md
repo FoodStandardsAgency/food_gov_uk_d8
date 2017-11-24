@@ -159,6 +159,13 @@ Chunking is used to prevent Drupal cache saturation subsequent OOM event.
 
 Everything here revolves around field `user.field_notification_cache`.
 
+## Notify Callback
+
+SMS sent to Notify number +44(0)7860064543 creates a callback defined in [Notify settings](https://www.notifications.service.gov.uk/services/6f00837a-4b8f-4ddd-ae96-ca2d3035fe57/service-settings/set-inbound-api)
+
+* `fsa_notify.callback_url` route defines the callback.
+   * `sms()` takes the SMS body and takes required actions.
+
 ## Testing
 
 Use `Makefile` in `fsa_notify/testing` directory.
@@ -172,7 +179,7 @@ Use `Makefile` in `fsa_notify/testing` directory.
   * Or use `make alert_add` to add arbitrary nonsense-alert
 * Run `make test`
   * Have `drush wd-show --tail --full --extended &` open in another tab
-* See message log at https://www.notifications.service.gov.uk/services/6f00837a-4b8f-4ddd-ae96-ca2d3035fe57/api
+* View the message logs at [Notify api tab](https://www.notifications.service.gov.uk/services/6f00837a-4b8f-4ddd-ae96-ca2d3035fe57/api)
 
 ## Files in this module
 
@@ -210,6 +217,9 @@ Use `Makefile` in `fsa_notify/testing` directory.
   * Basic stats
 * `src/Plugin/QueueWorker/FsaNotifyStorageQueue.php`
   * Item processing (storing / distributing)  
+* `src/FsaNotifyReceive.php`
+  * Notify SMS callback for processing the requests
+    * Unsubscribing feature.
 
 ## Related modules and packages
 

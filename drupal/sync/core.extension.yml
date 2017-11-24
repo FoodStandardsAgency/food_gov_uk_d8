@@ -52,6 +52,7 @@ module:
   fsa_subpages: 0
   fsa_team_finder: 0
   fsa_translate: 0
+  fsa_webform_validation: 0
   geolocation: 0
   help: 0
   hierarchical_term_formatter: 0

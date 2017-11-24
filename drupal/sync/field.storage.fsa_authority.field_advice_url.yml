@@ -1,0 +1,19 @@
+uuid: f1b96217-df2b-4018-b954-9aa1f9cc8d72
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_ratings
+    - link
+id: fsa_authority.field_advice_url
+field_name: field_advice_url
+entity_type: fsa_authority
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

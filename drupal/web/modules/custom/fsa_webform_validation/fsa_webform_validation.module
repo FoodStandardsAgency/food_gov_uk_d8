@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Adds custom webform validation.
+ *
+ * @see https://www.drupal.org/docs/8/modules/webform/webform-cookbook/how-to-add-custom-validation-to-a-webform-element
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_webform_element_alter().
+ */
+function fsa_webform_validation_webform_element_alter(array &$element, FormStateInterface $form_state, array $context) {
+  $form_ids = [
+    'foreign_object--fsa_establishment_postal_code',
+    'poor_hygiene_practices--fsa_establishment_postal_code',
+    'food_poisoning--fsa_establishment_postal_code',
+  ];
+  if (in_array($element['#webform_id'], $form_ids)) {
+    $element['#element_validate'][] = [
+      'Drupal\fsa_webform_validation\Validate\FsaWebformValidationValidate',
+      'validate',
+    ];
+  }
+}
