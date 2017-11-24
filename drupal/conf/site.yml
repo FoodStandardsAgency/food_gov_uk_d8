@@ -126,6 +126,7 @@ production:
          ignore:
           - builds
           - files
+      - shell: chmod -R a+w web
       - make
       - shell: chmod -R a-w web
       - shell: rsync -az . 10.2.3.18:/var/www/fsa.prod.wunder.io/current
