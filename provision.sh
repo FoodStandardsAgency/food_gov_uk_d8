@@ -42,7 +42,7 @@ self_update() {
   fi
 
   SELF=$(basename $0)
-  UPDATEURL="https://raw.githubusercontent.com/wunderkraut/WunderTools/$GITBRANCH/provision.sh"
+  UPDATEURL="https://raw.githubusercontent.com/wunderio/WunderTools/$GITBRANCH/provision.sh"
   MD5SELF=$($MD5COMMAND $0 | awk '{print $1}')
   MD5LATEST=$(curl -s $UPDATEURL | $MD5COMMAND | awk '{print $1}')
   if [[ "$MD5SELF" != "$MD5LATEST" ]]; then
@@ -77,7 +77,6 @@ self_update() {
   # Do this for everything else than local vagrant provisioning
   if [ "$ENVIRONMENT" != "vagrant" ] && [ "$wundersecrets_remote" != "" ]; then
     # Set defaults for WunderSecrets
-    export wundersecrets_path=$ROOT/secrets
     export wundersecrets_branch=${wundersecrets_branch-master}
 
     # Clone and update virtual environment secrets
@@ -108,6 +107,7 @@ else
   GITBRANCH=$wundertools_branch
 fi
 
+export wundersecrets_path=$ROOT/secrets
 
 self_update
 
@@ -160,7 +160,7 @@ popd > /dev/null
 PLAYBOOKPATH=$ROOT/conf/$ENVIRONMENT.yml
 if [ "$ENVIRONMENT" == "vagrant" ]; then
   INVENTORY=$ROOT/.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory
-  VAGRANT_CREDENTIALS="--private-key=.vagrant/machines/default/virtualbox/private_key -u vagrant"
+  VAGRANT_CREDENTIALS="--private-key=.vagrant/machines/default/virtualbox/private_key -u vagrant -e 'host_key_checking=False'"
 else
   INVENTORY=$ROOT/conf/server.inventory
 fi
@@ -198,6 +198,11 @@ if [ ! $SKIP_REQUIREMENTS ] ; then
   fi
 fi
 
+# Install ansible-galaxy roles
+if [ -f $ROOT/conf/requirements.yml ]; then
+  ansible-galaxy install -r $ROOT/conf/requirements.yml
+fi
+
 # Setup&Use WunderSecrets if the additional config file exists
 if [ -f $wundersecrets_path/ansible.yml ]; then
   WUNDER_SECRETS="--extra-vars=@$wundersecrets_path/ansible.yml"
@@ -212,14 +217,13 @@ fi
 
 if [ $FIRST_RUN ]; then
   if [ -z $MYSQL_ROOT_PASS ]; then
-    echo "Mysql root password missing. You need to provide password using -m flag."
-    exit 1
+    ansible-playbook $EXTRA_OPTS $PLAYBOOKPATH $WUNDER_SECRETS -c ssh -i $INVENTORY -e "@$EXTRA_VARS"  -e "first_run=True" --vault-password-file=$VAULT_FILE $ANSIBLE_TAGS
   else
-    ansible-playbook $EXTRA_OPTS $PLAYBOOKPATH $WUNDER_SECRETS -c ssh -i $INVENTORY -e "@$EXTRA_VARS"  -e "change_db_root_password=True mariadb_root_password=$MYSQL_ROOT_PASS first_run=True" --ask-pass --vault-password-file=$VAULT_FILE $ANSIBLE_TAGS
+    ansible-playbook $EXTRA_OPTS $PLAYBOOKPATH $WUNDER_SECRETS -c ssh -i $INVENTORY -e "@$EXTRA_VARS"  -e "change_db_root_password=True mariadb_root_password=$MYSQL_ROOT_PASS first_run=True" --vault-password-file=$VAULT_FILE $ANSIBLE_TAGS
   fi
 else
   if [ $ANSIBLE_TAGS ]; then
-    ansible-playbook $EXTRA_OPTS $VAGRANT_CREDENTIALS $PLAYBOOKPATH $WUNDER_SECRETS -c ssh -i $INVENTORY -e "@$EXTRA_VARS" --vault-password-file=$VAULT_FILE --tags "$ANSIBLE_TAGS"
+    ansible-playbook $EXTRA_OPTS $VAGRANT_CREDENTIALS $PLAYBOOKPATH $WUNDER_SECRETS -c ssh -i $INVENTORY -e "@$EXTRA_VARS" --vault-password-file=$VAULT_FILE --tags "common,$ANSIBLE_TAGS"
   elif [ $ANSIBLE_SKIP_TAGS ]; then
     ansible-playbook $EXTRA_OPTS $VAGRANT_CREDENTIALS $PLAYBOOKPATH $WUNDER_SECRETS -c ssh -i $INVENTORY -e "@$EXTRA_VARS" --vault-password-file=$VAULT_FILE --skip-tags "$ANSIBLE_SKIP_TAGS"
   else

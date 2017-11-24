@@ -1,82 +1,182 @@
 ---
 
+project_name: FSA
+
+support_email: fi.support@wunder.io
+
 innodb_buffer_pool_size: "{{ memory_db }}"
 
 php_memory_limit: 256 # In MB "256MB ought to be enough for anyone." -Bill Gates
 
+# Estimated average memory usage per process
+# Use `ps --no-headers -o "rss,cmd" -C php-fpm | awk '{ sum+=$1 } END { printf ("%d%s\n", sum/NR/1024,"Mb") }'` to get the average
+php_app_memory_usage_average: 64
+
 # Following values are highly dependand on server resources so we just calculate suitable values for them here.
-php_fpm_pm_max_children: "{{ memory_app // php_memory_limit }}"
+php_fpm_pm_max_children: "{{ memory_app // php_app_memory_usage_average }}"
 php_fpm_pm_start_servers: "{{ php_fpm_pm_max_children|int // 2 }}"
 php_fpm_pm_min_spare_servers: "{{ php_fpm_pm_max_children|int // 2 }}"
 php_fpm_pm_max_spare_servers: "{{ php_fpm_pm_max_children|int // 2 }}"
 
-nginx_workers: "{{ ansible_processor_vcpus }}" # This should be equal to core count
+base_pubkeys_url: https://{{ base_pubkeys_host }}/auth?hostname={{ ansible_nodename }}
+base_addhost_url: https://{{ base_pubkeys_host }}/auth/add_server?hostname={{ ansible_nodename }}
 
-# Add database information for php
-php_env_vars_include_db: True
+partition_var_log: False
+partition_var_lib_mysql: False
 
 # PHP version to be used. Available options: php56u, php70u
-php_package: "php70u"
+php_package: "php71u"
+
+drush: {
+  version: "8.*",
+}
+
+drush_use_launcher: True
+php_env_vars_include_db: True
 
 # Variables to create/update UpCloud Servers
-upcloud_server_hostname_base_domain: fsa.lon.wunder.io
-upcloud_project_name: FSA
+upcloud_project_name: "{{ project_name }}"
+#upcloud_server_admin_ssh_keys:
+
+upcloud_zone: uk-lon1
 
 # These are the specifications for servers in this project
 upcloud_server_spec_list:
-  - group: stage
+  - group: prod-front
+    # This can be used to add these machines into multiple groups
+    secondary_groups:
+      - prod
     members:
-      - { name: web1, state: present }
+      - { name: 1, state: present }
+      - { name: 2, state: present }
     settings:
       plan: 4xCPU-4GB
-      zone: uk-lon1 #can be de-fra1, fi-hel1 too
+      zone: "{{ upcloud_zone }}"
       # Allows ansible to reboot the machine when making changes to the disks
       allow_reboot_on_resize: true
       storage_devices:
         - title: root
-          size: 100
           os: CentOS 7.0
-          backup_rule: { interval: daily, time: '0430', retention: 14 }
+          size: 50
         - title: logs
           size: 10
           mount:
             path: /var/log
             fstype: ext4
-            opts: noatime
-        - title: database
+            opts: defaults,noatime
+  - group: prod-lb
+    secondary_groups:
+      - prod
+      - firewall_web
+    members:
+      - { name: 1, state: present }
+    settings:
+      plan: 4xCPU-4GB
+      zone: "{{ upcloud_zone }}"
+      # Allows ansible to reboot the machine when making changes to the disks
+      allow_reboot_on_resize: true
+      storage_devices:
+        - title: root
+          os: CentOS 7.0
+          size: 50
+        - title: logs
           size: 10
+          mount:
+            path: /var/log
+            fstype: ext4
+            opts: defaults,noatime
+  - group: prod-db
+    secondary_groups:
+      - prod
+    members:
+      - { name: 1, state: present }
+    settings:
+      plan: 6xCPU-8GB
+      zone: "{{ upcloud_zone }}"
+      # Allows ansible to reboot the machine when making changes to the disks
+      allow_reboot_on_resize: true
+      storage_devices:
+        - title: root
+          os: CentOS 7.0
+          size: 50
+        - title: logs
+          size: 10
+          mount:
+            path: /var/log
+            fstype: ext4
+            opts: defaults,noatime
+        - title: nfs
+          size: 100
+          mount:
+            path: /nfs-files
+            fstype: ext4
+            opts: defaults,noatime
+          backup_rule: { interval: daily, time: '0330', retention: 7 }
+        - title: database
+          size: 30
           mount:
             path: /var/lib/mysql
             fstype: ext4
             # Options for mysql performance
             # These are the same as Mozilla is using for their mysql servers: https://bugzilla.mozilla.org/show_bug.cgi?id=874039
             opts: defaults,noatime,data=writeback,barrier=0,dioread_nolock
-          backup_rule: { interval: daily, time: '0430', retention: 14 }
-  - group: develop
-    members:
-      - { name: web1, state: present }
-    settings:
-      plan: 4xCPU-4GB
-      zone: uk-lon1 #can be de-fra1, fi-hel1 too
-      # Allows ansible to reboot the machine when making changes to the disks
-      allow_reboot_on_resize: true
-      storage_devices:
-        - title: root
-          size: 100
-          os: CentOS 7.0
-          backup_rule: { interval: daily, time: '0430', retention: 14 }
-        - title: logs
-          size: 10
-          mount:
-            path: /var/log
-            fstype: ext4
-            opts: noatime
-        - title: database
-          size: 10
-          mount:
-            path: /var/lib/mysql
-            fstype: ext4
-            # Options for mysql performance
-            # These are the same as Mozilla is using for their mysql servers: https://bugzilla.mozilla.org/show_bug.cgi?id=874039
-            opts: defaults,noatime,data=writeback,barrier=0,dioread_nolock
-          backup_rule: { interval: daily, time: '0430', retention: 14 }
+  #- group: stage
+    #secondary_groups:
+      #- firewall_web
+    #members:
+      #- { name: web1, state: present }
+    #settings:
+      #plan: 4xCPU-4GB
+      #zone: de-fra1
+      ## Allows ansible to reboot the machine when making changes to the disks
+      #allow_reboot_on_resize: true
+      #storage_devices:
+        #- title: root
+          #size: 100
+          #os: CentOS 7.0
+          #backup_rule: { interval: daily, time: '0430', retention: 14 }
+        #- title: logs
+          #size: 10
+          #mount:
+            #path: /var/log
+            #fstype: ext4
+            #opts: noatime
+        #- title: database
+          #size: 10
+          #mount:
+            #path: /var/lib/mysql
+            #fstype: ext4
+            ## Options for mysql performance
+            ## These are the same as Mozilla is using for their mysql servers: https://bugzilla.mozilla.org/show_bug.cgi?id=874039
+            #opts: defaults,noatime,data=writeback,barrier=0,dioread_nolock
+          #backup_rule: { interval: daily, time: '0430', retention: 14 }
+  #- group: develop
+    #secondary_groups:
+      #- firewall_web
+    #members:
+      #- { name: web1, state: present }
+    #settings:
+      #plan: 4xCPU-4GB
+      #zone: de-fra1
+      ## Allows ansible to reboot the machine when making changes to the disks
+      #allow_reboot_on_resize: true
+      #storage_devices:
+        #- title: root
+          #size: 100
+          #os: CentOS 7.0
+          #backup_rule: { interval: daily, time: '0430', retention: 14 }
+        #- title: logs
+          #size: 10
+          #mount:
+            #path: /var/log
+            #fstype: ext4
+            #opts: noatime
+        #- title: database
+          #size: 10
+          #mount:
+            #path: /var/lib/mysql
+            #fstype: ext4
+            ## Options for mysql performance
+            ## These are the same as Mozilla is using for their mysql servers: https://bugzilla.mozilla.org/show_bug.cgi?id=874039
+            #opts: defaults,noatime,data=writeback,barrier=0,dioread_nolock
+          #backup_rule: { interval: daily, time: '0430', retention: 14 }

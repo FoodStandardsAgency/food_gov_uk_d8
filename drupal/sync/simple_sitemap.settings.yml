@@ -1,5 +1,5 @@
 max_links: 2000
-cron_generate: true
+cron_generate: false
 cron_generate_interval: 0
 remove_duplicates: true
 skip_untranslated: false
