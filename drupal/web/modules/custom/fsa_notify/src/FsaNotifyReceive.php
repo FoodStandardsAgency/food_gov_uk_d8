@@ -4,6 +4,7 @@ namespace Drupal\fsa_notify;
 
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\user\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -97,6 +98,7 @@ class FsaNotifyReceive extends ControllerBase {
 
     if (!empty($params)) {
       // Log the succesful event with message values.
+      // @todo: log the unsubscribe.
       \Drupal::logger('fsa_notify')->info(
         $this->t('Notify callback: Received SMS from @source_number.<br />Message body:<pre>@params</pre>',
           [
@@ -106,9 +108,18 @@ class FsaNotifyReceive extends ControllerBase {
         )
       );
 
+      $msg = '';
+      $sms_message = $params['message'];
+      $stop = preg_match("#^STOP(.*)$#i", $sms_message);
+      if ($stop) {
+
+        $values = ltrim($sms_message, 'STOP ');
+        $msg = $this->unsubscribeFromAlerts($params['source_number'], $values);
+      }
+
       return new JsonResponse([
         'status' => 'ok',
-        'message' => $this->t('Received SMS'),
+        'message' => $msg,
         'uuid' => $params['id'],
       ]);
     }
@@ -125,6 +136,81 @@ class FsaNotifyReceive extends ControllerBase {
         'message' => $error_msg,
       ]);
     }
+
+  }
+
+  /**
+   * Unsubscribe user from alerts.
+   *
+   * @param string $phone
+   *   Phone number to unsibscribe.
+   * @param string $values
+   *   That to unsubscribe from.
+   *
+   * @return string
+   *   .
+   */
+  public function unsubscribeFromAlerts($phone, $values) {
+    $message = '';
+
+    // Match the phone number with stored format.
+    // @todo: consider all cases of different formats.
+    $phone = '+' . $phone;
+
+    $values = explode(' ', $values);
+
+    // Get what to unsubscribe from.
+    if (count($values) >= 1) {
+      // If user passed id's only.
+      $unsubscribe = 'ids';
+    }
+    else {
+      foreach ($values as $value) {
+        if ($value == 'all') {
+          $unsubscribe = $value;
+          break;
+        }
+      }
+    }
+
+    // Get user(s) with phone number from the callback.
+    $query = \Drupal::entityQuery('user');
+    $query->condition('uid', 0, '>');
+    $query->condition('status', 1);
+    $query->condition('field_notification_sms', $phone, '=');
+    $uids = $query->execute();
+
+    // Could match multiple users since phone number is not unique field.
+    foreach ($uids as $uid) {
+      $user = User::load($uid);
+
+      // Unsubscribe from all notifications.
+      switch ($unsubscribe) {
+        case 'all':
+          $user->field_subscribed_notifications->setValue([]);
+          $user->save();
+          $message = 'Unsubscribed ' . $uid . ' from all alerts';
+          break;
+
+        case 'ids':
+          $tids = '';
+          foreach ($values as $tid) {
+            $tids .= $tid;
+            if (!is_numeric($tid)) {
+              // @todo: Get term by name.
+            }
+
+            // @todo: unsubscribe from defined alerts.
+
+          }
+
+          $message = 'Unsubscribed user ' . $uid . ' from ' . $tids . ' alerts';
+          break;
+
+      }
+    }
+
+    return $message;
 
   }
 
