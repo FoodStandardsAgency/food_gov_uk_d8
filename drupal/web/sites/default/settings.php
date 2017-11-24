@@ -78,9 +78,9 @@ $config['config_split.config_split.dev']['status'] = FALSE;
 
 $env = getenv('WKV_SITE_ENV');
 switch ($env) {
-  case 'production':
+  case 'prod':
 		$settings['simple_environment_indicator'] = '#d4000f Production';
-    $settings['file_private_path'] = '/var/www/fsa.prod.wunder.io/files-privates';
+    $settings['file_private_path'] = '/var/www/fsa.prod.wunder.io/private-files';
 	break;
   case 'dev':
     $settings['simple_environment_indicator'] = '#004984 Development';
