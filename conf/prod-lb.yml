@@ -123,6 +123,18 @@
     # or disable them completely
     #nginx_disable_content_security_policy: True
     # Also affects sslterminator
+    # On dev and stage it's good idea to protect the site with htauth
+    basicauth_enabled: True
+    basicauth_username: wunder
+    basicauth_password: tools
+    # Basic auth can also be disabled for certain ip's
+    basicauth_ip:
+      - address: 84.20.132.177
+      - address: 87.94.15.10
+      - address: 94.237.27.124
+      - address: 94.237.33.88
+      - address: 83.136.248.231
+
 
 
     ## Sslterminator ##
