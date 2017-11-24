@@ -98,6 +98,12 @@
 
 .establishment__authority-label {
   display: inline-block;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+
+  @media (--breakpoint-md) {
+    width: 10em;
+  }
 }
 
 .establishment__authority-content {
