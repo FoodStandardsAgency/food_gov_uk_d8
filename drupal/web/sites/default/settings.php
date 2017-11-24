@@ -14,7 +14,7 @@ $databases['default']['default'] = array (
   'username' => getenv('DB_USER_DRUPAL'),
   'password' => getenv('DB_PASS_DRUPAL'),
   'prefix' => '',
-  'host' => 'localhost',
+  'host' => getenv('DB_HOST_DRUPAL'),
   'port' => '3306',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',
@@ -80,6 +80,7 @@ $env = getenv('WKV_SITE_ENV');
 switch ($env) {
   case 'production':
 		$settings['simple_environment_indicator'] = '#d4000f Production';
+    $settings['file_private_path'] = '/var/www/fsa.prod.wunder.io/files-private';
 	break;
   case 'dev':
     $settings['simple_environment_indicator'] = '#004984 Development';
@@ -108,6 +109,7 @@ $settings['trusted_host_patterns'] = [
   'food\.gov\.uk$',
   'fsa\.dev\.wunder\.io$',
   'fsa\.stage\.wunder\.io$',
+  'fsa\.prod\.wunder\.io$',
 ];
 
 /**
