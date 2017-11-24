@@ -13,6 +13,6 @@ general_settings:
     unified_fields:
       enabled: true
       weight: 2
-  visual_inline_theme: default
+  visual_inline_theme: admin
 _core:
   default_config_hash: oXwX3NzLv9QK_LbNEvpQ9OPwH9tqtMSJzq5y8t63Q8w
