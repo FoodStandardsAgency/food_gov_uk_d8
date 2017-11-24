@@ -1,6 +1,7 @@
 ---
 
-- hosts: wundertools-prod-db
+- hosts: prod-db
+  user: root
   roles:
    - { role: base, tags: [ 'base' ] }
    - { role: papertrail, tags: [ 'papertrail' ] }
@@ -8,7 +9,7 @@
    - { role: dbserver, tags: [ 'dbserver' ] }
    - { role: drupal-db, tags: [ 'drupal-db' ] }
    #- { role: solr, tags: [ 'solr' ] }
-   - { role: fsa_elasticsearch, tags: [ 'elasticsearch' ] }
+   - { role: elasticsearch, tags: [ 'elasticsearch' ] }
    - { role: nfs_server, tags: [ 'nfs_server' ] }
    - { role: monit, tags: [ 'monit' ] }
    - { role: newrelic-infra, tags: [ 'newrelic-infra' ] }
@@ -16,37 +17,25 @@
 
   tasks:
 
+  vars_files:
+  - prod-vars.yml
 
   vars:
     ## Base ##
 
-    # /var/log on it's own partition
-    partition_var_log: False
-    partition_var_lib_mysql: False
-    # On Upcloud we usually get /dev/vdb for logs, but this may vary so you can define the disk here
-    #var_log_disk: /dev/vdb
-
-    # We want to manage our server access with public key authentication server
-    #base_pubkeys_enable: True
-    # key server is configured in prod-vars.yml
-
     # On default we disable iptables but we want option to keep it on for customer-servers without external firewall
     #disable_iptables: True
-
 
     ## Backups ##
 
     backup_db_name:
-      - example1
-      - example2
+      - drupal
+
     backup_location: /nfs-files/backups
 
     ## DB server ##
 
     memory_db: 4096 # In MB
-
-    partition_var_lib_mysql: True
-    var_lib_mysql_disk: /dev/vdd
 
     # Additional mysql configs available
     #max_connections: 500
@@ -62,30 +51,8 @@
 
     #innodb_buffer_pool_size configured in variables.yml based on memory_db
 
-
     ## Drupal DB ##
-
-    databases:
-      - name: example1
-        user: example1user
-        # defined in prod-vars.yml
-        pass: "{{ drupal_db1_password }}"
-        hosts:
-          - "127.0.0.1"
-          - "::1"
-          - "localhost"
-          - "{{ front1_ip }}"
-          - "{{ front2_ip }}"
-      - name: example2
-        user: example2user
-        # defined in prod-vars.yml
-        pass: "{{ drupal_db2_password }}"
-        hosts:
-          - "127.0.0.1"
-          - "::1"
-          - "localhost"
-          - "{{ front1_ip }}"
-          - "{{ front2_ip }}"
+    # Defined in production.yml
 
 
     ## Solr ##
@@ -97,7 +64,7 @@
 
     ## Nfs server ##
 
-    partition_nfs_share: True
+    partition_nfs_share: False
     nfs_share_disk: /dev/vdc
 
     nfs_exports:
@@ -107,9 +74,9 @@
 
     ## Monit ##
     monit_enabled: True
-    monit_alert_email_service_name: "wundertools db {{ ansible_nodename }}"
-    monit_alert_email_from: "alert@wundertools.com"
-    monit_alert_email_to: alert@wundertools.com
+    monit_alert_email_service_name: "{{ project_name }} db {{ ansible_nodename }}"
+    monit_alert_email_from: "{{ support_email }}"
+    monit_alert_email_to: "{{ support_email }}"
     monit_allow:
       - localhost
       - user:password
@@ -137,4 +104,4 @@
     newrelic_infra_enabled: True
     # newrelic_license_key defined in prod_vars.yml
 
-    elasticsearch_heap_size: 1g
+

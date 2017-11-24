@@ -116,6 +116,7 @@
       - name: drupal
         user: drupal
         pass: "{{ drupal_db_password }}"
+        host: localhost
         hosts:
           - "127.0.0.1"
           - "::1"
