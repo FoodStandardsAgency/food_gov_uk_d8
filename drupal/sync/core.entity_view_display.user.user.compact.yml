@@ -19,6 +19,7 @@ hidden:
   entity_print_view_word_docx: true
   field_notification_cache: true
   field_notification_method: true
+  field_notification_sms: true
   field_subscribed_notifications: true
   langcode: true
   member_for: true

@@ -116,36 +116,28 @@ production:
 
   # Prod environment only symlinks files
   link:
-    - conf/settings.production.php: web/sites/default/settings.local.php
-    - conf/settings.global.php: web/sites/default/settings.global.php
-    - /var/www/fsa/files: web/sites/default/files
+    - /var/www/fsa.prod.wunder.io/files: web/sites/default/files
+
 
   local_commands:
-    create:
-      - shell: echo "Creating a new installation should only be done in local environments."
-
-    reset:
-      - verify: "Type yes to verify you want to reset your local environment: "
-      - backup:
-         ignore:
-          - builds
-      - make
-      - drush: site-install config_installer
-      - cleanup
-
-
     # Basic site update functionality
     build:
       - backup:
          ignore:
           - builds
+          - files
+      - shell: chmod -R a+w web
       - make
+      - shell: chmod -R a-w web
+      - shell: rsync -az . 10.2.3.18:/var/www/fsa.prod.wunder.io/current
 
     update:
       - drush: updb -y
       - drush: cim -y
       - drush: entity-updates -y
+      - drush: cr -y
       - cleanup
-      - shell: chmod -R a-w current
-      - shell: sudo systemctl restart nginx php-fpm varnish
+      - shell: sudo systemctl restart nginx php-fpm memcached
+      - shell: sudo systemctl -H 10.2.3.18 restart nginx php-fpm memcached
+      - shell: sudo systemctl -H 10.2.5.150 restart varnish
 
