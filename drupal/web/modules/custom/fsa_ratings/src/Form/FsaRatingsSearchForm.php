@@ -116,7 +116,7 @@ class FsaRatingsSearchForm extends FormBase {
 
     $form['advanced'] = [
       '#type' => 'item',
-      '#prefix' => '<div class="toggle-content js-toggle-content' . $is_open . '" id="collapsible-12345zxcv">',
+      '#prefix' => '<div class="toggle-content ratings__advanced-search-content js-toggle-content' . $is_open . '" id="collapsible-12345zxcv">',
       '#suffix' => '</div>',
       '#attributes' => [
         'class' => [
