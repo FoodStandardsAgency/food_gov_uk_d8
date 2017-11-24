@@ -119,22 +119,17 @@ a {
   text-decoration: none;
 }
 
-.field__body {
-
-}
-
-.theme--help-centre .field__body {
-  @mixin responsive-declaration padding-top, 1em, 2em;
-  @mixin responsive-declaration padding-bottom, 1em, 2em;
-}
-
-
 .field__body a {
   text-decoration: underline;
 }
 
 :--not-touch .field__body a:--enter {
   color: var(--darker-primary-color);
+}
+
+.theme--help-centre .field__body {
+  @mixin responsive-declaration padding-top, 1em, 2em;
+  @mixin responsive-declaration padding-bottom, 1em, 2em;
 }
 
 /*a:not(.block-link) {
@@ -248,18 +243,22 @@ table caption:not(:last-child) {
 }
 
 /*Content List styles*/
+.ratings__content ol,
 .field__body ol {
   padding-left: 0;
 }
 
+.ratings__content ol li:not(:last-child),
 .field__body ol li:not(:last-child) {
   margin-bottom: 1em;
 }
 
+.ratings__content ul,
 .field__body ul {
   padding-left: 0;
 }
 
+.ratings__content ul li,
 .field__body ul li {
   position: relative;
   @mixin responsive-declaration padding-left, 1.3em, 1.5em;
@@ -272,10 +271,12 @@ table caption:not(:last-child) {
   }
 }
 
+.ratings__content ul li:not(:last-child),
 .field__body ul li:not(:last-child) {
   margin-bottom: 0.5em;
 }
 
+.ratings__content ul li:after,
 .field__body ul li:after {
   content: "";
   display: block;
@@ -290,6 +291,8 @@ table caption:not(:last-child) {
   box-shadow: inset 0em 0em 0em 2px var(--primary-color);
 }
 
+.ratings__content ol ol,
+.ratings__content ul ul,
 .field__body ol ol,
 .field__body ul ul {
   margin-top: 0.5em;
@@ -328,6 +331,7 @@ table caption:not(:last-child) {
 label {
   font-size: 0.8em;
   text-transform: uppercase;
+  font-weight: 700;
   margin-bottom: 0.5em;
   display: block;
 }
@@ -346,12 +350,16 @@ fieldset {
   }
 }
 
+.fieldset-legend {
+  font-weight: 700;
+}
+
 input, textarea, select {
   font-family: var(--font-family-content);
   display: block;
   max-width: 100%;
   font-size: 1em;
-  padding: 0.5em;
+  padding: 0.5em 1em;
   border-radius: 0em;
   background-color: var(--color-white);
   border: 0;
@@ -406,7 +414,7 @@ input[type="checkbox"] {
 
 input[type="radio"]:focus + label,
 input[type="checkbox"]:focus + label {
-  box-shadow: inset 0em 0em 0em 2px var(--primary-color);
+  box-shadow: inset 0em 0em 0em 1px var(--primary-color);
 }
 
 input[type="radio"] + label,
@@ -414,6 +422,7 @@ input[type="checkbox"] + label {
   position: relative;
   text-transform: none;
   font-size: 1em;
+  font-weight: 400;
   padding-left: calc(1em + 1em);
   padding-left: 38px;
   padding-top: 0.3em;
@@ -439,13 +448,17 @@ input[type="checkbox"] + label:after  {
 input[type="radio"] {
   & + label:before {
     border-radius: 1em;
-    box-shadow: inset 0em 0em 0em 2px currentColor;
+    box-shadow: inset 0em 0em 0em 1px currentColor;
   }
 
   & + label:after {
     border-radius: 50%;
-    box-shadow: inset 0em 0em 0em 2px var(--primary-color);
+    box-shadow: inset 0em 0em 0em 1px var(--primary-color);
     opacity: 0;
+  }
+
+  &:checked + label {
+    font-weight: 600;
   }
 
   &:checked + label:after {
@@ -457,16 +470,19 @@ input[type="radio"] {
 
 input[type="checkbox"] {
   & + label:before {
-    box-shadow: inset 0em 0em 0em 2px currentColor;
-    border-radius: 0.15em;
+    box-shadow: inset 0em 0em 0em 1px currentColor;
   }
 
   & + label:after {
-background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='12px' height='10px' viewBox='0 0 12 10' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Symbols' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='Checkbox-selected' transform='translate%28-4.000000, -5.000000%29' fill='%23FFFFFF'%3E%3Cpolygon id='Page-1' points='14.2341772 5 8.64248101 11.1189694 5.57594937 8.40159604 4 10.335509 7.94936709 13.8264412 8.82278481 14.6 9.62025316 13.7371685 16 6.75530417'%3E%3C/polygon%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='12px' height='10px' viewBox='0 0 12 10' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Symbols' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='Checkbox-selected' transform='translate%28-4.000000, -5.000000%29' fill='%23FFFFFF'%3E%3Cpolygon id='Page-1' points='14.2341772 5 8.64248101 11.1189694 5.57594937 8.40159604 4 10.335509 7.94936709 13.8264412 8.82278481 14.6 9.62025316 13.7371685 16 6.75530417'%3E%3C/polygon%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     background-size: 70% 70%;
     background-position: 50%;
     background-repeat: no-repeat;
     opacity: 0;
+  }
+
+  &:checked + label {
+    font-weight: 600;
   }
 
   &:checked + label:before {
