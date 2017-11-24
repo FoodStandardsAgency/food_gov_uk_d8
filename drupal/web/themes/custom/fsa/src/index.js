@@ -7,6 +7,7 @@ import stickyElement from './core/helper/stickyElement';
 import toggleContent from './core/helper/toggleContent';
 import toc from './core/helper/toc';
 import mobileMenu from './core/helper/mobile-menu';
+import subNavigation from './core/helper/subNavigation';
 import regionalVariation from './core/helper/regionalVariation';
 import printPage from './core/helper/printPage';
 import peek from './component/parallax/parallax';
@@ -64,6 +65,12 @@ const profileElement = document.getElementById('block-myprofile');
 if (profileElement != null) {
   const profileElementArray = [...document.getElementById('block-myprofile').children];
   toggleContent(profileElementArray[0], breakpoints, profileElementArray[2]);
+}
+
+// Subnavigation
+const subNavigationElement = document.getElementById('block-menu-help-secondary');
+if (subNavigationElement != null) {
+  subNavigation(subNavigationElement);
 }
 
 // Table of contents

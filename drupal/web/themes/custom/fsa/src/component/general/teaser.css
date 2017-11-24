@@ -94,8 +94,7 @@
 }
 
 .latest-block .views-row-wrapper > .views-row,
-.promo__item,
-.liftup__item {
+.promo__item {
   @mixin responsive-declaration margin-left, 1em, 1.5em;
   @mixin responsive-declaration margin-bottom, 1em, 1.5em;
   flex: 1 1 1;
@@ -114,6 +113,13 @@
   }
 }
 
+.liftup__item {
+  @mixin responsive-declaration margin-left, 1em, 1.5em;
+  @mixin responsive-declaration margin-bottom, 1em, 1.5em;
+  flex: 1 1 1;
+  width: 100%;
+}
+
 .theme--news-alerts .liftup__item,
 .latest-block .views-row-wrapper > .views-row,
 .theme--news-alerts .promo__item,
@@ -130,14 +136,55 @@
 
 /*Teaser item*/
 .latest-block .views-row-wrapper > .views-row,
-.promo__item,
-.node-teaser {
+.promo__item {
   display: block;
   background-color: var(--color-white);
   box-shadow: var(--box-shadow);
   transition: box-shadow var(--transition-enter);
   color: var(--color-black);
   position: relative;
+}
+
+.node-teaser {
+  display: flex;
+  margin: 0 0.25em;
+  background-color: var(--color-light-gray);
+  padding: 4px;
+  position: relative;
+  overflow: hidden;
+
+  @media (--breakpoint-md) {
+    flex: 1 1 0;
+  }
+}
+
+.node-teaser:before,
+.node-teaser:after {
+  content: "";
+  position: absolute;
+  z-index: var(--z-bottom);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  transition:
+    background-color var(--transition-enter),
+    transform var(--transition-enter);
+}
+
+.node-teaser:before {
+  transform: translateY(-101%) translateX(-101%);
+}
+
+.node-teaser:after {
+  transform: translateY(101%) translateX(101%);
+}
+
+:--not-touch .node-teaser:--enter:before,
+:--not-touch .node-teaser:--enter:after {
+  background-color: var(--dark-secondary-color);
+  transform: translateY(0%) translateX(0%);
 }
 
 .latest-block .views-row-wrapper > .views-row {
@@ -182,39 +229,28 @@
   height: 100%;
 }
 
+.node-teaser > * {
+  width: 100%;
+}
+
 .node-teaser > a {
   color: var(--color-black);
   text-decoration: none;
-}
-
-.theme--help-centre .node-teaser {
-  display: block;
-  background-color: var(--color-white);
-  box-shadow: var(--box-shadow);
-  padding: 0.75em;
-  height: 100%;
-  text-align: center;
-  position: relative;
-  transition: box-shadow var(--transition-enter);
-}
-
-:--not-touch .node-teaser:--enter,
-:--not-touch .theme--help-centre .node-teaser:--enter {
-  box-shadow: var(--box-shadow-active);
-  color: var(--primary-color);
 }
 
 :--not-touch .theme--news-alerts .node-teaser:--enter {
   box-shadow: 0 0 0 2px var(--light-primary-color);
 }
 
-.theme--help-centre .node-teaser__container {
+/* Teaser link */
+.node-teaser__link {
+  position: relative;
+  z-index: var(--z-middle);
+  background-color: var(--color-white);
   display: flex;
   align-items: center;
-
-  @media (--breakpoint-lg) {
-    flex-flow: column nowrap;
-  }
+  justify-content: space-between;
+  @mixin responsive-declaration padding, 1em, 1.5em;
 }
 
 /*Teaser type*/
@@ -470,50 +506,11 @@
   padding: 1em;
 }
 
-/*Temp fix*/
-.node-teaser__read-more {
-  display: none!important;
-}
-
 .theme--help-centre .node-teaser__read-more {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-top: 1px solid var(--color-lighter-gray);
-  padding: 1em;
-
-  @media (--breakpoint-lg) {
-    display: none;
-  }
-}
-
-.theme--help-centre .node-teaser__read-more.is-open .node-teaser__read-more-icon {
-  transform: rotate(0);
-}
-
-.theme--help-centre .node-teaser__read-more-text {
-  font-weight: 600;
-  color: var(--color-dark-blue);
-}
-
-.theme--help-centre .node-teaser__read-more-icon {
-  width: 1em;
-  height: 1em;
-  transform: rotate(-90deg);
   margin-left: auto;
 }
 
-.theme--help-centre .node-teaser__read-more-content {
-  display: none;
-  text-align: left;
-  padding: 1em;
-}
-
-.theme--help-centre .node-teaser__read-more-content.is-open {
-  display: block;
-
-  @media (--breakpoint-lg) {
-    display: none;
-  }
+.theme--help-centre .node-teaser__read-more .svg {
+  @mixin responsive-declaration width, 1em, 2em;
+  @mixin responsive-declaration height, 1em, 2em;
 }

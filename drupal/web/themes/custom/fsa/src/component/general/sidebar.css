@@ -23,14 +23,6 @@
   }
 }
 
-.theme--service .sidebar {
-  margin-top: 0em !important;
-  padding-right: 0em !important;
-  padding-bottom: 0em !important;
-  padding-left: 0em !important;
-  border-right: 0em;
-}
-
 .sidebar__header {
   display: flex;
   justify-content: space-between;
