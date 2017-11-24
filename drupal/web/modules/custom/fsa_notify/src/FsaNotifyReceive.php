@@ -105,17 +105,17 @@ class FsaNotifyReceive extends ControllerBase {
         // When a "STOP" command is issued.
         // Strip the command part for values and send for the unsubscriber.
         $values = preg_replace('/^STOP\s*/i', '', $sms_message);
-        $msg = $this->unsubscribeFromAlerts($params['source_number'], $values);
-        $action = $this->t('unsubscribed from alerts');
+        $unsubscribed = $this->unsubscribeFromAlerts($params['source_number'], $values);
+        $msg = $unsubscribed['message'];
+        $action = $msg;
       }
       else {
         $action = $this->t('sent SMS with no action detected');
       }
 
       \Drupal::logger('fsa_notify')->info(
-        $this->t('Notify callback: @source_number @action<br />Message body:<pre>@params</pre>',
+        $this->t('Notify SMS callback: @action<br />Message body:<pre>@params</pre>',
           [
-            '@source_number' => $params['source_number'],
             '@action' => $action,
             '@params' => var_export($params, TRUE),
           ]
@@ -133,7 +133,7 @@ class FsaNotifyReceive extends ControllerBase {
 
       if ($logger) {
         \Drupal::logger('fsa_notify')->warning(
-          $this->t('Notify callback: @msg', ['@msg' => $error_msg])
+          $this->t('Notify SMS callback: @msg', ['@msg' => $error_msg])
         );
       }
       return new JsonResponse([
@@ -152,11 +152,15 @@ class FsaNotifyReceive extends ControllerBase {
    * @param string $values
    *   That to unsubscribe from.
    *
-   * @return string
-   *   .
+   * @return array
+   *   Array with success booolean, uid and message.
    */
   public function unsubscribeFromAlerts($phone, $values) {
-    $message = '';
+    $ret = [
+      'uid' => FALSE,
+      'success' => FALSE,
+      'message' => $this->t('No changes'),
+    ];
 
     // Match the phone number with stored format.
     // @todo: match all possible cases of formats for the phone number.
@@ -187,30 +191,37 @@ class FsaNotifyReceive extends ControllerBase {
     $query->condition('field_notification_sms', $phone, '=');
     $uids = $query->execute();
 
-    // Could match multiple users since phone number is not unique field.
-    foreach ($uids as $uid) {
-      $user = User::load($uid);
+    if (!empty($uids)) {
+      // Could match multiple users since phone number is not unique field.
+      foreach ($uids as $uid) {
+        $user = User::load($uid);
 
-      switch ($unsubscribe) {
-        case 'all':
-          // Unsubscribe from all notifications.
-          $user->field_subscribed_notifications->setValue([]);
-          $user->save();
-          $message = 'User ' . $uid . ' unsubscribed from all alerts';
-          break;
+        switch ($unsubscribe) {
+          case 'all':
+            // Unsubscribe from all notifications.
+            $user->field_subscribed_notifications->setValue([]);
+            $user->save();
 
-        case 'ids':
-          // @todo: allow unsubscribe form specific terms.
-          $message = $this->t('Unsubscribe per term not possible yet.');
-          break;
+            $ret['success'] = TRUE;
+            $ret['message'] = 'User ' . $uid . ' unsubscribed from all alerts';
+            $ret['uid'] = $uid;
+            break;
 
-        default:
-          $message = $this->t('No changes');
-
+          case 'ids':
+            // @todo: allow unsubscribe form specific terms.
+            $ret['success'] = FALSE;
+            $ret['message'] = $this->t('Unsubscribe per term not possible yet.');
+            $ret['uid'] = $uid;
+            break;
+        }
       }
     }
+    else {
+      $ret['message'] = $this->t('Phone number did not match any user.');
+    }
 
-    return $message;
+
+    return $ret;
 
   }
 
