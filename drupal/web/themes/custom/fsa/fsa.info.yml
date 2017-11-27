@@ -19,4 +19,4 @@ regions:
 libraries:
   - fsa/global
 ckeditor_stylesheets:
-  - dist/main.css
+  - dist/app.css
