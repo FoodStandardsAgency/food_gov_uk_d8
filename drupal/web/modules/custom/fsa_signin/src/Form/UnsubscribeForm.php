@@ -117,13 +117,49 @@ class UnsubscribeForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
     $email = $form_state->getValue('email');
+    $t_options = ['@email' => $email];
 
     // For now just unsubscribe from all.
     // @todo: unsubscribeFromAlerts needs to allow unsubscribing specific terms.
     $values = 'all';
 
     $unsubscribed = $this->signInService->unsubscribeFromAlerts($email, $values);
-    drupal_set_message($unsubscribed['message']);
+
+    if ($unsubscribed['success']) {
+      drupal_set_message($unsubscribed['message']);
+      $config = \Drupal::config('system.site');
+
+      // Let user know (s)he just unsubscribed.
+      $mailManager = \Drupal::service('plugin.manager.mail');
+
+      // @todo: Format nice message for the user?
+      $params['message'] = $this->t('You have been have unsubscribed from all alerts on FSA website.');
+      $params['message'] .= "\r\n\r\n--\r\n";
+      $params['message'] .= $config->get('name');
+
+      $langcode = \Drupal::currentUser()->getPreferredLangcode();
+      $send = TRUE;
+      $result = $mailManager->mail(
+        'fsa_signin',
+        'unsubscribed',
+        $email,
+        $langcode,
+        $params,
+        NULL,
+        $send
+      );
+
+      if ($result['result'] !== TRUE) {
+        drupal_set_message($this->t('There was a problem sending you a confirmation email to @email.', $t_options), 'error');
+      }
+      else {
+        drupal_set_message($this->t('We have sent you an email confrmation to @email.', $t_options));
+      }
+    }
+    else {
+      drupal_set_message($this->t('There was a problem unsubscribing @email from alerts.', $t_options), 'error');
+    }
+
     $form_state->setRedirect('<front>');
   }
 
