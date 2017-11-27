@@ -8,6 +8,7 @@ use Drupal\fsa_signin\SignInService;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\user\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\fsa_signin\Form\UnsubscribeForm;
 
 /**
  * Class DefaultController.
@@ -114,9 +115,15 @@ class DefaultController extends ControllerBase {
     ];
   }
 
+  /**
+   * Creates unsubscribe page.
+   *
+   * @return array
+   *   Drupal\fsa_signin\Form\UnsubscribeForm.
+   */
   public function unsubscribePage() {
 
-    $unsubscribe_form = \Drupal::formBuilder()->getForm(\Drupal\fsa_signin\Form\UnsubscribeForm::class);
+    $unsubscribe_form = \Drupal::formBuilder()->getForm(UnsubscribeForm::class);
 
     return [$unsubscribe_form];
   }

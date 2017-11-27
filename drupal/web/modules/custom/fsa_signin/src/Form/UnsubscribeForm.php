@@ -27,12 +27,12 @@ class UnsubscribeForm extends FormBase {
 
     // Format of link to unsubscribe: ?email=foo@bar.com&id=123
     // where uid must match with respective email in db.
-    $email = $query['email'];
-    $uid = $query['id'];
+    $email = (isset($query['email'])) ? $query['email'] : FALSE;
+    $uid = (isset($query['email'])) ? $query['id'] : FALSE;
 
-    if (is_numeric($uid) && \Drupal::service('email.validator')->isValid($email)) {
+    $user = user_load_by_mail($email);
 
-      $user = user_load_by_mail($email);
+    if ($user && is_numeric($uid) && \Drupal::service('email.validator')->isValid($email)) {
 
       // Check uid matches with respective email.
       if ($user->id() === $uid) {
@@ -56,15 +56,19 @@ class UnsubscribeForm extends FormBase {
         ];
       }
       else {
-        $signin_url = Url::fromRoute('fsa_signin.default_controller_signInPage')->toString();
-
-        ksm($signin_url);
-
-        $form['description'] = [
-          '#markup' => '<p>' . $this->t('Unsubscribing unavailable. You may need <a href="@signin_url">to log in</a>.', ['@signin_url' => $signin_url]) . '</p>',
-        ];
+        // When UID does not match with email.
+        if (\Drupal::currentUser()->isAnonymous()) {
+          $message = $this->t('Cannot unsubscribe. You may need <a href="@url">to log in</a>.', ['@url' => Url::fromRoute('fsa_signin.default_controller_signInPage')->toString()]);
+        }
+        else {
+          $message = $this->t('Cannot unsubscribe. Visit your <a href="@url">profile page</a> to unsubscribe.', ['@url' => Url::fromRoute('fsa_signin.default_controller_myAccountPage')->toString()]);
+        }
+        drupal_set_message($message);
       }
 
+    }
+    else {
+      drupal_set_message($this->t('Cannot unsubscribe: User does not exist or invalid parameters.'));
     }
 
     return $form;
