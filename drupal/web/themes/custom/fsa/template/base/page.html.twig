@@ -49,11 +49,15 @@
   <div class="layout">
     <div class="layout__container">
       <div class="layout__content">
-        <div class="phase-banner">
+        <div class="header__topbar phase-banner">
           <p>
             <strong class="phase-tag">{{ 'ALPHA'|t }}</strong>
             <span>{{ 'This is a new service – your <a href="/contact">feedback</a> will help us to improve it.'|t }}</span>
           </p>
+
+          <div class="header__content">
+            {{ page.header }}
+          </div>
         </div>
       </div>
     </div>
@@ -84,14 +88,8 @@
       </a>
 
       <form class="header__search" role="search">
-        <button class="header__sorting-button button button--small button--light">{{ 'A–Z'|t }}</button>
         <div class="input-group">
           <input type="text" name="" value="" placeholder="{{ 'Search from...'|t }}">
-          <select class="" name="">
-            <option value="food.gov.uk">food.gov.uk</option>
-            <option value="food.gov.cy">food.gov.cy</option>
-            <option value="food.gov.com">food.gov.com</option>
-          </select>
           <button type="button" name="button" class="button button--small button--with-icon">
             <div class="button__icon svg">
               <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#search-icon"></use></svg>
@@ -99,11 +97,6 @@
           </button>
         </div>
       </form>
-
-
-      <div class="header__content">
-        {{ page.header }}
-      </div>
 
     </div>
   </header>
@@ -125,7 +118,18 @@
               <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop-white-{{ current_language }}"></use></svg>
             </div>
           </a>
+
+          <a class="header__search-button button button--with-icon button--mobile-light">
+            <div class="button__icon svg">
+              <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#search-icon"></use></svg>
+            </div>
+            <span>{{ 'Search'|t }}</span>
+          </a>
         </header>
+
+        <div class="menu-utility-wrapper">
+          {{ utility_menu }}
+        </div>
 
         <div class="navigation-wrapper__main">
           {{ page.primary_menu }}

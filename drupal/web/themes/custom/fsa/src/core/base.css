@@ -514,6 +514,7 @@ input[type="checkbox"] {
 
 .input-group > input,
 .input-group > select {
+  background-color: var(--color-lighter-gray);
   box-shadow: 0px 0px 0px 1px var(--color-light-gray);
   padding: 0.6em 2em;
 }
