@@ -5,11 +5,32 @@ namespace Drupal\fsa_signin\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Drupal\fsa_signin\SignInService;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class UnsubscribeForm.
  */
 class UnsubscribeForm extends FormBase {
+
+  /** @var \Drupal\fsa_signin\SignInService */
+  protected $signInService;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(SignInService $signInService) {
+    $this->signInService = $signInService;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('fsa_signin.service')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -95,9 +116,15 @@ class UnsubscribeForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
-    // @todo: Unsubscribe the user.
-    drupal_set_message('Submitted! [unsubscribe to be implemented]');
-///    $form_state->setRedirect('<front>');
+    $email = $form_state->getValue('email');
+
+    // For now just unsubscribe from all.
+    // @todo: unsubscribeFromAlerts needs to allow unsubscribing specific terms.
+    $values = 'all';
+
+    $unsubscribed = $this->signInService->unsubscribeFromAlerts($email, $values);
+    drupal_set_message($unsubscribed['message']);
+    $form_state->setRedirect('<front>');
   }
 
 }

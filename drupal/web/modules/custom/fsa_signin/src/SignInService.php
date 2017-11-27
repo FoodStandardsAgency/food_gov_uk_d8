@@ -51,24 +51,30 @@ class SignInService {
   /**
    * Unsubscribe user from alerts.
    *
-   * @param string $phone
-   *   Phone number to unsubscribe.
+   * @param string $identifier
+   *   Phone number OR email address of user to unsubscribe.
    * @param string $values
    *   That to unsubscribe from.
    *
    * @return array
-   *   Array with success booolean, uid and message.
+   *   Array with success (bool), uid (int) and message (string).
    */
-  public function unsubscribeFromAlerts($phone, $values) {
+  public function unsubscribeFromAlerts($identifier, $values) {
     $ret = [
       'uid' => FALSE,
       'success' => FALSE,
       'message' => $this->t('No changes'),
     ];
 
-    // Match the phone number with stored format.
-    // @todo: match all possible cases of formats for the phone number.
-    $phone = '+' . $phone;
+    if (\Drupal::service('email.validator')->isValid($identifier)) {
+      $match_with = 'email';
+    }
+    else {
+      // Assume the identifier is a phone number.
+      // @todo: match all possible cases of formats for the phone number.
+      $identifier = '+' . $identifier;
+      $match_with = 'phone';
+    }
 
     $values = explode(' ', $values);
     $values = array_map('strtolower', $values);
@@ -88,12 +94,24 @@ class SignInService {
       $unsubscribe = 'ids';
     }
 
-    // Get user(s) with phone number from the callback.
-    $query = \Drupal::entityQuery('user');
-    $query->condition('uid', 0, '>');
-    $query->condition('status', 1);
-    $query->condition('field_notification_sms', $phone, '=');
-    $uids = $query->execute();
+    switch ($match_with) {
+      case 'phone':
+        // Get user(s) with phone number from the callback.
+        $query = \Drupal::entityQuery('user');
+        $query->condition('uid', 0, '>');
+        $query->condition('status', 1);
+        $query->condition('field_notification_sms', $identifier, '=');
+        $uids = $query->execute();
+        break;
+
+      case 'email':
+        $uids = user_load_by_mail($identifier);
+        $uid = $uids->id();
+
+        // Set the array as it would come from entityQuery above.
+        $uids = [$uid => $uid];
+        break;
+    }
 
     if (!empty($uids)) {
       // Could match multiple users since phone number is not unique field.
@@ -121,7 +139,8 @@ class SignInService {
       }
     }
     else {
-      $ret['message'] = $this->t('Phone number did not match any user.');
+      $ret['success'] = FALSE;
+      $ret['message'] = $this->t('Phone or email did not match any user.');
     }
 
     return $ret;
