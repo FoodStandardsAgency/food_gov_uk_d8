@@ -47,4 +47,84 @@ class SignInService {
     }
     return $subscribed_term_ids;
   }
+
+  /**
+   * Unsubscribe user from alerts.
+   *
+   * @param string $phone
+   *   Phone number to unsubscribe.
+   * @param string $values
+   *   That to unsubscribe from.
+   *
+   * @return array
+   *   Array with success booolean, uid and message.
+   */
+  public function unsubscribeFromAlerts($phone, $values) {
+    $ret = [
+      'uid' => FALSE,
+      'success' => FALSE,
+      'message' => $this->t('No changes'),
+    ];
+
+    // Match the phone number with stored format.
+    // @todo: match all possible cases of formats for the phone number.
+    $phone = '+' . $phone;
+
+    $values = explode(' ', $values);
+    $values = array_map('strtolower', $values);
+
+    // Strings to match with "all".
+    $all = [
+      '',
+      'all',
+      'gyd',
+    ];
+
+    if (in_array($values[0], $all)) {
+      $unsubscribe = 'all';
+    }
+    else {
+      // We probably want to unsubscribe per term/tid.
+      $unsubscribe = 'ids';
+    }
+
+    // Get user(s) with phone number from the callback.
+    $query = \Drupal::entityQuery('user');
+    $query->condition('uid', 0, '>');
+    $query->condition('status', 1);
+    $query->condition('field_notification_sms', $phone, '=');
+    $uids = $query->execute();
+
+    if (!empty($uids)) {
+      // Could match multiple users since phone number is not unique field.
+      foreach ($uids as $uid) {
+        $user = User::load($uid);
+
+        switch ($unsubscribe) {
+          case 'all':
+            // Unsubscribe from all notifications.
+            $user->field_subscribed_notifications->setValue([]);
+            $user->save();
+
+            $ret['success'] = TRUE;
+            $ret['message'] = 'User ' . $uid . ' unsubscribed from all alerts';
+            $ret['uid'] = $uid;
+            break;
+
+          case 'ids':
+            // @todo: allow unsubscribe form specific terms.
+            $ret['success'] = FALSE;
+            $ret['message'] = $this->t('Unsubscribe per term not possible yet.');
+            $ret['uid'] = $uid;
+            break;
+        }
+      }
+    }
+    else {
+      $ret['message'] = $this->t('Phone number did not match any user.');
+    }
+
+    return $ret;
+  }
+
 }
