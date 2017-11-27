@@ -76,6 +76,8 @@ if (strpos($_SERVER['REQUEST_URI'], '/admin/structure/webform/manage') === 0) {
 // Be sure to have config_split.dev disabled by default.
 $config['config_split.config_split.dev']['status'] = FALSE;
 
+$config['elasticsearch_helper.settings']['elasticsearch_helper']['host'] = getenv('DB_HOST_DRUPAL');
+
 $env = getenv('WKV_SITE_ENV');
 switch ($env) {
   case 'prod':
