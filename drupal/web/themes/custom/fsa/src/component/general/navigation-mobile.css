@@ -91,7 +91,6 @@
 }
 
 /* Mobile navigation list and links */
-nav#block-menu-help-main > ul > li > a,
 .navigation > ul > li > a,
 .navigation__link {
   display: block;
@@ -106,7 +105,6 @@ nav#block-menu-help-main > ul > li > a,
     transform var(--transition-enter);
 }
 
-:--not-touch nav#block-menu-help-main > ul > li > a:--enter,
 :--not-touch .navigation ul li a:--enter,
 .navigation ul li a.is-active,
 .navigation ul li.menu-item--active-trail a,
@@ -117,7 +115,6 @@ nav#block-menu-help-main > ul > li > a,
 }
 
 
-.navigation-wrapper.is-open nav#block-menu-help-main > ul > li > a,
 .navigation-wrapper.is-open .navigation > ul > li > a,
 .navigation-wrapper.is-open .navigation__link {
   transform: translateX(0%);
