@@ -114,6 +114,13 @@ class DefaultController extends ControllerBase {
     ];
   }
 
+  public function unsubscribePage() {
+
+    $unsubscribe_form = \Drupal::formBuilder()->getForm(\Drupal\fsa_signin\Form\UnsubscribeForm::class);
+
+    return [$unsubscribe_form];
+  }
+
   /**
    * Check if user is more than just authenticated user (alert subscriber).
    *
