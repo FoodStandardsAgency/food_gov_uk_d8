@@ -85,7 +85,7 @@ class RatingsHelper extends ControllerBase {
    * @return array
    *   Rating image badge #markup.
    */
-  public static function ratingBadgeImageDisplay($rating, $scheme = 'FHRS', $embed_type = 4) {
+  public static function ratingBadgeImageDisplay($rating, $scheme = 'FHRS', $embed_type = 1) {
 
     // Language name to image path.
     $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();

@@ -21,6 +21,13 @@
   max-width: var(--max-width);
 }
 
+.theme--help-centre .layout__container.layout__container--main,
+.theme--help .layout__container.layout__container--main,
+.theme--help-centre .layout--content-top .layout__container,
+.theme--help .layout--content-top .layout__container {
+  max-width: 51.5em;
+}
+
 body:not(.theme--service, .theme--lander) .layout.layout--with-no-sidebar .layout__container {
   max-width: var(--content-max-width);
 }

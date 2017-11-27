@@ -11,20 +11,6 @@
   color: var(--color-black);
 }
 
-#block-menu-help-secondary > .menu {
-  display: flex;
-  justify-content: center;
-  margin-top: 0em;
-
-  @media (--breakpoint-md) {
-    margin-top: -1.25em;
-  }
-
-  @media (--breakpoint-lg) {
-    margin-top: -3.5em;
-  }
-}
-
 #block-menu-help-secondary ul {
   margin: 0;
   padding: 0;
@@ -43,10 +29,23 @@
 
 #block-menu-help-secondary > .menu {
   position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 0em;
+  @mixin responsive-declaration margin-bottom, 1em, 4em;
 
   @media (--breakpoint-md) {
     padding-bottom: 10em;
+    margin-top: -1.25em;
   }
+
+  @media (--breakpoint-lg) {
+    margin-top: -3.5em;
+  }
+}
+
+#block-menu-help-secondary > .menu > li {
+  flex: 1 1 0;
 }
 
 #block-menu-help-secondary > .menu > li > a {
@@ -122,15 +121,38 @@
 }
 
 #block-menu-help-secondary > .menu > li > .menu {
-  position: absolute;
-  right: 0;
-  left: 0;
   display: flex;
   padding-top: 2em;
+  flex-direction: column;
   align-items: stretch;
   justify-content: center;
   display: none;
+
+  @media (--breakpoint-md) {
+    position: absolute;
+    right: -2em;
+    left: -2em;
+    padding-top: 2em;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+  }
+
+  @media (--breakpoint-lg) {
+    position: absolute;
+    right: -6em;
+    left: -6em;
+  }
 }
+
+/* #block-menu-help-secondary > .menu > li:first-child > .menu {
+  width: 100vw;
+}
+
+#block-menu-help-secondary > .menu > li:last-child > .menu {
+  width: 100vw;
+  transform: translateX(-50%);
+} */
 
 #block-menu-help-secondary > .menu > li.menu-item--active-trail > .menu,
 #block-menu-help-secondary > .menu > li > .menu.is-open {
@@ -147,9 +169,11 @@
   background-color: var(--color-light-gray);
   padding: 4px;
   position: relative;
+  margin-bottom: 0.5em;
 
   @media (--breakpoint-md) {
     flex: 1 1 0;
+    margin-bottom: 0;
   }
 }
 
@@ -180,10 +204,14 @@
   transform: translateY(101%) translateX(101%);
 }
 
-#block-menu-help-secondary > .menu > li > .menu > li.menu-item--active-trail:before,
-#block-menu-help-secondary > .menu > li > .menu > li.menu-item--active-trail:after,
 :--not-touch #block-menu-help-secondary > .menu > li > .menu > li:--enter:before,
 :--not-touch #block-menu-help-secondary > .menu > li > .menu > li:--enter:after {
+  background-color: var(--dark-primary-color);
+  transform: translateY(0%) translateX(0%);
+}
+
+#block-menu-help-secondary > .menu > li > .menu > li.menu-item--active-trail:before,
+#block-menu-help-secondary > .menu > li > .menu > li.menu-item--active-trail:after {
   background-color: var(--dark-secondary-color);
   transform: translateY(0%) translateX(0%);
 }
@@ -204,7 +232,7 @@
 }
 
 :--not-touch #block-menu-help-secondary > .menu > li > .menu > li > a:not(.is-active):--enter {
-  color: var(--dark-secondary-color);
+  color: var(--dark-primary-color);
 }
 
 #block-menu-help-secondary > .menu > li > .menu > li > a.is-active {
