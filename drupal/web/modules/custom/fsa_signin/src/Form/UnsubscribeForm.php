@@ -153,7 +153,7 @@ class UnsubscribeForm extends FormBase {
         drupal_set_message($this->t('There was a problem sending you a confirmation email to @email.', $t_options), 'error');
       }
       else {
-        drupal_set_message($this->t('We have sent you an email confrmation to @email.', $t_options));
+        drupal_set_message($this->t('We have sent you an email confirmation to @email.', $t_options));
       }
     }
     else {
