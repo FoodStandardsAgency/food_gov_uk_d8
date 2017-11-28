@@ -73,7 +73,7 @@ function fsa_custom_preprocess_page_title(&$variables) {
 
   $route = \Drupal::routeMatch();
   $node = $route->getParameter('node');
-  if (is_object($node)) {
+  if (is_object($node) && $node->hasField('field_nation')) {
     $nations = $node->get('field_nation');
     // Display nation as title prefix only if just one nation is selected.
     if (isset($nations[0]) && !isset($nations[1])) {
