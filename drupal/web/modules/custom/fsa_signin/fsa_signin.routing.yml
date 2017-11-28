@@ -62,3 +62,11 @@ fsa_signin.user_registration_thank_you:
     _title: 'Thank you'
   requirements:
     _user_is_logged_in: 'TRUE'
+
+fsa_signin.default_controller_unsubscribe:
+  path: '/news-alerts/unsubscribe'
+  defaults:
+    _controller: '\Drupal\fsa_signin\Controller\DefaultController::unsubscribePage'
+    _title: 'Unsubscribe from alerts'
+  requirements:
+    _permission: 'access content'
