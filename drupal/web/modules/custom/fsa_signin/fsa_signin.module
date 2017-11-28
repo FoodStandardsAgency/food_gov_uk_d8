@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * fsa_signin.module
+ */
+
+/**
+ * Implements hook_mail().
+ */
+function fsa_signin_mail($key, &$message, $params) {
+
+  $options = ['langcode' => $message['langcode']];
+
+  switch ($key) {
+    case 'unsubscribed':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('Alerts unsubscribe notification', [], $options);
+      $message['body'][] = $params['message'];
+      break;
+  }
+}

@@ -10,7 +10,8 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\block\Entity\Block;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\Core\Access\AccessResult;
-use \Drupal\Core\Link;
+use Drupal\Core\Link;
+use Drupal\Component\Utility\Html;
 
 /**
  * Implements of template_preprocess_html().
@@ -62,6 +63,27 @@ function fsa_custom_preprocess_page(&$variables) {
     ],
     '#items' => $items,
   ];
+
+}
+
+/**
+ * Implements hook_preprocess_page_title().
+ */
+function fsa_custom_preprocess_page_title(&$variables) {
+
+  $route = \Drupal::routeMatch();
+  $node = $route->getParameter('node');
+  if (is_object($node)) {
+    $nations = $node->get('field_nation');
+    // Display nation as title prefix only if just one nation is selected.
+    if (isset($nations[0]) && !isset($nations[1])) {
+      $nation = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($nations[0]->getValue()['target_id'])->getName();
+
+      // Use same classes as via WYSIWYG for regional variations.
+      $class = 'regional-variation regional-variation--' . strtolower(Html::cleanCssIdentifier($nation));
+      $variables['title_prefix'] = ['#markup' => '<div class="' . $class . '">' . t('@nation specific', ['@nation' => $nation]) . '</div>'];
+    }
+  }
 
 }
 
@@ -198,4 +220,3 @@ function fsa_custom_theme() {
     ],
   ];
 }
-
