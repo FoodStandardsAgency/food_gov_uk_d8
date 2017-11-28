@@ -199,17 +199,3 @@ function fsa_custom_theme() {
     ],
   ];
 }
-
-/**
- * Implements hook_views_pre_render().
- */
-function fsa_custom_views_pre_render(ViewExecutable $view) {
-  if ($view->id() == 'news_alerts') {
-    foreach ($view->result as $value) {
-      $alert_type = $value->_entity->get('field_alert_type')->value;
-      if ($alert_type === 'FAFA' || $alert_type === 'PRIN') {
-        $value->_entity->set('field_alert_type', t('Food alert'));
-      }
-    }
-  }
-}
