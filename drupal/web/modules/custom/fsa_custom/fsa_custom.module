@@ -12,6 +12,7 @@ use Drupal\taxonomy\Entity\Term;
 use Drupal\Core\Access\AccessResult;
 use \Drupal\Core\Link;
 use Drupal\views\ViewExecutable;
+use Drupal\views\Plugin\views\cache\CachePluginBase;
 
 /**
  * Implements of template_preprocess_html().
@@ -198,4 +199,13 @@ function fsa_custom_theme() {
       ],
     ],
   ];
+}
+
+/**
+ * Implements hook_views_post_render().
+ */
+function fsa_custom_views_post_render(ViewExecutable $view, &$output, CachePluginBase $cache) {
+  if ($view->id() == 'news_alerts') {
+    kint($output);
+  }
 }
