@@ -82,11 +82,8 @@ class AlertTypeFormatter extends FormatterBase {
         break;
 
       case 'PRIN':
-        $content = $this->t('Product Recall Information Notice');
-        break;
-
       case 'FAFA':
-        $content = $this->t('Food Alert for Action');
+        $content = $this->t('Food Alert');
         break;
 
       default:
