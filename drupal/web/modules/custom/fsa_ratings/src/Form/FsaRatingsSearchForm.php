@@ -253,7 +253,7 @@ class FsaRatingsSearchForm extends FormBase {
       }
     }
 
-    $form_state->setRedirect('fsa_ratings.ratings_search', [], ['query' => $query]);
+    $form_state->setRedirect('fsa_ratings.ratings_search', [], ['query' => $query, 'fragment' => 'results']);
   }
 
   /**
