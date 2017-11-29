@@ -12,7 +12,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class AlertsForRegistrationForm extends FormBase {
 
-  /** @var  SignInService */
+  /**
+   * Signin service.
+   *
+   * @var \Drupal\fsa_signin\SignInService
+   */
   protected $signInService;
 
   /**
@@ -70,11 +74,11 @@ class AlertsForRegistrationForm extends FormBase {
       '#default_value' => $alert_tid_defaults,
       '#description' => $this->t('Select all that apply'),
     ];
-    $form['actions'] = array('#type' => 'actions');
-    $form['actions']['submit'] = array(
+    $form['actions'] = ['#type' => 'actions'];
+    $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Next'),
-    );
+    ];
     $form['#attached']['library'][] = 'fsa_signin/subscription_alerts';
     return $form;
   }
@@ -92,7 +96,7 @@ class AlertsForRegistrationForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Start a manual session for anonymous users.
     if (\Drupal::currentUser()->isAnonymous() && !isset($_SESSION['multistep_form_holds_session'])) {
-      $_SESSION['multistep_form_holds_session'] = true;
+      $_SESSION['multistep_form_holds_session'] = TRUE;
       \Drupal::service('session_manager')->start();
     }
 
