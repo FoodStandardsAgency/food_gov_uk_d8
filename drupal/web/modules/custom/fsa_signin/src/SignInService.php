@@ -61,7 +61,10 @@ class SignInService {
   }
 
   /**
+   * Get allergen terms as options to subscription forms.
+   *
    * @return array
+   *   Array of options in FAPI suitable format.
    */
   public function allergenTermsAsOptions() {
     $all_terms = \Drupal::entityTypeManager()
@@ -75,8 +78,13 @@ class SignInService {
   }
 
   /**
+   * Get user's subscribed term id's.
+   *
    * @param \Drupal\user\Entity\User $account
-   * @return int[] Term IDs
+   *   User object.
+   *
+   * @return array
+   *   Term IDs
    */
   public function subscribedTermIds(User $account) {
     $subscriptions = $account->get('field_subscribed_notifications')

@@ -13,7 +13,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class UnsubscribeForm extends FormBase {
 
-  /** @var \Drupal\fsa_signin\SignInService */
+  /**
+   * Signin service.
+   *
+   * @var \Drupal\fsa_signin\SignInService
+   */
   protected $signInService;
 
   /**

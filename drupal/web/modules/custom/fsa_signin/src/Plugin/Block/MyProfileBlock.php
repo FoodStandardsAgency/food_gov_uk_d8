@@ -3,7 +3,6 @@
 namespace Drupal\fsa_signin\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Url;
 use Drupal\Core\Link;
 
 /**
@@ -22,10 +21,10 @@ class MyProfileBlock extends BlockBase {
   public function build() {
     $build = [];
 
-    // Disable block cache
+    // Disable block cache.
     $build['#cache'] = ['max-age' => 0];
 
-    $markup  = '<div class="navigation"><ul>';
+    $markup = '<div class="navigation"><ul>';
     if (\Drupal::currentUser()->isAuthenticated()) {
       $markup .= self::createLinkMarkup('fsa_signin.default_controller_emailSubscriptionsPage', 'Email subscriptions', '<li>', '</li>');
       $markup .= self::createLinkMarkup('fsa_signin.default_controller_smsSubscriptionsPage', 'SMS subscriptions', '<li>', '</li>');
@@ -41,6 +40,9 @@ class MyProfileBlock extends BlockBase {
     return $build;
   }
 
+  /**
+   * Link markup for profile navigation.
+   */
   protected static function createLinkMarkup($route_name, $text, $prefix = '', $suffix = '') {
     $options = [];
     if (\Drupal::routeMatch()->getRouteName() == $route_name) {
@@ -49,4 +51,5 @@ class MyProfileBlock extends BlockBase {
     $link_object = Link::createFromRoute($text, $route_name, [], $options);
     return $prefix . $link_object->toString() . $suffix;
   }
+
 }

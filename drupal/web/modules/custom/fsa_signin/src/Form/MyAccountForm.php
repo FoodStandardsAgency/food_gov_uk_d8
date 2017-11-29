@@ -30,11 +30,11 @@ class MyAccountForm extends FormBase {
       '#type' => 'password_confirm',
       '#title' => $this->t('Enter new password'),
     ];
-    $form['actions'] = array('#type' => 'actions');
-    $form['actions']['submit'] = array(
+    $form['actions'] = ['#type' => 'actions'];
+    $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Update'),
-    );
+    ];
     return $form;
   }
 
