@@ -8,7 +8,7 @@
 }
 
 .field__field_topic_cloud:before {
-  content: "";
+  content: '';
   background-color: var(--color-lighter-gray);
   position: absolute;
   z-index: var(--z-bottom);

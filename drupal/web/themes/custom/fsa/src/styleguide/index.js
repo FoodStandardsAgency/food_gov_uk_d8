@@ -1,9 +1,5 @@
-import hljs from './vendor/highlightjs/highlight.min.js';
-// import hljs from './core/vendor/highlightjs/highlight.pack.js';
 import stickyElement from '../core/helper/stickyElement';
 import scrollToElement from '../core/helper/scrollToElement';
-
-hljs.initHighlightingOnLoad();
 
 // Sticky element
 const container = [...document.querySelectorAll('.js-sticky-container')];

@@ -291,7 +291,7 @@
 
 
 .header__region #block-myprofile > ul:before {
-  content: "";
+  content: '';
   position: absolute;
   z-index: var(--z-bottom);
   top: -0.25em;
