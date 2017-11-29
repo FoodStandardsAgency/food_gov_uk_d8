@@ -1,3 +1,6 @@
+@import "../../core/helper";
+@import "../../core/custom-property";
+
 .explanation {
   background-color: var(--color-lighter-gray);
 }
