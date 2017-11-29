@@ -61,10 +61,18 @@ class DefaultController extends ControllerBase {
   public function emailSubscriptionsPage() {
     $uid = \Drupal::currentUser()->id();
     $account = User::load($uid);
-    $subscribed_term_ids = $this->signInService->subscribedTermIds($account);
-    $options = $this->signInService->allergenTermsAsOptions();
 
-    $subscription_form = \Drupal::formBuilder()->getForm(\Drupal\fsa_signin\Form\EmailSubscriptionsForm::class, $account, $options, $subscribed_term_ids);
+    $options = [
+      'subscribed_notifications' => $this->signInService->allergenTermsAsOptions(),
+      'subscribed_food_alerts' => $this->signInService->foodAlertsAsOptions(),
+    ];
+
+    $default_values = [
+      'subscribed_food_alerts' => $this->signInService->subscribedFoodAlerts($account),
+      'subscribed_notifications' => $this->signInService->subscribedTermIds($account),
+    ];
+
+    $subscription_form = \Drupal::formBuilder()->getForm(\Drupal\fsa_signin\Form\EmailSubscriptionsForm::class, $account, $options, $default_values);
     $preferences_form = \Drupal::formBuilder()->getForm(\Drupal\fsa_signin\Form\EmailPreferencesForm::class, $account);
 
     return [
@@ -126,6 +134,23 @@ class DefaultController extends ControllerBase {
     $unsubscribe_form = \Drupal::formBuilder()->getForm(UnsubscribeForm::class);
 
     return [$unsubscribe_form];
+  }
+
+  /**
+   * Modify form value to be saved correctly.
+   *
+   * @param array $values
+   *   The values array.
+   *
+   * @return array|mixed
+   *   Value to be saved for a field.
+   */
+  public static function storableProfileFieldValue(array $values) {
+    foreach ($values as $key => $value) {
+      // @todo: refactor this if we need more food alerts to subscribe to.
+      $values = ($value === 0) ? $values = [] : key($values);
+    }
+    return $values;
   }
 
   /**

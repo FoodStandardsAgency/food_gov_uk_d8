@@ -30,7 +30,7 @@ class SignInService {
     // Initially on "all", compose manually and change to better logic if
     // different food alert types are allowed to subscribe to.
     $alert_types = [
-      'all' => $this->t('Food alerts'),
+      'all' => $this->t('Food alerts')->render(),
     ];
 
     $options = [];
@@ -39,6 +39,25 @@ class SignInService {
     }
 
     return $options;
+  }
+
+  /**
+   * Get user's subscribed food alerts.
+   *
+   * @param \Drupal\user\Entity\User $account
+   *   User account.
+   *
+   * @return array
+   *   Alerts user has subscribed to.
+   */
+  public function subscribedFoodAlerts(User $account) {
+    $subscriptions = $account->get('field_subscribed_food_alerts')
+      ->getValue();
+    $subscribed_food_alerts = [];
+    foreach ($subscriptions as $s) {
+      $subscribed_food_alerts[] = $s['value'];
+    }
+    return $subscribed_food_alerts;
   }
 
   /**
