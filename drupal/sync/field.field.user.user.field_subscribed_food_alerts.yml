@@ -1,0 +1,21 @@
+uuid: 19e798b6-a5aa-42d6-a1de-bf9f6e112b94
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_subscribed_food_alerts
+  module:
+    - options
+    - user
+id: user.user.field_subscribed_food_alerts
+field_name: field_subscribed_food_alerts
+entity_type: user
+bundle: user
+label: 'Subscribed food alerts'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

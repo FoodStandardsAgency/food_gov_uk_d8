@@ -6,6 +6,7 @@ dependencies:
     - field.field.user.user.field_notification_cache
     - field.field.user.user.field_notification_method
     - field.field.user.user.field_notification_sms
+    - field.field.user.user.field_subscribed_food_alerts
     - field.field.user.user.field_subscribed_notifications
   module:
     - user
@@ -22,21 +23,27 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_notification_method:
-    weight: 2
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_notification_sms:
-    weight: 6
+    weight: 5
     settings:
       size: 20
       placeholder: +44xxxxxxxxxx
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_subscribed_notifications:
+  field_subscribed_food_alerts:
     weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_subscribed_notifications:
+    weight: 2
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
