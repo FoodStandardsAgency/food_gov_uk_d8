@@ -63,7 +63,7 @@ class AlertsForRegistrationForm extends FormBase {
     $form['food_alert_registration'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Food alerts'),
-      '#options' => ['food_alerts' => $this->t('Food alerts')],
+      '#options' => $this->signInService->foodAlertsAsOptions(),
       '#default_value' => $food_alert_defaults,
     ];
 

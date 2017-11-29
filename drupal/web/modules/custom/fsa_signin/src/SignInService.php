@@ -19,6 +19,27 @@ class SignInService {
 
   }
 
+  /**
+   * Food alert subscription options.
+   *
+   * @return array
+   *   List of options.
+   */
+  public function foodAlertsAsOptions() {
+
+    // Initially on "all", compose manually and change to better logic if
+    // different food alert types are allowed to subscribe to.
+    $alert_types = [
+      'all' => $this->t('Food alerts'),
+    ];
+
+    $options = [];
+    foreach ($alert_types as $key => $name) {
+      $options[$key] = $name;
+    }
+
+    return $options;
+  }
 
   /**
    * @return array
