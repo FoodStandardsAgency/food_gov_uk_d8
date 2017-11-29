@@ -8,13 +8,12 @@ import toggleContent from './core/helper/toggleContent';
 import toc from './core/helper/toc';
 import mobileMenu from './core/helper/mobile-menu';
 import subNavigation from './core/helper/subNavigation';
-import regionalVariation from './core/helper/regionalVariation';
 import printPage from './core/helper/printPage';
-import peek from './component/parallax/parallax';
 
-document.addEventListener('DOMContentLoaded', () => {
-  peek();
-});
+import regionalVariation from './component/regional-variation/regionalVariation';
+import explanation from './component/explanation/explanation';
+import parallax from './component/parallax/parallax';
+
 
 const breakpoints = {
   small: "sm",
@@ -25,8 +24,21 @@ const breakpoints = {
 require.context("./img/", true, /\.(gif|png|svg|jpe?g)$/);
 require('./style.css');
 
-// Polyfill svgs
-svg4everybody({ polyfill: true });
+document.addEventListener('DOMContentLoaded', () => {
+  // Polyfill svgs
+  svg4everybody({ polyfill: true });
+
+  // Regional variation
+  regionalVariation();
+
+  // Explanation
+  explanation();
+
+  // Parallax
+  parallax();
+
+});
+
 
 // Temperary fix
 // const searchLogoElement = document.querySelector('.ratings.ratings--frontpage .ratings__text');
@@ -86,12 +98,6 @@ const navigationElement = document.querySelector('.js-navigation');
 const siteElement = document.querySelector('.js-site');
 if (menuButtonElements != null || navigationElement != null || siteElement != null) {
   mobileMenu(menuButtonElements, navigationElement, siteElement);
-}
-
-// Regional variations
-const regionalVariationElements = [...document.querySelectorAll('.js-regional-variation')];
-if (regionalVariationElements.length > 0) {
-  regionalVariation(regionalVariationElements);
 }
 
 // Print page
