@@ -48,13 +48,16 @@ class FsaNotifyStorage {
     $allergens = $alert->field_alert_allergen->getValue();
     $allergens = array_map(function ($a) {return $a['target_id'];}, $allergens);
 
-    $query = \Drupal::entityQuery('user');
-    $query->condition('uid', 0, '>');
-    $query->condition('status', 1);
-    $query->condition('field_notification_method', 'none', '!=');
-    $query->condition('field_subscribed_notifications', $allergens, 'in');
-    // $query->sort('uid');
-    $uids = $query->execute();
+    $uids = [];
+    if (!empty($allergens)) {
+      $query = \Drupal::entityQuery('user');
+      $query->condition('uid', 0, '>');
+      $query->condition('status', 1);
+      $query->condition('field_notification_method', 'none', '!=');
+      $query->condition('field_subscribed_notifications', $allergens, 'in');
+      // $query->sort('uid').
+      $uids = $query->execute();
+    }
 
     foreach ($uids as $uid) {
       $u = User::load($uid);
