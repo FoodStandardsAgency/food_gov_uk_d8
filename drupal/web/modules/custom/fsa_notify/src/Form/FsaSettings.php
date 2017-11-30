@@ -1,15 +1,13 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\fsa_notify\Form\FsaSettings.
- */
-
 namespace Drupal\fsa_notify\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
+/**
+ * FSA notify settings page.
+ */
 class FsaSettings extends FormBase {
 
   private $state_key = 'fsa_notify.killswitch';
@@ -17,11 +15,13 @@ class FsaSettings extends FormBase {
   /**
    * {@inheritdoc}
    */
-
   public function getFormId() {
     return 'fsa_notify.settings';
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
     $weight = 0;
@@ -40,7 +40,7 @@ class FsaSettings extends FormBase {
     ];
 
     foreach ($keys as $key => $title) {
-      // cannot have dot in render array key
+      // Cannot have dot in render array key.
       $key2 = str_replace('.', '___', $key);
       $value = \Drupal::state()->get($key);
       $form[$key2] = [
@@ -136,6 +136,9 @@ class FsaSettings extends FormBase {
     return $form;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
     $keys = [
@@ -146,7 +149,7 @@ class FsaSettings extends FormBase {
     ];
 
     foreach ($keys as $key) {
-      // cannot have dot in render array key
+      // Cannot have dot in render array key.
       $key2 = str_replace('.', '___', $key);
       $value = $form_state->getValue($key2);
       \Drupal::state()->set($key, $value);
@@ -157,7 +160,8 @@ class FsaSettings extends FormBase {
 
     if (empty($status_new)) {
       \Drupal::state()->delete($this->state_key);
-    } else {
+    }
+    else {
       \Drupal::state()->set($this->state_key, 1);
     }
 

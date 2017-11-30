@@ -2,17 +2,24 @@
 
 namespace Drupal\fsa_notify;
 
-use Drupal\fsa_notify\FsaNotifyMessage;
-
+/**
+ *
+ */
 class FsaNotifyMessageImmediate extends FsaNotifyMessage {
 
   private $subject;
 
+  /**
+   *
+   */
   public function __construct() {
     parent::__construct();
     $this->subject = t('Immediate');
   }
 
+  /**
+   *
+   */
   protected function assemble($items) {
 
     foreach ($items as &$item) {
@@ -28,6 +35,9 @@ class FsaNotifyMessageImmediate extends FsaNotifyMessage {
     return $items;
   }
 
+  /**
+   *
+   */
   protected function theme($item) {
     $title = $item->getTitle();
     $line1 = sprintf('%s', $title);

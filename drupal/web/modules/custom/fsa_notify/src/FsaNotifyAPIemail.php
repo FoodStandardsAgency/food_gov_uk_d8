@@ -1,23 +1,31 @@
 <?php
 
-// https://github.com/alphagov/notifications-php-client
-
 namespace Drupal\fsa_notify;
 
 use Alphagov\Notifications\Exception\ApiException;
 use Alphagov\Notifications\Exception\NotifyException;
-use Drupal\fsa_notify\FsaNotifyAPI;
 use Drupal\user\Entity\User;
 
+/**
+ * FSA Notify Emailing class.
+ *
+ * @see // https://github.com/alphagov/notifications-php-client
+ */
 class FsaNotifyAPIemail extends FsaNotifyAPI {
 
+  /**
+   * Todo: document.
+   */
   public function __construct() {
     $state_key = "fsa_notify.template_email";
     parent::__construct($state_key);
   }
-  
+
+  /**
+   * Todo: document.
+   */
   public function send(User $user, string $reference, array $personalisation) {
-  
+
     $email = $user->getEmail();
 
     try {
