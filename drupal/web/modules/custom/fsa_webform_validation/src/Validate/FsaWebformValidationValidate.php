@@ -3,6 +3,7 @@
 namespace Drupal\fsa_webform_validation\Validate;
 
 use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Validates webform elements.
@@ -43,17 +44,16 @@ class FsaWebformValidationValidate {
       }
     }
 
-    // Set error message.
+    // Redirect user.
     if (isset($error) && isset($fsa_authority)) {
-      if ($error && $fsa_authority->hasField('field_advice_url')) {
+      if ($error) {
         $args = [
-          '%name' => $la['name'],
-          '@path' => $fsa_authority->get('field_advice_url')->getString(),
+          'id' => $fsa_authority->id(),
+          'nid' => \Drupal::routeMatch()->getRawParameter('node'),
         ];
-        $formState->setError(
-          $element,
-          t('<span>Sorry, %name requires you to make a report directly to them. Please see their <a href="@path" target="_blank">advice page</a>.</span>', $args)
-        );
+        $path = '/help/consumers/report-a-food-safety-concern/redirect?' . http_build_query($args);
+        $response = new RedirectResponse($path);
+        $response->send();
       }
     }
   }

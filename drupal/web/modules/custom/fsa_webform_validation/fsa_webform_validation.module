@@ -25,3 +25,19 @@ function fsa_webform_validation_webform_element_alter(array &$element, FormState
     ];
   }
 }
+
+/**
+ * Implements hook_theme().
+ */
+function fsa_webform_validation_theme($existing, $type, $theme, $path) {
+  return [
+    'fsa_webform_validation_redirect' => [
+      'variables' => [
+        'name' => NULL,
+        'advice_url' => NULL,
+        'email' => NULL,
+        'back' => NULL,
+      ],
+    ],
+  ];
+}
