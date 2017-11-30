@@ -2,8 +2,6 @@
 
 namespace Drupal\fsa_webform_validation\Controller;
 
-use Drupal\Core\Link;
-
 /**
  * Report a food safety concern redirect.
  */
