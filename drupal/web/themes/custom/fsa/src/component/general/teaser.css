@@ -17,7 +17,7 @@
 .latest-block:before,
 .promo-list:before,
 .liftup-list:before {
-  content: "";
+  content: '';
   background-color: var(--color-purple);
   position: absolute;
   z-index: var(--z-bottom);
@@ -160,7 +160,7 @@
 
 .node-teaser:before,
 .node-teaser:after {
-  content: "";
+  content: '';
   position: absolute;
   z-index: var(--z-bottom);
   top: 0;

@@ -19,7 +19,7 @@
 }
 
 .regional-variation:after {
-  content: "";
+  content: '';
   position: absolute;
   top: -1px;
   left: 0;
