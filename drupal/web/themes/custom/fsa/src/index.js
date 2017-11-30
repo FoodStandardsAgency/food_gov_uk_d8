@@ -8,12 +8,9 @@ import toggleContent from './core/helper/toggleContent';
 import toc from './core/helper/toc';
 import mobileMenu from './core/helper/mobile-menu';
 import subNavigation from './core/helper/subNavigation';
-import printPage from './core/helper/printPage';
 
-import regionalVariation from './component/regional-variation/regionalVariation';
-import explanation from './component/explanation/explanation';
+import { addHeading, printPage } from './component/content/content';
 import parallax from './component/parallax/parallax';
-
 
 const breakpoints = {
   small: "sm",
@@ -28,11 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Polyfill svgs
   svg4everybody({ polyfill: true });
 
-  // Regional variation
-  regionalVariation();
+  // Add heading
+  addHeading();
 
-  // Explanation
-  explanation();
+  // Print page
+  printPage();
 
   // Parallax
   parallax();
@@ -98,12 +95,6 @@ const navigationElement = document.querySelector('.js-navigation');
 const siteElement = document.querySelector('.js-site');
 if (menuButtonElements != null || navigationElement != null || siteElement != null) {
   mobileMenu(menuButtonElements, navigationElement, siteElement);
-}
-
-// Print page
-const printPDFWrapperElements = [...document.querySelectorAll('.print__wrapper--pdf')];
-if (printPDFWrapperElements.length > 0) {
-  printPage(printPDFWrapperElements);
 }
 
 // Add class if touch device

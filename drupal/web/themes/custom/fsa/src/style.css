@@ -44,6 +44,4 @@
 @import "component/general/navigation-secondary.css";
 @import "component/general/navigation.css";
 
-
-@import "component/regional-variation/regional-variation.css";
-@import "component/explanation/explanation.css";
+@import "component/content/content.css";
