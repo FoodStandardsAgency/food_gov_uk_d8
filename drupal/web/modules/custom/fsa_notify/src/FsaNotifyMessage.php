@@ -5,7 +5,6 @@ namespace Drupal\fsa_notify;
 use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
 
-
 /**
  * Defines base implementation for FSA Notify messaging.
  */

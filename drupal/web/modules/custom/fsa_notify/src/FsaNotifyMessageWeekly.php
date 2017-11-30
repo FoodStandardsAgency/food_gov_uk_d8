@@ -3,14 +3,14 @@
 namespace Drupal\fsa_notify;
 
 /**
- *
+ * Weekly message digest sending class.
  */
 class FsaNotifyMessageWeekly extends FsaNotifyMessage {
 
   private $subject;
 
   /**
-   *
+   * {@inheritdoc}
    */
   public function __construct() {
     parent::__construct();
@@ -18,7 +18,7 @@ class FsaNotifyMessageWeekly extends FsaNotifyMessage {
   }
 
   /**
-   *
+   * {@inheritdoc}
    */
   protected function assemble($items) {
 
@@ -37,7 +37,7 @@ class FsaNotifyMessageWeekly extends FsaNotifyMessage {
   }
 
   /**
-   *
+   * {@inheritdoc}
    */
   protected function theme($item) {
     $title = $item->getTitle();

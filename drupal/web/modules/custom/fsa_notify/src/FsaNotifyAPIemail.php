@@ -14,7 +14,7 @@ use Drupal\user\Entity\User;
 class FsaNotifyAPIemail extends FsaNotifyAPI {
 
   /**
-   * Todo: document.
+   * {@inheritdoc}
    */
   public function __construct() {
     $state_key = "fsa_notify.template_email";
@@ -22,7 +22,7 @@ class FsaNotifyAPIemail extends FsaNotifyAPI {
   }
 
   /**
-   * Todo: document.
+   * {@inheritdoc}
    */
   public function send(User $user, string $reference, array $personalisation) {
 

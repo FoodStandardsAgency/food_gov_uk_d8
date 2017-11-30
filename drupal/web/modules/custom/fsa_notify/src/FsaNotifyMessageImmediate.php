@@ -3,14 +3,14 @@
 namespace Drupal\fsa_notify;
 
 /**
- *
+ * Immediate message sending class.
  */
 class FsaNotifyMessageImmediate extends FsaNotifyMessage {
 
   private $subject;
 
   /**
-   *
+   * {@inheritdoc}
    */
   public function __construct() {
     parent::__construct();
@@ -18,7 +18,7 @@ class FsaNotifyMessageImmediate extends FsaNotifyMessage {
   }
 
   /**
-   *
+   * {@inheritdoc}
    */
   protected function assemble($items) {
 
@@ -36,7 +36,7 @@ class FsaNotifyMessageImmediate extends FsaNotifyMessage {
   }
 
   /**
-   *
+   * {@inheritdoc}
    */
   protected function theme($item) {
     $title = $item->getTitle();
