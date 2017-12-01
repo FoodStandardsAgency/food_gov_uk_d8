@@ -121,7 +121,7 @@ class DefaultController extends ControllerBase {
   }
 
   /**
-   * Creates teh account page.
+   * Creates the account page.
    */
   public function myAccountPage() {
     $uid = \Drupal::currentUser()->id();
@@ -177,7 +177,7 @@ class DefaultController extends ControllerBase {
   public static function storableProfileFieldValue(array $values) {
     foreach ($values as $key => $value) {
       // @todo: refactor this if we need more food alerts to subscribe to.
-      $values = ($value === 0) ? $values = [] : key($values);
+      $values = ($value === 0) ? [] : key($values);
     }
     return $values;
   }
