@@ -19,9 +19,52 @@ class SignInService {
 
   }
 
+  /**
+   * Food alert subscription options.
+   *
+   * @return array
+   *   List of options.
+   */
+  public function foodAlertsAsOptions() {
+
+    // Initially on "all", compose manually and change to better logic if
+    // different food alert types are allowed to subscribe to.
+    $alert_types = [
+      'all' => $this->t('Food alerts')->render(),
+    ];
+
+    $options = [];
+    foreach ($alert_types as $key => $name) {
+      $options[$key] = $name;
+    }
+
+    return $options;
+  }
 
   /**
+   * Get user's subscribed food alerts.
+   *
+   * @param \Drupal\user\Entity\User $account
+   *   User account.
+   *
    * @return array
+   *   Alerts user has subscribed to.
+   */
+  public function subscribedFoodAlerts(User $account) {
+    $subscriptions = $account->get('field_subscribed_food_alerts')
+      ->getValue();
+    $subscribed_food_alerts = [];
+    foreach ($subscriptions as $s) {
+      $subscribed_food_alerts[] = $s['value'];
+    }
+    return $subscribed_food_alerts;
+  }
+
+  /**
+   * Get allergen terms as options to subscription forms.
+   *
+   * @return array
+   *   Array of options in FAPI suitable format.
    */
   public function allergenTermsAsOptions() {
     $all_terms = \Drupal::entityTypeManager()
@@ -35,8 +78,13 @@ class SignInService {
   }
 
   /**
+   * Get user's subscribed term id's.
+   *
    * @param \Drupal\user\Entity\User $account
-   * @return int[] Term IDs
+   *   User object.
+   *
+   * @return array
+   *   Term IDs
    */
   public function subscribedTermIds(User $account) {
     $subscriptions = $account->get('field_subscribed_notifications')

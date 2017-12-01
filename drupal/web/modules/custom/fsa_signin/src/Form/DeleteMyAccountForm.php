@@ -5,7 +5,6 @@ namespace Drupal\fsa_signin\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\fsa_signin\Controller\DefaultController;
-use Drupal\user\Entity\User;
 
 /**
  * Class DeleteMyAccountForm.
@@ -30,12 +29,12 @@ class DeleteMyAccountForm extends FormBase {
       ];
     }
     else {
-      $form['actions'] = array('#type' => 'actions');
-      $form['actions']['submit'] = array(
+      $form['actions'] = ['#type' => 'actions'];
+      $form['actions']['submit'] = [
         '#type' => 'submit',
         '#value' => $this->t('Delete account'),
         '#attributes' => ['class' => ['warning red']],
-      );
+      ];
     }
     return $form;
   }

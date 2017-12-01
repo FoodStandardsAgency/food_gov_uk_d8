@@ -12,7 +12,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class AlertsForRegistrationForm extends FormBase {
 
-  /** @var  SignInService */
+  /**
+   * Signin service.
+   *
+   * @var \Drupal\fsa_signin\SignInService
+   */
   protected $signInService;
 
   /**
@@ -44,28 +48,37 @@ class AlertsForRegistrationForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     /** @var \Drupal\user\PrivateTempStore $tempstore */
     $tempstore = \Drupal::service('user.private_tempstore')->get('fsa_signin');
-    $default_values = $tempstore->get('alert_tids_for_registration');
-    $default_values = ($default_values === NULL) ? [] : $default_values;
-    $options = ['all' => $this->t('All allergy alerts')->render()] + $this->signInService->allergenTermsAsOptions();
+    $alert_tid_defaults = $tempstore->get('alert_tids_for_registration');
+    $alert_tid_defaults = ($alert_tid_defaults === NULL) ? [] : $alert_tid_defaults;
+
+    $food_alert_defaults = $tempstore->get('food_alert_registration');
+    $food_alert_defaults = ($food_alert_defaults === NULL) ? [] : $food_alert_defaults;
 
     $form['title'] = [
       '#markup' => '<h2>' . $this->t('Alerts') . '</h2>',
     ];
     $form['description'] = [
-      '#markup' => '<p>' . $this->t('Get alerts for products recalled from sale because of an allergy risk, wrong labelling, contamination or food poisoning risk.') . '</p>',
+      '#markup' => '<p>' . $this->t("Get details of food recalls and withdrawals and allergy alerts as soon as they're issued by email or sent as an SMS text message direct to your mobile phone. This is a free service.") . '</p>',
     ];
+    $form['food_alert_registration'] = [
+      '#type' => 'checkboxes',
+      '#title' => $this->t('Food alerts'),
+      '#options' => $this->signInService->foodAlertsAsOptions(),
+      '#default_value' => $food_alert_defaults,
+    ];
+
     $form['alert_tids_for_registration'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Allergy alerts'),
-      '#options' => $options,
-      '#default_value' => $default_values,
+      '#options' => ['all' => $this->t('All allergy alerts')->render()] + $this->signInService->allergenTermsAsOptions(),
+      '#default_value' => $alert_tid_defaults,
       '#description' => $this->t('Select all that apply'),
     ];
-    $form['actions'] = array('#type' => 'actions');
-    $form['actions']['submit'] = array(
+    $form['actions'] = ['#type' => 'actions'];
+    $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Next'),
-    );
+    ];
     $form['#attached']['library'][] = 'fsa_signin/subscription_alerts';
     return $form;
   }
@@ -83,9 +96,11 @@ class AlertsForRegistrationForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Start a manual session for anonymous users.
     if (\Drupal::currentUser()->isAnonymous() && !isset($_SESSION['multistep_form_holds_session'])) {
-      $_SESSION['multistep_form_holds_session'] = true;
+      $_SESSION['multistep_form_holds_session'] = TRUE;
       \Drupal::service('session_manager')->start();
     }
+
+    $food_alert_registration = $form_state->getValue('food_alert_registration');
 
     $alert_tids = $form_state->getValue('alert_tids_for_registration');
     // Filter only those user has selected:
@@ -93,6 +108,7 @@ class AlertsForRegistrationForm extends FormBase {
 
     /** @var \Drupal\user\PrivateTempStore $tempstore */
     $tempstore = \Drupal::service('user.private_tempstore')->get('fsa_signin');
+    $tempstore->set('food_alert_registration', $food_alert_registration);
     $tempstore->set('alert_tids_for_registration', $selected_tids);
     $form_state->setRedirect('fsa_signin.user_registration_form');
   }

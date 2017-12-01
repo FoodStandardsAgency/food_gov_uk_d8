@@ -6,8 +6,10 @@ dependencies:
     - field.field.user.user.field_notification_cache
     - field.field.user.user.field_notification_method
     - field.field.user.user.field_notification_sms
+    - field.field.user.user.field_subscribed_food_alerts
     - field.field.user.user.field_subscribed_notifications
   module:
+    - options
     - user
 _core:
   default_config_hash: V51QPCKkgNREKtSmB9Iu2wmAMEpktVpnzklWaZV8UYo
@@ -16,6 +18,13 @@ targetEntityType: user
 bundle: user
 mode: default
 content:
+  field_subscribed_food_alerts:
+    weight: 7
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
   field_subscribed_notifications:
     weight: 6
     label: above

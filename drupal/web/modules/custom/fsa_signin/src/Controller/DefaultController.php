@@ -2,10 +2,17 @@
 
 namespace Drupal\fsa_signin\Controller;
 
+use Drupal\fsa_signin\Form\DeleteMyAccountForm;
+use Drupal\fsa_signin\Form\MyAccountForm;
+use Drupal\fsa_signin\Form\SmsSubscriptionsForm;
+use Drupal\fsa_signin\Form\EmailPreferencesForm;
+use Drupal\fsa_signin\Form\EmailSubscriptionsForm;
+use Drupal\fsa_signin\Form\SendPasswordEmailForm;
+use Drupal\fsa_signin\Form\CtaRegister;
+use Drupal\user\Form\UserLoginForm;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
 use Drupal\fsa_signin\SignInService;
-use Drupal\taxonomy\Entity\Term;
 use Drupal\user\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\fsa_signin\Form\UnsubscribeForm;
@@ -15,7 +22,11 @@ use Drupal\fsa_signin\Form\UnsubscribeForm;
  */
 class DefaultController extends ControllerBase {
 
-  /** @var  SignInService */
+  /**
+   * Signin service.
+   *
+   * @var \Drupal\fsa_signin\SignInService
+   */
   protected $signInService;
 
   /**
@@ -34,22 +45,28 @@ class DefaultController extends ControllerBase {
     );
   }
 
+  /**
+   * Create signin page.
+   */
   public function signInPage() {
     $title = ['#markup' => '<h1>' . $this->t('Sign in') . '</h1>'];
-    $login_form = \Drupal::formBuilder()->getForm(\Drupal\user\Form\UserLoginForm::class);
-    $cta_register_form = \Drupal::formBuilder()->getForm(\Drupal\fsa_signin\Form\CtaRegister::class);
-    $send_pwd_form = \Drupal::formBuilder()->getForm(\Drupal\fsa_signin\Form\SendPasswordEmailForm::class);
+    $login_form = \Drupal::formBuilder()->getForm(UserLoginForm::class);
+    $cta_register_form = \Drupal::formBuilder()->getForm(CtaRegister::class);
+    $send_pwd_form = \Drupal::formBuilder()->getForm(SendPasswordEmailForm::class);
 
     return [
       $title,
       $login_form,
       $cta_register_form,
-      $send_pwd_form
+      $send_pwd_form,
     ];
   }
 
+  /**
+   * Create register page.
+   */
   public function registerPage() {
-    $entity = \Drupal::entityTypeManager()->getStorage('user')->create(array());
+    $entity = \Drupal::entityTypeManager()->getStorage('user')->create([]);
     $formObject = \Drupal::entityTypeManager()
       ->getFormObject('user', 'register')
       ->setEntity($entity);
@@ -58,14 +75,25 @@ class DefaultController extends ControllerBase {
     return $register_form;
   }
 
+  /**
+   * Create email subscription pref. page.
+   */
   public function emailSubscriptionsPage() {
     $uid = \Drupal::currentUser()->id();
     $account = User::load($uid);
-    $subscribed_term_ids = $this->signInService->subscribedTermIds($account);
-    $options = $this->signInService->allergenTermsAsOptions();
 
-    $subscription_form = \Drupal::formBuilder()->getForm(\Drupal\fsa_signin\Form\EmailSubscriptionsForm::class, $account, $options, $subscribed_term_ids);
-    $preferences_form = \Drupal::formBuilder()->getForm(\Drupal\fsa_signin\Form\EmailPreferencesForm::class, $account);
+    $options = [
+      'subscribed_notifications' => $this->signInService->allergenTermsAsOptions(),
+      'subscribed_food_alerts' => $this->signInService->foodAlertsAsOptions(),
+    ];
+
+    $default_values = [
+      'subscribed_food_alerts' => $this->signInService->subscribedFoodAlerts($account),
+      'subscribed_notifications' => $this->signInService->subscribedTermIds($account),
+    ];
+
+    $subscription_form = \Drupal::formBuilder()->getForm(EmailSubscriptionsForm::class, $account, $options, $default_values);
+    $preferences_form = \Drupal::formBuilder()->getForm(EmailPreferencesForm::class, $account);
 
     return [
       ['#markup' => '<div class="profile header subscriptions"><h2>' . $this->t('Subscriptions') . '</h2></div>'],
@@ -75,13 +103,16 @@ class DefaultController extends ControllerBase {
     ];
   }
 
+  /**
+   * Create SMS subscription pref. page.
+   */
   public function smsSubscriptionsPage() {
     $uid = \Drupal::currentUser()->id();
     $account = User::load($uid);
     $subscribed_term_ids = $this->signInService->subscribedTermIds($account);
     $options = $this->signInService->allergenTermsAsOptions();
 
-    $subscription_form = \Drupal::formBuilder()->getForm(\Drupal\fsa_signin\Form\SmsSubscriptionsForm::class, $account, $options, $subscribed_term_ids);
+    $subscription_form = \Drupal::formBuilder()->getForm(SmsSubscriptionsForm::class, $account, $options, $subscribed_term_ids);
 
     return [
       ['#markup' => '<div class="profile header subscriptions"><h2>' . $this->t('Subscriptions') . '</h2></div>'],
@@ -89,11 +120,14 @@ class DefaultController extends ControllerBase {
     ];
   }
 
+  /**
+   * Creates the account page.
+   */
   public function myAccountPage() {
     $uid = \Drupal::currentUser()->id();
     $account = User::load($uid);
-    $acc_form = \Drupal::formBuilder()->getForm(\Drupal\fsa_signin\Form\MyAccountForm::class, $account);
-    $delete_acc_form = \Drupal::formBuilder()->getForm(\Drupal\fsa_signin\Form\DeleteMyAccountForm::class, $account);
+    $acc_form = \Drupal::formBuilder()->getForm(MyAccountForm::class, $account);
+    $delete_acc_form = \Drupal::formBuilder()->getForm(DeleteMyAccountForm::class, $account);
     return [
       ['#markup' => '<div class="profile header password"><h2>' . $this->t('Change password') . '</h2></div>'],
       ['#markup' => '<p>' . $this->t('If you would like to change your existing password, please enter it below.') . '</p>'],
@@ -104,11 +138,14 @@ class DefaultController extends ControllerBase {
     ];
   }
 
+  /**
+   * Registration thank you page.
+   */
   public function thankYouPage() {
     $profile_page_url = Url::fromRoute('fsa_signin.default_controller_myAccountPage')->toString();
-    $markup  = '<h1>' . $this->t('Thank you!') . '</h1>';
+    $markup = '<h1>' . $this->t('Thank you!') . '</h1>';
     $markup .= '<p>' . $this->t('Edit your subscriptions in your account page') . '</p>';
-    $markup .= '<p><a class="button" href="' .$profile_page_url. '">' . $this->t('My account') . '</a></p>';
+    $markup .= '<p><a class="button" href="' . $profile_page_url . '">' . $this->t('My account') . '</a></p>';
 
     return [
       '#markup' => $markup,
@@ -126,6 +163,23 @@ class DefaultController extends ControllerBase {
     $unsubscribe_form = \Drupal::formBuilder()->getForm(UnsubscribeForm::class);
 
     return [$unsubscribe_form];
+  }
+
+  /**
+   * Modify form value to be saved correctly.
+   *
+   * @param array $values
+   *   The values array.
+   *
+   * @return array|mixed
+   *   Value to be saved for a field.
+   */
+  public static function storableProfileFieldValue(array $values) {
+    foreach ($values as $key => $value) {
+      // @todo: refactor this if we need more food alerts to subscribe to.
+      $values = ($value === 0) ? [] : key($values);
+    }
+    return $values;
   }
 
   /**
