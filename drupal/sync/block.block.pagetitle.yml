@@ -10,7 +10,7 @@ dependencies:
     - fsa
 third_party_settings:
   block_class:
-    classes: ''
+    classes: block-page-title
 id: pagetitle
 theme: fsa
 region: content

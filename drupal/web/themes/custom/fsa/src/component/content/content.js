@@ -20,6 +20,7 @@ function addHeading() {
       heading.innerHTML = Drupal.t(`Difference in Northern Ireland`);
     } else if (element.classList.contains('js-explanation')) {
       heading.innerHTML = Drupal.t(`FSA Explains`);
+      heading.classList.add(`explanation__title`);
     }
 
     element.innerHTML = ``;

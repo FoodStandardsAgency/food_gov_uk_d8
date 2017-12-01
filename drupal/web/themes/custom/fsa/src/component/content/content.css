@@ -1,6 +1,120 @@
 @import "../../core/helper";
 @import "../../core/custom-property";
 
+/*Content List styles*/
+.ratings__content ol,
+.field__body ol {
+  padding-left: 1em;
+}
+
+.ratings__content ol li:not(:last-child),
+.field__body ol li:not(:last-child) {
+  margin-bottom: 1em;
+}
+
+.ratings__content ul,
+.field__body ul {
+  padding-left: 0;
+}
+
+.ratings__content ul li,
+.field__body ul li {
+  position: relative;
+  @mixin responsive-declaration padding-left, 1.3em, 1.5em;
+  list-style: none;
+
+  @media print {
+    list-style: circle;
+    padding-left: 0;
+    margin-left: 1.5em;
+  }
+}
+
+.ratings__content ul li:not(:last-child),
+.field__body ul li:not(:last-child) {
+  margin-bottom: 0.5em;
+}
+
+.ratings__content ul li:after,
+.field__body ul li:after {
+  content: '';
+  display: block;
+  @mixin responsive-declaration width, 1.3em, 1.5em;
+  @mixin responsive-declaration height, 1.3em, 1.5em;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  transform: scale(0.3333);
+  box-shadow: inset 0em 0em 0em 2px var(--primary-color);
+}
+
+.ratings__content ol ol,
+.ratings__content ul ul,
+.field__body ol ol,
+.field__body ul ul {
+  margin-top: 0.5em;
+  @mixin responsive-declaration padding-left, 1.5em, 2.5em;
+
+  & li:not(:last-child) {
+    margin-bottom: 1em;
+  }
+}
+
+/*Content styles*/
+figure {}
+
+figure > figcaption {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  @mixin responsive-declaration font-size, 1em, 0.9em;
+  color: var(--color-gray);
+  margin-top: 1em;
+  @mixin responsive-declaration margin-bottom, 1.5em, 2em;
+  padding-top: 0.25em;
+  padding-left: 1em;
+  padding-bottom: 0.25em;
+}
+
+figure > figcaption:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 5px;
+  background-color: var(--color-light-gray);
+}
+
+figure:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+/* Quote */
+blockquote {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  @mixin responsive-declaration margin-top, 1.5em, 2em;
+  @mixin responsive-declaration margin-bottom, 1.5em, 2em;
+  @mixin responsive-declaration padding-left, 2em, 0em;
+  margin-right: 1em;
+}
+
+blockquote:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  @mixin responsive-declaration left, 0em, -2em;
+  bottom: 0;
+  width: 5px;
+  background-color: var(--color-green);
+}
+
 /* Regional variation */
 .regional-variation {
   position: relative;
@@ -48,6 +162,32 @@
   background-color: var(--color-orange);
 }
 
+.block-page-title .regional-variation {
+  position: relative;
+  background-color: transparent;
+  font-weight: 600;
+  padding: 0;
+  padding-bottom: 1em;
+  border: 0;
+  margin-top: 0;
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
+}
+
+.block-page-title h1 {
+  margin-top: 0;
+}
+
+.block-page-title .regional-variation:after {
+  content: '';
+  position: absolute;
+  top: auto;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: 5px;
+  width: auto;
+}
+
 /* Explanation */
 .explanation {
   background-color: var(--color-lighter-gray);
@@ -55,21 +195,57 @@
 
 .explanation {
   position: relative;
+  @mixin responsive-declaration margin-top, 1em, 2em;
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
+}
+
+.explanation__title {
+  background-color: var(--primary-color);
+  border-bottom: 4px solid var(--color-green);
+  color: var(--color-white);
+  @mixin responsive-declaration padding-top, 1rem, 1.5rem;
+  @mixin responsive-declaration padding-right, 1rem, 2rem;
+  @mixin responsive-declaration padding-bottom, 1rem, 1.5rem;
+  @mixin responsive-declaration padding-left, 1rem, 2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+.explanation p {
   background-color: var(--color-lighter-gray);
   @mixin responsive-declaration padding, 1em, 2em;
+  border: 1px solid var(--color-light-gray);
+  border-top: 0;
+  margin-top: 0;
+}
+
+
+/*Important*/
+.important {
+  @mixin responsive-declaration padding, 1em, 2em;
+  background-color: var(--color-lighter-gray);
   border: 1px solid var(--color-light-gray);
   @mixin responsive-declaration margin-top, 1em, 2em;
   @mixin responsive-declaration margin-bottom, 1em, 2em;
 }
 
-.explanation:before {
-  content: attr(data-header);
-  background-color: var(--primary-color);
-  border-bottom: 4px solid var(--color-green);
-  color: var(--color-white);
-  @mixin responsive-declaration padding, 1em, 2em;
-  display: block;
-  font-weight: 600;
-  text-transform: uppercase;
-  margin-bottom: 0.5em;
+.important .regional-variation {
+  background-color: var(--color-white);
+}
+
+.important .video-embed-field-responsive-video {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.important .embedded-entity img {
+  margin-left: 0em;
+  width: 100%;
+}
+
+.important .important {
+  background-color: var(--color-white);
+  margin-left: 0;
+  margin-right: 0;
 }
