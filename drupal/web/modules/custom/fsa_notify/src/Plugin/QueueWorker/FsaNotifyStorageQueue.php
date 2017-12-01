@@ -16,12 +16,14 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   title = @Translation("FSA Notify Store"),
  * )
  */
-
 class FsaNotifyStorageQueue extends QueueWorkerBase implements ContainerFactoryPluginInterface {
 
   protected $nodeStorage;
   protected $notifyStorage;
 
+  /**
+   * Todo: document.
+   */
   public function __construct(
     EntityStorageInterface $node_storage,
     FsaNotifyStorage $notify_storage
@@ -30,6 +32,9 @@ class FsaNotifyStorageQueue extends QueueWorkerBase implements ContainerFactoryP
     $this->notifyStorage = $notify_storage;
   }
 
+  /**
+   * Todo: document.
+   */
   public static function create(
     ContainerInterface $container,
     array $configuration,
@@ -42,6 +47,9 @@ class FsaNotifyStorageQueue extends QueueWorkerBase implements ContainerFactoryP
     );
   }
 
+  /**
+   * Todo: document.
+   */
   public function processItem($nid) {
 
     $node = $this->nodeStorage->load($nid);
@@ -50,7 +58,7 @@ class FsaNotifyStorageQueue extends QueueWorkerBase implements ContainerFactoryP
       return;
     }
 
-    // time-consuming
+    // time-consuming.
     $this->notifyStorage->store($node);
 
   }

@@ -1,21 +1,29 @@
 <?php
 
-// https://github.com/alphagov/notifications-php-client
-
 namespace Drupal\fsa_notify;
 
 use Alphagov\Notifications\Exception\ApiException;
 use Alphagov\Notifications\Exception\NotifyException;
-use Drupal\fsa_notify\FsaNotifyAPI;
 use Drupal\user\Entity\User;
 
+/**
+ * Notify SMS sending class.
+ *
+ * @see https://github.com/alphagov/notifications-php-client
+ */
 class FsaNotifyAPIsms extends FsaNotifyAPI {
 
+  /**
+   * {@inheritdoc}
+   */
   public function __construct() {
     $state_key = "fsa_notify.template_sms";
     parent::__construct($state_key);
   }
-  
+
+  /**
+   * {@inheritdoc}
+   */
   public function send(User $user, string $reference, array $personalisation) {
 
     $phoneNumber = $user->field_notification_sms->getString();
