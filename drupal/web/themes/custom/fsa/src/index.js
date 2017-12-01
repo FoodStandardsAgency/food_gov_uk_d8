@@ -6,9 +6,9 @@ import responsiveTables from './core/helper/responsiveTables';
 import stickyElement from './core/helper/stickyElement';
 import toggleContent from './core/helper/toggleContent';
 import toc from './core/helper/toc';
-import mobileMenu from './core/helper/mobile-menu';
 import subNavigation from './core/helper/subNavigation';
 
+import navigation from './component/navigation/navigation';
 import { addHeading, printPage } from './component/content/content';
 import parallax from './component/parallax/parallax';
 
@@ -33,6 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Parallax
   parallax();
+
+  // Navigation
+  navigation();
 
 });
 
@@ -87,14 +90,6 @@ const tableOfContentsElements = [...document.querySelectorAll('.toc-tree')];
 const contentElements = [...document.querySelectorAll('.toc-filter')];
 if (tableOfContentsElements.length > 0 || contentElements.length > 0) {
   toc(tableOfContentsElements, contentElements);
-}
-
-// Mobile menu
-const menuButtonElements = document.querySelectorAll('.js-menu-button');
-const navigationElement = document.querySelector('.js-navigation');
-const siteElement = document.querySelector('.js-site');
-if (menuButtonElements != null || navigationElement != null || siteElement != null) {
-  mobileMenu(menuButtonElements, navigationElement, siteElement);
 }
 
 // Add class if touch device
