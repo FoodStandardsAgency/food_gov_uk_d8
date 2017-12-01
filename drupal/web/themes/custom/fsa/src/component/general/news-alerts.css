@@ -161,29 +161,24 @@
 }
 
 .theme--news-alerts .alert__type_badge {
-  padding: 0.6em 2.5em;
-  background-color: var(--color-lighter-gray);
   color: var(--color-gray);
   text-transform: uppercase;
   font-weight: 600;
   display: inline-block;
   text-align: center;
-  @mixin responsive-declaration margin-bottom, 1em, 2em;
+  margin-bottom: 1em;
 }
 
 .theme--news-alerts .alert__type_badge.alert__type_aa {
-  background-color: var(--color-red);
-  color: var(--color-white);
+  color: var(--color-lighter-purple);
 }
 
 .theme--news-alerts .alert__type_badge.alert__type_fafa {
-  background-color: var(--color-siren);
-  color: var(--color-white);
+  color: var(--color-red);
 }
 
 .theme--news-alerts .alert__type_badge.alert__type_prin {
-  background-color: var(--color-blue);
-  color: var(--color-white);
+  color: var(--color-blue);
 }
 
 :--not-touch .theme--news-alerts .type__Alert.views-row a:--enter {
