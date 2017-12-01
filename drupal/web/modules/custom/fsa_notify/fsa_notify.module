@@ -120,7 +120,6 @@ function fsa_notify_cron() {
 function fsa_notify_sent($state_key) {
   $now = time();
   $last = \Drupal::state()->set($state_key, $now);
-  drush_print_r($last);
 }
 
 /**
