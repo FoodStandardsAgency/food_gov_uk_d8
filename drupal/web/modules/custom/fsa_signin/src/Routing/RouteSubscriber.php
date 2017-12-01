@@ -2,15 +2,20 @@
 
 namespace Drupal\fsa_signin\Routing;
 
-
 use Drupal\Core\Url;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
+/**
+ * Routesubscriber.
+ */
 class RouteSubscriber implements EventSubscriberInterface {
 
+  /**
+   * Check if a redirect is required.
+   */
   public function checkForRedirection(GetResponseEvent $event) {
     $route_name = \Drupal::routeMatch()->getRouteName();
     if ($route_name == 'user.login') {
@@ -31,7 +36,7 @@ class RouteSubscriber implements EventSubscriberInterface {
    * {@inheritdoc}
    */
   public static function getSubscribedEvents() {
-    $events[KernelEvents::REQUEST][] = array('checkForRedirection');
+    $events[KernelEvents::REQUEST][] = ['checkForRedirection'];
     return $events;
   }
 

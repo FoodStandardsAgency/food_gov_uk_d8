@@ -2,7 +2,8 @@
 
 namespace Drupal\fsa_signin\Form;
 
-use Drupal\Component\Utility\Random;
+use Drupal\fsa_signin\Controller\DefaultController;
+use Drupal\user\Entity\User;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
@@ -25,8 +26,13 @@ class UserRegistrationForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     /** @var \Drupal\user\PrivateTempStore $tempstore */
     $tempstore = \Drupal::service('user.private_tempstore')->get('fsa_signin');
+    $food_alerts = $tempstore->get('food_alert_registration');
     $alert_tids = $tempstore->get('alert_tids_for_registration');
 
+    $form['subscribed_food_alerts'] = [
+      '#type' => 'value',
+      '#value' => $food_alerts,
+    ];
     $form['subscribed_notifications'] = [
       '#type' => 'value',
       '#value' => $alert_tids,
@@ -97,17 +103,13 @@ class UserRegistrationForm extends FormBase {
       '#default_value' => \Drupal::currentUser()->getPreferredLangcode(),
     ];
 
-    $form['alert_tids'] = [
-      '#type' => 'value',
-      '#value' => $alert_tids,
-    ];
-    $form['actions'] = array('#type' => 'actions');
-    $form['actions']['submit'] = array(
+    $form['actions'] = ['#type' => 'actions'];
+    $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
-    );
+    ];
     $form['actions']['back'] = [
-      '#markup' => Link::createFromRoute($this->t('Previous'),'fsa_signin.user_preregistration_alerts_form', [], ['attributes' => ['class' => 'button black left']])->toString(),
+      '#markup' => Link::createFromRoute($this->t('Previous'), 'fsa_signin.user_preregistration_alerts_form', [], ['attributes' => ['class' => 'button black left']])->toString(),
     ];
     return $form;
   }
@@ -123,27 +125,28 @@ class UserRegistrationForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $alert_tids = $form_state->getValue('alert_tids');
 
-    $user = \Drupal\user\Entity\User::create();
+    $user = User::create();
     $email = $form_state->getValue('email');
     $language = $form_state->getValue('language');
     $email_frequency = $form_state->getValue('delivery_frequency_email');
+    $subscribed_food_alerts = DefaultController::storableProfileFieldValue($form_state->getValue('subscribed_food_alerts'));
     $subscribed_notifications = $form_state->getValue('subscribed_notifications');
 
-    // Mandatory settings
+    // Mandatory settings.
     $user->setPassword(user_password());
     $user->enforceIsNew();
     $user->setEmail($email);
     $user->setUsername($email);
 
-    // Optional settings
+    // Optional settings.
     $user->set('init', $email);
     $user->set('langcode', $language);
     $user->set('preferred_langcode', $language);
     $user->activate();
 
-    // Field values
+    // Set the field values.
+    $user->set('field_subscribed_food_alerts', $subscribed_food_alerts);
     $user->set('field_subscribed_notifications', $subscribed_notifications);
     $user->set('field_notification_method', $email_frequency);
 
@@ -151,8 +154,6 @@ class UserRegistrationForm extends FormBase {
       // Save user account.
       $result = $user->save();
       user_login_finalize($user);
-
-      //drupal_set_message($this->t('Thank you! Your selections has been saved.'));
     }
     catch (\Exception $e) {
       drupal_set_message($this->t('An error occurred while creating an account.'), 'error');

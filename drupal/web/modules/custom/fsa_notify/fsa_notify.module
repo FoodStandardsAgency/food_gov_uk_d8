@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains fsa_notify.module.
+ */
+
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\fsa_notify\FsaNotifyAPIemail;
@@ -13,11 +18,16 @@ use Drupal\fsa_notify\Plugin\QueueWorker\FsaNotifyStorageQueue;
 use Drupal\node\NodeInterface;
 use Drupal\user\Entity\User;
 
+/**
+ * Implements hook_form_user_form_alter().
+ */
 function fsa_notify_form_user_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $form['field_notification_sms']['#element_validate'][] = 'fsa_notify_validate';
 }
 
-// data integrity: require phone number if user chooses sms method.
+/**
+ * Data integrity: require phone number if user chooses sms method.
+ */
 function fsa_notify_validate(&$form, FormStateInterface $form_state) {
 
   $field = 'field_notification_method';
@@ -35,7 +45,9 @@ function fsa_notify_validate(&$form, FormStateInterface $form_state) {
   $form_state->setErrorByName($field, t('If "Notification method" is SMS then "Notification SMS" is required.'));
 }
 
-// collect inserted alerts
+/**
+ * Collect inserted alerts.
+ */
 function fsa_notify_entity_insert(EntityInterface $entity) {
   if (!($entity instanceof NodeInterface)) {
     return;
@@ -43,17 +55,18 @@ function fsa_notify_entity_insert(EntityInterface $entity) {
   if ($entity->getType() != 'alert') {
     return;
   }
-  
+
   $queue = \Drupal::service('queue')->get('fsa_notify_store');
   $data = $entity->id();
   $queue->createItem($data);
 }
 
-
-
-// keep all stuff as abstract as possible here
-// so that it would be easy to understand highlevel workflow
-// just major decisions and major tasks
+/**
+ * Notify cron job.
+ *
+ * Keep all stuff as abstract as possible here so that it would be easy to
+ * understand highlevel workflow just major decisions and major tasks.
+ */
 function fsa_notify_cron() {
 
   $state_key = 'fsa_notify.killswitch';
@@ -62,26 +75,26 @@ function fsa_notify_cron() {
     return;
   }
 
-  // process alerts
+  // Process alerts
   // (insert it into each user cache who wants to be notified)
   fsa_notify_queue_process();
 
   /* now start sending */
 
-  // prepare
+  // Prepare.
   $notifier_sms = new FsaNotifyAPIsms();
   $notifier_email = new FsaNotifyAPIemail();
   $storage = new FsaNotifyStorage();
 
-  // sms
+  // Sms.
   $formatter = new FsaNotifyMessageSms();
   fsa_notify_send($storage, $notifier_sms, $formatter, 'sms');
 
-  // immediate
+  // Immediate.
   $formatter = new FsaNotifyMessageImmediate();
   fsa_notify_send($storage, $notifier_email, $formatter, 'immediate');
 
-  // daily
+  // Daily.
   $state_key = 'fsa_notify.last_daily';
   $formatter = new FsaNotifyMessageDaily();
   if (fsa_notify_daily_is_ready_to_send($state_key)) {
@@ -89,7 +102,7 @@ function fsa_notify_cron() {
     fsa_notify_sent($state_key);
   }
 
-  // weekly
+  // Weekly.
   $state_key = 'fsa_notify.last_weekly';
   $formatter = new FsaNotifyMessageWeekly();
   if (fsa_notify_weekly_is_ready_to_send($state_key)) {
@@ -98,29 +111,55 @@ function fsa_notify_cron() {
   }
 }
 
-
-
+/**
+ * Store the last sent status.
+ *
+ * @param string $state_key
+ *   The state key to set (fsa_notify.last_daily|fsa_notify.last_weekly).
+ */
 function fsa_notify_sent($state_key) {
   $now = time();
   $last = \Drupal::state()->set($state_key, $now);
 }
 
+/**
+ * Check if daily digests are ready to be sent.
+ *
+ * @param string $state_key
+ *   The state key (fsa_notify.last_daily|fsa_notify.last_weekly)
+ * @param int $now
+ *   Timestamp for testing purposes.
+ *
+ * @return bool
+ *   Boolean if daily digests are ready to send.
+ */
 function fsa_notify_daily_is_ready_to_send($state_key, $now = NULL) {
-  // $now argument is used only for algorithm testing purposes
+  // $now argument is used only for algorithm testing purposes.
   if (empty($now)) {
     $now = time();
   }
   $window = 3 * 60 * 60;
   $interval = 24 * 60 * 60;
-  // Calculation base: seconds since 00:00:00
+  // Calculation base: seconds since 00:00:00.
   $start = 7 * 60 * 60;
   $current = date('G', $now) * 60 * 60 + date('i', $now) * 60 + date('s', $now);
   $ready = fsa_notify_is_ready_to_send($state_key, $window, $interval, $start, $current, $now);
   return $ready;
 }
 
+/**
+ * Check if weekly digests are ready to send.
+ *
+ * @param string $state_key
+ *   The state key (fsa_notify.last_daily|fsa_notify.last_weekly)
+ * @param int $now
+ *   Timestamp for testing purposes.
+ *
+ * @return bool
+ *   Boolean if weekly digests are ready to send.
+ */
 function fsa_notify_weekly_is_ready_to_send($state_key, $now = NULL) {
-  // $now argument is used only for algorithm testing purposes
+  // $now argument is used only for algorithm testing purposes.
   if (empty($now)) {
     $now = time();
   }
@@ -133,14 +172,26 @@ function fsa_notify_weekly_is_ready_to_send($state_key, $now = NULL) {
   return $ready;
 }
 
+/**
+ * Check if batch is ready for notify to send.
+ *
+ * @param string $state_key
+ *   Drupal state to get/set related info.
+ * @param int $window
+ *   Duration window for sending out emails.
+ * @param int $interval
+ *   Duration between beginnings of two sendings.
+ * @param int $start
+ *   Arbitrary start timestamp, in context of interval.
+ * @param int $current
+ *   Arbitrary current timestamp, in context of interval.
+ * @param null|int $now
+ *   Now argument is used only for algorithm testing purposes.
+ *
+ * @return bool
+ *   Boolean if ready to send.
+ */
 function fsa_notify_is_ready_to_send($state_key, $window, $interval, $start, $current, $now = NULL) {
-  // $state_key = drupal state to get/set related info
-  // $window = duration window for sending out emails
-  // $interval = duration between beginnings of two sendings
-  // $start = arbitrary start time, in context of interval
-  // $current = arbitrary current time, in context of interval
-  // $now argument is used only for algorithm testing purposes
-
   if (empty($now)) {
     $now = time();
   }
@@ -151,9 +202,9 @@ function fsa_notify_is_ready_to_send($state_key, $window, $interval, $start, $cu
     return TRUE;
   }
 
-  // is elapsed enough time since last time
+  // Is elapsed enough time since last time.
   $is_elapsed_enough = $now - $last;
-  // so that we wont send out emails each time later and later.
+  // So that we wont send out emails each time later and later.
   $is_elapsed_enough = $is_elapsed_enough > $interval - $window;
 
   $is_in_window = $start <= $current && $current < $start + $window;
@@ -161,7 +212,9 @@ function fsa_notify_is_ready_to_send($state_key, $window, $interval, $start, $cu
   return $is_elapsed_enough && $is_in_window;
 }
 
-// process queued alerts
+/**
+ * Process queued alerts.
+ */
 function fsa_notify_queue_process() {
 
   $queue = Drupal::service('queue')->get('fsa_notify_store');
@@ -169,12 +222,12 @@ function fsa_notify_queue_process() {
 
   fsa_notify_timer('start', 'queue');
 
-  while($item = $queue->claimItem()) {
+  while ($item = $queue->claimItem()) {
     try {
       $worker->processItem($item->data);
       $queue->deleteItem($item);
     }
-    catch (SuspendQueueException $e) {
+    catch (FsaNotifyStorageQueue $e) {
       $queue->releaseItem($item);
       break;
     }
@@ -188,7 +241,19 @@ function fsa_notify_queue_process() {
 
 }
 
-function fsa_notify_send($storage, $notifier, $formatter, $type) {
+/**
+ * Send to notify.
+ *
+ * @param \Drupal\fsa_notify\FsaNotifyStorage $storage
+ *   FsaNotifyStorage object.
+ * @param object $notifier
+ *   Notifier object.
+ * @param object $formatter
+ *   Notifymessage formatter object.
+ * @param string $type
+ *   Type of send (SMS/immediate/digest).
+ */
+function fsa_notify_send(FsaNotifyStorage $storage, $notifier, $formatter, $type) {
   fsa_notify_timer('start', $type);
   while ($batch = $storage->getAllType($type)) {
     foreach ($batch as $uid => $messages) {
@@ -206,6 +271,14 @@ function fsa_notify_send($storage, $notifier, $formatter, $type) {
   fsa_notify_timer('stop', $type);
 }
 
+/**
+ * The timer for notify process.
+ *
+ * @param string $event
+ *   Type of the event (start|count|stop).
+ * @param string $type
+ *   The type (SMS/immediate/digest).
+ */
 function fsa_notify_timer($event, $type) {
 
   static $cache = [];
@@ -229,7 +302,7 @@ function fsa_notify_timer($event, $type) {
       $items = $cache[$type]['count'];
       unset($cache[$type]);
       if ($items == 0) {
-        // dont fill logs with zeros
+        // Dont fill logs with zeros.
         break;
       }
       $elapsed = $stop - $start;

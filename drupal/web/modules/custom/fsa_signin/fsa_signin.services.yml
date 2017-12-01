@@ -7,4 +7,3 @@ services:
   fsa_signin.service:
     class: Drupal\fsa_signin\SignInService
     arguments: []
-
