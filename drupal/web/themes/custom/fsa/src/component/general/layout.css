@@ -120,7 +120,8 @@ body:not(.theme--service, .theme--lander) .layout.layout--with-no-sidebar .layou
 
 
 .theme--subscribe .layout__content--main,
-.theme--page .layout__content--main {
+.theme--page .layout__content--main,
+.theme--alert .layout__content--main {
   @mixin responsive-declaration padding-top, 1em, 4em;
 }
 /* 
