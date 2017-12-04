@@ -18,7 +18,7 @@ function fsa_webform_validation_webform_element_alter(array &$element, FormState
     'poor_hygiene_practices--fsa_establishment_postal_code',
     'food_poisoning--fsa_establishment_postal_code',
   ];
-  if (in_array($element['#webform_id'], $form_ids)) {
+  if (isset($element['#webform_id']) && in_array($element['#webform_id'], $form_ids)) {
     $element['#element_validate'][] = [
       'Drupal\fsa_webform_validation\Validate\FsaWebformValidationValidate',
       'validate',
