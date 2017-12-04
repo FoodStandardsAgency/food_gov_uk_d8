@@ -147,6 +147,8 @@ rm -rf $SYNCDIR
 
 # Let's not use -y here yet so that we have at least one confirmation in this
 # script before we destroy the $TARGET data.
+# Additionally be sure the user understands which database tables are about to be dropped.
+echo "Confirm syncing database to $TARGET"
 drush $TARGET sql-drop
 drush $TARGET importdb --dump-dir=$SYNCDIR
 
