@@ -35,11 +35,6 @@ Add to your host machine `/etc/hosts` file the following line
 
 Access your local environment at https://local.food.gov.uk
 
-#### 3. Sync staging to local environment
-
-From your host machine, run: `./sync.sh`
-If it sputters errors, then you may need to do first `export WKV_SITE_ENV=local`.
-
 ## Project management
 
 Jira: https://wunder.atlassian.net/projects/FSA
