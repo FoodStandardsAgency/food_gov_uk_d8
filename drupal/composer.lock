@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1343b9ebd5f190ac6509f9ad90cbcf4a",
-    "content-hash": "14b822bad6f0241e81c7b3cbeeeaf549",
+    "content-hash": "1d06e62101840cd071b79219c436da46",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -229,7 +228,7 @@
                 "diff",
                 "html"
             ],
-            "time": "2017-06-12 17:35:44"
+            "time": "2017-06-12T17:35:44+00:00"
         },
         {
             "name": "composer/installers",
@@ -4677,6 +4676,68 @@
             }
         },
         {
+            "name": "drupal/warden",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/warden",
+                "reference": "8.x-1.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/warden-8.x-1.1.zip",
+                "reference": "8.x-1.1",
+                "shasum": "3c907a5b282920b6da7495f5e5f72516088cae8e"
+            },
+            "require": {
+                "drupal/core": "~8.0",
+                "teamdeeson/wardenapi": "dev-master"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.1",
+                    "datestamp": "1498079942",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Drupal\\warden\\": "src/"
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "johnennew",
+                    "homepage": "https://www.drupal.org/user/1150042"
+                },
+                {
+                    "name": "mike.davis",
+                    "homepage": "https://www.drupal.org/user/2660157"
+                }
+            ],
+            "description": "A module to link Drupal website with Warden dashboard.",
+            "homepage": "https://www.drupal.org/project/warden",
+            "keywords": [
+                "Drupal",
+                "Warden"
+            ],
+            "support": {
+                "source": "https://drupal.org/project/warden",
+                "issues": "https://drupal.org/project/issues/warden"
+            }
+        },
+        {
             "name": "drupal/webform",
             "version": "5.0.0-beta24",
             "source": {
@@ -5093,49 +5154,6 @@
             "time": "2017-11-08T17:04:47+00:00"
         },
         {
-            "name": "firebase/php-jwt",
-            "version": "v3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/firebase/php-jwt.git",
-                "reference": "fa8a06e96526eb7c0eeaa47e4f39be59d21f16e1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/fa8a06e96526eb7c0eeaa47e4f39be59d21f16e1",
-                "reference": "fa8a06e96526eb7c0eeaa47e4f39be59d21f16e1",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Firebase\\JWT\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Neuman Vong",
-                    "email": "neuman+pear@twilio.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Anant Narayanan",
-                    "email": "anant@php.net",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
-            "homepage": "https://github.com/firebase/php-jwt",
-            "time": "2015-07-22T18:31:08+00:00"
-        },
-        {
             "name": "ezyang/htmlpurifier",
             "version": "v4.9.3",
             "source": {
@@ -5180,7 +5198,50 @@
             "keywords": [
                 "html"
             ],
-            "time": "2017-06-03 02:28:16"
+            "time": "2017-06-03T02:28:16+00:00"
+        },
+        {
+            "name": "firebase/php-jwt",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/firebase/php-jwt.git",
+                "reference": "fa8a06e96526eb7c0eeaa47e4f39be59d21f16e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/fa8a06e96526eb7c0eeaa47e4f39be59d21f16e1",
+                "reference": "fa8a06e96526eb7c0eeaa47e4f39be59d21f16e1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Firebase\\JWT\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Neuman Vong",
+                    "email": "neuman+pear@twilio.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Anant Narayanan",
+                    "email": "anant@php.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
+            "homepage": "https://github.com/firebase/php-jwt",
+            "time": "2015-07-22T18:31:08+00:00"
         },
         {
             "name": "gabordemooij/redbean",
@@ -5813,7 +5874,7 @@
                 "diff",
                 "html"
             ],
-            "time": "2016-07-25 17:07:32"
+            "time": "2016-07-25T17:07:32+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -6749,7 +6810,7 @@
                 "html",
                 "parser"
             ],
-            "time": "2016-11-22 22:57:47"
+            "time": "2016-11-22T22:57:47+00:00"
         },
         {
             "name": "symfony-cmf/routing",
@@ -8322,6 +8383,55 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2017-06-02T09:43:35+00:00"
+        },
+        {
+            "name": "teamdeeson/wardenapi",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/teamdeeson/wardenapi.git",
+                "reference": "e4de6b42ebe4e0540fb16e793ad56bc97ecc062f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/teamdeeson/wardenapi/zipball/e4de6b42ebe4e0540fb16e793ad56bc97ecc062f",
+                "reference": "e4de6b42ebe4e0540fb16e793ad56bc97ecc062f",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.1",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WardenApi\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL3"
+            ],
+            "authors": [
+                {
+                    "name": "John Ennew",
+                    "email": "johne@deeson.co.uk"
+                },
+                {
+                    "name": "Mike Davis",
+                    "email": "miked@deeson.co.uk"
+                }
+            ],
+            "description": "Warden API utility",
+            "homepage": "https://www.deeson.co.uk/labs",
+            "keywords": [
+                "drupal",
+                "warden"
+            ],
+            "time": "2016-02-10 20:34:02"
         },
         {
             "name": "twig/twig",

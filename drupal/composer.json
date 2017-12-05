@@ -67,7 +67,8 @@
         "drupal/webform_views": "^5.0@alpha",
         "drupal/menu_block": "^1.4",
         "drupal/view_unpublished": "^1.0@alpha",
-        "drupal/diff": "^1.0@RC"
+        "drupal/diff": "^1.0@RC",
+        "drupal/warden": "^1.1"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
