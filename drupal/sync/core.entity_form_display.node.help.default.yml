@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.help.body
+    - field.field.node.help.field_block_reference
     - field.field.node.help.field_content_type
     - field.field.node.help.field_icon
     - field.field.node.help.field_liftup_summary
@@ -12,6 +13,7 @@ dependencies:
     - image.style.thumbnail
     - node.type.help
   module:
+    - content_moderation
     - field_group
     - image
     - paragraphs
@@ -47,6 +49,19 @@ third_party_settings:
         description: 'Use these fields to control what is displayed in promo areas directly referencing to this page.'
         required_fields: true
       label: 'Liftup metadata'
+    group_advanced_options:
+      children:
+        - field_block_reference
+      parent_name: ''
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Advanced options'
 id: node.help.default
 targetEntityType: node
 bundle: help
@@ -67,6 +82,15 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_block_reference:
+    weight: 101
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_content_type:
     weight: 10
     settings: {  }
@@ -115,6 +139,12 @@ content:
     region: content
     settings:
       include_locked: true
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
     third_party_settings: {  }
   path:
     type: path

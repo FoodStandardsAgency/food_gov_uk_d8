@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.help.body
+    - field.field.node.help.field_block_reference
     - field.field.node.help.field_content_type
     - field.field.node.help.field_icon
     - field.field.node.help.field_liftup_summary
@@ -25,6 +26,15 @@ content:
     weight: 1
     settings: {  }
     third_party_settings: {  }
+    region: content
+  field_block_reference:
+    weight: 3
+    label: hidden
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
     region: content
   field_liftups:
     weight: 2
