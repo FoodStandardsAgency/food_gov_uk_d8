@@ -142,7 +142,7 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
               ],
               'address' => [
                 'type' => 'text',
-                'index' => 'not_analyzed',
+                'analyzer' => $text_analyzer,
               ],
               'businesstype' => [
                 'properties' => [
@@ -254,11 +254,11 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
    *
    */
   protected function getFiltersAndAnalyzers($langcode) {
-    // Get full language name.
-    $language = $this->getLanguageName($langcode);
     // Get filters.
     $filters = $this->getFilters($langcode);
+
     // Analyzer filters.
+    // @todo Remove partial match filters as they are not used.
     $partial_match_filters = [
       'standard',
       'lowercase',
@@ -269,6 +269,8 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
       $language . '_stemmer',
       */
     ];
+
+    // @todo Remove custom analyzers as they are not used.
     return [
       'analysis' => [
         'tokenizer' => [
@@ -281,7 +283,7 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
             ],
           ],
         ],
-        'filter' => [] + $filters,
+        'filter' => $filters,
         'analyzer' => [
           'keyword_lower' => [
             'type' => 'custom',
@@ -319,12 +321,10 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
    */
   protected function getFilters($langcode) {
     $filters = [];
+
     // Get full language name.
     $language = $this->getLanguageName($langcode);
-    if ($language == 'standard') {
-      // Use english stopper and stemmer since in our case there's a lot of English text in the 'cy' (Welsh) index.
-      $language = 'english';
-    }
+
     // Add synonyms filter.
     if ($synonyms = self::getSynonyms($langcode)) {
       $filters['synonym'] = [
@@ -362,20 +362,28 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
    */
   protected function getLanguageAnalyzer($langcode) {
     $language = $this->getLanguageName($langcode);
-    if ($language == 'standard') {
-      // Use english stopper and stemmer since in our case there's a lot of English text in the 'cy' (Welsh) index.
-      $language = 'english';
-    }
+
     return [
       $language => [
         'tokenizer' => 'standard',
         'filter' => [
-          'lowercase',
+          // Synonyms filter goes first to add tokens.
           'synonym',
+          // Lowercase filter should go before stemmers to normalize the input
+          // data. Otherwise strings like "Ivy" and "ivy" will be stemmed
+          // differently.
           'lowercase',
-          $language . '_stop',
-          $language . '_stemmer',
+          // Possessive stemmer should go next in the list; if it goes after
+          // generic stemmer, apostrophes will remain at the end of the tokens.
+          // To test this out, try this:
+          // curl 'http://localhost:9200/ratings-en/_analyze?pretty=true' -d '{
+          //     "field": "name",
+          //     "text" : "Santa'\''s will bring all the joy"
+          // }'
           $language . '_possessive_stemmer',
+          $language . '_stemmer',
+          // Stopword filter goes last to remove tokens.
+          $language . '_stop',
         ],
       ],
     ];
@@ -392,14 +400,16 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
     $language_analyzers = [
       'en' => 'english',
       // There's no language analyzer for Welsh implemented in ES
-      // 'cy' => 'welsh',.
+      // 'cy' => 'welsh',
     ];
+
     if (isset($language_analyzers[$langcode])) {
       return $language_analyzers[$langcode];
     }
-    else {
-      return 'standard';
-    }
+
+    // Use english as a default language since in our case there's a lot of
+    // English text in the 'cy' (Welsh) index.
+    return 'english';
   }
 
   /**
