@@ -183,7 +183,6 @@ class DefaultController extends ControllerBase {
         'class' => [
           'button',
           'black',
-          'left',
         ],
       ],
     ];
