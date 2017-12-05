@@ -2,6 +2,7 @@
 
 namespace Drupal\fsa_signin\Controller;
 
+use Drupal\Core\Link;
 use Drupal\fsa_signin\Form\DeleteMyAccountForm;
 use Drupal\fsa_signin\Form\MyAccountForm;
 use Drupal\fsa_signin\Form\SmsSubscriptionsForm;
@@ -163,6 +164,36 @@ class DefaultController extends ControllerBase {
     $unsubscribe_form = \Drupal::formBuilder()->getForm(UnsubscribeForm::class);
 
     return [$unsubscribe_form];
+  }
+
+  /**
+   * Create backlink for form.
+   *
+   * @param string $route
+   *   Name of the route to link to.
+   *
+   * @return \Drupal\core\Link
+   *   Drupal link.
+   */
+  public static function formBackLink($route) {
+    $text = t('Previous');
+    $parameters = [];
+    $options = [
+      'attributes' => [
+        'class' => [
+          'button',
+          'black',
+        ],
+      ],
+    ];
+
+    $link = Link::createFromRoute(
+      $text,
+      $route,
+      $parameters,
+      $options);
+
+    return $link;
   }
 
   /**
