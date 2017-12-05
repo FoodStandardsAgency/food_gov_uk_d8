@@ -64,20 +64,17 @@ class SignInService {
    * News and consultations subscription options.
    *
    * @return array
-   *   List of options.
+   *   Array of options in FAPI suitable format.
    */
   public function newsAsOptions() {
 
-    // @todo: compose the list of what to order.
-    $news_types = [
-      'all' => $this->t('All news')->render(),
-    ];
-
+    $all_terms = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->loadTree('news_type', 0, 1, FALSE);
     $options = [];
-    foreach ($news_types as $key => $name) {
-      $options[$key] = $name;
+    foreach ($all_terms as $term) {
+      $options[$term->tid] = $this->t($term->name)->render();
     }
-
     return $options;
   }
 
