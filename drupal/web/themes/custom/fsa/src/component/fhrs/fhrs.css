@@ -174,11 +174,15 @@
 
     label {
       font-size: 1em;
-      font-weight: 600;
+      font-weight: 700;
       text-transform: none;
       display: block;
       margin: 0;
       margin-bottom: 0.5em;
+
+      @media (--breakpoint-md) {
+        font-weight: 600;
+      }
     
       @media (--breakpoint-lg) {
         display: inline-block;
@@ -189,6 +193,11 @@
     select {
       display: block;
       margin: 0;
+      width: 100%;
+
+      @media (--breakpoint-sm) {
+        width: auto;
+      }
     
       @media (--breakpoint-lg) {
         display: inline-block;
@@ -199,12 +208,14 @@
 }
 
 .ratings__hits-total {
+  font-family: var(--font-family-heading);
   font-size: 1.5em;
-  font-weight: 600;
   @mixin responsive-declaration margin-right, 1em, 2em;
   margin-bottom: 1em;
+  font-weight: 700;
 
   @media (--breakpoint-md) {
+    font-weight: 500;
     margin-bottom: 0;
   }
 }
@@ -287,6 +298,14 @@
   }
 }
 
+.ratings__mobile-rating-value .svg {
+  border-radius: 50%;
+  background-color: var(--color-green);
+  border: 2px solid var(--color-black);
+  width: 35px;
+  height: 35px;
+}
+
 .ratings__badge {
   img {
     border: 1px solid var(--color-light-gray);
@@ -356,15 +375,24 @@
 
 .ratings__mobile-name {
   padding: 0 1em;
-  text-decoration: underline;
+
+  h3 {
+    font-family: var(--font-family-content);
+    margin-bottom: 0.5em;
+    text-decoration: underline;
+  }
 
   p {
     color: var(--color-black);
+
+    .ratings__mobile-item.is-open & {
+      color: var(--color-white) !important;
+    }
   }
 }
 
 .ratings__toggle-button {
-  padding: 1em;
+  padding: 1em 1.2em;
   border-radius: 0;
   border-left: 1px solid var(--color-light-gray);
 

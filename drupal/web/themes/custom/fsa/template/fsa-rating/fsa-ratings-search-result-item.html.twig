@@ -23,8 +23,19 @@
 <div class="ratings__mobile-item table__button js-content-next">
   <a href="{{ item.url }}" class="ratings__mobile-link">
     <div class="ratings__mobile-rating-value">
-      {{ item.ratingvalue }}
+      {% if item.ratingvalue == "Exempt" %}
+        <div class="svg">
+          <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#exempt-icon"></use></svg>
+        </div>
+      {% elseif item.ratingvalue == "AwaitingInspection" %}
+        <div class="svg">
+          <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#awaiting-icon"></use></svg>
+        </div>
+      {% else %}
+        {{ item.ratingvalue }}
+      {% endif %}
     </div>
+    
     <div class="ratings__mobile-name">
       {% if item.name %}
         <h3>{{ item.name }}</h3>
