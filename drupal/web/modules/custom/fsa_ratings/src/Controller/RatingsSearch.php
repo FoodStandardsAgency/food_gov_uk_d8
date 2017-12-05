@@ -2,6 +2,7 @@
 
 namespace Drupal\fsa_ratings\Controller;
 
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
 use Drupal\fsa_es\SearchService;
@@ -170,6 +171,9 @@ class RatingsSearch extends ControllerBase {
       $result['ratingvalue'] = [
         '#markup' => '<p class="ratingvalue"><span class="description">' . t('Rating:') . '</span> <span class="numeric">' . $rating_value . '</span></p>',
       ];
+
+      // Raw ratingvalue for theming purposes.
+      $result['ratingvalue_class'] = Html::cleanCssIdentifier('rating--' . strtolower($rating_value));
 
       // Get scheme type to create the badge(s).
       $scheme = $result['schemetype'];
