@@ -28,7 +28,7 @@ content:
     third_party_settings: {  }
   field_news_type:
     weight: 0
-    label: above
+    label: hidden
     settings:
       link: false
     third_party_settings: {  }
