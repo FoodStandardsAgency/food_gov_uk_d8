@@ -19,11 +19,6 @@ settings:
           items:
             - Bold
             - Italic
-            - Strike
-            - Superscript
-            - Subscript
-            - '-'
-            - RemoveFormat
         -
           name: Linking
           items:
@@ -57,6 +52,8 @@ settings:
         -
           name: Tools
           items:
+            - RemoveFormat
+            - '-'
             - ShowBlocks
             - Source
   plugins:
