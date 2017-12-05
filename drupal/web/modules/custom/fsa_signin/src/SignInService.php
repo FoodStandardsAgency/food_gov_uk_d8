@@ -61,6 +61,27 @@ class SignInService {
   }
 
   /**
+   * News and consultations subscription options.
+   *
+   * @return array
+   *   List of options.
+   */
+  public function newsAsOptions() {
+
+    // @todo: compose the list of what to order.
+    $news_types = [
+      'all' => $this->t('All news')->render(),
+    ];
+
+    $options = [];
+    foreach ($news_types as $key => $name) {
+      $options[$key] = $name;
+    }
+
+    return $options;
+  }
+
+  /**
    * Get allergen terms as options to subscription forms.
    *
    * @return array
