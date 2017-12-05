@@ -110,7 +110,7 @@ class AlertsForRegistrationForm extends FormBase {
     $tempstore = \Drupal::service('user.private_tempstore')->get('fsa_signin');
     $tempstore->set('food_alert_registration', $food_alert_registration);
     $tempstore->set('alert_tids_for_registration', $selected_tids);
-    $form_state->setRedirect('fsa_signin.user_registration_form');
+    $form_state->setRedirect('fsa_signin.user_preregistration_news_form');
   }
 
 }

@@ -4,6 +4,8 @@ namespace Drupal\fsa_signin\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
+use Drupal\fsa_signin\Controller\DefaultController;
 use Drupal\fsa_signin\SignInService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -65,6 +67,9 @@ class NewsForRegistrationForm extends FormBase {
       '#default_value' => $food_alert_defaults,
     ];
     $form['actions'] = ['#type' => 'actions'];
+    $form['actions']['back'] = [
+      '#markup' => DefaultController::formBackLink('fsa_signin.user_preregistration_alerts_form')->toString(),
+    ];
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Next'),
@@ -92,14 +97,12 @@ class NewsForRegistrationForm extends FormBase {
 
     $news_registration = $form_state->getValue('news_registration');
 
-    $alert_tids = $form_state->getValue('alert_tids_for_registration');
     // Filter only those user has selected:
-    $selected_tids = array_filter(array_values($alert_tids));
+    $selected_tids = array_filter(array_values($news_registration));
 
     /** @var \Drupal\user\PrivateTempStore $tempstore */
     $tempstore = \Drupal::service('user.private_tempstore')->get('fsa_signin');
-    $tempstore->set('news_registration', $news_registration);
-    $tempstore->set('alert_tids_for_registration', $selected_tids);
+    $tempstore->set('news_registration', $selected_tids);
     $form_state->setRedirect('fsa_signin.user_registration_form');
 
   }

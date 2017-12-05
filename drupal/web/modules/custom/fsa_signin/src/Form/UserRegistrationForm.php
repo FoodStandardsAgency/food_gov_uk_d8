@@ -28,6 +28,7 @@ class UserRegistrationForm extends FormBase {
     $tempstore = \Drupal::service('user.private_tempstore')->get('fsa_signin');
     $food_alerts = $tempstore->get('food_alert_registration');
     $alert_tids = $tempstore->get('alert_tids_for_registration');
+    $news_registration = $tempstore->get('news_registration');
 
     $form['subscribed_food_alerts'] = [
       '#type' => 'value',
@@ -36,6 +37,10 @@ class UserRegistrationForm extends FormBase {
     $form['subscribed_notifications'] = [
       '#type' => 'value',
       '#value' => $alert_tids,
+    ];
+    $form['subscribed_news'] = [
+      '#type' => 'value',
+      '#value' => $news_registration,
     ];
     $form['description'] = [
       '#markup' => '<h2>' . $this->t('Type and frequency') . '</h2><p>' . $this->t('By how and how often you want to receive information from us?') . '</p>',
@@ -104,12 +109,12 @@ class UserRegistrationForm extends FormBase {
     ];
 
     $form['actions'] = ['#type' => 'actions'];
+    $form['actions']['back'] = [
+      '#markup' => DefaultController::formBackLink('fsa_signin.user_preregistration_news_form')->toString(),
+    ];
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
-    ];
-    $form['actions']['back'] = [
-      '#markup' => Link::createFromRoute($this->t('Previous'), 'fsa_signin.user_preregistration_alerts_form', [], ['attributes' => ['class' => 'button black left']])->toString(),
     ];
     return $form;
   }
@@ -132,6 +137,7 @@ class UserRegistrationForm extends FormBase {
     $email_frequency = $form_state->getValue('delivery_frequency_email');
     $subscribed_food_alerts = DefaultController::storableProfileFieldValue($form_state->getValue('subscribed_food_alerts'));
     $subscribed_notifications = $form_state->getValue('subscribed_notifications');
+    $subscribed_news = $form_state->getValue('subscribed_news');
 
     // Mandatory settings.
     $user->setPassword(user_password());
@@ -148,6 +154,7 @@ class UserRegistrationForm extends FormBase {
     // Set the field values.
     $user->set('field_subscribed_food_alerts', $subscribed_food_alerts);
     $user->set('field_subscribed_notifications', $subscribed_notifications);
+    $user->set('field_subscribed_news', $subscribed_news);
     $user->set('field_notification_method', $email_frequency);
 
     try {
