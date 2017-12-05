@@ -56,12 +56,12 @@ class NewsForRegistrationForm extends FormBase {
       '#markup' => '<h2>' . $this->t('News and consultations') . '</h2>',
     ];
     $form['description'] = [
-      '#markup' => '<p>' . $this->t("Get news to your inbox. This is a free service.") . '</p>',
+      '#markup' => '<p>' . $this->t("Stay up to date with the FSA's latest news and consultations by email.") . '</p>',
     ];
     $form['news_registration'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('News'),
-      '#options' => $this->signInService->newsAsOptions(),
+      '#options' => ['all' => $this->t('All news')->render()] + $this->signInService->newsAsOptions(),
       '#default_value' => $food_alert_defaults,
     ];
     $form['actions'] = ['#type' => 'actions'];
