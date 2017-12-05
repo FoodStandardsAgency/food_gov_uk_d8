@@ -10,8 +10,10 @@ module.exports = {
           warnings: false,
         },
         rem: false,
+        nesting: false,
       }
     },
+    'postcss-nested': {},
     'postcss-normalize': {},
   },
 };
