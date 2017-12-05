@@ -21,11 +21,11 @@
 {% set randomID = randomID|join %}
 
 <div class="ratings__mobile-item table__button js-content-next">
-  <a href="{{ item.url }}">
-    <div class="toggle-button__item toggle-button__item--width-2">
+  <a href="{{ item.url }}" class="ratings__mobile-link">
+    <div class="ratings__mobile-rating-value">
       {{ item.ratingvalue }}
     </div>
-    <div class="toggle-button__item">
+    <div class="ratings__mobile-name">
       {% if item.name %}
         <h3>{{ item.name }}</h3>
       {% endif %}

@@ -24,11 +24,6 @@
 @import "component/general/sidebar.css";
 @import "component/general/footer.css";
 
-/* Ratings */
-@import "component/general/establishment.css";
-@import "component/general/ratings-meanings.css";
-@import "component/general/ratings.css";
-
 /* Profile and registration */
 @import "component/general/my-profile.css";
 @import "component/general/subscribe-flow.css";
@@ -47,3 +42,4 @@
 @import "component/form/form.css";
 @import "component/header/header.css";
 @import "component/navigation/navigation.css";
+@import "component/fhrs/fhrs.css";
