@@ -13,7 +13,7 @@
       // Form id's to the array to implement "select all" option for checkbox lists.
       // Script expects FAPI to have the "all" option key named "all".
       var forms = [
-        "edit-news-registration",
+        "edit-news-tids-for-registration",
         "edit-alert-tids-for-registration"
       ];
       $.each( forms, function( index, value ) {

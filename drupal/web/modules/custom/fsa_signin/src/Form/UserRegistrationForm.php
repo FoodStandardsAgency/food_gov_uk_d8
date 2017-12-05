@@ -28,7 +28,7 @@ class UserRegistrationForm extends FormBase {
     $tempstore = \Drupal::service('user.private_tempstore')->get('fsa_signin');
     $food_alerts = $tempstore->get('food_alert_registration');
     $alert_tids = $tempstore->get('alert_tids_for_registration');
-    $news_registration = $tempstore->get('news_registration');
+    $news_registration = $tempstore->get('news_tids_for_registration');
 
     $form['subscribed_food_alerts'] = [
       '#type' => 'value',

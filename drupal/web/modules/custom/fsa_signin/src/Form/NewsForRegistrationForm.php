@@ -51,8 +51,8 @@ class NewsForRegistrationForm extends FormBase {
     /** @var \Drupal\user\PrivateTempStore $tempstore */
     $tempstore = \Drupal::service('user.private_tempstore')->get('fsa_signin');
 
-    $food_alert_defaults = $tempstore->get('news_registration');
-    $food_alert_defaults = ($food_alert_defaults === NULL) ? [] : $food_alert_defaults;
+    $news_defaults = $tempstore->get('news_tids_for_registration');
+    $news_defaults = ($news_defaults === NULL) ? [] : $news_defaults;
 
     $form['title'] = [
       '#markup' => '<h2>' . $this->t('News and consultations') . '</h2>',
@@ -60,11 +60,11 @@ class NewsForRegistrationForm extends FormBase {
     $form['description'] = [
       '#markup' => '<p>' . $this->t("Stay up to date with the FSA's latest news and consultations by email.") . '</p>',
     ];
-    $form['news_registration'] = [
+    $form['news_tids_for_registration'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('News'),
       '#options' => ['all' => $this->t('All news')->render()] + $this->signInService->newsAsOptions(),
-      '#default_value' => $food_alert_defaults,
+      '#default_value' => $news_defaults,
     ];
     $form['actions'] = ['#type' => 'actions'];
     $form['actions']['back'] = [
@@ -95,14 +95,14 @@ class NewsForRegistrationForm extends FormBase {
       \Drupal::service('session_manager')->start();
     }
 
-    $news_registration = $form_state->getValue('news_registration');
+    $news_registration = $form_state->getValue('news_tids_for_registration');
 
     // Filter only those user has selected:
     $selected_tids = array_filter(array_values($news_registration));
 
     /** @var \Drupal\user\PrivateTempStore $tempstore */
     $tempstore = \Drupal::service('user.private_tempstore')->get('fsa_signin');
-    $tempstore->set('news_registration', $selected_tids);
+    $tempstore->set('news_tids_for_registration', $selected_tids);
     $form_state->setRedirect('fsa_signin.user_registration_form');
 
   }
