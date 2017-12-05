@@ -56,17 +56,17 @@ function navigation() {
     // Hide by default
     submenuElement.classList.add(`is-closed`);
 
-    const openSubmenuButton = document.createElement('button');
-    openSubmenuButton.innerHTML = `Open menu`;
-    openSubmenuButton.classList.add(`navigation__submenu-button`);
-    openSubmenuButton.setAttribute(`aria-label`, submenuAriaLabel);
+    // const openSubmenuButton = document.createElement('button');
+    // openSubmenuButton.innerHTML = `Open menu`;
+    // openSubmenuButton.classList.add(`navigation__submenu-button`);
+    // openSubmenuButton.setAttribute(`aria-label`, submenuAriaLabel);
 
-    menuItemWithSubmenuElement.appendChild(openSubmenuButton);
+    // menuItemWithSubmenuElement.appendChild(openSubmenuButton);
 
-    // Add click listener
-    menuItemWithSubmenuElement.addEventListener("click", function(){
-      toggleSubmenu(this, submenuElement);
-    });
+    // // Add click listener
+    // menuItemWithSubmenuElement.addEventListener("click", function(){
+    //   toggleSubmenu(this, submenuElement);
+    // });
   });
 }
 
