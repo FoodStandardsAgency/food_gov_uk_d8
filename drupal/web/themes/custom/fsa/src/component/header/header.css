@@ -145,7 +145,7 @@
 }
 
 .header__language-link:not(:last-child):after {
-  content: "|";
+  content: '|';
   margin: 0 0.25em;
   color: var(--primary-color);
 }
@@ -224,7 +224,7 @@
 }
 
 .header__region ul.links li:not(:last-child):after {
-  content: "|";
+  content: '|';
   margin: 0 0.25em;
   color: var(--color-white);
 
@@ -291,7 +291,7 @@
 
 
 .header__region #block-myprofile > ul:before {
-  content: "";
+  content: '';
   position: absolute;
   z-index: var(--z-bottom);
   top: -0.25em;

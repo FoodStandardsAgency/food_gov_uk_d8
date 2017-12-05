@@ -1,8 +1,13 @@
 <?php
 
+/**
+ * @file
+ * Reset users.
+ */
+
 use Drupal\user\Entity\User;
 
-// use first argument of script for continuation
+// Use first argument of script for continuation.
 $min_uid = drush_shift();
 if (empty($min_uid)) {
   $min_uid = 0;
@@ -17,7 +22,9 @@ $methods = [
 ];
 
 $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadTree('alerts_allergen');
-$terms = array_map(function ($t) {return $t->tid;}, $terms);
+$terms = array_map(function ($t) {
+  return $t->tid;
+}, $terms);
 sort($terms);
 
 $query = \Drupal::entityQuery('node');
@@ -30,22 +37,23 @@ $query->condition('mail', '%@example.com', 'like');
 $query->condition('uid', $min_uid, '>=');
 $query->sort('uid');
 $uids = $query->execute();
-stats(count($uids)); // init
+// Init.
+stats(count($uids));
 foreach ($uids as $uid) {
   stats($uid);
   $u = User::load($uid);
 
-  // method
+  // Method.
   $method = $methods[array_rand($methods)];
   $u->field_notification_method = $method;
 
-  // allergys
+  // Allergys.
   $allergys = [];
   if ($method != 'none') {
     $rand = rand(1, 5);
     $rand = array_rand($terms, $rand);
     if (!is_array($rand)) {
-      // if array_rand() returns one element, its not array
+      // If array_rand() returns one element, its not array.
       $rand = [$rand];
     }
     foreach ($rand as $k) {
@@ -55,14 +63,14 @@ foreach ($uids as $uid) {
   $allergys = empty($allergys) ? NULL : $allergys;
   $u->field_subscribed_notifications = $allergys;
 
-  // notification cache
+  // Notification cache.
   $rand = mt_rand() / mt_getrandmax();
   $cache = [];
   if ($method != 'none' && $rand > 0.2) {
     $rand = rand(1, count($alerts));
     $rand = array_rand($alerts, $rand);
     if (!is_array($rand)) {
-      // if array_rand() returns one element, its not array
+      // If array_rand() returns one element, its not array.
       $rand = [$rand];
     }
     foreach ($rand as $k) {
@@ -72,7 +80,7 @@ foreach ($uids as $uid) {
   $cache = empty($cache) ? NULL : $cache;
   $u->field_notification_cache = $cache;
 
-  // status
+  // Status.
   $rand = mt_rand() / mt_getrandmax();
   $rand > 0.1 ? $u->activate() : $u->block();
 
@@ -84,7 +92,9 @@ foreach ($uids as $uid) {
 }
 print "\n";
 
-// first time called, uid is count
+/**
+ * First time called, uid is count.
+ */
 function stats($uid) {
 
   static $count;
@@ -108,6 +118,15 @@ function stats($uid) {
   $i++;
 }
 
+/**
+ * Human-readable time.
+ *
+ * @param int $sec
+ *   Time in seconds.
+ *
+ * @return string
+ *   Human redable time.
+ */
 function human_time($sec) {
   $h = floor($sec / 3600);
   $sec -= $h * 3600;

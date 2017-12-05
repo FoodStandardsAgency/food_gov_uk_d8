@@ -6,15 +6,11 @@ import responsiveTables from './core/helper/responsiveTables';
 import stickyElement from './core/helper/stickyElement';
 import toggleContent from './core/helper/toggleContent';
 import toc from './core/helper/toc';
-import mobileMenu from './core/helper/mobile-menu';
 import subNavigation from './core/helper/subNavigation';
-import regionalVariation from './core/helper/regionalVariation';
-import printPage from './core/helper/printPage';
-import peek from './component/parallax/parallax';
 
-document.addEventListener('DOMContentLoaded', () => {
-  peek();
-});
+import navigation from './component/navigation/navigation';
+import { addHeading, printPage } from './component/content/content';
+import parallax from './component/parallax/parallax';
 
 const breakpoints = {
   small: "sm",
@@ -25,8 +21,24 @@ const breakpoints = {
 require.context("./img/", true, /\.(gif|png|svg|jpe?g)$/);
 require('./style.css');
 
-// Polyfill svgs
-svg4everybody({ polyfill: true });
+document.addEventListener('DOMContentLoaded', () => {
+  // Polyfill svgs
+  svg4everybody({ polyfill: true });
+
+  // Add heading
+  addHeading();
+
+  // Print page
+  printPage();
+
+  // Parallax
+  parallax();
+
+  // Navigation
+  navigation();
+
+});
+
 
 // Temperary fix
 // const searchLogoElement = document.querySelector('.ratings.ratings--frontpage .ratings__text');
@@ -78,26 +90,6 @@ const tableOfContentsElements = [...document.querySelectorAll('.toc-tree')];
 const contentElements = [...document.querySelectorAll('.toc-filter')];
 if (tableOfContentsElements.length > 0 || contentElements.length > 0) {
   toc(tableOfContentsElements, contentElements);
-}
-
-// Mobile menu
-const menuButtonElements = document.querySelectorAll('.js-menu-button');
-const navigationElement = document.querySelector('.js-navigation');
-const siteElement = document.querySelector('.js-site');
-if (menuButtonElements != null || navigationElement != null || siteElement != null) {
-  mobileMenu(menuButtonElements, navigationElement, siteElement);
-}
-
-// Regional variations
-const regionalVariationElements = [...document.querySelectorAll('.js-regional-variation')];
-if (regionalVariationElements.length > 0) {
-  regionalVariation(regionalVariationElements);
-}
-
-// Print page
-const printPDFWrapperElements = [...document.querySelectorAll('.print__wrapper--pdf')];
-if (printPDFWrapperElements.length > 0) {
-  printPage(printPDFWrapperElements);
 }
 
 // Add class if touch device

@@ -5,6 +5,9 @@ namespace Drupal\fsa_notify;
 use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
 
+/**
+ * Defines base implementation for FSA Notify messaging.
+ */
 abstract class FsaNotifyMessage {
 
   protected static $cache = [];
@@ -13,6 +16,9 @@ abstract class FsaNotifyMessage {
   protected static $unsubscribe_url;
   protected static $date;
 
+  /**
+   * Construct the object.
+   */
   public function __construct() {
 
     $url = \Drupal::request()->getSchemeAndHttpHost();
@@ -28,6 +34,9 @@ abstract class FsaNotifyMessage {
     $this->date = date('j F Y');
   }
 
+  /**
+   * Todo: document.
+   */
   public function format($nids) {
     sort($nids, SORT_NUMERIC);
     $items = [];
@@ -42,12 +51,19 @@ abstract class FsaNotifyMessage {
     return $data;
   }
 
-
+  /**
+   * Todo: document.
+   */
   abstract protected function theme($item);
 
+  /**
+   * Todo: document.
+   */
   abstract protected function assemble($items);
 
-  // generate "short" for nodes in messages
+  /**
+   * Generate "short" for nodes in messages.
+   */
   protected function url($node) {
     $nid = $node->id();
     $url = sprintf('%s/node/%d', $this->base_url, $nid);

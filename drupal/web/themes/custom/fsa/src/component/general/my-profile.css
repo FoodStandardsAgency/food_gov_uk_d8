@@ -9,7 +9,7 @@
 }
 
 .my-profile__header > ul:before {
-  content: "";
+  content: '';
   background-color: var(--color-lighter-gray);
   position: absolute;
   z-index: var(--z-bottom);
@@ -38,7 +38,7 @@
 }
 
 .my-profile__header > ul > li > a:after {
-  content: "";
+  content: '';
   position: absolute;
   right: 0;
   left: 0;

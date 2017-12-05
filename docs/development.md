@@ -2,12 +2,14 @@ Development instructions
 ========================
 
 #### Database syncing
-Use `./syncdb.sh [SOURCE] [TARGET]` for syncing. Second parameter is optional.
+Use wundertools default `./syncdb.sh -s [SOURCE] -t [TARGET]` for syncing. The target parameter (`-t`) is optional.
 
 For example to sync staging to local run following outside the box:
 ```bash
-./syncdb.sh stage
+`./syncdb.sh -s stage -t local`
 ```
+
+If this sputters errors you may need to do `export WKV_SITE_ENV=local`.
 
 #### Configuration management
 

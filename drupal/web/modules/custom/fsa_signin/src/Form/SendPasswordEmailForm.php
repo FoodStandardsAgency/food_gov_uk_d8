@@ -10,7 +10,6 @@ use Drupal\Core\Form\FormStateInterface;
  */
 class SendPasswordEmailForm extends FormBase {
 
-
   /**
    * {@inheritdoc}
    */
@@ -55,9 +54,9 @@ class SendPasswordEmailForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $email = $form_state->getValue('email_address');
-    $langcode =  \Drupal::languageManager()->getCurrentLanguage()->getId();
-    // Try to load user account by email
-    $users = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties(array('mail' => $email));
+    $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    // Try to load user account by email.
+    $users = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties(['mail' => $email]);
     $account = reset($users);
     if (!empty($account)) {
       // Mail one time login URL and instructions using current language.

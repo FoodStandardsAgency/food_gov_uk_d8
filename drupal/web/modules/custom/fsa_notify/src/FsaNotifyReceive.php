@@ -18,6 +18,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class FsaNotifyReceive extends ControllerBase {
 
   /**
+   * Signin service.
+   *
    * @var \Drupal\fsa_signin\SignInService
    */
   protected $signInService;
@@ -34,7 +36,9 @@ class FsaNotifyReceive extends ControllerBase {
    * FsaNotifyReceive constructor.
    *
    * @param \Symfony\Component\HttpFoundation\RequestStack $request
+   *   The request stack.
    * @param \Drupal\fsa_signin\SignInService $signInService
+   *   Signin service.
    */
   public function __construct(RequestStack $request, SignInService $signInService) {
     $this->request = $request;

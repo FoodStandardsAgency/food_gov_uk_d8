@@ -2,17 +2,24 @@
 
 namespace Drupal\fsa_notify;
 
-use Drupal\fsa_notify\FsaNotifyMessage;
-
+/**
+ * Weekly message digest sending class.
+ */
 class FsaNotifyMessageWeekly extends FsaNotifyMessage {
 
   private $subject;
 
+  /**
+   * {@inheritdoc}
+   */
   public function __construct() {
     parent::__construct();
     $this->subject = t('Weekly digest');
   }
 
+  /**
+   * {@inheritdoc}
+   */
   protected function assemble($items) {
 
     $items = implode("\n", $items);
@@ -23,11 +30,15 @@ class FsaNotifyMessageWeekly extends FsaNotifyMessage {
       'allergy_alerts' => $items,
       'login' => $this->login_url,
       'unsubscribe' => $this->unsubscribe_url,
-    ]];
+    ],
+    ];
 
     return $items;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   protected function theme($item) {
     $title = $item->getTitle();
     $created = $item->getCreatedTime();

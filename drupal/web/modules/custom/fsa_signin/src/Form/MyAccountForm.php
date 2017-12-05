@@ -30,11 +30,11 @@ class MyAccountForm extends FormBase {
       '#type' => 'password_confirm',
       '#title' => $this->t('Enter new password'),
     ];
-    $form['actions'] = array('#type' => 'actions');
-    $form['actions']['submit'] = array(
+    $form['actions'] = ['#type' => 'actions'];
+    $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Update'),
-    );
+    ];
     return $form;
   }
 
@@ -42,6 +42,24 @@ class MyAccountForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
+
+    $password = $form_state->getValue('new_password');
+    if (!$password) {
+      $form_state->setErrorByName(
+        'new_password',
+        $this->t('Please enter a password to change it.')
+      );
+    }
+
+    $length = 5;
+    if (strlen($password) < $length) {
+      $form_state->setErrorByName(
+        'new_password',
+        $this->t('Password not updated: Please use a password of @length or more characters.',
+          ['@length' => $length]
+        )
+      );
+    }
 
   }
 
@@ -51,9 +69,10 @@ class MyAccountForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     /** @var \Drupal\user\Entity\User $account */
     $account = $form_state->getValue('account');
-    $subscribed_notifications = $form_state->getValue('subscribed_notifications');
-    $account->set('field_subscribed_notifications', $subscribed_notifications);
+    $pass = $form_state->getValue('new_password');
+    $account->setPassword($pass);
     $account->save();
+    drupal_set_message($this->t('Your password is now updated.'));
   }
 
 }

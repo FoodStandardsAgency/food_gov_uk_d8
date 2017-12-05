@@ -71,7 +71,7 @@
 
 .navigation-wrapper__content:after {
   @media (--breakpoint-sm) {
-    content: "";
+    content: '';
     position: absolute;
     right: 0;
     left: 0;
@@ -170,7 +170,7 @@
 
 .navigation > .menu > li > a:not(:last-child):before {
   @media (--breakpoint-sm) {
-    content: "";
+    content: '';
     position: absolute;
     top: 0.5em;
     bottom: 0.5em;
@@ -193,7 +193,7 @@
 
   &:before {
     @media (--breakpoint-sm) {
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       right: 0;
@@ -214,7 +214,7 @@
 .navigation .menu > li.menu-item--active-trail > a:after,
 .navigation .menu > li > a.is-active:after {
   @media (--breakpoint-sm) {
-    content: "";
+    content: '';
     position: absolute;
     right: 0.5em;
     left: 0.5em;

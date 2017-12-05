@@ -145,9 +145,7 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
         // Use content_type taxonomy to define in which region the pagetitle
         // should be displayed.
         switch ($term_id) {
-          // Guidance.
-          case 28:
-            // News/Alerts.
+          // News/Alerts.
           case 29:
             if ($block->id() == 'pagetitle') {
               return AccessResult::forbidden()
@@ -180,6 +178,15 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
 
     }
     else {
+      $route = \Drupal::routeMatch();
+      // Have few rules for non-nodes to hide the title from hero.
+      if ($block->id() == 'pagetitle_hero') {
+        if ($route->getParameter('fsa_establishment')) {
+          return AccessResult::forbidden()
+            ->addCacheableDependency($block);
+        }
+      }
+
       // Additional access/visibility rules for non-node pages.
       if ($block->id() == 'menu_help_secondary') {
         return AccessResult::forbidden()
@@ -203,6 +210,18 @@ function fsa_custom_preprocess_block(&$variables) {
         $variables['attributes']['class'][] = 'visually-hidden';
       }
     }
+  }
+}
+
+
+/**
+ * Implements hook_editor_js_settings_alter().
+ */
+function fsa_custom_editor_js_settings_alter(array &$settings) {
+
+  foreach ($settings['editor']['formats'] as $key => $value) {
+    // Limit headings/tags of "Format" dropdown.
+    $settings['editor']['formats'][$key]['editorSettings']['format_tags'] = "p;h2;h3;h4;h5";
   }
 }
 

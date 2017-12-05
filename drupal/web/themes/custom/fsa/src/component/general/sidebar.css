@@ -7,14 +7,11 @@
   @mixin responsive-declaration padding-right, 1em, 4em;
   @mixin responsive-declaration padding-bottom, 1em, 3em;
   background-color: var(--color-lighter-gray);
-  border-bottom: 1px solid var(--color-light-gray);
 
   @media (--breakpoint-md) {
     padding-left: 0;
     padding-top: 0;
     margin-top: 3em;
-    border-right: 1px solid var(--color-light-gray);
-    border-bottom: 0;
     background-color: transparent;
   }
 
@@ -85,4 +82,50 @@
   margin-top: 0;
   margin-bottom: 0;
   color: var(--primary-color);
+}
+
+.sidebar .toc-tree a {
+  @media (--breakpoint-md) {
+    position: relative;
+    display: block;
+    font-weight: 400;
+    text-decoration: underline;
+    transition:
+      transform 0.12s ease-in-out;
+  }
+
+  &:before {
+    @media (--breakpoint-md) {
+      content: '';
+      background-color: var(--color-green);
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 5px;
+      transform: scaleX(0) translateX(-1em);
+      transition:
+        transform 0.12s ease-in-out;
+    }
+  }
+
+  &:focus {
+    @media (--breakpoint-md) {
+      color: var(--color-black) !important;
+      font-weight: 600;
+      transform: translateX(0.5em);
+      text-decoration: none !important;
+      transition:
+        color var(--transition-enter),
+        transform var(--transition-enter);
+    }
+
+    &:before {
+      @media (--breakpoint-md) {
+        transform: scaleX(1) translateX(-0.5em);
+        transition:
+          transform var(--transition-enter);
+      }
+    }
+  }
 }

@@ -10,7 +10,6 @@
 @import "component/general/modal.css";
 @import "component/general/topic-cloud.css";
 @import "component/general/subpages.css";
-@import "component/general/regional-variation.css";
 @import "component/general/message-list.css";
 @import "component/general/teaser.css";
 @import "component/general/webform.css";
@@ -20,17 +19,10 @@
 
 /* Layout */
 @import "component/general/phase-banner.css";
-@import "component/general/header.css";
 @import "component/general/hero.css";
-@import "component/general/layout.css";
 @import "component/general/breadcrumb.css";
 @import "component/general/sidebar.css";
 @import "component/general/footer.css";
-
-/* Ratings */
-@import "component/general/establishment.css";
-@import "component/general/ratings-meanings.css";
-@import "component/general/ratings.css";
 
 /* Profile and registration */
 @import "component/general/my-profile.css";
@@ -43,4 +35,11 @@
 @import "component/general/navigation-side.css";
 @import "component/general/navigation-mobile.css";
 @import "component/general/navigation-secondary.css";
-@import "component/general/navigation.css";
+
+
+@import "component/layout/layout.css";
+@import "component/content/content.css";
+@import "component/form/form.css";
+@import "component/header/header.css";
+@import "component/navigation/navigation.css";
+@import "component/fhrs/fhrs.css";

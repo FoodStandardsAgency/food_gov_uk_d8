@@ -45,6 +45,9 @@ settings:
         -
           name: Tools
           items:
+            - RemoveFormat
+            - '-'
+            - ShowBlocks
             - Source
   plugins:
     drupallink:

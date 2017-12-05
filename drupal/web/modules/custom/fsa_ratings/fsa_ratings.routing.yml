@@ -10,7 +10,7 @@ fsa_ratings.ratings_search:
   path: '/ratings/search'
   defaults:
     _controller: '\Drupal\fsa_ratings\Controller\RatingsSearch::ratingsSearch'
-    _title: 'Food hygiene ratings search'
+    _title: 'Food hygiene ratings'
     keywords: ''
   requirements:
     _permission: 'access content'

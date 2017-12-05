@@ -8,6 +8,7 @@
 .navigation-side h2 {
   text-transform: uppercase;
   font-size: 1em;
+  letter-spacing: 0.08em;
   color: var(--color-black);
 }
 
@@ -78,7 +79,7 @@
 }
 
 #block-menu-help-secondary > .menu > li > a:before {
-  content: "";
+  content: '';
   position: absolute;
   @mixin responsive-declaration right, 1.5rem, 3.5rem;
   @mixin responsive-declaration left, 1.5rem, 3.5rem;
@@ -94,7 +95,7 @@
 }
 
 #block-menu-help-secondary > .menu > li > a:after {
-  content: "";
+  content: '';
   border: 0.4em solid transparent;
   border-top-color: transparent;
   position: absolute;
@@ -183,7 +184,7 @@
 
 #block-menu-help-secondary > .menu > li > .menu > li:before,
 #block-menu-help-secondary > .menu > li > .menu > li:after {
-  content: "";
+  content: '';
   position: absolute;
   z-index: var(--z-bottom);
   top: 0;
@@ -242,7 +243,7 @@
 }
 
 #block-menu-help-secondary > .menu > li > .menu > li > a.is-active:after {
-  content: "";
+  content: '';
   border: 0.7em solid transparent;
   position: absolute;
   bottom: 0;

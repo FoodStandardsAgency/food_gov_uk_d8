@@ -24,7 +24,7 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function getQuestion() {
-    return t('Are you sure you want to delete your account?');
+    return t('Delete account');
   }
 
   /**
@@ -38,7 +38,10 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function getDescription() {
-    return t('Confirm account deletion.');
+    $user = \Drupal::currentUser();
+    $email = $user->getEmail();
+    $message = '<p>' . $this->t('Are you sure you want to permanently delete your account <strong>@email</strong>.', ['@email' => $email]) . '</p>';
+    return $message;
   }
 
   /**

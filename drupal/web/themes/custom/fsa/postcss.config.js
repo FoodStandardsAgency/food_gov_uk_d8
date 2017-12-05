@@ -11,9 +11,11 @@ module.exports = {
             padding: "2em",
           }
         },
-        rem: false
+        rem: false,
+        nesting: false,
       }
     },
+    'postcss-nested': {},
     'postcss-normalize': {},
   },
 };
