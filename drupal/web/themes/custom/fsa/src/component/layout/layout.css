@@ -27,7 +27,6 @@
 }
 
 .layout {
-  position: relative;
 
   @media (--breakpoint-md) {
     padding-right: 2.5em;
