@@ -37,6 +37,7 @@
     "postcss-import": "^11.0.0",
     "postcss-loader": "^2.0.6",
     "postcss-mixins": "^6.0.0",
+    "postcss-nested": "^2.1.2",
     "postcss-normalize": "^4.0.0",
     "svg-sprite-loader": "^3.0.5",
     "svg4everybody": "^2.1.8",
