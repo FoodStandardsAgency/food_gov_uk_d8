@@ -1,0 +1,23 @@
+uuid: f3271990-76f1-4113-a100-13ea04278a92
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_block_reference
+    - node.type.help
+id: node.help.field_block_reference
+field_name: field_block_reference
+entity_type: node
+bundle: help
+label: 'Code block reference'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:block'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: entity_reference
