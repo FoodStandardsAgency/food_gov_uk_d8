@@ -13,27 +13,19 @@
  */
 function fsa_preprocess_webform_container_base_html(&$variables) {
 
-  // Get audience value.
-  if (isset($variables['webform_submission'])) {
-    $audience = $variables['webform_submission']->getElementData('audience');
-  }
-  else {
-    $audience = FALSE;
-  }
+  if (isset($variables['webform_submission']) && isset($variables['value']['#id'])) {
+    if ($audience = $variables['webform_submission']->getElementData('audience')) {
 
-  // Get fieldset identifier.
-  if (isset($variables['value']['#id'])) {
-    $id = $variables['value']['#id'];
-  }
-  else {
-    $id = FALSE;
-  }
+      // Get fieldset identifier.
+      $id = $variables['value']['#id'];
 
-  // Conditionally remove fieldset.
-  $con_bus = $audience == 'consumer' && $id == 'food_fraud_crime--business';
-  $bus_con = $audience == 'business' && $id == 'food_fraud_crime--consumer';
-  if ($con_bus || $bus_con) {
-    $variables = [];
+      // Conditionally remove fieldset.
+      $con_bus = $audience == 'consumer' && $id == 'food_fraud_crime--business';
+      $bus_con = $audience == 'business' && $id == 'food_fraud_crime--consumer';
+      if ($con_bus || $bus_con) {
+        $variables = [];
+      }
+    }
   }
 
 }
