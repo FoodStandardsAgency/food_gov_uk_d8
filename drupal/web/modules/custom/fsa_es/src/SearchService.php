@@ -48,9 +48,6 @@ class SearchService {
    *   An associated array containing results and metadata. Something like this: ['results' => [...], 'total' => 100, 'aggs' => [...]]
    */
   public function search(LanguageInterface $language, $input = '', $filters = [], $max_items = self::DEFAULT_MAX_RESULT_ITEMS, $offset = 0) {
-
-    // Sanitize the input.
-    $input = Html::escape($input);
     $query_must_filters = [];
     $query_should_filters = [];
     $language_code = $language->getId();
