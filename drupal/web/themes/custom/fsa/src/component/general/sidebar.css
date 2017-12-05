@@ -85,39 +85,47 @@
 }
 
 .sidebar .toc-tree a {
-  position: relative;
-  display: block;
-  font-weight: 400;
-  text-decoration: underline;
-  transition:
-    transform 0.12s ease-in-out;
-
-  &:before {
-    content: '';
-    background-color: var(--color-green);
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 5px;
-    transform: scaleX(0) translateX(-1em);
+  @media (--breakpoint-md) {
+    position: relative;
+    display: block;
+    font-weight: 400;
+    text-decoration: underline;
     transition:
       transform 0.12s ease-in-out;
   }
 
+  &:before {
+    @media (--breakpoint-md) {
+      content: '';
+      background-color: var(--color-green);
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 5px;
+      transform: scaleX(0) translateX(-1em);
+      transition:
+        transform 0.12s ease-in-out;
+    }
+  }
+
   &:focus {
-    color: var(--color-black) !important;
-    font-weight: 600;
-    transform: translateX(0.5em);
-    text-decoration: none !important;
-    transition:
-      color var(--transition-enter),
-      transform var(--transition-enter);
+    @media (--breakpoint-md) {
+      color: var(--color-black) !important;
+      font-weight: 600;
+      transform: translateX(0.5em);
+      text-decoration: none !important;
+      transition:
+        color var(--transition-enter),
+        transform var(--transition-enter);
+    }
 
     &:before {
-      transform: scaleX(1) translateX(-0.5em);
-      transition:
-        transform var(--transition-enter);
+      @media (--breakpoint-md) {
+        transform: scaleX(1) translateX(-0.5em);
+        transition:
+          transform var(--transition-enter);
+      }
     }
   }
 }
