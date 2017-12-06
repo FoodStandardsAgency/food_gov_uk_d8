@@ -269,7 +269,7 @@
     font-family: var(--font-family-content);
     font-size: 1.25em;
     font-weight: 600;
-    line-height: 35px;
+    line-height: 32px;
     color: var(--color-black);
     border-radius: 50%;
     background-color: var(--color-green);
@@ -298,12 +298,40 @@
   }
 }
 
-.ratings__mobile-rating-value .svg {
-  border-radius: 50%;
-  background-color: var(--color-green);
-  border: 2px solid var(--color-black);
-  width: 35px;
-  height: 35px;
+.ratings__mobile-rating-value {
+  .svg {
+    border-radius: 50%;
+    background-color: var(--color-green);
+    border: 2px solid var(--color-black);
+    width: 35px;
+    height: 35px;
+    display: flex;
+    flex-align: center;
+    justify-content: center;
+
+
+    &.awaitinginspection {
+      background-color: var(--color-black);
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .badge {
+    padding-top: 0.25em;
+    width: 5em;
+
+    @media (--breakpoint-xs) {
+      width: 7.5em;
+    }
+
+    @media (--breakpoint-sm) {
+      width: 10em;
+    }
+  }
 }
 
 .ratings__badge {
