@@ -1,6 +1,6 @@
-import checkMediaQuery from './checkMediaQuery';
+import checkMediaQuery from '../../core/helper/checkMediaQuery';
 
-function toggleContent(toggleButtons, breakpoints) {
+function toggle(toggleButtons, breakpoints) {
 
   const toggleContentVisibility = (button, content) => {
     if (content.classList.contains('is-open')) {
@@ -57,4 +57,4 @@ function toggleContent(toggleButtons, breakpoints) {
 
 }
 
-module.exports = toggleContent;
+module.exports = toggle;
