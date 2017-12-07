@@ -80,8 +80,8 @@ class ProfileManager extends FormBase {
     // News and consultations wrapper.
     $wrapper = 'news-consultation';
     $label = $this->t('News and consultations');
-    $form[$wrapper . '_button'] = $this->wrapperButton($wrapper, $label, TRUE);
-    $form[$wrapper] = $this->wrapperElement($wrapper, TRUE);
+    $form[$wrapper . '_button'] = $this->wrapperButton($wrapper, $label, $is_open);
+    $form[$wrapper] = $this->wrapperElement($wrapper, $is_open);
     $form[$wrapper]['subscribed_news'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('News'),
