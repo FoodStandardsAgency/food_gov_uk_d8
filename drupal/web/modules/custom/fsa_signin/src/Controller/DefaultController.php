@@ -3,6 +3,7 @@
 namespace Drupal\fsa_signin\Controller;
 
 use Drupal\Core\Link;
+use Drupal\Core\Routing\RouteProvider;
 use Drupal\fsa_signin\Form\DeleteMyAccountForm;
 use Drupal\fsa_signin\Form\MyAccountForm;
 use Drupal\fsa_signin\Form\ProfileManager;
@@ -81,10 +82,13 @@ class DefaultController extends ControllerBase {
       'subscribed_notifications' => $this->signInService->subscribedTermIds($account),
     ];
 
+    $header = '<h2>' . $this->t('Manage your preferences') . '</h2>';
+    $header .= '<p>' . $this->t("Update your subscription or unsubscribe from the alerts you're receiving") . '</p>';
+    $header .= self::linkMarkup('user.logout.http', 'Logout', '<div class="logout">', '</div>');
     $manage_form = \Drupal::formBuilder()->getForm(ProfileManager::class, $account, $options, $default_values);
 
     return [
-      ['#markup' => '<h2>' . $this->t('Manage your preferences') . '</h2><p>' . $this->t("Update your subscription or unsubscribe from the alerts you're receiving") . '</p>'],
+      ['#markup' => $header],
       $manage_form,
     ];
 
@@ -250,6 +254,30 @@ class DefaultController extends ControllerBase {
       $options);
 
     return $link;
+  }
+
+  /**
+   * Link markup for profile navigation.
+   *
+   * @param string $route_name
+   *   Name of the route.
+   * @param string $text
+   *   Link text.
+   * @param string $prefix
+   *   Prefix (can be markup)
+   * @param string $suffix
+   *   Suffix (can be markup)
+   *
+   * @return string
+   *   Link markup.
+   */
+  protected static function linkMarkup($route_name, $text, $prefix = '', $suffix = '') {
+    $options = [];
+    if (\Drupal::routeMatch()->getRouteName() == $route_name) {
+      $options['attributes'] = ['class' => 'is-active'];
+    }
+    $link_object = Link::createFromRoute($text, $route_name, [], $options);
+    return $prefix . $link_object->toString() . $suffix;
   }
 
   /**

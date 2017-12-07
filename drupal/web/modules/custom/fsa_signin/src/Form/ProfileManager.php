@@ -11,6 +11,8 @@ use Drupal\user\Entity\User;
  */
 class ProfileManager extends FormBase {
 
+  const PROFILE_PASSWORD_LENGTH = 8;
+
   /**
    * {@inheritdoc}
    */
@@ -48,19 +50,57 @@ class ProfileManager extends FormBase {
     $label = $this->t('Delivery options');
     $form[$wrapper . '_button'] = $this->wrapperButton($wrapper, $label, $is_open);
     $form[$wrapper] = $this->wrapperElement($wrapper, $is_open);
-    $form[$wrapper]['email'] = [
-      '#type' => 'email',
-      '#default_value' => $account->getEmail(),
+    $form[$wrapper]['alert_notifications'] = [
+      '#type' => 'item',
+      '#markup' => '<h3>' . $this->t('I want to receive food and allergy alerts via') . '</h3>',
+    ];
+    $form[$wrapper]['alert_notifications_method'] = [
+      '#type' => 'item',
+      '#markup' => '[not implemented yet]',
+    ];
+    $form[$wrapper]['news_notifications'] = [
+      '#type' => 'item',
+      '#markup' => '<h3>' . $this->t('I want to receive news and consultations via') . '</h3>',
+    ];
+    $form[$wrapper]['news_notifications_method'] = [
+      '#type' => 'item',
+      '#markup' => '[not implemented yet]',
+    ];
+    $form[$wrapper]['frequency'] = [
+      '#type' => 'item',
+      '#markup' => '<h3>' . $this->t('Frequency') . '</h3>',
+    ];
+    $form[$wrapper]['sms_notification_delivery'] = [
+      '#type' => 'checkboxes',
+      '#options' => [],
+      '#title' => $this->t('SMS frequency'),
+      '#markup' => '<p>' . $this->t('SMS updates are sent immediately') . '</p>',
     ];
     $form[$wrapper]['email_notification_delivery'] = [
       '#type' => 'radios',
-      '#title' => $this->t('Email delivery preference'),
+      '#title' => $this->t('Email frequency'),
+      '#required' => TRUE,
       '#options' => [
-        'immediate' => $this->t('Send updates immediately by email'),
-        'daily' => $this->t('Send updates daily by email'),
-        'weekly' => $this->t('Send updates weekly by email'),
+        'immediate' => $this->t('Send updates immediately'),
+        'daily' => $this->t('Send updates daily'),
+        'weekly' => $this->t('Send updates weekly'),
       ],
       '#default_value' => $account->get('field_notification_method')->getString(),
+    ];
+    $form[$wrapper]['personal_info'] = [
+      '#type' => 'item',
+      '#markup' => '<h3>' . $this->t('Personal information') . '</h3>',
+    ];
+    $form[$wrapper]['email'] = [
+      '#type' => 'email',
+      '#title' => $this->t('Email address'),
+      '#default_value' => $account->getEmail(),
+    ];
+    $form[$wrapper]['phone'] = [
+      '#type' => 'tel',
+      '#title' => $this->t('Phone number'),
+      '#default_value' => $account->get('field_notification_sms')->getString(),
+      '#description' => $this->t('This service is only for UK telephone numbers'),
     ];
     $form[$wrapper]['email_notification_language'] = [
       '#type' => 'radios',
@@ -72,7 +112,6 @@ class ProfileManager extends FormBase {
       '#default_value' => $account->getPreferredLangcode(),
     ];
 
-
     // Password wrapper.
     $wrapper = 'password';
     $label = $this->t('Password');
@@ -81,6 +120,7 @@ class ProfileManager extends FormBase {
     $form[$wrapper]['new_password'] = [
       '#type' => 'password_confirm',
       '#title' => $this->t('New password'),
+      '#description' => $this->t('Password should be at least @length characters', ['@length' => ProfileManager::PROFILE_PASSWORD_LENGTH]),
     ];
 
     // Submit and other actions.
@@ -100,6 +140,22 @@ class ProfileManager extends FormBase {
     if (!\Drupal::service('email.validator')->isValid($email)) {
       $form_state->setErrorByName('email', $this->t('Email value is not valid.'));
     }
+
+    // @todo: Phone number validation.
+    $phone = $password = $form_state->getValue('phone');
+
+    $password = $form_state->getValue('new_password');
+    $length = ProfileManager::PROFILE_PASSWORD_LENGTH;
+    if ($password != '' && strlen($password) < $length) {
+      $form_state->setErrorByName(
+        'new_password',
+        $this->t('Password not updated: Please use a password of @length or more characters.',
+          ['@length' => $length]
+        )
+      );
+
+    }
+
   }
 
   /**
@@ -109,12 +165,16 @@ class ProfileManager extends FormBase {
     /** @var \Drupal\user\Entity\User $account */
     $account = $form_state->getValue('account');
     $email = $form_state->getValue('email');
+    $phone = $form_state->getValue('phone');
     $email_notification_delivery = $form_state->getValue('email_notification_delivery');
     $email_notification_language = $form_state->getValue('email_notification_language');
     $account->setEmail($email);
+    $account->set('field_notification_sms', $phone);
     $account->set('field_notification_method', $email_notification_delivery);
     $account->set('preferred_langcode', $email_notification_language);
     $account->save();
+
+    drupal_set_message($this->t('Changes saved.'));
   }
 
   /**
