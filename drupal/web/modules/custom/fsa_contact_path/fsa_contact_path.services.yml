@@ -1,0 +1,5 @@
+services:
+  fsa_contact_path.route_subscriber:
+    class: Drupal\fsa_contact_path\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
