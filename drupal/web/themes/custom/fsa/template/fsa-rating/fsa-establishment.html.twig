@@ -42,74 +42,71 @@
         <div class="peek">
           <div class="peek__container">
             <header class="ratings__header rating__header--back-link">
-              <div class="svg">
-                <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#contact-arrow-icon"></use></svg>
-              </div>
               {{ backlink }}
             </header>
-            
-            
+
             <h1 class="establishment__title">{{ content.name }}</h1>
 
-            <div class="establishment__rating">
-              {{ rating_badge }}
-              <h5>{{ find_more_title }}</h5>
-              {{ find_more_link_ratings }}
-              {{ find_more_link_fhrs }}
-              </ul>
-            </div>
+            <div class="establishment__meta">
+              <div class="establishment__rating">
+                {{ rating_badge }}
+                <h5>{{ find_more_title }}</h5>
+                {{ find_more_link_ratings }}
+                {{ find_more_link_fhrs }}
+                </ul>
+              </div>
 
-            <div class="establishment__content">
-              {% if content.field_address %}
-                <h4>{{ 'Address'|t }}</h4>
-                <p>{{ content.field_address }}</p>
-              {% endif %}
+              <div class="establishment__content">
+                {% if content.field_address %}
+                  <h4>{{ 'Address'|t }}</h4>
+                  <p>{{ content.field_address }}</p>
+                {% endif %}
 
-              {% if content.field_postcode %}
-                <p>{{ content.field_postcode }}</p>
-              {% endif %}
+                {% if content.field_postcode %}
+                  <p>{{ content.field_postcode }}</p>
+                {% endif %}
 
-              {% if content.field_businesstype %}
-                  <h4>{{ 'Business type'|t }}</h4>
+                {% if content.field_businesstype %}
+                    <h4>{{ 'Business type'|t }}</h4>
+                  <p>
+                    {{ content.field_businesstype }}
+                  </p>
+                {% endif %}
+
+                {% if content.field_ratingdate %}
+                  <h4>{{ 'Inspection date'|t }}</h4>
+                  <p>
+                    {{ content.field_ratingdate }}
+                  </p>
+                {% endif %}
+
+                {% if content.field_newratingpending %}
+                  <div>{{ content.field_newratingpending }}</div>
+                {% endif %}
+
                 <p>
-                  {{ content.field_businesstype }}
+                  {{ content|without(
+                  'field_geocode',
+                  'field_localauthoritycode',
+                  'field_righttoreply',
+                  'field_score_hygiene',
+                  'field_score_structural',
+                  'field_score_confidence',
+                  'field_score_hygiene',
+                  'field_address',
+                  'field_postcode',
+                  'field_phone',
+                  'field_ratingdate',
+                  'field_businesstype',
+                  'name'
+                  ) }}
                 </p>
-              {% endif %}
-
-              {% if content.field_ratingdate %}
-                <h4>{{ 'Inspection date'|t }}</h4>
-                <p>
-                  {{ content.field_ratingdate }}
-                </p>
-              {% endif %}
-
-              {% if content.field_newratingpending %}
-                <div>{{ content.field_newratingpending }}</div>
-              {% endif %}
-
-              <p>
-                {{ content|without(
-                'field_geocode',
-                'field_localauthoritycode',
-                'field_righttoreply',
-                'field_score_hygiene',
-                'field_score_structural',
-                'field_score_confidence',
-                'field_score_hygiene',
-                'field_address',
-                'field_postcode',
-                'field_phone',
-                'field_ratingdate',
-                'field_businesstype',
-                'name'
-                ) }}
-              </p>
+              </div>
             </div>
           </div>
 
           {% if (content.field_geocode|length == 2) %}
           {% else %}
-
           <button class="establishment__button toggle-button js-toggle-button" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
             <div class="toggle-button__item toggle-button__item--presentation-icon svg">
               <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#map-icon"></use></svg>

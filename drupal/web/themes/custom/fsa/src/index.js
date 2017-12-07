@@ -4,12 +4,12 @@ import './core/helper/polyfill/closest';
 import svg4everybody from 'svg4everybody';
 import responsiveTables from './core/helper/responsiveTables';
 import stickyElement from './core/helper/stickyElement';
-import toggleContent from './core/helper/toggleContent';
 import toc from './core/helper/toc';
 import subNavigation from './core/helper/subNavigation';
 
 import navigation from './component/navigation/navigation';
 import { addHeading, printPage } from './component/content/content';
+import toggle from './component/toggle/toggle';
 import parallax from './component/parallax/parallax';
 
 const breakpoints = {
@@ -36,6 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Navigation
   navigation();
+
+  // Toggle content
+  const toggleButtons = [...document.querySelectorAll('.js-toggle-button')];
+  if (toggleButtons != null) {
+    toggle(toggleButtons, breakpoints);
+  }
 
 });
 
@@ -64,12 +70,6 @@ const container = [...document.querySelectorAll('.js-sticky-container')];
 const stickyElem = [...document.querySelectorAll('.js-sticky-element')];
 if (container != null || stickyElem != null) {
   stickyElement(container, stickyElem);
-}
-
-// Toggle content
-const toggleButtons = [...document.querySelectorAll('.js-toggle-button')];
-if (toggleButtons != null) {
-  toggleContent(toggleButtons, breakpoints);
 }
 
 // Toggle content

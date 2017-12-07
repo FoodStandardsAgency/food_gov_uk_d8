@@ -5,7 +5,6 @@
 /*Component*/
 @import "component/general/button.css";
 @import "component/general/table.css";
-@import "component/general/toggle.css";
 @import "component/general/toc.css";
 @import "component/general/modal.css";
 @import "component/general/topic-cloud.css";
@@ -43,3 +42,4 @@
 @import "component/header/header.css";
 @import "component/navigation/navigation.css";
 @import "component/fhrs/fhrs.css";
+@import "component/toggle/toggle.css";
