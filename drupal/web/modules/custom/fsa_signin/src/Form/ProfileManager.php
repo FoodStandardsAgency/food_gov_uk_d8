@@ -5,6 +5,8 @@ namespace Drupal\fsa_signin\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\user\Entity\User;
+use Drupal\fsa_signin\SignInService;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class EmailPreferencesForm.
@@ -12,6 +14,30 @@ use Drupal\user\Entity\User;
 class ProfileManager extends FormBase {
 
   const PROFILE_PASSWORD_LENGTH = 8;
+
+
+  /**
+   * Signin service.
+   *
+   * @var \Drupal\fsa_signin\SignInService
+   */
+  protected $signInService;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(SignInService $signInService) {
+    $this->signInService = $signInService;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('fsa_signin.service')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -42,8 +68,14 @@ class ProfileManager extends FormBase {
     // News and consultations wrapper.
     $wrapper = 'news-consultation';
     $label = $this->t('News and consultations');
-    $form[$wrapper . '_button'] = $this->wrapperButton($wrapper, $label, $is_open);
-    $form[$wrapper] = $this->wrapperElement($wrapper, $is_open);
+    $form[$wrapper . '_button'] = $this->wrapperButton($wrapper, $label, TRUE);
+    $form[$wrapper] = $this->wrapperElement($wrapper, TRUE);
+    $form[$wrapper]['subscribed_news'] = [
+      '#type' => 'checkboxes',
+      '#title' => $this->t('News'),
+      '#options' => ['all' => $this->t('All news')->render()] + $this->signInService->newsAsOptions(),
+      '#default_value' => array_column($account->get('field_subscribed_news')->getValue(), 'target_id'),
+    ];
 
     // Delivery options wrapper.
     $wrapper = 'delivery';
@@ -169,6 +201,8 @@ class ProfileManager extends FormBase {
     $email_notification_delivery = $form_state->getValue('email_notification_delivery');
     $email_notification_language = $form_state->getValue('email_notification_language');
     $account->setEmail($email);
+    $subscribed_news = $form_state->getValue('subscribed_news');
+    $account->set('field_subscribed_news', $subscribed_news);
     $account->set('field_notification_sms', $phone);
     $account->set('field_notification_method', $email_notification_delivery);
     $account->set('preferred_langcode', $email_notification_language);
