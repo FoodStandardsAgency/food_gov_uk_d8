@@ -64,6 +64,18 @@ class ProfileManager extends FormBase {
     $label = $this->t('Food and allergy alerts');
     $form[$wrapper . '_button'] = $this->wrapperButton($wrapper, $label, $is_open);
     $form[$wrapper] = $this->wrapperElement($wrapper, $is_open);
+    $form[$wrapper]['subscribed_food_alerts'] = [
+      '#type' => 'checkboxes',
+      '#title' => $this->t('Food alerts'),
+      '#options' => $this->signInService->foodAlertsAsOptions(),
+      '#default_value' => array_column($account->get('field_subscribed_food_alerts')->getValue(), 'target_id'),
+    ];
+    $form[$wrapper]['subscribed_allergy_alerts'] = [
+      '#type' => 'checkboxes',
+      '#title' => $this->t('Allergy alerts'),
+      '#options' => ['all' => $this->t('All allergy alerts')->render()] + $this->signInService->allergenTermsAsOptions(),
+      '#default_value' => array_column($account->get('field_subscribed_notifications')->getValue(), 'target_id'),
+    ];
 
     // News and consultations wrapper.
     $wrapper = 'news-consultation';
@@ -196,16 +208,32 @@ class ProfileManager extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     /** @var \Drupal\user\Entity\User $account */
     $account = $form_state->getValue('account');
-    $email = $form_state->getValue('email');
-    $phone = $form_state->getValue('phone');
-    $email_notification_delivery = $form_state->getValue('email_notification_delivery');
-    $email_notification_language = $form_state->getValue('email_notification_language');
-    $account->setEmail($email);
+
+    $food_alerts = $form_state->getValue('subscribed_food_alerts');
+    $account->set('field_subscribed_food_alerts', $food_alerts);
+
+    $allergy_alerts = $form_state->getValue('subscribed_allergy_alerts');
+    // Unset the helper.
+    unset($allergy_alerts['all']);
+    $account->set('field_subscribed_notifications', $allergy_alerts);
+
     $subscribed_news = $form_state->getValue('subscribed_news');
+    // Unset the helper.
+    unset($subscribed_news['all']);
     $account->set('field_subscribed_news', $subscribed_news);
+
+    $email = $form_state->getValue('email');
+    $account->setEmail($email);
+
+    $phone = $form_state->getValue('phone');
     $account->set('field_notification_sms', $phone);
+
+    $email_notification_delivery = $form_state->getValue('email_notification_delivery');
     $account->set('field_notification_method', $email_notification_delivery);
-    $account->set('preferred_langcode', $email_notification_language);
+
+    $language = $form_state->getValue('email_notification_language');
+    $account->set('preferred_langcode', $language);
+
     $account->save();
 
     drupal_set_message($this->t('Changes saved.'));
