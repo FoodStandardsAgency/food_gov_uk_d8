@@ -38,10 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
   navigation();
 
   // Toggle content
-  const toggleButtons = [...document.querySelectorAll('.js-toggle-button')];
-  if (toggleButtons != null) {
-    toggle(toggleButtons, breakpoints);
-  }
+  toggle();
 
 });
 

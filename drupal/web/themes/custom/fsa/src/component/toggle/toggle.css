@@ -107,8 +107,12 @@
 .toggle-content {
     transition: 1s;
     overflow: hidden;
-    max-height: 0;
-    min-height: 0;
+
+    &.is-closed {
+      max-height: 0;
+      min-height: 0;
+    }
+
     &.is-open {
       /*
       use the css variable --expanded if it is 
