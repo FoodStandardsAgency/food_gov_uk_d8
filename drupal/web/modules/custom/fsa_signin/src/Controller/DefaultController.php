@@ -5,6 +5,7 @@ namespace Drupal\fsa_signin\Controller;
 use Drupal\Core\Link;
 use Drupal\fsa_signin\Form\DeleteMyAccountForm;
 use Drupal\fsa_signin\Form\MyAccountForm;
+use Drupal\fsa_signin\Form\ProfileManager;
 use Drupal\fsa_signin\Form\SmsSubscriptionsForm;
 use Drupal\fsa_signin\Form\EmailPreferencesForm;
 use Drupal\fsa_signin\Form\EmailSubscriptionsForm;
@@ -61,6 +62,61 @@ class DefaultController extends ControllerBase {
       $cta_register_form,
       $send_pwd_form,
     ];
+  }
+
+  /**
+   * Create manage profile page.
+   */
+  public function manageProfilePage() {
+    $uid = \Drupal::currentUser()->id();
+    $account = User::load($uid);
+
+    $options = [
+      'subscribed_notifications' => $this->signInService->allergenTermsAsOptions(),
+      'subscribed_food_alerts' => $this->signInService->foodAlertsAsOptions(),
+    ];
+
+    $default_values = [
+      'subscribed_food_alerts' => $this->signInService->subscribedFoodAlerts($account),
+      'subscribed_notifications' => $this->signInService->subscribedTermIds($account),
+    ];
+
+    $manage_form = \Drupal::formBuilder()->getForm(ProfileManager::class, $account, $options, $default_values);
+
+    return [
+      ['#markup' => '<h2>' . $this->t('Manage your preferences') . '</h2><p>' . $this->t("Update your subscription or unsubscribe from the alerts you're receiving") . '</p>'],
+      $manage_form,
+    ];
+
+    /*
+    $options = [
+      'subscribed_notifications' => $this->signInService->allergenTermsAsOptions(),
+      'subscribed_food_alerts' => $this->signInService->foodAlertsAsOptions(),
+    ];
+
+    $default_values = [
+      'subscribed_food_alerts' => $this->signInService->subscribedFoodAlerts($account),
+      'subscribed_notifications' => $this->signInService->subscribedTermIds($account),
+    ];
+
+    $subscription_form = \Drupal::formBuilder()->getForm(EmailSubscriptionsForm::class, $account, $options, $default_values);
+    $preferences_form = \Drupal::formBuilder()->getForm(EmailPreferencesForm::class, $account);
+
+    $acc_form = \Drupal::formBuilder()->getForm(MyAccountForm::class, $account);
+    $delete_acc_form = \Drupal::formBuilder()->getForm(DeleteMyAccountForm::class, $account);
+
+    return [
+      ['#markup' => '<div class="profile header subscriptions"><h2>' . $this->t('Subscriptions') . '</h2></div>'],
+      $subscription_form,
+      ['#markup' => '<div class="profile header preferences"><h2>' . $this->t('Preferences') . '</h2></div>'],
+      $preferences_form,
+      ['#markup' => '<div class="profile header password"><h2>' . $this->t('Password') . '</h2></div>'],
+      $acc_form,
+      ['#markup' => '<div class="profile header account-delete"><h2>' . $this->t('Delete account') . '</h2></div>'],
+      ['#markup' => '<p>' . $this->t('Unsubscribe from all topics delivered by email and SMS and delete your account below. This operation cannot be undone.') . '</p>'],
+      $delete_acc_form,
+    ];
+*/
   }
 
   /**
