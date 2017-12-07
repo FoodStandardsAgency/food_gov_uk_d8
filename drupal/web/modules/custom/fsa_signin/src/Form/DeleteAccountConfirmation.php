@@ -68,18 +68,18 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    $user = \Drupal::currentUser();
-    if ($user->isAnonymous()) {
-      $markup = $this->t('Log in or create account');
+    if (\Drupal::request()->query->has('done')) {
+      $markup = '<h1>' . $this->t('Profile removed') . '</h1>';
+      $markup .= '<p>' . $this->t('Your profile has been successfully removed.') . '</p>';
 
       return [
         '#markup' => $markup,
       ];
     }
 
-    if (\Drupal::request()->query->has('done')) {
-      $markup = '<h1>' . $this->t('Profile removed') . '</h1>';
-      $markup .= '<p>' . $this->t('Your profile has been successfully removed.') . '</p>';
+    $user = \Drupal::currentUser();
+    if ($user->isAnonymous()) {
+      $markup = $this->t('Log in or create account');
 
       return [
         '#markup' => $markup,
@@ -128,7 +128,7 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
     $email = '***' . strstr($email, '@');
 
     // Permanently delete the account.
-    // $account->delete();
+    $account->delete();
 
     \Drupal::logger('fsa_signing')->notice(
       t(
