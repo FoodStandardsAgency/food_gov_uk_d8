@@ -203,10 +203,9 @@ class DefaultController extends ControllerBase {
    * Registration thank you page.
    */
   public function thankYouPage() {
-    $profile_page_url = Url::fromRoute('fsa_signin.default_controller_myAccountPage')->toString();
     $markup = '<h1>' . $this->t('Thank you!') . '</h1>';
     $markup .= '<p>' . $this->t('Edit your subscriptions in your account page') . '</p>';
-    $markup .= '<p><a class="button" href="' . $profile_page_url . '">' . $this->t('My account') . '</a></p>';
+    $markup .= self::linkMarkup('fsa_signin.default_controller_manageProfilePage', 'My account', ['button']);
 
     return [
       '#markup' => $markup,
@@ -267,6 +266,8 @@ class DefaultController extends ControllerBase {
    *   Link text.
    * @param array $classes
    *   Array of html classes for the link markup.
+   * @param array $route_params
+   *   Route parameters.
    * @param string $prefix
    *   Prefix (can be markup)
    * @param string $suffix
@@ -275,7 +276,7 @@ class DefaultController extends ControllerBase {
    * @return string
    *   Link markup.
    */
-  public static function linkMarkup($route_name, $text, array $classes = [], $prefix = '', $suffix = '') {
+  public static function linkMarkup($route_name, $text, array $classes = [], array $route_params = [], $prefix = '', $suffix = '') {
 
     $options = [
       'attributes' => [
@@ -287,7 +288,7 @@ class DefaultController extends ControllerBase {
       $options['attributes']['class'][] = 'is-active';
     }
 
-    $link_object = Link::createFromRoute($text, $route_name, [], $options);
+    $link_object = Link::createFromRoute($text, $route_name, $route_params, $options);
     return $prefix . $link_object->toString() . $suffix;
   }
 
