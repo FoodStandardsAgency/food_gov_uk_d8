@@ -84,7 +84,7 @@ class DefaultController extends ControllerBase {
 
     $header = '<h2>' . $this->t('Manage your preferences') . '</h2>';
     $header .= '<p>' . $this->t("Update your subscription or unsubscribe from the alerts you're receiving") . '</p>';
-    $header .= self::linkMarkup('user.logout.http', 'Logout', '<div class="logout">', '</div>');
+    $header .= self::linkMarkup('user.logout.http', 'Logout', ['button']);
     $manage_form = \Drupal::formBuilder()->getForm(ProfileManager::class, $account, $options, $default_values);
 
     return [
@@ -234,6 +234,8 @@ class DefaultController extends ControllerBase {
    *
    * @return \Drupal\core\Link
    *   Drupal link.
+   *
+   * @deprecated Use DefaultController::linkMarkup().
    */
   public static function formBackLink($route) {
     $text = t('Previous');
@@ -263,6 +265,8 @@ class DefaultController extends ControllerBase {
    *   Name of the route.
    * @param string $text
    *   Link text.
+   * @param array $classes
+   *   Array of html classes for the link markup.
    * @param string $prefix
    *   Prefix (can be markup)
    * @param string $suffix
@@ -271,11 +275,18 @@ class DefaultController extends ControllerBase {
    * @return string
    *   Link markup.
    */
-  protected static function linkMarkup($route_name, $text, $prefix = '', $suffix = '') {
-    $options = [];
+  public static function linkMarkup($route_name, $text, array $classes = [], $prefix = '', $suffix = '') {
+
+    $options = [
+      'attributes' => [
+        'class' => $classes,
+      ],
+    ];
+
     if (\Drupal::routeMatch()->getRouteName() == $route_name) {
-      $options['attributes'] = ['class' => 'is-active'];
+      $options['attributes']['class'][] = 'is-active';
     }
+
     $link_object = Link::createFromRoute($text, $route_name, [], $options);
     return $prefix . $link_object->toString() . $suffix;
   }
