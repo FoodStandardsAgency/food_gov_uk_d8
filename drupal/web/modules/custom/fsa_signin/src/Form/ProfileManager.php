@@ -173,6 +173,8 @@ class ProfileManager extends FormBase {
       '#type' => 'submit',
       '#value' => $this->t('Save your changes'),
     ];
+    // Attach js for the "select all" feature.
+    $form['#attached']['library'][] = 'fsa_signin/subscription_alerts';
     return $form;
   }
 
