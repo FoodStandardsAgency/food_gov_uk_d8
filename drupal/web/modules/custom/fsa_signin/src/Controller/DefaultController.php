@@ -203,9 +203,9 @@ class DefaultController extends ControllerBase {
    * Registration thank you page.
    */
   public function thankYouPage() {
-    $markup = '<h1>' . $this->t('Thank you!') . '</h1>';
-    $markup .= '<p>' . $this->t('Edit your subscriptions in your account page') . '</p>';
-    $markup .= self::linkMarkup('fsa_signin.default_controller_manageProfilePage', 'My account', ['button']);
+    $markup = '<h1>' . $this->t('Subscription complete') . '</h1>';
+    $markup .= '<p>' . $this->t("Thank you for subscribing to Food Standards Agency's updates.") . '</p>';
+    $markup .= self::linkMarkup('fsa_signin.default_controller_manageProfilePage', 'Manage your preferences', ['button']);
 
     return [
       '#markup' => $markup,
