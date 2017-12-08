@@ -13,11 +13,11 @@ bundle: team_contact
 mode: default
 content:
   field_team_contact_email:
-    weight: 2
+    weight: 1
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
+    type: email_mailto
     region: content
   field_team_contact_region:
     weight: 0
@@ -28,8 +28,8 @@ content:
     type: entity_reference_label
     region: content
   field_team_contact_telephone:
-    weight: 1
-    label: hidden
+    weight: 2
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
