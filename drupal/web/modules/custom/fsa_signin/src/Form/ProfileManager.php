@@ -58,7 +58,7 @@ class ProfileManager extends FormBase {
     ];
 
     // Food and allergy alerts wrapper.
-    $is_open = TRUE;
+    $is_open = FALSE;
     $wrapper = 'food-allergy';
     $label = $this->t('Food and allergy alerts');
     $form[$wrapper . '_button'] = $this->wrapperButton($wrapper, $label, $is_open);
