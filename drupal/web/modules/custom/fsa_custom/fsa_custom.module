@@ -210,6 +210,21 @@ function fsa_custom_preprocess_block(&$variables) {
         $variables['attributes']['class'][] = 'visually-hidden';
       }
     }
+    else {
+      $route = \Drupal::routeMatch();
+      $routename = $route->getParentRouteMatch()->getRouteName();
+
+      // Modify page title in hero area.
+      if ($variables['elements']['#id'] == 'pagetitle_hero') {
+
+        // Signin pages.
+        if (substr($routename, 0, 10) == 'fsa_signin') {
+          $variables['content']['#title'] = t('Subscribe to news and alerts');
+          $variables['title_suffix'] = ['#markup' => '<p>' . t('Stay up to date with food and allergy alerts, FSA news and consultations.') . '</p>'];
+        }
+
+      }
+    }
   }
 }
 
