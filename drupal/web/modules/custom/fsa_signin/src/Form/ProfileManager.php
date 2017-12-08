@@ -44,7 +44,7 @@ class ProfileManager extends FormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'email_preferences_form';
+    return 'profile_manager';
   }
 
   /**
@@ -52,15 +52,13 @@ class ProfileManager extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state, User $account = NULL) {
 
-    // To control the togglable wrappers oepn/close state.
-    $is_open = FALSE;
-
     $form['account'] = [
       '#type' => 'value',
       '#value' => $account,
     ];
 
     // Food and allergy alerts wrapper.
+    $is_open = TRUE;
     $wrapper = 'food-allergy';
     $label = $this->t('Food and allergy alerts');
     $form[$wrapper . '_button'] = $this->wrapperButton($wrapper, $label, $is_open);
@@ -79,6 +77,7 @@ class ProfileManager extends FormBase {
     ];
 
     // News and consultations wrapper.
+    $is_open = FALSE;
     $wrapper = 'news-consultation';
     $label = $this->t('News and consultations');
     $form[$wrapper . '_button'] = $this->wrapperButton($wrapper, $label, $is_open);
@@ -91,6 +90,7 @@ class ProfileManager extends FormBase {
     ];
 
     // Delivery options wrapper.
+    $is_open = FALSE;
     $wrapper = 'delivery';
     $label = $this->t('Delivery options');
     $form[$wrapper . '_button'] = $this->wrapperButton($wrapper, $label, $is_open);
@@ -158,6 +158,7 @@ class ProfileManager extends FormBase {
     ];
 
     // Password wrapper.
+    $is_open = FALSE;
     $wrapper = 'password';
     $label = $this->t('Password');
     $form[$wrapper . '_button'] = $form[$wrapper . '_button'] = $this->wrapperButton($wrapper, $label, $is_open);
