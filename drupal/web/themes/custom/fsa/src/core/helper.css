@@ -14,6 +14,9 @@ Plugin documentation:
   Plugin documentation:
     https://github.com/postcss/postcss-custom-selectors*/
   @custom-selector :--heading h1, h2, h3, h4, h5, h6;
+
+  @custom-selector :--content-field .field-body, .field__field_liftups, .field__field_document, .field__field_team_contacts;
+
   @custom-selector :--enter :hover, :focus, :active;
   
   @custom-selector :--not-touch html:not(.is-touch);
