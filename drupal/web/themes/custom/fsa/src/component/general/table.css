@@ -32,14 +32,11 @@
 } */
 
 .table__row {
-  display: flex;
-  justify-content: space-between;
-  flex-flow: column nowrap;
-  margin-bottom: 1em;
 
   @media (--breakpoint-md) {
+    display: flex;
+    justify-content: space-between;
     flex-flow: row nowrap;
-    margin-bottom: 0;
   }
 }
 
