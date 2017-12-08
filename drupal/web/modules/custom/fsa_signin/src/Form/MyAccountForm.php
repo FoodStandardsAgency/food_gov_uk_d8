@@ -28,7 +28,7 @@ class MyAccountForm extends FormBase {
     ];
     $form['new_password'] = [
       '#type' => 'password_confirm',
-      '#title' => $this->t('Enter new password'),
+      '#title' => $this->t('New password'),
     ];
     $form['actions'] = ['#type' => 'actions'];
     $form['actions']['submit'] = [

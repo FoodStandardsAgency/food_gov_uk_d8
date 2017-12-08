@@ -35,8 +35,8 @@ class EmailSubscriptionsForm extends FormBase {
     ];
     $form['subscribed_notifications'] = [
       '#type' => 'checkboxes',
-      '#title' => $this->t('Subscribed notifications'),
-      '#options' => $options['subscribed_notifications'],
+      '#title' => $this->t('Allergy alerts'),
+      '#options' => ['all' => $this->t('All allergy alerts')->render()] + $options['subscribed_notifications'],
       '#default_value' => $default_values['subscribed_notifications'],
     ];
     $form['actions'] = ['#type' => 'actions'];

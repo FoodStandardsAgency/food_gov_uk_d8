@@ -31,7 +31,7 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function getCancelUrl() {
-    return new Url('fsa_signin.default_controller_myAccountPage');
+    return new Url('fsa_signin.default_controller_manageProfilePage');
   }
 
   /**
@@ -40,7 +40,12 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
   public function getDescription() {
     $user = \Drupal::currentUser();
     $email = $user->getEmail();
-    $message = '<p>' . $this->t('Are you sure you want to permanently delete your account <strong>@email</strong>.', ['@email' => $email]) . '</p>';
+    $message = '<h1>' . $this->t('Confirm removal') . '</h1>';
+    $message .= '<p>' . $this->t('You are about to remove subscription with email <strong>@email</strong>.', ['@email' => $email]) . '</p>';
+    $message .= '<p>' . $this->t('This will cancel all your subscriptions and permanently remove your personal details..') . '</p>';
+    // @todo: Change the privacy link target. Something like below if internal node.
+    // $message .= '<p>' . DefaultController::linkMarkup('entity.node.canonical', $this->t('Privacy notice'), [], ['node' => '1']) . '</p>';
+    $message .= '<p><u>Privacy notice</u><br /><code>[LINK TARGET MISSING]</code></p>';
     return $message;
   }
 
@@ -48,7 +53,7 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function getConfirmText() {
-    return $this->t('Yes, delete my account');
+    return $this->t('Remove your profile');
   }
 
   /**
@@ -62,7 +67,33 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+
+    if (\Drupal::request()->query->has('done')) {
+      $markup = '<h1>' . $this->t('Profile removed') . '</h1>';
+      $markup .= '<p>' . $this->t('Your profile has been successfully removed.') . '</p>';
+
+      return [
+        '#markup' => $markup,
+      ];
+    }
+
     $user = \Drupal::currentUser();
+    if ($user->isAnonymous()) {
+      $markup = $this->t('Log in or create account');
+
+      return [
+        '#markup' => $markup,
+      ];
+    }
+
+    $form['back'] = [
+      '#markup' => DefaultController::linkMarkup('fsa_signin.default_controller_manageProfilePage', $this->t('Back'), ['back']),
+    ];
+    $form['logout'] = [
+      '#markup' => DefaultController::linkMarkup('user.logout.http', 'Logout', ['button']),
+    ];
+
+
     if (DefaultController::isMoreThanRegistered($user)) {
       // Don't let people with more than just "Authenticated" role to delete
       // their account.
@@ -96,7 +127,9 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
     // "Anonymise the email.
     $email = '***' . strstr($email, '@');
 
+    // Permanently delete the account.
     $account->delete();
+
     \Drupal::logger('fsa_signing')->notice(
       t(
         'User @id with email @email self-deleted their account.',
@@ -106,8 +139,8 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
         ]
       )
     );
-    drupal_set_message($this->t('Your account has been deleted.'));
-    $form_state->setRedirect('<front>');
+
+    $form_state->setRedirect('fsa_signin.delete_account_confirmation', [], ['query' => ['done' => NULL]]);
   }
 
 }

@@ -149,7 +149,9 @@ class SearchService {
         'multi_match' => [
           'query' => $input,
           'fields' => self::SEARCHABLE_FIELDS,
+          'type' => 'cross_fields',
           'operator' => 'and',
+          'minimum_should_match' => '50%',
         ],
       ];
       $query_should_filters[] = [

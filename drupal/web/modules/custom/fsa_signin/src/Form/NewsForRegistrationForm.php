@@ -4,13 +4,15 @@ namespace Drupal\fsa_signin\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
+use Drupal\fsa_signin\Controller\DefaultController;
 use Drupal\fsa_signin\SignInService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class AlertsForRegistrationForm.
+ * Class NewsForRegistrationForm.
  */
-class AlertsForRegistrationForm extends FormBase {
+class NewsForRegistrationForm extends FormBase {
 
   /**
    * Signin service.
@@ -39,7 +41,7 @@ class AlertsForRegistrationForm extends FormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'alert_for_registration_form';
+    return 'news_for_registration_form';
   }
 
   /**
@@ -48,33 +50,26 @@ class AlertsForRegistrationForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     /** @var \Drupal\user\PrivateTempStore $tempstore */
     $tempstore = \Drupal::service('user.private_tempstore')->get('fsa_signin');
-    $alert_tid_defaults = $tempstore->get('alert_tids_for_registration');
-    $alert_tid_defaults = ($alert_tid_defaults === NULL) ? [] : $alert_tid_defaults;
 
-    $food_alert_defaults = $tempstore->get('food_alert_registration');
-    $food_alert_defaults = ($food_alert_defaults === NULL) ? [] : $food_alert_defaults;
+    $news_defaults = $tempstore->get('news_tids_for_registration');
+    $news_defaults = ($news_defaults === NULL) ? [] : $news_defaults;
 
     $form['title'] = [
-      '#markup' => '<h2>' . $this->t('Alerts') . '</h2>',
+      '#markup' => '<h2>' . $this->t('News and consultations') . '</h2>',
     ];
     $form['description'] = [
-      '#markup' => '<p>' . $this->t("Get details of food recalls and withdrawals and allergy alerts as soon as they're issued by email or sent as an SMS text message direct to your mobile phone. This is a free service.") . '</p>',
+      '#markup' => '<p>' . $this->t("Stay up to date with the FSA's latest news and consultations by email.") . '</p>',
     ];
-    $form['food_alert_registration'] = [
+    $form['news_tids_for_registration'] = [
       '#type' => 'checkboxes',
-      '#title' => $this->t('Food alerts'),
-      '#options' => $this->signInService->foodAlertsAsOptions(),
-      '#default_value' => $food_alert_defaults,
-    ];
-
-    $form['alert_tids_for_registration'] = [
-      '#type' => 'checkboxes',
-      '#title' => $this->t('Allergy alerts'),
-      '#options' => ['all' => $this->t('All allergy alerts')->render()] + $this->signInService->allergenTermsAsOptions(),
-      '#default_value' => $alert_tid_defaults,
-      '#description' => $this->t('Select all that apply'),
+      '#title' => $this->t('News'),
+      '#options' => ['all' => $this->t('All news')->render()] + $this->signInService->newsAsOptions(),
+      '#default_value' => $news_defaults,
     ];
     $form['actions'] = ['#type' => 'actions'];
+    $form['actions']['back'] = [
+      '#markup' => DefaultController::formBackLink('fsa_signin.user_preregistration_alerts_form')->toString(),
+    ];
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Next'),
@@ -100,17 +95,16 @@ class AlertsForRegistrationForm extends FormBase {
       \Drupal::service('session_manager')->start();
     }
 
-    $food_alert_registration = $form_state->getValue('food_alert_registration');
+    $news_registration = $form_state->getValue('news_tids_for_registration');
 
-    $alert_tids = $form_state->getValue('alert_tids_for_registration');
     // Filter only those user has selected:
-    $selected_tids = array_filter(array_values($alert_tids));
+    $selected_tids = array_filter(array_values($news_registration));
 
     /** @var \Drupal\user\PrivateTempStore $tempstore */
     $tempstore = \Drupal::service('user.private_tempstore')->get('fsa_signin');
-    $tempstore->set('food_alert_registration', $food_alert_registration);
-    $tempstore->set('alert_tids_for_registration', $selected_tids);
-    $form_state->setRedirect('fsa_signin.user_preregistration_news_form');
+    $tempstore->set('news_tids_for_registration', $selected_tids);
+    $form_state->setRedirect('fsa_signin.user_registration_form');
+
   }
 
 }
