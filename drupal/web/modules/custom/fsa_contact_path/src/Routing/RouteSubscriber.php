@@ -19,6 +19,7 @@ class RouteSubscriber extends RouteSubscriberBase {
       $route->setPath('/feedback');
     }
     if ($route = $collection->get('entity.contact_form.canonical')) {
+      $route->setDefault('_title', 'Feedback');
       $route->setPath('/feedback/{contact_form}');
     }
   }
