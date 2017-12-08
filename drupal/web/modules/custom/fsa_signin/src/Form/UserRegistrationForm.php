@@ -30,6 +30,22 @@ class UserRegistrationForm extends FormBase {
     $alert_tids = $tempstore->get('alert_tids_for_registration');
     $news_registration = $tempstore->get('news_tids_for_registration');
 
+    // Only add possibility to submit if user has selected something to
+    // subscribe to.
+    if (
+      $tempstore->get('alert_tids_for_registration') != NULL ||
+      $tempstore->get('food_alert_registration') != NULL ||
+      $tempstore->get('news_tids_for_registration') != NULL) {
+
+    }
+    else {
+      drupal_set_message($this->t('Please subscribe to at least one category on previous pages.'));
+      $form['actions']['back'] = [
+        '#markup' => DefaultController::linkMarkup('fsa_signin.user_preregistration_news_form', $this->t('Previous'), ['back arrow']),
+      ];
+      return $form;
+    }
+
     $form['subscribed_food_alerts'] = [
       '#type' => 'value',
       '#value' => $food_alerts,
@@ -116,23 +132,13 @@ class UserRegistrationForm extends FormBase {
 
     $form['actions'] = ['#type' => 'actions'];
     $form['actions']['back'] = [
-      '#markup' => DefaultController::linkMarkup('fsa_signin.user_preregistration_alerts_form', $this->t('Previous'), ['back arrow']),
+      '#markup' => DefaultController::linkMarkup('fsa_signin.user_preregistration_news_form', $this->t('Previous'), ['back arrow']),
     ];
 
-    // Only add possibility to submit if user has selected something to
-    // subscribe to.
-    if (
-      $tempstore->get('alert_tids_for_registration') != NULL ||
-      $tempstore->get('food_alert_registration') != NULL ||
-      $tempstore->get('news_tids_for_registration') != NULL) {
-      $form['actions']['submit'] = [
-        '#type' => 'submit',
-        '#value' => $this->t('Submit'),
-      ];
-    }
-    else {
-      drupal_set_message($this->t('Subscribe to at least something on previous pages'));
-    }
+    $form['actions']['submit'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Submit'),
+    ];
 
     return $form;
   }
