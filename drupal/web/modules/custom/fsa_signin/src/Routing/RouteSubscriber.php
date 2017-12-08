@@ -18,6 +18,14 @@ class RouteSubscriber implements EventSubscriberInterface {
    */
   public function checkForRedirection(GetResponseEvent $event) {
     $route_name = \Drupal::routeMatch()->getRouteName();
+
+    // Signin/subscribe redirections.
+    if ($route_name == 'fsa_signin.user_preregistration') {
+      // Pre-registration "langing" page to alerts subscription.
+      $url = Url::fromRoute('fsa_signin.user_preregistration_alerts_form')->toString();
+      $event->setResponse(new RedirectResponse($url, 301));
+    }
+
     if ($route_name == 'user.login') {
       $url = Url::fromRoute('fsa_signin.default_controller_signInPage')->toString();
       $event->setResponse(new RedirectResponse($url, 301));

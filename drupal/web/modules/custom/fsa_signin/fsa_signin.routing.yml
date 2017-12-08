@@ -47,6 +47,13 @@ fsa_signin.delete_account_confirmation:
   requirements:
     _permission: 'access content'
 
+fsa_signin.user_preregistration:
+  path: '/news-alerts/subscribe'
+  defaults:
+    _controller: '\Drupal\fsa_signin\Controller\DefaultController::beginSubscribe'
+  requirements:
+    _permission: 'access content'
+
 fsa_signin.user_preregistration_alerts_form:
   path: '/news-alerts/subscribe/alerts'
   defaults:
