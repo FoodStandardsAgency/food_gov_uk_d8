@@ -3,6 +3,6 @@ langcode: en
 status: true
 dependencies: {  }
 id: help
-label: Help
-description: 'Help- and Contact Us section navigation'
+label: Contact
+description: 'Contact section navigation'
 locked: false
