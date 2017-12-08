@@ -43,39 +43,45 @@ class UserRegistrationForm extends FormBase {
       '#value' => $news_registration,
     ];
     $form['description'] = [
-      '#markup' => '<h2>' . $this->t('Type and frequency') . '</h2><p>' . $this->t('By how and how often you want to receive information from us?') . '</p>',
+      '#markup' => '<h2>' . $this->t('Delivery options') . '</h2><p>' . $this->t('How do you want to receive information from us?') . '</p>',
     ];
 
     $form['alert_container'] = [
       '#type' => 'container',
       '#attributes' => ['class' => ['alert-preferences']],
     ];
-    $form['alert_container']['title'] = [
-      '#markup' => '<h3>' . $this->t('I want to receive food and allergy alerts via') . '</h3>',
-    ];
     $form['alert_container']['delivery_method'] = [
-      '#type' => 'radios',
+      '#type' => 'checkboxes',
+      '#title' => $this->t('I want to receive food and allergy alerts via'),
       '#options' => [
         'email' => $this->t('Email'),
         'sms' => $this->t('SMS'),
       ],
     ];
+    $form['alert_container']['news_delivery_method'] = [
+      '#type' => 'checkboxes',
+      '#title' => $this->t('I want to receive news and consultations via'),
+      '#description' => $this->t('News are available only via email.'),
+      '#options' => [
+        'email' => $this->t('Email'),
+      ],
+    ];
+    $form['alert_container']['sms_notification_delivery'] = [
+      '#type' => 'checkboxes',
+      '#options' => [],
+      '#title' => $this->t('SMS frequency'),
+      '#description' => $this->t('SMS updates are sent immediately'),
+    ];
     $form['alert_container']['delivery_frequency_email'] = [
       '#type' => 'radios',
-      '#title' => $this->t('Frequency'),
+      '#title' => $this->t('Email frequency'),
       '#options' => [
         'immediate' => $this->t('Send updates immediately'),
         'daily' => $this->t('Send updates daily'),
         'weekly' => $this->t('Send updated weekly'),
       ],
-      '#states' => [
-        // Only display when user selected 'email' as the delivery method.
-        'visible' => [
-          ':input[name="delivery_method"]' => ['value' => 'email'],
-        ],
-      ],
+      '#default_value' => 'immediate',
     ];
-
     $form['personal_container'] = [
       '#type' => 'container',
       '#attributes' => ['class' => ['personal-info']],
@@ -85,11 +91,11 @@ class UserRegistrationForm extends FormBase {
     ];
     $form['personal_container']['email'] = [
       '#type' => 'email',
-      '#title' => $this->t('Email'),
+      '#title' => $this->t('Email address'),
     ];
     $form['personal_container']['phone'] = [
       '#type' => 'tel',
-      '#title' => $this->t('Phone'),
+      '#title' => $this->t('Phone number'),
     ];
 
     $form['language_container'] = [
