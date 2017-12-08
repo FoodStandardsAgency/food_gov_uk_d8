@@ -64,6 +64,14 @@ class DefaultController extends ControllerBase {
   }
 
   /**
+   * Begin the subscription flow.
+   */
+  public function beginSubscribe() {
+    // @see Drupal\fsa_signin\Routing\RouteSubscriber where user is redirected.
+    return ['#markup' => 'Registration landing page'];
+  }
+
+  /**
    * Create manage profile page.
    */
   public function manageProfilePage() {
