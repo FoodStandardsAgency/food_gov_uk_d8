@@ -179,9 +179,16 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
     }
     else {
       $route = \Drupal::routeMatch();
+      $routename = $route->getParentRouteMatch()->getRouteName();
       // Have few rules for non-nodes to hide the title from hero.
       if ($block->id() == 'pagetitle_hero') {
-        if ($route->getParameter('fsa_establishment')) {
+
+        // Enter all speficic routes to remove the page title in hero area.
+        $routes = [
+          'fsa_signin.user_registration_thank_you',
+        ];
+
+        if (in_array($routename, $routes) || $route->getParameter('fsa_establishment')) {
           return AccessResult::forbidden()
             ->addCacheableDependency($block);
         }
