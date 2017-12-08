@@ -1,6 +1,10 @@
 @import "../../core/helper";
 @import "../../core/custom-property";
 
+:--content-field {
+  @mixin responsive-declaration margin-bottom, 2em, 4em;
+}
+
 :--heading {
   font-family: var(--font-family-heading);
   font-weight: 700;
@@ -107,6 +111,15 @@ table {
   border-spacing: 0;
   width: 100%;
   @mixin responsive-declaration margin-bottom, 1em, 2em;
+
+  thead {
+    background-color: var(--dark-secondary-color) !important;
+    color: var(--color-white);
+
+    td, th {
+      border: 1px solid var(--dark-secondary-color);
+    }
+  }
 
   td, th {
     border: 1px solid var(--color-light-gray);

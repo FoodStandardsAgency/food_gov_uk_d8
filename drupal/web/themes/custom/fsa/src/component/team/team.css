@@ -1,0 +1,51 @@
+.field__field_team_contacts {
+
+}
+
+.field__field_team_contacts__heading {
+  @mixin responsive-declaration font-size, 1.25em, 1.7em;
+  @mixin responsive-declaration line-height, 1.2, 1.25;
+}
+
+.field__field_team_contacts__item {
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
+
+  h2 {
+    font-size: 1em;
+    @mixin responsive-declaration line-height, 1.2, 1.225;
+    font-family: var(--font-family-content);
+
+    & > a {
+      color: var(--color-black);
+      text-decoration: none;
+  
+      :--not-touch &:--enter {
+        color: var(--dark-primary-color);
+        text-decoration: underline;
+      }
+    }
+
+    &.field__field_team_contact__heading {
+      display: none;
+    }
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  .field {
+    margin-bottom: 0.5em;
+  }
+
+  .label__inline {
+
+    &:after {
+      content: ': ';
+    }
+
+    & + * {
+      display: inline-block;
+    }
+  }
+}

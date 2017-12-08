@@ -271,6 +271,7 @@ div.page-title {
   padding-bottom: 1em;
   padding-left: 1em;
   border: 0;
+  margin-bottom: 0;
 }
 
 :--not-touch .field__field_document > .field__field_document__item .field__field_document a:--enter {
@@ -302,8 +303,8 @@ div.page-title {
 /* Embedded entity */
 .embedded-entity {
   position: relative;
-  @mixin responsive-declaration margin-top, 2em, 4em;
-  @mixin responsive-declaration margin-bottom, 2em, 4em;
+  @mixin responsive-declaration margin-top, 1em, 2em;
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
 }
 
 /*Content image*/
