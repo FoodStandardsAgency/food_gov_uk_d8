@@ -71,7 +71,7 @@ fsa_signin.user_preregistration_news_form:
     _permission: 'access content'
 
 fsa_signin.user_registration_form:
-  path: '/news-alerts/subscribe/personal'
+  path: '/news-alerts/subscribe/delivery'
   defaults:
     _form: '\Drupal\fsa_signin\Form\UserRegistrationForm'
     _title: 'Subscribe to news & alerts'
