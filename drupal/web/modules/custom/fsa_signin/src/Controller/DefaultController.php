@@ -5,6 +5,7 @@ namespace Drupal\fsa_signin\Controller;
 use Drupal\Core\Link;
 use Drupal\fsa_signin\Form\DeleteMyAccountForm;
 use Drupal\fsa_signin\Form\MyAccountForm;
+use Drupal\fsa_signin\Form\ProfileManager;
 use Drupal\fsa_signin\Form\SmsSubscriptionsForm;
 use Drupal\fsa_signin\Form\EmailPreferencesForm;
 use Drupal\fsa_signin\Form\EmailSubscriptionsForm;
@@ -12,7 +13,6 @@ use Drupal\fsa_signin\Form\SendPasswordEmailForm;
 use Drupal\fsa_signin\Form\CtaRegister;
 use Drupal\user\Form\UserLoginForm;
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Url;
 use Drupal\fsa_signin\SignInService;
 use Drupal\user\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -61,6 +61,35 @@ class DefaultController extends ControllerBase {
       $cta_register_form,
       $send_pwd_form,
     ];
+  }
+
+  /**
+   * Create manage profile page.
+   */
+  public function manageProfilePage() {
+    $uid = \Drupal::currentUser()->id();
+    $account = User::load($uid);
+
+    $options = [
+      'subscribed_notifications' => $this->signInService->allergenTermsAsOptions(),
+      'subscribed_food_alerts' => $this->signInService->foodAlertsAsOptions(),
+    ];
+
+    $default_values = [
+      'subscribed_food_alerts' => $this->signInService->subscribedFoodAlerts($account),
+      'subscribed_notifications' => $this->signInService->subscribedTermIds($account),
+    ];
+
+    $header = '<h2>' . $this->t('Manage your preferences') . '</h2>';
+    $header .= '<p>' . $this->t("Update your subscription or unsubscribe from the alerts you're receiving") . '</p>';
+    $header .= self::linkMarkup('user.logout.http', 'Logout', ['button']);
+    $manage_form = \Drupal::formBuilder()->getForm(ProfileManager::class, $account, $options, $default_values);
+
+    return [
+      ['#markup' => $header],
+      $manage_form,
+    ];
+
   }
 
   /**
@@ -143,10 +172,9 @@ class DefaultController extends ControllerBase {
    * Registration thank you page.
    */
   public function thankYouPage() {
-    $profile_page_url = Url::fromRoute('fsa_signin.default_controller_myAccountPage')->toString();
     $markup = '<h1>' . $this->t('Thank you!') . '</h1>';
     $markup .= '<p>' . $this->t('Edit your subscriptions in your account page') . '</p>';
-    $markup .= '<p><a class="button" href="' . $profile_page_url . '">' . $this->t('My account') . '</a></p>';
+    $markup .= self::linkMarkup('fsa_signin.default_controller_manageProfilePage', 'My account', ['button']);
 
     return [
       '#markup' => $markup,
@@ -174,6 +202,8 @@ class DefaultController extends ControllerBase {
    *
    * @return \Drupal\core\Link
    *   Drupal link.
+   *
+   * @deprecated Use DefaultController::linkMarkup().
    */
   public static function formBackLink($route) {
     $text = t('Previous');
@@ -194,6 +224,41 @@ class DefaultController extends ControllerBase {
       $options);
 
     return $link;
+  }
+
+  /**
+   * Link markup for profile navigation.
+   *
+   * @param string $route_name
+   *   Name of the route.
+   * @param string $text
+   *   Link text.
+   * @param array $classes
+   *   Array of html classes for the link markup.
+   * @param array $route_params
+   *   Route parameters.
+   * @param string $prefix
+   *   Prefix (can be markup)
+   * @param string $suffix
+   *   Suffix (can be markup)
+   *
+   * @return string
+   *   Link markup.
+   */
+  public static function linkMarkup($route_name, $text, array $classes = [], array $route_params = [], $prefix = '', $suffix = '') {
+
+    $options = [
+      'attributes' => [
+        'class' => $classes,
+      ],
+    ];
+
+    if (\Drupal::routeMatch()->getRouteName() == $route_name) {
+      $options['attributes']['class'][] = 'is-active';
+    }
+
+    $link_object = Link::createFromRoute($text, $route_name, $route_params, $options);
+    return $prefix . $link_object->toString() . $suffix;
   }
 
   /**

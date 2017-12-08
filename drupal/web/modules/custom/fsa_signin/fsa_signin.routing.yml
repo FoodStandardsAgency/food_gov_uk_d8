@@ -7,6 +7,14 @@ fsa_signin.default_controller_signInPage:
   requirements:
     _permission: 'access content'
 
+fsa_signin.default_controller_manageProfilePage:
+  path: '/profile/manage'
+  defaults:
+    _controller: '\Drupal\fsa_signin\Controller\DefaultController::manageProfilePage'
+    _title: 'Manage your preferences'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
 fsa_signin.default_controller_emailSubscriptionsPage:
   path: '/profile/subscriptions/email'
   defaults:
@@ -37,7 +45,7 @@ fsa_signin.delete_account_confirmation:
     _title: 'Delete profile'
     _form: '\Drupal\fsa_signin\Form\DeleteAccountConfirmation'
   requirements:
-    _user_is_logged_in: 'TRUE'
+    _permission: 'access content'
 
 fsa_signin.user_preregistration_alerts_form:
   path: '/news-alerts/subscribe/alerts'
