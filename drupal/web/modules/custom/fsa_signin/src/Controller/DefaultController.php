@@ -3,7 +3,6 @@
 namespace Drupal\fsa_signin\Controller;
 
 use Drupal\Core\Link;
-use Drupal\Core\Routing\RouteProvider;
 use Drupal\fsa_signin\Form\DeleteMyAccountForm;
 use Drupal\fsa_signin\Form\MyAccountForm;
 use Drupal\fsa_signin\Form\ProfileManager;
@@ -14,7 +13,6 @@ use Drupal\fsa_signin\Form\SendPasswordEmailForm;
 use Drupal\fsa_signin\Form\CtaRegister;
 use Drupal\user\Form\UserLoginForm;
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Url;
 use Drupal\fsa_signin\SignInService;
 use Drupal\user\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -92,35 +90,6 @@ class DefaultController extends ControllerBase {
       $manage_form,
     ];
 
-    /*
-    $options = [
-      'subscribed_notifications' => $this->signInService->allergenTermsAsOptions(),
-      'subscribed_food_alerts' => $this->signInService->foodAlertsAsOptions(),
-    ];
-
-    $default_values = [
-      'subscribed_food_alerts' => $this->signInService->subscribedFoodAlerts($account),
-      'subscribed_notifications' => $this->signInService->subscribedTermIds($account),
-    ];
-
-    $subscription_form = \Drupal::formBuilder()->getForm(EmailSubscriptionsForm::class, $account, $options, $default_values);
-    $preferences_form = \Drupal::formBuilder()->getForm(EmailPreferencesForm::class, $account);
-
-    $acc_form = \Drupal::formBuilder()->getForm(MyAccountForm::class, $account);
-    $delete_acc_form = \Drupal::formBuilder()->getForm(DeleteMyAccountForm::class, $account);
-
-    return [
-      ['#markup' => '<div class="profile header subscriptions"><h2>' . $this->t('Subscriptions') . '</h2></div>'],
-      $subscription_form,
-      ['#markup' => '<div class="profile header preferences"><h2>' . $this->t('Preferences') . '</h2></div>'],
-      $preferences_form,
-      ['#markup' => '<div class="profile header password"><h2>' . $this->t('Password') . '</h2></div>'],
-      $acc_form,
-      ['#markup' => '<div class="profile header account-delete"><h2>' . $this->t('Delete account') . '</h2></div>'],
-      ['#markup' => '<p>' . $this->t('Unsubscribe from all topics delivered by email and SMS and delete your account below. This operation cannot be undone.') . '</p>'],
-      $delete_acc_form,
-    ];
-*/
   }
 
   /**
