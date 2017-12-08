@@ -118,10 +118,22 @@ class UserRegistrationForm extends FormBase {
     $form['actions']['back'] = [
       '#markup' => DefaultController::linkMarkup('fsa_signin.user_preregistration_alerts_form', $this->t('Previous'), ['back arrow']),
     ];
-    $form['actions']['submit'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Submit'),
-    ];
+
+    // Only add possibility to submit if user has selected something to
+    // subscribe to.
+    if (
+      $tempstore->get('alert_tids_for_registration') != NULL ||
+      $tempstore->get('food_alert_registration') != NULL ||
+      $tempstore->get('news_tids_for_registration') != NULL) {
+      $form['actions']['submit'] = [
+        '#type' => 'submit',
+        '#value' => $this->t('Submit'),
+      ];
+    }
+    else {
+      drupal_set_message($this->t('Subscribe to at least something on previous pages'));
+    }
+
     return $form;
   }
 

@@ -24,10 +24,25 @@ class AlertSubscribeNav extends BlockBase {
     // Disable block cache.
     $build['#cache'] = ['max-age' => 0];
 
+    // Get tempstore for checking check if user has subscribed to anything on
+    // previous pages.
+    $tempstore = \Drupal::service('user.private_tempstore')->get('fsa_signin');
+
+    $delivery_title = $this->t('Delivery options');
+    if (
+      $tempstore->get('alert_tids_for_registration') != NULL ||
+      $tempstore->get('food_alert_registration') != NULL ||
+      $tempstore->get('news_tids_for_registration') != NULL) {
+      $delivery_page = DefaultController::linkMarkup('fsa_signin.user_registration_form', $delivery_title);
+    }
+    else {
+      $delivery_page = $delivery_title;
+    }
+
     $items = [
       ['#markup' => DefaultController::linkMarkup('fsa_signin.user_preregistration_alerts_form', $this->t('Food and allergy alerts'))],
       ['#markup' => DefaultController::linkMarkup('fsa_signin.user_preregistration_news_form', $this->t('News and consultations'))],
-      ['#markup' => DefaultController::linkMarkup('fsa_signin.user_registration_form', $this->t('Delivery options'))],
+      ['#markup' => $delivery_page],
     ];
 
 

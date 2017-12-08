@@ -96,6 +96,7 @@ class NewsForRegistrationForm extends FormBase {
     }
 
     $news_registration = $form_state->getValue('news_tids_for_registration');
+    unset($news_registration['all']);
 
     // Filter only those user has selected:
     $selected_tids = array_filter(array_values($news_registration));

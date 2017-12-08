@@ -101,6 +101,7 @@ class AlertsForRegistrationForm extends FormBase {
     }
 
     $food_alert_registration = $form_state->getValue('food_alert_registration');
+    unset($food_alert_registration['all']);
 
     $alert_tids = $form_state->getValue('alert_tids_for_registration');
     // Filter only those user has selected:
