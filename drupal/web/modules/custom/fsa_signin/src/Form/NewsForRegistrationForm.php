@@ -68,7 +68,7 @@ class NewsForRegistrationForm extends FormBase {
     ];
     $form['actions'] = ['#type' => 'actions'];
     $form['actions']['back'] = [
-      '#markup' => DefaultController::formBackLink('fsa_signin.user_preregistration_alerts_form')->toString(),
+      '#markup' => DefaultController::linkMarkup('fsa_signin.user_preregistration_alerts_form', $this->t('Previous'), ['back arrow']),
     ];
     $form['actions']['submit'] = [
       '#type' => 'submit',

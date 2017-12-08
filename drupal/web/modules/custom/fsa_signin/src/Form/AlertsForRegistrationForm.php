@@ -58,7 +58,7 @@ class AlertsForRegistrationForm extends FormBase {
       '#markup' => '<h2>' . $this->t('Alerts') . '</h2>',
     ];
     $form['description'] = [
-      '#markup' => '<p>' . $this->t("Get details of food recalls and withdrawals and allergy alerts as soon as they're issued by email or sent as an SMS text message direct to your mobile phone. This is a free service.") . '</p>',
+      '#markup' => '<p>' . $this->t("Get food alerts and allergy alerts by email or SMS text message. This is a free service.") . '</p>',
     ];
     $form['food_alert_registration'] = [
       '#type' => 'checkboxes',
