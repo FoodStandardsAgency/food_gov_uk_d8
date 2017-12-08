@@ -1,0 +1,30 @@
+uuid: 2da74cc4-908f-4d54-ba38-be46ed11f501
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - fsa_signin
+    - system
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: alerts_subscribe_navigation
+theme: fsa
+region: content_top
+weight: 0
+provider: null
+plugin: alert_subscribe_nav
+settings:
+  id: alert_subscribe_nav
+  label: 'Alerts subscribe navigation'
+  provider: fsa_signin
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: '/news-alerts/subscribe*'
+    negate: false
+    context_mapping: {  }
