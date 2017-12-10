@@ -87,10 +87,53 @@
 
   .fieldgroup {
     margin-top: 2em;
+    padding-bottom: 2em;
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
+
+    @media (--breakpoint-md) {
+      width: 49%;
+    }
+
+    &:nth-child(odd) {
+      @media (--breakpoint-md) {
+        padding-right: 1em;
+      }
+    }
+
+    &:nth-child(even) {
+      @media (--breakpoint-md) {
+        padding-left: 1em;
+      }
+    }
   }
 
   .form-item {
     margin-bottom: 0;
+    text-align: left;
+
+    &.js-form-type-select {
+      width: 100%;
+      display: inline-block;
+      vertical-align: top;
+  
+      @media (--breakpoint-md) {
+        width: 50%;
+      }
+
+      &:nth-child(odd) {
+        @media (--breakpoint-md) {
+          padding-right: 1em;
+        }
+      }
+
+      &:nth-child(even) {
+        @media (--breakpoint-md) {
+          padding-left: 1em;
+        }
+      }
+    }
   }
 
   .ratings__advanced-search-button {
@@ -146,8 +189,6 @@
     }
   }
 }
-
-
 
 /* Ratings toolbar */
 .ratings__toolbar {
