@@ -1,4 +1,5 @@
 import checkMediaQuery from '../../core/helper/checkMediaQuery';
+import breakpoints from '../../core/helper/breakpoints';
 import cssCustomPropertySupport from '../../core/helper/cssCustomPropertySupport';
 
 function toggle() {
@@ -79,19 +80,27 @@ function toggle() {
           height is no longer adequate.
   */
 
+  function accordionClose(button, content) {
+    content.classList.remove('is-visible');
+    content.classList.add('is-hidden');
+    content.setAttribute('aria-hidden', true);
+    button.classList.remove('is-visible');
+    button.setAttribute('aria-expanded', false);
+  }
+
+  function accordionOpen(button, content) {
+    content.classList.add('is-visible');
+    content.classList.remove('is-hidden');
+    content.setAttribute('aria-hidden', false);
+    button.classList.add('is-visible');
+    button.setAttribute('aria-expanded', true);
+  }
+
   function accordionEventHandler(button, content) {
-    if (content.classList.contains('is-open')) {
-      content.classList.remove('is-open');
-      content.classList.add('is-closed');
-      content.setAttribute('aria-hidden', true);
-      button.classList.remove('is-open');
-      button.setAttribute('aria-expanded', false);
+    if (content.classList.contains('is-visible')) {
+      accordionClose(button, content)
     } else {
-      content.classList.add('is-open');
-      content.classList.remove('is-closed');
-      content.setAttribute('aria-hidden', false);
-      button.classList.add('is-open');
-      button.setAttribute('aria-expanded', true);
+      accordionOpen(button, content)
     }
   }
 
@@ -116,9 +125,6 @@ function toggle() {
       content = toggleButtonElement.nextElementSibling;
       toggleButton = toggleButtonElement;
     }
-
-    // Initial measurmenet for content element
-    measureAccordionContents(content);
     
     // Add click listener to toggle
     toggleButtonElement.addEventListener("click", function(e){
@@ -126,10 +132,22 @@ function toggle() {
       accordionEventHandler(toggleButton, content);
     });
 
-    // Add transitioned listener to content
-    content.addEventListener("transitionend", function(e){
+    // Check if only mobile
+    if (content.classList.contains('js-toggle-content-only-mobile')) {
+      if (checkMediaQuery() == breakpoints.medium) {
+        content.removeAttribute('aria-hidden');
+        content.classList.add('is-open');
+      }
+    } else {
+
+      // Initial measurmenet for content element
       measureAccordionContents(content);
-    });
+
+      // Add transitioned listener to content
+      content.addEventListener("transitionend", function(e){
+        measureAccordionContents(content);
+      });
+    }
   });
     
 }

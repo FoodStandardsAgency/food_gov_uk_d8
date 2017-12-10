@@ -110,12 +110,12 @@
   max-height: 0;
   min-height: 0;
 
-  &.is-closed {
+  &.is-hidden {
     /* max-height: 0;
     min-height: 0; */
   }
 
-  &.is-open {
+  &.is-visible {
     /*
     use the css variable --expanded if it is 
     set in the style attribute of the html
@@ -123,6 +123,17 @@
     */
     max-height: var(--expanded, 70px);
     min-height: var(--expanded, 70px);
+  }
+
+  &.is-closed {
+    display: none;
+  }
+
+  &.is-open {
+    display: block;
+    display: flex;
+    max-height: none;
+    min-height: 0;
   }
 
   :--not-js & {

@@ -11,6 +11,7 @@ import navigation from './component/navigation/navigation';
 import { addHeading, printPage } from './component/content/content';
 import toggle from './component/toggle/toggle';
 import parallax from './component/parallax/parallax';
+import fhrs from './component/fhrs/fhrs';
 
 const breakpoints = {
   small: "sm",
@@ -39,6 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Toggle content
   toggle();
+
+  // FHRS
+  fhrs();
 
 });
 
