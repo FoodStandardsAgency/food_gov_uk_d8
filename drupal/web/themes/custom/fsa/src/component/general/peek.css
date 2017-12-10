@@ -10,9 +10,6 @@
 
   @media (--breakpoint-md) {
     margin-top: -4em;
-    padding-right: 0;
-    padding-left: 0;
-    padding-bottom: 0;
   }
 
   @media (--breakpoint-lg) {
