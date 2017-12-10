@@ -118,7 +118,9 @@
           </button>
 
           <div class="establishment__map toggle-content js-toggle-content" id="collapsible-{{ randomID }}" aria-hidden="true">
-            {{ content.field_geocode }}
+            <div class="establishment__map-element">
+              {{ content.field_geocode }}
+            </div>
           </div>
           {% endif %}
         </div>

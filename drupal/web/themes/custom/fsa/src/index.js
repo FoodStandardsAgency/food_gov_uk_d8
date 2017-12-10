@@ -4,6 +4,7 @@ import './core/helper/polyfill/closest';
 import svg4everybody from 'svg4everybody';
 import responsiveTables from './core/helper/responsiveTables';
 import stickyElement from './core/helper/stickyElement';
+import cssCustomPropertySupport from './core/helper/cssCustomPropertySupport';
 import toc from './core/helper/toc';
 import subNavigation from './core/helper/subNavigation';
 
@@ -11,6 +12,7 @@ import navigation from './component/navigation/navigation';
 import { addHeading, printPage } from './component/content/content';
 import toggle from './component/toggle/toggle';
 import parallax from './component/parallax/parallax';
+import fhrs from './component/fhrs/fhrs';
 
 const breakpoints = {
   small: "sm",
@@ -39,6 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Toggle content
   toggle();
+
+  // FHRS
+  fhrs();
 
 });
 
@@ -94,3 +99,9 @@ document.addEventListener('touchstart', function addtouchclass(e) {
   document.documentElement.classList.add('is-touch');
   document.removeEventListener('touchstart', addtouchclass, false);
 }, false)
+
+// Add class if css custom properties are supported
+if (cssCustomPropertySupport()) {
+  document.documentElement.classList.add('is-modern');
+}
+

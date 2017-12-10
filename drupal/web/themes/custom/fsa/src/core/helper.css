@@ -22,6 +22,8 @@ Plugin documentation:
   @custom-selector :--not-touch html:not(.is-touch);
   
   @custom-selector :--not-js html:not(.js);
+
+  @custom-selector :--not-modern html:not(.is-modern);
   
   /*PostCSS Mixins
   Using postcss-mixins

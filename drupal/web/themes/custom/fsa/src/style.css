@@ -14,11 +14,9 @@
 @import "component/general/webform.css";
 @import "component/general/social-media.css";
 @import "component/general/team-finder.css";
-@import "component/general/peek.css";
 
 /* Layout */
 @import "component/general/phase-banner.css";
-@import "component/general/hero.css";
 @import "component/general/breadcrumb.css";
 @import "component/general/sidebar.css";
 @import "component/general/footer.css";
@@ -36,11 +34,14 @@
 @import "component/general/navigation-secondary.css";
 
 
+@import "component/toggle/toggle.css";
+
 @import "component/layout/layout.css";
 @import "component/content/content.css";
 @import "component/form/form.css";
 @import "component/header/header.css";
 @import "component/navigation/navigation.css";
 @import "component/fhrs/fhrs.css";
-@import "component/toggle/toggle.css";
 @import "component/team/team.css";
+@import "component/hero/hero.css";
+@import "component/parallax/parallax.css";
