@@ -12,14 +12,12 @@
 @import "component/general/message-list.css";
 @import "component/general/teaser.css";
 @import "component/general/webform.css";
-@import "component/general/social-media.css";
 @import "component/general/team-finder.css";
 
 /* Layout */
 @import "component/general/phase-banner.css";
 @import "component/general/breadcrumb.css";
 @import "component/general/sidebar.css";
-@import "component/general/footer.css";
 
 /* Profile and registration */
 @import "component/general/my-profile.css";
@@ -43,3 +41,4 @@
 @import "component/hero/hero.css";
 @import "component/parallax/parallax.css";
 @import "component/listing/listing.css";
+@import "component/footer/footer.css";
