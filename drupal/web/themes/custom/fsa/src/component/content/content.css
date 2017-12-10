@@ -23,7 +23,7 @@
 h1 {
   @mixin responsive-declaration font-size, 2.2em, 3.333em;
   @mixin responsive-declaration line-height, 1.2, 1.1;
-  color: var(--primary-color);
+  color: var(--dark-primary-color);
 
   .block-page-title & {
     margin-top: 0;

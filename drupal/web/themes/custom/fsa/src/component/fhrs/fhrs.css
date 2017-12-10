@@ -69,7 +69,7 @@
       background-position: left 1em top 50%;
       background-repeat: no-repeat;
 
-      :--no-js & {
+      :--not-js & {
         padding-left: 2em;
       }
 

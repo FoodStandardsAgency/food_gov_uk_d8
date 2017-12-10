@@ -271,56 +271,53 @@
     </div>
   </div>
 
-  <footer class="footer" role="contentinfo">
-    <div class="footer__logo">
-      <div class="svg">
-        <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop-{{ current_language }}"></use></svg>
-      </div>
+  <div class="layout">
+    <div class="layout__container">
+      <footer class="footer" role="contentinfo">
+          {# <div class="footer__content">
+            <p>{{ "Food Standards Agency makes sure food is safe to eat and what it says it is."|t }}</p>
+          </div> #}
+
+        {% if page.footer %}
+          {{ page.footer }}
+        {% endif %}
+
+        <div class="social-media">
+          <div class="social-media__list">
+            <a href="https://www.facebook.com/FoodStandardsAgency" class="social-media__link">
+              <div class="svg">
+                <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Facebook_icon"></use></svg>
+              </div>
+            </a>
+
+            <a href="https://twitter.com/foodgov" class="social-media__link">
+              <div class="svg">
+                <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Twitter_icon"></use></svg>
+              </div>
+            </a>
+
+            <a href="https://www.linkedin.com/company/food-standards-agency" class="social-media__link">
+              <div class="svg">
+                <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#LinkedIN_icon"></use></svg>
+              </div>
+            </a>
+
+            <a href="https://www.youtube.com/user/FoodStandardsAgency" class="social-media__link">
+              <div class="svg">
+                <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Youtube_icon"></use></svg>
+              </div>
+            </a>
+
+            <a href="https://www.instagram.com/foodgov/" class="social-media__link">
+              <div class="svg">
+                <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Instagram_icon"></use></svg>
+              </div>
+            </a>
+              
+          </div>
+        </div>
+
+      </footer>
     </div>
-
-    <div class="footer__content">
-      <p>{{ "Food Standards Agency makes sure food is safe to eat and what it says it is."|t }}</p>
-    </div>
-
-    <div class="social-media">
-      <div class="social-media__list">
-        <a href="https://www.facebook.com/FoodStandardsAgency" class="social-media__link">
-          <div class="svg">
-            <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Facebook_icon"></use></svg>
-          </div>
-        </a>
-
-        <a href="https://twitter.com/foodgov" class="social-media__link">
-          <div class="svg">
-            <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Twitter_icon"></use></svg>
-          </div>
-        </a>
-
-        <a href="https://www.linkedin.com/company/food-standards-agency" class="social-media__link">
-          <div class="svg">
-            <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#LinkedIN_icon"></use></svg>
-          </div>
-        </a>
-
-        <a href="https://www.youtube.com/user/FoodStandardsAgency" class="social-media__link">
-          <div class="svg">
-            <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Youtube_icon"></use></svg>
-          </div>
-        </a>
-
-        <a href="https://www.instagram.com/foodgov/" class="social-media__link">
-          <div class="svg">
-            <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Instagram_icon"></use></svg>
-          </div>
-        </a>
-          
-      </div>
-    </div>
-
-    {% if page.footer %}
-      {{ page.footer }}
-    {% endif %}
-
-  </footer>
-
+  </div>
 </div>

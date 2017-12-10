@@ -2,21 +2,19 @@
 @import "../../core/custom-property";
 
 .sidebar {
-  @mixin responsive-declaration padding-top, 1em, 3em;
   @mixin responsive-declaration padding-left, 1em, 4em;
   @mixin responsive-declaration padding-right, 1em, 4em;
   @mixin responsive-declaration padding-bottom, 1em, 3em;
   background-color: var(--color-lighter-gray);
+  @mixin responsive-declaration padding-top, 1em, 4em;
 
   @media (--breakpoint-md) {
     padding-left: 0;
-    padding-top: 0;
-    margin-top: 3em;
     background-color: transparent;
   }
 
-  @media (--breakpoint-lg) {
-    margin-top: 4em;
+  .theme--news-alerts & {
+    background-color: transparent;
   }
 }
 
@@ -128,4 +126,44 @@
       }
     }
   }
+}
+
+.toc-tree {
+
+}
+
+.toc-tree ul,
+.toc-tree ol {
+  margin: 0;
+  padding: 0;
+  padding-top: 1em;
+}
+
+.toc-tree ul li,
+.toc-tree ol li {
+  margin-bottom: 1em;
+}
+
+:--not-touch .toc-tree ul a:--enter,
+:--not-touch .toc-tree ol a:--enter {
+  color: var(--darker-primary-color);
+  text-decoration: underline;
+}
+
+.toc-tree ol a.is-active {
+  font-weight: 700;
+}
+
+.toc-tree ul ul,
+.toc-tree ol ol {
+  padding-left: 1em;
+}
+
+.toc-tree ul ul a,
+.toc-tree ol ol a {
+  color: var(--color-black);
+}
+
+.toc-filter .back-to-top {
+  display: none;
 }
