@@ -36,11 +36,12 @@
 @import "component/general/navigation-secondary.css";
 
 
+@import "component/toggle/toggle.css";
+
 @import "component/layout/layout.css";
 @import "component/content/content.css";
 @import "component/form/form.css";
 @import "component/header/header.css";
 @import "component/navigation/navigation.css";
 @import "component/fhrs/fhrs.css";
-@import "component/toggle/toggle.css";
 @import "component/team/team.css";

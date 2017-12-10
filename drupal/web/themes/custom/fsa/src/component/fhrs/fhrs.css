@@ -120,7 +120,6 @@
 
   .ratings__advanced-search-content {
     margin-bottom: 1em;
-    padding-bottom: 1em;
     box-shadow: 0 1px 0 0 var(--color-light-gray);
   }
 }
@@ -611,6 +610,23 @@
   }
 }
 
+.establishment__map {
+
+}
+
+.establishment__map-element {
+  position: relative;
+  height: 400px;
+
+  & > * {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+
 .establishment__table {
   clear: both;
   margin-top: 2em;
@@ -626,6 +642,9 @@
 }
 
 .establishment__table-button.is-open {
+  background-color: var(--dark-secondary-color);
+  color: var(--color-white);
+
   & .establishment__score {
     background-color: color(white alpha(-70%));
     color: white;

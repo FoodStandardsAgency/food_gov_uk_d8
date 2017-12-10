@@ -1,69 +1,26 @@
 import checkMediaQuery from '../../core/helper/checkMediaQuery';
 import breakpoints from '../../core/helper/breakpoints';
 import cssCustomPropertySupport from '../../core/helper/cssCustomPropertySupport';
+import debounce from '../../core/helper/debounce';
 
 function toggle() {
 
-  // const toggleContentVisibility = (button, content) => {
-  //   if (content.classList.contains('is-open')) {
-  //     content.classList.remove('is-open');
-  //     content.setAttribute('aria-hidden', true);
-  //     button.classList.remove('is-open');
-  //     button.setAttribute('aria-expanded', false);
-  //   } else {
-  //     content.classList.add('is-open');
-  //     content.setAttribute('aria-hidden', false);
-  //     button.classList.add('is-open');
-  //     button.setAttribute('aria-expanded', true);
-  //   }
-  // }
-
-  // if (toggleButtons.length != undefined) {
-  //   [...toggleButtons].forEach(function(button) {
-  //     let content;
-  //     let toggleButton;
-
-  //     if (button.nextElementSibling === null) {
-  //       content = button.closest('.js-content-next').nextElementSibling;
-  //       toggleButton = button.closest('.js-content-next');
-  //     } else {
-  //       content = button.nextElementSibling;
-  //       toggleButton = button;
-  //     }
-
-  //     if (content.classList.contains('js-toggle-content-only-mobile')) {
-  //       if (checkMediaQuery() == breakpoints.medium) {
-  //         content.removeAttribute('aria-hidden');
-  //       }
-  //     }
-  //     // Add click event
-  //     button.addEventListener("click", function() {
-  //       toggleContentVisibility(toggleButton, content);
-  //     });
-  //   });
-  // } else {
-  //   let content = toggleButtons.nextElementSibling;
-
-  //   if (content.classList.contains('js-toggle-content-only-mobile')) {
-  //     if (checkMediaQuery() == breakpoints.medium) {
-  //       content.removeAttribute('aria-hidden');
-  //     }
-  //   }
-  //   toggleButtons.setAttribute('role', 'button');
-
-  //   // Add click event
-  //   toggleButtons.addEventListener("click", function() {
-  //     toggleContentVisibility(toggleButtons, content);
-  //   });
-  // }
-
   // Measure all content elements and assign their height to a css variable in the style attribute of the html.
-  function measureAccordionContents(element) {
+  function setDynamicHeight(element) {
+    element.classList.remove('is-automated-height');
+    element.classList.add('is-dynamic-height');
+
     let childrenCombinedHeight = 0;
     [...element.children].forEach((child) => {
+      console.log(child.offsetHeight);
       childrenCombinedHeight = childrenCombinedHeight + child.offsetHeight;
     });
     element.style.setProperty('--expanded' , `${childrenCombinedHeight}px`);
+  }
+
+  function setAutomaticHeight(element) {
+    element.classList.add('is-automated-height');
+    element.classList.remove('is-dynamic-height');
   }
   /*
   @todo - Needs to be rerun whenever 
@@ -80,29 +37,70 @@ function toggle() {
           height is no longer adequate.
   */
 
-  function accordionClose(button, content) {
-    content.classList.remove('is-visible');
-    content.classList.add('is-hidden');
-    content.setAttribute('aria-hidden', true);
-    button.classList.remove('is-visible');
-    button.setAttribute('aria-expanded', false);
+  function accordionButtonClose(element) {
+    element.classList.remove('is-open');
+    element.classList.add('is-closed');
+    element.setAttribute('aria-expanded', false);
   }
 
-  function accordionOpen(button, content) {
-    content.classList.add('is-visible');
-    content.classList.remove('is-hidden');
-    content.setAttribute('aria-hidden', false);
-    button.classList.add('is-visible');
-    button.setAttribute('aria-expanded', true);
+  function accordionButtonOpen(element) {
+    element.classList.remove('is-closed');
+    element.classList.add('is-open');
+    element.setAttribute('aria-expanded', true);
+  }
+
+  function accordionContentClose(element) {
+    element.classList.remove('is-visible');
+    element.classList.add('is-hidden');
+    element.setAttribute('aria-hidden', true);
+  }
+
+  function accordionContentOpen(element) {
+    element.classList.add('is-visible');
+    element.classList.remove('is-hidden');
+    element.setAttribute('aria-hidden', false);
   }
 
   function accordionEventHandler(button, content) {
     if (content.classList.contains('is-visible')) {
-      accordionClose(button, content)
+      accordionContentClose(content);
+      accordionButtonClose(button);
     } else {
-      accordionOpen(button, content)
+      accordionContentOpen(content);
+      accordionButtonOpen(button);
     }
   }
+
+  function resetAccordion(buttonArray, contentArray) {
+    buttonArray.forEach((element) => {
+      // Check if only mobile
+      if (element.classList.contains('js-toggle-content-only-mobile')) {
+        if (checkMediaQuery() == breakpoints.small) {
+          accordionButtonClose(element);
+        } else {
+          accordionButtonOpen(element);
+        }
+      } else {
+        accordionButtonClose(element);
+      }
+    });
+
+    contentArray.forEach((element) => {
+      // Check if only mobile
+      if (element.classList.contains('js-toggle-content-only-mobile')) {
+        if (checkMediaQuery() == breakpoints.small) {
+          setDynamicHeight(element);
+          accordionContentClose(element);
+        } else {
+          setAutomaticHeight(element);
+          accordionContentOpen(element);
+        }
+      } else {
+        setDynamicHeight(element);
+        accordionContentClose(element);
+      }
+    });
+  };
 
   // All the toggle buttons
   const toggleButtonElementArray = [...document.querySelectorAll('.js-toggle-button')];
@@ -111,6 +109,9 @@ function toggle() {
   if (toggleButtonElementArray <= 0) {
     return;
   }
+
+  // All content elements
+  let contentElementArray = [];
 
   // Loop
   toggleButtonElementArray.forEach((element) => {
@@ -125,31 +126,36 @@ function toggle() {
       content = toggleButtonElement.nextElementSibling;
       toggleButton = toggleButtonElement;
     }
+
+    contentElementArray = [...contentElementArray, content];
     
     // Add click listener to toggle
-    toggleButtonElement.addEventListener("click", function(e){
+    toggleButtonElement.addEventListener('click', function(e){
       e.preventDefault();
       accordionEventHandler(toggleButton, content);
     });
 
-    // Check if only mobile
-    if (content.classList.contains('js-toggle-content-only-mobile')) {
-      if (checkMediaQuery() == breakpoints.medium) {
-        content.removeAttribute('aria-hidden');
-        content.classList.add('is-open');
-      }
-    } else {
+    toggleButtonElement.addEventListener('mouseenter', function(e){
+      content.style.willChange = 'max-height, min-height';
+    });
 
-      // Initial measurmenet for content element
-      measureAccordionContents(content);
-
-      // Add transitioned listener to content
-      content.addEventListener("transitionend", function(e){
-        measureAccordionContents(content);
-      });
-    }
-  });
+    toggleButtonElement.addEventListener('mouseout', function(e){
+      content.style.willChange = 'auto';
+    });
     
+    // // Add transitioned listener to content
+    // content.addEventListener("transitionend", function(e){
+    //   setDynamicHeight(content);
+    // });
+  });
+  
+  resetAccordion(toggleButtonElementArray, contentElementArray);
+
+  const resizeHandler = debounce(function() {
+    resetAccordion(toggleButtonElementArray, contentElementArray);
+  }, 250);
+
+  window.addEventListener('resize', resizeHandler);
 }
 
 module.exports = toggle;
