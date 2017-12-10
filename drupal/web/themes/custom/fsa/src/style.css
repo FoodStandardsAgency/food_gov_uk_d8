@@ -5,7 +5,6 @@
 /*Component*/
 @import "component/general/button.css";
 @import "component/general/table.css";
-@import "component/general/toc.css";
 @import "component/general/modal.css";
 @import "component/general/topic-cloud.css";
 @import "component/general/subpages.css";
@@ -17,7 +16,6 @@
 /* Layout */
 @import "component/general/phase-banner.css";
 @import "component/general/breadcrumb.css";
-@import "component/general/sidebar.css";
 
 /* Profile and registration */
 @import "component/general/my-profile.css";
@@ -42,3 +40,4 @@
 @import "component/parallax/parallax.css";
 @import "component/listing/listing.css";
 @import "component/footer/footer.css";
+@import "component/sidebar/sidebar.css";

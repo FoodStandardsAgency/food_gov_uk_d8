@@ -2,7 +2,7 @@
 @import "../../core/custom-property";
 
 .footer {
-  background-color: var(--secondary-color);
+  background-color: var(--dark-secondary-color);
   color: var(--color-white);
   padding: 1em;
   @mixin responsive-declaration padding-top, 1em, 2em;
