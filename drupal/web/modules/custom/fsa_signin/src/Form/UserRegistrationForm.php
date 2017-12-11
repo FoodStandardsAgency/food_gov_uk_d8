@@ -35,7 +35,8 @@ class UserRegistrationForm extends FormBase {
     if (
       $tempstore->get('alert_tids_for_registration') != NULL ||
       $tempstore->get('food_alert_registration') != NULL ||
-      $tempstore->get('news_tids_for_registration') != NULL) {
+      $tempstore->get('news_tids_for_registration') != NULL ||
+      $tempstore->get('cons_tids_for_registration') != NULL) {
 
     }
     else {

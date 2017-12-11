@@ -32,7 +32,8 @@ class AlertSubscribeNav extends BlockBase {
     if (
       $tempstore->get('alert_tids_for_registration') != NULL ||
       $tempstore->get('food_alert_registration') != NULL ||
-      $tempstore->get('news_tids_for_registration') != NULL) {
+      $tempstore->get('news_tids_for_registration') != NULL ||
+      $tempstore->get('cons_tids_for_registration') != NULL) {
       $delivery_page = DefaultController::linkMarkup('fsa_signin.user_registration_form', $delivery_title);
     }
     else {

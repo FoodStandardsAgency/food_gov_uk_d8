@@ -60,11 +60,23 @@ class MySubscriptions extends BlockBase {
       );
     }
 
+    // Consultations to a list.
+    $cons_list = [];
+    if (count($tempstore->get('cons_tids_for_registration')) > 0) {
+      $cons_items = $tempstore->get('cons_tids_for_registration');
+      // Consultations are taxonomy terms, use the protected func.
+      $cons_list = $this->itemListFromTerms(
+        $cons_items,
+        $this->t('Consultations')
+      );
+    }
+
     // Concatenate and return the lists.
     return [
       $food_list,
       $alert_list,
       $news_list,
+      $cons_list,
     ];
 
   }
