@@ -3,6 +3,7 @@
 namespace Drupal\fsa_webform_validation\Validate;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
@@ -47,11 +48,12 @@ class FsaWebformValidationValidate {
     // Redirect user.
     if (isset($error) && isset($fsa_authority)) {
       if ($error) {
-        $args = [
+        $route_parameters = [
           'id' => $fsa_authority->id(),
           'nid' => \Drupal::routeMatch()->getRawParameter('node'),
         ];
-        $path = '/help/consumers/report-a-food-safety-concern/redirect?' . http_build_query($args);
+        $url = Url::fromRoute('fsa_webform_validation.render', $route_parameters);
+        $path = $url->toString();
         $response = new RedirectResponse($path);
         $response->send();
       }

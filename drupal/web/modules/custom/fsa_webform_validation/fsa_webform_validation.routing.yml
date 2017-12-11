@@ -1,5 +1,5 @@
 fsa_webform_validation.render:
-  path: '/help/consumers/report-a-food-safety-concern/redirect'
+  path: '/contact/consumers/report-a-food-safety-concern/redirect'
   defaults:
     _controller: Drupal\fsa_webform_validation\Controller\FsaWebformValidation::render
     _title_callback: '\Drupal\fsa_webform_validation\Controller\FsaWebformValidation::title'
