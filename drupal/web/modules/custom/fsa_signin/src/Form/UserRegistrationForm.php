@@ -29,6 +29,7 @@ class UserRegistrationForm extends FormBase {
     $food_alerts = $tempstore->get('food_alert_registration');
     $alert_tids = $tempstore->get('alert_tids_for_registration');
     $news_registration = $tempstore->get('news_tids_for_registration');
+    $cons_registration = $tempstore->get('cons_tids_for_registration');
 
     // Only add possibility to submit if user has selected something to
     // subscribe to.
@@ -58,6 +59,10 @@ class UserRegistrationForm extends FormBase {
     $form['subscribed_news'] = [
       '#type' => 'value',
       '#value' => $news_registration,
+    ];
+    $form['subscribed_cons'] = [
+      '#type' => 'value',
+      '#value' => $cons_registration,
     ];
     $form['description'] = [
       '#markup' => '<h2>' . $this->t('Delivery options') . '</h2><p>' . $this->t('How do you want to receive information from us?') . '</p>',
@@ -163,6 +168,7 @@ class UserRegistrationForm extends FormBase {
     $subscribed_food_alerts = DefaultController::storableProfileFieldValue($form_state->getValue('subscribed_food_alerts'));
     $subscribed_notifications = $form_state->getValue('subscribed_notifications');
     $subscribed_news = $form_state->getValue('subscribed_news');
+    $subscribed_cons = $form_state->getValue('subscribed_cons');
 
     // Mandatory settings.
     $user->setPassword(user_password());
@@ -180,6 +186,7 @@ class UserRegistrationForm extends FormBase {
     $user->set('field_subscribed_food_alerts', $subscribed_food_alerts);
     $user->set('field_subscribed_notifications', $subscribed_notifications);
     $user->set('field_subscribed_news', $subscribed_news);
+    $user->set('field_subscribed_cons', $subscribed_cons);
     $user->set('field_notification_method', $email_frequency);
 
     try {
