@@ -45,7 +45,7 @@ class RouteSubscriber implements EventSubscriberInterface {
       $event->setResponse(new RedirectResponse($url, 301));
     }
     elseif ($route_name == 'user.page' || $route_name == 'entity.user.canonical') {
-      $url = Url::fromRoute('fsa_signin.default_controller_emailSubscriptionsPage')->toString();
+      $url = Url::fromRoute('fsa_signin.default_controller_profilePage')->toString();
       $event->setResponse(new RedirectResponse($url, 301));
     }
     elseif ($route_name == 'user.register') {

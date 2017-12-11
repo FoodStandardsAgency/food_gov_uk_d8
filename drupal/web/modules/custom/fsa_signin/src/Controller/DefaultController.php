@@ -3,12 +3,7 @@
 namespace Drupal\fsa_signin\Controller;
 
 use Drupal\Core\Link;
-use Drupal\fsa_signin\Form\DeleteMyAccountForm;
-use Drupal\fsa_signin\Form\MyAccountForm;
 use Drupal\fsa_signin\Form\ProfileManager;
-use Drupal\fsa_signin\Form\SmsSubscriptionsForm;
-use Drupal\fsa_signin\Form\EmailPreferencesForm;
-use Drupal\fsa_signin\Form\EmailSubscriptionsForm;
 use Drupal\fsa_signin\Form\SendPasswordEmailForm;
 use Drupal\fsa_signin\Form\CtaRegister;
 use Drupal\user\Form\UserLoginForm;
@@ -74,6 +69,23 @@ class DefaultController extends ControllerBase {
   /**
    * Create manage profile page.
    */
+  public function profilePage() {
+    $uid = \Drupal::currentUser()->id();
+    $account = User::load($uid);
+
+    $header = '<h2>' . $this->t('Your profile') . '</h2>';
+    $header .= '<p>' . $this->t("Hello @name", ['@name' => $account->getUsername()]) . '</p>';
+    $header .= self::linkMarkup('fsa_signin.default_controller_manageProfilePage', $this->t('Manage your profile'), ['button']);
+    $header .= self::linkMarkup('user.logout.http', 'Logout', ['button']);
+
+    return [
+      ['#markup' => $header],
+    ];
+  }
+
+  /**
+   * Create manage profile page.
+   */
   public function manageProfilePage() {
     $uid = \Drupal::currentUser()->id();
     $account = User::load($uid);
@@ -114,75 +126,12 @@ class DefaultController extends ControllerBase {
   }
 
   /**
-   * Create email subscription pref. page.
-   */
-  public function emailSubscriptionsPage() {
-    $uid = \Drupal::currentUser()->id();
-    $account = User::load($uid);
-
-    $options = [
-      'subscribed_notifications' => $this->signInService->allergenTermsAsOptions(),
-      'subscribed_food_alerts' => $this->signInService->foodAlertsAsOptions(),
-    ];
-
-    $default_values = [
-      'subscribed_food_alerts' => $this->signInService->subscribedFoodAlerts($account),
-      'subscribed_notifications' => $this->signInService->subscribedTermIds($account),
-    ];
-
-    $subscription_form = \Drupal::formBuilder()->getForm(EmailSubscriptionsForm::class, $account, $options, $default_values);
-    $preferences_form = \Drupal::formBuilder()->getForm(EmailPreferencesForm::class, $account);
-
-    return [
-      ['#markup' => '<div class="profile header subscriptions"><h2>' . $this->t('Subscriptions') . '</h2></div>'],
-      $subscription_form,
-      ['#markup' => '<div class="profile header preferences"><h2>' . $this->t('Preferences') . '</h2></div>'],
-      $preferences_form,
-    ];
-  }
-
-  /**
-   * Create SMS subscription pref. page.
-   */
-  public function smsSubscriptionsPage() {
-    $uid = \Drupal::currentUser()->id();
-    $account = User::load($uid);
-    $subscribed_term_ids = $this->signInService->subscribedTermIds($account);
-    $options = $this->signInService->allergenTermsAsOptions();
-
-    $subscription_form = \Drupal::formBuilder()->getForm(SmsSubscriptionsForm::class, $account, $options, $subscribed_term_ids);
-
-    return [
-      ['#markup' => '<div class="profile header subscriptions"><h2>' . $this->t('Subscriptions') . '</h2></div>'],
-      $subscription_form,
-    ];
-  }
-
-  /**
-   * Creates the account page.
-   */
-  public function myAccountPage() {
-    $uid = \Drupal::currentUser()->id();
-    $account = User::load($uid);
-    $acc_form = \Drupal::formBuilder()->getForm(MyAccountForm::class, $account);
-    $delete_acc_form = \Drupal::formBuilder()->getForm(DeleteMyAccountForm::class, $account);
-    return [
-      ['#markup' => '<div class="profile header password"><h2>' . $this->t('Change password') . '</h2></div>'],
-      ['#markup' => '<p>' . $this->t('If you would like to change your existing password, please enter it below.') . '</p>'],
-      $acc_form,
-      ['#markup' => '<div class="profile header account-delete"><h2>' . $this->t('Delete account') . '</h2></div>'],
-      ['#markup' => '<p>' . $this->t('Unsubscribe from all topics delivered by email and SMS and delete your account below. This operation cannot be undone.') . '</p>'],
-      $delete_acc_form,
-    ];
-  }
-
-  /**
    * Registration thank you page.
    */
   public function thankYouPage() {
     $markup = '<h1>' . $this->t('Subscription complete') . '</h1>';
     $markup .= '<p>' . $this->t("Thank you for subscribing to Food Standards Agency's updates.") . '</p>';
-    $markup .= self::linkMarkup('fsa_signin.default_controller_manageProfilePage', 'Manage your preferences', ['button']);
+    $markup .= self::linkMarkup('fsa_signin.default_controller_manageProfilePage', $this->t('Manage your preferences'), ['button']);
 
     return [
       '#markup' => $markup,

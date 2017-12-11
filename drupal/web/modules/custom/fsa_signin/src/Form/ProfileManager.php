@@ -10,7 +10,7 @@ use Drupal\fsa_signin\SignInService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class EmailPreferencesForm.
+ * Class ProfileManager.
  */
 class ProfileManager extends FormBase {
 
