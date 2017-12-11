@@ -242,3 +242,330 @@ input[type="checkbox"] {
     border-bottom-right-radius: 100px;
   }
 }
+
+.webform {
+  padding-top: 2em;
+}
+
+.webform__container {
+  max-width: 80em;
+}
+
+
+.webform-progress {
+
+}
+
+/*Webfrom status*/
+.webform .webform-progress__status {
+  text-align: left;
+  color: var(--color-gray);
+}
+
+/*Progress bar*/
+.webform-progress {
+  .webform-progress-tracker {
+    .progress-step {
+      .progress-marker {
+        background-color: var(--color-dark-blue);
+        color: var(--color-dark-blue);
+        width: 20px;
+        height: 20px;
+        margin-top: 4px;
+      }
+
+      &.is-active {
+        .progress-marker {
+          background-color: var(--primary-color);
+          color: var(--color-white);
+          width: 28px;
+          height: 28px;
+          margin-top: 0px;
+        }
+      }
+
+      &.is-complete:hover .progress-marker {
+        background-color: var(--color-dark-blue);
+      }
+
+      .progress-text {
+        color: var(--color-dark-blue);
+        font-weight: normal;
+        text-transform: uppercase;
+        font-size: 0.8em;
+      }
+
+      &.is-active {
+        .progress-text  {
+          color: var(--primary-color);
+        }
+      }
+
+      &:not(:last-child)::after {
+        background-color: var(--color-dark-blue);
+        z-index: 1;
+      }
+    }
+  }
+}
+
+/*Custom styles webform*/
+.webform {
+  label,
+  .fieldset-legend {
+    font-family: var(--font-family-heading);
+    font-size: 1em;
+    @mixin responsive-declaration line-height, 1.2, 1.25;
+    font-weight: 700;
+    color: inherit;
+    display: block;
+    margin-bottom: 1em;
+    text-transform: none;
+  }
+
+  .fieldset-legend {
+    /* padding-top: 1em; */
+    width: 100%;
+    /* border-top: 1px solid var(--color-light-gray); */
+  }
+
+  input:not([type='submit']),
+  textarea,
+  select {
+    background-color: var(--color-lighter-gray);
+  }
+
+  input:not([type='submit']) {
+    width: 100%;
+  }
+
+  input[type='radio'] + label,
+  input[type='checkbox'] + label {
+    font-weight: 400;
+  }
+
+  .description {
+    @mixin responsive-declaration margin-bottom, 1em, 2em;
+  }
+
+  .form-item.js-form-type-gds-date
+
+  fieldset,
+  .form-item {
+    display: block;
+    padding: 0;
+    margin: 0;
+    @mixin responsive-declaration margin-top, 1.5em, 4em;
+    @mixin responsive-declaration margin-bottom, 1.5em, 2em;
+  }
+
+  .form-item {
+    &.js-form-type-gds-date {
+      display: flex;
+      flex-flow: row wrap;
+      @mixin responsive-declaration margin-right, -1.5em, -2em;
+      @mixin responsive-declaration margin-left, -1.5em, -2em;
+  
+      & > label {
+        flex: 1 1 100%;
+        @mixin responsive-declaration padding-right, 1.5rem, 2rem;
+        @mixin responsive-declaration padding-left, 1.5rem, 2rem;
+      }
+  
+      & > .description {
+        flex: 1 1 100%;
+        @mixin responsive-declaration padding-right, 1.5em, 2em;
+        @mixin responsive-declaration padding-left, 1.5em, 2em;
+        margin-bottom: 0;
+      }
+  
+      &  > .form-item {
+        flex: 1 1 100%;
+        @mixin responsive-declaration margin-top, 1em, 2em;
+        @mixin responsive-declaration margin-bottom, 0.5em, 1em;
+        @mixin responsive-declaration padding-right, 1.5em, 2em;
+        @mixin responsive-declaration padding-left, 1.5em, 2em;
+      
+        @media (--breakpoint-xxs) {
+          flex: 0 0 33%;
+        }
+      }
+  
+      & > .form-item input {
+        width: 100%;
+      }
+    }
+
+    &.js-form-type-date input,
+    &.form-item-date input {
+      background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='18px' height='21px' viewBox='0 0 18 21' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Styleguide' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg transform='translate%28-1298.000000, -4569.000000%29' id='Basic-Elements' fill='%2300A39B'%3E%3Cg transform='translate%2877.000000, 3029.000000%29'%3E%3Cg id='Basic-forms' transform='translate%280.000000, 756.000000%29'%3E%3Cg id='calendar-normal' transform='translate%28956.000000, 745.000000%29'%3E%3Cpath d='M267.020548,59.9567328 L280.980512,59.9567328 C282.090826,59.9567328 283,59.049514 283,57.9415865 L283,43.8612552 C283,42.7533278 282.090826,41.8461089 280.980512,41.8461089 L278.809158,41.8461089 L278.809158,40.9644823 C278.809158,40.4105186 278.354572,39.9569092 277.799414,39.9569092 C277.244257,39.9569092 276.78967,40.4105186 276.78967,40.9644823 L276.78967,41.8461089 L271.21033,41.8461089 L271.21033,40.9644823 C271.21033,40.4105186 270.755743,39.9569092 270.200586,39.9569092 C269.645428,39.9569092 269.190842,40.4105186 269.190842,40.9644823 L269.190842,41.8461089 L267.019488,41.8461089 C265.909174,41.8461089 265,42.7533278 265,43.8612552 L265,57.9171529 C265.000987,59.0506727 265.909174,59.9569092 267.020473,59.9569092 L267.020548,59.9567328 Z M267.020548,57.9415865 L267.020548,49.4273413 L280.980512,49.4273413 L280.980512,57.9158934 L267.020548,57.9168783 L267.020548,57.9415865 Z M269.190917,43.8612552 L269.190917,45.2466683 C269.190917,45.8006321 269.645504,46.2542415 270.200661,46.2542415 C270.755819,46.2542415 271.210405,45.8006321 271.210405,45.2466683 L271.210405,43.8612552 L276.814232,43.8612552 L276.814232,45.2466683 C276.814232,45.8006321 277.268819,46.2542415 277.823976,46.2542415 C278.379134,46.2542415 278.83372,45.8006321 278.83372,45.2466683 L278.83372,43.8612552 L281.005074,43.8612552 L281.005074,47.4134544 L267.020624,47.4124695 L267.020624,43.8612779 L269.190917,43.8612552 Z' id='Page-1'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
+      background-position: 90% 50%;
+      background-position: calc(100% - 1em) 50%;
+      background-repeat: no-repeat;
+    }
+  }
+
+  .form-checkboxes .form-item,
+  .form-item.form-item-radios,
+  .form-item.js-form-type-radio {
+    margin-top: 0em;
+    margin-bottom: 0.5em;
+  }
+
+  .intl-tel-input {
+    display: block;
+
+    input[type=tel] {
+      padding-left: 60px;
+
+      .selected-flag {
+        background-color: var(--color-white);
+        box-shadow: inset -1px 0px 0px 0px var(--color-black);
+      }
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    @mixin responsive-declaration margin-top, 1.5em, 4em;
+  
+    @media (--breakpoint-md) {
+      justify-content: flex-end;
+    }
+
+    .webform-button--previous {
+      margin-right: auto;
+      background-color: transparent;
+      background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='22px' height='14px' viewBox='0 0 22 14' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3C!-- Generator: Sketch 45.1 %2843504%29 - http://www.bohemiancoding.com/sketch --%3E%3Ctitle%3EPage 1%3C/title%3E%3Cdesc%3ECreated with Sketch.%3C/desc%3E%3Cdefs%3E%3C/defs%3E%3Cg id='FHRS' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='About-Ratings' transform='translate%28-510.000000, -35.000000%29' fill='%23007c75'%3E%3Cg id='Header' transform='translate%28461.000000, 0.000000%29'%3E%3Cpath d='M57.2136083,35.2887967 C57.4093541,35.4817608 57.5067454,35.7227358 57.5067454,35.963706 C57.5067454,36.2046762 57.4093492,36.4456464 57.2136083,36.6386153 L52.7639959,41.0240316 L70.0222244,41.0240316 C70.5598054,41.0240316 71,41.4579707 71,41.9879123 C71,42.517854 70.5598054,42.9517931 70.0222244,42.9517931 L52.7639959,42.9517931 L57.2126305,47.3372094 C57.6041318,47.7231472 57.6041318,48.3255727 57.2126305,48.7105466 C56.8211291,49.0964845 56.2100194,49.0964845 55.8194958,48.7105466 L49,41.9879605 L55.8194958,35.2887485 C56.2109971,34.9037505 56.8221069,34.9037505 57.2135838,35.2887485 L57.2136083,35.2887967 Z' id='Page-1'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      background-position: left 0 top 50%;
+      background-size: 1em auto;
+      background-repeat: no-repeat;
+      padding-left: 1.5em;
+      color: var(--primary-color);
+      box-shadow: none;
+    
+      &:hover {
+        background-color: transparent;
+        color: var(--dark-primary-color);
+      }
+
+      
+    }
+
+    .webform-button--next {
+      margin-left: auto;
+    
+      @media (--breakpoint-md) {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .toggle-button {
+    background-color: var(--color-white);
+    @mixin responsive-declaration padding-top, 1em, 1.25em;
+    @mixin responsive-declaration padding-bottom, 1em, 1.25em;
+    @mixin responsive-declaration padding-right, 1em, 2em;
+    @mixin responsive-declaration padding-left, 1em, 2em;
+    color: var(--primary-color);
+    font-weight: 600;
+    box-shadow: var(--box-shadow);
+  }
+  
+  .toggle-button__item {
+    padding-right: 1em;
+  }
+  
+  .toggle-button.is-open {
+    background-color: var(--primary-color);
+    color: var(--color-white);
+  }
+  
+  .toggle-button__item--icon {
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    box-shadow: var(--box-shadow);
+  }
+  
+  .toggle-button.is-open .toggle-button__item--icon {
+    box-shadow: none;
+    background-color: var(--color-white);
+  }
+  
+  .toggle-button__item--icon svg {
+    transform: translateY(-50%) translateX(-50%) scale(0.3);
+  }
+  
+  .toggle-button__item--icon path {
+    color: var(--color-white);
+  }
+  
+  .toggle-button.is-open .toggle-button__item--icon path {
+    color: var(--primary-color);
+  }
+  
+  .toggle-content {
+    background-color: var(--color-white);
+    @mixin responsive-declaration padding, 1em, 2em;
+    font-weight: 400;
+    box-shadow: var(--box-shadow);
+
+    & > * {
+      @mixin responsive-declaration padding-right, 1em, 3em;
+      @mixin responsive-declaration padding-left, 1em, 3em;
+
+      &:first-child {
+        @mixin responsive-declaration padding-top, 1em, 2em;
+      }
+    }
+  }
+}
+
+.webform-preview {
+  @mixin responsive-declaration margin-top, 1.5em, 4em;
+  @mixin responsive-declaration margin-bottom, 1.5em, 2em;
+
+  label,
+  .fieldset-legend {
+    font-size: 1em;
+    line-height: 1.2;
+    font-weight: 700;
+    color: inherit;
+    display: block;
+    margin-bottom: 0.5em;
+  }
+
+  fieldset,
+  .form-item {
+    display: block;
+    padding: 0;
+    margin: 0;
+    @mixin responsive-declaration margin-top, 1.5em, 2em;
+    @mixin responsive-declaration margin-bottom, 1em, 2em;
+  }
+
+  details {
+    @mixin responsive-declaration padding-top, 1.5em, 2em;
+  }
+
+  summary {
+    font-size: 1.2em;
+    line-height: 1.2;
+    font-weight: 700;
+    color: var(--color-black);
+    cursor: pointer;
+  }
+  
+  :--not-touch .webform-preview summary:--enter {
+    color: var(--light-primary-color);
+  }
+}
+
+.webform-confirmation {
+  @mixin responsive-declaration margin-top, 1.5em, 4em;
+  @mixin responsive-declaration margin-bottom, 1.5em, 2em;
+  @mixin responsive-declaration padding-top, 1.5em, 2em;
+  border-top: 1px solid var(--color-light-gray);
+}

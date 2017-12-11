@@ -36,6 +36,11 @@
   }
 }
 
+.footer__logo .svg {
+  width: 10em;
+  height: 6em;
+}
+
 .footer__content {
   @mixin responsive-declaration padding, 1em, 2em;
   max-width: 24em;

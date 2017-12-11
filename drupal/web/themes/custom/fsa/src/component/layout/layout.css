@@ -41,7 +41,7 @@
 
 .layout__container {
   position: relative;
-  /* margin: 0 auto; */
+  margin: 0 auto;
   max-width: var(--max-width);
 
   .theme--help-centre .layout--content-top &,
