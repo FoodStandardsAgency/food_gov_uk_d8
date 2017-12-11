@@ -43,9 +43,7 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
     $message = '<h1>' . $this->t('Confirm removal') . '</h1>';
     $message .= '<p>' . $this->t('You are about to remove subscription with email <strong>@email</strong>.', ['@email' => $email]) . '</p>';
     $message .= '<p>' . $this->t('This will cancel all your subscriptions and permanently remove your personal details..') . '</p>';
-    // @todo: Change the privacy link target. Something like below if internal node.
-    // $message .= '<p>' . DefaultController::linkMarkup('entity.node.canonical', $this->t('Privacy notice'), [], ['node' => '1']) . '</p>';
-    $message .= '<p><u>Privacy notice</u><br /><code>[LINK TARGET MISSING]</code></p>';
+    $message .= '<p>' . DefaultController::linkMarkup('entity.node.canonical', $this->t('Privacy notice'), [], ['node' => '144']) . '</p>';
     return $message;
   }
 
