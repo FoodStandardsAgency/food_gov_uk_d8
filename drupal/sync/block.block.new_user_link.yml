@@ -1,0 +1,30 @@
+uuid: d8690200-9da2-4b5a-acfc-7a0a7eff1172
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - fsa_signin
+    - system
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: new_user_link
+theme: fsa
+region: sidebar_second
+weight: 0
+provider: null
+plugin: new_user
+settings:
+  id: new_user
+  label: 'New user?'
+  provider: fsa_signin
+  label_display: visible
+visibility:
+  request_path:
+    id: request_path
+    pages: /news-alerts/signin
+    negate: false
+    context_mapping: {  }
