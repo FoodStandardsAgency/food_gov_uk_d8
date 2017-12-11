@@ -4,6 +4,6 @@ status: true
 dependencies: {  }
 name: 'News type'
 vid: news_type
-description: ''
+description: 'For news and Alert subscriptions'
 hierarchy: 0
 weight: 0
