@@ -128,7 +128,7 @@ class UserRegistrationForm extends FormBase {
         'en' => $this->t('English'),
         'cy' => $this->t('Cymraeg'),
       ],
-      '#default_value' => \Drupal::currentUser()->getPreferredLangcode(),
+      '#default_value' => \Drupal::languageManager()->getCurrentLanguage()->getId(),
     ];
 
     $form['actions'] = ['#type' => 'actions'];
