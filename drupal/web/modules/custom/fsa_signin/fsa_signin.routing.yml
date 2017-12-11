@@ -42,7 +42,7 @@ fsa_signin.user_preregistration_alerts_form:
   path: '/news-alerts/subscribe/alerts'
   defaults:
     _form: '\Drupal\fsa_signin\Form\AlertsForRegistrationForm'
-    _title: 'Subscribe to news & alerts'
+    _title: 'Subscribe to news and alerts'
   requirements:
     _permission: 'access content'
 
@@ -50,7 +50,7 @@ fsa_signin.user_preregistration_news_form:
   path: '/news-alerts/subscribe/news'
   defaults:
     _form: '\Drupal\fsa_signin\Form\NewsForRegistrationForm'
-    _title: 'Subscribe to news & alerts'
+    _title: 'Subscribe to news and alerts'
   requirements:
     _permission: 'access content'
 
@@ -58,7 +58,7 @@ fsa_signin.user_registration_form:
   path: '/news-alerts/subscribe/delivery'
   defaults:
     _form: '\Drupal\fsa_signin\Form\UserRegistrationForm'
-    _title: 'Subscribe to news & alerts'
+    _title: 'Subscribe to news and alerts'
   requirements:
     _permission: 'access content'
 
