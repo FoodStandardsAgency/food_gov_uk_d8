@@ -2,8 +2,6 @@
 
 namespace Drupal\fsa_webform_validation\Controller;
 
-use Drupal\node\NodeInterface;
-
 /**
  * Report a food safety concern redirect.
  */
@@ -18,9 +16,7 @@ class FsaWebformValidation {
   public function title() {
     $nid = \Drupal::request()->get('nid');
     if ($node = $this->getNode($nid)) {
-      if ($node instanceof NodeInterface) {
-        return $node->getTitle();
-      }
+      return $node->getTitle();
     }
   }
 
@@ -34,18 +30,23 @@ class FsaWebformValidation {
 
     // Get FSA authority values.
     $id = \Drupal::request()->get('id');
-    $fsa_authority = $this->getFsaAuthority($id);
-    if ($fsa_authority) {
+    if (is_numeric($id) && $fsa_authority = $this->getFsaAuthority($id)) {
       $name = $fsa_authority->name->getString();
       $advice_url = $fsa_authority->field_advice_url->getString();
       $email = $fsa_authority->field_email->getString();
     }
+    else {
+      $name = FALSE; $advice_url = FALSE; $email = FALSE;
+    }
 
     // Construct back path.
     $nid = \Drupal::request()->get('nid');
-    if ($nid) {
+    if (is_numeric($nid)) {
       $back = \Drupal::service('path.alias_manager')
         ->getAliasByPath('/node/' . $nid);
+    }
+    else {
+      $back = FALSE;
     }
 
     // Construct render array.
