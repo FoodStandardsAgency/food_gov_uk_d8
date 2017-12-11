@@ -5,6 +5,24 @@
  * fsa_signin.module
  */
 
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\fsa_signin\Controller\DefaultController;
+
+/**
+ * Implements hook_form_alter().
+ */
+function fsa_signin_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'user_login_form') {
+    $form['forgot_link'] = [
+      '#markup' => t("Forgot or do not have a password?") . ' ' . DefaultController::linkMarkup(
+          'fsa_signin.default_controller_resetPassword',
+          t('Get a link for one-time sign in.')
+      ),
+    ];
+
+  }
+}
+
 /**
  * Implements hook_mail().
  */

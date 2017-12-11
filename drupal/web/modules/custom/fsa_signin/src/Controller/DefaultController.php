@@ -5,7 +5,6 @@ namespace Drupal\fsa_signin\Controller;
 use Drupal\Core\Link;
 use Drupal\fsa_signin\Form\ProfileManager;
 use Drupal\fsa_signin\Form\SendPasswordEmailForm;
-use Drupal\fsa_signin\Form\CtaRegister;
 use Drupal\user\Form\UserLoginForm;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\fsa_signin\SignInService;
@@ -45,15 +44,34 @@ class DefaultController extends ControllerBase {
    * Create signin page.
    */
   public function signInPage() {
-    $title = ['#markup' => '<h1>' . $this->t('Sign in') . '</h1>'];
+    $title = ['#markup' => '<h2>' . $this->t('Sign in or manage your subscription') . '</h2>'];
     $login_form = \Drupal::formBuilder()->getForm(UserLoginForm::class);
-    $cta_register_form = \Drupal::formBuilder()->getForm(CtaRegister::class);
-    $send_pwd_form = \Drupal::formBuilder()->getForm(SendPasswordEmailForm::class);
 
     return [
       $title,
       $login_form,
-      $cta_register_form,
+    ];
+  }
+
+  /**
+   * Create password reset page.
+   */
+  public function resetPassword() {
+    $back = [
+      '#markup' => self::linkMarkup(
+        'fsa_signin.default_controller_signInPage',
+        $this->t('Back'),
+        ['back arrow']
+      ),
+    ];
+    $title = ['#markup' => '<h2>' . $this->t('Use one-time sign in') . '</h2>'];
+    $content = ['#markup' => '<p>' . $this->t("Enter your email address below and we'll send you a one-time sign in link") . '</p>'];
+    $send_pwd_form = \Drupal::formBuilder()->getForm(SendPasswordEmailForm::class);
+
+    return [
+      $back,
+      $title,
+      $content,
       $send_pwd_form,
     ];
   }

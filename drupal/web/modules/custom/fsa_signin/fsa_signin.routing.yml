@@ -7,6 +7,14 @@ fsa_signin.default_controller_signInPage:
   requirements:
     _permission: 'access content'
 
+fsa_signin.default_controller_resetPassword:
+  path: '/news-alerts/signin/reset-password'
+  defaults:
+    _controller: '\Drupal\fsa_signin\Controller\DefaultController::resetPassword'
+    _title: 'Reset password'
+  requirements:
+    _permission: 'access content'
+
 fsa_signin.default_controller_profilePage:
   path: '/profile'
   defaults:

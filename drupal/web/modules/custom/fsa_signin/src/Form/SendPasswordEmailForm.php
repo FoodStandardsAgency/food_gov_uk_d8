@@ -21,12 +21,6 @@ class SendPasswordEmailForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $form['title'] = [
-      '#markup' => '<h3>' . $this->t("I have a subscription, but can't access my account") . '</h3>',
-    ];
-    $form['description'] = [
-      '#markup' => $this->t("We are asking all of our new subscribers to create an account with a password. In case you alread have a subscription prior to this change, we can send you an email which you will be able to update your settings."),
-    ];
     $form['email_address'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Email address'),
@@ -36,7 +30,7 @@ class SendPasswordEmailForm extends FormBase {
     ];
     $form['submit'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Submit'),
+      '#value' => $this->t('Send'),
     ];
 
     return $form;
@@ -46,7 +40,7 @@ class SendPasswordEmailForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    parent::validateForm($form, $form_state);
+
   }
 
   /**
