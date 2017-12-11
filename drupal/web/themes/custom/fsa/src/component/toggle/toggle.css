@@ -94,9 +94,12 @@
   max-height: 0;
   min-height: 0;
   padding: 0 1px !important;
+  transition:
+    max-height var(--transition-enter),
+    min-height var(--transition-enter);
 
   &.is-hidden {
-    transition: none;
+    /* transition: none; */
   }
 
   :--not-modern &.is-hidden {
@@ -117,9 +120,6 @@
     */
     max-height: var(--expanded, 70px);
     min-height: var(--expanded, 70px);
-    transition:
-      max-height var(--transition-enter),
-      min-height var(--transition-enter);
   }
 
   :--not-modern &.is-visible {
