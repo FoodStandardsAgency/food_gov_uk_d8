@@ -2,6 +2,8 @@
 
 namespace Drupal\fsa_webform_validation\Controller;
 
+use Drupal\node\NodeInterface;
+
 /**
  * Report a food safety concern redirect.
  */
@@ -15,8 +17,11 @@ class FsaWebformValidation {
    */
   public function title() {
     $nid = \Drupal::request()->get('nid');
-    $node = $this->getNode($nid);
-    return $node->getTitle();
+    if ($node = $this->getNode($nid)) {
+      if ($node instanceof NodeInterface) {
+        return $node->getTitle();
+      }
+    }
   }
 
   /**
