@@ -16,6 +16,7 @@
         "edit-subscribed-news",
         "edit-subscribed-allergy-alerts",
         "edit-news-tids-for-registration",
+        "edit-cons-tids-for-registration",
         "edit-alert-tids-for-registration"
       ];
       $.each( forms, function( index, value ) {
