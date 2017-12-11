@@ -6,7 +6,7 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\taxonomy\Entity\Term;
 
 /**
- * Provides a 'MySubscriptions' block.
+ * Provides 'My Subscriptions' block for registration flow.
  *
  * @Block(
  *  id = "my_subscriptions",
@@ -28,72 +28,87 @@ class MySubscriptions extends BlockBase {
     // previous pages.
     $tempstore = \Drupal::service('user.private_tempstore')->get('fsa_signin');
 
-    $tempstore->get('food_alert_registration');
-    $tempstore->get('alert_tids_for_registration');
-    $tempstore->get('news_tids_for_registration');
-
     // Food alerts to a list.
-    if (!empty($tempstore->get('food_alert_registration'))) {
-      $food_items = [];
-      foreach ($tempstore->get('food_alert_registration') as $value) {
-        $term = Term::load($value);
-        $name = $term->getName();
-        $food_items[] = ['#markup' => $name];
-      }
-      $food_list = [
-        '#theme' => 'item_list',
-        '#list_type' => 'ul',
-        '#attributes' => [
-          'class' => [
-            'item',
-          ],
-        ],
-        '#items' => $food_items,
-      ];
+    $food_list = [];
+    if (count($tempstore->get('food_alert_registration')) > 0) {
+      $food_items = $tempstore->get('food_alert_registration');
+      $food_list = $this->itemListFromTerms(
+        $food_items,
+        $this->t('Food alerts')
+      );
     }
 
     // Alerts to a list.
-    if (!empty($tempstore->get('alert_tids_for_registration'))) {
-      $alert_items = [];
-      foreach ($tempstore->get('alert_tids_for_registration') as $value) {
-        $term = Term::load($value);
-        $name = $term->getName();
-        $alert_items[] = ['#markup' => $name];
-      }
-      $alert_list = [
-        '#theme' => 'item_list',
-        '#list_type' => 'ul',
-        '#attributes' => [
-          'class' => [
-            'item',
-          ],
-        ],
-        '#items' => $alert_items,
-      ];
+    $alert_list = [];
+    if (count($tempstore->get('alert_tids_for_registration')) > 0) {
+      $alert_items = $tempstore->get('alert_tids_for_registration');
+      // Alerts are taxonomy terms, use the protected func.
+      $alert_list = $this->itemListFromTerms(
+        $alert_items,
+        $this->t('Allergy alerts')
+      );
     }
 
     // News to a list.
-    if (!empty($tempstore->get('news_tids_for_registration'))) {
-      $news_items = [];
-      foreach ($tempstore->get('news_tids_for_registration') as $value) {
-        $term = Term::load($value);
-        $name = $term->getName();
-        $news_items[] = ['#markup' => $name];
-      }
-      $news_list = [
-        '#theme' => 'item_list',
-        '#list_type' => 'ul',
-        '#attributes' => [
-          'class' => [
-            'item',
-          ],
-        ],
-        '#items' => $news_items,
-      ];
+    $news_list = [];
+    if (count($tempstore->get('news_tids_for_registration')) > 0) {
+      $news_items = $tempstore->get('news_tids_for_registration');
+      // News are taxonomy terms, use the protected func.
+      $news_list = $this->itemListFromTerms(
+        $news_items,
+        $this->t('News')
+      );
     }
 
-    // $food_list . $alert_list . $news_list.
-    return $alert_list;
+    // Concatenate and return the lists.
+    return [
+      $food_list,
+      $alert_list,
+      $news_list,
+    ];
+
+  }
+
+  /**
+   * List of subscribed items.
+   *
+   * @param array $terms
+   *   Array of term id's.
+   * @param string $title
+   *   The title of the list.
+   *
+   * @return array
+   *   List of subscribed terms.
+   */
+  protected function itemListFromTerms($terms, $title) {
+
+    $items = [];
+    foreach ($terms as $value) {
+      if ($term = Term::load($value)) {
+        $name = $term->getName();
+        $items[] = ['#markup' => $name];
+      }
+      elseif ($value == 'all') {
+        $items = ['#markup' => $title];
+      }
+    }
+
+    if (!empty($items)) {
+      return [
+        '#theme' => 'item_list',
+        '#list_type' => 'ul',
+        '#title' => $title,
+        '#attributes' => [
+          'class' => [
+            'item-selected',
+          ],
+        ],
+        '#items' => $items,
+      ];
+    }
+    else {
+      return [];
+    }
   }
 
 }
