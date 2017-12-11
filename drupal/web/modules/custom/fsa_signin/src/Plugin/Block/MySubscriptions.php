@@ -71,13 +71,19 @@ class MySubscriptions extends BlockBase {
       );
     }
 
-    // Concatenate and return the lists.
-    return [
-      $food_list,
-      $alert_list,
-      $news_list,
-      $cons_list,
-    ];
+    if (!empty($food_list) || !empty($alert_list) || !empty($news_list) || !empty($cons_list)) {
+      $content = [
+        $food_list,
+        $alert_list,
+        $news_list,
+        $cons_list,
+      ];
+    }
+    else {
+      $content = ['#markup' => '<p class="empty">' . $this->t('No subscriptions added yet.') . '</p>'];
+    }
+
+    return $content;
 
   }
 
