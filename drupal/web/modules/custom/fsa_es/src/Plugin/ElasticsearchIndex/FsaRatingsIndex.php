@@ -186,6 +186,10 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
                 'type' => 'text',
                 'index' => 'not_analyzed',
               ],
+              'postcode_tokenized' => [
+                'type' => 'text',
+                'analyzer' => $text_analyzer,
+              ],
               'ratingdate' => [
                 'type' => 'date',
               ],
@@ -257,49 +261,32 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
     // Get filters.
     $filters = $this->getFilters($langcode);
 
-    // Analyzer filters.
-    // @todo Remove partial match filters as they are not used.
-    $partial_match_filters = [
-      'standard',
-      'lowercase',
-      isset($filters['synonym']) ? 'synonym' : NULL,
-      /*
-      'asciifolding',
-      $language . '_stop',
-      $language . '_stemmer',
-      */
-    ];
-
-    // @todo Remove custom analyzers as they are not used.
+    // @todo Remove custom analyzers which are not used.
     return [
       'analysis' => [
-        'tokenizer' => [
-          'edge_ngram' => [
-            'type' => 'edge_ngram',
-            'min_gram' => 4,
-            'max_gram' => 10,
-            'token_chars' => [
-              'letter',
-            ],
+        'filter' => $filters,
+        'char_filter' => [
+          'concat' => [
+            'type' => 'pattern_replace',
+            'pattern' => '\u0020',
+            'replacement' => '',
           ],
         ],
-        'filter' => $filters,
         'analyzer' => [
-          'keyword_lower' => [
-            'type' => 'custom',
-            'tokenizer' => 'keyword',
-            'filter' => [
-              'standard',
-              'lowercase',
-            ],
-          ],
-          'partial_match' => [
+          // This analyzer edge n-grams the postcode - removes the spaces,
+          // lower-cases, makes at least 2 char long tokens from the left side.
+          // E.g., SW19 5EG => "sw", "sw1", "sw19", "sw195", "sw195e", "sw195eg"
+          'postcode_edge_ngram' => [
             'type' => 'custom',
             'tokenizer' => 'standard',
             'char_filter' => [
-              'html_strip',
+              'concat',
             ],
-            'filter' => array_filter($partial_match_filters),
+            'filter' => [
+              'standard',
+              'lowercase',
+              'postcode_edge_ngram'
+            ],
           ],
           'synonym' => [
             'tokenizer' => 'whitespace',
@@ -346,6 +333,11 @@ class FsaRatingsIndex extends ElasticsearchIndexBase {
     $filters[$language . '_possessive_stemmer'] = [
       'type' => 'stemmer',
       'language' => 'possessive_' . $language,
+    ];
+    $filters['postcode_edge_ngram'] = [
+      'type' => 'edge_ngram',
+      'min_gram' => 2,
+      'max_gram' => 8,
     ];
 
     return $filters;
