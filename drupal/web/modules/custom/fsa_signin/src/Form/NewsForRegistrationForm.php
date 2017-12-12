@@ -4,7 +4,6 @@ namespace Drupal\fsa_signin\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Link;
 use Drupal\fsa_signin\Controller\DefaultController;
 use Drupal\fsa_signin\SignInService;
 use Symfony\Component\DependencyInjection\ContainerInterface;

@@ -91,7 +91,6 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
       '#markup' => DefaultController::linkMarkup('user.logout.http', 'Logout', ['button']),
     ];
 
-
     if (DefaultController::isMoreThanRegistered($user)) {
       // Don't let people with more than just "Authenticated" role to delete
       // their account.

@@ -46,7 +46,6 @@ class AlertSubscribeNav extends BlockBase {
       ['#markup' => $delivery_page],
     ];
 
-
     // Build the menu as item_list.
     $build = [
       '#theme' => 'item_list',

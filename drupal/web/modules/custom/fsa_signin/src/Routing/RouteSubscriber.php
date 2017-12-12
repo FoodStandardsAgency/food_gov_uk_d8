@@ -35,7 +35,7 @@ class RouteSubscriber implements EventSubscriberInterface {
 
     // Signin/subscribe redirections.
     if ($route_name == 'fsa_signin.user_preregistration') {
-      // Pre-registration "langing" page to alerts subscription.
+      // Pre-registration "landing" page to alerts subscription.
       $url = Url::fromRoute('fsa_signin.user_preregistration_alerts_form')->toString();
       $event->setResponse(new RedirectResponse($url, 301));
     }

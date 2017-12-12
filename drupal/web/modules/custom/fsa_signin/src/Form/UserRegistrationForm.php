@@ -6,7 +6,6 @@ use Drupal\fsa_signin\Controller\DefaultController;
 use Drupal\user\Entity\User;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Link;
 
 /**
  * Class EmailSubscriptionsForm.
@@ -83,7 +82,7 @@ class UserRegistrationForm extends FormBase {
     $form['alert_container']['news_delivery_method'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('I want to receive news and consultations via'),
-      '#description' => $this->t('News are available only via email.'),
+      '#description' => $this->t('News is available only via email.'),
       '#options' => [
         'email' => $this->t('Email'),
       ],

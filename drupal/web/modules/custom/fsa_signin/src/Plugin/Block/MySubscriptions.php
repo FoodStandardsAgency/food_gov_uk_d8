@@ -98,7 +98,7 @@ class MySubscriptions extends BlockBase {
    * @return array
    *   List of subscribed terms.
    */
-  protected function itemListFromTerms($terms, $title) {
+  protected function itemListFromTerms(array $terms, $title) {
 
     $items = [];
     foreach ($terms as $value) {
