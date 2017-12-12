@@ -18,7 +18,7 @@ class SearchService {
     'name^3',
     'localauthoritycode.label.keyword^5',
     'address',
-    'postcode',
+    'postcode_tokenized',
   ];
 
   /**
@@ -151,7 +151,14 @@ class SearchService {
           'fields' => self::SEARCHABLE_FIELDS,
           'type' => 'cross_fields',
           'operator' => 'and',
-          'minimum_should_match' => '50%',
+        ],
+      ];
+      // Add postcode as an additional booster (should clause).
+      $query_should_filters[] = [
+        'match' => [
+          'postcode_tokenized' => [
+            'query' => $input,
+          ],
         ],
       ];
       $query_should_filters[] = [
@@ -213,15 +220,6 @@ class SearchService {
       $query_should_filters = $base_query_should_filters;
 
       // Assign looser settings to the multi match and match_phrase queries (with fuzziness)
-      /*
-      $query_must_filters[] = ['match_phrase' => [
-        'combinedvalues' => [
-          'query' => $input,
-          'slop' => 3,
-          'boost' => 5,
-        ],
-      ]];
-      */
       $query_must_filters[] = [
         'match' => [
           'combinedvalues' => [
