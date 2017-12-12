@@ -1,0 +1,30 @@
+uuid: 5073dcc7-0f86-4f45-b022-2bc7bbd31fdb
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - fsa_signin
+    - system
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: manage_subscription_cta
+theme: fsa
+region: secondary_menu
+weight: 0
+provider: null
+plugin: manage_subscription_cta
+settings:
+  id: manage_subscription_cta
+  label: 'Manage subscription CTA'
+  provider: fsa_signin
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: "/news-alerts*\r\n/profile*"
+    negate: false
+    context_mapping: {  }
