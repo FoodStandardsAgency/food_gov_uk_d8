@@ -17,9 +17,13 @@ class FsaWebformValidation {
    */
   public function title() {
     $nid = \Drupal::request()->get('nid');
-    if ($node = $this->getNode($nid)) {
-      return $node->getTitle();
+    if ($nid && $node = $this->getNode($nid)) {
+      $output = $node->getTitle();
     }
+    else {
+      $output = '';
+    }
+    return $output;
   }
 
   /**
