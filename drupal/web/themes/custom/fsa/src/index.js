@@ -4,13 +4,15 @@ import './core/helper/polyfill/closest';
 import svg4everybody from 'svg4everybody';
 import responsiveTables from './core/helper/responsiveTables';
 import stickyElement from './core/helper/stickyElement';
-import toggleContent from './core/helper/toggleContent';
+import cssCustomPropertySupport from './core/helper/cssCustomPropertySupport';
 import toc from './core/helper/toc';
 import subNavigation from './core/helper/subNavigation';
 
 import navigation from './component/navigation/navigation';
 import { addHeading, printPage } from './component/content/content';
+import toggle from './component/toggle/toggle';
 import parallax from './component/parallax/parallax';
+import fhrs from './component/fhrs/fhrs';
 
 const breakpoints = {
   small: "sm",
@@ -36,6 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Navigation
   navigation();
+
+  // Toggle content
+  toggle();
+
+  // FHRS
+  fhrs();
 
 });
 
@@ -67,12 +75,6 @@ if (container != null || stickyElem != null) {
 }
 
 // Toggle content
-const toggleButtons = [...document.querySelectorAll('.js-toggle-button')];
-if (toggleButtons != null) {
-  toggleContent(toggleButtons, breakpoints);
-}
-
-// Toggle content
 const profileElement = document.getElementById('block-myprofile');
 if (profileElement != null) {
   const profileElementArray = [...document.getElementById('block-myprofile').children];
@@ -97,3 +99,9 @@ document.addEventListener('touchstart', function addtouchclass(e) {
   document.documentElement.classList.add('is-touch');
   document.removeEventListener('touchstart', addtouchclass, false);
 }, false)
+
+// Add class if css custom properties are supported
+if (cssCustomPropertySupport()) {
+  document.documentElement.classList.add('is-modern');
+}
+

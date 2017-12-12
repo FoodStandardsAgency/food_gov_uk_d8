@@ -25,7 +25,7 @@ See more here: [https://travis-ci.com/wunderio/client-UK-FSA-alpha](https://trav
 ```$ vagrant up``` 
 
 Add to your host machine `/etc/hosts` file the following line  
-```192.168.10.178	local.food.gov.uk```
+```192.168.100.178	local.food.gov.uk```
 
 #### 2. First time setup
 

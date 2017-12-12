@@ -61,6 +61,42 @@ class SignInService {
   }
 
   /**
+   * News subscription options.
+   *
+   * @return array
+   *   Array of options in FAPI suitable format.
+   */
+  public function newsAsOptions() {
+
+    $all_terms = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->loadTree('news_type', 0, 1, FALSE);
+    $options = [];
+    foreach ($all_terms as $term) {
+      $options[$term->tid] = $this->t($term->name)->render();
+    }
+    return $options;
+  }
+
+  /**
+   * Consultations subscription options.
+   *
+   * @return array
+   *   Array of options in FAPI suitable format.
+   */
+  public function consultationsAsOptions() {
+
+    $all_terms = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->loadTree('consultations_type', 0, 1, FALSE);
+    $options = [];
+    foreach ($all_terms as $term) {
+      $options[$term->tid] = $this->t($term->name)->render();
+    }
+    return $options;
+  }
+
+  /**
    * Get allergen terms as options to subscription forms.
    *
    * @return array

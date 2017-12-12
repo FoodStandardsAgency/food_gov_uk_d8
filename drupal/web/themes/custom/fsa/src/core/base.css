@@ -11,7 +11,7 @@ html {
   font-size: var(--font-size-base);
   letter-spacing: 0.015em;
   @mixin responsive-declaration font-size, 100%, var(--font-size-base);
-  @mixin responsive-declaration line-height, 1.3, 1.5;
+  @mixin responsive-declaration line-height, 1.6, 1.4;
 }
 
 html.is-fixed {
@@ -271,6 +271,7 @@ div.page-title {
   padding-bottom: 1em;
   padding-left: 1em;
   border: 0;
+  margin-bottom: 0;
 }
 
 :--not-touch .field__field_document > .field__field_document__item .field__field_document a:--enter {
@@ -302,8 +303,8 @@ div.page-title {
 /* Embedded entity */
 .embedded-entity {
   position: relative;
-  @mixin responsive-declaration margin-top, 2em, 4em;
-  @mixin responsive-declaration margin-bottom, 2em, 4em;
+  @mixin responsive-declaration margin-top, 1em, 2em;
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
 }
 
 /*Content image*/

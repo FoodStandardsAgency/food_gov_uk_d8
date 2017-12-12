@@ -18,7 +18,7 @@ class SearchService {
     'name^3',
     'localauthoritycode.label.keyword^5',
     'address',
-    'postcode',
+    'postcode_tokenized',
   ];
 
   /**
@@ -48,9 +48,6 @@ class SearchService {
    *   An associated array containing results and metadata. Something like this: ['results' => [...], 'total' => 100, 'aggs' => [...]]
    */
   public function search(LanguageInterface $language, $input = '', $filters = [], $max_items = self::DEFAULT_MAX_RESULT_ITEMS, $offset = 0) {
-
-    // Sanitize the input.
-    $input = Html::escape($input);
     $query_must_filters = [];
     $query_should_filters = [];
     $language_code = $language->getId();
@@ -152,7 +149,16 @@ class SearchService {
         'multi_match' => [
           'query' => $input,
           'fields' => self::SEARCHABLE_FIELDS,
+          'type' => 'cross_fields',
           'operator' => 'and',
+        ],
+      ];
+      // Add postcode as an additional booster (should clause).
+      $query_should_filters[] = [
+        'match' => [
+          'postcode_tokenized' => [
+            'query' => $input,
+          ],
         ],
       ];
       $query_should_filters[] = [
@@ -214,15 +220,6 @@ class SearchService {
       $query_should_filters = $base_query_should_filters;
 
       // Assign looser settings to the multi match and match_phrase queries (with fuzziness)
-      /*
-      $query_must_filters[] = ['match_phrase' => [
-        'combinedvalues' => [
-          'query' => $input,
-          'slop' => 3,
-          'boost' => 5,
-        ],
-      ]];
-      */
       $query_must_filters[] = [
         'match' => [
           'combinedvalues' => [

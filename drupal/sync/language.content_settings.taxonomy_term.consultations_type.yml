@@ -1,0 +1,16 @@
+uuid: ba21f57e-95ff-43a8-b6fc-5319539f6ebc
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.consultations_type
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.consultations_type
+target_entity_type_id: taxonomy_term
+target_bundle: consultations_type
+default_langcode: site_default
+language_alterable: false

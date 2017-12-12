@@ -23,8 +23,24 @@
 <div class="ratings__mobile-item table__button js-content-next">
   <a href="{{ item.url }}" class="ratings__mobile-link">
     <div class="ratings__mobile-rating-value">
-      {{ item.ratingvalue }}
+      {% if item.ratingvalue_class == "rating--exempt" %}
+        <div class="svg exempt">
+          <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#exempt-icon"></use></svg>
+        </div>
+      {% elseif item.ratingvalue_class == "rating--awaitinginspection" %}
+        <div class="svg awaitinginspection">
+          <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#awaiting-icon"></use></svg>
+        </div>
+      {% elseif (item.ratingvalue_class == "rating--pass") or
+      (item.ratingvalue_class == "rating--pass-and-eat-safe") or
+      (item.ratingvalue_class == "rating--improvement-required") or
+      (item.ratingvalue_class == "rating--awaiting-inspection") %}
+        {{ item.ratingimage }}
+      {% else %}
+        {{ item.ratingvalue }}
+      {% endif %}
     </div>
+    
     <div class="ratings__mobile-name">
       {% if item.name %}
         <h3>{{ item.name }}</h3>
@@ -68,10 +84,10 @@
     <div class="table__content">
         {{ item.ratingdate }}
         {% if item.newratingpending %}
-            <p>{{ item.newratingpending }}</p>
+          <p class="light">{{ item.newratingpending }}</p>
         {% endif %}
         {% if item.righttoreply %}
-            <p>{{ item.righttoreply }}</p>
+          <p class="light">{{ item.righttoreply }}</p>
         {% endif %}
     </div>
   </div>

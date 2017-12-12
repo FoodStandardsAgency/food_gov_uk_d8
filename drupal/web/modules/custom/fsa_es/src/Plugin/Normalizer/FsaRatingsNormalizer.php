@@ -119,6 +119,9 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
       $data[$field_name] = $value;
     }
 
+    // Create edge n-grams of the postcode at normalization time.
+    $data['postcode_tokenized'] = strtolower($data['postcode'] . ' ' . implode(' ', $this->edgeNGram(str_replace(' ', '', $data['postcode']))));
+
     // Merge the values of values from name, address, postcode and LA into single field for more robust search querying.
     $data['combinedvalues'] = $data['name'] . ' ' . $data['address'] . ' ' . $data['postcode'] . ' ' . $data['localauthoritycode'][0]['label'];
 
@@ -132,6 +135,29 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
     $data['combined_location_postcode'] = $data['localauthoritycode'][0]['label'] . ' ' . $data['postcode'];
 
     return $data;
+  }
+
+  /**
+   * Returns a list of edge n-grams of the value.
+   *
+   * @param $value
+   * @param int $min_gram_length
+   *
+   * @return array
+   */
+  protected function edgeNGram($value, $min_gram_length = 2) {
+    $ngrams = [];
+    $value = trim($value);
+    $len = strlen($value);
+    $max_gram_length = $len;
+
+    for ($a = $min_gram_length; $a <= $max_gram_length; $a++) {
+      $ngrams[] = substr($value, 0, $a);
+    }
+
+    $ngrams = array_unique($ngrams);
+
+    return $ngrams;
   }
 
   /**

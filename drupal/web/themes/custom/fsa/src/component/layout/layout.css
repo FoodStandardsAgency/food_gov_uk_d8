@@ -59,6 +59,10 @@
   .theme--help & {
     max-width: 51.5em;
   }
+
+  .theme--news-alerts & {
+    padding-top: 0; 
+  }
 }
 
 /*Site sidebar*/
@@ -171,7 +175,7 @@
   }
 }
 
-.layout__container--main {
+.layout__content--main {
   .theme--subscribe &,
   .theme--page &,
   .theme--alert & {

@@ -104,6 +104,11 @@ class FsaRatingsSearchForm extends FormBase {
       '#type' => 'textfield',
       '#title' => $this->t('Business name/or location'),
       '#default_value' => $keywords,
+      '#attributes' => [
+        'class' => [
+          'js-main-search-input',
+        ],
+      ]
     ];
 
     $string = $this->t('More search options');

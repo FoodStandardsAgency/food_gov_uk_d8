@@ -65,9 +65,17 @@
     }
 
     input {
-      background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='16px' height='16px' viewBox='0 0 16 16' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3C!-- Generator: Sketch 47.1 %2845422%29 - http://www.bohemiancoding.com/sketch --%3E%3Ctitle%3Enav-fhrs-search-icon%3C/title%3E%3Cdesc%3ECreated with Sketch.%3C/desc%3E%3Cdefs%3E%3C/defs%3E%3Cg id='FHRS' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='FHRS-Frontpage-search-results' transform='translate%28-80.000000, -12.000000%29' fill='%23007C75'%3E%3Cg id='Header'%3E%3Cg id='top' transform='translate%280.000000, 10.000000%29'%3E%3Cg id='Links' transform='translate%2880.000000, 0.000000%29'%3E%3Cpath d='M6.99989063,13.9998125 C4.23793378,13.9998125 1.99996875,11.7618475 1.99996875,8.99989063 C1.99996875,6.23793378 4.23793378,3.99996875 6.99989063,3.99996875 C9.76184747,3.99996875 11.9998125,6.23793378 11.9998125,8.99989063 C11.9998125,11.7618475 9.76184747,13.9998125 6.99989063,13.9998125 M15.7067546,16.2927767 L12.6008031,13.1868252 C13.4757894,12.0178435 13.9997813,10.5718661 13.9997813,8.99989063 C13.9997813,5.13395103 10.8658302,2 6.99989063,2 C3.13395103,2 0,5.13395103 0,8.99989063 C0,12.8658302 3.13395103,15.9997813 6.99989063,15.9997813 C8.57186606,15.9997813 10.0188435,15.4757894 11.1868252,14.6008031 L14.2927767,17.7067546 C14.6837706,18.0977485 15.3157607,18.0977485 15.7067546,17.7067546 C16.0977485,17.3157607 16.0977485,16.6837706 15.7067546,16.2927767' id='nav-fhrs-search-icon'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      background-position: right 1em top 50%;
+      background-image: none;
+      background-position: left 1em top 50%;
       background-repeat: no-repeat;
+
+      :--not-js & {
+        padding-left: 2em;
+      }
+
+      &.is-active {
+        background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='16px' height='16px' viewBox='0 0 16 16' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3C!-- Generator: Sketch 47.1 %2845422%29 - http://www.bohemiancoding.com/sketch --%3E%3Ctitle%3Enav-fhrs-search-icon%3C/title%3E%3Cdesc%3ECreated with Sketch.%3C/desc%3E%3Cdefs%3E%3C/defs%3E%3Cg id='FHRS' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='FHRS-Frontpage-search-results' transform='translate%28-80.000000, -12.000000%29' fill='%23848B8E'%3E%3Cg id='Header'%3E%3Cg id='top' transform='translate%280.000000, 10.000000%29'%3E%3Cg id='Links' transform='translate%2880.000000, 0.000000%29'%3E%3Cpath d='M6.99989063,13.9998125 C4.23793378,13.9998125 1.99996875,11.7618475 1.99996875,8.99989063 C1.99996875,6.23793378 4.23793378,3.99996875 6.99989063,3.99996875 C9.76184747,3.99996875 11.9998125,6.23793378 11.9998125,8.99989063 C11.9998125,11.7618475 9.76184747,13.9998125 6.99989063,13.9998125 M15.7067546,16.2927767 L12.6008031,13.1868252 C13.4757894,12.0178435 13.9997813,10.5718661 13.9997813,8.99989063 C13.9997813,5.13395103 10.8658302,2 6.99989063,2 C3.13395103,2 0,5.13395103 0,8.99989063 C0,12.8658302 3.13395103,15.9997813 6.99989063,15.9997813 C8.57186606,15.9997813 10.0188435,15.4757894 11.1868252,14.6008031 L14.2927767,17.7067546 C14.6837706,18.0977485 15.3157607,18.0977485 15.7067546,17.7067546 C16.0977485,17.3157607 16.0977485,16.6837706 15.7067546,16.2927767' id='nav-fhrs-search-icon'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      }
     }
   }
 
@@ -79,10 +87,53 @@
 
   .fieldgroup {
     margin-top: 2em;
+    padding-bottom: 2em;
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
+
+    @media (--breakpoint-md) {
+      width: 49%;
+    }
+
+    &:nth-child(odd) {
+      @media (--breakpoint-md) {
+        padding-right: 1em;
+      }
+    }
+
+    &:nth-child(even) {
+      @media (--breakpoint-md) {
+        padding-left: 1em;
+      }
+    }
   }
 
   .form-item {
     margin-bottom: 0;
+    text-align: left;
+
+    &.js-form-type-select {
+      width: 100%;
+      display: inline-block;
+      vertical-align: top;
+  
+      @media (--breakpoint-md) {
+        width: 50%;
+      }
+
+      &:nth-child(odd) {
+        @media (--breakpoint-md) {
+          padding-right: 1em;
+        }
+      }
+
+      &:nth-child(even) {
+        @media (--breakpoint-md) {
+          padding-left: 1em;
+        }
+      }
+    }
   }
 
   .ratings__advanced-search-button {
@@ -112,7 +163,6 @@
 
   .ratings__advanced-search-content {
     margin-bottom: 1em;
-    padding-bottom: 1em;
     box-shadow: 0 1px 0 0 var(--color-light-gray);
   }
 }
@@ -128,18 +178,17 @@
     flex-flow: row nowrap;
     align-items: center;
   }
-}
 
-.ratings__header.rating__header--back-link .svg {
-  width: 1em;
-  height: 1em;
-  transform: rotate(180deg);
-
-  &.rating__header--back-link a {
-    margin-left: 1em;
+  &.rating__header--back-link {
+    a {
+      background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='22px' height='14px' viewBox='0 0 22 14' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3C!-- Generator: Sketch 45.1 %2843504%29 - http://www.bohemiancoding.com/sketch --%3E%3Ctitle%3EPage 1%3C/title%3E%3Cdesc%3ECreated with Sketch.%3C/desc%3E%3Cdefs%3E%3C/defs%3E%3Cg id='FHRS' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='About-Ratings' transform='translate%28-510.000000, -35.000000%29' fill='%23007c75'%3E%3Cg id='Header' transform='translate%28461.000000, 0.000000%29'%3E%3Cpath d='M57.2136083,35.2887967 C57.4093541,35.4817608 57.5067454,35.7227358 57.5067454,35.963706 C57.5067454,36.2046762 57.4093492,36.4456464 57.2136083,36.6386153 L52.7639959,41.0240316 L70.0222244,41.0240316 C70.5598054,41.0240316 71,41.4579707 71,41.9879123 C71,42.517854 70.5598054,42.9517931 70.0222244,42.9517931 L52.7639959,42.9517931 L57.2126305,47.3372094 C57.6041318,47.7231472 57.6041318,48.3255727 57.2126305,48.7105466 C56.8211291,49.0964845 56.2100194,49.0964845 55.8194958,48.7105466 L49,41.9879605 L55.8194958,35.2887485 C56.2109971,34.9037505 56.8221069,34.9037505 57.2135838,35.2887485 L57.2136083,35.2887967 Z' id='Page-1'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      background-position: left 0 top 50%;
+      background-size: 1em auto;
+      background-repeat: no-repeat;
+      padding-left: 1.5em;
+    }
   }
 }
-
 
 /* Ratings toolbar */
 .ratings__toolbar {
@@ -174,11 +223,15 @@
 
     label {
       font-size: 1em;
-      font-weight: 600;
+      font-weight: 700;
       text-transform: none;
       display: block;
       margin: 0;
       margin-bottom: 0.5em;
+
+      @media (--breakpoint-md) {
+        font-weight: 600;
+      }
     
       @media (--breakpoint-lg) {
         display: inline-block;
@@ -189,6 +242,11 @@
     select {
       display: block;
       margin: 0;
+      width: 100%;
+
+      @media (--breakpoint-sm) {
+        width: auto;
+      }
     
       @media (--breakpoint-lg) {
         display: inline-block;
@@ -199,12 +257,14 @@
 }
 
 .ratings__hits-total {
+  font-family: var(--font-family-heading);
   font-size: 1.5em;
-  font-weight: 600;
   @mixin responsive-declaration margin-right, 1em, 2em;
   margin-bottom: 1em;
+  font-weight: 700;
 
   @media (--breakpoint-md) {
+    font-weight: 500;
     margin-bottom: 0;
   }
 }
@@ -258,7 +318,7 @@
     font-family: var(--font-family-content);
     font-size: 1.25em;
     font-weight: 600;
-    line-height: 35px;
+    line-height: 32px;
     color: var(--color-black);
     border-radius: 50%;
     background-color: var(--color-green);
@@ -283,6 +343,42 @@
   
     @media (--breakpoint-lg) {
       display: none;
+    }
+  }
+}
+
+.ratings__mobile-rating-value {
+  .svg {
+    border-radius: 50%;
+    background-color: var(--color-green);
+    border: 2px solid var(--color-black);
+    width: 35px;
+    height: 35px;
+    display: flex;
+    flex-align: center;
+    justify-content: center;
+
+
+    &.awaitinginspection {
+      background-color: var(--color-black);
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .badge {
+    padding-top: 0.25em;
+    width: 5em;
+
+    @media (--breakpoint-xs) {
+      width: 7.5em;
+    }
+
+    @media (--breakpoint-sm) {
+      width: 10em;
     }
   }
 }
@@ -356,15 +452,24 @@
 
 .ratings__mobile-name {
   padding: 0 1em;
-  text-decoration: underline;
+
+  h3 {
+    font-family: var(--font-family-content);
+    margin-bottom: 0.5em;
+    text-decoration: underline;
+  }
 
   p {
     color: var(--color-black);
+
+    .ratings__mobile-item.is-open & {
+      color: var(--color-white) !important;
+    }
   }
 }
 
 .ratings__toggle-button {
-  padding: 1em;
+  padding: 1em 1.2em;
   border-radius: 0;
   border-left: 1px solid var(--color-light-gray);
 
@@ -469,22 +574,45 @@
 
 .establishment__container {
   max-width: 80em;
+
+  .peek {
+    @mixin responsive-declaration padding, 1em, 2em;
+
+    @media (--breakpoint-md) {
+      padding-right: 0;
+      padding-left: 0;
+      padding-bottom: 0;
+    }
+  }
+}
+
+.establishment__meta {
+  display: flex;
+  flex-wrap: wrap;
+
+  @media (--breakpoint-md) {
+    flex-wrap: nowrap;
+  }
+}
+
+.establishment__title {
+  margin-top: 0;
 }
 
 .establishment__rating {
   background-color: var(--color-lighter-gray);
-
   @mixin responsive-declaration margin-right, 1em, 2em;
   @mixin responsive-declaration padding-right, 1em, 2em;
   margin-bottom: 2em;
+  flex: 0 0 100%;
 
   @media (--breakpoint-md) {
+    flex: 1 1 50%;
     border-right: 0;
   }
 
   @media (--breakpoint-lg) {
-    width: 20em;
-    float: left;
+    flex: 1 1 20em;
     border-right: 1px solid var(--color-light-gray);
   }
 
@@ -507,10 +635,19 @@
   }
 }
 
-.establishment__title {
-  margin-top: 0;
-}
+.establishment__content {
+  margin-bottom: 2em;
+  flex: 0 0 100%;
+  
+  @media (--breakpoint-md) {
+    flex: 1 1 50%;
+  }
 
+  h4 {
+    font-size: 1em;
+    margin-bottom: 0.5em;
+  }
+}
 
 .establishment__button {
   background-color: var(--dark-primary-color);
@@ -525,12 +662,20 @@
   }
 }
 
-.establishment__content {
-  margin-bottom: 2em;
+.establishment__map {
 
-  h4 {
-    font-size: 1em;
-    margin-bottom: 0.5em;
+}
+
+.establishment__map-element {
+  position: relative;
+  height: 400px;
+
+  & > * {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
   }
 }
 
@@ -549,6 +694,9 @@
 }
 
 .establishment__table-button.is-open {
+  background-color: var(--dark-secondary-color);
+  color: var(--color-white);
+
   & .establishment__score {
     background-color: color(white alpha(-70%));
     color: white;

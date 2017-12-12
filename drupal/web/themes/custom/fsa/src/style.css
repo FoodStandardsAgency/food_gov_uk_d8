@@ -5,37 +5,28 @@
 /*Component*/
 @import "component/general/button.css";
 @import "component/general/table.css";
-@import "component/general/toggle.css";
-@import "component/general/toc.css";
 @import "component/general/modal.css";
 @import "component/general/topic-cloud.css";
 @import "component/general/subpages.css";
 @import "component/general/message-list.css";
 @import "component/general/teaser.css";
-@import "component/general/webform.css";
-@import "component/general/social-media.css";
 @import "component/general/team-finder.css";
-@import "component/general/peek.css";
 
 /* Layout */
 @import "component/general/phase-banner.css";
-@import "component/general/hero.css";
 @import "component/general/breadcrumb.css";
-@import "component/general/sidebar.css";
-@import "component/general/footer.css";
 
 /* Profile and registration */
 @import "component/general/my-profile.css";
 @import "component/general/subscribe-flow.css";
 
-/* Alert */
-@import "component/general/news-alerts.css";
-
 /* Navigation */
-@import "component/general/navigation-side.css";
 @import "component/general/navigation-mobile.css";
+@import "component/general/navigation-side.css";
 @import "component/general/navigation-secondary.css";
 
+
+@import "component/toggle/toggle.css";
 
 @import "component/layout/layout.css";
 @import "component/content/content.css";
@@ -43,3 +34,9 @@
 @import "component/header/header.css";
 @import "component/navigation/navigation.css";
 @import "component/fhrs/fhrs.css";
+@import "component/team/team.css";
+@import "component/hero/hero.css";
+@import "component/parallax/parallax.css";
+@import "component/listing/listing.css";
+@import "component/footer/footer.css";
+@import "component/sidebar/sidebar.css";

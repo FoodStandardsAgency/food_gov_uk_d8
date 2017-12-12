@@ -3,6 +3,8 @@
 namespace Drupal\fsa_webform_validation\Validate;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Validates webform elements.
@@ -43,17 +45,17 @@ class FsaWebformValidationValidate {
       }
     }
 
-    // Set error message.
+    // Redirect user.
     if (isset($error) && isset($fsa_authority)) {
-      if ($error && $fsa_authority->hasField('field_advice_url')) {
-        $args = [
-          '%name' => $la['name'],
-          '@path' => $fsa_authority->get('field_advice_url')->getString(),
+      if ($error) {
+        $route_parameters = [
+          'id' => $fsa_authority->id(),
+          'nid' => \Drupal::routeMatch()->getRawParameter('node'),
         ];
-        $formState->setError(
-          $element,
-          t('<span>Sorry, %name requires you to make a report directly to them. Please see their <a href="@path" target="_blank">advice page</a>.</span>', $args)
-        );
+        $url = Url::fromRoute('fsa_webform_validation.render', $route_parameters);
+        $path = $url->toString();
+        $response = new RedirectResponse($path);
+        $response->send();
       }
     }
   }

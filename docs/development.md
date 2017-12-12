@@ -84,10 +84,14 @@ Ensure the Alert API base path is set in FSA Alerts configuration `/admin/config
 FSA Ratings search / Elasticsearch
 ---------------------
 
-Ratings search is located at domain.com/ratings/search.
+Ratings search is located at `/ratings/search`. 
 
-Drush commands to rebuild ES index.
+FSA Establishments are sent to ES with `fsa_es` module.
 
-`drush eshd fsa_ratings_index -y; drush eshs; drush eshr fsa_ratings_index;` 
+Rating search is implemented with `fsa_ratings` module.
 
-And `drush cron`, multiple times if there are lots of establishment entities.
+If ES index need to be rebuild:
+* `drush sqlq "DELETE from queue WHERE name = 'elasticsearch_helper_indexing';"`
+* `drush eshd fsa_ratings_index -y; drush eshs fsa_ratings_index; drush eshr fsa_ratings_index;`
+* `watch -n1 drush queue-run elasticsearch_helper_indexing`
+  * `drush queue-run` is time- and resource-consuming and likely to cause php timeouts. Use with `watch -n1` to throw errors but continue if errors occur.

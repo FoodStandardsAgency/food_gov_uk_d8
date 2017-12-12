@@ -7,27 +7,27 @@ fsa_signin.default_controller_signInPage:
   requirements:
     _permission: 'access content'
 
-fsa_signin.default_controller_emailSubscriptionsPage:
-  path: '/profile/subscriptions/email'
+fsa_signin.default_controller_resetPassword:
+  path: '/news-alerts/signin/reset-password'
   defaults:
-    _controller: '\Drupal\fsa_signin\Controller\DefaultController::emailSubscriptionsPage'
-    _title: 'Email subscriptions'
+    _controller: '\Drupal\fsa_signin\Controller\DefaultController::resetPassword'
+    _title: 'Reset password'
   requirements:
-    _user_is_logged_in: 'TRUE'
+    _permission: 'access content'
 
-fsa_signin.default_controller_smsSubscriptionsPage:
-  path: '/profile/subscriptions/sms'
-  defaults:
-    _controller: '\Drupal\fsa_signin\Controller\DefaultController::smsSubscriptionsPage'
-    _title: 'SMS subscriptions'
-  requirements:
-    _user_is_logged_in: 'TRUE'
-
-fsa_signin.default_controller_myAccountPage:
+fsa_signin.default_controller_profilePage:
   path: '/profile'
   defaults:
-    _controller: '\Drupal\fsa_signin\Controller\DefaultController::myAccountPage'
-    _title: 'My account'
+    _controller: '\Drupal\fsa_signin\Controller\DefaultController::profilePage'
+    _title: 'Your profile'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+fsa_signin.default_controller_manageProfilePage:
+  path: '/profile/manage'
+  defaults:
+    _controller: '\Drupal\fsa_signin\Controller\DefaultController::manageProfilePage'
+    _title: 'Manage your preferences'
   requirements:
     _user_is_logged_in: 'TRUE'
 
@@ -37,21 +37,36 @@ fsa_signin.delete_account_confirmation:
     _title: 'Delete profile'
     _form: '\Drupal\fsa_signin\Form\DeleteAccountConfirmation'
   requirements:
-    _user_is_logged_in: 'TRUE'
+    _permission: 'access content'
+
+fsa_signin.user_preregistration:
+  path: '/news-alerts/subscribe'
+  defaults:
+    _controller: '\Drupal\fsa_signin\Controller\DefaultController::beginSubscribe'
+  requirements:
+    _permission: 'access content'
 
 fsa_signin.user_preregistration_alerts_form:
   path: '/news-alerts/subscribe/alerts'
   defaults:
     _form: '\Drupal\fsa_signin\Form\AlertsForRegistrationForm'
-    _title: 'Subscribe to news & alerts'
+    _title: 'Subscribe to news and alerts'
+  requirements:
+    _permission: 'access content'
+
+fsa_signin.user_preregistration_news_form:
+  path: '/news-alerts/subscribe/news'
+  defaults:
+    _form: '\Drupal\fsa_signin\Form\NewsForRegistrationForm'
+    _title: 'Subscribe to news and alerts'
   requirements:
     _permission: 'access content'
 
 fsa_signin.user_registration_form:
-  path: '/news-alerts/subscribe/personal'
+  path: '/news-alerts/subscribe/delivery'
   defaults:
     _form: '\Drupal\fsa_signin\Form\UserRegistrationForm'
-    _title: 'Subscribe to news & alerts'
+    _title: 'Subscribe to news and alerts'
   requirements:
     _permission: 'access content'
 

@@ -3,6 +3,22 @@
 
 /* Navigation wrapper */
 .navigation-wrapper {
+  background-color: var(--color-white);
+  position: absolute;
+  z-index: var(--z-topmost);
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  padding-top: 0em;
+  box-shadow: none;
+  transition:
+    box-shadow var(--transition-enter),
+    transform var(--transition-enter);
+
   @media (--breakpoint-sm) {
     background-color: transparent;
     position: relative;
@@ -25,13 +41,18 @@
   @media (--breakpoint-lg) {
     min-height: 3em;
   }
-}
 
-:--not-js .navigation-wrapper {
-  width: calc(100% - 12em);
+  :--not-js & {
+    width: calc(100% - 12em);
 
-  @media (--breakpoint-md) {
-    width: calc(100% - 19em);
+    @media (--breakpoint-md) {
+      width: calc(100% - 19em);
+    }
+  }
+
+  &.is-open {
+    transform: translateX(-20%);
+    box-shadow: var(--box-shadow);
   }
 }
 
