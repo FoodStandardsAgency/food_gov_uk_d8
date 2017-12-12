@@ -72,7 +72,7 @@ class MySubscriptions extends BlockBase {
     }
 
     if (!empty($food_list) || !empty($alert_list) || !empty($news_list) || !empty($cons_list)) {
-      $content = [
+      $build['content'] = [
         $food_list,
         $alert_list,
         $news_list,
@@ -80,10 +80,10 @@ class MySubscriptions extends BlockBase {
       ];
     }
     else {
-      $content = ['#markup' => '<p class="empty">' . $this->t('No subscriptions added yet.') . '</p>'];
+      $build['content'] = ['#markup' => '<p class="empty">' . $this->t('No subscriptions added yet.') . '</p>'];
     }
 
-    return $content;
+    return $build;
 
   }
 
