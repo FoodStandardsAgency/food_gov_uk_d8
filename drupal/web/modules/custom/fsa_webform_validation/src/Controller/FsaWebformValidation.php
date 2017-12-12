@@ -2,7 +2,6 @@
 
 namespace Drupal\fsa_webform_validation\Controller;
 
-use Drupal\Core\Link;
 use Drupal\Core\Url;
 
 /**
