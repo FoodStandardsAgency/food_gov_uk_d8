@@ -10,7 +10,7 @@ use Drupal\fsa_signin\SignInService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class EmailPreferencesForm.
+ * Class ProfileManager.
  */
 class ProfileManager extends FormBase {
 
@@ -87,6 +87,12 @@ class ProfileManager extends FormBase {
       '#title' => $this->t('News'),
       '#options' => ['all' => $this->t('All news')->render()] + $this->signInService->newsAsOptions(),
       '#default_value' => array_column($account->get('field_subscribed_news')->getValue(), 'target_id'),
+    ];
+    $form[$wrapper]['subscribed_cons'] = [
+      '#type' => 'checkboxes',
+      '#title' => $this->t('Consultations'),
+      '#options' => ['all' => $this->t('All consultations')->render()] + $this->signInService->consultationsAsOptions(),
+      '#default_value' => array_column($account->get('field_subscribed_cons')->getValue(), 'target_id'),
     ];
 
     // Delivery options wrapper.
@@ -228,6 +234,11 @@ class ProfileManager extends FormBase {
     // Unset the helper.
     unset($subscribed_news['all']);
     $account->set('field_subscribed_news', $subscribed_news);
+
+    $subscribed_cons = $form_state->getValue('subscribed_cons');
+    // Unset the helper.
+    unset($subscribed_cons['all']);
+    $account->set('field_subscribed_cons', $subscribed_cons);
 
     $email = $form_state->getValue('email');
     $account->setEmail($email);

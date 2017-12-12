@@ -58,7 +58,7 @@ class AlertsForRegistrationForm extends FormBase {
       '#markup' => '<h2>' . $this->t('Alerts') . '</h2>',
     ];
     $form['description'] = [
-      '#markup' => '<p>' . $this->t("Get details of food recalls and withdrawals and allergy alerts as soon as they're issued by email or sent as an SMS text message direct to your mobile phone. This is a free service.") . '</p>',
+      '#markup' => '<p>' . $this->t("Get food alerts and allergy alerts by email or SMS text message. This is a free service.") . '</p>',
     ];
     $form['food_alert_registration'] = [
       '#type' => 'checkboxes',
@@ -101,8 +101,10 @@ class AlertsForRegistrationForm extends FormBase {
     }
 
     $food_alert_registration = $form_state->getValue('food_alert_registration');
+    $food_alert_registration = array_filter(array_values($food_alert_registration));
 
     $alert_tids = $form_state->getValue('alert_tids_for_registration');
+    unset($alert_tids['all']);
     // Filter only those user has selected:
     $selected_tids = array_filter(array_values($alert_tids));
 

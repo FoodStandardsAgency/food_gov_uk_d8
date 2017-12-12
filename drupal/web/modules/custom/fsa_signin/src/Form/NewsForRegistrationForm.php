@@ -4,7 +4,6 @@ namespace Drupal\fsa_signin\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Link;
 use Drupal\fsa_signin\Controller\DefaultController;
 use Drupal\fsa_signin\SignInService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -53,6 +52,8 @@ class NewsForRegistrationForm extends FormBase {
 
     $news_defaults = $tempstore->get('news_tids_for_registration');
     $news_defaults = ($news_defaults === NULL) ? [] : $news_defaults;
+    $cons_defaults = $tempstore->get('cons_tids_for_registration');
+    $cons_defaults = ($cons_defaults === NULL) ? [] : $cons_defaults;
 
     $form['title'] = [
       '#markup' => '<h2>' . $this->t('News and consultations') . '</h2>',
@@ -66,9 +67,15 @@ class NewsForRegistrationForm extends FormBase {
       '#options' => ['all' => $this->t('All news')->render()] + $this->signInService->newsAsOptions(),
       '#default_value' => $news_defaults,
     ];
+    $form['cons_tids_for_registration'] = [
+      '#type' => 'checkboxes',
+      '#title' => $this->t('Consultations'),
+      '#options' => ['all' => $this->t('All consultations')->render()] + $this->signInService->consultationsAsOptions(),
+      '#default_value' => $cons_defaults,
+    ];
     $form['actions'] = ['#type' => 'actions'];
     $form['actions']['back'] = [
-      '#markup' => DefaultController::formBackLink('fsa_signin.user_preregistration_alerts_form')->toString(),
+      '#markup' => DefaultController::linkMarkup('fsa_signin.user_preregistration_alerts_form', $this->t('Previous'), ['back arrow']),
     ];
     $form['actions']['submit'] = [
       '#type' => 'submit',
@@ -96,13 +103,21 @@ class NewsForRegistrationForm extends FormBase {
     }
 
     $news_registration = $form_state->getValue('news_tids_for_registration');
+    unset($news_registration['all']);
 
     // Filter only those user has selected:
     $selected_tids = array_filter(array_values($news_registration));
 
+    $cons_registration = $form_state->getValue('cons_tids_for_registration');
+    unset($cons_registration['all']);
+
+    // Filter only those user has selected:
+    $selected_cons_tids = array_filter(array_values($cons_registration));
+
     /** @var \Drupal\user\PrivateTempStore $tempstore */
     $tempstore = \Drupal::service('user.private_tempstore')->get('fsa_signin');
     $tempstore->set('news_tids_for_registration', $selected_tids);
+    $tempstore->set('cons_tids_for_registration', $selected_cons_tids);
     $form_state->setRedirect('fsa_signin.user_registration_form');
 
   }
