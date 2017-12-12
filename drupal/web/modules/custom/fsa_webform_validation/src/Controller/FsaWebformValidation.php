@@ -2,6 +2,9 @@
 
 namespace Drupal\fsa_webform_validation\Controller;
 
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+
 /**
  * Report a food safety concern redirect.
  */
@@ -33,29 +36,32 @@ class FsaWebformValidation {
     if (is_numeric($id) && $fsa_authority = $this->getFsaAuthority($id)) {
       $name = $fsa_authority->name->getString();
       $advice_url = $fsa_authority->field_advice_url->getString();
-      $email = $fsa_authority->field_email->getString();
     }
     else {
-      $name = FALSE; $advice_url = FALSE; $email = FALSE;
+      $name = '';
+      $advice_url = '';
     }
 
     // Construct back path.
     $nid = \Drupal::request()->get('nid');
     if (is_numeric($nid)) {
-      $back = \Drupal::service('path.alias_manager')
-        ->getAliasByPath('/node/' . $nid);
+      $back_url = Url::fromRoute('entity.node.canonical', ['node' => $nid]);
     }
     else {
-      $back = FALSE;
+      $back_url = '';
     }
 
     // Construct render array.
     return [
-      '#theme' => 'fsa_webform_validation_redirect',
-      '#name' => $name,
-      '#advice_url' => $advice_url,
-      '#email' => $email,
-      '#back' => $back,
+      ['#markup' => t('<h2>Food safety team details</h2>')],
+      [
+        '#markup' => t('<p>Please report your issue directly to <a href="@advice_url" target="_blank">@name</a> food safety team</p>',
+        [
+          '@name' => $name,
+          '@advice_url' => $advice_url,
+        ]),
+      ],
+      ['#type' => 'link', '#title' => t('Back'), '#url' => $back_url],
     ];
   }
 
