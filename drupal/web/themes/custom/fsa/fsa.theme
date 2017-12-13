@@ -12,7 +12,6 @@ require_once 'inc/field.inc';
 require_once 'inc/page.inc';
 require_once 'inc/fsa-ratings-search-page.inc';
 require_once 'inc/status_messages.inc';
-require_once 'inc/menu.inc';
 
 /**
  * Implements hook_page_attachments_alter().
