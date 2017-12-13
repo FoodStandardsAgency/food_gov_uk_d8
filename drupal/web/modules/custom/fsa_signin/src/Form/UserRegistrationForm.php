@@ -152,7 +152,14 @@ class UserRegistrationForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-
+    $delivery_method = $form_state->getValue('delivery_method');
+    $delivery_method = array_filter(array_values($delivery_method));
+    if (in_array('sms', $delivery_method)) {
+      $phone = $form_state->getValue('phone');
+      if ($phone == '') {
+        $form_state->setErrorByName('phone', $this->t('You selected to receive alerts via SMS, please enter your phone number.'));
+      }
+    }
   }
 
   /**
@@ -191,16 +198,21 @@ class UserRegistrationForm extends FormBase {
     $user->set('field_subscribed_cons', $subscribed_cons);
     $user->set('field_notification_method', $email_frequency);
     $user->set('field_delivery_method', $delivery_method);
-    $user->set('field_notification_sms', $phone);
 
-    try {
-      // Save user account.
-      $result = $user->save();
-      user_login_finalize($user);
+    if (in_array('sms', $delivery_method)) {
+      // Only store the phone number if user subscribed via SMS.
+      $user->set('field_notification_sms', $phone);
+      drupal_set_message('Phone number stored');
     }
-    catch (\Exception $e) {
-      drupal_set_message($this->t('An error occurred while creating an account.'), 'error');
-    }
+
+//    try {
+//      // Save user account.
+//      $result = $user->save();
+//      user_login_finalize($user);
+//    }
+//    catch (\Exception $e) {
+//      drupal_set_message($this->t('An error occurred while creating an account.'), 'error');
+//    }
     $form_state->setRedirect('fsa_signin.user_registration_thank_you');
   }
 
