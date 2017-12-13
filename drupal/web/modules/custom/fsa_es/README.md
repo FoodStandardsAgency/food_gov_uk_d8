@@ -10,6 +10,7 @@ How to use Elasticsearch in FSA site?
     - `drush cron` 
         - OR `drush queue-run elasticsearch_helper_indexing`
 5. Notes on indexing content to ES:
+    - Full index rebuild takes approximately 1,5 to 2 hours (+500K establishments).
     - `drush cron` command will only index approximately 100 items at once. If you need to
    speed up the indexing process, run `watch -n1 drush cron`. This will run `drush cron`
    command periodically with 1 second interval between executions.
