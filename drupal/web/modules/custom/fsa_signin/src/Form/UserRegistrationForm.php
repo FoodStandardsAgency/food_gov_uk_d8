@@ -117,6 +117,11 @@ class UserRegistrationForm extends FormBase {
     $form['personal_container']['phone'] = [
       '#type' => 'tel',
       '#title' => $this->t('Phone number'),
+      '#states' => [
+        'visible' => [
+          ':input[name="delivery_method[sms]"]' => ['checked' => TRUE],
+        ],
+      ],
     ];
 
     $form['language_container'] = [
@@ -205,14 +210,14 @@ class UserRegistrationForm extends FormBase {
       drupal_set_message('Phone number stored');
     }
 
-//    try {
-//      // Save user account.
-//      $result = $user->save();
-//      user_login_finalize($user);
-//    }
-//    catch (\Exception $e) {
-//      drupal_set_message($this->t('An error occurred while creating an account.'), 'error');
-//    }
+    try {
+      // Save user account.
+      $result = $user->save();
+      user_login_finalize($user);
+    }
+    catch (\Exception $e) {
+      drupal_set_message($this->t('An error occurred while creating an account.'), 'error');
+    }
     $form_state->setRedirect('fsa_signin.user_registration_thank_you');
   }
 
