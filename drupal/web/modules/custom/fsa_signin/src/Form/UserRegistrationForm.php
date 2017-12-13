@@ -207,7 +207,6 @@ class UserRegistrationForm extends FormBase {
     if (in_array('sms', $delivery_method)) {
       // Only store the phone number if user subscribed via SMS.
       $user->set('field_notification_sms', $phone);
-      drupal_set_message('Phone number stored');
     }
 
     try {
