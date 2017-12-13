@@ -211,6 +211,10 @@ class ProfileManager extends FormBase {
     $delivery_method = array_filter(array_values($delivery_method));
     if (in_array('sms', $delivery_method)) {
       $phone = $form_state->getValue('phone');
+
+      if (!preg_match('/^\+[0-9 ]{7,}$/', $phone)) {
+        $form_state->setErrorByName('phone', $this->t('Please prefix your phone number with international country code and use only numbers.'));
+      }
       if ($phone == '') {
         $form_state->setErrorByName('phone', $this->t('You selected to receive alerts via SMS, please enter your phone number.'));
       }
