@@ -54,6 +54,7 @@ module:
   fsa_ratings_import: 0
   fsa_signin: 0
   fsa_subpages: 0
+  fsa_taxonomy: 0
   fsa_team_finder: 0
   fsa_translate: 0
   fsa_webform_validation: 0
@@ -94,6 +95,7 @@ module:
   simplei: 0
   system: 0
   taxonomy: 0
+  term_reference_tree: 0
   text: 0
   toc_api: 0
   toc_filter: 0

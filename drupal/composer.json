@@ -69,7 +69,8 @@
         "drupal/view_unpublished": "^1.0@alpha",
         "drupal/diff": "^1.0@RC",
         "drupal/warden": "^1.1",
-        "drupal/media_entity_browser": "~1.4"
+        "drupal/media_entity_browser": "~1.4",
+        "drupal/term_reference_tree": "^1.0"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
@@ -100,6 +101,9 @@
             },
             "drupal/media_entity_image": {
                 "Reset media thumbnails while changing media entity. Required by inline images.": "https://www.drupal.org/files/issues/2749695_14_media_entity_image.patch"
+            },
+            "drupal/term_reference_tree": {
+                "Undefined index: #select_parents": "https://www.drupal.org/files/issues/term_reference_tree-2837754-2.patch"
             }
         }
     },
