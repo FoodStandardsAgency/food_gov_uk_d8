@@ -4,8 +4,10 @@ status: true
 dependencies:
   module:
     - elasticsearch_helper_views
+    - fsa_es
+    - user
 id: search_global_ratings
-label: 'Global search: FHR'
+label: 'Global search: Ratings'
 module: views
 description: ''
 tag: ''
@@ -20,8 +22,9 @@ display:
     position: 0
     display_options:
       access:
-        type: none
-        options: {  }
+        type: perm
+        options:
+          perm: 'access content'
       cache:
         type: tag
         options: {  }
@@ -35,11 +38,11 @@ display:
       exposed_form:
         type: basic
         options:
-          submit_button: Apply
+          submit_button: Search
           reset_button: false
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
+          expose_sort_order: false
           sort_asc_label: Asc
           sort_desc_label: Desc
       pager:
@@ -118,12 +121,176 @@ display:
           hide_alter_empty: true
           view_mode:
             -
-              fsa_establishment: default
+              fsa_establishment: search_result
           set_result_on_entity: 0
           entity_type: null
           entity_field: null
           plugin_id: elasticsearch_rendered_entity
-      filters: {  }
+      filters:
+        ratings_business_type:
+          id: ratings_business_type
+          table: elasticsearch_result
+          field: ratings_business_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ratings_business_type_op
+            label: 'Business type'
+            description: ''
+            use_operator: false
+            operator: ratings_business_type_op
+            identifier: business_type
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              editor: '0'
+              administrator: '0'
+              author: '0'
+            reduce: 0
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: fsa_ratings_business_type
+        ratings_local_authority:
+          id: ratings_local_authority
+          table: elasticsearch_result
+          field: ratings_local_authority
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ratings_local_authority_op
+            label: 'Local authority'
+            description: ''
+            use_operator: false
+            operator: ratings_local_authority_op
+            identifier: local_authority
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              editor: '0'
+              administrator: '0'
+              author: '0'
+            reduce: 0
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: fsa_ratings_local_authority
+        ratings_fhrs_rating_value:
+          id: ratings_fhrs_rating_value
+          table: elasticsearch_result
+          field: ratings_fhrs_rating_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ratings_fhrs_rating_value_op
+            label: 'Hygiene rating (England, Northern Ireland, Wales)'
+            description: ''
+            use_operator: false
+            operator: ratings_fhrs_rating_value_op
+            identifier: fhrs_rating_value
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              editor: '0'
+              administrator: '0'
+              author: '0'
+            reduce: 0
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: fsa_ratings_fhrs_rating_value
+        ratings_fhis_rating_value:
+          id: ratings_fhis_rating_value
+          table: elasticsearch_result
+          field: ratings_fhis_rating_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ratings_fhis_rating_value_op
+            label: 'Hygiene rating (Scotland)'
+            description: ''
+            use_operator: false
+            operator: ratings_fhis_rating_value_op
+            identifier: fhis_rating_value
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              editor: '0'
+              administrator: '0'
+              author: '0'
+            reduce: 0
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: fsa_ratings_fhis_rating_value
       sorts: {  }
       title: 'Food hygiene ratings'
       header: {  }
@@ -132,11 +299,16 @@ display:
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
+      filter_groups:
+        operator: AND
+        groups: {  }
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_interface'
+        - url
         - url.query_args
+        - user.permissions
       tags: {  }
   page_1:
     display_plugin: page
@@ -150,5 +322,7 @@ display:
       max-age: -1
       contexts:
         - 'languages:language_interface'
+        - url
         - url.query_args
+        - user.permissions
       tags: {  }
