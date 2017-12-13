@@ -34,9 +34,9 @@ settings:
         -
           name: Media
           items:
-            - DrupalImage
-            - video_embed
             - image
+            - document
+            - video_embed
             - Blockquote
         -
           name: 'Block Formatting'
@@ -65,7 +65,7 @@ settings:
           width: '854'
           height: '480'
 image_upload:
-  status: true
+  status: false
   scheme: public
   directory: inline-images
   max_size: ''
