@@ -84,14 +84,10 @@ Ensure the Alert API base path is set in FSA Alerts configuration `/admin/config
 FSA Ratings search / Elasticsearch
 ---------------------
 
-Ratings search is located at `/ratings/search`. 
+* Ratings search is located at `/ratings/search`.
 
-FSA Establishments are sent to ES with `fsa_es` module.
+* The rating search is implemented with `fsa_ratings` module.
 
-Rating search is implemented with `fsa_ratings` module.
+* FSA Establishments are indexed to Elasticsearch with FSA Elasticsearch integration (`fsa_es`) module, refer to [README.md](/drupal/web/modules/custom/fsa_es/README.md) for documentation. 
 
-If ES index need to be rebuild:
-* `drush sqlq "DELETE from queue WHERE name = 'elasticsearch_helper_indexing';"`
-* `drush eshd fsa_ratings_index -y; drush eshs fsa_ratings_index; drush eshr fsa_ratings_index;`
-* `watch -n1 drush queue-run elasticsearch_helper_indexing`
-  * `drush queue-run` is time- and resource-consuming and likely to cause php timeouts. Use with `watch -n1` to throw errors but continue if errors occur.
+
