@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Theme override to display a menu (from classy theme)
+ * Theme override to display a menu.
  *
  * Available variables:
  * - menu_name: The machine name of the menu.
@@ -18,37 +18,46 @@
  *   - in_active_trail: TRUE if the link is in the active trail.
  */
 #}
+
 {% import _self as menus %}
+
 {#
   We call a macro which calls itself to render the full tree.
   @see http://twig.sensiolabs.org/doc/tags/macro.html
 #}
-{{ menus.menu_links(items, attributes, 0) }}
+
+{{ menus.menu_links(items, attributes) }}
 
 {% macro menu_links(items, attributes, menu_level) %}
   {% import _self as menus %}
+
   {% if items %}
-    {% if menu_level == 0 %}
-<ul{{ attributes.addClass('menu') }}>
-    {% else %}
-    <ul class="menu">
-        {% endif %}
-        {% for item in items %}
-            {%
-            set classes = [
-            'menu-item',
-            item.is_expanded ? 'menu-item--expanded',
-            item.is_collapsed ? 'menu-item--collapsed',
-            item.in_active_trail ? 'menu-item--active-trail',
-            ]
-            %}
-            <li{{ item.attributes.addClass(classes) }}>
-                {{ link(item.title, item.url) }}
-                {% if item.below %}
-                    {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
-                {% endif %}
-            </li>
-        {% endfor %}
+
+    <ul class="{{ 'navigation__menu navigation__menu--level-' ~ (menu_level + 1) }}{% if menu_level != 0 %} toggle-content js-toggle-content js-toggle-popup{% endif %}" {{ attributes.setAttribute('data-menu-level', (menu_level + 1)) }}>
+
+    {% for item in items %}
+
+      {%
+      set item_classes = [
+        item.is_expanded ? 'has-child',
+        item.in_active_trail ? 'active-trail',
+        item.is_collapsed ? 'menu-item-collapsed',
+      ]
+      %}
+
+      <li{{ item.attributes.addClass(item_classes, 'navigation__item navigation__item--level-' ~ (menu_level + 1)).setAttribute('data-menu-level', (menu_level + 1)) }}>
+          <span class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}{% if (menu_level == 0) and (item.is_expanded) %} toggle-button js-toggle-button{% endif %}">{{ link(item.title, item.url) }}</span>
+          {% if item.is_expanded %}
+            <button class="expand-item toggle-button js-toggle-button" aria-expanded="false" aria-controls="collapsible-">Open menu</button>
+          {% endif %}
+
+          {% if item.below %}
+            {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+          {% endif %}
+      </li>
+    {% endfor %}
+
     </ul>
-    {% endif %}
-    {% endmacro %}
+  {% endif %}
+
+{% endmacro %}

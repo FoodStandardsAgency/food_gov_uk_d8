@@ -2,6 +2,7 @@ import checkMediaQuery from '../../core/helper/checkMediaQuery';
 import breakpoints from '../../core/helper/breakpoints';
 import cssCustomPropertySupport from '../../core/helper/cssCustomPropertySupport';
 import debounce from '../../core/helper/debounce';
+import nextByClass from '../../core/helper/nextByClass';
 
 function toggle() {
 
@@ -114,31 +115,27 @@ function toggle() {
 
   // Loop
   toggleButtonElementArray.forEach((element) => {
-    const toggleButtonElement = element;
-    let toggleButton;
-    let content;
+    let toggleButton = element;
+    let content = nextByClass(toggleButton, 'js-toggle-content');
 
-    if (toggleButtonElement.nextElementSibling === null) {
-      content = toggleButtonElement.closest('.js-content-next').nextElementSibling;
-      toggleButton = toggleButtonElement.closest('.js-content-next');
-    } else {
-      content = toggleButtonElement.nextElementSibling;
-      toggleButton = toggleButtonElement;
+    if (content === null) {
+      content = toggleButton.closest('.js-content-next').nextElementSibling;
+      toggleButton = element.closest('.js-content-next');
     }
 
     contentElementArray = [...contentElementArray, content];
     
     // Add click listener to toggle
-    toggleButtonElement.addEventListener('click', function(e){
+    toggleButton.addEventListener('click', function(e){
       e.preventDefault();
       accordionEventHandler(toggleButton, content);
     });
 
-    toggleButtonElement.addEventListener('mouseenter', function(e){
+    toggleButton.addEventListener('mouseenter', function(e){
       content.style.willChange = 'max-height, min-height';
     });
 
-    toggleButtonElement.addEventListener('mouseout', function(e){
+    toggleButton.addEventListener('mouseout', function(e){
       content.style.willChange = 'auto';
     });
     
