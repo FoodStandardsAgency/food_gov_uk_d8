@@ -43,7 +43,8 @@
     "svg4everybody": "^2.1.8",
     "svgo-loader": "^1.2.1",
     "to-camel-case": "^1.0.0",
-    "webpack": "^3.6.0"
+    "webpack": "^3.6.0",
+    "wicg-inert": "^1.1.6"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^0.1.17",

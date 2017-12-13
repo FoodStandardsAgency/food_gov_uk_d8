@@ -269,7 +269,6 @@
 /* First level item */
 .navigation__item.navigation__item--level-1 {
   @media (--breakpoint-sm) {
-    position: relative;
     flex: 1 1 0;
     list-style: none;
     text-align: center;
@@ -402,10 +401,19 @@
   }
 }
 
+.navigation__expand-button.navigation__expand-button--level-1 {
+
+
+  @media (--breakpoint-sm) {
+    display: none;
+  }
+}
+
 /* Second level menu */
 .navigation__menu.navigation__menu--level-2 {
   @media (--breakpoint-sm) {
-    background-color: var(--dark-secondary-color);
+    background-color: var(--color-white);
+    display: flex;
   }
 
   @media (--breakpoint-md) {
@@ -418,7 +426,11 @@
 
 /* Second level item */
 .navigation__item.navigation__item--level-2 {
-
+  flex: 1 1 0;
+  list-style: none;
+  padding: 0 2em;
+  margin: 2em 0;
+  border-right: 1px solid var(--color-light-gray);
 }
 
 /* Second level link */
@@ -426,16 +438,13 @@
   @media (--breakpoint-sm) {
     padding: 1em;
     display: block;
-    background-color: var(--dark-secondary-color);
-    color: var(--color-white);
-    box-shadow: none;
+    color: var(--secondary-color);
+    font-weight: 600;
   }
 
   :--not-touch &:--enter {
     @media (--breakpoint-sm) {
-      background-color: var(--secondary-color);
-      color: var(--color-white);
-      box-shadow: none;
+      text-decoration: underline;
     }
   }
 }
@@ -457,8 +466,6 @@
     }
   }
 }
-
-
 
 .menu-utility-wrapper {
   display: block;
