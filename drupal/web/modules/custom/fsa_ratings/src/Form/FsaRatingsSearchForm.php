@@ -133,7 +133,7 @@ class FsaRatingsSearchForm extends FormBase {
       '#type' => 'select',
       '#title' => $this->t('Business type'),
       '#empty_option' => $this->t('All'),
-      '#options' => $this->aggsToOptions($available_filters['business_types']),
+      '#options' => $search_service->aggsToOptions($available_filters['business_types']),
       '#default_value' => \Drupal::request()->query->get('business_type'),
       '#empty_value' => '',
     ];
@@ -141,7 +141,7 @@ class FsaRatingsSearchForm extends FormBase {
       '#type' => 'select',
       '#title' => $this->t('Country or local authority'),
       '#empty_option' => $this->t('All'),
-      '#options' => $this->aggsToOptions($available_filters['local_authorities']),
+      '#options' => $search_service->aggsToOptions($available_filters['local_authorities']),
       '#default_value' => \Drupal::request()->query->get('local_authority'),
       '#empty_value' => '',
     ];
@@ -150,7 +150,7 @@ class FsaRatingsSearchForm extends FormBase {
       '#type' => 'checkboxes',
       '#title' => $this->t('Hygiene rating') . ' <span class="regions">(' . $this->t('England, Northern Ireland, Wales') . ')</span>',
       '#options' => $this->defineAndSortArrayItems(
-        $this->aggsToOptions($available_filters['fhrs_rating_values']),
+        $search_service->aggsToOptions($available_filters['fhrs_rating_values']),
         [
           5,
           4,
@@ -169,7 +169,7 @@ class FsaRatingsSearchForm extends FormBase {
       '#type' => 'checkboxes',
       '#title' => $this->t('Hygiene status') . ' <span class="regions">(' . $this->t('Scotland') . ')</span>',
       '#options' => $this->defineAndSortArrayItems(
-        $this->aggsToOptions($available_filters['fhis_rating_values']),
+        $search_service->aggsToOptions($available_filters['fhis_rating_values']),
         [
           'Pass',
           'Pass and Eat Safe',
@@ -261,49 +261,6 @@ class FsaRatingsSearchForm extends FormBase {
     $form_state->setRedirect('fsa_ratings.ratings_search', [], ['query' => $query, 'fragment' => 'results']);
   }
 
-  /**
-   * Translate aggs to options.
-   */
-  private function aggsToOptions($aggs_bucket = []) {
-    $options = [];
-    foreach ($aggs_bucket as $a) {
-      // Add textual representation for numeric values.
-      switch ($a['key']) {
-        case '5':
-          $value = $a['key'] . ' ' . t('Very good');
-          break;
 
-        case '4':
-          $value = $a['key'] . ' ' . t('Good');
-          break;
-
-        case '3':
-          $value = $a['key'] . ' ' . t('Generally satisfactory');
-          break;
-
-        case '2':
-          $value = $a['key'] . ' ' . t('Improvement necessary');
-          break;
-
-        case '1':
-          $value = $a['key'] . ' ' . t('Major improvement necessary');
-          break;
-
-        case '0':
-          $value = $a['key'] . ' ' . t('Urgent improvement necessary');
-          break;
-
-        case 'AwaitingInspection':
-          // Make this label more human friendly.
-          $value = t('Awaiting Rating');
-          break;
-
-        default:
-          $value = $a['key'];
-      }
-      $options[$a['key']] = (string) $value;
-    }
-    return $options;
-  }
 
 }

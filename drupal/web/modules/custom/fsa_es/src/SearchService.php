@@ -275,7 +275,7 @@ class SearchService {
     $language_code = $language->getId();
 
     // Define the base query.
-    $base_query = $query = [
+    $query = [
       'index' => ['ratings-' . $language_code],
       'size' => 0,
       'body' => [
@@ -332,6 +332,51 @@ class SearchService {
     ];
 
     return $response;
+  }
+
+  /**
+   * Translate aggregates to options.
+   */
+  public function aggsToOptions($aggs_bucket = []) {
+    $options = [];
+    foreach ($aggs_bucket as $a) {
+      // Add textual representation for numeric values.
+      switch ($a['key']) {
+        case '5':
+          $value = $a['key'] . ' ' . t('Very good');
+          break;
+
+        case '4':
+          $value = $a['key'] . ' ' . t('Good');
+          break;
+
+        case '3':
+          $value = $a['key'] . ' ' . t('Generally satisfactory');
+          break;
+
+        case '2':
+          $value = $a['key'] . ' ' . t('Improvement necessary');
+          break;
+
+        case '1':
+          $value = $a['key'] . ' ' . t('Major improvement necessary');
+          break;
+
+        case '0':
+          $value = $a['key'] . ' ' . t('Urgent improvement necessary');
+          break;
+
+        case 'AwaitingInspection':
+          // Make this label more human friendly.
+          $value = t('Awaiting Rating');
+          break;
+
+        default:
+          $value = $a['key'];
+      }
+      $options[$a['key']] = (string) $value;
+    }
+    return $options;
   }
 
 }
