@@ -1,0 +1,21 @@
+uuid: 43e5d140-9a6d-4c2d-b619-e3d11954d9d9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_delivery_method
+  module:
+    - options
+    - user
+id: user.user.field_delivery_method
+field_name: field_delivery_method
+entity_type: user
+bundle: user
+label: 'Delivery method'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string
