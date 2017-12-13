@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "25512c2b646a1eef6fe14a2f9b7c683c",
+    "content-hash": "8a0e3829eaeb439d515bfed74713fc25",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -4564,6 +4564,9 @@
                         "status": "not-covered",
                         "message": "Alpha releases are not covered by Drupal security advisories."
                     }
+                },
+                "patches_applied": {
+                    "Undefined index: #select_parents": "https://www.drupal.org/files/issues/term_reference_tree-2837754-2.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -5869,6 +5872,41 @@
                 }
             ],
             "time": "2015-04-20T18:58:01+00:00"
+        },
+        {
+            "name": "maijs/elasticsearch_helper_views",
+            "version": "dev-8.x-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maijs/elasticsearch_helper_views.git",
+                "reference": "65918521466aa5a6bae2c840c9c30abfd971c5d1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maijs/elasticsearch_helper_views/zipball/65918521466aa5a6bae2c840c9c30abfd971c5d1",
+                "reference": "65918521466aa5a6bae2c840c9c30abfd971c5d1",
+                "shasum": ""
+            },
+            "require": {
+                "drupal/elasticsearch_helper": "1.x-dev || 5.x-dev",
+                "elasticsearch/elasticsearch": "~2.1 || ~5.0"
+            },
+            "type": "drupal-module",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "maijs",
+                    "email": "raimonds.kalnins@wunder.io"
+                }
+            ],
+            "description": "Provides tools to integrate elasticsearch with Drupal Views.",
+            "support": {
+                "source": "https://github.com/maijs/elasticsearch_helper_views/tree/8.x-1.x",
+                "issues": "https://github.com/maijs/elasticsearch_helper_views/issues"
+            },
+            "time": "2017-12-12T10:24:08+00:00"
         },
         {
             "name": "masterminds/html5",
@@ -10818,7 +10856,8 @@
         "drupal/config_readonly": 10,
         "drupal/webform_views": 15,
         "drupal/view_unpublished": 15,
-        "drupal/diff": 5
+        "drupal/diff": 5,
+        "maijs/elasticsearch_helper_views": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

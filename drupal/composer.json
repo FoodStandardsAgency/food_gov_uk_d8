@@ -13,6 +13,11 @@
         {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
+        },
+        {
+            "name": "maijs/elasticsearch_helper_views",
+            "type": "vcs",
+            "url": "https://github.com/maijs/elasticsearch_helper_views.git"
         }
     ],
     "require": {
@@ -70,7 +75,8 @@
         "drupal/diff": "^1.0@RC",
         "drupal/warden": "^1.1",
         "drupal/media_entity_browser": "~1.4",
-        "drupal/term_reference_tree": "^1.0"
+        "drupal/term_reference_tree": "^1.0",
+        "maijs/elasticsearch_helper_views": "dev-8.x-1.x"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
