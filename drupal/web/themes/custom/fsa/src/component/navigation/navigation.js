@@ -79,7 +79,7 @@ function navigation() {
     in: function(item) {
       let childList;
 
-      // If item has parent menu item, query for its parent menu.
+      // If item has a child list, return its first item.
       if (childList = item.querySelector(settings.menuSelector)) {
         let firstItem;
 
