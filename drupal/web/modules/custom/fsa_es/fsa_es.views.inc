@@ -6,6 +6,13 @@
  * Defines Elasticsearch result filters and their plugins.
  */
 function fsa_es_views_data_alter(array &$data) {
+  $data['elasticsearch_result']['keyword'] = [
+    'title' => t('Keywords'),
+    'filter' => [
+      'id' => 'fsa_keyword',
+    ],
+  ];
+
   $data['elasticsearch_result']['ratings_business_type'] = [
     'title' => t('Business type'),
     'filter' => [

@@ -50,13 +50,34 @@ class SitewideSearchRatings extends SitewideSearchBase {
    * {@inheritdoc}
    */
   public function buildQuery(ViewExecutable $view) {
-    return [
-      'body' => [
-        'query' => [
-          'match_all' => new \stdClass(),
-        ],
-      ],
+    // Get query plugin.
+    $query_plugin = $view->getQuery();
+
+    // Get filter values.
+    $values = $this->getFilterValues($view);
+
+    // Get keyword.
+    $keyword = $values['keyword'];
+    $filters = [];
+
+    $filter_map = [
+      'business_type' => 'ratings_business_type',
+      'local_authority' => 'ratings_local_authority',
+      'fhrs_rating_value' => 'ratings_fhrs_rating_value',
+      'fhis_rating_value' => 'ratings_fhis_rating_value',
     ];
+
+    // Map filter keys to the keys mapped in $filter_map.
+    foreach ($filter_map as $filter_key => $filter_value) {
+      if (!empty($values[$filter_value])) {
+        $filters[$filter_key] = join(',', $values[$filter_value]);
+      }
+    }
+
+    // Get query.
+    $query = $this->searchService->buildQuery($this->currentLanguage, $keyword, $filters, $query_plugin->getLimit(), $query_plugin->offset);
+
+    return $query;
   }
 
   /**
@@ -99,7 +120,19 @@ class SitewideSearchRatings extends SitewideSearchBase {
    */
   public function getFhrsRatingValueFilterOptions() {
     $aggregations = $this->getAggregations();
-    return $this->searchService->aggsToOptions($aggregations['fhrs_rating_values']);
+    return $this->searchService->defineAndSortArrayItems(
+      $this->searchService->aggsToOptions($aggregations['fhrs_rating_values']),
+      [
+        5,
+        4,
+        3,
+        2,
+        1,
+        0,
+        'AwaitingInspection',
+        'Exempt',
+      ]
+    );
   }
 
   /**
@@ -109,7 +142,16 @@ class SitewideSearchRatings extends SitewideSearchBase {
    */
   public function getFhisRatingValueFilterOptions() {
     $aggregations = $this->getAggregations();
-    return $this->searchService->aggsToOptions($aggregations['fhis_rating_values']);
+    return $this->searchService->defineAndSortArrayItems(
+      $this->searchService->aggsToOptions($aggregations['fhis_rating_values']),
+      [
+        'Pass',
+        'Pass and Eat Safe',
+        'Improvement Required',
+        'Awaiting Inspection',
+        'Exempt',
+      ]
+    );
   }
 
 }
