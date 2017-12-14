@@ -38,6 +38,8 @@
     
     # Additional envs
     php_extra_env_vars:
+      - key: "DRUPAL_HASH_SALT_DEVELOPMENT"
+        value: "{{ drupal_hash_salt }}"
       - key: "DRUPAL_HASH_SALT"
         value: "{{ drupal_hash_salt }}"
      
