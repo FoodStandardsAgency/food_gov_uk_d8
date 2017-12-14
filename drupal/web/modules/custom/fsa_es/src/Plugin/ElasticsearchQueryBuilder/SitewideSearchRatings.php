@@ -70,7 +70,7 @@ class SitewideSearchRatings extends SitewideSearchBase {
     // Map filter keys to the keys mapped in $filter_map.
     foreach ($filter_map as $filter_key => $filter_value) {
       if (!empty($values[$filter_value])) {
-        $filters[$filter_key] = join(',', $values[$filter_value]);
+        $filters[$filter_key] = join(',', array_filter($values[$filter_value]));
       }
     }
 

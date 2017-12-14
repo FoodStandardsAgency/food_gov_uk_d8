@@ -3,13 +3,12 @@
 namespace Drupal\fsa_es\Plugin\views\filter;
 
 use Drupal\views\Plugin\views\display\DisplayPluginBase;
-use Drupal\views\Plugin\views\filter\InOperator;
 use Drupal\views\ViewExecutable;
 
 /**
  * @ViewsFilter("fsa_ratings_local_authority")
  */
-class RatingsLocalAuthority extends InOperator {
+class RatingsLocalAuthority extends FilterInOperatorBase {
 
   /**
    * {@inheritdoc}

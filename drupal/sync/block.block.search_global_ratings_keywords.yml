@@ -1,0 +1,43 @@
+uuid: faa4c01e-6437-4653-ba94-cb0de5e85505
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.search_global_ratings
+  module:
+    - block_class
+    - system
+    - views
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: search_global_ratings_keywords
+theme: fsa
+region: content
+weight: -3
+provider: null
+plugin: 'views_exposed_filter_block:search_global_ratings-page_1'
+settings:
+  id: 'views_exposed_filter_block:search_global_ratings-page_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  filters:
+    keywords: keywords
+    business_type: 0
+    local_authority: 0
+    fhrs_rating_value: 0
+    fhis_rating_value: 0
+  post_route_name: ''
+  location_context: ''
+  disable_ajax: 1
+  hide_submit_button: 1
+visibility:
+  request_path:
+    id: request_path
+    pages: '/search/ratings*'
+    negate: false
+    context_mapping: {  }

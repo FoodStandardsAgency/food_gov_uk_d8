@@ -3,13 +3,12 @@
 namespace Drupal\fsa_es\Plugin\views\filter;
 
 use Drupal\views\Plugin\views\display\DisplayPluginBase;
-use Drupal\views\Plugin\views\filter\InOperator;
 use Drupal\views\ViewExecutable;
 
 /**
  * @ViewsFilter("fsa_ratings_business_type")
  */
-class RatingsBusinessType extends InOperator {
+class RatingsBusinessType extends FilterInOperatorBase {
 
   /**
    * {@inheritdoc}

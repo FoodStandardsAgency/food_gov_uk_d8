@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * Implements hook_block_alter().
+ *
+ * Creates a copy of a search result view's exposed form block definition and
+ * hands that to a custom block plugin which will only show relevant elements
+ * on the search form.
+ *
+ * @param $info
+ *
+ * @see Drupal\fsa_es\Plugin\Block\ViewsExposedFilterSearchBlock
+ */
+function fsa_es_block_alter(&$info) {
+  // @todo Make search delta discoverable.
+  $search_view_exposed_block_delta = 'views_exposed_filter_block:search_global_ratings-page_1';
+
+  if (isset($info[$search_view_exposed_block_delta])) {
+    $info[$search_view_exposed_block_delta]['class'] = 'Drupal\fsa_es\Plugin\Block\ViewsExposedFilterSearchBlock';
+  }
+}
