@@ -45,18 +45,12 @@ class FsaRatingsSearchForm extends FormBase {
     /** @var \Drupal\fsa_es\SearchService $search_service */
     $search_service = \Drupal::service('fsa_es.search_service');
 
-    $filters = [];
+    $params = RatingsSearch::getSearchParameters();
     $language = \Drupal::languageManager()->getCurrentLanguage();
     $available_filters = $search_service->categories($language);
 
     // User provided search input.
-    $keywords = \Drupal::request()->query->get('q');
-
-    // User provided max item count. Hard-limit is 1000. Default is 20.
-    $max_items = \Drupal::request()->query->get('max');
-    if (empty($max_items) || $max_items > 1000) {
-      $max_items = RatingsSearch::INITIAL_RESULTS_COUNT;
-    }
+    $keywords = $params['keywords'];
 
     // See if the following parameters are provided by the user and add to the
     // list of filters ("advanced search options"). Additionally send
@@ -64,12 +58,11 @@ class FsaRatingsSearchForm extends FormBase {
     // value.
     $is_open = '';
     $aria_expanded = 'false';
-    foreach (self::FILTER_PARAM_NAMES as $opt) {
-      $value = \Drupal::request()->query->get($opt);
-      if (!empty($value)) {
-        $filters[$opt] = $value;
+    foreach (self::FILTER_PARAM_NAMES as $filter_parameter) {
+      if (!empty($params['filters'][$filter_parameter])) {
         $is_open = ' is-open';
         $aria_expanded = 'true';
+        break;
       }
     }
 
@@ -82,15 +75,6 @@ class FsaRatingsSearchForm extends FormBase {
         ],
       ],
     ];
-
-    // Detect from the query params if search was performed.
-    $search = FALSE;
-    foreach (self::FORM_FIELDS as $input) {
-      $query_input = \Drupal::request()->query->get($input);
-      if (isset($query_input)) {
-        $search = TRUE;
-      }
-    }
 
     $form['main'] = [
       '#type' => 'container',
@@ -134,7 +118,7 @@ class FsaRatingsSearchForm extends FormBase {
       '#title' => $this->t('Business type'),
       '#empty_option' => $this->t('All'),
       '#options' => $search_service->aggsToOptions($available_filters['business_types']),
-      '#default_value' => \Drupal::request()->query->get('business_type'),
+      '#default_value' => isset($params['filters']['business_type']) ? $params['filters']['business_type'] : NULL,
       '#empty_value' => '',
     ];
     $form['advanced']['local_authority'] = [
@@ -142,14 +126,15 @@ class FsaRatingsSearchForm extends FormBase {
       '#title' => $this->t('Country or local authority'),
       '#empty_option' => $this->t('All'),
       '#options' => $search_service->aggsToOptions($available_filters['local_authorities']),
-      '#default_value' => \Drupal::request()->query->get('local_authority'),
+      '#default_value' => isset($params['filters']['local_authority']) ? $params['filters']['local_authority'] : NULL,
       '#empty_value' => '',
     ];
 
+    $fhrs_rating_default_value = isset($params['filters']['fhrs_rating_value']) ? $params['filters']['fhrs_rating_value'] : '';
     $form['advanced']['fhrs_rating_value'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Hygiene rating') . ' <span class="regions">(' . $this->t('England, Northern Ireland, Wales') . ')</span>',
-      '#options' => $this->defineAndSortArrayItems(
+      '#options' => $search_service->defineAndSortArrayItems(
         $search_service->aggsToOptions($available_filters['fhrs_rating_values']),
         [
           5,
@@ -162,13 +147,14 @@ class FsaRatingsSearchForm extends FormBase {
           'Exempt',
         ]
       ),
-      '#default_value' => explode(',', \Drupal::request()->query->get('fhrs_rating_value')),
+      '#default_value' => is_array($fhrs_rating_default_value) ? $fhrs_rating_default_value : explode(',', $fhrs_rating_default_value),
     ];
 
+    $fhis_rating_default_value = isset($params['filters']['fhis_rating_value']) ? $params['filters']['fhis_rating_value'] : '';
     $form['advanced']['fhis_rating_value'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Hygiene status') . ' <span class="regions">(' . $this->t('Scotland') . ')</span>',
-      '#options' => $this->defineAndSortArrayItems(
+      '#options' => $search_service->defineAndSortArrayItems(
         $search_service->aggsToOptions($available_filters['fhis_rating_values']),
         [
           'Pass',
@@ -178,7 +164,7 @@ class FsaRatingsSearchForm extends FormBase {
           'Exempt',
         ]
       ),
-      '#default_value' => explode(',', \Drupal::request()->query->get('fhis_rating_value')),
+      '#default_value' => is_array($fhis_rating_default_value) ? $fhis_rating_default_value : explode(',', $fhis_rating_default_value),
     ];
 
     $form['container']['actions']['#type'] = 'actions';
@@ -194,28 +180,6 @@ class FsaRatingsSearchForm extends FormBase {
 
     return $form;
 
-  }
-
-  /**
-   * Private helper function to sort array by another array.
-   *
-   * @param array $array
-   *   The array to define..
-   * @param array $definingArray
-   *   The array with keys defining sort and items to keep.
-   *
-   * @return array
-   *   Sorted array.
-   */
-  private static function defineAndSortArrayItems(array $array, array $definingArray) {
-    $modified_array = [];
-    foreach ($definingArray as $key) {
-      if (array_key_exists($key, $array)) {
-        $modified_array[$key] = $array[$key];
-        unset($array[$key]);
-      }
-    }
-    return $modified_array;
   }
 
   /**

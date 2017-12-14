@@ -4,6 +4,7 @@ namespace Drupal\fsa_ratings\Controller;
 
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Url;
 use Drupal\fsa_es\SearchService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -24,23 +25,31 @@ class RatingsSearch extends ControllerBase {
   /**
    * {@inheritdoc}
    *
-   * @var \Drupal\fsa_es\SearchService*/
-  private $searchService;
+   * @var \Drupal\fsa_es\SearchService */
+  protected $searchService;
+
+  /** @var \Drupal\Core\Language\LanguageManagerInterface $languageManager */
+  protected $languageManager;
 
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('fsa_es.search_service')
+      $container->get('fsa_es.search_service'),
+      $container->get('language_manager')
     );
   }
 
   /**
-   * {@inheritdoc}
+   * RatingsSearch constructor.
+   *
+   * @param \Drupal\fsa_es\SearchService $searchService
+   * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
    */
-  public function __construct(SearchService $searchService) {
+  public function __construct(SearchService $searchService, LanguageManagerInterface $language_manager) {
     $this->searchService = $searchService;
+    $this->languageManager = $language_manager;
   }
 
   /**
@@ -83,11 +92,14 @@ class RatingsSearch extends ControllerBase {
     $items = [];
     $categories = [];
     $hits = 0;
-    $language = \Drupal::languageManager()->getCurrentLanguage();
+    $language = $this->languageManager->getCurrentLanguage();
     $available_filters = $this->searchService->categories($language);
 
+    // Get params.
+    $params = self::getSearchParameters();
+
     // User provided search input.
-    $keywords = \Drupal::request()->query->get('q');
+    $keywords = $params['keywords'];
 
     // User provided max item count. Hard-limit is 1000. Default is in constant.
     $max_items = \Drupal::request()->query->get('max');
@@ -95,29 +107,12 @@ class RatingsSearch extends ControllerBase {
       $max_items = RatingsSearch::INITIAL_RESULTS_COUNT;
     }
 
-    $filters = [];
-    // See if the following parameters are provided by the user and add to the
-    // list of filters.
-    $filter_param_names = [
-      'local_authority',
-      'business_type',
-      'rating_value',
-      'fhis_rating_value',
-      'fhrs_rating_value',
-    ];
-    foreach ($filter_param_names as $opt) {
-      $value = \Drupal::request()->query->get($opt);
-      if (isset($value)) {
-        $filters[$opt] = $value;
-      }
-    }
-
     // Fetch results from the service only when either the filter values or
     // keywords are given.
     $results = FALSE;
-    if (!empty($keywords) || !empty($filters)) {
+    if (!empty($keywords) || !empty($params)) {
       // Execute the search using the SearchService.
-      $results = $this->searchService->search($language, $keywords, $filters, $max_items);
+      $results = $this->searchService->search($language, $keywords, $params['filters'], $max_items);
       $items = $this->ratingSearchResults($results);
       $hits = $results['total'];
     }
@@ -143,10 +138,10 @@ class RatingsSearch extends ControllerBase {
       '#categories' => $categories,
     // Keywords given in the URL.
       '#keywords' => $keywords,
-    // Meaningful filters (which have content associated)
+    // Meaningful params (which have content associated)
       '#available_filters' => $available_filters,
     // Filters given by the user and used for the querying.
-      '#applied_filters' => $filters,
+      '#applied_filters' => $params,
     // Total count of the results.
       '#hits_total' => $hits,
     // Item count to be shown now.

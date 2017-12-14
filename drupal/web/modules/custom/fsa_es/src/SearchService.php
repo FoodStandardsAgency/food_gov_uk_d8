@@ -33,29 +33,21 @@ class SearchService {
   }
 
   /**
+   * Builds Elasticsearch base query.
+   *
    * @param \Drupal\Core\Language\LanguageInterface $language
-   *   The preferred language.
-   * @param string $input
-   *   Search keywords.
    * @param array $filters
-   *   Additional filters for the search query.
    * @param int $max_items
-   *   Returned max items.
    * @param int $offset
-   *   Offset for the results.
    *
    * @return array
-   *   An associated array containing results and metadata. Something like this: ['results' => [...], 'total' => 100, 'aggs' => [...]]
    */
-  public function search(LanguageInterface $language, $input = '', $filters = [], $max_items = self::DEFAULT_MAX_RESULT_ITEMS, $offset = 0) {
+  public function buildBaseQuery(LanguageInterface $language, array $filters, $max_items = self::DEFAULT_MAX_RESULT_ITEMS, $offset = 0) {
     $query_must_filters = [];
-    $query_should_filters = [];
-    $language_code = $language->getId();
 
-    // Build the query.
-    $query = $base_query = [
+    $query = [
       // Each language has a separate index.
-      'index' => ['ratings-' . $language_code],
+      'index' => ['ratings-' . $language->getId()],
       'size' => $max_items,
       'from' => $offset,
       'body' => [
@@ -141,8 +133,29 @@ class SearchService {
       $query_must_filters[] = ['terms' => ['fhrs_ratingvalue.keyword' => $ids]];
     }
 
-    $base_query_should_filters = $query_should_filters;
-    $base_query_must_filters = $query_must_filters;
+    // Assign the term filters to the query in the 'must' section.
+    foreach ($query_must_filters as $filter) {
+      $query['body']['query']['bool']['must'][] = $filter;
+    }
+
+    return $query;
+  }
+
+  /**
+   * Builds Elasticsearch query.
+   *
+   * @param \Drupal\Core\Language\LanguageInterface $language
+   * @param string $input
+   * @param array $filters
+   * @param int $max_items
+   * @param int $offset
+   *
+   * @return array
+   */
+  public function buildQuery(LanguageInterface $language, $input = '', $filters = [], $max_items = self::DEFAULT_MAX_RESULT_ITEMS, $offset = 0) {
+    $query_must_filters = [];
+    $query_should_filters = [];
+    $query = $this->buildBaseQuery($language, $filters, $max_items, $offset);
 
     if (!empty($input)) {
       $query_must_filters[] = [
@@ -200,42 +213,77 @@ class SearchService {
     }
 
     // Assign the term filters to the query in the 'must' section.
+    foreach ($query_must_filters as $filter) {
+      $query['body']['query']['bool']['must'][] = $filter;
+    }
+
+    // Assign the term filters to the query in the 'should' section.
+    foreach ($query_should_filters as $filter) {
+      $query['body']['query']['bool']['should'][] = $filter;
+    }
+
+    return $query;
+  }
+
+  /**
+   * Builds fallback Elasticsearch query.
+   *
+   * @param \Drupal\Core\Language\LanguageInterface $language
+   * @param string $input
+   * @param array $filters
+   * @param int $max_items
+   * @param int $offset
+   *
+   * @return array
+   */
+  public function buildFallbackQuery(LanguageInterface $language, $input = '', $filters = [], $max_items = self::DEFAULT_MAX_RESULT_ITEMS, $offset = 0) {
+    $query_must_filters = [];
+    $query = $this->buildBaseQuery($language, $filters, $max_items, $offset);
+
+    // Assign looser settings to the multi match and match_phrase queries (with fuzziness)
+    $query_must_filters[] = [
+      'match' => [
+        'combinedvalues' => [
+          'query' => $input,
+          'fuzziness' => 'AUTO',
+          'prefix_length' => 1, // Don't let the first letter be fuzzy.
+          'operator' => 'and',
+        ],
+      ],
+    ];
+
     foreach ($query_must_filters as $f) {
       $query['body']['query']['bool']['must'][] = $f;
     }
 
-    // Assign the term filters to the query in the 'should' section.
-    foreach ($query_should_filters as $f) {
-      $query['body']['query']['bool']['should'][] = $f;
-    }
+    return $query;
+  }
+
+  /**
+   * @param \Drupal\Core\Language\LanguageInterface $language
+   *   The preferred language.
+   * @param string $input
+   *   Search keywords.
+   * @param array $filters
+   *   Additional filters for the search query.
+   * @param int $max_items
+   *   Returned max items.
+   * @param int $offset
+   *   Offset for the results.
+   *
+   * @return array
+   *   An associated array containing results and metadata. Something like this: ['results' => [...], 'total' => 100, 'aggs' => [...]]
+   */
+  public function search(LanguageInterface $language, $input = '', $filters = [], $max_items = self::DEFAULT_MAX_RESULT_ITEMS, $offset = 0) {
+    // Get query.
+    $query = $this->buildQuery($language, $input, $filters, $max_items, $offset);
 
     // Execute the query.
     $result = $this->client->search($query);
 
-    // NO RESULTS FOUND:
+    // If no results found, try fallback query.
     if ($result['hits']['total'] == 0 && !empty($input)) {
-      // Reset the filtering to the base values.
-      $query = $base_query;
-      $query_must_filters = $base_query_must_filters;
-      $query_should_filters = $base_query_should_filters;
-
-      // Assign looser settings to the multi match and match_phrase queries (with fuzziness)
-      $query_must_filters[] = [
-        'match' => [
-          'combinedvalues' => [
-            'query' => $input,
-            'fuzziness' => 'AUTO',
-            'prefix_length' => 1, // Don't let the first letter be fuzzy.
-            'operator' => 'and',
-          ],
-        ],
-      ];
-      foreach ($query_must_filters as $f) {
-        $query['body']['query']['bool']['must'][] = $f;
-      }
-      foreach ($query_should_filters as $f) {
-        $query['body']['query']['bool']['should'][] = $f;
-      }
+      $query = $this->buildFallbackQuery($language, $input, $filters, $max_items, $offset);
 
       // Re-run the query.
       $result = $this->client->search($query);
@@ -377,6 +425,28 @@ class SearchService {
       $options[$a['key']] = (string) $value;
     }
     return $options;
+  }
+
+  /**
+   * Private helper function to sort array by another array.
+   *
+   * @param array $array
+   *   The array to define..
+   * @param array $definingArray
+   *   The array with keys defining sort and items to keep.
+   *
+   * @return array
+   *   Sorted array.
+   */
+  public static function defineAndSortArrayItems(array $array, array $definingArray) {
+    $modified_array = [];
+    foreach ($definingArray as $key) {
+      if (array_key_exists($key, $array)) {
+        $modified_array[$key] = $array[$key];
+        unset($array[$key]);
+      }
+    }
+    return $modified_array;
   }
 
 }
