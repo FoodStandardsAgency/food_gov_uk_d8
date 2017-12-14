@@ -35,7 +35,7 @@ function fsa_taxonomy_entity_presave(Drupal\Core\Entity\EntityInterface $entity)
   if (in_array($type, ['node', 'media'])) {
 
     // Read field definitions for this entity
-    foreach (Drupal::service('entity_field.manager')->getFieldDefinitions('node', $bundle) as $field_name => $field_definition) {
+    foreach (Drupal::service('entity_field.manager')->getFieldDefinitions($type, $bundle) as $field_name => $field_definition) {
 
       if ($field_definition->getType() == 'entity_reference') {
 
