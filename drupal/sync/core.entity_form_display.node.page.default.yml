@@ -33,6 +33,7 @@ dependencies:
     - paragraphs
     - path
     - shs
+    - term_reference_tree
     - text
 third_party_settings:
   field_group:
@@ -127,6 +128,7 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
+    type: term_reference_tree
     region: content
   field_block:
     weight: 17
