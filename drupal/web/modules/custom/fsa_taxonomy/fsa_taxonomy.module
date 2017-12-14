@@ -5,54 +5,57 @@
  * Contains fsa_taxonomy.module.
  */
 
-use \Drupal\Entity\EntityTypeManager ;
+use Drupal\Core\Entity\EntityInterface;
 
-/*
- * Implements hook_entity_presave()
+/**
+ * Implements hook_entity_presave().
  */
-function fsa_taxonomy_entity_presave(Drupal\Core\Entity\EntityInterface $entity) {
+function fsa_taxonomy_entity_presave(EntityInterface $entity) {
 
   $bundle = $entity->bundle();
   $type = $entity->getEntityType()->id();
 
-  // These are multilevel vocabularies that we want to process
+  // These are multilevel vocabularies that we want to process.
   $multilevel_vocabularies = ['audience', 'topic'];
 
-  // Here is how we dynamically find content types and nodes that are using multilevel vocabularies we define above.
-  // We might just do this statically, but in case fields are moved around mapping should be changed too.
-
+  // Here is how we dynamically find content types and nodes that are
+  // using multilevel vocabularies we define above.
+  // We might just do this statically, but in case fields are moved
+  // around mapping should be changed too.
+  //
   // Here's a static processing of those fields
-  //  if (in_array($bundle, ['page', 'lander', 'webform'])) {
-  //    _fsa_taxonomy_add_parents($entity, 'field_audience');
-  //    _fsa_taxonomy_add_parents($entity, 'field_topic');
-  //  }
-
-  // And here's dynamic below. Might have some minor performance penalties while saving content.
-
+  // if (in_array($bundle, ['page', 'lander', 'webform'])) {
+  // _fsa_taxonomy_add_parents($entity, 'field_audience');
+  // _fsa_taxonomy_add_parents($entity, 'field_topic');
+  // }
+  //
+  // And here's dynamic below. Might have some minor performance penalties
+  // while saving content.
+  //
   // We only have these vocabularies in two entity bundles currently,
-  // we don't want to process each and every entity type. Could potentially use hook_ENTITY_TYPE_presave(),
-  // but there's some duplication in it.
+  // we don't want to process each and every entity type. Could potentially
+  // use hook_ENTITY_TYPE_presave(), but there's some duplication in it.
   if (in_array($type, ['node', 'media'])) {
 
-    // Read field definitions for this entity
+    // Read field definitions for this entity.
     foreach (Drupal::service('entity_field.manager')->getFieldDefinitions($type, $bundle) as $field_name => $field_definition) {
 
       if ($field_definition->getType() == 'entity_reference') {
 
         $field_settings = $field_definition->getSettings();
 
-        // Look for taxonomy reference fields
+        // Look for taxonomy reference fields.
         if ($field_settings['handler'] == 'default:taxonomy_term') {
 
-          // Find the vocabulary this field is referencing
+          // Find the vocabulary this field is referencing.
           $target_bundles = $field_definition->getSettings()['handler_settings']['target_bundles'];
           if (is_array($target_bundles)) {
 
             foreach ($multilevel_vocabularies as $vocabulary) {
 
               // If this field is using multilevel vocabulary we defined above,
-              // we want to iterate trough child terms and add it's parents as field values too
-              // this helps selecting content
+              // we want to iterate trough child terms and add it's parents as
+              // field values too, this helps selecting content.
               if (in_array($vocabulary, $target_bundles)) {
 
                 $field_name = $field_definition->getName();
@@ -66,25 +69,25 @@ function fsa_taxonomy_entity_presave(Drupal\Core\Entity\EntityInterface $entity)
   }
 }
 
-/*
- * Loads taxonomy reference field values and adds their parents to field values
+/**
+ * Loads taxonomy reference field values and adds their parents to field values.
  */
-function _fsa_taxonomy_add_parents(Drupal\Core\Entity\EntityInterface $entity, $fieldname) {
+function _fsa_taxonomy_add_parents(EntityInterface $entity, $fieldname) {
 
-  // Get field value from entity
+  // Get field value from entity.
   $references = $entity->get($fieldname)->getValue();
   if (!empty($references)) {
 
     $reference_list = [];
 
-    // Throw them all in one array
+    // Throw them all in one array.
     foreach ($references as $reference) {
       $reference_list[] = $reference['target_id'];
 
-      // Get term parents
+      // Get term parents.
       $parents = \Drupal::service('entity_type.manager')->getStorage("taxonomy_term")->loadAllParents($reference['target_id']);
 
-      // Add parents to reference array if there are not there yet
+      // Add parents to reference array if there are not there yet.
       foreach ($parents as $parent_tid => $parent_term) {
         if (!in_array($parent_tid, $reference_list)) {
           $reference_list[] = $parent_tid;
@@ -92,13 +95,13 @@ function _fsa_taxonomy_add_parents(Drupal\Core\Entity\EntityInterface $entity, $
       }
     }
 
-    // Recreate reference field structure with target_id's
+    // Recreate reference field structure with target_id's.
     $references_new = [];
     foreach ($reference_list as $reference_id) {
       $references_new[] = ['target_id' => $reference_id];
     }
 
-    // Set new field values
+    // Set new field values.
     $entity->set($fieldname, $references_new);
   }
 }
