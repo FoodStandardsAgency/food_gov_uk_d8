@@ -1,0 +1,25 @@
+uuid: ffb565a4-9b48-46af-89a6-62101e20735c
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - fsa_es
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: views_result_totals
+theme: fsa
+region: content
+weight: -4
+provider: null
+plugin: views_result_totals
+settings:
+  id: views_result_totals
+  label: 'Views result totals'
+  provider: fsa_es
+  label_display: '0'
+  view_name: search_global_ratings
+visibility: {  }

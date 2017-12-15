@@ -21,7 +21,7 @@ provider: null
 plugin: 'views_exposed_filter_block:search_global_ratings-page_1'
 settings:
   id: 'views_exposed_filter_block:search_global_ratings-page_1'
-  label: ''
+  label: 'Ratings search: Filters'
   provider: views
   label_display: '0'
   views_label: ''

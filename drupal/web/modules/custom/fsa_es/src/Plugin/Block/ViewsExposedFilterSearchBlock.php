@@ -74,6 +74,9 @@ class ViewsExposedFilterSearchBlock extends ViewsExposedFilterBlock {
   function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $form = parent::buildConfigurationForm($form, $form_state);
 
+    // ViewsBlockBase disables the label field. This brings it back.
+    $form['label']['#access'] = TRUE;
+
     $this->view->initHandlers();
 
     $filter_options = [];
@@ -174,8 +177,7 @@ class ViewsExposedFilterSearchBlock extends ViewsExposedFilterBlock {
 
       // Hide submit button.
       if (!empty($this->configuration['hide_submit_button'])) {
-        // $build['actions']['submit']['#access'] = FALSE;
-        $build['actions']['submit']['#attributes']['class'][] = 'js-hide';
+        $build['actions']['#attributes']['class'][] = 'js-hide';
       }
 
       if (!empty($this->configuration['post_route_name'])) {

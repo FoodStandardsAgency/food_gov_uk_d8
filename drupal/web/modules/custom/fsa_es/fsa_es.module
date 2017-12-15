@@ -1,5 +1,8 @@
 <?php
 
+use Drupal\Component\Utility\Html;
+use Drupal\views\ViewExecutable;
+
 /**
  * Implements hook_block_alter().
  *
@@ -18,4 +21,27 @@ function fsa_es_block_alter(&$info) {
   if (isset($info[$search_view_exposed_block_delta])) {
     $info[$search_view_exposed_block_delta]['class'] = 'Drupal\fsa_es\Plugin\Block\ViewsExposedFilterSearchBlock';
   }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ *
+ * Sends Ajax-enabled views results total so that this could be displayed
+ * in a separate block.
+ */
+function fsa_es_views_pre_render(ViewExecutable $view) {
+  // If using AJAX, send identifying data about this view.
+  if ($view->ajaxEnabled() && empty($view->live_preview)) {
+    $view_element_selector = '.' . Html::getClass('views-result-total-' . $view->storage->id());
+
+    $view->element['#attached']['library'][] = 'fsa_es/result_totals';
+    $view->element['#attached']['drupalSettings']['fsa_es']['result_totals'] = [
+      $view_element_selector => [
+        'keywords' => isset($view->filter['keyword']) ? $view->filter['keyword']->value : NULL,
+        'total' => $view->total_rows,
+      ],
+    ];
+  }
+
+  return $view;
 }
