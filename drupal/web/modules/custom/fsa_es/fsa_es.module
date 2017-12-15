@@ -47,18 +47,32 @@ function fsa_es_views_pre_render(ViewExecutable $view) {
 }
 
 /**
- * Implements hook_theme_suggestions_HOOK_alter().
+ * Implements hook_theme_suggestions_alter().
  *
- * Suggest a separate block template for for views exposed filter blocks that
+ * Suggests a separate "block" template for views exposed filter blocks that
  * relate to search filters.
+ *
+ * Suggests a separate "views-view" template for global ratings search view.
  */
-function fsa_es_theme_suggestions_block_alter(array &$suggestions, array $variables) {
-  // @todo Add block IDs that relate to global search filters.
-  $block_ids = [
-    'search_global_ratings_filters',
-  ];
+function fsa_es_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+  switch ($hook) {
+    case 'block':
+      // @todo Add block IDs that relate to global search filters.
+      $block_ids = [
+        'search_global_ratings_filters',
+      ];
 
-  if (in_array($variables['elements']['#id'], $block_ids, TRUE)) {
-    $suggestions[] = 'block__' . $variables['elements']['#base_plugin_id'] . '__search_global_filters';
+      if (in_array($variables['elements']['#id'], $block_ids, TRUE)) {
+        $suggestions[] = 'block__' . $variables['elements']['#base_plugin_id'] . '__search_global_filters';
+      }
+      break;
+    case 'views_view':
+      $view = $variables['view'];
+
+      if ($view->storage->id() == 'search_global_ratings') {
+        $suggestions[] = 'views_view__' . $view->storage->id();
+      }
+      break;
   }
+
 }

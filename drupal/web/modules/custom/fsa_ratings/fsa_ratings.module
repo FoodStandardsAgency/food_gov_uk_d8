@@ -74,6 +74,8 @@ function fsa_ratings_theme() {
     'fsa_establishment' => [
       'render element' => 'children',
       'variables' => [
+        'id' => NULL,
+        'url' => NULL,
         'view_mode' => NULL,
         'search_form' => NULL,
         'content' => NULL,

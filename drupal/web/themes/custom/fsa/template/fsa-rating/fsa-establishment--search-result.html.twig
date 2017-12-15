@@ -4,6 +4,8 @@
  * Default theme implementation to present FSA Establishment entity
  *
  * Available variables (@see fsa_ratings_theme():
+ * - id: Entity ID.
+ * - url: URL to entity's canonical URL.
  * - view_mode: Used view mode.
  * - content: All fields from establishment entity.
  * - find_more_title: Title for "find more about ratings.
@@ -25,4 +27,9 @@
  * @ingroup themeable
  */
 #}
-{{ content }}
+<ul>
+  <li><a href="{{ url }}">{{ content.name }}</a></li>
+  <li>{{ content.field_address }} {{ content.field_postcode }}</li>
+  <li>{{ rating_badge }}</li>
+  <li>{{ content.field_ratingdate }}</li>
+</ul>
