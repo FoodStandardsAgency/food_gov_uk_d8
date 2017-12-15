@@ -22,7 +22,7 @@ function fsa_custom_preprocess_page(&$variables) {
   // Hardcoded "utility menu" links.
   // Get the contact link from settings. Default to 58 which happened to be the
   // first version contact lander.
-  $contact_link = \Drupal::state()->get('fsa_custom.contact_link');
+  $contact_link = \Drupal::state()->get('fsa_custom.contact_link_nid');
   $contact_nid = (isset($contact_link) && is_numeric($contact_link)) ? $contact_link : 58;
   $items = [[
     '#markup' => Link::createFromRoute(

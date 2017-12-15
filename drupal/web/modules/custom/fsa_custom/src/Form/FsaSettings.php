@@ -30,7 +30,7 @@ class FsaSettings extends FormBase {
       '#description' => $this->t('Define link targets for common pages linked from modules and page template.'),
       '#open' => TRUE,
     ];
-    $contact_link = \Drupal::state()->get('fsa_custom.contact_link');
+    $contact_link = \Drupal::state()->get('fsa_custom.contact_link_nid');
     $form['links']['contact_link'] = [
       '#title' => $this->t('Main contact lander'),
       '#description' => $this->t('Contact page main lander, used on heading link.'),
@@ -67,7 +67,7 @@ class FsaSettings extends FormBase {
 
     // Store contact link target.
     $contact_link = $form_state->getValue('contact_link');
-    \Drupal::state()->set('fsa_custom.contact_link', $contact_link);
+    \Drupal::state()->set('fsa_custom.contact_link_nid', $contact_link);
 
     // Store Privacy policy link target.
     $privacy_link = $form_state->getValue('privacy_link');
