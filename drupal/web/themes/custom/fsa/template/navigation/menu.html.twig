@@ -32,8 +32,8 @@
   {% import _self as menus %}
 
   {% if items %}
-
-    <ul class="{{ 'navigation__menu navigation__menu--level-' ~ (menu_level + 1) }}{% if menu_level != 0 %} toggle-content js-toggle-content js-toggle-theme-popup{% endif %}" {{ attributes.setAttribute('data-menu-level', (menu_level + 1)) }}>
+    
+    <ul class="{{ 'navigation__menu navigation__menu--level-' ~ (menu_level + 1) }}{% if menu_level != 0 %} toggle-content js-toggle-content js-toggle-theme-popup{% else %} js-toggle-group{% endif %}" {{ attributes.setAttribute('data-menu-level', (menu_level + 1)) }}>
 
     {% for item in items %}
 
@@ -46,10 +46,7 @@
       %}
 
       <li{{ item.attributes.addClass(item_classes, 'navigation__item navigation__item--level-' ~ (menu_level + 1)).setAttribute('data-menu-level', (menu_level + 1)) }}>
-          <span class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}{% if (menu_level == 0) and (item.is_expanded) %} toggle-button js-toggle-button{% endif %}">{{ link(item.title, item.url) }}</span>
-          {% if item.is_expanded %}
-            <button class="{{ 'navigation__expand-button navigation__expand-button--level-' ~ (menu_level + 1) }} toggle-button js-toggle-button" aria-expanded="false" aria-controls="collapsible-">Open menu</button>
-          {% endif %}
+          <a href="{{ item.url }}" title="{{ item.title }}" class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}{% if (menu_level == 0) and (item.is_expanded) %} toggle-button js-toggle-button{% endif %}">{{ item.title }}</a>
 
           {% if item.below %}
             {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
