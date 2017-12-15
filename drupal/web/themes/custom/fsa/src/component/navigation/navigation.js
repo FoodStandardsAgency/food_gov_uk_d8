@@ -88,6 +88,13 @@ function navigation() {
         }
       }
     },
+    getLevel: function(item) {
+      let itemLevel = item.getAttribute('data-menu-level');
+
+      if (itemLevel) {
+        return parseInt(itemLevel);
+      }
+    },
 
     // Functions for traversing between groups.
     group: {
@@ -137,14 +144,6 @@ function navigation() {
         link.focus();
       }
     }
-  };
-
-  const toggleSubmenu = (submenu, newState) => {
-    if (newState === undefined) {
-      newState = !submenu.classList.contains(settings.hoverClass);
-    }
-
-    submenu.classList.toggle(settings.hoverClass, newState);
   };
 
   // Query navigation related elements
@@ -197,10 +196,6 @@ function navigation() {
       const item = event.target;
       const keycode = event.keyCode;
 
-      // if (item.is("input:focus, select:focus, textarea:focus, button:focus")) {
-      //     // if the event target is a form element we should handle keydown normally
-      //     return;
-      // }
       let group;
       let topLevelItem;
       let prevTopLevelItem;
@@ -211,102 +206,110 @@ function navigation() {
 
       switch (keycode) {
         // Logic for key LEFT:
-        // First try and traverse to the previous group.
-        // If one doesn't exist (on first group),
+        // 1. Try and traverse to the previous group.
+        // OR:
+        // 2. If one doesn't exist (on first group),
         // traverse to the previous top item.
         case keyboard.LEFT:
           listItem = queryParents(item, settings.listItemSelector);
 
+          // 1. Traverse to the previous group.
           if (group = traversing.group.prev(listItem)) {
             traversing.focus(group);
-            event.preventDefault();
-          }
-          else if (prevTopLevelItem = traversing.top.prev(listItem)) {
-            traversing.focus(prevTopLevelItem);
-            event.preventDefault();
-          }
-          break;
-
-        // Logic for key UP:
-        // First try and traverse to the upper item.
-        // If there isn't an upper item (on top level),
-        // traverse to the previous sibling.
-        case keyboard.UP:
-          listItem = queryParents(item, settings.listItemSelector);
-          let upperItem;
-
-          if (upperItem = traversing.out(listItem)) {
-            traversing.focus(upperItem);
             event.preventDefault();
             break;
           }
 
-          if (siblingItem = traversing.prev(item)) {
+          // 2. Traverse to the previous top item.
+          if (prevTopLevelItem = traversing.top.prev(listItem)) {
+            traversing.focus(prevTopLevelItem);
+            event.preventDefault();
+            break;
+          }
+
+          break;
+
+        // Logic for key UP:
+        // 1. If focus is inside third level or deeper,
+        // traverse to previous sibling.
+        // OR:
+        // 2. If no sibling, try and traverse to the outer level.
+        case keyboard.UP:
+          listItem = queryParents(item, settings.listItemSelector);
+          let itemLevel = traversing.getLevel(listItem);
+          let upperItem;
+
+          // 1. If item level is over 2, traverse between siblings first.
+          if (itemLevel > 2 && (siblingItem = traversing.prev(item))) {
             traversing.focus(siblingItem);
             event.preventDefault();
             break;
           }
 
-          // if (topLevelItem = traversing.top.topItem(item)) {
-          //   traversing.focus(topLevelItem);
+          // 2. Traverse out to the upper level.
+          if (upperItem = traversing.out(listItem)) {
+            traversing.focus(upperItem);
+            event.preventDefault();
 
-          //   listItem = queryParents(topLevelItem, settings.listItemSelector);
-          //   // Close submenu.
-          //   const submenu = listItem.querySelector(settings.menuSelector);
-          //   toggleSubmenu(submenu, false);
-          //   event.preventDefault();
-          // }
+            // TODO: Ask megamenu to close.
+            break;
+          }
 
           break;
 
         // Logic for key RIGHT:
-        // First try and traverse to the next group.
-        // If one doesn't exist (on last group),
+        // 1. Try and traverse to the next group.
+        // OR:
+        // 2. If one doesn't exist (on last group),
         // traverse to next top item.
         case keyboard.RIGHT:
           listItem = queryParents(item, settings.listItemSelector);
 
+          // 1. Traverse to the next group.
           if (group = traversing.group.next(listItem)) {
             traversing.focus(group);
             event.preventDefault();
+            break;
           }
-          else if (nextTopLevelItem = traversing.top.next(listItem)) {
+
+          // 2. Traverse to the next top item.
+          if (nextTopLevelItem = traversing.top.next(listItem)) {
             traversing.focus(nextTopLevelItem);
             event.preventDefault();
+            break;
           }
+
           break;
 
         // Logic for key DOWN:
-        // First try and jump in the list item's sublist.
-        // Otherwise traverse to the next sibling.
+        // 1. Try and jump in the list item's child list.
+        // OR:
+        // 2. Traverse to the next sibling if there's no child list.
+        // OR:
+        // 3. If there's no sibling, traverse to next group.
         case keyboard.DOWN:
           listItem = queryParents(item, settings.listItemSelector);
           let innerItem;
 
+          // 1. Try and traverse into the list item's child list.
           if (innerItem = traversing.in(listItem)) {
-            // TODO: Open megamenu if needed.
+            // TODO: Ask megamenu to open first.
 
             traversing.focus(innerItem);
             event.preventDefault();
             break;
           }
 
-          // if (isItemTopLevel(item)) {
-          //   // TODO: Open submenu.
-
-          //   // Traverse inside.
-          //   listItem = queryParents(item, settings.listItemSelector);
-          //   let firstSubItem = traversing.in(listItem);
-
-          //   // Focus on first link.
-          //   traversing.focus(firstSubItem);
-
-          //   event.preventDefault();
-          //   break;
-          // }
-
+          // 2. Traverse to the next sibling.
           if (siblingItem = traversing.next(item)) {
             traversing.focus(siblingItem);
+            event.preventDefault();
+            break;
+          }
+
+          // 3. Traverse to the next group.
+          if (group = traversing.group.next(listItem)) {
+            traversing.focus(group);
             event.preventDefault();
             break;
           }
