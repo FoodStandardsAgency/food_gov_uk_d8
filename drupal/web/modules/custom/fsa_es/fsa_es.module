@@ -45,3 +45,20 @@ function fsa_es_views_pre_render(ViewExecutable $view) {
 
   return $view;
 }
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ *
+ * Suggest a separate block template for for views exposed filter blocks that
+ * relate to search filters.
+ */
+function fsa_es_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+  // @todo Add block IDs that relate to global search filters.
+  $block_ids = [
+    'search_global_ratings_filters',
+  ];
+
+  if (in_array($variables['elements']['#id'], $block_ids, TRUE)) {
+    $suggestions[] = 'block__' . $variables['elements']['#base_plugin_id'] . '__search_global_filters';
+  }
+}
