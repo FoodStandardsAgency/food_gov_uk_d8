@@ -38,7 +38,7 @@ class FsaSettings extends FormBase {
       '#target_type' => 'node',
       '#default_value' => (isset($contact_link) && is_numeric($contact_link)) ? Node::load($contact_link) : '',
     ];
-    $privacy_link = \Drupal::state()->get('fsa_custom.privacy_link');
+    $privacy_link = \Drupal::state()->get('fsa_custom.privacy_link_nid');
     $form['links']['privacy_link'] = [
       '#title' => $this->t('Privacy page'),
       '#description' => $this->t('Privacy description page.'),
@@ -71,7 +71,7 @@ class FsaSettings extends FormBase {
 
     // Store Privacy policy link target.
     $privacy_link = $form_state->getValue('privacy_link');
-    \Drupal::state()->set('fsa_custom.privacy_link', $privacy_link);
+    \Drupal::state()->set('fsa_custom.privacy_link_nid', $privacy_link);
 
     // Let the user know something happened.
     drupal_set_message($this->t('Custom settings updated.'));

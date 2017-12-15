@@ -38,12 +38,20 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function getDescription() {
+
+    $privacy_nid = \Drupal::state()->get('fsa_custom.privacy_link_nid');
+    if (is_numeric($privacy_nid)) {
+      $privacy_link = DefaultController::linkMarkup('entity.node.canonical', $this->t('Privacy notice'), [], ['node' => $privacy_nid]);
+    }
+    else {
+      $privacy_link = '<pre>[Privacy page link missing]</pre>';
+    }
     $user = \Drupal::currentUser();
     $email = $user->getEmail();
     $message = '<h1>' . $this->t('Confirm removal') . '</h1>';
     $message .= '<p>' . $this->t('You are about to remove subscription with email <strong>@email</strong>.', ['@email' => $email]) . '</p>';
     $message .= '<p>' . $this->t('This will cancel all your subscriptions and permanently remove your personal details..') . '</p>';
-    $message .= '<p>' . DefaultController::linkMarkup('entity.node.canonical', $this->t('Privacy notice'), [], ['node' => '144']) . '</p>';
+    $message .= '<p>' . $privacy_link . '</p>';
     return $message;
   }
 
