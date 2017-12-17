@@ -28,12 +28,24 @@
 
 {{ menus.menu_links(items, attributes) }}
 
-{% macro menu_links(items, attributes, menu_level) %}
+{% macro menu_links(items, attributes, menu_level, firstItem) %}
   {% import _self as menus %}
 
   {% if items %}
-    
-    <ul class="{{ 'navigation__menu navigation__menu--level-' ~ (menu_level + 1) }}{% if menu_level != 0 %} toggle-content js-toggle-content js-toggle-theme-popup{% else %} js-toggle-group{% endif %}" {{ attributes.setAttribute('data-menu-level', (menu_level + 1)) }}>
+
+    <ul class="{{ 'navigation__menu navigation__menu--level-' ~ (menu_level + 1) }}{% if menu_level != 0 %} toggle-content js-toggle-content js-toggle-theme-popup{% endif %}" {{ attributes.setAttribute('data-menu-level', (menu_level + 1)) }}>
+
+  
+    {% if menu_level != 0 %}
+      <header class="navigation__header">
+        <button class="navigation__back-link js-toggle-button js-toggle-button-function-current">
+          <span class="visually-hidden">Back</span>
+        </button>
+        <h2 class="navigation__item navigation__item--level-{{menu_level + 1}} navigation__item--heading">
+          <a href="{{ firstItem.url }}" title="{{ firstItem.title }}" class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}">{{ firstItem.title }}</a>
+        </h2>
+      </header>
+    {% endif %}
 
     {% for item in items %}
 
@@ -46,10 +58,10 @@
       %}
 
       <li{{ item.attributes.addClass(item_classes, 'navigation__item navigation__item--level-' ~ (menu_level + 1)).setAttribute('data-menu-level', (menu_level + 1)) }}>
-          <a href="{{ item.url }}" title="{{ item.title }}" class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}{% if (menu_level == 0) and (item.is_expanded) %} toggle-button js-toggle-button{% endif %}">{{ item.title }}</a>
+          <a href="{{ item.url }}" title="{{ item.title }}" class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}{% if (item.is_expanded) %} toggle-button js-toggle-button{% endif %}">{{ item.title }}</a>
 
           {% if item.below %}
-            {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+            {{ menus.menu_links(item.below, attributes, menu_level + 1, item) }}
           {% endif %}
       </li>
     {% endfor %}

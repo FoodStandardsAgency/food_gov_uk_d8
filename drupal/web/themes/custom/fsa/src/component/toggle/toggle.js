@@ -13,56 +13,90 @@ function toggle() {
     SPACE: 32,
   }
 
-  class Toggle {
-    constructor(element) {
-      this.element = element;
-      this.content = this.content(element);
-      this.sameGroupItemArray = []; 
-    }
+  // class Toggle {
+  //   constructor(element) {
+  //     this.element = element;
+  //     this.content = this.toggleContent();
+  //     this.sameGroupItemArray = this.toggleGroupID();
+  //     this.theme = this.toggleTheme();
+  //     this.state = {
+  //       open: false,
+  //     }
+  //   }
 
-    get content() {
-      return
-        (nextByClass(toggleButton, 'js-toggle-content') === null) ?
-        toggleButton.closest('.js-content-next').nextElementSibling :
-        nextByClass(toggleButton, 'js-toggle-content');
-    }
+  //   get toggleContent() {
+  //     return
+  //       (nextByClass(this.element, 'js-toggle-content') === null) ?
+  //       this.element.closest('.js-content-next').nextElementSibling :
+  //       nextByClass(this.element, 'js-toggle-content');
+  //   }
 
-    mount() {
-      // All the listeners
-      // Add click listener to toggle
-      this.element.addEventListener('mousedown', function(event){
-        event.preventDefault();  //stops default browser action (focus)
-        accordionEventHandler(toggleButton, content, event);
-      });
+  //   get toggleTheme() {
+  //     // Check if button specific themes and functions
+  //     this.element.classList.value.split(' ').forEach((className) => {
+  //       if (className.indexOf('js-toggle-button-theme') !== -1) {
+  //         return className.split('js-toggle-button-theme-').pop();
+  //       } else {
+  //         return undefined;
+  //       }
+  //     });
+  //   }
 
-      // Add click listener to toggle
-      this.element.addEventListener('click', function(event){
-        event.preventDefault();
-      });
+  //   get toggleGroupID() {
+  //     // Groups
+  //     if (toggleGroupElementArray.indexOf(toggleButton.closest('.js-toggle-group')) >= 0) {
+  //       return toggleGroupElementArray.indexOf(toggleButton.closest('.js-toggle-group'));
+  //     } else {
+  //       return undefined;
+  //     }
+  //   }
 
-      // Hover on
-      this.element.addEventListener('mouseenter', function(event){
-        content.style.willChange = 'max-height, min-height';
-      });
+  //   mount() {
+  //     // All the listeners
+  //     // Add click listener to toggle
+  //     this.element.addEventListener('mousedown', function(event){
+  //       event.preventDefault();  //stops default browser action (focus)
+  //       accordionEventHandler(toggleButton, content, event);
+  //     });
 
-      // Hover out
-      this.element.addEventListener('mouseout', function(event){
-        content.style.willChange = 'auto';
-      });
+  //     // Add click listener to toggle
+  //     this.element.addEventListener('click', function(event){
+  //       event.preventDefault();
+  //     });
 
-      // Add keyboard key listener
-      this.element.addEventListener('keydown', function(event){
-        if (event.keyCode === KEYCODE.SPACE) {
-          event.preventDefault();
-          accordionEventHandler(toggleButton, content, event);
-        }
-      });
-    }
+  //     // Add focus listener
+  //     this.element.addEventListener('focus', function(event) {
+  //       content.style.willChange = 'max-height, min-height';
+  //     }, true);
 
-    unmount() {
-      // All the listeners
-    }
-  }
+  //     // Add focus listener
+  //     this.element.addEventListener('blur', function(event) {
+  //       content.style.willChange = 'auto';
+  //     }, true);
+      
+  //     // Hover on
+  //     this.element.addEventListener('mouseenter', function(event){
+  //       content.style.willChange = 'max-height, min-height';
+  //     });
+
+  //     // Hover out
+  //     this.element.addEventListener('mouseout', function(event){
+  //       content.style.willChange = 'auto';
+  //     });
+
+  //     // Add keyboard key listener
+  //     this.element.addEventListener('keydown', function(event){
+  //       if (event.keyCode === KEYCODE.SPACE) {
+  //         event.preventDefault();
+  //         accordionEventHandler(toggleButton, content, event);
+  //       }
+  //     });
+  //   }
+
+  //   unmount() {
+  //     // All the listeners
+  //   }
+  // }
 
   // Measure all content elements and assign their height to a css variable in the style attribute of the html.
   function setDynamicHeight(element) {
@@ -212,18 +246,16 @@ function toggle() {
     toggleButtonClassListArray.forEach((className) => {
       if (className.indexOf('js-toggle-button-function') !== -1) {
         toggleFunction = className.split('js-toggle-button-function-').pop();
-
-        // Add focus listener
-        toggleButton.addEventListener('focus', function(event) {
-          content.style.willChange = 'max-height, min-height';
-          accordionEventHandler(toggleButton, content, event);
-        }, true);
       }
     });
 
     // Check if content has a next sibling
     if (content === null) {
-      content = toggleButton.closest('.js-content-next').nextElementSibling;
+      if (toggleFunction === 'current') {
+        content = toggleButton.closest('.js-toggle-content');
+      } else {
+        content = toggleButton.closest('.js-content-next').nextElementSibling;
+      }
     }
 
     contentElementArray = [...contentElementArray, content];    
