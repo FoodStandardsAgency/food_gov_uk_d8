@@ -33,8 +33,7 @@
 
   {% if items %}
 
-    <ul class="{{ 'navigation__menu navigation__menu--level-' ~ (menu_level + 1) }}{% if menu_level != 0 %} toggle-content js-toggle-content js-toggle-theme-popup{% endif %}" {{ attributes.setAttribute('data-menu-level', (menu_level + 1)) }}>
-
+    <ul class="{{ 'navigation__menu navigation__menu--level-' ~ (menu_level + 1) }}{% if menu_level != 0 %} toggle-content js-toggle-content js-toggle-theme-popup{% endif %}{% if menu_level == 2 %} js-toggle-content-function-open{% endif %}" {{ attributes.setAttribute('data-menu-level', (menu_level + 1)) }}>
   
     {% if menu_level != 0 %}
       <header class="navigation__header">

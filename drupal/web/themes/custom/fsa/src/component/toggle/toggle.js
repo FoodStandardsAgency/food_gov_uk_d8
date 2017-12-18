@@ -142,12 +142,16 @@ function toggle() {
   }
 
   function accordionContentClose(element) {
-    element.classList.remove('is-visible');
-    element.classList.add('is-hidden');
-    element.setAttribute('aria-hidden', true);
+    if (element.classList.contains('js-toggle-content-function-open')  && checkMediaQuery() != breakpoints.small) {
+      return false;
+    } else {
+      element.classList.remove('is-visible');
+      element.classList.add('is-hidden');
+      element.setAttribute('aria-hidden', true);
 
-    // Unset content from accessibility tree
-    element.inert = true;
+      // Unset content from accessibility tree
+      element.inert = true;
+    }
   }
 
   function accordionContentOpen(element) {
@@ -193,8 +197,12 @@ function toggle() {
     });
 
     contentArray.forEach((element) => {
-      // Unset content from accessibility tree
-      element.inert = true;
+      if (element.classList.contains('js-toggle-content-function-open') && checkMediaQuery() != breakpoints.small) {
+
+      } else {
+        // Unset content from accessibility tree
+        element.inert = true;
+      }
 
       // Check if only mobile
       if (element.classList.contains('js-toggle-content-only-mobile')) {
@@ -267,6 +275,10 @@ function toggle() {
       if (className.indexOf('js-toggle-theme') !== -1) {
         contentTheme = className.split('js-toggle-theme-').pop();
         content.classList.add(`is-${contentTheme}`);
+      }
+
+      if (className.indexOf('js-toggle-content-function') !== -1) {
+        toggleFunction = className.split('js-toggle-content-function-').pop();
       }
     });
 
