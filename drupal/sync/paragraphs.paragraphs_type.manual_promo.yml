@@ -4,4 +4,6 @@ status: true
 dependencies: {  }
 id: manual_promo
 label: 'Manual promo group'
+icon_uuid: null
+description: ''
 behavior_plugins: {  }
