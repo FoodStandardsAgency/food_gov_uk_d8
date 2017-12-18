@@ -1,0 +1,25 @@
+uuid: 07e22d1f-0c0d-458b-85b8-9e2de99e90f3
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.topic_cloud.field_topic_cloud
+    - paragraphs.paragraphs_type.topic_cloud
+id: paragraph.topic_cloud.preview
+targetEntityType: paragraph
+bundle: topic_cloud
+mode: preview
+content:
+  field_topic_cloud:
+    weight: 0
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
