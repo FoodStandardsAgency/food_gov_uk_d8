@@ -1,0 +1,30 @@
+uuid: 813a1f94-1bad-4b60-bbf2-713cdc28e9bb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_subscribed_cons
+    - taxonomy.vocabulary.consultations_type
+  module:
+    - user
+id: user.user.field_subscribed_cons
+field_name: field_subscribed_cons
+entity_type: user
+bundle: user
+label: 'Subscribed consultations'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      consultations_type: consultations_type
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

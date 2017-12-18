@@ -85,6 +85,16 @@ function fsa_custom_preprocess_page_title(&$variables) {
       $variables['title_prefix'] = ['#markup' => '<div class="' . $class . '">' . t('@nation specific', ['@nation' => $nation]) . '</div>'];
     }
   }
+  else {
+    $route = \Drupal::routeMatch();
+    $routename = $route->getParentRouteMatch()->getRouteName();
+
+    // Add a title suffix on signup pages.
+    if (substr($routename, 0, 10) == 'fsa_signin') {
+      $variables['title_suffix'] = ['#markup' => '<p>' . t('Stay up to date with food and allergy alerts, FSA news and consultations.') . '</p>'];
+    }
+
+  }
 
 }
 
@@ -135,8 +145,7 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
       if ($node->hasField('field_content_type')) {
         // Get content_type taxonomy term id.
         $tid = $node->get('field_content_type')->target_id;
-        if (is_numeric($tid)) {
-          $term = Term::load($tid);
+        if (is_numeric($tid) && $term = Term::load($tid)) {
           $term_id = $term->id();
         }
       }
@@ -180,9 +189,16 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
     }
     else {
       $route = \Drupal::routeMatch();
+      $routename = $route->getParentRouteMatch()->getRouteName();
       // Have few rules for non-nodes to hide the title from hero.
       if ($block->id() == 'pagetitle_hero') {
-        if ($route->getParameter('fsa_establishment')) {
+
+        // Enter all speficic routes to remove the page title in hero area.
+        $routes = [
+          'fsa_signin.user_registration_thank_you',
+        ];
+
+        if (in_array($routename, $routes) || $route->getParameter('fsa_establishment')) {
           return AccessResult::forbidden()
             ->addCacheableDependency($block);
         }
@@ -221,7 +237,6 @@ function fsa_custom_preprocess_block(&$variables) {
         // Signin pages.
         if (substr($routename, 0, 10) == 'fsa_signin') {
           $variables['content']['#title'] = t('Subscribe to news and alerts');
-          $variables['title_suffix'] = ['#markup' => '<p>' . t('Stay up to date with food and allergy alerts, FSA news and consultations.') . '</p>'];
         }
 
       }

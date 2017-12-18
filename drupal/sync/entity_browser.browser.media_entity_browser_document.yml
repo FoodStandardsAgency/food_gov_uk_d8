@@ -1,0 +1,42 @@
+uuid: 2d83c455-3c61-4e28-a1e1-49ebe5914089
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.fsa_media_browser
+  module:
+    - entity_browser_entity_form
+    - views
+name: media_entity_browser_document
+label: 'Document Entity Browser'
+display: iframe
+display_configuration:
+  width: 100%
+  height: '500'
+  link_text: 'Select entities'
+  auto_open: true
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  68fe8977-cce4-4677-948f-061bcef9d2fc:
+    settings:
+      view: fsa_media_browser
+      view_display: entity_browser_2
+      submit_text: 'Select entities'
+      auto_select: false
+    uuid: 68fe8977-cce4-4677-948f-061bcef9d2fc
+    weight: 1
+    label: 'Document list'
+    id: view
+  2a233745-96ba-4a09-aa05-071ace39baaa:
+    settings:
+      entity_type: media
+      bundle: document
+      form_mode: default
+      submit_text: 'Save entity'
+    uuid: 2a233745-96ba-4a09-aa05-071ace39baaa
+    weight: 2
+    label: 'Create document'
+    id: entity_form

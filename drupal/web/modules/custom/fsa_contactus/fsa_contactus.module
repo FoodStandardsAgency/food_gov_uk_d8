@@ -40,3 +40,29 @@ function fsa_contactus_preprocess_webform_progress(array &$variables) {
     $variables['summary'] = t('Step @start of @end', $variables['summary']->getArguments());
   }
 }
+
+/**
+ * Implements template_preprocess_webform_container_base_html().
+ *
+ * @param array $variables
+ *   Fieldset element.
+ */
+function fsa_contactus_preprocess_webform_container_base_html(&$variables) {
+
+  if (isset($variables['webform_submission']) && isset($variables['value']['#id'])) {
+    if ($audience = $variables['webform_submission']->getElementData('audience')) {
+
+      // Get fieldset identifier.
+      $id = $variables['value']['#id'];
+
+      // Conditionally remove fieldset. Business fields should be hidden from
+      // the consumer, and visa versa.
+      $con_bus = $audience == 'consumer' && $id == 'food_fraud_crime--business';
+      $bus_con = $audience == 'business' && $id == 'food_fraud_crime--consumer';
+      if ($con_bus || $bus_con) {
+        $variables = [];
+      }
+    }
+  }
+
+}

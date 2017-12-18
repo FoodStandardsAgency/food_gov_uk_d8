@@ -16,6 +16,7 @@ type_settings:
     - image
   display_plugins:
     - 'entity_reference:media_thumbnail'
-  entity_browser: ''
-  entity_browser_settings: null
+  entity_browser: media_entity_browser_image
+  entity_browser_settings:
+    display_review: false
 icon_uuid: null

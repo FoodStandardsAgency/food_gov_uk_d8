@@ -84,10 +84,10 @@ Ensure the Alert API base path is set in FSA Alerts configuration `/admin/config
 FSA Ratings search / Elasticsearch
 ---------------------
 
-Ratings search is located at domain.com/ratings/search.
+* Ratings search is located at `/ratings/search`.
 
-Drush commands to rebuild ES index.
+* The rating search is implemented with `fsa_ratings` module.
 
-`drush eshd fsa_ratings_index -y; drush eshs; drush eshr fsa_ratings_index;` 
+* FSA Establishments are indexed to Elasticsearch with FSA Elasticsearch integration (`fsa_es`) module, refer to [README.md](/drupal/web/modules/custom/fsa_es/README.md) for documentation. 
 
-And `drush cron`, multiple times if there are lots of establishment entities.
+

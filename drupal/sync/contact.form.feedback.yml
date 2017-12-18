@@ -13,4 +13,4 @@ recipients:
 reply: ''
 weight: 0
 message: 'Thank you for your feedback.'
-redirect: /contact
+redirect: /feedback

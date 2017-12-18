@@ -6,7 +6,6 @@ use Drupal\fsa_signin\Controller\DefaultController;
 use Drupal\user\Entity\User;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Link;
 
 /**
  * Class EmailSubscriptionsForm.
@@ -29,6 +28,24 @@ class UserRegistrationForm extends FormBase {
     $food_alerts = $tempstore->get('food_alert_registration');
     $alert_tids = $tempstore->get('alert_tids_for_registration');
     $news_registration = $tempstore->get('news_tids_for_registration');
+    $cons_registration = $tempstore->get('cons_tids_for_registration');
+
+    // Only add possibility to submit if user has selected something to
+    // subscribe to.
+    if (
+      $tempstore->get('alert_tids_for_registration') != NULL ||
+      $tempstore->get('food_alert_registration') != NULL ||
+      $tempstore->get('news_tids_for_registration') != NULL ||
+      $tempstore->get('cons_tids_for_registration') != NULL) {
+
+    }
+    else {
+      drupal_set_message($this->t('Please subscribe to at least one category on previous pages.'));
+      $form['actions']['back'] = [
+        '#markup' => DefaultController::linkMarkup('fsa_signin.user_preregistration_news_form', $this->t('Previous'), ['back arrow']),
+      ];
+      return $form;
+    }
 
     $form['subscribed_food_alerts'] = [
       '#type' => 'value',
@@ -42,40 +59,50 @@ class UserRegistrationForm extends FormBase {
       '#type' => 'value',
       '#value' => $news_registration,
     ];
+    $form['subscribed_cons'] = [
+      '#type' => 'value',
+      '#value' => $cons_registration,
+    ];
     $form['description'] = [
-      '#markup' => '<h2>' . $this->t('Type and frequency') . '</h2><p>' . $this->t('By how and how often you want to receive information from us?') . '</p>',
+      '#markup' => '<h2>' . $this->t('Delivery options') . '</h2><p>' . $this->t('How do you want to receive information from us?') . '</p>',
     ];
 
     $form['alert_container'] = [
       '#type' => 'container',
       '#attributes' => ['class' => ['alert-preferences']],
     ];
-    $form['alert_container']['title'] = [
-      '#markup' => '<h3>' . $this->t('I want to receive food and allergy alerts via') . '</h3>',
-    ];
     $form['alert_container']['delivery_method'] = [
-      '#type' => 'radios',
+      '#type' => 'checkboxes',
+      '#title' => $this->t('I want to receive food and allergy alerts via'),
       '#options' => [
         'email' => $this->t('Email'),
         'sms' => $this->t('SMS'),
       ],
     ];
+    $form['alert_container']['news_delivery_method'] = [
+      '#type' => 'checkboxes',
+      '#title' => $this->t('I want to receive news and consultations via'),
+      '#description' => $this->t('News is available only via email.'),
+      '#options' => [
+        'email' => $this->t('Email'),
+      ],
+    ];
+    $form['alert_container']['sms_notification_delivery'] = [
+      '#type' => 'checkboxes',
+      '#options' => [],
+      '#title' => $this->t('SMS frequency'),
+      '#description' => $this->t('SMS updates are sent immediately'),
+    ];
     $form['alert_container']['delivery_frequency_email'] = [
       '#type' => 'radios',
-      '#title' => $this->t('Frequency'),
+      '#title' => $this->t('Email frequency'),
       '#options' => [
         'immediate' => $this->t('Send updates immediately'),
         'daily' => $this->t('Send updates daily'),
         'weekly' => $this->t('Send updated weekly'),
       ],
-      '#states' => [
-        // Only display when user selected 'email' as the delivery method.
-        'visible' => [
-          ':input[name="delivery_method"]' => ['value' => 'email'],
-        ],
-      ],
+      '#default_value' => 'immediate',
     ];
-
     $form['personal_container'] = [
       '#type' => 'container',
       '#attributes' => ['class' => ['personal-info']],
@@ -85,11 +112,17 @@ class UserRegistrationForm extends FormBase {
     ];
     $form['personal_container']['email'] = [
       '#type' => 'email',
-      '#title' => $this->t('Email'),
+      '#title' => $this->t('Email address'),
+      '#required' => TRUE,
     ];
     $form['personal_container']['phone'] = [
       '#type' => 'tel',
-      '#title' => $this->t('Phone'),
+      '#title' => $this->t('Phone number'),
+      '#states' => [
+        'visible' => [
+          ':input[name="delivery_method[sms]"]' => ['checked' => TRUE],
+        ],
+      ],
     ];
 
     $form['language_container'] = [
@@ -105,17 +138,19 @@ class UserRegistrationForm extends FormBase {
         'en' => $this->t('English'),
         'cy' => $this->t('Cymraeg'),
       ],
-      '#default_value' => \Drupal::currentUser()->getPreferredLangcode(),
+      '#default_value' => \Drupal::languageManager()->getCurrentLanguage()->getId(),
     ];
 
     $form['actions'] = ['#type' => 'actions'];
     $form['actions']['back'] = [
-      '#markup' => DefaultController::formBackLink('fsa_signin.user_preregistration_news_form')->toString(),
+      '#markup' => DefaultController::linkMarkup('fsa_signin.user_preregistration_news_form', $this->t('Previous'), ['back arrow']),
     ];
+
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
     ];
+
     return $form;
   }
 
@@ -123,7 +158,17 @@ class UserRegistrationForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-
+    $delivery_method = $form_state->getValue('delivery_method');
+    $delivery_method = array_filter(array_values($delivery_method));
+    if (in_array('sms', $delivery_method)) {
+      $phone = $form_state->getValue('phone');
+      if (!preg_match('/^\+[0-9 ]{7,}$/', $phone)) {
+        $form_state->setErrorByName('phone', $this->t('Please prefix your phone number with international country code and use only numbers.'));
+      }
+      if ($phone == '') {
+        $form_state->setErrorByName('phone', $this->t('You selected to receive alerts via SMS, please enter your phone number.'));
+      }
+    }
   }
 
   /**
@@ -138,6 +183,10 @@ class UserRegistrationForm extends FormBase {
     $subscribed_food_alerts = DefaultController::storableProfileFieldValue($form_state->getValue('subscribed_food_alerts'));
     $subscribed_notifications = $form_state->getValue('subscribed_notifications');
     $subscribed_news = $form_state->getValue('subscribed_news');
+    $subscribed_cons = $form_state->getValue('subscribed_cons');
+    $delivery_method = $form_state->getValue('delivery_method');
+    $delivery_method = array_filter(array_values($delivery_method));
+    $phone = $form_state->getValue('phone');
 
     // Mandatory settings.
     $user->setPassword(user_password());
@@ -155,7 +204,14 @@ class UserRegistrationForm extends FormBase {
     $user->set('field_subscribed_food_alerts', $subscribed_food_alerts);
     $user->set('field_subscribed_notifications', $subscribed_notifications);
     $user->set('field_subscribed_news', $subscribed_news);
+    $user->set('field_subscribed_cons', $subscribed_cons);
     $user->set('field_notification_method', $email_frequency);
+    $user->set('field_delivery_method', $delivery_method);
+
+    if (in_array('sms', $delivery_method)) {
+      // Only store the phone number if user subscribed via SMS.
+      $user->set('field_notification_sms', $phone);
+    }
 
     try {
       // Save user account.

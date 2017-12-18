@@ -84,7 +84,7 @@ switch ($env) {
 		$settings['simple_environment_indicator'] = '#d4000f Production';
     $settings['file_private_path'] = '/var/www/fsa.prod.wunder.io/private-files';
 	break;
-  case 'dev':
+  case 'develop':
     $settings['simple_environment_indicator'] = '#004984 Development';
 	break;
   case 'stage':

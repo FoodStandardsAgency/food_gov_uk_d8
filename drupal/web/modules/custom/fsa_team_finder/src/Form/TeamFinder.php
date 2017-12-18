@@ -239,7 +239,7 @@ class TeamFinder extends FormBase {
         $email_value = $overridden ? $fsa_authority->field_email_alt->getString() : $fsa_authority->field_email->getString();
         $email_link = Link::fromTextAndUrl($email_value, Url::fromUri('mailto:' . $email_value, []))->toString();
         $site_value = $fsa_authority->field_url->getString();
-        $site_link = Link::fromTextAndUrl($site_value, Url::fromUri($site_value, []))->toString();
+        $site_link = Link::fromTextAndUrl($la['name'], Url::fromUri($site_value, []))->toString();
 
         // Set results.
         $result_message = $this->t('Details of the food safety team covering <strong>@query</strong> are shown below.', ['@query' => $query]);

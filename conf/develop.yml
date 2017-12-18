@@ -1,8 +1,10 @@
 ---
 
-# Example of absolute minimum server setup.
+# Setup firewalls using upcloud api
+#- include: upcloud.yml
 
-- hosts: fsa-dev
+# Example of standard single server setup without production services (monitoring, logging etc.)
+- hosts: develop
   become: false
   become_method: sudo
   user: root
@@ -11,26 +13,39 @@
    - { role: varnish, tags: [ 'varnish' ] }
    - { role: dbserver, tags: [ 'dbserver' ] }
    - { role: drupal-db, tags: [ 'drupal-db' ] }
+   - { role: certbot, tags: [ 'certbot' ] }
+   - { role: sslterminator, tags: [ 'sslterminator' ] }
    - { role: nginx, tags: [ 'nginx' ] }
    - { role: php-fpm, tags: [ 'php-fpm' ] }
    - { role: drush, tags: [ 'drush' ] }
+   - { role: drupal-log, tags: [ 'drupal-log' ] }
    - { role: fsa_elasticsearch, tags: [ 'elasticsearch' ] }
    - { role: wkhtmltopdf, tags: [ 'wkhtmltopdf' ] }
 
   vars_files:
   - dev-vars.yml
 
-  tasks:
+  #tasks:
   # Drupal cron job
-  - cron: name="Example Drupal cron job" minute="*/2" job="su nginx --shell=/bin/sh -c '/usr/lib/composer/vendor/bin/drush --root=/var/www/example.com/current elysia-cron > /dev/null 2>&1'" state="present"
+  #- cron: name="Example Drupal cron job" minute="*/2" job="su nginx --shell=/bin/sh -c '/usr/lib/composer/vendor/bin/drush --root=/var/www/example.com/current elysia-cron run > /dev/null 2>&1'" state="present"
 
   vars:
-    wkv_site_env: test
+    wkv_site_env: develop
 
     # You can set custom variables if the same value is used in multiple places so it can be easily changed here
     # You can use it anywhere after this using " {{ variable_name }}"
     domain_name: fsa.dev.wunder.io
+    
+    # Additional envs
+    php_extra_env_vars:
+      - key: "DRUPAL_HASH_SALT_DEVELOPMENT"
+        value: "{{ drupal_hash_salt }}"
+      - key: "DRUPAL_HASH_SALT"
+        value: "{{ drupal_hash_salt }}"
+     
+    php_env_vars_include_db: True
 
+    papertrail_enabled: False
     partition_var_log: False
     partition_var_lib_mysql: False
 
@@ -45,7 +60,7 @@
     # php memory limits etc are in variables.yml
 
     # Let's encrypt. Always use SSL if possible!
-    certbot_email: support@wundertools.com
+    certbot_email: fi.support@wunder.io
     certbot_domains:
       - "{{ domain_name }}"
     certbot_renewal_docroot: /var/www/letsencrypt-auto
@@ -53,7 +68,7 @@
     # On dev and stage it's good idea to protect the site with htauth
     basicauth_enabled: True
     basicauth_username: wunder
-    basicauth_password: tools
+    basicauth_password: fsa
     # Basic auth can also be disabled for certain ip's
     basicauth_ip:
       - address: 84.20.132.177

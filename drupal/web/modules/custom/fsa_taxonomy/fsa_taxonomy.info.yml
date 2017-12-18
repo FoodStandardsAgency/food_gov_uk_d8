@@ -1,0 +1,7 @@
+name: FSA Taxonomy
+type: module
+description: "Customization for FSA site, add parent terms when a term reference is added to entity"
+core: 8.x
+package: FSA
+dependencies:
+  - drupal:taxonomy

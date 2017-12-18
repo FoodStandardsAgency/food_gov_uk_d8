@@ -1,0 +1,9 @@
+uuid: bc129bc6-8d77-422d-aa73-4556ed12bb76
+langcode: en
+status: true
+dependencies: {  }
+name: 'Consultations type'
+vid: consultations_type
+description: 'For consultations and Alert subscriptions'
+hierarchy: 0
+weight: 0
