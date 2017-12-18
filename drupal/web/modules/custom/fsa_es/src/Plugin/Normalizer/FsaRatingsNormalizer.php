@@ -2,17 +2,15 @@
 
 namespace Drupal\fsa_es\Plugin\Normalizer;
 
-use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityManager;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
-use Drupal\serialization\Normalizer\ContentEntityNormalizer;
 
 /**
- * Normalizes / denormalizes Drupal entities into an array structure good for ES.
+ * Normalizes Drupal entities into an array structure good for ES.
  */
-class FsaRatingsNormalizer extends ContentEntityNormalizer {
+class FsaRatingsNormalizer extends NormalizerBase {
 
   use StringTranslationTrait;
 
@@ -21,7 +19,7 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
    *
    * @var array
    */
-  protected $supportedInterfaceOrClass = ['Drupal\Core\Entity\ContentEntityBase'];
+  protected $supportedInterfaceOrClass = ['Drupal\fsa_ratings\Entity\FsaEstablishment'];
 
   /**
    * Supported formats.
@@ -41,54 +39,14 @@ class FsaRatingsNormalizer extends ContentEntityNormalizer {
 
   /**
    * {@inheritdoc}
+   *
+   * @param \Drupal\fsa_ratings\Entity\FsaEstablishment $object
    */
   public function normalize($object, $format = NULL, array $context = []) {
-    // This normalizer supports only ContentEntityBase objects, see $this->supportedInterfaceOrClass.
-    /** @var \Drupal\Core\Entity\ContentEntityBase $object */
-    $type = $object->getEntityTypeId();
-
-    switch ($type) {
-      case 'node':
-        return NULL;
-
-      case 'fsa_establishment':
-        return $this->normalizeEstablishment($object, $format, $context);
-
-      default:
-        return $this->normalizeDefault($object, $format, $context);
-    }
-
-  }
-
-  /**
-   * Normalize generic entity attributes.
-   *
-   * @param \Drupal\Core\Entity\ContentEntityBase $object
-   * @param null $format
-   * @param array $context
-   *
-   * @return array
-   */
-  protected function normalizeDefault(ContentEntityBase $object, $format = NULL, array $context = []) {
     $data = [
       'id' => $object->id(),
       'name' => $object->get('name')->getString(),
     ];
-
-    return $data;
-  }
-
-  /**
-   * Normalize the 'fsa_establishment' entity specific fields.
-   *
-   * @param \Drupal\Core\Entity\ContentEntityBase $object
-   * @param null $format
-   * @param array $context
-   *
-   * @return array
-   */
-  protected function normalizeEstablishment(ContentEntityBase $object, $format = NULL, array $context = []) {
-    $data = $this->normalizeDefault($object, $format, $context);
 
     $field_names = [
       'address',
