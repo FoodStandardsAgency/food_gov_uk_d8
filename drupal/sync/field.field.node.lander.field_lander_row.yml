@@ -1,0 +1,40 @@
+uuid: ebeda567-d80a-4212-a1dc-4fa09f514f3e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_lander_row
+    - node.type.lander
+    - paragraphs.paragraphs_type.manual_promo
+  module:
+    - entity_reference_revisions
+id: node.lander.field_lander_row
+field_name: field_lander_row
+entity_type: node
+bundle: lander
+label: 'Lander row'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      manual_promo: manual_promo
+    target_bundles_drag_drop:
+      liftups:
+        weight: 5
+        enabled: false
+      manual_promo:
+        enabled: true
+        weight: 6
+      subpage:
+        weight: 7
+        enabled: false
+      team_contact:
+        weight: 8
+        enabled: false
+field_type: entity_reference_revisions
