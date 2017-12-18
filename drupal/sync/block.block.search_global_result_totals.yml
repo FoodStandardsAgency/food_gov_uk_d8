@@ -5,12 +5,13 @@ dependencies:
   module:
     - block_class
     - fsa_es
+    - system
   theme:
     - fsa
 third_party_settings:
   block_class:
-    classes: ''
-id: views_result_totals
+    classes: search-global-result-totals
+id: search_global_result_totals
 theme: fsa
 region: content
 weight: -4
@@ -22,4 +23,9 @@ settings:
   provider: fsa_es
   label_display: '0'
   view_name: search_global_ratings
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: '/search*'
+    negate: false
+    context_mapping: {  }

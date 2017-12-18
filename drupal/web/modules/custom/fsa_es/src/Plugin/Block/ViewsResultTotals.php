@@ -11,7 +11,7 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Provides a 'Footer logo' Block.
+ * Provides a views result totals block.
  *
  * @Block(
  *   id = "views_result_totals",
