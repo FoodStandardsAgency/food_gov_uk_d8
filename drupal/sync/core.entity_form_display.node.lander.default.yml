@@ -168,15 +168,17 @@ content:
     type: string_textarea
     region: content
   field_lander_row:
-    type: entity_reference_paragraphs
+    type: paragraphs
     weight: 5
     settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
+      title: 'Lander row'
+      title_plural: 'Lander rows'
+      edit_mode: closed
+      closed_mode: preview
+      autocollapse: none
       add_mode: dropdown
       form_display_mode: default
-      default_paragraph_type: ''
+      default_paragraph_type: _none
     third_party_settings: {  }
     region: content
   field_nation:
