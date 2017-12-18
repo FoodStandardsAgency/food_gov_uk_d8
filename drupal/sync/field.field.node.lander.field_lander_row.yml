@@ -6,6 +6,7 @@ dependencies:
     - field.storage.node.field_lander_row
     - node.type.lander
     - paragraphs.paragraphs_type.manual_promo
+    - paragraphs.paragraphs_type.topic_cloud
   module:
     - entity_reference_revisions
 id: node.lander.field_lander_row
@@ -23,11 +24,15 @@ settings:
   handler_settings:
     negate: 0
     target_bundles:
+      topic_cloud: topic_cloud
       manual_promo: manual_promo
     target_bundles_drag_drop:
       liftups:
         weight: 5
         enabled: false
+      topic_cloud:
+        enabled: true
+        weight: 6
       manual_promo:
         enabled: true
         weight: 6
