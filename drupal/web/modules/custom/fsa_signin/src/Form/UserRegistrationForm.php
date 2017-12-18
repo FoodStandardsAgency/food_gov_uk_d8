@@ -113,10 +113,16 @@ class UserRegistrationForm extends FormBase {
     $form['personal_container']['email'] = [
       '#type' => 'email',
       '#title' => $this->t('Email address'),
+      '#required' => TRUE,
     ];
     $form['personal_container']['phone'] = [
       '#type' => 'tel',
       '#title' => $this->t('Phone number'),
+      '#states' => [
+        'visible' => [
+          ':input[name="delivery_method[sms]"]' => ['checked' => TRUE],
+        ],
+      ],
     ];
 
     $form['language_container'] = [
@@ -152,7 +158,17 @@ class UserRegistrationForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-
+    $delivery_method = $form_state->getValue('delivery_method');
+    $delivery_method = array_filter(array_values($delivery_method));
+    if (in_array('sms', $delivery_method)) {
+      $phone = $form_state->getValue('phone');
+      if (!preg_match('/^\+[0-9 ]{7,}$/', $phone)) {
+        $form_state->setErrorByName('phone', $this->t('Please prefix your phone number with international country code and use only numbers.'));
+      }
+      if ($phone == '') {
+        $form_state->setErrorByName('phone', $this->t('You selected to receive alerts via SMS, please enter your phone number.'));
+      }
+    }
   }
 
   /**
@@ -168,6 +184,9 @@ class UserRegistrationForm extends FormBase {
     $subscribed_notifications = $form_state->getValue('subscribed_notifications');
     $subscribed_news = $form_state->getValue('subscribed_news');
     $subscribed_cons = $form_state->getValue('subscribed_cons');
+    $delivery_method = $form_state->getValue('delivery_method');
+    $delivery_method = array_filter(array_values($delivery_method));
+    $phone = $form_state->getValue('phone');
 
     // Mandatory settings.
     $user->setPassword(user_password());
@@ -187,6 +206,12 @@ class UserRegistrationForm extends FormBase {
     $user->set('field_subscribed_news', $subscribed_news);
     $user->set('field_subscribed_cons', $subscribed_cons);
     $user->set('field_notification_method', $email_frequency);
+    $user->set('field_delivery_method', $delivery_method);
+
+    if (in_array('sms', $delivery_method)) {
+      // Only store the phone number if user subscribed via SMS.
+      $user->set('field_notification_sms', $phone);
+    }
 
     try {
       // Save user account.

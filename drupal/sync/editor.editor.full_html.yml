@@ -34,7 +34,6 @@ settings:
         -
           name: Media
           items:
-            - DrupalImage
             - image
             - document
             - video_embed
@@ -72,7 +71,7 @@ settings:
           width: '854'
           height: '480'
 image_upload:
-  status: true
+  status: false
   scheme: public
   directory: inline-images
   max_size: ''

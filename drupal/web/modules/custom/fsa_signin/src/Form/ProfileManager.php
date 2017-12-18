@@ -101,13 +101,17 @@ class ProfileManager extends FormBase {
     $label = $this->t('Delivery options');
     $form[$wrapper . '_button'] = $this->wrapperButton($wrapper, $label, $is_open);
     $form[$wrapper] = $this->wrapperElement($wrapper, $is_open);
-    $form[$wrapper]['alert_notifications'] = [
+    $form[$wrapper]['delivery_method_title'] = [
       '#type' => 'item',
       '#markup' => '<h3>' . $this->t('I want to receive food and allergy alerts via') . '</h3>',
     ];
-    $form[$wrapper]['alert_notifications_method'] = [
-      '#type' => 'item',
-      '#markup' => '[not implemented yet]',
+    $form[$wrapper]['delivery_method'] = [
+      '#type' => 'checkboxes',
+      '#options' => [
+        'email' => $this->t('Email'),
+        'sms' => $this->t('SMS'),
+      ],
+      '#default_value' => array_column($account->get('field_delivery_method')->getValue(), 'value'),
     ];
     $form[$wrapper]['news_notifications'] = [
       '#type' => 'item',
@@ -152,6 +156,11 @@ class ProfileManager extends FormBase {
       '#title' => $this->t('Phone number'),
       '#default_value' => $account->get('field_notification_sms')->getString(),
       '#description' => $this->t('This service is only for UK telephone numbers'),
+      '#states' => [
+        'visible' => [
+          ':input[name="delivery_method[sms]"]' => ['checked' => TRUE],
+        ],
+      ],
     ];
     $form[$wrapper]['email_notification_language'] = [
       '#type' => 'radios',
@@ -198,8 +207,18 @@ class ProfileManager extends FormBase {
       $form_state->setErrorByName('email', $this->t('Email value is not valid.'));
     }
 
-    // @todo: Phone number validation.
-    $phone = $password = $form_state->getValue('phone');
+    $delivery_method = $form_state->getValue('delivery_method');
+    $delivery_method = array_filter(array_values($delivery_method));
+    if (in_array('sms', $delivery_method)) {
+      $phone = $form_state->getValue('phone');
+
+      if (!preg_match('/^\+[0-9 ]{7,}$/', $phone)) {
+        $form_state->setErrorByName('phone', $this->t('Please prefix your phone number with international country code and use only numbers.'));
+      }
+      if ($phone == '') {
+        $form_state->setErrorByName('phone', $this->t('You selected to receive alerts via SMS, please enter your phone number.'));
+      }
+    }
 
     $password = $form_state->getValue('new_password');
     $length = ProfileManager::PROFILE_PASSWORD_LENGTH;
@@ -243,8 +262,18 @@ class ProfileManager extends FormBase {
     $email = $form_state->getValue('email');
     $account->setEmail($email);
 
+    $delivery_method = $form_state->getValue('delivery_method');
+    $delivery_method = array_filter(array_values($delivery_method));
+    $account->set('field_delivery_method', $delivery_method);
+
     $phone = $form_state->getValue('phone');
-    $account->set('field_notification_sms', $phone);
+    if (in_array('sms', $delivery_method)) {
+      // Only store the phone number if user subscribed via SMS.
+      $account->set('field_notification_sms', $phone);
+    }
+    else {
+      $account->set('field_notification_sms', '');
+    }
 
     $email_notification_delivery = $form_state->getValue('email_notification_delivery');
     $account->set('field_notification_method', $email_notification_delivery);

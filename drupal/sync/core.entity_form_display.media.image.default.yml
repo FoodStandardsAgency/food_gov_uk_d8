@@ -12,7 +12,7 @@ dependencies:
     - field_group
     - image_widget_crop
     - path
-    - shs
+    - term_reference_tree
 third_party_settings:
   field_group:
     group_taxonomies:
@@ -22,11 +22,12 @@ third_party_settings:
       weight: 1
       format_type: tab
       format_settings:
-        id: ''
-        classes: ''
-        formatter: open
+        label: Taxonomies
+        formatter: closed
         description: 'Select appropriate taxonomy metadata for this content type.'
         required_fields: true
+        id: ''
+        classes: ''
       label: Taxonomies
 id: media.image.default
 targetEntityType: media
@@ -62,13 +63,9 @@ content:
     region: content
   field_topic:
     weight: 9
-    settings:
-      display_node_count: false
-      create_new_items: false
-      create_new_levels: false
-      force_deepest: false
+    settings: {  }
     third_party_settings: {  }
-    type: options_shs
+    type: term_reference_tree
     region: content
   langcode:
     type: language_select

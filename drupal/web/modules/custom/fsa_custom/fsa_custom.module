@@ -145,8 +145,7 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
       if ($node->hasField('field_content_type')) {
         // Get content_type taxonomy term id.
         $tid = $node->get('field_content_type')->target_id;
-        if (is_numeric($tid)) {
-          $term = Term::load($tid);
+        if (is_numeric($tid) && $term = Term::load($tid)) {
           $term_id = $term->id();
         }
       }

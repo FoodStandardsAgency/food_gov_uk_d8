@@ -13,6 +13,8 @@ permissions:
   - 'access fsa authority overview'
   - 'access fsa establishment overview'
   - 'access media overview'
+  - 'access media_entity_browser_document entity browser pages'
+  - 'access media_entity_browser_image entity browser pages'
   - 'access toolbar'
   - 'administer menu'
   - 'administer nodes'

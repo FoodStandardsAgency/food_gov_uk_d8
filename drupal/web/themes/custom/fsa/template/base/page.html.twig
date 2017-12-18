@@ -52,7 +52,7 @@
         <div class="header__topbar phase-banner">
           <p>
             <strong class="phase-tag">{{ 'ALPHA'|t }}</strong>
-            <span>{{ 'This is a new service – your <a href="/contact">feedback</a> will help us to improve it.'|t }}</span>
+            <span>{{ 'This is a new service – your <a href="/feedback">feedback</a> will help us to improve it.'|t }}</span>
           </p>
 
           <div class="header__content">
@@ -101,6 +101,13 @@
     </div>
   </header>
 
+  {# <div class="js-toggle-group">
+    <button class="toggle-button js-toggle-button">button</button>
+    <div class="toggle-content js-toggle-content">
+      <p>sLoremipsu</p>
+    </div>
+  </div> #}
+
   {% if page.primary_menu %}
   <div class="layout navigation-wrapper js-navigation">
     <div class="layout__container navigation-wrapper__container">
@@ -141,7 +148,6 @@
             {% if page.footer %}
               {{ page.footer }}
             {% endif %}
-            <p>{{ "Food Standards Agency makes sure food is safe to eat and what it says it is."|t }}</p>            
             <div class="social-media">
               <div class="social-media__list">
                 <a href="https://www.facebook.com/FoodStandardsAgency" class="social-media__link">

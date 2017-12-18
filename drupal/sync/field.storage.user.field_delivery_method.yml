@@ -1,0 +1,27 @@
+uuid: 29d5e9e5-ffad-4070-9c78-52d092765115
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - user
+id: user.field_delivery_method
+field_name: field_delivery_method
+entity_type: user
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: email
+      label: Email
+    -
+      value: sms
+      label: SMS
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

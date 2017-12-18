@@ -1,0 +1,5 @@
+name: FSA contact path
+description: Alters the routing of contact forms.
+type: module
+core: 8.x
+package: FSA

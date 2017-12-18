@@ -1,0 +1,20 @@
+uuid: 26ad090b-d90e-4560-9275-bfa13171baa0
+langcode: en
+status: true
+dependencies:
+  module:
+    - entity_embed
+    - media_entity
+_core:
+  default_config_hash: yDF6LgE9PjFsaJNdFK5ULMMfUz9LaTu15HpoyUREzbA
+label: 'Media Entity Embed'
+id: media_entity_embed
+type_id: entity
+type_settings:
+  entity_type: media
+  bundles: {  }
+  display_plugins: {  }
+  entity_browser: media_entity_browser
+  entity_browser_settings:
+    display_review: false
+icon_uuid: null

@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.field_delivery_method
     - field.field.user.user.field_notification_cache
     - field.field.user.user.field_notification_method
     - field.field.user.user.field_notification_sms
@@ -24,14 +25,20 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_delivery_method:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
   field_notification_method:
-    weight: 5
+    weight: 7
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_notification_sms:
-    weight: 7
+    weight: 1
     settings:
       size: 20
       placeholder: +44xxxxxxxxxx
@@ -39,31 +46,31 @@ content:
     type: string_textfield
     region: content
   field_subscribed_cons:
-    weight: 4
+    weight: 6
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_subscribed_food_alerts:
-    weight: 1
-    settings: {  }
-    third_party_settings: {  }
-    type: options_buttons
-    region: content
-  field_subscribed_news:
     weight: 3
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
+  field_subscribed_news:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
   field_subscribed_notifications:
-    weight: 2
+    weight: 4
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   language:
-    weight: 6
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
