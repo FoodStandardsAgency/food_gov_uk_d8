@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.code_block.field_code_block
+    - field.field.paragraph.code_block.field_hide_title
     - paragraphs.paragraphs_type.code_block
   module:
     - content_moderation
@@ -13,7 +14,7 @@ bundle: code_block
 mode: default
 content:
   field_code_block:
-    weight: 101
+    weight: 2
     settings:
       match_operator: CONTAINS
       size: 60
@@ -21,9 +22,16 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_hide_title:
+    weight: 1
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   moderation_state:
     type: moderation_state_default
-    weight: 100
+    weight: 0
     settings: {  }
     region: content
     third_party_settings: {  }
