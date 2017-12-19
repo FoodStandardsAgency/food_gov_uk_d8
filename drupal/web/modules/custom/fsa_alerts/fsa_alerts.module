@@ -17,7 +17,7 @@ function fsa_alerts_preprocess_block(&$variables) {
     // Override a generic title for page title block when alert type.
     if (is_object($node) && $node->getType() == 'alert') {
       if ($variables['elements']['#id'] == 'pagetitle_hero') {
-        $variables['content']['#title'] = t('News & alerts');
+        $variables['content']['#title'] = t('News and alerts');
       }
     }
   }

@@ -1,0 +1,9 @@
+uuid: 25289b7b-c262-463c-89f1-c3f58c9321a1
+langcode: en
+status: true
+dependencies: {  }
+id: title
+label: 'Custom title'
+icon_uuid: null
+description: 'A custom title to display as a lander row.'
+behavior_plugins: {  }

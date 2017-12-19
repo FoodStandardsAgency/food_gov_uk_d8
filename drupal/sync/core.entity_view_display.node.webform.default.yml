@@ -9,7 +9,6 @@ dependencies:
     - field.field.node.webform.field_icon
     - field.field.node.webform.field_liftup_summary
     - field.field.node.webform.field_liftup_title
-    - field.field.node.webform.field_nation
     - field.field.node.webform.field_topic
     - field.field.node.webform.webform
     - node.type.webform
@@ -48,7 +47,6 @@ hidden:
   field_icon: true
   field_liftup_summary: true
   field_liftup_title: true
-  field_nation: true
   field_topic: true
   langcode: true
   links: true

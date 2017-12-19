@@ -1,0 +1,53 @@
+uuid: ebeda567-d80a-4212-a1dc-4fa09f514f3e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_lander_row
+    - node.type.lander
+    - paragraphs.paragraphs_type.code_block
+    - paragraphs.paragraphs_type.title
+    - paragraphs.paragraphs_type.topic_cloud
+  module:
+    - entity_reference_revisions
+id: node.lander.field_lander_row
+field_name: field_lander_row
+entity_type: node
+bundle: lander
+label: 'Lander row'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      title: title
+      topic_cloud: topic_cloud
+      code_block: code_block
+    target_bundles_drag_drop:
+      title:
+        enabled: true
+        weight: -15
+      topic_cloud:
+        enabled: true
+        weight: -14
+      code_block:
+        enabled: true
+        weight: -13
+      liftups:
+        weight: -12
+        enabled: false
+      manual_promo:
+        weight: -11
+        enabled: false
+      subpage:
+        weight: -10
+        enabled: false
+      team_contact:
+        weight: -9
+        enabled: false
+field_type: entity_reference_revisions
