@@ -27,7 +27,7 @@ function fsa_preprocess_page(&$variables) {
   if (is_object($node)) {
 
     // Get attached hero image and send the url for template.
-    if ($node->field_header_image->target_id) {
+    if (isset($node->field_header_image->target_id)) {
       $media = Media::load($node->field_header_image->target_id);
       $file = File::load($media->get('field_image')->target_id);
       $uri = $file->getFileUri();
