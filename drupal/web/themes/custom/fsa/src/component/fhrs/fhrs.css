@@ -119,7 +119,7 @@
       vertical-align: top;
   
       @media (--breakpoint-md) {
-        width: 50%;
+        width: 49%;
       }
 
       &:nth-child(odd) {
