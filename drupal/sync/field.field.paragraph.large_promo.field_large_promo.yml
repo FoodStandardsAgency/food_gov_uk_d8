@@ -10,8 +10,8 @@ id: paragraph.large_promo.field_large_promo
 field_name: field_large_promo
 entity_type: paragraph
 bundle: large_promo
-label: 'Large promo'
-description: ''
+label: 'Large promo group'
+description: 'Suggested to use max 2 large promo items.'
 required: false
 translatable: false
 default_value: {  }
