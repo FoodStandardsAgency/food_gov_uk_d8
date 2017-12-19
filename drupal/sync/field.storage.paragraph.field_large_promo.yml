@@ -1,0 +1,20 @@
+uuid: 9c38fc59-2cb9-46e8-ab08-5d074a74726b
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - paragraphs
+id: paragraph.field_large_promo
+field_name: field_large_promo
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: block_content
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
