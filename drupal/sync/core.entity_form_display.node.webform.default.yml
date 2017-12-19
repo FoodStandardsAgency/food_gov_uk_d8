@@ -9,17 +9,16 @@ dependencies:
     - field.field.node.webform.field_icon
     - field.field.node.webform.field_liftup_summary
     - field.field.node.webform.field_liftup_title
-    - field.field.node.webform.field_nation
     - field.field.node.webform.field_topic
     - field.field.node.webform.webform
     - image.style.thumbnail
     - node.type.webform
   module:
+    - content_moderation
     - field_group
     - image
     - path
     - shs
-    - term_reference_tree
     - text
     - webform
 third_party_settings:
@@ -112,12 +111,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
-    region: content
-  field_nation:
-    weight: 28
-    settings: {  }
-    third_party_settings: {  }
-    type: options_buttons
     region: content
   field_topic:
     weight: 30
