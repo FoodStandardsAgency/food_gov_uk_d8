@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Includes FSA Lander custom functionality.
+ */
+
+/**
+ * Implements hook_preprocess_paragraph().
+ */
+function fsa_lander_preprocess_field(&$variables) {
+
+  // Add properties and attributes for lander rows.
+  if ($variables['field_name'] == 'field_lander_row') {
+    $i = 0;
+    foreach ($variables['items'] as $item) {
+
+      if (isset($item['content']['#paragraph'])) {
+
+        // Customize different paragraph types.
+        switch ($item['content']['#paragraph']->getType()) {
+          case 'code_block':
+            // Hide title if set so on edit mode.
+            if ($item['content']['#paragraph']->field_hide_title->value) {
+              // @todo: catch the value and hide block title.
+            }
+            break;
+        }
+      }
+      $i++;
+    }
+  }
+}
