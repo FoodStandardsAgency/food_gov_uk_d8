@@ -82,7 +82,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
-    type: term_reference_tree
     region: content
   field_content_type:
     weight: 26
@@ -136,6 +135,12 @@ content:
     region: content
     settings:
       include_locked: true
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
     third_party_settings: {  }
   path:
     type: path

@@ -1,0 +1,32 @@
+uuid: 07d29c18-d7f6-4f5a-b7e2-e7ff817fec3d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.title.field_title
+    - paragraphs.paragraphs_type.title
+  module:
+    - content_moderation
+id: paragraph.title.default
+targetEntityType: paragraph
+bundle: title
+mode: default
+content:
+  field_title:
+    weight: 101
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true
