@@ -16,6 +16,10 @@ html {
 
 html.is-fixed {
   position: fixed;
+
+  @media (--breakpoint-sm) {
+    position: static;
+  }
 }
 
 body {

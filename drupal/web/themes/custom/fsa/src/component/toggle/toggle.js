@@ -2,8 +2,101 @@ import checkMediaQuery from '../../core/helper/checkMediaQuery';
 import breakpoints from '../../core/helper/breakpoints';
 import cssCustomPropertySupport from '../../core/helper/cssCustomPropertySupport';
 import debounce from '../../core/helper/debounce';
+import nextByClass from '../../core/helper/nextByClass';
+import inert from 'wicg-inert';
+import tabbable from 'tabbable';
 
 function toggle() {
+
+  const KEYCODE = {
+    ESC: 27,
+    SPACE: 32,
+  }
+
+  // class Toggle {
+  //   constructor(element) {
+  //     this.element = element;
+  //     this.content = this.toggleContent();
+  //     this.sameGroupItemArray = this.toggleGroupID();
+  //     this.theme = this.toggleTheme();
+  //     this.state = {
+  //       open: false,
+  //     }
+  //   }
+
+  //   get toggleContent() {
+  //     return
+  //       (nextByClass(this.element, 'js-toggle-content') === null) ?
+  //       this.element.closest('.js-content-next').nextElementSibling :
+  //       nextByClass(this.element, 'js-toggle-content');
+  //   }
+
+  //   get toggleTheme() {
+  //     // Check if button specific themes and functions
+  //     this.element.classList.value.split(' ').forEach((className) => {
+  //       if (className.indexOf('js-toggle-button-theme') !== -1) {
+  //         return className.split('js-toggle-button-theme-').pop();
+  //       } else {
+  //         return undefined;
+  //       }
+  //     });
+  //   }
+
+  //   get toggleGroupID() {
+  //     // Groups
+  //     if (toggleGroupElementArray.indexOf(toggleButton.closest('.js-toggle-group')) >= 0) {
+  //       return toggleGroupElementArray.indexOf(toggleButton.closest('.js-toggle-group'));
+  //     } else {
+  //       return undefined;
+  //     }
+  //   }
+
+  //   mount() {
+  //     // All the listeners
+  //     // Add click listener to toggle
+  //     this.element.addEventListener('mousedown', function(event){
+  //       event.preventDefault();  //stops default browser action (focus)
+  //       accordionEventHandler(toggleButton, content, event);
+  //     });
+
+  //     // Add click listener to toggle
+  //     this.element.addEventListener('click', function(event){
+  //       event.preventDefault();
+  //     });
+
+  //     // Add focus listener
+  //     this.element.addEventListener('focus', function(event) {
+  //       content.style.willChange = 'max-height, min-height';
+  //     }, true);
+
+  //     // Add focus listener
+  //     this.element.addEventListener('blur', function(event) {
+  //       content.style.willChange = 'auto';
+  //     }, true);
+      
+  //     // Hover on
+  //     this.element.addEventListener('mouseenter', function(event){
+  //       content.style.willChange = 'max-height, min-height';
+  //     });
+
+  //     // Hover out
+  //     this.element.addEventListener('mouseout', function(event){
+  //       content.style.willChange = 'auto';
+  //     });
+
+  //     // Add keyboard key listener
+  //     this.element.addEventListener('keydown', function(event){
+  //       if (event.keyCode === KEYCODE.SPACE) {
+  //         event.preventDefault();
+  //         accordionEventHandler(toggleButton, content, event);
+  //       }
+  //     });
+  //   }
+
+  //   unmount() {
+  //     // All the listeners
+  //   }
+  // }
 
   // Measure all content elements and assign their height to a css variable in the style attribute of the html.
   function setDynamicHeight(element) {
@@ -49,18 +142,37 @@ function toggle() {
   }
 
   function accordionContentClose(element) {
-    element.classList.remove('is-visible');
-    element.classList.add('is-hidden');
-    element.setAttribute('aria-hidden', true);
+    if (element.classList.contains('js-toggle-content-function-open')  && checkMediaQuery() != breakpoints.small) {
+      return false;
+    } else {
+      element.classList.remove('is-visible');
+      element.classList.add('is-hidden');
+      element.setAttribute('aria-hidden', true);
+
+      // Unset content from accessibility tree
+      element.inert = true;
+    }
   }
 
   function accordionContentOpen(element) {
     element.classList.add('is-visible');
     element.classList.remove('is-hidden');
     element.setAttribute('aria-hidden', false);
+
+    // Set content to accessibility tree
+    element.inert = false;
   }
 
-  function accordionEventHandler(button, content) {
+  function accordionEventHandler(button, content, event) {
+    // console.log(event.type  + ' ' + content.classList.contains('is-visible'));
+    // if (document.activeElement.classList.contains('js-toggle-button')) {
+    //   console.log(button === document.activeElement)
+    // } else {
+    //   console.log(button);
+    //   console.log(document.activeElement.closest('.js-toggle-button'));
+    //   console.log(button === document.activeElement.closest('.js-toggle-button'));
+    // }
+    
     if (content.classList.contains('is-visible')) {
       accordionContentClose(content);
       accordionButtonClose(button);
@@ -85,6 +197,13 @@ function toggle() {
     });
 
     contentArray.forEach((element) => {
+      if (element.classList.contains('js-toggle-content-function-open') && checkMediaQuery() != breakpoints.small) {
+
+      } else {
+        // Unset content from accessibility tree
+        element.inert = true;
+      }
+
       // Check if only mobile
       if (element.classList.contains('js-toggle-content-only-mobile')) {
         if (checkMediaQuery() == breakpoints.small) {
@@ -101,8 +220,11 @@ function toggle() {
     });
   };
 
-  // All the toggle buttons
+  // Query all the toggle buttons
   const toggleButtonElementArray = [...document.querySelectorAll('.js-toggle-button')];
+
+  // Query all the toggle groups
+  const toggleGroupElementArray = [...document.querySelectorAll('.js-toggle-group')];
 
   // Check everything found
   if (toggleButtonElementArray <= 0) {
@@ -111,35 +233,95 @@ function toggle() {
 
   // All content elements
   let contentElementArray = [];
+  let toggleGroupItemArray = [];
 
   // Loop
   toggleButtonElementArray.forEach((element) => {
-    const toggleButtonElement = element;
-    let toggleButton;
-    let content;
+    let toggleButton = element;
+    let toggleFunction = undefined;
+    let content = nextByClass(toggleButton, 'js-toggle-content');
+    let contentTheme = undefined;
+    let groupID = undefined;
 
-    if (toggleButtonElement.nextElementSibling === null) {
-      content = toggleButtonElement.closest('.js-content-next').nextElementSibling;
-      toggleButton = toggleButtonElement.closest('.js-content-next');
-    } else {
-      content = toggleButtonElement.nextElementSibling;
-      toggleButton = toggleButtonElement;
+    // Set button focusable if not tabbable or has tabbable children
+    if (tabbable(toggleButton).length === 0) {
+      toggleButton.setAttribute('tabindex', '0');
     }
 
-    contentElementArray = [...contentElementArray, content];
-    
-    // Add click listener to toggle
-    toggleButtonElement.addEventListener('click', function(e){
-      e.preventDefault();
-      accordionEventHandler(toggleButton, content);
+    // Check if button specific themes and functions
+    const toggleButtonClassListArray = toggleButton.classList.value.split(' ');
+
+    toggleButtonClassListArray.forEach((className) => {
+      if (className.indexOf('js-toggle-button-function') !== -1) {
+        toggleFunction = className.split('js-toggle-button-function-').pop();
+      }
     });
 
-    toggleButtonElement.addEventListener('mouseenter', function(e){
+    // Check if content has a next sibling
+    if (content === null) {
+      if (toggleFunction === 'current') {
+        content = toggleButton.closest('.js-toggle-content');
+      } else {
+        content = toggleButton.closest('.js-content-next').nextElementSibling;
+      }
+    }
+
+    contentElementArray = [...contentElementArray, content];    
+
+    // Check if content specific themes and functions
+    const contentClassListArray = content.classList.value.split(' ');
+
+    contentClassListArray.forEach((className) => {
+      if (className.indexOf('js-toggle-theme') !== -1) {
+        contentTheme = className.split('js-toggle-theme-').pop();
+        content.classList.add(`is-${contentTheme}`);
+      }
+
+      if (className.indexOf('js-toggle-content-function') !== -1) {
+        toggleFunction = className.split('js-toggle-content-function-').pop();
+      }
+    });
+
+    // // Groups
+    // if (toggleGroupElementArray.indexOf(toggleButton.closest('.js-toggle-group')) >= 0) {
+    //   groupID = toggleGroupElementArray.indexOf(toggleButton.closest('.js-toggle-group'));
+    //   // toggleGroupItemArray[groupID].push(toggleButton);
+    //   // toggleGroupItemArray[groupID] = [...toggleGroupItemArray[groupID], toggleButton];
+
+    //   toggleGroupItemArray[groupID] = [...toggleGroupItemArray[groupID], toggleButton];
+    //   console.log(toggleGroupItemArray[groupID]);
+    // }
+
+    // Add click listener to toggle
+    toggleButton.addEventListener('mousedown', function(event){
+      event.preventDefault();  //stops default browser action (focus)
+      accordionEventHandler(toggleButton, content, event);
+    });
+
+    // Add click listener to toggle
+    toggleButton.addEventListener('click', function(event){
+      event.preventDefault();
+    });
+
+    // toggleButton.addEventListener('blur', function(event) {
+  //   content.style.willChange = 'auto';
+    //   accordionEventHandler(toggleButton, content, event);
+    // }, true);
+
+    toggleButton.addEventListener('mouseenter', function(event){
       content.style.willChange = 'max-height, min-height';
     });
 
-    toggleButtonElement.addEventListener('mouseout', function(e){
+    toggleButton.addEventListener('mouseout', function(event){
       content.style.willChange = 'auto';
+    });
+
+    // Add click listener to toggle
+    toggleButton.addEventListener('keydown', function(event){
+      if (event.keyCode === KEYCODE.SPACE) {
+        event.preventDefault();
+        accordionEventHandler(toggleButton, content, event);
+      }
     });
     
     // // Add transitioned listener to content

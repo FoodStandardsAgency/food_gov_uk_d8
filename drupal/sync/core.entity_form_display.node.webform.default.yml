@@ -19,6 +19,7 @@ dependencies:
     - image
     - path
     - shs
+    - term_reference_tree
     - text
     - webform
 third_party_settings:
@@ -81,6 +82,7 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
+    type: term_reference_tree
     region: content
   field_content_type:
     weight: 26
