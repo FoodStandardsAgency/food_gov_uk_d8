@@ -1,0 +1,9 @@
+uuid: f3c8cd0c-5b05-4323-adec-13c41b12f693
+langcode: en
+status: true
+dependencies: {  }
+id: large_promo
+label: 'Large promo'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

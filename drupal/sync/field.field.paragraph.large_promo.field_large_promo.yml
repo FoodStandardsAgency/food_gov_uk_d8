@@ -1,0 +1,28 @@
+uuid: 962e9aa5-3358-434b-ab10-a557febaeaae
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.large_promo
+    - field.storage.paragraph.field_large_promo
+    - paragraphs.paragraphs_type.large_promo
+id: paragraph.large_promo.field_large_promo
+field_name: field_large_promo
+entity_type: paragraph
+bundle: large_promo
+label: 'Large promo'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:block_content'
+  handler_settings:
+    target_bundles:
+      large_promo: large_promo
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

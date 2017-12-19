@@ -6,6 +6,7 @@ dependencies:
     - field.storage.node.field_lander_row
     - node.type.lander
     - paragraphs.paragraphs_type.code_block
+    - paragraphs.paragraphs_type.large_promo
     - paragraphs.paragraphs_type.title
     - paragraphs.paragraphs_type.topic_cloud
   module:
@@ -26,28 +27,32 @@ settings:
     negate: 0
     target_bundles:
       title: title
+      large_promo: large_promo
       topic_cloud: topic_cloud
       code_block: code_block
     target_bundles_drag_drop:
       title:
         enabled: true
-        weight: -15
+        weight: -17
+      large_promo:
+        enabled: true
+        weight: -16
       topic_cloud:
         enabled: true
-        weight: -14
+        weight: -15
       code_block:
         enabled: true
-        weight: -13
+        weight: -14
       liftups:
-        weight: -12
+        weight: -13
         enabled: false
       manual_promo:
-        weight: -11
+        weight: -12
         enabled: false
       subpage:
-        weight: -10
+        weight: -11
         enabled: false
       team_contact:
-        weight: -9
+        weight: -10
         enabled: false
 field_type: entity_reference_revisions

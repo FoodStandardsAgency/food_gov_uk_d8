@@ -1,0 +1,25 @@
+uuid: 028925cd-c5e5-4d99-af2b-a3ad833dba81
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.large_promo.field_large_promo
+    - paragraphs.paragraphs_type.large_promo
+id: paragraph.large_promo.default
+targetEntityType: paragraph
+bundle: large_promo
+mode: default
+content:
+  field_large_promo:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true

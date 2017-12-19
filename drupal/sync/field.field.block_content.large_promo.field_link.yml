@@ -1,0 +1,23 @@
+uuid: c73823cb-eaae-416d-abd0-d97d20ac1da9
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.large_promo
+    - field.storage.block_content.field_link
+  module:
+    - link
+id: block_content.large_promo.field_link
+field_name: field_link
+entity_type: block_content
+bundle: large_promo
+label: Link
+description: 'If link text is left empty a default text "Read more" will be used.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link
