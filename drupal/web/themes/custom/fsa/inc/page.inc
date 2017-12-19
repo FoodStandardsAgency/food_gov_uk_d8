@@ -5,6 +5,10 @@
  * Includes FSA theme page preprocess functionality.
  */
 
+use Drupal\media_entity\Entity\Media;
+use Drupal\file\Entity\File;
+use Drupal\Core\Url;
+
 /**
  * Implements template_preprocess_page().
  */
@@ -16,5 +20,18 @@ function fsa_preprocess_page(&$variables) {
   }
   else {
     $variables['home_url'] = '/';
+  }
+
+  // Do magic when we have a node object.
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if (is_object($node)) {
+
+    // Get attached hero image and send the url for template.
+    if ($node->field_header_image->target_id) {
+      $media = Media::load($node->field_header_image->target_id);
+      $file = File::load($media->get('field_image')->target_id);
+      $uri = $file->getFileUri();
+      $variables['hero_image_url'] = file_create_url($uri);
+    }
   }
 }
