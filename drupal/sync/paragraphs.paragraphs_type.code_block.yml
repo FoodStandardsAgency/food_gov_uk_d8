@@ -1,9 +1,9 @@
-uuid: 4f126610-b81a-4b22-890c-7022c422162d
+uuid: 8c593aed-3be2-41f0-9051-1d9b803c68c7
 langcode: en
 status: true
 dependencies: {  }
-id: manual_promo
-label: 'Manual promo group'
+id: code_block
+label: 'Code block'
 icon_uuid: null
 description: ''
 behavior_plugins: {  }

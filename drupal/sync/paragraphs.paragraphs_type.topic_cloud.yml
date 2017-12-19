@@ -1,9 +1,9 @@
-uuid: 4f126610-b81a-4b22-890c-7022c422162d
+uuid: 264037bd-57fd-4da8-9507-b7fa9707711b
 langcode: en
 status: true
 dependencies: {  }
-id: manual_promo
-label: 'Manual promo group'
+id: topic_cloud
+label: 'Topic cloud'
 icon_uuid: null
 description: ''
 behavior_plugins: {  }

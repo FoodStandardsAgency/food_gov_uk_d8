@@ -1,0 +1,24 @@
+uuid: d9209042-730b-43ec-a43f-e177c2bfaab3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.title.field_title
+    - paragraphs.paragraphs_type.title
+id: paragraph.title.default
+targetEntityType: paragraph
+bundle: title
+mode: default
+content:
+  field_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
