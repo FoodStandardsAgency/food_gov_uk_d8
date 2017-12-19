@@ -12,12 +12,12 @@ field_name: field_link
 entity_type: block_content
 bundle: large_promo
 label: Link
-description: 'If link text is left empty a default text "Read more" will be used.'
+description: ''
 required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
   link_type: 17
-  title: 1
+  title: 2
 field_type: link

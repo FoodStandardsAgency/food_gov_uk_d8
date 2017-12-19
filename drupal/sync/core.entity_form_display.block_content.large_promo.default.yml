@@ -30,7 +30,7 @@ content:
     weight: 3
     settings:
       placeholder_url: ''
-      placeholder_title: 'Read more'
+      placeholder_title: ''
     third_party_settings: {  }
     type: link_default
     region: content
