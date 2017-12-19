@@ -189,37 +189,29 @@
   </div>
   {% endif %}
 
-  {% if page.secondary_menu %}
-  <div class="layout">
-    <div class="layout__container">
-      <div class="layout__content">
-        <div class="navigation-wrapper navigation-wrapper--secondary">
-          {{ page.secondary_menu }}
-        </div>
-      </div>
-    </div>
-  </div>
-  {% endif %}
-
-  {% if page.hero is defined and page.hero|render|striptags|trim %}
+  {% if (page.hero is defined and page.hero|render|striptags|trim) or (page.secondary_menu) %}
   <div class="layout hero-wrapper">
     <div class="layout__container">
       <div class="layout__content hero-wrapper__content">
-        <div class="hero">
+          <div class="hero{% if page.hero is defined and page.hero|render|striptags|trim %} hero--with-content{% endif %}">
+            {% if page.hero is defined and page.hero|render|striptags|trim %}
+              {% if hero_image_url %}
+                <div class="hero__background hero__background--image" style="background-image: url({{ hero_image_url }});">
+                </div>
+              {% else %}
+                <div class="hero__background hero__background--pattern">
+                  <div class="svg">
+                    <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#pattern"></use></svg>
+                  </div>
+                </div>
+              {% endif %}
+              {{ page.hero }}
+            {% endif %}
 
-          {% if hero_image_url %}
-            <div class="hero__background hero__background--image" style="background-image: url({{ hero_image_url }});">
-            </div>
-          {% else %}
-            <div class="hero__background hero__background--pattern">
-              <div class="svg">
-                <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#pattern"></use></svg>
-              </div>
-            </div>
-          {% endif %}
-
-          {{ page.hero }}
-        </div>
+            {% if page.secondary_menu %}
+              {{ page.secondary_menu }}
+            {% endif %}
+          </div>
       </div>
     </div>
   </div>
