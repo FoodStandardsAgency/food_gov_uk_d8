@@ -1,0 +1,31 @@
+uuid: 032f60aa-546e-47d6-a593-686200933db1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.topic_cloud.field_topic_cloud
+    - paragraphs.paragraphs_type.topic_cloud
+  module:
+    - content_moderation
+    - term_reference_tree
+id: paragraph.topic_cloud.default
+targetEntityType: paragraph
+bundle: topic_cloud
+mode: default
+content:
+  field_topic_cloud:
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    type: term_reference_tree
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true
