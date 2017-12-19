@@ -14,6 +14,12 @@ use Drupal\Component\Utility\Html;
  */
 function fsa_preprocess_html(&$variables) {
 
+  // Add class to body if frontpage
+  $is_front = \Drupal::service('path.matcher')->isFrontPage();
+  if ($is_front) {
+    $variables['attributes']['class'][] = 'theme--frontpage';
+  }
+
   // Do magic when we have a node object.
   $node = \Drupal::routeMatch()->getParameter('node');
   if (is_object($node)) {
