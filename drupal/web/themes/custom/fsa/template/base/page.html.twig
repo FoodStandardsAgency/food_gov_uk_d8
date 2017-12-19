@@ -207,9 +207,14 @@
       <div class="layout__content hero-wrapper__content">
         <div class="hero">
           <div class="hero__background">
-            <div class="svg">
-              <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#pattern"></use></svg>
-            </div>
+              {% if hero_image_url %}
+                {# @todo: remove inline styles and make it pretty #}
+                <div style="background: url({{ hero_image_url }}) no-repeat 0 50%; background-size: cover; height: 480px; width: 100%;"></div>
+              {% else %}
+                <div class="svg">
+                  <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#pattern"></use></svg>
+                </div>
+            {% endif %}
           </div>
           {{ page.hero }}
         </div>
