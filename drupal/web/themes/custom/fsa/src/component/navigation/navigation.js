@@ -3,8 +3,8 @@ function navigation() {
   const settings = {
     hoverClass: 'is-open',
     menuSelector: 'ul.navigation__menu',
-    groupSelector: 'li.navigation__item.navigation__item--level-2',
-    listItemSelector: 'li',
+    groupSelector: 'header.navigation__header, li.navigation__item.navigation__item--level-2',
+    listItemSelector: 'header.navigation__header, li.navigation__item',
     menuItemActionSelector: '.navigation__item a, .navigation__item button'
   };
 
