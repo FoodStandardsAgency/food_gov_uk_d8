@@ -1,0 +1,50 @@
+uuid: 605a3211-4d67-441b-8cec-fb20cdfcc559
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.content_promo.field_content_promo
+    - field.field.paragraph.content_promo.field_title
+    - paragraphs.paragraphs_type.content_promo
+  module:
+    - content_moderation
+    - entity_browser_entity_form
+    - inline_entity_form
+id: paragraph.content_promo.default
+targetEntityType: paragraph
+bundle: content_promo
+mode: default
+content:
+  field_content_promo:
+    weight: 1
+    settings:
+      form_mode: default
+      override_labels: true
+      label_singular: 'Content promo'
+      label_plural: 'Content promos'
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+    type: inline_entity_form_complex
+    region: content
+  field_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 2
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true

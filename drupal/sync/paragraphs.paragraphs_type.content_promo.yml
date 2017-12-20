@@ -1,9 +1,9 @@
-uuid: f3c8cd0c-5b05-4323-adec-13c41b12f693
+uuid: 07774dc0-951a-4c23-bbe8-cabe98587e00
 langcode: en
 status: true
 dependencies: {  }
-id: large_promo
-label: 'Large promo group'
+id: content_promo
+label: 'Content promo group'
 icon_uuid: null
 description: ''
 behavior_plugins: {  }
