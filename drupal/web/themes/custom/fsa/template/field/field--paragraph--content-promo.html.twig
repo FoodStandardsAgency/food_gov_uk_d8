@@ -1,0 +1,43 @@
+{#
+/**
+ * @file
+ * FSA theme override for Content promo paragraph field.
+ *
+ * Additional variables:
+ * - link_target: URL to link the whole promo element.
+ *
+ * @see fsa_lander_preprocess_field()
+ * @see template_preprocess_field()
+ */
+#}
+
+{% if label_hidden %}
+    {% if multiple %}
+        <div{{ attributes }}>
+            {% for item in items %}
+                <div{{ item.attributes }}>{{ item.content }}</div>
+            {% endfor %}
+        </div>
+    {% else %}
+        {% for item in items %}
+            <div{{ attributes }}>{{ item.content }}</div>
+        {% endfor %}
+    {% endif %}
+{% else %}
+<div{{ attributes }}>
+    <{{ title_element }}{{ title_attributes }}>{{ label }}</{{ title_element }}>
+    {% if multiple %}
+        <div>
+    {% endif %}
+    {% for item in items %}
+        {% if label_display == 'inline' %}
+            <span{{ item.attributes }}>{{ item.content }}</span>
+        {% else %}
+            <div{{ item.attributes }}>{{ item.content }}</div>
+        {% endif %}
+    {% endfor %}
+    {% if multiple %}
+        </div>
+    {% endif %}
+    </div>
+{% endif %}
