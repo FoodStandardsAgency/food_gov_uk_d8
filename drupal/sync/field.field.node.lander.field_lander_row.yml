@@ -16,7 +16,7 @@ id: node.lander.field_lander_row
 field_name: field_lander_row
 entity_type: node
 bundle: lander
-label: 'Lander row'
+label: 'Lander rows'
 description: ''
 required: false
 translatable: false

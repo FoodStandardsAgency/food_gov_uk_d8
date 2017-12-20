@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: large_promo
-label: 'Large promo'
+label: 'Large promo group'
 icon_uuid: null
 description: ''
 behavior_plugins: {  }

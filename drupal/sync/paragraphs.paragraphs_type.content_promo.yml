@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: content_promo
-label: 'Content promo'
+label: 'Content promo group'
 icon_uuid: null
 description: ''
 behavior_plugins: {  }
