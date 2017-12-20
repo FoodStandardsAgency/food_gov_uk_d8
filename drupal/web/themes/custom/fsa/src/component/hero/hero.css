@@ -1,8 +1,14 @@
 @import "../../core/helper";
 @import "../../core/custom-property";
 
+.hero-wrapper__content {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .hero {
   position: relative;
+  @mixin responsive-declaration padding, 1em, 2em;
 
   @media print {
     background-color: transparent;
@@ -113,6 +119,18 @@
   &.hero__background--image {
     background-size: cover;
     background-position: 50% 50%;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: block;
+      background-color: var(--color-black);
+      opacity: 0.4;
+    }
   }
 
   &.hero__background--pattern {
@@ -166,7 +184,7 @@
 /* Hero breadcrumb */
 .hero__breadcrumb {
   padding: 0 1em;
-  
+
   .hero.hero--with-content & {
     position: absolute;
     top: 0;
@@ -180,14 +198,15 @@
 .breadcrumb {
   position: relative;
   z-index: var(--z-top);
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-flow: row wrap;
   padding-top: 1em;
   padding-bottom: 1em;
+  display: none;
 
   @media (--breakpoint-md) {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-flow: row wrap;
     border-bottom: 1px solid var(--color-light-gray);
   } 
 
