@@ -13,7 +13,7 @@ mode: preview
 content:
   field_large_promo:
     weight: 0
-    label: hidden
+    label: visually_hidden
     settings:
       link: false
     third_party_settings: {  }

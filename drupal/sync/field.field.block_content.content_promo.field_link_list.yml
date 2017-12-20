@@ -11,7 +11,7 @@ id: block_content.content_promo.field_link_list
 field_name: field_link_list
 entity_type: block_content
 bundle: content_promo
-label: 'Link list'
+label: 'Link list (Do not use in conjunction with link field above)'
 description: 'List of links to internal (or external) resources. These fields cannot be used in combination with Link field above.'
 required: false
 translatable: true

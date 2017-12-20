@@ -11,8 +11,8 @@ id: block_content.content_promo.field_link
 field_name: field_link
 entity_type: block_content
 bundle: content_promo
-label: Link
-description: 'Link target to make this whole promo a link element.'
+label: 'Promo link (Do not use in conjunction with link list field below)'
+description: ''
 required: false
 translatable: true
 default_value: {  }

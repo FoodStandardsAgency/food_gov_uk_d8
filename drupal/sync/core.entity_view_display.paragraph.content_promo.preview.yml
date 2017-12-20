@@ -14,7 +14,7 @@ mode: preview
 content:
   field_content_promo:
     weight: 1
-    label: hidden
+    label: inline
     settings:
       link: false
     third_party_settings: {  }
