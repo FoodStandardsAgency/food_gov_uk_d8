@@ -6,6 +6,7 @@ dependencies:
     - block_content.type.content_promo
     - field.field.block_content.content_promo.field_intro
     - field.field.block_content.content_promo.field_link
+    - field.field.block_content.content_promo.field_link_list
     - field.field.block_content.content_promo.field_media_library_image
     - field.field.block_content.content_promo.field_title
   module:
@@ -23,12 +24,24 @@ content:
     type: basic_string
     region: content
   field_link:
-    weight: 3
+    weight: 4
     label: hidden
     settings:
       trim_length: null
       url_only: true
       url_plain: true
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_link_list:
+    weight: 3
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
       rel: '0'
       target: '0'
     third_party_settings: {  }
