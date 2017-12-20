@@ -19,7 +19,7 @@
         <div{{ attributes }}>
             {% for item in items %}
             <div{{ item.attributes }}>
-                {% if item.content.field_link|render|striptags|trim %}
+                {% if item.content.field_link|render|striptags|trim and not item.content.field_link_list|render|striptags|trim %}
                     <a href="{{ item.content.field_link|render|striptags|trim }}">{{ item.content|without('field_link') }}</a>
                 {% else %}
                     {{ item.content|without('field_link') }}
@@ -31,7 +31,7 @@
         {% for item in items %}
             {{ item.content.field_link }}
             <div{{ attributes }}>
-                {% if item.content.field_link|render|striptags|trim %}
+                {% if item.content.field_link|render|striptags|trim and not item.content.field_link_list|render|striptags|trim %}
                     <a href="{{ item.content.field_link|render|striptags|trim }}">{{ item.content|without('field_link') }}</a>
                 {% else %}
                     {{ item.content|without('field_link') }}
@@ -49,7 +49,7 @@
         {% if label_display == 'inline' %}
             {{ item.content.field_link }}
             <span{{ item.attributes }}>
-                {% if item.content.field_link|render|striptags|trim %}
+                {% if item.content.field_link|render|striptags|trim and not item.content.field_link_list|render|striptags|trim %}
                     <a href="{{ item.content.field_link|render|striptags|trim }}">{{ item.content|without('field_link') }}</a>
                 {% else %}
                     {{ item.content|without('field_link') }}
@@ -58,7 +58,7 @@
         {% else %}
             {{ item.content.field_link }}
             <div{{ item.attributes }}>
-                {% if item.content.field_link|render|striptags|trim %}
+                {% if item.content.field_link|render|striptags|trim and not item.content.field_link_list|render|striptags|trim %}
                     <a href="{{ item.content.field_link|render|striptags|trim }}">{{ item.content|without('field_link') }}</a>
                 {% else %}
                     {{ item.content|without('field_link') }}
