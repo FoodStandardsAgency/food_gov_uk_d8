@@ -28,7 +28,7 @@ content:
     settings:
       trim_length: null
       url_only: true
-      url_plain: false
+      url_plain: true
       rel: '0'
       target: '0'
     third_party_settings: {  }

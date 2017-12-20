@@ -4,23 +4,39 @@
  * FSA theme override for Content promo paragraph field.
  *
  * Additional variables:
- * - link_target: URL to link the whole promo element.
+ * - item.link_target: URL to link the whole promo element.
+ *
+ * Note: variable|render|striptags|trim to avoid issues with twig debugging turned on.
  *
  * @see fsa_lander_preprocess_field()
  * @see template_preprocess_field()
  */
 #}
 
+{{ item.content.field_link }}
 {% if label_hidden %}
     {% if multiple %}
         <div{{ attributes }}>
             {% for item in items %}
-                <div{{ item.attributes }}>{{ item.content }}</div>
+            <div{{ item.attributes }}>
+                {% if item.content.field_link|render|striptags|trim %}
+                    <a href="{{ item.content.field_link|render|striptags|trim }}">{{ item.content|without('field_link') }}</a>
+                {% else %}
+                    {{ item.content|without('field_link') }}
+                {% endif %}
+            </div>
             {% endfor %}
         </div>
     {% else %}
         {% for item in items %}
-            <div{{ attributes }}>{{ item.content }}</div>
+            {{ item.content.field_link }}
+            <div{{ attributes }}>
+                {% if item.content.field_link|render|striptags|trim %}
+                    <a href="{{ item.content.field_link|render|striptags|trim }}">{{ item.content|without('field_link') }}</a>
+                {% else %}
+                    {{ item.content|without('field_link') }}
+                {% endif %}
+            </div>
         {% endfor %}
     {% endif %}
 {% else %}
@@ -31,9 +47,23 @@
     {% endif %}
     {% for item in items %}
         {% if label_display == 'inline' %}
-            <span{{ item.attributes }}>{{ item.content }}</span>
+            {{ item.content.field_link }}
+            <span{{ item.attributes }}>
+                {% if item.content.field_link|render|striptags|trim %}
+                    <a href="{{ item.content.field_link|render|striptags|trim }}">{{ item.content|without('field_link') }}</a>
+                {% else %}
+                    {{ item.content|without('field_link') }}
+                {% endif %}
+            </span>
         {% else %}
-            <div{{ item.attributes }}>{{ item.content }}</div>
+            {{ item.content.field_link }}
+            <div{{ item.attributes }}>
+                {% if item.content.field_link|render|striptags|trim %}
+                    <a href="{{ item.content.field_link|render|striptags|trim }}">{{ item.content|without('field_link') }}</a>
+                {% else %}
+                    {{ item.content|without('field_link') }}
+                {% endif %}
+            </div>
         {% endif %}
     {% endfor %}
     {% if multiple %}
