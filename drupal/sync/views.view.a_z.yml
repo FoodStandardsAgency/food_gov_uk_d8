@@ -3,10 +3,11 @@ langcode: en
 status: true
 dependencies:
   module:
+    - fsa_custom
     - node
     - user
 id: a_z
-label: a_z
+label: ''
 module: views
 description: ''
 tag: ''
@@ -206,21 +207,17 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: standard
-      title: A-Z
+      title: ''
       header:
-        area:
-          id: area
+        letters:
+          id: letters
           table: views
-          field: area
+          field: letters
           relationship: none
           group_type: group
           admin_label: ''
           empty: true
-          tokenize: false
-          content:
-            value: '<a class="a-z-ui-item" href="#a">A</a><a class="a-z-ui-item" href="#b">B</a><a class="a-z-ui-item" href="#c">C</a><a class="a-z-ui-item" href="#d">D</a><a class="a-z-ui-item" href="#e">E</a><a class="a-z-ui-item" href="#f">F</a><a class="a-z-ui-item" href="#g">G</a><a class="a-z-ui-item" href="#h">H</a><a class="a-z-ui-item" href="#i">I</a><a class="a-z-ui-item" href="#j">J</a><a class="a-z-ui-item" href="#k">K</a><a class="a-z-ui-item" href="#l">L</a><a class="a-z-ui-item" href="#m">M</a><a class="a-z-ui-item" href="#n">N</a><a class="a-z-ui-item" href="#o">O</a><a class="a-z-ui-item" href="#p">P</a><a class="a-z-ui-item" href="#q">Q</a><a class="a-z-ui-item" href="#r">R</a><a class="a-z-ui-item" href="#s">S</a><a class="a-z-ui-item" href="#t">T</a><a class="a-z-ui-item" href="#u">U</a><a class="a-z-ui-item" href="#v">V</a><a class="a-z-ui-item" href="#w">W</a><a class="a-z-ui-item" href="#x">X</a><a class="a-z-ui-item" href="#y">Y</a><a class="a-z-ui-item" href="#z">Z</a>'
-            format: full_html
-          plugin_id: text
+          plugin_id: letters
       footer: {  }
       empty: {  }
       relationships: {  }
@@ -234,18 +231,17 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-  page_1:
-    display_plugin: page
-    id: page_1
-    display_title: Page
-    position: 1
+  block_1:
+    display_plugin: block
+    id: block_1
+    display_title: Block
+    position: 2
     display_options:
       display_extenders: {  }
-      path: a-z
-      rendering_language: '***LANGUAGE_language_interface***'
     cache_metadata:
       max-age: -1
       contexts:
+        - 'languages:language_content'
         - 'languages:language_interface'
         - 'user.node_grants:view'
         - user.permissions
