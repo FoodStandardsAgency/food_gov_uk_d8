@@ -14,7 +14,7 @@ third_party_settings:
 id: search_global_keyword
 theme: fsa
 region: content
-weight: -3
+weight: -4
 provider: null
 plugin: search_keyword
 settings:
