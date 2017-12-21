@@ -1,0 +1,9 @@
+uuid: ceec5d03-789d-4308-ba25-0076411b1de7
+langcode: en
+status: true
+dependencies: {  }
+id: icon_link
+label: 'Icon link group'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }
