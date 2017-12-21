@@ -1,0 +1,25 @@
+uuid: e95f9a72-ff40-4c16-b0f1-f2e1cc0d5122
+langcode: en
+status: true
+dependencies:
+  module:
+    - file
+    - taxonomy
+_core:
+  default_config_hash: AoP9j3SbKoD3nOgS4A4ZgiN4xF4nlawif8tRyuRmhjM
+id: taxonomy_term.field_svg_file
+field_name: field_svg_file
+entity_type: taxonomy_term
+type: file
+settings:
+  display_field: false
+  display_default: false
+  uri_scheme: public
+  target_type: file
+module: file
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

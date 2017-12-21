@@ -1,0 +1,11 @@
+uuid: 5c54070f-5985-4f5d-86d0-3c370e4963c9
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: py1K5_xKzfVTT314A9SdRm7-4AKavjghxgBfY8BeAxo
+name: Icons
+vid: icons
+description: ''
+hierarchy: 0
+weight: 0
