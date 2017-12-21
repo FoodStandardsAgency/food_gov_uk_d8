@@ -1,0 +1,6 @@
+name: Linkit Content
+type: module
+description: "Allows using custom view for link selection"
+core: 8.x
+dependencies:
+  - linkit

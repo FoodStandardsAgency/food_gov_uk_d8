@@ -1,0 +1,8 @@
+name: FSA TOC Customizations
+type: module
+description: "Save body header tag id's to node instead of generating them on the fly"
+core: 8.x
+package: FSA
+dependencies:
+  - toc_filter
+  - toc_api
