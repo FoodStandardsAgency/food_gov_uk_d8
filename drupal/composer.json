@@ -76,6 +76,7 @@
         "drupal/warden": "^1.1",
         "drupal/media_entity_browser": "~1.4",
         "drupal/term_reference_tree": "^1.0",
+        "drupal/icon_select": "^1.0@beta",
         "maijs/elasticsearch_helper_views": "dev-8.x-1.x"
     },
     "require-dev": {
@@ -114,7 +115,7 @@
         }
     },
     "scripts": {
-        "post-install-cmd": [
+        "drupal-scaffold": [
             "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"]
     }
 }

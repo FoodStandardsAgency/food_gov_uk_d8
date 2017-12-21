@@ -1,0 +1,29 @@
+uuid: af1a0c6f-c679-49ba-9667-adbbb76db9d2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_svg_file
+    - taxonomy.vocabulary.icons
+  module:
+    - file
+_core:
+  default_config_hash: 24FZWRbpA-TijfPlR9G7NZQ21dhQ-GhY7etW3f22Ngw
+id: taxonomy_term.icons.field_svg_file
+field_name: field_svg_file
+entity_type: taxonomy_term
+bundle: icons
+label: SVG
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: icons/svgs
+  file_extensions: svg
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

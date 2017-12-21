@@ -5,10 +5,10 @@ import html from './toggle.html';
 import css from './toggle.css';
 
 // Import JavaScript
-import js from './toggle';
+// import js from './toggle';
 
 module.exports = {
   html,
   css,
-  js,
+  // js,
 };

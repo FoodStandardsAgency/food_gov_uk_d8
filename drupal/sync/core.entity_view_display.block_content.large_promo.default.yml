@@ -1,0 +1,58 @@
+uuid: ee926025-7a79-401c-8675-a13a054e69de
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.large_promo
+    - field.field.block_content.large_promo.field_intro
+    - field.field.block_content.large_promo.field_link
+    - field.field.block_content.large_promo.field_media_library_image
+    - field.field.block_content.large_promo.field_title
+  module:
+    - link
+id: block_content.large_promo.default
+targetEntityType: block_content
+bundle: large_promo
+mode: default
+content:
+  field_intro:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_link:
+    weight: 4
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_media_library_image:
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: large_promo
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_title:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true

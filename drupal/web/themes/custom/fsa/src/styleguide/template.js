@@ -45,6 +45,10 @@ const intro = parsePartialMarkup(require("template-string-loader!./partial/intro
 const requiredComponents = require.context('../component/', true, /index\.js$/).keys();
 
 const componentArray = requiredComponents.map((component) => {
+  /*
+  @todo - require doesn't currently support imports
+          from npm folder
+  */
   const requiredComponent = require(`../component/${component.replace('./', '')}`);
   requiredComponent.title = component.split('/')[1];
   return requiredComponent;
@@ -121,24 +125,24 @@ const styleGuide = (templateParams) => {
         </style>
       </head>
       <body class="${styles.locals.styleguide}">
-        <article class="${styles.locals.styleGuide}">
-          <section class="${styles.locals.hero}">
-            <span><b>${templateParams.htmlWebpackPlugin.options.title}</b></span> — <span class="${styles.locals.underline}">Technical Style Guide </span>
-          </section>
-          <section class="${styles.locals.layout} js-sticky-container">
-            <aside class="${styles.locals.navigation} js-sticky-element">
-              <h3 class="${styles.locals.navigation__heading}">Getting started</h3>
-              ${navigationIntroComponentItems}
-              <h3 class="${styles.locals.navigation__heading}">Components</h3>
-              ${navigationComponentItems}
-            </aside>
-            <main class="${styles.locals.layout__content} ${styles.locals.main}">
-              ${introComponents}
+       <article class="${styles.locals.styleGuide}">
+        <section class="${styles.locals.hero}">
+          <span><b>${templateParams.htmlWebpackPlugin.options.title}</b></span> — <span class="${styles.locals.underline}">Technical Style Guide </span>
+        </section>
+        <section class="${styles.locals.layout} js-sticky-container">
+          <aside class="${styles.locals.navigation} js-sticky-element">
+            <h3 class="${styles.locals.navigation__heading}">Getting started</h3>
+            ${navigationIntroComponentItems}
+            <h3 class="${styles.locals.navigation__heading}">Components</h3>
+            ${navigationComponentItems}
+          </aside>
+          <main class="${styles.locals.layout__content} ${styles.locals.main}">
+            ${introComponents}
 
-              ${components}
-            </main>
-          </section>
-        </article>
+            ${components}
+          </main>
+        </section>
+      </article>
       </body>
     </html>
     `;

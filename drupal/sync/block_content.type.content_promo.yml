@@ -1,0 +1,8 @@
+uuid: 6771ef2f-824b-4ed8-a0f0-1026637e0476
+langcode: en
+status: true
+dependencies: {  }
+id: content_promo
+label: 'Content promo'
+revision: 1
+description: 'Content promos on landing pages.'

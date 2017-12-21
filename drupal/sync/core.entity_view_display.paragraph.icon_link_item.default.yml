@@ -1,0 +1,42 @@
+uuid: dd9df7c2-3f04-42f5-a112-96afc5cfe021
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.icon_link_item.field_icon
+    - field.field.paragraph.icon_link_item.field_link
+    - paragraphs.paragraphs_type.icon_link_item
+  module:
+    - icon_select
+    - link
+id: paragraph.icon_link_item.default
+targetEntityType: paragraph
+bundle: icon_link_item
+mode: default
+content:
+  field_icon:
+    weight: 0
+    label: hidden
+    settings:
+      width: '25'
+      height: '25'
+      apply_dimensions: 0
+    third_party_settings: {  }
+    type: icon_select_formatter_default
+    region: content
+  field_link:
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    type: link
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true

@@ -1,0 +1,9 @@
+uuid: 636ef399-4360-4225-a8d2-9b5adacd1205
+langcode: en
+status: true
+dependencies: {  }
+id: icon_link_item
+label: 'Icon link item'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

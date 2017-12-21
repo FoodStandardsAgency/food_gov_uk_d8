@@ -14,14 +14,12 @@
 
 /* Layout */
 @import "component/general/phase-banner.css";
-@import "component/general/breadcrumb.css";
 
 /* Profile and registration */
 @import "component/general/my-profile.css";
 @import "component/general/subscribe-flow.css";
 
 /* Navigation */
-@import "component/general/navigation-mobile.css";
 @import "component/general/navigation-side.css";
 @import "component/general/navigation-secondary.css";
 

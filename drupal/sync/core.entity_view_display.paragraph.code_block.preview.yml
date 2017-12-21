@@ -1,0 +1,27 @@
+uuid: 5f45ea1b-f5c3-41d7-a633-1aa180500b8f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.code_block.field_code_block
+    - field.field.paragraph.code_block.field_hide_title
+    - paragraphs.paragraphs_type.code_block
+id: paragraph.code_block.preview
+targetEntityType: paragraph
+bundle: code_block
+mode: preview
+content:
+  field_code_block:
+    weight: 0
+    label: inline
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_hide_title: true
