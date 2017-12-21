@@ -865,6 +865,7 @@ display:
         title: false
         header: false
         footer: false
+        css_class: false
       fields:
         field_alert_type_1:
           id: field_alert_type_1
@@ -1360,6 +1361,7 @@ display:
             value: "<a data-entity-substitution=\"canonical\" data-entity-type=\"node\" data-entity-uuid=\"5427cabf-be8e-46ff-a722-2ce3ae019229\" href=\"/node/56\" class=\"button\">All News & Alerts</a>\n<!-- TODO: make this translatable/configurable from code instead of views header -->"
             format: full_html
           plugin_id: text
+      css_class: 'listing listing--latest'
     cache_metadata:
       max-age: -1
       contexts:

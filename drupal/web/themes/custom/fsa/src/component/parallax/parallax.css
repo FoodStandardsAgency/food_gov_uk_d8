@@ -15,6 +15,28 @@
   @media (--breakpoint-lg) {
     margin-top: -6em;
   }
+
+  & > h2 {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    @mixin responsive-declaration font-size, 1.25em, 1.7em;
+    @mixin responsive-declaration line-height, 1.2, 1.25;
+
+    &:after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: -0.5em;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3Ccircle cx='4' cy='4' r='4' fill='%23DEE2E5' /%3E%3C/svg%3E");
+      background-repeat: repeat-x;
+      background-size: 20px 15px;
+      width: 80%;
+      height: 10px;
+      display: block;
+      transform: translateX(-50%);
+    }
+  }
 }
 
 .peek__container {
