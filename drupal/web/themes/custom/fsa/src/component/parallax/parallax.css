@@ -20,8 +20,6 @@
     position: relative;
     display: inline-block;
     text-align: center;
-    @mixin responsive-declaration font-size, 1.25em, 1.7em;
-    @mixin responsive-declaration line-height, 1.2, 1.25;
 
     &:after {
       content: '';

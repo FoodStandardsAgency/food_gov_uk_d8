@@ -21,7 +21,7 @@
 }
 
 h1 {
-  @mixin responsive-declaration font-size, 2.2em, 3.333em;
+  @mixin responsive-declaration font-size, 2.2em, 3.0em;
   @mixin responsive-declaration line-height, 1.2, 1.1;
   color: var(--dark-primary-color);
 
@@ -31,7 +31,7 @@ h1 {
 }
 
 h2 {
-  @mixin responsive-declaration font-size, 2em, 2.67em;
+  @mixin responsive-declaration font-size, 1.8em, 2.0em;
   @mixin responsive-declaration line-height, 1.2, 1.1;
 
   &.small {

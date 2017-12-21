@@ -27,6 +27,7 @@
 }
 
 .layout {
+  background-color: var(--color-lighter-gray);
 
   @media (--breakpoint-md) {
     padding-right: 2.5em;
@@ -122,16 +123,12 @@
 
 /*Webform content*/
 .layout__content {
+  background-color: var(--color-white);
   position: relative;
   z-index: var(--z-bottom);
   flex: 1 1 100%;
   @mixin responsive-declaration padding-right, 1em, 4em;
   @mixin responsive-declaration padding-left, 1em, 4em;
-
-  @media (--breakpoint-md) {
-    padding-right: 0;
-    padding-left: 0;
-  }
 
   @media print {
     margin: 0 auto;
