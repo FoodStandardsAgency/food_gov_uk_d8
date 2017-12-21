@@ -7,6 +7,7 @@ dependencies:
     - node.type.lander
     - paragraphs.paragraphs_type.code_block
     - paragraphs.paragraphs_type.content_promo
+    - paragraphs.paragraphs_type.icon_link
     - paragraphs.paragraphs_type.large_promo
     - paragraphs.paragraphs_type.title
     - paragraphs.paragraphs_type.topic_cloud
@@ -29,35 +30,42 @@ settings:
     target_bundles:
       content_promo: content_promo
       large_promo: large_promo
+      icon_link: icon_link
       title: title
       topic_cloud: topic_cloud
       code_block: code_block
     target_bundles_drag_drop:
       content_promo:
         enabled: true
-        weight: -19
+        weight: -23
       large_promo:
         enabled: true
-        weight: -18
+        weight: -22
+      icon_link:
+        enabled: true
+        weight: -21
       title:
         enabled: true
-        weight: -17
+        weight: -20
       topic_cloud:
         enabled: true
-        weight: -16
+        weight: -19
       code_block:
         enabled: true
-        weight: -15
+        weight: -18
       liftups:
-        weight: -14
+        weight: -17
         enabled: false
       manual_promo:
-        weight: -13
+        weight: -16
         enabled: false
       subpage:
-        weight: -12
+        weight: -15
         enabled: false
       team_contact:
-        weight: -11
+        weight: -14
+        enabled: false
+      icon_link_item:
+        weight: -13
         enabled: false
 field_type: entity_reference_revisions

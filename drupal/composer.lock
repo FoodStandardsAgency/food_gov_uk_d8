@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "25512c2b646a1eef6fe14a2f9b7c683c",
+    "content-hash": "e177b5e4fdc9dd3c56a154fe87b2c4ea",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2609,7 +2609,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/elasticsearch_helper"
             },
-            "time": "2017-08-30T13:04:27+00:00"
+            "time": "2017-08-30 13:04:27"
         },
         {
             "name": "drupal/email_registration",
@@ -3342,6 +3342,113 @@
             }
         },
         {
+            "name": "drupal/hook_post_action",
+            "version": "1.0.0-beta1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/hook_post_action",
+                "reference": "8.x-1.0-beta1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/hook_post_action-8.x-1.0-beta1.zip",
+                "reference": "8.x-1.0-beta1",
+                "shasum": "1d06c3f0d4ef60e6e49c9b2757be3049c598a39a"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-beta1",
+                    "datestamp": "1460275141",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "id.tarzanych",
+                    "homepage": "https://www.drupal.org/user/2776543"
+                },
+                {
+                    "name": "sinasalek",
+                    "homepage": "https://www.drupal.org/user/52244"
+                }
+            ],
+            "description": "Introduces new Drupal hooks, hook_entity_postsave, hook_entity_postinsert, hook_entity_postupdate, hook_entity_postdelete, hook_node_postsave, hook_node_postinsert, hook_node_postupdate, hook_node_postdelete",
+            "homepage": "https://www.drupal.org/project/hook_post_action",
+            "support": {
+                "source": "http://cgit.drupalcode.org/hook_post_action"
+            }
+        },
+        {
+            "name": "drupal/icon_select",
+            "version": "1.0.0-beta4",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/icon_select",
+                "reference": "8.x-1.0-beta4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/icon_select-8.x-1.0-beta4.zip",
+                "reference": "8.x-1.0-beta4",
+                "shasum": "82dbc2c1a2af342315a935a13e2301d433419f8d"
+            },
+            "require": {
+                "drupal/core": "*",
+                "drupal/hook_post_action": "^1.0@beta"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-beta4",
+                    "datestamp": "1508927348",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "ayalon",
+                    "homepage": "https://www.drupal.org/user/419226"
+                },
+                {
+                    "name": "gperriard",
+                    "homepage": "https://www.drupal.org/user/3362098"
+                },
+                {
+                    "name": "make77",
+                    "homepage": "https://www.drupal.org/user/858788"
+                }
+            ],
+            "description": "Icon selector",
+            "homepage": "https://www.drupal.org/project/icon_select",
+            "support": {
+                "source": "http://cgit.drupalcode.org/icon_select"
+            }
+        },
+        {
             "name": "drupal/image_widget_crop",
             "version": "2.1.0",
             "source": {
@@ -3699,7 +3806,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/media_entity_browser"
             },
-            "time": "2017-02-27T07:23:31+00:00"
+            "time": "2017-02-27 07:23:31"
         },
         {
             "name": "drupal/media_entity_document",
@@ -4564,6 +4671,9 @@
                         "status": "not-covered",
                         "message": "Alpha releases are not covered by Drupal security advisories."
                     }
+                },
+                "patches_applied": {
+                    "Undefined index: #select_parents": "https://www.drupal.org/files/issues/term_reference_tree-2837754-2.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -8648,7 +8758,7 @@
                 "drupal",
                 "warden"
             ],
-            "time": "2016-02-10T20:34:02+00:00"
+            "time": "2016-02-10 20:34:02"
         },
         {
             "name": "twig/twig",
@@ -10818,7 +10928,8 @@
         "drupal/config_readonly": 10,
         "drupal/webform_views": 15,
         "drupal/view_unpublished": 15,
-        "drupal/diff": 5
+        "drupal/diff": 5,
+        "drupal/icon_select": 10
     },
     "prefer-stable": true,
     "prefer-lowest": false,
