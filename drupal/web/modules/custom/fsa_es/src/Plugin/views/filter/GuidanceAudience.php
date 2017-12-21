@@ -73,7 +73,7 @@ class GuidanceAudience extends TaxonomyIndexTid {
 
     // Add depth classes.
     foreach ($options as $name => $option) {
-      // $form[$field_identifier][$name]['#wrapper_attributes']['class'][] = 'depth-' . $option['depth'];
+      $form[$field_identifier][$name]['#wrapper_attributes']['class'][] = 'depth-' . $option['depth'];
     }
   }
 

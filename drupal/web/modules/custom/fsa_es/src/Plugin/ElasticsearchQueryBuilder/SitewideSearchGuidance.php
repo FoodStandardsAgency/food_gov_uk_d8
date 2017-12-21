@@ -19,11 +19,12 @@ class SitewideSearchGuidance extends SitewideSearchBase {
   /**
    * Builds Elasticsearch base query.
    *
-   * @param array $values
-   *
    * @return array
    */
-  public function buildBaseQuery(array $values) {
+  public function buildBaseQuery() {
+    // Get filter values.
+    $values = $this->getFilterValues($this->view);
+
     $query_must_filters = [];
 
     $query = [
@@ -35,7 +36,7 @@ class SitewideSearchGuidance extends SitewideSearchBase {
     if (!empty($values['guidance_content_type'])) {
       $query_must_filters[] = [
         'terms' => [
-          'content_type.id' => $values['guidance_content_type'],
+          'content_type.id' => array_values($values['guidance_content_type']),
         ],
       ];
     }
@@ -84,10 +85,8 @@ class SitewideSearchGuidance extends SitewideSearchBase {
    * {@inheritdoc}
    */
   public function buildQuery(ViewExecutable $view) {
-    // Get filter values.
-    $values = $this->getFilterValues($view);
     // Get the base query.
-    $query = $this->buildBaseQuery($values);
+    $query = $this->buildBaseQuery();
 
     return $query;
   }
@@ -99,6 +98,9 @@ class SitewideSearchGuidance extends SitewideSearchBase {
    */
   public function getAggregations() {
     if (!is_array($this->aggregations)) {
+      // Get filter values.
+      $values = $this->getFilterValues($this->view);
+
       $query = [
         'index' => ['page-' . $this->currentLanguage->getId()],
         'size' => 0,
@@ -121,6 +123,15 @@ class SitewideSearchGuidance extends SitewideSearchBase {
           ],
         ],
       ];
+
+      // Filter by content type.
+      if (!empty($values['guidance_content_type'])) {
+        $query['body']['query']['bool']['must'][] = [
+          'terms' => [
+            'content_type.id' => array_values($values['guidance_content_type']),
+          ],
+        ];
+      }
 
       // Execute the query.
       $result = $this->elasticsearchClient->search($query);
