@@ -15,12 +15,18 @@ use Drupal\views\ViewExecutable;
  * @see Drupal\fsa_es\Plugin\Block\ViewsExposedFilterSearchBlock
  */
 function fsa_es_block_alter(&$info) {
-  // @todo Make search delta discoverable.
-  $search_view_exposed_block_delta = 'views_exposed_filter_block:search_global_ratings-page_1';
+  // @todo Make search related views block delta discoverable.
+  $deltas = [
+    'views_exposed_filter_block:search_global_ratings-page_1',
+    'views_exposed_filter_block:search_global_guidance-page_1',
+  ];
 
-  if (isset($info[$search_view_exposed_block_delta])) {
-    $info[$search_view_exposed_block_delta]['class'] = 'Drupal\fsa_es\Plugin\Block\ViewsExposedFilterSearchBlock';
+  foreach ($deltas as $delta) {
+    if (isset($info[$delta])) {
+      $info[$delta]['class'] = 'Drupal\fsa_es\Plugin\Block\ViewsExposedFilterSearchBlock';
+    }
   }
+
 }
 
 /**
@@ -36,10 +42,9 @@ function fsa_es_views_pre_render(ViewExecutable $view) {
 
     $view->element['#attached']['library'][] = 'fsa_es/result_totals';
     $view->element['#attached']['drupalSettings']['fsa_es']['result_totals'] = [
-      $view_element_selector => [
-        'keywords' => isset($view->filter['keyword']) ? $view->filter['keyword']->value : NULL,
-        'total' => $view->total_rows,
-      ],
+      'keywords' => isset($view->filter['keyword']) ? $view->filter['keyword']->value : NULL,
+      'depth' => $view->total_rows,
+      'total' => $view->total_rows,
     ];
   }
 
@@ -60,6 +65,7 @@ function fsa_es_theme_suggestions_alter(array &$suggestions, array $variables, $
       // @todo Add block IDs that relate to global search filters.
       $block_ids = [
         'search_global_ratings_filters',
+        'search_global_guidance_filters',
       ];
 
       if (in_array($variables['elements']['#id'], $block_ids, TRUE)) {

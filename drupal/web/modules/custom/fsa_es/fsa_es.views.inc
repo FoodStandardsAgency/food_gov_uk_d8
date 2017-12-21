@@ -40,4 +40,18 @@ function fsa_es_views_data_alter(array &$data) {
       'id' => 'fsa_ratings_fhis_rating_value',
     ],
   ];
+
+  $data['elasticsearch_result']['guidance_audience'] = [
+    'title' => t('Audience'),
+    'filter' => [
+      'id' => 'fsa_guidance_audience',
+    ],
+  ];
+
+  $data['elasticsearch_result']['guidance_nation'] = [
+    'title' => t('Region'),
+    'filter' => [
+      'id' => 'fsa_guidance_nation',
+    ],
+  ];
 }

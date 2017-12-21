@@ -2,9 +2,7 @@
 
 namespace Drupal\fsa_es\Plugin\ElasticsearchQueryBuilder;
 
-use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\views\ViewExecutable;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * @ElasticsearchQueryBuilder(
@@ -19,37 +17,87 @@ class SitewideSearchGuidance extends SitewideSearchBase {
   protected $aggregations = NULL;
 
   /**
-   * {@inheritdoc}
+   * @var array
    *
-   * @param \Drupal\fsa_es\SearchService $search_service
+   * Defines which values in "field_content_type" field of a page should
+   * be present to consider a document a guidance.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $language_manager) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition, $language_manager);
-  }
+  protected $contentTypes = [
+    'Business guidance',
+    'Consumer guidance',
+  ];
 
   /**
-   * {@inheritdoc}
+   * Builds Elasticsearch base query.
+   *
+   * @param array $values
+   *
+   * @return array
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
-      $container->get('language_manager')
-    );
+  public function buildBaseQuery(array $values) {
+    $query_must_filters = [];
+
+    $query = [
+      'index' => ['page-' . $this->currentLanguage->getId()],
+      'body' => [],
+    ];
+
+    //
+    $query_must_filters[] = [
+      'terms' => [
+        'content_type.label.keyword' => $this->contentTypes,
+      ],
+    ];
+
+    // Apply the filters to the query.
+    if (!empty($values['keyword'])) {
+      $query_must_filters[] = [
+        'multi_match' => [
+          'query' => $values['keyword'],
+          'fields' => ['name^3', 'body'],
+          'type' => 'cross_fields',
+          'operator' => 'and',
+        ],
+      ];
+    }
+    else {
+      // Sort by updated if no keywords are given.
+      $query['body']['sort'] = ['updated' => 'desc'];
+    }
+
+    if (!empty($values['guidance_audience'])) {
+      $query_must_filters[] = [
+        'terms' => [
+          'audience.label.keyword' => array_filter(array_values($values['guidance_audience'])),
+        ],
+      ];
+    }
+
+    if (!empty($values['guidance_nation'])) {
+      $query_must_filters[] = [
+        'terms' => [
+          'nation.label.keyword' => array_filter(array_values($values['guidance_nation'])),
+        ],
+      ];
+    }
+
+    // Assign the term filters to the query in the 'must' section.
+    foreach ($query_must_filters as $filter) {
+      $query['body']['query']['bool']['must'][] = $filter;
+    }
+
+    return $query;
   }
 
   /**
    * {@inheritdoc}
    */
   public function buildQuery(ViewExecutable $view) {
-    $query = [
-      'body' => [
-        'query' => [
-          'match_all' => new \stdClass(),
-        ],
-      ],
-    ];
+    // Get filter values.
+    $values = $this->getFilterValues($view);
+    // Get the base query.
+    $query = $this->buildBaseQuery($values);
+
     return $query;
   }
 
@@ -59,7 +107,63 @@ class SitewideSearchGuidance extends SitewideSearchBase {
    * @return array
    */
   public function getAggregations() {
+    if (!is_array($this->aggregations)) {
+      $query = [
+        'index' => ['page-' . $this->currentLanguage->getId()],
+        'size' => 0,
+        'body' => [
+          'aggs' => [
+            'audience' => [
+              'terms' => [
+                'field' => 'audience.label.keyword',
+                'order' => ['_term' => 'asc'],
+                'size' => 10000,
+              ],
+            ],
+            'nation' => [
+              'terms' => [
+                'field' => 'nation.label.keyword',
+                'order' => ['_term' => 'asc'],
+                'size' => 10000,
+              ],
+            ],
+          ],
+        ],
+      ];
+
+      // Execute the query.
+      $result = $this->elasticsearchClient->search($query);
+
+      // Build the response.
+      $this->aggregations = [
+        'audience' => $result['aggregations']['audience']['buckets'],
+        'nation' => $result['aggregations']['nation']['buckets'],
+      ];
+    }
+
     return $this->aggregations;
+  }
+
+  /**
+   * Returns a list of audiences.
+   *
+   * @return array
+   */
+  public function getAudienceFilterOptions() {
+    $aggregations = $this->getAggregations();
+
+    return $this->aggsToOptions($aggregations['audience']);
+  }
+
+  /**
+   * Returns a list of nations.
+   *
+   * @return array
+   */
+  public function getNationFilterOptions() {
+    $aggregations = $this->getAggregations();
+
+    return $this->aggsToOptions($aggregations['nation']);
   }
 
 }

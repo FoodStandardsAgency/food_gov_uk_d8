@@ -2,6 +2,8 @@ uuid: 5ee9865a-2420-4b83-9938-b1846fac2286
 langcode: en
 status: true
 dependencies:
+  config:
+    - taxonomy.vocabulary.audience
   module:
     - better_exposed_filters
     - elasticsearch_helper_views
@@ -34,7 +36,7 @@ display:
         options:
           query_builder: sitewide_search_guidance
           entity_relationship:
-            entity_type_key: _type
+            entity_type_key: '@node'
             entity_id_key: _id
       exposed_form:
         type: bef
@@ -168,7 +170,7 @@ display:
           hide_alter_empty: true
           view_mode:
             -
-              page: search_result
+              'node:page': search_result
           set_result_on_entity: 0
           entity_type: null
           entity_field: null
@@ -214,6 +216,94 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           plugin_id: fsa_keyword
+        guidance_audience:
+          id: guidance_audience
+          table: elasticsearch_result
+          field: guidance_audience
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: guidance_audience_op
+            label: Audience
+            description: ''
+            use_operator: false
+            operator: guidance_audience_op
+            identifier: audience
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              editor: '0'
+              administrator: '0'
+              author: '0'
+            reduce: 0
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: audience
+          hierarchy: 1
+          error_message: 1
+          plugin_id: fsa_guidance_audience
+        guidance_nation:
+          id: guidance_nation
+          table: elasticsearch_result
+          field: guidance_nation
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: guidance_nation_op
+            label: Region
+            description: ''
+            use_operator: false
+            operator: guidance_nation_op
+            identifier: region
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              editor: '0'
+              administrator: '0'
+              author: '0'
+            reduce: 0
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: fsa_guidance_nation
       sorts: {  }
       title: Guidance
       header: {  }
@@ -243,6 +333,8 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user
+        - 'user.node_grants:view'
         - user.permissions
       tags: {  }
   page_1:
@@ -260,5 +352,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user
+        - 'user.node_grants:view'
         - user.permissions
       tags: {  }

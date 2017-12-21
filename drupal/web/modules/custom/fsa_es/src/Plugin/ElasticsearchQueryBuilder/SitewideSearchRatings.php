@@ -5,6 +5,7 @@ namespace Drupal\fsa_es\Plugin\ElasticsearchQueryBuilder;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\fsa_es\SearchService;
 use Drupal\views\ViewExecutable;
+use Elasticsearch\Client;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -27,8 +28,8 @@ class SitewideSearchRatings extends SitewideSearchBase {
    *
    * @param \Drupal\fsa_es\SearchService $search_service
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $language_manager, SearchService $search_service) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition, $language_manager);
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $language_manager, Client $elasticsearch_client, SearchService $search_service) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition, $language_manager, $elasticsearch_client);
 
     $this->searchService = $search_service;
   }
@@ -42,6 +43,7 @@ class SitewideSearchRatings extends SitewideSearchBase {
       $plugin_id,
       $plugin_definition,
       $container->get('language_manager'),
+      $container->get('elasticsearch_helper.elasticsearch_client'),
       $container->get('fsa_es.search_service')
     );
   }

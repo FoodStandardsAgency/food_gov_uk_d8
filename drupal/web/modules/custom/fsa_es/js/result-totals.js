@@ -3,7 +3,10 @@
 
   Drupal.behaviors.fsaElasticsearchResultTotals = {
     attach: function (context, settings) {
-      $.each(settings.fsa_es.result_totals, function(selector, value) {
+      var selector = '.views-result-total';
+
+      $(selector).each(function() {
+        var value = settings.fsa_es.result_totals;
         var result_total_value = '';
 
         if (value.keywords) {
