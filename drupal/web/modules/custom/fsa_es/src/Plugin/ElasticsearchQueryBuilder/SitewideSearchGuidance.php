@@ -17,17 +17,6 @@ class SitewideSearchGuidance extends SitewideSearchBase {
   protected $aggregations = NULL;
 
   /**
-   * @var array
-   *
-   * Defines which values in "field_content_type" field of a page should
-   * be present to consider a document a guidance.
-   */
-  protected $contentTypes = [
-    'Business guidance',
-    'Consumer guidance',
-  ];
-
-  /**
    * Builds Elasticsearch base query.
    *
    * @param array $values
@@ -42,12 +31,14 @@ class SitewideSearchGuidance extends SitewideSearchBase {
       'body' => [],
     ];
 
-    //
-    $query_must_filters[] = [
-      'terms' => [
-        'content_type.label.keyword' => $this->contentTypes,
-      ],
-    ];
+    // Filter by content type.
+    if (!empty($values['guidance_content_type'])) {
+      $query_must_filters[] = [
+        'terms' => [
+          'content_type.id' => $values['guidance_content_type'],
+        ],
+      ];
+    }
 
     // Apply the filters to the query.
     if (!empty($values['keyword'])) {

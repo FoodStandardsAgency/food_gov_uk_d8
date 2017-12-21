@@ -41,6 +41,13 @@ function fsa_es_views_data_alter(array &$data) {
     ],
   ];
 
+  $data['elasticsearch_result']['guidance_content_type'] = [
+    'title' => t('Content type'),
+    'filter' => [
+      'id' => 'fsa_guidance_content_type',
+    ],
+  ];
+
   $data['elasticsearch_result']['guidance_audience'] = [
     'title' => t('Audience'),
     'filter' => [
