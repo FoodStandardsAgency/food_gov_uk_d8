@@ -20,3 +20,8 @@ libraries:
   - fsa/global
 ckeditor_stylesheets:
   - dist/app.css
+libraries-extend:
+  # This extends code active link library and applies "is-active" class
+  # even if URL has query parameters.
+  core/drupal.active-link:
+    - fsa/active-link-incl-query
