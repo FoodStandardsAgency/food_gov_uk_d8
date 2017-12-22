@@ -1,0 +1,8 @@
+uuid: 6aaeaf1a-665b-458a-969a-6b8a9b5ecd38
+langcode: en
+status: true
+dependencies: {  }
+id: large_promo
+label: 'Large promo'
+revision: 1
+description: 'Large promos on landing pages.'

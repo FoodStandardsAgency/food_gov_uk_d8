@@ -1,0 +1,61 @@
+uuid: aa76cae3-fc57-4950-8b9f-f7dbcb81d35f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.icons.field_svg_file
+    - field.field.taxonomy_term.icons.field_symbol_id
+    - taxonomy.vocabulary.icons
+  module:
+    - file
+    - path
+_core:
+  default_config_hash: jPergu7DOXA9WebwKU1uJXHnSot5NsLaWO5bsRgMvt0
+id: taxonomy_term.icons.default
+targetEntityType: taxonomy_term
+bundle: icons
+mode: default
+content:
+  field_svg_file:
+    weight: 2
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
+  field_symbol_id:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  translation:
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  description: true

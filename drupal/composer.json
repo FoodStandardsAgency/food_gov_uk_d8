@@ -70,7 +70,8 @@
         "drupal/diff": "^1.0@RC",
         "drupal/warden": "^1.1",
         "drupal/media_entity_browser": "~1.4",
-        "drupal/term_reference_tree": "^1.0"
+        "drupal/term_reference_tree": "^1.0",
+        "drupal/icon_select": "^1.0@beta"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
@@ -108,7 +109,7 @@
         }
     },
     "scripts": {
-        "post-install-cmd": [
+        "drupal-scaffold": [
             "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"]
     }
 }
