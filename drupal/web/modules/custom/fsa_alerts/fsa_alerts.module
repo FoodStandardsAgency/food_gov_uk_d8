@@ -31,7 +31,7 @@ function fsa_alerts_preprocess_node(&$variables) {
   // Set vars for easy access.
   $node = $variables['node'];
 
-  if ($node->getType() == 'alert' && $node->hasField('field_alert_type')) {
+  if ($node->getType() == 'alert' && $variables['view_mode'] == 'full' && $node->hasField('field_alert_type')) {
 
     // Append "about alert/product recall" static copy text to alert nodes.
     switch ($node->get('field_alert_type')->getString()) {

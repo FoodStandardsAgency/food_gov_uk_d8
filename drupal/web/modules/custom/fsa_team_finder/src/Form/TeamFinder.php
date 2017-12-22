@@ -40,7 +40,6 @@ class TeamFinder extends FormBase {
       '#description_display' => 'before',
       '#size' => 9,
       '#maxlength' => 9,
-      '#required' => TRUE,
     ];
 
     // The AJAX result placeholder.
@@ -145,13 +144,7 @@ class TeamFinder extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-
-    // Check for valid uk postcode.
-    if (!$this->testValidUkPostcode($form_state->getValue('query'))) {
-      $form_state->setErrorByName('query', $this->t('Invalid postcode.'));
-    }
-  }
+  public function validateForm(array &$form, FormStateInterface $form_state) {}
 
   /**
    * {@inheritdoc}
