@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.promo
     - field.storage.node.body
     - field.storage.node.field_alert_description
     - field.storage.node.field_alert_type
@@ -865,6 +866,8 @@ display:
         title: false
         header: false
         footer: false
+        style: false
+        row: false
       fields:
         field_alert_type_1:
           id: field_alert_type_1
@@ -1360,6 +1363,17 @@ display:
             value: "<a data-entity-substitution=\"canonical\" data-entity-type=\"node\" data-entity-uuid=\"5427cabf-be8e-46ff-a722-2ce3ae019229\" href=\"/node/56\" class=\"button\">All News & Alerts</a>\n<!-- TODO: make this translatable/configurable from code instead of views header -->"
             format: full_html
           plugin_id: text
+      style:
+        type: default
+        options:
+          row_class: ''
+          default_row_class: true
+          uses_fields: false
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: promo
     cache_metadata:
       max-age: -1
       contexts:
