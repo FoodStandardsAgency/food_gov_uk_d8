@@ -24,19 +24,34 @@ class Letters extends AreaPluginBase {
       $nodes = \Drupal::entityTypeManager()
         ->getStorage('node')
         ->loadMultiple($nids);
-      $title_first_letters = [];
+      $title_first_chars = [];
       foreach ($nodes as $node) {
         if ($title = $node->getTitle()) {
-          $title_first_letters[] = substr($title, 0, 1);
+          $title_first_chars[] = strtoupper(substr($title, 0, 1));
         }
       }
-      $letters = array_unique($title_first_letters);
-      sort($letters);
+      $chars = array_unique($title_first_chars);
+      sort($chars);
 
       // Generate markup.
       $output = '';
-      foreach ($letters as $letter) {
-        $output .= '<a href="#' . strtolower($letter) . '">' . strtoupper($letter) . '</a>';
+      $alphabet = range('A', 'Z');
+
+      // Add any non-letters.
+      foreach ($chars as $char) {
+        if (!in_array($char, $alphabet)) {
+          $output .= '<a href="#' . $char . '">' . $char . '</a>';
+        }
+      }
+
+      // Add letters.
+      foreach ($alphabet as $letter) {
+        if (in_array($letter, $chars)) {
+          $output .= '<a href="#' . strtolower($letter) . '">' . $letter . '</a>';
+        }
+        else {
+          $output .= '<span>' . $letter . '</span>';
+        }
       }
       return ['#markup' => $output];
     }
