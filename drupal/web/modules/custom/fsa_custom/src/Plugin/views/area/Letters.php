@@ -19,18 +19,20 @@ class Letters extends AreaPluginBase {
   public function render($empty = FALSE) {
     if (!$empty || !empty($this->options['empty'])) {
 
-      // Get first letter of titles, ordered, and without duplicates.
-      $nids = \Drupal::entityQuery('node')->execute();
-      $nodes = \Drupal::entityTypeManager()
-        ->getStorage('node')
-        ->loadMultiple($nids);
-      $title_first_chars = [];
-      foreach ($nodes as $node) {
-        if ($title = $node->getTitle()) {
-          $title_first_chars[] = strtoupper(substr($title, 0, 1));
+      // Get first letter of names, ordered, and without duplicates.
+      $query = \Drupal::entityQuery('taxonomy_term');
+      $query->condition('vid', "topic");
+      $tids = $query->execute();
+      $terms = \Drupal::entityTypeManager()
+        ->getStorage('taxonomy_term')
+        ->loadMultiple($tids);
+      $name_first_chars = [];
+      foreach ($terms as $term) {
+        if ($name = $term->getName()) {
+          $name_first_chars[] = strtoupper(substr($name, 0, 1));
         }
       }
-      $chars = array_unique($title_first_chars);
+      $chars = array_unique($name_first_chars);
       sort($chars);
 
       // Generate markup.
