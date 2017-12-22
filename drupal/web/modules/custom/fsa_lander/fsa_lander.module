@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\file\Entity\File;
 
 /**
  * Implements hook_form_node_page_form_alter().
@@ -19,6 +20,27 @@ function fsa_lander_form_node_lander_form_alter(&$form, FormStateInterface $form
  * Implements hook_preprocess_paragraph().
  */
 function fsa_lander_preprocess_field(&$variables) {
+
+  // Define the fields to move the media image url as background to the element.
+  $img_to_bg = [
+    'field_content_promo',
+    'field_large_promo',
+  ];
+  if (in_array($variables['field_name'], $img_to_bg)) {
+    $i = 0;
+    foreach ($variables['items'] as $item) {
+      if (isset($variables['items'][$i]['content']['field_media_library_image'][0]['#media']->field_image)) {
+        $fid = $variables['items'][$i]['content']['field_media_library_image'][0]['#media']->field_image->getValue()[0]['target_id'];
+        $file = File::load($fid);
+        $uri = $file->getFileUri();
+        $variables['items'][$i]['attributes']['style'] = ['background: url(' . file_create_url($uri) . ')'];
+
+        // And unset the element, no matter how it is in configured in display.
+        unset($variables['items'][$i]['content']['field_media_library_image']);
+      }
+      $i++;
+    }
+  }
 
   // Add properties and attributes for lander rows.
   if ($variables['field_name'] == 'field_lander_row') {
