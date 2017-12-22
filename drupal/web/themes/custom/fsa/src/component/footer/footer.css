@@ -2,12 +2,9 @@
 @import "../../core/custom-property";
 
 .footer {
-  background-color: var(--dark-secondary-color);
-  color: var(--color-white);
   padding: 1em;
   @mixin responsive-declaration padding-top, 1em, 2em;
   @mixin responsive-declaration padding-bottom, 1em, 2em;
-  @mixin responsive-declaration margin-top, 2em, 4em;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -43,6 +40,8 @@
 
 .footer__content {
   @mixin responsive-declaration padding, 1em, 2em;
+  background-color: var(--dark-secondary-color);
+  color: var(--color-white);
   max-width: 24em;
   text-align: center;
 }

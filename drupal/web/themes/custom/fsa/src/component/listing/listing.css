@@ -1,25 +1,6 @@
 @import "../../core/helper";
 @import "../../core/custom-property";
 
-.listing {
-
-  .views-row-wrapper {
-
-  }
-
-  &.listing--latest .views-row-wrapper {
-    display: flex;
-  }
-
-  .views-row {
-    
-  }
-
-  footer {
-    text-align: center;
-  }
-}
-
 /* News alert listing page */
 .theme--news-alerts {
   .news-alerts-listing {
