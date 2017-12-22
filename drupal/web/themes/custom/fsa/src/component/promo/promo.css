@@ -1,3 +1,6 @@
+@import "../../core/helper";
+@import "../../core/custom-property";
+
 /* Global row style */
 .field__field_lander_row__item {
   @mixin responsive-declaration padding-top, 2em, 4em;
