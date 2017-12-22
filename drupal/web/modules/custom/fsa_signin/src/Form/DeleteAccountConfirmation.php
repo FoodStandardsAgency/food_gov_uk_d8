@@ -44,7 +44,7 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
       $privacy_link = DefaultController::linkMarkup('entity.node.canonical', $this->t('Privacy notice'), [], ['node' => $privacy_nid]);
     }
     else {
-      $privacy_link = '<pre>[Privacy page link missing]</pre>';
+      $privacy_link = '<pre>[Privacy page link not defined]</pre>';
     }
     $user = \Drupal::currentUser();
     $email = $user->getEmail();

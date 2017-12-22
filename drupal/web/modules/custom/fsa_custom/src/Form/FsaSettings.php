@@ -27,13 +27,13 @@ class FsaSettings extends FormBase {
     $form['links'] = [
       '#type' => 'details',
       '#title' => $this->t('Link targets'),
-      '#description' => $this->t('Define link targets for common pages linked from modules and page template.'),
+      '#description' => $this->t('Define the common pages linked from modules and page templates..'),
       '#open' => TRUE,
     ];
     $contact_link = \Drupal::state()->get('fsa_custom.contact_link_nid');
     $form['links']['contact_link'] = [
       '#title' => $this->t('Main contact lander'),
-      '#description' => $this->t('Contact page main lander, used on heading link.'),
+      '#description' => $this->t('Contact main lander, link in the site header.'),
       '#type' => 'entity_autocomplete',
       '#target_type' => 'node',
       '#default_value' => (isset($contact_link) && is_numeric($contact_link)) ? Node::load($contact_link) : '',
@@ -41,7 +41,7 @@ class FsaSettings extends FormBase {
     $privacy_link = \Drupal::state()->get('fsa_custom.privacy_link_nid');
     $form['links']['privacy_link'] = [
       '#title' => $this->t('Privacy page'),
-      '#description' => $this->t('Privacy description page.'),
+      '#description' => $this->t('Privacy description page, linked from subscribe/profile pages.'),
       '#type' => 'entity_autocomplete',
       '#target_type' => 'node',
       '#default_value' => (isset($privacy_link) && is_numeric($privacy_link)) ? Node::load($privacy_link) : '',
