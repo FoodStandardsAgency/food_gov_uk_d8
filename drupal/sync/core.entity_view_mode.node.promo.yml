@@ -1,0 +1,10 @@
+uuid: a10752c3-b5a5-44e1-b742-50e07224f637
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.promo
+label: Promo
+targetEntityType: node
+cache: true
