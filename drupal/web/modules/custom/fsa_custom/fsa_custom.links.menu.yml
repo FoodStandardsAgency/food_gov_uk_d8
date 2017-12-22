@@ -3,6 +3,11 @@ system.admin_config_fsa:
   parent: system.admin_config
   route_name: system.admin_config_fsa
   weight: -50
+fsa_custom.settings:
+  route_name: fsa_custom.settings
+  title: 'Custom settings'
+  parent: system.admin_config_fsa
+  description: 'FSA website site custom configurations, for example link target definitions of certain common pages.'
 view.la_send_failures.page_1:
   title: 'Failed to send'
   parent: system.admin_reports
