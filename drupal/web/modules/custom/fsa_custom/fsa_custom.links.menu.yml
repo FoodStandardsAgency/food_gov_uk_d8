@@ -7,7 +7,7 @@ fsa_custom.settings:
   route_name: fsa_custom.settings
   title: 'Custom settings'
   parent: system.admin_config_fsa
-  description: 'FSA custom configurations, for example link target definitions of certain common pages.'
+  description: 'FSA website site custom configurations, for example link target definitions of certain common pages.'
 view.la_send_failures.page_1:
   title: 'Failed to send'
   parent: system.admin_reports
