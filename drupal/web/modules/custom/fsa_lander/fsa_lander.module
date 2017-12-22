@@ -33,7 +33,14 @@ function fsa_lander_preprocess_field(&$variables) {
         $fid = $variables['items'][$i]['content']['field_media_library_image'][0]['#media']->field_image->getValue()[0]['target_id'];
         $file = File::load($fid);
         $uri = $file->getFileUri();
-        $variables['items'][$i]['attributes']['style'] = ['background: url(' . file_create_url($uri) . ')'];
+
+        // @todo: Use image style.
+        $path = file_create_url($uri);
+
+        $variables['items'][$i]['promo_img_path'] = [
+          '#theme' => 'image_as_background',
+          '#path' => $path,
+        ];
 
         // And unset the element, no matter how it is in configured in display.
         unset($variables['items'][$i]['content']['field_media_library_image']);

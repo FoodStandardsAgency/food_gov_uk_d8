@@ -19,6 +19,7 @@
         <div{{ attributes }}>
             {% for item in items %}
             <div{{ item.attributes }}>
+                {{ item.promo_img_path }}
                 {% if item.content.field_link|render|striptags|trim and not item.content.field_link_list|render|striptags|trim %}
                     <a href="{{ item.content.field_link|render|striptags|trim }}">{{ item.content|without('field_link') }}</a>
                 {% else %}
@@ -29,7 +30,7 @@
         </div>
     {% else %}
         {% for item in items %}
-            {{ item.content.field_link }}
+            {{ item.promo_img_path }}
             <div{{ attributes }}>
                 {% if item.content.field_link|render|striptags|trim and not item.content.field_link_list|render|striptags|trim %}
                     <a href="{{ item.content.field_link|render|striptags|trim }}">{{ item.content|without('field_link') }}</a>
@@ -47,7 +48,7 @@
     {% endif %}
     {% for item in items %}
         {% if label_display == 'inline' %}
-            {{ item.content.field_link }}
+            {{ item.promo_img_path }}
             <span{{ item.attributes }}>
                 {% if item.content.field_link|render|striptags|trim and not item.content.field_link_list|render|striptags|trim %}
                     <a href="{{ item.content.field_link|render|striptags|trim }}">{{ item.content|without('field_link') }}</a>
@@ -56,7 +57,7 @@
                 {% endif %}
             </span>
         {% else %}
-            {{ item.content.field_link }}
+            {{ item.promo_img_path }}
             <div{{ item.attributes }}>
                 {% if item.content.field_link|render|striptags|trim and not item.content.field_link_list|render|striptags|trim %}
                     <a href="{{ item.content.field_link|render|striptags|trim }}">{{ item.content|without('field_link') }}</a>
