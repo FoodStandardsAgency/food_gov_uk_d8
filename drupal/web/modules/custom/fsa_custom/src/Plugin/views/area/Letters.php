@@ -19,18 +19,12 @@ class Letters extends AreaPluginBase {
   public function render($empty = FALSE) {
     if (!$empty || !empty($this->options['empty'])) {
 
-      // Get first letter of names, ordered, and without duplicates.
-      $query = \Drupal::entityQuery('taxonomy_term');
-      $query->condition('vid', "topic");
-      $tids = $query->execute();
-      $terms = \Drupal::entityTypeManager()
+      $vocab = \Drupal::entityTypeManager()
         ->getStorage('taxonomy_term')
-        ->loadMultiple($tids);
+        ->loadTree('topic', 0, 3);
       $name_first_chars = [];
-      foreach ($terms as $term) {
-        if ($name = $term->getName()) {
-          $name_first_chars[] = strtoupper(substr($name, 0, 1));
-        }
+      foreach ($vocab as $term) {
+        $name_first_chars[] = strtoupper(substr($term->name, 0, 1));
       }
       $chars = array_unique($name_first_chars);
       sort($chars);
@@ -39,14 +33,14 @@ class Letters extends AreaPluginBase {
       $output = '';
       $alphabet = range('A', 'Z');
 
-      // Add any non-letters.
+      // Append any non-letters.
       foreach ($chars as $char) {
         if (!in_array($char, $alphabet)) {
           $output .= '<a href="#' . $char . '">' . $char . '</a>';
         }
       }
 
-      // Add letters.
+      // Append letters.
       foreach ($alphabet as $letter) {
         if (in_array($letter, $chars)) {
           $output .= '<a href="#' . strtolower($letter) . '">' . $letter . '</a>';

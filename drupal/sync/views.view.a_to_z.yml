@@ -9,7 +9,7 @@ dependencies:
     - taxonomy
     - user
 id: a_to_z
-label: a_to_z
+label: 'A to Z'
 module: views
 description: ''
 tag: ''
@@ -236,7 +236,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          empty: true
+          empty: false
           plugin_id: letters
       footer: {  }
       empty: {  }
@@ -250,13 +250,14 @@ display:
         - 'languages:language_interface'
         - user.permissions
       tags: {  }
-  block_1:
-    display_plugin: block
-    id: block_1
-    display_title: Block
-    position: 1
+  page_1:
+    display_plugin: page
+    id: page_1
+    display_title: Page
+    position: 2
     display_options:
       display_extenders: {  }
+      path: topics-a-to-z
     cache_metadata:
       max-age: -1
       contexts:
