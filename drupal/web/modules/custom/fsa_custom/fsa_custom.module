@@ -272,6 +272,12 @@ function fsa_custom_theme() {
         'copy' => NULL,
       ],
     ],
+    'image_as_background' => [
+      'variables' => [
+        'attributes' => NULL,
+        'path' => NULL,
+      ],
+    ],
   ];
 }
 

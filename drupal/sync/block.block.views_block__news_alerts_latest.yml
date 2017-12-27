@@ -11,7 +11,7 @@ dependencies:
     - fsa
 third_party_settings:
   block_class:
-    classes: peek
+    classes: ''
 id: views_block__news_alerts_latest
 theme: fsa
 region: hidden

@@ -29,11 +29,13 @@
     {% if multiple %}
         <div{{ attributes }}>
             {% for item in items %}
+                {{ item.promo_img_path }}
                 <div{{ item.attributes }}>{{ item.content }}</div>
             {% endfor %}
         </div>
     {% else %}
         {% for item in items %}
+            {{ item.promo_img_path }}
             <div{{ attributes }}>{{ item.content }}</div>
         {% endfor %}
     {% endif %}
@@ -45,8 +47,10 @@
     {% endif %}
     {% for item in items %}
         {% if label_display == 'inline' %}
+            {{ item.promo_img_path }}
             <span{{ item.attributes }}>{{ item.content }}</span>
         {% else %}
+            {{ item.promo_img_path }}
             <div{{ item.attributes }}>{{ item.content }}</div>
         {% endif %}
     {% endfor %}
