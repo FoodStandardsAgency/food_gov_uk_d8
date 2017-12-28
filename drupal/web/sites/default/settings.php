@@ -58,7 +58,7 @@ $config_allowed = [
   '/admin/structure/menu/manage/main',
   '/admin/structure/menu/manage/help',
   '/admin/structure/menu/manage/footer',
-  'admin/config/system/site-information',
+  '/admin/config/system/site-information',
   '/admin/config/fsa/ratings',
   '/admin/config/fsa/ratings/translate/cy/add',
   '/admin/config/fsa/ratings/translate/cy/edit',
