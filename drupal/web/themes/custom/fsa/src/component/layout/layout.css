@@ -134,6 +134,7 @@
     margin: 0 auto;
   }
 
+  .theme--lander &,
   .theme--fhrs & {
     padding-right: 0;
     padding-left: 0;

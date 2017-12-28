@@ -224,7 +224,7 @@ div.page-title {
 }
 
 /*Updated date*/
-.field__field_alert_modified,
+/* .field__field_alert_modified,
 .field__field_update_date {
   color: var(--color-gray);
   margin-bottom: 2em;
@@ -253,7 +253,7 @@ div.page-title {
 .field__field_intro {
   font-size: 1.25em;
   margin-bottom: 1em;
-}
+} */
 
 /*Document reference*/
 .field.field__field_document {
