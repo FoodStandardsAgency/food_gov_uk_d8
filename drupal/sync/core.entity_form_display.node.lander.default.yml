@@ -52,12 +52,13 @@ third_party_settings:
       weight: 2
       format_type: tab
       format_settings:
-        id: ''
-        classes: ''
+        label: 'Hero area'
         formatter: open
         description: ''
         required_fields: true
-      label: Hero
+        id: ''
+        classes: ''
+      label: 'Hero area'
     group_code_block_references:
       children:
         - field_block_reference

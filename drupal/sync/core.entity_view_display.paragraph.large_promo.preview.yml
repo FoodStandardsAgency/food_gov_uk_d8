@@ -1,0 +1,25 @@
+uuid: fe2222de-220e-48f6-84d0-b656d1389cc3
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.large_promo.field_large_promo
+    - paragraphs.paragraphs_type.large_promo
+id: paragraph.large_promo.preview
+targetEntityType: paragraph
+bundle: large_promo
+mode: preview
+content:
+  field_large_promo:
+    weight: 0
+    label: visually_hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true

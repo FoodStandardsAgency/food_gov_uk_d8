@@ -3,6 +3,6 @@ langcode: en
 status: true
 dependencies: {  }
 id: promo_block
-label: 'Promo block'
-revision: 0
-description: 'Block to promote internal or third party website content.'
+label: 'Promo block (deprecated)'
+revision: 1
+description: '(Deprecated) Block to promote internal or third party website content.'

@@ -10,6 +10,7 @@ module:
   ckeditor: 0
   config: 0
   config_filter: 0
+  config_ignore: 0
   config_readonly: 0
   config_split: 0
   config_translation: 0
@@ -63,6 +64,8 @@ module:
   geolocation: 0
   help: 0
   hierarchical_term_formatter: 0
+  hook_post_action: 0
+  icon_select: 0
   image: 0
   image_widget_crop: 0
   inline_entity_form: 0

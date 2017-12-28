@@ -1,0 +1,23 @@
+uuid: ba71a549-702f-45ef-bdea-14c569200357
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.content_promo
+    - field.storage.block_content.field_link_list
+  module:
+    - link
+id: block_content.content_promo.field_link_list
+field_name: field_link_list
+entity_type: block_content
+bundle: content_promo
+label: 'Link list (Do not use in conjunction with link field above)'
+description: 'List of links to internal (or external) resources. These fields cannot be used in combination with Link field above.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 2
+field_type: link

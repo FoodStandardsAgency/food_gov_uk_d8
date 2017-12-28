@@ -4,7 +4,7 @@ fsa_ratings.ratings_settings:
    _form: '\Drupal\fsa_ratings\Form\FsaRatingsConfigurations'
    _title: 'FSA Ratings configurations'
  requirements:
-   _permission: 'administer site configuration'
+   _permission: 'administer fsa rating landing content'
 
 fsa_ratings.ratings_search:
   path: '/ratings/search'

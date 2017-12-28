@@ -21,7 +21,7 @@ bundle: page
 label: 'Liftup icon'
 description: 'Icon that represents this content. Initially used when referencing to this piece of content. Preferably in square format to make it look nice on referencing page(s).'
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:

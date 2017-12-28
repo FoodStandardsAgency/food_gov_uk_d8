@@ -129,7 +129,7 @@ class RatingsSearch extends ControllerBase {
     }
     else {
       $fsa_ratings_config = $this->config('config.fsa_ratings');
-      $ratings_info = ['#markup' => $fsa_ratings_config->get('ratings_info_content')];
+      $ratings_info = ['#markup' => check_markup($fsa_ratings_config->get('ratings_info_content'), 'full_html')];
     }
 
     return [

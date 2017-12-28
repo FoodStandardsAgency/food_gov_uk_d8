@@ -1,0 +1,28 @@
+uuid: f4410e69-e235-4d64-833c-6dc7e9652c8c
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.large_promo
+    - field.storage.block_content.field_media_library_image
+    - media_entity.bundle.image
+id: block_content.large_promo.field_media_library_image
+field_name: field_media_library_image
+entity_type: block_content
+bundle: large_promo
+label: Image
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

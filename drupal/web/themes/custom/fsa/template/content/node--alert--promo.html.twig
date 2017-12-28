@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Theme override to display Alert promo.
+ * @todo: reuse this template for news and other suitable promos.
+ *
+ * @see template_preprocess_node()
+ *
+ */
+#}
+<article{{ attributes }}>
+  {{ content.field_alert_type }}
+  {{ title_prefix }}
+  {% if not page %}
+    <h4{{ title_attributes }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h4>
+  {% endif %}
+  {{ title_suffix }}
+
+  <div{{ content_attributes }}>
+    {{ content|without('field_alert_type') }}
+  </div>
+
+</article>
