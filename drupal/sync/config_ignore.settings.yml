@@ -1,4 +1,5 @@
 ignored_config_entities:
-  - config.fsa_ratings
+  0: system.site
+  2: config.fsa_ratings
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
