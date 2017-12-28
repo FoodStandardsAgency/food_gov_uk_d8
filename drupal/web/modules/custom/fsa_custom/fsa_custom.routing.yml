@@ -2,7 +2,7 @@ system.admin_config_fsa:
   path: '/admin/config/fsa'
   defaults:
     _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
-    _title: 'FSA configuration'
+    _title: 'FSA configurations'
   requirements:
     _permission: 'access administration pages'
 fsa_custom.settings:
