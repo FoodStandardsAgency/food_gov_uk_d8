@@ -1,0 +1,71 @@
+uuid: ae1358aa-4954-4145-9d38-7b5d51aaa69d
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.content_promo
+    - field.field.block_content.content_promo.field_intro
+    - field.field.block_content.content_promo.field_link
+    - field.field.block_content.content_promo.field_link_list
+    - field.field.block_content.content_promo.field_media_library_image
+    - field.field.block_content.content_promo.field_title
+  module:
+    - link
+id: block_content.content_promo.default
+targetEntityType: block_content
+bundle: content_promo
+mode: default
+content:
+  field_intro:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_link:
+    weight: 4
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_link_list:
+    weight: 3
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_media_library_image:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: promo_image
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_title:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true

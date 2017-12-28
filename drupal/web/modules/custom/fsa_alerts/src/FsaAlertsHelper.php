@@ -22,7 +22,7 @@ class FsaAlertsHelper {
    */
   public static function ctaSubscribe() {
 
-    $text = t('Subscribe to news & alerts');
+    $text = t('Subscribe to news and alerts');
     $options = ['attributes' => ['class' => 'button']];
 
     try {

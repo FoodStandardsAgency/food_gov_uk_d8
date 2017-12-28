@@ -1,0 +1,12 @@
+# FSA Custom
+
+Module for all small customization that do not make sense to put in separate module(s).
+
+##### FSA Custom module functionality list:
+* Creates base for custom module configuration (`/admin/config/fsa` and `/admin/config/fsa/custom`) pages and basic customization admin form.
+* Alter WYSIWYG allowed tags
+* Creates "Year select" plugin for views
+* Creates FSA Hero block
+* Handles "Page title" block visibilities
+  * The Page title block is set to Hero AND Content region and shown in either region based on template requirements. 
+

@@ -1,0 +1,16 @@
+uuid: 18df1881-fe8e-4091-8c5f-76f9ccfcacdd
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.large_promo
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: block_content.large_promo
+target_entity_type_id: block_content
+target_bundle: large_promo
+default_langcode: site_default
+language_alterable: false

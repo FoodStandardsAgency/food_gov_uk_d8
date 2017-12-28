@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ * FSA theme implementation to display icon link paragraph.
+ *
+ * @see template_preprocess_paragraph()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type-' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      <a href="{{ content.field_link[0]['#url']|render }}" style="display: block; border: 1px solid;">
+        {{ content|without('field_link') }}
+        {{ content.field_link[0]['#title']|render }}
+      </a>
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

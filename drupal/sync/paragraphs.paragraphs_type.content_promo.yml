@@ -1,0 +1,9 @@
+uuid: 07774dc0-951a-4c23-bbe8-cabe98587e00
+langcode: en
+status: true
+dependencies: {  }
+id: content_promo
+label: 'Content promo group'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

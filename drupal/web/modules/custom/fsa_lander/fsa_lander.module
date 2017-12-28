@@ -1,0 +1,81 @@
+<?php
+
+/**
+ * @file
+ * Includes FSA Lander custom functionality.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\file\Entity\File;
+use Drupal\image\Entity\ImageStyle;
+
+/**
+ * Implements hook_form_node_page_form_alter().
+ */
+function fsa_lander_form_node_lander_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Unset promo block paragraph reference on initial node creaion.
+  unset($form['field_promo_block']['widget'][0]);
+}
+
+/**
+ * Implements hook_preprocess_paragraph().
+ */
+function fsa_lander_preprocess_field(&$variables) {
+
+  // Define the fields to move the media image url as background to the element.
+  // Use field name as key and value as the image style to use.
+  $img_to_bg = [
+    'field_content_promo' => 'promo_medium',
+    'field_large_promo' => 'promo_large',
+  ];
+  if (array_key_exists($variables['field_name'], $img_to_bg)) {
+    $i = 0;
+    foreach ($variables['items'] as $item) {
+      if (isset($variables['items'][$i]['content']['field_media_library_image'][0]['#media']->field_image)) {
+        $fid = $variables['items'][$i]['content']['field_media_library_image'][0]['#media']->field_image->getValue()[0]['target_id'];
+
+        $file = File::load($fid);
+        $uri = $file->getFileUri();
+
+        // Check the image style exist.
+        if (array_key_exists($img_to_bg[$variables['field_name']], ImageStyle::loadMultiple())) {
+          $path = ImageStyle::load($img_to_bg[$variables['field_name']])->buildUrl($uri);
+        }
+        else {
+          // And fallback to original image if style does not exist.
+          $path = file_create_url($uri);
+        }
+
+        $variables['items'][$i]['promo_img_path'] = [
+          '#theme' => 'image_as_background',
+          '#path' => $path,
+        ];
+
+        // And unset the element, no matter how it is in configured in display.
+        unset($variables['items'][$i]['content']['field_media_library_image']);
+      }
+      $i++;
+    }
+  }
+
+  // Add properties and attributes for lander rows.
+  if ($variables['field_name'] == 'field_lander_row') {
+    $i = 0;
+    foreach ($variables['items'] as $item) {
+
+      if (isset($item['content']['#paragraph'])) {
+
+        // Customize different paragraph types.
+        switch ($item['content']['#paragraph']->getType()) {
+          case 'code_block':
+            // Hide title if set so on edit mode.
+            if ($item['content']['#paragraph']->field_hide_title->value) {
+              // @todo: catch the value and hide block title.
+            }
+            break;
+        }
+      }
+      $i++;
+    }
+  }
+}

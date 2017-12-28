@@ -6,7 +6,14 @@ dependencies:
     - field.storage.node.field_liftup_image
     - node.type.page
   module:
+    - content_translation
     - image
+third_party_settings:
+  content_translation:
+    translation_sync:
+      alt: alt
+      title: title
+      file: '0'
 id: node.page.field_liftup_image
 field_name: field_liftup_image
 entity_type: node
@@ -14,7 +21,7 @@ bundle: page
 label: 'Liftup image'
 description: 'Upload image to be displayed in the referencing liftup block. Uploading image through this field won''t be reusable.'
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:

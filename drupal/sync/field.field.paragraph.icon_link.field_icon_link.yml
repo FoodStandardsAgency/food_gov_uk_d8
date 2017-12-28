@@ -1,0 +1,61 @@
+uuid: 933a568f-cd58-4921-9106-fe60b6d6c5c7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_icon_link
+    - paragraphs.paragraphs_type.icon_link
+    - paragraphs.paragraphs_type.icon_link_item
+  module:
+    - entity_reference_revisions
+id: paragraph.icon_link.field_icon_link
+field_name: field_icon_link
+entity_type: paragraph
+bundle: icon_link
+label: 'Icon link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      icon_link_item: icon_link_item
+    target_bundles_drag_drop:
+      icon_link_item:
+        enabled: true
+        weight: 12
+      code_block:
+        weight: 13
+        enabled: false
+      content_promo:
+        weight: 14
+        enabled: false
+      icon_link:
+        weight: 15
+        enabled: false
+      large_promo:
+        weight: 16
+        enabled: false
+      liftups:
+        weight: 17
+        enabled: false
+      manual_promo:
+        weight: 18
+        enabled: false
+      subpage:
+        weight: 19
+        enabled: false
+      team_contact:
+        weight: 20
+        enabled: false
+      title:
+        weight: 21
+        enabled: false
+      topic_cloud:
+        weight: 22
+        enabled: false
+field_type: entity_reference_revisions

@@ -64,8 +64,13 @@
 }
 
 .header__logo .svg {
-  width: 7em;
+  width: 5.5em;
   height: 3em;
+
+  @media (--breakpoint-sm) {
+    width: 7em;
+    height: 3em;
+  }
 }
 
 .header__search {

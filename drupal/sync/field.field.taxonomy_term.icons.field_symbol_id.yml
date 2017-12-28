@@ -1,0 +1,21 @@
+uuid: 041adc93-ec1b-475d-ad27-0e5bdfa975c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_symbol_id
+    - taxonomy.vocabulary.icons
+_core:
+  default_config_hash: LPvUagyAgL51OCOltlmd7vPG3V2GuWLOsuo3XiCvc5E
+id: taxonomy_term.icons.field_symbol_id
+field_name: field_symbol_id
+entity_type: taxonomy_term
+bundle: icons
+label: 'Symbol ID'
+description: 'Distinct Symbol ID. Use lowercase letters. Can only used once within the vocabulary.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -51,13 +51,17 @@ if(!empty($_SERVER['SERVER_ADDR'])){
 // Disallow configuration changes by default.
 $settings['config_readonly'] = TRUE;
 
-// Define specific admin pages to always allow configuration changes.
+// Define specific admin pages to allow configuration changes on production.
 // @todo: follow issue https://www.drupal.org/node/2826274 for a fix on this.
 $config_allowed = [
   '/admin/structure/menu/manage/account',
   '/admin/structure/menu/manage/main',
   '/admin/structure/menu/manage/help',
   '/admin/structure/menu/manage/footer',
+  '/admin/config/system/site-information',
+  '/admin/config/fsa/ratings',
+  '/admin/config/fsa/ratings/translate/cy/add',
+  '/admin/config/fsa/ratings/translate/cy/edit',
 ];
 
 // Allow config changes on specified path pattern and command line.
