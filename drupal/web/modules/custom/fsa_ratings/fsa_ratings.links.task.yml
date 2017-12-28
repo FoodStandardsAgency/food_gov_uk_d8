@@ -51,3 +51,9 @@ entity.fsa_establishment.delete_form:
   base_route:  entity.fsa_establishment.canonical
   title: Delete
   weight: 10
+
+fsa_rating.settings_tab:
+  route_name: fsa_ratings.ratings_settings
+  title: FSA Ratings
+  base_route: fsa_ratings.ratings_settings
+  weight: 10
