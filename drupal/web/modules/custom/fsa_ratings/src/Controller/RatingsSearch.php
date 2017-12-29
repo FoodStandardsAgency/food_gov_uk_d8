@@ -148,7 +148,7 @@ class RatingsSearch extends ControllerBase {
     // Filters given by the user and used for the querying.
       '#applied_filters' => $filters,
     // Total count of the results.
-      '#hits_total' => $hits,
+      '#hits_total' => number_format($hits, 0, ',', ' '),
     // Item count to be shown now.
       '#hits_shown' => count($items),
       '#load_more' => \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchLoadMore'),
