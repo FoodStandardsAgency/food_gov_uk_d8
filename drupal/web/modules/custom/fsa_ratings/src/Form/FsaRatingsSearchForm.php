@@ -258,7 +258,15 @@ class FsaRatingsSearchForm extends FormBase {
       }
     }
 
-    $form_state->setRedirect('fsa_ratings.ratings_search', [], ['query' => $query, 'fragment' => 'results']);
+    if (empty($query)) {
+      drupal_set_message(t('Please enter a business name/location or use search options below.'), 'warning');
+      $fragment = FALSE;
+    }
+    else {
+      $fragment = 'results';
+    }
+
+    $form_state->setRedirect('fsa_ratings.ratings_search', [], ['query' => $query, 'fragment' => $fragment]);
   }
 
   /**
