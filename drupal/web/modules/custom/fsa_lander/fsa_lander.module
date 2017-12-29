@@ -10,6 +10,20 @@ use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
 
 /**
+ * Implements hook_form_alter().
+ */
+function fsa_lander_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  // On homepage, collapse the taxonomies for nicer adin UX.
+  if ($form_id == 'node_lander_edit_form') {
+    $config = \Drupal::config('system.site');
+    if ($config->get('page.front') == '/node/' . \Drupal::routeMatch()->getParameter('node')->id()) {
+      $form['#fieldgroups']['group_taxonomies']->format_settings['formatter'] = 'closed';
+    }
+  }
+}
+
+/**
  * Implements hook_form_node_page_form_alter().
  */
 function fsa_lander_form_node_lander_form_alter(&$form, FormStateInterface $form_state, $form_id) {
