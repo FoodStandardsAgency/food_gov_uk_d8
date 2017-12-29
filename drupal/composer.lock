@@ -6043,12 +6043,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/maijs/elasticsearch_helper_views.git",
-                "reference": "65918521466aa5a6bae2c840c9c30abfd971c5d1"
+                "reference": "34b7bce983e3fbdf6b9e15ce559f4040e527bf85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maijs/elasticsearch_helper_views/zipball/65918521466aa5a6bae2c840c9c30abfd971c5d1",
-                "reference": "65918521466aa5a6bae2c840c9c30abfd971c5d1",
+                "url": "https://api.github.com/repos/maijs/elasticsearch_helper_views/zipball/34b7bce983e3fbdf6b9e15ce559f4040e527bf85",
+                "reference": "34b7bce983e3fbdf6b9e15ce559f4040e527bf85",
                 "shasum": ""
             },
             "require": {
@@ -6070,7 +6070,7 @@
                 "source": "https://github.com/maijs/elasticsearch_helper_views/tree/8.x-1.x",
                 "issues": "https://github.com/maijs/elasticsearch_helper_views/issues"
             },
-            "time": "2017-12-12T10:24:08+00:00"
+            "time": "2017-12-29T11:09:30+00:00"
         },
         {
             "name": "masterminds/html5",
