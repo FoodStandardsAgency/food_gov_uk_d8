@@ -68,7 +68,7 @@ class FsaRatingsSearchForm extends FormBase {
       $value = \Drupal::request()->query->get($opt);
       if (!empty($value)) {
         $filters[$opt] = $value;
-        $is_open = ' is-open';
+        $is_open = ' is-visible';
         $aria_expanded = 'true';
       }
     }

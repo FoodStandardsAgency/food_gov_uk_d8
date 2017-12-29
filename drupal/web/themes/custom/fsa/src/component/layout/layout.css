@@ -134,16 +134,6 @@
     margin: 0 auto;
   }
 
-  .theme--lander &,
-  .theme--fhrs & {
-    padding-right: 0;
-    padding-left: 0;
-  
-    @media (--breakpoint-lg) {
-      padding-top: 0;
-    }
-  }
-
   .layout--with-sidebar & {
     position: relative;
     z-index: var(--z-bottom);
@@ -178,6 +168,16 @@
   .theme--page &,
   .theme--alert & {
     @mixin responsive-declaration padding-top, 1em, 4em;
+  }
+
+  .theme--lander &,
+  .theme--fhrs & {
+    padding-right: 0;
+    padding-left: 0;
+  
+    @media (--breakpoint-lg) {
+      padding-top: 0;
+    }
   }
 }
 

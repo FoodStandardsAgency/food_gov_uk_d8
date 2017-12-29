@@ -1,11 +1,11 @@
 // Import HTML
-import html from './parallax.html';
+import html from './peek.html';
 
 // Import Styles
-import css from './parallax.css';
+import css from './peek.css';
 
 // Import JavaScript
-import js from './parallax';
+import js from './peek';
 
 module.exports = {
   html,

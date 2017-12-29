@@ -128,13 +128,28 @@
   /* Promo link */
   .field__field_link_list__item {
     a {
-      background-image: var(--icon-arrow-right-primary);
-      background-repeat: no-repeat;
-      background-size: 1.5em auto;
-      background-position: left 0 top 50%;
-      padding-left: 2em;
+      position: relative;
+      margin-left: 2em;
       margin-bottom: 0.5em;
       display: block;
+
+      &:before {
+        content: '';
+        background-image: var(--icon-arrow-right-primary);
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+        background-position: 50% 50%;
+        position: absolute;
+        top: 0;
+        left: -2em;
+        display: block;
+        width: 1.5em;
+        height: 1.5em;
+      }
+
+      :--not-touch &:--enter {
+        text-decoration: underline;
+      }
     }
   }
 
@@ -180,6 +195,11 @@
 
 /* Large content promo */
 .field__field_large_promo {
+  @mixin responsive-declaration margin-top, -2em, -4em;
+  @mixin responsive-declaration margin-right, -2em, -4em;
+  @mixin responsive-declaration margin-bottom, -2em, -4em;
+  @mixin responsive-declaration margin-left, -2em, -4em;
+
   @media (--breakpoint-md) {
     display: flex;
     flex-flow: row wrap;
@@ -238,6 +258,10 @@
         a {
           background-color: var(--color-white);
           color: var(--primary-color);
+
+          :--not-touch &:--enter {
+            
+          }
         }
       }
     }
@@ -296,6 +320,11 @@
     border-radius: 50%;
     margin: 0 auto;
     margin-bottom: 1em;
+    transition: background-color var(--transition-enter);
+
+    :--not-touch &:--enter {
+      background-color: var(--primary-color);
+    }
 
     svg {
       transform: translateY(-50%) translateX(-50%) scale(0.6);

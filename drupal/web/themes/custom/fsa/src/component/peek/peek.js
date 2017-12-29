@@ -2,15 +2,30 @@ import InViewElement from '../../core/helper/inView';
 import debounce from '../../core/helper/debounce';
 
 function peek() {
-  const peekElements = [...document.querySelectorAll('.js-parallax')];
+  const peekElements = [...document.querySelectorAll('.js-peek')];
+
   let peekElementInstanceArray = [];
 
   if (peekElements != null) {
     peekElements.forEach((element) => {
+      element.classList.add('peek');
       peekElementInstanceArray =
         [...peekElementInstanceArray, new InViewElement(element)];
     });
   }
+
+  // Set default dataset
+  peekElementInstanceArray.forEach((item) => {
+    // if (item.dataset.length === 0) {
+    //   item.dataset = {
+    //     declaration: 'transform',
+    //     element: 'translateY',
+    //     start: 0,
+    //     end: -10,
+    //     unit: 'em',
+    //   };
+    // }
+  });
 
   let latestKnownScrollY = 0;
   let ticking = false;
@@ -27,9 +42,7 @@ function peek() {
 
     peekElementInstanceArray.forEach((item) => {
       let transforms = '';
-
       if (item.visible) {
-        // console.log(item.dataset);
         item.dataset.forEach((object) => {
           currentValue = calcCurrentValue(object.start, object.end, object.unit, item.offset);
           if (object.element === undefined) {
@@ -55,6 +68,7 @@ function peek() {
     requestTick();
   }
 
+  update();
   window.addEventListener('scroll', onScroll, false);
 
   // const handleScroll = debounce((e) => {
