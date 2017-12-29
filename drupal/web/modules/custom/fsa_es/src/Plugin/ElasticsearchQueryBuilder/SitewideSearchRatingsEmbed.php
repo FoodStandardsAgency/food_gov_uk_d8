@@ -17,18 +17,18 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class SitewideSearchRatingsEmbed extends SitewideSearchBase {
 
-  /** @var \Drupal\fsa_es\SearchService $searchService */
-  protected $searchService;
+  /** @var \Drupal\fsa_es\SearchService $ratingsSearchService */
+  protected $ratingsSearchService;
 
   /**
    * {@inheritdoc}
    *
-   * @param \Drupal\fsa_es\SearchService $search_service
+   * @param \Drupal\fsa_es\SearchService $ratings_search_service
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $language_manager, Client $elasticsearch_client, SearchService $search_service) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $language_manager, Client $elasticsearch_client, SearchService $ratings_search_service) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $language_manager, $elasticsearch_client);
 
-    $this->searchService = $search_service;
+    $this->ratingsSearchService = $ratings_search_service;
   }
 
   /**
@@ -59,7 +59,7 @@ class SitewideSearchRatingsEmbed extends SitewideSearchBase {
     $keyword = $arguments['keyword'];
 
     // Get query.
-    $query = $this->searchService->buildQuery($this->currentLanguage, $keyword, [], $query_plugin->getLimit(), $query_plugin->offset);
+    $query = $this->ratingsSearchService->buildQuery($this->currentLanguage, $keyword, [], $query_plugin->getLimit(), $query_plugin->offset);
 
     return $query;
   }

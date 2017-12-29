@@ -17,8 +17,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class SitewideSearchRatings extends SitewideSearchBase {
 
-  /** @var \Drupal\fsa_es\SearchService $searchService */
-  protected $searchService;
+  /** @var \Drupal\fsa_es\SearchService $ratingsSearchService */
+  protected $ratingsSearchService;
 
   /** @var null|array $aggregations */
   protected $aggregations = NULL;
@@ -26,12 +26,12 @@ class SitewideSearchRatings extends SitewideSearchBase {
   /**
    * {@inheritdoc}
    *
-   * @param \Drupal\fsa_es\SearchService $search_service
+   * @param \Drupal\fsa_es\SearchService $ratings_search_service
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $language_manager, Client $elasticsearch_client, SearchService $search_service) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $language_manager, Client $elasticsearch_client, SearchService $ratings_search_service) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $language_manager, $elasticsearch_client);
 
-    $this->searchService = $search_service;
+    $this->ratingsSearchService = $ratings_search_service;
   }
 
   /**
@@ -77,7 +77,7 @@ class SitewideSearchRatings extends SitewideSearchBase {
     }
 
     // Get query.
-    $query = $this->searchService->buildQuery($this->currentLanguage, $keyword, $filters, $query_plugin->getLimit(), $query_plugin->offset);
+    $query = $this->ratingsSearchService->buildQuery($this->currentLanguage, $keyword, $filters, $query_plugin->getLimit(), $query_plugin->offset);
 
     return $query;
   }
@@ -89,7 +89,7 @@ class SitewideSearchRatings extends SitewideSearchBase {
    */
   public function getAggregations() {
     if (!is_array($this->aggregations)) {
-      $this->aggregations = $this->searchService->categories($this->currentLanguage);
+      $this->aggregations = $this->ratingsSearchService->categories($this->currentLanguage);
     }
 
     return $this->aggregations;
@@ -102,7 +102,7 @@ class SitewideSearchRatings extends SitewideSearchBase {
    */
   public function getBusinessTypeFilterOptions() {
     $aggregations = $this->getAggregations();
-    return $this->searchService->aggsToOptions($aggregations['business_types']);
+    return $this->ratingsSearchService->aggsToOptions($aggregations['business_types']);
   }
 
   /**
@@ -112,7 +112,7 @@ class SitewideSearchRatings extends SitewideSearchBase {
    */
   public function getLocalAuthorityFilterOptions() {
     $aggregations = $this->getAggregations();
-    return $this->searchService->aggsToOptions($aggregations['local_authorities']);
+    return $this->ratingsSearchService->aggsToOptions($aggregations['local_authorities']);
   }
 
   /**
@@ -122,8 +122,8 @@ class SitewideSearchRatings extends SitewideSearchBase {
    */
   public function getFhrsRatingValueFilterOptions() {
     $aggregations = $this->getAggregations();
-    return $this->searchService->defineAndSortArrayItems(
-      $this->searchService->aggsToOptions($aggregations['fhrs_rating_values']),
+    return $this->ratingsSearchService->defineAndSortArrayItems(
+      $this->ratingsSearchService->aggsToOptions($aggregations['fhrs_rating_values']),
       [
         5,
         4,
@@ -144,8 +144,8 @@ class SitewideSearchRatings extends SitewideSearchBase {
    */
   public function getFhisRatingValueFilterOptions() {
     $aggregations = $this->getAggregations();
-    return $this->searchService->defineAndSortArrayItems(
-      $this->searchService->aggsToOptions($aggregations['fhis_rating_values']),
+    return $this->ratingsSearchService->defineAndSortArrayItems(
+      $this->ratingsSearchService->aggsToOptions($aggregations['fhis_rating_values']),
       [
         'Pass',
         'Pass and Eat Safe',

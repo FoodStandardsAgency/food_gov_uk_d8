@@ -1,0 +1,10 @@
+uuid: a486cd9e-26f8-4322-9dbe-fec544e9cd9b
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_ratings
+id: fsa_establishment.search_result_embed
+label: 'Search result embedded'
+targetEntityType: fsa_establishment
+cache: true

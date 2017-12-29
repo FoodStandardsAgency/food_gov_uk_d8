@@ -39,8 +39,6 @@ function fsa_es_block_alter(&$info) {
 function fsa_es_views_pre_render(ViewExecutable $view) {
   // If using AJAX, send identifying data about this view.
   if ($view->ajaxEnabled() && empty($view->live_preview)) {
-    $view_element_selector = '.' . Html::getClass('views-result-total-' . $view->storage->id());
-
     $view->element['#attached']['library'][] = 'fsa_es/result_totals';
     $view->element['#attached']['drupalSettings']['fsa_es']['result_totals'] = [
       'keywords' => isset($view->filter['keyword']) ? $view->filter['keyword']->value : NULL,
@@ -97,7 +95,7 @@ function fsa_es_preprocess_views_view(&$variables) {
     $embed_view_display = 'embed_1';
 
     // Get embed view.
-    if ($ratings_embed_view = Views::getView('search_global_ratings_embed')) {
+    if ($ratings_embed_view = Views::getView($embed_view_id)) {
       // Get keywords filter value from the parent view.
       $keywords = isset($view->filter['keyword']->value) ? $view->filter['keyword']->value : NULL;
 
