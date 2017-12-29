@@ -44,7 +44,14 @@
     <div class="ratings__listing">
       <div class="ratings__toolbar" role="toolbar" aria-label="sorting options" aria-controls="sortable">
         {% if sort_form %}
-          <div class="ratings__hits-total">{{ hits_total }} {{ 'results for '|t }} "{{ keywords }}"</div>
+          <div class="ratings__hits-total">
+              {{ hits_total }}
+              {% if keywords %}
+                {{ 'results for '|t }} "{{ keywords }}"
+              {% else %}
+                  {{ 'results'|t }}
+              {% endif %}
+          </div>
           <div class="ratings__sort-form">{{ sort_form }}</div>
         {% endif %}
       </div>
