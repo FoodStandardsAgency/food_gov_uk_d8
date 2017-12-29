@@ -1375,6 +1375,7 @@ display:
         options:
           relationship: none
           view_mode: promo
+      css_class: promo-wrapper
     cache_metadata:
       max-age: -1
       contexts:
