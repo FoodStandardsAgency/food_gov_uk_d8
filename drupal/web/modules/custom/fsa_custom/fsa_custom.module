@@ -19,12 +19,16 @@ use Drupal\Core\Form\FormStateInterface;
  */
 function fsa_custom_preprocess_page(&$variables) {
 
-  // Hardcoded links for "utility menu". @todo: make dynamic/editable via CMS.
+  // Hardcoded "utility menu" links.
+  // Get the contact link from settings. Default to 58 which happened to be the
+  // first version contact lander.
+  $contact_link = \Drupal::state()->get('fsa_custom.contact_link_nid');
+  $contact_nid = (isset($contact_link) && is_numeric($contact_link)) ? $contact_link : 58;
   $items = [[
     '#markup' => Link::createFromRoute(
       t('Contact'),
       'entity.node.canonical',
-      ['node' => '58'],
+      ['node' => $contact_nid],
       [])->toString(),
     '#wrapper_attributes' => [
       'class' => [
@@ -104,8 +108,11 @@ function fsa_custom_preprocess_page_title(&$variables) {
 function fsa_custom_preprocess_breadcrumb(&$variables) {
 
   $node = \Drupal::routeMatch()->getParameter('node');
-  if (isset($node)) {
-
+  if (\Drupal::service('path.matcher')->isFrontPage()) {
+    // We don't need breadcrumbs on homepage.
+    unset($variables['breadcrumb']);
+  }
+  elseif (isset($node)) {
     // Node titles can be horribly long, if that's the case truncate with
     // sensible amount of characters, word-safe.
     $max_length = 90;
@@ -266,6 +273,12 @@ function fsa_custom_theme() {
         'attributes' => NULL,
         'title' => NULL,
         'copy' => NULL,
+      ],
+    ],
+    'image_as_background' => [
+      'variables' => [
+        'attributes' => NULL,
+        'path' => NULL,
       ],
     ],
   ];

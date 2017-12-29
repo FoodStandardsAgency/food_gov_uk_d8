@@ -1,0 +1,14 @@
+uuid: 34132d85-8b89-4124-b1d8-bff3dc8ff687
+langcode: en
+status: true
+dependencies: {  }
+id: fsa_admin
+label: 'FSA Admin'
+weight: -6
+is_admin: null
+permissions:
+  - 'access webform overview'
+  - 'access webform submission log'
+  - 'administer fsa rating landing content'
+  - 'administer webform submission'
+  - 'translate configuration'

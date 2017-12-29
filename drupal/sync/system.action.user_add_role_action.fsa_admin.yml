@@ -1,0 +1,14 @@
+uuid: c7c0927f-3485-4887-a868-75ca7396e2c8
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.fsa_admin
+  module:
+    - user
+id: user_add_role_action.fsa_admin
+label: 'Add the FSA Admin role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: fsa_admin

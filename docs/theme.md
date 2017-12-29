@@ -4,30 +4,21 @@ Theme
 Description
 -----------
 
-The theme is called [theme] and is based on [base_theme].
+The theme is called `FSA` and is based on `stable` theme.
 
 Dependencies
 ------------
 
-This theme requires the following modules to run:
-
-* base_theme
-* panels_nowhere
+Theme has no Drupal dependencies but Node.js and Yarn for dependency management are required for development.
 
 Frontpage
 ---------
 
-Describe how the frontpage is built (panel, view, etc.)
+Frontpage is a node of content type "Landing page".
 
-Custom templates
-----------------
-
-The theme uses the following templates:
-
-### tpl1.tpl.php
-This template is used for something.
+Site frontpage `node/id` is set in Basic site settings `/admin/config/system/site-information`. This configuration is ignored from version control hence can (and must) be set separately on each environmment.
 
 Further details
 ---------------
 
-Describe any other theme-related special details (javascript libraries added, etc.).
+Refer to the theme [README.md](../drupal/web/themes/custom/fsa/README.md) for more information and developer notes.

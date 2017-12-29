@@ -92,7 +92,7 @@ class FsaRatingsSearchForm extends FormBase {
         'class' => [
           'js-main-search-input',
         ],
-      ]
+      ],
     ];
 
     $string = $this->t('More search options');
