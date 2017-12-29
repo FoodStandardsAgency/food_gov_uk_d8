@@ -106,11 +106,11 @@ class FsaRatingsNormalizer extends NormalizerBase {
   protected function edgeNGram($value, $min_gram_length = 2) {
     $ngrams = [];
     $value = trim($value);
-    $len = strlen($value);
+    $len = mb_strlen($value);
     $max_gram_length = $len;
 
     for ($a = $min_gram_length; $a <= $max_gram_length; $a++) {
-      $ngrams[] = substr($value, 0, $a);
+      $ngrams[] = mb_substr($value, 0, $a);
     }
 
     $ngrams = array_unique($ngrams);
