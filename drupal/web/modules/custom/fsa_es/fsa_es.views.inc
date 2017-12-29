@@ -11,6 +11,9 @@ function fsa_es_views_data_alter(array &$data) {
     'filter' => [
       'id' => 'fsa_keyword',
     ],
+    'argument' => [
+      'id' => 'string',
+    ],
   ];
 
   $data['elasticsearch_result']['ratings_business_type'] = [
