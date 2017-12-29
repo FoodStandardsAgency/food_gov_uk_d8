@@ -85,6 +85,7 @@ class LinkTabsBlock extends BlockBase implements ContainerFactoryPluginInterface
         'url' => '',
         'text' => '',
         'route_parameters' => '',
+        'query' => '',
       ];
     }
 
@@ -118,6 +119,12 @@ class LinkTabsBlock extends BlockBase implements ContainerFactoryPluginInterface
           '#title' => $this->t('Route parameters'),
           '#description' => $this->t('Provide parameters in json format. Example: %example. Tokens can be used.', ['%example' => '{"value": 123, "foo": "bar"}']),
           '#default_value' => $this->configuration['links'][$name]['route_parameters'],
+        ],
+        'query' => [
+          '#type' => 'textfield',
+          '#title' => $this->t('Query'),
+          '#description' => $this->t('Provide query parameters in json format. Example: %example. Tokens can be used.', ['%example' => '{"value": [current-page:query:value], "foo": "bar"}']),
+          '#default_value' => $this->configuration['links'][$name]['query'],
         ],
         'text' => [
           '#type' => 'textfield',
@@ -169,6 +176,7 @@ class LinkTabsBlock extends BlockBase implements ContainerFactoryPluginInterface
           $this->configuration['links'][$name]['url'] = $url;
           $this->configuration['links'][$name]['text'] = $text;
           $this->configuration['links'][$name]['route_parameters'] = $form_state->getValue(['links', $name, 'route_parameters']);
+          $this->configuration['links'][$name]['query'] = $form_state->getValue(['links', $name, 'query']);
         }
       }
     }
@@ -215,6 +223,9 @@ class LinkTabsBlock extends BlockBase implements ContainerFactoryPluginInterface
         ],
       ];
 
+      // Prepare cache context storage.
+      $cache_contexts = [];
+
       // Get token data from contexts.
       $data = $this->getContextAsTokenData();
 
@@ -222,17 +233,43 @@ class LinkTabsBlock extends BlockBase implements ContainerFactoryPluginInterface
         if (!empty($link['url'])) {
           // Prepare URL.
           $url = NULL;
+          // Prepare URL options.
+          $options = [
+            'set_active_class' => TRUE,
+          ];
+
           // Get route parameters.
-          $route_parameters = Json::decode($this->token->replace($link['route_parameters'], $data));
+          $route_parameters_tokenized = $this->token->replace($link['route_parameters'], $data);
+          $route_parameters = Json::decode($route_parameters_tokenized);
+
+          // Get query parameters.
+          $query_tokenized = $this->token->replace($link['query'], $data, ['clear' => TRUE]);
+          $query = Json::decode($query_tokenized);
+
+          // Add url cache context if query is not empty, and original query and
+          // tokenized query differ.
+          if ($link['query'] != $query_tokenized) {
+            $cache_contexts[] = 'url';
+          }
+
+          // Filter out empty query parameters.
+          $query = array_filter($query, function($item) {
+            return $item != '';
+          });
+
+          // Add query to options.
+          if (!empty($query)) {
+            $options['query'] = $query;
+          }
 
           try {
             // If route exists, no exceptions will be thrown.
             $route = $this->routeProvider->getRouteByName($link['url']);
-            $url = Url::fromRoute($route, is_array($route_parameters) ? $route_parameters : []);
+            $url = Url::fromRoute($route, is_array($route_parameters) ? $route_parameters : [], $options);
             $url->toString();
           } catch (RouteNotFoundException $e) {
             try {
-              $url = Url::fromUserInput($link['url']);
+              $url = Url::fromUserInput($link['url'], $options);
             } catch (\Exception $e) {
               watchdog_exception('csb_base', $e);
             }
@@ -242,11 +279,14 @@ class LinkTabsBlock extends BlockBase implements ContainerFactoryPluginInterface
 
           if ($url) {
             $item_link = Link::fromTextAndUrl($link['text'], $url);
-            $item_link->getUrl()->setOption('set_active_class', TRUE);
 
             $build['#items'][] = $item_link->toString();
           }
         }
+      }
+
+      if (!empty($cache_contexts)) {
+        $build['#cache']['contexts'] = array_unique($cache_contexts);
       }
     }
 
