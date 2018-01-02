@@ -303,11 +303,11 @@ class FsaRatingsSearchForm extends FormBase {
 
         case 'AwaitingInspection':
           // Make this label more human friendly.
-          $value = t('Awaiting Rating');
+          $value = t('Awaiting rating');
           break;
 
         default:
-          $value = $a['key'];
+          $value = ucfirst(strtolower($a['key']));
       }
       $options[$a['key']] = (string) $value;
     }
