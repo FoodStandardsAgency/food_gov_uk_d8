@@ -45,7 +45,6 @@
   margin: 0 auto;
   max-width: var(--max-width);
   background-color: var(--color-white);
-  overflow: auto;
 }
 
 .layout__container--main {
