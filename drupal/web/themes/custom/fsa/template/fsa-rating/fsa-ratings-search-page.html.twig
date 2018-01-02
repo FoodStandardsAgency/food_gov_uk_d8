@@ -66,18 +66,24 @@
 
           {{ items }}
 
+          {% if pager_info %}
+            <div>{{ pager_info }}</div>
+          {% endif %}
+
           <div id="ratings-search-load-more" class="ratings__table ratings__table--more-items"></div>
 
         </div>
 
-        <footer class="ratings__footer">
-          {% if hits_total > hits_shown %}
-            <div class="result-counter">
-              <p>{% trans %}Displaying <span class="hits-shown">{{ hits_shown }}</span> of <span class="hits-total">{{ hits_total }}</span> items{% endtrans %}</p>
-            </div>
+          {% if load_more %}
+            <footer class="ratings__footer">
+              {% if hits_total > hits_shown %}
+                <div class="result-counter">
+                  <p>{% trans %}Displaying <span class="hits-shown">{{ hits_shown }}</span> of <span class="hits-total">{{ hits_total }}</span> items{% endtrans %}</p>
+                </div>
+              {% endif %}
+              {{ load_more }}
+            </footer>
           {% endif %}
-          {{ load_more }}
-        </footer>
       </div>
       {% endif %}
     </div>

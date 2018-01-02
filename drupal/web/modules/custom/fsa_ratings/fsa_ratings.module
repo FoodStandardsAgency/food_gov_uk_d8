@@ -171,6 +171,7 @@ function fsa_ratings_theme() {
         'keywords' => '',
         'available_filters' => [],
         'applied_filters' => [],
+        'pager_info' => FALSE,
         'hits_total' => 0,
         'hits_shown' => 0,
         'form' => NULL,
