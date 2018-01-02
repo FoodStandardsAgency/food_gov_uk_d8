@@ -14,7 +14,7 @@ third_party_settings:
 id: search_link_tabs
 theme: fsa
 region: content
-weight: -11
+weight: -3
 provider: null
 plugin: fsa_link_tabs
 settings:
