@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <div id="results" class="ratings__content {% if ratings_info_content %}ratings__content--frontpage{% else %}ratings__content--listing{% endif %}">
+    <div id="{{ results_anchor }}" class="ratings__content {% if ratings_info_content %}ratings__content--frontpage{% else %}ratings__content--listing{% endif %}">
       {% if ratings_info_content %}
         <div class="container container--small">
           {{ ratings_info_content }}
@@ -66,18 +66,26 @@
 
           {{ items }}
 
-          <div id="ratings-search-load-more" class="ratings__table ratings__table--more-items"></div>
+          {% if pager_info %}
+            <div>{{ pager_info }}</div>
+          {% endif %}
+
+          {% if load_more %}
+            <div id="ratings-search-load-more" class="ratings__table ratings__table--more-items"></div>
+          {% endif %}
 
         </div>
 
-        <footer class="ratings__footer">
-          {% if hits_total > hits_shown %}
-            <div class="result-counter">
-              <p>{% trans %}Displaying <span class="hits-shown">{{ hits_shown }}</span> of <span class="hits-total">{{ hits_total }}</span> items{% endtrans %}</p>
-            </div>
+          {% if load_more %}
+            <footer class="ratings__footer">
+              {% if hits_total > hits_shown %}
+                <div class="result-counter">
+                  <p>{% trans %}Displaying <span class="hits-shown">{{ hits_shown }}</span> of <span class="hits-total">{{ hits_total }}</span> items{% endtrans %}</p>
+                </div>
+              {% endif %}
+              {{ load_more }}
+            </footer>
           {% endif %}
-          {{ load_more }}
-        </footer>
       </div>
       {% endif %}
     </div>
