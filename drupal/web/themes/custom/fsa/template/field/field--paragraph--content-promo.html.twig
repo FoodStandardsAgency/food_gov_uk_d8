@@ -12,32 +12,27 @@
  * @see template_preprocess_field()
  */
 #}
-{% set image_class = 'image-wrapper' %}
-{% set content_class = 'content-wrapper' %}
+{% set content_class = 'promo__content' %}
 <div{{ attributes }}>
-    {% for item in items %}
-        {% if item.content.field_link|render|striptags|trim and not item.content.field_link_list|render|striptags|trim %}
-            <a href="{{ item.content.field_link|render|striptags|trim }}" {{ item.attributes }}>
-                {% if item.image_as_background %}
-                    <div class="{{ image_class }}">
-                        {{ item.image_as_background }}
-                    </div>
-                {% endif %}
-                <div class="{{ content_class }}">
-                    {{ item.content|without('field_link') }}
-                </div>
-            </a>
-        {% else %}
-            <div{{ item.attributes }}>
-                {% if item.image_as_background %}
-                    <div class="{{ image_class }}">
-                        {{ item.image_as_background }}
-                    </div>
-                {% endif %}
-                <div class="{{ content_class }}">
-                    {{ item.content|without('field_link') }}
-                </div>
-            </div>
+  {% for item in items %}
+    {% if item.content.field_link|render|striptags|trim and not item.content.field_link_list|render|striptags|trim %}
+      <a href="{{ item.content.field_link|render|striptags|trim }}" {{ item.attributes }}>
+        {% if item.image_as_background %}
+          {{ item.image_as_background }}
         {% endif %}
-    {% endfor %}
+        <div class="{{ content_class }}">
+          {{ item.content|without('field_link') }}
+        </div>
+      </a>
+    {% else %}
+      <div{{ item.attributes }}>
+        {% if item.image_as_background %}
+          {{ item.image_as_background }}
+        {% endif %}
+        <div class="{{ content_class }}">
+          {{ item.content|without('field_link') }}
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
 </div>

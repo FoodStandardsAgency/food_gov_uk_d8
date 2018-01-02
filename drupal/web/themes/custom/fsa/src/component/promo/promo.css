@@ -65,10 +65,6 @@
 /* Global promo style */
 .promo,
 .field__field_content_promo__item {
-  background-image: var(--icon-arrow-right-primary);
-  background-repeat: no-repeat;
-  background-size: 1.5em auto;
-  background-position: right 1em bottom 1em;
   background-color: var(--color-white);
   border: 4px solid var(--color-light-gray);
   position: relative;
@@ -86,10 +82,6 @@
     background-position: right 2em bottom 2em;
   }
 
-  .promo__background-image {
-    height: 12em;
-  }
-
   /* Alert tag */
   .field__field_alert_type {
 
@@ -98,23 +90,6 @@
   /* Updated field */
   .field__field_alert_modified {
     color: var(--color-gray);
-  }
-
-  /* Heading field */
-  .field__field_title {
-    @mixin responsive-declaration padding-top, 1rem, 2rem;
-    @mixin responsive-declaration padding-right, 1rem, 2rem;
-    @mixin responsive-declaration padding-left, 1rem, 2rem;
-    @mixin responsive-declaration padding-bottom, 1rem, 2rem;
-    margin-top: 0em;
-    margin-bottom: 0;
-  }
-
-  /* Intro field */
-  .field__field_intro {
-    @mixin responsive-declaration padding-right, 1em, 2em;
-    @mixin responsive-declaration padding-left, 1em, 2em;
-    @mixin responsive-declaration padding-bottom, 1rem, 2rem;
   }
 
   /* Promo link list */
@@ -163,6 +138,15 @@
   }
 }
 
+/* If promo is a link */
+a.promo,
+a.field__field_content_promo__item {
+  background-image: var(--icon-arrow-right-primary);
+  background-repeat: no-repeat;
+  background-size: 1.5em auto;
+  background-position: right 1em bottom 1em;
+}
+
 .promo {
   @media (--breakpoint-lg) {
     height: 100%;
@@ -174,17 +158,19 @@
       margin-top: auto;
     }
   }
-
-  &.promo--inline-content {
-    background: none;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    padding-bottom: 0;
-    padding: 1em;
-  }
 }
 
+/* Promo with inline content */
+.promo--inline-content {
+  background: none;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  padding-bottom: 0;
+  padding: 1em;
+}
+
+/* Light variation promo */
 .promo--light {
   border: 0;
 
@@ -201,48 +187,6 @@
   }
 }
 
-.promo__icon {
-  width: 5em;
-  height: 5em;
-  border-radius: 50%;
-  background-color: var(--dark-primary-color);
-  padding: 1em;
-
-  .svg {
-    width: 100%;
-    height: 100%;
-
-    path {
-      fill: var(--color-white);
-    }
-  }
-}
-
-.promo__content {
-  color: var(--color-black);
-
-  .promo--inline-content & {
-    padding: 1em;
-  }
-}
-
-.promo__heading {
-  color: var(--dark-primary-color);
-}
-
-.promo__read-more {
-  padding: 1em;
-
-  .svg {
-    width: 2em;
-    height: 2em;
-  }
-
-  .promo--inline-content & {
-    margin-top: 0 !important;
-    margin-left: auto;
-  }
-}
 
 /* Large content promo */
 .field__field_large_promo {
@@ -251,42 +195,7 @@
   @mixin responsive-declaration margin-bottom, -2em, -4em;
   @mixin responsive-declaration margin-left, -2em, -4em;
 
-  @media (--breakpoint-md) {
-    display: flex;
-    flex-flow: row wrap;
-  }
-
-  .promo__background-image {
-    height: 15em;
-
-    @media (--breakpoint-xs) {
-      height: 30em;
-    }
-
-    @media (--breakpoint-md) {
-      flex: 1 1 50%;
-      height: auto;
-    }
-  }
-
-  .field__field_intro {
-    @mixin responsive-declaration padding-bottom, 1em, 2em;
-  }
-
-  .field__field_large_promo__item {
-    @mixin responsive-declaration padding-top, 1em, 3em;
-    @mixin responsive-declaration padding-right, 1em, 5em;
-    @mixin responsive-declaration padding-bottom, 1em, 3em;
-    @mixin responsive-declaration padding-left, 1em, 5em;
-      
-    @media (--breakpoint-md) {
-      flex: 1 1 50%;
-      display: flex;
-      flex-flow: column nowrap;
-      justify-content: center;
-      min-height: 30em;
-      height: 50vh;
-    }
+  .promo__content {
 
     .field__field_link {
       text-align: center;
@@ -319,10 +228,134 @@
   }
 }
 
+.field__field_large_promo__item {
+  display: flex;
+  flex-flow: column nowrap;
+
+  @media (--breakpoint-md) {
+    flex-flow: row nowrap;
+  }
+}
+
+.promo__icon {
+  width: 5em;
+  height: 5em;
+  border-radius: 50%;
+  background-color: var(--dark-primary-color);
+  padding: 1em;
+
+  .svg {
+    width: 100%;
+    height: 100%;
+
+    path {
+      fill: var(--color-white);
+    }
+  }
+}
+
 /* Promo image */
 .promo__background-image {
   background-position: 50% 50%;
   background-size: cover;
+
+  .promo &,
+  .field__field_content_promo__item & {
+    height: 12em;
+  }
+
+  .field__field_large_promo & {
+    height: 15em;
+
+    @media (--breakpoint-xs) {
+      height: 30em;
+    }
+
+    @media (--breakpoint-md) {
+      flex: 1 1 50%;
+      height: auto;
+    }
+  }
+
+  .field__field_large_promo__item--odd & {
+    @media (--breakpoint-md) {
+      order: 100;
+    }
+  }
+}
+
+/* Promo content */
+.promo__content {
+  color: var(--color-black);
+
+  .promo--inline-content & {
+    padding: 1em;
+  }
+
+  .promo--inline-content & {
+    margin-top: 0 !important;
+    margin-left: auto;
+  }
+
+  .field__field_large_promo & {
+    @mixin responsive-declaration padding-top, 1em, 3em;
+    @mixin responsive-declaration padding-right, 1em, 5em;
+    @mixin responsive-declaration padding-bottom, 1em, 3em;
+    @mixin responsive-declaration padding-left, 1em, 5em;
+      
+    @media (--breakpoint-md) {
+      flex: 1 1 50%;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: center;
+      min-height: 30em;
+      height: 50vh;
+    }
+  }
+
+  .field__field_large_promo__item--even & {
+    background-color: var(--dark-secondary-color);
+    color: var(--color-white);
+  }
+}
+
+/* Heading field */
+.promo__heading {
+  color: var(--dark-primary-color);
+}
+
+.field__field_title {
+  .promo,
+  .field__field_content_promo__item & {
+    @mixin responsive-declaration padding-top, 1rem, 2rem;
+    @mixin responsive-declaration padding-right, 1rem, 2rem;
+    @mixin responsive-declaration padding-left, 1rem, 2rem;
+    @mixin responsive-declaration padding-bottom, 1rem, 2rem;
+    margin-top: 0em;
+    margin-bottom: 0;
+  }
+}
+
+/* Intro */
+.field__field_intro {
+  @mixin responsive-declaration padding-bottom, 1em, 2em;
+
+  .promo &,
+  .field__field_content_promo__item & {
+    @mixin responsive-declaration padding-right, 1em, 2em;
+    @mixin responsive-declaration padding-left, 1em, 2em;
+    @mixin responsive-declaration padding-bottom, 1rem, 2rem;
+  }
+}
+
+/* Promo read more */
+.promo__read-more {
+  padding: 1em;
+
+  .svg {
+    width: 2em;
+    height: 2em;
+  }
 }
 
 /* Content reference (contact us frontpage) */
