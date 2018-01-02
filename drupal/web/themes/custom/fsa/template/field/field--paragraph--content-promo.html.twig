@@ -4,7 +4,7 @@
  * FSA theme override for Content promo paragraph field.
  *
  * Additional variables:
- * - item.link_target: URL to link the whole promo element.
+ * - item.promo_img_path: Promo image element
  *
  * Note: variable|render|striptags|trim to avoid issues with twig debugging turned on.
  *
@@ -12,63 +12,28 @@
  * @see template_preprocess_field()
  */
 #}
-
-{{ item.content.field_link }}
-{% if label_hidden %}
-    {% if multiple %}
-        <div{{ attributes }}>
-            {% for item in items %}
-            <div{{ item.attributes }}>
-                {{ item.promo_img_path }}
-                {% if item.content.field_link|render|striptags|trim and not item.content.field_link_list|render|striptags|trim %}
-                    <a href="{{ item.content.field_link|render|striptags|trim }}">{{ item.content|without('field_link') }}</a>
-                {% else %}
-                    {{ item.content|without('field_link') }}
-                {% endif %}
-            </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        {% for item in items %}
-            {{ item.promo_img_path }}
-            <div{{ attributes }}>
-                {% if item.content.field_link|render|striptags|trim and not item.content.field_link_list|render|striptags|trim %}
-                    <a href="{{ item.content.field_link|render|striptags|trim }}">{{ item.content|without('field_link') }}</a>
-                {% else %}
-                    {{ item.content|without('field_link') }}
-                {% endif %}
-            </div>
-        {% endfor %}
-    {% endif %}
-{% else %}
+{% set image_class = 'image-wrapper' %}
+{% set content_class = 'content-wrapper' %}
 <div{{ attributes }}>
-    <{{ title_element }}{{ title_attributes }}>{{ label }}</{{ title_element }}>
-    {% if multiple %}
-        <div>
-    {% endif %}
     {% for item in items %}
-        {% if label_display == 'inline' %}
-            {{ item.promo_img_path }}
-            <span{{ item.attributes }}>
-                {% if item.content.field_link|render|striptags|trim and not item.content.field_link_list|render|striptags|trim %}
-                    <a href="{{ item.content.field_link|render|striptags|trim }}">{{ item.content|without('field_link') }}</a>
-                {% else %}
+        {% if item.content.field_link|render|striptags|trim and not item.content.field_link_list|render|striptags|trim %}
+            <a href="{{ item.content.field_link|render|striptags|trim }}" {{ item.attributes }}>
+                <div class="{{ image_class }}">
+                    {{ item.promo_img_path }}
+                </div>
+                <div class="{{ content_class }}">
                     {{ item.content|without('field_link') }}
-                {% endif %}
-            </span>
+                </div>
+            </a>
         {% else %}
-            {{ item.promo_img_path }}
             <div{{ item.attributes }}>
-                {% if item.content.field_link|render|striptags|trim and not item.content.field_link_list|render|striptags|trim %}
-                    <a href="{{ item.content.field_link|render|striptags|trim }}">{{ item.content|without('field_link') }}</a>
-                {% else %}
+                <div class="{{ image_class }}">
+                    {{ item.promo_img_path }}
+                </div>
+                <div class="{{ content_class }}">
                     {{ item.content|without('field_link') }}
-                {% endif %}
+                </div>
             </div>
         {% endif %}
     {% endfor %}
-    {% if multiple %}
-        </div>
-    {% endif %}
-    </div>
-{% endif %}
+</div>
