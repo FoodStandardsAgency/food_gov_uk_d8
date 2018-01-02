@@ -32,16 +32,9 @@
   position: relative;
   display: flex;
   justify-content: center;
-  margin-top: 0em;
-  @mixin responsive-declaration margin-bottom, 1em, 4em;
 
   @media (--breakpoint-md) {
     padding-bottom: 10em;
-    margin-top: -1.25em;
-  }
-
-  @media (--breakpoint-lg) {
-    margin-top: -3.5em;
   }
 }
 
@@ -131,18 +124,12 @@
 
   @media (--breakpoint-md) {
     position: absolute;
-    right: -2em;
-    left: -2em;
+    right: 0em;
+    left: 0em;
     padding-top: 2em;
     flex-direction: row;
     align-items: stretch;
     justify-content: center;
-  }
-
-  @media (--breakpoint-lg) {
-    position: absolute;
-    right: -6em;
-    left: -6em;
   }
 }
 

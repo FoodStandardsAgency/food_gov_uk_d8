@@ -364,7 +364,6 @@ function navigation() {
     // Add click listener to toggle
     element.addEventListener('keydown', function(event){
       if (event.keyCode === KEYCODE.SPACE) {
-        console.log('safasdf');
         event.preventDefault();
         closeOther(otherItems);
       }
