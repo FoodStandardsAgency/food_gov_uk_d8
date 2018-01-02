@@ -91,10 +91,8 @@ function fsa_lander_preprocess_pager(&$variables) {
 
     // Modify pager links.
     if (isset($variables['items']['pages'])) {
-      $page = 1;
       foreach ($variables['items']['pages'] as $key => $value) {
-        $variables['items']['pages'][$page]['href'] = $value['href'] . $anchor;
-        $page++;
+        $variables['items']['pages'][$key]['href'] = $value['href'] . $anchor;
       }
     }
   }
