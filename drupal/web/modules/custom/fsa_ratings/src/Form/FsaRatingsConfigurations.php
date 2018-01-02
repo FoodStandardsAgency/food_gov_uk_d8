@@ -42,15 +42,19 @@ class FsaRatingsConfigurations extends ConfigFormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $fsa_ratings = $this->config('config.fsa_ratings');
 
+    $form['fsa_ratings'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Rating search landing page content'),
+      '#description' => $this->t('The content to display on the <a href="/ratings/search">Ratings search</a> landing page'),
+    ];
     // Ratings form landing info content.
     // @todo: Use to WYSIWYG field?
     $form['fsa_ratings']['ratings_info_content'] = [
       '#type' => 'text_format',
       '#format' => 'full_html',
-      '#title' => $this->t('Ratings search landing content'),
+      '#title' => $this->t('Intro content'),
       '#maxlength' => NULL,
       '#default_value' => $fsa_ratings->get('ratings_info_content') ? $fsa_ratings->get('ratings_info_content') : '',
-      '#description' => $this->t('Informational content displayed on the Ratings search page'),
     ];
     return parent::buildForm($form, $form_state);
   }

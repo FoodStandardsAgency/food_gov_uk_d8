@@ -1,0 +1,14 @@
+uuid: 66bb88b5-44f9-4df6-ba20-9acc3d75f15d
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.fsa_admin
+  module:
+    - user
+id: user_remove_role_action.fsa_admin
+label: 'Remove the FSA Admin role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: fsa_admin

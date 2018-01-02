@@ -9,7 +9,6 @@
 @import "component/general/topic-cloud.css";
 @import "component/general/subpages.css";
 @import "component/general/message-list.css";
-@import "component/general/teaser.css";
 @import "component/general/team-finder.css";
 
 /* Layout */
@@ -34,7 +33,8 @@
 @import "component/fhrs/fhrs.css";
 @import "component/team/team.css";
 @import "component/hero/hero.css";
-@import "component/parallax/parallax.css";
+@import "component/peek/peek.css";
 @import "component/listing/listing.css";
 @import "component/footer/footer.css";
 @import "component/sidebar/sidebar.css";
+@import "component/promo/promo.css";

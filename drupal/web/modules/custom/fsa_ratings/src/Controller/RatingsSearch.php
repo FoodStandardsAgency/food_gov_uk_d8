@@ -95,6 +95,11 @@ class RatingsSearch extends ControllerBase {
       $max_items = RatingsSearch::INITIAL_RESULTS_COUNT;
     }
 
+    // Get page number.
+    $page = \Drupal::request()->query->get('page');
+    // And calculate offset.
+    $offset = $page * RatingsSearch::INITIAL_RESULTS_COUNT;
+
     $filters = [];
     // See if the following parameters are provided by the user and add to the
     // list of filters.
@@ -117,9 +122,13 @@ class RatingsSearch extends ControllerBase {
     $results = FALSE;
     if (!empty($keywords) || !empty($filters)) {
       // Execute the search using the SearchService.
-      $results = $this->searchService->search($language, $keywords, $filters, $max_items);
+      $results = $this->searchService->search($language, $keywords, $filters, $max_items, $offset);
       $items = $this->ratingSearchResults($results);
       $hits = $results['total'];
+
+      // Init the pager.
+      pager_default_initialize($hits, RatingsSearch::INITIAL_RESULTS_COUNT);
+
     }
 
     $sort_form = NULL;
@@ -129,10 +138,24 @@ class RatingsSearch extends ControllerBase {
     }
     else {
       $fsa_ratings_config = $this->config('config.fsa_ratings');
-      $ratings_info = ['#markup' => $fsa_ratings_config->get('ratings_info_content')];
+      $ratings_info = ['#markup' => check_markup($fsa_ratings_config->get('ratings_info_content'), 'full_html')];
     }
 
-    return [
+    $hits_total = number_format($hits, 0, ',', ' ');
+
+    if ($hits > 0) {
+      $from = ($offset + 1);
+      $to = count($items) + $offset;
+      $showing_items = $from . '-' . $to;
+      $pager_info = $this->t('Showing <span>@items</span> of <span>@total</span>', ['@items' => $showing_items, '@total' => $hits_total]);
+    }
+    else {
+      $pager_info = FALSE;
+    }
+
+    // Build the renderable result page.
+    $render = [];
+    $render[] = [
       '#theme' => 'fsa_ratings_search_page',
       '#form' => \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchForm'),
       '#sort_form' => $sort_form,
@@ -147,12 +170,19 @@ class RatingsSearch extends ControllerBase {
       '#available_filters' => $available_filters,
     // Filters given by the user and used for the querying.
       '#applied_filters' => $filters,
+    // Pager information.
+      '#pager_info' => $pager_info,
     // Total count of the results.
-      '#hits_total' => $hits,
+      '#hits_total' => $hits_total,
     // Item count to be shown now.
       '#hits_shown' => count($items),
-      '#load_more' => \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchLoadMore'),
+      //'#load_more' => \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchLoadMore'),
     ];
+
+    // Append the pager.
+    $render[] = ['#type' => 'pager'];
+
+    return $render;
   }
 
   /**

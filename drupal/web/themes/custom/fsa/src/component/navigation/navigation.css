@@ -3,7 +3,6 @@
 
 /* Navigation wrapper */
 .navigation-wrapper {
-  background-color: var(--color-white);
   position: absolute;
   z-index: var(--z-topmost);
   top: 0;
@@ -20,7 +19,6 @@
     transform var(--transition-enter);
 
   @media (--breakpoint-sm) {
-    background-color: transparent;
     position: relative;
     top: auto;
     right: auto;

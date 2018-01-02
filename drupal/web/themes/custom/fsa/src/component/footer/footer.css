@@ -1,17 +1,24 @@
 @import "../../core/helper";
 @import "../../core/custom-property";
 
-.footer {
+.footer-wrapper {
+  border-top: 0.5em solid var(--color-green);
   background-color: var(--dark-secondary-color);
   color: var(--color-white);
+}
+
+.footer-wrapper__content {
+  background-color: var(--dark-secondary-color);
+}
+
+.footer {
   padding: 1em;
   @mixin responsive-declaration padding-top, 1em, 2em;
   @mixin responsive-declaration padding-bottom, 1em, 2em;
-  @mixin responsive-declaration margin-top, 2em, 4em;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  border-top: 0.5em solid var(--color-green);
+
 
   @media (--breakpoint-md) {
     flex-flow: row nowrap;
@@ -43,7 +50,6 @@
 
 .footer__content {
   @mixin responsive-declaration padding, 1em, 2em;
-  max-width: 24em;
   text-align: center;
 }
 

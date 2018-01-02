@@ -14,7 +14,7 @@ third_party_settings:
 id: manage_subscription_cta
 theme: fsa
 region: secondary_menu
-weight: 0
+weight: -9
 provider: null
 plugin: manage_subscription_cta
 settings:

@@ -10,11 +10,11 @@ dependencies:
     - fsa
 third_party_settings:
   block_class:
-    classes: ''
+    classes: hero__cta
 id: alerts_subscribe_cta
 theme: fsa
 region: hero
-weight: -7
+weight: -8
 provider: null
 plugin: alerts_subscribe_cta
 settings:
