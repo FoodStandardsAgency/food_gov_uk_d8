@@ -71,6 +71,33 @@ function fsa_ratings_preprocess_field(&$variables, $hook) {
 }
 
 /**
+ * Implements template_preprocess_pager().
+ */
+function fsa_lander_preprocess_pager(&$variables) {
+  $route = \Drupal::routeMatch();
+  // Prepend "#results" anchor to pager links on ratings search page.
+  if ($route->getParentRouteMatch()->getRouteName() == 'fsa_ratings.ratings_search') {
+
+    // Modify first/prev/next/last links.
+    $first_prev = ['first', 'prev', 'next', 'last'];
+    foreach ($first_prev as $item) {
+      if (isset($variables['items'][$item])) {
+        $variables['items'][$item]['href'] = $variables['items'][$item]['href'] . '#results';
+      }
+    }
+
+    // Modify pager links.
+    if (isset($variables['items']['pages'])) {
+      $page = 1;
+      foreach ($variables['items']['pages'] as $key => $value) {
+        $variables['items']['pages'][$page]['href'] = $value['href'] . '#results';
+        $page++;
+      }
+    }
+  }
+}
+
+/**
  * Implements hook_theme().
  */
 function fsa_ratings_theme() {
