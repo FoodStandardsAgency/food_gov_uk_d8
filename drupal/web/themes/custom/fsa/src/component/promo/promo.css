@@ -64,8 +64,7 @@
 
 /* Global promo style */
 .promo,
-.field__field_content_promo__item,
-.field__field_content_reference__item {
+.field__field_content_promo__item {
   background-image: var(--icon-arrow-right-primary);
   background-repeat: no-repeat;
   background-size: 1.5em auto;
@@ -175,6 +174,15 @@
       margin-top: auto;
     }
   }
+
+  &.promo--inline-content {
+    background: none;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    padding-bottom: 0;
+    padding: 1em;
+  }
 }
 
 .promo--light {
@@ -190,6 +198,49 @@
     a {
       color: var(--color-black);      
     }
+  }
+}
+
+.promo__icon {
+  width: 5em;
+  height: 5em;
+  border-radius: 50%;
+  background-color: var(--dark-primary-color);
+  padding: 1em;
+
+  .svg {
+    width: 100%;
+    height: 100%;
+
+    path {
+      fill: var(--color-white);
+    }
+  }
+}
+
+.promo__content {
+  color: var(--color-black);
+
+  .promo--inline-content & {
+    padding: 1em;
+  }
+}
+
+.promo__heading {
+  color: var(--dark-primary-color);
+}
+
+.promo__read-more {
+  padding: 1em;
+
+  .svg {
+    width: 2em;
+    height: 2em;
+  }
+
+  .promo--inline-content & {
+    margin-top: 0 !important;
+    margin-left: auto;
   }
 }
 
