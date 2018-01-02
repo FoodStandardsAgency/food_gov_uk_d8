@@ -4,7 +4,6 @@
 /* Navigation wrapper */
 .navigation-wrapper {
   @media (--breakpoint-sm) {
-    background-color: transparent;
     position: relative;
     top: auto;
     right: auto;
