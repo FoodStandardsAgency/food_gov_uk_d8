@@ -1,3 +1,68 @@
-.pager {
+@import "../../core/helper";
+@import "../../core/custom-property";
 
+.pager {
+  max-width: var(--max-width-medium);
+  margin: 0 auto;
+
+  @media (--breakpoint-md) {
+    display: flex;
+  }
+}
+
+.pager__items {
+  display: flex;
+  padding: 0;
+  justify-content: center;
+  flex-flow: row wrap;
+
+  @media (--breakpoint-md) {
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    margin-left: auto;
+  }
+}
+
+.pager__item {
+  display: block;
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0 0.25em;
+
+  a {
+    display: block;
+    display: flex;
+    width: 2em;
+    height: 2em;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+
+    :--not-touch &:--enter {
+      text-decoration: underline;
+    }
+  }
+
+  &.is-active a {
+    background-color: var(--dark-primary-color);
+    color: var(--color-white);
+    border-radius: 2em;
+  }
+
+  &.pager__item--ellipsis {
+    width: 2em;
+    text-align: center;
+  }
+
+  &.pager__item--first,
+  &.pager__item--previous,
+  &.pager__item--next,
+  &.pager__item--last {
+    a {
+      display: block;
+      width: auto;
+      height: auto;
+    }
+  }
 }
