@@ -70,7 +70,9 @@
             <div>{{ pager_info }}</div>
           {% endif %}
 
-          <div id="ratings-search-load-more" class="ratings__table ratings__table--more-items"></div>
+          {% if load_more %}
+            <div id="ratings-search-load-more" class="ratings__table ratings__table--more-items"></div>
+          {% endif %}
 
         </div>
 
