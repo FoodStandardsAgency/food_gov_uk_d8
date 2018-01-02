@@ -263,7 +263,7 @@ class FsaRatingsSearchForm extends FormBase {
       $fragment = FALSE;
     }
     else {
-      $fragment = 'results';
+      $fragment = RatingsHelper::RESULTS_ANCHOR;
     }
 
     $form_state->setRedirect('fsa_ratings.ratings_search', [], ['query' => $query, 'fragment' => $fragment]);
