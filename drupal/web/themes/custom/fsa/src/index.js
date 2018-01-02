@@ -11,7 +11,7 @@ import subNavigation from './core/helper/subNavigation';
 import navigation from './component/navigation/navigation';
 import { addHeading, printPage } from './component/content/content';
 import toggle from './component/toggle/toggle';
-import parallax from './component/parallax/parallax';
+import peek from './component/peek/peek';
 import fhrs from './component/fhrs/fhrs';
 
 const breakpoints = {
@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Print page
   printPage();
 
-  // Parallax
-  parallax();
+  // peek
+  peek();
 
   // Navigation
   navigation();

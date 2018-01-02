@@ -1,3 +1,6 @@
+import nextByClass from '../../core/helper/nextByClass';
+import inert from 'wicg-inert';
+
 function navigation() {
 
   const settings = {
@@ -6,6 +9,11 @@ function navigation() {
     groupSelector: 'li.navigation__item.navigation__item--level-2',
     listItemSelector: 'li',
     menuItemActionSelector: '.navigation__item a, .navigation__item button'
+  };
+
+  const KEYCODE = {
+    ESC: 27,
+    SPACE: 32,
   };
 
   const keyboard = {
@@ -323,6 +331,45 @@ function navigation() {
       keyDownHandler(e);
     })
   });
+
+  // Close other 1.level dropdowns
+  const firstLevelItems = [...document.querySelectorAll('.js-toggle-button.navigation__link--level-1')];
+
+  for (let i = 0; i < firstLevelItems.length; i++) {
+    const element = firstLevelItems[i];
+    let otherItems = firstLevelItems.slice(0);
+
+    if (i > -1) {
+      otherItems.splice(i, 1);
+    }
+
+    const closeOther = function(otherItems) {
+      otherItems.forEach(element => {
+        element.classList.remove('is-open');
+        element.classList.add('is-closed');
+        element.setAttribute('aria-expanded', false);
+
+        const content = nextByClass(element, 'js-toggle-content');
+        content.classList.remove('is-visible');
+        content.classList.add('is-hidden');
+        content.setAttribute('aria-hidden', true);
+        content.inert = true;
+      });
+    }
+    
+    element.addEventListener('mousedown', function(event){
+      closeOther(otherItems);
+    });
+
+    // Add click listener to toggle
+    element.addEventListener('keydown', function(event){
+      if (event.keyCode === KEYCODE.SPACE) {
+        console.log('safasdf');
+        event.preventDefault();
+        closeOther(otherItems);
+      }
+    });
+  }
 }
 
 module.exports = navigation;

@@ -1,6 +1,7 @@
 @import "../../core/helper";
 @import "../../core/custom-property";
 
+.field__field_link a,
 .button {
   font-family: var(--font-family-content);
   letter-spacing: 0.02em;
@@ -30,11 +31,11 @@
   	width: 1px !important;
   	overflow: hidden;
   }
-}
 
-:--not-touch .button:--enter {
-  text-decoration: none;
-  background-color: var(--darker-primary-color);
+  :--not-touch &:--enter {
+    text-decoration: none;
+    background-color: var(--darker-primary-color);
+  }
 }
 
 .button:focus svg path {

@@ -7,27 +7,26 @@
  */
 #}
 
-<div class="node-teaser{% if content.field_liftup_summary %} node-teaser--with-summary{% endif %}">
-  <article{{ attributes }}>
-    <a href="{{ url }}" rel="bookmark" class="node-teaser__link block-link">
-      {% if content.group_teaser_image %}
-        <div class="node-teaser__image">
-          {{ content.group_teaser_image }}
-        </div>
+<article{% if content.field_liftup_summary %}{{ attributes.addClass(['promo', 'promo--with-summary']) }}{% else %}{{ attributes.addClass('promo') }}{% endif %}>
+  <a href="{{ url }}" rel="bookmark" class="promo__link block-link">
+    {% if content.group_teaser_image %}
+      <div class="promo__image">
+        {{ content.group_teaser_image }}
+      </div>
+    {% endif %}
+
+    <div class="promo__content">
+      <h4{{ title_attributes }} class="promo__heading">{{ label }}</h4>
+      {% if content.field_liftup_summary|length > 2 %}
+        {{ content|without('group_teaser_image') }}
       {% endif %}
+    </div>
 
-      <div class="node-teaser__content">
-        <h4{{ title_attributes }} class="node-teaser__heading">{{ label }}</h4>
-        {% if content.field_liftup_summary|length > 2 %}
-          {{ content|without('group_teaser_image') }}
-        {% endif %}
+    <div class="promo__read-more">
+      <div class="svg">
+        <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#contact-arrow-icon"></use></svg>
       </div>
+    </div>
+  </a>
+</article>
 
-      <div class="node-teaser__read-more">
-        <div class="svg">
-          <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#contact-arrow-icon"></use></svg>
-        </div>
-      </div>
-    </a>
-  </article>
-</div>

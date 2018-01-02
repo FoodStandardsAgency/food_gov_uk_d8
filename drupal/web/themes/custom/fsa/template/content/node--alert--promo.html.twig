@@ -8,7 +8,7 @@
  *
  */
 #}
-<article{{ attributes }}>
+<article{{ attributes.addClass(['promo', 'promo--light']) }}>
   {{ content.field_alert_type }}
   {{ title_prefix }}
   {% if not page %}
