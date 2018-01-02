@@ -13,7 +13,7 @@ display: iframe
 display_configuration:
   width: 100%
   height: '500'
-  link_text: 'Select entities'
+  link_text: 'Select image(s)'
   auto_open: true
 selection_display: no_display
 selection_display_configuration:
@@ -26,7 +26,7 @@ widgets:
     settings:
       view: fsa_media_browser
       view_display: entity_browser_1
-      submit_text: 'Select entities'
+      submit_text: 'Select image(s)'
       auto_select: false
     uuid: 6131f669-a2fc-4f0b-bba0-6bacbd1d7bda
     weight: 1
@@ -37,7 +37,7 @@ widgets:
       entity_type: media
       bundle: image
       form_mode: default
-      submit_text: 'Create entity'
+      submit_text: 'Create image'
     uuid: 7ae6aba5-98b0-4ee3-9e35-8a2c2650d609
     weight: 3
     label: 'Create image'
