@@ -20,6 +20,7 @@ dependencies:
     - node.type.lander
   module:
     - content_moderation
+    - entity_browser_entity_form
     - field_group
     - inline_entity_form
     - paragraphs
@@ -141,7 +142,9 @@ content:
       allow_existing: true
       match_operator: CONTAINS
       override_labels: false
-    third_party_settings: {  }
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: media_entity_browser_image
     type: inline_entity_form_complex
     region: content
   field_hero_copy:

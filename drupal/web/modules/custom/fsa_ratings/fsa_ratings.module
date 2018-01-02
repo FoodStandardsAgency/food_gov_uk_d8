@@ -2,6 +2,7 @@
 
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Component\Utility\Html;
+use Drupal\fsa_ratings\Controller\RatingsHelper;
 
 /**
  * Implements hook_help().
@@ -62,6 +63,33 @@ function fsa_ratings_preprocess_field(&$variables, $hook) {
     }
 
     $variables['items'][0]['content']['#context']['value'] = ['#markup' => $address_display];
+  }
+}
+
+/**
+ * Implements template_preprocess_pager().
+ */
+function fsa_lander_preprocess_pager(&$variables) {
+  $route = \Drupal::routeMatch();
+  // Prepend "#results" anchor to pager links on ratings search page.
+  if ($route->getParentRouteMatch()->getRouteName() == 'fsa_ratings.ratings_search') {
+
+    $anchor = '#' . RatingsHelper::RESULTS_ANCHOR;
+
+    // Modify first/prev/next/last links.
+    $first_prev = ['first', 'prev', 'next', 'last'];
+    foreach ($first_prev as $item) {
+      if (isset($variables['items'][$item])) {
+        $variables['items'][$item]['href'] = $variables['items'][$item]['href'] . $anchor;
+      }
+    }
+
+    // Modify pager links.
+    if (isset($variables['items']['pages'])) {
+      foreach ($variables['items']['pages'] as $key => $value) {
+        $variables['items']['pages'][$key]['href'] = $value['href'] . $anchor;
+      }
+    }
   }
 }
 
@@ -143,11 +171,13 @@ function fsa_ratings_theme() {
     'fsa_ratings_search_page' => [
       'render element' => 'custom_element',
       'variables' => [
+        'results_anchor' => RatingsHelper::RESULTS_ANCHOR,
         'items' => [],
         'categories' => [],
         'keywords' => '',
         'available_filters' => [],
         'applied_filters' => [],
+        'pager_info' => FALSE,
         'hits_total' => 0,
         'hits_shown' => 0,
         'form' => NULL,

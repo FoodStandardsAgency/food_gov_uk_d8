@@ -95,11 +95,8 @@ class RatingsSearch extends ControllerBase {
     $language = $this->languageManager->getCurrentLanguage();
     $available_filters = $this->searchService->categories($language);
 
-    // Get params.
-    $params = self::getSearchParameters();
-
     // User provided search input.
-    $keywords = $params['keywords'];
+    $keywords = \Drupal::request()->query->get('q');
 
     // User provided max item count. Hard-limit is 1000. Default is in constant.
     $max_items = \Drupal::request()->query->get('max');
@@ -107,14 +104,40 @@ class RatingsSearch extends ControllerBase {
       $max_items = RatingsSearch::INITIAL_RESULTS_COUNT;
     }
 
+    // Get page number.
+    $page = \Drupal::request()->query->get('page');
+    // And calculate offset.
+    $offset = $page * RatingsSearch::INITIAL_RESULTS_COUNT;
+
+    $filters = [];
+    // See if the following parameters are provided by the user and add to the
+    // list of filters.
+    $filter_param_names = [
+      'local_authority',
+      'business_type',
+      'rating_value',
+      'fhis_rating_value',
+      'fhrs_rating_value',
+    ];
+    foreach ($filter_param_names as $opt) {
+      $value = \Drupal::request()->query->get($opt);
+      if (isset($value)) {
+        $filters[$opt] = $value;
+      }
+    }
+
     // Fetch results from the service only when either the filter values or
     // keywords are given.
     $results = FALSE;
-    if (!empty($keywords) || !empty($params)) {
+    if (!empty($keywords) || !empty($filters)) {
       // Execute the search using the SearchService.
-      $results = $this->searchService->search($language, $keywords, $params['filters'], $max_items);
+      $results = $this->searchService->search($language, $keywords, $filters, $max_items, $offset);
       $items = $this->ratingSearchResults($results);
       $hits = $results['total'];
+
+      // Init the pager.
+      pager_default_initialize($hits, RatingsSearch::INITIAL_RESULTS_COUNT);
+
     }
 
     $sort_form = NULL;
@@ -127,7 +150,21 @@ class RatingsSearch extends ControllerBase {
       $ratings_info = ['#markup' => check_markup($fsa_ratings_config->get('ratings_info_content'), 'full_html')];
     }
 
-    return [
+    $hits_total = number_format($hits, 0, ',', ' ');
+
+    if ($hits > 0) {
+      $from = ($offset + 1);
+      $to = count($items) + $offset;
+      $showing_items = $from . '-' . $to;
+      $pager_info = $this->t('Showing <span>@items</span> of <span>@total</span>', ['@items' => $showing_items, '@total' => $hits_total]);
+    }
+    else {
+      $pager_info = FALSE;
+    }
+
+    // Build the renderable result page.
+    $render = [];
+    $render[] = [
       '#theme' => 'fsa_ratings_search_page',
       '#form' => \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchForm'),
       '#sort_form' => $sort_form,
@@ -141,13 +178,20 @@ class RatingsSearch extends ControllerBase {
     // Meaningful params (which have content associated)
       '#available_filters' => $available_filters,
     // Filters given by the user and used for the querying.
-      '#applied_filters' => $params,
+      '#applied_filters' => $filters,
+    // Pager information.
+      '#pager_info' => $pager_info,
     // Total count of the results.
-      '#hits_total' => $hits,
+      '#hits_total' => $hits_total,
     // Item count to be shown now.
       '#hits_shown' => count($items),
-      '#load_more' => \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchLoadMore'),
+      //'#load_more' => \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchLoadMore'),
     ];
+
+    // Append the pager.
+    $render[] = ['#type' => 'pager'];
+
+    return $render;
   }
 
   /**

@@ -58,9 +58,11 @@ class FsaRatingsSearchForm extends FormBase {
     // value.
     $is_open = '';
     $aria_expanded = 'false';
-    foreach (self::FILTER_PARAM_NAMES as $filter_parameter) {
-      if (!empty($params['filters'][$filter_parameter])) {
-        $is_open = ' is-open';
+    foreach (self::FILTER_PARAM_NAMES as $opt) {
+      $value = \Drupal::request()->query->get($opt);
+      if (!empty($value)) {
+        $filters[$opt] = $value;
+        $is_open = ' is-visible';
         $aria_expanded = 'true';
         break;
       }
@@ -222,9 +224,15 @@ class FsaRatingsSearchForm extends FormBase {
       }
     }
 
-    $form_state->setRedirect('fsa_ratings.ratings_search', [], ['query' => $query, 'fragment' => 'results']);
+    if (empty($query)) {
+      drupal_set_message(t('Please enter a business name/location or use search options below.'), 'warning');
+      $fragment = FALSE;
+    }
+    else {
+      $fragment = RatingsHelper::RESULTS_ANCHOR;
+    }
+
+    $form_state->setRedirect('fsa_ratings.ratings_search', [], ['query' => $query, 'fragment' => $fragment]);
   }
-
-
 
 }

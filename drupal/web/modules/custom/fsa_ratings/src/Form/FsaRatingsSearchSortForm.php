@@ -101,7 +101,7 @@ class FsaRatingsSearchSortForm extends FormBase {
     }
 
     // And reload the search page with sorting params.
-    $form_state->setRedirect('fsa_ratings.ratings_search', [], ['query' => $query, 'fragment' => 'results']);
+    $form_state->setRedirect('fsa_ratings.ratings_search', [], ['query' => $query, 'fragment' => RatingsHelper::RESULTS_ANCHOR]);
 
   }
 

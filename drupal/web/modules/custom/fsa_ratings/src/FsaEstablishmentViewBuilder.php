@@ -78,7 +78,7 @@ class FsaEstablishmentViewBuilder extends EntityViewBuilder {
 
     // "Back to search" link with query params.
     $url = Url::fromRoute('fsa_ratings.ratings_search');
-    $url->setOptions(['query' => \Drupal::request()->query->all()]);
+    $url->setOptions(['query' => \Drupal::request()->query->all(), 'fragment' => RatingsHelper::RESULTS_ANCHOR]);
     $build['#backlink'] = Link::fromTextAndUrl($this->t('Back to ratings search'), $url)->toString();
 
     return $build;
