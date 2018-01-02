@@ -445,7 +445,7 @@ blockquote {
     transition: transform var(--transition-enter);
 
 
-    @media (--breakpoint-md) {
+    @media (--breakpoint-lg) {
       right: 0;
       width: auto;
       transform: scaleX(0.5);

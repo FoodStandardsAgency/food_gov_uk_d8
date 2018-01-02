@@ -129,7 +129,7 @@ class RatingsSearch extends ControllerBase {
     }
     else {
       $fsa_ratings_config = $this->config('config.fsa_ratings');
-      $ratings_info = ['#markup' => $fsa_ratings_config->get('ratings_info_content')];
+      $ratings_info = ['#markup' => check_markup($fsa_ratings_config->get('ratings_info_content'), 'full_html')];
     }
 
     return [
@@ -148,7 +148,7 @@ class RatingsSearch extends ControllerBase {
     // Filters given by the user and used for the querying.
       '#applied_filters' => $filters,
     // Total count of the results.
-      '#hits_total' => $hits,
+      '#hits_total' => number_format($hits, 0, ',', ' '),
     // Item count to be shown now.
       '#hits_shown' => count($items),
       '#load_more' => \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchLoadMore'),

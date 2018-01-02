@@ -108,8 +108,11 @@ function fsa_custom_preprocess_page_title(&$variables) {
 function fsa_custom_preprocess_breadcrumb(&$variables) {
 
   $node = \Drupal::routeMatch()->getParameter('node');
-  if (isset($node)) {
-
+  if (\Drupal::service('path.matcher')->isFrontPage()) {
+    // We don't need breadcrumbs on homepage.
+    unset($variables['breadcrumb']);
+  }
+  elseif (isset($node)) {
     // Node titles can be horribly long, if that's the case truncate with
     // sensible amount of characters, word-safe.
     $max_length = 90;

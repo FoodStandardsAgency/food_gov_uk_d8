@@ -30,31 +30,13 @@ Drupal console or codeception do not work out of the box as they cannot read `ge
  export DB_PASS_DRUPAL=password
  ```
  
-
-FSA Rating content/entities
+FHRS Rating Search
 ---------------------
  
-FHRS rating API: [api.ratings.food.gov.uk](http://api.ratings.food.gov.uk) 
-
-To import smaller batch of content for testing/development use following line(s) in your local `settings.local.php` file:
-
-`$config['fsa_ratings_import']['import_mode'] = 'development';`
-
-`$config['fsa_ratings_import']['import_random'] = 'TRUE';`
-
-### Import/migrate Rating content
-
-* Import authorities and establishments:
-  * `drush mi --tag=authorities`
-  * `drush mi --tag=establishments`
-* To import only specific language content use tags
-  * `drush mi --tag=english` or `drush mi --tag=welsh`
-
-* For more verbose import use `--feedback`, e.g.
-  * `drush mi --tag=establishments --feedback="1000 items"`
-
-* If import fails or is stopped set back to idle:
-  * `drush mrs fsa_establishment` or `drush mrs fsa_authority`
+FHRS Establishment and authority data is pulled from [FHRS rating API](http://api.ratings.food.gov.uk) with Drupal Migrate API.
+ 
+* Refer to [fsa_ratings/README.md](/drupal/web/modules/custom/fsa_ratings/README.md) for entity documentation.
+* Refer to [fsa_ratings_import/README.md](/drupal/web/modules/custom/fsa_ratings_import/README.md) for import documentation. 
 
 
 FSA Alerts API
@@ -64,22 +46,8 @@ FSA Alerts API
 
 Alert API data is imported to Drupal `alerts_allergen` taxonomy and `alert` nodes.
 
-### Import/migrate Alerts from the API
- 
-Ensure the Alert API base path is set in FSA Alerts configuration `/admin/config/fsa-alerts`. Drupal status page will display error if this is not done.
+* Refer to [fsa_alerts/README.md](/drupal/web/modules/custom/fsa_alerts/README.md) for documentation.
 
-* Import allergens:
-  * `drush mi --tag=allergens`
-  * Or update existing entries: `drush mi --tag=allergens --update`
-* Import alerts:
-  * `drush mi --tag=alerts`
-  * Or update existing entries: `drush mi --tag=alerts --update`
-
-* If import fails or is stopped set back to idle:
-  * `drush mrs fsa_alerts` or `drush mrs fsa_allergens`
-  
-* Remove/rollback migrated content with `drush mr --tag=[allergens|alerts]`
-  * Notice this will completely delete the created entries and next migrate recreates the entity id's.
 
 FSA Ratings search / Elasticsearch
 ---------------------
