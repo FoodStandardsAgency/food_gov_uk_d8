@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains fsa_ratings.module.
- */
-
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Component\Utility\Html;
 use Drupal\fsa_ratings\Controller\RatingsHelper;
@@ -108,6 +103,9 @@ function fsa_ratings_theme() {
     'fsa_establishment' => [
       'render element' => 'children',
       'variables' => [
+        'id' => NULL,
+        'url' => NULL,
+        'view_mode' => NULL,
         'search_form' => NULL,
         'content' => NULL,
         'rating_value' => NULL,
@@ -127,6 +125,14 @@ function fsa_ratings_theme() {
         'copy_of_report_title' => t('Do you want to get a copy of the report?'),
         'copy_of_report_copy' => t('If you wish to see the food safety officer’s report on which this rating is based, you can request this from the local authority that carried out the inspection. You can do this by sending an email to the address below. The local authority will consider your request and will usually send you a copy of the report. In some cases, the local authority may decide that they cannot do so but will let you know this and explain why.'),
       ],
+    ],
+
+    'fsa_establishment__search_result' => [
+      'base hook' => 'fsa_establishment',
+    ],
+
+    'fsa_establishment__search_result_embed' => [
+      'base hook' => 'fsa_establishment',
     ],
 
     // Ratings meaning page. Created by fsa_ratings.ratings_meanings route.
@@ -188,4 +194,16 @@ function fsa_ratings_theme() {
       ],
     ],
   ];
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ *
+ * Adds suggestions for "fsa_establishment" entity themes based on view mode.
+ */
+function fsa_ratings_theme_suggestions_fsa_establishment_alter(array &$suggestions, array $variables) {
+  if (isset($variables['view_mode'])) {
+    $sanitized_view_mode = strtr($variables['view_mode'], '.', '_');
+    $suggestions[] = 'fsa_establishment__' . $sanitized_view_mode;
+  }
 }

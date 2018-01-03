@@ -4,6 +4,7 @@ namespace Drupal\fsa_ratings\Controller;
 
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Url;
 use Drupal\fsa_es\SearchService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -24,23 +25,31 @@ class RatingsSearch extends ControllerBase {
   /**
    * {@inheritdoc}
    *
-   * @var \Drupal\fsa_es\SearchService*/
-  private $searchService;
+   * @var \Drupal\fsa_es\SearchService */
+  protected $searchService;
+
+  /** @var \Drupal\Core\Language\LanguageManagerInterface $languageManager */
+  protected $languageManager;
 
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('fsa_es.search_service')
+      $container->get('fsa_es.search_service'),
+      $container->get('language_manager')
     );
   }
 
   /**
-   * {@inheritdoc}
+   * RatingsSearch constructor.
+   *
+   * @param \Drupal\fsa_es\SearchService $searchService
+   * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
    */
-  public function __construct(SearchService $searchService) {
+  public function __construct(SearchService $searchService, LanguageManagerInterface $language_manager) {
     $this->searchService = $searchService;
+    $this->languageManager = $language_manager;
   }
 
   /**
@@ -83,7 +92,7 @@ class RatingsSearch extends ControllerBase {
     $items = [];
     $categories = [];
     $hits = 0;
-    $language = \Drupal::languageManager()->getCurrentLanguage();
+    $language = $this->languageManager->getCurrentLanguage();
     $available_filters = $this->searchService->categories($language);
 
     // User provided search input.
@@ -166,7 +175,7 @@ class RatingsSearch extends ControllerBase {
       '#categories' => $categories,
     // Keywords given in the URL.
       '#keywords' => $keywords,
-    // Meaningful filters (which have content associated)
+    // Meaningful params (which have content associated)
       '#available_filters' => $available_filters,
     // Filters given by the user and used for the querying.
       '#applied_filters' => $filters,

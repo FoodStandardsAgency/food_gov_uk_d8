@@ -1,0 +1,36 @@
+uuid: 7d8f22ff-24cf-4159-a823-e974adcdb7aa
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - fsa_es
+    - system
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: search-global-keyword
+id: search_global_keyword
+theme: fsa
+region: content
+weight: -4
+provider: null
+plugin: search_keyword
+settings:
+  id: search_keyword
+  label: 'Search keyword'
+  provider: fsa_es
+  label_display: '0'
+  action_url: ''
+  form_method: get
+  form_element:
+    name: keywords
+    title: Search
+    placeholder: ''
+visibility:
+  request_path:
+    id: request_path
+    pages: '/search*'
+    negate: false
+    context_mapping: {  }
