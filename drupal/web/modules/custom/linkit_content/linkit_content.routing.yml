@@ -1,0 +1,7 @@
+linkit_content.selector:
+  path: '/admin/content/linkit-content/selector'
+  defaults:
+    _controller: '\Drupal\linkit_content\Controller\LinkitContentController::selector'
+    _title: 'Content selector'
+  requirements:
+    _permission: 'link to any page'
