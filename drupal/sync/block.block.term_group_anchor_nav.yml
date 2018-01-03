@@ -1,0 +1,30 @@
+uuid: f08d8ed1-d9d6-40fd-88f2-c495b1814223
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - fsa_topic_listing
+    - system
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: term_group_anchor_nav
+theme: fsa
+region: sidebar_first
+weight: 0
+provider: null
+plugin: terms_group_anchor_nav
+settings:
+  id: terms_group_anchor_nav
+  label: 'In this topic'
+  provider: fsa_topic_listing
+  label_display: visible
+visibility:
+  request_path:
+    id: request_path
+    pages: '/taxonomy/term/*'
+    negate: false
+    context_mapping: {  }
