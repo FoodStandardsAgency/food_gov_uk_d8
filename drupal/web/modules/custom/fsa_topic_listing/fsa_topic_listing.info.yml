@@ -1,0 +1,5 @@
+name: FSA Topic listing
+type: module
+description: "Topic listing features"
+core: 8.x
+package: FSA
