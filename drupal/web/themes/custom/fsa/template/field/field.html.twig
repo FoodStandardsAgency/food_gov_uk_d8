@@ -20,6 +20,7 @@
  * - field_name: The name of the field.
  * - field_type: The type of the field.
  * - label_display: The display settings for the label.
+ * - item.image_as_background: Image element as backgrounded div
  *
  * @see template_preprocess_field()
  */
@@ -29,13 +30,13 @@
     {% if multiple %}
         <div{{ attributes }}>
             {% for item in items %}
-                {{ item.promo_img_path }}
+                {{ item.image_as_background }}
                 <div{{ item.attributes }}>{{ item.content }}</div>
             {% endfor %}
         </div>
     {% else %}
         {% for item in items %}
-            {{ item.promo_img_path }}
+            {{ item.image_as_background }}
             <div{{ attributes }}>{{ item.content }}</div>
         {% endfor %}
     {% endif %}
@@ -47,10 +48,10 @@
     {% endif %}
     {% for item in items %}
         {% if label_display == 'inline' %}
-            {{ item.promo_img_path }}
+            {{ item.image_as_background }}
             <span{{ item.attributes }}>{{ item.content }}</span>
         {% else %}
-            {{ item.promo_img_path }}
+            {{ item.image_as_background }}
             <div{{ item.attributes }}>{{ item.content }}</div>
         {% endif %}
     {% endfor %}

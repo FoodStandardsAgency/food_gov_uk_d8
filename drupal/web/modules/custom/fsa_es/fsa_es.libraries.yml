@@ -1,0 +1,6 @@
+result_totals:
+  version: 1.x
+  js:
+    js/result-totals.js: {}
+  dependencies:
+    - core/drupal

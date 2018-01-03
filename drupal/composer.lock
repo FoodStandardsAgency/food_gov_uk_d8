@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c405147a62a421018d27e13955ed63d7",
+    "content-hash": "81a977fc93406c38c910cd586c37cce8",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -1283,7 +1283,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.21",
-                    "datestamp": "1511283695",
+                    "datestamp": "1511191054",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2666,7 +2666,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/elasticsearch_helper"
             },
-            "time": "2017-08-30 13:04:27"
+            "time": "2017-08-30T13:04:27+00:00"
         },
         {
             "name": "drupal/email_registration",
@@ -3863,7 +3863,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/media_entity_browser"
             },
-            "time": "2017-02-27 07:23:31"
+            "time": "2017-02-27T07:23:31+00:00"
         },
         {
             "name": "drupal/media_entity_document",
@@ -4268,7 +4268,7 @@
                 },
                 "drupal": {
                     "version": "8.x-4.0-beta1",
-                    "datestamp": "1513088288",
+                    "datestamp": "1494450185",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
@@ -4326,7 +4326,7 @@
                 },
                 "drupal": {
                     "version": "8.x-4.0-beta1",
-                    "datestamp": "1511790485",
+                    "datestamp": "1494450185",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
@@ -4968,7 +4968,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.x",
-                    "datestamp": "1510132373",
+                    "datestamp": "1493246342",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -6036,6 +6036,41 @@
                 }
             ],
             "time": "2015-04-20T18:58:01+00:00"
+        },
+        {
+            "name": "maijs/elasticsearch_helper_views",
+            "version": "dev-8.x-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maijs/elasticsearch_helper_views.git",
+                "reference": "34b7bce983e3fbdf6b9e15ce559f4040e527bf85"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maijs/elasticsearch_helper_views/zipball/34b7bce983e3fbdf6b9e15ce559f4040e527bf85",
+                "reference": "34b7bce983e3fbdf6b9e15ce559f4040e527bf85",
+                "shasum": ""
+            },
+            "require": {
+                "drupal/elasticsearch_helper": "1.x-dev || 5.x-dev",
+                "elasticsearch/elasticsearch": "~2.1 || ~5.0"
+            },
+            "type": "drupal-module",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "maijs",
+                    "email": "raimonds.kalnins@wunder.io"
+                }
+            ],
+            "description": "Provides tools to integrate elasticsearch with Drupal Views.",
+            "support": {
+                "source": "https://github.com/maijs/elasticsearch_helper_views/tree/8.x-1.x",
+                "issues": "https://github.com/maijs/elasticsearch_helper_views/issues"
+            },
+            "time": "2017-12-29T11:09:30+00:00"
         },
         {
             "name": "masterminds/html5",
@@ -8815,7 +8850,7 @@
                 "drupal",
                 "warden"
             ],
-            "time": "2016-02-10 20:34:02"
+            "time": "2016-02-10T20:34:02+00:00"
         },
         {
             "name": "twig/twig",
@@ -10986,7 +11021,8 @@
         "drupal/webform_views": 15,
         "drupal/view_unpublished": 15,
         "drupal/diff": 5,
-        "drupal/icon_select": 10
+        "drupal/icon_select": 10,
+        "maijs/elasticsearch_helper_views": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

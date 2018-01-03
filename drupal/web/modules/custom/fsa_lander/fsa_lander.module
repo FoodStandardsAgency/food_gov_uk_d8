@@ -60,7 +60,7 @@ function fsa_lander_preprocess_field(&$variables) {
           $path = file_create_url($uri);
         }
 
-        $variables['items'][$i]['promo_img_path'] = [
+        $variables['items'][$i]['image_as_background'] = [
           '#theme' => 'image_as_background',
           '#path' => $path,
         ];

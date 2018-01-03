@@ -1,0 +1,10 @@
+uuid: 2a99c453-84ee-4b7f-a555-b2a4288db401
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_ratings
+id: fsa_establishment.search_result
+label: 'Search result highlighting input'
+targetEntityType: fsa_establishment
+cache: true
