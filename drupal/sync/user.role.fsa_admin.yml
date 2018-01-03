@@ -11,4 +11,5 @@ permissions:
   - 'access webform submission log'
   - 'administer fsa rating landing content'
   - 'administer webform submission'
+  - 'link to any page'
   - 'translate configuration'
