@@ -82,6 +82,7 @@ permissions:
   - 'edit terms in document_category'
   - 'edit terms in tags'
   - 'edit terms in topic'
+  - 'link to any page'
   - 'notify of path changes'
   - 'revert alert revisions'
   - 'revert all revisions'
