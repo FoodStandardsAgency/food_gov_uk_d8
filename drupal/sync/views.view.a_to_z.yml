@@ -227,7 +227,7 @@ display:
           entity_type: taxonomy_term
           entity_field: name
           plugin_id: standard
-      title: ''
+      title: 'Topics A-Z'
       header:
         letters:
           id: letters
@@ -236,10 +236,21 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          empty: false
+          empty: true
           plugin_id: letters
       footer: {  }
-      empty: {  }
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: true
+          content: 'No topics beginning with <strong>{{ arguments.name }}<strong>'
+          plugin_id: text_custom
       relationships: {  }
       arguments:
         name:
