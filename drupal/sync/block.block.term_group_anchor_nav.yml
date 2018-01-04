@@ -5,7 +5,6 @@ dependencies:
   module:
     - block_class
     - fsa_topic_listing
-    - system
   theme:
     - fsa
 third_party_settings:
@@ -19,12 +18,7 @@ provider: null
 plugin: terms_group_anchor_nav
 settings:
   id: terms_group_anchor_nav
-  label: 'In this topic'
+  label: 'Term group anchor nav'
   provider: fsa_topic_listing
-  label_display: visible
-visibility:
-  request_path:
-    id: request_path
-    pages: '/taxonomy/term/*'
-    negate: false
-    context_mapping: {  }
+  label_display: '0'
+visibility: {  }

@@ -2,10 +2,10 @@
 
 namespace Drupal\fsa_topic_listing\Plugin\Block;
 
-use Drupal\Component\Utility\Html;
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Link;
-use Drupal\Core\Url;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\toc_api\Entity\TocType;
 
 /**
  * Creates 'Term group nav' for taxonomy listing page.
@@ -21,31 +21,61 @@ class TermsGroupAnchorNav extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
+    $routematch = \Drupal::routeMatch();
 
-    // @todo: Get the groups programmatically.
-    $groups = [
-      'Business guidance',
-      'Consumer guidance',
-    ];
+    $build = [];
 
-    $links = [];
-    foreach ($groups as $group) {
-      $anchor = '#' . strtolower(Html::cleanCssIdentifier($group));
-      $url = Url::fromUserInput($anchor);
-      $links[] = ['#markup' => Link::fromTextAndUrl($group, $url)->toString()];
+    // Get the rendered term listing content.
+    $tid = $routematch->getParameter('taxonomy_term')->id();
+    $embed = views_embed_view('taxonomy_term', 'page', $tid);
+    $view = (string) \Drupal::service('renderer')->render($embed);
+
+    // Get our custom "Term group anchors" TOC type options.
+    /** @var \Drupal\toc_api\TocTypeInterface $toc_type */
+    $toc_type = TocType::load('term_group_anchors');
+    $options = ($toc_type) ? $toc_type->getOptions() : [];
+
+    // Create TOC instance using the TOC manager.
+    /** @var \Drupal\toc_api\TocManagerInterface $toc_manager */
+    $toc_manager = \Drupal::service('toc_api.manager');
+    /** @var \Drupal\toc_api\TocInterface $toc */
+    $toc = $toc_manager->create('toc_filter', $view, $options);
+
+    // If provided page content allows creating the toc build it.
+    if ($toc->isVisible()) {
+      /** @var \Drupal\toc_api\TocBuilderInterface $toc_builder */
+      $toc_builder = \Drupal::service('toc_api.builder');
+      $build = [
+        'toc' => $toc_builder->buildToc($toc),
+      ];
+
     }
 
-    // Build the anchor nav.
-    return [
-      '#theme' => 'item_list',
-      '#list_type' => 'ul',
-      '#wrapper_attributes' => [
-        'class' => [
-          'anchor-nav',
-        ],
-      ],
-      '#items' => $links,
-    ];
+    return $build;
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function blockAccess(AccountInterface $account) {
+
+    $routematch = \Drupal::routeMatch();
+
+
+    // Get the rendered term listing content.
+    $vid = $routematch->getParameter('taxonomy_term');
+
+    if (!isset($vid)) {
+      // No term parameter, no need to display the block.
+      return AccessResult::forbidden();
+    }
+    elseif ($vid->getVocabularyId() != 'topic') {
+      return AccessResult::forbidden();
+    }
+    else {
+      return AccessResult::allowed();
+    }
   }
 
 }
