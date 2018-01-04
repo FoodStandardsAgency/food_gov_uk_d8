@@ -1,0 +1,28 @@
+uuid: e3392373-44ad-45d3-b3fa-3213a9d065d5
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.subject_listing
+    - field.storage.paragraph.field_subject_listing
+    - paragraphs.paragraphs_type.subject_listing
+id: paragraph.subject_listing.field_subject_listing
+field_name: field_subject_listing
+entity_type: paragraph
+bundle: subject_listing
+label: 'Subject listing group'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:block_content'
+  handler_settings:
+    target_bundles:
+      subject_listing: subject_listing
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
