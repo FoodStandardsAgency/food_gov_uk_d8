@@ -201,11 +201,14 @@
 }
 
 .layout__content--main {
-  .theme--subscribe &,
+  @mixin responsive-declaration padding-top, 1em, 4em;
+  @mixin responsive-declaration padding-bottom, 1em, 4em;
+
+  /* .theme--subscribe &,
   .theme--page &,
   .theme--alert & {
     @mixin responsive-declaration padding-top, 1em, 4em;
-  }
+  } */
 
   .theme--lander &,
   .theme--fhrs & {
