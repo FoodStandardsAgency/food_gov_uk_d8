@@ -2,8 +2,8 @@
 
 namespace Drupal\fsa_topic_listing\Plugin\Block;
 
-use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\toc_api\Entity\TocType;
 
@@ -48,7 +48,6 @@ class TermsGroupAnchorNav extends BlockBase {
       $build = [
         'toc' => $toc_builder->buildToc($toc),
       ];
-
     }
 
     return $build;
@@ -60,17 +59,14 @@ class TermsGroupAnchorNav extends BlockBase {
    */
   protected function blockAccess(AccountInterface $account) {
 
-    $routematch = \Drupal::routeMatch();
-
-
-    // Get the rendered term listing content.
-    $vid = $routematch->getParameter('taxonomy_term');
+    $vid = \Drupal::routeMatch()->getParameter('taxonomy_term');
 
     if (!isset($vid)) {
-      // No term parameter, no need to display the block.
+      // No term parameter, do not render the block.
       return AccessResult::forbidden();
     }
     elseif ($vid->getVocabularyId() != 'topic') {
+      // Other than topic vocab, do not render the block.
       return AccessResult::forbidden();
     }
     else {
