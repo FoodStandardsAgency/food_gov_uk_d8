@@ -9,19 +9,18 @@ label: Default
 type: 'canonical_entities:node'
 pattern: '[node:menu-link:parent:url:path]/[node:title]'
 selection_criteria:
-  46f913f3-9c19-4557-af86-59261c326c64:
+  138616c6-32d7-4111-9c72-56720d797646:
     id: node_type
     bundles:
       generic: generic
       help: help
       lander: lander
-      news: news
       page: page
       webform: webform
     negate: false
     context_mapping:
       node: node
-    uuid: 46f913f3-9c19-4557-af86-59261c326c64
+    uuid: 138616c6-32d7-4111-9c72-56720d797646
 selection_logic: and
 weight: -5
 relationships: {  }
