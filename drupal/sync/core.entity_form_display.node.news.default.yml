@@ -4,26 +4,17 @@ status: true
 dependencies:
   config:
     - field.field.node.news.body
-    - field.field.node.news.field_icon
     - field.field.node.news.field_intro
-    - field.field.node.news.field_liftup_image
-    - field.field.node.news.field_liftup_summary
-    - field.field.node.news.field_liftup_title
-    - field.field.node.news.field_liftups
-    - field.field.node.news.field_media_library_liftup_image
     - field.field.node.news.field_nation
     - field.field.node.news.field_news_type
     - field.field.node.news.field_team_contacts
     - field.field.node.news.field_topic
     - field.field.node.news.field_update_date
-    - image.style.thumbnail
     - node.type.news
   module:
     - content_moderation
     - datetime
     - field_group
-    - image
-    - paragraphs
     - path
     - shs
     - text
@@ -44,23 +35,6 @@ third_party_settings:
         description: 'Select appropriate taxonomy metadata for this content type.'
         required_fields: true
       label: Taxonomies
-    group_liftup_metadata:
-      children:
-        - field_liftup_title
-        - field_liftup_summary
-        - field_icon
-        - field_liftup_image
-        - field_media_library_liftup_image
-      parent_name: ''
-      weight: 2
-      format_type: tab
-      format_settings:
-        id: ''
-        classes: ''
-        formatter: closed
-        description: 'Use these fields to control what is displayed in promo areas directly referencing to this page.'
-        required_fields: true
-      label: 'Liftup metadata'
 id: node.news.default
 targetEntityType: node
 bundle: news
@@ -81,14 +55,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_icon:
-    weight: 7
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
-    type: image_image
-    region: content
   field_intro:
     weight: 4
     settings:
@@ -96,51 +62,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
-    region: content
-  field_liftup_image:
-    weight: 8
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
-    type: image_image
-    region: content
-  field_liftup_summary:
-    weight: 6
-    settings:
-      rows: 3
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textarea
-    region: content
-  field_liftup_title:
-    weight: 5
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_liftups:
-    weight: 12
-    settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: ''
-    third_party_settings: {  }
-    type: entity_reference_paragraphs
-    region: content
-  field_media_library_liftup_image:
-    weight: 9
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
     region: content
   field_nation:
     weight: 3
