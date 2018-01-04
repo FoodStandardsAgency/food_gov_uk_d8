@@ -263,7 +263,18 @@ display:
           bypass_access: false
           plugin_id: entity
       footer: {  }
-      empty: {  }
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: true
+          content: 'No content tagged with <strong>{{ arguments.tid }}</strong>'
+          plugin_id: text_custom
       relationships:
         term_node_tid:
           id: term_node_tid
