@@ -4,7 +4,7 @@ namespace Drupal\fsa_custom\Plugin\views\area;
 
 use Drupal\Core\Link;
 use Drupal\views\Plugin\views\area\AreaPluginBase;
-use \Drupal\Core\Url;
+use Drupal\Core\Url;
 
 /**
  * Defines a views area handler for a-z letter anchors.
@@ -103,7 +103,3 @@ class Letters extends AreaPluginBase {
   }
 
 }
-
-
-
-

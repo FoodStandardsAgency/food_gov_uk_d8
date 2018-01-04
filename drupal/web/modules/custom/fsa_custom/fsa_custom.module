@@ -126,7 +126,7 @@ function fsa_custom_preprocess_breadcrumb(&$variables) {
   }
 
   // Alter breadcumbs for term pages.
-  $term = \Drupal::routeMatch()->getParameter('taxonomy_term');
+  $term = $routematch->getParameter('taxonomy_term');
   if (isset($term)) {
 
     // Topic terms listing pages.
