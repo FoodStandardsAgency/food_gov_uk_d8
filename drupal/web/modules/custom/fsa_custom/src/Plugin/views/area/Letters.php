@@ -3,6 +3,7 @@
 namespace Drupal\fsa_custom\Plugin\views\area;
 
 use Drupal\views\Plugin\views\area\AreaPluginBase;
+use \Drupal\Core\Url;
 
 /**
  * Defines a views area handler for a-z letter anchors.
@@ -32,18 +33,19 @@ class Letters extends AreaPluginBase {
       // Generate markup.
       $output = '';
       $alphabet = range('A', 'Z');
+      $view_path = Url::fromRoute('view.a_to_z.page_1')->toString();
 
       // Append any non-letters.
       foreach ($chars as $char) {
         if (!in_array($char, $alphabet)) {
-          $output .= '<a href="#' . $char . '">' . $char . '</a>';
+          $output .= '<a href="' . $view_path . '/' . $char . '">' . $char . '</a>';
         }
       }
 
       // Append letters.
       foreach ($alphabet as $letter) {
         if (in_array($letter, $chars)) {
-          $output .= '<a href="#' . strtolower($letter) . '">' . $letter . '</a>';
+          $output .= '<a href="' . $view_path . '/' . strtolower($letter) . '">' . $letter . '</a>';
         }
         else {
           $output .= '<span>' . $letter . '</span>';
