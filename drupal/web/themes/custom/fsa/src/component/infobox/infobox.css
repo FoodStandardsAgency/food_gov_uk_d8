@@ -1,0 +1,19 @@
+@import "../../core/helper";
+@import "../../core/custom-property";
+
+.infobox {
+  background-color: var(--color-lighter-gray);
+  border: 1px solid var(--color-light-gray);
+  @mixin responsive-declaration padding, 1em, 1.5em;
+
+  h2 {
+    @mixin reset-font-style;
+    font-weight: 600;
+    @mixin responsive-declaration margin, -1em, -1.5em;
+    @mixin responsive-declaration margin-bottom, 1.5em, 2em;
+    background-color: var(--dark-secondary-color);
+    color: var(--color-white);
+    @mixin responsive-declaration padding, 1em, 1.5em;
+    @mixin responsive-declaration padding-bottom, 0.75em, 1.25em;
+  }
+}
