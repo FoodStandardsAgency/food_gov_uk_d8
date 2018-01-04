@@ -21,7 +21,7 @@ function fsa_preprocess_html(&$variables) {
     $variables['attributes']['class'][] = 'theme--frontpage';
   }
 
-  if ($routematch->getRouteName() == 'entity.taxonomy_term.canonical') {
+  if ($routematch->getRouteName() == 'entity.taxonomy_term.canonical' || $routematch->getRouteName() == 'view.a_to_z.page_1') {
     // Set body class for term pages.
     $variables['attributes']['class'][] = 'theme--term';
   }
