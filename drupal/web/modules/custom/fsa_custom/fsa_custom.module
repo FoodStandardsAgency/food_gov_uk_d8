@@ -13,6 +13,7 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Link;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
 
 /**
  * Implements of template_preprocess_html().
@@ -131,7 +132,7 @@ function fsa_custom_preprocess_breadcrumb(&$variables) {
     // Topic terms listing pages.
     if ($term->getVocabularyId() == 'topic') {
       // Inject "Topics" as the second item.
-      array_splice($variables['breadcrumb'], 1, 0, [['text' => t('Topics'), 'url' => '/topics']]);
+      array_splice($variables['breadcrumb'], 1, 0, [['text' => t('Topics'), 'url' => Url::fromRoute('view.a_to_z.page_1')]]);
 
       // Add name of the term.
       $variables['breadcrumb'][] = [

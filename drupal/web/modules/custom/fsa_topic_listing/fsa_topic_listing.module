@@ -18,7 +18,7 @@ function fsa_topic_listing_preprocess_page_title(&$variables) {
 
   // Add "Show topics A-Z" listing page link after the page title.
   if ($routename == 'entity.taxonomy_term.canonical') {
-    $url = Url::fromUserInput('/topics');
+    $url = Url::fromRoute('view.a_to_z.page_1');
     $url->setOptions(['attributes' => ['class' => 'button']]);
     $link = Link::fromTextAndUrl(t('Show topics A-Z'), $url)->toString();
 
