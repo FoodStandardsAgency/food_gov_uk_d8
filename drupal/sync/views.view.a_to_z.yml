@@ -302,7 +302,7 @@ display:
     position: 2
     display_options:
       display_extenders: {  }
-      path: topics-a-to-z
+      path: topics
     cache_metadata:
       max-age: -1
       contexts:
