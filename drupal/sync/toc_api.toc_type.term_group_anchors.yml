@@ -1,0 +1,27 @@
+uuid: 809b4d60-2ab5-4a0e-854a-f6ead872269b
+langcode: en
+status: true
+dependencies: {  }
+id: term_group_anchors
+label: 'Term group anchors'
+options:
+  template: responsive
+  title: 'In this topic'
+  block: false
+  header_count: 1
+  header_min: 3
+  header_max: 3
+  header_allowed_tags: ''
+  header_id: title
+  header_id_prefix: ''
+  top_min: 1
+  top_max: 3
+  top_label: 'Back to top'
+  default:
+    number_type: none
+    number_prefix: ''
+    number_suffix: ''
+  number_path_separator: ''
+  number_path: true
+  number_path_truncate: true
+  headers: {  }
