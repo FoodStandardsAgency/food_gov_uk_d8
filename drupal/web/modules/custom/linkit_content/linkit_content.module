@@ -1,0 +1,130 @@
+<?php
+
+/**
+ * @file
+ * Contains linkit_content.module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\OpenDialogCommand;
+use Drupal\Core\Ajax\SettingsCommand;
+use Drupal\Component\Utility\Html;
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function linkit_content_form_editor_link_dialog_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  /** @var Drupal\filter\Entity\FilterFormat $filter_format */
+  $filter_format = $form_state->getBuildInfo()['args'][0];
+
+  /** @var \Drupal\Core\Entity\EntityStorageInterface $editorStorage */
+  $editorStorage = Drupal::service('entity.manager')->getStorage('editor');
+
+  /** @var \Drupal\editor\EditorInterface $editor */
+  $editor = $editorStorage->load($filter_format->id());
+  $plugin_settings = $editor->getSettings()['plugins']['drupallink'];
+
+  // Do not alter the form if Linkit is not enabled for this text format.
+  if (!isset($plugin_settings['linkit_enabled']) || (isset($plugin_settings['linkit_enabled']) && !$plugin_settings['linkit_enabled'])) {
+    return;
+  }
+
+  // Custom button that opens dialog with content browser view iframe.
+  $form['select_content'] = [
+    '#type' => 'button',
+    '#name' => 'select_content',
+    '#value' => t('Find content'),
+    '#ajax' => [
+      'callback' => '_linkit_content_ajax_callback_modal',
+    ],
+    '#attributes' => [
+      'class' => ['linkit-content-select-button'],
+    ],
+  ];
+
+  // Alterations for our modal window.
+  $form['#attached']['library'][] = 'linkit_content/general';
+}
+
+/**
+ * AJAX callback handler for linkit_content_form_editor_link_dialog_alter().
+ */
+function _linkit_content_ajax_callback_modal($form, &$form_state) {
+
+  $title = 'Select content';
+  $src = '/admin/content/linkit-content/selector';
+  $name = 'linkit_content_embed';
+
+  // Tried embedding the view in both OpenDialog and OpenModalDialog,
+  // but the AJAX in exposed filters broke. This is why i chose iframe.
+  $iframe = [
+    '#type' => 'html_tag',
+    '#tag' => 'iframe',
+    '#attributes' => [
+      'src' => $src,
+      'class' => 'linkit-content-modal-iframe',
+      'width' => '100%',
+      'height' => '400',
+      'frameborder' => 0,
+      'style' => 'padding:0; position:relative; z-index:10003;',
+      'name' => $name,
+      'id' => $name,
+    ],
+  ];
+
+  $content = \Drupal::service('renderer')->render($iframe);
+
+  $selector = '#' . Html::getUniqueId('dialog');
+
+  $dialog_options = [
+    'width' => '700',
+    'height' => 'auto',
+    'modal' => FALSE,
+    'maxWidth' => 700,
+    'fluid' => 1,
+    'autoResize' => 0,
+    'resizable' => 0,
+    // We alter the dialog closing action based on this, so don't change it.
+    'dialogClass' => 'linkit-content-embed-dialog',
+  ];
+
+  // Reset cached settings for selected content and such.
+  $drupalSettings = [
+    'linkit_content' => [
+      'selected_link' => '',
+      'selected_anchor' => '',
+      'selector' => $selector,
+      'selected_uuid' => '',
+      'selected_type' => 'node',
+      'selected_substitution' => 'canonical',
+    ],
+  ];
+
+  $response = new AjaxResponse();
+  $response->addCommand(new SettingsCommand($drupalSettings, TRUE));
+  $response->addCommand(new OpenDialogCommand($selector, $title, $content, $dialog_options));
+
+  return $response;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function linkit_content_theme($existing, $type, $theme, $path) {
+  return [
+    // Rewrite html template to get rid of menus. We need this for iframe embed.
+    'html__admin__content__linkit_content__selector' => [
+      'template' => 'html--linkit-content--selector',
+      'render element' => 'html',
+      'preprocess functions' => ['template_preprocess_html'],
+    ],
+    // Rewrite page template to get rid of menus. We need this for iframe embed.
+    'page__admin__content__linkit_content__selector' => [
+      'template' => 'page--linkit-content--selector',
+      'render element' => 'html',
+      'preprocess functions' => ['template_preprocess_page'],
+    ],
+  ];
+}

@@ -1,0 +1,172 @@
+uuid: 94f75cf1-9bbf-463b-9185-edeedfa56f05
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.fsa_establishment.search_result
+    - field.field.fsa_establishment.fsa_establishment.field_address
+    - field.field.fsa_establishment.fsa_establishment.field_businesstype
+    - field.field.fsa_establishment.fsa_establishment.field_fhis_ratingvalue
+    - field.field.fsa_establishment.fsa_establishment.field_fhrs_ratingvalue
+    - field.field.fsa_establishment.fsa_establishment.field_geocode
+    - field.field.fsa_establishment.fsa_establishment.field_localauthoritycode
+    - field.field.fsa_establishment.fsa_establishment.field_newratingpending
+    - field.field.fsa_establishment.fsa_establishment.field_phone
+    - field.field.fsa_establishment.fsa_establishment.field_postcode
+    - field.field.fsa_establishment.fsa_establishment.field_ratingdate
+    - field.field.fsa_establishment.fsa_establishment.field_ratingvalue
+    - field.field.fsa_establishment.fsa_establishment.field_righttoreply
+    - field.field.fsa_establishment.fsa_establishment.field_schemetype
+    - field.field.fsa_establishment.fsa_establishment.field_score_confidence
+    - field.field.fsa_establishment.fsa_establishment.field_score_hygiene
+    - field.field.fsa_establishment.fsa_establishment.field_score_structural
+  module:
+    - entity_print
+    - fsa_ratings
+    - geolocation
+third_party_settings:
+  entity_print:
+    pdf_label: 'View PDF'
+_core:
+  default_config_hash: fDOCJYkV8QCyOVS29HI4qqyPn6VdKooOQlWWjR9ls_Q
+id: fsa_establishment.fsa_establishment.search_result
+targetEntityType: fsa_establishment
+bundle: fsa_establishment
+mode: search_result
+content:
+  field_address:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_businesstype:
+    weight: 4
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_geocode:
+    type: geolocation_map
+    weight: 10
+    region: content
+    label: hidden
+    settings:
+      set_marker: '1'
+      title: '[current-page:title]'
+      info_text: '[geolocation_current_item:lat], [geolocation_current_item:lng]'
+      google_map_settings:
+        height: 400px
+        width: 100%
+        type: ROADMAP
+        zoom: '15'
+        maxZoom: 18
+        minZoom: 5
+        mapTypeControl: 1
+        streetViewControl: 1
+        zoomControl: 1
+        scrollwheel: 1
+        gestureHandling: auto
+        draggable: 1
+        style: "[\n    {\n        \"featureType\": \"administrative\",\n        \"elementType\": \"labels.text.fill\",\n        \"stylers\": [\n            {\n                \"color\": \"#444444\"\n            }\n        ]\n    },\n    {\n        \"featureType\": \"landscape\",\n        \"elementType\": \"all\",\n        \"stylers\": [\n            {\n                \"color\": \"#f2f2f2\"\n            }\n        ]\n    },\n    {\n        \"featureType\": \"poi\",\n        \"elementType\": \"all\",\n        \"stylers\": [\n            {\n                \"visibility\": \"off\"\n            }\n        ]\n    },\n    {\n        \"featureType\": \"poi.park\",\n        \"elementType\": \"geometry.fill\",\n        \"stylers\": [\n            {\n                \"visibility\": \"on\"\n            }\n        ]\n    },\n    {\n        \"featureType\": \"road\",\n        \"elementType\": \"all\",\n        \"stylers\": [\n            {\n                \"saturation\": -100\n            },\n            {\n                \"lightness\": 45\n            }\n        ]\n    },\n    {\n        \"featureType\": \"road.highway\",\n        \"elementType\": \"all\",\n        \"stylers\": [\n            {\n                \"visibility\": \"simplified\"\n            }\n        ]\n    },\n    {\n        \"featureType\": \"road.highway\",\n        \"elementType\": \"geometry.fill\",\n        \"stylers\": [\n            {\n                \"visibility\": \"on\"\n            }\n        ]\n    },\n    {\n        \"featureType\": \"road.highway\",\n        \"elementType\": \"geometry.stroke\",\n        \"stylers\": [\n            {\n                \"visibility\": \"on\"\n            }\n        ]\n    },\n    {\n        \"featureType\": \"road.arterial\",\n        \"elementType\": \"labels.icon\",\n        \"stylers\": [\n            {\n                \"visibility\": \"off\"\n            }\n        ]\n    },\n    {\n        \"featureType\": \"transit\",\n        \"elementType\": \"all\",\n        \"stylers\": [\n            {\n                \"visibility\": \"off\"\n            }\n        ]\n    },\n    {\n        \"featureType\": \"water\",\n        \"elementType\": \"all\",\n        \"stylers\": [\n            {\n                \"color\": \"#46bcec\"\n            },\n            {\n                \"visibility\": \"on\"\n            }\n        ]\n    }\n]"
+        info_auto_display: 1
+        marker_icon_path: ''
+        disableAutoPan: 1
+        rotateControl: 0
+        fullscreenControl: 0
+        preferScrollingToZooming: 0
+        disableDoubleClickZoom: 0
+      use_overridden_map_settings: 0
+      common_map: ''
+    third_party_settings: {  }
+  field_localauthoritycode:
+    weight: 12
+    label: above
+    settings:
+      link: false
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_newratingpending:
+    type: boolean
+    weight: 6
+    region: content
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+  field_phone:
+    weight: 3
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_postcode:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_ratingdate:
+    weight: 5
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: fsa_ratingdate_formatter
+    region: content
+  field_righttoreply:
+    weight: 11
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_score_confidence:
+    weight: 9
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: fsa_score_description_formatter
+    region: content
+  field_score_hygiene:
+    weight: 7
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: fsa_score_description_formatter
+    region: content
+  field_score_structural:
+    weight: 8
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: fsa_score_description_formatter
+    region: content
+  name:
+    label: hidden
+    type: string
+    weight: 0
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_fhis_ratingvalue: true
+  field_fhrs_ratingvalue: true
+  field_ratingvalue: true
+  field_schemetype: true
+  langcode: true
+  user_id: true

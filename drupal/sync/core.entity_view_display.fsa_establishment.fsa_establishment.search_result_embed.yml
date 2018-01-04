@@ -1,0 +1,78 @@
+uuid: ea9f2582-0bb5-4d10-86f8-0c3dbd0c0478
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.fsa_establishment.search_result_embed
+    - field.field.fsa_establishment.fsa_establishment.field_address
+    - field.field.fsa_establishment.fsa_establishment.field_businesstype
+    - field.field.fsa_establishment.fsa_establishment.field_fhis_ratingvalue
+    - field.field.fsa_establishment.fsa_establishment.field_fhrs_ratingvalue
+    - field.field.fsa_establishment.fsa_establishment.field_geocode
+    - field.field.fsa_establishment.fsa_establishment.field_localauthoritycode
+    - field.field.fsa_establishment.fsa_establishment.field_newratingpending
+    - field.field.fsa_establishment.fsa_establishment.field_phone
+    - field.field.fsa_establishment.fsa_establishment.field_postcode
+    - field.field.fsa_establishment.fsa_establishment.field_ratingdate
+    - field.field.fsa_establishment.fsa_establishment.field_ratingvalue
+    - field.field.fsa_establishment.fsa_establishment.field_righttoreply
+    - field.field.fsa_establishment.fsa_establishment.field_schemetype
+    - field.field.fsa_establishment.fsa_establishment.field_score_confidence
+    - field.field.fsa_establishment.fsa_establishment.field_score_hygiene
+    - field.field.fsa_establishment.fsa_establishment.field_score_structural
+  module:
+    - entity_print
+    - fsa_ratings
+third_party_settings:
+  entity_print:
+    pdf_label: 'View PDF'
+_core:
+  default_config_hash: fDOCJYkV8QCyOVS29HI4qqyPn6VdKooOQlWWjR9ls_Q
+id: fsa_establishment.fsa_establishment.search_result_embed
+targetEntityType: fsa_establishment
+bundle: fsa_establishment
+mode: search_result_embed
+content:
+  field_address:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_postcode:
+    weight: 3
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  name:
+    label: hidden
+    type: string
+    weight: 1
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_businesstype: true
+  field_fhis_ratingvalue: true
+  field_fhrs_ratingvalue: true
+  field_geocode: true
+  field_localauthoritycode: true
+  field_newratingpending: true
+  field_phone: true
+  field_ratingdate: true
+  field_ratingvalue: true
+  field_righttoreply: true
+  field_schemetype: true
+  field_score_confidence: true
+  field_score_hygiene: true
+  field_score_structural: true
+  langcode: true
+  user_id: true
