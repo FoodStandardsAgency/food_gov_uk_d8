@@ -22,8 +22,17 @@ class FsaEstablishmentViewBuilder extends EntityViewBuilder {
 
     $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
+    // Include entity ID.
+    $build['#id'] = $entity->id();
+
+    // Include canonical URL to entity.
+    $build['#url'] = $entity->toUrl();
+
     // Send entity to custom template.
     $build['#theme'] = 'fsa_establishment';
+
+    // Include used view mode.
+    $build['#view_mode'] = $view_mode;
 
     // Pass the search form for Establishment template.
     $build['#search_form'] = \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchForm');
