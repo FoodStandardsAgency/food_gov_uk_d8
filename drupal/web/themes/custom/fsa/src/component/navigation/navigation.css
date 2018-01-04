@@ -723,3 +723,49 @@
 :--not-touch .menu-utility > li > a:--enter {
   text-decoration: underline;
 }
+
+
+/* Tabs */
+.menu-subscribe {
+  background-color: var(--color-lighter-gray);
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 -0.1em 0 0 var(--color-light-gray);
+  padding: 0;
+  @mixin responsive-declaration margin-right, -1em, -4em;
+  @mixin responsive-declaration margin-left, -1em, -4em;
+
+  li {
+    list-style: none;
+    font-weight: 600;
+    margin: 0 1em;
+
+    a {
+      display: block;
+      padding: 1em;
+      text-align: center;
+      box-shadow: inset 0 -0.2em 0 0 transparent;
+      margin: 0 -1em;
+      transition:
+        color var(--transition-enter),
+        box-shadow var(--transition-enter);
+
+      :--not-touch &:--enter {
+        box-shadow: inset 0 -0.2em 0 0 var(--dark-primary-color);
+      }
+
+      &.is-active {
+        color: var(--color-black);
+        box-shadow: inset 0 -0.2em 0 0 var(--color-black);
+
+        :--not-touch &:--enter {
+          color: var(--dark-primary-color);
+          box-shadow: inset 0 -0.2em 0 0 var(--dark-primary-color);
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

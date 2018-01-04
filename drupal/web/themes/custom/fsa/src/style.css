@@ -15,7 +15,6 @@
 @import "component/general/phase-banner.css";
 
 /* Profile and registration */
-@import "component/general/my-profile.css";
 @import "component/general/subscribe-flow.css";
 
 /* Navigation */
@@ -39,3 +38,5 @@
 @import "component/sidebar/sidebar.css";
 @import "component/promo/promo.css";
 @import "component/pager/pager.css";
+@import "component/infobox/infobox.css";
+@import "component/profile/profile.css";

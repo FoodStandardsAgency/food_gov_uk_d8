@@ -10,7 +10,7 @@ dependencies:
     - fsa
 third_party_settings:
   block_class:
-    classes: ''
+    classes: infobox
 id: mysubscriptions
 theme: fsa
 region: sidebar_second
