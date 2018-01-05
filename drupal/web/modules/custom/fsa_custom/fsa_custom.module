@@ -89,6 +89,17 @@ function fsa_custom_preprocess_page_title(&$variables) {
       $class = 'regional-variation regional-variation--' . strtolower(Html::cleanCssIdentifier($nation));
       $variables['title_prefix'] = ['#markup' => '<div class="' . $class . '">' . t('@nation specific', ['@nation' => $nation]) . '</div>'];
     }
+    elseif (isset($nations[0]) && isset($nations[1]) && !isset($nations[2])) {
+      $nation_1 = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($nations[0]->getValue()['target_id'])->getName();
+      $nation_2 = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($nations[1]->getValue()['target_id'])->getName();
+      $class = 'regional-variation regional-variation--multi-nation';
+      $variables['title_prefix'] = [
+        '#markup' => '<div class="' . $class . '">' . t('@nation_1 and @nation_2 specific', [
+          '@nation_1' => $nation_1,
+          '@nation_2' => $nation_2,
+        ]) . '</div>',
+      ];
+    }
   }
   else {
     $route = \Drupal::routeMatch();
