@@ -24,11 +24,11 @@ class FsaTocService {
    * @param string $toc_type
    *   Toc type as stored in /admin/structure/toc.
    *
-   * @return false|\Drupal\toc_api\Toc
+   * @return array|\Drupal\toc_api\Toc
    *   Renderable table of contents anchor links.
    */
   public function renderAnchors($content = '', $toc_type = 'default') {
-    $anchors = FALSE;
+    $anchors = [];
 
     // Get custom TOC type options.
     /** @var \Drupal\toc_api\TocTypeInterface $toc_type */
