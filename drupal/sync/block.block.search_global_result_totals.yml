@@ -13,8 +13,8 @@ third_party_settings:
     classes: search-global-result-totals
 id: search_global_result_totals
 theme: fsa
-region: content
-weight: -5
+region: content_top
+weight: -11
 provider: null
 plugin: views_result_totals
 settings:
