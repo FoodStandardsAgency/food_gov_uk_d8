@@ -1,0 +1,4 @@
+services:
+  fsa_toc.service:
+    class: Drupal\fsa_toc\FsaTocService
+    arguments: []

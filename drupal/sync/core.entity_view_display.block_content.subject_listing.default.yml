@@ -1,0 +1,48 @@
+uuid: cca86a79-add6-4e88-b5cd-ef930e504716
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.subject_listing
+    - field.field.block_content.subject_listing.field_intro
+    - field.field.block_content.subject_listing.field_link_list
+    - field.field.block_content.subject_listing.field_title
+  module:
+    - link
+id: block_content.subject_listing.default
+targetEntityType: block_content
+bundle: subject_listing
+mode: default
+content:
+  field_intro:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_link_list:
+    weight: 2
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true

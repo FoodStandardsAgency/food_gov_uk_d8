@@ -1,0 +1,23 @@
+uuid: c11b184d-9ee9-4cd9-af82-818ecffe0b90
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.subject_listing
+    - field.storage.block_content.field_link_list
+  module:
+    - link
+id: block_content.subject_listing.field_link_list
+field_name: field_link_list
+entity_type: block_content
+bundle: subject_listing
+label: 'In this section'
+description: 'List of links below "In this section" heading.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 2
+field_type: link
