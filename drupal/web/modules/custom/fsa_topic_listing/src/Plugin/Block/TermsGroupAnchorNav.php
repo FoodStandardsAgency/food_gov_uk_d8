@@ -28,27 +28,11 @@ class TermsGroupAnchorNav extends BlockBase {
     // Get the rendered term listing content.
     $tid = $routematch->getParameter('taxonomy_term')->id();
     $embed = views_embed_view('taxonomy_term', 'page', $tid);
-    $view = (string) \Drupal::service('renderer')->render($embed);
+    $content = (string) \Drupal::service('renderer')->render($embed);
 
-    // Get our custom "Term group anchors" TOC type options.
-    /** @var \Drupal\toc_api\TocTypeInterface $toc_type */
-    $toc_type = TocType::load('term_group_anchors');
-    $options = ($toc_type) ? $toc_type->getOptions() : [];
-
-    // Create TOC instance using the TOC manager.
-    /** @var \Drupal\toc_api\TocManagerInterface $toc_manager */
-    $toc_manager = \Drupal::service('toc_api.manager');
-    /** @var \Drupal\toc_api\TocInterface $toc */
-    $toc = $toc_manager->create('toc_filter', $view, $options);
-
-    // If provided page content allows creating the toc build it.
-    if ($toc->isVisible()) {
-      /** @var \Drupal\toc_api\TocBuilderInterface $toc_builder */
-      $toc_builder = \Drupal::service('toc_api.builder');
-      $build = [
-        'toc' => $toc_builder->buildToc($toc),
-      ];
-    }
+    /** @var \Drupal\fsa_toc\FsaTocService $fsa_toc_service */
+    $fsa_toc_service = \Drupal::service('fsa_toc.service');
+    $build = $fsa_toc_service->renderAnchors($content, 'term_group_anchors');
 
     return $build;
 
