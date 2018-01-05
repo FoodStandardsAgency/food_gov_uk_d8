@@ -244,6 +244,21 @@ input[type="checkbox"] {
   }
 }
 
+.password-confirm {
+  color: var(--color-gray);
+  padding: 0.5em 0;
+
+  .ok {
+    font-weight: 600;
+    color: var(--color-dark-teal);
+  }
+
+  .error {
+    font-weight: 600;
+    color: var(--color-red);
+  }
+}
+
 .webform {
   padding-top: 2em;
 }

@@ -82,14 +82,18 @@
 
 .profile-manager {
   .toggle-button {
-    border: 0.2rem solid var(--color-light-gray);
+    border: 0.2em solid var(--color-light-gray);
     font-weight: 600;
-    @mixin responsive-declaration font-size, 1em, 1.25em;
     border-bottom: 0;
+    @mixin responsive-declaration padding, 0em, 0.5em;
 
     &.is-open {
       border-color: var(--color-black);
       color: var(--color-black);
+    }
+
+    & > * { 
+      @mixin responsive-declaration font-size, 1em, 1.25em;
     }
   }
 
@@ -105,6 +109,19 @@
     & > * { 
       @mixin responsive-declaration padding, 1em, 1.5em;
       margin: 0;
+    }
+
+    h3 {
+      @mixin responsive-declaration font-size, 1.25em, 1.5em;
+      @mixin responsive-declaration margin-top, 1.5em, 2em;
+      padding-bottom: 0.5em;
+      border-bottom: 0.1em solid var(--color-lighter-gray);
+    }
+  }
+
+  .form-item {
+    &.js-form-type-radio {
+      margin-bottom: 0em;
     }
   }
 }
