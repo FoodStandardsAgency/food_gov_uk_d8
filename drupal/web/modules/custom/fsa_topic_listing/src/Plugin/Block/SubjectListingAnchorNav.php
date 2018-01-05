@@ -28,7 +28,8 @@ class SubjectListingAnchorNav extends BlockBase {
     $node = Node::load($node->id());
     $view = '';
     foreach ($node->get('field_lander_row')->referencedEntities() as $rows) {
-      if (!empty($rows->field_subject_listing)) {
+      if (!empty($rows->field_subject_listing) && count($rows->field_subject_listing) >= 2) {
+        // Build nav only if two or more listing blocks attached.
         foreach ($rows->field_subject_listing as $block) {
           // Loop through content and send for toc_api to create anchor links.
           $block_entity = BlockContent::load($block->getValue()['target_id']);
@@ -89,7 +90,6 @@ class SubjectListingAnchorNav extends BlockBase {
 
     // And make sure if nothing to show do not bother renrering the block.
     return AccessResult::forbidden();
-
   }
 
 }
