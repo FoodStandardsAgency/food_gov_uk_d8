@@ -9,11 +9,11 @@ dependencies:
     - fsa
 third_party_settings:
   block_class:
-    classes: ''
+    classes: breadcrumb
 id: breadcrumbs
 theme: fsa
 region: secondary_menu
-weight: -11
+weight: -15
 provider: null
 plugin: system_breadcrumb_block
 settings:

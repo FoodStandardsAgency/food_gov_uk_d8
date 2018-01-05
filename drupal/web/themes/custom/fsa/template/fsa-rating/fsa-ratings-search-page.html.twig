@@ -27,51 +27,67 @@
 
 <div class="ratings {% if ratings_info_content %}ratings--frontpage{% else %}{% endif %}">
 
-  <div class="ratings__search peek {% if ratings_info_content %}ratings__search--frontpage{% else %}{% endif %}">
-    <div class="container peek__container">
-      <div class="ratings__text">
+  <div class="ratings__container">
+
+    <div class="ratings__search js-peek{% if ratings_info_content %} ratings__search--frontpage{% else %}{% endif %}">
+      <div class="container">
+        {{ form }}
       </div>
-      {{ form }}
     </div>
-  </div>
 
-  <div id="results" class="ratings__content {% if ratings_info_content %}ratings__content--frontpage{% else %}ratings__content--listing{% endif %}">
-    {% if ratings_info_content %}
-      <div class="container container--small">
-        {{ ratings_info_content }}
-      </div>
-    {% else %}
-    <div class="ratings__listing">
-      <div class="ratings__toolbar" role="toolbar" aria-label="sorting options" aria-controls="sortable">
-        {% if sort_form %}
-          <div class="ratings__hits-total">{{ hits_total }} {{ 'results for '|t }} "{{ keywords }}"</div>
-          <div class="ratings__sort-form">{{ sort_form }}</div>
-        {% endif %}
-      </div>
-
-      <h2 class="visually-hidden" aria-labelledby="sortable">{% trans %}Food hygiene ratings search results{% endtrans %}</h2>
-      <div class="table table--with-background js-table ratings__table" id="sortable" role="grid">
-        <div class="table__row table__row--header table__row--negative js-table-header" role="row">
-          <div class="table__item table__item--large" role="columnheader">{% trans %}Name{% endtrans %}</div>
-          <div class="table__item" role="columnheader">{% trans %}Rating{% endtrans %}</div>
-          <div class="table__item" role="columnheader">{% trans %}Inspection date{% endtrans %}</div>
+    <div id="{{ results_anchor }}" class="ratings__content {% if ratings_info_content %}ratings__content--frontpage{% else %}ratings__content--listing{% endif %}">
+      {% if ratings_info_content %}
+        <div class="container container--small">
+          {{ ratings_info_content }}
+        </div>
+      {% else %}
+      <div class="ratings__listing">
+        <div class="ratings__toolbar" role="toolbar" aria-label="sorting options" aria-controls="sortable">
+          {% if sort_form %}
+            <div class="ratings__hits-total">
+              {{ hits_total }}
+              {% if keywords %}
+                {{ 'results for '|t }} "{{ keywords }}"
+              {% else %}
+                  {{ 'results'|t }}
+              {% endif %}
+            </div>
+            <div class="ratings__sort-form">{{ sort_form }}</div>
+          {% endif %}
         </div>
 
-        {{ items }}
-
-        <div id="ratings-search-load-more" class="ratings__table ratings__table--more-items"></div>
-
-      </div>
-
-      <footer class="ratings__footer">
-        {% if hits_total > hits_shown %}
-          <div class="result-counter">
-            <p>{% trans %}Displaying <span class="hits-shown">{{ hits_shown }}</span> of <span class="hits-total">{{ hits_total }}</span> items{% endtrans %}</p>
+        <h2 class="visually-hidden" aria-labelledby="sortable">{% trans %}Food hygiene ratings search results{% endtrans %}</h2>
+        <div class="table table--with-background js-table ratings__table" id="sortable" role="grid">
+          <div class="table__row table__row--header table__row--negative js-table-header" role="row">
+            <div class="table__item table__item--large" role="columnheader">{% trans %}Name{% endtrans %}</div>
+            <div class="table__item" role="columnheader">{% trans %}Rating{% endtrans %}</div>
+            <div class="table__item" role="columnheader">{% trans %}Inspection date{% endtrans %}</div>
           </div>
-        {% endif %}
-        {{ load_more }}
-      </footer>
+
+          {{ items }}
+
+          {% if pager_info %}
+            <div>{{ pager_info }}</div>
+          {% endif %}
+
+          {% if load_more %}
+            <div id="ratings-search-load-more" class="ratings__table ratings__table--more-items"></div>
+          {% endif %}
+
+        </div>
+
+          {% if load_more %}
+            <footer class="ratings__footer">
+              {% if hits_total > hits_shown %}
+                <div class="result-counter">
+                  <p>{% trans %}Displaying <span class="hits-shown">{{ hits_shown }}</span> of <span class="hits-total">{{ hits_total }}</span> items{% endtrans %}</p>
+                </div>
+              {% endif %}
+              {{ load_more }}
+            </footer>
+          {% endif %}
+      </div>
+      {% endif %}
     </div>
-    {% endif %}
   </div>
 </div>

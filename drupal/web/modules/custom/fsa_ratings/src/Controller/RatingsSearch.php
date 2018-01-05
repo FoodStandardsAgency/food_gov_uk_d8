@@ -4,6 +4,7 @@ namespace Drupal\fsa_ratings\Controller;
 
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Url;
 use Drupal\fsa_es\SearchService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -24,23 +25,31 @@ class RatingsSearch extends ControllerBase {
   /**
    * {@inheritdoc}
    *
-   * @var \Drupal\fsa_es\SearchService*/
-  private $searchService;
+   * @var \Drupal\fsa_es\SearchService */
+  protected $searchService;
+
+  /** @var \Drupal\Core\Language\LanguageManagerInterface $languageManager */
+  protected $languageManager;
 
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('fsa_es.search_service')
+      $container->get('fsa_es.search_service'),
+      $container->get('language_manager')
     );
   }
 
   /**
-   * {@inheritdoc}
+   * RatingsSearch constructor.
+   *
+   * @param \Drupal\fsa_es\SearchService $searchService
+   * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
    */
-  public function __construct(SearchService $searchService) {
+  public function __construct(SearchService $searchService, LanguageManagerInterface $language_manager) {
     $this->searchService = $searchService;
+    $this->languageManager = $language_manager;
   }
 
   /**
@@ -83,7 +92,7 @@ class RatingsSearch extends ControllerBase {
     $items = [];
     $categories = [];
     $hits = 0;
-    $language = \Drupal::languageManager()->getCurrentLanguage();
+    $language = $this->languageManager->getCurrentLanguage();
     $available_filters = $this->searchService->categories($language);
 
     // User provided search input.
@@ -94,6 +103,11 @@ class RatingsSearch extends ControllerBase {
     if (empty($max_items) || $max_items > 1000) {
       $max_items = RatingsSearch::INITIAL_RESULTS_COUNT;
     }
+
+    // Get page number.
+    $page = \Drupal::request()->query->get('page');
+    // And calculate offset.
+    $offset = $page * RatingsSearch::INITIAL_RESULTS_COUNT;
 
     $filters = [];
     // See if the following parameters are provided by the user and add to the
@@ -117,9 +131,13 @@ class RatingsSearch extends ControllerBase {
     $results = FALSE;
     if (!empty($keywords) || !empty($filters)) {
       // Execute the search using the SearchService.
-      $results = $this->searchService->search($language, $keywords, $filters, $max_items);
+      $results = $this->searchService->search($language, $keywords, $filters, $max_items, $offset);
       $items = $this->ratingSearchResults($results);
       $hits = $results['total'];
+
+      // Init the pager.
+      pager_default_initialize($hits, RatingsSearch::INITIAL_RESULTS_COUNT);
+
     }
 
     $sort_form = NULL;
@@ -132,7 +150,21 @@ class RatingsSearch extends ControllerBase {
       $ratings_info = ['#markup' => check_markup($fsa_ratings_config->get('ratings_info_content'), 'full_html')];
     }
 
-    return [
+    $hits_total = number_format($hits, 0, ',', ' ');
+
+    if ($hits > 0) {
+      $from = ($offset + 1);
+      $to = count($items) + $offset;
+      $showing_items = $from . '-' . $to;
+      $pager_info = $this->t('Showing <span>@items</span> of <span>@total</span>', ['@items' => $showing_items, '@total' => $hits_total]);
+    }
+    else {
+      $pager_info = FALSE;
+    }
+
+    // Build the renderable result page.
+    $render = [];
+    $render[] = [
       '#theme' => 'fsa_ratings_search_page',
       '#form' => \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchForm'),
       '#sort_form' => $sort_form,
@@ -143,16 +175,23 @@ class RatingsSearch extends ControllerBase {
       '#categories' => $categories,
     // Keywords given in the URL.
       '#keywords' => $keywords,
-    // Meaningful filters (which have content associated)
+    // Meaningful params (which have content associated)
       '#available_filters' => $available_filters,
     // Filters given by the user and used for the querying.
       '#applied_filters' => $filters,
+    // Pager information.
+      '#pager_info' => $pager_info,
     // Total count of the results.
-      '#hits_total' => $hits,
+      '#hits_total' => $hits_total,
     // Item count to be shown now.
       '#hits_shown' => count($items),
-      '#load_more' => \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchLoadMore'),
+      //'#load_more' => \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchLoadMore'),
     ];
+
+    // Append the pager.
+    $render[] = ['#type' => 'pager'];
+
+    return $render;
   }
 
   /**

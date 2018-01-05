@@ -10,11 +10,11 @@ dependencies:
     - fsa
 third_party_settings:
   block_class:
-    classes: ''
+    classes: manage-subcriptions
 id: manage_subscription_cta
 theme: fsa
 region: secondary_menu
-weight: 0
+weight: -14
 provider: null
 plugin: manage_subscription_cta
 settings:

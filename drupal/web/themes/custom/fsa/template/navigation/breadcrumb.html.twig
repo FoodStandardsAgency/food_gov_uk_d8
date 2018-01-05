@@ -8,16 +8,14 @@
  */
 #}
 {% if breadcrumb %}
-  <div class="breadcrumb">
-    <h2 class="visually-hidden">{{ 'Breadcrumb'|t }}</h2>
-    {% for item in breadcrumb %}
-      <div class="breadcrumb__item">
-        {% if item.url %}
-          <a href="{{ item.url }}" class="breadcrumb__link">{{ item.text }}</a>
-        {% else %}
-          {{ item.text }}
-        {% endif %}
-      </div>
-    {% endfor %}
-  </div>
+  <h2 class="visually-hidden">{{ 'Breadcrumb'|t }}</h2>
+  {% for item in breadcrumb %}
+    <div class="breadcrumb__item">
+      {% if item.url %}
+        <a href="{{ item.url }}" class="breadcrumb__link">{{ item.text }}</a>
+      {% else %}
+        {{ item.text }}
+      {% endif %}
+    </div>
+  {% endfor %}
 {% endif %}

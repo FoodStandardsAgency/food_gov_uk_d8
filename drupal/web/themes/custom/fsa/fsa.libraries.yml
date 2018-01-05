@@ -5,3 +5,7 @@ global:
       dist/app.css: {}
   js:
     dist/app.js: {}
+
+active-link-incl-query:
+  js:
+    js/active-link-incl-query.js: {}

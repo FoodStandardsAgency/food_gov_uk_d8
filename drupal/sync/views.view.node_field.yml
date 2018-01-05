@@ -510,8 +510,8 @@ display:
             trim: false
             preserve_tags: ''
             html: false
-          element_type: h2
-          element_class: ''
+          element_type: h1
+          element_class: hero__heading
           element_label_type: ''
           element_label_class: ''
           element_label_colon: false

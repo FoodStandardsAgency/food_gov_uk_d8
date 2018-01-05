@@ -13,6 +13,7 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Link;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
 
 /**
  * Implements of template_preprocess_html().
@@ -106,8 +107,9 @@ function fsa_custom_preprocess_page_title(&$variables) {
  * Implements template_preprocess_breadcrumb().
  */
 function fsa_custom_preprocess_breadcrumb(&$variables) {
+  $routematch = \Drupal::routeMatch();
 
-  $node = \Drupal::routeMatch()->getParameter('node');
+  $node = $routematch->getParameter('node');
   if (\Drupal::service('path.matcher')->isFrontPage()) {
     // We don't need breadcrumbs on homepage.
     unset($variables['breadcrumb']);
@@ -122,6 +124,24 @@ function fsa_custom_preprocess_breadcrumb(&$variables) {
       }
     }
   }
+
+  // Alter breadcumbs for term pages.
+  $term = $routematch->getParameter('taxonomy_term');
+  if (isset($term)) {
+
+    // Topic terms listing pages.
+    if ($term->getVocabularyId() == 'topic') {
+      // Inject "Topics" as the second item.
+      array_splice($variables['breadcrumb'], 1, 0, [['text' => t('Topics'), 'url' => Url::fromRoute('view.a_to_z.page_1')]]);
+
+      // Add name of the term.
+      $variables['breadcrumb'][] = [
+        'text' => $term->getName(),
+        'url' => FALSE,
+      ];
+    }
+  }
+
 }
 
 /**

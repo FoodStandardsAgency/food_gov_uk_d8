@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * FSA theme override for Large promo paragraph field.
+ *
+ * Additional variables:
+ * - item.image_as_background: Promo image element as background
+ *
+ * @see fsa_lander_preprocess_field()
+ * @see template_preprocess_field()
+ */
+#}
+{% set content_class = 'promo__content' %}
+<div{{ attributes }}>
+  {% for item in items %}
+    <div{{ item.attributes }}>
+      {% if item.image_as_background %}
+        {{ item.image_as_background }}
+      {% endif %}
+      <div class="{{ content_class }}">
+        {{ item.content }}
+      </div>
+    </div>
+  {% endfor %}
+</div>

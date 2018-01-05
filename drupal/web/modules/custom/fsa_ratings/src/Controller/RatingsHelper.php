@@ -12,6 +12,9 @@ use Drupal\Core\Controller\ControllerBase;
  */
 class RatingsHelper extends ControllerBase {
 
+  // The anchor name for for search results to "scroll" user to the results.
+  const RESULTS_ANCHOR = 'results';
+
   /**
    * Get formatted date or "N/A" for dates from the beginning of 20th Century.
    *

@@ -26,6 +26,7 @@ dependencies:
     - image.style.thumbnail
     - node.type.page
   module:
+    - content_moderation
     - datetime
     - field_group
     - image
@@ -33,7 +34,6 @@ dependencies:
     - paragraphs
     - path
     - shs
-    - term_reference_tree
     - text
 third_party_settings:
   field_group:
@@ -268,7 +268,7 @@ content:
     third_party_settings: {  }
     region: content
   field_team_contacts:
-    weight: 26
+    weight: 16
     settings:
       match_operator: CONTAINS
       size: 60
@@ -301,7 +301,7 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 100
+    weight: 17
     settings: {  }
     region: content
     third_party_settings: {  }
@@ -318,6 +318,13 @@ content:
     weight: 14
     third_party_settings: {  }
     region: content
+  sticky:
+    type: boolean_checkbox
+    weight: 18
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0
@@ -342,4 +349,3 @@ content:
     third_party_settings: {  }
 hidden:
   promote: true
-  sticky: true

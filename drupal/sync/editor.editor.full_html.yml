@@ -23,7 +23,6 @@ settings:
           name: Linking
           items:
             - Anchor
-            - Link
             - DrupalLink
             - Unlink
         -

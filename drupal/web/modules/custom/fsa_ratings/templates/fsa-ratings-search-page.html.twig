@@ -26,7 +26,7 @@
 {{ ratings_info_content }}
 
 {% if items %}
-  <div class="fsa-ratings-items">
+  <div id="{{ results_anchor }}" class="fsa-ratings-items">
     {% if keywords %}
       <h2>{% trans %}Search results for {{ keywords|placeholder }}{% endtrans %}</h2>
     {% endif %}

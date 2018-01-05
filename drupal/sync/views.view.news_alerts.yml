@@ -19,7 +19,7 @@ dependencies:
     - text
     - user
 id: news_alerts
-label: 'News & alerts'
+label: 'News and alerts'
 module: views
 description: ''
 tag: ''
@@ -807,7 +807,7 @@ display:
           expose:
             label: ''
           granularity: second
-      title: 'News & alerts centre'
+      title: 'News and alerts centre'
       header: {  }
       footer: {  }
       empty:
@@ -866,6 +866,7 @@ display:
         title: false
         header: false
         footer: false
+        css_class: false
         style: false
         row: false
       fields:
@@ -1346,8 +1347,8 @@ display:
         groups:
           1: AND
       rendering_language: '***LANGUAGE_language_interface***'
-      block_description: 'Latest Updates'
-      title: 'Latest Updates'
+      block_description: 'Latest updates'
+      title: 'Latest updates'
       header: {  }
       footer:
         area:
@@ -1360,7 +1361,7 @@ display:
           empty: false
           tokenize: false
           content:
-            value: "<a data-entity-substitution=\"canonical\" data-entity-type=\"node\" data-entity-uuid=\"5427cabf-be8e-46ff-a722-2ce3ae019229\" href=\"/node/56\" class=\"button\">All News & Alerts</a>\n<!-- TODO: make this translatable/configurable from code instead of views header -->"
+            value: "<a data-entity-substitution=\"canonical\" data-entity-type=\"node\" data-entity-uuid=\"5427cabf-be8e-46ff-a722-2ce3ae019229\" href=\"/node/56\" class=\"button\">All news and alerts</a>\n<!-- TODO: make this translatable/configurable from code instead of views header -->"
             format: full_html
           plugin_id: text
       style:
@@ -1374,6 +1375,7 @@ display:
         options:
           relationship: none
           view_mode: promo
+      css_class: promo-wrapper
     cache_metadata:
       max-age: -1
       contexts:
@@ -1389,7 +1391,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      block_description: 'News & Alerts Centre'
+      block_description: 'News and alerts centre'
       block_category: 'Lists (Views)'
       display_description: ''
       footer:
