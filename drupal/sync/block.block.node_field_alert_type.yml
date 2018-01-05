@@ -15,7 +15,7 @@ third_party_settings:
 id: node_field_alert_type
 theme: fsa
 region: content
-weight: -11
+weight: -15
 provider: null
 plugin: 'views_block:node_field-alert_type'
 settings:
