@@ -79,3 +79,32 @@
 .profile__logout {
   margin-left: auto;
 }
+
+.profile-manager {
+  .toggle-button {
+    border: 0.2rem solid var(--color-light-gray);
+    font-weight: 600;
+    @mixin responsive-declaration font-size, 1em, 1.25em;
+    border-bottom: 0;
+
+    &.is-open {
+      border-color: var(--color-black);
+      color: var(--color-black);
+    }
+  }
+
+  .toggle-content {
+    border: 0.2em solid var(--color-light-gray);
+    border-top: 0;
+    margin-bottom: 0.5em;
+
+    &.is-visible {
+      border-color: var(--color-black);
+    }
+
+    & > * { 
+      @mixin responsive-declaration padding, 1em, 1.5em;
+      margin: 0;
+    }
+  }
+}
