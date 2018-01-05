@@ -70,6 +70,7 @@
   background-color: var(--color-white);
   display: flex;
   align-items: center;
+  @mixin responsive-declaration margin-bottom, 1.5em, 2em;
 }
 
 .profile__heading {
@@ -77,9 +78,33 @@
 }
 
 .profile__logout {
+  position: relative;
   margin-left: auto;
+  font-weight: 600;
+  padding-left: 2.25em;
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 1.5em;
+    height: 1.5em;
+    transform: translateY(-50%);
+    background-image: var(--icon-arrow-right-white);
+    background-position: 50% 50%;
+    background-size: 70% auto;
+    background-repeat: no-repeat;
+    background-color: var(--dark-primary-color);
+    border-radius: 50%;
+  }
+
+  :--not-touch &:--enter {
+    text-decoration: underline;
+  }
 }
 
+.user-registration-form,
 .profile-manager {
   .toggle-button {
     border: 0.2em solid var(--color-light-gray);

@@ -244,6 +244,14 @@ input[type="checkbox"] {
   }
 }
 
+input[type="text"],
+input[type="password"] {
+  .send-password-email-form &,
+  .user-login-form & {
+    background-color: var(--color-lighter-gray);
+  }
+}
+
 .password-confirm {
   color: var(--color-gray);
   padding: 0.5em 0;

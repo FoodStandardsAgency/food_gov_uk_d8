@@ -89,17 +89,15 @@ a {
   text-decoration: none;
 
   &.back {
-    &.arrow {
-      background-image: var(--icon-arrow-left-primary);
-      background-position: left 0 top 50%;
-      background-size: 1em auto;
-      background-repeat: no-repeat;
-      padding-left: 1.5em;
-      font-weight: 600;
+    background-image: var(--icon-arrow-left-primary);
+    background-position: left 0 top 50%;
+    background-size: 1em auto;
+    background-repeat: no-repeat;
+    padding-left: 1.5em;
+    font-weight: 600;
 
-      :--not-touch &:--enter {
-        text-decoration: underline;
-      }
+    :--not-touch &:--enter {
+      text-decoration: underline;
     }
   }
 }
