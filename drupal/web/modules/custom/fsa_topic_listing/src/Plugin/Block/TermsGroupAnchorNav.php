@@ -5,7 +5,6 @@ namespace Drupal\fsa_topic_listing\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\toc_api\Entity\TocType;
 
 /**
  * Creates 'Term group nav' for taxonomy listing page.
@@ -22,8 +21,6 @@ class TermsGroupAnchorNav extends BlockBase {
    */
   public function build() {
     $routematch = \Drupal::routeMatch();
-
-    $build = [];
 
     // Get the rendered term listing content.
     $tid = $routematch->getParameter('taxonomy_term')->id();
