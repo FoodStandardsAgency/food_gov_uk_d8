@@ -199,9 +199,6 @@
                 </div>
               {% else %}
                 <div class="hero__background hero__background--pattern">
-                  <div class="svg">
-                    <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#pattern"></use></svg>
-                  </div>
                 </div>
               {% endif %}
               {{ page.hero }}
@@ -240,19 +237,15 @@
 
   <main role="main" class="layout-content">
     <a id="main-content" tabindex="-1"></a>
-    <div class="layout{% if page.sidebar_first or page.sidebar_second %} layout--with-sidebar js-sticky-container{% else %} layout--with-no-sidebar{% endif %}">
+    <div class="layout{% if page.sidebar_first or page.sidebar_second %} layout--with-sidebar js-sticky-container{% else %} layout--with-no-sidebar{% endif %}{% if page.sidebar_second %} layout--with-secondary-sidebar{% endif %}">
       <div class="layout__container layout__container--main">
-        {% if page.sidebar_first or page.sidebar_second %}
+        {% if page.sidebar_first %}
           <aside class="layout__sidebar js-sticky-element" role="complementary">
             <div class="sidebar">
               <div role="navigation" class="navigation-side">
 
                 {% if page.sidebar_first %}
                   {{ page.sidebar_first }}
-                {% endif %}
-
-                {% if page.sidebar_second %}
-                  {{ page.sidebar_second }}
                 {% endif %}
 
               </div>
@@ -263,6 +256,20 @@
         <div class="layout__content layout__content--main {% if page.sidebar_first or page.sidebar_second %}layout__content--with-sidebar{% endif %} js-content">
           {{ page.content }}
         </div>
+
+        {% if page.sidebar_second %}
+          <aside class="layout__sidebar layout__sidebar--secondary js-sticky-element" role="complementary">
+            <div class="sidebar">
+              <div role="navigation" class="navigation-side">
+
+                {% if page.sidebar_second %}
+                  {{ page.sidebar_second }}
+                {% endif %}
+
+              </div>
+            </div>
+          </aside>
+        {% endif %}
       </div>
     </div>
   </main>
