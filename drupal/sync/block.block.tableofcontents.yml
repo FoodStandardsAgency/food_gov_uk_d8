@@ -1,0 +1,24 @@
+uuid: 2e6d67a9-b021-4218-a512-a4b814237cae
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - fsa_toc
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: tableofcontents
+theme: fsa
+region: sidebar_first
+weight: 0
+provider: null
+plugin: fsa_toc_block
+settings:
+  id: fsa_toc_block
+  label: 'Table of contents'
+  provider: fsa_toc
+  label_display: '0'
+visibility: {  }

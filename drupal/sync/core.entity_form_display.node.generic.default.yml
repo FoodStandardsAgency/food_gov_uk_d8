@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.generic.body
     - field.field.node.generic.field_content_type
+    - field.field.node.generic.field_fsa_toc
     - field.field.node.generic.field_liftup_image
     - field.field.node.generic.field_liftup_title
     - field.field.node.generic.field_media_library_liftup_image
@@ -72,6 +73,13 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_fsa_toc:
+    weight: 11
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   field_liftup_image:
     weight: 12
     settings:
@@ -121,7 +129,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 122
+    weight: 13
     third_party_settings: {  }
     region: content
   sticky:

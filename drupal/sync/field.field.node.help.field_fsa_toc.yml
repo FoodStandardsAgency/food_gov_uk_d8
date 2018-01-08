@@ -1,0 +1,23 @@
+uuid: 938e35ff-4df8-4633-afa8-1e30c5186a07
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_fsa_toc
+    - node.type.help
+id: node.help.field_fsa_toc
+field_name: field_fsa_toc
+entity_type: node
+bundle: help
+label: 'Display table of contents'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

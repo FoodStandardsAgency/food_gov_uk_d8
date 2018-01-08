@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.news.body
+    - field.field.node.news.field_fsa_toc
     - field.field.node.news.field_intro
     - field.field.node.news.field_nation
     - field.field.node.news.field_news_type
@@ -25,7 +26,7 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 3
+    weight: 2
     settings: {  }
     third_party_settings: {  }
     region: content
@@ -35,14 +36,14 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_intro:
-    weight: 2
+    weight: 1
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: basic_string
     region: content
   field_team_contacts:
-    weight: 5
+    weight: 3
     label: above
     settings:
       link: true
@@ -54,6 +55,7 @@ hidden:
   content_moderation_control: true
   entity_print_view_epub: true
   entity_print_view_word_docx: true
+  field_fsa_toc: true
   field_nation: true
   field_news_type: true
   field_topic: true
