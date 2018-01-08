@@ -10,11 +10,11 @@ dependencies:
     - fsa
 third_party_settings:
   block_class:
-    classes: ''
+    classes: tab-row
 id: alerts_subscribe_navigation
 theme: fsa
 region: content_top
-weight: 0
+weight: -14
 provider: null
 plugin: alert_subscribe_nav
 settings:

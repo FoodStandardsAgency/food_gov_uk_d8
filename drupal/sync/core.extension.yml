@@ -60,6 +60,8 @@ module:
   fsa_subpages: 0
   fsa_taxonomy: 0
   fsa_team_finder: 0
+  fsa_toc: 0
+  fsa_topic_listing: 0
   fsa_translate: 0
   fsa_webform_validation: 0
   geolocation: 0
@@ -73,6 +75,7 @@ module:
   language: 0
   link: 0
   linkit: 0
+  linkit_content: 0
   locale: 0
   media_entity: 0
   media_entity_browser: 0

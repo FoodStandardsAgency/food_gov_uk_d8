@@ -69,7 +69,8 @@ function fsa_ratings_preprocess_field(&$variables, $hook) {
 /**
  * Implements template_preprocess_pager().
  */
-function fsa_lander_preprocess_pager(&$variables) {
+function fsa_ratings_preprocess_pager(&$variables) {
+
   $route = \Drupal::routeMatch();
   // Prepend "#results" anchor to pager links on ratings search page.
   if ($route->getParentRouteMatch()->getRouteName() == 'fsa_ratings.ratings_search') {

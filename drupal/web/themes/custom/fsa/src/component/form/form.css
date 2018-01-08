@@ -14,6 +14,7 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
+  align-items: center;
 
   .button {
     margin: 0.5em;
@@ -240,6 +241,29 @@ input[type="checkbox"] {
   & > .button:last-child {
     border-top-right-radius: 100px;
     border-bottom-right-radius: 100px;
+  }
+}
+
+input[type="text"],
+input[type="password"] {
+  .send-password-email-form &,
+  .user-login-form & {
+    background-color: var(--color-lighter-gray);
+  }
+}
+
+.password-confirm {
+  color: var(--color-gray);
+  padding: 0.5em 0;
+
+  .ok {
+    font-weight: 600;
+    color: var(--color-dark-teal);
+  }
+
+  .error {
+    font-weight: 600;
+    color: var(--color-red);
   }
 }
 

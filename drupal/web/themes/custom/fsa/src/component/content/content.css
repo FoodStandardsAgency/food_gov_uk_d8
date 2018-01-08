@@ -80,9 +80,26 @@ p {
   }
 }
 
+.reset-font-style {
+  @mixin reset-font-style;
+}
+
 a {
   color: var(--dark-primary-color);
   text-decoration: none;
+
+  &.back {
+    background-image: var(--icon-arrow-left-primary);
+    background-position: left 0 top 50%;
+    background-size: 1em auto;
+    background-repeat: no-repeat;
+    padding-left: 1.5em;
+    font-weight: 600;
+
+    :--not-touch &:--enter {
+      text-decoration: underline;
+    }
+  }
 }
 
 img {

@@ -1,0 +1,19 @@
+uuid: 7fa59a9b-e4f6-4725-a2a7-4c376b2a94bb
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.subject_listing
+    - field.storage.block_content.field_intro
+id: block_content.subject_listing.field_intro
+field_name: field_intro
+entity_type: block_content
+bundle: subject_listing
+label: Intro
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

@@ -13,6 +13,7 @@ use Drupal\Component\Utility\Html;
  * Implements of template_preprocess_html().
  */
 function fsa_preprocess_html(&$variables) {
+  $routematch = \Drupal::routeMatch();
 
   // Add class to body if frontpage
   $is_front = \Drupal::service('path.matcher')->isFrontPage();
@@ -20,8 +21,13 @@ function fsa_preprocess_html(&$variables) {
     $variables['attributes']['class'][] = 'theme--frontpage';
   }
 
+  if ($routematch->getRouteName() == 'entity.taxonomy_term.canonical' || $routematch->getRouteName() == 'view.a_to_z.page_1') {
+    // Set body class for term pages.
+    $variables['attributes']['class'][] = 'theme--term';
+  }
+
   // Do magic when we have a node object.
-  $node = \Drupal::routeMatch()->getParameter('node');
+  $node = $routematch->getParameter('node');
   if (is_object($node)) {
 
     $variables['attributes']['class'][] = 'node-' . $node->id();

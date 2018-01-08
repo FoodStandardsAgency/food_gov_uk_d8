@@ -17,6 +17,7 @@ permissions:
   - 'edit any news content'
   - 'edit any page content'
   - 'edit any team_contacts content'
+  - 'link to any page'
   - 'translate any entity'
   - 'translate audience taxonomy_term'
   - 'translate block_content'

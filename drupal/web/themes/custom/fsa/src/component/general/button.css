@@ -3,6 +3,7 @@
 
 .field__field_link a,
 .button {
+  display: inline-block;
   font-family: var(--font-family-content);
   letter-spacing: 0.02em;
   background-color: var(--dark-primary-color);

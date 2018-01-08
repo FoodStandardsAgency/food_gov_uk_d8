@@ -1,17 +1,6 @@
 @import "../../core/helper";
 @import "../../core/custom-property";
 
-.navigation-side {
-
-}
-
-.navigation-side h2 {
-  text-transform: uppercase;
-  font-size: 1em;
-  letter-spacing: 0.08em;
-  color: var(--color-black);
-}
-
 #block-menu-help-secondary ul {
   margin: 0;
   padding: 0;

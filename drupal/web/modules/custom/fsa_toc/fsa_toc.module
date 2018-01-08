@@ -1,0 +1,70 @@
+<?php
+
+/**
+ * @file
+ * Contains fsa_toc.module.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\toc_api\TocFormatter;
+
+/**
+ * Implements hook_entity_presave().
+ */
+function fsa_toc_entity_presave(EntityInterface $entity) {
+
+  if ($entity->getEntityTypeId() != 'node') {
+    return;
+  }
+
+  /*
+   * This chunk of code catches body field right before it's saved
+   * and adds id attribute to h1-h6 tags whenever there is none.
+   */
+
+  // We only do this for body field.
+  if ($entity->hasField('body')) {
+
+    $text_format = $entity->get('body')->format;
+    $text_body = $entity->get('body')->value;
+
+    // Convert html-entities in order to preserve any special character.
+    $text_body = mb_convert_encoding($text_body, 'HTML-ENTITIES', 'UTF-8');
+
+    // We are using DOMDocument directly, because Html::load adds
+    // unnecessary DOCTYPE headers.
+    // @see Drupal\Component\Utility\Html::load
+    $html_dom = new \DOMDocument();
+    @$html_dom->loadHTML($text_body, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+    $xpath = new \DOMXPath($html_dom);
+
+    // Find all h1-h6 tags, add id attribute, if the element doesn't have one.
+    $elements = $xpath->evaluate('//h1|//h2|//h3|//h4|//h5|//h6', $html_dom->documentElement);
+
+    if (!empty($elements)) {
+
+      // Reuse name to id conversion from TOC module.
+      $toc_formatter = new TocFormatter();
+
+      foreach ($elements as $element) {
+
+        // If the element has no id attribute, we want to add it.
+        if (!$element->hasAttribute('id') && !empty($element->nodeValue)) {
+
+          $newId = $toc_formatter->convertStringToId($element->nodeValue);
+          // Prevent ridiculously long anchor names.
+          $newId = substr($newId, 0, 32);
+
+          $element->setAttribute('id', $newId);
+        }
+      }
+
+      // Convert xml structure back to html.
+      $text_body = $html_dom->saveHTML();
+
+      // Set the body field value and save node.
+      $entity->body->setValue(['value' => $text_body, 'format' => $text_format]);
+    }
+  }
+}
