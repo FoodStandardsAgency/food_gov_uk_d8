@@ -5,7 +5,6 @@ import svg4everybody from 'svg4everybody';
 import responsiveTables from './core/helper/responsiveTables';
 import stickyElement from './core/helper/stickyElement';
 import cssCustomPropertySupport from './core/helper/cssCustomPropertySupport';
-import toc from './core/helper/toc';
 import subNavigation from './core/helper/subNavigation';
 
 import navigation from './component/navigation/navigation';
@@ -13,6 +12,7 @@ import { addHeading, printPage } from './component/content/content';
 import toggle from './component/toggle/toggle';
 import peek from './component/peek/peek';
 import fhrs from './component/fhrs/fhrs';
+import toc from './component/toc/toc';
 
 const breakpoints = {
   small: "sm",
@@ -45,6 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // FHRS
   fhrs();
 
+  // Toc
+  toc();
 });
 
 
@@ -85,13 +87,6 @@ if (profileElement != null) {
 const subNavigationElement = document.getElementById('block-menu-help-secondary');
 if (subNavigationElement != null) {
   subNavigation(subNavigationElement);
-}
-
-// Table of contents
-const tableOfContentsElements = [...document.querySelectorAll('.toc-tree')];
-const contentElements = [...document.querySelectorAll('.toc-filter')];
-if (tableOfContentsElements.length > 0 || contentElements.length > 0) {
-  toc(tableOfContentsElements, contentElements);
 }
 
 // Add class if touch device

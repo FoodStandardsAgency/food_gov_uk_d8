@@ -61,6 +61,17 @@ h6 {
   @mixin responsive-declaration line-height, 1.0, 1.125;
 }
 
+:--heading.heading {
+  &.heading--background {
+    background-color: var(--dark-secondary-color);
+    color: var(--color-white);
+    display: block;
+    @mixin reset-font-style;
+    font-weight: 600;
+    padding: 1em;
+  }
+}
+
 p {
   &:first-child {
     margin-top: 0em;

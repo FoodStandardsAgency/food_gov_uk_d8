@@ -42,3 +42,8 @@
     width: 100%;
   }
 }
+
+/* Sidebar */
+.search__filter {
+  padding: 1em;
+}
