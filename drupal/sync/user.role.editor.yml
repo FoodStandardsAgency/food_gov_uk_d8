@@ -16,6 +16,7 @@ permissions:
   - 'access media_entity_browser_document entity browser pages'
   - 'access media_entity_browser_image entity browser pages'
   - 'access toolbar'
+  - 'administer blocks'
   - 'administer menu'
   - 'administer nodes'
   - 'administer redirects'
