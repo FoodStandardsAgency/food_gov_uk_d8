@@ -1,7 +1,10 @@
 general:
   version: 3.x
   js:
-    js/linkit_content.js: {}
+    js/linkit_content.general.js: {}
+  css:
+    theme:
+      css/linkit_content.general.css: {}
   dependencies:
     - core/jquery
 
