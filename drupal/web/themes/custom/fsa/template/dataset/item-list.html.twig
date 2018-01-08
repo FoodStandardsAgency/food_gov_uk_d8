@@ -28,9 +28,9 @@
   {%- endif -%}
 
   {%- if items -%}
-    <{{ list_type }}{{ attributes.addClass('checkmark') }}>
+    <{{ list_type }}{{ attributes }}>
       {%- for item in items -%}
-        <li{{ item.attributes.addClass('checkmark') }}>{{ item.value }}</li>
+        <li{{ item.attributes }}>{{ item.value }}</li>
       {%- endfor -%}
     </{{ list_type }}>
   {%- else -%}
