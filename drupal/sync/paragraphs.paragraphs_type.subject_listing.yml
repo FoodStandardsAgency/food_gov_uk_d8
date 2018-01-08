@@ -1,0 +1,9 @@
+uuid: 51b15fa2-2cd8-4646-9e8d-4c1081ce5fdb
+langcode: en
+status: true
+dependencies: {  }
+id: subject_listing
+label: 'Subject listing group'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

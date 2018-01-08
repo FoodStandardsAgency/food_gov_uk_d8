@@ -28,6 +28,9 @@ function fsa_toc_entity_presave(EntityInterface $entity) {
     $text_format = $entity->get('body')->format;
     $text_body = $entity->get('body')->value;
 
+    // Convert html-entities in order to preserve any special character.
+    $text_body = mb_convert_encoding($text_body, 'HTML-ENTITIES', 'UTF-8');
+
     // We are using DOMDocument directly, because Html::load adds
     // unnecessary DOCTYPE headers.
     // @see Drupal\Component\Utility\Html::load

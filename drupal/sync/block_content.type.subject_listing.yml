@@ -1,0 +1,8 @@
+uuid: 6203b57a-c2be-464e-888b-413a4dcca278
+langcode: en
+status: true
+dependencies: {  }
+id: subject_listing
+label: 'Subject listing'
+revision: 1
+description: 'Subject listing for landing page.'

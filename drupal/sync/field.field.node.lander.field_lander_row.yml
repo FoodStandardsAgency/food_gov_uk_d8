@@ -9,6 +9,7 @@ dependencies:
     - paragraphs.paragraphs_type.content_promo
     - paragraphs.paragraphs_type.icon_link
     - paragraphs.paragraphs_type.large_promo
+    - paragraphs.paragraphs_type.subject_listing
     - paragraphs.paragraphs_type.title
     - paragraphs.paragraphs_type.topic_cloud
   module:
@@ -34,38 +35,42 @@ settings:
       title: title
       topic_cloud: topic_cloud
       code_block: code_block
+      subject_listing: subject_listing
     target_bundles_drag_drop:
       content_promo:
         enabled: true
-        weight: -23
+        weight: -25
       large_promo:
         enabled: true
-        weight: -22
+        weight: -24
       icon_link:
         enabled: true
-        weight: -21
+        weight: -23
       title:
         enabled: true
-        weight: -20
+        weight: -22
       topic_cloud:
         enabled: true
-        weight: -19
+        weight: -21
       code_block:
         enabled: true
-        weight: -18
+        weight: -20
+      subject_listing:
+        enabled: true
+        weight: -19
       liftups:
-        weight: -17
+        weight: -18
         enabled: false
       manual_promo:
-        weight: -16
+        weight: -17
         enabled: false
       subpage:
-        weight: -15
+        weight: -16
         enabled: false
       team_contact:
-        weight: -14
+        weight: -15
         enabled: false
       icon_link_item:
-        weight: -13
+        weight: -14
         enabled: false
 field_type: entity_reference_revisions
