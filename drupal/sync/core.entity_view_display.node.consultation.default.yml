@@ -4,13 +4,40 @@ status: true
 dependencies:
   config:
     - field.field.node.consultation.body
+    - field.field.node.consultation.field_consultation_closing_date
+    - field.field.node.consultation.field_consultation_launch_date
     - field.field.node.consultation.field_consultations_type
     - field.field.node.consultation.field_intro
     - field.field.node.consultation.field_nation
+    - field.field.node.consultation.field_status
+    - field.field.node.consultation.field_update_date
     - node.type.consultation
   module:
+    - datetime
+    - field_group
     - text
     - user
+third_party_settings:
+  field_group:
+    group_metadata:
+      children:
+        - field_status
+        - field_consultation_launch_date
+        - field_consultation_closing_date
+      parent_name: ''
+      weight: 3
+      format_type: html_element
+      format_settings:
+        label: Metadata
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: 'consultation metadata'
+      label: Metadata
 id: node.consultation.default
 targetEntityType: node
 bundle: consultation
@@ -19,24 +46,53 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 2
+    weight: 4
     settings: {  }
     third_party_settings: {  }
     region: content
+  field_consultation_closing_date:
+    weight: 5
+    label: inline
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_consultation_launch_date:
+    weight: 4
+    label: inline
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
   field_intro:
-    weight: 1
+    weight: 2
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: basic_string
     region: content
-  field_nation:
+  field_status:
     weight: 3
-    label: above
+    label: inline
     settings:
-      link: true
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
     third_party_settings: {  }
-    type: entity_reference_label
+    type: boolean
+    region: content
+  field_update_date:
+    weight: 1
+    label: inline
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
     region: content
   links:
     weight: 0
@@ -48,4 +104,5 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_consultations_type: true
+  field_nation: true
   langcode: true
