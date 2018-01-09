@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.consultation.body
+    - field.field.node.consultation.field_consultations_type
     - field.field.node.consultation.field_intro
     - node.type.consultation
   module:
@@ -17,22 +18,25 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 101
+    weight: 2
     settings: {  }
     third_party_settings: {  }
     region: content
   field_intro:
-    weight: 102
-    label: above
+    weight: 1
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: basic_string
     region: content
   links:
-    weight: 100
+    weight: 0
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_consultations_type: true
   langcode: true

@@ -15,7 +15,7 @@ third_party_settings:
 id: node_field_news_type
 theme: fsa
 region: content
-weight: -14
+weight: -15
 provider: null
 plugin: 'views_block:node_field-news_type'
 settings:

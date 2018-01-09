@@ -1,0 +1,37 @@
+uuid: 8eca0227-05cb-47c0-8848-394764c66d27
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.node_field
+  module:
+    - block_class
+    - ctools
+    - views
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: node_field_consultations_type
+theme: fsa
+region: content
+weight: -14
+provider: null
+plugin: 'views_block:node_field-consultation_type'
+settings:
+  id: 'views_block:node_field-consultation_type'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      consultation: consultation
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
