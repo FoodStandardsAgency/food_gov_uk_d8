@@ -1,0 +1,38 @@
+uuid: 6d7ba7bb-ffc1-43ef-a4b7-09c69c47f705
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.consultation.body
+    - field.field.node.consultation.field_intro
+    - node.type.consultation
+  module:
+    - text
+    - user
+id: node.consultation.default
+targetEntityType: node
+bundle: consultation
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_intro:
+    weight: 102
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true
