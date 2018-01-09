@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.generic.body
     - field.field.node.generic.field_content_type
+    - field.field.node.generic.field_fsa_toc
     - field.field.node.generic.field_liftup_image
     - field.field.node.generic.field_liftup_title
     - field.field.node.generic.field_media_library_liftup_image
@@ -37,6 +38,7 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_word_docx: true
   field_content_type: true
+  field_fsa_toc: true
   field_liftup_image: true
   field_liftup_title: true
   field_media_library_liftup_image: true

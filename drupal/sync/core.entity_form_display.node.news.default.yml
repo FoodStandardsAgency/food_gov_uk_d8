@@ -40,7 +40,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 5
+    weight: 3
     settings:
       rows: 9
       summary_rows: 3
@@ -49,12 +49,12 @@ content:
     region: content
   created:
     type: datetime_timestamp
-    weight: 8
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
   field_intro:
-    weight: 4
+    weight: 2
     settings:
       rows: 3
       placeholder: ''
@@ -74,7 +74,7 @@ content:
     type: options_buttons
     region: content
   field_team_contacts:
-    weight: 13
+    weight: 11
     settings:
       match_operator: CONTAINS
       size: 60
@@ -94,20 +94,20 @@ content:
     region: content
   langcode:
     type: language_select
-    weight: 6
+    weight: 5
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 14
+    weight: 12
     settings: {  }
     region: content
     third_party_settings: {  }
   path:
     type: path
-    weight: 10
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -115,7 +115,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 11
+    weight: 10
     third_party_settings: {  }
     region: content
   title:
@@ -127,13 +127,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 9
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 7
+    weight: 6
     settings:
       match_operator: CONTAINS
       size: 60
