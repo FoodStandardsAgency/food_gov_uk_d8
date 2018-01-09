@@ -22,7 +22,7 @@ settings:
   label: 'Search tabs'
   provider: fsa_custom
   label_display: '0'
-  class: ''
+  class: 'tab-row tab-row--capitalize'
   links:
     link-0:
       url: /search

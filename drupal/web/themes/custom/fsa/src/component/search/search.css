@@ -1,0 +1,44 @@
+@import "../../core/helper";
+@import "../../core/custom-property";
+
+.views-result-total,
+.search-keyword {
+  background-color: var(--color-lighter-gray);
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+  @mixin responsive-declaration margin-right, -1em, -4em;
+  @mixin responsive-declaration margin-left, -1em, -4em;
+}
+
+.views-result-total {
+  font-family: var(--font-family-heading);
+  @mixin responsive-declaration font-size, 1.25em, 1.75em;
+  padding-bottom: 0.5em;
+}
+
+.views-result-total__number {
+  font-weight: 700;
+  margin-right: 0.25em;
+}
+
+.views-result-total__keyword {
+  font-weight: 700;
+  margin-left: 0.25em;
+
+  &:before {
+    content: "“";
+  }
+
+  &:after {
+    content: "”";
+  }
+}
+
+.search-keyword {
+  input {
+    width: 100%;
+  }
+}
