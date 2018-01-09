@@ -31,11 +31,16 @@ function linkit_content_form_editor_link_dialog_alter(&$form, FormStateInterface
     return;
   }
 
+  $form['attributes']['href']['#title'] = t('External or internal link');
+  $form['attributes']['href']['#description'] = t('For external link, type full URL including http.') . '<br />'
+    . t('For internal link, start typing the content title to find content.') . '<hr />'
+    . t('To link directly to anchors or for additional search options, use advanced search.');
+
   // Custom button that opens dialog with content browser view iframe.
   $form['select_content'] = [
     '#type' => 'button',
     '#name' => 'select_content',
-    '#value' => t('Find content'),
+    '#value' => t('Advanced search'),
     '#ajax' => [
       'callback' => '_linkit_content_ajax_callback_modal',
     ],
@@ -53,7 +58,7 @@ function linkit_content_form_editor_link_dialog_alter(&$form, FormStateInterface
  */
 function _linkit_content_ajax_callback_modal($form, &$form_state) {
 
-  $title = 'Select content';
+  $title = t('Advanced search');
   $src = '/admin/content/linkit-content/selector';
   $name = 'linkit_content_embed';
 
