@@ -17,7 +17,7 @@
         {
             "name": "maijs/elasticsearch_helper_views",
             "type": "vcs",
-            "url": "https://github.com/maijs/elasticsearch_helper_views.git"
+            "url": "git@github.com:maijs/elasticsearch_helper_views.git"
         }
     ],
     "require": {
