@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.consultation.body
     - field.field.node.consultation.field_consultation_closing_date
     - field.field.node.consultation.field_consultation_launch_date
+    - field.field.node.consultation.field_consultation_summary
     - field.field.node.consultation.field_consultations_type
     - field.field.node.consultation.field_intro
     - field.field.node.consultation.field_nation
@@ -46,7 +47,7 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 4
+    weight: 5
     settings: {  }
     third_party_settings: {  }
     region: content
@@ -67,6 +68,15 @@ content:
       timezone_override: ''
     third_party_settings: {  }
     type: datetime_default
+    region: content
+  field_consultation_summary:
+    weight: 4
+    label: inline
+    settings:
+      view_mode: document_link
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
     region: content
   field_intro:
     weight: 2
