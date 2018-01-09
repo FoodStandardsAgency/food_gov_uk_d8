@@ -9,4 +9,5 @@ Anchor links from HTML markup string.
 implemented so that internal links would have fixed anchor id's even when the
 heading text changes.
 * Creates "Table of contents" (`fsa_toc`) block that selectively displays node 
-body TOC based on boolean field "Display table of contents" (`field_fsa_toc`) value.
+body TOC based on boolean field "Display table of contents" (`field_fsa_toc`) 
+value.

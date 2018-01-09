@@ -6,7 +6,6 @@ dependencies:
     - field.field.node.help.body
     - field.field.node.help.field_block_reference
     - field.field.node.help.field_content_type
-    - field.field.node.help.field_fsa_toc
     - field.field.node.help.field_icon
     - field.field.node.help.field_liftup_summary
     - field.field.node.help.field_liftup_title
@@ -98,13 +97,6 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
-  field_fsa_toc:
-    type: boolean_checkbox
-    weight: 9
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
   field_icon:
     weight: 14
     settings:

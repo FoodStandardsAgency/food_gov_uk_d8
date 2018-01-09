@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\fsa_toc\Plugin\Block\FsaTocBlock.
- */
 
 namespace Drupal\fsa_toc\Plugin\Block;
 
@@ -24,9 +20,7 @@ class FsaTocBlock extends BlockBase {
   /**
    * {@inheritdoc}
    */
-  public function build()
-  {
-    $build = [];
+  public function build() {
 
     $node = \Drupal::routeMatch()->getParameter('node');
     $node = Node::load($node->id());
@@ -35,15 +29,20 @@ class FsaTocBlock extends BlockBase {
 
     if ($fsa_toc_enabled) {
 
+      // We must render this instead of getting body->value, because h2 anchors
+      // are built on the fly via filter.
       $body = $node->body->view(['label' => 'inline']);
-      $content = (string)\Drupal::service('renderer')->render($body);
+      $content = (string) \Drupal::service('renderer')->render($body);
 
       /** @var \Drupal\fsa_toc\FsaTocService $fsa_toc_service */
       $fsa_toc_service = \Drupal::service('fsa_toc.service');
-      $build = $fsa_toc_service->renderAnchors($content, 'anchor_navigation');
+      $toc = $fsa_toc_service->renderAnchors($content, 'anchor_navigation');
+      if (!empty($toc)) {
+        return $toc;
+      }
     }
 
-    return $build;
+    return [];
   }
 
   /**
@@ -57,11 +56,27 @@ class FsaTocBlock extends BlockBase {
       return AccessResult::forbidden();
     }
 
-    // If body field contains [toc] placeholder, toc is displayed by toc_filter block already.
+    // If body field contains [toc] placeholder, toc is displayed by
+    // toc_filter block already.
     if (stripos($node->body->value, '[toc') !== FALSE) {
+      return AccessResult::forbidden();
+    }
+
+    // If there is a way to remove empty block from region, feel free to
+    // remove lines below. Otherwise - doubleprocessing here and in build.
+    $fsa_toc_enabled = $node->get('field_fsa_toc')->value;
+    if (!$fsa_toc_enabled) {
+      return AccessResult::forbidden();
+    }
+
+    /** @var \Drupal\fsa_toc\FsaTocService $fsa_toc_service */
+    $fsa_toc_service = \Drupal::service('fsa_toc.service');
+    $toc = $fsa_toc_service->renderAnchors($node->body->value, 'anchor_navigation');
+    if (empty($toc)) {
       return AccessResult::forbidden();
     }
 
     return parent::blockAccess($account);
   }
+
 }
