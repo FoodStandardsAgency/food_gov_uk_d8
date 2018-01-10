@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * @file
+ * Contains fsa_consultations.install.
+ */
+
+use Drupal\taxonomy\Entity\Term;
+
+/**
+ * Implements hook_install().
+ */
+function fsa_consultations_install() {
+
+  // Add few terms to consultation type on install (if vocab is empty).
+  $vid = 'consultations_type';
+  $vocab = \Drupal::service('entity_type.manager')
+    ->getStorage('taxonomy_term')
+    ->loadTree($vid);
+
+  if (empty($vocab)) {
+    // Term names to be added.
+    $items = [
+      'Consultation',
+      'Help shape our policies',
+      'Rapidly developing policies',
+    ];
+
+    foreach ($items as $item) {
+      $term = Term::create([
+        'parent' => [],
+        'name' => $item,
+        'vid' => $vid,
+      ])->save();
+
+      if ($term) {
+        drupal_set_message('Created term ' . $item);
+      }
+    }
+  }
+}

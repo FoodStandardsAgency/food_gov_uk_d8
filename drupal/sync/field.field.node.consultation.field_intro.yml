@@ -1,0 +1,19 @@
+uuid: 59c86b87-3aed-4aa3-a1ae-f0571225b7d4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_intro
+    - node.type.consultation
+id: node.consultation.field_intro
+field_name: field_intro
+entity_type: node
+bundle: consultation
+label: Intro
+description: 'Introductory copy text for this page displayed with larger typeface above body field. The content of this field is not displayed anywhere else but this page.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

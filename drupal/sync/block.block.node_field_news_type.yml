@@ -1,4 +1,4 @@
-uuid: bc9f6384-1455-44a7-bbf2-5c403310921d
+uuid: 797e232a-a920-4c05-ad9c-5785b565ee13
 langcode: en
 status: true
 dependencies:
@@ -12,14 +12,14 @@ dependencies:
 third_party_settings:
   block_class:
     classes: ''
-id: node_field_alert_type
+id: node_field_news_type
 theme: fsa
 region: content
-weight: -16
+weight: -15
 provider: null
-plugin: 'views_block:node_field-alert_type'
+plugin: 'views_block:node_field-news_type'
 settings:
-  id: 'views_block:node_field-alert_type'
+  id: 'views_block:node_field-news_type'
   label: ''
   provider: views
   label_display: '0'
