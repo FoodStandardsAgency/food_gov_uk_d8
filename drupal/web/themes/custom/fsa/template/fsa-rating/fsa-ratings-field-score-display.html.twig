@@ -7,7 +7,7 @@
 {% endfor %}
 {% set randomID = randomID|join %}
 
-<button class="toggle-button table__button establishment__table-button js-toggle-button" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
+<button class="toggle-button table__button establishment__table-button"data-state="is-open" data-theme="dynamic" data-state-element="#collapsible-{{ randomID }}"  aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
   <div class="toggle-button__item"><strong>{{ title }}</strong></div>
   <div class="toggle-button__item toggle-button__item--align-right establishment__score">{{ score }}</div>
   <div class="toggle-button__item toggle-button__item--icon svg">

@@ -110,7 +110,7 @@
 
           {% if (content.field_geocode|length == 2) %}
           {% else %}
-          <button class="establishment__button toggle-button js-toggle-button" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
+          <button class="establishment__button toggle-button" data-state="is-open" data-theme="dynamic" data-state-element="#collapsible-{{ randomID }}" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
             <div class="toggle-button__item toggle-button__item--presentation-icon svg">
               <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#map-icon"></use></svg>
             </div>

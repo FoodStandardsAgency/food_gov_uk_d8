@@ -28,18 +28,29 @@
 
 {{ menus.menu_links(items, attributes) }}
 
-{% macro menu_links(items, attributes, menu_level, firstItem) %}
+{% macro menu_links(items, attributes, menu_level, firstItem, randomID) %}
   {% import _self as menus %}
 
   {% if items %}
 
-    <ul class="{{ 'navigation__menu navigation__menu--level-' ~ (menu_level + 1) }}{% if menu_level != 0 %} toggle-content js-toggle-content js-toggle-theme-popup{% endif %}{% if menu_level == 2 %} js-toggle-content-function-open{% endif %}" {{ attributes.setAttribute('data-menu-level', (menu_level + 1)) }}>
+    <ul
+      id="collapsible-{{ randomID }}"
+      class="{{ 'navigation__menu navigation__menu--level-' ~ (menu_level + 1) }}
+        {% if menu_level != 0 %} toggle-content js-toggle-content{% endif %}"
+      {{ attributes.setAttribute('data-menu-level', (menu_level + 1)) }}>
   
     {% if menu_level != 0 %}
       <header class="navigation__header">
-        <button class="navigation__back-link js-toggle-button js-toggle-button-function-current">
+        {# <button
+          class="navigation__back-link"
+          data-state="is-open"
+          data-theme="popup"
+          data-state-behaviour="remove"
+          data-state-element="#collapsible-{{ randomID }}"
+          aria-expanded="false"
+          aria-controls="collapsible-{{ randomID }}">
           <span class="visually-hidden">Back</span>
-        </button>
+        </button> #}
         <h2 class="navigation__item navigation__item--level-{{menu_level + 1}} navigation__item--heading">
           <a href="{{ firstItem.url }}" title="{{ firstItem.title }}" class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}">{{ firstItem.title }}</a>
         </h2>
@@ -47,6 +58,16 @@
     {% endif %}
 
     {% for item in items %}
+
+      {% set randomID = [] %}
+      {% for i in 1..10 %}
+          {% set alpha = 'abcdefghijklmnopqrstuvwxyz' %}
+          {% set alphaUpper = alpha|upper %}
+          {% set numbers = '0123456789' %}
+          {% set randomCharacter = random(alpha ~ alphaUpper ~ numbers ~ '-_') %}
+          {% set randomID = randomID|merge([randomCharacter]) %}
+      {% endfor %}
+      {% set randomID = randomID|join %}
 
       {%
       set item_classes = [
@@ -57,10 +78,32 @@
       %}
 
       <li{{ item.attributes.addClass(item_classes, 'navigation__item navigation__item--level-' ~ (menu_level + 1)).setAttribute('data-menu-level', (menu_level + 1)) }}>
-          <a href="{{ item.url }}" title="{{ item.title }}" class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}{% if (item.is_expanded) %} toggle-button js-toggle-button{% endif %}">{{ item.title }}</a>
+          <a
+            href="{{ item.url }}"
+            title="{{ item.title }}"
+            class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}
+              {% if (item.is_expanded) %} toggle-button{% endif %}"
+            {% if (item.is_expanded) %}
+              data-state="is-open"
+              data-state-element="#collapsible-{{ randomID }}"
+              aria-expanded="false" aria-controls="collapsible-{{ randomID }}"
+              data-theme="popup"
+              {% if menu_level == 0 %}
+                data-state-behaviour="remove-all"
+                data-state-scope="{{ 'navigation__menu--level-' ~ (menu_level + 1) }}"
+                data-state-scope-button="{{ '.navigation__link--level-' ~ (menu_level + 1) }}"
+                data-state-scope-content="{{ '.navigation__menu--level-' ~ (menu_level + 2) }}"
+              {% endif %}
+              {% if menu_level == 1 %}
+                data-breakpoint="mobile"
+              {% endif %}
+              {% if menu_level == 2 %}
+                data-breakpoint="mobile"
+              {% endif %}
+            {% endif %}>{{ item.title }}</a>
 
           {% if item.below %}
-            {{ menus.menu_links(item.below, attributes, menu_level + 1, item) }}
+            {{ menus.menu_links(item.below, attributes, menu_level + 1, item, randomID) }}
           {% endif %}
       </li>
     {% endfor %}

@@ -12,7 +12,7 @@ dependencies:
     - fsa
 third_party_settings:
   block_class:
-    classes: ''
+    classes: search__filter
 id: search_global_guidance_filters
 theme: fsa
 region: sidebar_first
@@ -21,7 +21,7 @@ provider: null
 plugin: 'views_exposed_filter_block:search_global_guidance-page_1'
 settings:
   id: 'views_exposed_filter_block:search_global_guidance-page_1'
-  label: 'Guidance search: Filters'
+  label: 'Ratings search: Guidance'
   provider: views
   label_display: '0'
   views_label: ''
@@ -29,6 +29,7 @@ settings:
     audience: audience
     region: region
     keywords: 0
+    '': 0
   post_route_name: ''
   location_context: ''
   disable_ajax: false
