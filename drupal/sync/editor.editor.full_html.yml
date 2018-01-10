@@ -18,7 +18,6 @@ settings:
           name: Formatting
           items:
             - Bold
-            - Italic
         -
           name: Linking
           items:
