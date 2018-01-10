@@ -10,8 +10,8 @@ field_name: field_rp_id
 entity_type: taxonomy_term
 bundle: research_programme
 label: 'Research programme id'
-description: ''
-required: false
+description: "Enter the programme id separate from programme name. The ID will be prepended to project name when viewing the pages.<br />\r\nThe ID will be used for path alias of this page."
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''

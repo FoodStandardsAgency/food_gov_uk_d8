@@ -51,7 +51,7 @@ content:
     region: content
     settings:
       size: 60
-      placeholder: 'Name of the programme, enter programme ID in field below.'
+      placeholder: ''
     third_party_settings: {  }
   path:
     type: path
