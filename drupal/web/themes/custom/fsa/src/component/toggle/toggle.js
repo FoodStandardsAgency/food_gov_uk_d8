@@ -83,12 +83,16 @@ function toggle() {
     }
   }
 
-  function getElemScope(elem, parentSelector, targetSelector) {
+  function getElemScope(elem, parentSelector, targetButtonSelector, targetContentSelector) {
+    console.log(elem);
+    console.log(parentSelector);
     // Grab parent
     var elemParent = closestParent(elem, parentSelector);
-
     // Grab all matching child elements of parent
-    return [...elemParent.querySelectorAll(targetSelector)];
+    return {
+      button: [...elemParent.querySelectorAll(targetButtonSelector)],
+      content: [...elemParent.querySelectorAll(targetContentSelector)]
+    };
   }
 
   function setStateOff(options, elemState) {
@@ -226,15 +230,17 @@ function toggle() {
   // Change function
   function processChange(elem, elemRef, elemState) {
     let dataStateScope;
-    let dataStateScopeTarget;
-    let elemScopeArray;
+    let dataStateScopeButton;
+    let dataStateScopeContent;
+    let elemScopeObject;
     let elemBehaviour;
 
     // Grab data-scope list if present and convert to array
-    if(elem.getAttribute("data-state-scope") && elem.getAttribute("data-state-scope-target")) {
+    if(elem.getAttribute("data-state-scope") && elem.getAttribute("data-state-scope-button") && elem.getAttribute("data-state-scope-content")) {
       dataStateScope = elem.getAttribute("data-state-scope");
-      dataStateScopeTarget = elem.getAttribute("data-state-scope-target");
-      elemScopeArray = getElemScope(elem, dataStateScope, dataStateScopeTarget);
+      dataStateScopeButton = elem.getAttribute("data-state-scope-button");
+      dataStateScopeContent = elem.getAttribute("data-state-scope-content");
+      elemScopeObject = getElemScope(elem, dataStateScope, dataStateScopeContent, dataStateScopeButton);
     }
 
     // Grab data-state-behaviour list if present and convert to array
@@ -246,23 +252,28 @@ function toggle() {
     for(var c = 0; c < elemRef.length; c++) {
       switch (elemBehaviour) {
         case 'add':
-          // elemRef[c].classList.add(elemState);
           setStateOn({element: elem, type: 'button'}, elemState);
           setStateOn({element: elemRef[c], type: 'content'}, elemState);
           break;
 
         case 'remove':
-          // elemRef[c].classList.remove(elemState);
           setStateOff({element: elem, type: 'button'}, elemState);
           setStateOff({element: elemRef[c], type: 'content'}, elemState);
           break;
         
         case 'remove-all':
-          console.log(elemScopeArray);
-          // elemScopeArray.forEach(elemScopeArrayItem => {
-          //   setStateOff({element: elem, type: 'button'}, elemState);
-          //   setStateOff({element: elemRefItem, type: 'content'}, elemState);
-          // });
+          setStateOff({element: elem, type: 'button'}, elemState);
+
+          elemScopeObject.button.forEach(elemScopeButtonArrayItem => {
+            setStateOff({element: elemScopeButtonArrayItem, type: 'button'}, elemState);
+          });
+
+          elemScopeObject.content.forEach(elemScopeContentArrayItem => {
+            setStateOff({element: elemScopeContentArrayItem, type: 'content'}, elemState);
+          });
+
+          // setStateOn({element: elem, type: 'button'}, elemState);
+          // setStateOn({element: elemRef[c], type: 'content'}, elemState);
 
         default:
           // elemRef[c].classList.toggle(elemState);

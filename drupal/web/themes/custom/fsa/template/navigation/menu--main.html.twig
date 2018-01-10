@@ -91,7 +91,8 @@
               {% if menu_level == 0 %}
                 data-state-behaviour="remove-all"
                 data-state-scope="{{ 'navigation__menu--level-' ~ (menu_level + 1) }}"
-                data-state-scope-target="{{ '.navigation__menu--level-' ~ (menu_level + 2) }}"
+                data-state-scope-button="{{ '.navigation__link--level-' ~ (menu_level + 2) }}"
+                data-state-scope-content="{{ '.navigation__menu--level-' ~ (menu_level + 2) }}"
               {% endif %}
               {% if menu_level == 1 %}
                 data-breakpoint="mobile"
