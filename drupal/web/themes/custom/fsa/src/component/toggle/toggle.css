@@ -113,11 +113,9 @@
     top: -100vh;
     left: 0;
     right: 0;
-    max-height: 0;
-    min-height: 0;
 
     &.is-open {
-      top: 0;
+      top: 100%;
     }
   }
 

@@ -1,4 +1,8 @@
 import setHeight from '../../core/helper/setHeight';
+import checkMediaQuery from '../../core/helper/checkMediaQuery';
+import breakpoints from '../../core/helper/breakpoints';
+import debounce from '../../core/helper/debounce';
+import nextByClass from '../../core/helper/nextByClass';
 import inert from 'wicg-inert';
 
 function toggle() {
@@ -70,69 +74,21 @@ function toggle() {
   //----------------------------------------------
 
   function getElemRef(elem, dataState) {
-    // Grab data-scope list if present and convert to array
-    if(elem.getAttribute("data-state-scope")) {
-      var dataStateScope = elem.getAttribute("data-state-scope");
-      dataStateScope = dataStateScope.split(", ");
-    }
-
-    // Grab data-state-element list and convert to array
-    // If data-state-element isn't found, pass self, set scope to self if none is present, essentially replicating "this"
+    // Get reference element or array
     if(elem.getAttribute("data-state-element")) {
-      var dataStateElement = elem.getAttribute("data-state-element");
-      dataStateElement = dataStateElement.split(", ");
+      const dataStateElementValue = elem.getAttribute("data-state-element");
+      return document.querySelectorAll(dataStateElementValue);
+    } else {
+      return elem.nextSibling;
     }
-    else {
-      var dataStateElement = [];
-      dataStateElement.push(elem.classList[0]);
-      if(!dataStateScope) {
-        var dataStateScope = dataStateElement;
-      }
-    }
+  }
 
-    // Find out which has the biggest length between states and elements and use that length as loop number
-    // This is to make sure situations where we have one data-state-element value and many data-state values are correctly setup
-    var dataLength = Math.max(dataStateElement.length, dataState.length);
+  function getElemScope(elem, parentSelector, targetSelector) {
+    // Grab parent
+    var elemParent = closestParent(elem, parentSelector);
 
-    // Loop
-    for(var b = 0; b < dataLength; b++) {
-
-      // If a data-state-element value isn't found, use last valid one
-      if(dataStateElement[b] !== undefined) {
-        var dataStateElementValue = dataStateElement[b];
-      } 
-
-      // If scope isn't found, use last valid one
-      if(dataStateScope && dataStateScope[b] !== undefined) {
-        var cachedScope = dataStateScope[b];
-      }
-      else if(cachedScope) {
-        dataStateScope[b] = cachedScope;
-      }
-
-      // Grab elem references, apply scope if found
-      if(dataStateScope && dataStateScope[b] !== "false") {
-
-        // Grab parent
-        var elemParent = closestParent(elem, dataStateScope[b]);
-
-        // Grab all matching child elements of parent
-        var elemRef = elemParent.querySelectorAll(dataStateElementValue);
-
-        // Convert to array
-        elemRef = Array.prototype.slice.call(elemRef);
-
-        // Add parent if it matches the data-state-element and fits within scope
-        if(elemParent.classList.contains(dataStateElementValue)) {
-          elemRef.unshift(elemParent);
-        }
-      }
-      else {
-        var elemRef = document.querySelectorAll(dataStateElementValue);
-      }
-    }
-
-    return elemRef;
+    // Grab all matching child elements of parent
+    return [...elemParent.querySelectorAll(targetSelector)];
   }
 
   function setStateOff(options, elemState) {
@@ -176,11 +132,6 @@ function toggle() {
   }
 
   function toggleState(elem, elemRefItem, elemState) {
-  //   console.log(elem);
-  //   console.log(elemRefItem);
-  //   console.log(elemState);
-
-  //  console.log(elemRefItem.classList.contains(elemState));
     if (elemRefItem.classList.contains(elemState)) {
       setStateOff({element: elem, type: 'button'}, elemState);
       setStateOff({element: elemRefItem, type: 'content'}, elemState);
@@ -201,95 +152,122 @@ function toggle() {
     setStateOff({element: elem, type: 'button'}, elemState);
 
     elemRef.forEach(elemRefItem => {
-      // Set default state for the 'content'
-      setStateOff({element: elemRefItem, type: 'content'}, elemState);
+      // Grab data-state-behaviour list if present and convert to array
+      if(elem.getAttribute("data-breakpoint")) {
+        var dataBreakpoint = elem.getAttribute("data-breakpoint");
+        dataBreakpoint = dataBreakpoint.split(", ");
 
-      // Set theme
-      if(elem.getAttribute("data-theme")) {
-        var dataStateTheme = elem.getAttribute("data-theme");
-        dataStateTheme = dataStateTheme.split(", ");
+        dataBreakpoint.forEach(breakpoint => {
+          elemRefItem.classList.add(`is-${breakpoint}`);
 
-        dataStateTheme.forEach(theme => {
-          elemRefItem.classList.add(`is-${theme}`);
+          switch (breakpoint) {
+            case "mobile":
+              if (checkMediaQuery() != breakpoints.small) {
+                setStateOn({element: elemRefItem, type: 'content'}, elemState);
+              } else {
+                setStateOff({element: elemRefItem, type: 'content'}, elemState);
 
-          switch (theme) {
-            case "dynamic":
-              setHeight(elemRefItem);
+                // Set theme
+                if(elem.getAttribute("data-theme")) {
+                  var dataStateTheme = elem.getAttribute("data-theme");
+                  dataStateTheme = dataStateTheme.split(", ");
+                  dataStateTheme.forEach(theme => {
+                    elemRefItem.classList.add(`is-${theme}`);
+          
+                    switch (theme) {
+                      case "dynamic":
+                        setHeight(elemRefItem);
+                        break;
+                      case "popup":
+                        break;
+          
+                      default:
+                        break;
+                    }
+                  });
+                }
+              }
               break;
-            case "popup":
+            case "desktop":
               break;
 
             default:
               break;
           }
         });
+      } else {
+        // Set default state for the 'content'
+        setStateOff({element: elemRefItem, type: 'content'}, elemState);
+        
+        // Set theme
+        if(elem.getAttribute("data-theme")) {
+          var dataStateTheme = elem.getAttribute("data-theme");
+          dataStateTheme = dataStateTheme.split(", ");
+
+          dataStateTheme.forEach(theme => {
+            elemRefItem.classList.add(`is-${theme}`);
+
+            switch (theme) {
+              case "dynamic":
+                setHeight(elemRefItem);
+                break;
+              case "popup":
+                break;
+
+              default:
+                break;
+            }
+          });
+        }
       }
     });
   }
 
   // Change function
-  function processChange(elem, elemRef, dataState){
-    // Grab data-state-element list and convert to array
-    // If data-state-element isn't found, pass self, set scope to self if none is present, essentially replicating "this"
-    if(elem.getAttribute("data-state-element")) {
-      var dataStateElement = elem.getAttribute("data-state-element");
-      dataStateElement = dataStateElement.split(", ");
-    }
-    else {
-      var dataStateElement = [];
-      dataStateElement.push(elem.classList[0]);
-      if(!dataStateScope) {
-        var dataStateScope = dataStateElement;
-      }
+  function processChange(elem, elemRef, elemState) {
+    let dataStateScope;
+    let dataStateScopeTarget;
+    let elemScopeArray;
+    let elemBehaviour;
+
+    // Grab data-scope list if present and convert to array
+    if(elem.getAttribute("data-state-scope") && elem.getAttribute("data-state-scope-target")) {
+      dataStateScope = elem.getAttribute("data-state-scope");
+      dataStateScopeTarget = elem.getAttribute("data-state-scope-target");
+      elemScopeArray = getElemScope(elem, dataStateScope, dataStateScopeTarget);
     }
 
     // Grab data-state-behaviour list if present and convert to array
     if(elem.getAttribute("data-state-behaviour")) {
-      var dataStateBehaviour = elem.getAttribute("data-state-behaviour");
-      dataStateBehaviour = dataStateBehaviour.split(", ");
+      elemBehaviour = elem.getAttribute("data-state-behaviour");
     }
 
-    // Find out which has the biggest length between states and elements and use that length as loop number
-    // This is to make sure situations where we have one data-state-element value and many data-state values are correctly setup
-    var dataLength = Math.max(dataStateElement.length, dataState.length);
+    // Do
+    for(var c = 0; c < elemRef.length; c++) {
+      switch (elemBehaviour) {
+        case 'add':
+          // elemRef[c].classList.add(elemState);
+          setStateOn({element: elem, type: 'button'}, elemState);
+          setStateOn({element: elemRef[c], type: 'content'}, elemState);
+          break;
 
-    // Loop
-    for(var b = 0; b < dataLength; b++) {
+        case 'remove':
+          // elemRef[c].classList.remove(elemState);
+          setStateOff({element: elem, type: 'button'}, elemState);
+          setStateOff({element: elemRef[c], type: 'content'}, elemState);
+          break;
+        
+        case 'remove-all':
+          console.log(elemScopeArray);
+          // elemScopeArray.forEach(elemScopeArrayItem => {
+          //   setStateOff({element: elem, type: 'button'}, elemState);
+          //   setStateOff({element: elemRefItem, type: 'content'}, elemState);
+          // });
 
-      // Grab state we will add
-      // If one isn't found, keep last valid one
-      if(dataState[b] !== undefined) {
-        var elemState = dataState[b];
-      }
-
-      // Grab behaviour if any exists
-      // If one isn't found, keep last valid one
-      if(dataStateBehaviour) {
-        if(dataStateBehaviour[b] !== undefined) {
-          var elemBehaviour = dataStateBehaviour[b];
-        }
-      }
-
-      // Do
-      for(var c = 0; c < elemRef.length; c++) {
-        switch (elemBehaviour) {
-          case "add":
-            // elemRef[c].classList.add(elemState);
-            setStateOn({element: elem, type: 'button'}, elemState);
-            setStateOn({element: elemRef[c], type: 'content'}, elemState);
-            break;
-
-          case "remove":
-            // elemRef[c].classList.remove(elemState);
-            setStateOff({element: elem, type: 'button'}, elemState);
-            setStateOff({element: elemRef[c], type: 'content'}, elemState);
-            break;
-
-          default:
-            // elemRef[c].classList.toggle(elemState);
-            toggleState(elem, elemRef[c], elemState);
-            break;
-        }
+        default:
+          // elemRef[c].classList.toggle(elemState);
+          toggleState(elem, elemRef[c], elemState);
+          break;
       }
     }
   };
@@ -299,7 +277,7 @@ function toggle() {
     // Get elem state
     var elemState = getElemState(elem);
 
-    // Get scope
+    // Get ref elements
     var elemRef = getElemRef(elem, elemState);
 
     // Set reference element theme
@@ -354,12 +332,14 @@ function toggle() {
     });
   };
 
-  // Grab all elements with required attributes
-  var elems = document.querySelectorAll("[data-state]");
-
-  // Loop through our matches and add click events
-  for(var a = 0; a < elems.length; a++){
-    initDataState(elems[a]);
+  function initialize() {
+    // Grab all elements with required attributes
+    var elems = document.querySelectorAll("[data-state]");
+  
+    // Loop through our matches and add click events
+    for(var a = 0; a < elems.length; a++){
+      initDataState(elems[a]);
+    }
   }
 
   // Setup mutation observer to track changes for matching elements added after initial DOM render
@@ -381,6 +361,14 @@ function toggle() {
     childList: true,
     subtree: true
   });
+
+  // const resizeHandler = debounce(function() {
+  //   initialize();
+  // }, 250);
+
+  // window.addEventListener('resize', resizeHandler);
+
+  initialize();
 }
 
 module.exports = toggle;

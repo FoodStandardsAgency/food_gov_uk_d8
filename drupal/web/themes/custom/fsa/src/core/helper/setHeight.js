@@ -1,7 +1,5 @@
 function setHeight(element) {
   // Measure all content elements and assign their height to a css variable in the style attribute of the html.
-  element.classList.add('is-dynamic-height');
-
   let childrenCombinedHeight = 0;
   [...element.children].forEach((child) => {
     childrenCombinedHeight = childrenCombinedHeight + child.offsetHeight;
