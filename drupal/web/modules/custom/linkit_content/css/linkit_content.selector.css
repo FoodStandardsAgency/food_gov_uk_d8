@@ -2,3 +2,13 @@ tr.anchor-row,
 tr.linkit-content-selector-row {
   cursor: pointer;
 }
+
+.view-linkit-content-selector .bef-exposed-form .form--inline > .form-item {
+  float: none;
+  display: inline-block;
+  margin: 0.1em 0.5em;
+}
+
+.view-linkit-content-selector .form--inline .form-actions {
+  display: inline-block;
+}

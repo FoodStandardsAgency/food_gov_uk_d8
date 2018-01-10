@@ -1348,7 +1348,7 @@ display:
           1: AND
       rendering_language: '***LANGUAGE_language_interface***'
       block_description: 'Latest updates'
-      title: 'Latest updates'
+      title: 'Latest news and alerts'
       header: {  }
       footer:
         area:

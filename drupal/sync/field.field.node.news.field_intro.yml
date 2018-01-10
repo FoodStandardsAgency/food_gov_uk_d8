@@ -11,7 +11,7 @@ entity_type: node
 bundle: news
 label: Intro
 description: 'Introductory copy text for this page displayed with larger typeface above body field. The content of this field is not displayed anywhere else but this page.'
-required: false
+required: true
 translatable: true
 default_value: {  }
 default_value_callback: ''

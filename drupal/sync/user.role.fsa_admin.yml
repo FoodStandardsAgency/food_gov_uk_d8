@@ -9,6 +9,7 @@ is_admin: null
 permissions:
   - 'access webform overview'
   - 'access webform submission log'
+  - 'administer blocks'
   - 'administer fsa rating landing content'
   - 'administer webform submission'
   - 'link to any page'
