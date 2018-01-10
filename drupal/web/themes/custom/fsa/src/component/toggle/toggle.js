@@ -77,15 +77,13 @@ function toggle() {
     // Get reference element or array
     if(elem.getAttribute("data-state-element")) {
       const dataStateElementValue = elem.getAttribute("data-state-element");
-      return document.querySelectorAll(dataStateElementValue);
+      return [...document.querySelectorAll(dataStateElementValue)];
     } else {
       return elem.nextSibling;
     }
   }
 
   function getElemScope(elem, parentSelector, targetButtonSelector, targetContentSelector) {
-    console.log(elem);
-    console.log(parentSelector);
     // Grab parent
     var elemParent = closestParent(elem, parentSelector);
     // Grab all matching child elements of parent
@@ -136,6 +134,7 @@ function toggle() {
   }
 
   function toggleState(elem, elemRefItem, elemState) {
+    console.log(elemRefItem.classList.contains(elemState));
     if (elemRefItem.classList.contains(elemState)) {
       setStateOff({element: elem, type: 'button'}, elemState);
       setStateOff({element: elemRefItem, type: 'content'}, elemState);
@@ -240,7 +239,7 @@ function toggle() {
       dataStateScope = elem.getAttribute("data-state-scope");
       dataStateScopeButton = elem.getAttribute("data-state-scope-button");
       dataStateScopeContent = elem.getAttribute("data-state-scope-content");
-      elemScopeObject = getElemScope(elem, dataStateScope, dataStateScopeContent, dataStateScopeButton);
+      elemScopeObject = getElemScope(elem, dataStateScope, dataStateScopeButton, dataStateScopeContent);
     }
 
     // Grab data-state-behaviour list if present and convert to array
@@ -249,38 +248,38 @@ function toggle() {
     }
 
     // Do
-    for(var c = 0; c < elemRef.length; c++) {
+    elemRef.forEach(elemRefItem => {
       switch (elemBehaviour) {
         case 'add':
           setStateOn({element: elem, type: 'button'}, elemState);
-          setStateOn({element: elemRef[c], type: 'content'}, elemState);
+          setStateOn({element: elemRefItem, type: 'content'}, elemState);
           break;
 
         case 'remove':
           setStateOff({element: elem, type: 'button'}, elemState);
-          setStateOff({element: elemRef[c], type: 'content'}, elemState);
+          setStateOff({element: elemRefItem, type: 'content'}, elemState);
           break;
         
         case 'remove-all':
-          setStateOff({element: elem, type: 'button'}, elemState);
-
           elemScopeObject.button.forEach(elemScopeButtonArrayItem => {
-            setStateOff({element: elemScopeButtonArrayItem, type: 'button'}, elemState);
+            if (elem !== elemScopeButtonArrayItem) {
+              setStateOff({element: elemScopeButtonArrayItem, type: 'button'}, elemState);              
+            }
           });
 
           elemScopeObject.content.forEach(elemScopeContentArrayItem => {
-            setStateOff({element: elemScopeContentArrayItem, type: 'content'}, elemState);
+            if (elemRefItem !== elemScopeContentArrayItem) {
+              setStateOff({element: elemScopeContentArrayItem, type: 'content'}, elemState);
+            }
           });
-
-          // setStateOn({element: elem, type: 'button'}, elemState);
-          // setStateOn({element: elemRef[c], type: 'content'}, elemState);
+          toggleState(elem, elemRefItem, elemState);
+          break;
 
         default:
-          // elemRef[c].classList.toggle(elemState);
-          toggleState(elem, elemRef[c], elemState);
+          toggleState(elem, elemRefItem, elemState);
           break;
       }
-    }
+    });
   };
   
   // Init function
