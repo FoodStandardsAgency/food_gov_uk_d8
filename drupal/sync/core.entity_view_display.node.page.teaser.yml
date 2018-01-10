@@ -10,7 +10,7 @@ dependencies:
     - field.field.node.page.field_block_reference
     - field.field.node.page.field_content_type
     - field.field.node.page.field_document
-    - field.field.node.page.field_header_image
+    - field.field.node.page.field_fsa_toc
     - field.field.node.page.field_icon
     - field.field.node.page.field_intro
     - field.field.node.page.field_liftup_image
@@ -21,6 +21,7 @@ dependencies:
     - field.field.node.page.field_nation
     - field.field.node.page.field_related_content
     - field.field.node.page.field_subpages
+    - field.field.node.page.field_team_contacts
     - field.field.node.page.field_topic
     - field.field.node.page.field_update_date
     - image.style.promo_medium
@@ -100,13 +101,14 @@ hidden:
   field_block_reference: true
   field_content_type: true
   field_document: true
-  field_header_image: true
+  field_fsa_toc: true
   field_intro: true
   field_liftup_title: true
   field_liftups: true
   field_nation: true
   field_related_content: true
   field_subpages: true
+  field_team_contacts: true
   field_topic: true
   field_update_date: true
   langcode: true
