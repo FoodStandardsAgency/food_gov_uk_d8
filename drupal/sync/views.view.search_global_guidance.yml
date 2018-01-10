@@ -373,6 +373,7 @@ display:
         groups:
           1: AND
       use_ajax: true
+      css_class: listing
     cache_metadata:
       max-age: -1
       contexts:
