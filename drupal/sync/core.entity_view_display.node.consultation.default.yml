@@ -15,6 +15,7 @@ dependencies:
     - node.type.consultation
   module:
     - datetime
+    - entity_print
     - field_group
     - text
     - user
@@ -39,6 +40,8 @@ third_party_settings:
         id: ''
         classes: 'consultation metadata'
       label: Metadata
+  entity_print:
+    pdf_label: 'View PDF'
 id: node.consultation.default
 targetEntityType: node
 bundle: consultation
@@ -51,6 +54,11 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
+  entity_print_view_pdf:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_consultation_closing_date:
     weight: 5
     label: inline
@@ -104,15 +112,10 @@ content:
     third_party_settings: {  }
     type: datetime_default
     region: content
-  links:
-    weight: 0
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
-  entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_consultations_type: true
   field_nation: true
   langcode: true
+  links: true
