@@ -79,27 +79,71 @@ function fsa_custom_preprocess_page_title(&$variables) {
 
   $route = \Drupal::routeMatch();
   $node = $route->getParameter('node');
-  if (is_object($node) && $node->hasField('field_nation')) {
-    $nations = $node->get('field_nation');
-    // Display nation as title prefix only if just one nation is selected.
-    if (isset($nations[0]) && !isset($nations[1])) {
-      $nation = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($nations[0]->getValue()['target_id'])->getName();
+  if (is_object($node)) {
+    $typemanager = \Drupal::entityTypeManager();
 
-      // Use same classes as via WYSIWYG for regional variations.
-      $class = 'regional-variation regional-variation--' . strtolower(Html::cleanCssIdentifier($nation));
-      $variables['title_prefix'] = ['#markup' => '<div class="' . $class . '">' . t('@nation specific', ['@nation' => $nation]) . '</div>'];
+    // Init the custom title prefix.
+    $title_prefix = [];
+
+    if ($node->hasField('field_nation')) {
+      $nations = $node->get('field_nation');
+      if (isset($nations[0])) {
+        // Add regional variations label with same classes as would be added via
+        // WYSIWYG editor.
+        $class = 'regional-variation';
+        $nation_label = '';
+        if (!isset($nations[1])) {
+          // If only one nation selected.
+          $nation = $typemanager->getStorage('taxonomy_term')->load($nations[0]->getValue()['target_id'])->getName();
+          $class .= ' regional-variation--' . strtolower(Html::cleanCssIdentifier($nation));
+          $nation_label = t('@nation specific', ['@nation' => $nation]);
+        }
+        elseif (isset($nations[1]) && !isset($nations[2])) {
+          // If two nations selected.
+          $class .= ' regional-variation--multi-regional';
+          $nation_label = t(
+            '@nation_1 and @nation_2 specific',
+            [
+              '@nation_1' => $typemanager->getStorage('taxonomy_term')->load($nations[0]->getValue()['target_id'])->getName(),
+              '@nation_2' => $typemanager->getStorage('taxonomy_term')->load($nations[1]->getValue()['target_id'])->getName(),
+            ]
+          );
+        }
+
+        if ($nation_label != '') {
+          $title_prefix[] = [
+            '#theme' => 'fsa_label',
+            '#attributes' => [
+              'class' => $class,
+            ],
+            '#label' => $nation_label,
+          ];
+        }
+
+      }
     }
-    elseif (isset($nations[0]) && isset($nations[1]) && !isset($nations[2])) {
-      $nation_1 = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($nations[0]->getValue()['target_id'])->getName();
-      $nation_2 = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($nations[1]->getValue()['target_id'])->getName();
-      $class = 'regional-variation regional-variation--multi-regional';
-      $variables['title_prefix'] = [
-        '#markup' => '<div class="' . $class . '">' . t('@nation_1 and @nation_2 specific', [
-          '@nation_1' => $nation_1,
-          '@nation_2' => $nation_2,
-        ]) . '</div>',
-      ];
+
+    if ($node->hasField('field_consultations_type')) {
+      // Add consultation type to title prefix.
+      $types = $node->get('field_consultations_type');
+      if (isset($types[0])) {
+        $consultation_type = $typemanager->getStorage('taxonomy_term')->load($types[0]->getValue()['target_id'])->getName();
+        $title_prefix[] = [
+          '#theme' => 'fsa_label',
+          '#attributes' => [
+            'class' => 'consultation-type consultation-type--' . strtolower(Html::cleanCssIdentifier($consultation_type)),
+          ],
+          '#label' => $consultation_type,
+        ];
+      }
     }
+
+    // Inject additional title prefix(es) if there was anything to add.
+    if (!empty($title_prefix)) {
+      $variables['title_prefix'] = $title_prefix;
+    }
+
+
   }
   else {
     $route = \Drupal::routeMatch();
@@ -310,6 +354,12 @@ function fsa_custom_theme() {
       'variables' => [
         'attributes' => NULL,
         'path' => NULL,
+      ],
+    ],
+    'fsa_label' => [
+      'variables' => [
+        'attributes' => [],
+        'label' => NULL,
       ],
     ],
   ];
