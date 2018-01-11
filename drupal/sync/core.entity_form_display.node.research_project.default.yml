@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.research_project.body
+    - field.field.node.research_project.field_date_range
     - field.field.node.research_project.field_intro
     - field.field.node.research_project.field_research_programme
     - field.field.node.research_project.field_update_date
@@ -11,6 +12,7 @@ dependencies:
   module:
     - content_moderation
     - datetime
+    - datetime_range
     - field_group
     - path
     - text
@@ -19,6 +21,7 @@ third_party_settings:
     group_project_metadata:
       children:
         - field_research_programme
+        - field_date_range
       parent_name: ''
       weight: 3
       format_type: tab
@@ -49,6 +52,12 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_date_range:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: daterange_default
+    region: content
   field_intro:
     weight: 4
     settings:

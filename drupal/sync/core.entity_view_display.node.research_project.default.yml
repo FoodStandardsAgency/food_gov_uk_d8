@@ -4,12 +4,14 @@ status: true
 dependencies:
   config:
     - field.field.node.research_project.body
+    - field.field.node.research_project.field_date_range
     - field.field.node.research_project.field_intro
     - field.field.node.research_project.field_research_programme
     - field.field.node.research_project.field_update_date
     - node.type.research_project
   module:
     - datetime
+    - datetime_range
     - entity_print
     - field_group
     - text
@@ -21,6 +23,7 @@ third_party_settings:
     group_metadata:
       children:
         - field_research_programme
+        - field_date_range
       parent_name: ''
       weight: 3
       format_type: html_element
@@ -51,6 +54,16 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_date_range:
+    weight: 6
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: month_year
+      separator: to
+    third_party_settings: {  }
+    type: daterange_default
+    region: content
   field_intro:
     weight: 2
     label: hidden
