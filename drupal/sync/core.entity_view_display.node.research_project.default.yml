@@ -1,0 +1,55 @@
+uuid: fe3202b4-530a-4529-8be1-8a3c1fcb0538
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.research_project.body
+    - field.field.node.research_project.field_intro
+    - field.field.node.research_project.field_update_date
+    - node.type.research_project
+  module:
+    - datetime
+    - entity_print
+    - text
+    - user
+third_party_settings:
+  entity_print:
+    pdf_label: 'View PDF'
+id: node.research_project.default
+targetEntityType: node
+bundle: research_project
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  entity_print_view_pdf:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_intro:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_update_date:
+    weight: 3
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_word_docx: true
+  langcode: true
+  links: true
