@@ -34,3 +34,8 @@ $databases['default']['default'] = array (
  * Set salts, prefer salt for the environment but fallback to global salt
  */
 $settings['hash_salt'] = getenv( 'DRUPAL_HASH_SALT_DEVELOPMENT' ) ?: getenv( 'DRUPAL_HASH_SALT' );
+
+// Include per-developer settings overrides.
+if (file_exists(__DIR__ . '/settings.private.php')) {
+	include __DIR__ . '/settings.private.php';
+}
