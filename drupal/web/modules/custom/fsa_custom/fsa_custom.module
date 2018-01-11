@@ -80,6 +80,7 @@ function fsa_custom_preprocess_page_title(&$variables) {
   $route = \Drupal::routeMatch();
   $node = $route->getParameter('node');
   if (is_object($node)) {
+    $nodetype = $node->getType();
     $typemanager = \Drupal::entityTypeManager();
 
     // Init the custom title prefix.
@@ -136,6 +137,16 @@ function fsa_custom_preprocess_page_title(&$variables) {
           '#label' => $consultation_type,
         ];
       }
+    }
+
+    if ($nodetype == 'research_project') {
+      $title_prefix[] = [
+        '#theme' => 'fsa_label',
+        '#attributes' => [
+          'class' => 'content-type content-type--research',
+        ],
+        '#label' => t('Research project'),
+      ];
     }
 
     // Inject additional title prefix(es) if there was anything to add.
