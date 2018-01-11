@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.research_project.body
     - field.field.node.research_project.field_conducted_by
     - field.field.node.research_project.field_date_range
+    - field.field.node.research_project.field_document
     - field.field.node.research_project.field_intro
     - field.field.node.research_project.field_research_programme
     - field.field.node.research_project.field_research_project_code
@@ -16,7 +17,9 @@ dependencies:
     - content_moderation
     - datetime
     - datetime_range
+    - entity_browser_entity_form
     - field_group
+    - inline_entity_form
     - path
     - text
 third_party_settings:
@@ -29,7 +32,7 @@ third_party_settings:
         - field_date_range
         - field_conducted_by
       parent_name: ''
-      weight: 3
+      weight: 2
       format_type: tab
       format_settings:
         id: ''
@@ -45,7 +48,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 5
+    weight: 4
     settings:
       rows: 9
       summary_rows: 3
@@ -72,8 +75,23 @@ content:
     third_party_settings: {  }
     type: daterange_default
     region: content
+  field_document:
+    weight: 5
+    settings:
+      form_mode: default
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      override_labels: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: media_entity_browser_document
+    type: inline_entity_form_complex
+    region: content
   field_intro:
-    weight: 4
+    weight: 3
     settings:
       rows: 3
       placeholder: ''
@@ -129,7 +147,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 11
+    weight: 12
     region: content
     third_party_settings: {  }
   title:
@@ -141,7 +159,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 10
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }

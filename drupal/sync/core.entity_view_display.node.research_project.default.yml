@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.research_project.body
     - field.field.node.research_project.field_conducted_by
     - field.field.node.research_project.field_date_range
+    - field.field.node.research_project.field_document
     - field.field.node.research_project.field_intro
     - field.field.node.research_project.field_research_programme
     - field.field.node.research_project.field_research_project_code
@@ -76,6 +77,15 @@ content:
       separator: to
     third_party_settings: {  }
     type: daterange_default
+    region: content
+  field_document:
+    weight: 12
+    label: inline
+    settings:
+      view_mode: document_link
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
     region: content
   field_intro:
     weight: 2
