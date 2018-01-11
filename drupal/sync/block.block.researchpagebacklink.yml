@@ -1,0 +1,24 @@
+uuid: 66fee418-27e5-4f82-adf1-6dfc0f911983
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - fsa_research
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: researchpagebacklink
+theme: fsa
+region: sidebar_first
+weight: 0
+provider: null
+plugin: research_backlink
+settings:
+  id: research_backlink
+  label: 'Research page backlink'
+  provider: fsa_research
+  label_display: '0'
+visibility: {  }
