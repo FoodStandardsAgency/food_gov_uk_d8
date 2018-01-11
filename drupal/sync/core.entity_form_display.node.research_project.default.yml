@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.research_project.field_date_range
     - field.field.node.research_project.field_intro
     - field.field.node.research_project.field_research_programme
+    - field.field.node.research_project.field_research_topics
     - field.field.node.research_project.field_update_date
     - node.type.research_project
   module:
@@ -22,6 +23,7 @@ third_party_settings:
     group_project_metadata:
       children:
         - field_research_programme
+        - field_research_topics
         - field_date_range
         - field_conducted_by
       parent_name: ''
@@ -55,7 +57,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_conducted_by:
-    weight: 4
+    weight: 9
     settings:
       size: 60
       placeholder: ''
@@ -63,7 +65,7 @@ content:
     type: string_textfield
     region: content
   field_date_range:
-    weight: 3
+    weight: 8
     settings: {  }
     third_party_settings: {  }
     type: daterange_default
@@ -77,10 +79,16 @@ content:
     type: string_textarea
     region: content
   field_research_programme:
-    weight: 2
+    weight: 6
     settings: {  }
     third_party_settings: {  }
     type: options_select
+    region: content
+  field_research_topics:
+    weight: 7
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
     region: content
   field_update_date:
     weight: 1

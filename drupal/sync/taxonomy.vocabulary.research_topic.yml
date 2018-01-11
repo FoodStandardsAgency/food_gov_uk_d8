@@ -1,0 +1,9 @@
+uuid: 91468227-34dc-4194-b6b1-af5533bcac34
+langcode: en
+status: true
+dependencies: {  }
+name: 'Research topic'
+vid: research_topic
+description: ''
+hierarchy: 0
+weight: 0

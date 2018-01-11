@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.research_project.field_date_range
     - field.field.node.research_project.field_intro
     - field.field.node.research_project.field_research_programme
+    - field.field.node.research_project.field_research_topics
     - field.field.node.research_project.field_update_date
     - node.type.research_project
   module:
@@ -101,5 +102,6 @@ content:
 hidden:
   entity_print_view_epub: true
   entity_print_view_word_docx: true
+  field_research_topics: true
   langcode: true
   links: true
