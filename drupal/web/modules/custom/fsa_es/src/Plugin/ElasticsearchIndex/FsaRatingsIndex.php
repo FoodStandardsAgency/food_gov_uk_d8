@@ -2,12 +2,6 @@
 
 namespace Drupal\fsa_es\Plugin\ElasticsearchIndex;
 
-use Drupal\Core\Language\LanguageManagerInterface;
-use Elasticsearch\Client;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Serializer\Serializer;
-
 /**
  * @ElasticsearchIndex(
  *   id = "fsa_ratings_index",
@@ -18,47 +12,6 @@ use Symfony\Component\Serializer\Serializer;
  * )
  */
 class FsaRatingsIndex extends FsaIndexBase {
-
-  /**
-   * @var \Drupal\Core\Language\LanguageManagerInterface
-   */
-  protected $language_manager;
-
-  /**
-   * PageIndex constructor.
-   *
-   * @param array $configuration
-   * @param string $plugin_id
-   * @param mixed $plugin_definition
-   * @param \Elasticsearch\Client $client
-   * @param \Symfony\Component\Serializer\Serializer $serializer
-   * @param \Psr\Log\LoggerInterface $logger
-   * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
-   */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, Client $client, Serializer $serializer, LoggerInterface $logger, LanguageManagerInterface $languageManager) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition, $client, $serializer, $logger);
-
-    $this->language_manager = $languageManager;
-  }
-
-  /**
-   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
-   * @param array $configuration
-   * @param string $plugin_id
-   * @param mixed $plugin_definition
-   * @return static
-   */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
-      $container->get('elasticsearch_helper.elasticsearch_client'),
-      $container->get('serializer'),
-      $container->get('logger.factory')->get('elasticsearch_helper'),
-      $container->get('language_manager')
-    );
-  }
 
   /**
    * {@inheritdoc}
