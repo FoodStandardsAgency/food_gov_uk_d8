@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.research_project.field_date_range
     - field.field.node.research_project.field_intro
     - field.field.node.research_project.field_research_programme
+    - field.field.node.research_project.field_research_project_code
     - field.field.node.research_project.field_research_topics
     - field.field.node.research_project.field_update_date
     - node.type.research_project
@@ -24,6 +25,7 @@ third_party_settings:
   field_group:
     group_metadata:
       children:
+        - field_research_project_code
         - field_research_programme
         - field_date_range
         - field_conducted_by
@@ -58,7 +60,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_conducted_by:
-    weight: 7
+    weight: 11
     label: inline
     settings:
       link_to_entity: false
@@ -66,7 +68,7 @@ content:
     type: string
     region: content
   field_date_range:
-    weight: 6
+    weight: 10
     label: inline
     settings:
       timezone_override: ''
@@ -83,12 +85,20 @@ content:
     type: basic_string
     region: content
   field_research_programme:
-    weight: 5
+    weight: 9
     label: inline
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_research_project_code:
+    weight: 8
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
     region: content
   field_update_date:
     weight: 1

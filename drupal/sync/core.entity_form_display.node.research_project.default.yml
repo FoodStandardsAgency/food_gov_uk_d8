@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.research_project.field_date_range
     - field.field.node.research_project.field_intro
     - field.field.node.research_project.field_research_programme
+    - field.field.node.research_project.field_research_project_code
     - field.field.node.research_project.field_research_topics
     - field.field.node.research_project.field_update_date
     - node.type.research_project
@@ -22,6 +23,7 @@ third_party_settings:
   field_group:
     group_project_metadata:
       children:
+        - field_research_project_code
         - field_research_programme
         - field_research_topics
         - field_date_range
@@ -57,7 +59,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_conducted_by:
-    weight: 9
+    weight: 30
     settings:
       size: 60
       placeholder: ''
@@ -65,7 +67,7 @@ content:
     type: string_textfield
     region: content
   field_date_range:
-    weight: 8
+    weight: 29
     settings: {  }
     third_party_settings: {  }
     type: daterange_default
@@ -79,13 +81,21 @@ content:
     type: string_textarea
     region: content
   field_research_programme:
-    weight: 6
+    weight: 27
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
+  field_research_project_code:
+    weight: 26
+    settings:
+      size: 24
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_research_topics:
-    weight: 7
+    weight: 28
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
@@ -129,6 +139,11 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
+    settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
