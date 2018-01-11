@@ -5,16 +5,35 @@ dependencies:
   config:
     - field.field.node.research_project.body
     - field.field.node.research_project.field_intro
+    - field.field.node.research_project.field_research_programme
     - field.field.node.research_project.field_update_date
     - node.type.research_project
   module:
     - datetime
     - entity_print
+    - field_group
     - text
     - user
 third_party_settings:
   entity_print:
     pdf_label: 'View PDF'
+  field_group:
+    group_metadata:
+      children:
+        - field_research_programme
+      parent_name: ''
+      weight: 3
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: 'research metadata'
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Metadata
 id: node.research_project.default
 targetEntityType: node
 bundle: research_project
@@ -23,7 +42,7 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 2
+    weight: 4
     settings: {  }
     third_party_settings: {  }
     region: content
@@ -33,15 +52,23 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_intro:
-    weight: 1
+    weight: 2
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: basic_string
     region: content
+  field_research_programme:
+    weight: 5
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_update_date:
-    weight: 3
-    label: above
+    weight: 1
+    label: inline
     settings:
       format_type: medium
       timezone_override: ''
