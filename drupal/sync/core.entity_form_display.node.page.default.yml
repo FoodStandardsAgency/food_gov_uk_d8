@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - entity_browser.browser.media_entity_browser_document
     - field.field.node.page.body
     - field.field.node.page.field_audience
     - field.field.node.page.field_block
@@ -28,9 +29,9 @@ dependencies:
   module:
     - content_moderation
     - datetime
+    - entity_browser
     - field_group
     - image
-    - inline_entity_form
     - paragraphs
     - path
     - shs
@@ -156,15 +157,15 @@ content:
   field_document:
     weight: 8
     settings:
-      form_mode: default
-      label_singular: ''
-      label_plural: ''
-      allow_existing: true
-      match_operator: CONTAINS
-      override_labels: false
-      allow_new: false
+      entity_browser: media_entity_browser_document
+      field_widget_display: label
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      open: false
+      field_widget_display_settings: {  }
     third_party_settings: {  }
-    type: inline_entity_form_complex
+    type: entity_browser_entity_reference
     region: content
   field_fsa_toc:
     weight: 6
