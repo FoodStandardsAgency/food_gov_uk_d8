@@ -1,0 +1,19 @@
+uuid: 3880e27e-baee-472d-99fb-c1d4e3ef4b1b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_rp_id
+    - taxonomy.vocabulary.research_programme
+id: taxonomy_term.research_programme.field_rp_id
+field_name: field_rp_id
+entity_type: taxonomy_term
+bundle: research_programme
+label: 'Research programme id'
+description: "Enter the programme id separate from programme name. The ID will be prepended to project name when viewing the pages.<br />\r\nThe ID will be used for path alias of this page."
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
