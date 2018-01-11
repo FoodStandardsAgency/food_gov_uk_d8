@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.research_project.body
+    - field.field.node.research_project.field_conducted_by
     - field.field.node.research_project.field_date_range
     - field.field.node.research_project.field_intro
     - field.field.node.research_project.field_research_programme
@@ -24,6 +25,7 @@ third_party_settings:
       children:
         - field_research_programme
         - field_date_range
+        - field_conducted_by
       parent_name: ''
       weight: 3
       format_type: html_element
@@ -54,6 +56,14 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_conducted_by:
+    weight: 7
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
   field_date_range:
     weight: 6
     label: inline
