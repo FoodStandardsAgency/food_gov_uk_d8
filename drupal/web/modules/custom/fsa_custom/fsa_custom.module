@@ -16,9 +16,13 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
 /**
- * Implements of template_preprocess_html().
+ * Implements of template_preprocess_page().
  */
 function fsa_custom_preprocess_page(&$variables) {
+
+  // Attach history back js (allows creating dummy clientside backlinks with
+  // ("a.history-back" html class).
+  $variables['#attached']['library'][] = 'fsa_custom/history_back';
 
   // Hardcoded "utility menu" links.
   // Get the contact link from settings. Default to 58 which happened to be the

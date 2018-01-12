@@ -32,7 +32,7 @@ class ResearchBacklink extends BlockBase {
     $build = [];
     $node = \Drupal::routeMatch()->getParameter('node');
     $text = '';
-    $path = FALSE;
+    $options = ['attributes' => ['class' => 'back']];
     if (is_object($node) && in_array($node->getType(), self::CONTENT_TYPES_TO_ENABLE)) {
       // Link research nodes back to search.
       // @todo: Get path from route.
@@ -40,18 +40,14 @@ class ResearchBacklink extends BlockBase {
       $text = $this->t('Back to search');
     }
     else {
-      // Get backlink from referrer path if it's internal page referring.
-      $previousUrl = \Drupal::request()->server->get('HTTP_REFERER');
-      $parsedUrl = parse_url($previousUrl);
-
-      if (isset($parsedUrl['scheme']) && $base_url == ($parsedUrl['scheme'] . '://' . $parsedUrl['host'])) {
-        $path = $parsedUrl['path'];
-        $text = $this->t('Back');
-      }
+      // Print simple javascript history back link (using the fsa_custom
+      // attached jquery class.
+      $path = '#';
+      $text = $this->t('Back');
+      $options['attributes']['class'] = ['back', 'history-back'];
     }
 
     if ($path) {
-      $options = ['attributes' => ['class' => 'back']];
       $url = Url::fromUserInput($path, $options);
 
       // Link to News & Alerts listing page.
