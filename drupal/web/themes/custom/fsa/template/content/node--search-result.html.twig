@@ -70,8 +70,14 @@
  *   in different view modes.
  */
 #}
-<article{{ attributes.addClass('item') }}>
+<article{{ attributes.addClass(['item', 'item--has-meta']) }}>
   <div class="item__meta">
+    <div class="item__tag">
+      {{ 'Tag' }}
+    </div>
+    <div class="item__date">
+      {{ content.field_update_date }}
+    </div>
     {% if display_submitted %}
       <div class="date">
         {{ date }}

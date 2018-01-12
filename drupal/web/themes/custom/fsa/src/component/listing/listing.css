@@ -4,7 +4,7 @@
 /* News alert listing page */
 .listing {
   position: relative;
-
+  max-width: var(--content-max-width);
 
   /* .views-row-wrapper {
     position: relative;
@@ -38,6 +38,14 @@
       }
     }
   } */
+  
+  .views-row-wrapper {
+    & > .views-row {
+      &:not(:last-child) {
+        border-bottom: 2px solid var(--color-lighter-gray);
+      }
+    }
+  }
 }
 
 .listing__header {
@@ -57,17 +65,32 @@
     &:not(:last-child) {
       border-bottom: 2px solid var(--color-lighter-gray);
     }
+
+    &.item--has-meta {
+      display: flex;
+    }
   }
 }
 
 /* Item meta info */
 .item__meta {
+  flex: 0 0 10em;
+  font-size: 0.8889em;
+
   .listing & {
     margin-bottom: 1em;
 
     @media (--breakpoint-sm) {
       margin-bottom: 0em;
     }
+  }
+}
+
+.item__tag {
+  .listing & {
+    margin-bottom: 1em;
+    text-transform: uppercase;
+    font-weight: 700;
   }
 }
 
