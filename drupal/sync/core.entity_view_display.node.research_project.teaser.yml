@@ -29,4 +29,12 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_conducted_by: true
+  field_date_range: true
+  field_document: true
+  field_intro: true
+  field_research_programme: true
+  field_research_project_code: true
+  field_research_topics: true
+  field_update_date: true
   langcode: true
