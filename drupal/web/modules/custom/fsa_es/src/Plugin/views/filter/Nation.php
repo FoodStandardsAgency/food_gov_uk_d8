@@ -6,9 +6,9 @@ use Drupal\views\Plugin\views\display\DisplayPluginBase;
 use Drupal\views\ViewExecutable;
 
 /**
- * @ViewsFilter("fsa_guidance_nation")
+ * @ViewsFilter("fsa_nation")
  */
-class GuidanceNation extends FilterInOperatorBase {
+class Nation extends FilterInOperatorBase {
 
   /**
    * {@inheritdoc}

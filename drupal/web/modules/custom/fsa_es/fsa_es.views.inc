@@ -58,10 +58,10 @@ function fsa_es_views_data_alter(array &$data) {
     ],
   ];
 
-  $data['elasticsearch_result']['guidance_nation'] = [
+  $data['elasticsearch_result']['nation'] = [
     'title' => t('Region'),
     'filter' => [
-      'id' => 'fsa_guidance_nation',
+      'id' => 'fsa_nation',
     ],
   ];
 }

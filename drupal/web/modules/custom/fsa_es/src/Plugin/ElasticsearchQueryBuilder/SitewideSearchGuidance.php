@@ -65,10 +65,10 @@ class SitewideSearchGuidance extends SitewideSearchBase {
       ];
     }
 
-    if (!empty($values['guidance_nation'])) {
+    if (!empty($values['nation'])) {
       $query_must_filters[] = [
         'terms' => [
-          'nation.label.keyword' => array_filter(array_values($values['guidance_nation'])),
+          'nation.label.keyword' => array_filter(array_values($values['nation'])),
         ],
       ];
     }
