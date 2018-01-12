@@ -1,4 +1,4 @@
-uuid: 936b4b16-99b2-42c4-8639-3da43252b71c
+uuid: 674b52b1-6027-4f24-9041-f5b32c3c469c
 langcode: en
 status: true
 dependencies:
@@ -11,47 +11,47 @@ dependencies:
 third_party_settings:
   block_class:
     classes: ''
-id: search_link_tabs
+id: news_alerts_search_link_tabs
 theme: fsa
 region: content_top
-weight: -9
+weight: -8
 provider: null
 plugin: fsa_link_tabs
 settings:
   id: fsa_link_tabs
-  label: 'Global search tabs'
+  label: 'News/alerts search tabs'
   provider: fsa_custom
   label_display: '0'
   class: 'tab-row tab-row--capitalize'
   links:
     link-0:
-      url: /search
+      url: /news-alerts/search
       text: All
       route_parameters: ''
-      query: '{"keywords": "[current-page:query:keywords]"}'
+      query: ''
     link-1:
-      url: /search/guidance
-      text: Guidance
+      url: ''
+      text: ''
       route_parameters: ''
-      query: '{"keywords": "[current-page:query:keywords]"}'
+      query: ''
     link-2:
-      url: /search/ratings
-      text: 'Food hygiene ratings'
+      url: ''
+      text: ''
       route_parameters: ''
-      query: '{"keywords": "[current-page:query:keywords]"}'
+      query: ''
     link-3:
-      url: /search/news
-      text: 'News & alerts'
+      url: ''
+      text: ''
       route_parameters: ''
-      query: '{"keywords": "[current-page:query:keywords]"}'
+      query: ''
     link-4:
-      url: /search/research
-      text: Research
+      url: ''
+      text: ''
       route_parameters: ''
-      query: '{"keywords": "[current-page:query:keywords]"}'
+      query: ''
 visibility:
   request_path:
     id: request_path
-    pages: '/search*'
+    pages: '/news-alerts/search*'
     negate: false
     context_mapping: {  }
