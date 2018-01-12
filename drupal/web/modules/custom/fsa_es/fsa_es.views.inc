@@ -18,6 +18,7 @@ function fsa_es_views_data_alter(array &$data) {
 
   $data['elasticsearch_result']['ratings_business_type'] = [
     'title' => t('Business type'),
+    'help' => t('Ratings business type'),
     'filter' => [
       'id' => 'fsa_ratings_business_type',
     ],
@@ -25,6 +26,7 @@ function fsa_es_views_data_alter(array &$data) {
 
   $data['elasticsearch_result']['ratings_local_authority'] = [
     'title' => t('Local authority'),
+    'help' => t('Ratings local authority'),
     'filter' => [
       'id' => 'fsa_ratings_local_authority',
     ],
@@ -32,6 +34,7 @@ function fsa_es_views_data_alter(array &$data) {
 
   $data['elasticsearch_result']['ratings_fhrs_rating_value'] = [
     'title' => t('Hygiene rating (England, Northern Ireland, Wales)'),
+    'help' => t('Ratings hygiene rating'),
     'filter' => [
       'id' => 'fsa_ratings_fhrs_rating_value',
     ],
@@ -39,6 +42,7 @@ function fsa_es_views_data_alter(array &$data) {
 
   $data['elasticsearch_result']['ratings_fhis_rating_value'] = [
     'title' => t('Hygiene rating (Scotland)'),
+    'help' => t('Ratings hygiene rating'),
     'filter' => [
       'id' => 'fsa_ratings_fhis_rating_value',
     ],
@@ -46,6 +50,7 @@ function fsa_es_views_data_alter(array &$data) {
 
   $data['elasticsearch_result']['guidance_content_type'] = [
     'title' => t('Content type'),
+    'help' => t('Guidance content type'),
     'filter' => [
       'id' => 'fsa_guidance_content_type',
     ],
@@ -53,6 +58,7 @@ function fsa_es_views_data_alter(array &$data) {
 
   $data['elasticsearch_result']['guidance_audience'] = [
     'title' => t('Audience'),
+    'help' => t('Guidance audience'),
     'filter' => [
       'id' => 'fsa_guidance_audience',
     ],
@@ -62,6 +68,14 @@ function fsa_es_views_data_alter(array &$data) {
     'title' => t('Region'),
     'filter' => [
       'id' => 'fsa_nation',
+    ],
+  ];
+
+  $data['elasticsearch_result']['news_alerts_type'] = [
+    'title' => t('Type'),
+    'help' => t('News and alerts type'),
+    'filter' => [
+      'id' => 'fsa_news_alerts_type',
     ],
   ];
 }

@@ -4,15 +4,15 @@ namespace Drupal\fsa_es\Plugin\ElasticsearchIndex;
 
 /**
  * @ElasticsearchIndex(
- *   id = "news_index",
- *   label = @Translation("FSA News Index"),
- *   indexName = "news-{langcode}",
- *   typeName = "news",
+ *   id = "alert_index",
+ *   label = @Translation("FSA Alert Index"),
+ *   indexName = "alert-{langcode}",
+ *   typeName = "alert",
  *   entityType = "node",
- *   bundle = "news",
+ *   bundle = "alert",
  * )
  */
-class FsaNewsIndex extends FsaIndexBase {
+class FsaAlertIndex extends FsaIndexBase {
 
   /**
    * {@inheritdoc}
@@ -20,7 +20,7 @@ class FsaNewsIndex extends FsaIndexBase {
   public function setup() {
     // Create one index per language, so that we can have different analyzers.
     foreach ($this->language_manager->getLanguages() as $langcode => $language) {
-      $index_name = 'news-' . $langcode;
+      $index_name = 'alert-' . $langcode;
 
       if (!$this->client->indices()->exists(['index' => $index_name])) {
         $this->client->indices()->create([
@@ -36,7 +36,7 @@ class FsaNewsIndex extends FsaIndexBase {
 
         $mapping = [
           'index' => $index_name,
-          'type' => 'news',
+          'type' => 'alert',
           'body' => [
             'properties' => [
               'id' => [
@@ -64,20 +64,6 @@ class FsaNewsIndex extends FsaIndexBase {
               'body' => [
                 'type' => 'text',
                 'analyzer' => $text_analyzer,
-              ],
-              'nation' => [
-                'properties' => [
-                  'id' => ['type' => 'keyword'],
-                  'label' => [
-                    'type' => 'text',
-                    'index' => 'not_analyzed',
-                    'fields' => [
-                      'keyword' => [
-                        'type' => 'keyword',
-                      ],
-                    ],
-                  ],
-                ],
               ],
               'updated' => [
                 'type' => 'date',

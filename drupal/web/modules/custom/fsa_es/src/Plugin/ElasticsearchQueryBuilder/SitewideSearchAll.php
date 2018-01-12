@@ -7,7 +7,7 @@ use Drupal\views\ViewExecutable;
 /**
  * @ElasticsearchQueryBuilder(
  *   id = "sitewide_search_all",
- *   label = @Translation("All"),
+ *   label = @Translation("Global search: All"),
  *   description = @Translation("Provides query builder for site-wide global search.")
  * )
  */

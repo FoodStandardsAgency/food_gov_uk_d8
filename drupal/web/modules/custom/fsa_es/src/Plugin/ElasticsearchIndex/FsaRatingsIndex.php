@@ -19,9 +19,11 @@ class FsaRatingsIndex extends FsaIndexBase {
   public function setup() {
     // Create one index per language, so that we can have different analyzers.
     foreach ($this->language_manager->getLanguages() as $langcode => $language) {
-      if (!$this->client->indices()->exists(['index' => 'ratings-' . $langcode])) {
+      $index_name = 'ratings-' . $langcode;
+
+      if (!$this->client->indices()->exists(['index' => $index_name])) {
         $this->client->indices()->create([
-          'index' => 'ratings-' . $langcode,
+          'index' => $index_name,
           'body' => [
             'number_of_shards' => 1,
             'number_of_replicas' => 0,
@@ -32,7 +34,7 @@ class FsaRatingsIndex extends FsaIndexBase {
         $text_analyzer = $this->getLanguageName($langcode);
 
         $mapping = [
-          'index' => 'ratings-' . $langcode,
+          'index' => $index_name,
           'type' => 'establishment',
           'body' => [
             'properties' => [

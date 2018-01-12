@@ -61,6 +61,8 @@ class FsaNewsNormalizer extends NormalizerBase {
     $date_changed = $this->dateFormatter->format($object->get('changed')->value, 'custom', DATETIME_DATETIME_STORAGE_FORMAT, DATETIME_STORAGE_TIMEZONE);
 
     $data = [
+      // See comments on the mapping in the index plugin fore news content type.
+      'news_type' => 'news',
       'name' => $object->label(),
       'body' => implode(' ', [
         $this->prepareTextualField($object->get('field_intro')->getString()),

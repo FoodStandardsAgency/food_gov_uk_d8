@@ -20,9 +20,11 @@ class FsaPageIndex extends FsaIndexBase {
   public function setup() {
     // Create one index per language, so that we can have different analyzers.
     foreach ($this->language_manager->getLanguages() as $langcode => $language) {
-      if (!$this->client->indices()->exists(['index' => 'page-' . $langcode])) {
+      $index_name = 'page-' . $langcode;
+
+      if (!$this->client->indices()->exists(['index' => $index_name])) {
         $this->client->indices()->create([
-          'index' => 'page-' . $langcode,
+          'index' => $index_name,
           'body' => [
             'number_of_shards' => 1,
             'number_of_replicas' => 0,
@@ -33,7 +35,7 @@ class FsaPageIndex extends FsaIndexBase {
         $text_analyzer = $this->getLanguageName($langcode);
 
         $mapping = [
-          'index' => 'page-' . $langcode,
+          'index' => $index_name,
           'type' => 'page',
           'body' => [
             'properties' => [

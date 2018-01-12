@@ -6,12 +6,12 @@ use Drupal\views\ViewExecutable;
 
 /**
  * @ElasticsearchQueryBuilder(
- *   id = "sitewide_search_guidance",
- *   label = @Translation("Global search: Guidance"),
- *   description = @Translation("Provides query builder for site-wide guidance search.")
+ *   id = "sitewide_search_news_alerts",
+ *   label = @Translation("Global search: News and alerts"),
+ *   description = @Translation("Provides query builder for site-wide news and alerts search.")
  * )
  */
-class SitewideSearchGuidance extends SitewideSearchBase {
+class SitewideSearchNewsAlerts extends SitewideSearchBase {
 
   /** @var null|array $aggregations */
   protected $aggregations = NULL;
@@ -28,16 +28,16 @@ class SitewideSearchGuidance extends SitewideSearchBase {
     $query_must_filters = [];
 
     $query = [
-      'index' => ['page-' . $this->currentLanguage->getId()],
+      'index' => $this->getIndices(),
       'body' => [],
     ];
 
     // Filter by content type.
-    if (!empty($values['guidance_content_type'])) {
+    if (!empty($values['news_alerts_type'])) {
       $query_must_filters[] = [
-        'terms' => [
-          'content_type.id' => array_values($values['guidance_content_type']),
-        ],
+        // 'terms' => [
+        //   'content_type.id' => array_values($values['news_alerts_type']),
+        // ],
       ];
     }
 
@@ -55,14 +55,6 @@ class SitewideSearchGuidance extends SitewideSearchBase {
     else {
       // Sort by updated if no keywords are given.
       $query['body']['sort'] = ['updated' => 'desc'];
-    }
-
-    if (!empty($values['guidance_audience'])) {
-      $query_must_filters[] = [
-        'terms' => [
-          'audience.label.keyword' => array_filter(array_values($values['guidance_audience'])),
-        ],
-      ];
     }
 
     if (!empty($values['nation'])) {
@@ -92,27 +84,30 @@ class SitewideSearchGuidance extends SitewideSearchBase {
   }
 
   /**
+   * Returns a list of indices that search should be performed on.
+   *
+   * @return array
+   */
+  protected function getIndices() {
+    return [
+      'news-' . $this->currentLanguage->getId(),
+      // 'alert-' . $this->currentLanguage->getId(),
+      // 'consultation-' . $this->currentLanguage->getId(),
+    ];
+  }
+
+  /**
    * Returns rating aggregations.
    *
    * @return array
    */
   public function getAggregations() {
     if (!is_array($this->aggregations)) {
-      // Get filter values.
-      $values = $this->getFilterValues($this->view);
-
       $query = [
-        'index' => ['page-' . $this->currentLanguage->getId()],
+        'index' => $this->getIndices(),
         'size' => 0,
         'body' => [
           'aggs' => [
-            'audience' => [
-              'terms' => [
-                'field' => 'audience.label.keyword',
-                'order' => ['_term' => 'asc'],
-                'size' => 10000,
-              ],
-            ],
             'nation' => [
               'terms' => [
                 'field' => 'nation.label.keyword',
@@ -124,21 +119,11 @@ class SitewideSearchGuidance extends SitewideSearchBase {
         ],
       ];
 
-      // Filter by content type.
-      if (!empty($values['guidance_content_type'])) {
-        $query['body']['query']['bool']['must'][] = [
-          'terms' => [
-            'content_type.id' => array_values($values['guidance_content_type']),
-          ],
-        ];
-      }
-
       // Execute the query.
       $result = $this->elasticsearchClient->search($query);
 
       // Build the response.
       $this->aggregations = [
-        'audience' => $result['aggregations']['audience']['buckets'],
         'nation' => $result['aggregations']['nation']['buckets'],
       ];
     }
@@ -147,14 +132,18 @@ class SitewideSearchGuidance extends SitewideSearchBase {
   }
 
   /**
-   * Returns a list of audiences.
+   * Returns a list of news and alert types.
    *
    * @return array
    */
-  public function getAudienceFilterOptions() {
-    $aggregations = $this->getAggregations();
-
-    return $this->aggsToOptions($aggregations['audience']);
+  public function getNewsAlertsTypeFilterOptions() {
+    return [
+      'allergy_alert' => t('Allergy alert'),
+      'food_alert' => t('Food alert'),
+      'news' => t('News'),
+      'consultation' => t('Consultation'),
+      'help_share_policies' => $this->t('Help share our policies'),
+    ];
   }
 
   /**
