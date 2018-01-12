@@ -1,4 +1,4 @@
-extlink_include: ''
+extlink_include: '^.*\.(pdf|PDF)$'
 extlink_exclude: ''
 extlink_alert_text: ''
 extlink_alert: false

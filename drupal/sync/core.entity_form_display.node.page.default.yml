@@ -28,6 +28,7 @@ dependencies:
   module:
     - content_moderation
     - datetime
+    - entity_browser_entity_form
     - field_group
     - image
     - inline_entity_form
@@ -159,11 +160,13 @@ content:
       form_mode: default
       label_singular: ''
       label_plural: ''
+      allow_new: true
       allow_existing: true
       match_operator: CONTAINS
       override_labels: false
-      allow_new: false
-    third_party_settings: {  }
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: media_entity_browser_document
     type: inline_entity_form_complex
     region: content
   field_fsa_toc:

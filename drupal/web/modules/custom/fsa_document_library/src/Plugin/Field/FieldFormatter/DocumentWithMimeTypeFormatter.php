@@ -34,11 +34,6 @@ class DocumentWithMimeTypeFormatter extends FileFormatterBase {
 
       $file_uri = $file->getFileUri();
       $url = Url::fromUri(file_create_url($file_uri));
-      $link_options = [
-        'attributes' => [
-          'download' => TRUE,
-        ],
-      ];
 
       if ($items[0]->description != '') {
         $link_text = $items[0]->description;
@@ -49,7 +44,6 @@ class DocumentWithMimeTypeFormatter extends FileFormatterBase {
 
       $filesize = format_size($file->getSize());
 
-      $url->setOptions($link_options);
       $link = Link::fromTextAndUrl($link_text, $url)->toString();
 
       $attributes['class'] = 'file__type_' . Html::cleanCssIdentifier($file->getMimeType());

@@ -75,7 +75,7 @@ class Letters extends AreaPluginBase {
           '#markup' => $item,
           '#wrapper_attributes' => [
             'class' => [
-              'letter',
+              'topics__letter',
               $active,
               $empty,
             ],
@@ -90,8 +90,7 @@ class Letters extends AreaPluginBase {
         '#list_type' => 'ul',
         '#attributes' => [
           'class' => [
-            'inline',
-            'menu-letters',
+            'topics__header',
           ],
         ],
         '#items' => $items,
