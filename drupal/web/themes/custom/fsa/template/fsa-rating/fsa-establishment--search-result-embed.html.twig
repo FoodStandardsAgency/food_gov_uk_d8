@@ -27,9 +27,14 @@
  * @ingroup themeable
  */
 #}
-<ul>
-  <li><a href="{{ url }}">{{ content.name }}</a></li>
-  <li>{{ content.field_address }} {{ content.field_postcode }}</li>
-  <li>{{ rating_badge }}</li>
-  <li>{{ content.field_ratingdate }}</li>
-</ul>
+
+<div class="item">
+  <h3 class="item__heading"><a href="{{ url }}">{{ content.name }}</a></h3>
+  <p>{{ content.field_address }}</p>
+  <p>{{ content.field_postcode }}</p>
+
+  <div class="item__image">
+    {{ rating_badge }}
+  </div>
+</div>
+

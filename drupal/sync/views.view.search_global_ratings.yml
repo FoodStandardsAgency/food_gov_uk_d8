@@ -401,7 +401,7 @@ display:
         groups:
           1: AND
       use_ajax: true
-      css_class: listing
+      css_class: 'listing ratings'
     cache_metadata:
       max-age: -1
       contexts:

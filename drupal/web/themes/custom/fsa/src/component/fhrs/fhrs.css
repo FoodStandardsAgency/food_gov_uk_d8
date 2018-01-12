@@ -499,6 +499,7 @@
 
 /* Ratings footer */
 .ratings__footer {
+  display: flex;
   text-align: center;
 
   .hits-shown,
