@@ -47,7 +47,7 @@ class AlertBacklink extends BlockBase {
     }
 
     // Classes to theme it.
-    $options = ['attributes' => ['class' => 'arrow-back']];
+    $options = ['attributes' => ['class' => 'back']];
 
     $url = Url::fromUserInput($path, $options);
 

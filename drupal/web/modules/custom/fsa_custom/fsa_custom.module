@@ -16,9 +16,13 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
 /**
- * Implements of template_preprocess_html().
+ * Implements of template_preprocess_page().
  */
 function fsa_custom_preprocess_page(&$variables) {
+
+  // Attach history back js (allows creating dummy clientside backlinks with
+  // ("a.history-back" html class).
+  $variables['#attached']['library'][] = 'fsa_custom/history_back';
 
   // Hardcoded "utility menu" links.
   // Get the contact link from settings. Default to 58 which happened to be the
@@ -80,6 +84,7 @@ function fsa_custom_preprocess_page_title(&$variables) {
   $route = \Drupal::routeMatch();
   $node = $route->getParameter('node');
   if (is_object($node)) {
+    $nodetype = $node->getType();
     $typemanager = \Drupal::entityTypeManager();
 
     // Init the custom title prefix.
@@ -136,6 +141,16 @@ function fsa_custom_preprocess_page_title(&$variables) {
           '#label' => $consultation_type,
         ];
       }
+    }
+
+    if ($nodetype == 'research_project') {
+      $title_prefix[] = [
+        '#theme' => 'fsa_label',
+        '#attributes' => [
+          'class' => 'content-type content-type--research',
+        ],
+        '#label' => t('Research project'),
+      ];
     }
 
     // Inject additional title prefix(es) if there was anything to add.
@@ -234,6 +249,16 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
 
       // Control the region for page title block.
       if ($block->getPluginId() == 'page_title_block') {
+
+        // Page title above content visibility.
+        if ($block->id() == 'pagetitle') {
+          // Hide page title on lander nodes.
+          if ($node->getType() == 'lander') {
+            return AccessResult::forbidden()
+              ->addCacheableDependency($block);
+          }
+        }
+
         // Use content_type taxonomy to define in which region the pagetitle
         // should be displayed.
         switch ($term_id) {
@@ -272,7 +297,28 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
     else {
       $route = \Drupal::routeMatch();
       $routename = $route->getParentRouteMatch()->getRouteName();
-      // Have few rules for non-nodes to hide the title from hero.
+
+      // Page title in content area.
+      if ($block->id() == 'pagetitle') {
+
+        // Term listing pages.
+        if ($routename == 'entity.taxonomy_term.canonical' && $term = Term::load($route->getRawParameters()->all()['taxonomy_term'])) {
+
+          switch ($term->getVocabularyId()) {
+            case 'research_programme':
+              // Hide hero on research programme pages.
+              return AccessResult::allowed()
+                ->addCacheableDependency($block);
+          }
+        }
+
+
+        // Default to not showing title in content area.
+        return AccessResult::forbidden()
+          ->addCacheableDependency($block);
+      }
+
+      // Page title in hero area.
       if ($block->id() == 'pagetitle_hero') {
 
         // Enter all speficic routes to remove the page title in hero area.
@@ -283,6 +329,17 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
         if (in_array($routename, $routes) || $route->getParameter('fsa_establishment')) {
           return AccessResult::forbidden()
             ->addCacheableDependency($block);
+        }
+
+        // Term listing pages.
+        if ($routename == 'entity.taxonomy_term.canonical' && $term = Term::load($route->getRawParameters()->all()['taxonomy_term'])) {
+
+          switch ($term->getVocabularyId()) {
+            case 'research_programme':
+              // Hide hero on research programme pages.
+              return AccessResult::forbidden()
+                ->addCacheableDependency($block);
+          }
         }
       }
 
@@ -334,7 +391,7 @@ function fsa_custom_editor_js_settings_alter(array &$settings) {
 
   foreach ($settings['editor']['formats'] as $key => $value) {
     // Limit headings/tags of "Format" dropdown.
-    $settings['editor']['formats'][$key]['editorSettings']['format_tags'] = "p;h2;h3;h4;h5";
+    $settings['editor']['formats'][$key]['editorSettings']['format_tags'] = "p;h2;h3";
   }
 }
 

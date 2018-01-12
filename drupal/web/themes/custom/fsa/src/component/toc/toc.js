@@ -1,6 +1,17 @@
-import doScrolling from './scrollToElement';
+import doScrolling from '../../core/helper/scrollToElement';
 
-function tableOfContents(tableOfContentsElements, contentElements) {
+function toc() {
+
+  // Table of contents
+  const tableOfContentsElements = [...document.querySelectorAll('.toc-tree')];
+  const contentElements = [...document.querySelectorAll('.toc-filter')];
+
+  // Check everything found
+  if (tableOfContentsElements.length <= 0 ||
+    contentElements.length <= 0) {
+    return false;
+  }
+
   // Get children
   const tocNavigationItems = tableOfContentsElements[0].children[0].children,
   tocContentItems = contentElements[0].children;
@@ -63,4 +74,4 @@ function tableOfContents(tableOfContentsElements, contentElements) {
 
 }
 
-module.exports = tableOfContents;
+module.exports = toc;

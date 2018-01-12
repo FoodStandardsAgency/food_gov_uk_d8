@@ -127,7 +127,7 @@
     border-top: 0;
     margin-bottom: 0.5em;
 
-    &.is-visible {
+    &.is-open {
       border-color: var(--color-black);
     }
 

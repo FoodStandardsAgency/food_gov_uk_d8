@@ -1,0 +1,22 @@
+uuid: 435a9dde-19f7-43eb-9268-b19af35cdcf8
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.research_project
+id: node.research_project.promote
+field_name: promote
+entity_type: node
+bundle: research_project
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

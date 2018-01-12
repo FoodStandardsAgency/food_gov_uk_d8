@@ -1,16 +1,16 @@
-uuid: 9ea5a869-bc70-44e6-9a53-f867c6a889d2
+uuid: d91af00a-19cf-4706-a034-b524f37d08e1
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_header_image
-    - media_entity.bundle.image
-    - node.type.page
-id: node.page.field_header_image
-field_name: field_header_image
+    - field.storage.node.field_document
+    - media_entity.bundle.document
+    - node.type.research_project
+id: node.research_project.field_document
+field_name: field_document
 entity_type: node
-bundle: page
-label: 'Header image'
+bundle: research_project
+label: 'Research report'
 description: ''
 required: false
 translatable: true
@@ -20,7 +20,7 @@ settings:
   handler: 'default:media'
   handler_settings:
     target_bundles:
-      image: image
+      document: document
     sort:
       field: _none
     auto_create: false

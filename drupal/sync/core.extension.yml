@@ -21,6 +21,7 @@ module:
   crop_media_entity: 0
   ctools: 0
   datetime: 0
+  datetime_range: 0
   dblog: 0
   diff: 0
   dynamic_page_cache: 0
@@ -57,6 +58,7 @@ module:
   fsa_notify: 0
   fsa_ratings: 0
   fsa_ratings_import: 0
+  fsa_research: 0
   fsa_signin: 0
   fsa_subpages: 0
   fsa_taxonomy: 0

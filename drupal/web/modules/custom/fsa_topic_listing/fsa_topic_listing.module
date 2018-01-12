@@ -7,6 +7,7 @@
 
 use Drupal\Core\Link;
 use Drupal\Core\Url;
+use Drupal\taxonomy\Entity\Term;
 
 /**
  * Implements hook_preprocess_page_title().
@@ -16,13 +17,15 @@ function fsa_topic_listing_preprocess_page_title(&$variables) {
   $route = \Drupal::routeMatch();
   $routename = $route->getRouteName();
 
-  // Add "Show topics A-Z" listing page link after the page title.
-  if ($routename == 'entity.taxonomy_term.canonical') {
-    $url = Url::fromRoute('view.a_to_z.page_1');
-    $url->setOptions(['attributes' => ['class' => 'button']]);
-    $link = Link::fromTextAndUrl(t('Show topics A-Z'), $url)->toString();
+  // Add "Show topics A-Z" link after the page title on topic terms.
+  if ($routename == 'entity.taxonomy_term.canonical' && $term = Term::load($route->getRawParameters()->all()['taxonomy_term'])) {
+    if ($term->getVocabularyId() == 'topic') {
+      $url = Url::fromRoute('view.a_to_z.page_1');
+      $url->setOptions(['attributes' => ['class' => 'button']]);
+      $link = Link::fromTextAndUrl(t('Show topics A-Z'), $url)->toString();
 
-    $variables['title_suffix'] = ['#markup' => '<div class="cta">' . $link . '</div>'];
+      $variables['title_suffix'] = ['#markup' => '<div class="cta">' . $link . '</div>'];
+    }
   }
 
 }

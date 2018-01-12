@@ -1,0 +1,19 @@
+uuid: 34861d9a-e5ac-4f4f-b9db-784b84b2c02e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_intro
+    - taxonomy.vocabulary.research_programme
+id: taxonomy_term.research_programme.field_intro
+field_name: field_intro
+entity_type: taxonomy_term
+bundle: research_programme
+label: Intro
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

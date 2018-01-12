@@ -61,6 +61,17 @@ h6 {
   @mixin responsive-declaration line-height, 1.0, 1.125;
 }
 
+:--heading.heading {
+  &.heading--background {
+    background-color: var(--dark-secondary-color);
+    color: var(--color-white);
+    display: block;
+    @mixin reset-font-style;
+    font-weight: 600;
+    padding: 1em;
+  }
+}
+
 p {
   &:first-child {
     margin-top: 0em;
@@ -78,6 +89,12 @@ p {
   &.light {
     color: var(--color-gray);
   }
+}
+
+.field__field_intro {
+  @mixin responsive-declaration font-size, 1.125em, 1.33em;
+  @mixin responsive-declaration line-height, 1.3, 1.4;
+  padding-bottom: 0 !important;
 }
 
 .reset-font-style {

@@ -10,7 +10,6 @@ dependencies:
     - field.field.node.page.field_content_type
     - field.field.node.page.field_document
     - field.field.node.page.field_fsa_toc
-    - field.field.node.page.field_header_image
     - field.field.node.page.field_icon
     - field.field.node.page.field_intro
     - field.field.node.page.field_liftup_image
@@ -29,6 +28,7 @@ dependencies:
   module:
     - content_moderation
     - datetime
+    - entity_browser_entity_form
     - field_group
     - image
     - inline_entity_form
@@ -160,11 +160,13 @@ content:
       form_mode: default
       label_singular: ''
       label_plural: ''
+      allow_new: true
       allow_existing: true
       match_operator: CONTAINS
       override_labels: false
-      allow_new: false
-    third_party_settings: {  }
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: media_entity_browser_document
     type: inline_entity_form_complex
     region: content
   field_fsa_toc:
@@ -173,19 +175,6 @@ content:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
-    region: content
-  field_header_image:
-    weight: 3
-    settings:
-      form_mode: default
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
-      match_operator: CONTAINS
-      override_labels: false
-    third_party_settings: {  }
-    type: inline_entity_form_complex
     region: content
   field_icon:
     weight: 7

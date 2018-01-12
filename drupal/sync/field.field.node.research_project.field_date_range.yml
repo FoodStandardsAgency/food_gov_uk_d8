@@ -1,0 +1,21 @@
+uuid: cb2daaf5-1138-4b4c-8109-2c312b0d34e2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_date_range
+    - node.type.research_project
+  module:
+    - datetime_range
+id: node.research_project.field_date_range
+field_name: field_date_range
+entity_type: node
+bundle: research_project
+label: 'Study duration'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: daterange
