@@ -12,16 +12,16 @@
         if (value.keywords) {
           result_total_value = Drupal.formatPlural(
             value.total,
-            '<strong>@count</strong> result found for %keywords',
-            '<strong>@count</strong> results found for %keywords',
+            '<span class="views-result-total__number">@count</span> result found for <span class="views-result-total__keyword">%keywords</span>',
+            '<span class="views-result-total__number">@count</span> results found for <span class="views-result-total__keyword">%keywords</span>',
             {'@count': value.total, '%keywords': value.keywords}
           );
         }
         else {
           result_total_value = Drupal.formatPlural(
             value.total,
-            '<strong>@count</strong> result found',
-            '<strong>@count</strong> results found',
+            '<span class="views-result-total__number">@count</span> result found',
+            '<span class="views-result-total__number">@count</span> results found',
             {'@count': value.total}
           );
         }

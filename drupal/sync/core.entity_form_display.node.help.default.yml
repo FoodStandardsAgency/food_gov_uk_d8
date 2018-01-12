@@ -53,7 +53,7 @@ third_party_settings:
       children:
         - field_block_reference
       parent_name: ''
-      weight: 20
+      weight: 12
       format_type: tab
       format_settings:
         id: ''
@@ -122,7 +122,7 @@ content:
     type: string_textfield
     region: content
   field_liftups:
-    weight: 9
+    weight: 10
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -156,7 +156,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 10
+    weight: 11
     third_party_settings: {  }
     region: content
   title:

@@ -32,6 +32,10 @@ function fsa_preprocess_field(&$variables) {
         $variables['title_element'] = 'div';
         break;
 
+      case 'field_link_list':
+        $variables['title_element'] = 'h4';
+        break;
+
       default:
         $variables['title_element'] = 'h2';
         break;
@@ -52,4 +56,18 @@ function fsa_preprocess_field(&$variables) {
       $variables['items'][$delta]['attributes']->setAttribute('class', $field_name . '__item' . ' ' . $field_name . '__item--' . ($delta % 2 == 0 ? 'even' : 'odd'));
     }
   }
+
+  if ($variables['element']['#field_name'] == 'field_news_type') {
+    foreach ($variables['items'] as $key => $item) {
+      if ($key == 0) {
+        // Show generic "News" label instead of the type.
+        $variables['items'][$key]['content']["#plain_text"] = t('News');
+      }
+      else {
+        // And unset other news types from page display.
+        unset($variables['items'][$key]);
+      }
+    }
+  }
+
 }

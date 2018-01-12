@@ -21,6 +21,8 @@ permissions:
   - 'translate any entity'
   - 'translate audience taxonomy_term'
   - 'translate block_content'
+  - 'translate consultation node'
+  - 'translate consultations_type taxonomy_term'
   - 'translate content_type taxonomy_term'
   - 'translate document_category taxonomy_term'
   - 'translate fhrs_businesstype taxonomy_term'

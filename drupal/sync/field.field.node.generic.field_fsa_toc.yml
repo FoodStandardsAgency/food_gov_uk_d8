@@ -1,0 +1,23 @@
+uuid: e6937fc0-4483-4c0d-b9d5-b8c0ac94aaf9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_fsa_toc
+    - node.type.generic
+id: node.generic.field_fsa_toc
+field_name: field_fsa_toc
+entity_type: node
+bundle: generic
+label: 'Display table of contents'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

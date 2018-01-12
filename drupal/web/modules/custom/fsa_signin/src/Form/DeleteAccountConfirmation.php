@@ -93,10 +93,12 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
     }
 
     $form['back'] = [
+      '#prefix' => '<header class="profile__header">',
       '#markup' => DefaultController::linkMarkup('fsa_signin.default_controller_manageProfilePage', $this->t('Back'), ['back']),
     ];
     $form['logout'] = [
-      '#markup' => DefaultController::linkMarkup('user.logout.http', 'Logout', ['button']),
+      '#suffix' => '</header>', 
+      '#markup' => DefaultController::linkMarkup('user.logout.http', 'Logout', ['profile__logout']),
     ];
 
     if (DefaultController::isMoreThanRegistered($user)) {

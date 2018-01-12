@@ -15,18 +15,20 @@
  * @see template_preprocess_views_view_unformatted()
  */
 #}
-<div class="term-group">
-    {% if title %}
-        <h3 id="{{ title|render|striptags|trim|clean_id }}">{{ title }}</h3>
-    {% endif %}
-    {% for row in rows %}
-        {%
-        set row_classes = [
-        default_row_class ? 'views-row',
-        ]
-        %}
-        <div{{ row.attributes.addClass(row_classes) }}>
-            {{ row.content }}
-        </div>
-    {% endfor %}
+<div class="term-group listing">
+  {% if title %}
+    <header class="listing_header">
+      <h3 class="listing_heading" id="{{ title|render|striptags|trim|clean_id }}">{{ title }}</h3>
+    </header>
+  {% endif %}
+  {% for row in rows %}
+    {%
+    set row_classes = [
+    default_row_class ? 'views-row item',
+    ]
+    %}
+    <div{{ row.attributes.addClass(row_classes) }}>
+        {{ row.content }}
+    </div>
+  {% endfor %}
 </div>

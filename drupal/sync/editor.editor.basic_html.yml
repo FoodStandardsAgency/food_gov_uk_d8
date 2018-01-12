@@ -18,7 +18,6 @@ settings:
           name: Formatting
           items:
             - Bold
-            - Italic
         -
           name: Linking
           items:
@@ -49,13 +48,13 @@ settings:
             - ShowBlocks
             - Source
   plugins:
+    stylescombo:
+      styles: ''
     drupallink:
       linkit_enabled: true
       linkit_profile: default
     language:
       language_list: un
-    stylescombo:
-      styles: ''
     video_embed:
       defaults:
         children:

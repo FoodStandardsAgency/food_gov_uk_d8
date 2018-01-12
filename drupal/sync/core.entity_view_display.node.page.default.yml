@@ -9,7 +9,7 @@ dependencies:
     - field.field.node.page.field_block_reference
     - field.field.node.page.field_content_type
     - field.field.node.page.field_document
-    - field.field.node.page.field_header_image
+    - field.field.node.page.field_fsa_toc
     - field.field.node.page.field_icon
     - field.field.node.page.field_intro
     - field.field.node.page.field_liftup_image
@@ -127,7 +127,7 @@ hidden:
   entity_print_view_word_docx: true
   field_audience: true
   field_content_type: true
-  field_header_image: true
+  field_fsa_toc: true
   field_icon: true
   field_liftup_image: true
   field_liftup_summary: true

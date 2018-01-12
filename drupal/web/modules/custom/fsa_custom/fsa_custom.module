@@ -79,16 +79,71 @@ function fsa_custom_preprocess_page_title(&$variables) {
 
   $route = \Drupal::routeMatch();
   $node = $route->getParameter('node');
-  if (is_object($node) && $node->hasField('field_nation')) {
-    $nations = $node->get('field_nation');
-    // Display nation as title prefix only if just one nation is selected.
-    if (isset($nations[0]) && !isset($nations[1])) {
-      $nation = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($nations[0]->getValue()['target_id'])->getName();
+  if (is_object($node)) {
+    $typemanager = \Drupal::entityTypeManager();
 
-      // Use same classes as via WYSIWYG for regional variations.
-      $class = 'regional-variation regional-variation--' . strtolower(Html::cleanCssIdentifier($nation));
-      $variables['title_prefix'] = ['#markup' => '<div class="' . $class . '">' . t('@nation specific', ['@nation' => $nation]) . '</div>'];
+    // Init the custom title prefix.
+    $title_prefix = [];
+
+    if ($node->hasField('field_nation')) {
+      $nations = $node->get('field_nation');
+      if (isset($nations[0])) {
+        // Add regional variations label with same classes as would be added via
+        // WYSIWYG editor.
+        $class = 'regional-variation';
+        $nation_label = '';
+        if (!isset($nations[1])) {
+          // If only one nation selected.
+          $nation = $typemanager->getStorage('taxonomy_term')->load($nations[0]->getValue()['target_id'])->getName();
+          $class .= ' regional-variation--' . strtolower(Html::cleanCssIdentifier($nation));
+          $nation_label = t('@nation specific', ['@nation' => $nation]);
+        }
+        elseif (isset($nations[1]) && !isset($nations[2])) {
+          // If two nations selected.
+          $class .= ' regional-variation--multi-regional';
+          $nation_label = t(
+            '@nation_1 and @nation_2 specific',
+            [
+              '@nation_1' => $typemanager->getStorage('taxonomy_term')->load($nations[0]->getValue()['target_id'])->getName(),
+              '@nation_2' => $typemanager->getStorage('taxonomy_term')->load($nations[1]->getValue()['target_id'])->getName(),
+            ]
+          );
+        }
+
+        if ($nation_label != '') {
+          $title_prefix[] = [
+            '#theme' => 'fsa_label',
+            '#attributes' => [
+              'class' => $class,
+            ],
+            '#label' => $nation_label,
+          ];
+        }
+
+      }
     }
+
+    if ($node->hasField('field_consultations_type')) {
+      // Add consultation type to title prefix.
+      $types = $node->get('field_consultations_type');
+      if (isset($types[0])) {
+        $consultation_type = $typemanager->getStorage('taxonomy_term')->load($types[0]->getValue()['target_id'])->getName();
+        $title_prefix[] = [
+          '#theme' => 'fsa_label',
+          '#attributes' => [
+            'class' => 'consultation-type consultation-type--' . strtolower(Html::cleanCssIdentifier($consultation_type)),
+          ],
+          '#label' => $consultation_type,
+        ];
+      }
+    }
+
+    // Inject additional title prefix(es) if there was anything to add.
+    if (!empty($title_prefix)) {
+      $variables['title_prefix'] = $title_prefix;
+    }
+
+
   }
   else {
     $route = \Drupal::routeMatch();
@@ -179,6 +234,16 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
 
       // Control the region for page title block.
       if ($block->getPluginId() == 'page_title_block') {
+
+        // Page title above content visibility.
+        if ($block->id() == 'pagetitle') {
+          // Hide page title on lander nodes.
+          if ($node->getType() == 'lander') {
+            return AccessResult::forbidden()
+              ->addCacheableDependency($block);
+          }
+        }
+
         // Use content_type taxonomy to define in which region the pagetitle
         // should be displayed.
         switch ($term_id) {
@@ -217,7 +282,28 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
     else {
       $route = \Drupal::routeMatch();
       $routename = $route->getParentRouteMatch()->getRouteName();
-      // Have few rules for non-nodes to hide the title from hero.
+
+      // Page title in content area.
+      if ($block->id() == 'pagetitle') {
+
+        // Term listing pages.
+        if ($routename == 'entity.taxonomy_term.canonical' && $term = Term::load($route->getRawParameters()->all()['taxonomy_term'])) {
+
+          switch ($term->getVocabularyId()) {
+            case 'research_programme':
+              // Hide hero on research programme pages.
+              return AccessResult::allowed()
+                ->addCacheableDependency($block);
+          }
+        }
+
+
+        // Default to not showing title in content area.
+        return AccessResult::forbidden()
+          ->addCacheableDependency($block);
+      }
+
+      // Page title in hero area.
       if ($block->id() == 'pagetitle_hero') {
 
         // Enter all speficic routes to remove the page title in hero area.
@@ -228,6 +314,17 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
         if (in_array($routename, $routes) || $route->getParameter('fsa_establishment')) {
           return AccessResult::forbidden()
             ->addCacheableDependency($block);
+        }
+
+        // Term listing pages.
+        if ($routename == 'entity.taxonomy_term.canonical' && $term = Term::load($route->getRawParameters()->all()['taxonomy_term'])) {
+
+          switch ($term->getVocabularyId()) {
+            case 'research_programme':
+              // Hide hero on research programme pages.
+              return AccessResult::forbidden()
+                ->addCacheableDependency($block);
+          }
         }
       }
 
@@ -279,7 +376,7 @@ function fsa_custom_editor_js_settings_alter(array &$settings) {
 
   foreach ($settings['editor']['formats'] as $key => $value) {
     // Limit headings/tags of "Format" dropdown.
-    $settings['editor']['formats'][$key]['editorSettings']['format_tags'] = "p;h2;h3;h4;h5";
+    $settings['editor']['formats'][$key]['editorSettings']['format_tags'] = "p;h2;h3";
   }
 }
 
@@ -299,6 +396,12 @@ function fsa_custom_theme() {
       'variables' => [
         'attributes' => NULL,
         'path' => NULL,
+      ],
+    ],
+    'fsa_label' => [
+      'variables' => [
+        'attributes' => [],
+        'label' => NULL,
       ],
     ],
   ];

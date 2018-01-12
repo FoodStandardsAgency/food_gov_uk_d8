@@ -53,20 +53,18 @@ display:
         options:
           offset: 0
       style:
-        type: grid
+        type: html_list
         options:
           grouping:
             -
               field: name_1
               rendered: true
               rendered_strip: false
-          columns: 4
-          automatic_width: true
-          alignment: horizontal
-          col_class_default: true
-          col_class_custom: ''
-          row_class_default: true
-          row_class_custom: ''
+          row_class: ''
+          default_row_class: true
+          type: ul
+          wrapper_class: topics__content
+          class: topics__list
       row:
         type: fields
       fields:
@@ -179,7 +177,7 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -298,6 +296,7 @@ display:
           plugin_id: string
       display_extenders: {  }
       use_ajax: false
+      css_class: topics
     cache_metadata:
       max-age: -1
       contexts:

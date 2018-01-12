@@ -1,0 +1,29 @@
+{#
+/**
+ * @file
+ * Theme override to display a news promo.
+ *
+ * @see template_preprocess_node()
+ *
+ */
+#}
+<article{{ attributes.addClass(['promo', 'promo--light']) }}>
+  {% if content.field_news_type %}
+    <div class="alert__type_badge"> {# @todo: Oskari come up with better classname to style the news type (can apparently be multiple), I just copied the alerts related class to make it look at least somethign #}
+        {{ content.field_news_type }}
+    </div>
+  {% endif %}
+  {{ title_prefix }}
+  {% if not page %}
+    <h4{{ title_attributes }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h4>
+  {% endif %}
+  {{ title_suffix }}
+
+  <div{{ content_attributes }}>
+    {{ content|without('field_news_type') }}
+    {{ date }}
+  </div>
+
+</article>
