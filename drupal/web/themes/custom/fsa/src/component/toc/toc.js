@@ -3,18 +3,18 @@ import doScrolling from '../../core/helper/scrollToElement';
 function toc() {
 
   // Table of contents
-  const tableOfContentsElements = [...document.querySelectorAll('.toc-tree')];
-  const contentElements = [...document.querySelectorAll('.toc-filter')];
+  const tableOfContentsElements = [...document.querySelectorAll('.js-toc-list')];
+  // const contentElements = [...document.querySelectorAll('.toc-filter')];
 
   // Check everything found
-  if (tableOfContentsElements.length <= 0 ||
-    contentElements.length <= 0) {
+  if (tableOfContentsElements.length <= 0) {
     return false;
   }
-
+  console.log(tableOfContentsElements);
   // Get children
-  const tocNavigationItems = tableOfContentsElements[0].children[0].children,
-  tocContentItems = contentElements[0].children;
+  const tocNavigationItems = [...tableOfContentsElements[0].children];
+  console.log(tocNavigationItems);
+  // tocContentItems = contentElements[0].children;
 
 
   // for (let i = 0; i < tocContentItems.length; i++) {
@@ -30,7 +30,7 @@ function toc() {
   // Navigation items
   for (let i = 0; i < tocNavigationItems.length; i++) {
     let thisTocNavigationItem = tocNavigationItems[i];
-
+    console.log(thisTocNavigationItem);
 
     thisTocNavigationItem.addEventListener("click", function(e) {
       e.preventDefault();
