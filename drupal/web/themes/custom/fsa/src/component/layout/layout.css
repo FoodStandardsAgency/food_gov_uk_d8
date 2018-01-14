@@ -164,7 +164,7 @@
   
     @media (--breakpoint-md) {
       margin-left: 20em;
-      padding-right: 0em;
+      padding-left: 0em;
     }
   
     @media (--breakpoint-lg) {
