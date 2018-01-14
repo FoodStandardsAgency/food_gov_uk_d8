@@ -46,6 +46,12 @@
     .views-row-wrapper {
       display: flex;
       margin: 0 -0.5em;
+      flex-flow: row wrap;
+      justify-content: center;
+
+      & > .views-row {
+        flex: 0 1 auto;
+      }
     }
   }
 
@@ -105,7 +111,6 @@
   }
 
   .listing--with-bg & {
-    flex: 0 1 auto;
     background-color: var(--color-white);
     margin: 0.5em;
     padding: 1em;
@@ -161,6 +166,35 @@
 .item__heading {
   @mixin reset-font-style;
   font-weight: 600;
+}
+
+/* More link */
+.more-link {
+  .listing & {
+    flex: 1 1 100%;
+
+    a {
+      display: inline-block;
+      font-family: var(--font-family-content);
+      letter-spacing: 0.02em;
+      background-color: var(--dark-primary-color);
+      color: var(--color-white);
+      text-decoration: none;
+      border: 0;
+      border-radius: 2em;
+      padding: 0.6em 2.5em;
+      box-shadow: var(--box-shadow);
+      cursor: pointer;
+      text-decoration: none !important;
+      transition:
+        background-color var(--transition-enter-fast);
+
+      :--not-touch &:--enter {
+        text-decoration: none;
+        background-color: var(--darker-primary-color);
+      }
+    }
+  }
 }
 
 .layout__sidebar .arrow-back {
