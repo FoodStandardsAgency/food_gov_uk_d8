@@ -4,7 +4,7 @@
 /* News alert listing page */
 .listing {
   position: relative;
-  max-width: var(--content-max-width);
+  /* max-width: var(--content-max-width); */
   @mixin responsive-declaration padding-bottom, 1em, 2em;
 
   /* .views-row-wrapper {
