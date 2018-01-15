@@ -1,0 +1,7 @@
+fsa_consultations.settings:
+ path: '/admin/config/fsa/consultations'
+ defaults:
+   _form: '\Drupal\fsa_consultations\Form\FsaConsultationsConfigurations'
+   _title: 'FSA Consultations configurations'
+ requirements:
+   _permission: 'administer fsa consultation configurations'

@@ -1,0 +1,7 @@
+config.fsa_consultations:
+  type: config_object
+  label: 'FSA Consultations config'
+  mapping:
+    consultation_standard_text:
+      type: text
+      label: 'FSA Consultations standard text'

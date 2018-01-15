@@ -62,6 +62,9 @@ $config_allowed = [
   '/admin/config/fsa/ratings',
   '/admin/config/fsa/ratings/translate/cy/add',
   '/admin/config/fsa/ratings/translate/cy/edit',
+  '/admin/config/fsa/consultations',
+  '/admin/config/fsa/consultations/translate/cy/add',
+  '/admin/config/fsa/consultations/translate/cy/edit',
 ];
 
 // Allow config changes on specified path pattern and command line.
