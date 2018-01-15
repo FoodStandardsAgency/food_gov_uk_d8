@@ -8,7 +8,7 @@ import cssCustomPropertySupport from './core/helper/cssCustomPropertySupport';
 import subNavigation from './core/helper/subNavigation';
 
 import navigation from './component/navigation/navigation';
-import { addHeading, printPage } from './component/content/content';
+import addHeading from './component/content/content';
 import toggle from './component/toggle/toggle';
 import peek from './component/peek/peek';
 import fhrs from './component/fhrs/fhrs';
@@ -29,9 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Add heading
   addHeading();
-
-  // Print page
-  printPage();
 
   // peek
   peek();

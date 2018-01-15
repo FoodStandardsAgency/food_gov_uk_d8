@@ -70,6 +70,13 @@ h6 {
     font-weight: 600;
     padding: 1em;
   }
+
+  &.heading--small {
+    @mixin reset-font-style;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
 }
 
 p {
