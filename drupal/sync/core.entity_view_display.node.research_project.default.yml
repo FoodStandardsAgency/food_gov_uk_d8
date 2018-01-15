@@ -26,7 +26,6 @@ third_party_settings:
   field_group:
     group_metadata:
       children:
-        - field_research_project_code
         - field_research_programme
         - field_date_range
         - field_conducted_by
@@ -79,7 +78,7 @@ content:
     type: daterange_default
     region: content
   field_document:
-    weight: 12
+    weight: 5
     label: inline
     settings:
       view_mode: document_link
@@ -102,14 +101,6 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_research_project_code:
-    weight: 8
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
   field_update_date:
     weight: 1
     label: inline
@@ -122,6 +113,7 @@ content:
 hidden:
   entity_print_view_epub: true
   entity_print_view_word_docx: true
+  field_research_project_code: true
   field_research_topics: true
   langcode: true
   links: true
