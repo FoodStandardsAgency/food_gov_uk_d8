@@ -5,7 +5,7 @@
 .listing {
   position: relative;
   max-width: var(--content-max-width);
-  @mixin responsive-declaration padding-top, 1em, 2em;
+  /* @mixin responsive-declaration padding-top, 1em, 2em; */
   @mixin responsive-declaration padding-bottom, 1em, 2em;
 
   /* .views-row-wrapper {
@@ -163,9 +163,14 @@
   }
 }
 
-.item__heading {
+.item__heading,
+.item.item--term h4 {
   @mixin reset-font-style;
   font-weight: 600;
+}
+
+.item.item--term h4 {
+  margin-bottom: 0.5em;
 }
 
 /* More link */

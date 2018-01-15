@@ -560,6 +560,10 @@
 
   .navigation__item.navigation__item--level-1:last-child > & {
   }
+  
+  &.toggle-content {
+    position: absolute;
+  }
 
   &.is-open {
     background-color: var(--color-white);
