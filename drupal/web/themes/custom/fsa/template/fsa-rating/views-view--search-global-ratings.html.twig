@@ -49,22 +49,27 @@ dom_id ? 'js-view-dom-id-' ~ dom_id,
   {{ exposed }}
   {{ attachment_before }}
 
-  <ul>
-    <li>{{ 'Name'|t }}</li>
-    <li>{{ 'Rating'|t }}</li>
-    <li>{{ 'Inspection date'|t }}</li>
-  </ul>
+  <div class="table table--with-background js-table ratings__table" id="sortable" role="grid">
 
-  {{ rows }}
+    <div class="table__row table__row--header table__row--negative js-table-header" role="row">
+      <div class="table__item" role="columnheader">{{ 'Name'|t }}</div>
+      <div class="table__item" role="columnheader">{{ 'Rating'|t }}</div>
+      <div class="table__item" role="columnheader">{{ 'Inspection date'|t }}</div>
+    </div>
+
+    {{ rows }}
+
+  </div>
+
   {{ empty }}
-  {{ pager }}
 
   {{ attachment_after }}
   {{ more }}
 
   {% if footer %}
-    <footer>
-      {{ footer }}
+    <footer class="ratings__footer">
+      <p>{{ footer }}</p>
+      {{ pager }}
     </footer>
   {% endif %}
 

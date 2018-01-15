@@ -1,0 +1,5 @@
+fsa_consultations.settings:
+  title: 'Consultations'
+  parent: system.admin_config_fsa
+  route_name: fsa_consultations.settings
+  description: 'Consultation related configurations'

@@ -1,21 +1,21 @@
-uuid: cb2daaf5-1138-4b4c-8109-2c312b0d34e2
+uuid: da94da16-6429-4fa0-bb20-1eb50d3701b5
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_date_range
+    - field.storage.node.field_planned_completion_date
     - node.type.research_project
   module:
-    - datetime_range
-id: node.research_project.field_date_range
-field_name: field_date_range
+    - datetime
+id: node.research_project.field_planned_completion_date
+field_name: field_planned_completion_date
 entity_type: node
 bundle: research_project
-label: 'Study duration'
+label: 'Planned completion'
 description: 'Only month and year are displayed when viewing the page. In case exact day is not applicable or not known known enter the first day of the month as the value of the day.'
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: daterange
+field_type: datetime

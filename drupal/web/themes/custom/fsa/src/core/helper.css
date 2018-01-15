@@ -53,6 +53,7 @@ Plugin documentation:
   font-family: var(--font-family-content);
   letter-spacing: 0;
   font-size: 1em;
+  @mixin responsive-declaration line-height, 1.6, 1.4;
   font-weight: 400;
   text-transform: none;
 }

@@ -11,7 +11,6 @@ dependencies:
     - field.field.node.consultation.field_intro
     - field.field.node.consultation.field_nation
     - field.field.node.consultation.field_status
-    - field.field.node.consultation.field_update_date
     - node.type.consultation
   module:
     - content_moderation
@@ -124,12 +123,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
-    region: content
-  field_update_date:
-    weight: 4
-    settings: {  }
-    third_party_settings: {  }
-    type: datetime_default
     region: content
   langcode:
     type: language_select
