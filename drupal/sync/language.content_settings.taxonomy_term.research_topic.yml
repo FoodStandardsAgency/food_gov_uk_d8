@@ -1,16 +1,16 @@
-uuid: 2961886f-4f2b-4045-9d79-e17c25b6093f
+uuid: e730b5db-6462-4dee-bedd-becb6f95a4a7
 langcode: en
 status: true
 dependencies:
   config:
-    - taxonomy.vocabulary.research_programme
+    - taxonomy.vocabulary.research_topic
   module:
     - content_translation
 third_party_settings:
   content_translation:
     enabled: true
-id: taxonomy_term.research_programme
+id: taxonomy_term.research_topic
 target_entity_type_id: taxonomy_term
-target_bundle: research_programme
+target_bundle: research_topic
 default_langcode: site_default
 language_alterable: false

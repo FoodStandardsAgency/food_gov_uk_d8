@@ -1,0 +1,29 @@
+uuid: 6d66d7d3-5253-4cc6-911c-77fd9e0abf72
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_team_contacts
+    - node.type.research_project
+    - node.type.team_contacts
+id: node.research_project.field_team_contacts
+field_name: field_team_contacts
+entity_type: node
+bundle: research_project
+label: 'Team contacts'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      team_contacts: team_contacts
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
