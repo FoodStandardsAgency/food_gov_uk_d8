@@ -219,6 +219,10 @@
       padding-top: 0;
     }
   }
+
+  .theme--search & {
+    max-width: var(--max-width-medium) !important;
+  }
 }
 
 .overflow-x-auto {
