@@ -70,6 +70,13 @@ h6 {
     font-weight: 600;
     padding: 1em;
   }
+
+  &.heading--small {
+    @mixin reset-font-style;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
 }
 
 p {
@@ -94,7 +101,14 @@ p {
 .field__field_intro {
   @mixin responsive-declaration font-size, 1.125em, 1.33em;
   @mixin responsive-declaration line-height, 1.3, 1.4;
+  @mixin responsive-declaration margin-top, 1em, 2em;
   padding-bottom: 0 !important;
+
+  .item & {
+    @mixin reset-font-style;
+    margin-top: 0 !important;
+    margin-bottom: 1em !important;
+  }
 }
 
 .reset-font-style {
@@ -535,4 +549,38 @@ blockquote {
       color: var(--color-blue);
     }      
   }
+}
+
+/*Subpages*/
+.subpages:not(:first-child) {
+  @mixin responsive-declaration margin-top, 1.5em, 4em;
+}
+
+.subpages > ul,
+.subpages > ol {
+  margin: 0;
+  padding: 0;
+  padding-top: 1em;
+}
+
+.subpages ul li,
+.subpages ol li {
+  list-style: none;
+  margin-bottom: 1em;
+}
+
+:--not-touch .subpages > ul a:--enter,
+:--not-touch .subpages > ul a:--enter {
+  color: var(--light-primary-color);
+  text-decoration: underline;
+}
+
+.subpages > ul ul,
+.subpages > ol ol {
+  padding-left: 1em;
+}
+
+.subpages > ul ul a,
+.subpages > ol ol a {
+  color: var(--color-black);
 }

@@ -15,7 +15,7 @@ use Drupal\Component\Utility\Html;
 function fsa_preprocess_html(&$variables) {
   $routematch = \Drupal::routeMatch();
 
-  // Add class to body if frontpage
+  // Add class to body if frontpage.
   $is_front = \Drupal::service('path.matcher')->isFrontPage();
   if ($is_front) {
     $variables['attributes']['class'][] = 'theme--frontpage';
@@ -68,6 +68,11 @@ function fsa_preprocess_html(&$variables) {
   if ($uri_segments[1] === 'ratings' || $uri_segments[1] === 'fsa-ratings') {
     $variables['attributes']['class'][] = 'theme--service';
     $variables['attributes']['class'][] = 'theme--fhrs';
+  }
+
+  // Search page(s) body class.
+  if ($uri_segments[1] === 'search' || ($uri_segments[1] === 'news-alerts' && $uri_segments[2] == 'search')) {
+    $variables['attributes']['class'][] = 'theme--search';
   }
 
   // Get service routes to set body classes for the section.

@@ -98,6 +98,10 @@ display:
           offset: 0
       style:
         type: default
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
       row:
         type: fields
       fields:
@@ -170,8 +174,8 @@ display:
           empty: false
           tokenize: false
           content:
-            value: '<h3>Food hygiene ratings</h3>'
-            format: basic_html
+            value: '<div class="listing__header"><h3 class="listing__heading">Food hygiene ratings</h3></div>'
+            format: full_html
           plugin_id: text
       footer: {  }
       empty: {  }
@@ -227,6 +231,7 @@ display:
       use_more_text: 'More food hygiene ratings'
       link_url: /search/ratings
       link_display: custom_url
+      css_class: 'listing listing--box listing--with-bg'
     cache_metadata:
       max-age: -1
       contexts:
