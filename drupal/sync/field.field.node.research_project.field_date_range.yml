@@ -12,7 +12,7 @@ field_name: field_date_range
 entity_type: node
 bundle: research_project
 label: 'Study duration'
-description: ''
+description: 'Only month and year are displayed when viewing the page. In case exact day is not applicable or not known known enter the first day of the month as the value of the day.'
 required: false
 translatable: false
 default_value: {  }

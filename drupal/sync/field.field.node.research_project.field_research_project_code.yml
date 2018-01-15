@@ -10,7 +10,7 @@ field_name: field_research_project_code
 entity_type: node
 bundle: research_project
 label: 'Project code'
-description: ''
+description: 'Can be left empty if not known or not applicable. Value is not displayed when viewing the page.'
 required: false
 translatable: false
 default_value: {  }

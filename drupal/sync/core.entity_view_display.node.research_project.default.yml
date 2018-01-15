@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.research_project.field_date_range
     - field.field.node.research_project.field_document
     - field.field.node.research_project.field_intro
+    - field.field.node.research_project.field_planned_completion_date
     - field.field.node.research_project.field_research_programme
     - field.field.node.research_project.field_research_project_code
     - field.field.node.research_project.field_research_topics
@@ -29,6 +30,7 @@ third_party_settings:
       children:
         - field_research_programme
         - field_date_range
+        - field_planned_completion_date
         - field_conducted_by
       parent_name: ''
       weight: 3
@@ -61,7 +63,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_conducted_by:
-    weight: 11
+    weight: 12
     label: inline
     settings:
       link_to_entity: false
@@ -93,6 +95,15 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: basic_string
+    region: content
+  field_planned_completion_date:
+    weight: 11
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: month_year
+    third_party_settings: {  }
+    type: datetime_default
     region: content
   field_research_programme:
     weight: 9
