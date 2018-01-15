@@ -24,11 +24,11 @@
   {% for row in rows %}
     {%
     set row_classes = [
-    default_row_class ? 'views-row item',
+    default_row_class ? 'views-row item item--term',
     ]
     %}
     <div{{ row.attributes.addClass(row_classes) }}>
-        {{ row.content }}
+      {{ row.content }}
     </div>
   {% endfor %}
 </div>

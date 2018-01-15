@@ -10,10 +10,10 @@ function toc() {
   if (tableOfContentsElements.length <= 0) {
     return false;
   }
-  console.log(tableOfContentsElements);
+
   // Get children
   const tocNavigationItems = [...tableOfContentsElements[0].children];
-  console.log(tocNavigationItems);
+
   // tocContentItems = contentElements[0].children;
 
 
