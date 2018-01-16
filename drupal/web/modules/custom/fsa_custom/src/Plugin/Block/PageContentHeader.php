@@ -53,7 +53,8 @@ class PageContentHeader extends BlockBase {
       }
 
       // Set rules when to display print/share links and buttons.
-      if ($entity_type == 'node' && !in_array($entity->getType(), ['help', 'lander'])) {
+      $hidden_on = ['help', 'lander', 'webform'];
+      if ($entity_type == 'node' && !in_array($entity->getType(), $hidden_on)) {
         $print_actions = TRUE;
         $share = TRUE;
       }
