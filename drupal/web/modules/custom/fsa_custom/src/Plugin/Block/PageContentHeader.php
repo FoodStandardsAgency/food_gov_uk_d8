@@ -69,7 +69,6 @@ class PageContentHeader extends BlockBase {
       }
 
       if ($print_actions) {
-        // @todo: The print link (attach a js file to module).
         $link_print = $this->t('Print this page');
 
         // The pdf export (with entity_print).
