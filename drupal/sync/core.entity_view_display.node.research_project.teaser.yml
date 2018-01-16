@@ -33,8 +33,10 @@ hidden:
   field_date_range: true
   field_document: true
   field_intro: true
+  field_planned_completion_date: true
   field_research_programme: true
   field_research_project_code: true
   field_research_topics: true
+  field_team_contacts: true
   field_update_date: true
   langcode: true

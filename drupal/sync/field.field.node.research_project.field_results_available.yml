@@ -1,0 +1,23 @@
+uuid: f2bf36d0-2288-436f-a09f-62177b6164b8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_results_available
+    - node.type.research_project
+id: node.research_project.field_results_available
+field_name: field_results_available
+entity_type: node
+bundle: research_project
+label: 'Results available'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Results available'
+  off_label: 'No results available'
+field_type: boolean
