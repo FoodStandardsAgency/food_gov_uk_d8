@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.research_project.field_research_programme
     - field.field.node.research_project.field_research_project_code
     - field.field.node.research_project.field_research_topics
+    - field.field.node.research_project.field_results_available
     - field.field.node.research_project.field_team_contacts
     - field.field.node.research_project.field_update_date
     - node.type.research_project
@@ -28,6 +29,7 @@ third_party_settings:
   field_group:
     group_project_metadata:
       children:
+        - field_results_available
         - field_research_programme
         - field_research_topics
         - field_date_range
@@ -65,7 +67,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_conducted_by:
-    weight: 34
+    weight: 40
     settings:
       size: 60
       placeholder: ''
@@ -73,7 +75,7 @@ content:
     type: string_textfield
     region: content
   field_date_range:
-    weight: 32
+    weight: 38
     settings: {  }
     third_party_settings: {  }
     type: daterange_default
@@ -102,13 +104,13 @@ content:
     type: string_textarea
     region: content
   field_planned_completion_date:
-    weight: 33
+    weight: 39
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
     region: content
   field_research_programme:
-    weight: 30
+    weight: 36
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -122,10 +124,17 @@ content:
     type: string_textfield
     region: content
   field_research_topics:
-    weight: 31
+    weight: 37
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
+    region: content
+  field_results_available:
+    weight: 35
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
     region: content
   field_team_contacts:
     weight: 7

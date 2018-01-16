@@ -60,3 +60,20 @@ function fsa_research_views_pre_view(ViewExecutable $view, $display_id, array &$
     }
   }
 }
+
+/**
+ * Implements template_preprocess_views_view_field().
+ */
+function fsa_research_preprocess_views_view_field(&$variables) {
+  $route = \Drupal::routeMatch();
+  $routename = $route->getRouteName();
+  if ($routename == 'entity.taxonomy_term.canonical' && $term = Term::load($route->getRawParameters()->all()['taxonomy_term'])) {
+    // Add "Results available" tag for research programme body results if the
+    // checkbox is selected on research node.
+    if ($term->getVocabularyId() == 'research_programme' &&
+          $variables['field']->field == 'body' &&
+          $variables['row']->_entity->field_results_available->value) {
+      $variables['output'] = ['#markup' => $variables['output'] .= '<div class="results-available">' . $variables['row']->_entity->field_results_available->view()[0]['#markup'] . '</div>'];
+    }
+  }
+}
