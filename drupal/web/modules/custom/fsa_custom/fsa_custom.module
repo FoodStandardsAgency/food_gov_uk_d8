@@ -14,7 +14,6 @@ use Drupal\Core\Link;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
-use Drupal\Core\Entity\EntityTypeInterface;
 
 /**
  * Implements of template_preprocess_html().
@@ -431,23 +430,5 @@ function fsa_custom_field_widget_form_alter(&$element, FormStateInterface $form_
         $element['value']['#maxlength'] = 128;
       }
     }
-  }
-}
-
-/**
- * Implements hook_entity_base_field_info_alter().
- */
-function fsa_custom_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type) {
-  if ($entity_type->id() == 'media' && !empty($fields['name'])) {
-    $fields['name']->setDescription(t('Media name is displayed as title on individual document pages and is utilised within CMS document search'));
-  }
-}
-
-/**
- * Implements hook_form_alter().
- */
-function fsa_custom_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  if ($form_id == 'media_document_form') {
-    $form['field_document']['widget'][0]['#process'][1][0] = 'Drupal\fsa_custom\Plugin\Field\FieldWidget\FsaCustomFileWidget';
   }
 }

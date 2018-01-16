@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\fsa_custom\Plugin\Field\FieldWidget;
+namespace Drupal\fsa_document_library\Plugin\Field\FieldWidget;
 
 use Drupal\Component\Utility\NestedArray;
 use Drupal\file\Plugin\Field\FieldWidget\FileWidget;
@@ -18,7 +18,7 @@ use Drupal\Core\Render\Element;
  *   }
  * )
  */
-class FsaCustomFileWidget extends FileWidget {
+class FsaDocumentLibraryFileWidget extends FileWidget {
 
   /**
    * Form API callback: Processes a file_generic field element.
