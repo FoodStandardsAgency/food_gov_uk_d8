@@ -1,0 +1,24 @@
+uuid: a57709a8-4510-49b1-8b8c-9a445b18f4f6
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - fsa_custom
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: page_content_header
+theme: fsa
+region: content
+weight: 0
+provider: null
+plugin: page_content_header
+settings:
+  id: page_content_header
+  label: 'Page content header (intro, last updated, print, sharing)'
+  provider: fsa_custom
+  label_display: '0'
+visibility: {  }

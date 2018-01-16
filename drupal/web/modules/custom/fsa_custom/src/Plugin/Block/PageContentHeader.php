@@ -62,7 +62,7 @@ class PageContentHeader extends BlockBase {
 
       if ($print_actions) {
         // @todo: The print link (attach a js file to module).
-        $content[] = ['#markup' => '<button class="print-page">' . $this->t('Print this page') . '</button>'];
+        $content[] = ['#markup' => '<a class="print-page button page-print-trigger">' . $this->t('Print this page') . '</a>'];
 
         // The pdf export (with entity_print).
         $route_params = [
@@ -82,8 +82,11 @@ class PageContentHeader extends BlockBase {
       }
 
       if ($sharing) {
-        // @todo: Sharing with addtoany.
-        $content[] = ['#markup' => 'Share'];
+        // @todo: FSA-571 to implement.
+        $content[] = [
+          '#markup' => '
+            <div class="share hardcoded-placeholder">Share</div>',
+        ];
       }
 
       $build['page_content_header'] = $content;
