@@ -8,7 +8,7 @@ dependencies:
     - fsa
 third_party_settings:
   block_class:
-    classes: content-toolbar
+    classes: cms-toolbar
 id: tabs
 theme: fsa
 region: content_top

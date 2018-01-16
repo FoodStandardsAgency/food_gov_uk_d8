@@ -37,6 +37,7 @@ hidden:
   field_research_programme: true
   field_research_project_code: true
   field_research_topics: true
+  field_results_available: true
   field_team_contacts: true
   field_update_date: true
   langcode: true
