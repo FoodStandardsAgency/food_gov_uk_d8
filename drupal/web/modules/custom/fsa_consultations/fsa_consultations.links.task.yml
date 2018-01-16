@@ -1,0 +1,5 @@
+fsa_consultations.settings_tab:
+  route_name: fsa_consultations.settings
+  title: FSA Consultations
+  base_route: fsa_consultations.settings
+  weight: 10
