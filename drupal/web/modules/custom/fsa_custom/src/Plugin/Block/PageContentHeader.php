@@ -36,33 +36,37 @@ class PageContentHeader extends BlockBase {
       // Entity intro field, no label.
       if (isset($entity->field_intro)) {
         $intro = $entity->get('field_intro')->view(['label' => 'hidden']);
-        $content[] = ['#markup' => render($intro)];
+      }
+      else {
+        $intro = NULL;
       }
 
       // Last updated with inlined label.
       if (isset($entity->field_update_date->value)) {
         $date = $entity->field_update_date->view(['label' => 'inline']);
-        $content[] = ['#markup' => render($date)];
+      }
+      else {
+        $date = NULL;
       }
 
       // Set rules when to display print/share links and buttons.
       if ($entity_type == 'node' && !in_array($entity->getType(), ['help', 'lander'])) {
         $print_actions = TRUE;
-        $sharing = TRUE;
+        $share = TRUE;
       }
       elseif ($entity_type == 'taxonomy_term' && $entity->getVocabularyId() == 'research_programme') {
         // Limit to research programmes.
         $print_actions = TRUE;
-        $sharing = TRUE;
+        $share = TRUE;
       }
       else {
         $print_actions = FALSE;
-        $sharing = FALSE;
+        $share = FALSE;
       }
 
       if ($print_actions) {
         // @todo: The print link (attach a js file to module).
-        $content[] = ['#markup' => '<a class="print-page button page-print-trigger">' . $this->t('Print this page') . '</a>'];
+        $link_print = $this->t('Print this page');
 
         // The pdf export (with entity_print).
         $route_params = [
@@ -71,7 +75,7 @@ class PageContentHeader extends BlockBase {
           'export_type' => 'pdf',
         ];
         $url = Url::fromRoute('entity_print.view', $route_params);
-        $content[] = [
+        $link_pdf = [
           '#type' => 'link',
           '#prefix' => '<div>',
           '#suffix' => '</div>',
@@ -80,17 +84,27 @@ class PageContentHeader extends BlockBase {
           '#url' => $url,
         ];
       }
-
-      if ($sharing) {
-        // @todo: FSA-571 to implement.
-        $content[] = [
-          '#markup' => '
-            <div class="share hardcoded-placeholder">Share</div>',
-        ];
+      else {
+        $link_pdf = NULL;
+        $link_print = NULL;
       }
 
-      $build['page_content_header'] = $content;
+      if ($share) {
+        // @todo: FSA-571 to implement.
+        $share = ['#markup' => '<div>' . $this->t('Share') . '</div>'];
+      }
 
+      $attributes = ['class' => 'page-content-header'];
+
+      $build['page_content_header'] = [
+        '#theme' => 'fsa_content_header',
+        '#attributes' => $attributes,
+        '#intro' => $intro,
+        '#update_date' => $date,
+        '#link_pdf' => $link_pdf,
+        '#link_print' => $link_print,
+        '#share' => $share,
+      ];
     }
 
     return $build;

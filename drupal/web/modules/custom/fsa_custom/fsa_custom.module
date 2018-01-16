@@ -423,6 +423,16 @@ function fsa_custom_theme() {
         'label' => NULL,
       ],
     ],
+    'fsa_content_header' => [
+      'variables' => [
+        'attributes' => NULL,
+        'intro' => NULL,
+        'update_date' => NULL,
+        'link_pdf' => NULL,
+        'link_print' => NULL,
+        'share' => NULL,
+      ],
+    ],
   ];
 }
 

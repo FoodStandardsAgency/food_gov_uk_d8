@@ -1,0 +1,21 @@
+<div{{ attributes }}>
+    {% if intro %}
+        {{ intro }}
+    {% endif %}
+
+    {% if update_date %}
+        {{ update_date }}
+    {% endif %}
+
+    {% if link_pdf %}
+        {{ link_pdf }}
+    {% endif %}
+
+    {% if link_print %}
+        <button class="page-print-trigger">{{ link_print }}</button>
+    {% endif %}
+
+    {% if share %} {# The actual sharing functionality will be implemented in FSA-571 #}
+        {{ share }}
+    {% endif %}
+</div>
