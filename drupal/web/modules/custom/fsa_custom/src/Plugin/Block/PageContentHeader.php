@@ -77,9 +77,10 @@ class PageContentHeader extends BlockBase {
         $url = Url::fromRoute('entity_print.view', $route_params);
         $link_pdf = [
           '#type' => 'link',
-          '#prefix' => '<div>',
-          '#suffix' => '</div>',
-          '#attributes' => ['class' => 'print__link--pdf'],
+          '#attributes' => [
+            'class' => 'print__link--pdf',
+            'target' => '_blank',
+          ],
           '#title' => $this->t('View PDF'),
           '#url' => $url,
         ];
@@ -91,7 +92,7 @@ class PageContentHeader extends BlockBase {
 
       if ($share) {
         // @todo: FSA-571 to implement.
-        $share = ['#markup' => '<div>' . $this->t('Share') . '</div>'];
+        $share = ['#markup' => $this->t('Share')];
       }
 
       $attributes = ['class' => 'page-content-header'];
