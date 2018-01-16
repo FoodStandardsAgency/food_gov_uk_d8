@@ -45,6 +45,9 @@ class PageContentHeader extends BlockBase {
       if (isset($entity->field_update_date->value)) {
         $date = $entity->field_update_date->view(['label' => 'inline']);
       }
+      elseif (isset($entity->field_alert_modified->value)) {
+        $date = $entity->field_alert_modified->view(['label' => 'inline']);
+      }
       else {
         $date = NULL;
       }
