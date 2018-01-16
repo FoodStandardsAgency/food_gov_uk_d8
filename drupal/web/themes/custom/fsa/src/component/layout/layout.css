@@ -188,6 +188,8 @@
   }
 
   .layout--with-secondary-sidebar & {
+    @mixin responsive-declaration padding-left, 1em, 4em;
+
     @media (--breakpoint-md) {
       margin-left: 0em !important;
       margin-right: 20em;
