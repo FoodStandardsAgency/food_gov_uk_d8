@@ -10,6 +10,7 @@ permissions:
   - 'access webform overview'
   - 'access webform submission log'
   - 'administer blocks'
+  - 'administer fsa consultation configurations'
   - 'administer fsa rating landing content'
   - 'administer webform submission'
   - 'link to any page'

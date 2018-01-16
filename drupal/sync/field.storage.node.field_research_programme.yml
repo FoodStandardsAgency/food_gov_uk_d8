@@ -1,0 +1,20 @@
+uuid: ccde2ea3-74ba-4643-a7c6-dd7504ad5194
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_research_programme
+field_name: field_research_programme
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

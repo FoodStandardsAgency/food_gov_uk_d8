@@ -1,20 +1,25 @@
-uuid: a844ee18-89d5-4f01-9c2a-89889cc0f9f6
+uuid: e0e217fa-6aff-49ee-8ad4-c5f58b291da5
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.consultation.body
-    - field.field.node.consultation.field_consultation_closing_date
-    - field.field.node.consultation.field_consultation_launch_date
-    - field.field.node.consultation.field_consultation_summary
-    - field.field.node.consultation.field_consultations_type
-    - field.field.node.consultation.field_intro
-    - field.field.node.consultation.field_nation
-    - field.field.node.consultation.field_status
-    - node.type.consultation
+    - field.field.node.research_project.body
+    - field.field.node.research_project.field_conducted_by
+    - field.field.node.research_project.field_date_range
+    - field.field.node.research_project.field_document
+    - field.field.node.research_project.field_intro
+    - field.field.node.research_project.field_planned_completion_date
+    - field.field.node.research_project.field_research_programme
+    - field.field.node.research_project.field_research_project_code
+    - field.field.node.research_project.field_research_topics
+    - field.field.node.research_project.field_results_available
+    - field.field.node.research_project.field_team_contacts
+    - field.field.node.research_project.field_update_date
+    - node.type.research_project
   module:
     - content_moderation
     - datetime
+    - datetime_range
     - entity_browser_entity_form
     - field_group
     - inline_entity_form
@@ -22,43 +27,33 @@ dependencies:
     - text
 third_party_settings:
   field_group:
-    group_taxonomies:
+    group_project_metadata:
       children:
-        - field_consultations_type
-        - field_nation
+        - field_results_available
+        - field_research_programme
+        - field_research_topics
+        - field_date_range
+        - field_planned_completion_date
+        - field_conducted_by
       parent_name: ''
-      weight: 1
+      weight: 3
       format_type: tab
       format_settings:
-        id: ''
-        classes: ''
+        label: 'Project metadata'
         formatter: open
         description: ''
         required_fields: true
-      label: Taxonomies
-    group_consultation_metadata:
-      children:
-        - field_status
-        - field_consultation_launch_date
-        - field_consultation_closing_date
-      parent_name: ''
-      weight: 2
-      format_type: tab
-      format_settings:
         id: ''
         classes: ''
-        formatter: open
-        description: ''
-        required_fields: true
-      label: 'Consultation metadata'
-id: node.consultation.default
+      label: 'Project metadata'
+id: node.research_project.default
 targetEntityType: node
-bundle: consultation
+bundle: research_project
 mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 6
+    weight: 5
     settings:
       rows: 9
       summary_rows: 3
@@ -71,20 +66,22 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_consultation_closing_date:
-    weight: 5
+  field_conducted_by:
+    weight: 40
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_date_range:
+    weight: 38
     settings: {  }
     third_party_settings: {  }
-    type: datetime_default
+    type: daterange_default
     region: content
-  field_consultation_launch_date:
-    weight: 4
-    settings: {  }
-    third_party_settings: {  }
-    type: datetime_default
-    region: content
-  field_consultation_summary:
-    weight: 3
+  field_document:
+    weight: 6
     settings:
       form_mode: default
       label_singular: ''
@@ -98,48 +95,78 @@ content:
         entity_browser_id: media_entity_browser_document
     type: inline_entity_form_complex
     region: content
-  field_consultations_type:
-    weight: 2
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
   field_intro:
-    weight: 5
+    weight: 4
     settings:
       rows: 3
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
     region: content
-  field_nation:
-    weight: 3
+  field_planned_completion_date:
+    weight: 39
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_research_programme:
+    weight: 36
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_research_project_code:
+    weight: 2
+    settings:
+      size: 24
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_research_topics:
+    weight: 37
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
-  field_status:
-    weight: 3
+  field_results_available:
+    weight: 35
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_team_contacts:
+    weight: 7
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_update_date:
+    weight: 1
     settings: {  }
     third_party_settings: {  }
-    type: options_buttons
+    type: datetime_default
     region: content
   langcode:
     type: language_select
-    weight: 7
+    weight: 12
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 12
+    weight: 11
     settings: {  }
     region: content
     third_party_settings: {  }
   path:
     type: path
-    weight: 11
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -150,13 +177,6 @@ content:
     weight: 14
     region: content
     third_party_settings: {  }
-  sticky:
-    type: boolean_checkbox
-    weight: 13
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0
@@ -166,7 +186,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 10
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -181,3 +201,4 @@ content:
     third_party_settings: {  }
 hidden:
   promote: true
+  sticky: true

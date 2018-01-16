@@ -1,0 +1,7 @@
+history_back:
+  version: 1.x
+  js:
+    js/history-back.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery.once

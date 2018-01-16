@@ -1,16 +1,16 @@
-uuid: 21667fb8-320f-403a-8c8d-e3f5490cac88
+uuid: 91c760e3-dd25-447b-91be-a255d6f17e64
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_update_date
-    - node.type.consultation
+    - node.type.research_project
   module:
     - datetime
-id: node.consultation.field_update_date
+id: node.research_project.field_update_date
 field_name: field_update_date
 entity_type: node
-bundle: consultation
+bundle: research_project
 label: 'Last updated'
 description: ''
 required: false

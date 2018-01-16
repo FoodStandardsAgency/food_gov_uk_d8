@@ -20,6 +20,8 @@ permissions:
   - 'entity print access bundle lander'
   - 'entity print access bundle news'
   - 'entity print access bundle page'
+  - 'entity print access bundle research_programme'
+  - 'entity print access bundle research_project'
   - 'entity print access type fsa_establishment'
   - 'post comments'
   - 'search content'
