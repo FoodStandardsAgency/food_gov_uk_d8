@@ -24,6 +24,10 @@ function fsa_custom_preprocess_page(&$variables) {
   // ("a.history-back" html class).
   $variables['#attached']['library'][] = 'fsa_custom/history_back';
 
+  // Attach page print js (allows triggering page printing with
+  // (".page-print-trigger" html class).
+  $variables['#attached']['library'][] = 'fsa_custom/page_print';
+
   // Hardcoded "utility menu" links.
   // Get the contact link from settings. Default to 58 which happened to be the
   // first version contact lander.
@@ -417,6 +421,16 @@ function fsa_custom_theme() {
       'variables' => [
         'attributes' => [],
         'label' => NULL,
+      ],
+    ],
+    'fsa_content_header' => [
+      'variables' => [
+        'attributes' => NULL,
+        'intro' => NULL,
+        'update_date' => NULL,
+        'link_pdf' => NULL,
+        'link_print' => NULL,
+        'share' => NULL,
       ],
     ],
   ];

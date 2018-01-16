@@ -1,0 +1,36 @@
+{#
+/**
+ * @file
+ * FSA Content header.
+ *
+ * Displays fields and action links between page title and content area.
+ *
+ * Variables:
+ *    attributes: Classes etc. attributes.
+ *    intro: Value of field_intro
+ *    update_date: Value of field_last_updated
+ *    link_pdf: Pdf generation link
+ *    link_print: Page print text (use .page-print-trigger in wrapper to trigger the browser print dialog)
+ *    share: Sharing options (addtoany)
+#}
+<div{{ attributes }}>
+    {% if intro %}
+        {{ intro }}
+    {% endif %}
+
+    {% if update_date %}
+        {{ update_date }}
+    {% endif %}
+
+    {% if link_pdf %}
+        {{ link_pdf }}
+    {% endif %}
+
+    {% if link_print %}
+        <button class="page-print-trigger">{{ link_print }}</button>
+    {% endif %}
+
+    {% if share %} {# The actual sharing functionality will be implemented in FSA-571 #}
+        {{ share }}
+    {% endif %}
+</div>

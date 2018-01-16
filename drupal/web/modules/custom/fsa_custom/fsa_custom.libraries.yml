@@ -5,3 +5,10 @@ history_back:
   dependencies:
     - core/drupal
     - core/jquery.once
+page_print:
+  version: 1.x
+  js:
+    js/page-print.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery.once
