@@ -9,7 +9,7 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
 /**
  * Normalizes Drupal entities into an array structure good for ES.
  */
-class FsaNewsNormalizer extends NormalizerBase {
+class FsaAlertNormalizer extends NormalizerBase {
 
   use StringTranslationTrait;
 
@@ -48,7 +48,7 @@ class FsaNewsNormalizer extends NormalizerBase {
    * {@inheritdoc}
    */
   public function supportsNormalization($data, $format = NULL) {
-    return is_a($data, '\Drupal\node\Entity\Node') && $data->bundle() == 'news';
+    return is_a($data, '\Drupal\node\Entity\Node') && $data->bundle() == 'alert';
   }
 
   /**
@@ -62,18 +62,12 @@ class FsaNewsNormalizer extends NormalizerBase {
 
     $data = [
       // See comments on the mapping in the index plugin fore news content type.
-      'news_type' => 'news',
+      'news_type' => $object->get('field_alert_type')->getString(),
       'name' => $object->label(),
       'body' => implode(' ', [
-        $this->prepareTextualField($object->get('field_intro')->value),
-        $this->prepareTextualField($object->get('body')->value),
+        $this->prepareTextualField($object->get('field_alert_actiontaken')->value),
+        $this->prepareTextualField($object->get('field_alert_description')->value),
       ]),
-      'nation' => array_map(function($item) {
-        return [
-          'id' => $item->id(),
-          'label' => $item->label(),
-        ];
-      }, $object->get('field_nation')->referencedEntities()),
       'updated' => $date_changed,
     ];
 

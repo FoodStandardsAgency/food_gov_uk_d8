@@ -91,8 +91,8 @@ class SitewideSearchNewsAlerts extends SitewideSearchBase {
   protected function getIndices() {
     return [
       'news-' . $this->currentLanguage->getId(),
+      'consultation-' . $this->currentLanguage->getId(),
       'alert',
-      // 'consultation-' . $this->currentLanguage->getId(),
     ];
   }
 

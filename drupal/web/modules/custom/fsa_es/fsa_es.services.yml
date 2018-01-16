@@ -22,6 +22,18 @@ services:
       - { name: normalizer, priority: 50 }
     arguments: ['@entity.manager', '@date.formatter']
 
+  fsa_es.normalizer.fsa_alert_normalizer:
+    class: Drupal\fsa_es\Plugin\Normalizer\FsaAlertNormalizer
+    tags:
+      - { name: normalizer, priority: 50 }
+    arguments: ['@entity.manager', '@date.formatter']
+
+  fsa_es.normalizer.fsa_consultation_normalizer:
+    class: Drupal\fsa_es\Plugin\Normalizer\FsaConsultationNormalizer
+    tags:
+      - { name: normalizer, priority: 50 }
+    arguments: ['@entity.manager', '@date.formatter']
+
   fsa_es.search_service:
     class: Drupal\fsa_es\SearchService
     arguments: ['@elasticsearch_helper.elasticsearch_client']
