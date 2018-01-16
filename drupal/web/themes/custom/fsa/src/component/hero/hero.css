@@ -25,6 +25,10 @@
       bottom: 0;
       left: 0;
       display: block;
+
+      .theme--term & {
+        background-color: var(--color-lighter-gray);
+      }
     }
   }
 }
@@ -48,6 +52,22 @@
     padding-bottom: 10em;
   }
 
+  .theme--term & {
+    @mixin responsive-declaration padding-right, 1em, 4em;
+    @mixin responsive-declaration padding-left, 1em, 4em;
+    max-width: var(--content-max-width);
+
+    @media (--breakpoint-md) {
+      padding-top: 4em;
+      padding-bottom: 1em;
+    }
+
+    @media (--breakpoint-lg) {
+      padding-top: 5em;
+      padding-bottom: 2em;
+    }
+  }
+
   a {
     color: var(--color-white);
   
@@ -68,6 +88,13 @@
 /* Hero title */
 .hero__title {
   text-align: center;
+
+  .theme--term & {
+    @media (--breakpoint-md) {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
 }
 
 .hero__title h1,
@@ -92,6 +119,17 @@
     height: 10px;
     display: block;
     transform: translateX(-50%);
+
+    .theme--term & {
+      display: none;
+    }
+  }
+
+  .theme--term & {
+    color: var(--dark-primary-color);
+    @mixin responsive-declaration font-size, 1.8em, 2.0em;
+    @mixin responsive-declaration line-height, 1.2, 1.1;
+    margin-bottom: 0;
   }
 }
 
@@ -135,6 +173,10 @@
   
     @media (--breakpoint-lg) {
       background-size: 1920px 800px;
+    }
+
+    .theme--term & {
+      display: none;
     }
     
     .svg {
@@ -196,6 +238,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    .theme--term & {
+      background-color: var(--color-white);
+    }
   }
 }
 
@@ -289,6 +335,10 @@
 
   .hero.hero--with-content & {
     color: var(--color-white);
+
+    .theme--term & {
+      color: var(--color-black);
+    }
   }
 
   &:not(:last-child):after {
@@ -304,6 +354,10 @@
 
     .hero.hero--with-content & {
       background-color: var(--color-white);
+
+      .theme--term & {
+        background-color: var(--color-light-gray);
+      }
     }
   }
 }
@@ -312,6 +366,10 @@
 
   .hero.hero--with-content & {
     color: var(--color-white);
+
+    .theme--term & {
+      color: var(--primary-color);
+    }
   }
 
   :--not-touch &:--enter {
