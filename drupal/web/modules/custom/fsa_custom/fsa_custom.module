@@ -86,16 +86,23 @@ function fsa_custom_preprocess_page(&$variables) {
 function fsa_custom_preprocess_page_title(&$variables) {
 
   $route = \Drupal::routeMatch();
-  $node = $route->getParameter('node');
-  if (is_object($node)) {
-    $nodetype = $node->getType();
+  $entity = FALSE;
+  if ($route->getParameter('node')) {
+    $entity = $route->getParameter('node');
+  }
+  elseif ($route->getParameter('media')) {
+    $entity = $route->getParameter('media');
+  }
+
+  if (is_object($entity)) {
+    $nodetype = $entity->getType();
     $typemanager = \Drupal::entityTypeManager();
 
     // Init the custom title prefix.
     $title_prefix = [];
 
-    if ($node->hasField('field_nation')) {
-      $nations = $node->get('field_nation');
+    if ($entity->hasField('field_nation')) {
+      $nations = $entity->get('field_nation');
       if (isset($nations[0])) {
         // Add regional variations label with same classes as would be added via
         // WYSIWYG editor.
@@ -132,9 +139,9 @@ function fsa_custom_preprocess_page_title(&$variables) {
       }
     }
 
-    if ($node->hasField('field_consultations_type')) {
+    if ($entity->hasField('field_consultations_type')) {
       // Add consultation type to title prefix.
-      $types = $node->get('field_consultations_type');
+      $types = $entity->get('field_consultations_type');
       if (isset($types[0])) {
         $consultation_type = $typemanager->getStorage('taxonomy_term')->load($types[0]->getValue()['target_id'])->getName();
         $title_prefix[] = [
