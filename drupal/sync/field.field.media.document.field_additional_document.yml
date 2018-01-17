@@ -11,10 +11,10 @@ id: media.document.field_additional_document
 field_name: field_additional_document
 entity_type: media
 bundle: document
-label: 'Additional documents'
+label: 'Supporting documents'
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
