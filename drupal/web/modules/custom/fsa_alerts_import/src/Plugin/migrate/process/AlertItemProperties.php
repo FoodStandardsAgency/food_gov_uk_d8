@@ -53,7 +53,7 @@ class AlertItemProperties extends ProcessPluginBase {
       $cids = [];
       foreach ($item['country'] as $country) {
         $cid = AlertImportHelpers::getIdFromUri($country['@id']);
-
+        // @todo: Store external country codes to nation taxonomy and map instead of assumed production term ids.
         switch ($cid) {
           case 'GB-ENG':
             $cids[] = '31';
