@@ -5,6 +5,9 @@
  * Contains fsa_document_library.module.
  */
 
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Form\FormStateInterface;
+
 /**
  * Implements hook_theme().
  */
@@ -23,4 +26,22 @@ function fsa_document_library_theme() {
       ],
     ],
   ];
+}
+
+/**
+ * Implements hook_entity_base_field_info_alter().
+ */
+function fsa_document_library_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type) {
+  if ($entity_type->id() == 'media' && !empty($fields['name'])) {
+    $fields['name']->setDescription(t('Media name is displayed as title on individual document pages and is utilised within CMS document search'));
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function fsa_document_library_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'media_document_form') {
+    $form['field_document']['widget'][0]['#process'][1][0] = 'Drupal\fsa_document_library\Plugin\Field\FieldWidget\FsaDocumentLibraryFileWidget';
+  }
 }

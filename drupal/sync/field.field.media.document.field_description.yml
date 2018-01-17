@@ -10,7 +10,7 @@ field_name: field_description
 entity_type: media
 bundle: document
 label: Description
-description: ''
+description: 'This will be used for something, we''re just not sure yet, but keeping for now!'
 required: false
 translatable: true
 default_value: {  }

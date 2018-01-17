@@ -20,7 +20,7 @@ third_party_settings:
         - field_document_category
         - field_nation
       parent_name: ''
-      weight: 2
+      weight: 3
       format_type: tab
       format_settings:
         id: ''
@@ -35,7 +35,7 @@ bundle: document
 mode: default
 content:
   field_description:
-    weight: 3
+    weight: 4
     settings:
       rows: 5
       placeholder: ''
@@ -43,7 +43,7 @@ content:
     type: string_textarea
     region: content
   field_document:
-    weight: 4
+    weight: 1
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
@@ -73,7 +73,7 @@ content:
     region: content
     settings:
       size: 60
-      placeholder: 'The name of the document displayed in download links'
+      placeholder: ''
     third_party_settings: {  }
   path:
     type: path
@@ -82,7 +82,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   translation:
-    weight: 1
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
