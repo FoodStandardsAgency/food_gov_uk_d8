@@ -130,7 +130,6 @@ class PageContentHeader extends BlockBase {
     // empty.
     $node = \Drupal::routeMatch()->getParameter('node');
     if (is_object($node) && in_array($node->getType(), self::CONTENT_TYPES_TO_HIDE)) {
-      // Dont crash if on non-node page.
       return AccessResult::forbidden();
     }
     else {
