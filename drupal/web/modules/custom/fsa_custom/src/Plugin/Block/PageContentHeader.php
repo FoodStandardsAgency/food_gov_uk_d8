@@ -2,7 +2,9 @@
 
 namespace Drupal\fsa_custom\Plugin\Block;
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 
 /**
@@ -14,6 +16,8 @@ use Drupal\Core\Url;
  * )
  */
 class PageContentHeader extends BlockBase {
+
+  const CONTENT_TYPES_TO_HIDE = ['help', 'lander', 'webform'];
 
   /**
    * {@inheritdoc}
@@ -41,11 +45,15 @@ class PageContentHeader extends BlockBase {
         $intro = NULL;
       }
 
-      // Last updated with inlined label.
-      if (isset($entity->field_update_date->value)) {
+      if ($entity->getType() == 'news') {
+        $date = \Drupal::service('date.formatter')->format($entity->getCreatedTime(), 'medium');
+      }
+      elseif (isset($entity->field_update_date->value)) {
+        // Last updated with inlined label.
         $date = $entity->field_update_date->view(['label' => 'inline']);
       }
       elseif (isset($entity->field_alert_modified->value)) {
+        // Alert modified date.
         $date = $entity->field_alert_modified->view(['label' => 'inline']);
       }
       else {
@@ -53,8 +61,7 @@ class PageContentHeader extends BlockBase {
       }
 
       // Set rules when to display print/share links and buttons.
-      $hidden_on = ['help', 'lander', 'webform'];
-      if ($entity_type == 'node' && !in_array($entity->getType(), $hidden_on)) {
+      if ($entity_type == 'node' && !in_array($entity->getType(), self::CONTENT_TYPES_TO_HIDE)) {
         $print_actions = TRUE;
         $share = TRUE;
       }
@@ -112,6 +119,22 @@ class PageContentHeader extends BlockBase {
     }
 
     return $build;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function blockAccess(AccountInterface $account) {
+
+    // Prevent empty block being placed on a pages where content would anyway be
+    // empty.
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if (is_object($node) && in_array($node->getType(), self::CONTENT_TYPES_TO_HIDE)) {
+      return AccessResult::forbidden();
+    }
+    else {
+      return AccessResult::allowed();
+    }
   }
 
 }
