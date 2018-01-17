@@ -4,6 +4,7 @@ namespace Drupal\fsa_custom\Plugin\Block;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\File\FileSystem;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 
@@ -47,6 +48,20 @@ class PageContentHeader extends BlockBase {
 
       if ($parameter == 'node' && $entity->getType() == 'news') {
         $date = \Drupal::service('date.formatter')->format($entity->getCreatedTime(), 'medium');
+      }
+      elseif ($parameter == 'media' && $entity->bundle() == 'document') {
+        // Get the file last update timestamp.
+        $uri = $entity->field_document->entity->getFileUri();
+        $stream_wrapper_manager = \Drupal::service('stream_wrapper_manager')->getViaUri($uri);
+        $file_path = $stream_wrapper_manager->realpath();
+        if (file_exists($file_path)) {
+          $timestamp = filemtime($file_path);
+        }
+        else {
+          // Fallback to entity changed time.
+          $timestamp = $entity->getChangedTime();
+        }
+        $date = $this->t('Last updated') . \Drupal::service('date.formatter')->format($timestamp, 'medium');
       }
       elseif (isset($entity->field_update_date->value)) {
         // Last updated with inlined label.
