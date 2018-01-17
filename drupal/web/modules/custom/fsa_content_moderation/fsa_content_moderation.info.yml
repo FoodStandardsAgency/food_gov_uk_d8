@@ -1,0 +1,5 @@
+name: FSA content moderation
+description: Customises content moderation.
+type: module
+core: 8.x
+package: FSA
