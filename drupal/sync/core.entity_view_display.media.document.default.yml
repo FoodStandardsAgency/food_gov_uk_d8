@@ -29,14 +29,6 @@ content:
     third_party_settings: {  }
     type: fsa_document_mime_type_formatter
     region: content
-  field_document_category:
-    weight: 3
-    label: inline
-    settings:
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
   name:
     label: hidden
     type: string
@@ -50,6 +42,7 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_document_category: true
   field_nation: true
   langcode: true
   thumbnail: true
