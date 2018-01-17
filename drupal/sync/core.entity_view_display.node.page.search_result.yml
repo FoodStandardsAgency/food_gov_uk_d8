@@ -20,7 +20,6 @@ dependencies:
     - field.field.node.page.field_media_library_liftup_image
     - field.field.node.page.field_nation
     - field.field.node.page.field_related_content
-    - field.field.node.page.field_subpages
     - field.field.node.page.field_team_contacts
     - field.field.node.page.field_topic
     - field.field.node.page.field_update_date
@@ -82,7 +81,6 @@ hidden:
   field_media_library_liftup_image: true
   field_nation: true
   field_related_content: true
-  field_subpages: true
   field_team_contacts: true
   field_topic: true
   langcode: true
