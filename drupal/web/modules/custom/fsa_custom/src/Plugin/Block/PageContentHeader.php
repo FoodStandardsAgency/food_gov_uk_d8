@@ -4,6 +4,7 @@ namespace Drupal\fsa_custom\Plugin\Block;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\File\FileSystem;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 
@@ -27,7 +28,7 @@ class PageContentHeader extends BlockBase {
     $content = [];
     $route = \Drupal::routeMatch();
 
-    $parameters = ['node', 'taxonomy_term'];
+    $parameters = ['media', 'node', 'taxonomy_term'];
     foreach ($parameters as $parameter) {
       // Skip if this was not the entity we are looking for.
       if (($entity = $route->getParameter($parameter)) == NULL) {
@@ -45,8 +46,22 @@ class PageContentHeader extends BlockBase {
         $intro = NULL;
       }
 
-      if ($entity->getType() == 'news') {
+      if ($parameter == 'node' && $entity->getType() == 'news') {
         $date = \Drupal::service('date.formatter')->format($entity->getCreatedTime(), 'medium');
+      }
+      elseif ($parameter == 'media' && $entity->bundle() == 'document') {
+        // Get the file last update timestamp.
+        $uri = $entity->field_document->entity->getFileUri();
+        $stream_wrapper_manager = \Drupal::service('stream_wrapper_manager')->getViaUri($uri);
+        $file_path = $stream_wrapper_manager->realpath();
+        if (file_exists($file_path)) {
+          $timestamp = filemtime($file_path);
+        }
+        else {
+          // Fallback to entity changed time.
+          $timestamp = $entity->getChangedTime();
+        }
+        $date = $this->t('Last updated: @date', ['@date' => \Drupal::service('date.formatter')->format($timestamp, 'medium')]);
       }
       elseif (isset($entity->field_update_date->value)) {
         // Last updated with inlined label.

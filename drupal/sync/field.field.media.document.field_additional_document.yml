@@ -1,0 +1,27 @@
+uuid: f61534a8-23c7-4aa5-8990-7d67d19679a9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_additional_document
+    - media_entity.bundle.document
+  module:
+    - file
+id: media.document.field_additional_document
+field_name: field_additional_document
+entity_type: media
+bundle: document
+label: 'Additional documents'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: media/document/additional
+  file_extensions: 'pdf doc docx xls xlsx ppt pptx txt rtf'
+  max_filesize: ''
+  description_field: true
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file
