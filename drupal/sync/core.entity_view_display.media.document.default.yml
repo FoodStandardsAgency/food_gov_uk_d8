@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.document.field_additional_document
     - field.field.media.document.field_description
     - field.field.media.document.field_document
     - field.field.media.document.field_document_category
@@ -15,6 +16,13 @@ targetEntityType: media
 bundle: document
 mode: default
 content:
+  field_additional_document:
+    weight: 3
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: fsa_document_mime_type_formatter
+    region: content
   field_description:
     weight: 1
     label: hidden

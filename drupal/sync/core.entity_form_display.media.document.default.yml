@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.document.field_additional_document
     - field.field.media.document.field_description
     - field.field.media.document.field_document
     - field.field.media.document.field_document_category
@@ -11,7 +12,7 @@ dependencies:
   module:
     - content_moderation
     - field_group
-    - file
+    - fsa_document_library
     - path
 third_party_settings:
   field_group:
@@ -29,11 +30,31 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Taxonomies
+    group_additional_documents:
+      children:
+        - field_additional_document
+      parent_name: ''
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: 'Upload additional files that are related to this document only.'
+        required_fields: true
+      label: 'Additional documents'
 id: media.document.default
 targetEntityType: media
 bundle: document
 mode: default
 content:
+  field_additional_document:
+    weight: 8
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
   field_description:
     weight: 4
     settings:
