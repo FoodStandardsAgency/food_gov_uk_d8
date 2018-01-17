@@ -19,7 +19,6 @@ dependencies:
     - field.field.node.page.field_media_library_liftup_image
     - field.field.node.page.field_nation
     - field.field.node.page.field_related_content
-    - field.field.node.page.field_subpages
     - field.field.node.page.field_team_contacts
     - field.field.node.page.field_topic
     - field.field.node.page.field_update_date
@@ -27,7 +26,6 @@ dependencies:
   module:
     - entity_print
     - entity_reference_revisions
-    - fsa_subpages
     - text
     - user
 third_party_settings:
@@ -76,15 +74,6 @@ content:
   field_liftups:
     type: entity_reference_revisions_entity_view
     weight: 2
-    label: hidden
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings: {  }
-    region: content
-  field_subpages:
-    type: entity_reference_revisions_subpages_entity_view
-    weight: 1
     label: hidden
     settings:
       view_mode: default
