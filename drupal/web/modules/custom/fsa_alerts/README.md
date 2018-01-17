@@ -1,6 +1,16 @@
 FSA Alerts
 =======
 
+Creates Alert content related blocks
+* Backlink from alert node
+  * Extends over to News & Consultations backlink to avoid code duplication 
+  (this coud probably be better to move in more universal module)
+* Alert subscribe CTA
+  * Block to display subscribe link
+* Alert subscribe hero
+  * Block to display alert pages hero content
+  
+
 [Alert API documentation](http://fsa-staging-alerts.epimorphics.net/food-alerts/ui/reference)
 
 Alert API data is imported to Drupal `alerts_allergen` taxonomy and `alert` nodes.
