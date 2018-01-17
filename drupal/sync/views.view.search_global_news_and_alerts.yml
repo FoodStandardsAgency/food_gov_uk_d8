@@ -168,7 +168,7 @@ display:
           hide_alter_empty: true
           view_mode:
             -
-              'node:page': search_result
+              node: search_result
           set_result_on_entity: 0
           entity_type: null
           entity_field: null

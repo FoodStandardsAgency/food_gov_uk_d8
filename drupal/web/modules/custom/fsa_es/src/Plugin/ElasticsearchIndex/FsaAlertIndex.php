@@ -67,6 +67,20 @@ class FsaAlertIndex extends FsaIndexBase {
               'type' => 'text',
               'analyzer' => $text_analyzer,
             ],
+            'nation' => [
+              'properties' => [
+                'id' => ['type' => 'keyword'],
+                'label' => [
+                  'type' => 'text',
+                  'index' => 'not_analyzed',
+                  'fields' => [
+                    'keyword' => [
+                      'type' => 'keyword',
+                    ],
+                  ],
+                ],
+              ],
+            ],
             'updated' => [
               'type' => 'date',
             ],

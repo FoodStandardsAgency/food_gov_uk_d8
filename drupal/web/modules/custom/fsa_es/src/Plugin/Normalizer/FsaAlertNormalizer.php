@@ -68,6 +68,12 @@ class FsaAlertNormalizer extends NormalizerBase {
         $this->prepareTextualField($object->get('field_alert_actiontaken')->value),
         $this->prepareTextualField($object->get('field_alert_description')->value),
       ]),
+      'nation' => array_map(function($item) {
+        return [
+          'id' => $item->id(),
+          'label' => $item->label(),
+        ];
+      }, $object->get('field_nation')->referencedEntities()),
       'updated' => $date_changed,
     ];
 
