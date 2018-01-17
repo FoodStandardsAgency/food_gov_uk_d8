@@ -27,7 +27,7 @@ class PageContentHeader extends BlockBase {
     $content = [];
     $route = \Drupal::routeMatch();
 
-    $parameters = ['node', 'taxonomy_term'];
+    $parameters = ['media', 'node', 'taxonomy_term'];
     foreach ($parameters as $parameter) {
       // Skip if this was not the entity we are looking for.
       if (($entity = $route->getParameter($parameter)) == NULL) {
@@ -45,7 +45,7 @@ class PageContentHeader extends BlockBase {
         $intro = NULL;
       }
 
-      if ($entity->getType() == 'news') {
+      if ($parameter == 'node' && $entity->getType() == 'news') {
         $date = \Drupal::service('date.formatter')->format($entity->getCreatedTime(), 'medium');
       }
       elseif (isset($entity->field_update_date->value)) {
