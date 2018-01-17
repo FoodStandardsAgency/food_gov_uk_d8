@@ -519,6 +519,7 @@ blockquote {
 
 
     :--not-touch &:--enter {
+      cursor: pointer;
       text-decoration: underline;
     }
   }
