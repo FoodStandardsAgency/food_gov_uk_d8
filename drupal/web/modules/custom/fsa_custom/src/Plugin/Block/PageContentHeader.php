@@ -61,7 +61,7 @@ class PageContentHeader extends BlockBase {
           // Fallback to entity changed time.
           $timestamp = $entity->getChangedTime();
         }
-        $date = $this->t('Last updated') . \Drupal::service('date.formatter')->format($timestamp, 'medium');
+        $date = $this->t('Last updated: @date', ['@date' => \Drupal::service('date.formatter')->format($timestamp, 'medium')]);
       }
       elseif (isset($entity->field_update_date->value)) {
         // Last updated with inlined label.
