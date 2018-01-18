@@ -25,14 +25,29 @@
  * @see template_preprocess_block()
  */
 #}
-<h3 class="heading heading--background">{{ 'Refine search'|t }}</h3>
-<div{{ attributes }}>
-  {{ title_prefix }}
-  {% if label %}
-    <h2{{ title_attributes }}>{{ label }}</h2>
-  {% endif %}
-  {{ title_suffix }}
-  {% block content %}
-    {{ content }}
-  {% endblock %}
+{% set randomID = [] %}
+{% for i in 1..10 %}
+    {% set alpha = 'abcdefghijklmnopqrstuvwxyz' %}
+    {% set alphaUpper = alpha|upper %}
+    {% set numbers = '0123456789' %}
+    {% set randomCharacter = random(alpha ~ alphaUpper ~ numbers ~ '-_') %}
+    {% set randomID = randomID|merge([randomCharacter]) %}
+{% endfor %}
+{% set randomID = randomID|join %}
+
+<header class="search__sidebar-header toggle-button" data-state="is-open" data-theme="dynamic" data-state-element="#collapsible-{{ randomID }}" data-breakpoint="mobile" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
+  <h3 class="heading">{{ 'Refine search'|t }}</h3>
+</header>
+
+<div class="toggle-content" id="collapsible-{{ randomID }}" aria-hidden="true">
+  <div{{ attributes }}>
+    {{ title_prefix }}
+    {% if label %}
+      <h2{{ title_attributes }}>{{ label }}</h2>
+    {% endif %}
+    {{ title_suffix }}
+    {% block content %}
+      {{ content }}
+    {% endblock %}
+  </div>
 </div>

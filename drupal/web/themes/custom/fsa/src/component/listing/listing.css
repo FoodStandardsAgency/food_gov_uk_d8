@@ -123,7 +123,9 @@
     }
 
     &.item--has-meta {
-      display: flex;
+      @media (--breakpoint-md) {
+        display: flex;
+      }
     }
   }
 
@@ -150,9 +152,12 @@
 
 .item__tag {
   .listing & {
-    margin-bottom: 1em;
     text-transform: uppercase;
     font-weight: 700;
+
+    @media (--breakpoint-md) {
+      margin-bottom: 1em;
+    }
   }
 }
 
@@ -160,6 +165,15 @@
   .listing & {
     color: var(--color-gray);
     margin-bottom: 0.5em;
+
+    .label__inline {
+      position: absolute !important;
+      clip: rect(1px, 1px, 1px, 1px);
+      overflow: hidden;
+      height: 1px;
+      width: 1px;
+      word-wrap: normal;
+    }
   }
 }
 
@@ -176,6 +190,25 @@
     :--heading {
       @mixin reset-font-style;
       font-weight: 600;
+    }
+
+    .field__field_update_date {
+      display: none;
+    }
+
+    .field__field_intro,
+    .field__body {
+      display: none;
+
+      @media (--breakpoint-md) {
+        display: block;
+      }
+    }
+  }
+
+  .listing .item__meta + & {
+    @media (--breakpoint-md) {
+      padding-left: 2em;
     }
   }
 }
