@@ -39,3 +39,13 @@ function fsa_consultations_install() {
     }
   }
 }
+
+/**
+ * Add consultation_standard_text schema for configurations.
+ */
+function fsa_consultations_update_8001() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('config.fsa_consultations');
+  $config->set('consultation_standard_text', '');
+  $config->save(TRUE);
+}
