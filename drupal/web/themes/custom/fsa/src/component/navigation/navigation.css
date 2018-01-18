@@ -745,11 +745,21 @@
     padding: 0;
     @mixin responsive-declaration padding-right, 1em, 4em;
     @mixin responsive-declaration padding-left, 1em, 4em;
+    overflow-x: scroll;
+
+    @media (--breakpoint-md) {
+      overflow-x: visible;
+    }
   
     li {
       list-style: none;
       font-weight: 600;
       margin: 0 1em;
+      flex: 0 0 auto;
+
+      @media (--breakpoint-md) {
+        flex: 1 1 auto;
+      }
   
       a {
         display: block;

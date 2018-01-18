@@ -66,6 +66,7 @@ h6 {
     background-color: var(--dark-secondary-color);
     color: var(--color-white);
     display: block;
+    width: 100%;
     @mixin reset-font-style;
     font-weight: 600;
     padding: 1em;
