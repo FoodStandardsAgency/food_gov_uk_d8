@@ -179,12 +179,9 @@
 
   .theme--news-alerts .layout--with-sidebar &,
   .theme--page:not(.theme--service) .layout--with-sidebar &,
-  .theme--subscribe .layout--with-sidebar & {
+  .theme--subscribe .layout--with-sidebar &,
+  .theme--consultation .layout--with-sidebar & {
     max-width: var(--content-max-width);
-  
-    /* @media (--breakpoint-lg) {
-      margin-left: 19.5em;
-    } */
   }
 
   .layout--with-secondary-sidebar & {
