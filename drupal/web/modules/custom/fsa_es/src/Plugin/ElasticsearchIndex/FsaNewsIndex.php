@@ -4,15 +4,15 @@ namespace Drupal\fsa_es\Plugin\ElasticsearchIndex;
 
 /**
  * @ElasticsearchIndex(
- *   id = "page_index",
- *   label = @Translation("FSA Page Index"),
- *   indexName = "page-{langcode}",
+ *   id = "news_index",
+ *   label = @Translation("FSA News Index"),
+ *   indexName = "news-{langcode}",
+ *   typeName = "news",
  *   entityType = "node",
- *   bundle = "page",
- *   typeName = "page",
+ *   bundle = "news",
  * )
  */
-class FsaPageIndex extends FsaIndexBase {
+class FsaNewsIndex extends FsaIndexBase {
 
   /**
    * {@inheritdoc}
@@ -20,7 +20,7 @@ class FsaPageIndex extends FsaIndexBase {
   public function setup() {
     // Create one index per language, so that we can have different analyzers.
     foreach ($this->language_manager->getLanguages() as $langcode => $language) {
-      $index_name = 'page-' . $langcode;
+      $index_name = 'news-' . $langcode;
 
       if (!$this->client->indices()->exists(['index' => $index_name])) {
         $this->client->indices()->create([
@@ -36,7 +36,7 @@ class FsaPageIndex extends FsaIndexBase {
 
         $mapping = [
           'index' => $index_name,
-          'type' => 'page',
+          'type' => 'news',
           'body' => [
             'properties' => [
               'id' => [
@@ -44,6 +44,11 @@ class FsaPageIndex extends FsaIndexBase {
               ],
               'langcode' => [
                 'type' => 'keyword',
+              ],
+              // Refers to news type that is displayed as a facet on the news
+              // search page.
+              'news_type' => [
+                'type' => 'keyword'
               ],
               'name' => [
                 'type' => 'text',
@@ -54,35 +59,6 @@ class FsaPageIndex extends FsaIndexBase {
               'body' => [
                 'type' => 'text',
                 'analyzer' => $text_analyzer,
-              ],
-              'content_type' => [
-                'properties' => [
-                  'id' => ['type' => 'keyword'],
-                  'label' => [
-                    'type' => 'text',
-                    'index' => 'not_analyzed',
-                    'fields' => [
-                      'keyword' => [
-                        'type' => 'keyword',
-                      ],
-                    ],
-                  ],
-                ],
-              ],
-              'audience' => [
-                'properties' => [
-                  'id' => ['type' => 'keyword'],
-                  'depth' => ['type' => 'integer'],
-                  'label' => [
-                    'type' => 'text',
-                    'index' => 'not_analyzed',
-                    'fields' => [
-                      'keyword' => [
-                        'type' => 'keyword',
-                      ],
-                    ],
-                  ],
-                ],
               ],
               'nation' => [
                 'properties' => [

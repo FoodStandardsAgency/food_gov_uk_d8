@@ -1,0 +1,57 @@
+uuid: 674b52b1-6027-4f24-9041-f5b32c3c469c
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - fsa_custom
+    - system
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: news_alerts_search_link_tabs
+theme: fsa
+region: content_top
+weight: -8
+provider: null
+plugin: fsa_link_tabs
+settings:
+  id: fsa_link_tabs
+  label: 'News/alerts search tabs'
+  provider: fsa_custom
+  label_display: '0'
+  class: 'tab-row tab-row--capitalize'
+  links:
+    link-0:
+      url: /news-alerts/search
+      text: All
+      route_parameters: ''
+      query: ''
+    link-1:
+      url: ''
+      text: ''
+      route_parameters: ''
+      query: ''
+    link-2:
+      url: ''
+      text: ''
+      route_parameters: ''
+      query: ''
+    link-3:
+      url: ''
+      text: ''
+      route_parameters: ''
+      query: ''
+    link-4:
+      url: ''
+      text: ''
+      route_parameters: ''
+      query: ''
+visibility:
+  request_path:
+    id: request_path
+    pages: '/news-alerts/search*'
+    negate: false
+    context_mapping: {  }

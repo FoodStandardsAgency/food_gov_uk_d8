@@ -19,7 +19,7 @@ provider: null
 plugin: fsa_link_tabs
 settings:
   id: fsa_link_tabs
-  label: 'Search tabs'
+  label: 'Global search tabs'
   provider: fsa_custom
   label_display: '0'
   class: 'tab-row tab-row--capitalize'
@@ -40,7 +40,7 @@ settings:
       route_parameters: ''
       query: '{"keywords": "[current-page:query:keywords]"}'
     link-3:
-      url: /search/news
+      url: /search/news-alerts
       text: 'News & alerts'
       route_parameters: ''
       query: '{"keywords": "[current-page:query:keywords]"}'

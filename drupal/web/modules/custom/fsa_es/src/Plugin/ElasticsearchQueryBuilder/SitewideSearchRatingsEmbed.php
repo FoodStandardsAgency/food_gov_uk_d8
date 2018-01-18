@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * @ElasticsearchQueryBuilder(
  *   id = "sitewide_search_ratings_embed",
- *   label = @Translation("Ratings (embedded)"),
+ *   label = @Translation("Global search: Ratings (embedded)"),
  *   description = @Translation("Provides query builder for embedded ratings search.")
  * )
  */

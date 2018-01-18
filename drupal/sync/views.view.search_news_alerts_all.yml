@@ -1,17 +1,14 @@
-uuid: 5ee9865a-2420-4b83-9938-b1846fac2286
+uuid: 236d1c1c-8db2-48c5-97a5-2b80495464da
 langcode: en
 status: true
 dependencies:
-  config:
-    - taxonomy.vocabulary.audience
-    - taxonomy.vocabulary.content_type
   module:
     - better_exposed_filters
     - elasticsearch_helper_views
     - fsa_es
     - user
-id: search_global_guidance
-label: 'Global search: Guidance'
+id: search_news_alerts_all
+label: 'News/alerts search: All'
 module: views
 description: ''
 tag: search_global
@@ -35,7 +32,7 @@ display:
       query:
         type: views_query
         options:
-          query_builder: sitewide_search_guidance
+          query_builder: news_alerts_search_all
           entity_relationship:
             entity_type_key: '@node'
             entity_id_key: _id
@@ -171,7 +168,11 @@ display:
           hide_alter_empty: true
           view_mode:
             -
-              'node:page': search_result
+              'node:news': search_result
+            -
+              'node:alert': search_result
+            -
+              'node:consultation': search_result
           set_result_on_entity: 0
           entity_type: null
           entity_field: null
@@ -217,142 +218,8 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           plugin_id: fsa_keyword
-        guidance_audience:
-          id: guidance_audience
-          table: elasticsearch_result
-          field: guidance_audience
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: guidance_audience_op
-            label: Audience
-            description: ''
-            use_operator: false
-            operator: guidance_audience_op
-            identifier: audience
-            required: false
-            remember: false
-            multiple: true
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              editor: '0'
-              administrator: '0'
-              author: '0'
-            reduce: 0
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: audience
-          hierarchy: 1
-          error_message: 1
-          plugin_id: fsa_guidance_audience
-        nation:
-          id: nation
-          table: elasticsearch_result
-          field: nation
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: in
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: nation_op
-            label: Region
-            description: ''
-            use_operator: false
-            operator: nation_op
-            identifier: region
-            required: false
-            remember: false
-            multiple: true
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              editor: '0'
-              author: '0'
-              fsa_admin: '0'
-              administrator: '0'
-            reduce: 0
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          plugin_id: fsa_nation
-        guidance_content_type:
-          id: guidance_content_type
-          table: elasticsearch_result
-          field: guidance_content_type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value:
-            28: '28'
-            183: '183'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: content_type
-          hierarchy: 0
-          error_message: true
-          plugin_id: fsa_guidance_content_type
       sorts: {  }
-      title: Guidance
+      title: 'News and alerts'
       header: {  }
       footer:
         result:
@@ -381,7 +248,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -392,7 +258,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: search/guidance
+      path: news-alerts/search
       exposed_block: true
     cache_metadata:
       max-age: -1
@@ -400,7 +266,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
