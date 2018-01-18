@@ -46,14 +46,9 @@ class FsaConsultationIndex extends FsaIndexBase {
                 'type' => 'keyword',
               ],
               // Refers to news type that is displayed as a facet on the news
-              // search page:
-              // - "news" for "news" content type
-              // - value of "field_alert_type" field on "alert" content type
-              //   (allergy or food alert)
-              // - value of "field_consultations_type" field on "consultation"
-              //   content type
+              // search page.
               'news_type' => [
-                'type' => 'keyword',
+                'type' => 'keyword'
               ],
               'name' => [
                 'type' => 'text',

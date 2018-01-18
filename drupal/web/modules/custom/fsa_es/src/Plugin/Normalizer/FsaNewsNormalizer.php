@@ -62,7 +62,7 @@ class FsaNewsNormalizer extends NormalizerBase {
 
     $data = [
       // See comments on the mapping in the index plugin fore news content type.
-      'news_type' => 'news',
+      'news_type' => $this->t('News'),
       'name' => $object->label(),
       'body' => implode(' ', [
         $this->prepareTextualField($object->get('field_intro')->value),

@@ -60,9 +60,12 @@ class FsaConsultationNormalizer extends NormalizerBase {
     // Store either date updated or date changed.
     $date_changed = $this->dateFormatter->format($object->get('changed')->value, 'custom', DATETIME_DATETIME_STORAGE_FORMAT, DATETIME_STORAGE_TIMEZONE);
 
+    // Get consultations type field.
+    $type_field = $object->get('field_consultations_type');
+
     $data = [
       // See comments on the mapping in the index plugin fore news content type.
-      'news_type' => $object->get('field_consultations_type')->getString(),
+      'news_type' => $type_field->entity ? $type_field->entity->label() : NULL,
       'name' => $object->label(),
       'body' => implode(' ', [
         $this->prepareTextualField($object->get('field_intro')->value),

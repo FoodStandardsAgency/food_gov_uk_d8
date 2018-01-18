@@ -78,4 +78,12 @@ function fsa_es_views_data_alter(array &$data) {
       'id' => 'fsa_news_alerts_type',
     ],
   ];
+
+  $data['elasticsearch_result']['news_type'] = [
+    'title' => t('News type'),
+    'help' => t('News type'),
+    'filter' => [
+      'id' => 'fsa_news_type',
+    ],
+  ];
 }

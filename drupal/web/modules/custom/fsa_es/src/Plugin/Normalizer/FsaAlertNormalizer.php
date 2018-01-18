@@ -60,9 +60,12 @@ class FsaAlertNormalizer extends NormalizerBase {
     // Store either date updated or date changed.
     $date_changed = $this->dateFormatter->format($object->get('changed')->value, 'custom', DATETIME_DATETIME_STORAGE_FORMAT, DATETIME_STORAGE_TIMEZONE);
 
+    // Get alert type field.
+    $type_field = $object->get('field_alert_type');
+
     $data = [
       // See comments on the mapping in the index plugin fore news content type.
-      'news_type' => $object->get('field_alert_type')->getString(),
+      'news_type' => $this->getNewsType($type_field->value),
       'name' => $object->label(),
       'body' => implode(' ', [
         $this->prepareTextualField($object->get('field_alert_actiontaken')->value),
@@ -78,6 +81,23 @@ class FsaAlertNormalizer extends NormalizerBase {
     ];
 
     return $data;
+  }
+
+  /**
+   * Returns new type depending on alert type field value.
+   *
+   * @param $value
+   *
+   * @return array|null
+   */
+  protected function getNewsType($value) {
+    $types = [
+      'AA' => $this->t('Allergy alert'),
+      'FAFA' => $this->t('Food alert'),
+      'PRIN' => $this->t('Food alert'),
+    ];
+
+    return isset($types[$value]) ? $types[$value] : NULL;
   }
 
 }
