@@ -6,12 +6,12 @@ use Drupal\views\ViewExecutable;
 
 /**
  * @ElasticsearchQueryBuilder(
- *   id = "sitewide_search_all",
- *   label = @Translation("Global search: All"),
- *   description = @Translation("Provides query builder for site-wide global search.")
+ *   id = "news_alerts_search_all",
+ *   label = @Translation("News and alerts search: All"),
+ *   description = @Translation("Provides query builder for news and alerts search.")
  * )
  */
-class SitewideSearchAll extends SitewideSearchBase {
+class NewsAlertsSearchAll extends SitewideSearchBase {
 
   /**
    * Builds Elasticsearch base query.
@@ -68,8 +68,12 @@ class SitewideSearchAll extends SitewideSearchBase {
    * @return array
    */
   protected function getIndices() {
+    $langcode = $this->currentLanguage->getId();
+
     return [
-      'page-' . $this->currentLanguage->getId(),
+      'alert',
+      'news-' . $langcode,
+      'consultation-' . $langcode,
     ];
   }
 

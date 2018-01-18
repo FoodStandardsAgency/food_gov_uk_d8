@@ -1,13 +1,12 @@
 <?php
 
-use Drupal\Component\Utility\Html;
 use Drupal\views\Views;
 use Drupal\views\ViewExecutable;
 
 /**
  * Implements hook_block_alter().
  *
- * Creates a copy of a search result view's exposed form block definition and
+ * Changes the view's exposed form block definition and
  * hands that to a custom block plugin which will only show relevant elements
  * on the search form.
  *
@@ -16,18 +15,11 @@ use Drupal\views\ViewExecutable;
  * @see Drupal\fsa_es\Plugin\Block\ViewsExposedFilterSearchBlock
  */
 function fsa_es_block_alter(&$info) {
-  // @todo Make search related views block delta discoverable.
-  $deltas = [
-    'views_exposed_filter_block:search_global_ratings-page_1',
-    'views_exposed_filter_block:search_global_guidance-page_1',
-  ];
-
-  foreach ($deltas as $delta) {
-    if (isset($info[$delta])) {
+  foreach ($info as $delta => $block) {
+    if (stripos($delta, 'views_exposed_filter_block:') === 0) {
       $info[$delta]['class'] = 'Drupal\fsa_es\Plugin\Block\ViewsExposedFilterSearchBlock';
     }
   }
-
 }
 
 /**

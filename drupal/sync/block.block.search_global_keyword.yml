@@ -31,6 +31,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: '/search*'
+    pages: "/search*\r\n/news-alerts/search*"
     negate: false
     context_mapping: {  }

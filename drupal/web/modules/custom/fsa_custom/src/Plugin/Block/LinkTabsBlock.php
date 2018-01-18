@@ -244,7 +244,9 @@ class LinkTabsBlock extends BlockBase implements ContainerFactoryPluginInterface
 
           // Get query parameters.
           $query_tokenized = $this->token->replace($link['query'], $data, ['clear' => TRUE]);
-          $query = Json::decode($query_tokenized);
+          if (!is_array($query = Json::decode($query_tokenized))) {
+            $query = [];
+          }
 
           // Add url cache context if query is not empty, and original query and
           // tokenized query differ.

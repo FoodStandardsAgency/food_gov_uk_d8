@@ -6,9 +6,9 @@ use Drupal\views\Plugin\views\display\DisplayPluginBase;
 use Drupal\views\ViewExecutable;
 
 /**
- * @ViewsFilter("fsa_guidance_nation")
+ * @ViewsFilter("fsa_news_alerts_type")
  */
-class GuidanceNation extends FilterInOperatorBase {
+class NewsAlertsType extends FilterInOperatorBase {
 
   /**
    * {@inheritdoc}
@@ -17,7 +17,7 @@ class GuidanceNation extends FilterInOperatorBase {
     parent::init($view, $display, $options);
     /** @var \Drupal\elasticsearch_helper_views\Plugin\views\query\Elasticsearch $query */
     $query = $this->view->getQuery();
-    $this->definition['options callback'] = [$query->getQueryBuilder(), 'getNationFilterOptions'];
+    $this->definition['options callback'] = [$query->getQueryBuilder(), 'getNewsAlertsTypeFilterOptions'];
   }
 
   /**
