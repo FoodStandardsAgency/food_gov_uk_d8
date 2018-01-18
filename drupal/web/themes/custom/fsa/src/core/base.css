@@ -304,44 +304,6 @@ div.page-title {
   transform: translateY(-50%);
 }
 
-/* Embedded entity */
-.embedded-entity {
-  position: relative;
-  @mixin responsive-declaration margin-top, 1em, 2em;
-  @mixin responsive-declaration margin-bottom, 1em, 2em;
-}
-
-/*Content image*/
-.embedded-entity img {
-  margin-left: -2em;
-  width: 110%;
-  width: calc(100% + 4em);
-  max-width: none;
-}
-
-/*Inline document reference*/
-.embedded-entity .media {
-
-}
-
-.embedded-entity + .embedded-entity > .media {
-  @mixin responsive-declaration margin-top, -2em, -3.5em;
-}
-
-.embedded-entity .media .field.field__field_document {
-  margin-bottom: 0.5em !important;
-}
-
-/*Iframe*/
-.video-embed-field-responsive-video {
-  @mixin responsive-declaration margin-top, 2em, 4em;
-  @mixin responsive-declaration margin-bottom, 2em, 4em;
-
-  @media (min-width: 850em) {
-    margin-right: -13em;
-  }
-}
-
 /*Feed icon*/
 a.feed-icon {
   display: inline-block;
