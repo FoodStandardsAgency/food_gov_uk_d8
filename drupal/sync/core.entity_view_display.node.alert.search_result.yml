@@ -1,0 +1,57 @@
+uuid: 25c9cd80-7895-4b40-ab7a-896d9ea09a53
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_result
+    - field.field.node.alert.field_alert_actiontaken
+    - field.field.node.alert.field_alert_allergen
+    - field.field.node.alert.field_alert_consumeradvice
+    - field.field.node.alert.field_alert_description
+    - field.field.node.alert.field_alert_modified
+    - field.field.node.alert.field_alert_notation
+    - field.field.node.alert.field_alert_otherbusiness
+    - field.field.node.alert.field_alert_productdetails_raw
+    - field.field.node.alert.field_alert_relatedmedia
+    - field.field.node.alert.field_alert_reportingbusiness
+    - field.field.node.alert.field_alert_smstext
+    - field.field.node.alert.field_alert_type
+    - field.field.node.alert.field_nation
+    - node.type.alert
+  module:
+    - entity_print
+    - text
+    - user
+third_party_settings:
+  entity_print:
+    pdf_label: 'View PDF'
+id: node.alert.search_result
+targetEntityType: node
+bundle: alert
+mode: search_result
+content:
+  field_alert_description:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_alert_actiontaken: true
+  field_alert_allergen: true
+  field_alert_consumeradvice: true
+  field_alert_modified: true
+  field_alert_notation: true
+  field_alert_otherbusiness: true
+  field_alert_productdetails_raw: true
+  field_alert_relatedmedia: true
+  field_alert_reportingbusiness: true
+  field_alert_smstext: true
+  field_alert_type: true
+  field_nation: true
+  langcode: true
+  links: true
