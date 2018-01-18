@@ -2,6 +2,7 @@
 
 namespace Drupal\fsa_custom\Plugin\Field\FieldFormatter;
 
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\Plugin\Field\FieldFormatter\EntityReferenceFormatterBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -35,9 +36,10 @@ class RegionalVariationFormatter extends EntityReferenceFormatterBase {
     $elements['style'] = [
       '#type' => 'select',
       '#title' => $this->t('Formatting style'),
+      '#description' => $this->t('<strong>Attachment</strong> style displays only label(s)<br /><strong>Page label</strong> style displays label(s) and additional wording.'),
       '#options' => [
-        'attachment' => $this->t('Attachment label style'),
-        'page_label' => $this->t('Page label style'),
+        'attachment' => $this->t('Attachment label'),
+        'page_label' => $this->t('Page label'),
       ],
       '#default_value' => $this->getSetting('style'),
     ];
@@ -53,11 +55,11 @@ class RegionalVariationFormatter extends EntityReferenceFormatterBase {
 
     switch ($this->getSetting('style')) {
       case 'attachment':
-        $summary[] = t('Attachment label style');
+        $summary[] = t('Attachment label (short format)');
         break;
 
       case 'page_label':
-        $summary[] = t('Page label style');
+        $summary[] = t('Page label (long format)');
         break;
 
       default:
@@ -71,25 +73,51 @@ class RegionalVariationFormatter extends EntityReferenceFormatterBase {
    * {@inheritdoc}
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
+    $cachetags = FALSE;
     $elements = [];
+    $labels = [];
+    $region = FALSE;
     $style = $this->getSetting('style');
 
-    if (count($items) >= 0 && count($items) < 3) {
+    if (count($items) > 0 && count($items) < 3) {
       foreach ($this->getEntitiesToView($items, $langcode) as $delta => $entity) {
-        $label = $entity->label();
+        $labels[] = $entity->label();
+        $cachetags = $entity->getCacheTags();
+      }
 
-        // Attachment (short) formatting.
+      if (count($labels) == 1) {
+        // Only one label.
         if ($style == 'attachment') {
-          $elements[$delta] = ['#plain_text' => 'Shortened style: ' . $label];
+          // The short mode.
+          $region = $labels[0];
         }
         elseif ($style == 'page_label') {
-          $elements[$delta] = ['#plain_text' => 'Longer style: ' . $label];
+          // The long mode (above title style).
+          $region = $this->t('@region specific', ['@region' => $labels[0]]);
         }
-
-        $elements[$delta]['#cache']['tags'] = $entity->getCacheTags();
       }
+      elseif (count($labels) == 2) {
+        // When two regions assigned.
+        if ($style == 'attachment') {
+          // The short mode.
+          $region = $this->t(
+              '@first_region and @second_region', [
+                '@first_region' => $labels[0],
+                '@second_region' => $labels[1],
+              ]);
+        }
+        elseif ($style == 'page_label') {
+          // The long mode (above title style).
+          $region = $this->t(
+              '@first_region and @second_region specific', [
+                '@first_region' => $labels[0],
+                '@second_region' => $labels[1],
+              ]);
+        }
+      }
+      $elements[$delta] = ['#markup' => $region];
+      $elements[$delta]['#cache']['tags'] = $cachetags;
     }
-
     return $elements;
 
   }
