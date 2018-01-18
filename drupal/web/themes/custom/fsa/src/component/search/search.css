@@ -80,6 +80,15 @@
       background-image: none;
     }
   }
+
+  @media (--breakpoint-sm) {
+    background-color: var(--dark-secondary-color);
+    background-image: none;
+  }
+
+  .heading {
+    text-transform: none;
+  }
 }
 
 .search__sidebar-heading {
