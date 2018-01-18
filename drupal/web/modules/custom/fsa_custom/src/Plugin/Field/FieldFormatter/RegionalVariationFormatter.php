@@ -2,7 +2,6 @@
 
 namespace Drupal\fsa_custom\Plugin\Field\FieldFormatter;
 
-use Drupal\Component\Utility\Html;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\Plugin\Field\FieldFormatter\EntityReferenceFormatterBase;
 use Drupal\Core\Form\FormStateInterface;
