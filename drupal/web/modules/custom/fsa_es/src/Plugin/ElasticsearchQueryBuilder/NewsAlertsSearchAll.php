@@ -68,10 +68,12 @@ class NewsAlertsSearchAll extends SitewideSearchBase {
    * @return array
    */
   protected function getIndices() {
+    $langcode = $this->currentLanguage->getId();
+
     return [
-      'news-' . $this->currentLanguage->getId(),
-      // 'alert-' . $this->currentLanguage->getId(),
-      // 'consultation-' . $this->currentLanguage->getId(),
+      'alert',
+      'news-' . $langcode,
+      'consultation-' . $langcode,
     ];
   }
 
