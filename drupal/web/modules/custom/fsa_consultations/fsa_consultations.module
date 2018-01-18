@@ -4,3 +4,22 @@
  * @file
  * Contains fsa_consultations.module.
  */
+
+/**
+ * Implements template_preprocess_node().
+ */
+function fsa_consultations_preprocess_node(&$variables) {
+  $node = $variables['node'];
+  if ($node->getType() == 'consultation' && $variables['view_mode'] == 'full') {
+    $tid = $node->field_consultations_type;
+    if (isset($tid->target_id) && $tid->target_id == '215') {
+      // // Get the consultation standard text and append to the bottom of
+      // content if consultation type is "Consultation" (term id 215).
+      $config = \Drupal::config('config.fsa_consultations');
+      $variables['content']['standard_text'] = [
+        '#markup' => check_markup($config->get('consultation_standard_text'), 'full_html'),
+        '#weight' => 50,
+      ];
+    }
+  }
+}

@@ -16,9 +16,17 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
 /**
- * Implements of template_preprocess_html().
+ * Implements of template_preprocess_page().
  */
 function fsa_custom_preprocess_page(&$variables) {
+
+  // Attach history back js (allows creating dummy clientside backlinks with
+  // ("a.history-back" html class).
+  $variables['#attached']['library'][] = 'fsa_custom/history_back';
+
+  // Attach page print js (allows triggering page printing with
+  // (".page-print-trigger" html class).
+  $variables['#attached']['library'][] = 'fsa_custom/page_print';
 
   // Hardcoded "utility menu" links.
   // Get the contact link from settings. Default to 58 which happened to be the
@@ -78,15 +86,23 @@ function fsa_custom_preprocess_page(&$variables) {
 function fsa_custom_preprocess_page_title(&$variables) {
 
   $route = \Drupal::routeMatch();
-  $node = $route->getParameter('node');
-  if (is_object($node)) {
+  $entity = FALSE;
+  if ($route->getParameter('node')) {
+    $entity = $route->getParameter('node');
+  }
+  elseif ($route->getParameter('media')) {
+    $entity = $route->getParameter('media');
+  }
+
+  if (is_object($entity)) {
+    $nodetype = $entity->getType();
     $typemanager = \Drupal::entityTypeManager();
 
     // Init the custom title prefix.
     $title_prefix = [];
 
-    if ($node->hasField('field_nation')) {
-      $nations = $node->get('field_nation');
+    if ($entity->hasField('field_nation')) {
+      $nations = $entity->get('field_nation');
       if (isset($nations[0])) {
         // Add regional variations label with same classes as would be added via
         // WYSIWYG editor.
@@ -123,9 +139,9 @@ function fsa_custom_preprocess_page_title(&$variables) {
       }
     }
 
-    if ($node->hasField('field_consultations_type')) {
+    if ($entity->hasField('field_consultations_type')) {
       // Add consultation type to title prefix.
-      $types = $node->get('field_consultations_type');
+      $types = $entity->get('field_consultations_type');
       if (isset($types[0])) {
         $consultation_type = $typemanager->getStorage('taxonomy_term')->load($types[0]->getValue()['target_id'])->getName();
         $title_prefix[] = [
@@ -136,6 +152,16 @@ function fsa_custom_preprocess_page_title(&$variables) {
           '#label' => $consultation_type,
         ];
       }
+    }
+
+    if ($nodetype == 'research_project') {
+      $title_prefix[] = [
+        '#theme' => 'fsa_label',
+        '#attributes' => [
+          'class' => 'content-type content-type--research',
+        ],
+        '#label' => t('Research project'),
+      ];
     }
 
     // Inject additional title prefix(es) if there was anything to add.
@@ -203,8 +229,9 @@ function fsa_custom_preprocess_breadcrumb(&$variables) {
  * Implements block_access().
  */
 function fsa_custom_block_access(Block $block, $operation, AccountInterface $account) {
+  $routematch = \Drupal::routeMatch();
 
-  if ($operation == 'update' && \Drupal::routeMatch()->getRouteName() == 'entity.block.edit_form') {
+  if ($operation == 'update' && $routematch->getRouteName() == 'entity.block.edit_form') {
     // Let admins know these blocks configuration visibility is controlled in
     // this custom module.
     $controlled_block_ids = [
@@ -219,14 +246,21 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
   }
 
   if ($operation == 'view') {
-    // Control certain block visibilities based on node type, term etc.
-    $node = \Drupal::routeMatch()->getParameter('node');
-    if (is_object($node)) {
-
+    // Control certain block visibilities based on entity type, term etc.
+    if ($routematch->getParameter('node')) {
+      $entity = $routematch->getParameter('node');
+    }
+    elseif ($routematch->getParameter('media')) {
+      $entity = $routematch->getParameter('media');
+    }
+    else {
+      $entity = FALSE;
+    }
+    if (is_object($entity)) {
       $term_id = FALSE;
-      if ($node->hasField('field_content_type')) {
+      if ($entity->hasField('field_content_type')) {
         // Get content_type taxonomy term id.
-        $tid = $node->get('field_content_type')->target_id;
+        $tid = $entity->get('field_content_type')->target_id;
         if (is_numeric($tid) && $term = Term::load($tid)) {
           $term_id = $term->id();
         }
@@ -238,7 +272,7 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
         // Page title above content visibility.
         if ($block->id() == 'pagetitle') {
           // Hide page title on lander nodes.
-          if ($node->getType() == 'lander') {
+          if ($entity->getType() == 'lander') {
             return AccessResult::forbidden()
               ->addCacheableDependency($block);
           }
@@ -268,7 +302,7 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
       if ($block->id() == 'menu_help_secondary') {
         // Help nodes and nodes with "Content type" term should always show the
         // left hand menu.
-        if ($term_id == 27 || $node->getType() == 'help') {
+        if ($term_id == 27 || $entity->getType() == 'help') {
           return AccessResult::allowed()
             ->addCacheableDependency($block);
         }
@@ -280,14 +314,13 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
 
     }
     else {
-      $route = \Drupal::routeMatch();
-      $routename = $route->getParentRouteMatch()->getRouteName();
+      $routename = $routematch->getParentRouteMatch()->getRouteName();
 
       // Page title in content area.
       if ($block->id() == 'pagetitle') {
 
         // Term listing pages.
-        if ($routename == 'entity.taxonomy_term.canonical' && $term = Term::load($route->getRawParameters()->all()['taxonomy_term'])) {
+        if ($routename == 'entity.taxonomy_term.canonical' && $term = Term::load($routematch->getRawParameters()->all()['taxonomy_term'])) {
 
           switch ($term->getVocabularyId()) {
             case 'research_programme':
@@ -311,13 +344,13 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
           'fsa_signin.user_registration_thank_you',
         ];
 
-        if (in_array($routename, $routes) || $route->getParameter('fsa_establishment')) {
+        if (in_array($routename, $routes) || $routematch->getParameter('fsa_establishment')) {
           return AccessResult::forbidden()
             ->addCacheableDependency($block);
         }
 
         // Term listing pages.
-        if ($routename == 'entity.taxonomy_term.canonical' && $term = Term::load($route->getRawParameters()->all()['taxonomy_term'])) {
+        if ($routename == 'entity.taxonomy_term.canonical' && $term = Term::load($routematch->getRawParameters()->all()['taxonomy_term'])) {
 
           switch ($term->getVocabularyId()) {
             case 'research_programme':
@@ -402,6 +435,16 @@ function fsa_custom_theme() {
       'variables' => [
         'attributes' => [],
         'label' => NULL,
+      ],
+    ],
+    'fsa_content_header' => [
+      'variables' => [
+        'attributes' => NULL,
+        'intro' => NULL,
+        'update_date' => NULL,
+        'link_pdf' => NULL,
+        'link_print' => NULL,
+        'share' => NULL,
       ],
     ],
   ];

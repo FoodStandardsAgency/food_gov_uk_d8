@@ -1,0 +1,16 @@
+uuid: 77475c52-6bc1-4934-b00b-fb4e37f064fa
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.research_project
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: node.research_project
+target_entity_type_id: node
+target_bundle: research_project
+default_langcode: site_default
+language_alterable: false

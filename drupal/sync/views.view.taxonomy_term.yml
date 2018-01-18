@@ -16,7 +16,7 @@ _core:
 id: taxonomy_term
 label: 'Taxonomy term'
 module: taxonomy
-description: 'Content belonging to a certain taxonomy term. Modified to be used for topic listing pages.'
+description: 'Term listing page(s). Modified for customised topic and research listings.'
 tag: default
 base_table: node_field_data
 base_field: nid

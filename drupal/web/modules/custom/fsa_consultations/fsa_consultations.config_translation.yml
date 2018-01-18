@@ -1,0 +1,5 @@
+consultation_standard_text.config:
+  title: 'FSA Consultations standard text'
+  base_route_name: fsa_consultations.settings
+  names:
+    - config.fsa_consultations

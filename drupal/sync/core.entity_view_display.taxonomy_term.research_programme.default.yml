@@ -7,7 +7,11 @@ dependencies:
     - field.field.taxonomy_term.research_programme.field_rp_id
     - taxonomy.vocabulary.research_programme
   module:
+    - entity_print
     - text
+third_party_settings:
+  entity_print:
+    pdf_label: 'View PDF'
 id: taxonomy_term.research_programme.default
 targetEntityType: taxonomy_term
 bundle: research_programme
@@ -16,20 +20,14 @@ content:
   description:
     label: hidden
     type: text_default
-    weight: 1
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_intro:
     weight: 0
-    label: hidden
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
-    region: content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_intro: true
   field_rp_id: true
   langcode: true

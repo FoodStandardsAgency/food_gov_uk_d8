@@ -27,9 +27,60 @@
  * @ingroup themeable
  */
 #}
-<ul>
-  <li><a href="{{ url }}">{{ content.name }}</a></li>
-  <li>{{ content.field_address }} {{ content.field_postcode }}</li>
-  <li>{{ rating_badge }}</li>
-  <li>{{ content.field_ratingdate }}</li>
-</ul>
+
+{% set randomID = [] %}
+{% for i in 1..10 %}
+    {% set alpha = 'abcdefghijklmnopqrstuvwxyz' %}
+    {% set alphaUpper = alpha|upper %}
+    {% set numbers = '0123456789' %}
+    {% set randomCharacter = random(alpha ~ alphaUpper ~ numbers ~ '-_') %}
+    {% set randomID = randomID|merge([randomCharacter]) %}
+{% endfor %}
+{% set randomID = randomID|join %}
+
+<div class="ratings__mobile-item table__button">
+  <a href="{{ url }}" class="ratings__mobile-link">
+    <div class="ratings__mobile-rating-value">
+      {% if rating_badge %}
+        {{ rating_badge }}
+      {% endif %}
+    </div>
+    
+    <div class="ratings__mobile-name">
+      {% if content.name %}
+        <h3>{{ content.name }}</h3>
+      {% endif %}
+      {% if content.field_address %}
+        <p>{{ content.field_address }}</p>
+      {% endif %}
+      {% if content.field_postcode %}
+        <p>{{ content.field_postcode }}</p>
+      {% endif %}
+    </div>
+  </a>
+  <button class="ratings__toggle-button toggle-button" data-state="is-open" data-theme="dynamic" data-state-element="#collapsible-{{ randomID }}" data-breakpoint="mobile" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
+    <div class="svg">
+      <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#nav-arrow-icon"></use></svg>
+    </div>
+  </button>
+</div>
+
+<div class="ratings__item table__row toggle-content toggle-content--only-mobile js-toggle-content js-toggle-content-only-mobile" id="collapsible-{{ randomID }}" aria-hidden="true" role="row">
+  <div class="table__item table__item--large" role="gridcell">
+    <div class="table__content">
+      <h3><a href="{{ url }}">{{ content.name }}</a></h3>
+      <p>{{ content.field_address }}</p>
+      <p>{{ content.field_postcode }}</p>
+    </div>
+  </div>
+  <div class="table__item" role="gridcell">
+    <div class="table__content ratings__badge">
+      {{ rating_badge }}
+    </div>
+  </div>
+  <div class="table__item" role="gridcell">
+    <div class="table__content">
+      {{ content.field_ratingdate }}
+    </div>
+  </div>
+</div>

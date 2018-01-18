@@ -1,0 +1,14 @@
+history_back:
+  version: 1.x
+  js:
+    js/history-back.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery.once
+page_print:
+  version: 1.x
+  js:
+    js/page-print.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery.once

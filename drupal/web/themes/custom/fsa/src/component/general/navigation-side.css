@@ -1,4 +1,4 @@
-@import "../../core/helper";
+/* @import "../../core/helper";
 @import "../../core/custom-property";
 
 #block-menu-help-secondary ul {
@@ -122,15 +122,6 @@
   }
 }
 
-/* #block-menu-help-secondary > .menu > li:first-child > .menu {
-  width: 100vw;
-}
-
-#block-menu-help-secondary > .menu > li:last-child > .menu {
-  width: 100vw;
-  transform: translateX(-50%);
-} */
-
 #block-menu-help-secondary > .menu > li.menu-item--active-trail > .menu,
 #block-menu-help-secondary > .menu > li > .menu.is-open {
   display: flex;
@@ -226,39 +217,4 @@
   left: 50%;
   border-top-color: var(--dark-secondary-color);
   transform: translateX(-50%) translateY(100%);
-}
-
-
-/*Subpages*/
-.subpages:not(:first-child) {
-  @mixin responsive-declaration margin-top, 1.5em, 4em;
-}
-
-.subpages > ul,
-.subpages > ol {
-  margin: 0;
-  padding: 0;
-  padding-top: 1em;
-}
-
-.subpages ul li,
-.subpages ol li {
-  list-style: none;
-  margin-bottom: 1em;
-}
-
-:--not-touch .subpages > ul a:--enter,
-:--not-touch .subpages > ul a:--enter {
-  color: var(--light-primary-color);
-  text-decoration: underline;
-}
-
-.subpages > ul ul,
-.subpages > ol ol {
-  padding-left: 1em;
-}
-
-.subpages > ul ul a,
-.subpages > ol ol a {
-  color: var(--color-black);
-}
+} */
