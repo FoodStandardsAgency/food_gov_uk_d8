@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * Node template to display Related link promo.
+ *
+ * @see template_preprocess_node()
+ */
+#}
+
+{# @todo: Oskari create good classes to format as in layouts (and remove this comment :) #}
+<a href="{{ url }}" rel="bookmark" class="related-content">
+    <article{{ attributes.addClass(['promo', 'promo--inline-content']) }}>
+        <div class="promo__content">
+            <h4 class="promo__heading">{{ label }}</h4>
+            {{ content }}
+        </div>
+    </article>
+</a>
