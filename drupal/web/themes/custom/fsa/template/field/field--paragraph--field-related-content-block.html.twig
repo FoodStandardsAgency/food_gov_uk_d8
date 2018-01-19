@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * Vield paragraph block template to display Related link promo
+ *
+ * @see template_preprocess_field()
+ */
+#}
+{% for item in items %}
+<a href="{{ item.content.field_link[0]['#url']|render }}" rel="bookmark" class="related-content">
+    <article{{ attributes.addClass(['promo', 'promo--inline-content']) }}>
+        <div class="promo__content">
+            <h4 class="promo__heading">{{ item.content.field_title }}</h4>
+            {{ item.content|without('field_title', 'field_link') }}
+        </div>
+    </article>
+</a>
+{% endfor %}
