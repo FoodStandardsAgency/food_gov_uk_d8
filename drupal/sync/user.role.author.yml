@@ -49,4 +49,6 @@ permissions:
   - 'use editorial transition ready_for_review'
   - 'use editorial transition restore_from_drafted'
   - 'view all revisions'
+  - 'view latest version'
+  - 'view own unpublished content'
   - 'view the administration theme'
