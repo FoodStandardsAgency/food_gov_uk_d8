@@ -16,6 +16,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Class AjaxLoadMore.
  *
+ * @deprecated FHRS AJAX load more has been replaced with pagination.
+ *
  * @package Drupal\fsa_ratings\Form
  */
 class FsaRatingsSearchLoadMore extends FormBase {
@@ -56,7 +58,6 @@ class FsaRatingsSearchLoadMore extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-
     $init_result_count = RatingsSearch::INITIAL_RESULTS_COUNT;
 
     $params = RatingsSearch::getSearchParameters();

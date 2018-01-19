@@ -9,15 +9,12 @@
 @import "component/general/topic-cloud.css";
 @import "component/general/subpages.css";
 @import "component/general/message-list.css";
-@import "component/general/teaser.css";
 @import "component/general/team-finder.css";
 
 /* Layout */
 @import "component/general/phase-banner.css";
-@import "component/general/breadcrumb.css";
 
 /* Profile and registration */
-@import "component/general/my-profile.css";
 @import "component/general/subscribe-flow.css";
 
 /* Navigation */
@@ -33,9 +30,15 @@
 @import "component/header/header.css";
 @import "component/navigation/navigation.css";
 @import "component/fhrs/fhrs.css";
-@import "component/team/team.css";
 @import "component/hero/hero.css";
-@import "component/parallax/parallax.css";
+@import "component/peek/peek.css";
 @import "component/listing/listing.css";
 @import "component/footer/footer.css";
 @import "component/sidebar/sidebar.css";
+@import "component/promo/promo.css";
+@import "component/pager/pager.css";
+@import "component/infobox/infobox.css";
+@import "component/profile/profile.css";
+@import "component/search/search.css";
+@import "component/topics/topics.css";
+@import "component/toc/toc.css";

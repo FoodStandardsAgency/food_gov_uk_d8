@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "25512c2b646a1eef6fe14a2f9b7c683c",
+    "content-hash": "81a977fc93406c38c910cd586c37cce8",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -1582,6 +1582,63 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/config_filter",
                 "issues": "https://www.drupal.org/project/issues/config_filter",
+                "irc": "irc://irc.freenode.org/drupal-contribute"
+            }
+        },
+        {
+            "name": "drupal/config_ignore",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/config_ignore",
+                "reference": "8.x-2.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/config_ignore-8.x-2.1.zip",
+                "reference": "8.x-2.1",
+                "shasum": "07e00684930706632b3f2fc2a7433ffdae57cde7"
+            },
+            "require": {
+                "drupal/config_filter": "1.*",
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-2.x": "2.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-2.1",
+                    "datestamp": "1507706044",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Tommy Lynge Jørgensen",
+                    "homepage": "https://www.drupal.org/u/tlyngej",
+                    "email": "tlyngej@gmail.com",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Fabian Bircher",
+                    "homepage": "https://www.drupal.org/u/bircher",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Ignore certain configuration during import.",
+            "homepage": "http://drupal.org/project/config_ignore",
+            "support": {
+                "source": "http://cgit.drupalcode.org/config_ignore",
+                "issues": "http://drupal.org/project/config_ignore",
                 "irc": "irc://irc.freenode.org/drupal-contribute"
             }
         },
@@ -3342,6 +3399,113 @@
             }
         },
         {
+            "name": "drupal/hook_post_action",
+            "version": "1.0.0-beta1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/hook_post_action",
+                "reference": "8.x-1.0-beta1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/hook_post_action-8.x-1.0-beta1.zip",
+                "reference": "8.x-1.0-beta1",
+                "shasum": "1d06c3f0d4ef60e6e49c9b2757be3049c598a39a"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-beta1",
+                    "datestamp": "1460275141",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "id.tarzanych",
+                    "homepage": "https://www.drupal.org/user/2776543"
+                },
+                {
+                    "name": "sinasalek",
+                    "homepage": "https://www.drupal.org/user/52244"
+                }
+            ],
+            "description": "Introduces new Drupal hooks, hook_entity_postsave, hook_entity_postinsert, hook_entity_postupdate, hook_entity_postdelete, hook_node_postsave, hook_node_postinsert, hook_node_postupdate, hook_node_postdelete",
+            "homepage": "https://www.drupal.org/project/hook_post_action",
+            "support": {
+                "source": "http://cgit.drupalcode.org/hook_post_action"
+            }
+        },
+        {
+            "name": "drupal/icon_select",
+            "version": "1.0.0-beta4",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/icon_select",
+                "reference": "8.x-1.0-beta4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/icon_select-8.x-1.0-beta4.zip",
+                "reference": "8.x-1.0-beta4",
+                "shasum": "82dbc2c1a2af342315a935a13e2301d433419f8d"
+            },
+            "require": {
+                "drupal/core": "*",
+                "drupal/hook_post_action": "^1.0@beta"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-beta4",
+                    "datestamp": "1508927348",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "ayalon",
+                    "homepage": "https://www.drupal.org/user/419226"
+                },
+                {
+                    "name": "gperriard",
+                    "homepage": "https://www.drupal.org/user/3362098"
+                },
+                {
+                    "name": "make77",
+                    "homepage": "https://www.drupal.org/user/858788"
+                }
+            ],
+            "description": "Icon selector",
+            "homepage": "https://www.drupal.org/project/icon_select",
+            "support": {
+                "source": "http://cgit.drupalcode.org/icon_select"
+            }
+        },
+        {
             "name": "drupal/image_widget_crop",
             "version": "2.1.0",
             "source": {
@@ -4564,6 +4728,9 @@
                         "status": "not-covered",
                         "message": "Alpha releases are not covered by Drupal security advisories."
                     }
+                },
+                "patches_applied": {
+                    "Undefined index: #select_parents": "https://www.drupal.org/files/issues/term_reference_tree-2837754-2.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -5869,6 +6036,41 @@
                 }
             ],
             "time": "2015-04-20T18:58:01+00:00"
+        },
+        {
+            "name": "maijs/elasticsearch_helper_views",
+            "version": "dev-8.x-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maijs/elasticsearch_helper_views.git",
+                "reference": "34b7bce983e3fbdf6b9e15ce559f4040e527bf85"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maijs/elasticsearch_helper_views/zipball/34b7bce983e3fbdf6b9e15ce559f4040e527bf85",
+                "reference": "34b7bce983e3fbdf6b9e15ce559f4040e527bf85",
+                "shasum": ""
+            },
+            "require": {
+                "drupal/elasticsearch_helper": "1.x-dev || 5.x-dev",
+                "elasticsearch/elasticsearch": "~2.1 || ~5.0"
+            },
+            "type": "drupal-module",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "maijs",
+                    "email": "raimonds.kalnins@wunder.io"
+                }
+            ],
+            "description": "Provides tools to integrate elasticsearch with Drupal Views.",
+            "support": {
+                "source": "https://github.com/maijs/elasticsearch_helper_views/tree/8.x-1.x",
+                "issues": "https://github.com/maijs/elasticsearch_helper_views/issues"
+            },
+            "time": "2017-12-29T11:09:30+00:00"
         },
         {
             "name": "masterminds/html5",
@@ -10818,7 +11020,9 @@
         "drupal/config_readonly": 10,
         "drupal/webform_views": 15,
         "drupal/view_unpublished": 15,
-        "drupal/diff": 5
+        "drupal/diff": 5,
+        "drupal/icon_select": 10,
+        "maijs/elasticsearch_helper_views": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

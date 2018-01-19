@@ -1,0 +1,86 @@
+{#
+/**
+ * @file fsa_establishment.html.twig
+ * Default theme implementation to present FSA Establishment entity
+ *
+ * Available variables (@see fsa_ratings_theme():
+ * - id: Entity ID.
+ * - url: URL to entity's canonical URL.
+ * - view_mode: Used view mode.
+ * - content: All fields from establishment entity.
+ * - find_more_title: Title for "find more about ratings.
+ * - find_more_link_ratings: Link to ratings meaning page.
+ * - find_more_link_fhrs: Link to FHRS explanation page.
+ * - righttoreply_title: Right to reply explanatory title
+ * - righttoreply_copy: Right to reply explanatory copy
+ * - business_owner_title: Title for business owner guidance.
+ * - business_owner_copy1: Copy paragraph 1 for business owners.
+ * - business_owner_copy2: Copy paragraph 1 for business owners.
+ * - rating_badge_title: Title for "Get badge" heading.
+ * - rating_badge_copy: "Get badge" explanation copy.
+ * - rating_badge_cta: "Get badge" CTA link.
+ * - copy_of_report_title: Heading for report copy explanation
+ * - copy_of_report_copy: COpy text for report copy explanation
+ *
+ * @see template_preprocess_fsa_establishment()
+ *
+ * @ingroup themeable
+ */
+#}
+
+{% set randomID = [] %}
+{% for i in 1..10 %}
+    {% set alpha = 'abcdefghijklmnopqrstuvwxyz' %}
+    {% set alphaUpper = alpha|upper %}
+    {% set numbers = '0123456789' %}
+    {% set randomCharacter = random(alpha ~ alphaUpper ~ numbers ~ '-_') %}
+    {% set randomID = randomID|merge([randomCharacter]) %}
+{% endfor %}
+{% set randomID = randomID|join %}
+
+<div class="ratings__mobile-item table__button">
+  <a href="{{ url }}" class="ratings__mobile-link">
+    <div class="ratings__mobile-rating-value">
+      {% if rating_badge %}
+        {{ rating_badge }}
+      {% endif %}
+    </div>
+    
+    <div class="ratings__mobile-name">
+      {% if content.name %}
+        <h3>{{ content.name }}</h3>
+      {% endif %}
+      {% if content.field_address %}
+        <p>{{ content.field_address }}</p>
+      {% endif %}
+      {% if content.field_postcode %}
+        <p>{{ content.field_postcode }}</p>
+      {% endif %}
+    </div>
+  </a>
+  <button class="ratings__toggle-button toggle-button" data-state="is-open" data-theme="dynamic" data-state-element="#collapsible-{{ randomID }}" data-breakpoint="mobile" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
+    <div class="svg">
+      <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#nav-arrow-icon"></use></svg>
+    </div>
+  </button>
+</div>
+
+<div class="ratings__item table__row toggle-content toggle-content--only-mobile js-toggle-content js-toggle-content-only-mobile" id="collapsible-{{ randomID }}" aria-hidden="true" role="row">
+  <div class="table__item table__item--large" role="gridcell">
+    <div class="table__content">
+      <h3><a href="{{ url }}">{{ content.name }}</a></h3>
+      <p>{{ content.field_address }}</p>
+      <p>{{ content.field_postcode }}</p>
+    </div>
+  </div>
+  <div class="table__item" role="gridcell">
+    <div class="table__content ratings__badge">
+      {{ rating_badge }}
+    </div>
+  </div>
+  <div class="table__item" role="gridcell">
+    <div class="table__content">
+      {{ content.field_ratingdate }}
+    </div>
+  </div>
+</div>

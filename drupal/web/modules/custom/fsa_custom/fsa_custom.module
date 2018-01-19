@@ -13,18 +13,31 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Link;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
 
 /**
- * Implements of template_preprocess_html().
+ * Implements of template_preprocess_page().
  */
 function fsa_custom_preprocess_page(&$variables) {
 
-  // Hardcoded links for "utility menu". @todo: make dynamic/editable via CMS.
+  // Attach history back js (allows creating dummy clientside backlinks with
+  // ("a.history-back" html class).
+  $variables['#attached']['library'][] = 'fsa_custom/history_back';
+
+  // Attach page print js (allows triggering page printing with
+  // (".page-print-trigger" html class).
+  $variables['#attached']['library'][] = 'fsa_custom/page_print';
+
+  // Hardcoded "utility menu" links.
+  // Get the contact link from settings. Default to 58 which happened to be the
+  // first version contact lander.
+  $contact_link = \Drupal::state()->get('fsa_custom.contact_link_nid');
+  $contact_nid = (isset($contact_link) && is_numeric($contact_link)) ? $contact_link : 58;
   $items = [[
     '#markup' => Link::createFromRoute(
       t('Contact'),
       'entity.node.canonical',
-      ['node' => '58'],
+      ['node' => $contact_nid],
       [])->toString(),
     '#wrapper_attributes' => [
       'class' => [
@@ -71,19 +84,109 @@ function fsa_custom_preprocess_page(&$variables) {
  * Implements hook_preprocess_page_title().
  */
 function fsa_custom_preprocess_page_title(&$variables) {
+  $is_admin = \Drupal::service('router.admin_context')->isAdminRoute();
 
   $route = \Drupal::routeMatch();
-  $node = $route->getParameter('node');
-  if (is_object($node) && $node->hasField('field_nation')) {
-    $nations = $node->get('field_nation');
-    // Display nation as title prefix only if just one nation is selected.
-    if (isset($nations[0]) && !isset($nations[1])) {
-      $nation = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($nations[0]->getValue()['target_id'])->getName();
+  $entity = FALSE;
+  if ($route->getParameter('node')) {
+    $entity = $route->getParameter('node');
+  }
+  elseif ($route->getParameter('media')) {
+    $entity = $route->getParameter('media');
+  }
 
-      // Use same classes as via WYSIWYG for regional variations.
-      $class = 'regional-variation regional-variation--' . strtolower(Html::cleanCssIdentifier($nation));
-      $variables['title_prefix'] = ['#markup' => '<div class="' . $class . '">' . t('@nation specific', ['@nation' => $nation]) . '</div>'];
+  if (!$is_admin && is_object($entity)) {
+    $nodetype = $entity->getType();
+    $typemanager = \Drupal::entityTypeManager();
+
+    // Init the custom title prefix.
+    $title_prefix = [];
+
+    // Define content types that should send the label above title.
+    $content_type_label = [
+      'news',
+      'alert',
+      'consultation',
+      'research_project',
+    ];
+    if (in_array($nodetype, $content_type_label)) {
+
+      if ($nodetype == 'alert') {
+        // Alerts display the formatted alert type field value.
+        $label = $entity->get('field_alert_type')->view([
+          'type' => 'fsa_alert_type_formatter',
+        ]);
+      }
+      elseif ($nodetype == 'consultation' && $entity->field_consultations_type) {
+        // Consultations display their consultation type taxonomy label.
+        $label = $entity->field_consultations_type->view([
+          'label' => 'hidden',
+          'settings' => [
+            'link' => FALSE,
+          ],
+        ]);
+      }
+      else {
+        // Rest are fine displaying their content type human readable name.
+        $label = $entity->type->entity->label();
+      }
+
+      $title_prefix[] = [
+        '#theme' => 'fsa_label',
+        '#attributes' => [
+          'class' => [
+            'content-label',
+            'content-label--content-type',
+            'content-type--' . strtolower(Html::cleanCssIdentifier($nodetype)),
+          ],
+        ],
+        '#label' => $label,
+      ];
     }
+
+    if ($entity->hasField('field_nation')) {
+      $nations = $entity->get('field_nation');
+      if (isset($nations[0])) {
+        // Add regional variations label with same classes as would be added via
+        // WYSIWYG editor.
+        $class = 'regional-variation';
+        $nation_label = '';
+        if (!isset($nations[1])) {
+          // If only one nation selected.
+          $nation = $typemanager->getStorage('taxonomy_term')->load($nations[0]->getValue()['target_id'])->getName();
+          $class .= ' regional-variation--' . strtolower(Html::cleanCssIdentifier($nation));
+          $nation_label = t('@nation specific', ['@nation' => $nation]);
+        }
+        elseif (isset($nations[1]) && !isset($nations[2])) {
+          // If two nations selected.
+          $class .= ' regional-variation--multi-regional';
+          $nation_label = t(
+            '@nation_1 and @nation_2 specific',
+            [
+              '@nation_1' => $typemanager->getStorage('taxonomy_term')->load($nations[0]->getValue()['target_id'])->getName(),
+              '@nation_2' => $typemanager->getStorage('taxonomy_term')->load($nations[1]->getValue()['target_id'])->getName(),
+            ]
+          );
+        }
+
+        if ($nation_label != '') {
+          $title_prefix[] = [
+            '#theme' => 'fsa_label',
+            '#attributes' => [
+              'class' => $class,
+            ],
+            '#label' => $nation_label,
+          ];
+        }
+
+      }
+    }
+
+    // Inject additional title prefix(es) if there was anything to add.
+    if (!empty($title_prefix)) {
+      $variables['title_prefix'] = $title_prefix;
+    }
+
   }
   else {
     $route = \Drupal::routeMatch();
@@ -102,10 +205,14 @@ function fsa_custom_preprocess_page_title(&$variables) {
  * Implements template_preprocess_breadcrumb().
  */
 function fsa_custom_preprocess_breadcrumb(&$variables) {
+  $routematch = \Drupal::routeMatch();
 
-  $node = \Drupal::routeMatch()->getParameter('node');
-  if (isset($node)) {
-
+  $node = $routematch->getParameter('node');
+  if (\Drupal::service('path.matcher')->isFrontPage()) {
+    // We don't need breadcrumbs on homepage.
+    unset($variables['breadcrumb']);
+  }
+  elseif (isset($node)) {
     // Node titles can be horribly long, if that's the case truncate with
     // sensible amount of characters, word-safe.
     $max_length = 90;
@@ -115,14 +222,33 @@ function fsa_custom_preprocess_breadcrumb(&$variables) {
       }
     }
   }
+
+  // Alter breadcumbs for term pages.
+  $term = $routematch->getParameter('taxonomy_term');
+  if (isset($term)) {
+
+    // Topic terms listing pages.
+    if ($term->getVocabularyId() == 'topic') {
+      // Inject "Topics" as the second item.
+      array_splice($variables['breadcrumb'], 1, 0, [['text' => t('Topics'), 'url' => Url::fromRoute('view.a_to_z.page_1')]]);
+
+      // Add name of the term.
+      $variables['breadcrumb'][] = [
+        'text' => $term->getName(),
+        'url' => FALSE,
+      ];
+    }
+  }
+
 }
 
 /**
  * Implements block_access().
  */
 function fsa_custom_block_access(Block $block, $operation, AccountInterface $account) {
+  $routematch = \Drupal::routeMatch();
 
-  if ($operation == 'update' && \Drupal::routeMatch()->getRouteName() == 'entity.block.edit_form') {
+  if ($operation == 'update' && $routematch->getRouteName() == 'entity.block.edit_form') {
     // Let admins know these blocks configuration visibility is controlled in
     // this custom module.
     $controlled_block_ids = [
@@ -137,14 +263,21 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
   }
 
   if ($operation == 'view') {
-    // Control certain block visibilities based on node type, term etc.
-    $node = \Drupal::routeMatch()->getParameter('node');
-    if (is_object($node)) {
-
+    // Control certain block visibilities based on entity type, term etc.
+    if ($routematch->getParameter('node')) {
+      $entity = $routematch->getParameter('node');
+    }
+    elseif ($routematch->getParameter('media')) {
+      $entity = $routematch->getParameter('media');
+    }
+    else {
+      $entity = FALSE;
+    }
+    if (is_object($entity)) {
       $term_id = FALSE;
-      if ($node->hasField('field_content_type')) {
+      if ($entity->hasField('field_content_type')) {
         // Get content_type taxonomy term id.
-        $tid = $node->get('field_content_type')->target_id;
+        $tid = $entity->get('field_content_type')->target_id;
         if (is_numeric($tid) && $term = Term::load($tid)) {
           $term_id = $term->id();
         }
@@ -152,6 +285,16 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
 
       // Control the region for page title block.
       if ($block->getPluginId() == 'page_title_block') {
+
+        // Page title above content visibility.
+        if ($block->id() == 'pagetitle') {
+          // Hide page title on lander nodes.
+          if ($entity->getType() == 'lander') {
+            return AccessResult::forbidden()
+              ->addCacheableDependency($block);
+          }
+        }
+
         // Use content_type taxonomy to define in which region the pagetitle
         // should be displayed.
         switch ($term_id) {
@@ -176,7 +319,7 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
       if ($block->id() == 'menu_help_secondary') {
         // Help nodes and nodes with "Content type" term should always show the
         // left hand menu.
-        if ($term_id == 27 || $node->getType() == 'help') {
+        if ($term_id == 27 || $entity->getType() == 'help') {
           return AccessResult::allowed()
             ->addCacheableDependency($block);
         }
@@ -188,9 +331,29 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
 
     }
     else {
-      $route = \Drupal::routeMatch();
-      $routename = $route->getParentRouteMatch()->getRouteName();
-      // Have few rules for non-nodes to hide the title from hero.
+      $routename = $routematch->getParentRouteMatch()->getRouteName();
+
+      // Page title in content area.
+      if ($block->id() == 'pagetitle') {
+
+        // Term listing pages.
+        if ($routename == 'entity.taxonomy_term.canonical' && $term = Term::load($routematch->getRawParameters()->all()['taxonomy_term'])) {
+
+          switch ($term->getVocabularyId()) {
+            case 'research_programme':
+              // Hide hero on research programme pages.
+              return AccessResult::allowed()
+                ->addCacheableDependency($block);
+          }
+        }
+
+
+        // Default to not showing title in content area.
+        return AccessResult::forbidden()
+          ->addCacheableDependency($block);
+      }
+
+      // Page title in hero area.
       if ($block->id() == 'pagetitle_hero') {
 
         // Enter all speficic routes to remove the page title in hero area.
@@ -198,9 +361,20 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
           'fsa_signin.user_registration_thank_you',
         ];
 
-        if (in_array($routename, $routes) || $route->getParameter('fsa_establishment')) {
+        if (in_array($routename, $routes) || $routematch->getParameter('fsa_establishment')) {
           return AccessResult::forbidden()
             ->addCacheableDependency($block);
+        }
+
+        // Term listing pages.
+        if ($routename == 'entity.taxonomy_term.canonical' && $term = Term::load($routematch->getRawParameters()->all()['taxonomy_term'])) {
+
+          switch ($term->getVocabularyId()) {
+            case 'research_programme':
+              // Hide hero on research programme pages.
+              return AccessResult::forbidden()
+                ->addCacheableDependency($block);
+          }
         }
       }
 
@@ -252,7 +426,7 @@ function fsa_custom_editor_js_settings_alter(array &$settings) {
 
   foreach ($settings['editor']['formats'] as $key => $value) {
     // Limit headings/tags of "Format" dropdown.
-    $settings['editor']['formats'][$key]['editorSettings']['format_tags'] = "p;h2;h3;h4;h5";
+    $settings['editor']['formats'][$key]['editorSettings']['format_tags'] = "p;h2;h3";
   }
 }
 
@@ -266,6 +440,28 @@ function fsa_custom_theme() {
         'attributes' => NULL,
         'title' => NULL,
         'copy' => NULL,
+      ],
+    ],
+    'image_as_background' => [
+      'variables' => [
+        'attributes' => NULL,
+        'path' => NULL,
+      ],
+    ],
+    'fsa_label' => [
+      'variables' => [
+        'attributes' => [],
+        'label' => NULL,
+      ],
+    ],
+    'fsa_content_header' => [
+      'variables' => [
+        'attributes' => NULL,
+        'intro' => NULL,
+        'update_date' => NULL,
+        'link_pdf' => NULL,
+        'link_print' => NULL,
+        'share' => NULL,
       ],
     ],
   ];

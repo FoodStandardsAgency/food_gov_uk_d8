@@ -1,0 +1,29 @@
+uuid: 1434e4f4-6cb0-4e07-b8fc-f6d47786165e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_icon
+    - paragraphs.paragraphs_type.icon_link_item
+    - taxonomy.vocabulary.icons
+id: paragraph.icon_link_item.field_icon
+field_name: field_icon
+entity_type: paragraph
+bundle: icon_link_item
+label: Icon
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      icons: icons
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

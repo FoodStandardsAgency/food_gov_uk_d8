@@ -1,0 +1,21 @@
+uuid: 5eb27236-ef4f-4253-b35e-e37308591bbb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_consultation_launch_date
+    - node.type.consultation
+  module:
+    - datetime
+id: node.consultation.field_consultation_launch_date
+field_name: field_consultation_launch_date
+entity_type: node
+bundle: consultation
+label: 'Date launched'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

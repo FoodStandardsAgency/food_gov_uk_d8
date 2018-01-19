@@ -1,0 +1,23 @@
+uuid: 08b79d00-6444-485e-b499-f24a481cc07b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_status
+    - node.type.consultation
+id: node.consultation.field_status
+field_name: field_status
+entity_type: node
+bundle: consultation
+label: Status
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Open
+  off_label: Closed
+field_type: boolean

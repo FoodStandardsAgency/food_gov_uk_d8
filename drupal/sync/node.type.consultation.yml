@@ -1,0 +1,17 @@
+uuid: f3bfc3fd-776c-41be-860b-c7902dab10b2
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Consultation
+type: consultation
+description: 'Use <em>Consultation</em> content type to create <strong>Consultation</strong>, <strong>Help shape our policies</strong> or <strong>Rapidly developing policies</strong> content pages.'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

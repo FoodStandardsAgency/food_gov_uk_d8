@@ -4,6 +4,9 @@
  * Default theme implementation to present FSA Establishment entity
  *
  * Available variables (@see fsa_ratings_theme():
+ * - id: Entity ID.
+ * - url: URL to entity's canonical URL.
+ * - view_mode: Used view mode.
  * - content: All fields from establishment entity.
  * - find_more_title: Title for "find more about ratings.
  * - find_more_link_ratings: Link to ratings meaning page.
@@ -107,7 +110,7 @@
 
           {% if (content.field_geocode|length == 2) %}
           {% else %}
-          <button class="establishment__button toggle-button js-toggle-button" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
+          <button class="establishment__button toggle-button" data-state="is-open" data-theme="dynamic" data-state-element="#collapsible-{{ randomID }}" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
             <div class="toggle-button__item toggle-button__item--presentation-icon svg">
               <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#map-icon"></use></svg>
             </div>

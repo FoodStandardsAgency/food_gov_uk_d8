@@ -2,12 +2,17 @@ uuid: 9c3fa9e9-7f86-4672-a655-1025a6f77ba6
 langcode: en
 status: true
 dependencies:
+  module:
+    - block_class
   theme:
     - fsa
+third_party_settings:
+  block_class:
+    classes: cms-toolbar
 id: tabs
 theme: fsa
-region: content
-weight: -1
+region: content_top
+weight: -12
 provider: null
 plugin: local_tasks_block
 settings:

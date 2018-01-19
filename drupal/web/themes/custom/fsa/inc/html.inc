@@ -13,9 +13,21 @@ use Drupal\Component\Utility\Html;
  * Implements of template_preprocess_html().
  */
 function fsa_preprocess_html(&$variables) {
+  $routematch = \Drupal::routeMatch();
+
+  // Add class to body if frontpage.
+  $is_front = \Drupal::service('path.matcher')->isFrontPage();
+  if ($is_front) {
+    $variables['attributes']['class'][] = 'theme--frontpage';
+  }
+
+  if ($routematch->getRouteName() == 'entity.taxonomy_term.canonical' || $routematch->getRouteName() == 'view.a_to_z.page_1') {
+    // Set body class for term pages.
+    $variables['attributes']['class'][] = 'theme--term';
+  }
 
   // Do magic when we have a node object.
-  $node = \Drupal::routeMatch()->getParameter('node');
+  $node = $routematch->getParameter('node');
   if (is_object($node)) {
 
     $variables['attributes']['class'][] = 'node-' . $node->id();
@@ -56,6 +68,11 @@ function fsa_preprocess_html(&$variables) {
   if ($uri_segments[1] === 'ratings' || $uri_segments[1] === 'fsa-ratings') {
     $variables['attributes']['class'][] = 'theme--service';
     $variables['attributes']['class'][] = 'theme--fhrs';
+  }
+
+  // Search page(s) body class.
+  if ($uri_segments[1] === 'search' || ($uri_segments[1] === 'news-alerts' && $uri_segments[2] == 'search')) {
+    $variables['attributes']['class'][] = 'theme--search';
   }
 
   // Get service routes to set body classes for the section.

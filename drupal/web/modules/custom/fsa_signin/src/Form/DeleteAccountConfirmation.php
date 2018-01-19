@@ -38,12 +38,20 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function getDescription() {
+
+    $privacy_nid = \Drupal::state()->get('fsa_custom.privacy_link_nid');
+    if (is_numeric($privacy_nid)) {
+      $privacy_link = DefaultController::linkMarkup('entity.node.canonical', $this->t('Privacy notice'), [], ['node' => $privacy_nid]);
+    }
+    else {
+      $privacy_link = '<pre>[Privacy page link not defined]</pre>';
+    }
     $user = \Drupal::currentUser();
     $email = $user->getEmail();
     $message = '<h1>' . $this->t('Confirm removal') . '</h1>';
     $message .= '<p>' . $this->t('You are about to remove subscription with email <strong>@email</strong>.', ['@email' => $email]) . '</p>';
     $message .= '<p>' . $this->t('This will cancel all your subscriptions and permanently remove your personal details..') . '</p>';
-    $message .= '<p>' . DefaultController::linkMarkup('entity.node.canonical', $this->t('Privacy notice'), [], ['node' => '144']) . '</p>';
+    $message .= '<p>' . $privacy_link . '</p>';
     return $message;
   }
 
@@ -85,10 +93,12 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
     }
 
     $form['back'] = [
+      '#prefix' => '<header class="profile__header">',
       '#markup' => DefaultController::linkMarkup('fsa_signin.default_controller_manageProfilePage', $this->t('Back'), ['back']),
     ];
     $form['logout'] = [
-      '#markup' => DefaultController::linkMarkup('user.logout.http', 'Logout', ['button']),
+      '#suffix' => '</header>', 
+      '#markup' => DefaultController::linkMarkup('user.logout.http', 'Logout', ['profile__logout']),
     ];
 
     if (DefaultController::isMoreThanRegistered($user)) {

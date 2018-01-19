@@ -45,18 +45,12 @@ class FsaRatingsSearchForm extends FormBase {
     /** @var \Drupal\fsa_es\SearchService $search_service */
     $search_service = \Drupal::service('fsa_es.search_service');
 
-    $filters = [];
+    $params = RatingsSearch::getSearchParameters();
     $language = \Drupal::languageManager()->getCurrentLanguage();
     $available_filters = $search_service->categories($language);
 
     // User provided search input.
-    $keywords = \Drupal::request()->query->get('q');
-
-    // User provided max item count. Hard-limit is 1000. Default is 20.
-    $max_items = \Drupal::request()->query->get('max');
-    if (empty($max_items) || $max_items > 1000) {
-      $max_items = RatingsSearch::INITIAL_RESULTS_COUNT;
-    }
+    $keywords = $params['keywords'];
 
     // See if the following parameters are provided by the user and add to the
     // list of filters ("advanced search options"). Additionally send
@@ -68,8 +62,9 @@ class FsaRatingsSearchForm extends FormBase {
       $value = \Drupal::request()->query->get($opt);
       if (!empty($value)) {
         $filters[$opt] = $value;
-        $is_open = ' is-open';
+        $is_open = ' is-visible';
         $aria_expanded = 'true';
+        break;
       }
     }
 
@@ -82,15 +77,6 @@ class FsaRatingsSearchForm extends FormBase {
         ],
       ],
     ];
-
-    // Detect from the query params if search was performed.
-    $search = FALSE;
-    foreach (self::FORM_FIELDS as $input) {
-      $query_input = \Drupal::request()->query->get($input);
-      if (isset($query_input)) {
-        $search = TRUE;
-      }
-    }
 
     $form['main'] = [
       '#type' => 'container',
@@ -108,14 +94,14 @@ class FsaRatingsSearchForm extends FormBase {
         'class' => [
           'js-main-search-input',
         ],
-      ]
+      ],
     ];
 
     $string = $this->t('More search options');
 
     $form['advanced_button'] = [
       '#type' => 'item',
-      '#prefix' => '<div class="toggle-button js-toggle-button ratings__advanced-search-button' . $is_open . '" role="button" aria-expanded="' . $aria_expanded . '" aria-controls="collapsible-12345zxcv"><div class="toggle-button__item">' . $string . '</div>',
+      '#prefix' => '<div class="toggle-button ratings__advanced-search-button' . $is_open . '" role="button" aria-expanded="' . $aria_expanded . '" data-state="is-open" data-theme="dynamic" data-state-element="#collapsible-12345zxcv" aria-controls="collapsible-12345zxcv"><div class="toggle-button__item">' . $string . '</div>',
       '#suffix' => '<div class="toggle-button__item toggle-button__item--icon ratings__advanced-search-button-icon"><div class="toggle-button__fallback-icon"></div></div></div>',
     ];
 
@@ -133,24 +119,25 @@ class FsaRatingsSearchForm extends FormBase {
       '#type' => 'select',
       '#title' => $this->t('Business type'),
       '#empty_option' => $this->t('All'),
-      '#options' => $this->aggsToOptions($available_filters['business_types']),
-      '#default_value' => \Drupal::request()->query->get('business_type'),
+      '#options' => $search_service->aggsToOptions($available_filters['business_types']),
+      '#default_value' => isset($params['filters']['business_type']) ? $params['filters']['business_type'] : NULL,
       '#empty_value' => '',
     ];
     $form['advanced']['local_authority'] = [
       '#type' => 'select',
       '#title' => $this->t('Country or local authority'),
       '#empty_option' => $this->t('All'),
-      '#options' => $this->aggsToOptions($available_filters['local_authorities']),
-      '#default_value' => \Drupal::request()->query->get('local_authority'),
+      '#options' => $search_service->aggsToOptions($available_filters['local_authorities']),
+      '#default_value' => isset($params['filters']['local_authority']) ? $params['filters']['local_authority'] : NULL,
       '#empty_value' => '',
     ];
 
+    $fhrs_rating_default_value = isset($params['filters']['fhrs_rating_value']) ? $params['filters']['fhrs_rating_value'] : '';
     $form['advanced']['fhrs_rating_value'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Hygiene rating') . ' <span class="regions">(' . $this->t('England, Northern Ireland, Wales') . ')</span>',
-      '#options' => $this->defineAndSortArrayItems(
-        $this->aggsToOptions($available_filters['fhrs_rating_values']),
+      '#options' => $search_service->defineAndSortArrayItems(
+        $search_service->aggsToOptions($available_filters['fhrs_rating_values']),
         [
           5,
           4,
@@ -162,14 +149,15 @@ class FsaRatingsSearchForm extends FormBase {
           'Exempt',
         ]
       ),
-      '#default_value' => explode(',', \Drupal::request()->query->get('fhrs_rating_value')),
+      '#default_value' => is_array($fhrs_rating_default_value) ? $fhrs_rating_default_value : explode(',', $fhrs_rating_default_value),
     ];
 
+    $fhis_rating_default_value = isset($params['filters']['fhis_rating_value']) ? $params['filters']['fhis_rating_value'] : '';
     $form['advanced']['fhis_rating_value'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Hygiene status') . ' <span class="regions">(' . $this->t('Scotland') . ')</span>',
-      '#options' => $this->defineAndSortArrayItems(
-        $this->aggsToOptions($available_filters['fhis_rating_values']),
+      '#options' => $search_service->defineAndSortArrayItems(
+        $search_service->aggsToOptions($available_filters['fhis_rating_values']),
         [
           'Pass',
           'Pass and Eat Safe',
@@ -178,7 +166,7 @@ class FsaRatingsSearchForm extends FormBase {
           'Exempt',
         ]
       ),
-      '#default_value' => explode(',', \Drupal::request()->query->get('fhis_rating_value')),
+      '#default_value' => is_array($fhis_rating_default_value) ? $fhis_rating_default_value : explode(',', $fhis_rating_default_value),
     ];
 
     $form['container']['actions']['#type'] = 'actions';
@@ -194,28 +182,6 @@ class FsaRatingsSearchForm extends FormBase {
 
     return $form;
 
-  }
-
-  /**
-   * Private helper function to sort array by another array.
-   *
-   * @param array $array
-   *   The array to define..
-   * @param array $definingArray
-   *   The array with keys defining sort and items to keep.
-   *
-   * @return array
-   *   Sorted array.
-   */
-  private static function defineAndSortArrayItems(array $array, array $definingArray) {
-    $modified_array = [];
-    foreach ($definingArray as $key) {
-      if (array_key_exists($key, $array)) {
-        $modified_array[$key] = $array[$key];
-        unset($array[$key]);
-      }
-    }
-    return $modified_array;
   }
 
   /**
@@ -258,52 +224,15 @@ class FsaRatingsSearchForm extends FormBase {
       }
     }
 
-    $form_state->setRedirect('fsa_ratings.ratings_search', [], ['query' => $query, 'fragment' => 'results']);
-  }
-
-  /**
-   * Translate aggs to options.
-   */
-  private function aggsToOptions($aggs_bucket = []) {
-    $options = [];
-    foreach ($aggs_bucket as $a) {
-      // Add textual representation for numeric values.
-      switch ($a['key']) {
-        case '5':
-          $value = $a['key'] . ' ' . t('Very good');
-          break;
-
-        case '4':
-          $value = $a['key'] . ' ' . t('Good');
-          break;
-
-        case '3':
-          $value = $a['key'] . ' ' . t('Generally satisfactory');
-          break;
-
-        case '2':
-          $value = $a['key'] . ' ' . t('Improvement necessary');
-          break;
-
-        case '1':
-          $value = $a['key'] . ' ' . t('Major improvement necessary');
-          break;
-
-        case '0':
-          $value = $a['key'] . ' ' . t('Urgent improvement necessary');
-          break;
-
-        case 'AwaitingInspection':
-          // Make this label more human friendly.
-          $value = t('Awaiting Rating');
-          break;
-
-        default:
-          $value = $a['key'];
-      }
-      $options[$a['key']] = (string) $value;
+    if (empty($query)) {
+      drupal_set_message(t('Please enter a business name/location or use search options below.'), 'warning');
+      $fragment = FALSE;
     }
-    return $options;
+    else {
+      $fragment = RatingsHelper::RESULTS_ANCHOR;
+    }
+
+    $form_state->setRedirect('fsa_ratings.ratings_search', [], ['query' => $query, 'fragment' => $fragment]);
   }
 
 }

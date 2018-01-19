@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 name: promo_large
-label: 'Promo large (720×400)'
+label: 'Promo large (720×475)'
 effects:
   ed3cbfc5-8130-4373-adb9-04812f9b9926:
     uuid: ed3cbfc5-8130-4373-adb9-04812f9b9926
@@ -11,4 +11,4 @@ effects:
     weight: 1
     data:
       width: 720
-      height: 400
+      height: 475

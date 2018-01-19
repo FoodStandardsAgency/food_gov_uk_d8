@@ -90,19 +90,36 @@
 }
 
 .toggle-content {
-  overflow: hidden;
-  max-height: 0;
-  min-height: 0;
-  padding: 0 1px !important;
-  transition:
-    max-height var(--transition-enter),
-    min-height var(--transition-enter);
 
-  &.is-hidden {
-    /* transition: none; */
+
+  &.is-dynamic {
+    overflow: hidden;
+    max-height: 0;
+    min-height: 0;
+    padding: 0 1px !important;
+    transition:
+      max-height var(--transition-enter),
+      min-height var(--transition-enter);
+
+    &.is-open {
+      max-height: var(--expanded, 70px);
+      min-height: var(--expanded, 70px);
+    }
   }
 
-  :--not-modern &.is-hidden {
+  &.is-popup {
+    position: absolute;
+    top: -7777px;
+    top: -100vh;
+    left: 0;
+    right: 0;
+
+    &.is-open {
+      top: 100%;
+    }
+  }
+
+  /* :--not-modern &.is-hidden {
     display: none;
     max-height: none;
     min-height: 0;
@@ -113,11 +130,6 @@
   }
 
   &.is-visible {
-    /*
-    use the css variable --expanded if it is 
-    set in the style attribute of the html
-    otherwise use the fallback number.
-    */
     max-height: var(--expanded, 70px);
     min-height: var(--expanded, 70px);
   }
@@ -144,17 +156,12 @@
     min-height: 0;
   }
 
-  /* Theme */
   &.is-popup {
     position: absolute;
     left: 0;
     right: 0;
     max-height: 0;
     min-height: 0;
-    
-    &.is-hidden {
-      /* transition: none; */
-    }
 
     &.is-visible {
       min-height: 30em;
@@ -165,7 +172,7 @@
   :--not-js & {
     max-height: none;
     min-height: 0;
-  }
+  } */
 }
 
 

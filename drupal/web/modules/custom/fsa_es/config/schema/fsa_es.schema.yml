@@ -1,0 +1,2 @@
+views.filter.fsa_guidance_content_type:
+  type: views.filter.many_to_one

@@ -9,7 +9,9 @@
 require_once 'inc/html.inc';
 require_once 'inc/node.inc';
 require_once 'inc/field.inc';
+require_once 'inc/fieldset.inc';
 require_once 'inc/page.inc';
+require_once 'inc/media.inc';
 require_once 'inc/fsa-ratings-search-page.inc';
 require_once 'inc/status_messages.inc';
 

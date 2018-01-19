@@ -1,5 +1,5 @@
 fsa_notify.settings:
   route_name: fsa_notify.settings
-  title: 'Notify'
+  title: 'Notify API'
   parent: system.admin_config_fsa
   description: 'Edit Notify API settings and turn on/off Notify subsystem (alert collection, distributing and sending).'

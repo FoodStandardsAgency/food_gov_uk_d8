@@ -1,0 +1,42 @@
+@import "../../core/helper";
+@import "../../core/custom-property";
+
+.peek {
+  @mixin responsive-declaration padding, 1em, 2em;
+  background-color: var(--color-lighter-gray);
+  border-top: 4px solid var(--color-green);
+
+  @media (--breakpoint-md) {
+    margin-bottom: -5em;
+    transform: translateY(-5em);
+  }
+
+  & > h2 {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+
+    &:after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: -0.5em;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3Ccircle cx='4' cy='4' r='4' fill='%23DEE2E5' /%3E%3C/svg%3E");
+      background-repeat: repeat-x;
+      background-size: 20px 15px;
+      width: 80%;
+      height: 10px;
+      display: block;
+      transform: translateX(-50%);
+    }
+  }
+}
+
+.peek__container {
+  max-width: 39em;
+  margin: 0 auto;
+}
+
+.parallax {
+  will-change: transform;
+}

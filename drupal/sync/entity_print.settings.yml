@@ -1,5 +1,5 @@
 default_css: true
-force_download: true
+force_download: false
 print_engines:
   pdf_engine: phpwkhtmltopdf
   epub_engine: ''

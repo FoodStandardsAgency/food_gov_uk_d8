@@ -1,16 +1,5 @@
-@import "../../core/helper";
+/* @import "../../core/helper";
 @import "../../core/custom-property";
-
-.navigation-side {
-
-}
-
-.navigation-side h2 {
-  text-transform: uppercase;
-  font-size: 1em;
-  letter-spacing: 0.08em;
-  color: var(--color-black);
-}
 
 #block-menu-help-secondary ul {
   margin: 0;
@@ -32,16 +21,9 @@
   position: relative;
   display: flex;
   justify-content: center;
-  margin-top: 0em;
-  @mixin responsive-declaration margin-bottom, 1em, 4em;
 
   @media (--breakpoint-md) {
     padding-bottom: 10em;
-    margin-top: -1.25em;
-  }
-
-  @media (--breakpoint-lg) {
-    margin-top: -3.5em;
   }
 }
 
@@ -131,29 +113,14 @@
 
   @media (--breakpoint-md) {
     position: absolute;
-    right: -2em;
-    left: -2em;
+    right: 0em;
+    left: 0em;
     padding-top: 2em;
     flex-direction: row;
     align-items: stretch;
     justify-content: center;
   }
-
-  @media (--breakpoint-lg) {
-    position: absolute;
-    right: -6em;
-    left: -6em;
-  }
 }
-
-/* #block-menu-help-secondary > .menu > li:first-child > .menu {
-  width: 100vw;
-}
-
-#block-menu-help-secondary > .menu > li:last-child > .menu {
-  width: 100vw;
-  transform: translateX(-50%);
-} */
 
 #block-menu-help-secondary > .menu > li.menu-item--active-trail > .menu,
 #block-menu-help-secondary > .menu > li > .menu.is-open {
@@ -250,39 +217,4 @@
   left: 50%;
   border-top-color: var(--dark-secondary-color);
   transform: translateX(-50%) translateY(100%);
-}
-
-
-/*Subpages*/
-.subpages:not(:first-child) {
-  @mixin responsive-declaration margin-top, 1.5em, 4em;
-}
-
-.subpages > ul,
-.subpages > ol {
-  margin: 0;
-  padding: 0;
-  padding-top: 1em;
-}
-
-.subpages ul li,
-.subpages ol li {
-  list-style: none;
-  margin-bottom: 1em;
-}
-
-:--not-touch .subpages > ul a:--enter,
-:--not-touch .subpages > ul a:--enter {
-  color: var(--light-primary-color);
-  text-decoration: underline;
-}
-
-.subpages > ul ul,
-.subpages > ol ol {
-  padding-left: 1em;
-}
-
-.subpages > ul ul a,
-.subpages > ol ol a {
-  color: var(--color-black);
-}
+} */

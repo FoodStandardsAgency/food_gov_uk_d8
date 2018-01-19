@@ -1,0 +1,7 @@
+name: FSA Lander
+type: module
+description: "Landing page customization for FSA"
+core: 8.x
+package: FSA
+dependencies:
+  - drupal:paragraphs

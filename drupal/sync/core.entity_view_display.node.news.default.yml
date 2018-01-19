@@ -4,11 +4,19 @@ status: true
 dependencies:
   config:
     - field.field.node.news.body
+    - field.field.node.news.field_intro
+    - field.field.node.news.field_nation
     - field.field.node.news.field_news_type
+    - field.field.node.news.field_team_contacts
+    - field.field.node.news.field_topic
     - node.type.news
   module:
+    - entity_print
     - text
     - user
+third_party_settings:
+  entity_print:
+    pdf_label: 'View PDF'
 id: node.news.default
 targetEntityType: node
 bundle: news
@@ -17,30 +25,27 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 3
-    settings: {  }
-    third_party_settings: {  }
-    region: content
-  content_moderation_control:
-    weight: 1
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_news_type:
     weight: 0
-    label: hidden
-    settings:
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  links:
-    weight: 2
-    region: content
     settings: {  }
     third_party_settings: {  }
+    region: content
+  field_team_contacts:
+    weight: 1
+    label: above
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
 hidden:
+  content_moderation_control: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_intro: true
+  field_nation: true
+  field_news_type: true
+  field_topic: true
   langcode: true
+  links: true

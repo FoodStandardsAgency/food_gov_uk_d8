@@ -1,0 +1,12 @@
+{#
+/**
+ * @file
+ * Theme override for title on custom blocks. Used on paragraph lander references.
+ * Add id's for anchor linking to the content.
+ *
+ * @see template_preprocess_field()
+ */
+#}
+{% for item in items %}
+    <h3{{ attributes.setAttribute('id', item.content|render|striptags|trim|clean_id) }}>{{ item.content }}</h3>
+{% endfor %}

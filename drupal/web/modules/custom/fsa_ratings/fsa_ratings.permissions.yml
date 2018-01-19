@@ -43,3 +43,6 @@ view published fsa establishment entities:
 
 view unpublished fsa establishment entities:
   title: 'View unpublished FSA Establishment entities'
+
+'administer fsa rating landing content':
+  title: 'Administer FSA Rating landing content'

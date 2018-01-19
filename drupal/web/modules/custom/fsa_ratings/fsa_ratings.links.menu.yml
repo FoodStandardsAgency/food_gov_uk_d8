@@ -25,7 +25,7 @@ fsa_establishment.admin.structure.settings:
 
 # FSA Ratings configuration page menu item definition
 fsa_ratings.ratings_settings:
-  title: 'Ratings'
+  title: 'Ratings (FHRS)'
   parent: system.admin_config_fsa
   route_name: fsa_ratings.ratings_settings
-  description: 'Ratings configuration page ...'
+  description: 'Food Hygiene Ratings (FHRS) search page configurations.'

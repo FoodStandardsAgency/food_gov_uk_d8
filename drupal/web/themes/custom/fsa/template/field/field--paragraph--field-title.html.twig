@@ -1,0 +1,13 @@
+{#
+/**
+ * @file
+ * FSA theme override for title field on paragraphs (used on lander rows).
+ *
+ * @see fsa_lander_preprocess_field()
+ */
+#}
+<div{{ attributes }}>
+    {% for item in items %}
+        <h2{{ item.attributes }}>{{ item.content }}</h2>
+    {% endfor %}
+</div>

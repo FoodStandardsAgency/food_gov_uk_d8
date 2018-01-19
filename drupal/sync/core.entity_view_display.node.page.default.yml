@@ -9,7 +9,7 @@ dependencies:
     - field.field.node.page.field_block_reference
     - field.field.node.page.field_content_type
     - field.field.node.page.field_document
-    - field.field.node.page.field_header_image
+    - field.field.node.page.field_fsa_toc
     - field.field.node.page.field_icon
     - field.field.node.page.field_intro
     - field.field.node.page.field_liftup_image
@@ -19,16 +19,13 @@ dependencies:
     - field.field.node.page.field_media_library_liftup_image
     - field.field.node.page.field_nation
     - field.field.node.page.field_related_content
-    - field.field.node.page.field_subpages
     - field.field.node.page.field_team_contacts
     - field.field.node.page.field_topic
     - field.field.node.page.field_update_date
     - node.type.page
   module:
-    - datetime
     - entity_print
     - entity_reference_revisions
-    - fsa_subpages
     - text
     - user
 third_party_settings:
@@ -44,17 +41,12 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 3
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  entity_print_view_pdf:
     weight: 0
     region: content
     settings: {  }
     third_party_settings: {  }
   field_block:
-    weight: 7
+    weight: 4
     label: above
     settings:
       link: true
@@ -62,7 +54,7 @@ content:
     type: entity_reference_label
     region: content
   field_block_reference:
-    weight: 8
+    weight: 5
     label: hidden
     settings:
       view_mode: default
@@ -71,7 +63,7 @@ content:
     type: entity_reference_entity_view
     region: content
   field_document:
-    weight: 6
+    weight: 3
     label: hidden
     settings:
       view_mode: document_link
@@ -79,25 +71,9 @@ content:
     third_party_settings: {  }
     type: entity_reference_entity_view
     region: content
-  field_intro:
-    weight: 2
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    type: basic_string
-    region: content
   field_liftups:
     type: entity_reference_revisions_entity_view
-    weight: 5
-    label: hidden
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings: {  }
-    region: content
-  field_subpages:
-    type: entity_reference_revisions_subpages_entity_view
-    weight: 4
+    weight: 2
     label: hidden
     settings:
       view_mode: default
@@ -105,7 +81,7 @@ content:
     third_party_settings: {  }
     region: content
   field_team_contacts:
-    weight: 9
+    weight: 6
     label: above
     settings:
       link: true
@@ -113,22 +89,15 @@ content:
     third_party_settings: {  }
     type: entity_reference_entity_view
     region: content
-  field_update_date:
-    weight: 1
-    label: inline
-    settings:
-      timezone_override: ''
-      format_type: medium
-    third_party_settings: {  }
-    type: datetime_default
-    region: content
 hidden:
   entity_print_view_epub: true
+  entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_audience: true
   field_content_type: true
-  field_header_image: true
+  field_fsa_toc: true
   field_icon: true
+  field_intro: true
   field_liftup_image: true
   field_liftup_summary: true
   field_liftup_title: true
@@ -136,5 +105,6 @@ hidden:
   field_nation: true
   field_related_content: true
   field_topic: true
+  field_update_date: true
   langcode: true
   links: true

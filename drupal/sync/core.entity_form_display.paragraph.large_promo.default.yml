@@ -1,0 +1,41 @@
+uuid: e95ae3bd-8e58-4578-995a-72db1ac90060
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.large_promo.field_large_promo
+    - paragraphs.paragraphs_type.large_promo
+  module:
+    - content_moderation
+    - entity_browser_entity_form
+    - inline_entity_form
+id: paragraph.large_promo.default
+targetEntityType: paragraph
+bundle: large_promo
+mode: default
+content:
+  field_large_promo:
+    weight: 0
+    settings:
+      form_mode: default
+      override_labels: true
+      label_singular: 'Large promo'
+      label_plural: 'Large promos'
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+    type: inline_entity_form_complex
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 1
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true

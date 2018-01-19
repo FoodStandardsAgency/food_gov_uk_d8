@@ -1,0 +1,35 @@
+uuid: 91d8f82e-f0ef-4971-8fb0-00586b83908a
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.icon_link.field_icon_link
+    - field.field.paragraph.icon_link.field_title
+    - paragraphs.paragraphs_type.icon_link
+  module:
+    - paragraphs
+id: paragraph.icon_link.preview
+targetEntityType: paragraph
+bundle: icon_link
+mode: preview
+content:
+  field_icon_link:
+    type: paragraph_summary
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true

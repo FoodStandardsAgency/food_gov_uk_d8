@@ -91,10 +91,12 @@ class DefaultController extends ControllerBase {
     $uid = \Drupal::currentUser()->id();
     $account = User::load($uid);
 
-    $header = '<h2>' . $this->t('Your profile') . '</h2>';
-    $header .= '<p>' . $this->t("Hello @name", ['@name' => $account->getUsername()]) . '</p>';
+    $header = '<header class="profile__header">';
+    $header .= '<h2 class="profile__heading">' . $this->t('Your profile') . '</h2>';
+    $header .= '<p class="profile__intro">' . $this->t("Hello @name", ['@name' => $account->getUsername()]) . '</p>';
+    $header .= '</header>';
     $header .= self::linkMarkup('fsa_signin.default_controller_manageProfilePage', $this->t('Manage your profile'), ['button']);
-    $header .= self::linkMarkup('user.logout.http', 'Logout', ['button']);
+    $header .= self::linkMarkup('user.logout.http', 'Logout', ['profile__logout']);
 
     return [
       ['#markup' => $header],
@@ -118,9 +120,12 @@ class DefaultController extends ControllerBase {
       'subscribed_notifications' => $this->signInService->subscribedTermIds($account),
     ];
 
-    $header = '<h2>' . $this->t('Manage your preferences') . '</h2>';
-    $header .= '<p>' . $this->t("Update your subscription or unsubscribe from the alerts you're receiving") . '</p>';
-    $header .= self::linkMarkup('user.logout.http', 'Logout', ['button']);
+    $header = '<header class="profile__header">';
+    $header .= '<h2 class="profile__heading">' . $this->t('Manage your preferences') . '</h2>';
+    $header .= self::linkMarkup('user.logout.http', 'Logout', ['profile__logout']);
+    $header .= '</header>';
+    $header .= '<p class="profile__intro">' . $this->t("Update your subscription or unsubscribe from the alerts you're receiving") . '</p>';
+
     $manage_form = \Drupal::formBuilder()->getForm(ProfileManager::class, $account, $options, $default_values);
 
     return [

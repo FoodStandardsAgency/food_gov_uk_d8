@@ -1,3 +1,6 @@
+import nextByClass from '../../core/helper/nextByClass';
+import inert from 'wicg-inert';
+
 function navigation() {
 
   const settings = {
@@ -6,6 +9,11 @@ function navigation() {
     groupSelector: 'header.navigation__header, li.navigation__item.navigation__item--level-2',
     listItemSelector: 'header.navigation__header, li.navigation__item',
     menuItemActionSelector: '.navigation__item a, .navigation__item button'
+  };
+
+  const KEYCODE = {
+    ESC: 27,
+    SPACE: 32,
   };
 
   const keyboard = {

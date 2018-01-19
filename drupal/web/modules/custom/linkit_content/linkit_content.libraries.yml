@@ -1,0 +1,20 @@
+general:
+  version: 3.x
+  js:
+    js/linkit_content.general.js: {}
+  css:
+    theme:
+      css/linkit_content.general.css: {}
+  dependencies:
+    - core/jquery
+
+selector:
+  version: VERSION
+  css:
+    theme:
+      css/linkit_content.selector.css: {}
+  js:
+    js/linkit_content.selector.js: {}
+  dependencies:
+    - core/drupalSettings
+    - core/jquery.once

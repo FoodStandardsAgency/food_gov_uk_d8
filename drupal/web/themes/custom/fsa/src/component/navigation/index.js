@@ -5,10 +5,10 @@ import html from './navigation.html';
 import css from './navigation.css';
 
 // Import JavaScript
-import js from './navigation';
+// import js from './navigation';
 
 module.exports = {
   html,
   css,
-  js,
+  // js,
 };

@@ -1,0 +1,42 @@
+uuid: c6657cc7-0c43-4ce8-ab07-0813fb51538e
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.search_global_guidance
+  module:
+    - block_class
+    - system
+    - views
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: search__filter
+id: search_global_guidance_filters
+theme: fsa
+region: sidebar_first
+weight: -13
+provider: null
+plugin: 'views_exposed_filter_block:search_global_guidance-page_1'
+settings:
+  id: 'views_exposed_filter_block:search_global_guidance-page_1'
+  label: 'Global search: Guidance filters'
+  provider: views
+  label_display: '0'
+  views_label: ''
+  filters:
+    audience: audience
+    region: region
+    keywords: 0
+    '': 0
+  post_route_name: ''
+  location_context: ''
+  disable_ajax: false
+  hide_submit_button: 1
+visibility:
+  request_path:
+    id: request_path
+    pages: '/search/guidance*'
+    negate: false
+    context_mapping: {  }

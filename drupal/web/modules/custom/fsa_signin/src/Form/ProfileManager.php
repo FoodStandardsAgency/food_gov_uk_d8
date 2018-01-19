@@ -310,7 +310,7 @@ class ProfileManager extends FormBase {
     }
     return [
       '#type' => 'item',
-      '#prefix' => '<div class="toggle-button js-toggle-button ' . $wrapper . '-button' . $class_open . '" role="button" aria-expanded="' . $aria_expanded . '" aria-controls="collapsible-' . $wrapper . '"><div class="toggle-button__item">' . $label . '</div>',
+      '#prefix' => '<div class="toggle-button ' . $wrapper . '-button' . $class_open . '" role="button" aria-expanded="' . $aria_expanded . '" data-state="is-open" data-theme="dynamic" data-state-element="#collapsible-' . $wrapper . '"  aria-controls="collapsible-' . $wrapper . '"><div class="toggle-button__item">' . $label . '</div>',
       '#suffix' => '<div class="toggle-button__item toggle-button__item--icon ' . $wrapper . '-button-icon"><div class="toggle-button__fallback-icon"></div></div></div>',
     ];
   }

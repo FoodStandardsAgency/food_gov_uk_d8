@@ -1,0 +1,29 @@
+uuid: a6fb623c-80b1-4d7e-8606-caf2c874e12a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_topic_cloud
+    - paragraphs.paragraphs_type.topic_cloud
+    - taxonomy.vocabulary.topic
+id: paragraph.topic_cloud.field_topic_cloud
+field_name: field_topic_cloud
+entity_type: paragraph
+bundle: topic_cloud
+label: 'Topic cloud'
+description: 'Select topics to create a cloud of topic links.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      topic: topic
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

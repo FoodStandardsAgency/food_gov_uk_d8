@@ -10,10 +10,10 @@ id: node.lander.field_header_image
 field_name: field_header_image
 entity_type: node
 bundle: lander
-label: 'Header image'
+label: 'Hero image'
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:

@@ -1,11 +1,11 @@
 uuid: d87600a6-4a3c-498f-92d9-5568872a9ac4
 name: 'Food Standards Agency'
 mail: no-reply@food.gov.uk
-slogan: ''
+slogan: 'Food Standards Agency makes sure food is safe and what it says it is.'
 page:
   403: ''
   404: ''
-  front: /node
+  front: /node/251
 admin_compact_mode: false
 weight_select_max: 100
 langcode: en

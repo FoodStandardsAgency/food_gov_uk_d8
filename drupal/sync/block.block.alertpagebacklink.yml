@@ -19,7 +19,7 @@ provider: null
 plugin: alert_backlink
 settings:
   id: alert_backlink
-  label: 'Alert page backlink'
+  label: 'News & alerts search tab backlink'
   provider: fsa_alerts
   label_display: '0'
 visibility:
@@ -27,6 +27,8 @@ visibility:
     id: 'entity_bundle:node'
     bundles:
       alert: alert
+      consultation: consultation
+      news: news
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
