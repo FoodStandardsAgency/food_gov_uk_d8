@@ -37,7 +37,7 @@ third_party_settings:
         effect: none
         speed: fast
         id: ''
-        classes: 'consultation metadata'
+        classes: 'content-metadata important'
       label: Metadata
   entity_print:
     pdf_label: 'View PDF'
