@@ -159,7 +159,6 @@ permissions:
   - 'use text format restricted_html'
   - 'view alert revisions'
   - 'view all revisions'
-  - 'view any unpublished news content'
   - 'view consultation revisions'
   - 'view generic revisions'
   - 'view help revisions'
