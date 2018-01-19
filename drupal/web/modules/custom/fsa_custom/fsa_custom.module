@@ -84,6 +84,7 @@ function fsa_custom_preprocess_page(&$variables) {
  * Implements hook_preprocess_page_title().
  */
 function fsa_custom_preprocess_page_title(&$variables) {
+  $is_admin = \Drupal::service('router.admin_context')->isAdminRoute();
 
   $route = \Drupal::routeMatch();
   $entity = FALSE;
@@ -94,12 +95,54 @@ function fsa_custom_preprocess_page_title(&$variables) {
     $entity = $route->getParameter('media');
   }
 
-  if (is_object($entity)) {
+  if (!$is_admin && is_object($entity)) {
     $nodetype = $entity->getType();
     $typemanager = \Drupal::entityTypeManager();
 
     // Init the custom title prefix.
     $title_prefix = [];
+
+    // Define content types that should send the label above title.
+    $content_type_label = [
+      'news',
+      'alert',
+      'consultation',
+      'research_project',
+    ];
+    if (in_array($nodetype, $content_type_label)) {
+
+      if ($nodetype == 'alert') {
+        // Alerts display the formatted alert type field value.
+        $label = $entity->get('field_alert_type')->view([
+          'type' => 'fsa_alert_type_formatter',
+        ]);
+      }
+      elseif ($nodetype == 'consultation' && $entity->field_consultations_type) {
+        // Consultations display their consultation type taxonomy label.
+        $label = $entity->field_consultations_type->view([
+          'label' => 'hidden',
+          'settings' => [
+            'link' => FALSE,
+          ],
+        ]);
+      }
+      else {
+        // Rest are fine displaying their content type human readable name.
+        $label = $entity->type->entity->label();
+      }
+
+      $title_prefix[] = [
+        '#theme' => 'fsa_label',
+        '#attributes' => [
+          'class' => [
+            'content-label',
+            'content-label--content-type',
+            'content-type--' . strtolower(Html::cleanCssIdentifier($nodetype)),
+          ],
+        ],
+        '#label' => $label,
+      ];
+    }
 
     if ($entity->hasField('field_nation')) {
       $nations = $entity->get('field_nation');
@@ -139,36 +182,10 @@ function fsa_custom_preprocess_page_title(&$variables) {
       }
     }
 
-    if ($entity->hasField('field_consultations_type')) {
-      // Add consultation type to title prefix.
-      $types = $entity->get('field_consultations_type');
-      if (isset($types[0])) {
-        $consultation_type = $typemanager->getStorage('taxonomy_term')->load($types[0]->getValue()['target_id'])->getName();
-        $title_prefix[] = [
-          '#theme' => 'fsa_label',
-          '#attributes' => [
-            'class' => 'content-label content-label--consultation-type content-label--consultation-type--' . strtolower(Html::cleanCssIdentifier($consultation_type)),
-          ],
-          '#label' => $consultation_type,
-        ];
-      }
-    }
-
-    if ($nodetype == 'research_project') {
-      $title_prefix[] = [
-        '#theme' => 'fsa_label',
-        '#attributes' => [
-          'class' => 'content-label content-label--content-type content-type--research',
-        ],
-        '#label' => t('Research project'),
-      ];
-    }
-
     // Inject additional title prefix(es) if there was anything to add.
     if (!empty($title_prefix)) {
       $variables['title_prefix'] = $title_prefix;
     }
-
 
   }
   else {

@@ -62,6 +62,7 @@ class FsaDocumentLibraryFileWidget extends FileWidget {
         '#value' => isset($item['description']) ? $item['description'] : '',
         '#maxlength' => $config->get('description.length'),
         '#description' => t('File link title is displayed when documents are embedded into content pages. If not populated will display file name.'),
+        '#required' => TRUE,
       ];
     }
 
