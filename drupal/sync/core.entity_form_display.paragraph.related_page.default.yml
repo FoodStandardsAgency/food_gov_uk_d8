@@ -1,0 +1,33 @@
+uuid: 95160a52-7bb6-45aa-acf2-2699989d6722
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.related_page.field_related_node
+    - paragraphs.paragraphs_type.related_page
+  module:
+    - content_moderation
+id: paragraph.related_page.default
+targetEntityType: paragraph
+bundle: related_page
+mode: default
+content:
+  field_related_node:
+    weight: 101
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true

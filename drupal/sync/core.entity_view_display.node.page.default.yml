@@ -18,6 +18,7 @@ dependencies:
     - field.field.node.page.field_liftups
     - field.field.node.page.field_media_library_liftup_image
     - field.field.node.page.field_nation
+    - field.field.node.page.field_related
     - field.field.node.page.field_related_content
     - field.field.node.page.field_team_contacts
     - field.field.node.page.field_topic
@@ -75,6 +76,15 @@ content:
     type: entity_reference_revisions_entity_view
     weight: 2
     label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_related:
+    type: entity_reference_revisions_entity_view
+    weight: 7
+    label: above
     settings:
       view_mode: default
       link: ''

@@ -18,6 +18,7 @@ dependencies:
     - field.field.node.page.field_liftups
     - field.field.node.page.field_media_library_liftup_image
     - field.field.node.page.field_nation
+    - field.field.node.page.field_related
     - field.field.node.page.field_related_content
     - field.field.node.page.field_team_contacts
     - field.field.node.page.field_topic
@@ -91,7 +92,7 @@ third_party_settings:
         - field_related_content
         - group_code_block_references
       parent_name: ''
-      weight: 16
+      weight: 17
       format_type: tab
       format_settings:
         label: 'Development required / do not use (liftups, related content, block references)'
@@ -101,6 +102,20 @@ third_party_settings:
         id: ''
         classes: ''
       label: 'Development required / do not use (liftups, related content, block references)'
+    group_related:
+      children:
+        - field_related
+      parent_name: ''
+      weight: 14
+      format_type: tab
+      format_settings:
+        label: 'Related link boxes'
+        formatter: open
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+      label: 'Related link boxes'
 _core:
   default_config_hash: sWCotip3wyA0CvZUxyo-StTDU8TyTAhx5fcfOiHS6s4
 id: node.page.default
@@ -110,7 +125,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 7
+    weight: 6
     region: content
     settings:
       rows: 9
@@ -119,7 +134,7 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 12
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -154,7 +169,7 @@ content:
     type: options_select
     region: content
   field_document:
-    weight: 8
+    weight: 7
     settings:
       form_mode: default
       label_singular: ''
@@ -169,7 +184,7 @@ content:
     type: inline_entity_form_complex
     region: content
   field_fsa_toc:
-    weight: 6
+    weight: 5
     settings:
       display_label: true
     third_party_settings: {  }
@@ -184,7 +199,7 @@ content:
     type: image_image
     region: content
   field_intro:
-    weight: 5
+    weight: 4
     settings:
       rows: 3
       placeholder: ''
@@ -242,6 +257,20 @@ content:
     third_party_settings: {  }
     type: options_buttons
     region: content
+  field_related:
+    type: paragraphs
+    weight: 15
+    settings:
+      title: 'Related link box'
+      title_plural: 'Related link boxes'
+      edit_mode: closed
+      closed_mode: preview
+      autocollapse: none
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    region: content
   field_related_content:
     weight: 18
     settings:
@@ -252,7 +281,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_team_contacts:
-    weight: 17
+    weight: 16
     settings:
       match_operator: CONTAINS
       size: 60
@@ -271,14 +300,14 @@ content:
     type: options_shs
     region: content
   field_update_date:
-    weight: 4
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
     region: content
   langcode:
     type: language_select
-    weight: 10
+    weight: 8
     region: content
     settings:
       include_locked: true
@@ -291,7 +320,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 14
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -299,7 +328,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 15
+    weight: 13
     third_party_settings: {  }
     region: content
   sticky:
@@ -318,13 +347,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 13
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 11
+    weight: 9
     region: content
     settings:
       match_operator: CONTAINS

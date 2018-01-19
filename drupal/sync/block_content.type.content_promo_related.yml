@@ -1,0 +1,8 @@
+uuid: 516e9154-2d92-4770-a575-59d73030e683
+langcode: en
+status: true
+dependencies: {  }
+id: content_promo_related
+label: 'Related content promo'
+revision: 1
+description: 'Content promos for related content links.'

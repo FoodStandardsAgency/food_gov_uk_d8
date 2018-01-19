@@ -1,0 +1,24 @@
+uuid: 3141c0ac-269d-40e8-ac65-e0d80d5b858f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.promo_block.field_related_content_block
+    - paragraphs.paragraphs_type.promo_block
+id: paragraph.promo_block.default
+targetEntityType: paragraph
+bundle: promo_block
+mode: default
+content:
+  field_related_content_block:
+    weight: 0
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true

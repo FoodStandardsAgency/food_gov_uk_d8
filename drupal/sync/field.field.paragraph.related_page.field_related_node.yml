@@ -1,0 +1,44 @@
+uuid: b9ef58a4-454e-4517-8657-5fcc0679acce
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_related_node
+    - node.type.alert
+    - node.type.consultation
+    - node.type.generic
+    - node.type.help
+    - node.type.lander
+    - node.type.news
+    - node.type.page
+    - node.type.research_project
+    - node.type.webform
+    - paragraphs.paragraphs_type.related_page
+id: paragraph.related_page.field_related_node
+field_name: field_related_node
+entity_type: paragraph
+bundle: related_page
+label: 'Page reference'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      alert: alert
+      consultation: consultation
+      generic: generic
+      help: help
+      lander: lander
+      news: news
+      page: page
+      research_project: research_project
+      webform: webform
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: research_project
+field_type: entity_reference
