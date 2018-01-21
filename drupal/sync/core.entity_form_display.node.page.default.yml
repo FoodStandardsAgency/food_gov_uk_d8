@@ -109,13 +109,13 @@ third_party_settings:
       weight: 14
       format_type: tab
       format_settings:
-        label: 'Related link boxes'
+        label: 'Related content'
         formatter: open
         description: ''
         required_fields: true
         id: ''
         classes: ''
-      label: 'Related link boxes'
+      label: 'Related content'
 _core:
   default_config_hash: sWCotip3wyA0CvZUxyo-StTDU8TyTAhx5fcfOiHS6s4
 id: node.page.default
@@ -261,8 +261,8 @@ content:
     type: paragraphs
     weight: 15
     settings:
-      title: 'Related link box'
-      title_plural: 'Related link boxes'
+      title: 'Related links'
+      title_plural: 'Related links'
       edit_mode: closed
       closed_mode: preview
       autocollapse: none

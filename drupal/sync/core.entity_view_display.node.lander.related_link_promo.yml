@@ -26,13 +26,13 @@ targetEntityType: node
 bundle: lander
 mode: related_link_promo
 content:
-  field_intro:
+  field_hero_copy:
+    type: basic_string
     weight: 0
+    region: content
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
-    region: content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
@@ -42,8 +42,8 @@ hidden:
   field_block_reference: true
   field_content_type: true
   field_header_image: true
-  field_hero_copy: true
   field_hero_title: true
+  field_intro: true
   field_lander_row: true
   field_nation: true
   field_promo_block: true

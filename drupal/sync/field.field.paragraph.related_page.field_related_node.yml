@@ -18,7 +18,7 @@ id: paragraph.related_page.field_related_node
 field_name: field_related_node
 entity_type: paragraph
 bundle: related_page
-label: 'Page reference'
+label: 'Search for internal node'
 description: ''
 required: false
 translatable: false
