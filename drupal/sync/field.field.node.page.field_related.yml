@@ -13,8 +13,8 @@ id: node.page.field_related
 field_name: field_related
 entity_type: node
 bundle: page
-label: 'Related content'
-description: ''
+label: Related
+description: "<p><strong>Page reference</strong> allows to search for internal pages (nodes) to create a related link. The link box title and intro are pulled automatically from the referred page.<br />\r\n<strong>Promo block</strong> allows to enter the link title, intro and target URL on this page. The link can be external or internal. Use for internal links <em>only</em> if the linked page title and intro text do not fit in this page context.</p>"
 required: false
 translatable: false
 default_value: {  }
