@@ -3,7 +3,7 @@
 
 .header:not(.profile) {
   position: relative;
-  z-index: var(--z-top);
+  z-index: var(--z-topmost);
 
   @media print {
     display: none;
@@ -177,6 +177,11 @@
 
 
 /* Header topbar */
+.topbar-wrapper {
+  position: relative;
+  z-index: var(--z-topmost);
+}
+
 .header__topbar {
   display: flex;
   justify-content: space-between;

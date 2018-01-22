@@ -47,7 +47,8 @@ body:after {
 
 .site {
   transition: transform var(--transition-enter);
-
+  position: relative;
+  
   @media (--breakpoint-sm) {
     overflow: hidden;
     transition: none;

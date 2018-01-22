@@ -1,6 +1,24 @@
 @import "../../core/helper";
 @import "../../core/custom-property";
 
+.cover {
+  content: '';
+  position: absolute;
+  z-index: var(--z-top);
+  top: 0;
+  left: 50%;
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+  height: 100%;
+  display: block;
+  background-color: rgba(0, 0, 0, 0.5);
+  transform: translateX(-50%);
+
+  /* Temp disable */
+  display: none;
+}
+
 /* Navigation wrapper */
 .navigation-wrapper {
   position: absolute;
