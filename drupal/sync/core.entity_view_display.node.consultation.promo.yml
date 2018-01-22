@@ -26,7 +26,7 @@ mode: promo
 content:
   field_consultations_type:
     type: entity_reference_label
-    weight: 1
+    weight: 0
     region: content
     label: hidden
     settings:
