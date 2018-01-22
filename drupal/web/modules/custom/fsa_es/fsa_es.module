@@ -89,11 +89,15 @@ function fsa_es_preprocess_views_view(&$variables) {
     // Get embed view.
     if ($ratings_embed_view = Views::getView($embed_view_id)) {
       // Get keywords filter value from the parent view.
-      $keywords = isset($view->filter['keyword']->value) ? $view->filter['keyword']->value : NULL;
+      // It's important that keyword is either a value or NULL (no empty
+      // stings) since ViewExecutable::_buildArguments() will produce a failed
+      // state.
+      $keywords = isset($view->filter['keyword']->value) && $view->filter['keyword']->value != '' ? $view->filter['keyword']->value : NULL;
 
       // Get embed build.
       $ratings_embed_build = $ratings_embed_view->buildRenderable($embed_view_display, [$keywords]);
       $ratings_embed_build['#access'] = $ratings_embed_view->access($embed_view_display);
+
 
       // If there are more than 3 values, inject the ratings embed after 3rd element.
       if (count($variables['rows'][0]['#rows']) > 3) {
