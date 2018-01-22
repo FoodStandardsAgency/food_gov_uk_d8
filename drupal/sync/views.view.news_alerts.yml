@@ -865,7 +865,7 @@ display:
         filter_groups: false
         title: false
         header: false
-        footer: false
+        footer: true
         css_class: false
         style: false
         row: false
@@ -1391,20 +1391,6 @@ display:
       block_description: 'Latest news and alerts'
       title: 'Latest news and alerts'
       header: {  }
-      footer:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content:
-            value: "<a data-entity-substitution=\"canonical\" data-entity-type=\"node\" data-entity-uuid=\"5427cabf-be8e-46ff-a722-2ce3ae019229\" href=\"/node/56\" class=\"button\">All news and alerts</a>\n<!-- TODO: make this translatable/configurable from code instead of views header -->"
-            format: full_html
-          plugin_id: text
       style:
         type: default
         options:
@@ -1445,7 +1431,7 @@ display:
         filter_groups: false
         title: false
         header: false
-        footer: false
+        footer: true
         css_class: false
         style: false
         row: false
@@ -1970,20 +1956,6 @@ display:
       block_description: 'Latest alerts'
       title: 'Latest alerts'
       header: {  }
-      footer:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content:
-            value: "<a data-entity-substitution=\"canonical\" data-entity-type=\"node\" data-entity-uuid=\"5427cabf-be8e-46ff-a722-2ce3ae019229\" href=\"/node/56\" class=\"button\">All news and alerts</a>\n<!-- TODO: make this translatable/configurable from code instead of views header -->"
-            format: full_html
-          plugin_id: text
       style:
         type: default
         options:
@@ -2024,7 +1996,7 @@ display:
         filter_groups: false
         title: false
         header: false
-        footer: false
+        footer: true
         css_class: false
         style: false
         row: false
@@ -2549,20 +2521,6 @@ display:
       block_description: 'Latest consultations'
       title: 'Latest consultations'
       header: {  }
-      footer:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content:
-            value: "<a data-entity-substitution=\"canonical\" data-entity-type=\"node\" data-entity-uuid=\"5427cabf-be8e-46ff-a722-2ce3ae019229\" href=\"/node/56\" class=\"button\">All news and alerts</a>\n<!-- TODO: make this translatable/configurable from code instead of views header -->"
-            format: full_html
-          plugin_id: text
       style:
         type: default
         options:
@@ -2603,7 +2561,7 @@ display:
         filter_groups: false
         title: false
         header: false
-        footer: false
+        footer: true
         css_class: false
         style: false
         row: false
@@ -3128,20 +3086,6 @@ display:
       block_description: 'Latest news'
       title: 'Latest news'
       header: {  }
-      footer:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content:
-            value: "<a data-entity-substitution=\"canonical\" data-entity-type=\"node\" data-entity-uuid=\"5427cabf-be8e-46ff-a722-2ce3ae019229\" href=\"/node/56\" class=\"button\">All news and alerts</a>\n<!-- TODO: make this translatable/configurable from code instead of views header -->"
-            format: full_html
-          plugin_id: text
       style:
         type: default
         options:
