@@ -1,4 +1,4 @@
-uuid: 4d5f74e0-31d8-4f72-812c-aabf910c9ed4
+uuid: 6f057be3-461b-4701-b5c0-b10614095776
 langcode: en
 status: true
 dependencies:
@@ -7,8 +7,8 @@ dependencies:
     - elasticsearch_helper_views
     - fsa_es
     - user
-id: search_news_alerts_alerts
-label: 'News/alerts search: Alerts'
+id: search_news_alerts_news
+label: 'News/alerts search: News'
 module: views
 description: ''
 tag: search_global
@@ -32,7 +32,7 @@ display:
       query:
         type: views_query
         options:
-          query_builder: news_alerts_search_alerts
+          query_builder: news_alerts_search_news
           entity_relationship:
             entity_type_key: '@node'
             entity_id_key: _id
@@ -168,7 +168,7 @@ display:
           hide_alter_empty: true
           view_mode:
             -
-              'node:alert': search_result
+              'node:news': search_result
           set_result_on_entity: 0
           entity_type: null
           entity_field: null
@@ -214,48 +214,6 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           plugin_id: fsa_keyword
-        news_type:
-          id: news_type
-          table: elasticsearch_result
-          field: news_type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: in
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: news_type_op
-            label: Type
-            description: ''
-            use_operator: false
-            operator: news_type_op
-            identifier: type
-            required: false
-            remember: false
-            multiple: true
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              editor: '0'
-              author: '0'
-              fsa_admin: '0'
-              administrator: '0'
-            reduce: 0
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          plugin_id: fsa_news_type
         nation:
           id: nation
           table: elasticsearch_result
@@ -299,7 +257,7 @@ display:
             group_items: {  }
           plugin_id: fsa_nation
       sorts: {  }
-      title: Alerts
+      title: News
       header: {  }
       footer:
         result:
@@ -338,7 +296,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: news-alerts/search/alerts
+      path: news-alerts/search/news
       exposed_block: true
     cache_metadata:
       max-age: -1

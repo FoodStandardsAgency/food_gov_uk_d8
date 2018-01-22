@@ -35,8 +35,8 @@ settings:
       route_parameters: ''
       query: ''
     link-2:
-      url: ''
-      text: ''
+      url: /news-alerts/search/news
+      text: News
       route_parameters: ''
       query: ''
     link-3:
