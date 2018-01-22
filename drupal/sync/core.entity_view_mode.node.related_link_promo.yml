@@ -1,0 +1,10 @@
+uuid: 58bfb9be-72f5-455c-8a57-2ff26e34a635
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.related_link_promo
+label: 'Related link promo'
+targetEntityType: node
+cache: true

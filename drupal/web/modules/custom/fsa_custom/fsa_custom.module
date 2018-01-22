@@ -243,6 +243,24 @@ function fsa_custom_preprocess_breadcrumb(&$variables) {
 }
 
 /**
+ * Implements hook_preprocess_field().
+ */
+function fsa_custom_preprocess_field(&$variables, $hook) {
+  $is_admin = \Drupal::service('router.admin_context')->isAdminRoute();
+  if ($is_admin && $variables['element']['#view_mode'] == 'preview') {
+    if ($variables['element']['#field_name'] == 'field_related_node') {
+      // Open the preview links in new tab to avoid killing the edited page.
+      if (isset($variables['items'][0]['content']['#url'])) {
+        $variables['items'][0]['content']['#url']->setOption('attributes', [
+          'target' => '_blank',
+          'title' => t('Click to open this page in new tab.'),
+        ]);
+      }
+    }
+  }
+}
+
+/**
  * Implements block_access().
  */
 function fsa_custom_block_access(Block $block, $operation, AccountInterface $account) {

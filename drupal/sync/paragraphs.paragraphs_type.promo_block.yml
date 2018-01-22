@@ -1,0 +1,9 @@
+uuid: 3bd4c493-778f-4a29-a88b-a556b683e04d
+langcode: en
+status: true
+dependencies: {  }
+id: promo_block
+label: 'Promo block'
+icon_uuid: null
+description: 'Create custom related content promo block to manually enter related content title, intro and link target.'
+behavior_plugins: {  }
