@@ -4,9 +4,6 @@ namespace Drupal\fsa_custom\Plugin\Field\FieldFormatter;
 
 use Drupal\file\Plugin\Field\FieldFormatter\FileFormatterBase;
 use Drupal\Core\Field\FieldItemListInterface;
-use Drupal\Component\Utility\Html;
-use Drupal\Core\Url;
-use Drupal\Core\Link;
 
 /**
  * Plugin implementation to display SVG path as rendered image.
