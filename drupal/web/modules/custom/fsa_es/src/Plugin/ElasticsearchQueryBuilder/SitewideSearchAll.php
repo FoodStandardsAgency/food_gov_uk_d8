@@ -71,6 +71,8 @@ class SitewideSearchAll extends SitewideSearchBase {
 
         if (isset($ratings_query)) {
           $index_bool_query = array_merge($index_bool_query, $ratings_query['body']['query']['bool']);
+          // Remove all should clauses so that they do not influence the score.
+          unset($index_bool_query['should']);
         }
       }
       // For other indices a simple keyword query is added.
@@ -89,7 +91,7 @@ class SitewideSearchAll extends SitewideSearchBase {
       }
 
       // Add index as a term filter.
-      $index_bool_query['must'][]['terms']['_index'] = $indices;
+      $index_bool_query['filter'][]['terms']['_index'] = $indices;
 
       // Add a set of must filters to the should query.
       $query_should_filters[]['bool'] = $index_bool_query;
