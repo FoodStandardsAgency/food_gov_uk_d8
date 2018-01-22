@@ -92,14 +92,41 @@
     display: flex;
     flex-flow: row wrap;
   }
+
+  & > .views-row {
+    flex: 1 1 0;
+  }
+
+  .field__field_content_promo__item {
+    flex: 1 1 25%;
+  }
 }
 
-.field__field_content_promo__item {
+/* Promo listing */
+.promo-listing {
+  @mixin responsive-declaration padding-bottom, 1em, 2em;
+
+  @media (--breakpoint-lg) {
+    display: flex;
+    flex-flow: row wrap;
+  }
+}
+
+.promo-listing__item {
   flex: 1 1 25%;
-}
+  margin-bottom: 1em;
 
-.promo-wrapper > .views-row-wrapper > .views-row {
-  flex: 1 1 0;
+  @media (--breakpoint-md) {
+    margin: 1em;
+  }
+
+  & > * {
+    height: 100%;
+  }
+
+  .label__above {
+    display: none;
+  }
 }
 
 /* Promo wrapper footer */
@@ -187,6 +214,7 @@
 /* If promo is a link */
 a.promo,
 a.field__field_content_promo__item {
+  display: block;
   background-image: var(--icon-arrow-right-primary);
   background-repeat: no-repeat;
   background-size: 1.5em auto;
@@ -204,6 +232,11 @@ a.field__field_content_promo__item {
       margin-top: auto;
     }
   }
+}
+
+/* Related promo */
+.promo--related {
+  margin: 0;
 }
 
 /* Promo with inline content */
@@ -421,8 +454,9 @@ a.field__field_content_promo__item {
   color: var(--color-gray);
 }
 
+.promo__heading,
 .field__field_title {
-  .promo,
+  .promo &,
   .field__field_content_promo__item & {
     @mixin responsive-declaration padding-top, 1rem, 2rem;
     @mixin responsive-declaration padding-right, 1rem, 2rem;
@@ -434,7 +468,10 @@ a.field__field_content_promo__item {
 }
 
 /* Intro */
+.promo__intro,
 .field__field_intro {
+  @mixin reset-font-style;
+  margin-top: 0;
   @mixin responsive-declaration padding-bottom, 1em, 2em;
 
   .promo &,

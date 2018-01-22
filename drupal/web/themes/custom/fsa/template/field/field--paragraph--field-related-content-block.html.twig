@@ -11,10 +11,13 @@
 #}
 {% for item in items %}
 {# @todo: Oskari note I used content promo field class, reuse something else or create new classes to make more sense with nanming #}
-<a href="{{ item.content.field_link|render|striptags|trim }}" rel="bookmark" class="field__field_content_promo__item">
-    <div class="related__content">
-        <h4 class="related__heading">{{ item.content.field_title[0] }}</h4>
-        {{ item.content|without('field_title', 'field_link') }}
-    </div>
+<a href="{{ item.content.field_link|render|striptags|trim }}" rel="bookmark" class="promo promo--related">
+  <div class="promo__content">
+    <header class="promo__header">
+      <h4 class="promo__heading">{{ item.content.field_title[0] }}</h4>
+    </header>
+
+    {{ item.content|without('field_title', 'field_link') }}
+  </div>
 </a>
 {% endfor %}
