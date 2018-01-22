@@ -220,6 +220,11 @@
     }
   }
 
+  .theme--help-centre & {
+    max-width: var(--max-width-medium);
+    margin: 0 auto;
+  }
+
   .theme--search & {
     max-width: var(--max-width-medium) !important;
   }
