@@ -19,20 +19,20 @@ content:
   description:
     label: hidden
     type: text_default
-    weight: 0
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
   field_svg_file:
-    weight: 1
+    weight: 0
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: file_url_plain
+    type: file_default
     region: content
   field_symbol_id:
-    weight: 2
-    label: inline
+    weight: 1
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
