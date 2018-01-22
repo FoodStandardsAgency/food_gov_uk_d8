@@ -330,7 +330,12 @@ blockquote {
     background-color: var(--color-white);
   }
 
-  .block-page-title & {
+  .field {
+    margin-bottom: 0.5em !important;
+  }
+
+  .block-page-title &,
+  .field__field_nation {
     position: relative;
     background-color: transparent;
     font-weight: 600;
@@ -368,6 +373,11 @@ blockquote {
       height: 5px;
       width: auto;
     }
+  }
+
+  &.media-document {
+    padding-top: 1em;
+    padding-bottom: 1em;
   }
 
   &.regional-variation--england:after {
@@ -646,6 +656,11 @@ blockquote {
     padding-left: 0em;
     border: 0;
     margin-bottom: 0;
+  }
+
+  .regional-variation & {
+    border: 1px solid transparent;
+    padding: 0;
   }
 
   .field {
