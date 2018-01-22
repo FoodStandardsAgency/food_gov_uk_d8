@@ -22,7 +22,7 @@ settings:
   id: 'views_block:news_alerts-latest_news'
   label: ''
   provider: views
-  label_display: visible
+  label_display: '0'
   views_label: ''
   items_per_page: none
 visibility: {  }
