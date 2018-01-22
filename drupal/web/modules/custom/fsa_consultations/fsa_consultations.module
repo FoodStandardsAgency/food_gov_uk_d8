@@ -26,10 +26,10 @@ function fsa_consultations_preprocess_node(&$variables) {
   // Get consultation dates and concatenate to be used on promo date field.
   // @todo: A twig template if we start getting more of these start/end dates.
   $consultation_dates = '';
-  if (isset($node->field_consultation_launch_date)) {
+  if (isset($node->field_consultation_launch_date[0])) {
     $consultation_dates .= '<span class="start">' . $node->field_consultation_launch_date->view()[0]['#text'] . '</span>';
   }
-  if (isset($node->field_consultation_closing_date)) {
+  if (isset($node->field_consultation_closing_date[0])) {
     if ($consultation_dates != '') {
       $consultation_dates .= ' <span class="divider">' . t('to') . '</span> ';
     }
