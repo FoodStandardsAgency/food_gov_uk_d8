@@ -1,0 +1,29 @@
+{#
+/**
+ * @file
+ * Theme override to display a consultation promo.
+ *
+ * @see template_preprocess_node()
+ *
+ */
+#}
+<a href="{{ url }}" {{ attributes.addClass(['promo', 'promo--light']) }}>
+  {% if content.field_consultations_type %}
+    <div class="promo__type">
+      {{ content.field_consultations_type }}
+    </div>
+  {% endif %}
+  {{ title_prefix }}
+  {% if not page %}
+    <h4{{ title_attributes }} class="promo__content">
+      {{ label }}
+    </h4>
+  {% endif %}
+  {{ title_suffix }}
+
+  <div{{ content_attributes }}>
+    {{ content|without('field_consultations_type') }}
+  </div>
+
+  <div class="promo__date">{{ date }}</div>
+</a>
