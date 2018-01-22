@@ -242,11 +242,19 @@ a.field__field_content_promo__item {
 /* Promo with inline content */
 .promo--inline-content {
   background: none;
-  display: flex;
+  display: flex !important  ;
   flex-flow: row nowrap;
   align-items: center;
   padding-bottom: 0;
   padding: 1em;
+
+  .field {
+    margin-bottom: 0 !important;
+  }
+
+  a& {
+    background-image: none;
+  }
 }
 
 /* Light variation promo */
@@ -374,7 +382,7 @@ a.field__field_content_promo__item {
 
   .promo--inline-content & {
     margin-top: 0 !important;
-    margin-left: auto;
+    padding: 0;
   }
 
   .field__field_large_promo & {
@@ -465,6 +473,11 @@ a.field__field_content_promo__item {
     margin-top: 0em;
     margin-bottom: 0;
   }
+
+  .promo--inline-content & {
+    padding-top: 0;
+    padding-bottom: 0.5em;
+  }
 }
 
 /* Intro */
@@ -479,10 +492,16 @@ a.field__field_content_promo__item {
     @mixin responsive-declaration padding-left, 1em, 2em;
     @mixin responsive-declaration padding-bottom, 1rem, 2rem;
   }
+
+  .promo--inline-content & {
+    padding-bottom: 0;
+  }
 }
 
 /* Promo read more */
 .promo__read-more {
+  margin-top: 0 !important;
+  margin-left: auto;
   padding: 1em;
 
   .svg {
