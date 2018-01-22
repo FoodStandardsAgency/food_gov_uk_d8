@@ -470,12 +470,11 @@ a.field__field_content_promo__item {
 /* Intro */
 .promo__intro,
 .field__field_intro {
-  @mixin reset-font-style;
-  margin-top: 0;
-  @mixin responsive-declaration padding-bottom, 1em, 2em;
 
   .promo &,
   .field__field_content_promo__item & {
+    @mixin reset-font-style;
+    margin-top: 0;
     @mixin responsive-declaration padding-right, 1em, 2em;
     @mixin responsive-declaration padding-left, 1em, 2em;
     @mixin responsive-declaration padding-bottom, 1rem, 2rem;
