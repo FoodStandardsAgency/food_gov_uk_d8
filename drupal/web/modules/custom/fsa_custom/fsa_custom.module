@@ -14,6 +14,7 @@ use Drupal\Core\Link;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Drupal\views\ViewExecutable;
 
 /**
  * Implements of template_preprocess_page().
@@ -261,6 +262,65 @@ function fsa_custom_preprocess_field(&$variables, $hook) {
 }
 
 /**
+ * Implements hook_views_pre_view().
+ */
+function fsa_custom_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
+
+  // Add link buttons to news and alert listing display footers.
+  if ($view->id() == 'news_alerts') {
+    $link = FALSE;
+    $link_options = [
+      'attributes' => [
+        'class' => 'button',
+      ],
+    ];
+
+    // @todo: Once search dev (FSA-545, FSA-458 etc) is done add the correct routes.
+    switch ($display_id) {
+      case 'latest':
+        $text = t('All news and alerts');
+        $link = Link::createFromRoute($text, 'view.search_news_alerts_all.page_1', [], $link_options);
+        break;
+
+      case 'latest_alerts':
+        $text = t('All alerts');
+        $link = Link::createFromRoute($text, 'view.search_news_alerts_all.page_1', [], $link_options);
+        break;
+
+      case 'latest_consultations':
+        $text = t('All consultations');
+        $link = Link::createFromRoute($text, 'view.search_news_alerts_all.page_1', [], $link_options);
+        break;
+
+      case 'latest_news':
+        $text = t('All news');
+        $link = Link::createFromRoute($text, 'view.search_news_alerts_all.page_1', [], $link_options);
+        break;
+    }
+
+    if ($link) {
+      // Set the link in view footer.
+      $view->setHandler(
+        $display_id,
+        'footer',
+        'area_text_custom', [
+          'id' => 'area_text_custom',
+          'table' => 'views',
+          'field' => 'area_text_custom',
+          'relationship' => 'none',
+          'group_type' => 'none',
+          'admin_label' => '',
+          'empty' => TRUE,
+          'tokenize' => FALSE,
+          'content' => $link->toString(),
+          'plugin_id' => 'text_custom',
+        ]
+      );
+    }
+  }
+}
+
+/**
  * Implements block_access().
  */
 function fsa_custom_block_access(Block $block, $operation, AccountInterface $account) {
@@ -365,7 +425,6 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
           }
         }
 
-
         // Default to not showing title in content area.
         return AccessResult::forbidden()
           ->addCacheableDependency($block);
@@ -435,7 +494,6 @@ function fsa_custom_preprocess_block(&$variables) {
     }
   }
 }
-
 
 /**
  * Implements hook_editor_js_settings_alter().

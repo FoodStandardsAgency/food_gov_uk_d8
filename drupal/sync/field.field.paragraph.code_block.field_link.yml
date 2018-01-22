@@ -1,0 +1,23 @@
+uuid: d8d0a5a5-7bef-42c5-a5b0-6d7db432e3b0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_link
+    - paragraphs.paragraphs_type.code_block
+  module:
+    - link
+id: paragraph.code_block.field_link
+field_name: field_link
+entity_type: paragraph
+bundle: code_block
+label: Link
+description: 'Enter e.g. a "Read more" link that relates to the code block below.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link
