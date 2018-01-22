@@ -43,10 +43,12 @@ class FsaRatingsNormalizer extends NormalizerBase {
    * @param \Drupal\fsa_ratings\Entity\FsaEstablishment $object
    */
   public function normalize($object, $format = NULL, array $context = []) {
+    $parent_data = parent::normalize($object, $format, $context);
+
     $data = [
       'id' => $object->id(),
       'name' => $object->get('name')->getString(),
-    ];
+    ] + $parent_data;
 
     $field_names = [
       'address',
