@@ -561,6 +561,7 @@ a.field__field_content_promo__item {
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
+  margin-bottom: 0 !important;
 
   @media (--breakpoint-lg) {
     justify-content: center;
@@ -573,9 +574,14 @@ a.field__field_content_promo__item {
     @media (--breakpoint-xs) {
       flex: 0 1 33.33%;
     }
+
+    @media (--breakpoint-md) {
+      flex: 0 1 25%;
+      margin: 1em;
+    }
     
     @media (--breakpoint-lg) {
-      flex: 0 1 25%;
+      flex: 0 1 13%;
       margin: 1em;
     }
   
