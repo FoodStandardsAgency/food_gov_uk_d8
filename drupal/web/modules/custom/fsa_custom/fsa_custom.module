@@ -366,8 +366,8 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
 
         // Page title above content visibility.
         if ($block->id() == 'pagetitle') {
-          // Hide page title on lander nodes.
-          if ($entity->getType() == 'lander') {
+          // Hide page title on lander and help nodes.
+          if (in_array($entity->getType(), ['lander', 'help'])) {
             return AccessResult::forbidden()
               ->addCacheableDependency($block);
           }
