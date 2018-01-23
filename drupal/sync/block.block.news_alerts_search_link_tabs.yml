@@ -40,8 +40,8 @@ settings:
       route_parameters: ''
       query: ''
     link-3:
-      url: ''
-      text: ''
+      url: /news-alerts/search/consultations
+      text: Consultations
       route_parameters: ''
       query: ''
     link-4:

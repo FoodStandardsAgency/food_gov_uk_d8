@@ -17,7 +17,7 @@ class NewsAlertsType extends FilterInOperatorBase {
     parent::init($view, $display, $options);
     /** @var \Drupal\elasticsearch_helper_views\Plugin\views\query\Elasticsearch $query */
     $query = $this->view->getQuery();
-    $this->definition['options callback'] = [$query->getQueryBuilder(), 'getNewsAlertsTypeFilterOptions'];
+    $this->definition['options callback'] = [$query->getQueryBuilder(), 'getNewsTypeFilterOptions'];
   }
 
   /**

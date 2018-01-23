@@ -134,16 +134,16 @@ class SitewideSearchNewsAlerts extends SitewideSearchBase {
 
     return [
       'alert' => [
-        'Allergy alert',
-        'Food alert',
+        (string) $this->t('Allergy alert'),
+        (string) $this->t('Food alert'),
       ],
       'news-' . $langcode => [
-        'News'
+        (string) $this->t('News'),
       ],
       'consultation-' . $langcode => [
-        'Consultation',
-        'Help shape our policies',
-        'Rapidly developing policies',
+        (string) $this->t('Consultation'),
+        (string) $this->t('Help shape our policies'),
+        (string) $this->t('Rapidly developing policies'),
       ],
     ];
   }
