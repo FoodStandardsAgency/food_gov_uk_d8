@@ -28,6 +28,7 @@ settings:
     name: keywords
     title: Search
     placeholder: ''
+  form_submit_button: 0
 visibility:
   request_path:
     id: request_path

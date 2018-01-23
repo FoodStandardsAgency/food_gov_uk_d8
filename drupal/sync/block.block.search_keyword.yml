@@ -1,0 +1,31 @@
+uuid: 704dfe7f-fd09-4750-812e-6be1f83aa62e
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - fsa_es
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: header__search
+id: search_keyword
+theme: fsa
+region: header_2
+weight: -18
+provider: null
+plugin: search_keyword
+settings:
+  id: search_keyword
+  label: Search
+  provider: fsa_es
+  label_display: '0'
+  action_url: /search
+  form_method: post
+  form_element:
+    name: keywords
+    title: ''
+    placeholder: Search...
+  form_submit_button: 1
+visibility: {  }
