@@ -126,6 +126,12 @@ class SearchKeyword extends BlockBase implements FormInterface, ContainerFactory
       '#default_value' => $this->configuration['form_element']['placeholder'],
     ];
 
+    $form['form_submit_button'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Display submit button'),
+      '#default_value' => $this->configuration['form_submit_button'],
+    ];
+
     return $form;
   }
 
@@ -147,6 +153,7 @@ class SearchKeyword extends BlockBase implements FormInterface, ContainerFactory
 
     $this->configuration['action_url'] = $source_form_state->getValue(array_merge($value_parents, ['action_url']));
     $this->configuration['form_method'] = $source_form_state->getValue(array_merge($value_parents, ['form_method']));
+    $this->configuration['form_submit_button'] = $source_form_state->getValue(array_merge($value_parents, ['form_submit_button']));
 
     $form_element_values = [];
     foreach (['name', 'title', 'placeholder'] as $field) {
@@ -197,6 +204,13 @@ class SearchKeyword extends BlockBase implements FormInterface, ContainerFactory
 
     $form['#action'] = !empty($this->configuration['action_url']) ? $this->configuration['action_url'] : $this->request->getPathInfo();
     $form['#method'] = $this->configuration['form_method'];
+
+    if ($this->configuration['form_submit_button']) {
+      $form['submit'] = [
+        '#type' => 'submit',
+        '#value' => $this->t('Submit'),
+      ];
+    }
 
     return $form;
   }
