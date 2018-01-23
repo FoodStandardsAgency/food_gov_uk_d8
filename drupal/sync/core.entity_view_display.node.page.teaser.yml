@@ -57,11 +57,6 @@ targetEntityType: node
 bundle: page
 mode: teaser
 content:
-  addtoany:
-    weight: 101
-    settings: {  }
-    third_party_settings: {  }
-    region: content
   field_icon:
     type: image
     weight: 1
@@ -97,6 +92,7 @@ content:
       link: false
     third_party_settings: {  }
 hidden:
+  addtoany: true
   body: true
   entity_print_view_epub: true
   entity_print_view_pdf: true

@@ -39,11 +39,6 @@ targetEntityType: node
 bundle: page
 mode: default
 content:
-  addtoany:
-    weight: 101
-    settings: {  }
-    third_party_settings: {  }
-    region: content
   body:
     label: hidden
     type: text_default
@@ -96,6 +91,7 @@ content:
     type: entity_reference_entity_view
     region: content
 hidden:
+  addtoany: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
