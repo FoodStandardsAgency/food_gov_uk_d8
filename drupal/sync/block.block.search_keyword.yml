@@ -9,7 +9,7 @@ dependencies:
     - fsa
 third_party_settings:
   block_class:
-    classes: header__search
+    classes: search-block
 id: search_keyword
 theme: fsa
 region: header_2
