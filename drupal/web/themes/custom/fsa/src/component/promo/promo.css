@@ -327,19 +327,54 @@ a.field__field_content_promo__item {
 }
 
 .promo__icon {
-  width: 5em;
-  height: 5em;
-  border-radius: 50%;
+  flex: 0 0 auto;
+  position: relative;
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 20em;
   background-color: var(--dark-primary-color);
-  padding: 1em;
+
+  @media (--breakpoint-xs) {
+    width: 3.5em;
+    height: 3.5em;
+  }
+
+  @media (--breakpoint-md) {
+    width: 5em;
+    height: 5em;
+  }
 
   .svg {
-    width: 100%;
-    height: 100%;
+    width: 2.5em;
+    height: 2.5em;
+    transform:
+      scale(0.75);
+
+    @media (--breakpoint-xs) {
+      width: 3.5em;
+      height: 3.5em;
+    }
+  
+    @media (--breakpoint-md) {
+      width: 5em;
+      height: 5em;
+    }
+    
 
     path {
       fill: var(--color-white);
     }
+  }
+
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 20em;
+    transform:
+      translateY(-50%)
+      translateX(-50%)
+      scale(0.75);
   }
 }
 
