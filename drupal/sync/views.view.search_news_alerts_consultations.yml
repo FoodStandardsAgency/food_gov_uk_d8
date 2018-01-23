@@ -168,7 +168,7 @@ display:
           hide_alter_empty: true
           view_mode:
             -
-              'node:news': search_result
+              'node:consultation': search_result
           set_result_on_entity: 0
           entity_type: null
           entity_field: null
@@ -256,6 +256,90 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           plugin_id: fsa_news_type
+        consultation_status:
+          id: consultation_status
+          table: elasticsearch_result
+          field: consultation_status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: consultation_status_op
+            label: Status
+            description: ''
+            use_operator: false
+            operator: consultation_status_op
+            identifier: status
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              editor: '0'
+              author: '0'
+              fsa_admin: '0'
+              administrator: '0'
+            reduce: 0
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: fsa_consultation_status
+        consultation_responses_published:
+          id: consultation_responses_published
+          table: elasticsearch_result
+          field: consultation_responses_published
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: consultation_responses_published_op
+            label: Responses
+            description: ''
+            use_operator: false
+            operator: consultation_responses_published_op
+            identifier: responses_published
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              editor: '0'
+              author: '0'
+              fsa_admin: '0'
+              administrator: '0'
+            reduce: 0
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: fsa_consultation_responses_published
         nation:
           id: nation
           table: elasticsearch_result

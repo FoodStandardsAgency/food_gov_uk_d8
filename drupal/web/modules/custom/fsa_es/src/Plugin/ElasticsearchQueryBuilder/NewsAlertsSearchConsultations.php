@@ -58,6 +58,40 @@ class NewsAlertsSearchConsultations extends SitewideSearchBase {
       ];
     }
 
+    // Add news type as a term filter.
+    if (!empty($values['consultation_status'])) {
+      // Selected checkbox values come as strings, so "0" would mean that
+      // value of "0" is selected, while 0 would mean that it was not selected.
+      $filtered_status_values = array_filter($values['consultation_status'], function($item) {
+        return is_string($item);
+      });
+
+      $query_filter_filters[] = [
+        'terms' => [
+          'status' => array_map(function($item) {
+            return (bool) $item;
+          }, array_values($filtered_status_values)),
+        ],
+      ];
+    }
+
+    // Region is only applicable to news and alerts.
+    if (!empty($values['consultation_responses_published'])) {
+      // Selected checkbox values come as strings, so "0" would mean that
+      // value of "0" is selected, while 0 would mean that it was not selected.
+      $filtered_responses_published_values = array_filter($values['consultation_responses_published'], function($item) {
+        return is_string($item);
+      });
+
+      $query_filter_filters[] = [
+        'terms' => [
+          'responses_published' => array_map(function($item) {
+            return (bool) $item;
+          }, array_values($filtered_responses_published_values)),
+        ],
+      ];
+    }
+
     // Region is only applicable to news and alerts.
     if (!empty($values['nation'])) {
       $query_filter_filters[] = [
@@ -74,6 +108,8 @@ class NewsAlertsSearchConsultations extends SitewideSearchBase {
     if ($query_filter_filters) {
       $query['body']['query']['bool']['filter'] = $query_filter_filters;
     }
+
+    $json = json_encode($query['body'], JSON_PRETTY_PRINT);
 
     return $query;
   }
@@ -120,6 +156,20 @@ class NewsAlertsSearchConsultations extends SitewideSearchBase {
                 'size' => 10000,
               ],
             ],
+            'status' => [
+              'terms' => [
+                'field' => 'status',
+                'order' => ['_term' => 'asc'],
+                'size' => 10000,
+              ],
+            ],
+            'responses_published' => [
+              'terms' => [
+                'field' => 'responses_published',
+                'order' => ['_term' => 'asc'],
+                'size' => 10000,
+              ],
+            ],
             'nation' => [
               'terms' => [
                 'field' => 'nation.label.keyword',
@@ -137,6 +187,8 @@ class NewsAlertsSearchConsultations extends SitewideSearchBase {
       // Build the response.
       $this->aggregations = [
         'type' => $result['aggregations']['type']['buckets'],
+        'status' => $result['aggregations']['status']['buckets'],
+        'responses_published' => $result['aggregations']['responses_published']['buckets'],
         'nation' => $result['aggregations']['nation']['buckets'],
       ];
     }
@@ -175,6 +227,47 @@ class NewsAlertsSearchConsultations extends SitewideSearchBase {
     $aggregations = $this->getAggregations();
 
     return $this->aggsToOptions($aggregations['nation']);
+  }
+
+  /**
+   * Returns a list of consultation statuses.
+   *
+   * @return array
+   */
+  public function getConsultationStatusFilterOptions() {
+    $aggregations = $this->getAggregations();
+
+    // Define human readable values.
+    $human_readable_values = [
+      1 => $this->t('Open'),
+      0 => $this->t('Closed'),
+    ];
+
+    // Get aggregated values.
+    $agg_values = array_column($aggregations['status'], 'key');
+
+    // Return aggregated values with human readable values.
+    return array_intersect_key($human_readable_values, array_combine($agg_values, $agg_values));
+  }
+
+  /**
+   * Returns a filter for bool if responses are published.
+   *
+   * @return array
+   */
+  public function getConsultationResponsesPublishedFilterOptions() {
+    $aggregations = $this->getAggregations();
+
+    // Define human readable values.
+    $human_readable_values = [
+      1 => $this->t('Responses published'),
+    ];
+
+    // Get aggregated values.
+    $agg_values = array_column($aggregations['responses_published'], 'key');
+
+    // Return aggregated values with human readable values.
+    return array_intersect_key($human_readable_values, array_combine($agg_values, $agg_values));
   }
 
 }
