@@ -20,6 +20,10 @@
   justify-content: space-between;
   @mixin responsive-declaration padding-top, 1em, 2em;  
   @mixin responsive-declaration padding-bottom, 1em, 2em;
+
+  & > *:last-child {
+    margin-left: auto;
+  }
 }
 
 .header__menu-button {

@@ -25,7 +25,7 @@ require('./style.css');
 
 document.addEventListener('DOMContentLoaded', () => {
   // Polyfill svgs
-  // svg4everybody({ polyfill: true });
+  svg4everybody({ polyfill: true });
 
   // Add heading
   addHeading();
