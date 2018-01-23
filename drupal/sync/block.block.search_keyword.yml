@@ -22,7 +22,7 @@ settings:
   provider: fsa_es
   label_display: '0'
   action_url: /search
-  form_method: post
+  form_method: get
   form_element:
     name: keywords
     title: ''
