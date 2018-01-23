@@ -4,7 +4,8 @@ description: "Theme for the Food Standards Agency"
 core: 8.x
 base theme: stable
 regions:
-  header: 'Header'
+  header: 'Header row 1'
+  header_2: 'Header row 2'
   primary_menu: 'Primary menu'
   secondary_menu: 'Secondary menu'
   hero: 'Hero'
