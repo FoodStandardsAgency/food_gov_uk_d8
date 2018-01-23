@@ -41,6 +41,9 @@ class FsaRatingsIndex extends FsaIndexBase {
               'id' => [
                 'type' => 'integer',
               ],
+              'entity_type' => [
+                'type' => 'keyword',
+              ],
               'name' => [
                 'type' => 'text',
                 'fields' => [
