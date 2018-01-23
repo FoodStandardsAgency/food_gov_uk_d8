@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.webform.field_audience
     - field.field.node.webform.field_content_type
     - field.field.node.webform.field_icon
+    - field.field.node.webform.field_icon_ref
     - field.field.node.webform.field_liftup_summary
     - field.field.node.webform.field_liftup_title
     - field.field.node.webform.field_topic
@@ -16,12 +17,14 @@ dependencies:
     - node.type.webform
   module:
     - field_group
+    - icon_select
     - image
     - user
 third_party_settings:
   field_group:
     group_teaser_image:
       children:
+        - field_icon_ref
         - field_icon
       parent_name: ''
       weight: 0
@@ -51,6 +54,16 @@ content:
     settings:
       image_style: thumbnail
       image_link: ''
+    third_party_settings: {  }
+  field_icon_ref:
+    type: icon_select_formatter_default
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      apply_dimensions: '1'
+      width: '100'
+      height: '100'
     third_party_settings: {  }
   field_liftup_summary:
     type: basic_string

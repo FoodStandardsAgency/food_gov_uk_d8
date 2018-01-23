@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.webform.field_audience
     - field.field.node.webform.field_content_type
     - field.field.node.webform.field_icon
+    - field.field.node.webform.field_icon_ref
     - field.field.node.webform.field_liftup_summary
     - field.field.node.webform.field_liftup_title
     - field.field.node.webform.field_topic
@@ -16,6 +17,7 @@ dependencies:
   module:
     - content_moderation
     - field_group
+    - icon_select
     - image
     - path
     - shs
@@ -27,7 +29,6 @@ third_party_settings:
       children:
         - field_content_type
         - field_audience
-        - field_nation
         - field_topic
       parent_name: ''
       weight: 1
@@ -43,6 +44,7 @@ third_party_settings:
       children:
         - field_liftup_title
         - field_liftup_summary
+        - field_icon_ref
         - field_icon
       parent_name: ''
       weight: 2
@@ -89,12 +91,18 @@ content:
     type: options_select
     region: content
   field_icon:
-    weight: 5
+    weight: 6
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
     type: image_image
+    region: content
+  field_icon_ref:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: icon_select_widget_default
     region: content
   field_liftup_summary:
     weight: 4
