@@ -176,12 +176,6 @@ table {
     padding: 1em;
   }
 
-  td {
-    &:first-child {
-      font-weight: 600;
-    }
-  }
-
   caption:not(:last-child) {
     background-color: var(--dark-secondary-color);
     color: var(--color-white);
