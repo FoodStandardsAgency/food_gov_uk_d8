@@ -33,6 +33,7 @@ function fsa_preprocess_field(&$variables) {
         break;
 
       case 'field_link_list':
+      case 'field_additional_document':
         $variables['title_element'] = 'h4';
         break;
 

@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.webform.field_audience
     - field.field.node.webform.field_content_type
     - field.field.node.webform.field_icon
+    - field.field.node.webform.field_icon_ref
     - field.field.node.webform.field_liftup_summary
     - field.field.node.webform.field_liftup_title
     - field.field.node.webform.field_topic
@@ -45,6 +46,7 @@ hidden:
   field_audience: true
   field_content_type: true
   field_icon: true
+  field_icon_ref: true
   field_liftup_summary: true
   field_liftup_title: true
   field_topic: true

@@ -46,7 +46,7 @@
 #}
 <div class="site js-site">
 
-  <div class="layout">
+  <div class="layout topbar-wrapper">
     <div class="layout__container">
       <div class="layout__content">
         <div class="header__topbar phase-banner">
@@ -179,6 +179,8 @@
       </div>
     </div>
   </div>
+
+  <div class="cover"></div>
   {% endif %}
 
   {% if (page.hero is defined and page.hero|render|striptags|trim) or (page.secondary_menu) %}

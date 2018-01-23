@@ -65,6 +65,10 @@ $config_allowed = [
   '/admin/config/fsa/consultations',
   '/admin/config/fsa/consultations/translate/cy/add',
   '/admin/config/fsa/consultations/translate/cy/edit',
+  '/admin/config/content/embed/button/manage/document',
+  '/admin/config/content/embed/button/manage/media_entity_embed',
+  '/admin/config/content/embed/button/manage/image',
+  '/admin/config/content/embed/button/manage/node',
 ];
 
 // Allow config changes on specified path pattern and command line.

@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * Node template to display Related link promo.
+ *
+ * NB! Template field--paragraph--field-related-content-block.html.twig uses
+ * the same markup to display related link with manually curated content.
+ *
+ * @see template_preprocess_node()
+ */
+#}
+
+{# @todo: Oskari note I used content promo field class, reuse something else or create new classes to make more sense with nanming #}
+<a href="{{ url }}" rel="bookmark" class="promo promo--related">
+  <div class="promo__content">
+    <header class="promo__header">
+      <h4 class="promo__heading">{{ label }}</h4>
+    </header>
+    
+    <div class="promo__intro">
+      {{ content }}
+    </div>
+  </div>
+</a>

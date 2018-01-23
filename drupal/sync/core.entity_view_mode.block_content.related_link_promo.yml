@@ -1,0 +1,10 @@
+uuid: 2612014c-820d-4259-888e-ca2fb74bef84
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+id: block_content.related_link_promo
+label: 'Related link promo'
+targetEntityType: block_content
+cache: true

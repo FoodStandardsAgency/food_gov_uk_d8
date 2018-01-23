@@ -2,6 +2,8 @@
 @import "../../core/custom-property";
 
 .footer-wrapper {
+  position: relative;
+  z-index: var(--z-topmost);
   border-top: 0.5em solid var(--color-green);
   background-color: var(--dark-secondary-color);
   color: var(--color-white);

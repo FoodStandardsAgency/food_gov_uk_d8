@@ -1,0 +1,19 @@
+uuid: 2e745540-4d4e-46ed-ae24-e9a85a479360
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.content_promo_related
+    - field.storage.block_content.field_intro
+id: block_content.content_promo_related.field_intro
+field_name: field_intro
+entity_type: block_content
+bundle: content_promo_related
+label: Intro
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

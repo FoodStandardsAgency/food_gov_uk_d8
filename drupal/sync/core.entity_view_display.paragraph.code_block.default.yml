@@ -5,20 +5,52 @@ dependencies:
   config:
     - field.field.paragraph.code_block.field_code_block
     - field.field.paragraph.code_block.field_hide_title
+    - field.field.paragraph.code_block.field_intro
+    - field.field.paragraph.code_block.field_link
+    - field.field.paragraph.code_block.field_title
     - paragraphs.paragraphs_type.code_block
+  module:
+    - link
 id: paragraph.code_block.default
 targetEntityType: paragraph
 bundle: code_block
 mode: default
 content:
   field_code_block:
-    weight: 0
+    weight: 3
     label: hidden
     settings:
       view_mode: default
       link: false
     third_party_settings: {  }
     type: entity_reference_entity_view
+    region: content
+  field_intro:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_link:
+    weight: 2
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
     region: content
 hidden:
   entity_print_view_epub: true

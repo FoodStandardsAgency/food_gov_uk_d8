@@ -16,12 +16,12 @@ third_party_settings:
 id: search_global_guidance_filters
 theme: fsa
 region: sidebar_first
-weight: -14
+weight: -13
 provider: null
 plugin: 'views_exposed_filter_block:search_global_guidance-page_1'
 settings:
   id: 'views_exposed_filter_block:search_global_guidance-page_1'
-  label: 'Ratings search: Guidance'
+  label: 'Global search: Guidance filters'
   provider: views
   label_display: '0'
   views_label: ''

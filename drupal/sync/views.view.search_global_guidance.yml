@@ -264,10 +264,10 @@ display:
           hierarchy: 1
           error_message: 1
           plugin_id: fsa_guidance_audience
-        guidance_nation:
-          id: guidance_nation
+        nation:
+          id: nation
           table: elasticsearch_result
-          field: guidance_nation
+          field: nation
           relationship: none
           group_type: group
           admin_label: ''
@@ -276,11 +276,11 @@ display:
           group: 1
           exposed: true
           expose:
-            operator_id: guidance_nation_op
+            operator_id: nation_op
             label: Region
             description: ''
             use_operator: false
-            operator: guidance_nation_op
+            operator: nation_op
             identifier: region
             required: false
             remember: false
@@ -289,8 +289,9 @@ display:
               authenticated: authenticated
               anonymous: '0'
               editor: '0'
-              administrator: '0'
               author: '0'
+              fsa_admin: '0'
+              administrator: '0'
             reduce: 0
           is_grouped: false
           group_info:
@@ -304,7 +305,7 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: fsa_guidance_nation
+          plugin_id: fsa_nation
         guidance_content_type:
           id: guidance_content_type
           table: elasticsearch_result

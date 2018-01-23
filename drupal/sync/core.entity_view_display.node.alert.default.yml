@@ -15,9 +15,9 @@ dependencies:
     - field.field.node.alert.field_alert_reportingbusiness
     - field.field.node.alert.field_alert_smstext
     - field.field.node.alert.field_alert_type
+    - field.field.node.alert.field_nation
     - node.type.alert
   module:
-    - datetime
     - entity_print
     - fsa_alerts_import
     - link
@@ -26,80 +26,70 @@ dependencies:
 third_party_settings:
   entity_print:
     pdf_label: 'View PDF'
+    epub_label: 'View EPub'
+    word_docx_label: 'View Word Document'
 id: node.alert.default
 targetEntityType: node
 bundle: alert
 mode: default
 content:
-  entity_print_view_pdf:
-    weight: 0
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_alert_actiontaken:
-    weight: 6
+    type: basic_string
+    weight: 4
+    region: content
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
-    region: content
   field_alert_allergen:
-    weight: 4
+    type: entity_reference_entity_view
+    weight: 2
+    region: content
     label: above
     settings:
       view_mode: teaser
       link: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
-    region: content
   field_alert_consumeradvice:
-    weight: 7
+    type: basic_string
+    weight: 5
+    region: content
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
-    region: content
   field_alert_description:
-    weight: 2
+    weight: 0
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default
     region: content
-  field_alert_modified:
-    weight: 1
-    label: inline
-    settings:
-      timezone_override: ''
-      format_type: medium
-    third_party_settings: {  }
-    type: datetime_default
-    region: content
   field_alert_notation:
-    weight: 10
+    type: string
+    weight: 8
+    region: content
     label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
-    region: content
   field_alert_otherbusiness:
-    weight: 9
+    type: string
+    weight: 7
+    region: content
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
-    region: content
   field_alert_productdetails_raw:
-    weight: 3
+    type: fsa_alert_json_formatter
+    weight: 1
+    region: content
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: fsa_alert_json_formatter
-    region: content
   field_alert_relatedmedia:
-    weight: 5
+    type: link
+    weight: 3
+    region: content
     label: hidden
     settings:
       trim_length: 80
@@ -108,20 +98,21 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
-    region: content
   field_alert_reportingbusiness:
-    weight: 8
+    type: string
+    weight: 6
+    region: content
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
-    region: content
 hidden:
   entity_print_view_epub: true
+  entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_alert_modified: true
   field_alert_smstext: true
   field_alert_type: true
+  field_nation: true
   langcode: true
   links: true

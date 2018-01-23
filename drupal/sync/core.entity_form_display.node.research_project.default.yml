@@ -9,9 +9,11 @@ dependencies:
     - field.field.node.research_project.field_document
     - field.field.node.research_project.field_intro
     - field.field.node.research_project.field_planned_completion_date
+    - field.field.node.research_project.field_related
     - field.field.node.research_project.field_research_programme
     - field.field.node.research_project.field_research_project_code
     - field.field.node.research_project.field_research_topics
+    - field.field.node.research_project.field_results_available
     - field.field.node.research_project.field_team_contacts
     - field.field.node.research_project.field_update_date
     - node.type.research_project
@@ -22,12 +24,14 @@ dependencies:
     - entity_browser_entity_form
     - field_group
     - inline_entity_form
+    - paragraphs
     - path
     - text
 third_party_settings:
   field_group:
     group_project_metadata:
       children:
+        - field_results_available
         - field_research_programme
         - field_research_topics
         - field_date_range
@@ -44,6 +48,19 @@ third_party_settings:
         id: ''
         classes: ''
       label: 'Project metadata'
+    group_related:
+      children:
+        - field_related
+      parent_name: ''
+      weight: 7
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: open
+        description: ''
+        required_fields: true
+      label: Related
 id: node.research_project.default
 targetEntityType: node
 bundle: research_project
@@ -60,12 +77,12 @@ content:
     region: content
   created:
     type: datetime_timestamp
-    weight: 9
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
   field_conducted_by:
-    weight: 34
+    weight: 40
     settings:
       size: 60
       placeholder: ''
@@ -73,7 +90,7 @@ content:
     type: string_textfield
     region: content
   field_date_range:
-    weight: 32
+    weight: 38
     settings: {  }
     third_party_settings: {  }
     type: daterange_default
@@ -102,13 +119,27 @@ content:
     type: string_textarea
     region: content
   field_planned_completion_date:
-    weight: 33
+    weight: 39
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
     region: content
+  field_related:
+    weight: 41
+    settings:
+      title: 'Related links'
+      title_plural: 'Related links'
+      edit_mode: closed
+      closed_mode: preview
+      autocollapse: none
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    type: paragraphs
+    region: content
   field_research_programme:
-    weight: 30
+    weight: 36
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -122,13 +153,20 @@ content:
     type: string_textfield
     region: content
   field_research_topics:
-    weight: 31
+    weight: 37
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
+  field_results_available:
+    weight: 35
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   field_team_contacts:
-    weight: 7
+    weight: 8
     settings:
       match_operator: CONTAINS
       size: 60
@@ -144,20 +182,20 @@ content:
     region: content
   langcode:
     type: language_select
-    weight: 12
+    weight: 13
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 11
+    weight: 12
     settings: {  }
     region: content
     third_party_settings: {  }
   path:
     type: path
-    weight: 10
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -165,7 +203,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 14
+    weight: 15
     region: content
     third_party_settings: {  }
   title:
@@ -177,13 +215,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 13
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 8
+    weight: 9
     settings:
       match_operator: CONTAINS
       size: 60

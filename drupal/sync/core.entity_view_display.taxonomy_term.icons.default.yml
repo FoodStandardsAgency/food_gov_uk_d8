@@ -7,7 +7,7 @@ dependencies:
     - field.field.taxonomy_term.icons.field_symbol_id
     - taxonomy.vocabulary.icons
   module:
-    - file
+    - fsa_custom
     - text
 _core:
   default_config_hash: UUwvJN32DfkPEMyhX9Ey38vdaQbr20x0Sc8fnGBHlyc
@@ -28,18 +28,11 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: file_url_plain
-    region: content
-  field_symbol_id:
-    weight: 2
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
+    type: fsa_rendered_svg
     region: content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_symbol_id: true
   langcode: true

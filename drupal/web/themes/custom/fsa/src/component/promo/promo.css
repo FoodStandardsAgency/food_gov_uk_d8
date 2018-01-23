@@ -92,14 +92,41 @@
     display: flex;
     flex-flow: row wrap;
   }
+
+  & > .views-row {
+    flex: 1 1 0;
+  }
+
+  .field__field_content_promo__item {
+    flex: 1 1 25%;
+  }
 }
 
-.field__field_content_promo__item {
+/* Promo listing */
+.promo-listing {
+  @mixin responsive-declaration padding-bottom, 1em, 2em;
+
+  @media (--breakpoint-lg) {
+    display: flex;
+    flex-flow: row wrap;
+  }
+}
+
+.promo-listing__item {
   flex: 1 1 25%;
-}
+  margin-bottom: 1em;
 
-.promo-wrapper > .views-row-wrapper > .views-row {
-  flex: 1 1 0;
+  @media (--breakpoint-md) {
+    margin: 1em;
+  }
+
+  & > * {
+    height: 100%;
+  }
+
+  .label__above {
+    display: none;
+  }
 }
 
 /* Promo wrapper footer */
@@ -187,6 +214,7 @@
 /* If promo is a link */
 a.promo,
 a.field__field_content_promo__item {
+  display: block;
   background-image: var(--icon-arrow-right-primary);
   background-repeat: no-repeat;
   background-size: 1.5em auto;
@@ -206,14 +234,29 @@ a.field__field_content_promo__item {
   }
 }
 
+/* Related promo */
+.promo--related {
+  margin: 0;
+}
+
 /* Promo with inline content */
 .promo--inline-content {
   background: none;
-  display: flex;
+  display: flex !important  ;
   flex-flow: row nowrap;
   align-items: center;
   padding-bottom: 0;
+  margin: 0;
   padding: 1em;
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
+
+  .field {
+    margin-bottom: 0 !important;
+  }
+
+  a& {
+    background-image: none;
+  }
 }
 
 /* Light variation promo */
@@ -341,7 +384,7 @@ a.field__field_content_promo__item {
 
   .promo--inline-content & {
     margin-top: 0 !important;
-    margin-left: auto;
+    padding: 0;
   }
 
   .field__field_large_promo & {
@@ -421,8 +464,9 @@ a.field__field_content_promo__item {
   color: var(--color-gray);
 }
 
+.promo__heading,
 .field__field_title {
-  .promo,
+  .promo &,
   .field__field_content_promo__item & {
     @mixin responsive-declaration padding-top, 1rem, 2rem;
     @mixin responsive-declaration padding-right, 1rem, 2rem;
@@ -431,22 +475,35 @@ a.field__field_content_promo__item {
     margin-top: 0em;
     margin-bottom: 0;
   }
+
+  .promo--inline-content & {
+    padding-top: 0;
+    padding-bottom: 0.5em;
+  }
 }
 
 /* Intro */
+.promo__intro,
 .field__field_intro {
-  @mixin responsive-declaration padding-bottom, 1em, 2em;
 
   .promo &,
   .field__field_content_promo__item & {
+    @mixin reset-font-style;
+    margin-top: 0;
     @mixin responsive-declaration padding-right, 1em, 2em;
     @mixin responsive-declaration padding-left, 1em, 2em;
     @mixin responsive-declaration padding-bottom, 1rem, 2rem;
+  }
+
+  .promo--inline-content & {
+    padding-bottom: 0;
   }
 }
 
 /* Promo read more */
 .promo__read-more {
+  margin-top: 0 !important;
+  margin-left: auto;
   padding: 1em;
 
   .svg {

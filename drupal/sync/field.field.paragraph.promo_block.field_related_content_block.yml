@@ -1,0 +1,28 @@
+uuid: ec891149-f9eb-4a96-ad56-bc4c1f226ac4
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.content_promo_related
+    - field.storage.paragraph.field_related_content_block
+    - paragraphs.paragraphs_type.promo_block
+id: paragraph.promo_block.field_related_content_block
+field_name: field_related_content_block
+entity_type: paragraph
+bundle: promo_block
+label: 'Related content block'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:block_content'
+  handler_settings:
+    target_bundles:
+      content_promo_related: content_promo_related
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

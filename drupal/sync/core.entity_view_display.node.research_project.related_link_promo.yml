@@ -1,0 +1,55 @@
+uuid: d9bdb5fa-fc25-422e-b5bb-efb4a4bd38db
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.related_link_promo
+    - field.field.node.research_project.body
+    - field.field.node.research_project.field_conducted_by
+    - field.field.node.research_project.field_date_range
+    - field.field.node.research_project.field_document
+    - field.field.node.research_project.field_intro
+    - field.field.node.research_project.field_planned_completion_date
+    - field.field.node.research_project.field_research_programme
+    - field.field.node.research_project.field_research_project_code
+    - field.field.node.research_project.field_research_topics
+    - field.field.node.research_project.field_results_available
+    - field.field.node.research_project.field_team_contacts
+    - field.field.node.research_project.field_update_date
+    - node.type.research_project
+  module:
+    - entity_print
+    - user
+third_party_settings:
+  entity_print:
+    pdf_label: 'View PDF'
+id: node.research_project.related_link_promo
+targetEntityType: node
+bundle: research_project
+mode: related_link_promo
+content:
+  field_intro:
+    type: basic_string
+    weight: 0
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  body: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_conducted_by: true
+  field_date_range: true
+  field_document: true
+  field_planned_completion_date: true
+  field_related: true
+  field_research_programme: true
+  field_research_project_code: true
+  field_research_topics: true
+  field_results_available: true
+  field_team_contacts: true
+  field_update_date: true
+  langcode: true
+  links: true

@@ -7,6 +7,7 @@
 
 use Drupal\taxonomy\Entity\Term;
 use Drupal\views\ViewExecutable;
+use Drupal\Component\Utility\Html;
 
 /**
  * Implements hook_preprocess_page_title().
@@ -17,8 +18,24 @@ function fsa_research_preprocess_page_title(&$variables) {
 
   // Prepend research programme ID to page title.
   if ($routename == 'entity.taxonomy_term.canonical' && $term = Term::load($route->getRawParameters()->all()['taxonomy_term'])) {
-    if ($term->getVocabularyId() == 'research_programme' && $term->field_rp_id->value != '') {
-      $variables['title']['#markup'] = $variables['title']['#markup'] . ' ' . $term->field_rp_id->value;
+    if ($term->getVocabularyId() == 'research_programme') {
+      // Set title label.
+      $label = t('Research programme');
+      $variables['title_prefix'] = [
+        '#theme' => 'fsa_label',
+        '#attributes' => [
+          'class' => [
+            'content-label',
+            'content-label--content-type',
+            'content-type--' . strtolower(Html::cleanCssIdentifier($label)),
+          ],
+        ],
+        '#label' => $label,
+      ];
+      if ($term->field_rp_id->value != '') {
+        // And append the programme code.
+        $variables['title']['#markup'] = $variables['title']['#markup'] . ' ' . $term->field_rp_id->value;
+      }
     }
   }
 }
@@ -57,6 +74,23 @@ function fsa_research_views_pre_view(ViewExecutable $view, $display_id, array &$
         'plugin_id' => 'text_custom',
       );
       $view->setHandler('page', 'header', 'area_text_custom', $options);
+    }
+  }
+}
+
+/**
+ * Implements template_preprocess_views_view_field().
+ */
+function fsa_research_preprocess_views_view_field(&$variables) {
+  $route = \Drupal::routeMatch();
+  $routename = $route->getRouteName();
+  if ($routename == 'entity.taxonomy_term.canonical' && $term = Term::load($route->getRawParameters()->all()['taxonomy_term'])) {
+    // Add "Results available" tag for research programme body results if the
+    // checkbox is selected on research node.
+    if ($term->getVocabularyId() == 'research_programme' &&
+          $variables['field']->field == 'body' &&
+          $variables['row']->_entity->field_results_available->value) {
+      $variables['output'] = ['#markup' => $variables['output'] .= '<div class="results-available">' . $variables['row']->_entity->field_results_available->view()[0]['#markup'] . '</div>'];
     }
   }
 }
