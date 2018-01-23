@@ -57,6 +57,8 @@ class FsaConsultationNormalizer extends NormalizerBase {
    * @param \Drupal\node\NodeInterface $object
    */
   public function normalize($object, $format = NULL, array $context = []) {
+    $parent_data = parent::normalize($object, $format, $context);
+
     // Store either date updated or date changed.
     $date_changed = $this->dateFormatter->format($object->get('changed')->value, 'custom', DATETIME_DATETIME_STORAGE_FORMAT, DATETIME_STORAGE_TIMEZONE);
 
@@ -72,7 +74,7 @@ class FsaConsultationNormalizer extends NormalizerBase {
         $this->prepareTextualField($object->get('body')->value),
       ]),
       'updated' => $date_changed,
-    ];
+    ] + $parent_data;
 
     return $data;
   }

@@ -43,7 +43,7 @@ class SearchService {
    * @return array
    */
   public function buildBaseQuery(LanguageInterface $language, array $filters, $max_items = self::DEFAULT_MAX_RESULT_ITEMS, $offset = 0) {
-    $query_must_filters = [];
+    $query_filter_filters = [];
 
     $query = [
       // Each language has a separate index.
@@ -53,9 +53,7 @@ class SearchService {
       'body' => [
         'query' => [
           'bool' => [
-            'must' => [
-              ['term' => ['_type' => 'establishment']],
-            ],
+            'must' => [],
           ],
         ],
         // Aggregations needed for the potential facet filters.
@@ -114,29 +112,27 @@ class SearchService {
     // Apply the filters to the query:
     if (!empty($filters['business_type'])) {
       $ids = explode(',', $filters['business_type']);
-      $query_must_filters[] = ['terms' => ['businesstype.label.keyword' => $ids]];
+      $query_filter_filters[] = ['terms' => ['businesstype.label.keyword' => $ids]];
     }
     if (!empty($filters['local_authority'])) {
       $ids = explode(',', $filters['local_authority']);
-      $query_must_filters[] = ['terms' => ['localauthoritycode.label.keyword' => $ids]];
+      $query_filter_filters[] = ['terms' => ['localauthoritycode.label.keyword' => $ids]];
     }
     if (isset($filters['rating_value'])) {
       $ids = explode(',', $filters['rating_value']);
-      $query_must_filters[] = ['terms' => ['ratingvalue.keyword' => $ids]];
+      $query_filter_filters[] = ['terms' => ['ratingvalue.keyword' => $ids]];
     }
     if (isset($filters['fhis_rating_value'])) {
       $ids = explode(',', $filters['fhis_rating_value']);
-      $query_must_filters[] = ['terms' => ['fhis_ratingvalue.keyword' => $ids]];
+      $query_filter_filters[] = ['terms' => ['fhis_ratingvalue.keyword' => $ids]];
     }
     if (isset($filters['fhrs_rating_value'])) {
       $ids = explode(',', $filters['fhrs_rating_value']);
-      $query_must_filters[] = ['terms' => ['fhrs_ratingvalue.keyword' => $ids]];
+      $query_filter_filters[] = ['terms' => ['fhrs_ratingvalue.keyword' => $ids]];
     }
 
-    // Assign the term filters to the query in the 'must' section.
-    foreach ($query_must_filters as $filter) {
-      $query['body']['query']['bool']['must'][] = $filter;
-    }
+    // Assign the term filters to the query in the 'filter' section.
+    $query['body']['query']['bool']['filter'] = $query_filter_filters;
 
     return $query;
   }

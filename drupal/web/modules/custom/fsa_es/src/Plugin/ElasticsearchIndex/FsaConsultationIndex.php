@@ -42,6 +42,9 @@ class FsaConsultationIndex extends FsaIndexBase {
               'id' => [
                 'type' => 'integer',
               ],
+              'entity_type' => [
+                'type' => 'keyword',
+              ],
               'langcode' => [
                 'type' => 'keyword',
               ],
