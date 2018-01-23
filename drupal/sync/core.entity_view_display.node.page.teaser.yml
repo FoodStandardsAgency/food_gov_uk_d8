@@ -19,6 +19,7 @@ dependencies:
     - field.field.node.page.field_liftups
     - field.field.node.page.field_media_library_liftup_image
     - field.field.node.page.field_nation
+    - field.field.node.page.field_related
     - field.field.node.page.field_related_content
     - field.field.node.page.field_team_contacts
     - field.field.node.page.field_topic
@@ -56,6 +57,11 @@ targetEntityType: node
 bundle: page
 mode: teaser
 content:
+  addtoany:
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   field_icon:
     type: image
     weight: 1
@@ -105,6 +111,7 @@ hidden:
   field_liftup_title: true
   field_liftups: true
   field_nation: true
+  field_related: true
   field_related_content: true
   field_team_contacts: true
   field_topic: true
