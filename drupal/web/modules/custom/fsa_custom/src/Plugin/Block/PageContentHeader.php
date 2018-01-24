@@ -118,7 +118,12 @@ class PageContentHeader extends BlockBase {
 
       if ($share) {
         $block = Block::load('addtoany');
-        $share = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block);
+        if (is_object($block)) {
+          $share = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block);
+        }
+        else {
+          $share = '';
+        }
       }
 
       $attributes = ['class' => 'page-content-header'];
