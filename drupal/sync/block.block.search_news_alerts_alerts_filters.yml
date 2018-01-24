@@ -1,0 +1,41 @@
+uuid: 38dcfbc8-c8a7-4bc0-bc06-7eaa4ab74866
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.search_news_alerts_alerts
+  module:
+    - block_class
+    - system
+    - views
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: search_news_alerts_alerts_filters
+theme: fsa
+region: sidebar_first
+weight: -13
+provider: null
+plugin: 'views_exposed_filter_block:search_news_alerts_alerts-page_1'
+settings:
+  id: 'views_exposed_filter_block:search_news_alerts_alerts-page_1'
+  label: 'News/alerts search: Alerts filters'
+  provider: views
+  label_display: '0'
+  views_label: ''
+  filters:
+    region: region
+    type: type
+    keywords: 0
+  post_route_name: ''
+  location_context: ''
+  disable_ajax: false
+  hide_submit_button: false
+visibility:
+  request_path:
+    id: request_path
+    pages: '/news-alerts/search/alerts*'
+    negate: false
+    context_mapping: {  }

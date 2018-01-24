@@ -141,6 +141,7 @@ class SitewideSearchAll extends SitewideSearchBase {
         'consultation-' . $langcode,
         'news-' . $langcode,
         'page-' . $langcode,
+        'research-' . $langcode,
       ],
       'ratings' => [
         'ratings-' . $langcode
