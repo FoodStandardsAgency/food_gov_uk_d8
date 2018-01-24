@@ -28,6 +28,15 @@ class RouteSubscriber implements EventSubscriberInterface {
 
     $preregistration_pages = self::PREREGISTRATION_ROUTES;
 
+    // Redirect users to old site.
+    // @todo: Add configuration options to enable/disable.
+    if (TRUE) {
+      if (in_array($route_name, $preregistration_pages)) {
+        // @todo: Add configuration option for the URL.
+        $url = 'https://www.food.gov.uk/about-us/subscribe';
+        $event->setResponse(new TrustedRedirectResponse($url, 301));
+      }
+    }
 
     // Redirect logged in in users to profile manage page from the signup pages.
     if (\Drupal::currentUser()->isAuthenticated()) {
