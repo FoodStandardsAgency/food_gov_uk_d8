@@ -180,7 +180,8 @@
   .theme--news-alerts .layout--with-sidebar &,
   .theme--page:not(.theme--service) .layout--with-sidebar &,
   .theme--subscribe .layout--with-sidebar &,
-  .theme--consultation .layout--with-sidebar & {
+  .theme--consultation .layout--with-sidebar &,
+  .theme--research_project .layout--with-sidebar & {
     max-width: var(--content-max-width);
   }
 
@@ -217,6 +218,11 @@
     @media (--breakpoint-lg) {
       padding-top: 0;
     }
+  }
+
+  .theme--help-centre & {
+    max-width: var(--max-width-medium);
+    margin: 0 auto;
   }
 
   .theme--search & {

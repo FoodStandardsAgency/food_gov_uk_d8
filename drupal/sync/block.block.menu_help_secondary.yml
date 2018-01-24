@@ -11,7 +11,7 @@ dependencies:
     - fsa
 third_party_settings:
   block_class:
-    classes: ''
+    classes: sub-navigation
 id: menu_help_secondary
 theme: fsa
 region: content_top

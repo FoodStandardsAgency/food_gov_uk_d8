@@ -1,0 +1,46 @@
+uuid: e111a262-e8a0-40ec-8e6b-da4634c5f77b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.related_link_promo
+    - field.field.node.webform.body
+    - field.field.node.webform.field_audience
+    - field.field.node.webform.field_content_type
+    - field.field.node.webform.field_icon
+    - field.field.node.webform.field_liftup_summary
+    - field.field.node.webform.field_liftup_title
+    - field.field.node.webform.field_topic
+    - field.field.node.webform.webform
+    - node.type.webform
+  module:
+    - user
+_core:
+  default_config_hash: 3r1i0UMUbeNHhvmiqHDYznoS4G9XR1jq6lQ49r80lDE
+id: node.webform.related_link_promo
+targetEntityType: node
+bundle: webform
+mode: related_link_promo
+content:
+  field_liftup_summary:
+    type: basic_string
+    weight: 0
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  addtoany: true
+  body: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_audience: true
+  field_content_type: true
+  field_icon: true
+  field_icon_ref: true
+  field_liftup_title: true
+  field_topic: true
+  langcode: true
+  links: true
+  webform: true

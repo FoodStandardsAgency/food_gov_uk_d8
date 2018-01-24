@@ -1,0 +1,72 @@
+uuid: 6cc16f95-cd8e-4330-8ec4-2d22093ef08a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_related
+    - node.type.research_project
+    - paragraphs.paragraphs_type.promo_block
+    - paragraphs.paragraphs_type.related_page
+  module:
+    - entity_reference_revisions
+id: node.research_project.field_related
+field_name: field_related
+entity_type: node
+bundle: research_project
+label: 'Related research'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      related_page: related_page
+      promo_block: promo_block
+    target_bundles_drag_drop:
+      related_page:
+        enabled: true
+        weight: -29
+      promo_block:
+        enabled: true
+        weight: -28
+      code_block:
+        weight: -27
+        enabled: false
+      content_promo:
+        weight: -26
+        enabled: false
+      icon_link:
+        weight: -25
+        enabled: false
+      icon_link_item:
+        weight: -24
+        enabled: false
+      large_promo:
+        weight: -23
+        enabled: false
+      liftups:
+        weight: -22
+        enabled: false
+      manual_promo:
+        weight: -21
+        enabled: false
+      subject_listing:
+        weight: -20
+        enabled: false
+      subpage:
+        weight: -19
+        enabled: false
+      team_contact:
+        weight: -18
+        enabled: false
+      title:
+        weight: -17
+        enabled: false
+      topic_cloud:
+        weight: -16
+        enabled: false
+field_type: entity_reference_revisions

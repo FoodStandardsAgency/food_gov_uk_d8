@@ -14,6 +14,7 @@ use Drupal\Core\Link;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Drupal\views\ViewExecutable;
 
 /**
  * Implements of template_preprocess_page().
@@ -84,6 +85,7 @@ function fsa_custom_preprocess_page(&$variables) {
  * Implements hook_preprocess_page_title().
  */
 function fsa_custom_preprocess_page_title(&$variables) {
+  $is_admin = \Drupal::service('router.admin_context')->isAdminRoute();
 
   $route = \Drupal::routeMatch();
   $entity = FALSE;
@@ -94,12 +96,54 @@ function fsa_custom_preprocess_page_title(&$variables) {
     $entity = $route->getParameter('media');
   }
 
-  if (is_object($entity)) {
+  if (!$is_admin && is_object($entity)) {
     $nodetype = $entity->getType();
     $typemanager = \Drupal::entityTypeManager();
 
     // Init the custom title prefix.
     $title_prefix = [];
+
+    // Define content types that should send the label above title.
+    $content_type_label = [
+      'news',
+      'alert',
+      'consultation',
+      'research_project',
+    ];
+    if (in_array($nodetype, $content_type_label)) {
+
+      if ($nodetype == 'alert') {
+        // Alerts display the formatted alert type field value.
+        $label = $entity->get('field_alert_type')->view([
+          'type' => 'fsa_alert_type_formatter',
+        ]);
+      }
+      elseif ($nodetype == 'consultation' && $entity->field_consultations_type) {
+        // Consultations display their consultation type taxonomy label.
+        $label = $entity->field_consultations_type->view([
+          'label' => 'hidden',
+          'settings' => [
+            'link' => FALSE,
+          ],
+        ]);
+      }
+      else {
+        // Rest are fine displaying their content type human readable name.
+        $label = $entity->type->entity->label();
+      }
+
+      $title_prefix[] = [
+        '#theme' => 'fsa_label',
+        '#attributes' => [
+          'class' => [
+            'content-label',
+            'content-label--content-type',
+            'content-type--' . strtolower(Html::cleanCssIdentifier($nodetype)),
+          ],
+        ],
+        '#label' => $label,
+      ];
+    }
 
     if ($entity->hasField('field_nation')) {
       $nations = $entity->get('field_nation');
@@ -139,36 +183,10 @@ function fsa_custom_preprocess_page_title(&$variables) {
       }
     }
 
-    if ($entity->hasField('field_consultations_type')) {
-      // Add consultation type to title prefix.
-      $types = $entity->get('field_consultations_type');
-      if (isset($types[0])) {
-        $consultation_type = $typemanager->getStorage('taxonomy_term')->load($types[0]->getValue()['target_id'])->getName();
-        $title_prefix[] = [
-          '#theme' => 'fsa_label',
-          '#attributes' => [
-            'class' => 'content-label content-label--consultation-type content-label--consultation-type--' . strtolower(Html::cleanCssIdentifier($consultation_type)),
-          ],
-          '#label' => $consultation_type,
-        ];
-      }
-    }
-
-    if ($nodetype == 'research_project') {
-      $title_prefix[] = [
-        '#theme' => 'fsa_label',
-        '#attributes' => [
-          'class' => 'content-label content-label--content-type content-type--research',
-        ],
-        '#label' => t('Research project'),
-      ];
-    }
-
     // Inject additional title prefix(es) if there was anything to add.
     if (!empty($title_prefix)) {
       $variables['title_prefix'] = $title_prefix;
     }
-
 
   }
   else {
@@ -226,6 +244,83 @@ function fsa_custom_preprocess_breadcrumb(&$variables) {
 }
 
 /**
+ * Implements hook_preprocess_field().
+ */
+function fsa_custom_preprocess_field(&$variables, $hook) {
+  $is_admin = \Drupal::service('router.admin_context')->isAdminRoute();
+  if ($is_admin && $variables['element']['#view_mode'] == 'preview') {
+    if ($variables['element']['#field_name'] == 'field_related_node') {
+      // Open the preview links in new tab to avoid killing the edited page.
+      if (isset($variables['items'][0]['content']['#url'])) {
+        $variables['items'][0]['content']['#url']->setOption('attributes', [
+          'target' => '_blank',
+          'title' => t('Click to open this page in new tab.'),
+        ]);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_views_pre_view().
+ */
+function fsa_custom_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
+
+  // Add link buttons to news and alert listing display footers.
+  if ($view->id() == 'news_alerts') {
+    $link = FALSE;
+    $link_options = [
+      'attributes' => [
+        'class' => 'button',
+      ],
+    ];
+
+    // @todo: Once search dev (FSA-545, FSA-458 etc) is done add the correct routes.
+    switch ($display_id) {
+      case 'latest':
+        $text = t('All news and alerts');
+        $link = Link::createFromRoute($text, 'view.search_news_alerts_all.page_1', [], $link_options);
+        break;
+
+      case 'latest_alerts':
+        $text = t('All alerts');
+        $link = Link::createFromRoute($text, 'view.search_news_alerts_all.page_1', [], $link_options);
+        break;
+
+      case 'latest_consultations':
+        $text = t('All consultations');
+        $link = Link::createFromRoute($text, 'view.search_news_alerts_all.page_1', [], $link_options);
+        break;
+
+      case 'latest_news':
+        $text = t('All news');
+        $link = Link::createFromRoute($text, 'view.search_news_alerts_all.page_1', [], $link_options);
+        break;
+    }
+
+    if ($link) {
+      // Set the link in view footer.
+      $view->setHandler(
+        $display_id,
+        'footer',
+        'area_text_custom', [
+          'id' => 'area_text_custom',
+          'table' => 'views',
+          'field' => 'area_text_custom',
+          'relationship' => 'none',
+          'group_type' => 'none',
+          'admin_label' => '',
+          'empty' => TRUE,
+          'tokenize' => FALSE,
+          'content' => $link->toString(),
+          'plugin_id' => 'text_custom',
+        ]
+      );
+    }
+  }
+}
+
+/**
  * Implements block_access().
  */
 function fsa_custom_block_access(Block $block, $operation, AccountInterface $account) {
@@ -271,8 +366,8 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
 
         // Page title above content visibility.
         if ($block->id() == 'pagetitle') {
-          // Hide page title on lander nodes.
-          if ($entity->getType() == 'lander') {
+          // Hide page title on lander and help nodes.
+          if (in_array($entity->getType(), ['lander', 'help'])) {
             return AccessResult::forbidden()
               ->addCacheableDependency($block);
           }
@@ -329,7 +424,6 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
                 ->addCacheableDependency($block);
           }
         }
-
 
         // Default to not showing title in content area.
         return AccessResult::forbidden()
@@ -400,7 +494,6 @@ function fsa_custom_preprocess_block(&$variables) {
     }
   }
 }
-
 
 /**
  * Implements hook_editor_js_settings_alter().

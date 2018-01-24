@@ -1,9 +1,9 @@
-uuid: 797e232a-a920-4c05-ad9c-5785b565ee13
+uuid: cfb628c9-6437-419e-aba6-636e557f90d1
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.node_field
+    - views.view.news_alerts
   module:
     - block_class
     - views
@@ -12,18 +12,17 @@ dependencies:
 third_party_settings:
   block_class:
     classes: ''
-id: node_field_news_type
+id: views_block__news_alerts_latest_alerts
 theme: fsa
-region: content
-weight: -15
+region: hidden
+weight: 0
 provider: null
-plugin: 'views_block:node_field-news_type'
+plugin: 'views_block:news_alerts-latest_alerts'
 settings:
-  id: 'views_block:node_field-news_type'
+  id: 'views_block:news_alerts-latest_alerts'
   label: ''
   provider: views
   label_display: '0'
   views_label: ''
   items_per_page: none
-  context_mapping: {  }
 visibility: {  }

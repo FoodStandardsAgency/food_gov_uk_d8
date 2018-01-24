@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "81a977fc93406c38c910cd586c37cce8",
+    "content-hash": "ae5a073abe982000932b63473cbb7d52",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -1258,6 +1258,61 @@
             ],
             "description": "Composer Plugin for updating the Drupal scaffold files when using drupal/core",
             "time": "2017-05-05T21:26:28+00:00"
+        },
+        {
+            "name": "drupal/addtoany",
+            "version": "1.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/addtoany",
+                "reference": "8.x-1.8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/addtoany-8.x-1.8.zip",
+                "reference": "8.x-1.8",
+                "shasum": "fc3fc0193cb2fd434c0d4112f99287b72f233a41"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.8",
+                    "datestamp": "1493344443",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "AddToAny",
+                    "homepage": "https://www.drupal.org/user/2640913"
+                },
+                {
+                    "name": "micropat",
+                    "homepage": "https://www.drupal.org/user/260224"
+                },
+                {
+                    "name": "patPrzybilla",
+                    "homepage": "https://www.drupal.org/user/151965"
+                }
+            ],
+            "description": "Share buttons by AddToAny, including the AddToAny universal sharing button, Facebook, Twitter, Google+, Pinterest, and over 100 more on the <a href=\"https://www.addtoany.com/\" target=\"_blank\">AddToAny</a> platform.",
+            "homepage": "https://www.drupal.org/project/addtoany",
+            "support": {
+                "source": "http://cgit.drupalcode.org/addtoany"
+            }
         },
         {
             "name": "drupal/admin_toolbar",
@@ -2666,7 +2721,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/elasticsearch_helper"
             },
-            "time": "2017-08-30T13:04:27+00:00"
+            "time": "2017-08-30 13:04:27"
         },
         {
             "name": "drupal/email_registration",
@@ -3679,6 +3734,9 @@
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
                     }
+                },
+                "patches_applied": {
+                    "Linkit filter should honour the URL query and fragment": "https://www.drupal.org/files/issues/linkit_substitution_query_fragment-2895153-10.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -3863,7 +3921,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/media_entity_browser"
             },
-            "time": "2017-02-27T07:23:31+00:00"
+            "time": "2017-02-27 07:23:31"
         },
         {
             "name": "drupal/media_entity_document",
@@ -5001,65 +5059,6 @@
             }
         },
         {
-            "name": "drupal/view_unpublished",
-            "version": "1.0.0-alpha1",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupal.org/project/view_unpublished",
-                "reference": "8.x-1.0-alpha1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/view_unpublished-8.x-1.0-alpha1.zip",
-                "reference": "8.x-1.0-alpha1",
-                "shasum": "6c5928295162027cd4da8f45aba6111d11e899f0"
-            },
-            "require": {
-                "drupal/core": "*"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-1.0-alpha1",
-                    "datestamp": "1483493344",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Alpha releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "amaria",
-                    "homepage": "https://www.drupal.org/user/66428"
-                },
-                {
-                    "name": "beeradb",
-                    "homepage": "https://www.drupal.org/user/120651"
-                },
-                {
-                    "name": "elevins",
-                    "homepage": "https://www.drupal.org/user/781882"
-                },
-                {
-                    "name": "entendu",
-                    "homepage": "https://www.drupal.org/user/173461"
-                }
-            ],
-            "description": "Select which roles should be able to see unpublished nodes.",
-            "homepage": "https://www.drupal.org/project/view_unpublished",
-            "support": {
-                "source": "http://cgit.drupalcode.org/view_unpublished"
-            }
-        },
-        {
             "name": "drupal/warden",
             "version": "1.1.0",
             "source": {
@@ -6070,7 +6069,7 @@
                 "source": "https://github.com/maijs/elasticsearch_helper_views/tree/8.x-1.x",
                 "issues": "https://github.com/maijs/elasticsearch_helper_views/issues"
             },
-            "time": "2017-12-29T11:09:30+00:00"
+            "time": "2017-12-29 11:09:30"
         },
         {
             "name": "masterminds/html5",
@@ -8850,7 +8849,7 @@
                 "drupal",
                 "warden"
             ],
-            "time": "2016-02-10T20:34:02+00:00"
+            "time": "2016-02-10 20:34:02"
         },
         {
             "name": "twig/twig",
@@ -11019,7 +11018,6 @@
         "drupal/redirect": 10,
         "drupal/config_readonly": 10,
         "drupal/webform_views": 15,
-        "drupal/view_unpublished": 15,
         "drupal/diff": 5,
         "drupal/icon_select": 10,
         "maijs/elasticsearch_helper_views": 20

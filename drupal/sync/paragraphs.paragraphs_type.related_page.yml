@@ -1,0 +1,9 @@
+uuid: 46cc335b-48e9-4b73-a0e4-49c39ea251b8
+langcode: en
+status: true
+dependencies: {  }
+id: related_page
+label: 'Page reference'
+icon_uuid: null
+description: 'Create a reference to content to create related link box. Title, intro and link target is fetched automatically from the referenced page.'
+behavior_plugins: {  }

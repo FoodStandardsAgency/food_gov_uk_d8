@@ -1,0 +1,44 @@
+uuid: fc3bd994-2980-4577-9fd3-be2fdcded80c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.related_link_promo
+    - field.field.node.news.body
+    - field.field.node.news.field_intro
+    - field.field.node.news.field_nation
+    - field.field.node.news.field_news_type
+    - field.field.node.news.field_team_contacts
+    - field.field.node.news.field_topic
+    - node.type.news
+  module:
+    - entity_print
+    - user
+third_party_settings:
+  entity_print:
+    pdf_label: 'View PDF'
+id: node.news.related_link_promo
+targetEntityType: node
+bundle: news
+mode: related_link_promo
+content:
+  field_intro:
+    type: basic_string
+    weight: 0
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  addtoany: true
+  body: true
+  content_moderation_control: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_nation: true
+  field_news_type: true
+  field_team_contacts: true
+  field_topic: true
+  langcode: true
+  links: true

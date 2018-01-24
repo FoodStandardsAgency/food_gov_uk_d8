@@ -71,14 +71,14 @@
         "drupal/simple_sitemap": "^2.10",
         "drupal/webform_views": "^5.0@alpha",
         "drupal/menu_block": "^1.4",
-        "drupal/view_unpublished": "^1.0@alpha",
         "drupal/diff": "^1.0@RC",
         "drupal/warden": "^1.1",
         "drupal/media_entity_browser": "~1.4",
         "drupal/term_reference_tree": "^1.0",
         "drupal/icon_select": "^1.0@beta",
         "drupal/config_ignore": "^2.1",
-        "maijs/elasticsearch_helper_views": "dev-8.x-1.x"
+        "maijs/elasticsearch_helper_views": "dev-8.x-1.x",
+        "drupal/addtoany": "^1.8"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",

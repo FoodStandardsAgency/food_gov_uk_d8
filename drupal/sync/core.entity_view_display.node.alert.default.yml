@@ -26,34 +26,36 @@ dependencies:
 third_party_settings:
   entity_print:
     pdf_label: 'View PDF'
+    epub_label: 'View EPub'
+    word_docx_label: 'View Word Document'
 id: node.alert.default
 targetEntityType: node
 bundle: alert
 mode: default
 content:
   field_alert_actiontaken:
+    type: basic_string
     weight: 4
+    region: content
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
-    region: content
   field_alert_allergen:
+    type: entity_reference_entity_view
     weight: 2
+    region: content
     label: above
     settings:
       view_mode: teaser
       link: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
-    region: content
   field_alert_consumeradvice:
+    type: basic_string
     weight: 5
+    region: content
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
-    region: content
   field_alert_description:
     weight: 0
     label: hidden
@@ -62,30 +64,32 @@ content:
     type: text_default
     region: content
   field_alert_notation:
+    type: string
     weight: 8
+    region: content
     label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
-    region: content
   field_alert_otherbusiness:
+    type: string
     weight: 7
+    region: content
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
-    region: content
   field_alert_productdetails_raw:
+    type: fsa_alert_json_formatter
     weight: 1
+    region: content
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: fsa_alert_json_formatter
-    region: content
   field_alert_relatedmedia:
+    type: link
     weight: 3
+    region: content
     label: hidden
     settings:
       trim_length: 80
@@ -94,17 +98,16 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
-    region: content
   field_alert_reportingbusiness:
+    type: string
     weight: 6
+    region: content
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
-    region: content
 hidden:
+  addtoany: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true

@@ -18,6 +18,7 @@ dependencies:
     - field.field.node.page.field_liftups
     - field.field.node.page.field_media_library_liftup_image
     - field.field.node.page.field_nation
+    - field.field.node.page.field_related
     - field.field.node.page.field_related_content
     - field.field.node.page.field_team_contacts
     - field.field.node.page.field_topic
@@ -46,7 +47,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_block:
-    weight: 4
+    weight: 3
     label: above
     settings:
       link: true
@@ -54,7 +55,7 @@ content:
     type: entity_reference_label
     region: content
   field_block_reference:
-    weight: 5
+    weight: 4
     label: hidden
     settings:
       view_mode: default
@@ -63,7 +64,7 @@ content:
     type: entity_reference_entity_view
     region: content
   field_document:
-    weight: 3
+    weight: 2
     label: hidden
     settings:
       view_mode: document_link
@@ -73,7 +74,7 @@ content:
     region: content
   field_liftups:
     type: entity_reference_revisions_entity_view
-    weight: 2
+    weight: 1
     label: hidden
     settings:
       view_mode: default
@@ -81,7 +82,7 @@ content:
     third_party_settings: {  }
     region: content
   field_team_contacts:
-    weight: 6
+    weight: 5
     label: above
     settings:
       link: true
@@ -90,6 +91,7 @@ content:
     type: entity_reference_entity_view
     region: content
 hidden:
+  addtoany: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
@@ -103,6 +105,7 @@ hidden:
   field_liftup_title: true
   field_media_library_liftup_image: true
   field_nation: true
+  field_related: true
   field_related_content: true
   field_topic: true
   field_update_date: true

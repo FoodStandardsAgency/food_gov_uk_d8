@@ -1,0 +1,48 @@
+uuid: 33510e51-28e9-4458-8bfd-a0c688fb5f27
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.content_promo_related
+    - field.field.block_content.content_promo_related.field_intro
+    - field.field.block_content.content_promo_related.field_link
+    - field.field.block_content.content_promo_related.field_title
+  module:
+    - link
+id: block_content.content_promo_related.default
+targetEntityType: block_content
+bundle: content_promo_related
+mode: default
+content:
+  field_intro:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_link:
+    weight: 2
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_title:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true

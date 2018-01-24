@@ -9,8 +9,8 @@ id: paragraph.code_block.field_hide_title
 field_name: field_hide_title
 entity_type: paragraph
 bundle: code_block
-label: 'Hide the title of this block'
-description: ''
+label: 'Hide the block title'
+description: 'Select this to hide the title of the block and override with a custom title in above field (experimental - this option does not work fully yet)'
 required: false
 translatable: false
 default_value:
