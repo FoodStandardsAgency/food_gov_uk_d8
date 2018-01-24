@@ -197,7 +197,7 @@ class SearchKeyword extends BlockBase implements FormInterface, ContainerFactory
       '#default_value' => $parameter_value,
       '#cache' => [
         'contexts' => [
-          'url'
+          'url',
         ],
       ],
     ];
@@ -207,8 +207,8 @@ class SearchKeyword extends BlockBase implements FormInterface, ContainerFactory
 
     if ($this->configuration['form_submit_button']) {
       $form['submit'] = [
-        '#type' => 'submit',
-        '#value' => $this->t('Submit'),
+        '#markup' => '<button class="button search">' . $this->t('Submit') . '</button>',
+        '#allowed_tags' => ['button'],
       ];
     }
 
