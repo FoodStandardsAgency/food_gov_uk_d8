@@ -30,6 +30,7 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  addtoany: true
   body: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
@@ -37,6 +38,7 @@ hidden:
   field_audience: true
   field_content_type: true
   field_icon: true
+  field_icon_ref: true
   field_liftup_title: true
   field_topic: true
   langcode: true

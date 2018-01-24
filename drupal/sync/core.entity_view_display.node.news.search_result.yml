@@ -31,6 +31,7 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  addtoany: true
   content_moderation_control: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
