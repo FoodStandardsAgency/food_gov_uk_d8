@@ -24,9 +24,8 @@ class ManageSubscriptionCta extends BlockBase {
     $text = $this->t('Manage your subscription');
     $classes = ['gear icon'];
     // @todo: Add configuration options to enable/disable redirection.
-    if (TRUE) {
-      // @todo: Add configuration option for the URL.
-      $uri = 'https://public.govdelivery.com/accounts/UKFSA/subscriber/new';
+    if (\Drupal::state()->get('fsa_signin.redirect')) {
+      $uri = \Drupal::state()->get('fsa_signin.external_profile_manage_url');
       $url = Url::fromUri($uri);
       $url->setOptions(['attributes' => ['class' => $classes]]);
       $content = Link::fromTextAndUrl($text, $url)->toString();

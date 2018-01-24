@@ -37,8 +37,8 @@ class FsaSettings extends FormBase {
     ];
 
     $keys = [
-      'fsa_signin.profile_manage_url' => t('Profile manage external URL'),
-      'fsa_signin.signup_url' => t('Profile signup external URL'),
+      'fsa_signin.external_profile_manage_url' => t('Profile manage external URL'),
+      'fsa_signin.external_registration_url' => t('Profile registration external URL'),
     ];
 
     foreach ($keys as $key => $title) {
@@ -75,11 +75,31 @@ class FsaSettings extends FormBase {
   /**
    * {@inheritdoc}
    */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    $redirect = $form_state->getValue('redirect_signin_pages');
+    if ($redirect) {
+      $keys = [
+        'fsa_signin.external_profile_manage_url',
+        'fsa_signin.external_registration_url',
+      ];
+      foreach ($keys as $key) {
+        // Cannot have dot in render array key.
+        $key2 = str_replace('.', '___', $key);
+        if (empty($form_state->getValue($key2))) {
+          $form_state->setErrorByName($key2, $this->t('Enter value to both URL fields'));
+        }
+      }
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
     $keys = [
-      'fsa_signin.profile_manage_url',
-      'fsa_signin.signup_url',
+      'fsa_signin.external_profile_manage_url',
+      'fsa_signin.external_registration_url',
     ];
 
     foreach ($keys as $key) {

@@ -29,11 +29,9 @@ class RouteSubscriber implements EventSubscriberInterface {
     $preregistration_pages = self::PREREGISTRATION_ROUTES;
 
     // Redirect users to old site.
-    // @todo: Add configuration options to enable/disable.
-    if (TRUE) {
+    if (\Drupal::state()->get('fsa_signin.redirect')) {
       if (in_array($route_name, $preregistration_pages)) {
-        // @todo: Add configuration option for the URL.
-        $url = 'https://www.food.gov.uk/about-us/subscribe';
+        $url = \Drupal::state()->get('fsa_signin.external_registration_url');
         $event->setResponse(new TrustedRedirectResponse($url, 301));
       }
     }
