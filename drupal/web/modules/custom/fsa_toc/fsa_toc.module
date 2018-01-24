@@ -35,7 +35,7 @@ function fsa_toc_entity_presave(EntityInterface $entity) {
     // unnecessary DOCTYPE headers.
     // @see Drupal\Component\Utility\Html::load
     $html_dom = new \DOMDocument();
-    $html_dom->loadHTML($text_body);
+    @$html_dom->loadHTML($text_body, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
     $xpath = new \DOMXPath($html_dom);
 
