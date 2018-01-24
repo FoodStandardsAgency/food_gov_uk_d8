@@ -66,7 +66,7 @@ display:
         type: default
         options:
           grouping: {  }
-          row_class: promo-listing
+          row_class: ''
           default_row_class: false
       row:
         type: fields
@@ -920,6 +920,8 @@ display:
         fields: false
         filters: false
         filter_groups: false
+        style: false
+        row: false
       fields:
         field_related:
           id: field_related
@@ -1079,6 +1081,19 @@ display:
         operator: AND
         groups:
           1: AND
+      style:
+        type: default
+        options:
+          grouping: {  }
+          row_class: promo-listing
+          default_row_class: false
+      row:
+        type: fields
+        options:
+          default_field_elements: false
+          inline: {  }
+          separator: ''
+          hide_empty: true
     cache_metadata:
       max-age: -1
       contexts:
