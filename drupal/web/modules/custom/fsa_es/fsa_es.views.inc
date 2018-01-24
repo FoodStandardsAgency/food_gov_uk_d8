@@ -111,4 +111,12 @@ function fsa_es_views_data_alter(array &$data) {
     ],
   ];
 
+  $data['elasticsearch_result']['research_topic'] = [
+    'title' => t('Research topic'),
+    'help' => t('Research topic'),
+    'filter' => [
+      'id' => 'fsa_research_topic',
+    ],
+  ];
+
 }

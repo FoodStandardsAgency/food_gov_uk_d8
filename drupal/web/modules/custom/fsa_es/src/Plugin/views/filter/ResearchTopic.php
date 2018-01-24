@@ -6,9 +6,9 @@ use Drupal\views\Plugin\views\display\DisplayPluginBase;
 use Drupal\views\ViewExecutable;
 
 /**
- * @ViewsFilter("fsa_news_type")
+ * @ViewsFilter("fsa_research_topic")
  */
-class NewsType extends FilterInOperatorBase {
+class ResearchTopic extends FilterInOperatorBase {
 
   use FilterExposedCheckboxTrait;
 
@@ -19,7 +19,7 @@ class NewsType extends FilterInOperatorBase {
     parent::init($view, $display, $options);
     /** @var \Drupal\elasticsearch_helper_views\Plugin\views\query\Elasticsearch $query */
     $query = $this->view->getQuery();
-    $this->definition['options callback'] = [$query->getQueryBuilder(), 'getNewsTypeFilterOptions'];
+    $this->definition['options callback'] = [$query->getQueryBuilder(), 'getTopicFilterOptions'];
   }
 
 }
