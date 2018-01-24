@@ -82,6 +82,12 @@ class FsaConsultationNormalizer extends NormalizerBase {
         $this->prepareTextualField($object->get('field_intro')->value),
         $this->prepareTextualField($object->get('body')->value),
       ]),
+      'nation' => array_map(function($item) {
+        return [
+          'id' => $item->id(),
+          'label' => $item->label(),
+        ];
+      }, $object->get('field_nation')->referencedEntities()),
       'updated' => $date_changed,
     ] + $parent_data;
 
