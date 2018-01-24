@@ -92,6 +92,31 @@ class NewsAlertsSearchConsultations extends SitewideSearchBase {
       ];
     }
 
+    // Apply year filter.
+    if (!empty($values['consultation_year'])) {
+      $year = reset($values['consultation_year']);
+      // Range filtering should be performed on two date fields.
+      $year_bool_query = [];
+
+      foreach (['consultation_start_date', 'consultation_close_date'] as $field) {
+        $year_bool_query['bool']['should'][] = [
+          'range' => [
+            $field => [
+              'gte' => $year . '||/y',
+              'lte' => $year . '||/y',
+              'format' => 'yyyy',
+              'time_zone' => DATETIME_STORAGE_TIMEZONE,
+            ],
+          ],
+        ];
+      }
+
+      // At least one match in starting and closing date should be found.
+      $year_bool_query['bool']['minimum_should_match'] = 1;
+
+      $query_must_filters[] = $year_bool_query;
+    }
+
     // Region is only applicable to news and alerts.
     if (!empty($values['nation'])) {
       $query_filter_filters[] = [
@@ -108,8 +133,6 @@ class NewsAlertsSearchConsultations extends SitewideSearchBase {
     if ($query_filter_filters) {
       $query['body']['query']['bool']['filter'] = $query_filter_filters;
     }
-
-    $json = json_encode($query['body'], JSON_PRETTY_PRINT);
 
     return $query;
   }
@@ -170,6 +193,20 @@ class NewsAlertsSearchConsultations extends SitewideSearchBase {
                 'size' => 10000,
               ],
             ],
+            'start_date' => [
+              'date_histogram' => [
+                'field' => 'consultation_start_date',
+                'interval' => 'year',
+                'format' => 'yyy',
+              ],
+            ],
+            'close_date' => [
+              'date_histogram' => [
+                'field' => 'consultation_close_date',
+                'interval' => 'year',
+                'format' => 'yyy',
+              ],
+            ],
             'nation' => [
               'terms' => [
                 'field' => 'nation.label.keyword',
@@ -189,6 +226,8 @@ class NewsAlertsSearchConsultations extends SitewideSearchBase {
         'type' => $result['aggregations']['type']['buckets'],
         'status' => $result['aggregations']['status']['buckets'],
         'responses_published' => $result['aggregations']['responses_published']['buckets'],
+        'start_date' => $result['aggregations']['start_date']['buckets'],
+        'close_date' => $result['aggregations']['close_date']['buckets'],
         'nation' => $result['aggregations']['nation']['buckets'],
       ];
     }
@@ -268,6 +307,24 @@ class NewsAlertsSearchConsultations extends SitewideSearchBase {
 
     // Return aggregated values with human readable values.
     return array_intersect_key($human_readable_values, array_combine($agg_values, $agg_values));
+  }
+
+  /**
+   * Returns a filter for year.
+   *
+   * @return array
+   */
+  public function getConsultationYearFilterOptions() {
+    $aggregations = $this->getAggregations();
+
+    // Get aggregated values.
+    $start_date_values = array_column($aggregations['start_date'], 'key_as_string');
+    $close_date_values = array_column($aggregations['close_date'], 'key_as_string');
+    $merged_values = array_unique(array_merge($start_date_values, $close_date_values));
+    sort($merged_values);
+
+    return array_combine($merged_values, $merged_values);
+
   }
 
 }

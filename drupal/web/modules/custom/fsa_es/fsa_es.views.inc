@@ -103,4 +103,12 @@ function fsa_es_views_data_alter(array &$data) {
     ],
   ];
 
+  $data['elasticsearch_result']['consultation_year'] = [
+    'title' => t('Year'),
+    'help' => t('Consultation start and close year'),
+    'filter' => [
+      'id' => 'fsa_consultation_year',
+    ],
+  ];
+
 }
