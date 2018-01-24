@@ -37,6 +37,7 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  addtoany: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
@@ -44,7 +45,9 @@ hidden:
   field_date_range: true
   field_document: true
   field_intro: true
+  field_nation: true
   field_planned_completion_date: true
+  field_related: true
   field_research_programme: true
   field_research_project_code: true
   field_research_topics: true
