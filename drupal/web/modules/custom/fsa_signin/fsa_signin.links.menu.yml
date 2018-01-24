@@ -1,0 +1,5 @@
+fsa_signin.settings:
+  route_name: fsa_signin.settings
+  title: 'Signin settings'
+  parent: system.admin_config_fsa
+  description: 'Turn on/off the redirection of account signup.'
