@@ -29,7 +29,6 @@ class SitewideSearchNewsAlerts extends SitewideSearchBase {
 
     // Prepare query.
     $query = [];
-    // Prepare should filters.
     $query_should_filters = [];
 
     // Prepare news types.
@@ -45,9 +44,10 @@ class SitewideSearchNewsAlerts extends SitewideSearchBase {
     foreach ($indices as $index) {
       // Each should index will contain a set of must filters.
       $index_must_filter = [];
+      $index_filter_filter = [];
 
       // Add index as a term filter.
-      $index_must_filter[] = [
+      $index_filter_filter[] = [
         'term' => [
           '_index' => $index,
         ],
@@ -69,7 +69,7 @@ class SitewideSearchNewsAlerts extends SitewideSearchBase {
       if (!empty($news_types)) {
         $index_news_types = array_values(array_intersect($news_types, $type_index_mapping[$index]));
 
-        $index_must_filter[] = [
+        $index_filter_filter[] = [
           'terms' => [
             'news_type' => $index_news_types,
           ],
@@ -78,15 +78,20 @@ class SitewideSearchNewsAlerts extends SitewideSearchBase {
 
       // Region is only applicable to news and alerts.
       if (!empty($values['nation']) && in_array($index, ['alert', 'news-' . $langcode])) {
-        $index_must_filter[] = [
+        $index_filter_filter[] = [
           'terms' => [
             'nation.label.keyword' => array_filter(array_values($values['nation'])),
           ],
         ];
       }
 
-      // Add a set of must filters to the should query.
-      $query_should_filters[]['bool']['must'] = $index_must_filter;
+      // Create a bool query.
+      $bool_query = [
+        'must' => $index_must_filter,
+        'filter' => $index_filter_filter,
+      ];
+
+      $query_should_filters[]['bool'] = $bool_query;
     }
 
     // Assign the filters to the query in the 'should' section.
@@ -105,8 +110,6 @@ class SitewideSearchNewsAlerts extends SitewideSearchBase {
         ],
       ];
     }
-
-    $json = json_encode($query['body'], JSON_PRETTY_PRINT);
 
     return $query;
   }

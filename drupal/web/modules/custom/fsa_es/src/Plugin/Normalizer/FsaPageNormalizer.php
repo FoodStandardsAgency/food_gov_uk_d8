@@ -3,7 +3,6 @@
 namespace Drupal\fsa_es\Plugin\Normalizer;
 
 use Drupal\Core\Datetime\DateFormatterInterface;
-use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityManagerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
@@ -58,6 +57,8 @@ class FsaPageNormalizer extends NormalizerBase {
    * @param \Drupal\node\NodeInterface $object
    */
   public function normalize($object, $format = NULL, array $context = []) {
+    $parent_data = parent::normalize($object, $format, $context);
+
     // Get audience term tree indexed by term ID.
     $audience_term_tree = $this->getTaxonomyTree('audience');
 
@@ -78,7 +79,6 @@ class FsaPageNormalizer extends NormalizerBase {
         ];
       }, $object->get('field_content_type')->referencedEntities()),
       'audience' => array_map(function($item) use ($audience_term_tree) {
-        $f1 = 1;
         return [
           'id' => $item->id(),
           'depth' => isset($audience_term_tree[$item->id()]->depth) ? $audience_term_tree[$item->id()]->depth : 0,
@@ -92,7 +92,7 @@ class FsaPageNormalizer extends NormalizerBase {
         ];
       }, $object->get('field_nation')->referencedEntities()),
       'updated' => $date_updated ? $date_updated : $date_changed,
-    ];
+    ] + $parent_data;
 
     return $data;
   }

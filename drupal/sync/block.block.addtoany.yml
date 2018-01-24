@@ -1,0 +1,24 @@
+uuid: cd2ebbfe-4397-4c8f-89a1-95358c75ca2a
+langcode: en
+status: true
+dependencies:
+  module:
+    - addtoany
+    - block_class
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: addtoany
+theme: fsa
+region: hidden
+weight: 0
+provider: null
+plugin: addtoany_block
+settings:
+  id: addtoany_block
+  label: 'AddToAny buttons'
+  provider: addtoany
+  label_display: '0'
+visibility: {  }

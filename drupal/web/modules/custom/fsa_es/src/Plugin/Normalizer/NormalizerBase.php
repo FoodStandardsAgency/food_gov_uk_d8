@@ -25,4 +25,15 @@ class NormalizerBase extends ContentEntityNormalizer {
     return $string;
   }
 
+  /**
+   * {@inheritdoc}
+   *
+   * @param \Drupal\node\NodeInterface $object
+   */
+  public function normalize($object, $format = NULL, array $context = []) {
+    return [
+      'entity_type' => $object->getEntityTypeId(),
+    ];
+  }
+
 }
