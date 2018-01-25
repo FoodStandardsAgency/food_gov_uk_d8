@@ -11,8 +11,8 @@ field_name: field_research_programme
 entity_type: node
 bundle: research_project
 label: 'Research programme'
-description: ''
-required: true
+description: 'If research report is not associated to a programme, please leave blank.'
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''

@@ -52,6 +52,17 @@
     padding-bottom: 10em;
   }
 
+  .theme--search & {
+    @mixin responsive-declaration padding-right, 1em, 4em;
+    @mixin responsive-declaration padding-left, 1em, 4em;
+    max-width: var(--content-max-width);
+
+    @media (--breakpoint-md) {
+      padding-top: 2em;
+      padding-bottom: 0em;
+    }
+  }
+
   .theme--term & {
     @mixin responsive-declaration padding-right, 1em, 4em;
     @mixin responsive-declaration padding-left, 1em, 4em;
@@ -89,6 +100,16 @@
 .hero__title {
   text-align: center;
 
+  .theme--search & {
+    :--heading {
+      margin-bottom: 0;
+
+      @media (--breakpoint-sm) {
+        margin-bottom: 0.8em;
+      }
+    }
+  }
+
   .theme--term & {
     @media (--breakpoint-md) {
       display: flex;
@@ -120,6 +141,7 @@
     display: block;
     transform: translateX(-50%);
 
+    .theme--search &,
     .theme--term & {
       display: none;
     }

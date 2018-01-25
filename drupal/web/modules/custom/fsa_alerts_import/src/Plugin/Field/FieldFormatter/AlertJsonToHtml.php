@@ -42,8 +42,8 @@ class AlertJsonToHtml extends FormatterBase {
 
       $data = json_decode($item->value, TRUE);
 
-      if (json_last_error() != JSON_ERROR_NONE) {
-        drupal_set_message('Failed formatting the product details.', 'warning');
+      if (!is_array($data) || json_last_error() != JSON_ERROR_NONE) {
+        drupal_set_message($this->t('Failed formatting the product details.'), 'warning');
         return $elements;
       }
 

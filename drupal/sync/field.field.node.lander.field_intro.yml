@@ -10,7 +10,7 @@ field_name: field_intro
 entity_type: node
 bundle: lander
 label: Intro
-description: 'Introductional copy text displayed next to the page title.'
+description: 'Introductory copy text for this page. The content of this field may be displayed within referring promo links to this page.'
 required: false
 translatable: true
 default_value: {  }

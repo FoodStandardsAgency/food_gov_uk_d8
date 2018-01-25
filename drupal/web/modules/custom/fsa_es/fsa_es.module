@@ -1,13 +1,12 @@
 <?php
 
-use Drupal\Component\Utility\Html;
 use Drupal\views\Views;
 use Drupal\views\ViewExecutable;
 
 /**
  * Implements hook_block_alter().
  *
- * Creates a copy of a search result view's exposed form block definition and
+ * Changes the view's exposed form block definition and
  * hands that to a custom block plugin which will only show relevant elements
  * on the search form.
  *
@@ -16,18 +15,11 @@ use Drupal\views\ViewExecutable;
  * @see Drupal\fsa_es\Plugin\Block\ViewsExposedFilterSearchBlock
  */
 function fsa_es_block_alter(&$info) {
-  // @todo Make search related views block delta discoverable.
-  $deltas = [
-    'views_exposed_filter_block:search_global_ratings-page_1',
-    'views_exposed_filter_block:search_global_guidance-page_1',
-  ];
-
-  foreach ($deltas as $delta) {
-    if (isset($info[$delta])) {
+  foreach ($info as $delta => $block) {
+    if (stripos($delta, 'views_exposed_filter_block:') === 0) {
       $info[$delta]['class'] = 'Drupal\fsa_es\Plugin\Block\ViewsExposedFilterSearchBlock';
     }
   }
-
 }
 
 /**
@@ -97,19 +89,24 @@ function fsa_es_preprocess_views_view(&$variables) {
     // Get embed view.
     if ($ratings_embed_view = Views::getView($embed_view_id)) {
       // Get keywords filter value from the parent view.
-      $keywords = isset($view->filter['keyword']->value) ? $view->filter['keyword']->value : NULL;
+      // It's important that keyword is either a value or NULL (no empty
+      // stings) since ViewExecutable::_buildArguments() will produce a failed
+      // state.
+      $keywords = isset($view->filter['keyword']->value) && $view->filter['keyword']->value != '' ? $view->filter['keyword']->value : NULL;
 
       // Get embed build.
-      $ratings_embed_build = $ratings_embed_view->buildRenderable($embed_view_display, [$keywords]);
-      $ratings_embed_build['#access'] = $ratings_embed_view->access($embed_view_display);
+      $ratings_embed_build = $ratings_embed_view->preview($embed_view_display, [$keywords]);
+      $ratings_embed_build['#access'] = !empty($ratings_embed_view->result) && $ratings_embed_view->access($embed_view_display);
 
       // If there are more than 3 values, inject the ratings embed after 3rd element.
-      if (count($variables['rows'][0]['#rows']) > 3) {
-        array_splice($variables['rows'][0]['#rows'], 3, 0, [$ratings_embed_build]);
-      }
-      // If there are less than 3 values, just append at the end.
-      else {
-        $variables['rows'][0]['#rows'][] = $ratings_embed_build;
+      if ($ratings_embed_build['#access']) {
+        if (count($variables['rows'][0]['#rows']) > 3) {
+          array_splice($variables['rows'][0]['#rows'], 3, 0, [$ratings_embed_build]);
+        }
+        // If there are less than 3 values, just append at the end.
+        else {
+          $variables['rows'][0]['#rows'][] = $ratings_embed_build;
+        }
       }
     }
   }

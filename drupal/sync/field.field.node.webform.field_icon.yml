@@ -19,7 +19,7 @@ field_name: field_icon
 entity_type: node
 bundle: webform
 label: 'Liftup icon'
-description: 'Icon that represents this content. Initially used when referencing to this piece of content. Preferably in square format to make it look nice on referencing page(s).'
+description: '<strong>NB!</strong>The use of this field is discouraged. Please select the icon from the icon library ("<strong>Choose icon</strong>" field above)'
 required: false
 translatable: true
 default_value: {  }

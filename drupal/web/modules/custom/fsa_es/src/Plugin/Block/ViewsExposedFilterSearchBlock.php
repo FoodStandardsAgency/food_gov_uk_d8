@@ -75,6 +75,7 @@ class ViewsExposedFilterSearchBlock extends ViewsExposedFilterBlock {
     $form = parent::buildConfigurationForm($form, $form_state);
 
     // ViewsBlockBase disables the label field. This brings it back.
+    $form['label']['#default_value'] = $this->label();
     $form['label']['#access'] = TRUE;
 
     $this->view->initHandlers();

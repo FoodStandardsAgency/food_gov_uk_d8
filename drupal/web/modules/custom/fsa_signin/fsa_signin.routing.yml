@@ -85,3 +85,11 @@ fsa_signin.default_controller_unsubscribe:
     _title: 'Unsubscribe from alerts'
   requirements:
     _permission: 'access content'
+
+fsa_signin.settings:
+ path: '/admin/config/fsa/signin'
+ defaults:
+   _title: 'Signin settings'
+   _form: '\Drupal\fsa_signin\Form\FsaSettings'
+ requirements:
+   _permission: 'administer site configuration'

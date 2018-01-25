@@ -8,9 +8,10 @@ dependencies:
     - field.storage.node.field_hero_copy
     - field.storage.node.field_hero_title
     - field.storage.node.field_news_type
-    - field.storage.node.field_related_content
+    - field.storage.node.field_related
     - taxonomy.vocabulary.news_type
   module:
+    - entity_reference_revisions
     - fsa_alerts_import
     - node
     - options
@@ -919,11 +920,13 @@ display:
         fields: false
         filters: false
         filter_groups: false
+        style: false
+        row: false
       fields:
-        field_related_content:
-          id: field_related_content
-          table: node__field_related_content
-          field: field_related_content
+        field_related:
+          id: field_related
+          table: node__field_related
+          field: field_related
           relationship: none
           group_type: group
           admin_label: ''
@@ -969,10 +972,10 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: target_id
-          type: entity_reference_entity_view
+          type: entity_reference_revisions_entity_view
           settings:
-            view_mode: teaser
-          group_column: target_id
+            view_mode: default
+          group_column: ''
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -980,7 +983,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: ', '
+          separator: ''
           field_api_classes: false
           plugin_id: field
       filters:
@@ -1035,10 +1038,10 @@ display:
           entity_type: node
           entity_field: langcode
           plugin_id: language
-        field_related_content_target_id:
-          id: field_related_content_target_id
-          table: node__field_related_content
-          field: field_related_content_target_id
+        field_related_target_id:
+          id: field_related_target_id
+          table: node__field_related
+          field: field_related_target_id
           relationship: none
           group_type: group
           admin_label: ''
@@ -1078,6 +1081,19 @@ display:
         operator: AND
         groups:
           1: AND
+      style:
+        type: default
+        options:
+          grouping: {  }
+          row_class: promo-listing
+          default_row_class: false
+      row:
+        type: fields
+        options:
+          default_field_elements: false
+          inline: {  }
+          separator: ''
+          hide_empty: true
     cache_metadata:
       max-age: -1
       contexts:
@@ -1087,4 +1103,4 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:field.storage.node.field_related_content'
+        - 'config:field.storage.node.field_related'

@@ -66,6 +66,7 @@ h6 {
     background-color: var(--dark-secondary-color);
     color: var(--color-white);
     display: block;
+    width: 100%;
     @mixin reset-font-style;
     font-weight: 600;
     padding: 1em;
@@ -173,12 +174,6 @@ table {
     border: 1px solid var(--color-light-gray);
     text-align: left;
     padding: 1em;
-  }
-
-  td {
-    &:first-child {
-      font-weight: 600;
-    }
   }
 
   caption:not(:last-child) {
@@ -316,6 +311,57 @@ blockquote {
   }
 }
 
+/*Important*/
+.important {
+  @mixin responsive-declaration padding, 1em, 2em;
+  background-color: var(--color-lighter-gray);
+  border: 1px solid var(--color-light-gray);
+  @mixin responsive-declaration margin-top, 1em, 2em;
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
+
+  .important & {
+    background-color: var(--color-white);
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .explanation & {
+    margin-top: 0;
+    border-top: none;
+  }
+}
+
+.important .video-embed-field-responsive-video {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.important .embedded-entity img {
+  margin-left: 0em;
+  width: 100%;
+}
+
+/* Explanation */
+.explanation {
+  position: relative;
+  @mixin responsive-declaration margin-top, 1em, 2em;
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
+}
+
+.explanation__title {
+  background-color: var(--primary-color);
+  border-bottom: 4px solid var(--color-green);
+  color: var(--color-white);
+  @mixin responsive-declaration padding-top, 1rem, 1.5rem;
+  @mixin responsive-declaration padding-right, 1rem, 2rem;
+  @mixin responsive-declaration padding-bottom, 1rem, 1.5rem;
+  @mixin responsive-declaration padding-left, 1rem, 2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+
 /* Regional variation */
 .regional-variation {
   position: relative;
@@ -329,7 +375,12 @@ blockquote {
     background-color: var(--color-white);
   }
 
-  .block-page-title & {
+  .field {
+    margin-bottom: 0.5em !important;
+  }
+
+  .block-page-title &,
+  .field__field_nation {
     position: relative;
     background-color: transparent;
     font-weight: 600;
@@ -369,6 +420,11 @@ blockquote {
     }
   }
 
+  &.media-document {
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
+
   &.regional-variation--england:after {
     background-color: var(--color-red);
   }
@@ -389,60 +445,6 @@ blockquote {
   padding-bottom: 0;
 }
 
-/* Explanation */
-.explanation {
-  position: relative;
-  background-color: var(--color-lighter-gray);
-  @mixin responsive-declaration margin-top, 1em, 2em;
-  @mixin responsive-declaration margin-bottom, 1em, 2em;
-
-  p {
-    background-color: var(--color-lighter-gray);
-    @mixin responsive-declaration padding, 1em, 2em;
-    border: 1px solid var(--color-light-gray);
-    border-top: 0;
-    margin-top: 0;
-  }  
-}
-
-.explanation__title {
-  background-color: var(--primary-color);
-  border-bottom: 4px solid var(--color-green);
-  color: var(--color-white);
-  @mixin responsive-declaration padding-top, 1rem, 1.5rem;
-  @mixin responsive-declaration padding-right, 1rem, 2rem;
-  @mixin responsive-declaration padding-bottom, 1rem, 1.5rem;
-  @mixin responsive-declaration padding-left, 1rem, 2rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  margin-bottom: 0;
-}
-
-/*Important*/
-.important {
-  @mixin responsive-declaration padding, 1em, 2em;
-  background-color: var(--color-lighter-gray);
-  border: 1px solid var(--color-light-gray);
-  @mixin responsive-declaration margin-top, 1em, 2em;
-  @mixin responsive-declaration margin-bottom, 1em, 2em;
-
-  .important & {
-    background-color: var(--color-white);
-    margin-left: 0;
-    margin-right: 0;
-  }
-}
-
-.important .video-embed-field-responsive-video {
-  margin-left: 0;
-  margin-right: 0;
-}
-
-.important .embedded-entity img {
-  margin-left: 0em;
-  width: 100%;
-}
-
 /* Content toolbar */
 .content-toolbar {
   position: relative;
@@ -450,6 +452,7 @@ blockquote {
   align-items: center;
   justify-content: space-between;
   flex-flow: row wrap;
+  margin-top: 1em;
   padding-top: 1em;
   margin-left: -0.5em;
   margin-right: -0.5em;
@@ -495,6 +498,7 @@ blockquote {
   button {
     position: relative;
     display: block;
+    font-size: 1em !important;
     font-weight: 600;
     padding: 0.5em;
     padding-left: 2.5em;
@@ -576,7 +580,225 @@ blockquote {
       &:before {
         background-image: var(--icon-share-primary);
       }
+
+      &:after {
+        content: 'Share';
+      }
+
+      img {
+        position: absolute !important;
+        clip: rect(1px, 1px, 1px, 1px);
+        overflow: hidden;
+        height: 1px;
+        width: 1px;
+        word-wrap: normal;
+      }
     }
+  }
+}
+
+/* Content toolbar */
+.content-label {
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 1em;
+}
+
+/* Content metadata */
+
+.content-metadata {
+  font-size: 0.8889em;
+  font-weight: 600;
+
+  .field {
+    margin-bottom: 0em !important;
+
+    &:not(:last-child) {
+      margin-bottom: 0.5rem !important;
+    }
+
+    &.field__field_status {
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--color-light-gray);
+
+      &:not(:last-child) {
+        margin-bottom: 0.75rem !important;
+      }
+    }
+  }
+
+  .label__inline {
+    font-weight: 400;
+
+    &:after {
+      content: ':';
+    }
+  }
+
+  a {
+    text-decoration: underline;
+
+    :--not-touch &:--enter {
+      color: var(--primary-color);
+    }
+  }
+}
+
+/*Document reference*/
+.field__field_document {
+  background-color: var(--color-lighter-gray);
+  padding-top: 1em;
+  @mixin responsive-declaration padding-right, 1.25em, 2em;
+  padding-bottom: 1em;
+  @mixin responsive-declaration padding-left, 1.25em, 2em;
+  border: 1px solid var(--color-light-gray);
+
+  .field__field_document {
+    padding-top: 1em;
+    padding-right: 1em;
+    padding-bottom: 1em;
+    padding-left: 0em;
+    border: 0;
+    margin-bottom: 0;
+  }
+
+  .regional-variation & {
+    border: 1px solid transparent;
+    padding: 0;
+  }
+
+  .field {
+    margin-bottom: 0 !important;
+  }
+
+  :--heading {
+    @mixin reset-font-style;
+    font-weight: 700;
+  }
+
+  a {
+    color: var(--color-black);
+    text-decoration: underline;
+
+    :--not-touch &:--enter {
+      color: var(--primary-color);
+    }
+  }
+
+  & > .field__field_alert_relatedmedia__item,
+  & > .file__type_application-pdf {
+    padding-left: 3.5em;
+    position: relative;
+
+    &:before {
+      content: "PDF";
+      background-color: var(--color-dark-red);
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 3em;
+      height: 1.5em;
+      border-radius: 0.15em;
+      font-size: 0.7em;
+      text-align: center;
+      font-weight: 600;
+      color: var(--color-white);
+      transform: translateY(-50%);
+    }
+  }
+}
+
+/* Team contact */
+.field__field_team_contacts {
+  .field__field_team_contacts__heading {
+    @mixin responsive-declaration font-size, 1.25em, 1.7em;
+    @mixin responsive-declaration line-height, 1.2, 1.25;
+  }
+
+  .field {
+    margin-bottom: 0 !important;
+  }
+
+  .paragraph--type-team-contact {
+    margin-bottom: 1em;
+  }
+
+  .field__field_team_contacts__item {
+    @mixin responsive-declaration margin-bottom, 1em, 2em;
+  
+    h2 {
+      font-size: 1em;
+      @mixin responsive-declaration line-height, 1.2, 1.225;
+      font-family: var(--font-family-content);
+  
+      & > a {
+        color: var(--color-black);
+        text-decoration: none;
+    
+        :--not-touch &:--enter {
+          color: var(--dark-primary-color);
+          text-decoration: underline;
+        }
+      }
+  
+      &.field__field_team_contact__heading {
+        display: none;
+      }
+    }
+  
+    a {
+      text-decoration: underline;
+    }
+  
+    .field {
+      margin-bottom: 0.5em;
+    }
+  
+    .label__inline {
+  
+      &:after {
+        content: ': ';
+      }
+  
+      & + * {
+        display: inline-block;
+      }
+    }
+  }
+}
+
+/* Embedded entity */
+.embedded-entity {
+  position: relative;
+  @mixin responsive-declaration margin-top, 1em, 2em;
+  @mixin responsive-declaration margin-bottom, 1em, 2em;
+}
+
+/*Content image*/
+.embedded-entity img {
+  margin-left: -2em;
+  width: 110%;
+  width: calc(100% + 4em);
+  max-width: none;
+}
+
+/*Inline document reference*/
+.embedded-entity .media {
+
+}
+
+.embedded-entity .media .field.field__field_document {
+  margin-bottom: 0.5em !important;
+}
+
+/*Iframe*/
+.video-embed-field-responsive-video {
+  @mixin responsive-declaration margin-top, 2em, 4em;
+  @mixin responsive-declaration margin-bottom, 2em, 4em;
+
+  @media (min-width: 850em) {
+    margin-right: -13em;
   }
 }
 

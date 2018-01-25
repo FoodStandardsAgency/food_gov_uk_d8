@@ -1,0 +1,44 @@
+uuid: fe74817d-f1e4-47c1-83b8-fd27a7f1b812
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.related_link_promo
+    - field.field.node.help.body
+    - field.field.node.help.field_block_reference
+    - field.field.node.help.field_content_type
+    - field.field.node.help.field_icon
+    - field.field.node.help.field_liftup_summary
+    - field.field.node.help.field_liftup_title
+    - field.field.node.help.field_liftups
+    - node.type.help
+  module:
+    - text
+    - user
+id: node.help.related_link_promo
+targetEntityType: node
+bundle: help
+mode: related_link_promo
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 0
+    settings:
+      trim_length: 250
+    third_party_settings: {  }
+    region: content
+hidden:
+  addtoany: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_block_reference: true
+  field_content_type: true
+  field_icon: true
+  field_icon_ref: true
+  field_liftup_summary: true
+  field_liftup_title: true
+  field_liftups: true
+  langcode: true
+  links: true

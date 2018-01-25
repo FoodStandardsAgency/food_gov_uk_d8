@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * @ElasticsearchQueryBuilder(
  *   id = "sitewide_search_ratings",
- *   label = @Translation("Ratings"),
+ *   label = @Translation("Global search: Ratings"),
  *   description = @Translation("Provides query builder for site-wide ratings search.")
  * )
  */

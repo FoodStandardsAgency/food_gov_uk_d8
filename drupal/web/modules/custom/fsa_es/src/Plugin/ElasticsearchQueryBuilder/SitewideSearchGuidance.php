@@ -7,7 +7,7 @@ use Drupal\views\ViewExecutable;
 /**
  * @ElasticsearchQueryBuilder(
  *   id = "sitewide_search_guidance",
- *   label = @Translation("Guidance"),
+ *   label = @Translation("Global search: Guidance"),
  *   description = @Translation("Provides query builder for site-wide guidance search.")
  * )
  */
@@ -26,6 +26,7 @@ class SitewideSearchGuidance extends SitewideSearchBase {
     $values = $this->getFilterValues($this->view);
 
     $query_must_filters = [];
+    $query_filter_filters = [];
 
     $query = [
       'index' => ['page-' . $this->currentLanguage->getId()],
@@ -34,7 +35,7 @@ class SitewideSearchGuidance extends SitewideSearchBase {
 
     // Filter by content type.
     if (!empty($values['guidance_content_type'])) {
-      $query_must_filters[] = [
+      $query_filter_filters[] = [
         'terms' => [
           'content_type.id' => array_values($values['guidance_content_type']),
         ],
@@ -58,24 +59,29 @@ class SitewideSearchGuidance extends SitewideSearchBase {
     }
 
     if (!empty($values['guidance_audience'])) {
-      $query_must_filters[] = [
+      $query_filter_filters[] = [
         'terms' => [
           'audience.label.keyword' => array_filter(array_values($values['guidance_audience'])),
         ],
       ];
     }
 
-    if (!empty($values['guidance_nation'])) {
-      $query_must_filters[] = [
+    if (!empty($values['nation'])) {
+      $query_filter_filters[] = [
         'terms' => [
-          'nation.label.keyword' => array_filter(array_values($values['guidance_nation'])),
+          'nation.label.keyword' => array_filter(array_values($values['nation'])),
         ],
       ];
     }
 
-    // Assign the term filters to the query in the 'must' section.
+    // Assign the text search filters to the query in the 'must' section.
     foreach ($query_must_filters as $filter) {
       $query['body']['query']['bool']['must'][] = $filter;
+    }
+
+    // Assign the text search filters to the query in the 'filter' section.
+    foreach ($query_filter_filters as $filter) {
+      $query['body']['query']['bool']['filter'][] = $filter;
     }
 
     return $query;

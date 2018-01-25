@@ -5,7 +5,6 @@ import svg4everybody from 'svg4everybody';
 import responsiveTables from './core/helper/responsiveTables';
 import stickyElement from './core/helper/stickyElement';
 import cssCustomPropertySupport from './core/helper/cssCustomPropertySupport';
-import subNavigation from './core/helper/subNavigation';
 
 import navigation from './component/navigation/navigation';
 import addHeading from './component/content/content';
@@ -47,19 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// Temperary fix
-// const searchLogoElement = document.querySelector('.ratings.ratings--frontpage .ratings__text');
-
-// if (searchLogoElement != null) {
-//   const searchHeading = document.querySelector('#fsa-ratings-search h2');
-//   searchHeading.classList.add('small');
-//   const searchLead = document.querySelector('#fsa-ratings-search p');
-//   searchLead.classList.add('lead');
-
-//   searchLogoElement.parentNode.insertBefore(searchLead, searchLogoElement.nextSibling);
-//   searchLogoElement.parentNode.insertBefore(searchHeading, searchLogoElement.nextSibling);
-// }
-
 // Responsive tableElements
 const tableElements = [...document.querySelectorAll('.js-table')];
 if (tableElements != null) {
@@ -78,12 +64,6 @@ const profileElement = document.getElementById('block-myprofile');
 if (profileElement != null) {
   const profileElementArray = [...document.getElementById('block-myprofile').children];
   toggleContent(profileElementArray[0], breakpoints, profileElementArray[2]);
-}
-
-// Subnavigation
-const subNavigationElement = document.getElementById('block-menu-help-secondary');
-if (subNavigationElement != null) {
-  subNavigation(subNavigationElement);
 }
 
 // Add class if touch device

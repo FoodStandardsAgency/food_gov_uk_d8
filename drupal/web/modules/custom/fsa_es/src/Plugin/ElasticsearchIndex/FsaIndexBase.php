@@ -2,12 +2,58 @@
 
 namespace Drupal\fsa_es\Plugin\ElasticsearchIndex;
 
+use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\elasticsearch_helper\Plugin\ElasticsearchIndexBase;
+use Elasticsearch\Client;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * Class FsaIndexBase
  */
 class FsaIndexBase extends ElasticsearchIndexBase {
+
+  /**
+   * @var \Drupal\Core\Language\LanguageManagerInterface
+   */
+  protected $language_manager;
+
+  /**
+   * PageIndex constructor.
+   *
+   * @param array $configuration
+   * @param string $plugin_id
+   * @param mixed $plugin_definition
+   * @param \Elasticsearch\Client $client
+   * @param \Symfony\Component\Serializer\Serializer $serializer
+   * @param \Psr\Log\LoggerInterface $logger
+   * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, Client $client, Serializer $serializer, LoggerInterface $logger, LanguageManagerInterface $languageManager) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition, $client, $serializer, $logger);
+
+    $this->language_manager = $languageManager;
+  }
+
+  /**
+   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+   * @param array $configuration
+   * @param string $plugin_id
+   * @param mixed $plugin_definition
+   * @return static
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('elasticsearch_helper.elasticsearch_client'),
+      $container->get('serializer'),
+      $container->get('logger.factory')->get('elasticsearch_helper'),
+      $container->get('language_manager')
+    );
+  }
 
   /**
    * @inheritdoc
@@ -30,7 +76,14 @@ class FsaIndexBase extends ElasticsearchIndexBase {
     /** @var \Drupal\node\Entity\Node $source */
     foreach ($source->getTranslationLanguages() as $langcode => $language) {
       if ($source->hasTranslation($langcode)) {
-        parent::index($source->getTranslation($langcode));
+        $translation = $source->getTranslation($langcode);
+
+        if ($translation->isPublished()) {
+          parent::index($translation);
+        }
+        else {
+          parent::delete($translation);
+        }
       }
     }
   }

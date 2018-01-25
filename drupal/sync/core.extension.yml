@@ -1,4 +1,5 @@
 module:
+  addtoany: 0
   admin_toolbar: 0
   anchor_link: 0
   automated_cron: 0
@@ -118,7 +119,6 @@ module:
   user: 0
   video_embed_field: 0
   video_embed_wysiwyg: 0
-  view_unpublished: 0
   warden: 0
   webform: 0
   webform_node: 0

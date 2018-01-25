@@ -2,16 +2,48 @@
 
 namespace Drupal\fsa_es\Plugin\ElasticsearchQueryBuilder;
 
+use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\fsa_es\SearchService;
 use Drupal\views\ViewExecutable;
+use Elasticsearch\Client;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * @ElasticsearchQueryBuilder(
  *   id = "sitewide_search_all",
- *   label = @Translation("All"),
+ *   label = @Translation("Global search: All"),
  *   description = @Translation("Provides query builder for site-wide global search.")
  * )
  */
 class SitewideSearchAll extends SitewideSearchBase {
+
+  /** @var \Drupal\fsa_es\SearchService $ratingsSearchService */
+  protected $ratingsSearchService;
+
+  /**
+   * {@inheritdoc}
+   *
+   * @param \Drupal\fsa_es\SearchService $ratings_search_service
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $language_manager, Client $elasticsearch_client, SearchService $ratings_search_service) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition, $language_manager, $elasticsearch_client);
+
+    $this->ratingsSearchService = $ratings_search_service;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('language_manager'),
+      $container->get('elasticsearch_helper.elasticsearch_client'),
+      $container->get('fsa_es.search_service')
+    );
+  }
 
   /**
    * Builds Elasticsearch base query.
@@ -23,6 +55,7 @@ class SitewideSearchAll extends SitewideSearchBase {
     $values = $this->getFilterValues($this->view);
 
     $query_must_filters = [];
+    $query_filter_filters = [];
 
     $query = [
       'index' => $this->getIndices(),
@@ -45,8 +78,14 @@ class SitewideSearchAll extends SitewideSearchBase {
       $query['body']['sort'] = ['updated' => 'desc'];
     }
 
+    // Assign the text search filters to the query in the 'must' section.
     foreach ($query_must_filters as $filter) {
       $query['body']['query']['bool']['must'][] = $filter;
+    }
+
+    // Assign the text search filters to the query in the 'filter' section.
+    foreach ($query_filter_filters as $filter) {
+      $query['body']['query']['bool']['filter'][] = $filter;
     }
 
     return $query;
@@ -68,8 +107,14 @@ class SitewideSearchAll extends SitewideSearchBase {
    * @return array
    */
   protected function getIndices() {
+    $langcode = $this->currentLanguage->getId();
+
     return [
-      'page-' . $this->currentLanguage->getId(),
+      'alert',
+      'consultation-' . $langcode,
+      'news-' . $langcode,
+      'page-' . $langcode,
+      'research-' . $langcode,
     ];
   }
 

@@ -2,6 +2,7 @@
 
 namespace Drupal\fsa_custom\Plugin\Block;
 
+use Drupal\block\Entity\Block;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\File\FileSystem;
@@ -116,8 +117,13 @@ class PageContentHeader extends BlockBase {
       }
 
       if ($share) {
-        // @todo: FSA-571 to implement.
-        $share = ['#markup' => $this->t('Share')];
+        $block = Block::load('addtoany');
+        if (is_object($block)) {
+          $share = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block);
+        }
+        else {
+          $share = '';
+        }
       }
 
       $attributes = ['class' => 'page-content-header'];

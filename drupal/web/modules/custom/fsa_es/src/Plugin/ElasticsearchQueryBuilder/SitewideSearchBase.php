@@ -65,4 +65,28 @@ abstract class SitewideSearchBase extends ElasticsearchQueryBuilderPluginBase {
     return $options;
   }
 
+  /**
+   * Private helper function to sort array by another array.
+   *
+   * 1:1 copy of Drupal\fsa_es\SearchService::defineAndSortArrayItems().
+   *
+   * @param array $array
+   *   The array to define..
+   * @param array $definingArray
+   *   The array with keys defining sort and items to keep.
+   *
+   * @return array
+   *   Sorted array.
+   */
+  public static function defineAndSortArrayItems(array $array, array $definingArray) {
+    $modified_array = [];
+    foreach ($definingArray as $key) {
+      if (array_key_exists($key, $array)) {
+        $modified_array[$key] = $array[$key];
+        unset($array[$key]);
+      }
+    }
+    return $modified_array;
+  }
+
 }

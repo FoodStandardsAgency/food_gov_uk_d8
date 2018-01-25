@@ -42,7 +42,7 @@ function fsa_toc_entity_presave(EntityInterface $entity) {
     // Find all h1-h6 tags, add id attribute, if the element doesn't have one.
     $elements = $xpath->evaluate('//h1|//h2|//h3|//h4|//h5|//h6', $html_dom->documentElement);
 
-    if (!empty($elements)) {
+    if ($elements->length > 0) {
 
       // Reuse name to id conversion from TOC module.
       $toc_formatter = new TocFormatter();
