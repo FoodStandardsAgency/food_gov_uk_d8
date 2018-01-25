@@ -45,7 +45,7 @@ class FsaRatingsConfigurations extends ConfigFormBase {
     $form['fsa_ratings'] = [
       '#type' => 'details',
       '#title' => $this->t('Rating search landing page content'),
-      '#description' => $this->t('The content to display on the <a href="/ratings/search">Ratings search</a> landing page'),
+      '#description' => $this->t('The content to display on the <a href="/hygiene-ratings">Ratings search</a> landing page'),
     ];
     // Ratings form landing info content.
     // @todo: Use to WYSIWYG field?
