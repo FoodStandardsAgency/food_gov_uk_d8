@@ -498,6 +498,7 @@ blockquote {
   button {
     position: relative;
     display: block;
+    font-size: 1em !important;
     font-weight: 600;
     padding: 0.5em;
     padding-left: 2.5em;
@@ -578,6 +579,19 @@ blockquote {
     button {
       &:before {
         background-image: var(--icon-share-primary);
+      }
+
+      &:after {
+        content: 'Share';
+      }
+
+      img {
+        position: absolute !important;
+        clip: rect(1px, 1px, 1px, 1px);
+        overflow: hidden;
+        height: 1px;
+        width: 1px;
+        word-wrap: normal;
       }
     }
   }
