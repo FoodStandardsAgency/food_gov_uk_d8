@@ -148,7 +148,7 @@ handlers:
       cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
-      from_mail: default
+      from_mail: report@food.gov.uk
       from_options: {  }
       from_name: default
       subject: 'Thank you for reporting a food problem'
@@ -179,7 +179,7 @@ handlers:
       cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
-      from_mail: default
+      from_mail: report@food.gov.uk
       from_options: {  }
       from_name: default
       subject: 'This is a food problem report from a consumer via food.gov.uk'
