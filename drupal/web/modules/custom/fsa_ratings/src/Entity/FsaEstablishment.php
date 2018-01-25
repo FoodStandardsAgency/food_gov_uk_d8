@@ -47,11 +47,11 @@ use Drupal\user\UserInterface;
  *     "status" = "status",
  *   },
  *   links = {
- *     "canonical" = "/fsa-ratings/establishment/{fsa_establishment}",
- *     "add-form" = "/fsa-ratings/establishment/add",
- *     "edit-form" = "/fsa-ratings/establishment/{fsa_establishment}/edit",
- *     "delete-form" = "/fsa-ratings/establishment/{fsa_establishment}/delete",
- *     "collection" = "/fsa-ratings/establishment",
+ *     "canonical" = "/hygiene-ratings/{fsa_establishment}",
+ *     "add-form" = "/hygiene-ratings/add",
+ *     "edit-form" = "/hygiene-ratings/{fsa_establishment}/edit",
+ *     "delete-form" = "/hygiene-ratings/{fsa_establishment}/delete",
+ *     "collection" = "/hygiene-ratings",
  *   },
  *   field_ui_base_route = "fsa_establishment.settings"
  * )
