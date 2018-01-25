@@ -31,7 +31,7 @@ install:
   - pip install pyyaml --user
 
   # Install drush
-  - composer global require drush/drush
+  - composer global require drush/drush "~8"
   
   # Install imagick extensions
   - printf "\n" | pecl install imagick
