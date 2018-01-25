@@ -65,7 +65,7 @@ function fsa_preprocess_html(&$variables) {
   // Rely on URL paths for FHRS ratings and subscribe sections.
   $current_path = \Drupal::service('path.current')->getPath();
   $uri_segments = explode('/', $current_path);
-  if ($uri_segments[1] === 'ratings' || $uri_segments[1] === 'fsa-ratings') {
+  if ($uri_segments[1] === 'hygiene-ratings') {
     $variables['attributes']['class'][] = 'theme--service';
     $variables['attributes']['class'][] = 'theme--fhrs';
   }
