@@ -8,16 +8,16 @@ dependencies:
 id: research_programme_taxonomy
 label: 'Research programme taxonomy'
 type: 'canonical_entities:taxonomy_term'
-pattern: 'about-us/research/[term:name]'
+pattern: 'about-us/[term:name]'
 selection_criteria:
-  cb93e7fb-0b74-419f-bf81-6f1098920bde:
+  e48171f4-a753-442e-bcf9-d35dee7a4f66:
     id: 'entity_bundle:taxonomy_term'
     bundles:
       research_programme: research_programme
     negate: false
     context_mapping:
       taxonomy_term: taxonomy_term
-    uuid: cb93e7fb-0b74-419f-bf81-6f1098920bde
+    uuid: e48171f4-a753-442e-bcf9-d35dee7a4f66
 selection_logic: and
 weight: -4
 relationships: {  }
