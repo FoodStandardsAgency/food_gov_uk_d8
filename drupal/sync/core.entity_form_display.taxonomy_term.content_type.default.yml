@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.taxonomy_term.content_type.field_path_alias
     - taxonomy.vocabulary.content_type
   module:
     - path
@@ -11,6 +12,14 @@ targetEntityType: taxonomy_term
 bundle: content_type
 mode: default
 content:
+  field_path_alias:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   langcode:
     type: language_select
     weight: 1
@@ -28,7 +37,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 3
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }

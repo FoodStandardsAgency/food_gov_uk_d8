@@ -10,5 +10,5 @@ type: 'canonical_entities:fsa_establishment'
 pattern: 'hygiene-ratings/[fsa_establishment:id:value]/[fsa_establishment:name:value]'
 selection_criteria: {  }
 selection_logic: and
-weight: 0
+weight: -1
 relationships: {  }
