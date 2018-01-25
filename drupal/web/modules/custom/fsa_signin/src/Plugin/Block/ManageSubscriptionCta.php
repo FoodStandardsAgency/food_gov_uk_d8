@@ -3,6 +3,8 @@
 namespace Drupal\fsa_signin\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Link;
+use Drupal\Core\Url;
 use Drupal\fsa_signin\Controller\DefaultController;
 
 /**
@@ -19,7 +21,18 @@ class ManageSubscriptionCta extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $content = DefaultController::linkMarkup('fsa_signin.default_controller_signInPage', $this->t('Manage your subscription'), ['gear icon']);
+    $text = $this->t('Manage your subscription');
+    $classes = ['gear icon'];
+    // @todo: Add configuration options to enable/disable redirection.
+    if (\Drupal::state()->get('fsa_signin.redirect')) {
+      $uri = \Drupal::state()->get('fsa_signin.external_profile_manage_url');
+      $url = Url::fromUri($uri);
+      $url->setOptions(['attributes' => ['class' => $classes]]);
+      $content = Link::fromTextAndUrl($text, $url)->toString();
+    }
+    else {
+      $content = DefaultController::linkMarkup('fsa_signin.default_controller_signInPage', $text, $classes);
+    }
 
     return ['#markup' => $content];
 

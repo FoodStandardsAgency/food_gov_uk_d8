@@ -2,6 +2,7 @@
 
 namespace Drupal\fsa_signin\Routing;
 
+use Drupal\Core\Routing\TrustedRedirectResponse;
 use Drupal\Core\Url;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -13,20 +14,32 @@ use Symfony\Component\HttpKernel\KernelEvents;
  */
 class RouteSubscriber implements EventSubscriberInterface {
 
+  const PREREGISTRATION_ROUTES = [
+    'fsa_signin.user_preregistration_alerts_form',
+    'fsa_signin.user_preregistration_news_form',
+    'fsa_signin.user_registration_form',
+  ];
+
   /**
    * Check if a redirect is required.
    */
   public function checkForRedirection(GetResponseEvent $event) {
     $route_name = \Drupal::routeMatch()->getRouteName();
 
+    $preregistration_pages = self::PREREGISTRATION_ROUTES;
+
+    // Redirect users to old site.
+    if (\Drupal::state()->get('fsa_signin.redirect')) {
+      if (in_array($route_name, $preregistration_pages)) {
+        $url = \Drupal::state()->get('fsa_signin.external_registration_url');
+        $event->setResponse(new TrustedRedirectResponse($url, 301));
+      }
+    }
+
     // Redirect logged in in users to profile manage page from the signup pages.
     if (\Drupal::currentUser()->isAuthenticated()) {
-      $preregistration_pages = [
-        'fsa_signin.default_controller_signInPage',
-        'fsa_signin.user_preregistration_alerts_form',
-        'fsa_signin.user_preregistration_news_form',
-        'fsa_signin.user_registration_form',
-      ];
+      // Add signin page to the array.
+      $preregistration_pages[] = 'fsa_signin.default_controller_signInPage';
       if (in_array($route_name, $preregistration_pages)) {
         $url = Url::fromRoute('fsa_signin.default_controller_manageProfilePage')->toString();
         $event->setResponse(new RedirectResponse($url, 301));

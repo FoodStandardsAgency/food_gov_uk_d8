@@ -76,7 +76,14 @@ class FsaIndexBase extends ElasticsearchIndexBase {
     /** @var \Drupal\node\Entity\Node $source */
     foreach ($source->getTranslationLanguages() as $langcode => $language) {
       if ($source->hasTranslation($langcode)) {
-        parent::index($source->getTranslation($langcode));
+        $translation = $source->getTranslation($langcode);
+
+        if ($translation->isPublished()) {
+          parent::index($translation);
+        }
+        else {
+          parent::delete($translation);
+        }
       }
     }
   }

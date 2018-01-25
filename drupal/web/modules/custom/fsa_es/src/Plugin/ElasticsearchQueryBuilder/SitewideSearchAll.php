@@ -54,64 +54,38 @@ class SitewideSearchAll extends SitewideSearchBase {
     // Get filter values.
     $values = $this->getFilterValues($this->view);
 
-    // Prepare query.
-    $query = [];
-    // Prepare should filters.
-    $query_should_filters = [];
+    $query_must_filters = [];
+    $query_filter_filters = [];
 
-    // Create should query for each index.
-    foreach ($this->getIndices() as $index_group => $indices) {
-      // Each should index will contain a set of must filters.
-      $index_bool_query = [];
+    $query = [
+      'index' => $this->getIndices(),
+      'body' => [],
+    ];
 
-      // For ratings the query is retrieved from an external ratings search
-      // service.
-      if ($index_group == 'ratings') {
-        $ratings_query = $this->ratingsSearchService->buildQuery($this->currentLanguage, $values['keyword']);
-
-        if (isset($ratings_query)) {
-          $index_bool_query = array_merge($index_bool_query, $ratings_query['body']['query']['bool']);
-          // Remove all should clauses so that they do not influence the score.
-          unset($index_bool_query['should']);
-        }
-      }
-      // For other indices a simple keyword query is added.
-      else {
-        // Apply the filters to the query.
-        if (!empty($values['keyword'])) {
-          $index_bool_query['must'][] = [
-            'multi_match' => [
-              'query' => $values['keyword'],
-              'fields' => ['name^3', 'body'],
-              'type' => 'cross_fields',
-              'operator' => 'and',
-            ],
-          ];
-        }
-      }
-
-      // Add index as a term filter.
-      $index_bool_query['filter'][]['terms']['_index'] = $indices;
-
-      // Add a set of must filters to the should query.
-      $query_should_filters[]['bool'] = $index_bool_query;
-    }
-
-    // Assign the filters to the query in the 'should' section.
-    foreach ($query_should_filters as $filter) {
-      $query['body']['query']['bool']['should'][] = $filter;
-    }
-    // At least one "should" query must be matched.
-    $query['body']['query']['bool']['minimum_should_match'] = 1;
-
-    // Sort by updated if no keywords are given.
-    if (empty($values['keyword'])) {
-      $query['body']['sort'][] = [
-        'updated' => [
-          'order' => 'desc',
-          'unmapped_type' => 'date',
+    // Apply the filters to the query.
+    if (!empty($values['keyword'])) {
+      $query_must_filters[] = [
+        'multi_match' => [
+          'query' => $values['keyword'],
+          'fields' => ['name^3', 'body'],
+          'type' => 'cross_fields',
+          'operator' => 'and',
         ],
       ];
+    }
+    else {
+      // Sort by updated if no keywords are given.
+      $query['body']['sort'] = ['updated' => 'desc'];
+    }
+
+    // Assign the text search filters to the query in the 'must' section.
+    foreach ($query_must_filters as $filter) {
+      $query['body']['query']['bool']['must'][] = $filter;
+    }
+
+    // Assign the text search filters to the query in the 'filter' section.
+    foreach ($query_filter_filters as $filter) {
+      $query['body']['query']['bool']['filter'][] = $filter;
     }
 
     return $query;
@@ -136,15 +110,11 @@ class SitewideSearchAll extends SitewideSearchBase {
     $langcode = $this->currentLanguage->getId();
 
     return [
-      'all' => [
-        'alert',
-        'consultation-' . $langcode,
-        'news-' . $langcode,
-        'page-' . $langcode,
-      ],
-      'ratings' => [
-        'ratings-' . $langcode
-      ],
+      'alert',
+      'consultation-' . $langcode,
+      'news-' . $langcode,
+      'page-' . $langcode,
+      'research-' . $langcode,
     ];
   }
 

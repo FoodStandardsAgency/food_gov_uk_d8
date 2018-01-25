@@ -86,4 +86,37 @@ function fsa_es_views_data_alter(array &$data) {
       'id' => 'fsa_news_type',
     ],
   ];
+
+  $data['elasticsearch_result']['consultation_status'] = [
+    'title' => t('Consultation status'),
+    'help' => t('Consultation status'),
+    'filter' => [
+      'id' => 'fsa_consultation_status',
+    ],
+  ];
+
+  $data['elasticsearch_result']['consultation_responses_published'] = [
+    'title' => t('Responses published'),
+    'help' => t('Consultation responses published'),
+    'filter' => [
+      'id' => 'fsa_consultation_responses_published',
+    ],
+  ];
+
+  $data['elasticsearch_result']['consultation_year'] = [
+    'title' => t('Year'),
+    'help' => t('Consultation start and close year'),
+    'filter' => [
+      'id' => 'fsa_consultation_year',
+    ],
+  ];
+
+  $data['elasticsearch_result']['research_topic'] = [
+    'title' => t('Research topic'),
+    'help' => t('Research topic'),
+    'filter' => [
+      'id' => 'fsa_research_topic',
+    ],
+  ];
+
 }

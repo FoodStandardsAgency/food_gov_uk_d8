@@ -4,15 +4,15 @@ namespace Drupal\fsa_es\Plugin\ElasticsearchIndex;
 
 /**
  * @ElasticsearchIndex(
- *   id = "consultation_index",
- *   label = @Translation("FSA Consultation Index"),
- *   indexName = "consultation-{langcode}",
- *   typeName = "consultation",
+ *   id = "research_index",
+ *   label = @Translation("FSA Research Index"),
+ *   indexName = "research-{langcode}",
+ *   typeName = "research",
  *   entityType = "node",
- *   bundle = "consultation",
+ *   bundle = "research_project",
  * )
  */
-class FsaConsultationIndex extends FsaIndexBase {
+class FsaResearchIndex extends FsaIndexBase {
 
   /**
    * {@inheritdoc}
@@ -20,7 +20,7 @@ class FsaConsultationIndex extends FsaIndexBase {
   public function setup() {
     // Create one index per language, so that we can have different analyzers.
     foreach ($this->language_manager->getLanguages() as $langcode => $language) {
-      $index_name = $this->getIndexName(['langcode' => $langcode]);
+      $index_name = 'research-' . $langcode;
 
       if (!$this->client->indices()->exists(['index' => $index_name])) {
         $this->client->indices()->create([
@@ -48,32 +48,32 @@ class FsaConsultationIndex extends FsaIndexBase {
               'langcode' => [
                 'type' => 'keyword',
               ],
-              // Refers to news type that is displayed as a facet on the news
-              // search page.
-              'news_type' => [
-                'type' => 'keyword'
-              ],
-              'status' => [
-                'type' => 'boolean'
-              ],
-              'responses_published' => [
-                'type' => 'boolean'
-              ],
-              'consultation_start_date' => [
-                'type' => 'date',
-              ],
-              'consultation_close_date' => [
-                'type' => 'date',
-              ],
               'name' => [
                 'type' => 'text',
                 'analyzer' => $text_analyzer,
+              ],
+              'project_code' => [
+                'type' => 'keyword',
               ],
               // Intro is included in the body cause there's no need to
               // separate them.
               'body' => [
                 'type' => 'text',
                 'analyzer' => $text_analyzer,
+              ],
+              'topics' => [
+                'properties' => [
+                  'id' => ['type' => 'keyword'],
+                  'label' => [
+                    'type' => 'text',
+                    'index' => 'not_analyzed',
+                    'fields' => [
+                      'keyword' => [
+                        'type' => 'keyword',
+                      ],
+                    ],
+                  ],
+                ],
               ],
               'nation' => [
                 'properties' => [

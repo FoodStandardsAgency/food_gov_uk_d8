@@ -194,7 +194,7 @@ function fsa_custom_preprocess_page_title(&$variables) {
     $routename = $route->getParentRouteMatch()->getRouteName();
 
     // Add a title suffix on signup pages.
-    if (substr($routename, 0, 10) == 'fsa_signin') {
+    if (!\Drupal::service('router.admin_context')->isAdminRoute() && substr($routename, 0, 10) == 'fsa_signin') {
       $variables['title_suffix'] = ['#markup' => '<p>' . t('Stay up to date with food and allergy alerts, FSA news and consultations.') . '</p>'];
     }
 
