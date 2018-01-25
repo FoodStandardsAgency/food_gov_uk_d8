@@ -95,17 +95,18 @@ function fsa_es_preprocess_views_view(&$variables) {
       $keywords = isset($view->filter['keyword']->value) && $view->filter['keyword']->value != '' ? $view->filter['keyword']->value : NULL;
 
       // Get embed build.
-      $ratings_embed_build = $ratings_embed_view->buildRenderable($embed_view_display, [$keywords]);
-      $ratings_embed_build['#access'] = $ratings_embed_view->access($embed_view_display);
-
+      $ratings_embed_build = $ratings_embed_view->preview($embed_view_display, [$keywords]);
+      $ratings_embed_build['#access'] = !empty($ratings_embed_view->result) && $ratings_embed_view->access($embed_view_display);
 
       // If there are more than 3 values, inject the ratings embed after 3rd element.
-      if (count($variables['rows'][0]['#rows']) > 3) {
-        array_splice($variables['rows'][0]['#rows'], 3, 0, [$ratings_embed_build]);
-      }
-      // If there are less than 3 values, just append at the end.
-      else {
-        $variables['rows'][0]['#rows'][] = $ratings_embed_build;
+      if ($ratings_embed_build['#access']) {
+        if (count($variables['rows'][0]['#rows']) > 3) {
+          array_splice($variables['rows'][0]['#rows'], 3, 0, [$ratings_embed_build]);
+        }
+        // If there are less than 3 values, just append at the end.
+        else {
+          $variables['rows'][0]['#rows'][] = $ratings_embed_build;
+        }
       }
     }
   }
