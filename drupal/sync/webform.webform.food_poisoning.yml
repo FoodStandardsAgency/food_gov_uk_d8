@@ -152,7 +152,7 @@ handlers:
       from_options: {  }
       from_name: default
       subject: 'Thank you for reporting a food problem'
-      body: "<p>Thank you for reporting a food problem at: <strong>[webform_submission:values:where_lookup:value]</strong>.</p>\r\n\r\n<p>Your report has been forwarded to <strong>[webform_submission:values:fsa_establishment_la_name:value] Council</strong>, who you may contact, if you wish to discuss your report further, at: [webform_submission:values:fsa_establishment_la_email:value].</p>\r\n\r\n<p>Please do not reply to this email.</p>"
+      body: "<p>Thank you for reporting a food problem at: <strong>[webform_submission:values:where_lookup:value]</strong>.</p>\r\n\r\n<p>Your report has been forwarded to <strong>[webform_submission:values:fsa_establishment_la_name:value] Council</strong>\r\n\r\n<p>Please do not reply to this email.</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
@@ -173,17 +173,17 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:email:raw]'
+      to_mail: '[webform_submission:values:fsa_establishment_la_email:raw]'
       to_options: {  }
-      cc_mail: ''
+      cc_mail: webmaster@food.gov.uk
       cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       from_mail: report@food.gov.uk
       from_options: {  }
       from_name: default
-      subject: 'This is a food problem report from a consumer via food.gov.uk'
-      body: "<p>[webform_submission:values]</p>\r\n\r\n<p>Please do not reply to this email.</p>\r\n\r\n<p><strong>Protect privacy:</strong> make sure you keep the information in this email appropriately secure and only use it for the purpose of investigating the complaint against the food business. If this issue is for another local authority to consider and take appropriate action, please securely share the information in this email with that local authority. Ensure that the personal details of the person who made the complaint are not revealed to the food business.</p>"
+      subject: 'This is a food problem report from a consumer via beta.food.gov.uk'
+      body: "<p>This is a food problem report from a consumer via beta.food.gov.uk.&nbsp;</p>\r\n\r\n<div>[webform_submission:values]</div>\r\n\r\n<p>Please do not reply to this email.</p>\r\n\r\n<p>Protect privacy: make sure you keep the information in this email appropriately secure and only use it for the purpose of investigating the complaint against the food business. If this issue is for another local authority to consider and take appropriate action, please securely share the information in this email with that local authority. Ensure that the personal details of the person who made the complaint are not revealed to the food business.</p>"
       excluded_elements:
         fsa_establishment_la_name: fsa_establishment_la_name
         fsa_establishment_postal_code: fsa_establishment_postal_code
