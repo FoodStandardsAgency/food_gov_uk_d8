@@ -48,10 +48,10 @@ use Drupal\user\UserInterface;
  *   },
  *   links = {
  *     "canonical" = "/hygiene-ratings/{fsa_establishment}",
- *     "add-form" = "/hygiene-ratings/add",
- *     "edit-form" = "/hygiene-ratings/{fsa_establishment}/edit",
- *     "delete-form" = "/hygiene-ratings/{fsa_establishment}/delete",
- *     "collection" = "/hygiene-ratings",
+ *     "add-form" = "/fsa-ratings/establishment/add",
+ *     "edit-form" = "/fsa-ratings/establishment/{fsa_establishment}/edit",
+ *     "delete-form" = "/fsa-ratings/establishment/{fsa_establishment}/delete",
+ *     "collection" = "/fsa-ratings/establishment",
  *   },
  *   field_ui_base_route = "fsa_establishment.settings"
  * )
