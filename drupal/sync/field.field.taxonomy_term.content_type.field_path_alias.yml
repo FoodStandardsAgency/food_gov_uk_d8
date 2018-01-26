@@ -1,0 +1,19 @@
+uuid: 55545b58-af28-440c-97ac-5ca664ebd20a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_path_alias
+    - taxonomy.vocabulary.content_type
+id: taxonomy_term.content_type.field_path_alias
+field_name: field_path_alias
+entity_type: taxonomy_term
+bundle: content_type
+label: 'Path alias'
+description: 'Enter a string to represent the path alias for a page with this content type if term name does not satisfy.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
