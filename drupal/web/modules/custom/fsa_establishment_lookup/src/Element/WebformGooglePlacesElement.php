@@ -94,7 +94,16 @@ class WebformGooglePlacesElement extends FormElement {
       if (isset($la)) {
         $form_state->setValue('fsa_establishment_la', $la);
         $form_state->setValue('fsa_establishment_la_name', RatingsHelper::getEntityDetail('fsa_authority', $la, 'name'));
-        $form_state->setValue('fsa_establishment_la_email', RatingsHelper::getEntityDetail('fsa_authority', $la, 'field_email'));
+
+        // Ensure admins can save local authority emails after submission.
+        $route = \Drupal::routeMatch()->getRouteName();
+        $routes = [
+          'entity.webform_submission.edit_form',
+          'entity.webform_submission.edit_form.all',
+        ];
+        if (!in_array($route, $routes)) {
+          $form_state->setValue('fsa_establishment_la_email', RatingsHelper::getEntityDetail('fsa_authority', $la, 'field_email'));
+        }
       }
 
     }
