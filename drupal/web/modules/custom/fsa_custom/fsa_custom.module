@@ -239,6 +239,15 @@ function fsa_custom_preprocess_breadcrumb(&$variables) {
         'url' => FALSE,
       ];
     }
+
+    if ($term->getVocabularyId() == 'research_programme') {
+      // Inject "Research" to breadcrumbs.
+      array_splice($variables['breadcrumb'], 1, 0, [['text' => t('Research'), 'url' => Url::fromRoute('view.search_global_research.page_1')]]);
+      $variables['breadcrumb'][] = [
+        'text' => $term->getName(),
+        'url' => FALSE,
+      ];
+    }
   }
 
 }
