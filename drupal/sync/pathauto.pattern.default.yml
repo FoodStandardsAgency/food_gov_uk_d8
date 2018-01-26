@@ -9,17 +9,15 @@ label: Default
 type: 'canonical_entities:node'
 pattern: '[node:menu-link:parents:join-path]/[node:title]'
 selection_criteria:
-  e6329807-8ec3-41f5-a020-78ee7d0fbc11:
+  72cebb96-262b-416a-8dd0-902fb27e1ec4:
     id: node_type
     bundles:
       generic: generic
-      help: help
       lander: lander
-      webform: webform
     negate: false
     context_mapping:
       node: node
-    uuid: e6329807-8ec3-41f5-a020-78ee7d0fbc11
+    uuid: 72cebb96-262b-416a-8dd0-902fb27e1ec4
 selection_logic: and
 weight: -10
 relationships: {  }
