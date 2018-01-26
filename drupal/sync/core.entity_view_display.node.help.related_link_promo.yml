@@ -29,12 +29,14 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  addtoany: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_block_reference: true
   field_content_type: true
   field_icon: true
+  field_icon_ref: true
   field_liftup_summary: true
   field_liftup_title: true
   field_liftups: true

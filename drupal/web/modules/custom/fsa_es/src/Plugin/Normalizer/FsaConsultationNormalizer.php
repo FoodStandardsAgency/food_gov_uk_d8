@@ -3,6 +3,7 @@
 namespace Drupal\fsa_es\Plugin\Normalizer;
 
 use Drupal\Core\Datetime\DateFormatterInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityManagerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
@@ -65,14 +66,28 @@ class FsaConsultationNormalizer extends NormalizerBase {
     // Get consultations type field.
     $type_field = $object->get('field_consultations_type');
 
+    // Get dates.
+    $consultation_start_date = $object->get('field_consultation_launch_date')->first();
+    $consultation_close_date = $object->get('field_consultation_closing_date')->first();
+
     $data = [
       // See comments on the mapping in the index plugin fore news content type.
       'news_type' => $type_field->entity ? $type_field->entity->label() : NULL,
+      'status' => (bool) $object->get('field_status')->value,
+      'responses_published' => ($object->get('field_consultation_summary')->count() > 0),
+      'consultation_start_date' => $consultation_start_date ? $consultation_start_date->date->format(DATETIME_DATETIME_STORAGE_FORMAT) : NULL,
+      'consultation_close_date' => $consultation_close_date ? $consultation_close_date->date->format(DATETIME_DATETIME_STORAGE_FORMAT) : NULL,
       'name' => $object->label(),
       'body' => implode(' ', [
         $this->prepareTextualField($object->get('field_intro')->value),
         $this->prepareTextualField($object->get('body')->value),
       ]),
+      'nation' => array_map(function($item) {
+        return [
+          'id' => $item->id(),
+          'label' => $item->label(),
+        ];
+      }, $object->get('field_nation')->referencedEntities()),
       'updated' => $date_changed,
     ] + $parent_data;
 

@@ -53,6 +53,18 @@ class FsaConsultationIndex extends FsaIndexBase {
               'news_type' => [
                 'type' => 'keyword'
               ],
+              'status' => [
+                'type' => 'boolean'
+              ],
+              'responses_published' => [
+                'type' => 'boolean'
+              ],
+              'consultation_start_date' => [
+                'type' => 'date',
+              ],
+              'consultation_close_date' => [
+                'type' => 'date',
+              ],
               'name' => [
                 'type' => 'text',
                 'analyzer' => $text_analyzer,
@@ -63,8 +75,19 @@ class FsaConsultationIndex extends FsaIndexBase {
                 'type' => 'text',
                 'analyzer' => $text_analyzer,
               ],
-              'open' => [
-                'type' => 'boolean',
+              'nation' => [
+                'properties' => [
+                  'id' => ['type' => 'keyword'],
+                  'label' => [
+                    'type' => 'text',
+                    'index' => 'not_analyzed',
+                    'fields' => [
+                      'keyword' => [
+                        'type' => 'keyword',
+                      ],
+                    ],
+                  ],
+                ],
               ],
               'updated' => [
                 'type' => 'date',

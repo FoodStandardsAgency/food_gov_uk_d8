@@ -509,7 +509,7 @@
         right: 0;
         bottom: 0;
         left: 0;
-        background-image: var(--icon-search-white);
+        background-image: var(--icon-home-white);
         background-position: 50% 50%;
         background-size: 1em 1em;
         background-repeat: no-repeat;

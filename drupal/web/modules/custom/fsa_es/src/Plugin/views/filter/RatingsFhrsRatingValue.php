@@ -10,6 +10,8 @@ use Drupal\views\ViewExecutable;
  */
 class RatingsFhrsRatingValue extends FilterInOperatorBase {
 
+  use FilterExposedCheckboxTrait;
+
   /**
    * {@inheritdoc}
    */
@@ -18,19 +20,6 @@ class RatingsFhrsRatingValue extends FilterInOperatorBase {
     /** @var \Drupal\elasticsearch_helper_views\Plugin\views\query\Elasticsearch $query */
     $query = $this->view->getQuery();
     $this->definition['options callback'] = [$query->getQueryBuilder(), 'getFhrsRatingValueFilterOptions'];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function exposedTranslate(&$form, $type) {
-    parent::exposedTranslate($form, $type);
-
-    // Expose filter as checkboxes.
-    $form['#type'] = 'checkboxes';
-
-    // Filter out empty values.
-    $form['#options'] = array_filter($form['#options']);
   }
 
 }

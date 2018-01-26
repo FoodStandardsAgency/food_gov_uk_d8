@@ -47,7 +47,7 @@ use Drupal\user\UserInterface;
  *     "status" = "status",
  *   },
  *   links = {
- *     "canonical" = "/fsa-ratings/establishment/{fsa_establishment}",
+ *     "canonical" = "/hygiene-ratings/{fsa_establishment}",
  *     "add-form" = "/fsa-ratings/establishment/add",
  *     "edit-form" = "/fsa-ratings/establishment/{fsa_establishment}/edit",
  *     "delete-form" = "/fsa-ratings/establishment/{fsa_establishment}/delete",

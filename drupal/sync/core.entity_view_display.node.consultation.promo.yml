@@ -33,6 +33,7 @@ content:
       link: false
     third_party_settings: {  }
 hidden:
+  addtoany: true
   body: true
   entity_print_view_epub: true
   entity_print_view_pdf: true

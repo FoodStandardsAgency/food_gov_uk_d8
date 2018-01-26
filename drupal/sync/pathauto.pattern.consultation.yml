@@ -7,16 +7,16 @@ dependencies:
 id: consultation
 label: Consultation
 type: 'canonical_entities:node'
-pattern: 'news-alerts/consultations/[node:field_consultation_launch_date:date:html_year]/[node:title]'
+pattern: 'news-alerts/consultations/[node:title]'
 selection_criteria:
-  02e14491-6c01-4594-a5cb-bcae929cfd39:
+  476c3275-c3ef-4847-b556-52ff178187cd:
     id: node_type
     bundles:
       consultation: consultation
     negate: false
     context_mapping:
       node: node
-    uuid: 02e14491-6c01-4594-a5cb-bcae929cfd39
+    uuid: 476c3275-c3ef-4847-b556-52ff178187cd
 selection_logic: and
-weight: -5
+weight: -7
 relationships: {  }

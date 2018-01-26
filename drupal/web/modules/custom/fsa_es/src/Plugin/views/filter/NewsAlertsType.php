@@ -10,6 +10,8 @@ use Drupal\views\ViewExecutable;
  */
 class NewsAlertsType extends FilterInOperatorBase {
 
+  use FilterExposedCheckboxTrait;
+
   /**
    * {@inheritdoc}
    */
@@ -17,20 +19,7 @@ class NewsAlertsType extends FilterInOperatorBase {
     parent::init($view, $display, $options);
     /** @var \Drupal\elasticsearch_helper_views\Plugin\views\query\Elasticsearch $query */
     $query = $this->view->getQuery();
-    $this->definition['options callback'] = [$query->getQueryBuilder(), 'getNewsAlertsTypeFilterOptions'];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function exposedTranslate(&$form, $type) {
-    parent::exposedTranslate($form, $type);
-
-    // Expose filter as checkboxes.
-    $form['#type'] = 'checkboxes';
-
-    // Filter out empty values.
-    $form['#options'] = array_filter($form['#options']);
+    $this->definition['options callback'] = [$query->getQueryBuilder(), 'getNewsTypeFilterOptions'];
   }
 
 }
