@@ -1,0 +1,9 @@
+uuid: b9321365-8334-4fa0-87c0-a842cceaeaa5
+langcode: en
+status: true
+dependencies: {  }
+id: custom_block
+label: 'Custom HTML'
+icon_uuid: null
+description: 'Create or reference existing custom block to display custom HTML as lander row.'
+behavior_plugins: {  }
