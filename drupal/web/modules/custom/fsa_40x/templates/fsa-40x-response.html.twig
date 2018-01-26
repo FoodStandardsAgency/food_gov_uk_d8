@@ -1,10 +1,10 @@
-<h1>{{ status_code }}</h1>
-<p>{{ 'Sorry, something went wrong.'|t }}</p>
-<p>{{ status_description }}</p>
-{% if search %}
-  <h2>{{ 'Try searching for another page'|t }}</h2>
-  {{ search }}
-{% endif %}
-<p>
-  <a href="{{ path('<front>') }}" title="{{ 'Return to homepage'|t }}" rel="home">{{ 'Return to homepage'|t }}</a>
-</p>
+<div class="site layout">
+  <main role="main" class="layout-content">
+    <div class="layout">
+      <h2>{{ status_code }} - {{ status_description }}</h2>
+      <p>
+        <a href="{{ path('<front>') }}" title="{{ 'Return to homepage'|t }}" rel="home">{{ 'Return to homepage'|t }}</a>
+      </p>
+    </div>
+  </main>
+</div>
