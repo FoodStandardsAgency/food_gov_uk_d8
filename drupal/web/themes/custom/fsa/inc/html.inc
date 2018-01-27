@@ -14,6 +14,7 @@ use Drupal\Component\Utility\Html;
  */
 function fsa_preprocess_html(&$variables) {
   $routematch = \Drupal::routeMatch();
+  $routename = $routematch->getRouteName();
 
   // Add class to body if frontpage.
   $is_front = \Drupal::service('path.matcher')->isFrontPage();
@@ -24,6 +25,17 @@ function fsa_preprocess_html(&$variables) {
   if ($routematch->getRouteName() == 'entity.taxonomy_term.canonical' || $routematch->getRouteName() == 'view.a_to_z.page_1') {
     // Set body class for term pages.
     $variables['attributes']['class'][] = 'theme--term';
+  }
+
+  // Send classes to theme error pages.
+  $error_routes = [
+    'system.401',
+    'system.403',
+    'system.404',
+  ];
+  if (in_array($routename, $error_routes)) {
+    $variables['attributes']['class'][] = 'theme--error';
+    $variables['attributes']['class'][] = 'theme--error-' . strtolower(Html::cleanCssIdentifier($routename));
   }
 
   // Do magic when we have a node object.
