@@ -22,18 +22,13 @@ function fsa_preprocess_html(&$variables) {
     $variables['attributes']['class'][] = 'theme--frontpage';
   }
 
-  if ($routematch->getRouteName() == 'entity.taxonomy_term.canonical' || $routematch->getRouteName() == 'view.a_to_z.page_1') {
-    // Set body class for term pages.
+  // Set body class for term and related listing pages.
+  if (in_array($routename, ['view.a_to_z.page_1', 'entity.taxonomy_term.canonical'])) {
     $variables['attributes']['class'][] = 'theme--term';
   }
 
   // Send classes to theme error pages.
-  $error_routes = [
-    'system.401',
-    'system.403',
-    'system.404',
-  ];
-  if (in_array($routename, $error_routes)) {
+  if (in_array($routename, ['system.401', 'system.403', 'system.404'])) {
     $variables['attributes']['class'][] = 'theme--error';
     $variables['attributes']['class'][] = 'theme--error-' . strtolower(Html::cleanCssIdentifier($routename));
   }
