@@ -13,10 +13,10 @@ use Drupal\Core\Url;
 class FsaHttp4xxController extends ControllerBase {
 
   /**
-   * The 404 page content override.
+   * The 401 page content override.
    *
    * @return array
-   *   Render array to display themed error page content.
+   *   Render array to display themed 401 error page content.
    */
   public function on401() {
     return [
@@ -28,10 +28,10 @@ class FsaHttp4xxController extends ControllerBase {
   }
 
   /**
-   * The 404 page content override.
+   * The 403 page content override.
    *
    * @return array
-   *   Render array to display themed error page content.
+   *   Render array to display themed 403 error page content.
    */
   public function on403() {
     return [
@@ -46,7 +46,7 @@ class FsaHttp4xxController extends ControllerBase {
    * The 404 page content override.
    *
    * @return array
-   *   Render array to display themed error page content.
+   *   Render array to display themed 404 page not found content.
    */
   public function on404() {
     return [
