@@ -14,19 +14,10 @@ use Drupal\Core\Access\AccessResult;
  */
 function fsa_40x_block_access(Block $block, $operation, AccountInterface $account) {
 
-  // Be sure breadcrumbbs and page titles are not shown on error pages.
+  // Be sure breadcrumbs and page titles are not shown on error pages.
   if (in_array($block->id(), ['breadcrumbs', 'pagetitle', 'pagetitle_hero'])) {
-    $routematch = \Drupal::routeMatch();
-    $routename = $routematch->getRouteName();
-    // Enter routes when to remove the page title in hero area.
-    $routes = [
-      'fsa_signin.user_registration_thank_you',
-      'system.401',
-      'system.403',
-      'system.404',
-    ];
-
-    if (in_array($routename, $routes) || $routematch->getParameter('fsa_establishment')) {
+    $routename = \Drupal::routeMatch()->getRouteName();
+    if (substr($routename, 0, 9) == 'system.40') {
       return AccessResult::forbidden()
         ->addCacheableDependency($block);
     }
