@@ -1,5 +1,6 @@
 name: FSA 40x
-description: Throws custom 40x pages.
+description: Override Drupal default error page content and add support to
+  theming the error pages.
 type: module
 core: 8.x
 package: FSA

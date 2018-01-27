@@ -1,10 +1,16 @@
-<div class="site layout">
-  <main role="main" class="layout-content">
-    <div class="layout">
-      <h2>{{ status_code }} - {{ status_description }}</h2>
-      <p>
-        <a href="{{ path('<front>') }}" title="{{ 'Return to homepage'|t }}" rel="home">{{ 'Return to homepage'|t }}</a>
-      </p>
-    </div>
-  </main>
-</div>
+{#
+/**
+ * @file
+ * Custom theme implementation for error pages.
+ *
+ * Variables:
+ * - status_code: numeric status code (404, 403 or 401)
+ * - error: The short error message (status message)
+ * - content: The supportive text content.
+ *
+ */
+#}
+<h1>{{ status_code }} - {{ error }}</h1>
+<p>{{ content }}</p>
+{# make sure image exists, status code can be either 404, 403 or 401 #}
+<img src="/themes/custom/fsa/dist/img/error/{{ status_code }}.png" alt="{{ status_code }}" />
