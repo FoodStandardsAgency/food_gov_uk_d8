@@ -25,6 +25,7 @@ permissions:
   - 'create page content'
   - 'create research_project content'
   - 'create team_contacts content'
+  - 'delete all revisions'
   - 'delete any consultation content'
   - 'delete any generic content'
   - 'delete any media'
