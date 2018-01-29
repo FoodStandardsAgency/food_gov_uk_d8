@@ -13,7 +13,6 @@ dependencies:
     - node.type.news
   module:
     - entity_print
-    - text
     - user
 third_party_settings:
   entity_print:
@@ -23,20 +22,20 @@ targetEntityType: node
 bundle: news
 mode: search_result
 content:
-  body:
-    label: hidden
-    type: text_default
+  field_intro:
+    type: basic_string
     weight: 0
+    region: content
+    label: hidden
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   addtoany: true
+  body: true
   content_moderation_control: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
-  field_intro: true
   field_nation: true
   field_news_type: true
   field_team_contacts: true

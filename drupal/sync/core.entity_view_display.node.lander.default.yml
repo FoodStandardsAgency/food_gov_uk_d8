@@ -87,6 +87,7 @@ content:
     type: entity_reference_label
     region: content
 hidden:
+  addtoany: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true

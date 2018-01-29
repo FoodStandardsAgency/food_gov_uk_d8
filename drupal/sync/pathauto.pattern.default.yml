@@ -7,20 +7,17 @@ dependencies:
 id: default
 label: Default
 type: 'canonical_entities:node'
-pattern: '[node:menu-link:parent:url:path]/[node:title]'
+pattern: '[node:menu-link:parents:join-path]/[node:title]'
 selection_criteria:
-  138616c6-32d7-4111-9c72-56720d797646:
+  72cebb96-262b-416a-8dd0-902fb27e1ec4:
     id: node_type
     bundles:
       generic: generic
-      help: help
       lander: lander
-      page: page
-      webform: webform
     negate: false
     context_mapping:
       node: node
-    uuid: 138616c6-32d7-4111-9c72-56720d797646
+    uuid: 72cebb96-262b-416a-8dd0-902fb27e1ec4
 selection_logic: and
-weight: -5
+weight: -10
 relationships: {  }

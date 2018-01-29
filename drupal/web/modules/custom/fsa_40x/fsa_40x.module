@@ -2,37 +2,38 @@
 
 /**
  * @file
- * Throws custom 40x pages.
+ * Custom 40x page functionalities.
  */
 
+use Drupal\Core\Session\AccountInterface;
+use Drupal\block\Entity\Block;
+use Drupal\Core\Access\AccessResult;
+
 /**
- * Implements hook_theme_suggestions_page_alter().
- *
- * @see https://www.drupal.org/node/2363987#comment-12154462
+ * Implements block_access().
  */
-function fsa_40x_theme_suggestions_page_alter(array &$suggestions, array $variables) {
-  $path_args = explode('/', trim(\Drupal::service('path.current')->getPath(), '/'));
-  $suggestions = theme_get_suggestions($path_args, 'page');
-  $http_error_suggestions = [
-    'fsa_40x.throw403' => 'page__40x',
-    'fsa_40x.throw404' => 'page__40x',
-  ];
-  $route_name = \Drupal::routeMatch()->getRouteName();
-  if (isset($http_error_suggestions[$route_name])) {
-    $suggestions[] = $http_error_suggestions[$route_name];
+function fsa_40x_block_access(Block $block, $operation, AccountInterface $account) {
+
+  // Be sure breadcrumbs and page titles are not shown on error pages.
+  if (in_array($block->id(), ['breadcrumbs', 'pagetitle', 'pagetitle_hero'])) {
+    $routename = \Drupal::routeMatch()->getRouteName();
+    if (substr($routename, 0, 9) == 'system.40') {
+      return AccessResult::forbidden()
+        ->addCacheableDependency($block);
+    }
   }
 }
 
 /**
  * Implements hook_theme().
  */
-function fsa_40x_theme($existing, $type, $theme, $path) {
+function fsa_40x_theme() {
   return [
     'fsa_40x_response' => [
       'variables' => [
         'status_code' => NULL,
-        'status_description' => NULL,
-        'search' => NULL,
+        'error' => NULL,
+        'content' => NULL,
       ],
     ],
   ];

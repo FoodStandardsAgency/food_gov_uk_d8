@@ -7,7 +7,7 @@ fsa_ratings.ratings_settings:
    _permission: 'administer fsa rating landing content'
 
 fsa_ratings.ratings_search:
-  path: '/ratings/search'
+  path: '/hygiene-ratings'
   defaults:
     _controller: '\Drupal\fsa_ratings\Controller\RatingsSearch::ratingsSearch'
     _title: 'Food hygiene ratings'
@@ -17,7 +17,7 @@ fsa_ratings.ratings_search:
 
 # Ratings explanation page.
 fsa_ratings.ratings_meanings:
-  path: '/ratings/meanings'
+  path: '/hygiene-ratings/meanings'
   defaults:
     _controller: '\Drupal\fsa_ratings\Controller\RatingsStaticPages::ratingMeanings'
     _title: 'What do the different ratings mean'

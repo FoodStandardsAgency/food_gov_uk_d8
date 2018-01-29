@@ -7,16 +7,16 @@ dependencies:
 id: news
 label: News
 type: 'canonical_entities:node'
-pattern: 'news/[node:field_news_type]/[node:title]'
+pattern: 'news-alerts/news/[node:title]'
 selection_criteria:
-  4e6d3c7a-8530-40c7-8dd4-263d837565a9:
+  7abd1c50-8fc5-4d1d-b615-5ee12022a52a:
     id: node_type
     bundles:
       news: news
     negate: false
     context_mapping:
       node: node
-    uuid: 4e6d3c7a-8530-40c7-8dd4-263d837565a9
+    uuid: 7abd1c50-8fc5-4d1d-b615-5ee12022a52a
 selection_logic: and
 weight: -5
 relationships: {  }

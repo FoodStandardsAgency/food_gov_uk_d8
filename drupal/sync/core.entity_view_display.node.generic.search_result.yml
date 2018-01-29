@@ -1,8 +1,9 @@
-uuid: 0cc517f9-d66d-4cb3-89e2-b5cf949988fa
+uuid: b39ebea0-fd34-4228-aa7a-72890d10bb24
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.search_result
     - field.field.node.generic.body
     - field.field.node.generic.field_content_type
     - field.field.node.generic.field_fsa_toc
@@ -17,16 +18,17 @@ dependencies:
 third_party_settings:
   entity_print:
     pdf_label: 'View PDF'
-id: node.generic.default
+id: node.generic.search_result
 targetEntityType: node
 bundle: generic
-mode: default
+mode: search_result
 content:
   body:
     label: hidden
-    type: text_default
+    type: text_summary_or_trimmed
     weight: 0
-    settings: {  }
+    settings:
+      trim_length: 250
     third_party_settings: {  }
     region: content
 hidden:

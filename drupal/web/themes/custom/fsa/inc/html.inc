@@ -14,6 +14,7 @@ use Drupal\Component\Utility\Html;
  */
 function fsa_preprocess_html(&$variables) {
   $routematch = \Drupal::routeMatch();
+  $routename = $routematch->getRouteName();
 
   // Add class to body if frontpage.
   $is_front = \Drupal::service('path.matcher')->isFrontPage();
@@ -21,9 +22,15 @@ function fsa_preprocess_html(&$variables) {
     $variables['attributes']['class'][] = 'theme--frontpage';
   }
 
-  if ($routematch->getRouteName() == 'entity.taxonomy_term.canonical' || $routematch->getRouteName() == 'view.a_to_z.page_1') {
-    // Set body class for term pages.
+  // Set body class for term and related listing pages.
+  if (in_array($routename, ['view.a_to_z.page_1', 'entity.taxonomy_term.canonical'])) {
     $variables['attributes']['class'][] = 'theme--term';
+  }
+
+  // Send classes to theme error pages.
+  if (in_array($routename, ['system.401', 'system.403', 'system.404'])) {
+    $variables['attributes']['class'][] = 'theme--error';
+    $variables['attributes']['class'][] = 'theme--error-' . strtolower(Html::cleanCssIdentifier($routename));
   }
 
   // Do magic when we have a node object.
@@ -65,7 +72,7 @@ function fsa_preprocess_html(&$variables) {
   // Rely on URL paths for FHRS ratings and subscribe sections.
   $current_path = \Drupal::service('path.current')->getPath();
   $uri_segments = explode('/', $current_path);
-  if ($uri_segments[1] === 'ratings' || $uri_segments[1] === 'fsa-ratings') {
+  if ($uri_segments[1] === 'hygiene-ratings') {
     $variables['attributes']['class'][] = 'theme--service';
     $variables['attributes']['class'][] = 'theme--fhrs';
   }
