@@ -29,19 +29,23 @@ body {
     flex-flow: row nowrap;
     align-items: center;
   }
-}
 
-body:after {
-  content: "sm";
-  position: absolute !important;
-  clip: rect(1px, 1px, 1px, 1px);
-  overflow: hidden;
-  height: 1px;
-  width: 1px;
-  word-wrap: normal;
+  &:after {
+    content: "xs";
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px);
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+    word-wrap: normal;
 
-  @media (--breakpoint-md) {
-    content: "md";
+    @media (--breakpoint-sm) {
+      content: "sm";
+    }
+  
+    @media (--breakpoint-md) {
+      content: "md";
+    }
   }
 }
 

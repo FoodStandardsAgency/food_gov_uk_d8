@@ -36,21 +36,17 @@
     <ul
       id="collapsible-{{ randomID }}"
       class="{{ 'navigation__menu navigation__menu--level-' ~ (menu_level + 1) }}
-        {% if menu_level != 0 %} toggle-content js-toggle-content{% endif %}"
+        {% if menu_level != 0 %} js-nav-menu{% endif %}"
       {{ attributes.setAttribute('data-menu-level', (menu_level + 1)) }}>
   
     {% if menu_level != 0 %}
       <header class="navigation__header">
-        {# <button
-          class="navigation__back-link"
-          data-state="is-open"
-          data-theme="popup"
-          data-state-behaviour="remove"
-          data-state-element="#collapsible-{{ randomID }}"
+        <button
+          class="navigation__back-link js-nav-back-link"
           aria-expanded="false"
           aria-controls="collapsible-{{ randomID }}">
           <span class="visually-hidden">Back</span>
-        </button> #}
+        </button>
         <h2 class="navigation__item navigation__item--level-{{menu_level + 1}} navigation__item--heading">
           <a href="{{ firstItem.url }}" title="{{ firstItem.title }}" class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}">{{ firstItem.title }}</a>
         </h2>
@@ -81,8 +77,11 @@
           <a
             href="{{ item.url }}"
             title="{{ item.title }}"
-            class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}
-              {% if (item.is_expanded) %} toggle-button{% endif %}">{{ item.title }}</a>
+            class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}{% if (item.is_expanded) %} js-nav-item-with-child{% endif %}"
+            {% if (item.is_expanded) %}
+              aria-controls="collapsible-{{ randomID }}"
+            {% endif %}
+            >{{ item.title }}</a>
 
           {% if item.below %}
             {{ menus.menu_links(item.below, attributes, menu_level + 1, item, randomID) }}

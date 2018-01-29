@@ -2,6 +2,7 @@ import nextByClass from '../../core/helper/nextByClass';
 import debounce from '../../core/helper/debounce';
 import checkMediaQuery from '../../core/helper/checkMediaQuery';
 import breakpoints from '../../core/helper/breakpoints';
+import closestParent from '../../core/helper/closestParent';
 import inert from 'wicg-inert';
 
 function navigation() {
@@ -160,6 +161,15 @@ function navigation() {
   // Query navigation related elements
   const menuButtonElementsArray = [...document.querySelectorAll('.js-menu-button')];
   const navigationElementArray = [...document.querySelectorAll('.js-navigation')];
+
+  // Query nav items with child
+  const navigationParentItemsArray = [...document.querySelectorAll('.js-nav-item-with-child')];
+
+  // Query back links
+  const navigationBackLinksArray = [...document.querySelectorAll('.js-nav-back-link')];
+
+  // Query nav menus
+  const navigationMenuElementsArray = [...document.querySelectorAll('.js-nav-menu')];
 
   // Query main element
   const siteElementArray = [...document.querySelectorAll('.js-site')];
@@ -375,24 +385,72 @@ function navigation() {
     const menuButtonElement = element;
 
     // Add click listener
-    menuButtonElement.addEventListener("click", function(){
+    menuButtonElement.addEventListener("click", function(e){
       toggleState(this, navigationElementArray[0], 'is-open');
       siteElementArray[0].classList.toggle("is-moved");
       root.classList.toggle("is-fixed");
     });
   });
 
+  // Items with children
+  navigationParentItemsArray.forEach((element) => {
+    // Add click listener
+    element.addEventListener("click", function(e){
+      if (checkMediaQuery() === breakpoints.xsmall) {
+        e.preventDefault();
+        setStateOn({element: element, type: 'content'}, 'is-open');
+        setStateOn({element: element.nextElementSibling, type: 'content'}, 'is-open');
+      }
+    });
+  });
+
+  // Back link
+  navigationBackLinksArray.forEach((element) => {
+    // Add click listener
+    element.addEventListener("click", function(e){
+      if (checkMediaQuery() === breakpoints.xsmall) {
+        e.preventDefault();
+        setStateOff({element: element, type: 'button'}, 'is-open');
+        setStateOff({element: closestParent(element, 'js-nav-menu'), type: 'content'}, 'is-open');
+      }
+    });
+  });
+
   function initializeMobileNav() {
-    if (checkMediaQuery() === breakpoints.small) {
+    if (checkMediaQuery() === breakpoints.xsmall) {
       menuButtonElementsArray.forEach((element) => {
         setStateOff({element: element, type: 'button'}, 'is-open');
       });
       setStateOff({element: navigationElementArray[0], type: 'content'}, 'is-open');
+
+      navigationParentItemsArray.forEach((element) => {
+        setStateOff({element: element, type: 'button'}, 'is-open');
+      });
+
+      navigationMenuElementsArray.forEach((element) => {
+        setStateOff({element: element, type: 'content'}, 'is-open');
+      });
+
+      navigationBackLinksArray.forEach((element) => {
+        setStateOff({element: element, type: 'button'}, 'is-open');
+      });
     } else {
       menuButtonElementsArray.forEach((element) => {
         setStateOn({element: element, type: 'button'}, 'is-open');
       });
       setStateOn({element: navigationElementArray[0], type: 'content'}, 'is-open');
+
+      navigationParentItemsArray.forEach((element) => {
+        setStateOn({element: element, type: 'button'}, 'is-open');
+      });
+
+      navigationMenuElementsArray.forEach((element) => {
+        setStateOn({element: element, type: 'content'}, 'is-open');
+      });
+
+      navigationBackLinksArray.forEach((element) => {
+        setStateOfn({element: element, type: 'button'}, 'is-open');
+      });
     }
   }
 

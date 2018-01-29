@@ -160,7 +160,7 @@
   width: 100%;
   height: 6em;
   flex: 0 0 auto;
-  box-shadow: 0 3px var(--color-green);
+  box-shadow: inset 0 -3px var(--color-green);
 
   @media (--breakpoint-sm) {
     display: none;
@@ -633,10 +633,28 @@
     }
   }
 
-  &.is-open {
+  /* &.is-open {
     background-color: var(--color-white);
     z-index: var(--z-middle);
     top: -6em;
+    height: calc(100vh - 6em);
+
+    @media (--breakpoint-sm) {
+      top: 100%;
+      height: auto;
+      opacity: 1;
+      transform: translateY(0em);
+      transition:
+        transform var(--transition-enter),
+        opacity var(--transition-enter),
+        top 0s step-end 0.0s;
+    }
+  } */
+
+  &.is-open {
+    background-color: var(--color-white);
+    z-index: var(--z-middle);
+    top: 0em;
     height: calc(100vh - 6em);
 
     @media (--breakpoint-sm) {
@@ -691,6 +709,17 @@
 /* Third level menu */
 .navigation__menu.navigation__menu--level-3 {
   padding: 0;
+  position: absolute;
+  top: -7777px;
+  left: 0;
+  right: 0;
+
+  @media (--breakpoint-sm) {
+    position: static;
+    top: auto;
+    left: auto;
+    right: auto;
+  }
 
   &.is-open {
     background-color: var(--color-white);

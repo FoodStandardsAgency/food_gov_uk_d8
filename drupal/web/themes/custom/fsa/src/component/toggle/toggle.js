@@ -110,18 +110,8 @@ function toggle() {
           switch (breakpoint) {
             case "mobile":
             
-              if (checkMediaQuery() != breakpoints.small) {
-                setStateOn({element: elemRefItem, type: 'content'}, elemState);
-
-                // Remove theme
-                if(elem.getAttribute("data-theme")) {
-                  var dataStateTheme = elem.getAttribute("data-theme");
-                  dataStateTheme = dataStateTheme.split(", ");
-                  dataStateTheme.forEach(theme => {
-                    elemRefItem.classList.remove(`is-${theme}`);
-                  });
-                }
-              } else {
+              if (checkMediaQuery() === breakpoints.small || checkMediaQuery() === breakpoints.xsmall) {
+                // Set state off
                 setStateOff({element: elemRefItem, type: 'content'}, elemState);
 
                 // Set theme
@@ -141,6 +131,18 @@ function toggle() {
                       default:
                         break;
                     }
+                  });
+                }
+              } else {
+                // Set state on
+                setStateOn({element: elemRefItem, type: 'content'}, elemState);
+
+                // Remove theme
+                if(elem.getAttribute("data-theme")) {
+                  var dataStateTheme = elem.getAttribute("data-theme");
+                  dataStateTheme = dataStateTheme.split(", ");
+                  dataStateTheme.forEach(theme => {
+                    elemRefItem.classList.remove(`is-${theme}`);
                   });
                 }
               }
