@@ -38,7 +38,6 @@ third_party_settings:
         - field_date_range
         - field_planned_completion_date
         - field_conducted_by
-        - field_nation
       parent_name: ''
       weight: 4
       format_type: tab
@@ -121,7 +120,7 @@ content:
     type: string_textarea
     region: content
   field_nation:
-    weight: 41
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     type: options_buttons

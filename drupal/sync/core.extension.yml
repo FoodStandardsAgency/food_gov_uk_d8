@@ -44,7 +44,6 @@ module:
   field_validation: 0
   file: 0
   filter: 0
-  fsa_40x: 0
   fsa_alerts: 0
   fsa_alerts_import: 0
   fsa_authorities_exp_filter: 0
@@ -127,6 +126,7 @@ module:
   webform_views: 0
   workflows: 0
   extlink: 1
+  fsa_40x: 1
   menu_link_content: 1
   pathauto: 1
   content_translation: 10

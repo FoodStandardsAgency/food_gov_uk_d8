@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * FSA 40x module install file.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function fsa_40x_install() {
+  // Need to run after system module.
+  module_set_weight('fsa_40x', 1);
+}
+
+/**
+ * Ensure fsa_40x runs after the system module.
+ */
+function fsa_40x_update_8001() {
+  module_set_weight('fsa_40x', 1);
+}
