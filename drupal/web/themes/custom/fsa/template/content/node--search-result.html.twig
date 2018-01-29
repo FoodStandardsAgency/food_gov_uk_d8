@@ -76,7 +76,13 @@
       {{ 'Tag' }}
     </div>
     <div class="item__date">
-      {{ content.field_update_date }}
+      {% if content.field_update_date %}
+        {{ content.field_update_date }}
+      {% elseif content.field_alert_modified %}
+        {{ content.field_alert_modified }}
+      {% else %}
+        {{ date }}
+      {% endif %}
     </div>
     {% if display_submitted %}
       <div class="date">
@@ -97,7 +103,7 @@
     {{ title_suffix }}
     
     <div{{ content_attributes }}>
-      {{ content }}
+      {{ content|without('field_alert_modified') }}
     </div>
   </div>
 
