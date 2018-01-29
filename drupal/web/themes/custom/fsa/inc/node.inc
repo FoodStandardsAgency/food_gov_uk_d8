@@ -27,11 +27,12 @@ function fsa_preprocess_node(&$variables) {
     }
   }
 
+  // Set content type tag for the search result template.
   if ($variables['view_mode'] == 'search_result') {
-    // Use "Unclassified" as default however we should never see it (if seen we
-    // know a definition is missing).
-    $tag = t('Unclassified');
-    // Send appropriate tag for the template.
+    // Use bundle name as default (to have at least something when switch below
+    // does not set the value.
+    $tag = $node->bundle();
+
     switch ($node->getType()) {
       case 'page':
         // Use content type taxonomy.
@@ -58,17 +59,14 @@ function fsa_preprocess_node(&$variables) {
             ],
           ]);
         }
-
         break;
 
       case 'news':
         $tag = t('News');
-
         break;
 
       case 'research_project':
         $tag = t('Research project');
-
         break;
 
     }
