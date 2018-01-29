@@ -1,15 +1,13 @@
 # Food Standards Agency
-[![Build Status](https://travis-ci.com/wunderio/client-UK-FSA-alpha.svg?token=n479wr8JE8WbYmyacHHX&branch=master)](https://travis-ci.com/wunderio/client-UK-FSA-alpha)
+[![Build Status](https://travis-ci.com/wunderio/client-UK-FSA-alpha.svg?token=n479wr8JE8WbYmyacHHX&branch=master)](https://travis-ci.com/wunderio/client-UK-FSA-alpha) 
 
 Food Standards Agency (FSA) Drupal 8 site code repository.
 
 ### Continuous integration
-This project deploys using [Deploybot](https://wunder.deploybot.com/111465-FSA-Alpha)
+This project deploys using [Deploybot](https://wunder.deploybot.com/111465-FSA-Alpha) and uses [Travis](https://travis-ci.com/wunderio/client-UK-FSA-alpha) for tests.
 * Production [beta.food.gov.uk](https://beta.food.gov.uk)
 * Development: [fsa.dev.wunder.io](https://fsa.dev.wunder.io)
 * Staging [fsa.stage.wunder.io](https://fsa.stage.wunder.io)
-
-See more here: [https://travis-ci.com/wunderio/client-UK-FSA-alpha](https://travis-ci.com/wunderio/client-UK-FSA-alpha.svg?token=oxuHeqz2nYPYhP3SBFxr&branch=master)
 
 ### Getting started
 
