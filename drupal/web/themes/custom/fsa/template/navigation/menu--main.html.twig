@@ -82,25 +82,7 @@
             href="{{ item.url }}"
             title="{{ item.title }}"
             class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}
-              {% if (item.is_expanded) %} toggle-button{% endif %}"
-            {% if (item.is_expanded) %}
-              data-state="is-open"
-              data-state-element="#collapsible-{{ randomID }}"
-              aria-expanded="false" aria-controls="collapsible-{{ randomID }}"
-              data-theme="popup"
-              {% if menu_level == 0 %}
-                data-state-behaviour="remove-all"
-                data-state-scope="{{ 'navigation__menu--level-' ~ (menu_level + 1) }}"
-                data-state-scope-button="{{ '.navigation__link--level-' ~ (menu_level + 1) }}"
-                data-state-scope-content="{{ '.navigation__menu--level-' ~ (menu_level + 2) }}"
-              {% endif %}
-              {% if menu_level == 1 %}
-                data-breakpoint="mobile"
-              {% endif %}
-              {% if menu_level == 2 %}
-                data-breakpoint="mobile"
-              {% endif %}
-            {% endif %}>{{ item.title }}</a>
+              {% if (item.is_expanded) %} toggle-button{% endif %}">{{ item.title }}</a>
 
           {% if item.below %}
             {{ menus.menu_links(item.below, attributes, menu_level + 1, item, randomID) }}

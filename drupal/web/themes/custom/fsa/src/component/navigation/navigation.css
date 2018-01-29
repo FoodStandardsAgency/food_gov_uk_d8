@@ -172,13 +172,14 @@
 }
 
 .navigation-mobile-header__button {
-  padding: 2em;
+  padding: 1.75em;
 
   .svg {
-    width: 2em;
-    height: 2em;
+    width: 1.5em;
+    height: 1.5em;
 
-    path {
+    path,
+    rect {
       fill: var(--color-white);
     }
   }
@@ -324,6 +325,7 @@
       display: block;
       flex: 0 1 25%;
       margin: 2em 0;
+      display: none;
     }
   }
 }
@@ -427,6 +429,39 @@
       flex: 0 0 auto;
     }
   }
+
+  &.has-child {
+    &:after {
+      @media (--breakpoint-sm) {
+        content: '';
+        position: absolute;
+        z-index: var(--z-under);
+        top: -7777px;
+        left: 0;
+        right: 0;
+        height: 300vh;
+        background-color: var(--color-black);
+        display: block;
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          opacity var(--transition-enter),
+          top 0s step-end 0.2s;
+      }
+    }
+  
+    &:--enter {
+      &:after {
+        @media (--breakpoint-sm) {
+          top: 100%;
+          opacity: 0.4;
+          transition:
+            opacity var(--transition-enter),
+            top 0s step-end 0.0s;
+        }
+      } 
+    }
+  }
 }
 
 /* First level link */
@@ -444,6 +479,7 @@
   @media (--breakpoint-sm) {
     position: relative;
     display: flex;
+    align-items: center;
     justify-content: center;
     height: 100%;
     padding: 1em 1em;
@@ -559,13 +595,17 @@
 /* Second level menu */
 .navigation__menu.navigation__menu--level-2 {
   padding: 0;
+  position: absolute;
+  top: -7777px;
+  left: 0;
+  right: 0;
 
   @media (--breakpoint-sm) {
     background-color: var(--color-white);
     display: flex;
     flex-flow: row wrap;
     opacity: 0;
-    transform: translateY(-1em);
+    transform: translateY(-0.25em);
     transition:
       transform var(--transition-enter),
       opacity var(--transition-enter),
@@ -578,9 +618,19 @@
 
   .navigation__item.navigation__item--level-1:last-child > & {
   }
-  
-  &.toggle-content {
-    position: absolute;
+
+  .navigation__item:hover > &,
+  .navigation__link:focus ~ & {
+    @media (--breakpoint-sm) {
+      top: 100%;
+      height: auto;
+      opacity: 1;
+      transform: translateY(0em);
+      transition:
+        transform var(--transition-enter),
+        opacity var(--transition-enter),
+        top 0s step-end 0.0s;
+    }
   }
 
   &.is-open {

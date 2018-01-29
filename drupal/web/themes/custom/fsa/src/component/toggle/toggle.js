@@ -3,76 +3,19 @@ import checkMediaQuery from '../../core/helper/checkMediaQuery';
 import breakpoints from '../../core/helper/breakpoints';
 import debounce from '../../core/helper/debounce';
 import nextByClass from '../../core/helper/nextByClass';
+import closestParent from '../../core/helper/closestParent';
 import inert from 'wicg-inert';
+import tabbable from 'tabbable';
 
 function toggle() {
 
-  // SWIPE DETECT HELPER
-  //----------------------------------------------
-
-  var swipeDetect = function(el, callback){ 
-    var touchsurface = el,
-    swipedir,
-    startX,
-    startY,
-    dist,
-    distX,
-    distY,
-    threshold = 100, //required min distance traveled to be considered swipe
-    restraint = 100, // maximum distance allowed at the same time in perpendicular direction
-    allowedTime = 300, // maximum time allowed to travel that distance
-    elapsedTime,
-    startTime,
-    eventObj,
-    handleswipe = callback || function(swipedir, eventObj){}
-
-    touchsurface.addEventListener('touchstart', function(e){
-      var touchobj = e.changedTouches[0]
-      swipedir = 'none'
-      dist = 0
-      startX = touchobj.pageX
-      startY = touchobj.pageY
-      startTime = new Date().getTime() // record time when finger first makes contact with surface
-      eventObj = e;
-    }, false)
-
-    touchsurface.addEventListener('touchend', function(e){
-      var touchobj = e.changedTouches[0]
-      distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
-      distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
-      elapsedTime = new Date().getTime() - startTime // get time elapsed
-      if (elapsedTime <= allowedTime){ // first condition for awipe met
-        if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
-          swipedir = (distX < 0)? 'left' : 'right' // if dist traveled is negative, it indicates left swipe
-        }
-        else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
-          swipedir = (distY < 0)? 'up' : 'down' // if dist traveled is negative, it indicates up swipe
-        }
-      }
-      handleswipe(swipedir, eventObj)
-    }, false)
+  const KEYCODE = {
+    ENTER: 13,
+    ESC: 27,
+    SPACE: 32,
   }
 
-
-  // CLOSEST PARENT HELPER FUNCTION
-  //----------------------------------------------
-
-  var closestParent = function(child, match) {
-    if (!child || child == document) {
-      return null;
-    }
-    if (child.classList.contains(match) || child.nodeName.toLowerCase() == match) {
-      return child;
-    }
-    else {
-      return closestParent(child.parentNode, match);
-    }
-  }
-
-
-  // REUSABLE FUNCTION
-  //----------------------------------------------
-
+  // Get content element the button is referencing to
   function getElemRef(elem, dataState) {
     // Get reference element or array
     if(elem.getAttribute("data-state-element")) {
@@ -83,6 +26,7 @@ function toggle() {
     }
   }
 
+  // Get content element scope
   function getElemScope(elem, parentSelector, targetButtonSelector, targetContentSelector) {
     // Grab parent
     var elemParent = closestParent(elem, parentSelector);
@@ -93,48 +37,47 @@ function toggle() {
     };
   }
 
+  // Set state off
   function setStateOff(options, elemState) {
     const element = options.element;
-
     switch (options.type) {
       case 'button':
         element.classList.remove(elemState);
-        // element.classList.add('is-closed');
         element.setAttribute('aria-expanded', false);
         break;
       case 'content':
         element.classList.remove(elemState);
-        // element.classList.add('is-hidden');
         element.setAttribute('aria-hidden', true);
         element.inert = true;
+        // console.log('content off, aria-hidden=', element.getAttribute('aria-hidden'));
         break;
       default:
         break;
     }
   }
 
+  // Set state on
   function setStateOn(options, elemState) {
     const element = options.element;
 
     switch (options.type) {
       case 'button':
-        // element.classList.remove('is-closed');
         element.classList.add(elemState);
         element.setAttribute('aria-expanded', true);
         break;
       case 'content':
         element.classList.add(elemState);
-        // element.classList.remove('is-hidden');
         element.setAttribute('aria-hidden', false);
         element.inert = false;
+        // console.log('content on, aria-hidden=', element.getAttribute('aria-hidden'));
         break;
       default:
         break;
     }
   }
 
+  // Toggle state
   function toggleState(elem, elemRefItem, elemState) {
-    console.log(elemRefItem.classList.contains(elemState));
     if (elemRefItem.classList.contains(elemState)) {
       setStateOff({element: elem, type: 'button'}, elemState);
       setStateOff({element: elemRefItem, type: 'content'}, elemState);
@@ -144,18 +87,19 @@ function toggle() {
     }
   }
 
+  // Get elemenet state
   function getElemState(elem) {
     // Grab data-state list and convert to array
     var dataState = elem.getAttribute("data-state");
     return dataState.split(", ");
   }
 
+  // Set default state
   function setDefaultState(elem, elemRef, elemState) {
     // Set default state for the 'button'
     setStateOff({element: elem, type: 'button'}, elemState);
 
     elemRef.forEach(elemRefItem => {
-      // Grab data-state-behaviour list if present and convert to array
       if(elem.getAttribute("data-breakpoint")) {
         var dataBreakpoint = elem.getAttribute("data-breakpoint");
         dataBreakpoint = dataBreakpoint.split(", ");
@@ -165,8 +109,18 @@ function toggle() {
 
           switch (breakpoint) {
             case "mobile":
+            
               if (checkMediaQuery() != breakpoints.small) {
                 setStateOn({element: elemRefItem, type: 'content'}, elemState);
+
+                // Remove theme
+                if(elem.getAttribute("data-theme")) {
+                  var dataStateTheme = elem.getAttribute("data-theme");
+                  dataStateTheme = dataStateTheme.split(", ");
+                  dataStateTheme.forEach(theme => {
+                    elemRefItem.classList.remove(`is-${theme}`);
+                  });
+                }
               } else {
                 setStateOff({element: elemRefItem, type: 'content'}, elemState);
 
@@ -193,7 +147,8 @@ function toggle() {
               break;
             case "desktop":
               break;
-
+            case "touch":
+              break;
             default:
               break;
           }
@@ -282,58 +237,26 @@ function toggle() {
     });
   };
   
-  // Init function
-  function initDataState(elem){
-    // Get elem state
-    var elemState = getElemState(elem);
+  // Prepare elements
+  function prepareElements(elem, elemRef, elemState){
 
-    // Get ref elements
-    var elemRef = getElemRef(elem, elemState);
-
-    // Set reference element theme
-    setDefaultState(elem, elemRef, elemState);
+    // Add tabindex if not tabbable
+    if (tabbable(elem).length === 0) {
+      elem.setAttribute('tabindex', '0');
+    }
 
     // Add listeners
-    // Detect data-swipe attribute before we do anything, as its optional
-    // If not present, assign click event like before
-    if(elem.getAttribute("data-state-swipe")){
-      // Grab swipe specific data from data-state-swipe
-      var elemSwipe = elem.getAttribute("data-state-swipe"),
-          elemSwipe = elemSwipe.split(", "),
-          direction = elemSwipe[0],
-          elemSwipeBool = elemSwipe[1],
-          currentElem = elem;
+    // Assign click event
+    elem.addEventListener("click", function(e){
+      // Prevent default action of element
+      e.preventDefault(); 
+      // Run state function
+      processChange(this, elemRef, elemState);
+    });
 
-      // If the behaviour flag is set to "false", or not set at all, then assign our click event
-      if(elemSwipeBool === "false" || !elemSwipeBool) {
-        // Assign click event
-        elem.addEventListener("click", function(e){
-          // Prevent default action of element
-          e.preventDefault(); 
-          // Run state function
-          processChange(this, elemRef, elemState);
-        });
-      }
-      // Use our swipeDetect helper function to determine if the swipe direction matches our desired direction
-      swipeDetect(elem, function(swipedir){
-        if(swipedir === direction) {
-          // Run state function
-          processChange(currentElem, elemRef, elemState);
-        }
-      })
-    }
-    else {
-      // Assign click event
-      elem.addEventListener("click", function(e){
-        // Prevent default action of element
-        e.preventDefault(); 
-        // Run state function
-        processChange(this, elemRef, elemState);
-      });
-    }
     // Add keyboard event for enter key to mimic anchor functionality
     elem.addEventListener("keypress", function(e){
-      if(e.which === 13) {
+      if(e.which === KEYCODE.SPACE || e.which === KEYCODE.ENTER) {
         // Prevent default action of element
         e.preventDefault();
         // Run state function
@@ -342,13 +265,20 @@ function toggle() {
     });
   };
 
-  function initialize() {
-    // Grab all elements with required attributes
-    var elems = document.querySelectorAll("[data-state]");
-  
-    // Loop through our matches and add click events
+  function initialize(elems) {
+    // Loop through our matches
     for(var a = 0; a < elems.length; a++){
-      initDataState(elems[a]);
+      // Get elem state
+      var elemState = getElemState(elems[a]);
+
+      // Get ref elements
+      var elemRef = getElemRef(elems[a], elemState);
+
+      // Prepare elements
+      prepareElements(elems[a], elemRef, elemState);
+
+      // Set default state
+      setDefaultState(elems[a], elemRef, elemState);
     }
   }
 
@@ -359,12 +289,25 @@ function toggle() {
         // Check if we're dealing with an element node
         if(typeof mutation.addedNodes[d].getAttribute === 'function') {
           if(mutation.addedNodes[d].getAttribute("data-state")) {
-            initDataState(mutation.addedNodes[d]);
+            // Get elem state
+            var elemState = getElemState(mutation.addedNodes[d]);
+
+            // Get ref elements
+            var elemRef = getElemRef(mutation.addedNodes[d], elemState);
+
+            // Prepare elements
+            prepareElements(mutation.addedNodes[d], elemRef, elemState);
+
+            // Set default state
+            setDefaultState(mutation.addedNodes[d], elemRef, elemState);
           }
         }
       }
     });    
   });
+
+  // Grab all elements with required attributes
+  var elems = document.querySelectorAll("[data-state]");
 
   // Define type of change our observer will watch out for
   observer.observe(document.body, {
@@ -372,13 +315,24 @@ function toggle() {
     subtree: true
   });
 
-  // const resizeHandler = debounce(function() {
-  //   initialize();
-  // }, 250);
+  const resizeHandler = debounce(function() {
+    // Loop through our matches
+    for(var a = 0; a < elems.length; a++){
 
-  // window.addEventListener('resize', resizeHandler);
+      // Get elem state
+      var elemState = getElemState(elems[a]);
 
-  initialize();
+      // Get ref elements
+      var elemRef = getElemRef(elems[a], elemState);
+
+      // Set default state
+      setDefaultState(elems[a], elemRef, elemState);
+    }
+  }, 250);
+
+  window.addEventListener('resize', resizeHandler);
+
+  initialize(elems);
 }
 
 module.exports = toggle;

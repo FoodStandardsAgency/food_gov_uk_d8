@@ -111,34 +111,67 @@
     }
   
     .button {
-      padding-right: 1.5em;
-      padding-left: 1.5em;
+      position: relative;
+      background-color: transparent;
+      width: 3.75em;
+      height: 3.75em;
       border-radius: 0;
-      box-shadow: 0px 0px 0px 1px var(--dark-primary-color);
-      color: var(--dark-primary-color);
+      color: var(--color-white);
       overflow: hidden;
+      border: 0;
+      box-shadow: none;
   
       :--not-touch &:--enter {
         box-shadow: 0px 0px 0px 1px var(--light-primary-color);
       }
 
       @media (--breakpoint-sm) {
-        position: relative;
+        padding-right: 1.5em;
+        padding-left: 1.5em;
+        color: var(--dark-primary-color);
         width: 3em;
+        height: auto;
+        background-color: var(--dark-primary-color);
+        box-shadow: 0px 0px 0px 1px var(--dark-primary-color);
       }
-    
-      &:after {
+
+      :--not-touch &:--enter {
+        background-color: transparent;
+        box-shadow: none;
+        color: var(--color-white);
+
         @media (--breakpoint-sm) {
-          content: '';
-          position: absolute;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
+          text-decoration: none;
+          background-color: var(--darker-primary-color);
+        }
+      }
+
+      .navigation-mobile-header & {
+        color: var(--dark-secondary-color);
+
+        :--not-touch &:--enter {
+          color: var(--dark-secondary-color);
+        }
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-image: var(--icon-search-primary);
+        background-position: 50% 50%;
+        background-size: 1em 1em;
+        background-repeat: no-repeat;
+
+        @media (--breakpoint-sm) {
           background-image: var(--icon-search-white);
-          background-position: 50% 50%;
-          background-size: 1em 1em;
-          background-repeat: no-repeat;
+        }
+
+        .navigation-mobile-header & {
+          background-image: var(--icon-search-white);
         }
       }
 
