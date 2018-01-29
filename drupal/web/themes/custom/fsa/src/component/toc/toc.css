@@ -23,7 +23,7 @@
   }
 
   a {
-    color: var(--color-black);
+    color: var(--primary-color);
 
     :--not-touch &:--enter {
       color: var(--darker-primary-color);

@@ -2,10 +2,10 @@
 @import "../../core/custom-property";
 
 .sidebar {
-  @mixin responsive-declaration padding-left, 1em, 3em;
-  @mixin responsive-declaration padding-right, 1em, 3em;
+  @mixin responsive-declaration padding-left, 1em, 4em;
+  @mixin responsive-declaration padding-right, 1em, 2em;
   @mixin responsive-declaration padding-bottom, 1em, 3em;
-  @mixin responsive-declaration padding-top, 1em, 4em;
+  @mixin responsive-declaration padding-top, 1em, 2em;
 
   .theme--news-alerts & {
     background-color: transparent;
@@ -15,10 +15,10 @@
     padding: 0;
 
     @media (--breakpoint-md) {
-      @mixin responsive-declaration padding-left, 1em, 3em;
-      @mixin responsive-declaration padding-right, 1em, 3em;
+      @mixin responsive-declaration padding-left, 1em, 4em;
+      @mixin responsive-declaration padding-right, 1em, 2em;
       @mixin responsive-declaration padding-bottom, 1em, 3em;
-      @mixin responsive-declaration padding-top, 1em, 4em;
+      @mixin responsive-declaration padding-top, 1em, 2em;
     }
   }
 

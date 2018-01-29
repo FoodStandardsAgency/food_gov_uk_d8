@@ -3,7 +3,7 @@
 
 .footer-wrapper {
   position: relative;
-  z-index: var(--z-topmost);
+  z-index: var(--z-top);
   border-top: 0.5em solid var(--color-green);
   background-color: var(--dark-secondary-color);
   color: var(--color-white);

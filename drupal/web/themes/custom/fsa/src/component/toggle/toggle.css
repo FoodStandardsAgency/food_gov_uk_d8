@@ -104,6 +104,12 @@
     &.is-open {
       max-height: var(--expanded, 70px);
       min-height: var(--expanded, 70px);
+
+      :--not-modern & {
+        display: block;
+        max-height: none;
+        min-height: 0;
+      }
     }
   }
 

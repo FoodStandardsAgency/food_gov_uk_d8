@@ -603,7 +603,7 @@ a.field__field_content_promo__item {
 .field__field_icon_link {
   display: flex;
   flex-flow: row wrap;
-  justify-content: flex-start;
+  justify-content: center;
   margin-bottom: 0 !important;
 
   @media (--breakpoint-lg) {
