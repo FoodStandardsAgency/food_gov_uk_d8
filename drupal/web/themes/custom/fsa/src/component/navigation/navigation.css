@@ -95,6 +95,7 @@
   height: 100%;
 
   @media (--breakpoint-sm) {
+    background-color: var(--dark-secondary-color);
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -427,6 +428,14 @@
   &:first-child {
     @media (--breakpoint-sm) {
       flex: 0 0 auto;
+      padding-left: 2em;
+    }
+  }
+
+  /* Last child */
+  &:first-child {
+    @media (--breakpoint-sm) {
+      padding-right: 2em;
     }
   }
 
@@ -484,7 +493,7 @@
     height: 100%;
     padding: 1em 1em;
     text-align: center;
-    font-size: 0.8em;
+    font-size: 0.8999em;
     font-weight: 600;
     color: var(--color-white);
     background-color: transparent;
@@ -494,10 +503,6 @@
     transform: translateX(0%);
     box-shadow: none;
     text-decoration: none !important;
-  }
-
-  @media (--breakpoint-lg) {
-    font-size: 1em;
   }
 
   :--not-touch &:--enter {
@@ -786,6 +791,8 @@
 .menu-utility {
   display: flex;
   flex-direction: column;
+  font-size: 0.8889em;
+  font-weight: 600;
 
   @media (--breakpoint-sm) {
     flex-direction: row;

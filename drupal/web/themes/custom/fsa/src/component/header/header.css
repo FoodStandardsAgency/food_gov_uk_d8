@@ -18,8 +18,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  @mixin responsive-declaration padding-top, 1em, 2em;  
-  @mixin responsive-declaration padding-bottom, 1em, 2em;
+  @mixin responsive-declaration padding-top, 0.8em, 1em;  
+  @mixin responsive-declaration padding-bottom, 0.8em, 1em;
   padding: 0;
   border-bottom: 1px solid var(--color-light-gray);
 
@@ -205,6 +205,7 @@
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #bfc1c3;
+  font-size: 0.8999em;
 }
 
 /*Header region*/
@@ -238,15 +239,20 @@
       @media (--breakpoint-sm) {
         content: '|';
         margin: 0 0.25em;
-        color: var(--color-white);
-        color: var(--dark-primary-color);
+        color: var(--color-light-gray);
       }
     }
 
     a {
+
       @media (--breakpoint-sm) {
         padding: 0.5em 0.75em;
         color: var(--dark-primary-color);
+      }
+
+      &.is-active {
+        color: var(--color-black);
+        font-weight: 400;
       }
 
       :--not-touch &:--enter {
