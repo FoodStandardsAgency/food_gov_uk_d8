@@ -38,7 +38,7 @@ class AlertBacklink extends BlockBase {
         'text' => t('All news'),
         'route_name' => 'view.search_news_alerts_news.page_1',
       ],
-      'consultatioan' => [
+      'consultation' => [
         'text' => t('All consultations'),
         'route_name' => 'view.search_news_alerts_consultations.page_1',
       ],
