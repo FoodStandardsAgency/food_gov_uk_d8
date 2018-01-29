@@ -1,10 +1,13 @@
 # Food Standards Agency
-[![Build Status](https://travis-ci.com/wunderio/client-UK-FSA-alpha.svg?token=oxuHeqz2nYPYhP3SBFxr&branch=master)](https://travis-ci.com/wunderio/client-UK-FSA-alpha)
+[![Build Status](https://travis-ci.com/wunderio/client-UK-FSA-alpha.svg?token=n479wr8JE8WbYmyacHHX&branch=master)](https://travis-ci.com/wunderio/client-UK-FSA-alpha)
 
 Food Standards Agency (FSA) Drupal 8 site code repository.
 
 ### Continuous integration
-This project is using Travis CI to deploy the code.
+This project deploys using [Deploybot](https://wunder.deploybot.com/111465-FSA-Alpha)
+* *Development* (automatically on changes to `development` branch)
+* *Staging* (automatically on changes to `master` branch)
+* *Production* (manually from `production` branch)
 
 See more here: [https://travis-ci.com/wunderio/client-UK-FSA-alpha](https://travis-ci.com/wunderio/client-UK-FSA-alpha.svg?token=oxuHeqz2nYPYhP3SBFxr&branch=master)
 
@@ -41,7 +44,7 @@ Jira: https://wunder.atlassian.net/projects/FSA
 
 ## Development workflow
 
-Refer WunderFlow for branching: http://wunderkraut.github.io/WunderFlow
+Refer WunderFlow for branching: http://wunderflow.wunder.io
 
 ## Server Provisioning/Deployment
 See [docs/provisioning.md](docs/provisioning.md).
