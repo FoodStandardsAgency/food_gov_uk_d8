@@ -370,6 +370,23 @@ function navigation() {
     }
   }
 
+  function removeState(options, elemState) {
+    const element = options.element;
+
+    switch (options.type) {
+      case 'button':
+        element.classList.remove(elemState);
+        element.removeAttribute('aria-expanded');
+        break;
+      case 'content':
+        element.classList.remove(elemState);
+        element.removeAttribute('aria-hidden');
+        element.inert = false;
+        break;
+      default:
+        break;
+    }
+  }
   function toggleState(elem, elemRefItem, elemState) {
     if (elemRefItem.classList.contains(elemState)) {
       setStateOff({element: elem, type: 'button'}, elemState);
@@ -438,18 +455,19 @@ function navigation() {
       menuButtonElementsArray.forEach((element) => {
         setStateOn({element: element, type: 'button'}, 'is-open');
       });
-      setStateOn({element: navigationElementArray[0], type: 'content'}, 'is-open');
+      
+      removeState({element: navigationElementArray[0], type: 'content'}, 'is-open');
 
       navigationParentItemsArray.forEach((element) => {
-        setStateOn({element: element, type: 'button'}, 'is-open');
+        removeState({element: element, type: 'button'}, 'is-open');
       });
 
       navigationMenuElementsArray.forEach((element) => {
-        setStateOn({element: element, type: 'content'}, 'is-open');
+        removeState({element: element, type: 'content'}, 'is-open');
       });
 
       navigationBackLinksArray.forEach((element) => {
-        setStateOfn({element: element, type: 'button'}, 'is-open');
+        removeState({element: element, type: 'button'}, 'is-open');
       });
     }
   }
