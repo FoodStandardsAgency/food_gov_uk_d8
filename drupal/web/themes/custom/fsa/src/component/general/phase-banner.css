@@ -3,7 +3,8 @@
 
 .phase-banner {
   padding: 10px 0 8px;
-  border-bottom: 1px solid #bfc1c3;
+  display: flex;
+  align-items: center;
 }
 
 .phase-banner .phase-tag {
@@ -26,7 +27,6 @@
 }
 
 .phase-banner p {
-  display: table;
   font-size: 16px;
   line-height: 1.25;
 }

@@ -204,15 +204,20 @@
 .header__topbar {
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid #bfc1c3;
 }
 
 /*Header region*/
 .header__region {
-  display: none;
-  
-  @media (--breakpoint-sm) {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+
+  .header__topbar & {
+    display: none;
+
+    @media (--breakpoint-sm) {
+      display: flex;
+    }
   }
 }
 

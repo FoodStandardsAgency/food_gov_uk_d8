@@ -599,6 +599,12 @@
   top: -7777px;
   left: 0;
   right: 0;
+  opacity: 0;
+  transform: translateX(2em);
+  transition:
+    transform var(--transition-enter),
+    opacity var(--transition-enter),
+    top 0s step-end 0.2s;
 
   @media (--breakpoint-sm) {
     background-color: var(--color-white);
@@ -606,10 +612,6 @@
     flex-flow: row wrap;
     opacity: 0;
     transform: translateY(-0.25em);
-    transition:
-      transform var(--transition-enter),
-      opacity var(--transition-enter),
-      top 0s step-end 0.2s;
   }
 
   @media (--breakpoint-md) {
@@ -624,6 +626,12 @@
     z-index: var(--z-middle);
     top: 0em;
     height: calc(100vh - 6em);
+    opacity: 1;
+    transform: translateX(0em);
+    transition:
+      transform var(--transition-enter),
+      opacity var(--transition-enter),
+      top 0s step-end 0.0s;
 
     @media (--breakpoint-sm) {
       top: 100%;
@@ -707,12 +715,21 @@
   top: -7777px;
   left: 0;
   right: 0;
+  opacity: 0;
+  transform: translateX(2em);
+  transition:
+    transform var(--transition-enter),
+    opacity var(--transition-enter),
+    top 0s step-end 0.2s;
 
   @media (--breakpoint-sm) {
     position: static;
     top: auto;
     left: auto;
     right: auto;
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 
   &.is-open {
@@ -720,6 +737,12 @@
     z-index: var(--z-middle);
     top: 0em;
     height: calc(100vh - 6em);
+    opacity: 1;
+    transform: translateX(0em);
+    transition:
+      transform var(--transition-enter),
+      opacity var(--transition-enter),
+      top 0s step-end 0.0s;
 
     @media (--breakpoint-sm) {
       top: auto;
