@@ -19,6 +19,7 @@ dependencies:
     - field.field.node.alert.field_nation
     - node.type.alert
   module:
+    - datetime
     - entity_print
     - text
     - user
@@ -31,12 +32,22 @@ bundle: alert
 mode: search_result
 content:
   field_alert_description:
-    weight: 0
+    weight: 1
     label: hidden
-    settings: {  }
+    settings:
+      trim_length: 250
     third_party_settings: {  }
-    type: text_default
+    type: text_summary_or_trimmed
     region: content
+  field_alert_modified:
+    type: datetime_default
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
 hidden:
   addtoany: true
   entity_print_view_epub: true
@@ -45,7 +56,6 @@ hidden:
   field_alert_actiontaken: true
   field_alert_allergen: true
   field_alert_consumeradvice: true
-  field_alert_modified: true
   field_alert_notation: true
   field_alert_otherbusiness: true
   field_alert_productdetails_raw: true
