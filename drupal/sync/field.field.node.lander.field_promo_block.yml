@@ -16,7 +16,7 @@ bundle: lander
 label: 'Content promos'
 description: 'Create custom promo blocks or references to existing content to display promotional boxes on this landing page.'
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:

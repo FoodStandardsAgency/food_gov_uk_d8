@@ -21,7 +21,7 @@ bundle: related_page
 label: 'Search for internal node'
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
