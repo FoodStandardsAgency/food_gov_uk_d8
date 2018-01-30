@@ -11,7 +11,6 @@ dependencies:
     - field.field.node.page.field_content_type
     - field.field.node.page.field_document
     - field.field.node.page.field_fsa_toc
-    - field.field.node.page.field_icon
     - field.field.node.page.field_intro
     - field.field.node.page.field_liftup_image
     - field.field.node.page.field_liftup_summary
@@ -67,7 +66,6 @@ hidden:
   field_content_type: true
   field_document: true
   field_fsa_toc: true
-  field_icon: true
   field_liftup_image: true
   field_liftup_summary: true
   field_liftup_title: true
