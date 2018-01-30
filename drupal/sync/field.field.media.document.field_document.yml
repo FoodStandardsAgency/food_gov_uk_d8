@@ -19,7 +19,7 @@ default_value: {  }
 default_value_callback: ''
 settings:
   file_directory: media/document
-  file_extensions: 'pdf doc docx xls xlsx ppt pptx txt rtf'
+  file_extensions: 'pdf doc docx xls xlsx ppt pptx txt rtf csv'
   max_filesize: 50MB
   description_field: true
   handler: 'default:file'
