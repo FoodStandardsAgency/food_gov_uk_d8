@@ -57,6 +57,7 @@ module:
   fsa_establishment_lookup: 0
   fsa_lander: 0
   fsa_notify: 0
+  fsa_page_feedback: 0
   fsa_ratings: 0
   fsa_ratings_import: 0
   fsa_research: 0

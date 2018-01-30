@@ -15,7 +15,7 @@ third_party_settings:
 id: menu_footer
 theme: fsa
 region: footer
-weight: 0
+weight: -21
 provider: null
 plugin: 'system_menu_block:footer'
 settings:

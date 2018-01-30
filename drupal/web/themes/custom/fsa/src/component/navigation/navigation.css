@@ -465,8 +465,8 @@
           top: 100%;
           opacity: 0.4;
           transition:
-            opacity var(--transition-enter),
-            top 0s step-end 0.0s;
+            opacity var(--transition-enter) 0.35s,
+            top 0s step-end 0.35s;
         }
       } 
     }
@@ -652,9 +652,9 @@
       opacity: 1;
       transform: translateY(0em);
       transition:
-        transform var(--transition-enter),
-        opacity var(--transition-enter),
-        top 0s step-end 0.0s;
+        transform var(--transition-enter) 0.5s,
+        opacity var(--transition-enter) 0.5s,
+        top 0s step-end 0.5s;
     }
   }
 

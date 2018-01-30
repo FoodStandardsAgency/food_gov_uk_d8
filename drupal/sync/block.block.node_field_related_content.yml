@@ -15,7 +15,7 @@ third_party_settings:
 id: node_field_related_content
 theme: fsa
 region: content_bottom
-weight: 0
+weight: -20
 provider: null
 plugin: 'views_block:node_field-related_content'
 settings:
