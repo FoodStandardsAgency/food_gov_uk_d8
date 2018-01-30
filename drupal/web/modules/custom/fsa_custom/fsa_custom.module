@@ -239,6 +239,15 @@ function fsa_custom_preprocess_breadcrumb(&$variables) {
         'url' => FALSE,
       ];
     }
+
+    if ($term->getVocabularyId() == 'research_programme') {
+      // Inject "Research" to breadcrumbs.
+      array_splice($variables['breadcrumb'], 1, 0, [['text' => t('Research'), 'url' => Url::fromRoute('view.search_global_research.page_1')]]);
+      $variables['breadcrumb'][] = [
+        'text' => $term->getName(),
+        'url' => FALSE,
+      ];
+    }
   }
 
 }
@@ -268,54 +277,49 @@ function fsa_custom_views_pre_view(ViewExecutable $view, $display_id, array &$ar
 
   // Add link buttons to news and alert listing display footers.
   if ($view->id() == 'news_alerts') {
-    $link = FALSE;
-    $link_options = [
-      'attributes' => [
-        'class' => 'button',
+    $route_provider = \Drupal::service('router.route_provider');
+
+    // Define to array the routes and link texts to match with display_id to
+    // create the "All xxx" links.
+    $ctas = [
+      'latest' => [
+        'text' => t('All news and alerts'),
+        'route_name' => 'view.search_news_alerts_all.page_1',
+      ],
+      'latest_alerts' => [
+        'text' => t('All alerts'),
+        'route_name' => 'view.search_news_alerts_alerts.page_1',
+      ],
+      'latest_news' => [
+        'text' => t('All news'),
+        'route_name' => 'view.search_news_alerts_news.page_1',
+      ],
+      'latest_consultations' => [
+        'text' => t('All consultations'),
+        'route_name' => 'view.search_news_alerts_consultations.page_1',
       ],
     ];
-
-    // @todo: Once search dev (FSA-545, FSA-458 etc) is done add the correct routes.
-    switch ($display_id) {
-      case 'latest':
-        $text = t('All news and alerts');
-        $link = Link::createFromRoute($text, 'view.search_news_alerts_all.page_1', [], $link_options);
-        break;
-
-      case 'latest_alerts':
-        $text = t('All alerts');
-        $link = Link::createFromRoute($text, 'view.search_news_alerts_all.page_1', [], $link_options);
-        break;
-
-      case 'latest_consultations':
-        $text = t('All consultations');
-        $link = Link::createFromRoute($text, 'view.search_news_alerts_all.page_1', [], $link_options);
-        break;
-
-      case 'latest_news':
-        $text = t('All news');
-        $link = Link::createFromRoute($text, 'view.search_news_alerts_all.page_1', [], $link_options);
-        break;
-    }
-
-    if ($link) {
-      // Set the link in view footer.
-      $view->setHandler(
-        $display_id,
-        'footer',
-        'area_text_custom', [
-          'id' => 'area_text_custom',
-          'table' => 'views',
-          'field' => 'area_text_custom',
-          'relationship' => 'none',
-          'group_type' => 'none',
-          'admin_label' => '',
-          'empty' => TRUE,
-          'tokenize' => FALSE,
-          'content' => $link->toString(),
-          'plugin_id' => 'text_custom',
-        ]
-      );
+    if (array_key_exists($display_id, $ctas) && count($route_provider->getRoutesByNames([$ctas[$display_id]['route_name']])) === 1) {
+      $link = Link::createFromRoute($ctas[$display_id]['text'], $ctas[$display_id]['route_name'], [], ['attributes' => ['class' => 'button']]);
+      if ($link) {
+        // Set the link in view footer.
+        $view->setHandler(
+          $display_id,
+          'footer',
+          'area_text_custom', [
+            'id' => 'area_text_custom',
+            'table' => 'views',
+            'field' => 'area_text_custom',
+            'relationship' => 'none',
+            'group_type' => 'none',
+            'admin_label' => '',
+            'empty' => TRUE,
+            'tokenize' => FALSE,
+            'content' => $link->toString(),
+            'plugin_id' => 'text_custom',
+          ]
+        );
+      }
     }
   }
 }

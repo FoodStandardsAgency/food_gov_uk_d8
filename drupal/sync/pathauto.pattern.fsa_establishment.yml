@@ -1,0 +1,14 @@
+uuid: bb97f1b1-afec-4429-820a-d6f37c6c9613
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_ratings
+id: fsa_establishment
+label: 'FSA Establishment'
+type: 'canonical_entities:fsa_establishment'
+pattern: 'hygiene-ratings/[fsa_establishment:id:value]/[fsa_establishment:name:value]'
+selection_criteria: {  }
+selection_logic: and
+weight: -1
+relationships: {  }

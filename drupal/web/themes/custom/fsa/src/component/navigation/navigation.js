@@ -1,4 +1,8 @@
 import nextByClass from '../../core/helper/nextByClass';
+import debounce from '../../core/helper/debounce';
+import checkMediaQuery from '../../core/helper/checkMediaQuery';
+import breakpoints from '../../core/helper/breakpoints';
+import closestParent from '../../core/helper/closestParent';
 import inert from 'wicg-inert';
 
 function navigation() {
@@ -158,35 +162,20 @@ function navigation() {
   const menuButtonElementsArray = [...document.querySelectorAll('.js-menu-button')];
   const navigationElementArray = [...document.querySelectorAll('.js-navigation')];
 
+  // Query nav items with child
+  const navigationParentItemsArray = [...document.querySelectorAll('.js-nav-item-with-child')];
+
+  // Query back links
+  const navigationBackLinksArray = [...document.querySelectorAll('.js-nav-back-link')];
+
+  // Query nav menus
+  const navigationMenuElementsArray = [...document.querySelectorAll('.js-nav-menu')];
+
   // Query main element
   const siteElementArray = [...document.querySelectorAll('.js-site')];
 
   // Html element
   const root = document.documentElement;
-
-  // Check everything found
-  if (menuButtonElementsArray.length <= 0 ||
-    navigationElementArray.length <= 0 ||
-    siteElementArray.length <= 0) {
-    return console.warn('Navigation elements not found');
-  }
-
-  // Toggle states
-  const toggleNavigation = (button) => {
-    navigationElementArray[0].classList.toggle("is-open");
-    siteElementArray[0].classList.toggle("is-moved");
-    root.classList.toggle("is-fixed");
-  }
-
-  // Loop the menubuttons
-  menuButtonElementsArray.forEach((element) => {
-    const menuButtonElement = element;
-
-    // Add click listener
-    menuButtonElement.addEventListener("click", function(){
-      toggleNavigation(this);
-    });
-  });
 
   // Add keyboard navigation so the megamenu is easy to use with a keyboard.
   const menuItemActionArray = [...navigationElementArray[0].querySelectorAll(settings.menuItemActionSelector)];
@@ -331,6 +320,165 @@ function navigation() {
       keyDownHandler(e);
     })
   });
+
+  /// Mobile navigation
+
+  // Check everything found
+  if (menuButtonElementsArray.length <= 0 ||
+    navigationElementArray.length <= 0 ||
+    siteElementArray.length <= 0) {
+    return console.warn('Navigation elements not found');
+  }
+
+  function setStateOff(options, elemState) {
+    const element = options.element;
+
+    switch (options.type) {
+      case 'button':
+        element.classList.remove(elemState);
+        // element.classList.add('is-closed');
+        element.setAttribute('aria-expanded', false);
+        break;
+      case 'content':
+        element.classList.remove(elemState);
+        // element.classList.add('is-hidden');
+        element.setAttribute('aria-hidden', true);
+        element.inert = true;
+        break;
+      default:
+        break;
+    }
+  }
+
+  function setStateOn(options, elemState) {
+    const element = options.element;
+
+    switch (options.type) {
+      case 'button':
+        // element.classList.remove('is-closed');
+        element.classList.add(elemState);
+        element.setAttribute('aria-expanded', true);
+        break;
+      case 'content':
+        element.classList.add(elemState);
+        // element.classList.remove('is-hidden');
+        element.setAttribute('aria-hidden', false);
+        element.inert = false;
+        break;
+      default:
+        break;
+    }
+  }
+
+  function removeState(options, elemState) {
+    const element = options.element;
+
+    switch (options.type) {
+      case 'button':
+        element.classList.remove(elemState);
+        element.removeAttribute('aria-expanded');
+        break;
+      case 'content':
+        element.classList.remove(elemState);
+        element.removeAttribute('aria-hidden');
+        element.inert = false;
+        break;
+      default:
+        break;
+    }
+  }
+  function toggleState(elem, elemRefItem, elemState) {
+    if (elemRefItem.classList.contains(elemState)) {
+      setStateOff({element: elem, type: 'button'}, elemState);
+      setStateOff({element: elemRefItem, type: 'content'}, elemState);
+    } else {
+      setStateOn({element: elem, type: 'button'}, elemState);
+      setStateOn({element: elemRefItem, type: 'content'}, elemState);
+    }
+  }
+
+  // Loop the menubuttons
+  menuButtonElementsArray.forEach((element) => {
+    const menuButtonElement = element;
+
+    // Add click listener
+    menuButtonElement.addEventListener("click", function(e){
+      toggleState(this, navigationElementArray[0], 'is-open');
+      siteElementArray[0].classList.toggle("is-moved");
+      root.classList.toggle("is-fixed");
+    });
+  });
+
+  // Items with children
+  navigationParentItemsArray.forEach((element) => {
+    // Add click listener
+    element.addEventListener("click", function(e){
+      if (checkMediaQuery() === breakpoints.xsmall) {
+        e.preventDefault();
+        setStateOn({element: element, type: 'content'}, 'is-open');
+        setStateOn({element: element.nextElementSibling, type: 'content'}, 'is-open');
+      }
+    });
+  });
+
+  // Back link
+  navigationBackLinksArray.forEach((element) => {
+    // Add click listener
+    element.addEventListener("click", function(e){
+      if (checkMediaQuery() === breakpoints.xsmall) {
+        e.preventDefault();
+        setStateOff({element: element, type: 'button'}, 'is-open');
+        setStateOff({element: closestParent(element, 'js-nav-menu'), type: 'content'}, 'is-open');
+      }
+    });
+  });
+
+  function initializeMobileNav() {
+    if (checkMediaQuery() === breakpoints.xsmall) {
+      menuButtonElementsArray.forEach((element) => {
+        setStateOff({element: element, type: 'button'}, 'is-open');
+      });
+      setStateOff({element: navigationElementArray[0], type: 'content'}, 'is-open');
+
+      navigationParentItemsArray.forEach((element) => {
+        setStateOff({element: element, type: 'button'}, 'is-open');
+      });
+
+      navigationMenuElementsArray.forEach((element) => {
+        setStateOff({element: element, type: 'content'}, 'is-open');
+      });
+
+      navigationBackLinksArray.forEach((element) => {
+        setStateOff({element: element, type: 'button'}, 'is-open');
+      });
+    } else {
+      menuButtonElementsArray.forEach((element) => {
+        setStateOn({element: element, type: 'button'}, 'is-open');
+      });
+      
+      removeState({element: navigationElementArray[0], type: 'content'}, 'is-open');
+
+      navigationParentItemsArray.forEach((element) => {
+        removeState({element: element, type: 'button'}, 'is-open');
+      });
+
+      navigationMenuElementsArray.forEach((element) => {
+        removeState({element: element, type: 'content'}, 'is-open');
+      });
+
+      navigationBackLinksArray.forEach((element) => {
+        removeState({element: element, type: 'button'}, 'is-open');
+      });
+    }
+  }
+
+  const resizeHandler = debounce(function() {
+    initializeMobileNav();
+  }, 250);
+
+  window.addEventListener('resize', resizeHandler);
+
+  initializeMobileNav();
 }
 
 module.exports = navigation;

@@ -3,7 +3,7 @@ import checkMediaQuery from './checkMediaQuery';
 function responsiveTables(elements, breakpoints) {
   var currentMediaQuery = checkMediaQuery();
 
-  if (currentMediaQuery == breakpoints.small) {
+  if (currentMediaQuery == breakpoints.small || currentMediaQuery == breakpoints.xsmall) {
     for (let i = 0; i < elements.length; i++) {
       elements[i].removeAttribute('role');
     }

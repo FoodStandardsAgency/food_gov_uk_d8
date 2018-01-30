@@ -1,10 +1,16 @@
-<h1>{{ status_code }}</h1>
-<p>{{ 'Sorry, something went wrong.'|t }}</p>
-<p>{{ status_description }}</p>
-{% if search %}
-  <h2>{{ 'Try searching for another page'|t }}</h2>
-  {{ search }}
-{% endif %}
-<p>
-  <a href="{{ path('<front>') }}" title="{{ 'Return to homepage'|t }}" rel="home">{{ 'Return to homepage'|t }}</a>
-</p>
+{#
+/**
+ * @file
+ * Custom theme implementation for error pages.
+ *
+ * Variables:
+ * - status_code: numeric status code (404, 403 or 401)
+ * - error: The short error message (status message)
+ * - content: The supportive text content.
+ *
+ */
+#}
+<h1>{{ status_code }} - {{ error }}</h1>
+<p>{{ content }}</p>
+{# Comment below out and make sure possible image variations exists: status code variable can be either 404, 403 or 401 #}
+<!--<img src="/themes/custom/fsa/dist/img/error/{{ status_code }}.png" alt="{{ status_code }}" /> -->

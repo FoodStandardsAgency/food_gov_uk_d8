@@ -1,0 +1,45 @@
+uuid: b39ebea0-fd34-4228-aa7a-72890d10bb24
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_result
+    - field.field.node.generic.body
+    - field.field.node.generic.field_content_type
+    - field.field.node.generic.field_fsa_toc
+    - field.field.node.generic.field_liftup_image
+    - field.field.node.generic.field_liftup_title
+    - field.field.node.generic.field_media_library_liftup_image
+    - node.type.generic
+  module:
+    - entity_print
+    - text
+    - user
+third_party_settings:
+  entity_print:
+    pdf_label: 'View PDF'
+id: node.generic.search_result
+targetEntityType: node
+bundle: generic
+mode: search_result
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 0
+    settings:
+      trim_length: 250
+    third_party_settings: {  }
+    region: content
+hidden:
+  addtoany: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_content_type: true
+  field_fsa_toc: true
+  field_liftup_image: true
+  field_liftup_title: true
+  field_media_library_liftup_image: true
+  langcode: true
+  links: true

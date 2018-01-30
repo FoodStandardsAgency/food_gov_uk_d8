@@ -1,15 +1,23 @@
-fsa_40x.throw403:
-  path: '/system/403'
+system.401:
+  path: '/system/401'
   defaults:
-    _controller: Drupal\fsa_40x\Controller\Fsa40x::throw403
-    _title: 'Access denied'
+    _controller: '\Drupal\fsa_40x\Controller\FsaHttp4xxController:on401'
+    _title: 'Unauthorized'
   requirements:
     _access: 'TRUE'
 
-fsa_40x.throw404:
+system.403:
+  path: '/system/403'
+  defaults:
+    _controller: '\Drupal\fsa_40x\Controller\FsaHttp4xxController:on403'
+    _title: 'Forbidden'
+  requirements:
+    _access: 'TRUE'
+
+system.404:
   path: '/system/404'
   defaults:
-    _controller: Drupal\fsa_40x\Controller\Fsa40x::throw404
+    _controller: '\Drupal\fsa_40x\Controller\FsaHttp4xxController:on404'
     _title: 'Page not found'
   requirements:
     _access: 'TRUE'

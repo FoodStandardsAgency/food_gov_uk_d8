@@ -60,6 +60,13 @@ function fsa_research_views_pre_view(ViewExecutable $view, $display_id, array &$
   if ($view->id() == 'taxonomy_term' && $display_id === 'page' && is_numeric($args[0])) {
     $term = Term::load($args[0]);
     if (isset($term) && $term->getVocabularyId() == 'research_programme') {
+      if ($term->id() == 269 || $term->label() == 'Research projects') {
+        $title = t('Research projects');
+      }
+      else {
+        $title = t('Research projects related to the programme');
+      }
+
       // Append title of listing to the views header.
       $options = array(
         'id' => 'area_text_custom',
@@ -70,7 +77,7 @@ function fsa_research_views_pre_view(ViewExecutable $view, $display_id, array &$
         'admin_label' => '',
         'empty' => TRUE,
         'tokenize' => FALSE,
-        'content' => '<h3>' . t('Research projects related to the programme') . '</h3>',
+        'content' => '<h3>' . $title . '</h3>',
         'plugin_id' => 'text_custom',
       );
       $view->setHandler('page', 'header', 'area_text_custom', $options);

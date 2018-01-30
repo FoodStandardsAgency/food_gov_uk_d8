@@ -2,8 +2,6 @@
 
 namespace Drupal\fsa_es\Plugin\ElasticsearchQueryBuilder;
 
-use Drupal\views\ViewExecutable;
-
 /**
  * @ElasticsearchQueryBuilder(
  *   id = "sitewide_search_news_alerts",
@@ -25,7 +23,7 @@ class SitewideSearchNewsAlerts extends SitewideSearchBase {
     $langcode = $this->currentLanguage->getId();
 
     // Get filter values.
-    $values = $this->getFilterValues($this->view);
+    $values = $this->getFilterValues();
 
     // Prepare query.
     $query = [];
@@ -117,7 +115,7 @@ class SitewideSearchNewsAlerts extends SitewideSearchBase {
   /**
    * {@inheritdoc}
    */
-  public function buildQuery(ViewExecutable $view) {
+  public function buildQuery() {
     // Get the base query.
     $query = $this->buildBaseQuery();
 

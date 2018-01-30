@@ -1,0 +1,35 @@
+uuid: c91a2b80-9cb7-4447-a73a-530e8ce8a3a5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.custom_block.field_custom_block
+    - paragraphs.paragraphs_type.custom_block
+  module:
+    - entity_browser_entity_form
+    - inline_entity_form
+id: paragraph.custom_block.default
+targetEntityType: paragraph
+bundle: custom_block
+mode: default
+content:
+  field_custom_block:
+    weight: 0
+    settings:
+      form_mode: default
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      override_labels: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+    type: inline_entity_form_complex
+    region: content
+hidden:
+  created: true
+  moderation_state: true
+  status: true
+  uid: true

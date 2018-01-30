@@ -1,0 +1,55 @@
+uuid: 9271b175-ea3f-45f4-a781-4956414fec99
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_result
+    - field.field.node.lander.field_audience
+    - field.field.node.lander.field_block
+    - field.field.node.lander.field_block_reference
+    - field.field.node.lander.field_content_type
+    - field.field.node.lander.field_header_image
+    - field.field.node.lander.field_hero_copy
+    - field.field.node.lander.field_hero_title
+    - field.field.node.lander.field_intro
+    - field.field.node.lander.field_lander_row
+    - field.field.node.lander.field_nation
+    - field.field.node.lander.field_promo_block
+    - field.field.node.lander.field_related_content
+    - field.field.node.lander.field_topic
+    - field.field.node.lander.field_topic_cloud
+    - node.type.lander
+  module:
+    - user
+id: node.lander.search_result
+targetEntityType: node
+bundle: lander
+mode: search_result
+content:
+  field_intro:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+hidden:
+  addtoany: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_audience: true
+  field_block: true
+  field_block_reference: true
+  field_content_type: true
+  field_header_image: true
+  field_hero_copy: true
+  field_hero_title: true
+  field_lander_row: true
+  field_nation: true
+  field_promo_block: true
+  field_related_content: true
+  field_topic: true
+  field_topic_cloud: true
+  langcode: true
+  links: true

@@ -86,7 +86,7 @@ class RatingsSearch extends ControllerBase {
   }
 
   /**
-   * Page callback for /ratings/search.
+   * Page callback for /hygiene-ratings.
    */
   public function ratingsSearch() {
     $items = [];

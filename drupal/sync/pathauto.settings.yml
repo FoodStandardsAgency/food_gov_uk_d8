@@ -1,4 +1,5 @@
 enabled_entity_types:
+  - fsa_establishment
   - media
 punctuation:
   double_quotes: 0
