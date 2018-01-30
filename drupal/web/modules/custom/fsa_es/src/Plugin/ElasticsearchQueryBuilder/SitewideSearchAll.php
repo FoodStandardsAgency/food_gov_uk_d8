@@ -4,7 +4,6 @@ namespace Drupal\fsa_es\Plugin\ElasticsearchQueryBuilder;
 
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\fsa_es\SearchService;
-use Drupal\views\ViewExecutable;
 use Elasticsearch\Client;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -52,7 +51,7 @@ class SitewideSearchAll extends SitewideSearchBase {
    */
   public function buildBaseQuery() {
     // Get filter values.
-    $values = $this->getFilterValues($this->view);
+    $values = $this->getFilterValues();
 
     $query_must_filters = [];
     $query_filter_filters = [];
@@ -94,7 +93,7 @@ class SitewideSearchAll extends SitewideSearchBase {
   /**
    * {@inheritdoc}
    */
-  public function buildQuery(ViewExecutable $view) {
+  public function buildQuery() {
     // Get the base query.
     $query = $this->buildBaseQuery();
 
