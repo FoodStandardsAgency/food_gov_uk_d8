@@ -12,7 +12,6 @@ use Drupal\taxonomy\Entity\Term;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Link;
 use Drupal\Component\Utility\Html;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\views\ViewExecutable;
 
@@ -545,30 +544,4 @@ function fsa_custom_theme() {
       ],
     ],
   ];
-}
-
-/**
- * Implements hook_field_widget_form_alter().
- */
-function fsa_custom_field_widget_form_alter(&$element, FormStateInterface $form_state, $context) {
-
-  // Media provider classes.
-  $classes = [
-    'media-document-form',
-    'media-document-edit-form',
-    'media-image-form',
-    'media-image-edit-form',
-  ];
-
-  // Reset media name field maximum length to 128 characters.
-  if (isset($context['form']['#attributes']['class'])) {
-    $media_form = array_intersect($classes, $context['form']['#attributes']['class']);
-    if ($media_form) {
-      $field_definition = $context['items']->getFieldDefinition();
-      $name = $field_definition->getName();
-      if ($name == 'name') {
-        $element['value']['#maxlength'] = 128;
-      }
-    }
-  }
 }
