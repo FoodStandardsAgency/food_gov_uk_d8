@@ -12,7 +12,6 @@ dependencies:
     - field.field.node.page.field_document
     - field.field.node.page.field_fsa_toc
     - field.field.node.page.field_intro
-    - field.field.node.page.field_liftup_image
     - field.field.node.page.field_liftup_summary
     - field.field.node.page.field_liftup_title
     - field.field.node.page.field_liftups
@@ -23,11 +22,9 @@ dependencies:
     - field.field.node.page.field_team_contacts
     - field.field.node.page.field_topic
     - field.field.node.page.field_update_date
-    - image.style.promo_medium
     - node.type.page
   module:
     - field_group
-    - image
     - user
 third_party_settings:
   field_group:
@@ -56,15 +53,6 @@ targetEntityType: node
 bundle: page
 mode: teaser
 content:
-  field_liftup_image:
-    type: image
-    weight: 2
-    region: content
-    label: hidden
-    settings:
-      image_style: promo_medium
-      image_link: ''
-    third_party_settings: {  }
   field_liftup_summary:
     type: basic_string
     weight: 1
