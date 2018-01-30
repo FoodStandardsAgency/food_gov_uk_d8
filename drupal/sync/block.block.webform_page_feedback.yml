@@ -1,24 +1,26 @@
-uuid: 46ae9d79-2e57-4990-bb80-5827edb1d14c
+uuid: 53fcdd5f-cfb8-435c-94e9-311c77b077f2
 langcode: en
 status: true
 dependencies:
   module:
     - block_class
-    - fsa_subpages
+    - webform
   theme:
     - fsa
 third_party_settings:
   block_class:
     classes: ''
-id: subpagesprevnextblock
+id: webform_page_feedback
 theme: fsa
 region: content_bottom
-weight: -21
+weight: -19
 provider: null
-plugin: subpages_prevnext_block
+plugin: webform_block
 settings:
-  id: subpages_prevnext_block
-  label: 'Sub-pages prev-next block'
-  provider: fsa_subpages
+  id: webform_block
+  label: 'Page feedback'
+  provider: webform
   label_display: '0'
+  webform_id: page_feedback
+  default_data: ''
 visibility: {  }
