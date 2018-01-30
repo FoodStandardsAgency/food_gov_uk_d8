@@ -19,6 +19,7 @@ dependencies:
     - field.field.node.page.field_liftups
     - field.field.node.page.field_media_library_liftup_image
     - field.field.node.page.field_nation
+    - field.field.node.page.field_related
     - field.field.node.page.field_related_content
     - field.field.node.page.field_team_contacts
     - field.field.node.page.field_topic
@@ -27,7 +28,6 @@ dependencies:
   module:
     - datetime
     - entity_print
-    - text
     - user
 third_party_settings:
   entity_print:
@@ -39,14 +39,6 @@ targetEntityType: node
 bundle: page
 mode: search_result
 content:
-  body:
-    label: hidden
-    type: text_summary_or_trimmed
-    weight: 2
-    region: content
-    settings:
-      trim_length: 200
-    third_party_settings: {  }
   field_intro:
     weight: 1
     label: hidden
@@ -64,6 +56,8 @@ content:
     type: datetime_default
     region: content
 hidden:
+  addtoany: true
+  body: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
@@ -80,6 +74,7 @@ hidden:
   field_liftups: true
   field_media_library_liftup_image: true
   field_nation: true
+  field_related: true
   field_related_content: true
   field_team_contacts: true
   field_topic: true

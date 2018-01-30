@@ -710,7 +710,17 @@ blockquote {
 }
 
 /* Team contact */
+.field__field_team_contact,
 .field__field_team_contacts {
+  .label__visually_hidden {
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px);
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+    word-wrap: normal;
+  }
+
   .field__field_team_contacts__heading {
     @mixin responsive-declaration font-size, 1.25em, 1.7em;
     @mixin responsive-declaration line-height, 1.2, 1.25;

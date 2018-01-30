@@ -8,7 +8,6 @@
 
 .hero {
   position: relative;
-  @mixin responsive-declaration padding, 1em, 2em;
 
   @media print {
     background-color: transparent;
@@ -248,7 +247,8 @@
 
 /* Hero secondary-navigation */
 .hero__secondary-navigation {
-  padding: 0 1em;
+  @mixin responsive-declaration padding-right, 1em, 4em;
+  @mixin responsive-declaration padding-left, 1em, 4em;
 
   .hero.hero--with-content & {
     position: absolute;
@@ -326,12 +326,12 @@
   &:not(:last-child):after {
     content: "";
     position: absolute;
-    top: 0.2em;
+    top: 0.3em;
     right: 0.55em;
-    bottom: 0.2em;
-    width: 2px;
+    bottom: 0.25em;
+    width: 1px;
     text-align: center;
-    background-color: var(--color-light-gray);
+    background-color: var(--color-black);
     transform: skew(-25deg);
 
     .hero.hero--with-content & {
@@ -345,6 +345,8 @@
 }
 
 .breadcrumb__link {
+  text-decoration: underline;
+  color: var(--primary-color);
 
   .hero.hero--with-content & {
     color: var(--color-white);

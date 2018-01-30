@@ -28,7 +28,7 @@ class GdsDate extends WebformCompositeBase {
   /**
    * {@inheritdoc}
    */
-  public static function getCompositeElements() {
+  public static function getCompositeElements(array $element) {
     $html_id = Html::getUniqueId('gds_date');
 
     $elements = [];

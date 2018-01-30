@@ -9,6 +9,9 @@ use Drupal\Core\Url;
 /**
  * Provides a 'AlertBacklink' block.
  *
+ * Conditionally displays a link back to news and alerts search tab of
+ * corresponding content type.
+ *
  * @Block(
  *  id = "alert_backlink",
  *  admin_label = @Translation("News & alerts search tab backlink"),
@@ -22,38 +25,37 @@ class AlertBacklink extends BlockBase {
   public function build() {
     $build = [];
 
+    $route_provider = \Drupal::service('router.route_provider');
     $node = \Drupal::routeMatch()->getParameter('node');
     $type = $node->getType();
 
-    // Set path per content type.
-    // @todo: get from route once searh tabs are added to setup.
-    switch ($type) {
-      case 'alert':
-        $path = '/news-alerts/alerts';
-        break;
-
-      case 'news':
-        $path = '/news-alerts/news';
-        break;
-
-      case 'consultation':
-        $path = '/news-alerts/consultations';
-        break;
-
-      default:
-        $path = '/news-alerts/all';
-        break;
-
+    $links = [
+      'alert' => [
+        'text' => t('All alerts'),
+        'route_name' => 'view.search_news_alerts_alerts.page_1',
+      ],
+      'news' => [
+        'text' => t('All news'),
+        'route_name' => 'view.search_news_alerts_news.page_1',
+      ],
+      'consultation' => [
+        'text' => t('All consultations'),
+        'route_name' => 'view.search_news_alerts_consultations.page_1',
+      ],
+      'default' => [
+        'text' => t('All news and alerts'),
+        'route_name' => 'view.search_news_alerts_all.page_1',
+      ],
+    ];
+    if (array_key_exists($type, $links) && count($route_provider->getRoutesByNames([$links[$type]['route_name']])) === 1) {
+      $link = Link::createFromRoute($links[$type]['text'], $links[$type]['route_name'], [], ['attributes' => ['class' => 'back']]);
+    }
+    else {
+      $link = Link::createFromRoute($links['default']['text'], $links['default']['route_name'], [], ['attributes' => ['class' => 'back']]);
     }
 
-    // Classes to theme it.
-    $options = ['attributes' => ['class' => 'back']];
-
-    $url = Url::fromUserInput($path, $options);
-
-    // Link to News & Alerts listing page.
     $build['backlink'] = [
-      '#markup' => Link::fromTextAndUrl($this->t('News and alerts'), $url)->toString(),
+      '#markup' => $link->toString(),
     ];
 
     return $build;

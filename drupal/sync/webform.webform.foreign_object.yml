@@ -36,8 +36,11 @@ settings:
   form_novalidate: false
   form_unsaved: true
   form_disable_back: false
+  form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
+  form_login: false
+  form_login_message: ''
   submission_label: ''
   submission_log: false
   submission_user_columns:
@@ -55,6 +58,9 @@ settings:
     - element__name
     - element__email
     - element__telephone
+  submission_login: false
+  submission_login_message: ''
+  submission_exception_message: ''
   wizard_progress_bar: false
   wizard_progress_pages: true
   wizard_progress_percentage: false
@@ -87,18 +93,20 @@ settings:
   confirmation_back_label: ''
   confirmation_back_attributes: {  }
   limit_total: null
+  limit_total_interval: null
   limit_total_message: ''
   limit_user: null
+  limit_user_interval: null
   limit_user_message: ''
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
   purge: none
   purge_days: null
-  entity_limit_total: null
-  entity_limit_user: null
   results_disabled: false
   results_disabled_ignore: false
   token_update: false
-  wizard_comfirmation: true
-  wizard_comfirmation_label: ''
 access:
   create:
     roles:
@@ -134,6 +142,10 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
 handlers:
   copy_of_report:
     id: email
@@ -155,12 +167,13 @@ handlers:
       from_options: {  }
       from_name: default
       subject: 'Thank you for reporting a food problem'
-      body: "<p>Thank you for reporting a food problem at: <strong>[webform_submission:values:where_lookup:value]</strong>.</p>\r\n\r\n<p>Your report has been forwarded to <strong>[webform_submission:values:fsa_establishment_la_name:value] Council</strong>\r\n\r\n<p>Please do not reply to this email.</p>"
+      body: "{% if (webform_token('[webform_submission:values:where_lookup:value]', webform_submission) is empty) or (webform_token('[webform_submission:values:fsa_establishment_la_name:value]', webform_submission) is empty) %}\r\n  <p>Thank you for your report. It has been forwarded to the relevant Local Authority.</p>\r\n{% else %}\r\n  <p>Thank you for reporting a food problem at: {{ webform_token('[webform_submission:values:where_lookup:value]', webform_submission) }}</p>\r\n  <p>Your report has been forwarded to {{ webform_token('[webform_submission:values:fsa_establishment_la_name:value]', webform_submission) }} Council</p>\r\n  <p>Please do not reply to this email.</p>\r\n{% endif %}\r\n"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
       html: true
       attachments: false
+      twig: true
       debug: false
       reply_to: ''
       return_path: ''
@@ -176,7 +189,7 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:fsa_establishment_la_email:raw]'
+      to_mail: sally.barber@food.gov.uk
       to_options: {  }
       cc_mail: webmaster@food.gov.uk
       cc_options: {  }
@@ -198,6 +211,7 @@ handlers:
       exclude_empty: true
       html: true
       attachments: false
+      twig: false
       debug: false
       reply_to: ''
       return_path: ''

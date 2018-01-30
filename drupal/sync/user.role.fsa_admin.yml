@@ -12,6 +12,7 @@ permissions:
   - 'access files overview'
   - 'access fsa authority overview'
   - 'access fsa establishment overview'
+  - 'access media overview'
   - 'access site in maintenance mode'
   - 'access toolbar'
   - 'access webform overview'
