@@ -9,7 +9,7 @@ dependencies:
     - fsa
 third_party_settings:
   block_class:
-    classes: ''
+    classes: form-autosubmit-on-yes
 id: webform_page_feedback
 theme: fsa
 region: content_bottom
