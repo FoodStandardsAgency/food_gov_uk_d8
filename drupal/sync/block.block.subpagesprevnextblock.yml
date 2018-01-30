@@ -13,7 +13,7 @@ third_party_settings:
 id: subpagesprevnextblock
 theme: fsa
 region: content_bottom
-weight: -8
+weight: -21
 provider: null
 plugin: subpages_prevnext_block
 settings:

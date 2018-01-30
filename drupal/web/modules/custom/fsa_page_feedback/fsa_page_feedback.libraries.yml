@@ -1,0 +1,7 @@
+page_feedback:
+  version: 1.x
+  js:
+    js/page-feedback.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery.once

@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Contains fsa_custom.module.
+ */
+
+/**
+ * Implements of template_preprocess_page().
+ */
+function fsa_page_feedback_preprocess_page(&$variables) {
+
+  // Attach the page feedback additional js.
+  $variables['#attached']['library'][] = 'fsa_page_feedback/page_feedback';
+}
