@@ -10,8 +10,8 @@ id: node.page.field_media_library_liftup_image
 field_name: field_media_library_liftup_image
 entity_type: node
 bundle: page
-label: 'Liftup image from media library'
-description: 'Reuse existing image from the media library.'
+label: 'Liftup image from media browser'
+description: 'Reuse existing image from the media browser.'
 required: false
 translatable: true
 default_value: {  }
