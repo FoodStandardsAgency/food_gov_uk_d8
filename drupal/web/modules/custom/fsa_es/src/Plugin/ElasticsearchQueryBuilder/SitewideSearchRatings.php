@@ -4,7 +4,6 @@ namespace Drupal\fsa_es\Plugin\ElasticsearchQueryBuilder;
 
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\fsa_es\SearchService;
-use Drupal\views\ViewExecutable;
 use Elasticsearch\Client;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -51,12 +50,12 @@ class SitewideSearchRatings extends SitewideSearchBase {
   /**
    * {@inheritdoc}
    */
-  public function buildQuery(ViewExecutable $view) {
+  public function buildQuery() {
     // Get query plugin.
-    $query_plugin = $view->getQuery();
+    $query_plugin = $this->view->getQuery();
 
     // Get filter values.
-    $values = $this->getFilterValues($view);
+    $values = $this->getFilterValues();
 
     // Get keyword.
     $keyword = $values['keyword'];

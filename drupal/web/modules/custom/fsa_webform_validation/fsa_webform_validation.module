@@ -25,3 +25,27 @@ function fsa_webform_validation_webform_element_alter(array &$element, FormState
     ];
   }
 }
+
+/**
+ * Implements hook_form_alter().
+ */
+function fsa_webform_validation_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $webform_ids = [
+    'foreign_object',
+    'poor_hygiene_practices',
+    'food_poisoning',
+  ];
+  if (isset($form['#webform_id']) && in_array($form['#webform_id'], $webform_ids)) {
+    if (isset($form['confirmation'])) {
+      if (empty($form_state->getValue('fsa_establishment_la_name')) || empty($form_state->getValue('fsa_establishment_la_name'))) {
+
+        // Alter confirmation message.
+        if ($form['confirmation']['#webform']->getSetting('confirmation_message')) {
+          $value = t('<h2>Report complete</h2>');
+          $value .= t('<p>Thank you for your report. It has been forwarded to the relevant Local Authority.</p>');
+          $form['confirmation']['#webform']->setSetting('confirmation_message', $value);
+        }
+      }
+    }
+  }
+}
