@@ -29,14 +29,14 @@
     @mixin responsive-declaration margin-left, 1em, 4em;
     @mixin responsive-declaration padding-top, 1.5em, 3em;
     @mixin responsive-declaration padding-right, 1em, 3em;
-    @mixin responsive-declaration padding-bottom, 1.5em, 3em;
+    @mixin responsive-declaration padding-bottom, 1em, 2em;
     @mixin responsive-declaration padding-left, 1em, 3em;
     background-color: var(--color-white);
     border-top: 4px solid var(--color-green);
     box-shadow: 0 2px 6px 0 rgba(0,0,0,0.1);
   
     @media (--breakpoint-md) {
-      margin-bottom: -1em;
+      margin-bottom: -4em;
       transform: translateY(-5em);
     }
   
@@ -170,7 +170,7 @@
 
 /* Promo wrapper footer */
 .promo-wrapper > footer {
-  @mixin responsive-declaration padding-top, 1em, 3em;
+  padding-top: 1em;
   text-align: center;
 }
 
@@ -181,7 +181,7 @@
   border: 4px solid var(--color-light-gray);
   position: relative;
   margin-bottom: 1em;
-  @mixin responsive-declaration padding-bottom, 1em, 2em;
+  padding-bottom: 1em;
   transition: border-color var(--transition-enter);
 
   @media (--breakpoint-md) {
@@ -194,9 +194,14 @@
     background-position: right 2em bottom 2em;
   }
 
+  /* Reset font styles for headings */
+  :--heading {
+    @mixin reset-font-style;
+  }
+
   /* Alert tag */
   .field__field_alert_type {
-
+    margin-bottom: 0 !important;
   }
 
   /* Promo link list */
@@ -235,12 +240,16 @@
   }
 
   :--not-touch &:--enter {
-    border-color: var(--dark-secondary-color);
-    
+    background-color: var(--color-white);
+
     .alert__type_badge {  
       &:before {
         transform: scaleX(1);
       }
+    }
+
+    .field__title {
+      text-decoration: underline;
     }
   }
 }
@@ -253,7 +262,11 @@ a.field__field_content_promo__item {
   background-image: var(--icon-arrow-right-primary);
   background-repeat: no-repeat;
   background-size: 1.5em auto;
-  background-position: right 1em bottom 2.25em;
+  background-position: right 1em bottom 1.25em;
+
+  :--not-touch &:--enter {
+    border-color: var(--dark-primary-color);
+  }
 }
 
 .promo {
@@ -342,7 +355,7 @@ a.field__field_content_promo__item {
 
   .field__field_large_promo__item--odd {
     .promo__content {
-      background-color: var(--color-lighter-gray);
+      /* background-color: var(--color-lighter-gray); */
     }
   }
 
@@ -465,7 +478,6 @@ a.field__field_content_promo__item {
 
 /* Promo content */
 .promo__content {
-  @mixin reset-font-style;
   color: var(--color-black);
 
   .promo--inline-content & {
@@ -475,6 +487,11 @@ a.field__field_content_promo__item {
   .promo--inline-content & {
     margin-top: 0 !important;
     padding: 0;
+  }
+
+
+  :--not-touch .promo:--enter & {
+    text-decoration: underline;
   }
 
   .field__field_large_promo & {
@@ -502,16 +519,18 @@ a.field__field_content_promo__item {
 .promo__type {
   & > .field {
     position: relative;
+    color: var(--color-gray);
+    text-align: left;
     text-transform: uppercase;
-    font-size: 0.8889em;
     font-weight: 600;
-    letter-spacing: 0.02em;
+    display: block;
     padding-top: 1em;
-
+    margin-bottom: 1em;
+  
     &:before {
       content: '';
       position: absolute;
-      top: 0;
+      top: -0.3em;
       left: 0;
       right: auto;
       width: 6em;
@@ -546,6 +565,8 @@ a.field__field_content_promo__item {
 
 /* Heading field */
 .promo__heading {
+  font-family: var(--font-family-heading) !important;
+  font-weight: 700 !important;
   color: var(--dark-primary-color);
 }
 
@@ -569,9 +590,11 @@ a.field__field_content_promo__item {
     @mixin responsive-declaration padding-top, 1rem, 2rem;
     @mixin responsive-declaration padding-right, 1rem, 2rem;
     @mixin responsive-declaration padding-left, 1rem, 2rem;
-    @mixin responsive-declaration padding-bottom, 1rem, 2rem;
+    padding-bottom: 1em;
     margin-top: 0em;
     margin-bottom: 0;
+    @mixin responsive-declaration font-size, 1.125em, 1.33em;
+    @mixin responsive-declaration line-height, 1.2, 1.17;
   }
 
   .promo--inline-content & {
@@ -669,7 +692,7 @@ a.field__field_content_promo__item {
     transition: background-color var(--transition-enter);
 
     :--not-touch &:--enter {
-      background-color: var(--primary-color);
+      background-color: var(--darker-primary-color);
     }
 
     svg {

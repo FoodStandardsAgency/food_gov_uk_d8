@@ -891,7 +891,7 @@ blockquote {
   &:before {
     content: '';
     position: absolute;
-    top: 0;
+    top: -0.3em;
     left: 0;
     right: auto;
     width: 6em;

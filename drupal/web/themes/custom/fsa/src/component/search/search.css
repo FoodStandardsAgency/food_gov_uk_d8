@@ -109,6 +109,10 @@
       @media (--breakpoint-lg) {
         width: 20em;
       }
+
+      :--not-touch &:--enter {
+        background-color: var(--color-white);
+      }
     }
   
     .button {
@@ -117,7 +121,7 @@
       width: 3.75em;
       height: 3.75em;
       border-radius: 0;
-      color: var(--color-white);
+      color: transparent;
       overflow: hidden;
       border: 0;
       box-shadow: none;
@@ -129,7 +133,7 @@
       @media (--breakpoint-sm) {
         padding-right: 1.5em;
         padding-left: 1.5em;
-        color: var(--dark-primary-color);
+        color: transparent;
         width: 3em;
         height: auto;
         background-color: var(--dark-primary-color);
@@ -138,8 +142,8 @@
 
       :--not-touch &:--enter {
         background-color: transparent;
-        box-shadow: none;
-        color: var(--color-white);
+        box-shadow: 0px 0px 0px 1px var(--darker-primary-color);
+        color: transparent;
 
         @media (--breakpoint-sm) {
           text-decoration: none;
