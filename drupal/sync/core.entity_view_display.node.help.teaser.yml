@@ -7,17 +7,14 @@ dependencies:
     - field.field.node.help.body
     - field.field.node.help.field_block_reference
     - field.field.node.help.field_content_type
-    - field.field.node.help.field_icon
     - field.field.node.help.field_icon_ref
     - field.field.node.help.field_liftup_summary
     - field.field.node.help.field_liftup_title
     - field.field.node.help.field_liftups
-    - image.style.thumbnail
     - node.type.help
   module:
     - field_group
     - icon_select
-    - image
     - user
 third_party_settings:
   field_group:
@@ -43,15 +40,6 @@ targetEntityType: node
 bundle: help
 mode: teaser
 content:
-  field_icon:
-    type: image
-    weight: 1
-    region: content
-    label: hidden
-    settings:
-      image_style: thumbnail
-      image_link: ''
-    third_party_settings: {  }
   field_icon_ref:
     type: icon_select_formatter_default
     weight: 0

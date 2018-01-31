@@ -9,8 +9,8 @@ id: node.help.field_liftup_title
 field_name: field_liftup_title
 entity_type: node
 bundle: help
-label: 'Liftup title override'
-description: ''
+label: 'Promo title override'
+description: 'Use this field to override the page original title when referencing from another node.'
 required: false
 translatable: true
 default_value: {  }

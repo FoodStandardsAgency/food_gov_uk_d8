@@ -6,14 +6,12 @@ dependencies:
     - field.field.node.generic.body
     - field.field.node.generic.field_content_type
     - field.field.node.generic.field_fsa_toc
-    - field.field.node.generic.field_liftup_image
     - field.field.node.generic.field_liftup_title
     - field.field.node.generic.field_media_library_liftup_image
-    - image.style.thumbnail
     - node.type.generic
   module:
+    - content_moderation
     - field_group
-    - image
     - path
     - text
 third_party_settings:
@@ -40,13 +38,13 @@ third_party_settings:
       weight: 2
       format_type: tab
       format_settings:
-        label: 'Liftup metadata'
+        label: 'Landing Page Promo'
         formatter: closed
         description: 'Use these fields to control what is displayed in promo areas directly referencing to this page.'
         required_fields: true
         id: ''
         classes: ''
-      label: 'Liftup metadata'
+      label: 'Landing Page Promo'
 id: node.generic.default
 targetEntityType: node
 bundle: generic
@@ -79,14 +77,6 @@ content:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
-    region: content
-  field_liftup_image:
-    weight: 12
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
-    type: image_image
     region: content
   field_liftup_title:
     weight: 11

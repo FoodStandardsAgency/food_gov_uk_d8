@@ -7,7 +7,7 @@ dependencies:
     - field.field.node.help.body
     - field.field.node.help.field_block_reference
     - field.field.node.help.field_content_type
-    - field.field.node.help.field_icon
+    - field.field.node.help.field_icon_ref
     - field.field.node.help.field_liftup_summary
     - field.field.node.help.field_liftup_title
     - field.field.node.help.field_liftups
@@ -35,7 +35,6 @@ hidden:
   entity_print_view_word_docx: true
   field_block_reference: true
   field_content_type: true
-  field_icon: true
   field_icon_ref: true
   field_liftup_summary: true
   field_liftup_title: true

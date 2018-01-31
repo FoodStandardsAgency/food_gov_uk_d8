@@ -6,18 +6,15 @@ dependencies:
     - field.field.node.help.body
     - field.field.node.help.field_block_reference
     - field.field.node.help.field_content_type
-    - field.field.node.help.field_icon
     - field.field.node.help.field_icon_ref
     - field.field.node.help.field_liftup_summary
     - field.field.node.help.field_liftup_title
     - field.field.node.help.field_liftups
-    - image.style.thumbnail
     - node.type.help
   module:
     - content_moderation
     - field_group
     - icon_select
-    - image
     - paragraphs
     - path
     - text
@@ -46,12 +43,13 @@ third_party_settings:
       weight: 2
       format_type: tab
       format_settings:
-        id: ''
-        classes: ''
+        label: 'Landing Page Promo'
         formatter: closed
         description: 'Use these fields to control what is displayed in promo areas directly referencing to this page.'
         required_fields: true
-      label: 'Liftup metadata'
+        id: ''
+        classes: ''
+      label: 'Landing Page Promo'
     group_advanced_options:
       children:
         - field_block_reference
@@ -99,14 +97,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_select
-    region: content
-  field_icon:
-    weight: 15
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
-    type: image_image
     region: content
   field_icon_ref:
     weight: 14
