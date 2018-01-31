@@ -927,10 +927,10 @@ blockquote {
   }
 
   &.alert__type_prin {
-    color: var(--color-blue);
+    color: var(--color-red);
 
     &:before {
-      background-color: var(--color-blue);
+      background-color: var(--color-red);
     }
   }
 }

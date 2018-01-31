@@ -121,6 +121,8 @@
 /* Promo wrapper */
 .promo-wrapper > .views-row-wrapper,
 .field__field_content_promo {
+  margin-bottom: 0 !important;
+
   @media (--breakpoint-lg) {
     display: flex;
     flex-flow: row wrap;
@@ -329,9 +331,8 @@ a.field__field_content_promo__item {
 
 /* Large content promo */
 .field__field_large_promo {
-  @mixin responsive-declaration margin-top, -2em, -4em;
+  margin-bottom: 0 !important;
   @mixin responsive-declaration margin-right, -2em, -4em;
-  @mixin responsive-declaration margin-bottom, -2em, -4em;
   @mixin responsive-declaration margin-left, -2em, -4em;
 
   .field__field_large_promo__item--even {
@@ -556,6 +557,14 @@ a.field__field_content_promo__item {
         background-color: var(--color-lighter-purple);
       }
     }
+
+    &.field__field_consultations_type {
+      color: var(--color-blue);
+      
+      &:before {
+        background-color: var(--color-blue);
+      }
+    }
   }
 
   .promo:--enter & > .field:before {
@@ -707,6 +716,8 @@ a.field__field_content_promo__item {
 
 /* Topic cloud */
 .field__field_topic_cloud {
+  margin-bottom: 0 !important;
+
   & > div {
     display: flex;
     flex-flow: column nowrap;
@@ -745,7 +756,7 @@ a.field__field_content_promo__item {
     padding: 0.75em 1em;
     background-color: var(--dark-primary-color);
     color: var(--color-white);
-    font-weight: 600;
+    font-weight: 400;
     height: 100%;
     display: flex;
     text-align: center;
@@ -754,7 +765,7 @@ a.field__field_content_promo__item {
     transition: box-shadow var(--transition-enter);
 
     :--not-touch &:--enter {
-      background-color: var(--primary-color);
+      background-color: var(--darker-primary-color);
     }
   }
 }
