@@ -1,0 +1,18 @@
+uuid: 50e6de15-db85-4fa5-93ab-b6802c39caa3
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.alerts_allergen
+id: taxonomy_term.alerts_allergen.name
+field_name: name
+entity_type: taxonomy_term
+bundle: alerts_allergen
+label: Name
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
