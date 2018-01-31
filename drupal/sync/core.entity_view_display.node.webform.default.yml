@@ -6,7 +6,6 @@ dependencies:
     - field.field.node.webform.body
     - field.field.node.webform.field_audience
     - field.field.node.webform.field_content_type
-    - field.field.node.webform.field_icon
     - field.field.node.webform.field_icon_ref
     - field.field.node.webform.field_liftup_summary
     - field.field.node.webform.field_liftup_title
@@ -46,7 +45,6 @@ hidden:
   entity_print_view_word_docx: true
   field_audience: true
   field_content_type: true
-  field_icon: true
   field_icon_ref: true
   field_liftup_summary: true
   field_liftup_title: true
