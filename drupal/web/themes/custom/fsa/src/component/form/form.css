@@ -420,6 +420,10 @@ input[type="password"] {
   textarea,
   select {
     background-color: var(--color-lighter-gray);
+
+    :--not-touch &:--enter {
+      background-color: var(--color-white);
+    }
   }
 
   input:not([type='submit']) {
