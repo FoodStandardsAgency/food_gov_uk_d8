@@ -74,6 +74,7 @@
       %}
 
       <li{{ item.attributes.addClass(item_classes, 'navigation__item navigation__item--level-' ~ (menu_level + 1)).setAttribute('data-menu-level', (menu_level + 1)) }}>
+        {% if item.url|render|striptags|trim %}
           <a
             href="{{ item.url }}"
             title="{{ item.title }}"
@@ -82,6 +83,15 @@
               aria-controls="collapsible-{{ randomID }}"
             {% endif %}
             >{{ item.title }}</a>
+        {% else %}
+          <span
+            title="{{ item.title }}"
+            class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}{% if (item.is_expanded) %} js-nav-item-with-child{% endif %}"
+            {% if (item.is_expanded) %}
+              aria-controls="collapsible-{{ randomID }}"
+            {% endif %}
+          >{{ item.title }}</span>
+        {% endif %}
 
           {% if item.below %}
             {{ menus.menu_links(item.below, attributes, menu_level + 1, item, randomID) }}
