@@ -12,7 +12,7 @@ bundle: code_block
 label: 'Code block'
 description: 'Embed a system block to display Dynamically updating widget or similar advanced element.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

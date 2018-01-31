@@ -1,0 +1,20 @@
+uuid: 296c308f-6f6d-4eb5-a189-bb2925c39e0d
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.alerts_allergen
+  module:
+    - path
+id: taxonomy_term.alerts_allergen.path
+field_name: path
+entity_type: taxonomy_term
+bundle: alerts_allergen
+label: 'URL alias'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

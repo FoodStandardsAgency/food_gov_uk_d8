@@ -1,0 +1,22 @@
+uuid: a922dfdb-df48-4372-acc6-8788c2d78859
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.content_promo
+id: paragraph.content_promo.status
+field_name: status
+entity_type: paragraph
+bundle: content_promo
+label: Published
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
