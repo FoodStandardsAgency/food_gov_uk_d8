@@ -12,7 +12,7 @@ id: node.help.field_liftups
 field_name: field_liftups
 entity_type: node
 bundle: help
-label: Liftups
+label: Promos
 description: ''
 required: false
 translatable: false
@@ -21,6 +21,7 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
+    negate: 0
     target_bundles:
       liftups: liftups
     target_bundles_drag_drop:
@@ -32,5 +33,41 @@ settings:
         enabled: false
       subpage:
         weight: 6
+        enabled: false
+      code_block:
+        weight: 16
+        enabled: false
+      content_promo:
+        weight: 17
+        enabled: false
+      custom_block:
+        weight: 18
+        enabled: false
+      icon_link:
+        weight: 19
+        enabled: false
+      icon_link_item:
+        weight: 20
+        enabled: false
+      large_promo:
+        weight: 21
+        enabled: false
+      promo_block:
+        weight: 24
+        enabled: false
+      related_page:
+        weight: 25
+        enabled: false
+      subject_listing:
+        weight: 26
+        enabled: false
+      team_contact:
+        weight: 28
+        enabled: false
+      title:
+        weight: 29
+        enabled: false
+      topic_cloud:
+        weight: 30
         enabled: false
 field_type: entity_reference_revisions

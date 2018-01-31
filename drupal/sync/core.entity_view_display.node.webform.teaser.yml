@@ -7,18 +7,15 @@ dependencies:
     - field.field.node.webform.body
     - field.field.node.webform.field_audience
     - field.field.node.webform.field_content_type
-    - field.field.node.webform.field_icon
     - field.field.node.webform.field_icon_ref
     - field.field.node.webform.field_liftup_summary
     - field.field.node.webform.field_liftup_title
     - field.field.node.webform.field_topic
     - field.field.node.webform.webform
-    - image.style.thumbnail
     - node.type.webform
   module:
     - field_group
     - icon_select
-    - image
     - user
 third_party_settings:
   field_group:
@@ -46,15 +43,6 @@ targetEntityType: node
 bundle: webform
 mode: teaser
 content:
-  field_icon:
-    type: image
-    weight: 1
-    region: content
-    label: hidden
-    settings:
-      image_style: thumbnail
-      image_link: ''
-    third_party_settings: {  }
   field_icon_ref:
     type: icon_select_formatter_default
     weight: 0
