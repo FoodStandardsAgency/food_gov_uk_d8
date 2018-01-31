@@ -29,9 +29,19 @@
   }
 
   @media (--breakpoint-sm) {
-    @mixin responsive-declaration padding-right, 1em, 4em;
-    @mixin responsive-declaration padding-left, 1em, 4em;
+    padding-right: 2.5em;
+    padding-left: 2.5em;
     border-bottom: 0;
+  }
+
+  @media (--breakpoint-md) {
+    padding-right: 3.25em;
+    padding-left: 3.25em;
+  }
+
+  @media (--breakpoint-lg) {
+    padding-right: 4em;
+    padding-left: 4em;
   }
 
   & > *:last-child {

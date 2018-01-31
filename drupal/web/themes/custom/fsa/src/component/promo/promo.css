@@ -5,7 +5,7 @@
 .field__field_lander_row__item {
   @mixin responsive-declaration padding-top, 1.5em, 3em;
   @mixin responsive-declaration padding-right, 2em, 4em;
-  @mixin responsive-declaration padding-bottom, 1.5em, 3em;
+  padding-bottom: 1em;
   @mixin responsive-declaration padding-left, 2em, 4em;
 
   &.field__field_lander_row__item--odd {
@@ -130,7 +130,7 @@
   }
 
   & > .views-row {
-    flex: 0 1 0;
+    flex: 0 1 20%;
     flex: 0 1 calc(100% / 4 - 2em);
     margin: 1em;
   }
@@ -277,8 +277,8 @@ a.field__field_content_promo__item {
 /* Promo with inline content */
 .promo--inline-content {
   background: none;
-  display: flex !important  ;
-  flex-flow: row nowrap;
+  display: flex !important;
+  flex-flow: row nowrap !important;
   align-items: center;
   padding-bottom: 0;
   margin: 0;
