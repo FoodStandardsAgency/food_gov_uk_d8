@@ -13,7 +13,7 @@ function fsa_preprocess_fieldset(&$variables) {
     'edit-fhrs-rating-value--11',
     'edit-fhis-rating-value--11',
   ];
-  dsm($variables['element']['#id']);
+  
   $variables['toggle_fieldset'] = false;
 
   if (in_array($variables['element']['#id'], $add_attrs)) {
