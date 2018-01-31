@@ -3,8 +3,8 @@
   Drupal.behaviors.fsaPageFeedback = {
     attach: function (context, settings) {
 
-      var toggler = '.page-feedback fieldset.is_useful',
-          wrapper = '.page-feedback fieldset.feedback_wrapper',
+      var radios_fieldset = '.page-feedback fieldset.is_useful',
+          wrapper_fieldset = '.page-feedback fieldset.feedback_wrapper',
           submit = '.page-feedback form #edit-actions-submit',
           radio_yes = '#edit-is-useful-yes',
           radio_no = '#edit-is-useful-no',
@@ -12,27 +12,33 @@
           close_text = Drupal.t('Close');
 
       // Supporting buttons to open/close the feedback form.
-      $(toggler).once().append('<button type="button" value="open" class="toggler open-feedback">'+open_text+'</button>');
-      $(wrapper).once().prepend('<button type="button" value="close" class="toggler close-feedback">'+close_text+'</button>');
+      $(radios_fieldset).once().append('<button type="button" value="open" class="toggler open-feedback">'+open_text+'</button>');
+      $(wrapper_fieldset).once().prepend('<button type="button" value="close" class="toggler close-feedback">'+close_text+'</button>');
 
-      // Hide the feedback form by default.
-      $(wrapper).hide();
-      $(submit).hide();
+      if ($('.page-feedback .message-list').length === 0) {
+        // Hide the feedback form by default as long as no visible errors.
+        $(wrapper_fieldset).hide();
+        $(submit).hide();
+      }
+      else {
+        // On errors the form should already be visible, hide the radios fieldset.
+        $(radios_fieldset).hide();
+      }
 
       // Open the feedback-container and show submit button.
       $('.toggler.open-feedback, #edit-is-useful-no').click(function(e) {
         $(radio_no).prop('checked', true);
-        $(toggler).hide();
+        $(radios_fieldset).hide();
         $(submit).show();
-        $(wrapper).slideDown();
+        $(wrapper_fieldset).slideDown();
       });
 
       // Close the container/hide submit
       $('.toggler.close-feedback').click(function(e) {
         $(radio_no).prop('checked', false);
         $(submit).hide();
-        $(wrapper).slideUp();
-        $(toggler).fadeIn();
+        $(wrapper_fieldset).slideUp();
+        $(radios_fieldset).fadeIn();
       });
 
       // Auto-trigger a submit on yes.

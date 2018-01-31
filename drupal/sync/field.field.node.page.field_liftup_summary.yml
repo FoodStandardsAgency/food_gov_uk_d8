@@ -9,8 +9,8 @@ id: node.page.field_liftup_summary
 field_name: field_liftup_summary
 entity_type: node
 bundle: page
-label: 'Liftup summary'
-description: 'Introductional summary text shown on liftups/promotions referencing to this page.'
+label: 'Promo summary'
+description: 'Introductory summary text shown on promos referencing to this page.'
 required: false
 translatable: true
 default_value: {  }

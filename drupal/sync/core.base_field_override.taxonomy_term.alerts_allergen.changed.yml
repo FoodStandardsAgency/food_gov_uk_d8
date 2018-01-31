@@ -1,0 +1,18 @@
+uuid: 5bedc477-b4c4-4473-9780-28deca452f04
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.alerts_allergen
+id: taxonomy_term.alerts_allergen.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: alerts_allergen
+label: Changed
+description: 'The time that the term was last edited.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

@@ -1,0 +1,16 @@
+uuid: 1784548c-234b-4872-8063-5088b307d12d
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.topic_cloud
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.topic_cloud
+target_entity_type_id: paragraph
+target_bundle: topic_cloud
+default_langcode: site_default
+language_alterable: true

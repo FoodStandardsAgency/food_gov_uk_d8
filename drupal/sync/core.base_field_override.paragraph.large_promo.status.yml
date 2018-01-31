@@ -1,0 +1,22 @@
+uuid: cbbad564-2bf9-4283-bd28-a91e3333360e
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.large_promo
+id: paragraph.large_promo.status
+field_name: status
+entity_type: paragraph
+bundle: large_promo
+label: Published
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

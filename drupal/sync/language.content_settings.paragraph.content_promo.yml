@@ -1,0 +1,16 @@
+uuid: 00476344-600a-4cc7-ac6e-d69d240ff607
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.content_promo
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.content_promo
+target_entity_type_id: paragraph
+target_bundle: content_promo
+default_langcode: site_default
+language_alterable: true
