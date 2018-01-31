@@ -130,7 +130,7 @@
   }
 
   & > .views-row {
-    flex: 0 1 0;
+    flex: 0 1 20%;
     flex: 0 1 calc(100% / 4 - 2em);
     margin: 1em;
   }
