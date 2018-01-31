@@ -15,6 +15,7 @@ regions:
   content_bottom: 'Content bottom'
   sidebar_first: 'Left sidebar'
   sidebar_second: 'Right sidebar'
+  footer_top: 'Footer top'
   footer: 'Footer'
   hidden: 'Hidden'
 libraries:

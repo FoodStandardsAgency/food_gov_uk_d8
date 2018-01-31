@@ -1,0 +1,70 @@
+{#
+/**
+ * @file
+ * FSA theme override for a field.
+ *
+ * Direct copy from stable theme, with added possibility to override the title dev element.
+ * Avoid modifying too much to keep compatible with Drupal field configurations.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the containing element.
+ * - label_hidden: Whether to show the field label or not.
+ * - title_element: Title element tag.
+ * - title_attributes: HTML attributes for the title.
+ * - label: The label for the field.
+ * - multiple: TRUE if a field can contain multiple items.
+ * - items: List of all the field items. Each item contains:
+ *   - attributes: List of HTML attributes for each item.
+ *   - content: The field item's content.
+ * - entity_type: The entity type to which the field belongs.
+ * - field_name: The name of the field.
+ * - field_type: The type of the field.
+ * - label_display: The display settings for the label.
+ * - item.image_as_background: Image element as backgrounded div
+ *
+ * @see template_preprocess_field()
+ */
+#}
+
+{% if label_hidden %}
+  {% if multiple %}
+    <div{{ attributes }}>
+      {% for item in items %}
+        {{ item.image_as_background }}
+        <div{{ item.attributes }}>
+          <a href="tel:{{ item.content|render|replace({' ':''}) }}">{{ item.content }}</a>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    {% for item in items %}
+      {{ item.image_as_background }}
+      <div{{ attributes }}>
+        <a href="tel:{{ item.content|render|replace({' ':''}) }}">{{ item.content }}</a>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% else %}
+<div{{ attributes }}>
+  <{{ title_element }}{{ title_attributes }}>{{ label }}</{{ title_element }}>
+  {% if multiple %}
+    <div>
+  {% endif %}
+  {% for item in items %}
+    {% if label_display == 'inline' %}
+      {{ item.image_as_background }}
+      <span{{ item.attributes }}>
+        <a href="tel:{{ item.content|render|replace({' ':''}) }}">{{ item.content }}</a>
+      </span>
+    {% else %}
+      {{ item.image_as_background }}
+      <div{{ item.attributes }}>
+        <a href="tel:{{ item.content|render|replace({' ':''}) }}">{{ item.content }}</a>
+      </div>
+    {% endif %}
+  {% endfor %}
+  {% if multiple %}
+    </div>
+  {% endif %}
+  </div>
+{% endif %}

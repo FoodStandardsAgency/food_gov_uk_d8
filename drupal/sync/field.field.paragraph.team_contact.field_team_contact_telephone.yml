@@ -10,9 +10,9 @@ field_name: field_team_contact_telephone
 entity_type: paragraph
 bundle: team_contact
 label: Telephone
-description: ''
+description: 'Use this format: 020 7276 8829'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

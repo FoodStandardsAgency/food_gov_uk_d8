@@ -30,7 +30,6 @@ function toc() {
   // Navigation items
   for (let i = 0; i < tocNavigationItems.length; i++) {
     let thisTocNavigationItem = tocNavigationItems[i];
-    console.log(thisTocNavigationItem);
 
     thisTocNavigationItem.addEventListener("click", function(e) {
       e.preventDefault();

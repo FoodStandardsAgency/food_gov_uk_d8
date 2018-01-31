@@ -36,6 +36,7 @@ label {
 }
 
 fieldset {
+  border: 0;
   margin: 0;
   @mixin responsive-declaration margin-top, 1em, 2em;
   @mixin responsive-declaration margin-bottom, 1em, 2.5em;
@@ -419,6 +420,10 @@ input[type="password"] {
   textarea,
   select {
     background-color: var(--color-lighter-gray);
+
+    :--not-touch &:--enter {
+      background-color: var(--color-white);
+    }
   }
 
   input:not([type='submit']) {
@@ -432,6 +437,13 @@ input[type="password"] {
 
   .description {
     @mixin responsive-declaration margin-bottom, 1em, 2em;
+  }
+
+
+  input + .description {
+    padding-top: 0.5em;
+    font-size: 0.8889em;
+    color: var(--color-gray);
   }
 
   .form-item.js-form-type-gds-date

@@ -34,48 +34,55 @@
 
 .hero__region {
   position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
   z-index: var(--z-middle);
   color: var(--color-white);
   max-width: 50em;
+  min-height: 18em;
   margin: 0 auto;
-  padding-top: 2em;
+  padding-top: 1em;
   padding-bottom: 2em;
 
   @media (--breakpoint-md) {
-    padding-top: 4em;
-    padding-bottom: 7em;
+    min-height: 28em;
   }
 
-  @media (--breakpoint-lg) {
-    padding-top: 6em;
-    padding-bottom: 10em;
+  .theme--frontpage & {
+    /* @media (--breakpoint-md) {
+      padding-top: 9em;
+      padding-bottom: 15em;
+    } */
+    min-height: 29em;
+
+    @media (--breakpoint-md) {
+      min-height: 39em;
+      padding-bottom: 7em;
+    }
+  }
+
+  .theme--fhrs & {
+    padding-bottom: 7em;
   }
 
   .theme--search & {
     @mixin responsive-declaration padding-right, 1em, 4em;
     @mixin responsive-declaration padding-left, 1em, 4em;
     max-width: var(--content-max-width);
-
-    @media (--breakpoint-md) {
-      padding-top: 2em;
-      padding-bottom: 0em;
-    }
+    padding-top: 4em;
+    padding-bottom: 2em;
+    min-height: 14em;
   }
 
   .theme--term & {
     @mixin responsive-declaration padding-right, 1em, 4em;
     @mixin responsive-declaration padding-left, 1em, 4em;
     max-width: var(--content-max-width);
-
-    @media (--breakpoint-md) {
-      padding-top: 4em;
-      padding-bottom: 1em;
-    }
-
-    @media (--breakpoint-lg) {
-      padding-top: 5em;
-      padding-bottom: 2em;
-    }
+    padding-top: 4em;
+    padding-bottom: 2em;
+    min-height: 14em;
   }
 
   a {
@@ -88,6 +95,9 @@
 
   p {
     @mixin responsive-declaration font-size, 1.0em, 1.3em;
+    padding-right: 1em;
+    padding-left: 1em;
+    margin-top: 0;
 
     &:empty {
       display: none;
@@ -126,6 +136,8 @@
   text-align: center;
   margin-top: 0;
   margin-bottom: 0.8em;
+  padding-right: 1em;
+  padding-left: 1em;
 
   &:after {
     content: '';

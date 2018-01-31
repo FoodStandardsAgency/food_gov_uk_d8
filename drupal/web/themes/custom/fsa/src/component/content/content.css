@@ -814,6 +814,8 @@ blockquote {
 
 /* Drupal toolbar */
 .cms-toolbar {
+  @mixin responsive-declaration padding-top, 1em, 2em;
+  @mixin responsive-declaration padding-bottom, 1em, 2em;
 
   @media print {
     display: none;
@@ -891,7 +893,7 @@ blockquote {
   &:before {
     content: '';
     position: absolute;
-    top: 0;
+    top: -0.3em;
     left: 0;
     right: auto;
     width: 6em;
@@ -927,10 +929,10 @@ blockquote {
   }
 
   &.alert__type_prin {
-    color: var(--color-blue);
+    color: var(--color-red);
 
     &:before {
-      background-color: var(--color-blue);
+      background-color: var(--color-red);
     }
   }
 }

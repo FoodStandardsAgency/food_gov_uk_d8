@@ -10,10 +10,10 @@ id: paragraph.topic_cloud.field_topic_cloud
 field_name: field_topic_cloud
 entity_type: paragraph
 bundle: topic_cloud
-label: 'Topic cloud'
+label: 'Information by topic'
 description: 'Select topics to create a cloud of topic links.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
