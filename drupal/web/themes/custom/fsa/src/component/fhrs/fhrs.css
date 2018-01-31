@@ -307,11 +307,6 @@
       color: var(--color-darker-teal);
     }
   }
-
-  p {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
 }
 
 .ratingvalue {
@@ -575,8 +570,16 @@
   font-weight: bold;
 }
 
+/* Establishment */
+.establishment {
+  .field {
+    margin-bottom: 0 !important;
+  }
+}
+
 .establishment__container {
-  max-width: 80em;
+  max-width: var(--max-width-medium);
+  margin: 0 auto;
 }
 
 .establishment__meta {
