@@ -81,6 +81,8 @@ h6 {
 }
 
 p {
+  margin-bottom: 1.2em;
+
   &:first-child {
     margin-top: 0em;
   }
@@ -102,8 +104,9 @@ p {
 .field__field_intro {
   @mixin responsive-declaration font-size, 1.125em, 1.33em;
   @mixin responsive-declaration line-height, 1.3, 1.4;
-  @mixin responsive-declaration margin-top, 1em, 2em;
   padding-bottom: 0 !important;
+  margin-top: 1em !important;
+  margin-bottom: 1em !important;
 
   .item & {
     @mixin reset-font-style;

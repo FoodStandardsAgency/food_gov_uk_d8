@@ -11,7 +11,7 @@ html {
   font-size: var(--font-size-base);
   letter-spacing: 0.015em;
   @mixin responsive-declaration font-size, 100%, var(--font-size-base);
-  @mixin responsive-declaration line-height, 1.6, 1.4;
+  @mixin responsive-declaration line-height, 1.7, 1.6;
 }
 
 html.is-fixed {

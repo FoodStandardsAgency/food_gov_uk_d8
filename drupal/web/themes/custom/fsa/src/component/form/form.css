@@ -73,17 +73,22 @@ fieldset {
     color var(--transition-enter-fast),
     border-color var(--transition-enter-fast) 0.2s;
 
+  .fieldset-legend {
+    font-weight: 400;
+  }
+
   &.is-open {
     background-image: var(--icon-dropdown-top-black);
     border-bottom: 1px solid transparent;
     color: var(--color-black);
+    font-weight: 700;
     transition:
       color var(--transition-enter-fast),
       border-color var(--transition-enter-fast);
-  }
 
-  .fieldset-legend {
-    font-weight: 400;
+    .fieldset-legend {
+      font-weight: 700;
+    }
   }
 }
 
