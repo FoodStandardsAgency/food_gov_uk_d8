@@ -10,7 +10,7 @@ field_name: field_description
 entity_type: media
 bundle: document
 label: Description
-description: 'This will be used for something, we''re just not sure yet, but keeping for now!'
+description: 'Description text will show on individual document pages. If no document description needed or relevant, please leave blank (rather than copy title).'
 required: false
 translatable: true
 default_value: {  }
