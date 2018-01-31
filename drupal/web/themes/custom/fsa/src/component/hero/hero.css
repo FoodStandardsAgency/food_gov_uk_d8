@@ -80,9 +80,10 @@
     @mixin responsive-declaration padding-right, 1em, 4em;
     @mixin responsive-declaration padding-left, 1em, 4em;
     max-width: var(--content-max-width);
-    padding-top: 4em;
+    padding-top: 5.5em;
     padding-bottom: 2em;
     min-height: 14em;
+    align-items: flex-start;
   }
 
   a {
@@ -123,6 +124,11 @@
     @media (--breakpoint-md) {
       display: flex;
       justify-content: space-between;
+      width: 100%;
+    }
+
+    h1 {
+      padding: 0;
     }
   }
 }

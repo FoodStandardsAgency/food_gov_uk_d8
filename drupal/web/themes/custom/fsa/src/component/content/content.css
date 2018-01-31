@@ -346,9 +346,9 @@ blockquote {
   background-color: var(--primary-color);
   border-bottom: 4px solid var(--color-green);
   color: var(--color-white);
-  @mixin responsive-declaration padding-top, 1rem, 1.5rem;
+  padding-top: 1em;
   @mixin responsive-declaration padding-right, 1rem, 2rem;
-  @mixin responsive-declaration padding-bottom, 1rem, 1.5rem;
+  padding-bottom: 1em;
   @mixin responsive-declaration padding-left, 1rem, 2rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -494,6 +494,7 @@ blockquote {
     display: block;
     font-size: 1em !important;
     font-weight: 600;
+    text-align: left;
     padding: 0.5em;
     padding-left: 2.5em;
     font-weight: 600;
@@ -693,7 +694,6 @@ blockquote {
       left: 0;
       width: 3em;
       height: 1.5em;
-      border-radius: 0.15em;
       font-size: 0.7em;
       text-align: center;
       font-weight: 600;

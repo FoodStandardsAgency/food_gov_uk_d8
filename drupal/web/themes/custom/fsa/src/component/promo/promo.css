@@ -17,6 +17,7 @@
 
   .layout--with-sidebar & {
     max-width: var(--content-max-width);
+    @mixin responsive-declaration padding-top, 1em, 2em;
 
     @media (--breakpoint-md) {
       padding-left: 0;
