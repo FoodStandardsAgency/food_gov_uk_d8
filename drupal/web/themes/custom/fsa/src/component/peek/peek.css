@@ -35,11 +35,19 @@
     margin-bottom: 0em;
     transform: translateY(0em);
   }
+
+  .establishment & {
+    padding: 0;
+  }
 }
 
 .peek__container {
   max-width: 39em;
   margin: 0 auto;
+
+  .establishment & {
+    @mixin responsive-declaration padding, 1em, 2em;
+  }
 }
 
 .parallax {

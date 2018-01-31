@@ -202,7 +202,7 @@ table {
     padding-left: 1em;
 
     li:not(:last-child) {
-      margin-bottom: 1em;
+      margin-bottom: 0.25em;
     }
   }
 
@@ -221,7 +221,7 @@ table {
       }
 
       &:not(:last-child) {
-        margin-bottom: 0.5em;
+        margin-bottom: 0.25em;
       }
 
       &:after {
@@ -237,15 +237,6 @@ table {
         transform: scale(0.3333);
         box-shadow: inset 0em 0em 0em 2px var(--primary-color);
       }
-    }
-  }
-
-  ol,
-  ul {
-    margin-top: 0.5em;
-  
-    & li:not(:last-child) {
-      margin-bottom: 1em;
     }
   }
 }
