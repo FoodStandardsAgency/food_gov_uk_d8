@@ -16,6 +16,10 @@
   justify-content: space-between;
   align-items: center;
 
+  .footer-top & {
+    padding-top: 0 !important;
+  }
+
   .button {
     margin: 0.5em;
   }
@@ -337,6 +341,10 @@ input[type="password"] {
 
 .webform {
   padding-top: 2em;
+
+  .footer-top & {
+    padding-top: 0em;
+  }
 }
 
 .webform__container {
@@ -411,7 +419,7 @@ input[type="password"] {
     font-weight: 700;
     color: inherit;
     display: block;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
     text-transform: none;
   }
 
@@ -441,7 +449,7 @@ input[type="password"] {
   }
 
   .description {
-    @mixin responsive-declaration margin-bottom, 1em, 2em;
+    margin-bottom: 0.5em;
   }
 
 
@@ -451,15 +459,15 @@ input[type="password"] {
     color: var(--color-gray);
   }
 
-  .form-item.js-form-type-gds-date
-
   fieldset,
   .form-item {
     display: block;
     padding: 0;
     margin: 0;
-    @mixin responsive-declaration margin-top, 1.5em, 4em;
-    @mixin responsive-declaration margin-bottom, 1.5em, 2em;
+    @mixin responsive-declaration margin-top, 1em, 1.5em;
+    /* margin-top: 1em; */
+    @mixin responsive-declaration margin-bottom, 1em, 1.5em;
+    /* margin-bottom: 1em; */
   }
 
   .form-item {
@@ -531,6 +539,10 @@ input[type="password"] {
   .form-actions {
     display: flex;
     @mixin responsive-declaration margin-top, 1.5em, 4em;
+
+    .footer-top & {
+      margin-top: 0 !important;
+    }
   
     @media (--breakpoint-md) {
       justify-content: flex-end;
@@ -671,4 +683,136 @@ input[type="password"] {
   @mixin responsive-declaration margin-bottom, 1.5em, 2em;
   @mixin responsive-declaration padding-top, 1.5em, 2em;
   border-top: 1px solid var(--color-light-gray);
+}
+
+/* Feedback form styles */
+.webform-submission-page-feedback-form {
+
+  input[type="radio"] + label {
+    color: var(--primary-color);
+    text-decoration: underline;
+    padding: 0.5em 1em;
+    cursor: pointer;
+
+    &:before,
+    &:after {
+      display: none;
+    }
+
+    :--not-touch &:--enter {
+      color: var(--dark-primary-color);
+    }
+  }
+
+  button {
+    &.close-feedback,
+    &.open-feedback {
+      color: var(--primary-color);
+      text-decoration: underline;
+      cursor: pointer;
+
+      :--not-touch &:--enter {
+        color: var(--dark-primary-color);
+      }
+    }
+
+    &.close-feedback {
+      position: absolute;
+      @mixin responsive-declaration top, 1em, 3em;
+      right: 0;
+    }
+  }
+
+  fieldset {
+    &.feedback_wrapper {
+      position: relative;
+      margin-top: 0;
+      /* border-top: 0.5em solid var(--dark-primary-color); */
+
+      .fieldset-legend {
+        @mixin responsive-declaration padding-top, 1em, 2em;
+        @mixin responsive-declaration font-size, 1.125em, 1.33em;
+        @mixin responsive-declaration line-height, 1.2, 1.17;
+        padding-right: 4em;
+      }
+
+      & > .fieldset-wrapper {
+        max-width: 33em;
+
+        & > .form-item {
+          &:first-child {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .form-actions {
+    justify-content: flex-start;
+
+    .form-submit.button.button--primary {
+      margin: 0em;
+      margin-bottom: 2em;
+      @mixin responsive-declaration padding-right, 1em, 2em;
+      @mixin responsive-declaration padding-left, 1em, 2em;
+    }
+  }
+
+  .webform-confirmation {
+    margin: 0;
+    padding: 0;
+
+    .webform-confirmation__message {
+      margin-bottom: 0;
+      padding: 1em 0;
+      font-weight: 600;
+    }
+  }
+
+  .fieldgroup {
+    border: 0;
+    padding: 0.01em 0 0 0;
+    margin: 0;
+    min-width: 0;
+    overflow: auto;
+
+    & > legend {
+      display: inline-block;
+      width: auto;
+      float: left;
+      padding: 1em 0;
+      margin-bottom: 0;
+
+      & > .fieldset-legend {
+        margin-bottom: 0;
+        font-weight: 600;
+      }
+    }
+
+    & > .fieldset-wrapper {
+      display: inline-block;
+      width: auto;
+      float: left;
+      margin-bottom: 0;
+
+      & > .fieldset-legend {
+        margin-bottom: 0;
+      }
+    }
+
+    & > button.open-feedback {
+      display: inline-block;
+      width: auto;
+      float: right;
+      padding: 1em 0;
+      margin-bottom: 0;
+    }
+  
+    &:after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+  }
 }

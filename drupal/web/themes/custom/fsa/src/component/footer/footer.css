@@ -1,6 +1,21 @@
 @import "../../core/helper";
 @import "../../core/custom-property";
 
+
+.footer-top-wrapper {
+  position: relative;
+  z-index: var(--z-top);
+}
+
+.footer-top-wrapper__container {
+  background-color: var(--color-light-gray);
+}
+
+.footer-top-wrapper__content {
+  max-width: var(--max-width-medium);
+  margin: 0 auto;
+}
+
 .footer-wrapper {
   position: relative;
   z-index: var(--z-top);
@@ -81,9 +96,10 @@
   }
 
   & > ul {
-    margin: 0 0.5em;
+    margin: 0em;
     padding: 0;
     text-align: center;
+    margin: 0 -0.5em;
 
     @media (--breakpoint-md) {
       text-align: left;

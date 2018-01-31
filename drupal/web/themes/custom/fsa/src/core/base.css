@@ -52,6 +52,9 @@ body {
 .site {
   transition: transform var(--transition-enter);
   position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  min-height: 100vh;
   
   @media (--breakpoint-sm) {
     overflow: hidden;

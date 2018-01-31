@@ -40,6 +40,11 @@
   }
 }
 
+.layout--main {
+  flex: 1 1 auto;
+  display: flex;
+}
+
 .layout__container {
   position: relative;
   margin: 0 auto;
@@ -48,6 +53,11 @@
 }
 
 .layout__container--main {
+  flex: 1 1 auto;
+
+  @media (--breakpoint-md) {
+    display: flex;
+  }
 
   .theme--news-alerts & {
     padding-top: 0; 
@@ -213,6 +223,7 @@
 }
 
 .layout__content--main {
+  flex: 1 1 auto;
   @mixin responsive-declaration padding-top, 1em, 2em;
   @mixin responsive-declaration padding-bottom, 1em, 2em;
 
