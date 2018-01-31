@@ -23,7 +23,7 @@ function fsa_preprocess_html(&$variables) {
 
   // Add class(es) if logged in.
   if ($user->hasPermission('edit content')) {
-    $variables['attributes']['class'][] = 'has-content-toolbar';
+    $variables['attributes']['class'][] = 'has-cms-toolbar';
   }
 
   // Add class to body if frontpage.

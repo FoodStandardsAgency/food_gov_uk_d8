@@ -30,6 +30,11 @@
       transform: translateX(-50%);
     }
   }
+
+  body.has-cms-toolbar & {
+    margin-bottom: 0em;
+    transform: translateY(0em);
+  }
 }
 
 .peek__container {
