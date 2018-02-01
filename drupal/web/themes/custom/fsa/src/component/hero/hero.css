@@ -249,11 +249,6 @@
     background-color: var(--color-white);
     color: var(--dark-primary-color);
     transition: box-shadow var(--transition-enter-fast);
-    font-size: 0.8em;
-  
-    @media (--breakpoint-xs) {
-      font-size: 1em;
-    }
   
     :--not-touch &:--enter {
       background-color: var(--color-white);

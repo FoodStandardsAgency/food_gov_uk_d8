@@ -887,8 +887,13 @@ blockquote {
   text-transform: uppercase;
   font-weight: 600;
   display: block;
-  padding-top: 1em;
-  margin-bottom: 1em;
+  padding-top: 0.25em;
+  margin-bottom: 0.15em;
+
+  @media (--breakpoint-md) {
+    padding-top: 1em;
+    margin-bottom: 1em;
+  }
 
   &:before {
     content: '';
