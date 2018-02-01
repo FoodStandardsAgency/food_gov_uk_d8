@@ -957,6 +957,58 @@ blockquote {
   }
 }
 
+/* Error message */
+.error-message {
+  position: relative;
+  min-height: 20em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column nowrap;
+}
+
+.error-message__image {
+  width: 12em;
+  height: auto;
+}
+
+.error-message__image--401 {
+  margin-top: 2em;
+}
+
+.error-message__image--403 {
+  position: absolute;
+  z-index: var(--z-bottom);
+  top: 50%;
+  left: 50%;
+  transform:
+    translateY(-50%)
+    translateX(-50%);
+  opacity: 0.5;
+}
+
+.error-message__image--404 {
+  margin-top: 2em;
+}
+
+.error-message__content {
+  position: relative;
+  z-index: var(--z-top);
+  text-align: center;
+}
+
+.error-message__heading {
+  margin-bottom: 0;
+}
+
+.error-message__paragraph {
+  font-weight: 600;
+
+  a {
+    text-decoration: underline;
+  }
+}
+
 /*Subpages*/
 .subpages:not(:first-child) {
   @mixin responsive-declaration margin-top, 1.5em, 4em;
