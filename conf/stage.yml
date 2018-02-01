@@ -32,7 +32,7 @@
     - name: "Fetch Alerts from Epimorphics server"
       cron:
         name: "Run Migrate API task to pull alerts from the API"
-        minute: "*/2"
+        minute: "*/10"
         job: "/usr/lib/composer/vendor/bin/drush --root=/var/www/fsa/current/web mi --tag=alerts"
         state: "present"
         user: nginx
