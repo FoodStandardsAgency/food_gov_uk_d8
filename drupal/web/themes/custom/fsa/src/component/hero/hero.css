@@ -44,17 +44,13 @@
   min-height: 18em;
   margin: 0 auto;
   padding-top: 1em;
-  padding-bottom: 2em;
+  padding-bottom: 2.5em;
 
   @media (--breakpoint-md) {
     min-height: 28em;
   }
 
   .theme--frontpage & {
-    /* @media (--breakpoint-md) {
-      padding-top: 9em;
-      padding-bottom: 15em;
-    } */
     min-height: 29em;
 
     @media (--breakpoint-md) {
@@ -64,7 +60,11 @@
   }
 
   .theme--fhrs & {
-    padding-bottom: 7em;
+    padding-bottom: 1em;
+
+    @media (--breakpoint-md) {
+      padding-bottom: 7em;
+    }
   }
 
   .theme--search & {
@@ -84,6 +84,10 @@
     padding-bottom: 2em;
     min-height: 14em;
     align-items: flex-start;
+  }
+
+  .theme--news-alerts .hero.hero--with-content & {
+    padding-top: 4em;
   }
 
   a {
@@ -263,6 +267,13 @@
 .hero__secondary-navigation {
   @mixin responsive-declaration padding-right, 1em, 4em;
   @mixin responsive-declaration padding-left, 1em, 4em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  .hero:not(.hero--with-content) & {
+    border-bottom: 1px solid var(--color-light-gray);
+  }
 
   .hero.hero--with-content & {
     position: absolute;
@@ -271,9 +282,6 @@
     left: 0;
     z-index: var(--z-top);
     color: var(--color-white);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 
     .theme--term & {
       background-color: var(--color-white);
@@ -294,7 +302,6 @@
     justify-content: flex-start;
     align-items: center;
     flex-flow: row wrap;
-    border-bottom: 1px solid var(--color-light-gray);
   } 
 
   @media (--breakpoint-lg) {
@@ -379,6 +386,12 @@
 .manage-subcriptions {
   padding-top: 1em;
   padding-bottom: 1em;
+  margin: 0 auto;
+  flex: 0 0 auto;
+
+  @media (--breakpoint-md) {
+    margin: 0;
+  }
   
   a {
     position: relative;
@@ -386,6 +399,10 @@
     font-size: 0.8889em;
     padding-left: 2.25em;
     text-decoration: underline;
+
+    .hero:not(.hero--with-content) & {
+      color: var(--dark-primary-color);
+    }
 
     &:before {
       content: '';
@@ -401,6 +418,11 @@
       background-repeat: no-repeat;
       background-color: var(--color-white);
       border-radius: 50%;
+
+      .hero:not(.hero--with-content) & {
+        background-image: var(--icon-gear-white);
+        background-color: var(--dark-primary-color);
+      }
     }
   
     @media (--breakpoint-lg) {

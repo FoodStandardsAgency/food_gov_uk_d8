@@ -522,9 +522,9 @@ a.field__field_content_promo__item {
   }
 
   .field__field_large_promo & {
-    @mixin responsive-declaration padding-top, 1em, 3em;
+    @mixin responsive-declaration padding-top, 2em, 3em;
     @mixin responsive-declaration padding-right, 1em, 5em;
-    @mixin responsive-declaration padding-bottom, 1em, 3em;
+    @mixin responsive-declaration padding-bottom, 2em, 3em;
     @mixin responsive-declaration padding-left, 1em, 5em;
       
     @media (--breakpoint-md) {
@@ -664,6 +664,15 @@ a.field__field_content_promo__item {
 
     .field__field_intro {
       padding: 0;
+    }
+  }
+
+  .field__field_large_promo__item & {
+    padding-bottom: 1rem !important;
+
+
+    @media (--breakpoint-sm) {
+      padding-bottom: 2rem !important;
     }
   }
 

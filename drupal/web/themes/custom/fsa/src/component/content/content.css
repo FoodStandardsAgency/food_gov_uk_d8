@@ -787,9 +787,10 @@ blockquote {
 
 /*Content image*/
 .embedded-entity img {
-  margin-left: -2em;
-  width: 110%;
-  width: calc(100% + 4em);
+  width: 100%;
+  /* margin-left: -2em; */
+  /* width: 110%; */
+  /* width: calc(100% + 4em); */
   max-width: none;
 }
 

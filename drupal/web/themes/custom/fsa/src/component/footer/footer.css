@@ -55,8 +55,8 @@
     padding: 0.25em;
 
     .svg {
-      @mixin responsive-declaration width, 2em, 2.2em;
-      @mixin responsive-declaration height, 2em, 2.2em;
+      @mixin responsive-declaration width, 3em, 2.2em;
+      @mixin responsive-declaration height, 3em, 2.2em;
 
       path {
         fill: var(--color-white) !important;
@@ -106,18 +106,27 @@
     }
 
     & > li {
-      display: inline-block;
+      display: block;
       margin: 0 0.5em;
+
+      @media (--breakpoint-md) {
+        display: inline-block;
+      }
 
       & > a {
         display: block;
-        padding: 1em 0em;
+        padding: 0.5em 0em;
         font-size: 0.8889em;
         background-color: transparent;
         color: var(--color-white);
         border-radius: 0em;
         transform: translateX(0%);
         box-shadow: none;
+        text-decoration: underline;
+
+        @media (--breakpoint-md) {
+          text-decoration: none;
+        }
 
         :--not-touch &:--enter {
           background-color: transparent;
