@@ -213,6 +213,32 @@ function fsa_custom_preprocess_breadcrumb(&$variables) {
     unset($variables['breadcrumb']);
   }
   elseif (isset($node)) {
+
+    $text = FALSE;
+    $route_name = FALSE;
+    switch ($node->getType()) {
+      case 'alert':
+        $text = t('Alerts');
+        $route_name = 'view.search_news_alerts_alerts.page_1';
+        break;
+
+      case 'news':
+        $text = t('News');
+        $route_name = 'view.search_news_alerts_news.page_1';
+        break;
+
+      case 'consultation':
+        $text = t('Consultations');
+        $route_name = 'view.search_news_alerts_consultations.page_1';
+        break;
+
+    }
+
+    if ($text && $route_name) {
+      // Inject the "missing segment".
+      array_splice($variables['breadcrumb'], 2, 0, [['text' => $text, 'url' => Url::fromRoute($route_name)]]);
+    }
+
     // Node titles can be horribly long, if that's the case truncate with
     // sensible amount of characters, word-safe.
     $max_length = 90;
