@@ -70,6 +70,7 @@ module:
   fsa_translate: 0
   fsa_webform_validation: 0
   geolocation: 0
+  google_tag: 0
   help: 0
   hierarchical_term_formatter: 0
   hook_post_action: 0

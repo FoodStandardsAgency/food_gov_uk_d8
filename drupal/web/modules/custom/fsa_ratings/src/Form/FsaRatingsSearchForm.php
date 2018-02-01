@@ -45,6 +45,9 @@ class FsaRatingsSearchForm extends FormBase {
     /** @var \Drupal\fsa_es\SearchService $search_service */
     $search_service = \Drupal::service('fsa_es.search_service');
 
+    // Attach JS to toggle FHRS/FHIS checkbox selecting.
+    $form['#attached']['library'][] = 'fsa_ratings/ratings_search';
+
     $params = RatingsSearch::getSearchParameters();
     $language = \Drupal::languageManager()->getCurrentLanguage();
     $available_filters = $search_service->categories($language);

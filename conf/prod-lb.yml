@@ -15,23 +15,22 @@
   vars_files:
   - prod-vars.yml
 
-  #tasks:
-    #- name: make sure SSL certificate is installed
-      #copy:
-        #content: "{{ ssl_certificate }}"
-        #dest: "/etc/nginx/ssl/{{ domain2_name }}.crt"
-        #owner: root
-        #group: root
-        #mode: 0644
+  tasks:
+    - name: make sure SSL certificate is installed
+      copy:
+        content: "{{ ssl_certificate }}"
+        dest: "/etc/nginx/ssl/{{ domain2_name }}.crt"
+        owner: root
+        group: root
+        mode: 0644
 
-    #- name: make sure SSL private key is installed
-      #copy:
-        #content: "{{ ssl_private_key }}"
-        #dest: "etc/nginx/ssl/{{ domain2_name }}.key"
-        #owner: root
-        #group: root
-        #mode: 0600
-        #no_log: true
+    - name: make sure SSL private key is installed
+      copy:
+        content: "{{ ssl_private_key }}"
+        dest: "/etc/nginx/ssl/{{ domain2_name }}.key"
+        owner: root
+        group: root
+        mode: 0600
 
   vars:
 
@@ -105,25 +104,24 @@
 
     # You can also define aliases with app_dir_aliases, see ansible/playbook/roles/nginx/templates/all_apps.conf.j2
 
-    nginx_real_ip: 127.0.0.1
+    # nginx_real_ip: 127.0.0.1
     # If using 3rd party CDN / proxy you can define those ip's here so that the real original request ip will be passed through
     # For example Cloudflare:
-    #nginx_real_ip:
-    #  - 103.21.244.0/22
-    #  - 103.22.200.0/22
-    #  - 103.31.4.0/22
-    #  - 104.16.0.0/12
-    #  - 108.162.192.0/18
-    #  - 131.0.72.0/22
-    #  - 141.101.64.0/18
-    #  - 162.158.0.0/15
-    #  - 172.64.0.0/13
-    #  - 173.245.48.0/20
-    #  - 188.114.96.0/20
-    #  - 190.93.240.0/20
-    #  - 197.234.240.0/22
-    #  - 198.41.128.0/17
-    #  - 199.27.128.0/21
+    nginx_real_ip:
+      - 103.21.244.0/22
+      - 103.22.200.0/22
+      - 103.31.4.0/22
+      - 104.16.0.0/12
+      - 108.162.192.0/18
+      - 131.0.72.0/22
+      - 141.101.64.0/18
+      - 162.158.0.0/15
+      - 172.64.0.0/13
+      - 173.245.48.0/20
+      - 188.114.96.0/20
+      - 190.93.240.0/20
+      - 197.234.240.0/22
+      - 198.41.128.0/17
 
     # Extra nginx configs
     nginx_conf:
@@ -166,10 +164,10 @@
       - server_name: "{{ domain2_name }}"
         # Certbot is configured to smash all certificates into the first one
         # So domain2 uses domain1 certificate
-        ssl_certificate: "/etc/letsencrypt/live/{{ domain1_name }}/fullchain.pem"
-        ssl_certificate_key: "/etc/letsencrypt/live/{{ domain1_name}}/privkey.pem"
-        #ssl_certificate: "/etc/nginx/ssl/{{ domain2_name.crt"
-        #ssl_certificate_key: "/etc/nginx/ssl/{{ domain2_name}}.key"
+        #ssl_certificate: "/etc/letsencrypt/live/{{ domain1_name }}/fullchain.pem"
+        #ssl_certificate_key: "/etc/letsencrypt/live/{{ domain1_name}}/privkey.pem"
+        ssl_certificate: "/etc/nginx/ssl/{{ domain2_name }}.crt"
+        ssl_certificate_key: "/etc/nginx/ssl/{{ domain2_name}}.key"
         use_dhparam: True
         backends:
           - 127.0.0.1:8081

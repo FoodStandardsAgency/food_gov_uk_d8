@@ -10,7 +10,12 @@
  *
  */
 #}
-<h1>{{ status_code }} - {{ error }}</h1>
-<p>{{ content }}</p>
-{# Comment below out and make sure possible image variations exists: status code variable can be either 404, 403 or 401 #}
-<!--<img src="/themes/custom/fsa/dist/img/error/{{ status_code }}.png" alt="{{ status_code }}" /> -->
+<div class="error-message error-message--{{ status_code }}">
+  <div class="error-message__content">
+    <h1 class="error-message__heading">{{ error }} - {{ status_code }}</h1>
+    <p class="error-message__paragraph">{{ content }}</p>
+  </div>
+  
+  <img class="error-message__image error-message__image--{{ status_code }}" src="/themes/custom/fsa/dist/img/error/{{ status_code }}.png" alt="Error {{ status_code }}" />
+  
+</div>

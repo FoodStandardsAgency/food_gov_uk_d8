@@ -6,19 +6,16 @@ dependencies:
     - field.field.node.webform.body
     - field.field.node.webform.field_audience
     - field.field.node.webform.field_content_type
-    - field.field.node.webform.field_icon
     - field.field.node.webform.field_icon_ref
     - field.field.node.webform.field_liftup_summary
     - field.field.node.webform.field_liftup_title
     - field.field.node.webform.field_topic
     - field.field.node.webform.webform
-    - image.style.thumbnail
     - node.type.webform
   module:
     - content_moderation
     - field_group
     - icon_select
-    - image
     - path
     - shs
     - text
@@ -50,12 +47,13 @@ third_party_settings:
       weight: 2
       format_type: tab
       format_settings:
-        id: ''
-        classes: ''
+        label: 'Landing Page Promo'
         formatter: closed
         description: ''
         required_fields: true
-      label: 'Liftup metadata'
+        id: ''
+        classes: ''
+      label: 'Landing Page Promo'
 _core:
   default_config_hash: A3evv2pt6d-bKCPcgjXA5VGTemXWOxG3lSXvWiRWcck
 id: node.webform.default
@@ -89,14 +87,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_select
-    region: content
-  field_icon:
-    weight: 6
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
-    type: image_image
     region: content
   field_icon_ref:
     weight: 5
@@ -180,7 +170,8 @@ content:
     region: content
   webform:
     weight: 6
-    settings: {  }
+    settings:
+      default_data: true
     third_party_settings: {  }
     type: webform_entity_reference_select
     region: content

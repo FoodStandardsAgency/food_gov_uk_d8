@@ -34,6 +34,8 @@ drush: {
 drush_use_launcher: False
 php_env_vars_include_db: True
 
+firewall_web_whitelist_enabled: true
+
 # Variables to create/update UpCloud Servers
 upcloud_project_name: "{{ project_name }}"
 #upcloud_server_admin_ssh_keys:

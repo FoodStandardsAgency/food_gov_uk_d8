@@ -102,6 +102,10 @@
       }
     }
   }
+
+  .field__field_lander_row__item & {
+    padding-bottom: 0;
+  }
 }
 
 .listing__header {

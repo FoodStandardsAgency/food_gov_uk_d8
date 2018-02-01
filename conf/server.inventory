@@ -6,7 +6,7 @@ prod-lb
 # Alias prod servers for all subgroups
 
 [stage]
-94.237.80.83
+83.136.254.252
 
 [develop]
 83.136.248.137

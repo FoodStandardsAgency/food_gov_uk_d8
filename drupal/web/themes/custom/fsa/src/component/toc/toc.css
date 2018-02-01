@@ -16,14 +16,27 @@
   margin: 0;
   padding: 0;
   padding-left: 0em;
-  padding-top: 1em;
+  padding-top: 0em;
+  display: flex;
+  flex-flow: row wrap;
+
+  @media (--breakpoint-md) {
+    display: block;
+    padding-top: 1em;
+  }
 
   li {
-    margin-bottom: 1em;
+    flex: 0 0 50%;
+
+    @media (--breakpoint-md) {
+      margin-bottom: 1em;
+    }
   }
 
   a {
+    display: block;
     color: var(--primary-color);
+    padding: 0.25em 0;
 
     :--not-touch &:--enter {
       color: var(--darker-primary-color);
@@ -31,6 +44,7 @@
     }
 
     @media (--breakpoint-md) {
+      padding: 0;
       position: relative;
       display: block;
       font-weight: 400;

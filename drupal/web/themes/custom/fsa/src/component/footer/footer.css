@@ -1,20 +1,33 @@
 @import "../../core/helper";
 @import "../../core/custom-property";
 
+
+.footer-top-wrapper {
+  position: relative;
+  z-index: var(--z-top);
+}
+
+.footer-top-wrapper__container {
+  background-color: var(--color-light-gray);
+}
+
+.footer-top-wrapper__content {
+  max-width: var(--max-width-medium);
+  margin: 0 auto;
+}
+
 .footer-wrapper {
   position: relative;
   z-index: var(--z-top);
-  border-top: 0.5em solid var(--color-green);
-  background-color: var(--dark-secondary-color);
   color: var(--color-white);
 }
 
 .footer-wrapper__content {
+  border-top: 0.5em solid var(--color-green);
   background-color: var(--dark-secondary-color);
 }
 
 .footer {
-  padding: 1em;
   @mixin responsive-declaration padding-top, 1em, 2em;
   @mixin responsive-declaration padding-bottom, 1em, 2em;
   display: flex;
@@ -24,6 +37,17 @@
 
   @media (--breakpoint-md) {
     flex-flow: row nowrap;
+    align-items: flex-start;
+  }
+
+  .social-media {
+    padding: 1em 0em;
+
+    @media (--breakpoint-md) {
+      flex: 0 0 auto;
+      padding: 0em;
+      margin-left: auto;
+    }
   }
 
   .social-media__link {
@@ -31,8 +55,8 @@
     padding: 0.25em;
 
     .svg {
-      @mixin responsive-declaration width, 2em, 2.2em;
-      @mixin responsive-declaration height, 2em, 2.2em;
+      @mixin responsive-declaration width, 3em, 2.2em;
+      @mixin responsive-declaration height, 3em, 2.2em;
 
       path {
         fill: var(--color-white) !important;
@@ -55,35 +79,58 @@
   text-align: center;
 }
 
+.footer__paragraph {
+  font-size: 0.8889em;
+  padding: 1em 0em;
+  margin: 0;
+
+  @media (--breakpoint-md) {
+    flex: 0 0 auto;
+  }
+}
+
 .footer__links {
-  @mixin responsive-declaration padding, 1em, 2em;
-  text-align: center;
   
   @media print {
     display: none;
   }
 
   & > ul {
+    margin: 0em;
     padding: 0;
+    text-align: center;
+    margin: 0 -0.5em;
+
+    @media (--breakpoint-md) {
+      text-align: left;
+    }
 
     & > li {
-      display: inline-block;
-      margin: 0.5em;
+      display: block;
+      margin: 0 0.5em;
+
+      @media (--breakpoint-md) {
+        display: inline-block;
+      }
 
       & > a {
-        padding: 1em 0em;
-        font-size: 1em;
-        font-weight: 600;
+        display: block;
+        padding: 0.5em 0em;
+        font-size: 0.8889em;
         background-color: transparent;
         color: var(--color-white);
         border-radius: 0em;
         transform: translateX(0%);
         box-shadow: none;
+        text-decoration: underline;
+
+        @media (--breakpoint-md) {
+          text-decoration: none;
+        }
 
         :--not-touch &:--enter {
           background-color: transparent;
           box-shadow: none !important;
-          color: var(--primary-color);
           text-decoration: underline;
         }
       }

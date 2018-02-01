@@ -15,6 +15,16 @@ use Drupal\Component\Utility\Html;
 function fsa_preprocess_html(&$variables) {
   $routematch = \Drupal::routeMatch();
   $routename = $routematch->getRouteName();
+  $user = \Drupal::currentUser();
+
+  if ($user->isAuthenticated()) {
+    $variables['attributes']['class'][] = 'logged-in';
+  }
+
+  // Add class(es) if logged in.
+  if ($user->hasPermission('edit content')) {
+    $variables['attributes']['class'][] = 'has-cms-toolbar';
+  }
 
   // Add class to body if frontpage.
   $is_front = \Drupal::service('path.matcher')->isFrontPage();
