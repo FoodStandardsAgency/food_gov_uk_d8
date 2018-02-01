@@ -205,7 +205,7 @@ table {
     padding-left: 1em;
 
     li:not(:last-child) {
-      margin-bottom: 0.25em;
+      margin-bottom: 0em;
     }
   }
 
@@ -224,7 +224,7 @@ table {
       }
 
       &:not(:last-child) {
-        margin-bottom: 0.25em;
+        margin-bottom: 0em;
       }
 
       &:after {
@@ -234,13 +234,19 @@ table {
         @mixin responsive-declaration height, 1.3em, 1.5em;
         position: absolute;
         left: 0;
-        top: 0;
+        top: 0.07em;
         border-radius: 50%;
         background-color: var(--primary-color);
         transform: scale(0.3333);
         box-shadow: inset 0em 0em 0em 2px var(--primary-color);
       }
     }
+  }
+
+  h3 {
+    @mixin responsive-declaration font-size, 1.125em, 1.33em;
+    @mixin responsive-declaration line-height, 1.2, 1.17;
+    margin-bottom: 0em;
   }
 }
 

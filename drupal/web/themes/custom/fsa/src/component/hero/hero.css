@@ -382,14 +382,36 @@
 
 /* Manage subcriptions */
 .manage-subcriptions {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  
   a {
+    position: relative;
     color: var(--color-white);
-    font-size: 0.8em;
+    font-size: 0.8889em;
+    padding-left: 2.25em;
+    text-decoration: underline;
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 1.75em;
+      height: 1.75em;
+      transform: translateY(-50%);
+      background-image: var(--icon-gear-primary);
+      background-position: 50% 50%;
+      background-size: 60% auto;
+      background-repeat: no-repeat;
+      background-color: var(--color-white);
+      border-radius: 50%;
+    }
   
     @media (--breakpoint-lg) {
       font-size: 0.9em;
     }
-
+    
     :--not-touch &:--enter {
       text-decoration: underline;
     }

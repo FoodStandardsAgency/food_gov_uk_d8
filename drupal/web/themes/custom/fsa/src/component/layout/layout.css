@@ -120,7 +120,20 @@
   /* Secondary sidebar */
   &.layout__sidebar--secondary {
     left: auto;
-    right: 0;
+
+    @media (--breakpoint-md) {
+      right: 0em;
+      padding-top: 0em;
+    }
+
+    @media (--breakpoint-lg) {
+      right: 5em;
+      padding-top: 2em;
+    }
+
+    @media (min-width: 100em) {
+      right: 10em;
+    }
 
     &.is-sticky {
       @media (--breakpoint-md) {
@@ -131,12 +144,12 @@
     
       @media (--breakpoint-lg) {
         left: auto;
-        right: 4em;
+        right: 9em;
       }
     
       @media (min-width: 100em) {
         left: auto;
-        right: calc(50% - 40em);
+        right: calc(50% - 30em);
       }
     }
   
@@ -145,7 +158,15 @@
         position: absolute;
         top: auto;
         left: auto;
-        right: 0;
+        right: 0em;
+      }
+  
+      @media (--breakpoint-lg) {
+        right: 5em;
+      }
+  
+      @media (min-width: 100em) {
+        right: 10em;
       }
     }
   }
@@ -208,16 +229,26 @@
   }
 
   .layout--with-secondary-sidebar & {
-    @mixin responsive-declaration padding-left, 1em, 4em;
+    max-width: none !important;
 
     @media (--breakpoint-md) {
       margin-left: 0em !important;
+      padding-left: 2em;
+      padding-top: 2em;
       margin-right: 18em;
+      padding-right: 1.5em;
     }
-  
+
     @media (--breakpoint-lg) {
-      margin-left: 0em !important;
-      margin-right: 22em;
+      padding-left: 5em;
+      padding-right: 4em;
+      padding-top: 4em;
+      margin-right: 27em;
+    }
+
+    @media (min-width: 100em) {
+      padding-left: 10em;
+      margin-right: 32em;
     }
   }
 }

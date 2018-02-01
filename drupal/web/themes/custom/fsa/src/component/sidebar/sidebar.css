@@ -22,6 +22,16 @@
     }
   }
 
+  .layout__sidebar--secondary & {
+    @media (--breakpoint-md) {
+      padding-left: 1.5em;
+    }
+
+    @media (--breakpoint-lg) {
+      padding-left: 4em;
+    }
+  }
+
   :--heading {
     @mixin reset-font-style;
     font-weight: 600;

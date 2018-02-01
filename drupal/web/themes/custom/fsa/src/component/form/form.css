@@ -321,6 +321,11 @@ input[type="password"] {
   .send-password-email-form &,
   .user-login-form & {
     background-color: var(--color-lighter-gray);
+    width: 100%;
+
+    :--not-touch &:--enter {
+      background-color: var(--color-white);
+    }
   }
 }
 
@@ -638,6 +643,7 @@ input[type="password"] {
   }
 }
 
+/* Preview */
 .webform-preview {
   @mixin responsive-declaration margin-top, 1.5em, 4em;
   @mixin responsive-declaration margin-bottom, 1.5em, 2em;
@@ -814,5 +820,25 @@ input[type="password"] {
       clear: both;
       display: table;
     }
+  }
+}
+
+/* Login form */
+.user-login-form {
+  a {
+    text-decoration: underline;
+    display: block;
+    padding-bottom: 2em;
+    border-bottom: 1px solid var(--color-light-gray);
+
+    :--not-touch &:--enter {
+      color: var(--darker-primary-color);
+    }
+  }
+
+  .description {
+    padding-top: 0.5em;
+    font-size: 0.8889em;
+    color: var(--color-gray);
   }
 }
