@@ -50,7 +50,7 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
     $email = $user->getEmail();
     $message = '<h1>' . $this->t('Confirm removal') . '</h1>';
     $message .= '<p>' . $this->t('You are about to remove subscription with email <strong>@email</strong>.', ['@email' => $email]) . '</p>';
-    $message .= '<p>' . $this->t('This will cancel all your subscriptions and permanently remove your personal details..') . '</p>';
+    $message .= '<p>' . $this->t('This will cancel all your subscriptions and permanently remove your personal details.') . '</p>';
     $message .= '<p>' . $privacy_link . '</p>';
     return $message;
   }
