@@ -51,6 +51,15 @@
         user: nginx
       tags: ['cron']
       when: ansible_eth0.ipv4.address == groups['prod-front'][0] and drupal_web_root is defined
+    - name: "Fetch Alerts from Epimorphics server"
+      cron:
+        name: "Run Migrate API task to pull alerts from the API"
+        minute: "*/10"
+        job: "/usr/lib/composer/vendor/bin/drush --root={{ drupal_web_root }} mi --tag=alerts"
+        state: "present"
+        user: nginx
+      tags: ['cron']
+      when: ansible_eth0.ipv4.address == groups['prod-front'][0] and drupal_web_root is defined
 
   vars:
 
