@@ -499,6 +499,8 @@
   }
 
   .navigation__item.navigation__item--level-1:first-child > & {
+    color: var(--primary-color);
+
     @media (--breakpoint-sm) {
       color: transparent;
       position: relative;
@@ -510,7 +512,11 @@
     }
 
     :--not-touch &:--enter {
-      color: transparent;
+      color: var(--color-black);
+
+      @media (--breakpoint-sm) {
+        color: transparent;
+      }
     }
   
     &:after {
@@ -777,11 +783,12 @@
 .menu-utility {
   display: flex;
   flex-direction: column;
-  font-size: 0.8889em;
+  font-size: 1em;
   font-weight: 600;
 
   @media (--breakpoint-sm) {
     flex-direction: row;
+    font-size: 0.8889em;
   }
 
   .header & {
@@ -898,7 +905,7 @@
   }
 
   .theme--search & ul {
-    max-width: var(--max-width-medium);
+    max-width: var(--max-width-small);
     width: 100%;
     justify-content: space-between;
   }

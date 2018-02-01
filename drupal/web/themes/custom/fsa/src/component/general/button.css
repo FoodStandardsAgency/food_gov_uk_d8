@@ -9,6 +9,7 @@
   background-color: var(--dark-primary-color);
   color: var(--color-white);
   font-size: 1.1em;
+  @mixin responsive-declaration line-height, 1.7, 1.6;
   text-decoration: none;
   border: 0;
   border-radius: 2em;

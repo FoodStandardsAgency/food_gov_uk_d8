@@ -129,6 +129,7 @@ input, textarea, select {
   font-family: var(--font-family-content);
   display: block;
   max-width: 100%;
+  width: auto;
   font-size: 1em;
   padding: 0.5em 1em;
   border-radius: 0em;
@@ -141,11 +142,10 @@ input, textarea, select {
 }
 
 input {
-  &:not([type="radio"],
-  &[type="checkbox"],
-  &[type="submit"],
-  &[type="number"]) {
-    width: 100%;
+  &:not([type="radio"],[type="checkbox"],[type="submit"],[type="number"]) {
+    .profile-manager & {
+      width: 100%;
+    }
   }
 
   &.date {
@@ -344,14 +344,6 @@ input[type="password"] {
   }
 }
 
-.webform {
-  padding-top: 2em;
-
-  .footer-top & {
-    padding-top: 0em;
-  }
-}
-
 .webform__container {
   max-width: 80em;
 }
@@ -469,8 +461,8 @@ input[type="password"] {
     display: block;
     padding: 0;
     margin: 0;
-    @mixin responsive-declaration margin-top, 1em, 1.5em;
-    /* margin-top: 1em; */
+    /* @mixin responsive-declaration margin-top, 1em, 1.5em; */
+    margin-top: 1em;
     @mixin responsive-declaration margin-bottom, 1em, 1.5em;
     /* margin-bottom: 1em; */
   }
@@ -543,11 +535,6 @@ input[type="password"] {
 
   .form-actions {
     display: flex;
-    @mixin responsive-declaration margin-top, 1.5em, 4em;
-
-    .footer-top & {
-      margin-top: 0 !important;
-    }
   
     @media (--breakpoint-md) {
       justify-content: flex-end;

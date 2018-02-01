@@ -144,6 +144,11 @@
     }
   }
 
+  .toggle-button__item.toggle-button__item--icon {
+    margin-left: auto;
+    padding-right: 2em;
+  }
+
   .form-item {
     &.js-form-type-radio {
       margin-bottom: 0em;

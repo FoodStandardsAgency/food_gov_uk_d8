@@ -80,6 +80,20 @@ h6 {
   }
 }
 
+.page-title {
+  color: var(--primary-color);
+
+  div& {
+    @mixin responsive-declaration padding-bottom, 1em, 2em;
+  }
+}
+
+.block-page-title {
+  .theme--help-centre & {
+    margin-bottom: 1em;
+  }
+}
+
 p {
   margin-bottom: 1.2em;
 
@@ -896,6 +910,17 @@ blockquote {
     margin-bottom: 1em;
   }
 
+  .theme--search & {
+    padding-top: 0em;
+    font-weight: 700;
+    margin-bottom: 0em;
+
+    @media (--breakpoint-md) {
+      padding-top: 0em;
+      margin-bottom: 0em;
+    }  
+  }
+
   &:before {
     content: '';
     position: absolute;
@@ -910,11 +935,14 @@ blockquote {
     transform-origin: 0 50%;
     transition: transform var(--transition-enter);
 
-
     @media (--breakpoint-lg) {
       right: 0;
       width: auto;
       transform: scaleX(0.5);
+    }
+
+    .theme--search & {
+      display: none;
     }
   }
 

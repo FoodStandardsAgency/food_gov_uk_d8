@@ -215,7 +215,11 @@
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #bfc1c3;
-  font-size: 0.8999em;
+  font-size: 1em;
+
+  @media (--breakpoint-sm) {
+    font-size: 0.8999em;
+  }
 }
 
 /*Header region*/
