@@ -9,14 +9,14 @@
   justify-content: center;
   align-items: center;
   padding: 1em;
-  @mixin responsive-declaration margin-right, -1em, -4em;
-  @mixin responsive-declaration margin-left, -1em, -4em;
+  @mixin responsive-declaration margin-right, -1rem, -4rem;
+  @mixin responsive-declaration margin-left, -1rem, -4rem;
 }
 
 .views-result-total {
   font-family: var(--font-family-heading);
   @mixin responsive-declaration font-size, 1.25em, 1.75em;
-  padding-bottom: 0.5em;
+  padding-bottom: 0.5rem;
 }
 
 .views-result-total__number {
