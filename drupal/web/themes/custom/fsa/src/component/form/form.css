@@ -663,8 +663,8 @@ input[type="password"] {
     display: block;
     padding: 0;
     margin: 0;
-    @mixin responsive-declaration margin-top, 1.5em, 2em;
-    @mixin responsive-declaration margin-bottom, 1em, 2em;
+    margin-top: 1em;
+    margin-bottom: 1em;
   }
 
   details {
@@ -675,12 +675,13 @@ input[type="password"] {
     font-size: 1.2em;
     line-height: 1.2;
     font-weight: 700;
-    color: var(--color-black);
+    color: var(--dark-primary-color);
     cursor: pointer;
-  }
-  
-  :--not-touch .webform-preview summary:--enter {
-    color: var(--light-primary-color);
+
+    :--not-touch &:--enter {
+      color: var(--darker-primary-color);
+      text-decoration: underline;
+    }
   }
 }
 
