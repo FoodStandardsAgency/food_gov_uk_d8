@@ -301,7 +301,7 @@ a.field__field_content_promo__item {
   padding-bottom: 0;
   margin: 0;
   padding: 1em;
-  @mixin responsive-declaration margin-bottom, 1em, 2em;
+  margin-bottom: 1em;
 
   .field {
     margin-bottom: 0 !important;
@@ -430,6 +430,13 @@ a.field__field_content_promo__item {
       width: 5em;
       height: 5em;
     }
+
+    svg {
+      transform:
+        translateY(-50%)
+        translateX(-50%)
+        scale(0.9);
+    }
     
 
     path {
@@ -495,6 +502,10 @@ a.field__field_content_promo__item {
 
   :--not-touch .promo:--enter & {
     text-decoration: underline;
+  }
+
+  :--not-touch .promo--inline-content:--enter & {
+    text-decoration: none;
   }
 
   .field__field_large_promo & {
@@ -579,6 +590,10 @@ a.field__field_content_promo__item {
   .promo--light & {
     font-family: var(--font-family-heading) !important;
     font-weight: 700 !important;
+    color: var(--dark-primary-color);
+  }
+
+  .promo--inline-content & {
     color: var(--dark-primary-color);
   }
 }
