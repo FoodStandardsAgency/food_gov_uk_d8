@@ -413,14 +413,14 @@ a.field__field_content_promo__item {
 .promo__icon {
   flex: 0 0 auto;
   position: relative;
-  width: 2.5em;
-  height: 2.5em;
+  width: 3.5em;
+  height: 3.5em;
   border-radius: 20em;
   background-color: var(--dark-primary-color);
 
   @media (--breakpoint-xs) {
-    width: 3.5em;
-    height: 3.5em;
+    width: 4.5em;
+    height: 4.5em;
   }
 
   @media (--breakpoint-md) {
@@ -429,14 +429,14 @@ a.field__field_content_promo__item {
   }
 
   .svg {
-    width: 2.5em;
-    height: 2.5em;
+    width: 3.5em;
+    height: 3.5em;
     transform:
       scale(0.75);
 
     @media (--breakpoint-xs) {
-      width: 3.5em;
-      height: 3.5em;
+      width: 4.5em;
+      height: 4.5em;
     }
   
     @media (--breakpoint-md) {
@@ -678,6 +678,11 @@ a.field__field_content_promo__item {
 
   .promo--inline-content & {
     padding-bottom: 0;
+    display: none;
+
+    @media (--breakpoint-md) {
+      display: block;
+    }
   }
 }
 

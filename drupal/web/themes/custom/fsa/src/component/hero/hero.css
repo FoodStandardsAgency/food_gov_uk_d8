@@ -59,6 +59,7 @@
     }
   }
 
+  .theme--help &,
   .theme--fhrs & {
     padding-bottom: 1em;
 
