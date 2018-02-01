@@ -7,6 +7,8 @@ Module for all small customization that do not make sense to put in separate mod
 * Alter WYSIWYG allowed tags
 * Creates "Year select" plugin for views
 * Creates FSA Hero block
+  * Contact section static hero.
+  * FHRS Establishment static hero.
 * Handles "Page title" block visibilities
   * The Page title block is set to Hero AND Content region and shown in either region based on template requirements. 
 
