@@ -8,6 +8,7 @@ dependencies:
     - field.storage.fsa_authority.field_regionname
     - taxonomy.vocabulary.fhrs_region
     - user.role.administrator
+    - user.role.fsa_admin
   module:
     - fsa_ratings
     - taxonomy
@@ -31,6 +32,7 @@ display:
         type: role
         options:
           role:
+            fsa_admin: fsa_admin
             administrator: administrator
       cache:
         type: tag
