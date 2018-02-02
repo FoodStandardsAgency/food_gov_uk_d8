@@ -1,0 +1,101 @@
+progress:
+  '#changed': 1517573934
+  '#changed_by': '1'
+  '#completed_items': 32
+  '#items':
+    install_and_enable_seo_checklist_module:
+      '#completed': 1517573934
+      '#uid': '1'
+    install_and_enable_admin_toolbar_module:
+      '#completed': 1517573934
+      '#uid': '1'
+    install_composer_command_line_tool:
+      '#completed': 1517573934
+      '#uid': '1'
+    install_console_command_line_tool:
+      '#completed': 1517573934
+      '#uid': '1'
+    install_drush_command_line_tool:
+      '#completed': 1517573934
+      '#uid': '1'
+    enable_clean_urls:
+      '#completed': 1517573934
+      '#uid': '1'
+    install_and_enable_redirect_module:
+      '#completed': 1517573934
+      '#uid': '1'
+    configure_the_redirect_module:
+      '#completed': 1517573934
+      '#uid': '1'
+    install_and_enable_pathauto_module:
+      '#completed': 1517573934
+      '#uid': '1'
+    configure_pathauto_module:
+      '#completed': 1517573934
+      '#uid': '1'
+    create_pathauto_patterns:
+      '#completed': 1517573934
+      '#uid': '1'
+    install_and_enable_metatag_module:
+      '#completed': 1517573934
+      '#uid': '1'
+    install_and_enable_xml_sitemap_module:
+      '#completed': 1517573934
+      '#uid': '1'
+    configure_xml_sitemap_module:
+      '#completed': 1517573934
+      '#uid': '1'
+    set_up_cron:
+      '#completed': 1517573934
+      '#uid': '1'
+    get_a_google_account:
+      '#completed': 1517573934
+      '#uid': '1'
+    install_and_enable_easy_breadcrumbs_module:
+      '#completed': 1517573934
+      '#uid': '1'
+    configure_easy_breadcrumbs_module:
+      '#completed': 1517573934
+      '#uid': '1'
+    install_and_enable_linkit_module:
+      '#completed': 1517573934
+      '#uid': '1'
+    configure_linkit_module:
+      '#completed': 1517573934
+      '#uid': '1'
+    configure_text_formats_to_use_linkit_module:
+      '#completed': 1517573934
+      '#uid': '1'
+    install_and_enable_d8_editor_advanced_link_module:
+      '#completed': 1517573934
+      '#uid': '1'
+    configure_text_formats_to_use_d8_editor_advanced_link_module:
+      '#completed': 1517573934
+      '#uid': '1'
+    install_and_enable_diff_module:
+      '#completed': 1517573934
+      '#uid': '1'
+    secure_your_website_with_https:
+      '#completed': 1517573934
+      '#uid': '1'
+    adjust_performance_admin_settings:
+      '#completed': 1517573934
+      '#uid': '1'
+    configure_image_styles:
+      '#completed': 1517573934
+      '#uid': '1'
+    set_up_a_cdn_cloudflare_etc:
+      '#completed': 1517573934
+      '#uid': '1'
+    move_to_fast_hosting:
+      '#completed': 1517573934
+      '#uid': '1'
+    make_sure_website_is_responsive:
+      '#completed': 1517573934
+      '#uid': '1'
+    install_and_enable_share_buttons_by_addtoany:
+      '#completed': 1517573934
+      '#uid': '1'
+    configure_share_buttons_by_addtoany:
+      '#completed': 1517573934
+      '#uid': '1'

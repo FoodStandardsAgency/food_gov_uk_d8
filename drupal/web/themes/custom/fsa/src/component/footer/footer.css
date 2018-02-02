@@ -24,6 +24,10 @@
     }
   }
 
+  .ext {
+    display: none;
+  }
+
   &:--enter .svg path {
     transition: fill var(--transition-enter-fast);
   }
