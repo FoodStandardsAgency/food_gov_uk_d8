@@ -26,22 +26,27 @@ class FsaHero extends BlockBase {
     $build = [];
     $route = \Drupal::routeMatch();
     $route_name = $route->getRouteName();
+    $node = $route->getParameter('node');
 
-    // Example to display something on a help CT.
-    /*
-     *   // Get node object and continue only if it exists.
-     *   $node = $route->getParameter('node');
-     *   if (is_object($node)) {
-     *     if ($node->getType() == 'help') {
-     *       $build['fsa_hero'] = [
-     *         '#theme' => $theme,
-     *         '#attributes' => ['class' => ['extraclass']],
-     *         '#title' => $this->t('Contact us'),
-     *         '#copy' => $this->t('Example copy text'),
-     *       ];
-     *     }
-     *   }
-     */
+    // Add hero's on node content.
+    if (is_object($node)) {
+
+      // Most help and webform nodes should have the contact hero.
+      if (in_array($node->getType(), ['help', 'webform'])) {
+        // And query if the node is set to help menu, on true set the content.
+        $query = \Drupal::entityQuery('menu_link_content')
+          ->condition('link.uri', 'entity:node/' . $node->id())
+          ->condition('menu_name', 'help');
+        $result = $query->execute();
+        if ((!empty($result)) ? reset($result) : FALSE) {
+          $build['fsa_hero'] = [
+            '#theme' => $theme,
+            '#title' => $this->t('Contact us'),
+            '#copy' => ['#markup' => $this->t('Report a food problem, give us feedback or find our contact details.')],
+          ];
+        }
+      }
+    }
 
     // Static hero content for all hygiene rating related pages.
     if ($route_name == 'fsa_ratings.ratings_meanings' ||

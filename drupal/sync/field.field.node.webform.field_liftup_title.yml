@@ -9,7 +9,7 @@ id: node.webform.field_liftup_title
 field_name: field_liftup_title
 entity_type: node
 bundle: webform
-label: 'Liftup title override'
+label: 'Promo title override'
 description: 'Use this field to override the page original title when referencing from another node.'
 required: false
 translatable: true

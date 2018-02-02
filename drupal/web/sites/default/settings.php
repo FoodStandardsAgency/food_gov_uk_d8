@@ -92,22 +92,46 @@ $config['elasticsearch_helper.settings']['elasticsearch_helper']['host'] = geten
 $env = getenv('WKV_SITE_ENV');
 switch ($env) {
   case 'prod':
-		$settings['simple_environment_indicator'] = '#d4000f Production';
+    $settings['simple_environment_indicator'] = '#d4000f Production';
     $settings['file_private_path'] = '/var/www/fsa.prod.wunder.io/private-files';
-	break;
+
+    // GTM Environment overrides.
+    $config['google_tag.settings']['environment_id'] = 'env-2';
+    $config['google_tag.settings']['environment_token'] = 'qiSnyllzn5flpcJTEzjYGA';
+
+    break;
+
   case 'develop':
     $settings['simple_environment_indicator'] = '#004984 Development';
-	break;
-  case 'stage':
-		$settings['simple_environment_indicator'] = '#e56716 Stage';
-	break;
-  case 'local':
-		$settings['simple_environment_indicator'] = '#88b700 Local';
 
-		$config['config_split.config_split.dev']['status'] = TRUE;
+    // GTM Environment overrides.
+    $config['google_tag.settings']['environment_id'] = 'env-6';
+    $config['google_tag.settings']['environment_token'] = '4d3H88TmNOCwXVDx0PK8bg';
+
+    break;
+
+  case 'stage':
+    $settings['simple_environment_indicator'] = '#e56716 Stage';
+
+    // GTM Environment overrides.
+    $config['google_tag.settings']['environment_id'] = 'env-5';
+    $config['google_tag.settings']['environment_token'] = 'nNEwJ_lItnO48_pabdUErg';
+
+    break;
+
+  case 'local':
+    $settings['simple_environment_indicator'] = '#88b700 Local';
+
+    $config['config_split.config_split.dev']['status'] = TRUE;
     $settings['config_readonly'] = FALSE;
-	break;
+
+    // GTM Environment (below values should be as default configurations).
+    $config['google_tag.settings']['environment_id'] = 'env-7';
+    $config['google_tag.settings']['environment_token'] = 'a4fGxt3oZ4lNeD1SjVDqdA';
+
+    break;
 }
+
 /**
  * Location of the site configuration files.
  */

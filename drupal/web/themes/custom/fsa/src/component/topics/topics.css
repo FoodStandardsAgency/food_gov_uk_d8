@@ -19,12 +19,12 @@
 
 .topics__letter {
   list-style: none;
-  padding: 0.25em;
+  padding: 0.5em;
 
   a {
     display: block;
-    margin: -0.25em;
-    padding: 0.25em;
+    margin: -0.5em;
+    padding: 0.5em;
 
     @media (--breakpoint-md) {
       margin: -0.5em;

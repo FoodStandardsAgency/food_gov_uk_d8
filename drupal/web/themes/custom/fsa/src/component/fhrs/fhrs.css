@@ -285,12 +285,12 @@
   z-index: var(--z-bottom);
   flex: 1 1 100%;
   min-height: 100vh;
-  @mixin responsive-declaration padding-bottom, 1em, 3em;
+  @mixin responsive-declaration padding-bottom, 2em, 3em;
   @mixin responsive-declaration padding-right, 1em, 4em;
   @mixin responsive-declaration padding-left, 1em, 4em;
 
   &.ratings__content--frontpage {
-    @mixin responsive-declaration padding-top, 1em, 3em;
+    @mixin responsive-declaration padding-top, 2em, 3em;
   }
 
   &.ratings__content--listing {
@@ -306,11 +306,6 @@
     :--not-touch &:--enter {
       color: var(--color-darker-teal);
     }
-  }
-
-  p {
-    margin-top: 0;
-    margin-bottom: 0;
   }
 }
 
@@ -575,8 +570,16 @@
   font-weight: bold;
 }
 
+/* Establishment */
+.establishment {
+  .field {
+    margin-bottom: 0 !important;
+  }
+}
+
 .establishment__container {
-  max-width: 80em;
+  max-width: var(--max-width-medium);
+  margin: 0 auto;
 }
 
 .establishment__meta {

@@ -158,9 +158,14 @@
   .listing & {
     text-transform: uppercase;
     font-weight: 700;
+    line-height: 1.2;
 
     @media (--breakpoint-md) {
-      margin-bottom: 1em;
+      margin-bottom: 0.5em;
+    }
+
+    & > .field {
+      margin-bottom: 0 !important;
     }
   }
 }
@@ -194,12 +199,18 @@
     :--heading {
       @mixin reset-font-style;
       font-weight: 600;
+      margin-bottom: 0em;
+
+      @media (--breakpoint-md) {
+        margin-bottom: 0.8em;
+      }
     }
 
     .field__field_update_date {
       display: none;
     }
 
+    .field__field_alert_description,
     .field__field_intro,
     .field__body {
       display: none;

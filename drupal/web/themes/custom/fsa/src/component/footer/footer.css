@@ -1,6 +1,48 @@
 @import "../../core/helper";
 @import "../../core/custom-property";
 
+.social-media {
+  padding: 1em 0em;
+
+  @media (--breakpoint-md) {
+    flex: 0 0 auto;
+    padding: 0em;
+    margin-left: auto;
+  }
+}
+
+.social-media__link {
+  display: inline-block;
+  padding: 0.25em;
+
+  .svg {
+    @mixin responsive-declaration width, 3em, 2.2em;
+    @mixin responsive-declaration height, 3em, 2.2em;
+
+    path {
+      fill: var(--color-white) !important;
+    }
+  }
+
+  &:--enter .svg path {
+    transition: fill var(--transition-enter-fast);
+  }
+}
+
+.footer-top-wrapper {
+  position: relative;
+  z-index: var(--z-top);
+}
+
+.footer-top-wrapper__container {
+  background-color: var(--color-light-gray);
+}
+
+.footer-top-wrapper__content {
+  max-width: var(--max-width-medium);
+  margin: 0 auto;
+}
+
 .footer-wrapper {
   position: relative;
   z-index: var(--z-top);
@@ -23,34 +65,6 @@
   @media (--breakpoint-md) {
     flex-flow: row nowrap;
     align-items: flex-start;
-  }
-
-  .social-media {
-    padding: 1em 0em;
-
-    @media (--breakpoint-md) {
-      flex: 0 0 auto;
-      padding: 0em;
-      margin-left: auto;
-    }
-  }
-
-  .social-media__link {
-    display: inline-block;
-    padding: 0.25em;
-
-    .svg {
-      @mixin responsive-declaration width, 2em, 2.2em;
-      @mixin responsive-declaration height, 2em, 2.2em;
-
-      path {
-        fill: var(--color-white) !important;
-      }
-    }
-
-    &:--enter .svg path {
-      transition: fill var(--transition-enter-fast);
-    }
   }
 }
 
@@ -81,27 +95,37 @@
   }
 
   & > ul {
-    margin: 0 0.5em;
+    margin: 0em;
     padding: 0;
     text-align: center;
+    margin: 0 -0.5em;
 
     @media (--breakpoint-md) {
       text-align: left;
     }
 
     & > li {
-      display: inline-block;
+      display: block;
       margin: 0 0.5em;
+
+      @media (--breakpoint-md) {
+        display: inline-block;
+      }
 
       & > a {
         display: block;
-        padding: 1em 0em;
+        padding: 0.5em 0em;
         font-size: 0.8889em;
         background-color: transparent;
         color: var(--color-white);
         border-radius: 0em;
         transform: translateX(0%);
         box-shadow: none;
+        text-decoration: underline;
+
+        @media (--breakpoint-md) {
+          text-decoration: none;
+        }
 
         :--not-touch &:--enter {
           background-color: transparent;

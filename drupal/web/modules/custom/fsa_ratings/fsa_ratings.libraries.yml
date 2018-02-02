@@ -1,0 +1,6 @@
+ratings_search:
+  version: 1.x
+  js:
+    js/ratings-search.js: {}
+  dependencies:
+    - core/jquery

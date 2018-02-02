@@ -4,8 +4,8 @@ extlink_alert_text: ''
 extlink_alert: false
 extlink_target: true
 extlink_subdomains: false
-extlink_mailto_class: '0'
+extlink_mailto_class: mailto
 extlink_img_class: false
-extlink_class: '0'
+extlink_class: ext
 extlink_css_exclude: ''
 extlink_css_explicit: ''

@@ -8,6 +8,8 @@
   letter-spacing: 0.02em;
   background-color: var(--dark-primary-color);
   color: var(--color-white);
+  font-size: 1.1em;
+  @mixin responsive-declaration line-height, 1.7, 1.6;
   text-decoration: none;
   border: 0;
   border-radius: 2em;
@@ -36,6 +38,10 @@
   :--not-touch &:--enter {
     text-decoration: none;
     background-color: var(--darker-primary-color);
+  }
+
+  @media (--breakpoint-md) {
+    font-size: 1em;
   }
 }
 

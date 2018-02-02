@@ -126,28 +126,28 @@
                     <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Facebook_icon"></use></svg>
                   </div>
                 </a>
-        
+
                 <a href="https://twitter.com/foodgov" class="social-media__link">
                   <div class="svg">
                     <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Twitter_icon"></use></svg>
                   </div>
                 </a>
-        
+
                 <a href="https://www.linkedin.com/company/food-standards-agency" class="social-media__link">
                   <div class="svg">
                     <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#LinkedIN_icon"></use></svg>
                   </div>
                 </a>
-        
+
                 <a href="https://www.youtube.com/user/FoodStandardsAgency" class="social-media__link">
                   <div class="svg">
                     <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Youtube_icon"></use></svg>
                   </div>
                 </a>
-        
+
                 <a href="https://www.instagram.com/foodgov/" class="social-media__link">
                   <div class="svg">
-                    <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Instagram_icon"></use></svg>
+                    <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#instagram-icon"></use></svg>
                   </div>
                 </a>
                   
@@ -207,9 +207,8 @@
     </div>
   {% endif %}
 
-  <main role="main" class="layout-content">
     <a id="main-content" tabindex="-1"></a>
-    <div class="layout{% if page.sidebar_first or page.sidebar_second %} layout--with-sidebar js-sticky-container{% else %} layout--with-no-sidebar{% endif %}{% if page.sidebar_second %} layout--with-secondary-sidebar{% endif %}">
+    <main role="main" class="layout layout--main {% if page.sidebar_first or page.sidebar_second %} layout--with-sidebar js-sticky-container{% else %} layout--with-no-sidebar{% endif %}{% if page.sidebar_second %} layout--with-secondary-sidebar{% endif %}">
       <div class="layout__container layout__container--main">
         {% if page.sidebar_first %}
           <aside class="layout__sidebar js-sticky-element" role="complementary">
@@ -243,8 +242,7 @@
           </aside>
         {% endif %}
       </div>
-    </div>
-  </main>
+    </main>
 
   <div class="layout">
     <div class="layout__container">
@@ -254,10 +252,12 @@
     </div>
   </div>
 
-  <div class="layout">
-    <div class="layout__container">
-      <div class="layout__content">
-        {{ page.footer_top }}
+  <div class="layout footer-top-wrapper">
+    <div class="layout__container footer-top-wrapper__container">
+      <div class="layout__content footer-top-wrapper__content">
+        <div class="footer-top">
+          {{ page.footer_top }}
+        </div>
       </div>
     </div>
   </div>

@@ -6,12 +6,14 @@
 function fsa_preprocess_fieldset(&$variables) {
 
   $add_attrs = [
+    'edit-type',
     'edit-audience',
+    'edit-topic',
     'edit-region',
     'edit-fhrs-rating-value--11',
     'edit-fhis-rating-value--11',
   ];
-
+  
   $variables['toggle_fieldset'] = false;
 
   if (in_array($variables['element']['#id'], $add_attrs)) {
