@@ -12,7 +12,7 @@
           close_text = Drupal.t('Close');
 
       // Supporting buttons to open/close the feedback form.
-      $(radios_fieldset).once().append('<button type="button" value="open" class="toggler open-feedback">'+open_text+'</button>');
+      $(radios_fieldset).once().append('<button id="open-feedback" type="button" value="open" class="toggler open-feedback">'+open_text+'</button>');
       $(wrapper_fieldset).once().prepend('<button type="button" value="close" class="toggler close-feedback">'+close_text+'</button>');
 
       if ($('.page-feedback .message-list').length === 0) {
