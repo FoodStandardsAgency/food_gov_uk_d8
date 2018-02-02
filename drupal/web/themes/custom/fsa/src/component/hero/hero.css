@@ -206,9 +206,10 @@
   }
 
   &.hero__background--pattern {
-    background-image: url('/themes/custom/fsa/dist/sprite.svg#pattern-usage');
-    background-position: 50% 50%;
+    background-image: url('/themes/custom/fsa/src/img/background/pattern.svg');
+    /* background-image: url('/themes/custom/fsa/dist/sprite.svg#pattern-usage'); */
     background-size: 1024px 426.6666666px;
+    background-position: 50% 50%;
     background-repeat: repeat;
     opacity: 0.1;
 

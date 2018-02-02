@@ -81,8 +81,13 @@
 }
 
 .header__logo .svg {
-  width: 7.5em;
-  height: 5em;
+  width: 5.5em;
+  height: 2em;
+
+  @media (--breakpoint-xxs) {
+    width: 7.5em;
+    height: 5em;
+  }
 
   @media (--breakpoint-sm) {
     width: 7em;
