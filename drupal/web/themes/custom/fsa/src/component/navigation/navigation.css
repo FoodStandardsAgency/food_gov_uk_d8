@@ -151,7 +151,7 @@
   }
 
   .header__logo {
-    padding: 0.6em 2.5em;
+
   }
 }
 
@@ -475,6 +475,7 @@
     text-decoration: none !important;
   }
 
+  :--not-touch .navigation__item:--enter > &,
   .navigation__item.active-trail > &,
   :--not-touch &:--enter {
     color: var(--color-black);
@@ -622,17 +623,16 @@
     }
   }
 
-  .navigation__item:hover > &,
-  .navigation__link:focus ~ & {
+  .navigation__item:hover > & {
     @media (--breakpoint-sm) {
       top: 100%;
       height: auto;
       opacity: 1;
       transform: translateY(0em);
       transition:
-        transform var(--transition-enter) 0.5s,
-        opacity var(--transition-enter) 0.5s,
-        top 0s step-end 0.5s;
+        transform var(--transition-enter) 0.3s,
+        opacity var(--transition-enter) 0.3s,
+        top 0s step-end 0.3s;
     }
   }
 
