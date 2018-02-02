@@ -9,6 +9,7 @@ module:
   block_class: 0
   block_content: 0
   breakpoint: 0
+  checklistapi: 0
   ckeditor: 0
   config: 0
   config_filter: 0
@@ -105,6 +106,7 @@ module:
   rdf: 0
   redirect: 0
   search: 0
+  seo_checklist: 0
   serialization: 0
   shortcut: 0
   shs: 0
