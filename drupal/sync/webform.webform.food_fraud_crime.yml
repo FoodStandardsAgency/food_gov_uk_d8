@@ -196,7 +196,7 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: foodcrime@food.gov.uk
+      to_mail: sally.barber@food.gov.uk
       to_options: {  }
       cc_mail: webmaster@food.gov.uk
       cc_options: {  }

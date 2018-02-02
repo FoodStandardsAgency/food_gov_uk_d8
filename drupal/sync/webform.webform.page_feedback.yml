@@ -79,11 +79,11 @@ settings:
   limit_total_message: ''
   limit_user: null
   limit_user_interval: null
-  limit_user_message: ''
+  limit_user_message: 'Thanks your feedback is registered.'
   entity_limit_total: null
   entity_limit_total_interval: null
-  entity_limit_user: null
-  entity_limit_user_interval: null
+  entity_limit_user: 2
+  entity_limit_user_interval: 900
   purge: none
   purge_days: null
   results_disabled: false
