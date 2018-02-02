@@ -4598,17 +4598,17 @@
         },
         {
             "name": "drupal/redirect",
-            "version": "1.0.0-beta1",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/redirect",
-                "reference": "8.x-1.0-beta1"
+                "reference": "8.x-1.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/redirect-8.x-1.0-beta1.zip",
-                "reference": "8.x-1.0-beta1",
-                "shasum": "0be21502538afc193a6817089476e7f6ddae2f6d"
+                "url": "https://ftp.drupal.org/files/projects/redirect-8.x-1.0.zip",
+                "reference": "8.x-1.0",
+                "shasum": "93021b77f225a3035fbee361a21850a36a8cd684"
             },
             "require": {
                 "drupal/core": "~8"
@@ -4619,11 +4619,11 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0-beta1",
-                    "datestamp": "1501443542",
+                    "version": "8.x-1.0",
+                    "datestamp": "1513767485",
                     "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Project has not opted into security advisory coverage!"
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
                     }
                 }
             },
