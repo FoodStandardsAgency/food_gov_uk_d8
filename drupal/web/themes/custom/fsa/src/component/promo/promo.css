@@ -1,12 +1,21 @@
 @import "../../core/helper";
 @import "../../core/custom-property";
 
+/* Global row wrapper */
+.field__field_lander_row {
+  margin-bottom: 0 !important;
+}
+
 /* Global row style */
 .field__field_lander_row__item {
   @mixin responsive-declaration padding-top, 1.5em, 3em;
   @mixin responsive-declaration padding-right, 1em, 4em;
   padding-bottom: 1em;
   @mixin responsive-declaration padding-left, 1em, 4em;
+
+  &:last-child {
+    padding-bottom: 0em;
+  }
 
   &.field__field_lander_row__item--odd {
 

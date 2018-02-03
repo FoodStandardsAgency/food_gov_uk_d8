@@ -1,4 +1,5 @@
 import 'babel-polyfill';
+import 'mutationobserver-shim';
 import './core/helper/polyfill/classList';
 import './core/helper/polyfill/closest';
 import svg4everybody from 'svg4everybody';

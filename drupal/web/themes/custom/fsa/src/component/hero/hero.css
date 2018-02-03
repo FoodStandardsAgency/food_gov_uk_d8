@@ -270,6 +270,8 @@
 
 /* Hero secondary-navigation */
 .hero__secondary-navigation {
+  width: 100%;
+  flex: 1 1 100%;
   @mixin responsive-declaration padding-right, 1em, 4em;
   @mixin responsive-declaration padding-left, 1em, 4em;
   display: flex;
