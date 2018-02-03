@@ -608,6 +608,11 @@ a.field__field_content_promo__item {
     display: inline-block;
     margin-bottom: 0em !important;
   }
+  
+  a.promo &,
+  a.field__field_content_promo__item & {
+    padding-right: 4em;
+  }
 }
 
 /* Heading */
