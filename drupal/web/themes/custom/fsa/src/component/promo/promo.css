@@ -140,56 +140,48 @@
   }
 }
 
-/* Promo wrapper */
-.promo-wrapper > .views-row-wrapper,
-.field__field_content_promo {
-  margin-bottom: 0 !important;
+/* Promo listing wrapper */
+.promo-listing-wrapper {
+  & > footer {
+    padding-top: 1em;
+    text-align: center;
+  }
+}
+
+/* Promo listing */
+.promo-listing-wrapper > .views-row-wrapper,
+.promo-listing {
+  margin-bottom: -1em !important;
 
   @media (--breakpoint-lg) {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    margin-left: -1em;
-    margin-right: -1em;
   }
 
-  & > .views-row {
-    flex: 0 1 20%;
-    flex: 0 1 calc(100% / 4 - 2em);
-    margin-right: 0em;
-    margin-left: 0em;
-
-    @media (--breakpoint-md) {
-      margin: 1em;
-    }
-  }
-
-  .field__field_content_promo__item {
-    flex: 0 1 25%;
-    flex: 0 1 calc(100% / 3 - 2em);
+  body:not(.theme--lander) & {
+    @mixin responsive-declaration padding-bottom, 2em, 3em;
   }
 }
 
-/* Promo listing */
-.promo-listing {
-  @mixin responsive-declaration padding-bottom, 1em, 2em;
-
-  @media (--breakpoint-lg) {
-    display: flex;
-    flex-flow: row wrap;
-  }
-}
-
+/* Promo listing item */
+.promo-listing-wrapper > .views-row-wrapper > .views-row,
 .promo-listing__item {
-  flex: 1 1 25%;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% / 3);
   margin-bottom: 1em;
 
   @media (--breakpoint-md) {
-    margin: 1em;
+    margin-bottom: 0em;
   }
 
   & > * {
     height: 100%;
+
+    @media (--breakpoint-md) {
+      padding: 1em;
+    }
   }
 
   .label__above {
@@ -197,25 +189,33 @@
   }
 }
 
-/* Promo wrapper footer */
-.promo-wrapper > footer {
-  padding-top: 1em;
-  text-align: center;
+/* Promo listing items outputted by view */
+.promo-listing-wrapper > .views-row-wrapper > .views-row {
+  flex-basis: calc(100% / 4);
 }
 
-/* Global promo style */
+/* Promo wrapper */
+.promo-wrapper {
+  @media (--breakpoint-md) {
+    padding: 1em;
+  }
+
+  &.promo-wrapper--full-height {
+    @media (--breakpoint-md) {
+      height: 100%;
+    }
+  }
+}
+
+/* Promo style */
 .promo,
 .field__field_content_promo__item {
   background-color: var(--color-lighter-blue);
   border: 4px solid var(--color-light-gray);
   position: relative;
-  margin-bottom: 1em;
+  height: 100%;
   padding-bottom: 1em;
   transition: border-color var(--transition-enter);
-
-  @media (--breakpoint-md) {
-    margin: 1em;
-  }
 
   @media (--breakpoint-lg) {
     display: flex;

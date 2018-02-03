@@ -1402,7 +1402,7 @@ display:
         options:
           relationship: none
           view_mode: promo
-      css_class: promo-wrapper
+      css_class: promo-listing-wrapper
     cache_metadata:
       max-age: -1
       contexts:
@@ -1967,7 +1967,7 @@ display:
         options:
           relationship: none
           view_mode: promo
-      css_class: promo-wrapper
+      css_class: promo-listing-wrapper
     cache_metadata:
       max-age: -1
       contexts:
@@ -2532,7 +2532,7 @@ display:
         options:
           relationship: none
           view_mode: promo
-      css_class: promo-wrapper
+      css_class: promo-listing-wrapper
     cache_metadata:
       max-age: -1
       contexts:
@@ -3097,7 +3097,7 @@ display:
         options:
           relationship: none
           view_mode: promo
-      css_class: promo-wrapper
+      css_class: promo-listing-wrapper
     cache_metadata:
       max-age: -1
       contexts:

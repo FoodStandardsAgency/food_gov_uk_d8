@@ -13,26 +13,30 @@
  */
 #}
 {% set content_class = 'promo__content' %}
-<div{{ attributes }}>
+<div{{ attributes.addClass('promo-listing') }}>
   {% for item in items %}
-    {% if item.content.field_link|render|striptags|trim and not item.content.field_link_list|render|striptags|trim %}
-      <a href="{{ item.content.field_link|render|striptags|trim }}" {{ item.attributes }}>
-        {% if item.image_as_background %}
-          {{ item.image_as_background }}
+    <div class="promo-listing__item">
+      <div class="promo-wrapper">
+        {% if item.content.field_link|render|striptags|trim and not item.content.field_link_list|render|striptags|trim %}
+          <a href="{{ item.content.field_link|render|striptags|trim }}" {{ item.attributes }}>
+            {% if item.image_as_background %}
+              {{ item.image_as_background }}
+            {% endif %}
+            <div class="{{ content_class }}">
+              {{ item.content|without('field_link') }}
+            </div>
+          </a>
+        {% else %}
+          <div{{ item.attributes }}>
+            {% if item.image_as_background %}
+              {{ item.image_as_background }}
+            {% endif %}
+            <div class="{{ content_class }}">
+              {{ item.content|without('field_link') }}
+            </div>
+          </div>
         {% endif %}
-        <div class="{{ content_class }}">
-          {{ item.content|without('field_link') }}
-        </div>
-      </a>
-    {% else %}
-      <div{{ item.attributes }}>
-        {% if item.image_as_background %}
-          {{ item.image_as_background }}
-        {% endif %}
-        <div class="{{ content_class }}">
-          {{ item.content|without('field_link') }}
-        </div>
       </div>
-    {% endif %}
+    </div>
   {% endfor %}
 </div>
