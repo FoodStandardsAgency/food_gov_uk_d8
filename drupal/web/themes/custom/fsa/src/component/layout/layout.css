@@ -216,6 +216,7 @@
 
   body:not(.theme--service, .theme--lander) .layout.layout--with-no-sidebar & {
     max-width: var(--content-max-width);
+    width: 100%;
     margin: 0 auto;
   }
   
@@ -257,7 +258,6 @@
 .layout__content--main {
   flex: 1 1 auto;
   @mixin responsive-declaration padding-top, 1em, 2em;
-  @mixin responsive-declaration padding-bottom, 1em, 2em;
 
   .theme--lander &,
   .theme--fhrs & {

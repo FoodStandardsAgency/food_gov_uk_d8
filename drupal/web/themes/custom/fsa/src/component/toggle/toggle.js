@@ -284,38 +284,38 @@ function toggle() {
     }
   }
 
-  // Setup mutation observer to track changes for matching elements added after initial DOM render
-  var observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      for(var d = 0; d < mutation.addedNodes.length; d++) {
-        // Check if we're dealing with an element node
-        if(typeof mutation.addedNodes[d].getAttribute === 'function') {
-          if(mutation.addedNodes[d].getAttribute("data-state")) {
-            // Get elem state
-            var elemState = getElemState(mutation.addedNodes[d]);
+  // // Setup mutation observer to track changes for matching elements added after initial DOM render
+  // var observer = new MutationObserver(function(mutations) {
+  //   mutations.forEach(function(mutation) {
+  //     for(var d = 0; d < mutation.addedNodes.length; d++) {
+  //       // Check if we're dealing with an element node
+  //       if(typeof mutation.addedNodes[d].getAttribute === 'function') {
+  //         if(mutation.addedNodes[d].getAttribute("data-state")) {
+  //           // Get elem state
+  //           var elemState = getElemState(mutation.addedNodes[d]);
 
-            // Get ref elements
-            var elemRef = getElemRef(mutation.addedNodes[d], elemState);
+  //           // Get ref elements
+  //           var elemRef = getElemRef(mutation.addedNodes[d], elemState);
 
-            // Prepare elements
-            prepareElements(mutation.addedNodes[d], elemRef, elemState);
+  //           // Prepare elements
+  //           prepareElements(mutation.addedNodes[d], elemRef, elemState);
 
-            // Set default state
-            setDefaultState(mutation.addedNodes[d], elemRef, elemState);
-          }
-        }
-      }
-    });    
-  });
+  //           // Set default state
+  //           setDefaultState(mutation.addedNodes[d], elemRef, elemState);
+  //         }
+  //       }
+  //     }
+  //   });    
+  // });
 
   // Grab all elements with required attributes
   var elems = document.querySelectorAll("[data-state]");
 
-  // Define type of change our observer will watch out for
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true
-  });
+  // // Define type of change our observer will watch out for
+  // observer.observe(document.body, {
+  //   childList: true,
+  //   subtree: true
+  // });
 
   const resizeHandler = debounce(function() {
     // Loop through our matches
