@@ -2,7 +2,7 @@
 @import "../../core/custom-property";
 
 .topics {
-
+  @mixin responsive-declaration padding-bottom, 1em, 2em;
 }
 
 .topics__header {
