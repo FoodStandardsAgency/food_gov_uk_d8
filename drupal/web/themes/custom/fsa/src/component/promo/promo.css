@@ -350,31 +350,6 @@ a.field__field_content_promo__item {
   @mixin responsive-declaration margin-right, -1em, -4em;
   @mixin responsive-declaration margin-left, -1em, -4em;
 
-  .field__field_large_promo__item--even {
-    .promo__content {
-      background-color: var(--dark-secondary-color);
-      color: var(--color-white);
-
-      .field__field_link {
-        a {
-          background-color: var(--color-white);
-          color: var(--primary-color);
-
-          :--not-touch &:--enter {
-            background-color: var(--primary-color);
-            color: var(--color-white);
-          }
-        }
-      }
-    }
-  }
-
-  .field__field_large_promo__item--odd {
-    .promo__content {
-      /* background-color: var(--color-lighter-gray); */
-    }
-  }
-
   .promo__content {
 
     .field__field_link {
@@ -401,7 +376,9 @@ a.field__field_content_promo__item {
   }
 }
 
+/* Large promo item */
 .field__field_large_promo__item {
+  width: 100%;
   display: flex;
   flex-flow: column nowrap;
 
@@ -410,6 +387,7 @@ a.field__field_content_promo__item {
   }
 }
 
+/* Promo icon */
 .promo__icon {
   flex: 0 0 auto;
   position: relative;
@@ -488,7 +466,8 @@ a.field__field_content_promo__item {
 
     @media (--breakpoint-md) {
       flex: 0 0 50%;
-      height: auto;
+      min-height: 30em;
+      height: 50vh;
     }
   }
 
@@ -522,15 +501,8 @@ a.field__field_content_promo__item {
   }
 
   .field__field_large_promo & {
-    @mixin responsive-declaration padding-top, 2em, 3em;
-    @mixin responsive-declaration padding-right, 1em, 5em;
-    @mixin responsive-declaration padding-bottom, 2em, 3em;
-    @mixin responsive-declaration padding-left, 1em, 5em;
-      
     @media (--breakpoint-md) {
       flex: 0 0 50%;
-      display: flex;
-      flex-flow: column nowrap;
       min-height: 30em;
       height: 50vh;
     }
@@ -644,6 +616,12 @@ a.field__field_content_promo__item {
     @mixin responsive-declaration line-height, 1.2, 1.17;
   }
 
+  .field__field_large_promo__item & {
+    @mixin responsive-declaration padding-top, 2rem, 3rem;
+    @mixin responsive-declaration padding-right, 1rem, 5rem;
+    @mixin responsive-declaration padding-left, 1rem, 5rem;
+  }
+
   .promo--inline-content & {
     padding-top: 0;
     padding-bottom: 0.5em;
@@ -668,6 +646,8 @@ a.field__field_content_promo__item {
   }
 
   .field__field_large_promo__item & {
+    @mixin responsive-declaration padding-right, 1em, 5em;
+    @mixin responsive-declaration padding-left, 1em, 5em;
     padding-bottom: 1rem !important;
 
 
@@ -682,6 +662,27 @@ a.field__field_content_promo__item {
 
     @media (--breakpoint-md) {
       display: block;
+    }
+  }
+}
+
+/* Promo link */
+.field__field_link {
+  .field__field_large_promo__item & {
+    @mixin responsive-declaration padding-right, 1rem, 5rem;
+    @mixin responsive-declaration padding-left, 1rem, 5rem;
+    @mixin responsive-declaration padding-bottom, 2rem, 3rem;
+  }
+
+  .field__field_large_promo__item--even & {
+    a {
+      background-color: var(--color-white);
+      color: var(--primary-color);
+  
+      :--not-touch &:--enter {
+        background-color: var(--primary-color);
+        color: var(--color-white);
+      }
     }
   }
 }
