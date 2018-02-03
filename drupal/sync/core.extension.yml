@@ -9,6 +9,7 @@ module:
   block_class: 0
   block_content: 0
   breakpoint: 0
+  checklistapi: 0
   ckeditor: 0
   config: 0
   config_filter: 0
@@ -22,6 +23,7 @@ module:
   crop: 0
   crop_media_entity: 0
   ctools: 0
+  datalayer: 0
   datetime: 0
   datetime_range: 0
   dblog: 0
@@ -79,6 +81,7 @@ module:
   image_widget_crop: 0
   inline_entity_form: 0
   language: 0
+  libraries: 0
   link: 0
   linkit: 0
   linkit_content: 0
@@ -103,6 +106,7 @@ module:
   rdf: 0
   redirect: 0
   search: 0
+  seo_checklist: 0
   serialization: 0
   shortcut: 0
   shs: 0
