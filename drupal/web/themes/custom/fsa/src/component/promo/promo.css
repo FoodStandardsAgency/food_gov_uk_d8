@@ -487,7 +487,7 @@ a.field__field_content_promo__item {
     }
 
     @media (--breakpoint-md) {
-      flex: 1 1 50%;
+      flex: 0 0 50%;
       height: auto;
     }
   }
@@ -528,7 +528,7 @@ a.field__field_content_promo__item {
     @mixin responsive-declaration padding-left, 1em, 5em;
       
     @media (--breakpoint-md) {
-      flex: 1 1 50%;
+      flex: 0 0 50%;
       display: flex;
       flex-flow: column nowrap;
       min-height: 30em;

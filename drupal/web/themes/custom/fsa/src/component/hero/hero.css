@@ -41,6 +41,7 @@
   justify-content: center;
   z-index: var(--z-middle);
   color: var(--color-white);
+  width: 100%;
   max-width: 50em;
   min-height: 18em;
   margin: 0 auto;
