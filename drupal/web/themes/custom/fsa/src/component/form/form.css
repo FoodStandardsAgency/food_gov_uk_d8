@@ -280,7 +280,8 @@ input, textarea, select {
   display: block;
   max-width: 100%;
   width: auto;
-  font-size: 1em;
+  font-size: 1.1em;
+  @mixin responsive-declaration line-height, 1.7, 1.6;
   padding: 0.5em 1em;
   border-radius: 0em;
   background-color: var(--color-white);
@@ -289,6 +290,10 @@ input, textarea, select {
   transition:
     background-color var(--transition-enter-fast),
     box-shadow var(--transition-enter-fast);
+
+  @media (--breakpoint-md) {
+    font-size: 1em;
+  }
 }
 
 input {
@@ -685,7 +690,7 @@ input[type="password"] {
 
   .form-actions {
     display: block;
-    
+
     &:after {
       content: "";
       clear: both;
