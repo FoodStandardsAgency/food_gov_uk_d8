@@ -3,7 +3,6 @@
 @import "core/base.css";
 
 /*Component*/
-@import "component/general/button.css";
 @import "component/general/table.css";
 @import "component/general/modal.css";
 @import "component/general/topic-cloud.css";

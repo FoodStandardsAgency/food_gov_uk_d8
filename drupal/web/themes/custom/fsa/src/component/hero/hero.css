@@ -8,6 +8,7 @@
 
 .hero {
   position: relative;
+  display: flex;
 
   @media print {
     background-color: transparent;
@@ -243,6 +244,7 @@
 /*Hero content*/
 .hero__content {
   text-align: center;
+  width: 100%;
 }
 
 /* Hero cta */
