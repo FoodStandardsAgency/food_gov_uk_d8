@@ -410,6 +410,7 @@ function navigation() {
   function initializeNav() {
     siteElementArray[0].classList.remove("is-moved");
     root.classList.remove("is-fixed");
+    navigationElementArray[0].classList.remove('has-open-submenu');
 
     if (checkMediaQuery() === breakpoints.xsmall) {
       setStateOff({element: menuButtonOpenElement, type: 'button'}, 'is-open');
