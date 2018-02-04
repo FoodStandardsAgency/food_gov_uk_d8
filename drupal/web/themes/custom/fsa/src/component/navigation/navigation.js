@@ -385,6 +385,7 @@ function navigation() {
         setStateOn({element: element, type: 'button'}, 'is-open');
         setStateOn({element: element.nextElementSibling, type: 'content'}, 'is-open');
         element.nextElementSibling.children[0].children[0].focus();
+        navigationElementArray[0].classList.add('has-open-submenu');
       }
     });
   });
@@ -398,11 +399,18 @@ function navigation() {
         setStateOff({element: element, type: 'button'}, 'is-open');
         setStateOff({element: closestParent(element, 'js-nav-menu'), type: 'content'}, 'is-open');
         setStateOff({element: closestParent(element, 'js-nav-menu').previousElementSibling, type: 'button'}, 'is-open');
+        
+        if([...closestParent(element, 'js-nav-menu').classList].indexOf('navigation__menu--level-2') != -1) {
+          navigationElementArray[0].classList.remove('has-open-submenu');
+        }
       }
     });
   });
 
   function initializeNav() {
+    siteElementArray[0].classList.remove("is-moved");
+    root.classList.remove("is-fixed");
+
     if (checkMediaQuery() === breakpoints.xsmall) {
       setStateOff({element: menuButtonOpenElement, type: 'button'}, 'is-open');
       setStateOff({element: menuButtonCloseElement, type: 'button'}, 'is-open');
