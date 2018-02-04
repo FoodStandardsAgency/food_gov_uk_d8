@@ -14,11 +14,6 @@ import peek from './component/peek/peek';
 import fhrs from './component/fhrs/fhrs';
 import toc from './component/toc/toc';
 
-const breakpoints = {
-  small: "sm",
-  medium: "md"
-}
-
 // Require every image asset inside of img folder
 require.context("./img/", true, /\.(gif|png|svg|jpe?g)$/);
 require('./style.css');
@@ -44,27 +39,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Toc
   toc();
+
+  // Responsive tables
+  responsiveTables();
 });
-
-
-// Responsive tableElements
-const tableElements = [...document.querySelectorAll('.js-table')];
-if (tableElements != null) {
-  responsiveTables(tableElements, breakpoints);
-}
 
 // Sticky element
 const container = [...document.querySelectorAll('.js-sticky-container')];
 const stickyElem = [...document.querySelectorAll('.js-sticky-element')];
 if (container != null || stickyElem != null) {
   stickyElement(container, stickyElem);
-}
-
-// Toggle content
-const profileElement = document.getElementById('block-myprofile');
-if (profileElement != null) {
-  const profileElementArray = [...document.getElementById('block-myprofile').children];
-  toggleContent(profileElementArray[0], breakpoints, profileElementArray[2]);
 }
 
 // Add class if touch device

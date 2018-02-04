@@ -3,6 +3,7 @@ import debounce from '../../core/helper/debounce';
 import checkMediaQuery from '../../core/helper/checkMediaQuery';
 import breakpoints from '../../core/helper/breakpoints';
 import closestParent from '../../core/helper/closestParent';
+import { setStateOff, setStateOn, removeState, toggleState } from '../../core/helper/toggleHelpers';
 import inert from 'wicg-inert';
 
 function navigation() {
@@ -328,73 +329,6 @@ function navigation() {
     navigationElementArray.length <= 0 ||
     siteElementArray.length <= 0) {
     return console.warn('Navigation elements not found');
-  }
-
-  function setStateOff(options, elemState) {
-    const element = options.element;
-
-    switch (options.type) {
-      case 'button':
-        element.classList.remove(elemState);
-        // element.classList.add('is-closed');
-        element.setAttribute('aria-expanded', false);
-        break;
-      case 'content':
-        element.classList.remove(elemState);
-        // element.classList.add('is-hidden');
-        element.setAttribute('aria-hidden', true);
-        element.inert = true;
-        break;
-      default:
-        break;
-    }
-  }
-
-  function setStateOn(options, elemState) {
-    const element = options.element;
-
-    switch (options.type) {
-      case 'button':
-        // element.classList.remove('is-closed');
-        element.classList.add(elemState);
-        element.setAttribute('aria-expanded', true);
-        break;
-      case 'content':
-        element.classList.add(elemState);
-        // element.classList.remove('is-hidden');
-        element.setAttribute('aria-hidden', false);
-        element.inert = false;
-        break;
-      default:
-        break;
-    }
-  }
-
-  function removeState(options, elemState) {
-    const element = options.element;
-
-    switch (options.type) {
-      case 'button':
-        element.classList.remove(elemState);
-        element.removeAttribute('aria-expanded');
-        break;
-      case 'content':
-        element.classList.remove(elemState);
-        element.removeAttribute('aria-hidden');
-        element.inert = false;
-        break;
-      default:
-        break;
-    }
-  }
-  function toggleState(elem, elemRefItem, elemState) {
-    if (elemRefItem.classList.contains(elemState)) {
-      setStateOff({element: elem, type: 'button'}, elemState);
-      setStateOff({element: elemRefItem, type: 'content'}, elemState);
-    } else {
-      setStateOn({element: elem, type: 'button'}, elemState);
-      setStateOn({element: elemRefItem, type: 'content'}, elemState);
-    }
   }
 
   // Loop the menubuttons
