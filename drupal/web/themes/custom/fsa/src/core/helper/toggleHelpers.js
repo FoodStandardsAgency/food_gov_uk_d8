@@ -10,7 +10,7 @@ function setStateOff(options, elemState) {
       element.classList.remove(elemState);
       element.setAttribute('aria-hidden', 'false');
       element.inert = true;
-      console.log('content off, aria-hidden=', element.getAttribute('aria-hidden'));
+      // console.log('content off, aria-hidden=', element.getAttribute('aria-hidden'));
       break;
     default:
       break;
@@ -30,7 +30,7 @@ function setStateOn(options, elemState) {
       element.classList.add(elemState);
       element.setAttribute('aria-hidden', 'false');
       element.inert = false;
-      console.log('content on, aria-hidden=', element.getAttribute('aria-hidden'));
+      // console.log('content on, aria-hidden=', element.getAttribute('aria-hidden'));
       break;
     default:
       break;

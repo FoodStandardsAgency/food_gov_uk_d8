@@ -63,7 +63,7 @@
   <header class="layout header" role="banner">
     <div class="layout__container header__container">
       <div class="layout__content header__content">
-        <button class="header__menu-button js-menu-button">
+        <button class="header__menu-button js-menu-button-open">
           <div class="svg">
             <span class="visually-hidden">{{ 'Open mobile navigation'|t }}</span>
             <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#menu-icon"></use></svg>
@@ -89,8 +89,8 @@
     <div class="layout__container navigation-wrapper__container">
       <div class="layout__content navigation-wrapper__content">
         <header class="navigation-mobile-header">
-          <button class="navigation-mobile-header__button js-menu-button">
-            <span class="visually-hidden">Close mobile navigation</span>
+          <button class="navigation-mobile-header__button js-menu-button-close">
+            <span class="visually-hidden">{{ 'Close mobile navigation'|t }}</span>
             <div class="svg">
               <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#close-icon"></use></svg>
             </div>
