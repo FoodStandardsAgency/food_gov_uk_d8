@@ -1,16 +1,22 @@
 import checkMediaQuery from './checkMediaQuery';
+import breakpoints from './breakpoints';
 
-function responsiveTables(elements, breakpoints) {
-  var currentMediaQuery = checkMediaQuery();
+function responsiveTables() {
 
-  if (currentMediaQuery == breakpoints.small || currentMediaQuery == breakpoints.xsmall) {
-    for (let i = 0; i < elements.length; i++) {
-      elements[i].removeAttribute('role');
+  // Query elements
+  const tableElementsArray = [...document.querySelectorAll('.js-table')];
+
+  if (tableElementsArray <= 0) {
+    return false;
+  }
+
+  if (checkMediaQuery() == breakpoints.small || checkMediaQuery() == breakpoints.xsmall) {
+    for (let i = 0; i < tableElementsArray.length; i++) {
+      tableElementsArray[i].removeAttribute('role');
     }
   }
 
-
-  const elemChildren = elements.map(elements => elements.children);
+  const elemChildren = tableElementsArray.map(tableElementsArray => tableElementsArray.children);
 
   const headerTexts = elemChildren.map(function(row) {
     const currentRow = [...row];
@@ -23,7 +29,7 @@ function responsiveTables(elements, breakpoints) {
 
   for (let i = 0; i < elemChildren.length; i++) {
     for (let y = 0; y < elemChildren[i].length; y++) {
-      if (currentMediaQuery == breakpoints.small) {
+      if (checkMediaQuery() == breakpoints.small || checkMediaQuery() == breakpoints.xsmall) {
         if (elemChildren[i][y].hasAttribute('role')) {
           elemChildren[i][y].removeAttribute('role');
         }
