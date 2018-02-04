@@ -1,0 +1,15 @@
+minified: 1
+headline_text: 'BETA.FOOD.GOV.UK uses cookies to make the site simpler.'
+accept_button_text: OK
+read_more_button_text: 'Find out more about cookies'
+theme: light-top
+path: /
+domain: ''
+expiry: '365'
+target: _self
+_core:
+  default_config_hash: _tr-X8c0EtWB8CElgT53wtsgTQfB_Th-MMGaw7xA6bo
+theme_path: ''
+customise: 1
+cookie_policy: '144'
+container: ''
