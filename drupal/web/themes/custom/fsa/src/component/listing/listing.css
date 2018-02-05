@@ -59,14 +59,32 @@
       flex-flow: row wrap;
 
       & > .views-row {
-        flex: 0 1 100%;
-
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: 100%;
+        border-bottom: none !important;
+        
         @media (--breakpoint-xs) {
-          flex: 0 1 50%;
+          flex-grow: 0;
+          flex-shrink: 0;
+          flex-basis: calc(100% / 2);
         }
 
         @media (--breakpoint-md) {
-          flex: 0 1 33%;
+          flex-grow: 0;
+          flex-shrink: 0;
+          flex-basis: calc(100% / 3);
+        }
+
+        & > * {
+          display: block;
+          height: 100%;
+          padding: 0.5em;
+
+          & > * {
+            display: block;
+            height: 100%;
+          }
         }
       }
     }
@@ -135,12 +153,28 @@
 
   .listing--with-bg & {
     background-color: var(--color-white);
-    margin: 0.5em;
-    padding: 1em;
+  }
+
+  .listing--box & {
+    padding: 1em !important;
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 0;
+
+    & > * {
+      margin-top: 0;
+      margin-bottom: 0.8em;
+
+      &:last-child {
+        margin-top: auto;
+        margin-bottom: 0;
+      }
+    }
   }
 
   .views-row:first-child & {
-    padding-top: 0 !important;
+    padding-top: 0;
   } 
 }
 
