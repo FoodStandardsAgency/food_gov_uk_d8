@@ -831,12 +831,21 @@ input[type="password"] {
 
 /* Feedback form styles */
 .webform-submission-page-feedback-form {
+  padding: 1em 0;
+
+  @media (--breakpoint-sm) {
+    padding: 0;
+  }
 
   input[type="radio"] + label {
     color: var(--primary-color);
     text-decoration: underline;
-    padding: 0.5em 1em;
+    padding: 0em;
     cursor: pointer;
+
+    @media (--breakpoint-sm) {
+      padding: 0.5em 0em;
+    }
 
     &:before,
     &:after {
@@ -925,12 +934,22 @@ input[type="password"] {
       display: inline-block;
       width: auto;
       float: left;
-      padding: 1em 0;
+      padding: 0;
       margin-bottom: 0;
+
+      @media (--breakpoint-sm) {
+        padding: 1em 0;
+      }
 
       & > .fieldset-legend {
         margin-bottom: 0;
         font-weight: 600;
+        padding-top: 0.25em;
+        margin-right: 1em;
+
+        @media (--breakpoint-sm) {
+          padding-top: 0em;
+        }
       }
     }
 
@@ -943,14 +962,29 @@ input[type="password"] {
       & > .fieldset-legend {
         margin-bottom: 0;
       }
+
+      & > * {
+        margin-top: 0;
+
+        @media (--breakpoint-sm) {
+          margin-top: 0.4em;
+        }
+      }
     }
 
     & > button.open-feedback {
+      width: 100%;
       display: inline-block;
-      width: auto;
-      float: right;
-      padding: 1em 0;
+      float: none;
+      text-align: left;
+      padding: 0;
       margin-bottom: 0;
+
+      @media (--breakpoint-sm) {
+        width: auto;
+        float: right;
+        padding: 1em 0;
+      }
     }
   
     &:after {
