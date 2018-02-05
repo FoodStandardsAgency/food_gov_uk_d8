@@ -216,12 +216,6 @@ function toggle() {
         // Run state function
         processChange(this, elemRef, elemState);
       }
-      if(e.which === KEYCODE.ENTER) {
-        // Prevent default action of element
-        e.preventDefault();
-        // Run state function
-        processChange(this, elemRef, elemState);
-      }
     });
   };
 

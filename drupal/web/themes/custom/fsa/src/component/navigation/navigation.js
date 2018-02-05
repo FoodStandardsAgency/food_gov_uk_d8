@@ -18,9 +18,10 @@ function navigation() {
   };
 
   const KEYCODE = {
+    ENTER: 13,
     ESC: 27,
     SPACE: 32,
-  };
+  }
 
   const keyboard = {
     BACKSPACE: 8,
@@ -430,6 +431,43 @@ function navigation() {
       });
     } else {
       firstLevelLinkArray.forEach((element) => {
+
+        element.addEventListener("focus", function( e ) {
+          const content = element.nextElementSibling;
+          console.log('asd');
+
+          firstLevelLinkArray.forEach((element) => {
+            // removeState({element: element, type: 'button'}, 'is-open');
+            setStateOff({element: element, type: 'button'}, 'is-open');
+          })
+          
+          secondLevelMenuArray.forEach((element) => {
+            // removeState({element: element, type: 'content'}, 'is-open');
+            setStateOff({element: content, type: 'content'}, 'is-open');
+          });
+          // setStateOff({element: element, type: 'button'}, 'is-open');
+          // setStateOff({element: content, type: 'content'}, 'is-open');
+        }, true);
+
+        element.addEventListener("keypress", function(e) {
+          const content = element.nextElementSibling;
+
+          if(e.which === KEYCODE.SPACE) {
+            e.preventDefault();
+            toggleState(element, content, 'is-open');
+          }
+          if(e.which === KEYCODE.ENTER) {
+            if([...content.classList].indexOf('is-open') != -1) {
+              setStateOff({element: element, type: 'button'}, 'is-open');
+              setStateOff({element: content, type: 'content'}, 'is-open');
+            } else {
+              e.preventDefault();
+              setStateOn({element: element, type: 'button'}, 'is-open');
+              setStateOn({element: content, type: 'content'}, 'is-open');
+            }
+          }
+        });
+
         // If touch device
         element.addEventListener('touchstart', function addtouchclass(e) {
           if (checkMediaQuery() !== breakpoints.xsmall) {
@@ -449,7 +487,18 @@ function navigation() {
               content.classList.add('is-open');
             }
           }
-        }, false)
+        }, false);
+
+        element.addEventListener("mouseenter", function(e) {
+          const content = element.nextElementSibling;
+          firstLevelLinkArray.forEach((element) => {
+            removeState({element: element, type: 'button'}, 'is-open');
+          })
+          
+          secondLevelMenuArray.forEach((element) => {
+            removeState({element: element, type: 'content'}, 'is-open');
+          });
+        }, true);
       });
       removeState({element: menuButtonOpenElement, type: 'button'}, 'is-open');
       removeState({element: menuButtonCloseElement, type: 'button'}, 'is-open');
