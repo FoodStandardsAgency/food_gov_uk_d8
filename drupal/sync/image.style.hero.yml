@@ -3,12 +3,13 @@ langcode: en
 status: true
 dependencies: {  }
 name: hero
-label: hero
+label: 'Hero (scale to 1440 width)'
 effects:
-  02966b07-f83d-43bb-b620-59bb19c70b6c:
-    uuid: 02966b07-f83d-43bb-b620-59bb19c70b6c
-    id: image_scale_and_crop
+  cd024618-89ee-46fa-90f8-0bdf2e3aa65a:
+    uuid: cd024618-89ee-46fa-90f8-0bdf2e3aa65a
+    id: image_scale
     weight: 1
     data:
       width: 1440
-      height: 500
+      height: null
+      upscale: true

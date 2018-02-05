@@ -26,14 +26,12 @@ function fsa_preprocess_page(&$variables) {
   $node = \Drupal::routeMatch()->getParameter('node');
   if (is_object($node)) {
 
-    // Get attached hero image and send the url for template.
+    // Get attached hero image and send correct image style url for template.
     if (isset($node->field_header_image->target_id)) {
       $media = Media::load($node->field_header_image->target_id);
       $uri = File::load($media->get('field_image')->target_id)->getFileUri();
 
-      // Set hero image style, go with extra large on homepage.
-      $sid = (\Drupal::service('path.matcher')->isFrontPage()) ? 'hero_extralarge' : 'hero';
-      if ($style = ImageStyle::load($sid)) {
+      if ($style = ImageStyle::load('hero')) {
         $url = $style->buildUrl($uri);
       }
       else {
