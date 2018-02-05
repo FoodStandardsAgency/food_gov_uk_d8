@@ -1,6 +1,6 @@
 /**
  * @file
- * Exposes search data to data layer.
+ * Exposes hygiene ratings search data to data layer.
  */
 
 (function ($, Drupal, drupalSettings) {
