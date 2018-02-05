@@ -113,10 +113,9 @@
 
 
     ## External-smtp ##
-
+    external_smtp_sasl_password_maps: 'hash:/etc/postfix/sasl_passwd'
     external_smtp_tls_security_level: 'encrypt'
-    external_smtp_relayhost: '[smtp.sparkpostmail.com]:587'
-    # external_smtp_sasl_password_maps value defined in prod-vars.yml
+    external_smtp_relayhost: '[smtp.office365.com]:587'
 
     ## Nfs-client ##
 

@@ -140,8 +140,8 @@
     # Also affects sslterminator
     # On dev and stage it's good idea to protect the site with htauth
     basicauth_enabled: True
-    basicauth_username: wunder
-    basicauth_password: tools
+    basicauth_username: fsawunder
+    basicauth_password: wndrfsabfguk
     # Basic auth can also be disabled for certain ip's
     basicauth_ip:
       - address: 84.20.132.177

@@ -8,18 +8,18 @@
  *
  */
 #}
-<article{{ attributes.addClass(['promo', 'promo--light']) }}>
-  {{ content.field_alert_type }}
-  {{ title_prefix }}
-  {% if not page %}
-    <h4{{ title_attributes }}>
-      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-    </h4>
-  {% endif %}
-  {{ title_suffix }}
+<div class="promo-wrapper">
+   <a href="{{ url }}" {{ attributes.addClass(['promo', 'promo--light', 'promo-wrapper--full-height']) }}>
+    {{ content.field_alert_type }}
+    {{ title_prefix }}
+    {% if not page %}
+      <h4{{ title_attributes }} class="promo__content">{{ label }}</h4>
+    {% endif %}
+    {{ title_suffix }}
 
-  <div{{ content_attributes }}>
-    {{ content|without('field_alert_type') }}
-  </div>
+    <div{{ content_attributes }}>
+      {{ content|without('field_alert_type') }}
+    </div>
 
-</article>
+  </a>
+</div>
