@@ -518,7 +518,17 @@ function navigation() {
     }
   }
 
+  // Current window width
+  let windowWidth = window.innerWidth;
+
   const resizeHandler = debounce(function() {
+    // Check if vertical resizing
+    if (window.innerWidth == windowWidth) {
+      return false; 
+    }
+
+    windowWidth = window.innerWidth;
+
     initializeNav();
   }, 250);
 

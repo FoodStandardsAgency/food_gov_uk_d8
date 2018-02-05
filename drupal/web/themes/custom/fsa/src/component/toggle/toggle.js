@@ -263,6 +263,9 @@ function toggle() {
   // Grab all elements with required attributes
   var elems = document.querySelectorAll("[data-state]");
 
+  // Current window width
+  let windowWidth = window.innerWidth;
+
   // Define type of change our observer will watch out for
   observer.observe(document.body, {
     childList: true,
@@ -270,6 +273,14 @@ function toggle() {
   });
 
   const resizeHandler = debounce(function() {
+
+    // Check if vertical resizing
+    if (window.innerWidth == windowWidth) {
+      return false; 
+    }
+
+    windowWidth = window.innerWidth;
+
     // Loop through our matches
     for(var a = 0; a < elems.length; a++){
 
