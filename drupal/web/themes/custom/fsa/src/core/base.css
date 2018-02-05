@@ -10,7 +10,7 @@ html {
   font-family: var(--font-family-content);
   font-size: var(--font-size-base);
   letter-spacing: 0.015em;
-  @mixin responsive-declaration font-size, 100%, var(--font-size-base);
+  @mixin responsive-declaration font-size, 100%, 112.5%;
   @mixin responsive-declaration line-height, 1.7, 1.6;
 }
 
