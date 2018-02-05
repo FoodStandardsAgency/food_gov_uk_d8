@@ -16,9 +16,17 @@ html {
 
 html.is-fixed {
   position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
 
   @media (--breakpoint-sm) {
     position: static;
+    right: auto;
+    left: auto;
+    top: auto;
+    bottom: auto;
   }
 }
 

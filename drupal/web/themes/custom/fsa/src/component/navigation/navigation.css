@@ -859,9 +859,12 @@
   font-size: 1em;
   font-weight: 600;
   padding: 0 1.75em;
+  padding-top: 0.75em;
+  margin: 0;
 
   @media (--breakpoint-sm) {
     flex-direction: row;
+    padding-top: 0em;
     font-size: 0.8889em;
   }
 
