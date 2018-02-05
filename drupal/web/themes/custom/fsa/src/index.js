@@ -58,7 +58,7 @@ document.addEventListener('touchstart', function addtouchclass(e) {
 }, false)
 
 // Add class if css custom properties are supported
-if (cssCustomPropertySupport()) {
-  document.documentElement.classList.add('is-modern');
-}
+// if (cssCustomPropertySupport()) {
+//   document.documentElement.classList.add('is-modern');
+// }
 
