@@ -1122,6 +1122,11 @@ blockquote {
   justify-content: space-between !important;
 }
 
+.cc_message {
+  margin-top: 0.5em !important;
+  margin-bottom: 0.5em !important;
+}
+
 .cc_more_info {
   color: var(--color-white) !important;
   text-decoration: underline;
@@ -1136,7 +1141,9 @@ blockquote {
   background-color: var(--color-white) !important;
   color: var(--dark-primary-color) !important;
   border-radius: 2em !important;
-  padding: 0.6em 2.5em !important;
+  padding: 0.35em 2.5em !important;
+  margin-top: 0.5em !important;
+  margin-bottom: 0.5em !important;
 
   :--not-touch &:--enter {
     color: var(--darker-primary-color) !important;
