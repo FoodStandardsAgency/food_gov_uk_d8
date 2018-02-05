@@ -296,11 +296,12 @@ input, textarea, select {
   }
 }
 
+
 input {
   &:not([type="radio"],[type="checkbox"],[type="submit"],[type="number"]) {
-    .profile-manager & {
+    /* .profile-manager & { */
       width: 100%;
-    }
+    /* } */
   }
 
   &.date {
@@ -557,6 +558,19 @@ input[type="password"] {
         background-color: var(--color-dark-blue);
         z-index: 1;
       }
+    }
+  }
+}
+
+/* Contact message form */
+.contact-message-feedback-form {
+  input:not([type='submit']),
+  textarea,
+  select {
+    background-color: var(--color-lighter-gray);
+
+    :--not-touch &:--enter {
+      background-color: var(--color-white);
     }
   }
 }
@@ -841,7 +855,13 @@ input[type="password"] {
     color: var(--primary-color);
     text-decoration: underline;
     padding: 0em;
+    padding-top: 0.5em;
+    padding-bottom: 0.25em;
     cursor: pointer;
+
+    @media (--breakpoint-xs) {
+      padding: 0em;
+    }
 
     @media (--breakpoint-sm) {
       padding: 0.5em 0em;
@@ -955,9 +975,14 @@ input[type="password"] {
 
     & > .fieldset-wrapper {
       display: inline-block;
-      width: auto;
-      float: left;
+      width: 100%;
+      float: none;
       margin-bottom: 0;
+
+      @media (--breakpoint-xs) {
+        width: auto;
+        float: left;
+      }
 
       & > .fieldset-legend {
         margin-bottom: 0;

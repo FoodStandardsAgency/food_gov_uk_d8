@@ -103,11 +103,11 @@
 
       @media (--breakpoint-md) {
         display: block;
-        width: 12em;
+        width: 12em !important;
       }
 
       @media (--breakpoint-lg) {
-        width: 20em;
+        width: 20em !important;
       }
 
       :--not-touch &:--enter {
