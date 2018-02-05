@@ -5,7 +5,7 @@ module.exports = {
     'postcss-cssnext': {
       features: {
         customProperties: {
-          preserve: true,
+          preserve: false,
           warnings: false,
           variables: {
             padding: "2em",
