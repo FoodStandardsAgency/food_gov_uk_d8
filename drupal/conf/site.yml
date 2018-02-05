@@ -176,7 +176,7 @@ production:
       - shell: chmod -R a+w web
       - make
       - shell: chmod -R a-w web
-      - shell: rsync -az . 10.2.3.18:/var/www/fsa.prod.wunder.io/current
+      - shell: rsync --delete -az . 10.2.3.18:/var/www/fsa.prod.wunder.io/current
 
     update:
       - drush: updb -y
