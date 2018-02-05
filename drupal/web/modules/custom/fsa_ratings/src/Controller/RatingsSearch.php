@@ -191,6 +191,26 @@ class RatingsSearch extends ControllerBase {
     // Append the pager.
     $render[] = ['#type' => 'pager'];
 
+    $pagination = ['results' => '999', 'results_page' => '1-999'];
+
+    // Attach JS to push search parameters to data layer.
+    $render[] = [
+      '#attached' => [
+        'library' => [
+          'fsa_ratings/data_layer',
+        ],
+        'drupalSettings' => [
+          'fsa_ratings' => [
+            'data_layer' => [
+              'keywords' => $keywords,
+              'filters' => $filters,
+              'pager_info' => $pager_info ? $showing_items : "0-0",
+              'hits_total' => $hits_total,
+            ],
+          ],
+        ],
+      ],
+    ];
     return $render;
   }
 
