@@ -7,6 +7,7 @@ _core:
 id: node
 label: Content
 tags:
-  title: '[node:title] | [site:name]'
-  description: '[node:summary]'
   canonical_url: '[node:url]'
+  description: '[node:field_intro]'
+  title: '[node:title] | [site:name]'
+  og_image: '[site:url]/themes/custom/fsa/share-default.png,[node:field_header_image:entity:field_image:hero:url]'

@@ -8,4 +8,17 @@ id: global
 label: Global
 tags:
   canonical_url: '[current-page:url]'
+  description: '[site:slogan]'
   title: '[current-page:title] | [site:name]'
+  og_description: '[site:slogan]'
+  og_image: '[site:url]/themes/custom/fsa/share-default.png'
+  og_site_name: '[site:name]'
+  og_title: '[current-page:title]'
+  og_url: '[current-page:url:absolute]'
+  twitter_cards_description: '[site:slogan]'
+  twitter_cards_image: '[site:url]/themes/custom/fsa/share-default.png'
+  twitter_cards_page_url: '[current-page:url]'
+  twitter_cards_site: '@foodgov'
+  twitter_cards_site_id: '68686173'
+  twitter_cards_title: '[current-page:title]'
+  twitter_cards_type: summary

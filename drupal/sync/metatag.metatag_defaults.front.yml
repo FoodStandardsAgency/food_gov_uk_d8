@@ -9,3 +9,6 @@ label: 'Front page'
 tags:
   canonical_url: '[site:url]'
   shortlink: '[site:url]'
+  og_image: '[site:url]/themes/custom/fsa/share-default.png'
+  og_url: '[site:url]'
+  twitter_cards_image: '[site:url]/themes/custom/fsa/share-default.png'

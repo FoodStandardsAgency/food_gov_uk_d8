@@ -8,4 +8,5 @@ id: '404'
 label: '404 page not found'
 tags:
   canonical_url: '[site:url]'
+  robots: 'noindex, nofollow, noarchive, nosnippet, noodp, noydir, noimageindex, notranslate'
   shortlink: '[site:url]'
