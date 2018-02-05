@@ -103,11 +103,11 @@
 
       @media (--breakpoint-md) {
         display: block;
-        width: 12em;
+        width: 12em !important;
       }
 
       @media (--breakpoint-lg) {
-        width: 20em;
+        width: 20em !important;
       }
 
       :--not-touch &:--enter {
@@ -209,11 +209,8 @@
 }
 
 .search__sidebar-header {
-  background-color: var(--dark-primary-color);
-  background-image: var(--icon-dropdown-down-white);
-  background-position: right 1em top 50%;
-  background-repeat: no-repeat;
-  background-size: 0.5em auto;
+  background-color: var(--dark-secondary-color);
+  background-image: none;
   padding-right: 2.5em;
   color: var(--color-white);
   display: block;
@@ -223,20 +220,6 @@
   padding: 1em;
   transition:
     backround-color var(--transition-enter);
-
-  &.is-open {
-    background-color: var(--darker-primary-color);
-
-    @media (--breakpoint-md) {
-      background-color: var(--dark-secondary-color);
-      background-image: none;
-    }
-  }
-
-  @media (--breakpoint-sm) {
-    background-color: var(--dark-secondary-color);
-    background-image: none;
-  }
 
   .heading {
     text-transform: none;
