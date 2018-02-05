@@ -938,6 +938,9 @@
     @mixin responsive-declaration padding-right, 1em, 4em;
     @mixin responsive-declaration padding-left, 1em, 4em;
     overflow-x: scroll;
+    max-width: var(--max-width-small);
+    width: 100%;
+    justify-content: space-between;
 
     @media (--breakpoint-md) {
       overflow-x: visible;
@@ -979,12 +982,6 @@
         }
       }
     }
-  }
-
-  .theme--search & ul {
-    max-width: var(--max-width-small);
-    width: 100%;
-    justify-content: space-between;
   }
 
   &.tab-row--capitalize {
