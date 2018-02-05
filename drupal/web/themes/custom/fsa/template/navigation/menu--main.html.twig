@@ -48,7 +48,11 @@
           <span class="visually-hidden">Back</span>
         </button>
         <h2 class="navigation__item navigation__item--level-{{menu_level + 1}} navigation__item--heading">
-          <a href="{{ firstItem.url }}" title="{{ firstItem.title }}" class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}">{{ firstItem.title }}</a>
+          {% if firstItem.url|render|striptags|trim %}
+            <a href="{{ firstItem.url }}" title="{{ firstItem.title }}" class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}">{{ firstItem.title }}</a>
+          {% else %}
+            <button title="{{ firstItem.title }}" class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}">{{ firstItem.title }}</button>
+          {% endif %}
         </h2>
       </header>
     {% endif %}
@@ -84,13 +88,13 @@
             {% endif %}
             >{{ item.title }}</a>
         {% else %}
-          <span
+          <button
             title="{{ item.title }}"
             class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}{% if (item.is_expanded) %} js-nav-item-with-child{% endif %}"
             {% if (item.is_expanded) %}
               aria-controls="collapsible-{{ randomID }}"
             {% endif %}
-          >{{ item.title }}</span>
+          >{{ item.title }}</button>
         {% endif %}
 
           {% if item.below %}

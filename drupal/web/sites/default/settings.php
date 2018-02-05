@@ -99,6 +99,8 @@ switch ($env) {
     $config['google_tag.settings']['environment_id'] = 'env-2';
     $config['google_tag.settings']['environment_token'] = 'qiSnyllzn5flpcJTEzjYGA';
 
+    $config['elasticsearch_helper.settings']['elasticsearch_helper']['host'] = '10.2.3.85';
+
     break;
 
   case 'develop':

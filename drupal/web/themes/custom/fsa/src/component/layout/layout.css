@@ -216,6 +216,7 @@
 
   body:not(.theme--service, .theme--lander) .layout.layout--with-no-sidebar & {
     max-width: var(--content-max-width);
+    width: 100%;
     margin: 0 auto;
   }
   
@@ -253,16 +254,10 @@
   }
 }
 
+/* Main content */
 .layout__content--main {
   flex: 1 1 auto;
   @mixin responsive-declaration padding-top, 1em, 2em;
-  @mixin responsive-declaration padding-bottom, 1em, 2em;
-
-  /* .theme--subscribe &,
-  .theme--page &,
-  .theme--alert & {
-    @mixin responsive-declaration padding-top, 1em, 4em;
-  } */
 
   .theme--lander &,
   .theme--fhrs & {
@@ -277,6 +272,8 @@
   }
 
   .theme--search & {
+    max-width: var(--max-width-small) !important;
+    width: 100%;
     @mixin responsive-declaration padding-top, 1em, 3em;
     @mixin responsive-declaration padding-right, 1em, 3em;
   }

@@ -8,6 +8,7 @@
 
 .hero {
   position: relative;
+  display: flex;
 
   @media print {
     background-color: transparent;
@@ -40,6 +41,7 @@
   justify-content: center;
   z-index: var(--z-middle);
   color: var(--color-white);
+  width: 100%;
   max-width: 50em;
   min-height: 18em;
   margin: 0 auto;
@@ -59,6 +61,7 @@
     }
   }
 
+  .theme--help &,
   .theme--fhrs & {
     padding-bottom: 1em;
 
@@ -205,9 +208,10 @@
   }
 
   &.hero__background--pattern {
-    background-image: url('/themes/custom/fsa/dist/sprite.svg#pattern-usage');
-    background-position: 50% 50%;
+    background-image: url('/themes/custom/fsa/src/img/background/pattern.svg');
+    /* background-image: url('/themes/custom/fsa/dist/sprite.svg#pattern-usage'); */
     background-size: 1024px 426.6666666px;
+    background-position: 50% 50%;
     background-repeat: repeat;
     opacity: 0.1;
 
@@ -241,6 +245,7 @@
 /*Hero content*/
 .hero__content {
   text-align: center;
+  width: 100%;
 }
 
 /* Hero cta */
@@ -265,6 +270,8 @@
 
 /* Hero secondary-navigation */
 .hero__secondary-navigation {
+  width: 100%;
+  flex: 1 1 100%;
   @mixin responsive-declaration padding-right, 1em, 4em;
   @mixin responsive-declaration padding-left, 1em, 4em;
   display: flex;

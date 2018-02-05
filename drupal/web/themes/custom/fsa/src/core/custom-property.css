@@ -79,6 +79,7 @@ Plugin documentation:
   --box-shadow-active: 0 1em 3em 0 color(#000 a(10%));
   --max-width: 80em;
   --max-width-medium: 55em;
+  --max-width-small: 51em;
   --content-max-width: 47em;
 }
 

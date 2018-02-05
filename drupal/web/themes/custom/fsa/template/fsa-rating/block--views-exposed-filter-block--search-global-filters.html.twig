@@ -35,11 +35,11 @@
 {% endfor %}
 {% set randomID = randomID|join %}
 
-<header class="search__sidebar-header toggle-button" data-state="is-open" data-theme="dynamic" data-state-element="#collapsible-{{ randomID }}" data-breakpoint="mobile" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
+<header class="search__sidebar-header">
   <h3 class="heading">{{ 'Refine search'|t }}</h3>
 </header>
 
-<div class="toggle-content" id="collapsible-{{ randomID }}" aria-hidden="true">
+<div>
   <div{{ attributes }}>
     {{ title_prefix }}
     {% if label %}

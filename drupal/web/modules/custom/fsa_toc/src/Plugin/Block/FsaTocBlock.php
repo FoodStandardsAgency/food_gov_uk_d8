@@ -21,6 +21,7 @@ class FsaTocBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
+    $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
     $node = \Drupal::routeMatch()->getParameter('node');
     $node = Node::load($node->id());
@@ -28,10 +29,14 @@ class FsaTocBlock extends BlockBase {
     $fsa_toc_enabled = $node->get('field_fsa_toc')->value;
 
     if ($fsa_toc_enabled) {
+      if ($node->hasTranslation($langcode)) {
+        $node = $node->getTranslation($langcode);
+      }
+      $body = $node->body;
+      $body = $body->view(['label' => 'inline']);
 
       // We must render this instead of getting body->value, because h2 anchors
       // are built on the fly via filter.
-      $body = $node->body->view(['label' => 'inline']);
       $content = (string) \Drupal::service('renderer')->render($body);
 
       /** @var \Drupal\fsa_toc\FsaTocService $fsa_toc_service */

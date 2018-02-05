@@ -2,7 +2,9 @@ import nextByClass from '../../core/helper/nextByClass';
 import debounce from '../../core/helper/debounce';
 import checkMediaQuery from '../../core/helper/checkMediaQuery';
 import breakpoints from '../../core/helper/breakpoints';
+import hasClass from '../../core/helper/hasClass';
 import closestParent from '../../core/helper/closestParent';
+import { setStateOff, setStateOn, removeState, toggleState } from '../../core/helper/toggleHelpers';
 import inert from 'wicg-inert';
 
 function navigation() {
@@ -16,9 +18,10 @@ function navigation() {
   };
 
   const KEYCODE = {
+    ENTER: 13,
     ESC: 27,
     SPACE: 32,
-  };
+  }
 
   const keyboard = {
     BACKSPACE: 8,
@@ -158,8 +161,11 @@ function navigation() {
     }
   };
 
-  // Query navigation related elements
-  const menuButtonElementsArray = [...document.querySelectorAll('.js-menu-button')];
+  // Query menu buttons
+  const menuButtonOpenElement = document.querySelector('.js-menu-button-open');
+  const menuButtonCloseElement = document.querySelector('.js-menu-button-close');
+
+  // Query navigation
   const navigationElementArray = [...document.querySelectorAll('.js-navigation')];
 
   // Query nav items with child
@@ -324,99 +330,63 @@ function navigation() {
   /// Mobile navigation
 
   // Check everything found
-  if (menuButtonElementsArray.length <= 0 ||
+  if (menuButtonOpenElement.length <= 0 ||
+    menuButtonCloseElement.length <= 0 ||
     navigationElementArray.length <= 0 ||
     siteElementArray.length <= 0) {
     return console.warn('Navigation elements not found');
   }
 
-  function setStateOff(options, elemState) {
-    const element = options.element;
+  let secondLevelMenuArray = [];
 
-    switch (options.type) {
-      case 'button':
-        element.classList.remove(elemState);
-        // element.classList.add('is-closed');
-        element.setAttribute('aria-expanded', false);
-        break;
-      case 'content':
-        element.classList.remove(elemState);
-        // element.classList.add('is-hidden');
-        element.setAttribute('aria-hidden', true);
-        element.inert = true;
-        break;
-      default:
-        break;
+  navigationMenuElementsArray.forEach((element) => {
+    if([...element.classList].indexOf('navigation__menu--level-2') != -1) {
+      secondLevelMenuArray = [...secondLevelMenuArray, element];
     }
-  }
+  });
 
-  function setStateOn(options, elemState) {
-    const element = options.element;
-
-    switch (options.type) {
-      case 'button':
-        // element.classList.remove('is-closed');
-        element.classList.add(elemState);
-        element.setAttribute('aria-expanded', true);
-        break;
-      case 'content':
-        element.classList.add(elemState);
-        // element.classList.remove('is-hidden');
-        element.setAttribute('aria-hidden', false);
-        element.inert = false;
-        break;
-      default:
-        break;
+  let firstLevelLinkArray = [];
+  
+  navigationParentItemsArray.forEach((element) => {
+    if([...element.classList].indexOf('navigation__link--level-1') != -1) {
+      firstLevelLinkArray = [...firstLevelLinkArray, element];
     }
-  }
+  });
 
-  function removeState(options, elemState) {
-    const element = options.element;
+  // Add click listener for menu button
+  menuButtonOpenElement.addEventListener("click", function(e){
+    setStateOn({element: menuButtonOpenElement, type: 'button'}, 'is-open');
+    setStateOn({element: menuButtonCloseElement, type: 'button'}, 'is-open');
+    setStateOn({element: navigationElementArray[0], type: 'content'}, 'is-open');
+    siteElementArray[0].classList.add("is-moved");
+    root.classList.add("is-fixed");
+    menuButtonCloseElement.focus();
+  });
 
-    switch (options.type) {
-      case 'button':
-        element.classList.remove(elemState);
-        element.removeAttribute('aria-expanded');
-        break;
-      case 'content':
-        element.classList.remove(elemState);
-        element.removeAttribute('aria-hidden');
-        element.inert = false;
-        break;
-      default:
-        break;
-    }
-  }
-  function toggleState(elem, elemRefItem, elemState) {
-    if (elemRefItem.classList.contains(elemState)) {
-      setStateOff({element: elem, type: 'button'}, elemState);
-      setStateOff({element: elemRefItem, type: 'content'}, elemState);
-    } else {
-      setStateOn({element: elem, type: 'button'}, elemState);
-      setStateOn({element: elemRefItem, type: 'content'}, elemState);
-    }
-  }
-
-  // Loop the menubuttons
-  menuButtonElementsArray.forEach((element) => {
-    const menuButtonElement = element;
-
-    // Add click listener
-    menuButtonElement.addEventListener("click", function(e){
-      toggleState(this, navigationElementArray[0], 'is-open');
-      siteElementArray[0].classList.toggle("is-moved");
-      root.classList.toggle("is-fixed");
-    });
+  // Add click listener for menu button
+  menuButtonCloseElement.addEventListener("click", function(e){
+    setStateOff({element: menuButtonOpenElement, type: 'button'}, 'is-open');
+    setStateOff({element: menuButtonCloseElement, type: 'button'}, 'is-open');
+    setStateOff({element: navigationElementArray[0], type: 'content'}, 'is-open');
+    siteElementArray[0].classList.remove("is-moved");
+    root.classList.remove("is-fixed");
+    menuButtonOpenElement.focus();
   });
 
   // Items with children
   navigationParentItemsArray.forEach((element) => {
+
+    // Add tabindex
+    element.setAttribute('tabindex', '0');
+
     // Add click listener
     element.addEventListener("click", function(e){
       if (checkMediaQuery() === breakpoints.xsmall) {
         e.preventDefault();
-        setStateOn({element: element, type: 'content'}, 'is-open');
+        setStateOn({element: element, type: 'button'}, 'is-open');
         setStateOn({element: element.nextElementSibling, type: 'content'}, 'is-open');
+        element.nextElementSibling.children[0].children[0].focus();
+        navigationElementArray[0].classList.add('has-open-submenu');
       }
     });
   });
@@ -429,15 +399,23 @@ function navigation() {
         e.preventDefault();
         setStateOff({element: element, type: 'button'}, 'is-open');
         setStateOff({element: closestParent(element, 'js-nav-menu'), type: 'content'}, 'is-open');
+        setStateOff({element: closestParent(element, 'js-nav-menu').previousElementSibling, type: 'button'}, 'is-open');
+        
+        if([...closestParent(element, 'js-nav-menu').classList].indexOf('navigation__menu--level-2') != -1) {
+          navigationElementArray[0].classList.remove('has-open-submenu');
+        }
       }
     });
   });
 
-  function initializeMobileNav() {
+  function initializeNav() {
+    siteElementArray[0].classList.remove("is-moved");
+    root.classList.remove("is-fixed");
+    navigationElementArray[0].classList.remove('has-open-submenu');
+
     if (checkMediaQuery() === breakpoints.xsmall) {
-      menuButtonElementsArray.forEach((element) => {
-        setStateOff({element: element, type: 'button'}, 'is-open');
-      });
+      setStateOff({element: menuButtonOpenElement, type: 'button'}, 'is-open');
+      setStateOff({element: menuButtonCloseElement, type: 'button'}, 'is-open');
       setStateOff({element: navigationElementArray[0], type: 'content'}, 'is-open');
 
       navigationParentItemsArray.forEach((element) => {
@@ -452,10 +430,78 @@ function navigation() {
         setStateOff({element: element, type: 'button'}, 'is-open');
       });
     } else {
-      menuButtonElementsArray.forEach((element) => {
-        setStateOn({element: element, type: 'button'}, 'is-open');
+      firstLevelLinkArray.forEach((element) => {
+
+        element.addEventListener("focus", function( e ) {
+          const content = element.nextElementSibling;
+          console.log('asd');
+
+          firstLevelLinkArray.forEach((element) => {
+            // removeState({element: element, type: 'button'}, 'is-open');
+            setStateOff({element: element, type: 'button'}, 'is-open');
+          })
+          
+          secondLevelMenuArray.forEach((element) => {
+            // removeState({element: element, type: 'content'}, 'is-open');
+            setStateOff({element: content, type: 'content'}, 'is-open');
+          });
+          // setStateOff({element: element, type: 'button'}, 'is-open');
+          // setStateOff({element: content, type: 'content'}, 'is-open');
+        }, true);
+
+        element.addEventListener("keypress", function(e) {
+          const content = element.nextElementSibling;
+
+          if(e.which === KEYCODE.SPACE) {
+            e.preventDefault();
+            toggleState(element, content, 'is-open');
+          }
+          if(e.which === KEYCODE.ENTER) {
+            if([...content.classList].indexOf('is-open') != -1) {
+              setStateOff({element: element, type: 'button'}, 'is-open');
+              setStateOff({element: content, type: 'content'}, 'is-open');
+            } else {
+              e.preventDefault();
+              setStateOn({element: element, type: 'button'}, 'is-open');
+              setStateOn({element: content, type: 'content'}, 'is-open');
+            }
+          }
+        });
+
+        // If touch device
+        element.addEventListener('touchstart', function addtouchclass(e) {
+          if (checkMediaQuery() !== breakpoints.xsmall) {
+            const content = element.nextElementSibling;
+            if([...content.classList].indexOf('is-open') != -1) {
+              element.classList.remove('is-open');
+              content.classList.remove('is-open');
+            } else {
+              e.preventDefault();
+              firstLevelLinkArray.forEach((element) => {
+                element.classList.remove('is-open');
+              })
+              element.classList.add('is-open');
+              secondLevelMenuArray.forEach((element) => {
+                element.classList.remove('is-open');
+              })
+              content.classList.add('is-open');
+            }
+          }
+        }, false);
+
+        element.addEventListener("mouseenter", function(e) {
+          const content = element.nextElementSibling;
+          firstLevelLinkArray.forEach((element) => {
+            removeState({element: element, type: 'button'}, 'is-open');
+          })
+          
+          secondLevelMenuArray.forEach((element) => {
+            removeState({element: element, type: 'content'}, 'is-open');
+          });
+        }, true);
       });
-      
+      removeState({element: menuButtonOpenElement, type: 'button'}, 'is-open');
+      removeState({element: menuButtonCloseElement, type: 'button'}, 'is-open');
       removeState({element: navigationElementArray[0], type: 'content'}, 'is-open');
 
       navigationParentItemsArray.forEach((element) => {
@@ -472,13 +518,23 @@ function navigation() {
     }
   }
 
+  // Current window width
+  let windowWidth = window.innerWidth;
+
   const resizeHandler = debounce(function() {
-    initializeMobileNav();
+    // Check if vertical resizing
+    if (window.innerWidth == windowWidth) {
+      return false; 
+    }
+
+    windowWidth = window.innerWidth;
+
+    initializeNav();
   }, 250);
 
   window.addEventListener('resize', resizeHandler);
 
-  initializeMobileNav();
+  initializeNav();
 }
 
 module.exports = navigation;

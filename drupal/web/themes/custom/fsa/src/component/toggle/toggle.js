@@ -4,6 +4,7 @@ import breakpoints from '../../core/helper/breakpoints';
 import debounce from '../../core/helper/debounce';
 import nextByClass from '../../core/helper/nextByClass';
 import closestParent from '../../core/helper/closestParent';
+import { setStateOff, setStateOn, toggleState } from '../../core/helper/toggleHelpers';
 import inert from 'wicg-inert';
 import tabbable from 'tabbable';
 
@@ -35,56 +36,6 @@ function toggle() {
       button: [...elemParent.querySelectorAll(targetButtonSelector)],
       content: [...elemParent.querySelectorAll(targetContentSelector)]
     };
-  }
-
-  // Set state off
-  function setStateOff(options, elemState) {
-    const element = options.element;
-    switch (options.type) {
-      case 'button':
-        element.classList.remove(elemState);
-        element.setAttribute('aria-expanded', false);
-        break;
-      case 'content':
-        element.classList.remove(elemState);
-        element.setAttribute('aria-hidden', true);
-        element.inert = true;
-        // console.log('content off, aria-hidden=', element.getAttribute('aria-hidden'));
-        break;
-      default:
-        break;
-    }
-  }
-
-  // Set state on
-  function setStateOn(options, elemState) {
-    const element = options.element;
-
-    switch (options.type) {
-      case 'button':
-        element.classList.add(elemState);
-        element.setAttribute('aria-expanded', true);
-        break;
-      case 'content':
-        element.classList.add(elemState);
-        element.setAttribute('aria-hidden', false);
-        element.inert = false;
-        // console.log('content on, aria-hidden=', element.getAttribute('aria-hidden'));
-        break;
-      default:
-        break;
-    }
-  }
-
-  // Toggle state
-  function toggleState(elem, elemRefItem, elemState) {
-    if (elemRefItem.classList.contains(elemState)) {
-      setStateOff({element: elem, type: 'button'}, elemState);
-      setStateOff({element: elemRefItem, type: 'content'}, elemState);
-    } else {
-      setStateOn({element: elem, type: 'button'}, elemState);
-      setStateOn({element: elemRefItem, type: 'content'}, elemState);
-    }
   }
 
   // Get elemenet state
@@ -250,6 +201,7 @@ function toggle() {
     // Add listeners
     // Assign click event
     elem.addEventListener("click", function(e){
+      // TODO Prevet this happening when pressing SPACE on BUTTON element
       // Prevent default action of element
       e.preventDefault(); 
       // Run state function
@@ -257,7 +209,7 @@ function toggle() {
     });
 
     // Add keyboard event for enter key to mimic anchor functionality
-    elem.addEventListener("keypress", function(e){
+    elem.addEventListener("keypress", function(e) {
       if(e.which === KEYCODE.SPACE || e.which === KEYCODE.ENTER) {
         // Prevent default action of element
         e.preventDefault();
@@ -311,6 +263,9 @@ function toggle() {
   // Grab all elements with required attributes
   var elems = document.querySelectorAll("[data-state]");
 
+  // Current window width
+  let windowWidth = window.innerWidth;
+
   // Define type of change our observer will watch out for
   observer.observe(document.body, {
     childList: true,
@@ -318,6 +273,14 @@ function toggle() {
   });
 
   const resizeHandler = debounce(function() {
+
+    // Check if vertical resizing
+    if (window.innerWidth == windowWidth) {
+      return false; 
+    }
+
+    windowWidth = window.innerWidth;
+
     // Loop through our matches
     for(var a = 0; a < elems.length; a++){
 
