@@ -197,7 +197,7 @@ handlers:
       from_options: {  }
       from_name: default
       subject: 'This is a food problem report from a consumer via beta.food.gov.uk'
-      body: "<p>This is a food problem report from a consumer via beta.food.gov.uk.&nbsp;</p>\r\n\r\n<div>[webform_submission:values]</div>\r\n\r\n<p>Please do not reply to this email.</p>\r\n\r\n<p>Protect privacy: make sure you keep the information in this email appropriately secure and only use it for the purpose of investigating the complaint against the food business. If this issue is for another local authority to consider and take appropriate action, please securely share the information in this email with that local authority. Ensure that the personal details of the person who made the complaint are not revealed to the food business.</p>"
+      body: "<p>This is a food problem report from <strong><a href=\"[current-page:url:unaliased:absolute]\">[current-page:title]</a></strong> via beta.food.gov.uk.</p>\r\n\r\n<div>[webform_submission:values]</div>\r\n\r\n<p>Please do not reply to this email.</p>\r\n\r\n<p>Protect privacy: make sure you keep the information in this email appropriately secure and only use it for the purpose of investigating the complaint against the food business. If this issue is for another local authority to consider and take appropriate action, please securely share the information in this email with that local authority. Ensure that the personal details of the person who made the complaint are not revealed to the food business.</p>"
       excluded_elements:
         fsa_establishment_la_name: fsa_establishment_la_name
         fsa_establishment_postal_code: fsa_establishment_postal_code
