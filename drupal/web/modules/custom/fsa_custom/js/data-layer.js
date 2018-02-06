@@ -6,7 +6,7 @@
 (function ($, Drupal, drupalSettings) {
   Drupal.behaviors.fsaCustomDataLayer = {
     attach: function (context, settings) {
-      $('main', context).once('fsaCustomDataLayer').each(function () { // once('fsaCustomDataLayer', function () {
+      $('main', context).once('fsaCustomDataLayer').each(function () {
 
         // Apply data layer push behaviour once.
         var category = drupalSettings.fsa_ratings.data_layer.category;
@@ -22,7 +22,7 @@
             dataLayer.push({
               "event": "search",
               "search": {
-                "keywords" : filters.keyword == null ? undefined : filters.keyword,
+                "keywords" : filters.keyword == "" ? undefined : filters.keyword,
                 "category": "search all"
               }
             });
@@ -34,7 +34,7 @@
             dataLayer.push({
               "event": "search",
               "search": {
-                "keywords": filters.keyword == null ? undefined : filters.keyword,
+                "keywords": filters.keyword == "" ? undefined : filters.keyword,
                 "category": "search guidance",
                 "results": pager.total_items,
                 "resultsPage": pager.page_of_pages,
@@ -52,7 +52,7 @@
             dataLayer.push({
               "event": "search",
               "search": {
-                "keywords": filters.keyword == null ? undefined : filters.keyword,
+                "keywords": filters.keyword == "" ? undefined : filters.keyword,
                 "category": "search ratings",
                 "tags": {
                   "businessType": filters.business_type,
@@ -70,7 +70,7 @@
             dataLayer.push({
               "event": "search",
               "search": {
-                "keywords": filters.keyword == null ? undefined : filters.keyword,
+                "keywords": filters.keyword == "" ? undefined : filters.keyword,
                 "category": "search news and alerts",
                 "tags": {
                   "newsType": filters.news_type,
@@ -86,7 +86,7 @@
             dataLayer.push({
               "event": "search",
               "search": {
-                "keywords": filters.keyword == null ? undefined : filters.keyword,
+                "keywords": filters.keyword == "" ? undefined : filters.keyword,
                 "category": "search research",
               },
               "tags": {
