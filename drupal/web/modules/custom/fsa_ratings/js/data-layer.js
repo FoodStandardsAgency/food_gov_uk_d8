@@ -17,7 +17,7 @@
           "event" : "search",
           "search": {
             "keywords" : keywords == null ? undefined : keywords,
-            "category" : "hygiene ratings",
+            "category" : "hygiene-ratings",
             "results" : hitsTotal.split(" ").join(''),
             "resultsPage" : pagerInfo,
             "tags": {
