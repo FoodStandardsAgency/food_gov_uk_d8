@@ -49,8 +49,7 @@ class FsaHero extends BlockBase {
     }
 
     // Static hero content for all hygiene rating related pages.
-    if ($route_name == 'fsa_ratings.ratings_meanings' ||
-      $route->getParameter('fsa_establishment')) {
+    if ($route->getParameter('fsa_establishment')) {
       $build['fsa_hero'] = [
         '#theme' => $theme,
         '#title' => $this->t('Food hygiene ratings'),
