@@ -23,7 +23,7 @@
               "event": "search",
               "search": {
                 "keywords" : filters.keyword == "" ? undefined : filters.keyword,
-                "category": "search all"
+                "category": "all"
               }
             });
             break;
@@ -34,7 +34,7 @@
               "event": "search",
               "search": {
                 "keywords": filters.keyword == "" ? undefined : filters.keyword,
-                "category": "search guidance",
+                "category": "guidance",
                 "results": pager.total_items,
                 "resultsPage": pager.page_of_pages,
                 "tags": {
@@ -51,7 +51,7 @@
               "event": "search",
               "search": {
                 "keywords": filters.keyword == "" ? undefined : filters.keyword,
-                "category": "search ratings",
+                "category": "hygiene-ratings",
                 "tags": {
                   "businessType": filters.business_type,
                   "localAuthority": filters.ratings_local_authority,
@@ -68,7 +68,7 @@
               "event": "search",
               "search": {
                 "keywords": filters.keyword == "" ? undefined : filters.keyword,
-                "category": "search news and alerts",
+                "category": "news-alerts",
                 "tags": {
                   "newsType": filters.news_type,
                   "nation": filters.nation
@@ -83,7 +83,7 @@
               "event": "search",
               "search": {
                 "keywords": filters.keyword == "" ? undefined : filters.keyword,
-                "category": "search research",
+                "category": "research"
               },
               "tags": {
                 "researchTopic": filters.research_topic,
