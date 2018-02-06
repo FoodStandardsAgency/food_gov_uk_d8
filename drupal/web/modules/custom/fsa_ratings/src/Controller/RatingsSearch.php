@@ -194,6 +194,16 @@ class RatingsSearch extends ControllerBase {
     // Append the pager.
     $render[] = ['#type' => 'pager'];
 
+    // Generate pages information.
+    if ($pager_info) {
+      $page_number = ($to / count($items));
+      $number_of_pages = ($hits / count($items));
+      $pages = $page_number . '-' . $number_of_pages;
+    }
+    else {
+      $pages = '0-0';
+    }
+
     // Attach data layer library and settings to page.
     $render[] = [
       '#attached' => [
@@ -205,8 +215,8 @@ class RatingsSearch extends ControllerBase {
             'data_layer' => [
               'keywords' => $keywords,
               'filters' => $filters,
-              'pager_info' => $pager_info ? $showing_items : "0-0",
-              'hits_total' => $hits_total,
+              'pages' => $pages,
+              'hits' => $hits_total,
             ],
           ],
         ],
