@@ -601,9 +601,7 @@ function fsa_custom_views_pre_render(ViewExecutable $view) {
         $filters['keyword'] = $view->filter['keyword']->value;
         $filters['guidance_audience'] = $view->filter['guidance_audience']->value;
         $filters['nation'] = $view->filter['nation']->value;
-        $of_pages = $view->pager->getCurrentPage() * 10;
-        $page = $of_pages - 9;
-        $pager['page_of_pages'] = $page . '-' . $of_pages;
+        $pager['page_of_pages'] = '1-' . $view->pager->options['items_per_page'];
         $pager['total_items'] = $view->pager->getTotalItems();
         break;
 
