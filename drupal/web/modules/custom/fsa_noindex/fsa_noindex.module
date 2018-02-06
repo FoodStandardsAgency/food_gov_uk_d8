@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Includes FSA Noindex module code.
+ */
+
+/**
+ * Implements hook_page_attachments().
+ */
+function fsa_noindex_page_attachments(array &$attachments) {
+
+  // Add noindex robot metatag to avoid site from being indexed.
+  $tags = [
+    '#tag' => 'meta',
+    '#attributes' => [
+      'name' => 'robots',
+      'content' => 'noindex',
+    ],
+  ];
+  $attachments['#attached']['html_head'][] = [$tags, 'robots'];
+
+}
