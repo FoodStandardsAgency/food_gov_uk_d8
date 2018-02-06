@@ -28,7 +28,6 @@
             }
           }
         });
-        console.log(dataLayer);
       });
     }
   };

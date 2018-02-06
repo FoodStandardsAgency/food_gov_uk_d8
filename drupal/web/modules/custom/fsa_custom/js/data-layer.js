@@ -26,7 +26,6 @@
                 "category": "search all"
               }
             });
-            console.log(dataLayer[2]["search"]);
             break;
 
           // Search guidance.
@@ -44,7 +43,6 @@
                 }
               }
             });
-            console.log(dataLayer[2]["search"]);
             break;
 
           // Search ratings.
@@ -62,7 +60,6 @@
                 }
               }
             });
-            console.log(dataLayer[2]["search"]);
             break;
 
           // Search news and alerts.
@@ -78,7 +75,6 @@
                 }
               }
             });
-            console.log(dataLayer[2]["search"]);
             break;
 
           // Search research.
@@ -94,7 +90,6 @@
                 "nation": filters.nation
               }
             });
-            console.log(dataLayer[2]["search"]);
             break;
         }
       });
