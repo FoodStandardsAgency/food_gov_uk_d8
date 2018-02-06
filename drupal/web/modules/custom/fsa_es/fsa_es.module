@@ -110,4 +110,19 @@ function fsa_es_preprocess_views_view(&$variables) {
       }
     }
   }
+  elseif ($view->storage->id() == 'search_global_ratings_embed') {
+    // This changes the view more link to include the search keyword and
+    // anchor. Unfortunately this is not possible with Views UI.
+    if ($params = \Drupal::service('request_stack')->getCurrentRequest()->query->all()) {
+      if (isset($params['q'])) {
+        /** @var \Drupal\Core\Url $more_url */
+        $more_url = $variables['more']['#url'];
+        // Get existing query (if available).
+        $more_query = $more_url->getOption('query') ? $more_url->getOption('query') : [];
+        // Set options.
+        $more_url->setOption('query', array_merge($more_query, ['q' => $params['q']]));
+        $more_url->setOption('fragment', 'results');
+      }
+    }
+  }
 }
