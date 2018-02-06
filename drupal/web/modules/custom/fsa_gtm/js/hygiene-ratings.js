@@ -6,7 +6,7 @@
 (function ($, Drupal, drupalSettings) {
   Drupal.behaviors.fsaRatingsDataLayer = {
     attach: function (context, settings) {
-      $('main', context).once('data-layer').each(function () {
+      $(document, context).once('data-layer').each(function () {
 
         // Apply data layer push behaviour once.
         var keywords = drupalSettings.fsa_ratings.data_layer.keywords;
