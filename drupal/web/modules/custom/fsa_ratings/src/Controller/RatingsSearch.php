@@ -194,8 +194,6 @@ class RatingsSearch extends ControllerBase {
     // Append the pager.
     $render[] = ['#type' => 'pager'];
 
-    $pagination = ['results' => '999', 'results_page' => '1-999'];
-
     // Attach data layer library and settings to page.
     $render[] = [
       '#attached' => [
