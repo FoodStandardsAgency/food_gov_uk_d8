@@ -2,9 +2,7 @@
 
 namespace Drupal\fsa_es\Plugin\ElasticsearchQueryBuilder;
 
-use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\fsa_es\SearchService;
-use Elasticsearch\Client;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -21,27 +19,30 @@ class SitewideSearchAll extends SitewideSearchBase {
 
   /**
    * {@inheritdoc}
-   *
-   * @param \Drupal\fsa_es\SearchService $ratings_search_service
-   */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $language_manager, Client $elasticsearch_client, SearchService $ratings_search_service) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition, $language_manager, $elasticsearch_client);
-
-    $this->ratingsSearchService = $ratings_search_service;
-  }
-
-  /**
-   * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static(
+    $instance = new static(
       $configuration,
       $plugin_id,
       $plugin_definition,
       $container->get('language_manager'),
       $container->get('elasticsearch_helper.elasticsearch_client'),
-      $container->get('fsa_es.search_service')
+      $container->get('request_stack')
     );
+
+    // Set ratings search service instance.
+    $instance->setRatingsSearchService($container->get('fsa_es.search_service'));
+
+    return $instance;
+  }
+
+  /**
+   * Sets ratings search service instance.
+   *
+   * @param \Drupal\fsa_es\SearchService $ratings_search_service
+   */
+  public function setRatingsSearchService(SearchService $ratings_search_service) {
+    $this->ratingsSearchService = $ratings_search_service;
   }
 
   /**
