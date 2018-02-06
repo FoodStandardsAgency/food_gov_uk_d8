@@ -206,7 +206,7 @@ handlers:
       from_options: {  }
       from_name: default
       subject: 'This is a food crime report from a consumer/business via beta.food.gov.uk'
-      body: "<p>This is a suspected food crime report via beta.food.gov.uk.</p>\r\n\r\n<p>[webform_submission:values]</p>\r\n\r\n<p>Please do not reply to this email.</p>\r\n\r\n<p>Protect privacy: make sure you keep the information in this email appropriately secure and only use it for the purpose of investigating the complaint against the food business. Ensure that the personal details of the person who made the complaint are not revealed to the food business.</p>"
+      body: "<p>This is a suspected food crime report via beta.food.gov.uk.</p>\r\n\r\n<p>[webform_submission:values]</p>\r\n\r\n<p>Please do not reply to this email.</p>\r\n"
       excluded_elements:
         audience: audience
       ignore_access: false
