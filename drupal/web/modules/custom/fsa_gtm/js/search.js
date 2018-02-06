@@ -6,13 +6,12 @@
 (function ($, Drupal, drupalSettings) {
   Drupal.behaviors.fsaCustomDataLayer = {
     attach: function (context, settings) {
-      $('main', context).once('fsaCustomDataLayer').each(function () {
+      $('main', context).once('data-layer').each(function () {
 
         // Apply data layer push behaviour once.
         var category = drupalSettings.fsa_ratings.data_layer.category;
         var filters = drupalSettings.fsa_ratings.data_layer.filters;
         var pager = drupalSettings.fsa_ratings.data_layer.pager;
-
 
         // Push data relevant to the search category in use.
         switch(category) {
