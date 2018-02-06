@@ -82,7 +82,7 @@ function fsa_es_preprocess_views_view(&$variables) {
   $view = $variables['view'];
 
   // empty($view->pager->current_page) = either not set or first page (current page = 0).
-  if ($view->storage->id() == 'search_global_all' && !empty($variables['rows'][0]['#rows']) && empty($view->pager->current_page)) {
+  if ($view->storage->id() == 'search_global_all' && empty($view->pager->current_page)) {
     $embed_view_id = 'search_global_ratings_embed';
     $embed_view_display = 'embed_1';
 
@@ -100,12 +100,21 @@ function fsa_es_preprocess_views_view(&$variables) {
 
       // If there are more than 3 values, inject the ratings embed after 3rd element.
       if ($ratings_embed_build['#access']) {
-        if (count($variables['rows'][0]['#rows']) > 3) {
-          array_splice($variables['rows'][0]['#rows'], 3, 0, [$ratings_embed_build]);
+        // If there are results in "search_global_all", inject or append the
+        // embedded ratings view.
+        if (!empty($variables['rows'])) {
+          if (isset($variables['rows'][0]['#rows']) && count($variables['rows'][0]['#rows']) > 3) {
+            array_splice($variables['rows'][0]['#rows'], 3, 0, [$ratings_embed_build]);
+          }
+          // If there are less than 3 values, just append at the end.
+          else {
+            $variables['rows'][0]['#rows'][] = $ratings_embed_build;
+          }
         }
-        // If there are less than 3 values, just append at the end.
+        // If there are no results in "search_global_all", add directly to
+        // "rows" element
         else {
-          $variables['rows'][0]['#rows'][] = $ratings_embed_build;
+          $variables['rows'][] = $ratings_embed_build;
         }
       }
     }
