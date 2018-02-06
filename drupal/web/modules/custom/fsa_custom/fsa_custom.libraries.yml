@@ -12,3 +12,12 @@ page_print:
   dependencies:
     - core/drupal
     - core/jquery.once
+
+data_layer:
+  js:
+    js/data-layer.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
+    - core/drupalSettings
