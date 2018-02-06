@@ -193,7 +193,7 @@ class RatingsSearch extends ControllerBase {
 
     $pagination = ['results' => '999', 'results_page' => '1-999'];
 
-    // Attach JS to push search parameters to data layer.
+    // Attach data layer library and settings to page.
     $render[] = [
       '#attached' => [
         'library' => [

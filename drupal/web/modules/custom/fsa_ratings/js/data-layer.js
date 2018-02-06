@@ -6,17 +6,19 @@
 (function ($, Drupal, drupalSettings) {
   Drupal.behaviors.fsaRatingsDataLayer = {
     attach: function (context, settings) {
-      $('body', context).once('fsaRatingsDataLayer').each(function () {
+      $('main', context).once('fsaRatingsDataLayer').each(function () {
+
+        // Apply data layer push behaviour once.
         var keywords = drupalSettings.fsa_ratings.data_layer.keywords;
         var filters = drupalSettings.fsa_ratings.data_layer.filters;
         var pagerInfo = drupalSettings.fsa_ratings.data_layer.pager_info;
         var hitsTotal = drupalSettings.fsa_ratings.data_layer.hits_total;
-        var data = {
+        dataLayer.push({
           "event" : "search",
           "search": {
             "keywords" : keywords == null ? undefined : keywords,
             "category" : "hygiene ratings",
-            "results" : hitsTotal,
+            "results" : hitsTotal.split(" ").join(''),
             "resultsPage" : pagerInfo,
             "tags": {
               "businessType" : filters.business_type,
@@ -25,8 +27,8 @@
               "localAuthority": filters.local_authority
             }
           }
-        };
-        dataLayer.push(data);
+        });
+        console.log(dataLayer);
       });
     }
   };
