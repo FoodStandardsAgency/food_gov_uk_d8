@@ -24,7 +24,7 @@ settings:
   action_url: /search
   form_method: get
   form_element:
-    name: keywords
+    name: q
     title: ''
     placeholder: Search...
   form_submit_button: 1

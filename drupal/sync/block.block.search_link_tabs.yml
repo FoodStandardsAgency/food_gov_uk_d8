@@ -28,27 +28,27 @@ settings:
       url: /search
       text: All
       route_parameters: ''
-      query: '{"keywords": "[current-page:query:keywords]"}'
+      query: '{"q": "[current-page:query:q]"}'
     link-1:
       url: /search/guidance
       text: Guidance
       route_parameters: ''
-      query: '{"keywords": "[current-page:query:keywords]"}'
+      query: '{"q": "[current-page:query:q]"}'
     link-2:
       url: /search/ratings
       text: 'Food hygiene ratings'
       route_parameters: ''
-      query: '{"keywords": "[current-page:query:keywords]"}'
+      query: '{"q": "[current-page:query:q]"}'
     link-3:
       url: /search/news-alerts
       text: 'News & alerts'
       route_parameters: ''
-      query: '{"keywords": "[current-page:query:keywords]"}'
+      query: '{"q": "[current-page:query:q]"}'
     link-4:
       url: /search/research
       text: Research
       route_parameters: ''
-      query: '{"keywords": "[current-page:query:keywords]"}'
+      query: '{"q": "[current-page:query:q]"}'
 visibility:
   request_path:
     id: request_path

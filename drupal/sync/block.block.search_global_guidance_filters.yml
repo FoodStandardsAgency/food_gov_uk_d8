@@ -28,7 +28,7 @@ settings:
   filters:
     audience: audience
     region: region
-    keywords: 0
+    q: 0
     '': 0
   post_route_name: ''
   location_context: ''

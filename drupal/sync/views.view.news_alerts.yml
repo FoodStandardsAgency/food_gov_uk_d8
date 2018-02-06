@@ -727,7 +727,7 @@ display:
             description: ''
             use_operator: false
             operator: keys_op
-            identifier: keyword
+            identifier: q
             required: false
             remember: false
             multiple: false

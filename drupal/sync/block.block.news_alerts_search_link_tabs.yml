@@ -28,22 +28,22 @@ settings:
       url: /news-alerts/search
       text: All
       route_parameters: ''
-      query: ''
+      query: '{"q": "[current-page:query:q]"}'
     link-1:
       url: /news-alerts/search/alerts
       text: Alerts
       route_parameters: ''
-      query: ''
+      query: '{"q": "[current-page:query:q]"}'
     link-2:
       url: /news-alerts/search/news
       text: News
       route_parameters: ''
-      query: ''
+      query: '{"q": "[current-page:query:q]"}'
     link-3:
       url: /news-alerts/search/consultations
       text: Consultations
       route_parameters: ''
-      query: ''
+      query: '{"q": "[current-page:query:q]"}'
     link-4:
       url: ''
       text: ''

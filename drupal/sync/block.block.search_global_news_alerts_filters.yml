@@ -28,7 +28,7 @@ settings:
   filters:
     type: type
     region: region
-    keywords: 0
+    q: 0
   post_route_name: ''
   location_context: ''
   disable_ajax: false
