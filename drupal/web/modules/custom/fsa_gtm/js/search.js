@@ -52,7 +52,7 @@
                 "keywords": filters.keyword == "" ? undefined : filters.keyword,
                 "category": "hygiene-ratings",
                 "tags": {
-                  "businessType": filters.business_type,
+                  "businessType": filters.ratings_business_type,
                   "localAuthority": filters.ratings_local_authority,
                   "hygieneRating": filters.ratings_fhrs_rating_value,
                   "hygieneStatus": filters.ratings_fhis_rating_value
