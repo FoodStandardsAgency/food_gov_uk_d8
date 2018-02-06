@@ -42,7 +42,7 @@ function fsa_gtm_views_pre_render(ViewExecutable $view) {
 
       case 'search ratings':
         $filters['keyword'] = $view->filter['keyword']->value;
-        $filters['business_type'] = $view->filter['business_type']->value;
+        $filters['business_type'] = $view->filter['ratings_business_type']->value;
         $filters['ratings_local_authority'] = $view->filter['ratings_local_authority']->value;
         $filters['ratings_fhrs_rating_value'] = $view->filter['ratings_fhrs_rating_value']->value;
         $filters['ratings_fhis_rating_value'] = $view->filter['ratings_fhis_rating_value']->value;
