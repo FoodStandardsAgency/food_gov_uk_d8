@@ -198,7 +198,7 @@ class RatingsSearch extends ControllerBase {
     $render[] = [
       '#attached' => [
         'library' => [
-          'fsa_ratings/data_layer',
+          'fsa_gtm/data_layer.hygiene_ratings',
         ],
         'drupalSettings' => [
           'fsa_ratings' => [

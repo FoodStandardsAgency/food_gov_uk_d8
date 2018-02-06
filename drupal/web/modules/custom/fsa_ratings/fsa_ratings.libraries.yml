@@ -4,12 +4,3 @@ ratings_search:
     js/ratings-search.js: {}
   dependencies:
     - core/jquery
-
-data_layer:
-  js:
-    js/data-layer.js: {}
-  dependencies:
-    - core/jquery
-    - core/jquery.once
-    - core/drupal
-    - core/drupalSettings
