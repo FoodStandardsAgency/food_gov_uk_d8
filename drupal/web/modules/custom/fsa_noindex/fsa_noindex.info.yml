@@ -1,0 +1,5 @@
+name: FSA Noindex
+type: module
+description: Prevent site from being indexed by adding noindex robots-meta-tag on all pages.
+core: 8.x
+package: FSA
