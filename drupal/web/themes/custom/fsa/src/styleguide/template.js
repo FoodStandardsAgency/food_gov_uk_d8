@@ -11,29 +11,29 @@ function parsePartialMarkup(string) {
   return string.split(re)[1];
 }
 
-const myArray = customProperties.toString().split(/[{}]+/).filter(function(e) { return e; });
+// const myArray = customProperties.toString().split(/[{}]+/).filter(function(e) { return e; });
 
-const parts = myArray[1].replace(/\s/g, '').split(';');
-const colorArray = [];
-for (let i = 0; i < parts.length; i++) {
-  const subParts = parts[i].split(':');
+// const parts = myArray[1].replace(/\s/g, '').split(';');
+// const colorArray = [];
+// for (let i = 0; i < parts.length; i++) {
+//   const subParts = parts[i].split(':');
 
-  if (isColor(subParts[1])) {
-    colorArray.push({
-      customProperty: subParts[0],
-      value: subParts[1],
-    });
-  }
-}
+//   if (isColor(subParts[1])) {
+//     colorArray.push({
+//       customProperty: subParts[0],
+//       value: subParts[1],
+//     });
+//   }
+// }
 
-const colors = colorArray.map((color) => {
-  return parsePartialMarkup(require("template-string-loader!./partial/color.html")({
-    guid: guid(),
-    customProperty: (color.customProperty !== undefined) ? color.customProperty : 'color',
-    value: (color.value !== undefined) ? color.value : 'Not available',
-    styles,
-  }));
-}).join('');
+// const colors = colorArray.map((color) => {
+//   return parsePartialMarkup(require("template-string-loader!./partial/color.html")({
+//     guid: guid(),
+//     customProperty: (color.customProperty !== undefined) ? color.customProperty : 'color',
+//     value: (color.value !== undefined) ? color.value : 'Not available',
+//     styles,
+//   }));
+// }).join('');
 
 const intro = parsePartialMarkup(require("template-string-loader!./partial/intro.html")({
   guid: guid(),
@@ -87,10 +87,10 @@ const introComponentArray = [
     description: 'These are custom properties. Use them with var() function',
     element: intro,
   },
-  {
-    title: 'Colors',
-    element: colors,
-  },
+  // {
+  //   title: 'Colors',
+  //   element: colors,
+  // },
 ];
 
 

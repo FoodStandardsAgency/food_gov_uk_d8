@@ -53,7 +53,7 @@
 }
 
 .layout__container--main {
-  flex: 1 1 auto;
+  flex: 1 1 100%;
 
   @media (--breakpoint-md) {
     display: flex;
@@ -256,7 +256,7 @@
 
 /* Main content */
 .layout__content--main {
-  flex: 1 1 auto;
+  flex: 1 1 100%;
   @mixin responsive-declaration padding-top, 1em, 2em;
 
   .theme--lander &,
