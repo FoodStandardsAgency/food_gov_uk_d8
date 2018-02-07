@@ -8,8 +8,6 @@
    - { role: backups, tags: [ 'backups' ] }
    - { role: dbserver, tags: [ 'dbserver' ] }
    - { role: drupal-db, tags: [ 'drupal-db' ] }
-   #- { role: solr, tags: [ 'solr' ] }
-   - { role: elasticsearch, tags: [ 'elasticsearch' ] }
    - { role: nfs_server, tags: [ 'nfs_server' ] }
    - { role: monit, tags: [ 'monit' ] }
    - { role: newrelic-infra, tags: [ 'newrelic-infra' ] }
@@ -54,14 +52,6 @@
     ## Drupal DB ##
     # Defined in production.yml
 
-
-    ## Solr ##
-    # See ansible/playbook/roles/solr/defaults/main.yml for reference
-
-    ## Elasticsearch ##
-    # See ansible/playbook/roles/elasticsearch/defaults/main.yml for reference
-
-
     ## Nfs server ##
 
     partition_nfs_share: False
@@ -86,11 +76,7 @@
     monit_check_cron: True
     monit_check_mysql: True
 
-    # Which ever you are using
-    #monit_check_solr: True
-    monit_check_elasticsearch: True
-
-    ## Papertrail ##
+       ## Papertrail ##
     papertrail_enabled: True
     papertrail_remote_syslog2_version: "0.16"
     papertrail_conf: "/etc/log_files.yml"

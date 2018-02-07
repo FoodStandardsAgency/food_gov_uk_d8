@@ -60,3 +60,4 @@
 - include: prod-lb.yml
 - include: prod-db.yml
 - include: prod-front.yml
+- include: prod-search.yml
