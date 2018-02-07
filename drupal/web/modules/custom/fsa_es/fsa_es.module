@@ -114,13 +114,17 @@ function fsa_es_preprocess_views_view(&$variables) {
     // This changes the view more link to include the search keyword and
     // anchor. Unfortunately this is not possible with Views UI.
     if ($params = \Drupal::service('request_stack')->getCurrentRequest()->query->all()) {
-      if (isset($params['q'])) {
+      // The "keywords" query parameter name for keywords is supposed to be the
+      // same for global search and ratings search for consistency.
+      $keyword_param_key = 'keywords';
+
+      if (isset($params[$keyword_param_key])) {
         /** @var \Drupal\Core\Url $more_url */
         $more_url = $variables['more']['#url'];
         // Get existing query (if available).
         $more_query = $more_url->getOption('query') ? $more_url->getOption('query') : [];
         // Set options.
-        $more_url->setOption('query', array_merge($more_query, ['q' => $params['q']]));
+        $more_url->setOption('query', array_merge($more_query, [$keyword_param_key => $params[$keyword_param_key]]));
         $more_url->setOption('fragment', 'results');
       }
     }
