@@ -18,6 +18,7 @@ source:
   data_parser_plugin: json
   api_resource: /id
   item_selector: items
+  track_changes: true
   fields:
     -
       name: notation
