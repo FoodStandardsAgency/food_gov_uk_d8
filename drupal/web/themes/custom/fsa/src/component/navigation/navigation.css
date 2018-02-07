@@ -859,9 +859,12 @@
   font-size: 1em;
   font-weight: 600;
   padding: 0 1.75em;
+  padding-top: 0.75em;
+  margin: 0;
 
   @media (--breakpoint-sm) {
     flex-direction: row;
+    padding-top: 0em;
     font-size: 0.8889em;
   }
 
@@ -935,6 +938,9 @@
     @mixin responsive-declaration padding-right, 1em, 4em;
     @mixin responsive-declaration padding-left, 1em, 4em;
     overflow-x: scroll;
+    max-width: var(--max-width-small);
+    width: 100%;
+    justify-content: space-between;
 
     @media (--breakpoint-md) {
       overflow-x: visible;
@@ -976,12 +982,6 @@
         }
       }
     }
-  }
-
-  .theme--search & ul {
-    max-width: var(--max-width-small);
-    width: 100%;
-    justify-content: space-between;
   }
 
   &.tab-row--capitalize {

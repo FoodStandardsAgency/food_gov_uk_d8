@@ -571,3 +571,80 @@ function fsa_custom_theme() {
     ],
   ];
 }
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function fsa_custom_views_pre_render(ViewExecutable $view) {
+
+  // Target global search views.
+  $ids = [
+    'search_global_all',
+    'search_global_guidance',
+    'search_global_news_and_alerts',
+    'search_global_ratings',
+    'search_global_research',
+  ];
+  if (isset($view) && (in_array($view->storage->id(), $ids))) {
+
+    // Coerce view identifier into category.
+    $category = str_replace('_global', '', $view->storage->id());
+    $category = str_replace('_', ' ', $category);
+
+    // Push relevant values onto filters array.
+    switch ($category) {
+      case 'search all':
+        $filters['keyword'] = $view->filter['keyword']->value;
+        break;
+
+      case 'search guidance':
+        $filters['keyword'] = $view->filter['keyword']->value;
+        $filters['guidance_audience'] = $view->filter['guidance_audience']->value;
+        $filters['nation'] = $view->filter['nation']->value;
+        $pager['page_of_pages'] = '1-' . $view->pager->options['items_per_page'];
+        $pager['total_items'] = $view->pager->getTotalItems();
+        break;
+
+      case 'search ratings':
+        $filters['keyword'] = $view->filter['keyword']->value;
+        $filters['business_type'] = $view->filter['business_type']->value;
+        $filters['ratings_local_authority'] = $view->filter['ratings_local_authority']->value;
+        $filters['ratings_fhrs_rating_value'] = $view->filter['ratings_fhrs_rating_value']->value;
+        $filters['ratings_fhis_rating_value'] = $view->filter['ratings_fhis_rating_value']->value;
+        break;
+
+      case 'search news and alerts':
+        $filters['keyword'] = $view->filter['keyword']->value;
+        $filters['news_type'] = $view->filter['news_type']->value;
+        $filters['nation'] = $view->filter['nation']->value;
+        break;
+
+      case 'search research':
+        $filters['keyword'] = $view->filter['keyword']->value;
+        $filters['research_topic'] = $view->filter['research_topic']->value;
+        $filters['nation'] = $view->filter['nation']->value;
+        break;
+
+      default:
+        $filters = [];
+    }
+
+    // Attach data layer library and settings to view.
+    $view->element = [
+      '#attached' => [
+        'library' => [
+          'fsa_custom/data_layer',
+        ],
+        'drupalSettings' => [
+          'fsa_ratings' => [
+            'data_layer' => [
+              'category' => $category,
+              'filters' => $filters,
+              'pager' => $pager,
+            ],
+          ],
+        ],
+      ],
+    ];
+  }
+}

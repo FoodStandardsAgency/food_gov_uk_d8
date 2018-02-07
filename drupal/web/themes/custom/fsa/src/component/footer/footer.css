@@ -3,11 +3,13 @@
 
 .social-media {
   padding: 1em 0em;
+  text-align: center;
 
   @media (--breakpoint-md) {
     flex: 0 0 auto;
     padding: 0em;
     margin-left: auto;
+    text-align: left;
   }
 }
 
@@ -102,7 +104,11 @@
     margin: 0em;
     padding: 0;
     text-align: center;
-    margin: 0 -0.5em;
+    margin: 0;
+
+    @media (--breakpoint-sm) {
+      margin: 0 -0.5em;
+    }
 
     @media (--breakpoint-md) {
       text-align: left;

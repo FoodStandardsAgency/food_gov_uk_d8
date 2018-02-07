@@ -6,6 +6,6 @@ id: phpwkhtmltopdf
 settings:
   orientation: portrait
   default_paper_size: a4
-  username: wunder
-  password: tools
+  username: fsawunder
+  password: wndrfsabfguk
   binary_location: /bin/wkhtmltopdf

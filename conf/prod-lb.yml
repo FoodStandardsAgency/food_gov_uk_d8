@@ -14,6 +14,7 @@
 
   vars_files:
   - prod-vars.yml
+  - error-page.yml
 
   tasks:
     - name: make sure SSL certificate is installed
@@ -62,7 +63,7 @@
       error_header_x_sitetitle: "{{ project_name }}"
       error_header_x_ua: "insert_GA_code"
       # It's possible to define custom error page template with
-      #custom_error_template:
+      custom_error_template: "{{ varnish_error_template }}"
       # you can also set the control_key
       control_key: "{{ varnish_control_key }}"
       probe_resource_url: "_ping.php"
@@ -140,8 +141,8 @@
     # Also affects sslterminator
     # On dev and stage it's good idea to protect the site with htauth
     basicauth_enabled: True
-    basicauth_username: wunder
-    basicauth_password: tools
+    basicauth_username: fsawunder
+    basicauth_password: wndrfsabfguk
     # Basic auth can also be disabled for certain ip's
     basicauth_ip:
       - address: 84.20.132.177

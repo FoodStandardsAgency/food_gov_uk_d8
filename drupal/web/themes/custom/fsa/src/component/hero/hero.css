@@ -74,9 +74,14 @@
     @mixin responsive-declaration padding-right, 1em, 4em;
     @mixin responsive-declaration padding-left, 1em, 4em;
     max-width: var(--content-max-width);
-    padding-top: 4em;
+    padding-top: 2em;
     padding-bottom: 2em;
     min-height: 14em;
+
+    @media (--breakpoint-md) {
+      padding-top: 4em;
+      padding-bottom: 2em;
+    }
   }
 
   .theme--term & {
@@ -266,7 +271,6 @@
     }
   }
 }
-
 
 /* Hero secondary-navigation */
 .hero__secondary-navigation {

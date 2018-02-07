@@ -1,0 +1,13 @@
+<?php
+/**
+ * @file
+ * Includes FSA Noindex install code.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function fsa_noindex_install() {
+  // Need to run after system module.
+  module_set_weight('fsa_noindex', 1);
+}

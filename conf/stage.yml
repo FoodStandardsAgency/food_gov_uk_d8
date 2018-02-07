@@ -24,6 +24,7 @@
 
   vars_files:
   - stage-vars.yml
+  - error-page.yml
 
   tasks:
   # Drupal cron job
@@ -77,8 +78,8 @@
 
     # On dev and stage it's good idea to protect the site with htauth
     basicauth_enabled: True
-    basicauth_username: wunder
-    basicauth_password: tools
+    basicauth_username: fsawunder
+    basicauth_password: wndrfsabfguk
     # Basic auth can also be disabled for certain ip's
     basicauth_ip:
       - address: 84.20.132.177
@@ -99,6 +100,7 @@
     varnish:
       port: 8081
       memory: 512M
+      custom_error_template: "{{ varnish_error_template }}"
       directors:
         - name: stage
           host: "{{ domain_name }}"

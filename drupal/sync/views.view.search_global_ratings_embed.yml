@@ -227,9 +227,9 @@ display:
           1: AND
       use_ajax: false
       use_more: true
-      use_more_always: false
+      use_more_always: true
       use_more_text: 'More food hygiene ratings'
-      link_url: /search/ratings
+      link_url: hygiene-ratings
       link_display: custom_url
       css_class: 'listing listing--box listing--with-bg'
     cache_metadata:

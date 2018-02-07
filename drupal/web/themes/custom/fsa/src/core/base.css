@@ -10,15 +10,23 @@ html {
   font-family: var(--font-family-content);
   font-size: var(--font-size-base);
   letter-spacing: 0.015em;
-  @mixin responsive-declaration font-size, 100%, var(--font-size-base);
+  @mixin responsive-declaration font-size, 100%, 112.5%;
   @mixin responsive-declaration line-height, 1.7, 1.6;
 }
 
 html.is-fixed {
   position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
 
   @media (--breakpoint-sm) {
     position: static;
+    right: auto;
+    left: auto;
+    top: auto;
+    bottom: auto;
   }
 }
 
