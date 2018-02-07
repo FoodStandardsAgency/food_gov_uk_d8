@@ -57,7 +57,7 @@ class FsaTocBlock extends BlockBase {
 
     $node = \Drupal::routeMatch()->getParameter('node');
 
-    if (!$node || !$node->hasField('body') || !$node->hasField('field_fsa_toc')) {
+    if (!is_object($node) || !$node->hasField('body') || !$node->hasField('field_fsa_toc')) {
       return AccessResult::forbidden();
     }
 
