@@ -6,7 +6,6 @@ use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\elasticsearch_helper_views\Plugin\ElasticsearchQueryBuilder\ElasticsearchQueryBuilderPluginBase;
 use Elasticsearch\Client;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Class SitewideSearchBase
@@ -19,9 +18,6 @@ abstract class SitewideSearchBase extends ElasticsearchQueryBuilderPluginBase {
   /** @var \Elasticsearch\Client $elasticsearchClient */
   protected $elasticsearchClient;
 
-  /** @var null|\Symfony\Component\HttpFoundation\Request $request */
-  protected $request;
-
   /**
    * SitewideSearchBase constructor.
    *
@@ -30,14 +26,12 @@ abstract class SitewideSearchBase extends ElasticsearchQueryBuilderPluginBase {
    * @param mixed $plugin_definition
    * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
    * @param \Elasticsearch\Client $elasticsearch_client
-   * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $language_manager, Client $elasticsearch_client, RequestStack $request_stack) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $language_manager, Client $elasticsearch_client) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
     $this->currentLanguage = $language_manager->getCurrentLanguage();
     $this->elasticsearchClient = $elasticsearch_client;
-    $this->request = $request_stack->getCurrentRequest();
   }
 
   /**
@@ -49,37 +43,8 @@ abstract class SitewideSearchBase extends ElasticsearchQueryBuilderPluginBase {
       $plugin_id,
       $plugin_definition,
       $container->get('language_manager'),
-      $container->get('elasticsearch_helper.elasticsearch_client'),
-      $container->get('request_stack')
+      $container->get('elasticsearch_helper.elasticsearch_client')
     );
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getFilterValues() {
-    $values = [];
-
-    // Get query parameters.
-    $params = $this->request->query->all();
-
-    if (!empty($this->view->filter)) {
-      /** @var \Drupal\views\Plugin\views\filter\FilterPluginBase $filter */
-      foreach ($this->view->filter as $filter) {
-        $info = $filter->exposedInfo();
-
-        // A special case for "q" query parameter which is unique in Drupal
-        // and which is not automatically populated by Views.
-        if (isset($info['value']) && $info['value'] == 'q' && isset($params['q'])) {
-          $values[$filter->realField] = $params['q'];
-        }
-        else {
-          $values[$filter->realField] = $filter->value;
-        }
-      }
-    }
-
-    return $values;
   }
 
   /**

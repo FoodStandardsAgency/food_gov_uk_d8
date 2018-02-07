@@ -30,7 +30,7 @@ settings:
     local_authority: local_authority
     fhrs_rating_value: fhrs_rating_value
     fhis_rating_value: fhis_rating_value
-    q: 0
+    keywords: 0
   post_route_name: ''
   location_context: ''
   disable_ajax: false

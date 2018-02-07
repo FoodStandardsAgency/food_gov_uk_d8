@@ -195,7 +195,7 @@ display:
             description: ''
             use_operator: false
             operator: keyword_op
-            identifier: q
+            identifier: keywords
             required: false
             remember: false
             multiple: false
