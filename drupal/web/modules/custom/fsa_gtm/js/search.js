@@ -39,7 +39,7 @@
 
       // Add search term when filters are unused.
       $(document, context).once('data-layer').each(function () {
-        getSearchTerm();
+        pushSearchTerm();
       });
 
       // Add search term, filter selections, and pager results.
@@ -55,7 +55,7 @@
           // On change push to data layer.
           $("#views-exposed-form-search-global-guidance-page-1", context).change(function () {
 
-            getSearchTerm();
+            pushSearchTerm();
 
             var checked = {};
 
@@ -90,7 +90,7 @@
           // On change push to data layer.
           $("#views-exposed-form-search-global-ratings-page-1", context).change(function () {
 
-            getSearchTerm();
+            pushSearchTerm();
 
             var selected;
 
@@ -131,7 +131,7 @@
           // On change push to data layer.
           $("#views-exposed-form-search-global-news-and-alerts-page-1", context).change(function () {
 
-            getSearchTerm();
+            pushSearchTerm();
 
             var checked = {};
 
@@ -164,7 +164,7 @@
           // On change push to data layer.
           $("#views-exposed-form-search-global-research-page-1", context).change(function () {
 
-            getSearchTerm();
+            pushSearchTerm();
 
             var checked = {};
 
@@ -189,7 +189,7 @@
       }
 
       // Push search term to data layer.
-      function getSearchTerm() {
+      function pushSearchTerm() {
         var term = $("[id^=edit-keywords]").val();
         data.search.keywords = term ? term : undefined;
         console.log(data.search);
