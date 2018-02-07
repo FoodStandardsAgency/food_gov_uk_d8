@@ -37,9 +37,7 @@
 
       // Add search term when filters are unused.
       $(document, context).once('data-layer').each(function () {
-        var term = $("#edit-q--2").val();
-        data.search.keywords = term ? term : undefined;
-        console.log(data.search);
+        getSearchTerm();
       });
 
       // Add search term, filter selections, and pager results.
@@ -55,8 +53,7 @@
           // On change push to data layer.
           $("#views-exposed-form-search-global-guidance-page-1", context).change(function () {
 
-            var term = $("#edit-q--2").val();
-            data.search.keywords = term ? term : undefined;
+            getSearchTerm();
 
             var checked = {};
 
@@ -91,8 +88,7 @@
           // On change push to data layer.
           $("#views-exposed-form-search-global-ratings-page-1", context).change(function () {
 
-            var term = $("#edit-q--2").val();
-            data.search.keywords = term ? term : undefined;
+            getSearchTerm();
 
             var selected;
 
@@ -133,8 +129,7 @@
           // On change push to data layer.
           $("#views-exposed-form-search-global-news-and-alerts-page-1", context).change(function () {
 
-            var term = $("#edit-q--2").val();
-            data.search.keywords = term ? term : undefined;
+            getSearchTerm();
 
             var checked = {};
 
@@ -167,8 +162,7 @@
           // On change push to data layer.
           $("#views-exposed-form-search-global-research-page-1", context).change(function () {
 
-            var term = $("#edit-q--2").val();
-            data.search.keywords = term ? term : undefined;
+            getSearchTerm();
 
             var checked = {};
 
@@ -190,6 +184,13 @@
             console.log(dataLayer);
           });
           break;
+      }
+
+      // Push search term to data layer.
+      function getSearchTerm() {
+        var term = $("[id^=edit-keywords]").val();
+        data.search.keywords = term ? term : undefined;
+        console.log(data.search);
       }
     }
   };
