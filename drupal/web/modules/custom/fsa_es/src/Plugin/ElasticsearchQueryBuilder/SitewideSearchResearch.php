@@ -141,15 +141,4 @@ class SitewideSearchResearch extends SitewideSearchBase {
     return $this->aggsToOptions($aggregations['topics']);
   }
 
-  /**
-   * Returns a list of nations.
-   *
-   * @return array
-   */
-  public function getNationFilterOptions() {
-    $aggregations = $this->getAggregations();
-
-    return $this->aggsToOptions($aggregations['nation']);
-  }
-
 }
