@@ -61,14 +61,14 @@
             var checked = {};
 
             var guidanceAudience = [];
-            $("#edit-audience .form-checkbox:checked").each(function() {
+            $("[id^=edit-audience] .form-checkbox:checked").each(function() {
               guidanceAudience.push($(this).val().toLowerCase());
             });
             checked.audience = guidanceAudience.join(',');
             data.search.tags.guidanceAudience = checked.audience ? checked.audience : null;
 
             var guidanceRegion = [];
-            $("#edit-region .form-checkbox:checked").each(function() {
+            $("[id^=edit-region] .form-checkbox:checked").each(function() {
               guidanceRegion.push($(this).val().toLowerCase());
             });
             checked.region = guidanceRegion.join(',');
@@ -96,23 +96,23 @@
 
             var selected;
 
-            selected = $("#edit-business-type option:selected").val().toLowerCase();
+            selected = $("[id^=edit-business-type] option:selected").val().toLowerCase();
             data.search.tags.businessType = selected == "all" ? null : selected;
 
-            selected = $("#edit-local-authority option:selected").val().toLowerCase();
+            selected = $("[id^=edit-local-authority] option:selected").val().toLowerCase();
             data.search.tags.localAuthority = selected == "all" ? null : selected;
 
             var checked = {};
 
             var hygieneRating = [];
-            $("#edit-fhrs-rating-value .form-checkbox:checked").each(function() {
+            $("[id^=edit-fhrs-rating-value] .form-checkbox:checked").each(function() {
               hygieneRating.push($(this).val().toLowerCase());
             });
             checked.rating = hygieneRating.join(',');
             data.search.tags.hygieneRating = checked.rating ? checked.rating : null;
 
             var hygieneStatus = [];
-            $("#edit-fhis-rating-value .form-checkbox:checked").each(function() {
+            $("[id^=edit-fhis-rating-value] .form-checkbox:checked").each(function() {
               hygieneStatus.push($(this).val().toLowerCase());
             });
             checked.status = hygieneStatus.join(',');
@@ -139,14 +139,14 @@
             var checked = {};
 
             var newsType = [];
-            $("#edit-type .form-checkbox:checked").each(function() {
+            $("[id^=edit-local-type] .form-checkbox:checked").each(function() {
               newsType.push($(this).val().toLowerCase());
             });
             checked.type = newsType.join(',');
             data.search.tags.newsType = checked.type ? checked.type : null;
 
             var nation = [];
-            $("#edit-region .form-checkbox:checked").each(function() {
+            $("[id^=edit-region] .form-checkbox:checked").each(function() {
               nation.push($(this).val().toLowerCase());
             });
             checked.nation = nation.join(',');
@@ -173,14 +173,14 @@
             var checked = {};
 
             var researchTopic = [];
-            $("#edit-topic .form-checkbox:checked").each(function() {
+            $("[id^=edit-topic] .form-checkbox:checked").each(function() {
               researchTopic.push($(this).val().toLowerCase());
             });
             checked.topic = researchTopic.join(',');
             data.search.tags.researchTopic = checked.topic ? checked.topic : null;
 
             var nation = [];
-            $("#edit-region .form-checkbox:checked").each(function() {
+            $("[id^=edit-region] .form-checkbox:checked").each(function() {
               nation.push($(this).val().toLowerCase());
             });
             checked.nation = nation.join(',');
