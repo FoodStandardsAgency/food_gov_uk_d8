@@ -1,6 +1,6 @@
 (function ($) {
   'use strict';
-  Drupal.behaviors.fsaHistoryBack = {
+  Drupal.behaviors.fsaPagePrint = {
     attach: function (context, settings) {
       $('.page-print-trigger').once().click(function(e) {
         e.preventDefault();
