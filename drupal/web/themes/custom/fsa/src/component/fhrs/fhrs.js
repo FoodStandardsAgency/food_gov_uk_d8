@@ -1,4 +1,4 @@
-import debounce from '../../core/helper/debounce';
+import debounce from '../../helper/debounce';
 
 function fhrs() {
   // All the toggle buttons

@@ -1,10 +1,9 @@
-@import "../core/helper";
-/* @import "/vendor/highlightjs/solarized-dark"; */
+@import "../helper/custom-property";
+@import "../helper/helper";
 
 :root {
   --styleguide-color-black: var(--color-black, #000);
   --styleguide-color-white: var(--color-white, #fff);
-
   --styleguide-color-gray-light: var(--color-gray-light, #EEEEEE);
   --styleguide-color-gray: var(--color-gray, #9E9E9E);
 

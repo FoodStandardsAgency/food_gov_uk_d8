@@ -1,5 +1,5 @@
-@import "../../core/helper";
-@import "../../core/custom-property";
+@import "../../helper/helper";
+@import "../../helper/custom-property";
 
 .fsa-team-finder .form-intro {
     margin-bottom: 2em;

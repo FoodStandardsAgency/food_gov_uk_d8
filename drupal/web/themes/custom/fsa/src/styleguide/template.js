@@ -1,10 +1,10 @@
 import toCamelCase from 'to-camel-case';
 import readme from '../../README.md';
-import customProperties from '../core/custom-property.css';
+// import customProperties from '../helper/custom-property.css';
 import styles from './styleguide.css';
-import guid from '../core/helper/guid';
-import safeTagsReplace from '../core/helper/safeTagsReplace';
-import isColor from '../core/helper/isColor';
+import guid from '../helper/guid';
+import safeTagsReplace from '../helper/safeTagsReplace';
+// import isColor from '../helper/isColor';
 
 function parsePartialMarkup(string) {
   const re = /= "|";/;
@@ -38,7 +38,7 @@ function parsePartialMarkup(string) {
 const intro = parsePartialMarkup(require("template-string-loader!./partial/intro.html")({
   guid: guid(),
   title: 'CSS Custom Properties',
-  content: customProperties,
+  // content: customProperties,
   styles,
 }));
 
@@ -138,7 +138,6 @@ const styleGuide = (templateParams) => {
           </aside>
           <main class="${styles.locals.layout__content} ${styles.locals.main}">
             ${introComponents}
-
             ${components}
           </main>
         </section>

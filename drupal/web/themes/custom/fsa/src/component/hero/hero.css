@@ -1,5 +1,5 @@
-@import "../../core/helper";
-@import "../../core/custom-property";
+@import "../../helper/helper";
+@import "../../helper/custom-property";
 
 .hero-wrapper__content {
   padding-left: 0;
@@ -356,7 +356,7 @@
   }
 
   &:not(:last-child):after {
-    content: "";
+    content: '';
     position: absolute;
     top: 0.3em;
     right: 0.55em;

@@ -1,5 +1,5 @@
-@import "../../core/helper";
-@import "../../core/custom-property";
+@import "../../helper/helper";
+@import "../../helper/custom-property";
 
 .social-media {
   padding: 1em 0em;

@@ -1,12 +1,10 @@
-import setHeight from '../../core/helper/setHeight';
-import checkMediaQuery from '../../core/helper/checkMediaQuery';
-import breakpoints from '../../core/helper/breakpoints';
-import debounce from '../../core/helper/debounce';
-import nextByClass from '../../core/helper/nextByClass';
-import closestParent from '../../core/helper/closestParent';
-import { setStateOff, setStateOn, toggleState } from '../../core/helper/toggleHelpers';
-import inert from 'wicg-inert';
 import tabbable from 'tabbable';
+import setHeight from '../../helper/setHeight';
+import checkMediaQuery from '../../helper/checkMediaQuery';
+import breakpoints from '../../helper/breakpoints';
+import debounce from '../../helper/debounce';
+import closestParent from '../../helper/closestParent';
+import { setStateOff, setStateOn, toggleState } from '../../helper/toggleHelpers';
 
 function toggle() {
 
@@ -19,12 +17,11 @@ function toggle() {
   // Get content element the button is referencing to
   function getElemRef(elem, dataState) {
     // Get reference element or array
-    if(elem.getAttribute("data-state-element")) {
-      const dataStateElementValue = elem.getAttribute("data-state-element");
+    if (elem.getAttribute('data-state-element')) {
+      const dataStateElementValue = elem.getAttribute('data-state-element');
       return [...document.querySelectorAll(dataStateElementValue)];
-    } else {
-      return elem.nextSibling;
     }
+    return elem.nextSibling;
   }
 
   // Get content element scope

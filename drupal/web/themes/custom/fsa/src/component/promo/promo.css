@@ -1,5 +1,5 @@
-@import "../../core/helper";
-@import "../../core/custom-property";
+@import "../../helper/helper";
+@import "../../helper/custom-property";
 
 /* Global row wrapper */
 .field__field_lander_row {
@@ -240,8 +240,11 @@
     a {
       position: relative;
       margin-left: 2em;
-      margin-bottom: 0.5em;
       display: block;
+
+      @media (--breakpoint-sm) {
+        margin-bottom: 0.5em;
+      }
 
       &:before {
         content: '';
@@ -623,7 +626,7 @@ a.field__field_content_promo__item {
     @mixin responsive-declaration padding-top, 1rem, 2rem;
     @mixin responsive-declaration padding-right, 1rem, 2rem;
     @mixin responsive-declaration padding-left, 1rem, 2rem;
-    padding-bottom: 1em;
+    @mixin responsive-declaration padding-bottom, 0.5rem, 1rem;
     margin-top: 0em;
     margin-bottom: 0;
     @mixin responsive-declaration font-size, 1.125em, 1.33em;
@@ -649,7 +652,7 @@ a.field__field_content_promo__item {
   .promo &,
   .field__field_content_promo__item & {
     @mixin reset-font-style;
-    margin-top: 0;
+    margin-top: 0 !important;
     @mixin responsive-declaration padding-right, 1em, 2em;
     @mixin responsive-declaration padding-left, 1em, 2em;
     @mixin responsive-declaration padding-bottom, 1rem, 2rem;
@@ -875,7 +878,10 @@ a.field__field_content_promo__item {
       padding-left: 2em;
       font-weight: 600;
       display: block;
-      margin-bottom: 0.5em;
+
+      @media (--breakpoint-sm) {
+        margin-bottom: 0.5em;
+      }
   
       :--not-touch &:--enter {
         text-decoration: underline;

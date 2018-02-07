@@ -1,5 +1,5 @@
-@import "../../core/helper";
-@import "../../core/custom-property";
+@import "../../helper/helper";
+@import "../../helper/custom-property";
 
 .views-result-total,
 .search-keyword {
@@ -29,11 +29,11 @@
   margin-left: 0.25em;
 
   &:before {
-    content: "“";
+    content: '\0022';
   }
 
   &:after {
-    content: "”";
+    content: '\0022';
   }
 }
 

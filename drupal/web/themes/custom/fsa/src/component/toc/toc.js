@@ -1,4 +1,4 @@
-import doScrolling from '../../core/helper/scrollToElement';
+import doScrolling from '../../helper/scrollToElement';
 
 function toc() {
 

@@ -1,10 +1,10 @@
-import nextByClass from '../../core/helper/nextByClass';
-import debounce from '../../core/helper/debounce';
-import checkMediaQuery from '../../core/helper/checkMediaQuery';
-import breakpoints from '../../core/helper/breakpoints';
-import hasClass from '../../core/helper/hasClass';
-import closestParent from '../../core/helper/closestParent';
-import { setStateOff, setStateOn, removeState, toggleState } from '../../core/helper/toggleHelpers';
+import nextByClass from '../../helper/nextByClass';
+import debounce from '../../helper/debounce';
+import checkMediaQuery from '../../helper/checkMediaQuery';
+import breakpoints from '../../helper/breakpoints';
+import hasClass from '../../helper/hasClass';
+import closestParent from '../../helper/closestParent';
+import { setStateOff, setStateOn, removeState, toggleState } from '../../helper/toggleHelpers';
 import inert from 'wicg-inert';
 
 function navigation() {

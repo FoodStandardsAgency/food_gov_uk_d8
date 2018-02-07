@@ -1,4 +1,4 @@
-import guid from '../../core/helper/guid';
+import guid from '../../helper/guid';
 
 function addHeading() {
   const regionalVariationElementArray = [...document.querySelectorAll('.js-regional-variation')];

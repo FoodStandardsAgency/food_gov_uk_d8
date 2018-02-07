@@ -1,5 +1,5 @@
-@import "../../core/helper";
-@import "../../core/custom-property";
+@import "../../helper/helper";
+@import "../../helper/custom-property";
 
 :--content-field {
   @mixin responsive-declaration margin-bottom, 2em, 4em;
@@ -707,7 +707,7 @@ blockquote {
     position: relative;
 
     &:before {
-      content: "PDF";
+      content: 'PDF';
       background-color: var(--color-dark-red);
       position: absolute;
       top: 50%;

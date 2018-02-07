@@ -1,5 +1,5 @@
-@import "../../core/helper";
-@import "../../core/custom-property";
+@import "../../helper/helper";
+@import "../../helper/custom-property";
 
 /* News alert listing page */
 .listing {
@@ -95,7 +95,7 @@
     background-color: var(--color-lighter-gray);
 
     &:before {
-      content: "";
+      content: '';
       display: block;
       position: absolute;
       z-index: var(--z-bottom);

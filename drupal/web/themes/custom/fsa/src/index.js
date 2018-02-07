@@ -1,11 +1,11 @@
 import 'babel-polyfill';
 import 'mutationobserver-shim';
-import './core/helper/polyfill/classList';
-import './core/helper/polyfill/closest';
+import './helper/polyfill/classList';
+import './helper/polyfill/closest';
 import svg4everybody from 'svg4everybody';
-import responsiveTables from './core/helper/responsiveTables';
-import stickyElement from './core/helper/stickyElement';
-import cssCustomPropertySupport from './core/helper/cssCustomPropertySupport';
+import responsiveTables from './helper/responsiveTables';
+import stickyElement from './helper/stickyElement';
+import cssCustomPropertySupport from './helper/cssCustomPropertySupport';
 
 import navigation from './component/navigation/navigation';
 import addHeading from './component/content/content';
