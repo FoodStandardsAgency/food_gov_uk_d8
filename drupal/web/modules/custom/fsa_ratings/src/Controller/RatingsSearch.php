@@ -196,12 +196,12 @@ class RatingsSearch extends ControllerBase {
 
     // Generate pages information.
     if ($pager_info) {
-      $page_number = ($to / count($items));
-      $number_of_pages = ($hits / count($items));
+      $page_number = round((($to / count($items)))) - 1;
+      $number_of_pages = round(($hits / count($items))) - 1;
       $pages = $page_number . '-' . $number_of_pages;
     }
     else {
-      $pages = '0-0';
+      $pages = NULL;
     }
 
     // Attach data layer library and settings to page.
