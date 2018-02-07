@@ -39,8 +39,8 @@ class NewsAlertsSearchAll extends SitewideSearchBase {
       ];
     }
     else {
-      // Sort by updated if no keywords are given.
-      $query['body']['sort'] = ['updated' => 'desc'];
+      // Sort by created if no keywords are given.
+      $query['body']['sort'] = ['created' => 'desc'];
     }
 
     foreach ($query_must_filters as $filter) {

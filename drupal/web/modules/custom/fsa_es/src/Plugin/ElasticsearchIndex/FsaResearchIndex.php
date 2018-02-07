@@ -89,6 +89,9 @@ class FsaResearchIndex extends FsaIndexBase {
                   ],
                 ],
               ],
+              'created' => [
+                'type' => 'date',
+              ],
               'updated' => [
                 'type' => 'date',
               ],

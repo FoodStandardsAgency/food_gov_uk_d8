@@ -73,8 +73,8 @@ class SitewideSearchAll extends SitewideSearchBase {
       ];
     }
     else {
-      // Sort by updated if no keywords are given.
-      $query['body']['sort'] = ['updated' => 'desc'];
+      // Sort by created if no keywords are given.
+      $query['body']['sort'] = ['created' => 'desc'];
     }
 
     // Assign the text search filters to the query in the 'must' section.
