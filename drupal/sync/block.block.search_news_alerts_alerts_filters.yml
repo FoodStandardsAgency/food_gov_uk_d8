@@ -26,9 +26,9 @@ settings:
   label_display: '0'
   views_label: ''
   filters:
-    type: type
     region: region
-    q: 0
+    type: type
+    keywords: 0
   post_route_name: ''
   location_context: ''
   disable_ajax: false
