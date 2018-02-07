@@ -15,7 +15,9 @@
         "event": "search",
         "search": {
           "keywords": undefined,
-          "category": undefined
+          "category": undefined,
+          "results": undefined,
+          "resultsPage": undefined
         }
       };
       if (viewId != "search_global_all") {
