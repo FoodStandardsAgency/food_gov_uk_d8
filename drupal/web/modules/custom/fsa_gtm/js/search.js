@@ -199,18 +199,19 @@
 
       // Add hits and pages data.
       function pushHitsAndPages() {
-        if ($('.pager__items')[0]) {
 
-          // Add hits.
-          var hits = $(".listing footer").text().trim().split(" ").pop();
+        // Add hits.
+        var hits = $(".listing footer").text().trim().split(" ").pop();
+        if (hits) {
           data.search.results = hits;
+        }
 
-          // Add pages.
-          var query;
-          query = $(".pager__item.is-active a").attr("href");
-          var pageNumber = query.replace(/^\D+/g, "");
-          query = $(".pager__item--last a").attr("href");
-          var numberOfPages = query.replace(/^\D+/g, "");
+        // Add pages.
+        isActiveQuery = $(".pager__item.is-active a").attr("href");
+        lastQuery = $(".pager__item--last a").attr("href");
+        if (isActiveQuery && lastQuery) {
+          var pageNumber = isActiveQuery.replace(/^\D+/g, "");
+          var numberOfPages = lastQuery.replace(/^\D+/g, "");
           data.search.resultsPage = pageNumber + "-" + numberOfPages;
         }
       }
