@@ -1,41 +1,41 @@
-import debounce from '../../helper/debounce';
+import debounce from '../../helper/debounce'
 
-function fhrs() {
+function fhrs () {
   // All the toggle buttons
-  const mainSearchElementArray = [...document.querySelectorAll('.js-main-search-input')];
-  
+  const mainSearchElementArray = [...document.querySelectorAll('.js-main-search-input')]
+
   // Check everything found
   if (mainSearchElementArray <= 0) {
-    return;
+    return
   }
 
   const addActiveClass = (element) => {
-    element.classList.add('is-active');
-  };
+    element.classList.add('is-active')
+  }
 
   const removeActiveClass = (element) => {
-    element.classList.remove('is-active');
-  };
+    element.classList.remove('is-active')
+  }
 
   mainSearchElementArray.forEach((element) => {
-    const classHandler = debounce(function() {
+    const classHandler = debounce(function () {
       if (element.value.length > 0 || element === document.activeElement) {
-        removeActiveClass(element);
+        removeActiveClass(element)
       } else {
-        addActiveClass(element);
+        addActiveClass(element)
       }
-    }, 250);
-    
-    element.addEventListener('keyup', classHandler);
+    }, 250)
 
-    element.addEventListener('focus', function( event ) {
-      removeActiveClass(element);   
-    }, true);
+    element.addEventListener('keyup', classHandler)
 
-    element.addEventListener('blur', function( event ) {
-      addActiveClass(element);   
-    }, true);
-  });
+    element.addEventListener('focus', function (event) {
+      removeActiveClass(element)
+    }, true)
+
+    element.addEventListener('blur', function (event) {
+      addActiveClass(element)
+    }, true)
+  })
 }
 
-module.exports = fhrs;
+module.exports = fhrs

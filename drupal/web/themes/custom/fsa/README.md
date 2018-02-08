@@ -13,9 +13,6 @@ To get the started with theming, complete the following steps:
 2. Install project dependencies by running the following task
   * `npm install` or `yarn`
 
-3. (optional) If you are using in editor CSS/PostCSS validation it is recommended to turn those off.
-  * VS Code: `"css.validate": false` and `"postcss.validate": false`
-
 ## Workflow summary
 __Run__ `npm run watch` or `yarn watch` while developing.
 

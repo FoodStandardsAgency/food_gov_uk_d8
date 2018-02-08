@@ -1,22 +1,19 @@
 @import "../../helper/helper";
 @import "../../helper/custom-property";
 
-.toc {
-
-}
-
 .toc__heading {
   @mixin reset-font-style;
+
   font-weight: 600;
   letter-spacing: 0.02em;
-  tex-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .toc__list {
   margin: 0;
   padding: 0;
-  padding-left: 0em;
-  padding-top: 0em;
+  padding-left: 0;
+  padding-top: 0;
   display: flex;
   flex-flow: row wrap;
 
@@ -63,11 +60,10 @@
         bottom: 0;
         width: 5px;
         transform: scaleX(0) translateX(-1em);
-        transition:
-          transform 0.12s ease-in-out;
+        transition: transform 0.12s ease-in-out;
       }
     }
-  
+
     &:focus {
       @media (--breakpoint-md) {
         color: var(--color-black) !important;
@@ -78,12 +74,11 @@
           color var(--transition-enter),
           transform var(--transition-enter);
       }
-  
+
       &:before {
         @media (--breakpoint-md) {
           transform: scaleX(1) translateX(-0.5em);
-          transition:
-            transform var(--transition-enter);
+          transition: transform var(--transition-enter);
         }
       }
     }
