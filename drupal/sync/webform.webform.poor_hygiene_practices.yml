@@ -184,9 +184,9 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: sally.barber@food.gov.uk
+      to_mail: '[webform_submission:values:fsa_establishment_la_email:raw]'
       to_options: {  }
-      cc_mail: webmaster@food.gov.uk
+      cc_mail: ''
       cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
