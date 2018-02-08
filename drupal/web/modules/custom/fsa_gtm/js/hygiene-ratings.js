@@ -27,7 +27,7 @@
             "search": {
               "keywords": keywords == null ? undefined : keywords,
               "category": "hygiene-ratings",
-              "results": hits.split(" ").join(''),
+              "results": hits.split(" ").join(""),
               "resultsPage": pages,
               "tags": {
                 "businessType": filters.business_type == undefined ? null : filters.business_type,
