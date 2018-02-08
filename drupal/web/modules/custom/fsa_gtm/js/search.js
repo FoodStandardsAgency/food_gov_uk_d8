@@ -21,10 +21,6 @@
         }
       };
       if (viewId != "search_global_all") {
-        data.search.keywords = undefined;
-        data.search.category = undefined;
-        data.search.results = undefined;
-        data.search.resultsPage = undefined;
         data.search.tags = {};
       }
 
@@ -40,6 +36,7 @@
       // Add search term when filters are unused.
       $(document, context).once('data-layer').each(function () {
         pushSearchTerm();
+        pushHitsAndPages();
       });
 
       // Add search term, filter selections, and pager results.
@@ -188,10 +185,28 @@
           break;
       }
 
-      // Push search term to data layer.
+      // Add search term data.
       function pushSearchTerm() {
         var term = $("[id^=edit-keywords]").val();
         data.search.keywords = term ? term : undefined;
+      }
+
+      // Add hits and pages data.
+      function pushHitsAndPages() {
+        if ($('.pager__items')[0]) {
+
+          // Add hits.
+          var hits = $(".listing footer").text().trim().split(" ").pop();
+          data.search.results = hits;
+
+          // Add pages.
+          var query;
+          query = $(".pager__item.is-active a").attr("href");
+          var pageNumber = query.replace(/^\D+/g, "");
+          query = $(".pager__item--last a").attr("href");
+          var numberOfPages = query.replace(/^\D+/g, "");
+          data.search.resultsPage = pageNumber + "-" + numberOfPages;
+        }
         console.log(data.search);
       }
     }
