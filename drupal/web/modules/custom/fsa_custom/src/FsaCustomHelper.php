@@ -47,10 +47,15 @@ class FsaCustomHelper extends ControllerBase {
 
     if ($ent_id) {
       $link = Link::createFromRoute(
-        t('Privacy notice') . ' ' . $type,
+        t('Privacy notice'),
         'entity.media.canonical',
         ['media' => $ent_id],
-        [])->toString();
+        [
+          'attributes' => [
+            'class' => 'privacy-link',
+            'target' => '_blank',
+          ],
+        ])->toString();
     }
     else {
       $link = [];
