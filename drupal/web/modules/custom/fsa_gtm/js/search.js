@@ -10,7 +10,7 @@
       // Get view identifier.
       var viewId = drupalSettings.fsa_ratings.data_layer.view_id;
 
-      // Define two data objects: simple and full.
+      // Define one of two data objects: simple and full (with tags property).
       var data = {
         "event": "search",
         "search": {
@@ -24,7 +24,7 @@
         data.search.tags = {};
       }
 
-      // Add category (coerced from views identifier).
+      // Add category to data (coerced from views identifier).
       var category = viewId.replace("search_global_", "");
       if (category == "ratings") {
         data.search.category = "hygiene-" + category;
@@ -33,31 +33,35 @@
         data.search.category = category;
       }
 
-      // Add search term when filters are unused.
+      // Add search term to data when filters are unused and don't trigger push.
       $(document, context).once('data-layer').each(function () {
         pushSearchTerm();
         pushHitsAndPages();
         dataLayer.push(data);
       });
 
-      // Add search term, filter selections, and pager results.
+      // Add all data when filters are used for any of five search tabs.
       switch(viewId) {
 
         // Guidance search.
         case "search_global_guidance":
 
-          // Initialise tags.
+          // Initialise tags property.
           data.search.tags.guidanceAudience = null;
           data.search.tags.nation = null;
 
           // On change push to data layer.
           $("#views-exposed-form-search-global-guidance-page-1", context).change(function () {
 
+            // Add search term to data
             pushSearchTerm();
+
+            // Add hits and pages information to data
             pushHitsAndPages();
 
             var checked = {};
 
+            // Select filtered values and add to data
             var guidanceAudience = [];
             $("[id^=edit-audience] .form-checkbox:checked").each(function() {
               guidanceAudience.push($(this).val().toLowerCase());
@@ -76,16 +80,14 @@
           });
           break;
 
-        // Ratings search.
+        // Ratings search - see comments for guidance search.
         case "search_global_ratings":
 
-          // Initialise tags.
           data.search.tags.businessType = null;
           data.search.tags.localAuthority = null;
           data.search.tags.hygieneRating = null;
           data.search.tags.hygieneStatus = null;
 
-          // On change push to data layer.
           $("#views-exposed-form-search-global-ratings-page-1", context).change(function () {
 
             pushSearchTerm();
@@ -119,14 +121,12 @@
           });
           break;
 
-        // News & alerts search.
+        // News & alerts search - see comments for guidance search.
         case "search_global_news_and_alerts":
 
-          // Initialise tags.
           data.search.tags.newsType = null;
           data.search.tags.nation = null;
 
-          // On change push to data layer.
           $("#views-exposed-form-search-global-news-and-alerts-page-1", context).change(function () {
 
             pushSearchTerm();
@@ -152,14 +152,12 @@
           });
           break;
 
-        // Research search.
+        // Research search - see comments for guidance search.
         case "search_global_research":
 
-          // Initialise tags.
           data.search.tags.researchTopic = null;
           data.search.tags.nation = null;
 
-          // On change push to data layer.
           $("#views-exposed-form-search-global-research-page-1", context).change(function () {
 
             pushSearchTerm();
@@ -192,16 +190,16 @@
         data.search.keywords = term ? term : undefined;
       }
 
-      // Add hits and pages data.
+      // Add hits and pages information to data from pager.
       function pushHitsAndPages() {
 
-        // Add hits.
+        // Add hits to data.
         var hits = $(".listing footer").text().trim().split(" ")[3].replace(/[^0-9]/, "");
         if (hits) {
           data.search.results = hits;
         }
 
-        // Add pages.
+        // Add pages to data.
         isActiveQuery = $(".pager__item.is-active a").attr("href");
         lastQuery = $(".pager__item--last a").attr("href");
         if (isActiveQuery && lastQuery) {
