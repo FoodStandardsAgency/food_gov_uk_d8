@@ -21,7 +21,6 @@
   transform: translateX(-50%);
 }
 
-
 .my-profile__header > ul > li {
   position: relative;
   z-index: var(--z-middle);
@@ -29,7 +28,6 @@
   margin: 0;
   padding: 0;
 }
-
 
 .my-profile__header > ul > li > a {
   position: relative;
@@ -53,8 +51,7 @@
     transform 0.12s ease-in-out;
 }
 
-
-.my-profile__header > ul > li > a.is-active:after
+.my-profile__header > ul > li > a.is-active:after,
 :--not-touch .my-profile__header > ul > li > a:--enter:after {
   opacity: 1;
   transform: scaleY(1);
@@ -66,11 +63,12 @@
 
 /* Profile header */
 .profile__header {
+  @mixin responsive-declaration margin-bottom, 1.5em, 2em;
+
   position: relative;
   background-color: var(--color-white);
   display: flex;
   align-items: center;
-  @mixin responsive-declaration margin-bottom, 1.5em, 2em;
 }
 
 .profile__heading {
@@ -107,17 +105,18 @@
 .user-registration-form,
 .profile-manager {
   .toggle-button {
+    @mixin responsive-declaration padding, 0, 0.5em;
+
     border: 0.2em solid var(--color-light-gray);
     font-weight: 600;
     border-bottom: 0;
-    @mixin responsive-declaration padding, 0em, 0.5em;
 
     &.is-open {
       border-color: var(--color-black);
       color: var(--color-black);
     }
 
-    & > * { 
+    & > * {
       @mixin responsive-declaration font-size, 1em, 1.25em;
     }
   }
@@ -131,14 +130,16 @@
       border-color: var(--color-black);
     }
 
-    & > * { 
+    & > * {
       @mixin responsive-declaration padding, 1em, 1.5em;
+
       margin: 0;
     }
 
     h3 {
       @mixin responsive-declaration font-size, 1.25em, 1.5em;
       @mixin responsive-declaration margin-top, 1.5em, 2em;
+
       padding-bottom: 0.5em;
       border-bottom: 0.1em solid var(--color-lighter-gray);
     }
@@ -151,7 +152,7 @@
 
   .form-item {
     &.js-form-type-radio {
-      margin-bottom: 0em;
+      margin-bottom: 0;
     }
   }
 }

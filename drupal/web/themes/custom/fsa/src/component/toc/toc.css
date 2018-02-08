@@ -46,8 +46,7 @@
       display: block;
       font-weight: 400;
       text-decoration: underline;
-      transition:
-        transform 0.12s ease-in-out;
+      transition: transform 0.12s ease-in-out;
     }
 
     &:before {

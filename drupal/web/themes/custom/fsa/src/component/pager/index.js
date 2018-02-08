@@ -1,14 +1,7 @@
-// Import HTML
-import html from './pager.html';
-
-// Import Styles
-import css from './pager.css';
-
-// Import JavaScript
-import js from './pager';
+import html from './pager.html'
+import css from './pager.css'
 
 module.exports = {
   html,
-  css,
-  js,
-};
+  css
+}
