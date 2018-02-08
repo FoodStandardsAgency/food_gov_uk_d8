@@ -38,7 +38,6 @@
         pushSearchTerm();
         pushHitsAndPages();
         dataLayer.push(data);
-        console.log(dataLayer);
       });
 
       // Add search term, filter selections, and pager results.
@@ -74,7 +73,6 @@
             data.search.tags.nation = checked.region ? checked.region : null;
 
             dataLayer.push(data);
-            console.log(dataLayer);
           });
           break;
 
@@ -118,7 +116,6 @@
             data.search.tags.hygieneStatus = checked.status ? checked.status : null;
 
             dataLayer.push(data);
-            console.log(dataLayer);
           });
           break;
 
@@ -152,7 +149,6 @@
             data.search.tags.nation = checked.nation ? checked.nation : null;
 
             dataLayer.push(data);
-            console.log(dataLayer);
           });
           break;
 
@@ -186,7 +182,6 @@
             data.search.tags.nation = checked.nation ? checked.nation : null;
 
             dataLayer.push(data);
-            console.log(dataLayer);
           });
           break;
       }
