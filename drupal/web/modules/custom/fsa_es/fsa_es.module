@@ -34,8 +34,12 @@ function fsa_es_views_pre_render(ViewExecutable $view) {
     $view->element['#attached']['library'][] = 'fsa_es/result_totals';
     $view->element['#attached']['drupalSettings']['fsa_es']['result_totals'] = [
       'keywords' => isset($view->filter['keyword']) ? $view->filter['keyword']->value : NULL,
-      'depth' => $view->total_rows,
-      'total' => $view->total_rows,
+      'total' => [
+        // Result totals can show results from the main view and from
+        // embedded ratings view.
+        // @see fsa_es_preprocess_views_view() where ratings totals are added.
+        'main_view' => $view->total_rows,
+      ],
     ];
   }
 
@@ -100,6 +104,12 @@ function fsa_es_preprocess_views_view(&$variables) {
 
       // If there are more than 3 values, inject the ratings embed after 3rd element.
       if ($ratings_embed_build['#access']) {
+        // Result totals can show results from the main view and from
+        // embedded ratings view.
+        // @see fsa_es_views_pre_render() where main view totals are added.
+        $variables['#attached']['library'][] = 'fsa_es/result_totals';
+        $variables['#attached']['drupalSettings']['fsa_es']['result_totals']['total']['ratings'] = $ratings_embed_view->total_rows;
+
         // If there are results in "search_global_all", inject or append the
         // embedded ratings view.
         if (!empty($variables['rows'])) {
