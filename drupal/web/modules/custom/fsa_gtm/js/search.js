@@ -201,7 +201,7 @@
       function pushHitsAndPages() {
 
         // Add hits.
-        var hits = $(".listing footer").text().trim().split(" ").pop();
+        var hits = $(".listing footer").text().trim().split(" ")[3].replace(/[^0-9]/, "");
         if (hits) {
           data.search.results = hits;
         }
