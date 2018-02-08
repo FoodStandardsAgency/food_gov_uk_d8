@@ -33,17 +33,12 @@
         data.search.category = category;
       }
 
-      // Push search term and pages information when filters are unused.
-      $(document, context).once("data-layer").each(function () {
-        pushSearchTerm();
-        pushHitsAndPages();
-        dataLayer.push(data);
-      });
+      // Push search term on page load response.
+      pushSearchTerm();
 
-      // Push pages information only when pager is used.
-      $(".pager__item a", context).click(function () {
+      // Push pager information on ajax response.
+      $(document, context).once("data-layer-ajax").ajaxSuccess(function() {
         pushHitsAndPages();
-        data.search.abc = "xyz";
         dataLayer.push(data);
       });
 
@@ -62,9 +57,6 @@
 
             // Add search term to data
             pushSearchTerm();
-
-            // Add hits and pages information to data
-            pushHitsAndPages();
 
             var checked = {};
 
@@ -98,7 +90,6 @@
           $("#views-exposed-form-search-global-ratings-page-1", context).change(function () {
 
             pushSearchTerm();
-            pushHitsAndPages();
 
             var selected;
 
@@ -137,7 +128,6 @@
           $("#views-exposed-form-search-global-news-and-alerts-page-1", context).change(function () {
 
             pushSearchTerm();
-            pushHitsAndPages();
 
             var checked = {};
 
@@ -168,7 +158,6 @@
           $("#views-exposed-form-search-global-research-page-1", context).change(function () {
 
             pushSearchTerm();
-            pushHitsAndPages();
 
             var checked = {};
 
