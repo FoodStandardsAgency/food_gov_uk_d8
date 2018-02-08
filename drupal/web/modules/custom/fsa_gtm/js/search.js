@@ -33,8 +33,8 @@
         data.search.category = category;
       }
 
-      // Add search term to data when filters are unused and don't trigger push.
-      $(document, context).once('data-layer').each(function () {
+      // Add search term to data when filters are unused and don"t trigger push.
+      $(document, context).once("data-layer").each(function () {
         pushSearchTerm();
         pushHitsAndPages();
         dataLayer.push(data);
@@ -66,14 +66,14 @@
             $("[id^=edit-audience] .form-checkbox:checked").each(function() {
               guidanceAudience.push($(this).val().toLowerCase());
             });
-            checked.audience = guidanceAudience.join(',');
+            checked.audience = guidanceAudience.join(",");
             data.search.tags.guidanceAudience = checked.audience ? checked.audience : null;
 
             var guidanceRegion = [];
             $("[id^=edit-region] .form-checkbox:checked").each(function() {
               guidanceRegion.push($(this).val().toLowerCase());
             });
-            checked.region = guidanceRegion.join(',');
+            checked.region = guidanceRegion.join(",");
             data.search.tags.nation = checked.region ? checked.region : null;
 
             dataLayer.push(data);
@@ -107,14 +107,14 @@
             $("[id^=edit-fhrs-rating-value] .form-checkbox:checked").each(function() {
               hygieneRating.push($(this).val().toLowerCase());
             });
-            checked.rating = hygieneRating.join(',');
+            checked.rating = hygieneRating.join(",");
             data.search.tags.hygieneRating = checked.rating ? checked.rating : null;
 
             var hygieneStatus = [];
             $("[id^=edit-fhis-rating-value] .form-checkbox:checked").each(function() {
               hygieneStatus.push($(this).val().toLowerCase());
             });
-            checked.status = hygieneStatus.join(',');
+            checked.status = hygieneStatus.join(",");
             data.search.tags.hygieneStatus = checked.status ? checked.status : null;
 
             dataLayer.push(data);
@@ -138,14 +138,14 @@
             $("[id^=edit-local-type] .form-checkbox:checked").each(function() {
               newsType.push($(this).val().toLowerCase());
             });
-            checked.type = newsType.join(',');
+            checked.type = newsType.join(",");
             data.search.tags.newsType = checked.type ? checked.type : null;
 
             var nation = [];
             $("[id^=edit-region] .form-checkbox:checked").each(function() {
               nation.push($(this).val().toLowerCase());
             });
-            checked.nation = nation.join(',');
+            checked.nation = nation.join(",");
             data.search.tags.nation = checked.nation ? checked.nation : null;
 
             dataLayer.push(data);
@@ -169,14 +169,14 @@
             $("[id^=edit-topic] .form-checkbox:checked").each(function() {
               researchTopic.push($(this).val().toLowerCase());
             });
-            checked.topic = researchTopic.join(',');
+            checked.topic = researchTopic.join(",");
             data.search.tags.researchTopic = checked.topic ? checked.topic : null;
 
             var nation = [];
             $("[id^=edit-region] .form-checkbox:checked").each(function() {
               nation.push($(this).val().toLowerCase());
             });
-            checked.nation = nation.join(',');
+            checked.nation = nation.join(",");
             data.search.tags.nation = checked.nation ? checked.nation : null;
 
             dataLayer.push(data);
