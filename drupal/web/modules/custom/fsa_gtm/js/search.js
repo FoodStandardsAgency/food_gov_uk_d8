@@ -33,8 +33,13 @@
         data.search.category = category;
       }
 
-      // Push search term on page load response.
-      pushSearchTerm();
+      // Push search term and pages information on page load response.
+      $(document, context).once("data-layer-page").each(function () {
+        pushSearchTerm();
+        pushHitsAndPages();
+        dataLayer.push(data);
+      });
+
 
       // Push pager information on ajax response.
       $(document, context).once("data-layer-ajax").ajaxSuccess(function() {
