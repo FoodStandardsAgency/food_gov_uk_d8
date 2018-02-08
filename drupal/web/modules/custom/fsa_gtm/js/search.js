@@ -33,10 +33,17 @@
         data.search.category = category;
       }
 
-      // Add search term to data when filters are unused and don"t trigger push.
+      // Push search term and pages information when filters are unused.
       $(document, context).once("data-layer").each(function () {
         pushSearchTerm();
         pushHitsAndPages();
+        dataLayer.push(data);
+      });
+
+      // Push pages information only when pager is used.
+      $(".pager__item a", context).click(function () {
+        pushHitsAndPages();
+        data.search.abc = "xyz";
         dataLayer.push(data);
       });
 
