@@ -197,7 +197,7 @@
 
         // Add pages to data.
         isActiveQuery = $(".pager__item.is-active a").attr("href");
-        lastQuery = $(".pager__item--last a").attr("href");
+        lastQuery = $(".pager__items li:nth-last-of-type(1) a").attr("href");
         if (isActiveQuery && lastQuery) {
           var pageNumber = isActiveQuery.trim().split("=").pop();
           var numberOfPages = lastQuery.trim().split("=").pop();
