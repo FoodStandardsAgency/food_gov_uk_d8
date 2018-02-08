@@ -1,2 +1,4 @@
 views.filter.fsa_guidance_content_type:
   type: views.filter.many_to_one
+views.filter.fsa_consultation_responses_published:
+  type: views.filter.many_to_one
