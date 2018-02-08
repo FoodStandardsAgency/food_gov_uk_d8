@@ -55,6 +55,7 @@
           $("#views-exposed-form-search-global-guidance-page-1", context).change(function () {
 
             pushSearchTerm();
+            pushHitsAndPages();
 
             var checked = {};
 
@@ -90,6 +91,7 @@
           $("#views-exposed-form-search-global-ratings-page-1", context).change(function () {
 
             pushSearchTerm();
+            pushHitsAndPages();
 
             var selected;
 
@@ -131,6 +133,7 @@
           $("#views-exposed-form-search-global-news-and-alerts-page-1", context).change(function () {
 
             pushSearchTerm();
+            pushHitsAndPages();
 
             var checked = {};
 
@@ -164,6 +167,7 @@
           $("#views-exposed-form-search-global-research-page-1", context).change(function () {
 
             pushSearchTerm();
+            pushHitsAndPages();
 
             var checked = {};
 
