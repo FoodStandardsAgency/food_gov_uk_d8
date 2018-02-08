@@ -37,6 +37,8 @@
       $(document, context).once('data-layer').each(function () {
         pushSearchTerm();
         pushHitsAndPages();
+        dataLayer.push(data);
+        console.log(dataLayer);
       });
 
       // Add search term, filter selections, and pager results.
@@ -207,7 +209,6 @@
           var numberOfPages = query.replace(/^\D+/g, "");
           data.search.resultsPage = pageNumber + "-" + numberOfPages;
         }
-        console.log(data.search);
       }
     }
   };
