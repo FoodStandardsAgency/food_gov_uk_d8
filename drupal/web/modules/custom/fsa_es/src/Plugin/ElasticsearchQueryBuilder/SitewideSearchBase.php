@@ -53,7 +53,7 @@ abstract class SitewideSearchBase extends ElasticsearchQueryBuilderPluginBase {
    * return array
    */
   public function getAggregations() {
-    
+    return [];
   }
 
   /**
