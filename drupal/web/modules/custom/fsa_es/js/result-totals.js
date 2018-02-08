@@ -74,21 +74,37 @@
 
       $(selector).each(function() {
         if (keywords) {
+          // Show main view and ratings totals in combo.
           if (total_main_view && total_ratings) {
             result_string = Drupal.t('!main_view_string and !ratings_string found for <span class="' + class_keyword + '">%keywords</span>',
               {'!main_view_string': getComboMainViewString(total_main_view), '!ratings_string': getComboRatingsString(total_ratings), '%keywords': keywords}
             );
           }
+          // Show only ratings totals with keywords.
+          else if (total_ratings) {
+            result_string = Drupal.t('!ratings_string found for <span class="' + class_keyword + '">%keywords</span>',
+              {'!ratings_string': getComboRatingsString(total_ratings), '%keywords': keywords}
+            );
+          }
+          // Show only main view totals with keywords.
           else {
             result_string = getMainViewWithKeywordsString(total_main_view, keywords);
           }
         }
         else {
+          // Show main view and ratings totals in combo.
           if (total_main_view && total_ratings) {
             result_string = Drupal.t('!main_view_string and !ratings_string found',
               {'!main_view_string': getComboMainViewString(total_main_view), '!ratings_string': getComboRatingsString(total_ratings)}
             );
           }
+          // Show only ratings totals.
+          else if (total_ratings) {
+            result_string = Drupal.t('!ratings_string found',
+              {'!ratings_string': getComboRatingsString(total_ratings)}
+            );
+          }
+          // Show only main view totals.
           else {
             result_string = getMainViewString(total_main_view);
           }
