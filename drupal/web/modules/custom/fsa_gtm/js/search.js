@@ -193,20 +193,22 @@
 
       // Add hits and pages information to data from pager.
       function pushHitsAndPages() {
+        if ($(".pager__items")[0]) {
 
-        // Add hits to data.
-        var hits = $(".listing footer").text().trim().split(" ")[3].replace(/[^0-9]/, "");
-        if (hits) {
-          data.search.results = hits;
-        }
+          // Add hits to data.
+          var hits = $(".listing footer").text().trim().split(" ")[3].replace(/[^0-9]/, "");
+          if (hits) {
+            data.search.results = hits;
+          }
 
-        // Add pages to data.
-        isActiveQuery = $(".pager__item.is-active a").attr("href");
-        lastQuery = $(".pager__items li:nth-last-of-type(1) a").attr("href");
-        if (isActiveQuery && lastQuery) {
-          var pageNumber = isActiveQuery.trim().split("=").pop();
-          var numberOfPages = lastQuery.trim().split("=").pop();
-          data.search.resultsPage = pageNumber + "-" + numberOfPages;
+          // Add pages to data.
+          isActiveQuery = $(".pager__item.is-active a").attr("href");
+          lastQuery = $(".pager__items li:nth-last-of-type(1) a").attr("href");
+          if (isActiveQuery && lastQuery) {
+            var pageNumber = isActiveQuery.trim().split("=").pop();
+            var numberOfPages = lastQuery.trim().split("=").pop();
+            data.search.resultsPage = pageNumber + "-" + numberOfPages;
+          }
         }
       }
     }
