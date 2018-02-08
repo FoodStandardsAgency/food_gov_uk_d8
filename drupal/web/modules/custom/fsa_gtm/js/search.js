@@ -210,8 +210,8 @@
         isActiveQuery = $(".pager__item.is-active a").attr("href");
         lastQuery = $(".pager__item--last a").attr("href");
         if (isActiveQuery && lastQuery) {
-          var pageNumber = isActiveQuery.replace(/^\D+/g, "");
-          var numberOfPages = lastQuery.replace(/^\D+/g, "");
+          var pageNumber = isActiveQuery.trim().split("=").pop();
+          var numberOfPages = lastQuery.trim().split("=").pop();
           data.search.resultsPage = pageNumber + "-" + numberOfPages;
         }
       }
