@@ -37,7 +37,7 @@ class FsaCustomHelper extends ControllerBase {
         $ent_id = 607;
         break;
 
-      case 'ncfu':
+      case 'nfcu':
         $ent_id = 1069;
         break;
 
@@ -58,7 +58,7 @@ class FsaCustomHelper extends ControllerBase {
         ])->toString();
     }
     else {
-      $link = [];
+      $link = '<pre>[privacy link not defined]</pre>';
     }
 
     return $link;
