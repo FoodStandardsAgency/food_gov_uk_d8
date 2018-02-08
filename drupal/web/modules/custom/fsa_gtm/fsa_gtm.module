@@ -1,0 +1,43 @@
+<?php
+
+/**
+ * @file
+ * Expose data to page layer for GTM.
+ */
+
+use Drupal\views\ViewExecutable;
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function fsa_gtm_views_pre_render(ViewExecutable $view) {
+
+  // Target global search views.
+  $view_ids = [
+    'search_global_all',
+    'search_global_guidance',
+    'search_global_news_and_alerts',
+    'search_global_ratings',
+    'search_global_research',
+  ];
+  $view_id = $view->storage->id();
+  if (isset($view) && (in_array($view_id, $view_ids))) {
+
+    // Attach data layer library and settings to view.
+    $view->element = [
+      '#attached' => [
+        'library' => [
+
+          'fsa_gtm/data_layer.search',
+        ],
+        'drupalSettings' => [
+          'fsa_ratings' => [
+            'data_layer' => [
+              'view_id' => $view_id,
+            ],
+          ],
+        ],
+      ],
+    ];
+  }
+}
