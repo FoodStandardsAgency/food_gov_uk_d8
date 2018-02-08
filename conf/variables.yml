@@ -122,6 +122,27 @@ upcloud_server_spec_list:
             # Options for mysql performance
             # These are the same as Mozilla is using for their mysql servers: https://bugzilla.mozilla.org/show_bug.cgi?id=874039
             opts: defaults,noatime,data=writeback,barrier=0,dioread_nolock
+  - group: prod-search
+    # This can be used to add these machines into multiple groups
+    secondary_groups:
+      - prod
+    members:
+      - { name: 1, state: present }
+    settings:
+      plan: 4xCPU-4GB
+      zone: "{{ upcloud_zone }}"
+      # Allows ansible to reboot the machine when making changes to the disks
+      allow_reboot_on_resize: true
+      storage_devices:
+        - title: root
+          os: CentOS 7.0
+          size: 50
+        - title: logs
+          size: 10
+          mount:
+            path: /var/log
+            fstype: ext4
+            opts: defaults,noatime
   #- group: stage
     #secondary_groups:
       #- firewall_web

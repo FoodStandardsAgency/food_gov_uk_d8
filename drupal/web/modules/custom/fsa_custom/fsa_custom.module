@@ -206,13 +206,14 @@ function fsa_custom_preprocess_page_title(&$variables) {
  */
 function fsa_custom_preprocess_breadcrumb(&$variables) {
   $routematch = \Drupal::routeMatch();
+  $is_admin_route = \Drupal::service('router.admin_context')->isAdminRoute();
 
   $node = $routematch->getParameter('node');
   if (\Drupal::service('path.matcher')->isFrontPage()) {
     // We don't need breadcrumbs on homepage.
     unset($variables['breadcrumb']);
   }
-  elseif (isset($node)) {
+  elseif (is_object($node) && !$is_admin_route) {
 
     $text = FALSE;
     $route_name = FALSE;

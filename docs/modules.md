@@ -3,6 +3,12 @@ Modules
 
 The following custom modules are used in this project.
 
+## FSA Noindex (`fsa_noindex`)
+Small module to force noindex robot metatag on all pages in order to avoid site being indexed in search engines before launch.
+
+The module should be uninstalled and removed once site is launched to public.
+
+
 ## FSA Custom (`fsa_custom`)
 FSA site small customizations and configuration pages. 
 

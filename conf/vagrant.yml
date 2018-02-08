@@ -41,8 +41,10 @@
    #- { role: selenium, tags: [ 'selenium' ] }
    - { role: wkhtmltopdf, tags: [ 'wkhtmltopdf' ] }
 
-  tasks:
+  vars_files:
+  - error-page.yml
 
+  tasks:
     - cron: name="check dirs" minute="0" hour="5,2" job="ls -alh > /dev/null"
 
   vars:
@@ -90,6 +92,7 @@
       memory: 512M
       probe_resource_url: "_ping.php"
       control_key: "{{ 'vagrant' | to_uuid }}"
+      custom_error_template: "{{ varnish_error_template }}"
       acl_internal:
         - ip: 127.0.0.1
       acl_purge:

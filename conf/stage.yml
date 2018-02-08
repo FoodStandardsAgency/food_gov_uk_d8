@@ -24,6 +24,7 @@
 
   vars_files:
   - stage-vars.yml
+  - error-page.yml
 
   tasks:
   # Drupal cron job
@@ -99,6 +100,7 @@
     varnish:
       port: 8081
       memory: 512M
+      custom_error_template: "{{ varnish_error_template }}"
       directors:
         - name: stage
           host: "{{ domain_name }}"

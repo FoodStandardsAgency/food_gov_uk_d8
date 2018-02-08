@@ -41,7 +41,7 @@ settings:
       query: '{"keywords": "[current-page:query:keywords]"}'
     link-3:
       url: /search/news-alerts
-      text: 'News & alerts'
+      text: 'News and alerts'
       route_parameters: ''
       query: '{"keywords": "[current-page:query:keywords]"}'
     link-4:

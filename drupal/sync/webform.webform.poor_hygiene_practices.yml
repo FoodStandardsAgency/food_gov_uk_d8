@@ -10,7 +10,7 @@ id: poor_hygiene_practices
 title: 'Report poor hygiene practices'
 description: 'Poor hygiene practices report form'
 category: 'Food problem'
-elements: "business:\n  '#type': webform_wizard_page\n  '#title': Business\n  where_lookup:\n    '#type': webform_googleplace\n    '#title': 'Where did you notice poor hygiene practices?'\n    '#description': '<p>Enter the name and the address of the UK business where you bought the product and select from the list. You can also type them in manually.</p>'\n    '#required': true\n  fsa_establishment_la_name:\n    '#type': hidden\n    '#title': 'Local authority name'\n  fsa_establishment_postal_code:\n    '#type': hidden\n    '#title': 'Postal code'\n  fsa_establishment_la_email:\n    '#type': textfield\n    '#title': 'Local authority email'\n    '#help': 'Use the <em>Find a food safety team</em> lookup, below. Enter a local authority email. Check <em>Manually sent to local authority</em>. Continue and save. Visit the <em>Resend</em> tab, above, to send the data.'\n    '#access_create_roles': {  }\n    '#access_update_roles':\n      - administrator\n    '#access_view_roles':\n      - administrator\n  manually_sent:\n    '#type': checkbox\n    '#title': 'Manually sent to local authority'\n    '#access_create_roles': {  }\n    '#access_update_roles':\n      - administrator\n    '#access_view_roles':\n      - administrator\npage_about:\n  '#type': webform_wizard_page\n  '#title': Description\n  what_noticed:\n    '#type': textarea\n    '#title': 'What have you noticed?'\n    '#description': 'Please give us as much detail as possible to help investigate the issue.'\n    '#required': true\n  when_noticed:\n    '#type': textfield\n    '#title': 'When did you notice this?'\n    '#required': true\ncontact_details:\n  '#type': webform_wizard_page\n  '#title': 'Contact details'\n  header_contact_info:\n    '#type': webform_markup\n    '#markup': \"<h3>Your contact details</h3>\\n\\n<p>This information will only be used by the local authority to contact you about your issue, and&nbsp;to send you a confirmation email about your report.</p>\\n\"\n  name:\n    '#type': textfield\n    '#title': 'Full name'\n  email:\n    '#type': email\n    '#title': 'Email address'\n    '#required': true\n  telephone:\n    '#type': tel\n    '#title': 'Phone number'\n"
+elements: "business:\n  '#type': webform_wizard_page\n  '#title': Business\n  where_lookup:\n    '#type': webform_googleplace\n    '#title': 'Where did you notice poor hygiene practices?'\n    '#description': '<p>Enter the name and the address of the UK business where you bought the product and select from the list. You can also type them in manually.</p>'\n    '#required': true\n  fsa_establishment_la_name:\n    '#type': hidden\n    '#title': 'Local authority name'\n  fsa_establishment_postal_code:\n    '#type': hidden\n    '#title': 'Postal code'\n  fsa_establishment_la_email:\n    '#type': textfield\n    '#title': 'Local authority email'\n    '#help': 'Use the <em>Find a food safety team</em> lookup, below. Enter a local authority email. Check <em>Manually sent to local authority</em>. Continue and save. Visit the <em>Resend</em> tab, above, to send the data.'\n    '#access_create_roles': {  }\n    '#access_update_roles':\n      - administrator\n    '#access_view_roles':\n      - administrator\n  manually_sent:\n    '#type': checkbox\n    '#title': 'Manually sent to local authority'\n    '#access_create_roles': {  }\n    '#access_update_roles':\n      - administrator\n    '#access_view_roles':\n      - administrator\npage_about:\n  '#type': webform_wizard_page\n  '#title': Description\n  what_noticed:\n    '#type': textarea\n    '#title': 'What have you noticed?'\n    '#description': 'Please give us as much detail as possible to help investigate the issue.'\n    '#required': true\n  when_noticed:\n    '#type': textfield\n    '#title': 'When did you notice this?'\n    '#required': true\ncontact_details:\n  '#type': webform_wizard_page\n  '#title': 'Contact details'\n  header_contact_info:\n    '#type': webform_markup\n    '#markup': |\n      <h3>Your contact details</h3>\n      \n      <p>This information will only be used by the local authority to contact you about your issue, and&nbsp;to send you a confirmation email about your report.</p>\n  name:\n    '#type': textfield\n    '#title': 'Full name'\n  email:\n    '#type': email\n    '#title': 'Email address'\n    '#required': true\n  telephone:\n    '#type': tel\n    '#title': 'Phone number'\n  fsa_privacy_link_rafp:\n    '#type': webform_markup"
 css: ''
 javascript: ''
 settings:
@@ -158,7 +158,7 @@ handlers:
       cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
-      from_mail: report@food.gov.uk
+      from_mail: default
       from_options: {  }
       from_name: default
       subject: 'Thank you for reporting a food problem'
@@ -184,9 +184,9 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: sally.barber@food.gov.uk
+      to_mail: '[webform_submission:values:fsa_establishment_la_email:raw]'
       to_options: {  }
-      cc_mail: webmaster@food.gov.uk
+      cc_mail: ''
       cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
@@ -194,7 +194,7 @@ handlers:
       from_options: {  }
       from_name: default
       subject: 'This is a food problem report from a consumer via beta.food.gov.uk'
-      body: "<p>This is a food problem report from a consumer via beta.food.gov.uk.&nbsp;</p>\r\n\r\n<div>[webform_submission:values]</div>\r\n\r\n<p>Please do not reply to this email.</p>\r\n\r\n<p>Protect privacy: make sure you keep the information in this email appropriately secure and only use it for the purpose of investigating the complaint against the food business. If this issue is for another local authority to consider and take appropriate action, please securely share the information in this email with that local authority. Ensure that the personal details of the person who made the complaint are not revealed to the food business.</p>"
+      body: "<p>This is a food problem report from <strong><a href=\"[current-page:url:unaliased:absolute]\">[current-page:title]</a></strong> via beta.food.gov.uk.&nbsp;</p>\r\n\r\n<div>[webform_submission:values]</div>\r\n\r\n<p>Please do not reply to this email.</p>\r\n\r\n<p>Protect privacy: make sure you keep the information in this email appropriately secure and only use it for the purpose of investigating the complaint against the food business. If this issue is for another local authority to consider and take appropriate action, please securely share the information in this email with that local authority. Ensure that the personal details of the person who made the complaint are not revealed to the food business.</p>"
       excluded_elements:
         fsa_establishment_la_email: fsa_establishment_la_email
         name: name

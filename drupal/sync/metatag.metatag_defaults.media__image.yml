@@ -1,0 +1,11 @@
+uuid: 6d99da9a-e20a-4a2f-ac82-da7d1212e429
+langcode: en
+status: true
+dependencies: {  }
+id: media__image
+label: 'Media: Image'
+tags:
+  robots: 'noindex, nofollow, noarchive, nosnippet, noodp, noydir, noimageindex, notranslate'
+  title: 'Image: [current-page:title] | [site:name]'
+  og_image: '[media:field_image]'
+  twitter_cards_image: '[media:field_image]'

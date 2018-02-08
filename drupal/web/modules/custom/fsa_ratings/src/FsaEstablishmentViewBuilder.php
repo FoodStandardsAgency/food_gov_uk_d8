@@ -65,8 +65,8 @@ class FsaEstablishmentViewBuilder extends EntityViewBuilder {
     $build['#find_more_link_ratings'] = Link::fromTextAndUrl(t('What do the different ratings mean'), $url)->toString();
 
     // "What is FHRS" link.
-    // @todo: For now link to existing site, correct the link once we have the business guidance page in place.
-    $url = Url::fromUri('https://www.food.gov.uk/business-industry/hygieneratings');
+    // @todo: Add node id via config form (route "fsa_custom.settings")
+    $url = Url::fromRoute('entity.node.canonical', ['node' => 165]);
     $build['#find_more_link_fhrs'] = Link::fromTextAndUrl(t('What is the Food Hygiene Rating Scheme?'), $url)->toString();
 
     // "Get badges" link.

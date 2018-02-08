@@ -34,8 +34,12 @@ function fsa_es_views_pre_render(ViewExecutable $view) {
     $view->element['#attached']['library'][] = 'fsa_es/result_totals';
     $view->element['#attached']['drupalSettings']['fsa_es']['result_totals'] = [
       'keywords' => isset($view->filter['keyword']) ? $view->filter['keyword']->value : NULL,
-      'depth' => $view->total_rows,
-      'total' => $view->total_rows,
+      'total' => [
+        // Result totals can show results from the main view and from
+        // embedded ratings view.
+        // @see fsa_es_preprocess_views_view() where ratings totals are added.
+        'main_view' => $view->total_rows,
+      ],
     ];
   }
 
@@ -82,7 +86,7 @@ function fsa_es_preprocess_views_view(&$variables) {
   $view = $variables['view'];
 
   // empty($view->pager->current_page) = either not set or first page (current page = 0).
-  if ($view->storage->id() == 'search_global_all' && !empty($variables['rows'][0]['#rows']) && empty($view->pager->current_page)) {
+  if ($view->storage->id() == 'search_global_all' && empty($view->pager->current_page)) {
     $embed_view_id = 'search_global_ratings_embed';
     $embed_view_display = 'embed_1';
 
@@ -100,13 +104,47 @@ function fsa_es_preprocess_views_view(&$variables) {
 
       // If there are more than 3 values, inject the ratings embed after 3rd element.
       if ($ratings_embed_build['#access']) {
-        if (count($variables['rows'][0]['#rows']) > 3) {
-          array_splice($variables['rows'][0]['#rows'], 3, 0, [$ratings_embed_build]);
+        // Result totals can show results from the main view and from
+        // embedded ratings view.
+        // @see fsa_es_views_pre_render() where main view totals are added.
+        $variables['#attached']['library'][] = 'fsa_es/result_totals';
+        $variables['#attached']['drupalSettings']['fsa_es']['result_totals']['total']['ratings'] = $ratings_embed_view->total_rows;
+
+        // If there are results in "search_global_all", inject or append the
+        // embedded ratings view.
+        if (!empty($variables['rows'])) {
+          if (isset($variables['rows'][0]['#rows']) && count($variables['rows'][0]['#rows']) > 3) {
+            array_splice($variables['rows'][0]['#rows'], 3, 0, [$ratings_embed_build]);
+          }
+          // If there are less than 3 values, just append at the end.
+          else {
+            $variables['rows'][0]['#rows'][] = $ratings_embed_build;
+          }
         }
-        // If there are less than 3 values, just append at the end.
+        // If there are no results in "search_global_all", add directly to
+        // "rows" element
         else {
-          $variables['rows'][0]['#rows'][] = $ratings_embed_build;
+          $variables['rows'][] = $ratings_embed_build;
         }
+      }
+    }
+  }
+  elseif ($view->storage->id() == 'search_global_ratings_embed') {
+    // This changes the view more link to include the search keyword and
+    // anchor. Unfortunately this is not possible with Views UI.
+    if ($params = \Drupal::service('request_stack')->getCurrentRequest()->query->all()) {
+      // The "keywords" query parameter name for keywords is supposed to be the
+      // same for global search and ratings search for consistency.
+      $keyword_param_key = 'keywords';
+
+      if (isset($params[$keyword_param_key])) {
+        /** @var \Drupal\Core\Url $more_url */
+        $more_url = $variables['more']['#url'];
+        // Get existing query (if available).
+        $more_query = $more_url->getOption('query') ? $more_url->getOption('query') : [];
+        // Set options.
+        $more_url->setOption('query', array_merge($more_query, [$keyword_param_key => $params[$keyword_param_key]]));
+        $more_url->setOption('fragment', 'results');
       }
     }
   }
