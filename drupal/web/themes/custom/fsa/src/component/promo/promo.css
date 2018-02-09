@@ -226,11 +226,6 @@
     background-position: right 2em bottom 2em;
   }
 
-  /* Alert tag */
-  .field__field_alert_type {
-    margin-bottom: 0 !important;
-  }
-
   /* Promo link list */
   .field__field_link_list {
     @mixin responsive-declaration padding-right, 1em, 2em;
@@ -573,6 +568,14 @@ a.field__field_content_promo__item {
 
       &:before {
         background-color: var(--color-blue);
+      }
+    }
+
+    &.field__field_alert_type {
+      color: var(--color-red);
+
+      &:before {
+        background-color: var(--color-red);
       }
     }
   }

@@ -4,6 +4,7 @@
   "postcss.validate": false,
   "stylelint.enable": true,
   "files.associations": {
-    "*.css": "postcss"
+    "*.css": "postcss",
+    "*.module": "php"
   }
 }

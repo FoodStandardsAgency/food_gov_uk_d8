@@ -84,6 +84,10 @@
       background-position: left 1em top 50%;
       background-repeat: no-repeat;
       padding-left: 3em;
+
+      :--not-touch &:--enter {
+        background-image: var(--icon-search-primary);
+      }
     }
   }
 

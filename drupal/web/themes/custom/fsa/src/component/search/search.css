@@ -7,7 +7,6 @@
   @mixin responsive-declaration margin-left, -1rem, -4rem;
 
   background-color: var(--color-lighter-gray);
-  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,13 +16,21 @@
 .views-result-total {
   @mixin responsive-declaration font-size, 1.25em, 1.75em;
 
+  flex-flow: row wrap;
+  text-align: center;
   font-family: var(--font-family-heading);
+  color: var(--dark-secondary-color);
   padding-bottom: 0.5rem;
 }
 
 .views-result-total__number {
   font-weight: 700;
   margin-right: 0.25em;
+  margin-left: 0.25em;
+
+  &:first-child {
+    margin-left: 0;
+  }
 }
 
 .views-result-total__keyword {
@@ -32,16 +39,26 @@
 
   &:before {
     content: '\0022';
+    margin-right: 0.05em;
   }
 
   &:after {
     content: '\0022';
+    margin-left: 0.25em;
   }
 }
 
 .search-keyword {
   input {
     width: 100%;
+    background-image: var(--icon-search-gray);
+    background-position: right 1em top 50%;
+    background-repeat: no-repeat;
+    padding-right: 3em;
+
+    :--not-touch &:--enter {
+      background-image: var(--icon-search-primary);
+    }
   }
 
   .form-item {

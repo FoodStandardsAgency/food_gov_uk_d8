@@ -11,6 +11,7 @@ function addHeading () {
     const heading = document.createElement('h3')
     const paragraph = document.createElement('div')
     paragraph.innerHTML = element.innerHTML
+    paragraph.classList.add(`regional-variation__content`)
     heading.classList.add(`heading`)
     heading.classList.add(`regional-variation__heading`)
     heading.id = id
