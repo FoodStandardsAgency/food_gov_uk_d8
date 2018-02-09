@@ -256,6 +256,132 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           plugin_id: fsa_news_type
+        consultation_status:
+          id: consultation_status
+          table: elasticsearch_result
+          field: consultation_status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: consultation_status_op
+            label: 'Consultation status'
+            description: ''
+            use_operator: false
+            operator: consultation_status_op
+            identifier: consultation_status
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              author: '0'
+              editor: '0'
+              fsa_admin: '0'
+              administrator: '0'
+            reduce: 0
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: fsa_consultation_status
+        consultation_responses_published:
+          id: consultation_responses_published
+          table: elasticsearch_result
+          field: consultation_responses_published
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: consultation_responses_published_op
+            label: 'Consultation responses'
+            description: ''
+            use_operator: false
+            operator: consultation_responses_published_op
+            identifier: consultation_responses_published
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              author: '0'
+              editor: '0'
+              fsa_admin: '0'
+              administrator: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: fsa_consultation_responses_published
+        consultation_year:
+          id: consultation_year
+          table: elasticsearch_result
+          field: consultation_year
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: consultation_year_op
+            label: 'Consultation year'
+            description: ''
+            use_operator: false
+            operator: consultation_year_op
+            identifier: consultation_year
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              author: '0'
+              editor: '0'
+              fsa_admin: '0'
+              administrator: '0'
+            reduce: 0
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: fsa_consultation_year
         nation:
           id: nation
           table: elasticsearch_result

@@ -177,28 +177,21 @@ class NewsAlertsSearchConsultations extends SitewideSearchBase {
                 'size' => 10000,
               ],
             ],
-            'status' => [
+            'consultation_status' => [
               'terms' => [
                 'field' => 'status',
                 'order' => ['_term' => 'asc'],
                 'size' => 10000,
               ],
             ],
-            'responses_published' => [
-              'terms' => [
-                'field' => 'responses_published',
-                'order' => ['_term' => 'asc'],
-                'size' => 10000,
-              ],
-            ],
-            'start_date' => [
+            'consultation_start_date' => [
               'date_histogram' => [
                 'field' => 'consultation_start_date',
                 'interval' => 'year',
                 'format' => 'yyy',
               ],
             ],
-            'close_date' => [
+            'consultation_close_date' => [
               'date_histogram' => [
                 'field' => 'consultation_close_date',
                 'interval' => 'year',
@@ -222,10 +215,9 @@ class NewsAlertsSearchConsultations extends SitewideSearchBase {
       // Build the response.
       $this->aggregations = [
         'type' => $result['aggregations']['type']['buckets'],
-        'status' => $result['aggregations']['status']['buckets'],
-        'responses_published' => $result['aggregations']['responses_published']['buckets'],
-        'start_date' => $result['aggregations']['start_date']['buckets'],
-        'close_date' => $result['aggregations']['close_date']['buckets'],
+        'consultation_status' => $result['aggregations']['consultation_status']['buckets'],
+        'consultation_start_date' => $result['aggregations']['consultation_start_date']['buckets'],
+        'consultation_close_date' => $result['aggregations']['consultation_close_date']['buckets'],
         'nation' => $result['aggregations']['nation']['buckets'],
       ];
     }
@@ -253,76 +245,6 @@ class NewsAlertsSearchConsultations extends SitewideSearchBase {
     // This is more simple way to display options which is sorted by label.
     // $aggregations = $this->getAggregations();
     // return $this->aggsToOptions($aggregations['type']);
-  }
-
-  /**
-   * Returns a list of nations.
-   *
-   * @return array
-   */
-  public function getNationFilterOptions() {
-    $aggregations = $this->getAggregations();
-
-    return $this->aggsToOptions($aggregations['nation']);
-  }
-
-  /**
-   * Returns a list of consultation statuses.
-   *
-   * @return array
-   */
-  public function getConsultationStatusFilterOptions() {
-    $aggregations = $this->getAggregations();
-
-    // Define human readable values.
-    $human_readable_values = [
-      1 => $this->t('Open'),
-      0 => $this->t('Closed'),
-    ];
-
-    // Get aggregated values.
-    $agg_values = array_column($aggregations['status'], 'key');
-
-    // Return aggregated values with human readable values.
-    return array_intersect_key($human_readable_values, array_combine($agg_values, $agg_values));
-  }
-
-  /**
-   * Returns a filter for bool if responses are published.
-   *
-   * @return array
-   */
-  public function getConsultationResponsesPublishedFilterOptions() {
-    $aggregations = $this->getAggregations();
-
-    // Define human readable values.
-    $human_readable_values = [
-      1 => $this->t('Responses published'),
-    ];
-
-    // Get aggregated values.
-    $agg_values = array_column($aggregations['responses_published'], 'key');
-
-    // Return aggregated values with human readable values.
-    return array_intersect_key($human_readable_values, array_combine($agg_values, $agg_values));
-  }
-
-  /**
-   * Returns a filter for year.
-   *
-   * @return array
-   */
-  public function getConsultationYearFilterOptions() {
-    $aggregations = $this->getAggregations();
-
-    // Get aggregated values.
-    $start_date_values = array_column($aggregations['start_date'], 'key_as_string');
-    $close_date_values = array_column($aggregations['close_date'], 'key_as_string');
-    $merged_values = array_unique(array_merge($start_date_values, $close_date_values));
-    sort($merged_values);
-
-    return array_combine($merged_values, $merged_values);
-
   }
 
 }

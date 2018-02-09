@@ -125,15 +125,4 @@ class NewsAlertsSearchNews extends SitewideSearchBase {
     return $this->aggregations;
   }
 
-  /**
-   * Returns a list of nations.
-   *
-   * @return array
-   */
-  public function getNationFilterOptions() {
-    $aggregations = $this->getAggregations();
-
-    return $this->aggsToOptions($aggregations['nation']);
-  }
-
 }

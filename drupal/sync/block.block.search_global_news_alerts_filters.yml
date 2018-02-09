@@ -27,6 +27,9 @@ settings:
   views_label: ''
   filters:
     type: type
+    consultation_status: consultation_status
+    consultation_responses_published: consultation_responses_published
+    consultation_year: consultation_year
     region: region
     keywords: 0
   post_route_name: ''

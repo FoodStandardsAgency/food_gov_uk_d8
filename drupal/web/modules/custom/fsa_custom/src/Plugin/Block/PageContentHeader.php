@@ -32,7 +32,7 @@ class PageContentHeader extends BlockBase {
     $parameters = ['media', 'node', 'taxonomy_term'];
     foreach ($parameters as $parameter) {
       // Skip if this was not the entity we are looking for.
-      if (($entity = $route->getParameter($parameter)) == NULL) {
+      if (($entity = $route->getParameter($parameter)) == NULL || !is_object($entity)) {
         continue;
       }
 
