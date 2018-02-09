@@ -185,7 +185,6 @@ pre {
 table {
   @mixin responsive-declaration margin-bottom, 1em, 2em;
 
-  table-layout: fixed;
   border-collapse: collapse;
   border-spacing: 0;
   width: 100% !important;
@@ -719,7 +718,7 @@ blockquote {
     }
   }
 
-  & > * {
+  & > *:not(.field__field_document__item) {
     padding-left: 3.5em;
     position: relative;
 
