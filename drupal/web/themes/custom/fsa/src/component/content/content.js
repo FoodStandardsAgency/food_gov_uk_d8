@@ -1,3 +1,4 @@
+/* global Drupal */
 import guid from '../../helper/guid'
 
 function addHeading () {
@@ -11,25 +12,26 @@ function addHeading () {
     const paragraph = document.createElement('div')
     paragraph.innerHTML = element.innerHTML
     heading.classList.add(`heading`)
+    heading.classList.add(`regional-variation__heading`)
     heading.id = id
     if (element.classList.contains('js-england')) {
       heading.classList.add(`heading--small`)
-      heading.innerHTML = Drupal.t(`England specific guidance`)
+      heading.innerHTML = Drupal.t(`England`)
     } else if (element.classList.contains('js-england-wales')) {
       heading.classList.add(`heading--small`)
-      heading.innerHTML = Drupal.t(`England and wales specific guidance`)
+      heading.innerHTML = Drupal.t(`England and wales`)
     } else if (element.classList.contains('js-england-northern-ireland')) {
       heading.classList.add(`heading--small`)
-      heading.innerHTML = Drupal.t(`England and Northern Ireland specific guidance`)
+      heading.innerHTML = Drupal.t(`England and Northern Ireland`)
     } else if (element.classList.contains('js-northern-ireland-wales')) {
       heading.classList.add(`heading--small`)
-      heading.innerHTML = Drupal.t(`Northern Ireland and wales specific guidance`)
+      heading.innerHTML = Drupal.t(`Northern Ireland and wales`)
     } else if (element.classList.contains('js-wales')) {
       heading.classList.add(`heading--small`)
-      heading.innerHTML = Drupal.t(`Wales specific guidance`)
+      heading.innerHTML = Drupal.t(`Wales`)
     } else if (element.classList.contains('js-northern-ireland')) {
       heading.classList.add(`heading--small`)
-      heading.innerHTML = Drupal.t(`Northern Ireland specific guidance`)
+      heading.innerHTML = Drupal.t(`Northern Ireland`)
     } else if (element.classList.contains('js-explanation')) {
       heading.classList.add(`heading--small`)
       heading.innerHTML = Drupal.t(`FSA Explains`)

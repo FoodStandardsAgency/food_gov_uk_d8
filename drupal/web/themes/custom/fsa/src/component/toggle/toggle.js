@@ -1,3 +1,4 @@
+/* global MutationObserver */
 import tabbable from 'tabbable'
 import setHeight from '../../helper/setHeight'
 import checkMediaQuery from '../../helper/checkMediaQuery'
