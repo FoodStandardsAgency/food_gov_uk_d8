@@ -297,6 +297,16 @@ function fsa_custom_preprocess_field(&$variables, $hook) {
 }
 
 /**
+ * Implements hook_form_alter().
+ */
+function fsa_custom_form_alter(&$form, $form_state, $form_id) {
+  // Remove preview button from all core contact message forms.
+  if (strpos($form_id, 'contact_message_') !== FALSE) {
+    $form['actions']['preview']['#access'] = FALSE;
+  }
+}
+
+/**
  * Implements hook_views_pre_view().
  */
 function fsa_custom_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
