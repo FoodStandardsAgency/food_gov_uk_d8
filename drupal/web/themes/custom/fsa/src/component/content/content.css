@@ -157,6 +157,30 @@ a {
       text-decoration: underline;
     }
   }
+
+  /* External link */
+  &.ext {
+    background-image: var(--icon-external-link-white);
+    background-position: right 0 top 50%;
+    background-position: right 0 top calc(50% - 0.15em);
+    background-size: 0.65em auto;
+    background-repeat: no-repeat;
+    padding-right: 0.8em;
+  }
+
+  span.ext,
+  span.mailto {
+    display: none;
+  }
+
+  /* Hide the extra spans when printing. */
+  @media print {
+    span.ext,
+    span.mailto {
+      display: none;
+      padding: 0;
+    }
+  }
 }
 
 img {
@@ -732,6 +756,8 @@ blockquote {
   a {
     color: var(--color-black);
     text-decoration: underline;
+    background: none;
+    padding: 0;
 
     :--not-touch &:--enter {
       color: var(--primary-color);
