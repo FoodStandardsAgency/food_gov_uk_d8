@@ -111,6 +111,7 @@
     input:not([type="submit"]),
     select {
       display: none;
+      background-image: none;
       background-color: var(--color-lighter-gray);
       box-shadow: 0 0 0 1px var(--color-light-gray);
       padding: 0.6em 2em;
