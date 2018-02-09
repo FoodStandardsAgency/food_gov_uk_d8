@@ -110,8 +110,11 @@ class RatingsHelper extends ControllerBase {
       // Not all FHRS rating values match the badge name, rewrite.
       switch ($rating) {
         case 'AwaitingInspection':
+          $rating = 'inspection';
+          break;
+
         case 'AwaitingPublication':
-          $rating = 'pending';
+          $rating = 'publication';
           break;
       }
 
