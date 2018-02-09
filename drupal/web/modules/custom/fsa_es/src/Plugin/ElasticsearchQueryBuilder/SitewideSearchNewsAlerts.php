@@ -158,10 +158,10 @@ class SitewideSearchNewsAlerts extends SitewideSearchBase {
     // At least one "should" query must be matched.
     $query['body']['query']['bool']['minimum_should_match'] = 1;
 
-    // Sort by updated if no keywords are given.
+    // Sort by created if no keywords are given.
     if (empty($values['keyword'])) {
       $query['body']['sort'][] = [
-        'updated' => [
+        'created' => [
           'order' => 'desc',
           'unmapped_type' => 'date',
         ],

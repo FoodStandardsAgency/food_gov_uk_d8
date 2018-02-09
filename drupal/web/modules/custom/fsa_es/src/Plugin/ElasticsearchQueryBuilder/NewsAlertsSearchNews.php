@@ -43,8 +43,8 @@ class NewsAlertsSearchNews extends SitewideSearchBase {
       ];
     }
     else {
-      // Sort by updated if no keywords are given.
-      $query['body']['sort'] = ['updated' => 'desc'];
+      // Sort by created if no keywords are given.
+      $query['body']['sort'] = ['created' => 'desc'];
     }
 
     // Region is only applicable to news and alerts.
