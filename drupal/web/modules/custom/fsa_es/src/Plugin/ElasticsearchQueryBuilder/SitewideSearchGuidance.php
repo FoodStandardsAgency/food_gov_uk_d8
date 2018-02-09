@@ -161,15 +161,4 @@ class SitewideSearchGuidance extends SitewideSearchBase {
     return $this->aggsToOptions($aggregations['audience']);
   }
 
-  /**
-   * Returns a list of nations.
-   *
-   * @return array
-   */
-  public function getNationFilterOptions() {
-    $aggregations = $this->getAggregations();
-
-    return $this->aggsToOptions($aggregations['nation']);
-  }
-
 }

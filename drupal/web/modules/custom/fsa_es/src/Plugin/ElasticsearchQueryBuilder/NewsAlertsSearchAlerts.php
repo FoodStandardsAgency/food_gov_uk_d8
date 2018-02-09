@@ -43,8 +43,8 @@ class NewsAlertsSearchAlerts extends SitewideSearchBase {
       ];
     }
     else {
-      // Sort by updated if no keywords are given.
-      $query['body']['sort'] = ['updated' => 'desc'];
+      // Sort by created if no keywords are given.
+      $query['body']['sort'] = ['created' => 'desc'];
     }
 
     // Add news type as a term filter.
@@ -159,17 +159,6 @@ class NewsAlertsSearchAlerts extends SitewideSearchBase {
     // This is more simple way to display options which is sorted by label.
     // $aggregations = $this->getAggregations();
     // return $this->aggsToOptions($aggregations['type']);
-  }
-
-  /**
-   * Returns a list of nations.
-   *
-   * @return array
-   */
-  public function getNationFilterOptions() {
-    $aggregations = $this->getAggregations();
-
-    return $this->aggsToOptions($aggregations['nation']);
   }
 
 }

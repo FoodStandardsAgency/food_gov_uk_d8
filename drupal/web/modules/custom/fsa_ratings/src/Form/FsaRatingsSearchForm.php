@@ -15,7 +15,7 @@ use Drupal\fsa_ratings\Controller\RatingsSearch;
 class FsaRatingsSearchForm extends FormBase {
 
   const FORM_FIELDS = [
-    'q',
+    RatingsSearch::KEYWORDS_QUERY_PARAM,
     'local_authority',
     'business_type',
     'rating_value',
@@ -89,7 +89,7 @@ class FsaRatingsSearchForm extends FormBase {
         ],
       ],
     ];
-    $form['main']['q'] = [
+    $form['main'][RatingsSearch::KEYWORDS_QUERY_PARAM] = [
       '#type' => 'textfield',
       '#title' => $this->t('Business name/or location'),
       '#default_value' => $keywords,
@@ -194,7 +194,7 @@ class FsaRatingsSearchForm extends FormBase {
     $query = [];
 
     // Read all the single values.
-    foreach (['q', 'business_type', 'local_authority'] as $p) {
+    foreach ([RatingsSearch::KEYWORDS_QUERY_PARAM, 'business_type', 'local_authority'] as $p) {
       if (!empty($form_state->getValue($p))) {
         $query[$p] = $form_state->getValue($p);
       }

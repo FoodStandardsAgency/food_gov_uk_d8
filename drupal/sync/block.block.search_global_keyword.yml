@@ -25,7 +25,7 @@ settings:
   action_url: ''
   form_method: get
   form_element:
-    name: q
+    name: keywords
     title: Search
     placeholder: ''
   form_submit_button: 0

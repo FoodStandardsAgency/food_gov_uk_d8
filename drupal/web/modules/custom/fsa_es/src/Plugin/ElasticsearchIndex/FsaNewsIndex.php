@@ -77,6 +77,9 @@ class FsaNewsIndex extends FsaIndexBase {
                   ],
                 ],
               ],
+              'created' => [
+                'type' => 'date',
+              ],
               'updated' => [
                 'type' => 'date',
               ],

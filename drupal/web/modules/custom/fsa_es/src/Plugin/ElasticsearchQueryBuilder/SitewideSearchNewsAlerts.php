@@ -83,6 +83,65 @@ class SitewideSearchNewsAlerts extends SitewideSearchBase {
         ];
       }
 
+      // Add news type as a term filter.
+      if (!empty($values['consultation_status'])) {
+        // Selected checkbox values come as strings, so "0" would mean that
+        // value of "0" is selected, while 0 would mean that it was not selected.
+        $filtered_status_values = array_filter($values['consultation_status'], function($item) {
+          return is_string($item);
+        });
+
+        $index_filter_filter[] = [
+          'terms' => [
+            'status' => array_map(function($item) {
+              return (bool) $item;
+            }, array_values($filtered_status_values)),
+          ],
+        ];
+      }
+
+      // Region is only applicable to news and alerts.
+      if (!empty($values['consultation_responses_published'])) {
+        // Selected checkbox values come as strings, so "0" would mean that
+        // value of "0" is selected, while 0 would mean that it was not selected.
+        $filtered_responses_published_values = array_filter($values['consultation_responses_published'], function($item) {
+          return is_string($item);
+        });
+
+        $index_filter_filter[] = [
+          'terms' => [
+            'responses_published' => array_map(function($item) {
+              return (bool) $item;
+            }, array_values($filtered_responses_published_values)),
+          ],
+        ];
+      }
+
+      // Apply year filter.
+      if (!empty($values['consultation_year'])) {
+        $year = reset($values['consultation_year']);
+        // Range filtering should be performed on two date fields.
+        $year_bool_query = [];
+
+        foreach (['consultation_start_date', 'consultation_close_date'] as $field) {
+          $year_bool_query['bool']['should'][] = [
+            'range' => [
+              $field => [
+                'gte' => $year . '||/y',
+                'lte' => $year . '||/y',
+                'format' => 'yyyy',
+                'time_zone' => DATETIME_STORAGE_TIMEZONE,
+              ],
+            ],
+          ];
+        }
+
+        // At least one match in starting and closing date should be found.
+        $year_bool_query['bool']['minimum_should_match'] = 1;
+
+        $index_must_filter[] = $year_bool_query;
+      }
+
       // Create a bool query.
       $bool_query = [
         'must' => $index_must_filter,
@@ -99,10 +158,10 @@ class SitewideSearchNewsAlerts extends SitewideSearchBase {
     // At least one "should" query must be matched.
     $query['body']['query']['bool']['minimum_should_match'] = 1;
 
-    // Sort by updated if no keywords are given.
+    // Sort by created if no keywords are given.
     if (empty($values['keyword'])) {
       $query['body']['sort'][] = [
-        'updated' => [
+        'created' => [
           'order' => 'desc',
           'unmapped_type' => 'date',
         ],
@@ -193,6 +252,27 @@ class SitewideSearchNewsAlerts extends SitewideSearchBase {
                 'size' => 10000,
               ],
             ],
+            'consultation_status' => [
+              'terms' => [
+                'field' => 'status',
+                'order' => ['_term' => 'asc'],
+                'size' => 10000,
+              ],
+            ],
+            'consultation_start_date' => [
+              'date_histogram' => [
+                'field' => 'consultation_start_date',
+                'interval' => 'year',
+                'format' => 'yyy',
+              ],
+            ],
+            'consultation_close_date' => [
+              'date_histogram' => [
+                'field' => 'consultation_close_date',
+                'interval' => 'year',
+                'format' => 'yyy',
+              ],
+            ],
             'nation' => [
               'terms' => [
                 'field' => 'nation.label.keyword',
@@ -210,6 +290,9 @@ class SitewideSearchNewsAlerts extends SitewideSearchBase {
       // Build the response.
       $this->aggregations = [
         'type' => $result['aggregations']['type']['buckets'],
+        'consultation_status' => $result['aggregations']['consultation_status']['buckets'],
+        'consultation_start_date' => $result['aggregations']['consultation_start_date']['buckets'],
+        'consultation_close_date' => $result['aggregations']['consultation_close_date']['buckets'],
         'nation' => $result['aggregations']['nation']['buckets'],
       ];
     }
@@ -240,17 +323,6 @@ class SitewideSearchNewsAlerts extends SitewideSearchBase {
     // This is more simple way to display options which is sorted by label.
     // $aggregations = $this->getAggregations();
     // return $this->aggsToOptions($aggregations['type']);
-  }
-
-  /**
-   * Returns a list of nations.
-   *
-   * @return array
-   */
-  public function getNationFilterOptions() {
-    $aggregations = $this->getAggregations();
-
-    return $this->aggsToOptions($aggregations['nation']);
   }
 
 }

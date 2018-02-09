@@ -43,8 +43,8 @@ class NewsAlertsSearchNews extends SitewideSearchBase {
       ];
     }
     else {
-      // Sort by updated if no keywords are given.
-      $query['body']['sort'] = ['updated' => 'desc'];
+      // Sort by created if no keywords are given.
+      $query['body']['sort'] = ['created' => 'desc'];
     }
 
     // Region is only applicable to news and alerts.
@@ -123,17 +123,6 @@ class NewsAlertsSearchNews extends SitewideSearchBase {
     }
 
     return $this->aggregations;
-  }
-
-  /**
-   * Returns a list of nations.
-   *
-   * @return array
-   */
-  public function getNationFilterOptions() {
-    $aggregations = $this->getAggregations();
-
-    return $this->aggsToOptions($aggregations['nation']);
   }
 
 }

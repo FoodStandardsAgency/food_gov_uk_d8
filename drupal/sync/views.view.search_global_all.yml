@@ -198,17 +198,16 @@ display:
             description: ''
             use_operator: false
             operator: keyword_op
-            identifier: q
+            identifier: keywords
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
-              author: '0'
               editor: '0'
-              fsa_admin: '0'
               administrator: '0'
+              author: '0'
           is_grouped: false
           group_info:
             label: ''

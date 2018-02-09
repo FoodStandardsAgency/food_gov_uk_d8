@@ -22,6 +22,9 @@ class RatingsSearch extends ControllerBase {
   // Number of items to "Load more".
   const ADDITIONAL_LOAD_COUNT = 10;
 
+  // Name of the query parameter for keywords.
+  const KEYWORDS_QUERY_PARAM = 'keywords';
+
   /**
    * {@inheritdoc}
    *
@@ -62,7 +65,7 @@ class RatingsSearch extends ControllerBase {
     $params = [];
 
     $params['language'] = \Drupal::languageManager()->getCurrentLanguage();
-    $params['keywords'] = \Drupal::request()->query->get('q');
+    $params['keywords'] = \Drupal::request()->query->get(self::KEYWORDS_QUERY_PARAM);
 
     $filters = [];
     $filter_param_names = [
@@ -96,7 +99,7 @@ class RatingsSearch extends ControllerBase {
     $available_filters = $this->searchService->categories($language);
 
     // User provided search input.
-    $keywords = \Drupal::request()->query->get('q');
+    $keywords = \Drupal::request()->query->get(self::KEYWORDS_QUERY_PARAM);
 
     // User provided max item count. Hard-limit is 1000. Default is in constant.
     $max_items = \Drupal::request()->query->get('max');
@@ -191,21 +194,29 @@ class RatingsSearch extends ControllerBase {
     // Append the pager.
     $render[] = ['#type' => 'pager'];
 
-    $pagination = ['results' => '999', 'results_page' => '1-999'];
+    // Generate pages information.
+    if ($pager_info) {
+      $page_number = round((($to / count($items)))) - 1;
+      $number_of_pages = round(($hits / count($items))) - 1;
+      $pages = $page_number . '-' . $number_of_pages;
+    }
+    else {
+      $pages = NULL;
+    }
 
     // Attach data layer library and settings to page.
     $render[] = [
       '#attached' => [
         'library' => [
-          'fsa_ratings/data_layer',
+          'fsa_gtm/data_layer.hygiene_ratings',
         ],
         'drupalSettings' => [
           'fsa_ratings' => [
             'data_layer' => [
               'keywords' => $keywords,
               'filters' => $filters,
-              'pager_info' => $pager_info ? $showing_items : "0-0",
-              'hits_total' => $hits_total,
+              'pages' => $pages,
+              'hits' => $hits_total,
             ],
           ],
         ],
