@@ -79,6 +79,9 @@ class FsaAlertIndex extends FsaIndexBase {
                 ],
               ],
             ],
+            'created' => [
+              'type' => 'date',
+            ],
             'updated' => [
               'type' => 'date',
             ],
