@@ -1,10 +1,7 @@
-// Import HTML
-import html from './profile.html';
-
-// Import Styles
-import css from './profile.css';
+import html from './profile.html'
+import css from './profile.css'
 
 module.exports = {
   html,
-  css,
-};
+  css
+}

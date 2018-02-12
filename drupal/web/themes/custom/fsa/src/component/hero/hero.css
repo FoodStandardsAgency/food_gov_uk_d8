@@ -1,5 +1,5 @@
-@import "../../core/helper";
-@import "../../core/custom-property";
+@import "../../helper/helper";
+@import "../../helper/custom-property";
 
 .hero-wrapper__content {
   padding-left: 0;
@@ -73,6 +73,7 @@
   .theme--search & {
     @mixin responsive-declaration padding-right, 1em, 4em;
     @mixin responsive-declaration padding-left, 1em, 4em;
+
     max-width: var(--content-max-width);
     padding-top: 2em;
     padding-bottom: 2em;
@@ -87,6 +88,7 @@
   .theme--term & {
     @mixin responsive-declaration padding-right, 1em, 4em;
     @mixin responsive-declaration padding-left, 1em, 4em;
+
     max-width: var(--content-max-width);
     padding-top: 5.5em;
     padding-bottom: 2em;
@@ -100,14 +102,15 @@
 
   a {
     color: var(--color-white);
-  
+
     @media print {
       background-color: var(--color-black);
     }
   }
 
   p {
-    @mixin responsive-declaration font-size, 1.0em, 1.3em;
+    @mixin responsive-declaration font-size, 1em, 1.3em;
+
     padding-right: 1em;
     padding-left: 1em;
     margin-top: 0;
@@ -148,9 +151,10 @@
 .hero__title h1,
 .hero__heading,
 .hero__content h2 {
+  @mixin responsive-declaration font-size, 2.2em, 3.9em;
+
   position: relative;
   display: inline-block;
-  @mixin responsive-declaration font-size, 2.2em, 3.9em;
   color: var(--color-white);
   text-align: center;
   margin-top: 0;
@@ -178,9 +182,10 @@
   }
 
   .theme--term & {
-    color: var(--dark-primary-color);
-    @mixin responsive-declaration font-size, 1.8em, 2.0em;
+    @mixin responsive-declaration font-size, 1.8em, 2em;
     @mixin responsive-declaration line-height, 1.2, 1.1;
+
+    color: var(--dark-primary-color);
     margin-bottom: 0;
   }
 }
@@ -214,6 +219,7 @@
 
   &.hero__background--pattern {
     background-image: url('/themes/custom/fsa/src/img/background/pattern.svg');
+
     /* background-image: url('/themes/custom/fsa/dist/sprite.svg#pattern-usage'); */
     background-size: 1024px 426.6666666px;
     background-position: 50% 50%;
@@ -223,7 +229,7 @@
     @media (--breakpoint-md) {
       background-size: 1440px 600px;
     }
-  
+
     @media (--breakpoint-lg) {
       background-size: 1920px 800px;
     }
@@ -231,14 +237,14 @@
     .theme--term & {
       display: none;
     }
-    
+
     .svg {
       display: none;
       width: 100%;
       height: 100%;
       overflow: hidden;
       opacity: 0.1;
-  
+
       svg {
         width: 100%;
         height: auto;
@@ -247,7 +253,7 @@
   }
 }
 
-/*Hero content*/
+/* Hero content */
 .hero__content {
   text-align: center;
   width: 100%;
@@ -255,15 +261,16 @@
 
 /* Hero cta */
 .hero__cta {
-  text-align: center;
   @mixin responsive-declaration padding-top, 1em, 2em;
+
+  text-align: center;
 
   .button {
     display: inline-block;
     background-color: var(--color-white);
     color: var(--dark-primary-color);
     transition: box-shadow var(--transition-enter-fast);
-  
+
     :--not-touch &:--enter {
       background-color: var(--color-white);
       color: var(--dark-primary-color);
@@ -274,14 +281,15 @@
 
 /* Hero secondary-navigation */
 .hero__secondary-navigation {
-  width: 100%;
-  flex: 1 1 100%;
   @mixin responsive-declaration padding-right, 1em, 4em;
   @mixin responsive-declaration padding-left, 1em, 4em;
+
+  width: 100%;
+  flex: 1 1 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+
   .hero:not(.hero--with-content) & {
     border-bottom: 1px solid var(--color-light-gray);
   }
@@ -313,7 +321,7 @@
     justify-content: flex-start;
     align-items: center;
     flex-flow: row wrap;
-  } 
+  }
 
   @media (--breakpoint-lg) {
     min-height: 3.5em;
@@ -322,17 +330,18 @@
   .hero.hero--with-content & {
     @media (--breakpoint-md) {
       border-bottom: 0;
-    } 
+    }
   }
 }
 
 .breadcrumb__item {
+  @mixin responsive-declaration margin, 0.5em, 0;
+
   position: relative;
   font-weight: 400;
   text-align: left;
   padding-right: 1.5em;
   color: var(--color-black);
-  @mixin responsive-declaration margin, 0.5em, 0em;
 
   @media (--breakpoint-sm) {
     font-size: 0.8em;
@@ -356,7 +365,7 @@
   }
 
   &:not(:last-child):after {
-    content: "";
+    content: '';
     position: absolute;
     top: 0.3em;
     right: 0.55em;
@@ -403,7 +412,7 @@
   @media (--breakpoint-md) {
     margin: 0;
   }
-  
+
   a {
     position: relative;
     color: var(--color-white);
@@ -435,16 +444,13 @@
         background-color: var(--dark-primary-color);
       }
     }
-  
+
     @media (--breakpoint-lg) {
       font-size: 0.9em;
     }
-    
+
     :--not-touch &:--enter {
       text-decoration: underline;
     }
   }
 }
-
-
-

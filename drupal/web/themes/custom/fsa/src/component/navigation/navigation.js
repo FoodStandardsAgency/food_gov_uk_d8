@@ -1,26 +1,22 @@
-import nextByClass from '../../core/helper/nextByClass';
-import debounce from '../../core/helper/debounce';
-import checkMediaQuery from '../../core/helper/checkMediaQuery';
-import breakpoints from '../../core/helper/breakpoints';
-import hasClass from '../../core/helper/hasClass';
-import closestParent from '../../core/helper/closestParent';
-import { setStateOff, setStateOn, removeState, toggleState } from '../../core/helper/toggleHelpers';
-import inert from 'wicg-inert';
+import debounce from '../../helper/debounce'
+import checkMediaQuery from '../../helper/checkMediaQuery'
+import breakpoints from '../../helper/breakpoints'
+import closestParent from '../../helper/closestParent'
+import { setStateOff, setStateOn, removeState, toggleState } from '../../helper/toggleHelpers'
 
-function navigation() {
-
+function navigation () {
   const settings = {
     hoverClass: 'is-open',
     menuSelector: 'ul.navigation__menu',
     groupSelector: 'header.navigation__header, li.navigation__item.navigation__item--level-2',
     listItemSelector: 'header.navigation__header, li.navigation__item',
     menuItemActionSelector: '.navigation__item a, .navigation__item button'
-  };
+  }
 
   const KEYCODE = {
     ENTER: 13,
     ESC: 27,
-    SPACE: 32,
+    SPACE: 32
   }
 
   const keyboard = {
@@ -39,8 +35,8 @@ function navigation() {
     RIGHT: 39,
     SPACE: 32,
     TAB: 9,
-    UP: 38,
-  };
+    UP: 38
+  }
 
   const queryParents = (elem, selector) => {
     // Element.matches() polyfill

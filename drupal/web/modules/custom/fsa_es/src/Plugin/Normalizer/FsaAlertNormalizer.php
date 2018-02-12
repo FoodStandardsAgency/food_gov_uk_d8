@@ -59,8 +59,11 @@ class FsaAlertNormalizer extends NormalizerBase {
   public function normalize($object, $format = NULL, array $context = []) {
     $parent_data = parent::normalize($object, $format, $context);
 
-    // Store either date updated or date changed.
-    $date_changed = $this->dateFormatter->format($object->get('changed')->value, 'custom', DATETIME_DATETIME_STORAGE_FORMAT, DATETIME_STORAGE_TIMEZONE);
+    // Get dates.
+    $entity_dates = [];
+    foreach (['created', 'changed'] as $date_field) {
+      $entity_dates[$date_field] = $this->dateFormatter->format($object->get($date_field)->value, 'custom', DATETIME_DATETIME_STORAGE_FORMAT, DATETIME_STORAGE_TIMEZONE);
+    }
 
     // Get alert type field.
     $type_field = $object->get('field_alert_type');
@@ -79,7 +82,8 @@ class FsaAlertNormalizer extends NormalizerBase {
           'label' => $item->label(),
         ];
       }, $object->get('field_nation')->referencedEntities()),
-      'updated' => $date_changed,
+      'created' => $entity_dates['created'],
+      'updated' => $entity_dates['changed'],
     ] + $parent_data;
 
     return $data;

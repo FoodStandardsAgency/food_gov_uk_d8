@@ -1,8 +1,8 @@
 default_challenge: recaptcha/reCAPTCHA
-description: 'This is to test you are a human visitor in order to prevent automated spam submissions.'
+description: ''
 administration_mode: false
 allow_on_admin_pages: false
-add_captcha_description: true
+add_captcha_description: false
 default_validation: 1
 persistence: 1
 enable_stats: false

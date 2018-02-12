@@ -116,6 +116,7 @@
     external_smtp_sasl_password_maps: 'hash:/etc/postfix/sasl_passwd'
     external_smtp_tls_security_level: 'encrypt'
     external_smtp_relayhost: '[smtp.office365.com]:587'
+    external_smtp_sender_dependent_auth: true
 
     ## Nfs-client ##
 

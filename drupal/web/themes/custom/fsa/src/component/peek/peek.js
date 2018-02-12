@@ -1,5 +1,5 @@
-import InViewElement from '../../core/helper/inView';
-import debounce from '../../core/helper/debounce';
+import InViewElement from '../../helper/inView';
+import debounce from '../../helper/debounce';
 
 function peek() {
   const peekElements = [...document.querySelectorAll('.js-peek')];

@@ -1,6 +1,5 @@
-@import "core/helper.css";
-@import "core/custom-property.css";
-@import "core/base.css";
+@import "helper/helper.css";
+@import "helper/custom-property.css";
 
 /*Component*/
 @import "component/general/table.css";
@@ -40,3 +39,80 @@
 @import "component/search/search.css";
 @import "component/topics/topics.css";
 @import "component/toc/toc.css";
+
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-family-content);
+  font-size: var(--font-size-base);
+  letter-spacing: 0.015em;
+  @mixin responsive-declaration font-size, 100%, 112.5%;
+  @mixin responsive-declaration line-height, 1.7, 1.6;
+}
+
+html.is-fixed {
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  @media (--breakpoint-sm) {
+    position: static;
+    right: auto;
+    left: auto;
+    top: auto;
+    bottom: auto;
+  }
+}
+
+body {
+  margin: 0;
+
+  @media (--breakpoint-md) {
+    flex-flow: row nowrap;
+    align-items: center;
+  }
+
+  &:after {
+    content: "xs";
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px);
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+    word-wrap: normal;
+
+    @media (--breakpoint-sm) {
+      content: "sm";
+    }
+  
+    @media (--breakpoint-md) {
+      content: "md";
+    }
+  }
+}
+
+.site {
+  transition: transform var(--transition-enter);
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  min-height: 100vh;
+  
+  @media (--breakpoint-sm) {
+    overflow: hidden;
+    transition: none;
+  }
+}
+
+.site.is-moved {
+  transform: translate(20%);
+
+  @media (--breakpoint-sm) {
+    transform: none;
+  }
+}

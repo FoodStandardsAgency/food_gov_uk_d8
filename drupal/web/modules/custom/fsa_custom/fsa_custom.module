@@ -102,6 +102,44 @@ function fsa_custom_preprocess_page_title(&$variables) {
     // Init the custom title prefix.
     $title_prefix = [];
 
+    if ($entity->hasField('field_nation')) {
+      $nations = $entity->get('field_nation');
+      if (isset($nations[0])) {
+        // Add regional variations label with same classes as would be added via
+        // WYSIWYG editor.
+        $class = 'regional-variation';
+        $nation_label = '';
+        if (!isset($nations[1])) {
+          // If only one nation selected.
+          $nation = $typemanager->getStorage('taxonomy_term')->load($nations[0]->getValue()['target_id'])->getName();
+          $class .= ' regional-variation--' . strtolower(Html::cleanCssIdentifier($nation));
+          $nation_label = t('@nation specific', ['@nation' => $nation]);
+        }
+        elseif (isset($nations[1]) && !isset($nations[2])) {
+          // If two nations selected.
+          $class .= ' regional-variation--multi-regional';
+          $nation_label = t(
+            '@nation_1 and @nation_2 specific',
+            [
+              '@nation_1' => $typemanager->getStorage('taxonomy_term')->load($nations[0]->getValue()['target_id'])->getName(),
+              '@nation_2' => $typemanager->getStorage('taxonomy_term')->load($nations[1]->getValue()['target_id'])->getName(),
+            ]
+          );
+        }
+
+        if ($nation_label != '') {
+          $title_prefix[] = [
+            '#theme' => 'fsa_label',
+            '#attributes' => [
+              'class' => $class,
+            ],
+            '#label' => $nation_label,
+          ];
+        }
+
+      }
+    }
+
     // Define content types that should send the label above title.
     $content_type_label = [
       'news',
@@ -142,44 +180,6 @@ function fsa_custom_preprocess_page_title(&$variables) {
         ],
         '#label' => $label,
       ];
-    }
-
-    if ($entity->hasField('field_nation')) {
-      $nations = $entity->get('field_nation');
-      if (isset($nations[0])) {
-        // Add regional variations label with same classes as would be added via
-        // WYSIWYG editor.
-        $class = 'regional-variation';
-        $nation_label = '';
-        if (!isset($nations[1])) {
-          // If only one nation selected.
-          $nation = $typemanager->getStorage('taxonomy_term')->load($nations[0]->getValue()['target_id'])->getName();
-          $class .= ' regional-variation--' . strtolower(Html::cleanCssIdentifier($nation));
-          $nation_label = t('@nation specific', ['@nation' => $nation]);
-        }
-        elseif (isset($nations[1]) && !isset($nations[2])) {
-          // If two nations selected.
-          $class .= ' regional-variation--multi-regional';
-          $nation_label = t(
-            '@nation_1 and @nation_2 specific',
-            [
-              '@nation_1' => $typemanager->getStorage('taxonomy_term')->load($nations[0]->getValue()['target_id'])->getName(),
-              '@nation_2' => $typemanager->getStorage('taxonomy_term')->load($nations[1]->getValue()['target_id'])->getName(),
-            ]
-          );
-        }
-
-        if ($nation_label != '') {
-          $title_prefix[] = [
-            '#theme' => 'fsa_label',
-            '#attributes' => [
-              'class' => $class,
-            ],
-            '#label' => $nation_label,
-          ];
-        }
-
-      }
     }
 
     // Inject additional title prefix(es) if there was anything to add.
@@ -293,6 +293,16 @@ function fsa_custom_preprocess_field(&$variables, $hook) {
         ]);
       }
     }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function fsa_custom_form_alter(&$form, $form_state, $form_id) {
+  // Remove preview button from all core contact message forms.
+  if (strpos($form_id, 'contact_message_') !== FALSE) {
+    $form['actions']['preview']['#access'] = FALSE;
   }
 }
 
