@@ -42,6 +42,19 @@ class FSAContactUsHandler extends WebformHandlerBase {
 
       // Prepare the values and store them.
       $fields = $webform_submission->toArray(TRUE);
+
+      // Load the webform with element (custom) properties to check which may
+      // be set as data and append to $personal_data_field_names array.
+      $webform = \Drupal::entityTypeManager()->getStorage('webform')->load($fields['webform_id']);
+      foreach ($webform->getElementsDecodedAndFlattened() as $e_key => $elem) {
+        if (isset($elem['#personal_data']) && $elem['#personal_data'] === TRUE) {
+          $personal_data_field_names[] = $e_key;
+
+          // If we want to anonymise already here?
+//          $webform_submission->setData([$e_key => '']);
+        }
+      }
+
       foreach ($fields['data'] as $field_name => $field_value) {
         // Don't process the value when the field name is defined in the
         // excluded fields' list.
