@@ -204,9 +204,7 @@ handlers:
         fsa_establishment_la_name: fsa_establishment_la_name
         fsa_establishment_postal_code: fsa_establishment_postal_code
         fsa_establishment_la_email: fsa_establishment_la_email
-        name: name
-        email: email
-        telephone: telephone
+        manually_sent: manually_sent
       ignore_access: false
       exclude_empty: true
       html: true
