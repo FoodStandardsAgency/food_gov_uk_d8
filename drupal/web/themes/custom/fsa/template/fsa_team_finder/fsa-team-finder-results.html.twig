@@ -1,0 +1,19 @@
+<div{{ attributes }}>
+  {% if message %}
+    <p>{{ message }}</p>
+  {% endif %}
+  <div class="listing">
+    {% if (site or mail) %}
+      <article class="item">
+        {% if site %}
+          <h4 class="item__heading">{{ site }}</h4>
+        {% endif %}
+        {% if mail %}
+          <div class="item__content">
+            {{ 'Email address'|t }} - {{ mail }}
+          </div>
+        {% endif %}
+      </article>
+    {% endif %}
+  </div>
+</div>
