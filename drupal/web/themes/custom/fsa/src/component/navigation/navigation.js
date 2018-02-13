@@ -1,3 +1,4 @@
+/* global Element */
 import debounce from '../../helper/debounce'
 import checkMediaQuery from '../../helper/checkMediaQuery'
 import breakpoints from '../../helper/breakpoints'
@@ -430,7 +431,6 @@ function navigation () {
 
         element.addEventListener("focus", function( e ) {
           const content = element.nextElementSibling;
-          console.log('asd');
 
           firstLevelLinkArray.forEach((element) => {
             // removeState({element: element, type: 'button'}, 'is-open');

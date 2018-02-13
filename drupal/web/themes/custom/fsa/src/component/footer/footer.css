@@ -71,7 +71,6 @@
 
   @media (--breakpoint-md) {
     flex-flow: row nowrap;
-    align-items: flex-start;
   }
 }
 
@@ -112,6 +111,7 @@
 
     @media (--breakpoint-md) {
       text-align: left;
+      max-width: 34em;
     }
 
     & > li {
