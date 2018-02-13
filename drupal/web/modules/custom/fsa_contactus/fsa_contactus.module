@@ -25,8 +25,10 @@ function fsa_contactus_webform_element_alter(array &$element, FormStateInterface
     }
   }
 
-  // Mark optional elements as suggested by GDS.
-  if ((!isset($element['#required']) && isset($element['#title'])) && !isset($element['#states']['required']) && $element['#type'] != 'fieldset') {
+  // Mark optional elements as suggested by GDS, do not apply on fieldsets,
+  // pages etc.
+  $ignored_elements = ['fieldset', 'webform_wizard_page'];
+  if ((!isset($element['#required']) && isset($element['#title'])) && !isset($element['#states']['required']) && !in_array($element['#type'], $ignored_elements)) {
     $element['#title'] = $element['#title'] . ' <span class="optional">(' . t('optional') . ')</span>';
   }
 
