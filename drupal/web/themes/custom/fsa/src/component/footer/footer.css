@@ -45,11 +45,6 @@
   background-color: var(--color-light-gray);
 }
 
-.footer-top-wrapper__content {
-  max-width: var(--max-width-medium);
-  margin: 0 auto;
-}
-
 .footer-wrapper {
   position: relative;
   z-index: var(--z-top);

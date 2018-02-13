@@ -6,7 +6,7 @@
  * @see template_preprocess_node()
  */
 #}
-<a href="{{ url }}" rel="bookmark" {% if content.field_liftup_summary %}{{ attributes.addClass(['promo', 'promo--inline-content', 'promo--with-summary']) }}{% else %}{{ attributes.addClass(['promo', 'promo--inline-content']) }}{% endif %}>
+<a href="{{ url }}" rel="bookmark" {% if content.field_liftup_summary %}class="promo promo--inline-content promo--with-summary"{% else %}class="promo promo--inline-content"{% endif %}>
   {% if content.group_teaser_image %}
     <div class="promo__icon">
       {{ content.group_teaser_image }}
@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <div class="promo__read-more">
+  <div class="promo__read-more" aria-hidden="true">
     <div class="svg">
       <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#contact-arrow-icon"></use></svg>
     </div>
