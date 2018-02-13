@@ -60,6 +60,16 @@
         user: nginx
       tags: ['cron']
       when: ansible_eth0.ipv4.address == groups['prod-front'][0] and drupal_web_root is defined
+    - name: "Fetch FHRS establishments from the API"
+      cron:
+        name: "Run Migrate API task twice a day to fetch FHRS establishment updates from the API"
+        minute: "0"
+        hour: "23,7"
+        job: "/usr/lib/composer/vendor/bin/drush --root={{ drupal_web_root }} mi --tag=establishments"
+        state: "present"
+        user: nginx
+      tags: ['cron']
+      when: ansible_eth0.ipv4.address == groups['prod-front'][0] and drupal_web_root is defined
 
   vars:
 
