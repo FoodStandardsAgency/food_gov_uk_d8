@@ -84,7 +84,7 @@ settings:
   draft_loaded_message: ''
   confirmation_type: inline
   confirmation_title: ''
-  confirmation_message: "<h2>Report complete</h2>\r\n\r\n<p>Thank you for your report, which will be forwarded to: <strong>[webform_submission:values:fsa_establishment_la_name:value] Council</strong>.</p>\r\n\r\n<p>If you need to contact [webform_submission:values:fsa_establishment_la_name:value] Council about your report, you can do so at: <a href=\"mailto:[webform_submission:values:fsa_establishment_la_email:value]\">[webform_submission:values:fsa_establishment_la_email:value]</a></p>\r\n\r\n<p>A confirmation email has been sent to: <a href=\"mailto:[webform_submission:values:email:value]\">[webform_submission:values:email:value]</a>.</p>"
+  confirmation_message: "<h2>Report complete</h2>\r\n\r\n<p>Thank you for your report, which will be forwarded to: <strong>[webform_submission:values:fsa_establishment_la_name:value] Council</strong>.</p>\r\n\r\n<p>If you need to contact [webform_submission:values:fsa_establishment_la_name:value] Council about your report, you can do so at: <a href=\"mailto:[webform_submission:values:fsa_establishment_la_email:value]\">[webform_submission:values:fsa_establishment_la_email:value]</a></p>\r\n\r\n<p>A confirmation email was sent to your inbox.</p>"
   confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: false
@@ -213,3 +213,23 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
+  remove_personal_data:
+    id: action
+    label: 'Remove personal data'
+    handler_id: remove_personal_data
+    status: true
+    conditions:
+      disabled:
+        ':input[name="fsa_establishment_la_email"]':
+          empty: true
+    weight: 0
+    settings:
+      states:
+        - completed
+        - updated
+      notes: 'Personal data was removed automatically from the submission'
+      sticky: null
+      data: "name: ''\r\nemail: ''\r\ntelephone: ''"
+      message: ''
+      message_type: status
+      debug: false

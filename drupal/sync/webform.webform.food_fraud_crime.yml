@@ -79,7 +79,7 @@ settings:
   draft_loaded_message: ''
   confirmation_type: inline
   confirmation_title: ''
-  confirmation_message: "<h2>Report complete</h2>\r\n\r\n<p>Thank you for your report, which will be forwarded to the <strong>FSA&#39;s National Food Crime Unit (NFCU)</strong>.</p>\r\nIf you need to contact the Food Crime Unit about your report, please email: <a href=\"mailto:foodcrime@foodstandards.gsi.gov.uk\">foodcrime@foodstandards.gsi.gov.uk</a>, or call: <strong>0207 276 8787</strong>.\r\n\r\n<p>A confirmation email has been sent to: <a href=\"mailto:[webform_submission:values:email:value]\">[webform_submission:values:email:value]</a>.</p>"
+  confirmation_message: "<h2>Report complete</h2>\r\n\r\n<p>Thank you for your report, which will be forwarded to the <strong>FSA&#39;s National Food Crime Unit (NFCU)</strong>.</p>\r\nIf you need to contact the Food Crime Unit about your report, please email: <a href=\"mailto:foodcrime@foodstandards.gsi.gov.uk\">foodcrime@foodstandards.gsi.gov.uk</a>, or call: <strong>0207 276 8787</strong>.\r\n\r\n<p>A confirmation email has been sent to your inbox.</p>"
   confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: false
@@ -218,3 +218,20 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
+  remove_personal_data:
+    id: action
+    label: 'Remove personal data'
+    handler_id: remove_personal_data
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+        - updated
+      notes: 'Personal data has was removed automatically.'
+      sticky: null
+      data: "name: ''\r\nemail: ''\r\ntelephone: ''"
+      message: ''
+      message_type: status
+      debug: false
