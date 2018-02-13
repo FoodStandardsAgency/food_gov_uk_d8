@@ -15,6 +15,7 @@ source:
     x-api-version: '2'
     accept-language: cy-GB
   item_selector: establishments
+  track_changes: true
   fields:
     -
       name: FHRSID
