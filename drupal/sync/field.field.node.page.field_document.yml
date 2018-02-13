@@ -10,7 +10,7 @@ id: node.page.field_document
 field_name: field_document
 entity_type: node
 bundle: page
-label: Document
+label: Resources
 description: 'Create a list of downloadable attachments at the bottom of this page by referencing to items in document library.'
 required: false
 translatable: true
