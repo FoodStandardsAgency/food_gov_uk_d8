@@ -122,7 +122,7 @@ function fsa_ratings_theme() {
         'rating_badge_title' => t('Display this rating on your website'),
         'rating_badge_copy' => t('You can display this rating on your website.'),
         'rating_badge_cta' => NULL,
-        'ratingvalue_class' => NULL,
+        'ratingvalue_id' => NULL,
         'copy_of_report_title' => t('Do you want to get a copy of the report?'),
         'copy_of_report_copy' => t('If you wish to see the food safety officer’s report on which this rating is based, you can request this from the local authority that carried out the inspection. You can do this by sending an email to the address below. The local authority will consider your request and will usually send you a copy of the report. In some cases, the local authority may decide that they cannot do so but will let you know this and explain why.'),
       ],
