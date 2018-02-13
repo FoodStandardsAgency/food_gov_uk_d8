@@ -24,6 +24,7 @@ class EstablishmentApiUrl extends Url {
   public function __construct(array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration) {
 
     $filters = [];
+    $start_at_page = 1;
     $process = $migration->getProcess();
     if ($process['langcode'][0]['default_value'] == 'cy') {
       // For welsh language migration limit establishments to only those located
@@ -33,10 +34,15 @@ class EstablishmentApiUrl extends Url {
     }
     else {
       $count = FhrsApiController::totalCount();
+
+      // Vary with the start at page offset for english import as defined in
+      // Drupal\fsa_ratings_import\EventSubscriber\FsaRatingsImportMigrateSubscriber.
+      if (\Drupal::state()->get('fsa_rating_api_offset')) {
+        $start_at_page = \Drupal::state()->get('fsa_rating_api_offset');
+      }
     }
 
     $page_count = $count / self::RATINGS_API_MAX_PAGE_SIZE;
-    $start_at_page = 1;
     $page_size = self::RATINGS_API_MAX_PAGE_SIZE;
 
     $import_mode = \Drupal::config('fsa_ratings_import')->get('import_mode');
