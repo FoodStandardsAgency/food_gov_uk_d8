@@ -34,10 +34,14 @@ function addHeading () {
       heading.classList.add(`heading--small`)
       heading.innerHTML = Drupal.t(`Northern Ireland`)
     } else if (element.classList.contains('js-explanation')) {
+      element.setAttribute('role', 'complementary')
       heading.classList.add(`heading--small`)
       heading.innerHTML = Drupal.t(`FSA Explains`)
+      heading.classList.remove(`regional-variation__heading`)
       heading.classList.add(`explanation__title`)
       paragraph.classList.add(`important`)
+      paragraph.classList.remove(`regional-variation__content`)
+      paragraph.classList.add(`explanation__content`)
     }
 
     element.innerHTML = ``

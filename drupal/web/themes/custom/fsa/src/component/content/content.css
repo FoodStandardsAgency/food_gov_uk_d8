@@ -399,14 +399,24 @@ blockquote {
 .explanation {
   @mixin responsive-declaration margin-top, 1em, 2em;
   @mixin responsive-declaration margin-bottom, 1em, 2em;
+  @mixin responsive-declaration padding, 1em, 2em;
 
   position: relative;
+  background-color: var(--color-lighter-gray);
+  border: 1px solid var(--color-light-gray);
+  border-top: 4px solid var(--color-green);
 }
 
 .explanation__title {
   @mixin responsive-declaration padding-right, 1rem, 2rem;
   @mixin responsive-declaration padding-left, 1rem, 2rem;
 
+  margin-top: -1em !important;
+  margin-top: calc(-1em - 4px) !important;
+  margin-left: -1em !important;
+  margin-left: calc(-1em - 1px) !important;
+  margin-right: -1em !important;
+  margin-right: calc(-1em - 1px) !important;
   background-color: var(--primary-color);
   border-bottom: 4px solid var(--color-green);
   color: var(--color-white);
@@ -415,6 +425,50 @@ blockquote {
   font-weight: 500;
   text-transform: uppercase;
   margin-bottom: 0;
+
+  @media (--breakpoint-xs) {
+    margin-top: -1.25em !important;
+    margin-top: calc(-1.25em - 4px) !important;
+    margin-left: -1.25em !important;
+    margin-left: calc(-1.25em - 1px) !important;
+    margin-right: -1.25em !important;
+    margin-right: calc(-1.25em - 1px) !important;
+  }
+
+  @media (--breakpoint-sm) {
+    margin-top: -1.5em !important;
+    margin-top: calc(-1.5em - 4px) !important;
+    margin-left: -1.5em !important;
+    margin-left: calc(-1.5em - 1px) !important;
+    margin-right: -1.5em !important;
+    margin-right: calc(-1.5em - 1px) !important;
+  }
+
+  @media (--breakpoint-md) {
+    margin-top: -1.75em !important;
+    margin-top: calc(-1.75em - 4px) !important;
+    margin-left: -1.75em !important;
+    margin-left: calc(-1.75em - 1px) !important;
+    margin-right: -1.75em !important;
+    margin-right: calc(-1.75em - 1px) !important;
+  }
+
+  @media (--breakpoint-lg) {
+    margin-top: -2em !important;
+    margin-top: calc(-2em - 4px) !important;
+    margin-left: -2 !important;
+    margin-left: calc(-2em - 1px) !important;
+    margin-right: -2em !important;
+    margin-right: calc(-2em - 1px) !important;
+  }
+}
+
+.explanation__content {
+  @mixin responsive-declaration margin-right, -1em, -2em;
+  @mixin responsive-declaration margin-bottom, -1em, -2em;
+  @mixin responsive-declaration margin-left, -1em, -2em;
+
+  border: 0;
 }
 
 /* Regional variation */
