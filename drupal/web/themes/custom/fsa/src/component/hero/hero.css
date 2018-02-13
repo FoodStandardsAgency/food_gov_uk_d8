@@ -53,7 +53,7 @@
   }
 
   .theme--frontpage & {
-    min-height: 29em;
+    min-height: 22em;
 
     @media (--breakpoint-md) {
       min-height: 39em;
@@ -67,6 +67,15 @@
 
     @media (--breakpoint-md) {
       padding-bottom: 7em;
+    }
+  }
+
+  .theme--help & {
+    padding-top: 1em;
+
+    @media (--breakpoint-md) {
+      padding-top: 4em;
+      min-height: 23em;
     }
   }
 
@@ -213,7 +222,7 @@
       left: 0;
       display: block;
       background-color: var(--color-black);
-      opacity: 0.4;
+      opacity: 0.45;
     }
   }
 
@@ -257,6 +266,10 @@
 .hero__content {
   text-align: center;
   width: 100%;
+
+  .hero--with-content & {
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
 }
 
 /* Hero cta */
