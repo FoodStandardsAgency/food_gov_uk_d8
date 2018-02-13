@@ -224,7 +224,7 @@ handlers:
       states:
         - completed
         - updated
-      notes: 'Personal data has was removed automatically.'
+      notes: 'Personal data was removed automatically on submit'
       sticky: null
       data: "name: ''\r\nemail: ''\r\ntelephone: ''"
       message: ''
