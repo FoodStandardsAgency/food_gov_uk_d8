@@ -149,7 +149,7 @@ They can be used as a selectors like this:
 }
 ```
 
-For now nesting is mainly used for media queries but selector nesting can also be used:
+Selector nesting can also be used:
 
 ```
 ul {
@@ -174,6 +174,10 @@ Webpack loaders check for bitmap and vector images separately. Bitmap images are
 </div>
 ```
 To polyfill browsers that don't support `<use>` tags every svg reference will be turned into inline svg by browser with [svg4everybody](https://github.com/jonathantneal/svg4everybody) JavaScript plugin.
+
+Remember to restart varnish after generating a new sprite.
+
+* `sudo systemctl restart varnish`
 
 
 ## Building the theme assets

@@ -33,9 +33,16 @@
         data.search.category = category;
       }
 
-      // Add search term to data when filters are unused and don"t trigger push.
-      $(document, context).once("data-layer").each(function () {
+      // Push search term and pages information on page load response.
+      $(document, context).once("data-layer-page").each(function () {
         pushSearchTerm();
+        pushHitsAndPages();
+        dataLayer.push(data);
+      });
+
+
+      // Push pager information on ajax response.
+      $(document, context).once("data-layer-ajax").ajaxSuccess(function() {
         pushHitsAndPages();
         dataLayer.push(data);
       });
@@ -55,9 +62,6 @@
 
             // Add search term to data
             pushSearchTerm();
-
-            // Add hits and pages information to data
-            pushHitsAndPages();
 
             var checked = {};
 
@@ -91,7 +95,6 @@
           $("#views-exposed-form-search-global-ratings-page-1", context).change(function () {
 
             pushSearchTerm();
-            pushHitsAndPages();
 
             var selected;
 
@@ -130,7 +133,6 @@
           $("#views-exposed-form-search-global-news-and-alerts-page-1", context).change(function () {
 
             pushSearchTerm();
-            pushHitsAndPages();
 
             var checked = {};
 
@@ -161,7 +163,6 @@
           $("#views-exposed-form-search-global-research-page-1", context).change(function () {
 
             pushSearchTerm();
-            pushHitsAndPages();
 
             var checked = {};
 
@@ -192,20 +193,22 @@
 
       // Add hits and pages information to data from pager.
       function pushHitsAndPages() {
+        if ($(".pager__items")[0]) {
 
-        // Add hits to data.
-        var hits = $(".listing footer").text().trim().split(" ")[3].replace(/[^0-9]/, "");
-        if (hits) {
-          data.search.results = hits;
-        }
+          // Add hits to data.
+          var hits = $(".listing footer").text().trim().split(" ")[3].replace(/[^0-9]/, "");
+          if (hits) {
+            data.search.results = hits;
+          }
 
-        // Add pages to data.
-        isActiveQuery = $(".pager__item.is-active a").attr("href");
-        lastQuery = $(".pager__item--last a").attr("href");
-        if (isActiveQuery && lastQuery) {
-          var pageNumber = isActiveQuery.trim().split("=").pop();
-          var numberOfPages = lastQuery.trim().split("=").pop();
-          data.search.resultsPage = pageNumber + "-" + numberOfPages;
+          // Add pages to data.
+          isActiveQuery = $(".pager__item.is-active a").attr("href");
+          lastQuery = $(".pager__items li:nth-last-of-type(1) a").attr("href");
+          if (isActiveQuery && lastQuery) {
+            var pageNumber = isActiveQuery.trim().split("=").pop();
+            var numberOfPages = lastQuery.trim().split("=").pop();
+            data.search.resultsPage = pageNumber + "-" + numberOfPages;
+          }
         }
       }
     }

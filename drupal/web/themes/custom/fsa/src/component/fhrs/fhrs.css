@@ -10,6 +10,15 @@
     padding-right: 0;
     padding-left: 0;
   }
+
+  .theme--search & {
+    @mixin responsive-declaration margin-right, -1em, -3em;
+    @mixin responsive-declaration margin-left, -1em, -4em;
+
+    @media (--breakpoint-md) {
+      margin: 0;
+    }
+  }
 }
 
 .ratings__container {

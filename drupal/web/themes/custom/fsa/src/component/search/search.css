@@ -127,6 +127,7 @@
 
       :--not-touch &:--enter {
         background-color: var(--color-white);
+        background-image: none;
       }
     }
 
