@@ -71,13 +71,14 @@
         </button>
 
         <a href="{{ home_url }}" class="header__logo block-link">
-          <div class="svg">
+          <span class="visually-hidden">{{ 'Food Standards Agency - Frontpage'|t }}</span>
+          <div class="svg" aria-hidden="true">
             <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop-{{ current_language }}"></use></svg>
           </div>
         </a>
 
         {{ utility_menu }}
-
+        
         {{ page.header_2 }}
 
       </div>

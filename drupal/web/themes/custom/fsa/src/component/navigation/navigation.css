@@ -420,8 +420,8 @@
           top: 100%;
           opacity: 0.4;
           transition:
-            opacity var(--transition-enter) 0.35s,
-            top 0s step-end 0.35s;
+            opacity var(--transition-enter) 0.05s,
+            top 0s step-end 0.05s;
         }
       }
     }
