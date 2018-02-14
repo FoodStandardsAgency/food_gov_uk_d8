@@ -1,0 +1,7 @@
+fsa_team_finder.mapit_api_key_configuration:
+ path: '/admin/config/fsa/mapit'
+ defaults:
+   _form: '\Drupal\fsa_team_finder\Form\MapItApiKeyConfiguration'
+   _title: 'MapIt API key configuration'
+ requirements:
+   _permission: 'administer site configuration'
