@@ -42,7 +42,7 @@ function fsa_alerts_preprocess_node(&$variables) {
 
       case 'PRIN':
       case 'FAFA':
-        $about_title = t('About product recalls and withdrawls');
+        $about_title = t('About product recalls and withdrawals');
         $about_copy = t("If there is a problem with a food product that means it should not be sold, then it might be 'withdrawn' (taken off the shelves) or 'recalled' (when customers are asked to return the product). The FSA issues Product Withdrawal Information Notices and Product Recall Information Notices to let consumers and local authorities know about problems associated with food. In some cases, a 'Food Alert for Action' is issued. This provides local authorities with details of specific action to be taken on behalf of consumers.");
         break;
 
