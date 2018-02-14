@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.alert.field_alert_smstext
     - field.field.node.alert.field_alert_type
     - field.field.node.alert.field_nation
+    - field.field.node.alert.field_short_title
     - node.type.alert
   module:
     - entity_print
@@ -115,5 +116,6 @@ hidden:
   field_alert_smstext: true
   field_alert_type: true
   field_nation: true
+  field_short_title: true
   langcode: true
   links: true
