@@ -11,6 +11,15 @@ For example to sync staging to local run following outside the box:
 
 If this sputters errors you may need to do `export WKV_SITE_ENV=local`.
 
+*NB!* for a quick copying of content to local you can ignore the establishment data (+500K entities with field values) 
+by temporarily editing `./syncdb.sh` around line `131`:
+```
+drush $SOURCE dumpdb --structure-tables-list=fsa_establish*,migrate_message_fsa_establish*,cache,cache_*,history,sessions,watchdog --dump-dir=$SYNCDIR
+```
+
+Once sync is done you need to run the ratings migrate commands in order to have ratings data locally: 
+[fsa_ratings_import/README.md](/drupal/web/modules/custom/fsa_ratings_import/README) 
+
 #### Configuration management
 
 * Project uses `config_readonly` module to prevent configuration changes on other than local dev environments. See `$settings['config_readonly']` in `settings.php`

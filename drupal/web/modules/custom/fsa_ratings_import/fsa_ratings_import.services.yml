@@ -1,0 +1,5 @@
+services:
+  fsa_ratings_import.subscriber:
+    class: Drupal\fsa_ratings_import\EventSubscriber\FsaRatingsImportMigrateSubscriber
+    tags:
+      - { name: event_subscriber }
