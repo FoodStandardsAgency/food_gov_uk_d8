@@ -27,6 +27,9 @@ source:
       name: title
       selector: title
     -
+      name: shortTitle
+      selector: shortTitle
+    -
       name: created
       selector: created
     -
@@ -44,6 +47,7 @@ process:
     default_value: alert
   id: notation
   title: title
+  field_short_title: shortTitle
   created:
     plugin: alert_timestamp
     source: created

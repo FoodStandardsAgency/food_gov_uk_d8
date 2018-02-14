@@ -38,6 +38,15 @@
         state: "present"
         user: nginx
       tags: ['cron']
+    - name: "Fetch FHRS establishments from the API"
+      cron:
+        name: "Run Migrate API task twice a day to fetch FHRS establishment updates from the API"
+        minute: "0"
+        hour: "23,7"
+        job: "/usr/lib/composer/vendor/bin/drush --root=/var/www/fsa/current/web mi --tag=establishments"
+        state: "present"
+        user: nginx
+      tags: ['cron']
 
   vars:
     wkv_site_env: stage
