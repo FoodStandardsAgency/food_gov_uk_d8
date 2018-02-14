@@ -29,3 +29,18 @@ Deployment uses `upcloud_server_spec_list` list from `conf/variables.yml` to dep
 ```
 $ ./provision.sh -p ~/.ansible-pass-file upcloud
 ```
+
+Provisioning troubleshooting
+-------------------------
+
+In case provisioning halts because of search server fingerprint/key temporarily remove from `conf/server.inventory` the following lines 
+```
+prod-search
+[prod-search]
+83.136.250.80
+```
+   
+And from `conf/production.yml` the include line 
+```
+- include: prod-search.yml
+```
