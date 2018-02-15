@@ -2,6 +2,7 @@
 
 namespace Drupal\fsa_signin\Form;
 
+use Drupal\fsa_custom\FsaCustomHelper;
 use Drupal\fsa_signin\Controller\DefaultController;
 use Drupal\user\Entity\User;
 use Drupal\Core\Form\FormBase;
@@ -139,6 +140,11 @@ class UserRegistrationForm extends FormBase {
         'cy' => $this->t('Cymraeg'),
       ],
       '#default_value' => \Drupal::languageManager()->getCurrentLanguage()->getId(),
+    ];
+
+    $form['links']['privacy_notice'] = [
+      '#type' => 'item',
+      '#markup' => FsaCustomHelper::privacyNoticeLink('alerts'),
     ];
 
     $form['actions'] = ['#type' => 'actions'];

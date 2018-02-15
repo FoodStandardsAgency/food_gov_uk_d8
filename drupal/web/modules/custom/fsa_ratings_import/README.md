@@ -21,6 +21,10 @@ FHRS rating API documentation: [api.ratings.food.gov.uk](http://api.ratings.food
 
 * The process can be memory-consuming. Especially on full reimport it may be required to run the command with physical memory limit: `php -dmemory_limit=-1 /usr/lib/composer/vendor/bin/drush mi fsa_establishment`
 
+### Establishment import/frequency note
+Module implements an eventsubscriberwhich sets the API url start page offset
+ to avoid bloating the memory with fetching all +500K entities at once.
+
 ### Development options 
 
 To import smaller batch of content for testing/development add following line(s) to your local `settings.local.php` file:
