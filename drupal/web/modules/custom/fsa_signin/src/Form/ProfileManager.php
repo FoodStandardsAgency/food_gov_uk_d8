@@ -4,6 +4,7 @@ namespace Drupal\fsa_signin\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\fsa_custom\FsaCustomHelper;
 use Drupal\fsa_signin\Controller\DefaultController;
 use Drupal\user\Entity\User;
 use Drupal\fsa_signin\SignInService;
@@ -170,6 +171,10 @@ class ProfileManager extends FormBase {
         'cy' => $this->t('Cymraeg'),
       ],
       '#default_value' => $account->getPreferredLangcode(),
+    ];
+    $form[$wrapper]['privacy_notice'] = [
+      '#type' => 'item',
+      '#markup' => FsaCustomHelper::privacyNoticeLink('alerts'),
     ];
 
     // Password wrapper.

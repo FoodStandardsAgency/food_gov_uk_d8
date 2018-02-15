@@ -41,6 +41,10 @@ class FsaCustomHelper extends ControllerBase {
         $ent_id = 1069;
         break;
 
+      case 'alerts':
+        $ent_id = 608;
+        break;
+
       default:
         $ent_id = FALSE;
     }
