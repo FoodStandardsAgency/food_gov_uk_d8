@@ -4,5 +4,6 @@ description: FSA account login and registration functionality related tweaks.
 core: 8.x
 package: FSA
 dependencies:
-  - user
-  - email_registration
+  - drupal:user
+  - drupal:email_registration
+  - fsa_custom
