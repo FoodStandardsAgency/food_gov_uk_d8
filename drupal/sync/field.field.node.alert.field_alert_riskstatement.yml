@@ -1,0 +1,19 @@
+uuid: d7cc3eb6-2c8b-4e76-9fc4-e8d59e5af74e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_alert_riskstatement
+    - node.type.alert
+id: node.alert.field_alert_riskstatement
+field_name: field_alert_riskstatement
+entity_type: node
+bundle: alert
+label: 'Risk statement'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

@@ -123,6 +123,12 @@ class AlertItemProperties extends ProcessPluginBase {
       $row->setDestinationProperty('field_alert_productdetails_raw', $productDetails);
     }
 
+    // Map problem/riskStatement.
+    if (isset($item['problem'][0]['riskStatement'])) {
+      $riskStatement = $item['problem'][0]['riskStatement'];
+      $row->setDestinationProperty('field_alert_riskstatement', $riskStatement);
+    }
+
     // Map to allergens by notation.
     if (isset($item['problem'][0]['allergen'])) {
       $tids = [];
