@@ -3,6 +3,7 @@
 namespace Drupal\fsa_signin;
 
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\taxonomy\Entity\Term;
 use Drupal\user\Entity\User;
 
 /**
@@ -108,7 +109,12 @@ class SignInService {
       ->loadTree('alerts_allergen', 0, 1, FALSE);
     $options = [];
     foreach ($all_terms as $term) {
-      $options[$term->tid] = $this->t($term->name)->render();
+      $description = FALSE;
+      $full_term = Term::load($term->tid);
+      if ($full_term->hasField('field_description') && $full_term->field_description->value != '') {
+        $description = ' <span class="light">(' . $full_term->field_description->value . ')</span>';
+      }
+      $options[$term->tid] = $this->t($term->name)->render() . $description;
     }
     return $options;
   }
