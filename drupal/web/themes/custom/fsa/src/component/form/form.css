@@ -326,6 +326,10 @@ select {
   border: none;
   padding-right: 3em;
   background-color: var(--color-white);
+
+   &::-ms-expand {
+    display: none;
+  }
 }
 
 textarea {

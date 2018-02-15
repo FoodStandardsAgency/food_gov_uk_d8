@@ -23,7 +23,8 @@
 <div class="ratings__mobile-item table__button js-content-next">
   <a href="{{ item.url }}" class="ratings__mobile-link">
     <div class="ratings__mobile-rating-value">
-      {% if item.ratingvalue_class == "rating--exempt" %}
+      {% if (item.ratingvalue_class == "rating--exempt") and
+      (item.schemetype|clean_id == "fhrs") %}
         <div class="svg exempt">
           <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#exempt-icon"></use></svg>
         </div>
@@ -34,7 +35,8 @@
       {% elseif (item.ratingvalue_class == "rating--pass") or
       (item.ratingvalue_class == "rating--pass-and-eat-safe") or
       (item.ratingvalue_class == "rating--improvement-required") or
-      (item.ratingvalue_class == "rating--awaiting-inspection") %}
+      (item.ratingvalue_class == "rating--awaiting-inspection") or
+      ((item.ratingvalue_class == "rating--exempt") and (item.schemetype|clean_id == "fhis")) %}
         {{ item.ratingimage }}
       {% else %}
         {{ item.ratingvalue }}

@@ -98,7 +98,8 @@
           </button>
 
           <a href="/" class="header__logo block-link">
-            <div class="svg">
+            <span class="visually-hidden">{{ 'Food Standards Agency - Frontpage'|t }}</span>
+            <div class="svg" aria-hidden="true">
               <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop-white-{{ current_language }}"></use></svg>
             </div>
           </a>
@@ -170,7 +171,7 @@
   <div class="layout hero-wrapper">
     <div class="layout__container">
       <div class="layout__content hero-wrapper__content">
-          <div class="hero{% if page.hero is defined and page.hero|render|striptags|trim %} hero--with-content{% endif %}">
+          <section class="hero{% if page.hero is defined and page.hero|render|striptags|trim %} hero--with-content{% endif %}">
             {% if page.hero is defined and page.hero|render|striptags|trim %}
               {% if hero_image_url %}
                 <div class="hero__background hero__background--image" style="background-image: url({{ hero_image_url }});">
@@ -185,7 +186,7 @@
             {% if page.secondary_menu %}
               {{ page.secondary_menu }}
             {% endif %}
-          </div>
+          </section>
       </div>
     </div>
   </div>

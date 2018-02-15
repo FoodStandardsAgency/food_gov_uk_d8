@@ -100,6 +100,16 @@ h6 {
   }
 }
 
+b,
+strong {
+  font-weight: 700;
+}
+
+.light {
+  color: var(--color-gray);
+  font-size: 0.8889em;
+}
+
 p {
   margin-bottom: 1.2em;
 
@@ -818,7 +828,7 @@ blockquote {
     }
   }
 
-  & > *:not(.field__field_document__item) {
+  & > * {
     padding-left: 3.5em;
     position: relative;
 
@@ -858,6 +868,15 @@ blockquote {
     &:before {
       content: 'Excel';
       background-color: #227346;
+    }
+  }
+
+  .document-reference > & > * {
+    padding-left: 0;
+    position: static;
+
+    &:before {
+      display: none;
     }
   }
 }
@@ -913,6 +932,10 @@ blockquote {
 
     a {
       text-decoration: underline;
+
+      :--not-touch &:--enter {
+        color: var(--dark-primary-color);
+      }
     }
 
     .field {
