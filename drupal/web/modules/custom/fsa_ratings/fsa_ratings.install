@@ -35,3 +35,15 @@ function fsa_ratings_update_8001() {
   $config->set('ratings_info_content', $default);
   $config->save(TRUE);
 }
+
+/**
+ * Add schema for configurations with Hygiene ratings hero copy.
+ */
+function fsa_ratings_update_8002() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('config.fsa_ratings');
+  // Add the default hero copy to be saved for the config.
+  $default = 'This is a Beta service and our Food Hygiene Rating data is updated every 24 hours. To access the most up-to-date ratings information go to food.gov.uk/ratings';
+  $config->set('hero_copy', $default);
+  $config->save(TRUE);
+}
