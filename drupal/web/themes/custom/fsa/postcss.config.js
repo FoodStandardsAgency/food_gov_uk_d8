@@ -6,16 +6,14 @@ module.exports = {
       features: {
         customProperties: {
           preserve: false,
-          warnings: false,
-          variables: {
-            padding: "2em",
-          }
+          warnings: false
         },
         rem: false,
-        nesting: false,
+        nesting: false
       }
     },
     'postcss-nested': {},
     'postcss-normalize': {},
+    'postcss-discard-comments': {}
   },
 };

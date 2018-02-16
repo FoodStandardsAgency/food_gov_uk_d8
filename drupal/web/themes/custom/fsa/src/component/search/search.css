@@ -1,27 +1,36 @@
-@import "../../core/helper";
-@import "../../core/custom-property";
+@import "../../helper/helper";
+@import "../../helper/custom-property";
 
 .views-result-total,
 .search-keyword {
+  @mixin responsive-declaration margin-right, -1rem, -4rem;
+  @mixin responsive-declaration margin-left, -1rem, -4rem;
+
   background-color: var(--color-lighter-gray);
-  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 1em;
-  @mixin responsive-declaration margin-right, -1rem, -4rem;
-  @mixin responsive-declaration margin-left, -1rem, -4rem;
 }
 
 .views-result-total {
-  font-family: var(--font-family-heading);
   @mixin responsive-declaration font-size, 1.25em, 1.75em;
+
+  flex-flow: row wrap;
+  text-align: center;
+  font-family: var(--font-family-heading);
+  color: var(--dark-secondary-color);
   padding-bottom: 0.5rem;
 }
 
 .views-result-total__number {
   font-weight: 700;
   margin-right: 0.25em;
+  margin-left: 0.25em;
+
+  &:first-child {
+    margin-left: 0;
+  }
 }
 
 .views-result-total__keyword {
@@ -29,17 +38,27 @@
   margin-left: 0.25em;
 
   &:before {
-    content: "“";
+    content: '\0022';
+    margin-right: 0.05em;
   }
 
   &:after {
-    content: "”";
+    content: '\0022';
+    margin-left: 0.25em;
   }
 }
 
 .search-keyword {
   input {
     width: 100%;
+    background-image: var(--icon-search-gray);
+    background-position: right 1em top 50%;
+    background-repeat: no-repeat;
+    padding-right: 3em;
+
+    :--not-touch &:--enter {
+      background-image: var(--icon-search-primary);
+    }
   }
 
   .form-item {
@@ -51,17 +70,21 @@
   }
 }
 
-/* Sidebar */
-.search__filter {
-
-}
-
 /* Search block */
 .search-block {
   background-color: transparent;
   margin: 0;
   padding: 0;
   font-size: 0.8889em;
+
+  h2 {
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px);
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+    word-wrap: normal;
+  }
 
   .field,
   .form-item {
@@ -97,8 +120,9 @@
     input:not([type="submit"]),
     select {
       display: none;
+      background-image: none;
       background-color: var(--color-lighter-gray);
-      box-shadow: 0px 0px 0px 1px var(--color-light-gray);
+      box-shadow: 0 0 0 1px var(--color-light-gray);
       padding: 0.6em 2em;
 
       @media (--breakpoint-md) {
@@ -112,9 +136,10 @@
 
       :--not-touch &:--enter {
         background-color: var(--color-white);
+        background-image: none;
       }
     }
-  
+
     .button {
       position: relative;
       background-color: transparent;
@@ -133,7 +158,7 @@
         width: 3em;
         height: 3em;
         background-color: var(--dark-primary-color);
-        box-shadow: 0px 0px 0px 1px var(--dark-primary-color);
+        box-shadow: 0 0 0 1px var(--dark-primary-color);
       }
 
       @media (--breakpoint-md) {
@@ -147,7 +172,7 @@
         @media (--breakpoint-sm) {
           text-decoration: none;
           background-color: var(--darker-primary-color);
-          box-shadow: 0px 0px 0px 1px var(--darker-primary-color);
+          box-shadow: 0 0 0 1px var(--darker-primary-color);
         }
       }
 
@@ -188,8 +213,8 @@
         border-bottom-right-radius: 100px;
 
         @media (--breakpoint-md) {
-          border-top-right-radius: 0px;
-          border-bottom-right-radius: 0px;
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
         }
       }
 
@@ -200,8 +225,8 @@
         border-bottom-right-radius: 100px;
 
         @media (--breakpoint-md) {
-          border-top-left-radius: 0px;
-          border-bottom-left-radius: 0px;
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
         }
       }
     }
@@ -209,17 +234,16 @@
 }
 
 .search__sidebar-header {
+  @mixin reset-font-style;
+
   background-color: var(--dark-secondary-color);
   background-image: none;
-  padding-right: 2.5em;
   color: var(--color-white);
   display: block;
   width: 100%;
-  @mixin reset-font-style;
   font-weight: 600;
   padding: 1em;
-  transition:
-    backround-color var(--transition-enter);
+  transition: backround-color var(--transition-enter);
 
   .heading {
     text-transform: none;

@@ -20,7 +20,7 @@ settings:
   id: search_keyword
   label: Search
   provider: fsa_es
-  label_display: '0'
+  label_display: visible
   action_url: /search
   form_method: get
   form_element:

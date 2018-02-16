@@ -1,14 +1,7 @@
-// Import HTML
-import html from './header.html';
-
-// Import Styles
-import css from './header.css';
-
-// Import JavaScript
-import js from './header';
+import html from './header.html'
+import css from './header.css'
 
 module.exports = {
   html,
-  css,
-  js,
-};
+  css
+}

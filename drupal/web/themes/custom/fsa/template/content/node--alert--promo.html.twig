@@ -10,7 +10,11 @@
 #}
 <div class="promo-wrapper">
    <a href="{{ url }}" {{ attributes.addClass(['promo', 'promo--light', 'promo-wrapper--full-height']) }}>
-    {{ content.field_alert_type }}
+    {% if content.field_alert_type %}
+      <div class="promo__type">
+        {{ content.field_alert_type }}
+      </div>
+    {% endif %}
     {{ title_prefix }}
     {% if not page %}
       <h4{{ title_attributes }} class="promo__content">{{ label }}</h4>

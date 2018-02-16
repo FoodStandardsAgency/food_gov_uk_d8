@@ -1,4 +1,6 @@
-# 🍴 FSA Drupal Theme
+[![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
+
+# FSA Drupal Theme
 
 ## Requirements
 FSA Theme uses ES6 features, so it is recommended to have a latest version of [Node.js](https://nodejs.org/) installed locally ([Node.js](https://nodejs.org/) v4.0+ required). [Node.js](https://nodejs.org/) is the only global requirement as this project does not use any task runners. We are using [Webpack](https://webpack.js.org/) instead.
@@ -18,7 +20,7 @@ __Run__ `npm run watch` or `yarn watch` while developing.
 
 __Build__ before commiting `npm run build` or `yarn build`.
 
-## 🏗 Development
+## Development
 When developing FSA Theme, you may want assets automatically compiled. To do this, run the following watch task:
 
 * `npm run watch` or `yarn watch`
@@ -147,7 +149,7 @@ They can be used as a selectors like this:
 }
 ```
 
-For now nesting is mainly used for media queries but selector nesting can also be used:
+Selector nesting can also be used:
 
 ```
 ul {
@@ -173,8 +175,12 @@ Webpack loaders check for bitmap and vector images separately. Bitmap images are
 ```
 To polyfill browsers that don't support `<use>` tags every svg reference will be turned into inline svg by browser with [svg4everybody](https://github.com/jonathantneal/svg4everybody) JavaScript plugin.
 
+Remember to restart varnish after generating a new sprite.
 
-## 📦 Building the theme assets
+* `sudo systemctl restart varnish`
+
+
+## Building the theme assets
 Remember to create the static assets of this theme before committing your changes to version control. Build the assets by running the following task:
 
 * `npm run build` or `yarn build`
@@ -185,8 +191,8 @@ Theme folder/file structure
 ```
 ├─ dist/               # Distributed assets that Drupal uses
 │  ├─ img/             # Compressed bitmap images
-│  ├─ bundle.js        # Minified JavaScript file that bundles all the JavaScript files
-│  ├─ main.css         # Minified CSS files
+│  ├─ app.js        # Minified JavaScript file that bundles all the JavaScript files
+│  ├─ app.css         # Minified CSS files
 │  └─ sprites.svg      # Main SVG sprite file
 │
 ├─ inc/                # Theme function includes
@@ -198,7 +204,6 @@ Theme folder/file structure
 |  |
 │  ├─ img/             # Bitmap and vector images
 │  │
-│  ├─ js/              # Modular JavaScript files
 │  │
 │  └─ index.js         # Entrypoint JavaScript file
 |

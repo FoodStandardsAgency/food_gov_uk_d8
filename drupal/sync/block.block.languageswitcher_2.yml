@@ -1,0 +1,24 @@
+uuid: f1bfa1de-5aa6-4d38-ae13-d705087c86ec
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - language
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: languageswitcher_2
+theme: fsa
+region: header_mobile
+weight: 0
+provider: null
+plugin: 'language_block:language_interface'
+settings:
+  id: 'language_block:language_interface'
+  label: 'Language switcher'
+  provider: language
+  label_display: visible
+visibility: {  }

@@ -1,0 +1,10 @@
+{
+  "editor.tabSize": 2,
+  "css.validate": false,
+  "postcss.validate": false,
+  "stylelint.enable": true,
+  "files.associations": {
+    "*.css": "postcss",
+    "*.module": "php"
+  }
+}
