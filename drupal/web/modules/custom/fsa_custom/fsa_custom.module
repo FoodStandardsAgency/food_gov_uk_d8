@@ -195,12 +195,12 @@ function fsa_custom_preprocess_page_title(&$variables) {
       if (!\Drupal::service('router.admin_context')->isAdminRoute() && substr($routename, 0, 10) == 'fsa_signin') {
         $variables['title_suffix'] = ['#markup' => '<p>' . t('Stay up to date with food and allergy alerts, FSA news and consultations.') . '</p>'];
       }
-    }
 
-    // Add hygiene ratings hero copy text below title.
-    if (in_array($routename, ['view.search_global_ratings.page_1', 'fsa_ratings.ratings_search'])) {
-      $fsa_ratings_config = \Drupal::config('config.fsa_ratings');
-      $variables['title_suffix'] = ['#markup' => '<p>' . check_markup($fsa_ratings_config->get('hero_copy'), 'basic_html') . '</p>'];
+      // Add hygiene ratings hero copy text below title.
+      if (in_array($routename, ['view.search_global_ratings.page_1', 'fsa_ratings.ratings_search'])) {
+        $fsa_ratings_config = \Drupal::config('config.fsa_ratings');
+        $variables['title_suffix'] = ['#markup' => '<p>' . check_markup($fsa_ratings_config->get('hero_copy'), 'basic_html') . '</p>'];
+      }
     }
   }
 
