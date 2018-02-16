@@ -198,7 +198,7 @@ function fsa_custom_preprocess_page_title(&$variables) {
     }
 
     // Add hygiene ratings hero copy text below title.
-    if ($routename == 'fsa_ratings.ratings_search') {
+    if (in_array($routename, ['view.search_global_ratings.page_1', 'fsa_ratings.ratings_search'])) {
       $fsa_ratings_config = \Drupal::config('config.fsa_ratings');
       $variables['title_suffix'] = ['#markup' => '<p>' . check_markup($fsa_ratings_config->get('hero_copy'), 'basic_html') . '</p>'];
     }
