@@ -96,7 +96,7 @@ class DefaultController extends ControllerBase {
     $header .= '<p class="profile__intro">' . $this->t("Hello @name", ['@name' => $account->getUsername()]) . '</p>';
     $header .= '</header>';
     $header .= self::linkMarkup('fsa_signin.default_controller_manageProfilePage', $this->t('Manage your profile'), ['button']);
-    $header .= self::linkMarkup('user.logout.http', 'Logout', ['profile__logout']);
+    $header .= self::linkMarkup('user.logout.http', $this->t('Logout'), ['profile__logout']);
 
     return [
       ['#markup' => $header],
