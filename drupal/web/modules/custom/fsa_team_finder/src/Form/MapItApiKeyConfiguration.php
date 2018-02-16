@@ -47,6 +47,7 @@ class MapItApiKeyConfiguration extends ConfigFormBase {
       '#type' => 'textfield',
       '#title' => $this->t('MapIt API key'),
       '#default_value' => $mapit_api_key->get('mapit_api_key') ? $mapit_api_key->get('mapit_api_key') : '',
+      '#description' => 'This key enables unlimted calls to the MapIt API, which identifies a responsible Local Authority for a given postcode. See: <a href="https://mapit.mysociety.org/">https://mapit.mysociety.org/</a>.',
     ];
     return parent::buildForm($form, $form_state);
   }
