@@ -5,6 +5,7 @@ core: 8.x
 base theme: stable
 regions:
   header: 'Header row 1'
+  header_mobile: 'Header row 1 (Mobile)'
   header_2: 'Header row 2'
   primary_menu: 'Primary menu'
   secondary_menu: 'Secondary menu'
@@ -17,6 +18,7 @@ regions:
   sidebar_second: 'Right sidebar'
   footer_top: 'Footer top'
   footer: 'Footer'
+  footer_mobile: 'Footer (Mobile)'
   hidden: 'Hidden'
 libraries:
   - fsa/global

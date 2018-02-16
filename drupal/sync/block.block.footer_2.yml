@@ -1,0 +1,31 @@
+uuid: f8056ca0-6ba0-4603-90d8-ff6305cf13e1
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.footer
+  module:
+    - block_class
+    - menu_block
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: footer__links
+id: footer_2
+theme: fsa
+region: footer_mobile
+weight: 0
+provider: null
+plugin: 'menu_block:footer'
+settings:
+  id: 'menu_block:footer'
+  label: Footer
+  provider: menu_block
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand: 0
+  parent: 'footer:'
+  suggestion: footer
+visibility: {  }
