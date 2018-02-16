@@ -1,4 +1,4 @@
-uuid: bbca6540-7ff2-46f5-927a-61a6e4e0b168
+uuid: f1bfa1de-5aa6-4d38-ae13-d705087c86ec
 langcode: en
 status: true
 dependencies:
@@ -10,10 +10,10 @@ dependencies:
 third_party_settings:
   block_class:
     classes: ''
-id: languageswitcher
+id: languageswitcher_2
 theme: fsa
-region: header
-weight: -19
+region: header_mobile
+weight: 0
 provider: null
 plugin: 'language_block:language_interface'
 settings:

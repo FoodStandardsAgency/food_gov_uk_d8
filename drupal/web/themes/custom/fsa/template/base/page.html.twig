@@ -71,15 +71,15 @@
         </button>
 
         <a href="{{ home_url }}" class="header__logo block-link">
-          <div class="svg">
+          <span class="visually-hidden">{{ 'Food Standards Agency - Frontpage'|t }}</span>
+          <div class="svg" aria-hidden="true">
             <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop-{{ current_language }}"></use></svg>
           </div>
         </a>
 
         {{ utility_menu }}
-
+        
         {{ page.header_2 }}
-
       </div>
     </div>
   </header>
@@ -97,7 +97,8 @@
           </button>
 
           <a href="/" class="header__logo block-link">
-            <div class="svg">
+            <span class="visually-hidden">{{ 'Food Standards Agency - Frontpage'|t }}</span>
+            <div class="svg" aria-hidden="true">
               <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop-white-{{ current_language }}"></use></svg>
             </div>
           </a>
@@ -105,9 +106,7 @@
           {{ page.header_2 }}
         </header>
 
-        <div class="menu-utility-wrapper">
-          {{ utility_menu }}
-        </div>
+        {{ utility_menu }}
 
         <div class="navigation-wrapper__main">
           {{ page.primary_menu }}
@@ -115,9 +114,12 @@
 
         <footer class="navigation-mobile-footer" role="contentinfo">
           <div class="navigation-mobile-footer__content">
-            {{ page.header }}
+            <div class="header__region">
+              {{ page.header_mobile }}
+            </div>
+
             {% if page.footer %}
-              {{ page.footer }}
+              {{ page.footer_mobile }}
             {% endif %}
             <div class="social-media">
               <h2 class="visually-hidden">Food Standards Agency on social media</h2>
@@ -169,7 +171,7 @@
   <div class="layout hero-wrapper">
     <div class="layout__container">
       <div class="layout__content hero-wrapper__content">
-          <div class="hero{% if page.hero is defined and page.hero|render|striptags|trim %} hero--with-content{% endif %}">
+          <section class="hero{% if page.hero is defined and page.hero|render|striptags|trim %} hero--with-content{% endif %}">
             {% if page.hero is defined and page.hero|render|striptags|trim %}
               {% if hero_image_url %}
                 <div class="hero__background hero__background--image" style="background-image: url({{ hero_image_url }});">
@@ -184,7 +186,7 @@
             {% if page.secondary_menu %}
               {{ page.secondary_menu }}
             {% endif %}
-          </div>
+          </section>
       </div>
     </div>
   </div>

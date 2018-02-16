@@ -1,5 +1,6 @@
 import 'babel-polyfill'
 import 'mutationobserver-shim'
+import 'wicg-inert'
 import './helper/polyfill/classList'
 import './helper/polyfill/closest'
 import svg4everybody from 'svg4everybody'
