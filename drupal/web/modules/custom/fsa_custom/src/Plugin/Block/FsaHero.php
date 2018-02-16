@@ -50,9 +50,11 @@ class FsaHero extends BlockBase {
 
     // Static hero content for all hygiene rating related pages.
     if ($route->getParameter('fsa_establishment')) {
+      $fsa_ratings_config = \Drupal::config('config.fsa_ratings');
       $build['fsa_hero'] = [
         '#theme' => $theme,
         '#title' => $this->t('Food hygiene ratings'),
+        '#copy' => check_markup($fsa_ratings_config->get('hero_copy'), 'basic_html'),
       ];
     }
 
