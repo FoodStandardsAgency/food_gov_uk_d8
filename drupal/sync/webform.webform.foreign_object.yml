@@ -278,7 +278,7 @@ handlers:
       disabled:
         ':input[name="fsa_establishment_la_email"]':
           empty: true
-    weight: 0
+    weight: 3
     settings:
       states:
         - completed
