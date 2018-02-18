@@ -148,6 +148,7 @@ class FsaRatingsSearchForm extends FormBase {
           2,
           1,
           0,
+          'AwaitingPublication',
           'AwaitingInspection',
           'Exempt',
         ]

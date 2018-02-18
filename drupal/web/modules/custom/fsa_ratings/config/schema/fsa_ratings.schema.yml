@@ -5,3 +5,6 @@ config.fsa_ratings:
     ratings_info_content:
       type: text
       label: 'FSA Ratings info text'
+    ratings_hero_copy:
+      type: text
+      label: 'Ratings hero copy'

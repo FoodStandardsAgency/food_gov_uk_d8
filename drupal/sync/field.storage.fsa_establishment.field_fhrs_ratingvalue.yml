@@ -37,6 +37,9 @@ settings:
     -
       value: AwaitingInspection
       label: AwaitingInspection
+    -
+      value: AwaitingPublication
+      label: AwaitingPublication
   allowed_values_function: ''
 module: options
 locked: false
