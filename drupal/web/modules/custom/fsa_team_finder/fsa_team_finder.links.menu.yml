@@ -3,3 +3,9 @@ view.fsa_authorities.page_1:
   parent: system.admin_reports
   description: 'View and edit FSA authority data.'
   route_name: view.fsa_authorities.page_1
+
+fsa_team_finder.mapit_api_key_configuration:
+  title: 'MapIt API'
+  parent: system.admin_config_fsa
+  description: 'MapIt API key configuration.'
+  route_name: fsa_team_finder.mapit_api_key_configuration
