@@ -473,6 +473,15 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
           }
         }
 
+        // Define routes to show pagetitle within content.
+        $routes = [
+          'entity.user.canonical',
+        ];
+        if (in_array($routename, $routes) || $routematch->getParameter('fsa_establishment')) {
+          return AccessResult::allowed()
+            ->addCacheableDependency($block);
+        }
+
         // Default to not showing title in content area.
         return AccessResult::forbidden()
           ->addCacheableDependency($block);
@@ -481,8 +490,9 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
       // Page title in hero area.
       if ($block->id() == 'pagetitle_hero') {
 
-        // Enter all speficic routes to remove the page title in hero area.
+        // Define routes to remove the page title in hero area.
         $routes = [
+          'entity.user.canonical',
           'fsa_signin.user_registration_thank_you',
         ];
 
