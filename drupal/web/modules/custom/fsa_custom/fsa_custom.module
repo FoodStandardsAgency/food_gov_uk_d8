@@ -477,7 +477,7 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
         $routes = [
           'entity.user.canonical',
         ];
-        if (in_array($routename, $routes) || $routematch->getParameter('fsa_establishment')) {
+        if (in_array($routename, $routes)) {
           return AccessResult::allowed()
             ->addCacheableDependency($block);
         }
