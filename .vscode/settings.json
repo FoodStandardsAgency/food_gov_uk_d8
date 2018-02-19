@@ -5,6 +5,8 @@
   "stylelint.enable": true,
   "files.associations": {
     "*.css": "postcss",
-    "*.module": "php"
+    "*.module": "php",
+    "*.theme": "php",
+    "*.inc": "php"
   }
 }

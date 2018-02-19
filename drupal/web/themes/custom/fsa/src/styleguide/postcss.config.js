@@ -7,13 +7,13 @@ module.exports = {
       features: {
         customProperties: {
           preserve: false,
-          warnings: false,
+          warnings: false
         },
         rem: false,
-        nesting: false,
+        nesting: false
       }
     },
     'postcss-nested': {},
-    'postcss-normalize': {},
-  },
-};
+    'postcss-normalize': {}
+  }
+}

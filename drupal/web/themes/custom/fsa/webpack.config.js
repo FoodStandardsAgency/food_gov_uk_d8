@@ -1,22 +1,22 @@
-const webpack = require('webpack');
-const path = require('path');
+const webpack = require('webpack')
+const path = require('path')
 
 // Plugins
-const ExtractCSSPlugin = require('extract-text-webpack-plugin');
-const SpritePlugin = require('svg-sprite-loader/plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ExtractCSSPlugin = require('extract-text-webpack-plugin')
+const SpritePlugin = require('svg-sprite-loader/plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: {
     app: './index.js',
-    styleguide: './styleguide/index.js',
+    styleguide: './styleguide/index.js'
   },
   devServer: {
     contentBase: './dist',
     port: 9000,
-    hot: true,
+    hot: true
   },
   module: {
     rules: [
@@ -26,9 +26,9 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env'],
-          },
-        },
+            presets: ['env']
+          }
+        }
       },
       {
         test: /\.css$/,
@@ -37,11 +37,11 @@ module.exports = {
           use: [
             {
               loader: 'css-loader',
-              options: { importLoaders: 1 },
+              options: { importLoaders: 1 }
             },
-            'postcss-loader',
-          ],
-        }),
+            'postcss-loader'
+          ]
+        })
       },
       {
         test: /\.css$/,
@@ -50,18 +50,18 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              importLoaders: 1,
-            },
+              importLoaders: 1
+            }
           },
           {
             loader: 'postcss-loader',
             options: {
               config: {
-                path: './styleguide/postcss.config.js',
-              },
-            },
-          },
-        ],
+                path: './styleguide/postcss.config.js'
+              }
+            }
+          }
+        ]
       },
       {
         test: /\.css$/,
@@ -72,71 +72,71 @@ module.exports = {
             options: {
               importLoaders: 1,
               modules: 1,
-              localIdentName: '[name]__[local]___[hash:base64:5]',
-            },
+              localIdentName: '[name]__[local]___[hash:base64:5]'
+            }
           },
           {
             loader: 'postcss-loader',
             options: {
               config: {
-                path: './styleguide/postcss.config.js',
-              },
-            },
-          },
-        ],
+                path: './styleguide/postcss.config.js'
+              }
+            }
+          }
+        ]
       },
       {
         test: /\.(gif|png|jpe?g)$/i,
         use: [
           'file-loader?name=[path][name].[ext]',
-          'image-webpack-loader',
-        ],
+          'image-webpack-loader'
+        ]
       },
       {
         test: /\.svg$/,
         use: [
           {
             loader: 'svg-sprite-loader',
-            options: { extract: true },
+            options: { extract: true }
           },
-          'svgo-loader',
-        ],
+          'svgo-loader'
+        ]
       },
       {
         test: /\.html$/,
         use: {
-          loader: 'html-loader',
-        },
+          loader: 'html-loader'
+        }
       },
       {
         test: /\.md$/,
         use: [
           {
-            loader: 'html-loader',
+            loader: 'html-loader'
           },
           {
             loader: 'markdown-loader',
             options: {
 
-            },
-          },
-        ],
-      },
-    ],
+            }
+          }
+        ]
+      }
+    ]
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist')
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new ExtractCSSPlugin({
-      filename: '[name].css',
+      filename: '[name].css'
     }),
     new SpritePlugin(),
     new HtmlWebpackPlugin({
-      template: 'styleguide/template.js',
+      template: 'styleguide/template.js'
     }),
-    new webpack.HotModuleReplacementPlugin(),
-  ],
-};
+    new webpack.HotModuleReplacementPlugin()
+  ]
+}

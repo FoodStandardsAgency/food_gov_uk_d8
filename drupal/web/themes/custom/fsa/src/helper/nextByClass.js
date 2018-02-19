@@ -1,12 +1,12 @@
-import hasClass from './hasClass';
+import hasClass from './hasClass'
 
-function nextByClass(node, cls) {
+function nextByClass (node, cls) {
   while (node = node.nextSibling) {
-      if (hasClass(node, cls)) {
-          return node;
-      }
+    if (hasClass(node, cls)) {
+      return node
+    }
   }
-  return null;
+  return null
 }
 
-module.exports = nextByClass;
+module.exports = nextByClass

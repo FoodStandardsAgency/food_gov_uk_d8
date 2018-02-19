@@ -9,7 +9,17 @@
     "IE 10",
     "IE 9"
   ],
+  "standard": {
+    "globals": [
+      "Drupal"
+    ],
+    "ignore": [
+      "dist/",
+      "js/"
+    ]
+  },
   "scripts": {
+    "test": "standard",
     "dev": "webpack-dev-server",
     "watch": "webpack --watch",
     "build": "webpack -p"

@@ -1,14 +1,14 @@
-import toCamelCase from 'to-camel-case';
-import readme from '../../README.md';
-// import customProperties from '../helper/custom-property.css';
-import styles from './styleguide.css';
-import guid from '../helper/guid';
-import safeTagsReplace from '../helper/safeTagsReplace';
-// import isColor from '../helper/isColor';
+import toCamelCase from 'to-camel-case'
+import readme from '../../README.md'
+// import customProperties from '../helper/custom-property.css'
+import styles from './styleguide.css'
+import guid from '../helper/guid'
+import safeTagsReplace from '../helper/safeTagsReplace'
+// import isColor from '../helper/isColor'
 
-function parsePartialMarkup(string) {
-  const re = /= "|";/;
-  return string.split(re)[1];
+function parsePartialMarkup (string) {
+  const re = /= "|";/
+  return string.split(re)[1]
 }
 
 // const myArray = customProperties.toString().split(/[{}]+/).filter(function(e) { return e; });
@@ -35,27 +35,27 @@ function parsePartialMarkup(string) {
 //   }));
 // }).join('');
 
-const intro = parsePartialMarkup(require("template-string-loader!./partial/intro.html")({
+const intro = parsePartialMarkup(require('template-string-loader!./partial/intro.html')({
   guid: guid(),
   title: 'CSS Custom Properties',
   // content: customProperties,
-  styles,
-}));
+  styles
+}))
 
-const requiredComponents = require.context('../component/', true, /index\.js$/).keys();
+const requiredComponents = require.context('../component/', true, /index\.js$/).keys()
 
 const componentArray = requiredComponents.map((component) => {
   /*
   @todo - require doesn't currently support imports
           from npm folder
   */
-  const requiredComponent = require(`../component/${component.replace('./', '')}`);
-  requiredComponent.title = component.split('/')[1];
-  return requiredComponent;
-});
+  const requiredComponent = require(`../component/${component.replace('./', '')}`)
+  requiredComponent.title = component.split('/')[1]
+  return requiredComponent
+})
 
 const components = componentArray.map((component) => {
-  return parsePartialMarkup(require("template-string-loader!./partial/component.html")({
+  return parsePartialMarkup(require('template-string-loader!./partial/component.html')({
     guid: guid(),
     id: toCamelCase(component.title),
     title: (component.title !== undefined) ? component.title : 'Component',
@@ -64,55 +64,54 @@ const components = componentArray.map((component) => {
     html: (component.html !== undefined) ? safeTagsReplace(component.html) : 'Not available',
     css: (component.css !== undefined) ? component.css : 'Not available',
     js: (component.js !== undefined) ? component.js : 'Not available',
-    styles,
-  }));
-}).join('');
+    styles
+  }))
+}).join('')
 
 const navigationComponentItems = componentArray.map((component) => {
-  return parsePartialMarkup(require("template-string-loader!./partial/navigationItem.html")({
+  return parsePartialMarkup(require('template-string-loader!./partial/navigationItem.html')({
     guid: guid(),
     id: toCamelCase(component.title),
     title: (component.title !== undefined) ? component.title : 'Component',
-    styles,
-  }));
-}).join('');
+    styles
+  }))
+}).join('')
 
 const introComponentArray = [
   {
     title: 'Workflow',
-    element: readme,
+    element: readme
   },
   {
     title: 'CSS Custom Properties',
     description: 'These are custom properties. Use them with var() function',
-    element: intro,
-  },
+    element: intro
+  }
   // {
   //   title: 'Colors',
   //   element: colors,
   // },
-];
-
+]
 
 const introComponents = introComponentArray.map((component) => {
-  return parsePartialMarkup(require("template-string-loader!./partial/introComponent.html")({
+  return parsePartialMarkup(require('template-string-loader!./partial/introComponent.html')({
     guid: guid(),
     id: toCamelCase(component.title),
     title: (component.title !== undefined) ? component.title : 'Component',
     description: (component.description !== undefined) ? component.description : '',
     element: (component.element !== undefined) ? component.element : 'Not available',
-    styles,
-  }));
-}).join('');
+    styles
+  }))
+}).join('')
 
 const navigationIntroComponentItems = introComponentArray.map((component) => {
-  return parsePartialMarkup(require("template-string-loader!./partial/navigationItem.html")({
+  return parsePartialMarkup(require('template-string-loader!./partial/navigationItem.html')({
     guid: guid(),
     id: toCamelCase(component.title),
     title: (component.title !== undefined) ? component.title : 'Component',
-    styles,
-  }));
-}).join('');
+    styles
+  }))
+}).join('')
 
 const styleGuide = (templateParams) => {
   const html =
@@ -144,8 +143,8 @@ const styleGuide = (templateParams) => {
       </article>
       </body>
     </html>
-    `;
-  return html;
-};
+    `
+  return html
+}
 
-module.exports = styleGuide;
+module.exports = styleGuide

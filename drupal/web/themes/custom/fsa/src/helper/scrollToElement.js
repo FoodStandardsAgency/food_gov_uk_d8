@@ -1,23 +1,23 @@
 // Helper animate scrolling function with requestAnimationFrame
-function doScrolling(element, duration, offset) {
-	var startingY = window.pageYOffset
-  var elementY = window.pageYOffset + element.getBoundingClientRect().top;
+function doScrolling (element, duration, offset) {
+  var startingY = window.pageYOffset
+  var elementY = window.pageYOffset + element.getBoundingClientRect().top
   // If element is close to page's bottom then window will scroll only to some position above the element.
   var targetY = document.body.scrollHeight - elementY < window.innerHeight ? document.body.scrollHeight - window.innerHeight + offset : elementY + offset
-	var diff = targetY - startingY
+  var diff = targetY - startingY
   // Easing function: easeInOutCubic
   // From: https://gist.github.com/gre/1650294
-  var easing = function (t) { return t<.5 ? 4*t*t*t : (t-1)*(2*t-2)*(2*t-2)+1 }
+  var easing = function (t) { return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1 }
   var start
 
   if (!diff) return
 
-	// Bootstrap our animation - it will get called right before next frame shall be rendered.
-	window.requestAnimationFrame(function step(timestamp) {
+  // Bootstrap our animation - it will get called right before next frame shall be rendered.
+  window.requestAnimationFrame(function step (timestamp) {
     if (!start) start = timestamp
     // Elapsed miliseconds since start of scrolling.
     var time = timestamp - start
-		// Get percent of completion in range [0, 1].
+    // Get percent of completion in range [0, 1].
     var percent = Math.min(time / duration, 1)
     // Apply the easing.
     // It can cause bad-looking slow frames in browser performance tool, so be careful.
@@ -25,11 +25,11 @@ function doScrolling(element, duration, offset) {
 
     window.scrollTo(0, startingY + diff * percent)
 
-		// Proceed with animation as long as we wanted it to.
+    // Proceed with animation as long as we wanted it to.
     if (time < duration) {
       window.requestAnimationFrame(step)
     }
   })
 }
 
-module.exports = doScrolling;
+module.exports = doScrolling

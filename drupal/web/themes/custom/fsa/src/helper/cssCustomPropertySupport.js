@@ -1,6 +1,6 @@
-function cssCustomPropertySupport() {
-  return (window.CSS && CSS.supports('color', 'var(--primary)'));
+/* global CSS */
+function cssCustomPropertySupport () {
+  return (window.CSS && CSS.supports('color', 'var(--primary)'))
 }
 
-module.exports = cssCustomPropertySupport;
-  
+module.exports = cssCustomPropertySupport

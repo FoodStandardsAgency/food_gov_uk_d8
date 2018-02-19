@@ -1,4 +1,3 @@
-/* global Element */
 import debounce from '../../helper/debounce'
 import checkMediaQuery from '../../helper/checkMediaQuery'
 import breakpoints from '../../helper/breakpoints'
@@ -40,22 +39,6 @@ function navigation () {
   }
 
   const queryParents = (elem, selector) => {
-    // Element.matches() polyfill
-    if (!Element.prototype.matches) {
-      Element.prototype.matches =
-        Element.prototype.matchesSelector ||
-        Element.prototype.mozMatchesSelector ||
-        Element.prototype.msMatchesSelector ||
-        Element.prototype.oMatchesSelector ||
-        Element.prototype.webkitMatchesSelector ||
-        function (s) {
-          var matches = (this.document || this.ownerDocument).querySelectorAll(s)
-          var i = matches.length
-          while (--i >= 0 && matches.item(i) !== this) {}
-          return i > -1
-        }
-    }
-
     // Get the closest matching element
     for (; elem && elem !== document; elem = elem.parentNode) {
       if (elem.matches(selector)) return elem
@@ -67,35 +50,35 @@ function navigation () {
   const traversing = {
     // Functions for traversing between items and levels.
     prev: function (item) {
-      let currentItem
+      let currentItem = queryParents(item, settings.listItemSelector)
 
-      if (currentItem = queryParents(item, settings.listItemSelector)) {
+      if (currentItem) {
         return currentItem.previousElementSibling
       }
     },
     next: function (item) {
-      let currentItem
+      let currentItem = queryParents(item, settings.listItemSelector)
 
-      if (currentItem = queryParents(item, settings.listItemSelector)) {
+      if (currentItem) {
         return currentItem.nextElementSibling
       }
     },
     out: function (item) {
-      let parentItem
+      let parentItem = queryParents(item.parentNode, settings.listItemSelector)
 
       // If item has parent menu item, query for its parent menu.
-      if (parentItem = queryParents(item.parentNode, settings.listItemSelector)) {
+      if (parentItem) {
         return parentItem
       }
     },
     in: function (item) {
-      let childList
+      let childList = item.querySelector(settings.menuSelector)
 
       // If item has a child list, return its first item.
-      if (childList = item.querySelector(settings.menuSelector)) {
-        let firstItem
+      if (childList) {
+        let firstItem = childList.querySelector(settings.listItemSelector)
 
-        if (firstItem = childList.querySelector(settings.listItemSelector)) {
+        if (firstItem) {
           return firstItem
         }
       }
@@ -131,10 +114,10 @@ function navigation () {
     // Functions for traversing between top level items.
     top: {
       topItem: function (item) {
-        let parentItem
+        let parentItem = queryParents(item.parentNode, settings.listItemSelector)
 
         // If item has parent menu item, query for its parent menu.
-        if (parentItem = queryParents(item.parentNode, settings.listItemSelector)) {
+        if (parentItem) {
           return traversing.top.topItem(parentItem)
         }
 
@@ -203,16 +186,18 @@ function navigation () {
         // traverse to the previous top item.
         case keyboard.LEFT:
           listItem = queryParents(item, settings.listItemSelector)
+          group = traversing.group.prev(listItem)
 
           // 1. Traverse to the previous group.
-          if (group = traversing.group.prev(listItem)) {
+          if (group) {
             traversing.focus(group)
             event.preventDefault()
             break
           }
 
           // 2. Traverse to the previous top item.
-          if (prevTopLevelItem = traversing.top.prev(listItem)) {
+          prevTopLevelItem = traversing.top.prev(listItem)
+          if (prevTopLevelItem) {
             traversing.focus(prevTopLevelItem)
             event.preventDefault()
             break
@@ -238,7 +223,8 @@ function navigation () {
           }
 
           // 2. Traverse out to the upper level.
-          if (upperItem = traversing.out(listItem)) {
+          upperItem = traversing.out(listItem)
+          if (upperItem) {
             traversing.focus(upperItem)
             event.preventDefault()
 
@@ -257,14 +243,16 @@ function navigation () {
           listItem = queryParents(item, settings.listItemSelector)
 
           // 1. Traverse to the next group.
-          if (group = traversing.group.next(listItem)) {
+          group = traversing.group.next(listItem)
+          if (group) {
             traversing.focus(group)
             event.preventDefault()
             break
           }
 
           // 2. Traverse to the next top item.
-          if (nextTopLevelItem = traversing.top.next(listItem)) {
+          nextTopLevelItem = traversing.top.next(listItem)
+          if (nextTopLevelItem) {
             traversing.focus(nextTopLevelItem)
             event.preventDefault()
             break
@@ -280,10 +268,10 @@ function navigation () {
         // 3. If there's no sibling, traverse to next group.
         case keyboard.DOWN:
           listItem = queryParents(item, settings.listItemSelector)
-          let innerItem
+          let innerItem = traversing.in(listItem)
 
           // 1. Try and traverse into the list item's child list.
-          if (innerItem = traversing.in(listItem)) {
+          if (innerItem) {
             // TODO: Ask megamenu to open first.
 
             traversing.focus(innerItem)
@@ -292,14 +280,16 @@ function navigation () {
           }
 
           // 2. Traverse to the next sibling.
-          if (siblingItem = traversing.next(item)) {
+          siblingItem = traversing.next(item)
+          if (siblingItem) {
             traversing.focus(siblingItem)
             event.preventDefault()
             break
           }
 
           // 3. Traverse to the next group.
-          if (group = traversing.group.next(listItem)) {
+          group = traversing.group.next(listItem)
+          if (group) {
             traversing.focus(group)
             event.preventDefault()
             break
