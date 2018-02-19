@@ -98,7 +98,7 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
     ];
     $form['logout'] = [
       '#suffix' => '</header>',
-      '#markup' => DefaultController::linkMarkup('user.logout.http', 'Logout', ['profile__logout']),
+      '#markup' => DefaultController::linkMarkup('user.logout.http', $this->t('Logout'), ['profile__logout']),
     ];
 
     if (DefaultController::isMoreThanRegistered($user)) {
