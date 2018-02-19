@@ -42,19 +42,19 @@ class FsaRatingsImportMigrateSubscriber implements EventSubscriberInterface {
 
     // Change the offset only on Establishments import.
     if ($event->getMigration()->id() == 'fsa_establishment') {
-      // Switch/change the offset for every second import.
-      // We do this due to the quite a heavy import process that runs out of
+      // Increase the offset by one with each iteration,
+      // we do this due to the quite a heavy import process that runs out of
       // memory before getting everything parsed.
+      // @todo: once memory consumption has tuned to parse more items refactore/remove this "hack".
       $offset = \Drupal::state()->get(self::RATING_IMPORT_START_OFFSET_VAR);
-      switch ($offset) {
-        case 1:
-          // @todo get the good "halfway" calling the API instead of hardcoded value.
-          \Drupal::state()->set(self::RATING_IMPORT_START_OFFSET_VAR, 50);
-          break;
-
-        default:
-          \Drupal::state()->set(self::RATING_IMPORT_START_OFFSET_VAR, 1);
+      if (!isset($offset) || $offset >= 102) {
+        // Reset to 1 after getting tho current end of pages.
+        \Drupal::state()->set(self::RATING_IMPORT_START_OFFSET_VAR, 1);
       }
+      else {
+        \Drupal::state()->set(self::RATING_IMPORT_START_OFFSET_VAR, $offset + 1);
+      }
+      drush_print_r($offset);
     }
   }
 
