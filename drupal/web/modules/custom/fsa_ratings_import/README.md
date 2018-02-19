@@ -24,6 +24,10 @@ FHRS rating API documentation: [api.ratings.food.gov.uk](http://api.ratings.food
 ### Establishment import/frequency note
 Module implements an eventsubscriberwhich sets the API url start page offset
  to avoid bloating the memory with fetching all +500K entities at once.
+ 
+* To handle with the memomry consumption the module currently increments the offset of API calls and sets it to a state.
+ The state can be reset with `drush sset fsa_rating_api_offset 1` or use `drush sget fsa_rating_api_offset` to check the 
+ current offset. 
 
 ### Development options 
 

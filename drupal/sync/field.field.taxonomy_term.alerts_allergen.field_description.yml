@@ -1,0 +1,19 @@
+uuid: 795fa170-b44a-43c6-8538-a8ff292a109d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_description
+    - taxonomy.vocabulary.alerts_allergen
+id: taxonomy_term.alerts_allergen.field_description
+field_name: field_description
+entity_type: taxonomy_term
+bundle: alerts_allergen
+label: Description
+description: 'The short description of this allergen. Can be edited manually on this site but will be later pulled from the Alerts API.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

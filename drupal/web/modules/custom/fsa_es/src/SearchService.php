@@ -411,8 +411,13 @@ class SearchService {
           break;
 
         case 'AwaitingInspection':
-          // Make this label more human friendly.
-          $value = t('Awaiting Rating');
+          // We humans like spaces between wording.
+          $value = t('Awaiting Inspection');
+          break;
+
+        case 'AwaitingPublication':
+          // We humans like spaces between wording.
+          $value = t('Awaiting Publication');
           break;
 
         default:

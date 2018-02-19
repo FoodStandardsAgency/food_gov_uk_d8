@@ -130,6 +130,7 @@ class SitewideSearchRatings extends SitewideSearchBase {
         2,
         1,
         0,
+        'AwaitingPublication',
         'AwaitingInspection',
         'Exempt',
       ]

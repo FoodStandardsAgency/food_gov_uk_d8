@@ -1,5 +1,5 @@
-import stickyElement from '../core/helper/stickyElement';
-import scrollToElement from '../core/helper/scrollToElement';
+import stickyElement from '../helper/stickyElement';
+import scrollToElement from '../helper/scrollToElement';
 
 // Sticky element
 const container = [...document.querySelectorAll('.js-sticky-container')];

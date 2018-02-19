@@ -26,6 +26,12 @@ class RouteSubscriber implements EventSubscriberInterface {
   public function checkForRedirection(GetResponseEvent $event) {
     $route_name = \Drupal::routeMatch()->getRouteName();
 
+    $current_user = \Drupal::currentUser();
+    $roles = $current_user->getRoles();
+
+    // User is a subscriber if has only one role (authenticated)
+    $is_subscriber = (count($roles) <= 1 && $roles[0] = 'authenticated') ? TRUE : FALSE;
+
     $preregistration_pages = self::PREREGISTRATION_ROUTES;
 
     // Redirect users to old site.
@@ -36,12 +42,26 @@ class RouteSubscriber implements EventSubscriberInterface {
       }
     }
 
-    // Redirect logged in in users to profile manage page from the signup pages.
+    // Redirect subscribers to profile manage page from the signup pages.
     if (\Drupal::currentUser()->isAuthenticated()) {
-      // Add signin page to the array.
+      // Add signin route to the preregistration pages array.
       $preregistration_pages[] = 'fsa_signin.default_controller_signInPage';
       if (in_array($route_name, $preregistration_pages)) {
         $url = Url::fromRoute('fsa_signin.default_controller_manageProfilePage')->toString();
+        $event->setResponse(new RedirectResponse($url, 301));
+      }
+    }
+
+    // Redirect Administrators/editors to their Drupal profile pages. Only
+    // subscribed users should be using the profile pages.
+    if (\Drupal::currentUser()->isAuthenticated() && !$is_subscriber) {
+      $routes = [
+        'fsa_signin.default_controller_profilePage',
+        'fsa_signin.default_controller_manageProfilePage',
+        'fsa_signin.delete_account_confirmation',
+      ];
+      if (in_array($route_name, $routes)) {
+        $url = Url::fromRoute('entity.user.canonical', ['user' => $current_user->id()])->toString();
         $event->setResponse(new RedirectResponse($url, 301));
       }
     }
@@ -57,7 +77,7 @@ class RouteSubscriber implements EventSubscriberInterface {
       $url = Url::fromRoute('fsa_signin.default_controller_signInPage')->toString();
       $event->setResponse(new RedirectResponse($url, 301));
     }
-    elseif ($route_name == 'user.page' || $route_name == 'entity.user.canonical') {
+    elseif ($is_subscriber && ($route_name == 'user.page' || $route_name == 'entity.user.canonical')) {
       $url = Url::fromRoute('fsa_signin.default_controller_profilePage')->toString();
       $event->setResponse(new RedirectResponse($url, 301));
     }

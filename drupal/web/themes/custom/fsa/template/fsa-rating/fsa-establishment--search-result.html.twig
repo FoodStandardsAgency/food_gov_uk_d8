@@ -41,8 +41,21 @@
 <div class="ratings__mobile-item table__button">
   <a href="{{ url }}" class="ratings__mobile-link">
     <div class="ratings__mobile-rating-value">
-      {% if rating_badge %}
+      {% if ratingvalue_id == "exempt" %}
+        <div class="svg exempt">
+          <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#exempt-icon"></use></svg>
+        </div>
+      {% elseif ratingvalue_id == "awaitinginspection" %}
+        <div class="svg awaitinginspection">
+          <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#awaiting-icon"></use></svg>
+        </div>
+      {% elseif (ratingvalue_id == "pass") or
+      (ratingvalue_id == "pass-and-eat-safe") or
+      (ratingvalue_id == "improvement-required") or
+      (ratingvalue_id == "awaiting-inspection") %}
         {{ rating_badge }}
+      {% else %}
+        {{ rating_value }}
       {% endif %}
     </div>
     

@@ -64,6 +64,9 @@ function fsa_custom_preprocess_page(&$variables) {
   // Build the utility menu.
   $variables['utility_menu'] = [
     '#theme' => 'item_list',
+    '#prefix' => '<nav class="menu-utility-wrapper">',
+    '#suffix' => '</nav>',
+    '#title' => t('Services'),
     '#list_type' => 'ul',
     '#wrapper_attributes' => [
       'class' => [
@@ -85,8 +88,9 @@ function fsa_custom_preprocess_page(&$variables) {
  */
 function fsa_custom_preprocess_page_title(&$variables) {
   $is_admin = \Drupal::service('router.admin_context')->isAdminRoute();
-
   $route = \Drupal::routeMatch();
+  $routename = $route->getParentRouteMatch()->getRouteName();
+
   $entity = FALSE;
   if ($route->getParameter('node')) {
     $entity = $route->getParameter('node');
@@ -101,6 +105,44 @@ function fsa_custom_preprocess_page_title(&$variables) {
 
     // Init the custom title prefix.
     $title_prefix = [];
+
+    if ($entity->hasField('field_nation')) {
+      $nations = $entity->get('field_nation');
+      if (isset($nations[0])) {
+        // Add regional variations label with same classes as would be added via
+        // WYSIWYG editor.
+        $class = 'regional-variation';
+        $nation_label = '';
+        if (!isset($nations[1])) {
+          // If only one nation selected.
+          $nation = $typemanager->getStorage('taxonomy_term')->load($nations[0]->getValue()['target_id'])->getName();
+          $class .= ' regional-variation--' . strtolower(Html::cleanCssIdentifier($nation));
+          $nation_label = t('@nation specific', ['@nation' => $nation]);
+        }
+        elseif (isset($nations[1]) && !isset($nations[2])) {
+          // If two nations selected.
+          $class .= ' regional-variation--multi-regional';
+          $nation_label = t(
+            '@nation_1 and @nation_2 specific',
+            [
+              '@nation_1' => $typemanager->getStorage('taxonomy_term')->load($nations[0]->getValue()['target_id'])->getName(),
+              '@nation_2' => $typemanager->getStorage('taxonomy_term')->load($nations[1]->getValue()['target_id'])->getName(),
+            ]
+          );
+        }
+
+        if ($nation_label != '') {
+          $title_prefix[] = [
+            '#theme' => 'fsa_label',
+            '#attributes' => [
+              'class' => $class,
+            ],
+            '#label' => $nation_label,
+          ];
+        }
+
+      }
+    }
 
     // Define content types that should send the label above title.
     $content_type_label = [
@@ -144,44 +186,6 @@ function fsa_custom_preprocess_page_title(&$variables) {
       ];
     }
 
-    if ($entity->hasField('field_nation')) {
-      $nations = $entity->get('field_nation');
-      if (isset($nations[0])) {
-        // Add regional variations label with same classes as would be added via
-        // WYSIWYG editor.
-        $class = 'regional-variation';
-        $nation_label = '';
-        if (!isset($nations[1])) {
-          // If only one nation selected.
-          $nation = $typemanager->getStorage('taxonomy_term')->load($nations[0]->getValue()['target_id'])->getName();
-          $class .= ' regional-variation--' . strtolower(Html::cleanCssIdentifier($nation));
-          $nation_label = t('@nation specific', ['@nation' => $nation]);
-        }
-        elseif (isset($nations[1]) && !isset($nations[2])) {
-          // If two nations selected.
-          $class .= ' regional-variation--multi-regional';
-          $nation_label = t(
-            '@nation_1 and @nation_2 specific',
-            [
-              '@nation_1' => $typemanager->getStorage('taxonomy_term')->load($nations[0]->getValue()['target_id'])->getName(),
-              '@nation_2' => $typemanager->getStorage('taxonomy_term')->load($nations[1]->getValue()['target_id'])->getName(),
-            ]
-          );
-        }
-
-        if ($nation_label != '') {
-          $title_prefix[] = [
-            '#theme' => 'fsa_label',
-            '#attributes' => [
-              'class' => $class,
-            ],
-            '#label' => $nation_label,
-          ];
-        }
-
-      }
-    }
-
     // Inject additional title prefix(es) if there was anything to add.
     if (!empty($title_prefix)) {
       $variables['title_prefix'] = $title_prefix;
@@ -189,14 +193,18 @@ function fsa_custom_preprocess_page_title(&$variables) {
 
   }
   else {
-    $route = \Drupal::routeMatch();
-    $routename = $route->getParentRouteMatch()->getRouteName();
+    if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
+      // Add a title suffix on signup pages.
+      if (!\Drupal::service('router.admin_context')->isAdminRoute() && substr($routename, 0, 10) == 'fsa_signin') {
+        $variables['title_suffix'] = ['#markup' => '<p>' . t('Stay up to date with food and allergy alerts, FSA news and consultations.') . '</p>'];
+      }
 
-    // Add a title suffix on signup pages.
-    if (!\Drupal::service('router.admin_context')->isAdminRoute() && substr($routename, 0, 10) == 'fsa_signin') {
-      $variables['title_suffix'] = ['#markup' => '<p>' . t('Stay up to date with food and allergy alerts, FSA news and consultations.') . '</p>'];
+      // Add hygiene ratings hero copy text below title.
+      if (in_array($routename, ['view.search_global_ratings.page_1', 'fsa_ratings.ratings_search'])) {
+        $fsa_ratings_config = \Drupal::config('config.fsa_ratings');
+        $variables['title_suffix'] = ['#markup' => '<p>' . check_markup($fsa_ratings_config->get('hero_copy'), 'basic_html') . '</p>'];
+      }
     }
-
   }
 
 }
@@ -465,6 +473,15 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
           }
         }
 
+        // Define routes to show pagetitle within content.
+        $routes = [
+          'entity.user.canonical',
+        ];
+        if (in_array($routename, $routes)) {
+          return AccessResult::allowed()
+            ->addCacheableDependency($block);
+        }
+
         // Default to not showing title in content area.
         return AccessResult::forbidden()
           ->addCacheableDependency($block);
@@ -473,8 +490,9 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
       // Page title in hero area.
       if ($block->id() == 'pagetitle_hero') {
 
-        // Enter all speficic routes to remove the page title in hero area.
+        // Define routes to remove the page title in hero area.
         $routes = [
+          'entity.user.canonical',
           'fsa_signin.user_registration_thank_you',
         ];
 

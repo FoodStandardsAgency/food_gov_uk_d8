@@ -1,10 +1,7 @@
-// Import HTML
-import html from './footer.html';
-
-// Import Styles
-import css from './footer.css';
+import html from './footer.html'
+import css from './footer.css'
 
 module.exports = {
   html,
-  css,
-};
+  css
+}
