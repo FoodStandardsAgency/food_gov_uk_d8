@@ -34,12 +34,6 @@ class EstablishmentApiUrl extends Url {
     }
     else {
       $count = FhrsApiController::totalCount();
-
-      // Vary with the start at page offset for english import as defined in
-      // Drupal\fsa_ratings_import\EventSubscriber\FsaRatingsImportMigrateSubscriber.
-      if (\Drupal::state()->get('fsa_rating_api_offset')) {
-        $start_at_page = \Drupal::state()->get('fsa_rating_api_offset');
-      }
     }
 
     $page_count = $count / self::RATINGS_API_MAX_PAGE_SIZE;
