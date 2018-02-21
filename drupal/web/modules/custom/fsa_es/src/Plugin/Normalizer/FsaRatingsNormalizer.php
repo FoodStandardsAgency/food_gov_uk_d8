@@ -174,9 +174,14 @@ class FsaRatingsNormalizer extends NormalizerBase {
           $ret = [];
           foreach ($content_entity->{$field_name} as $ref) {
             if (isset($ref->entity)) {
-              if ($translated_entity = $ref->entity->getTranslation($content_entity->language()->getId())) {
-                $field_entity = $translated_entity;
+              // See if there's translation of the referenced entity in entity
+              // language.
+              $langcode = $content_entity->language()->getId();
+
+              if ($ref->entity->hasTranslation($langcode)) {
+                $field_entity = $ref->entity->getTranslation($langcode);
               }
+              // If not, use the default referenced entity.
               else {
                 $field_entity = $ref->entity;
               }
