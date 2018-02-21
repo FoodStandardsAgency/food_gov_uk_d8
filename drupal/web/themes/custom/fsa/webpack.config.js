@@ -32,7 +32,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        exclude: /(component|styleguide|core)/,
+        exclude: /(component|styleguide|helper)/,
         use: ExtractCSSPlugin.extract({
           use: [
             {
@@ -45,21 +45,10 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        include: /(component|core)/,
+        include: /(component|helper)/,
         use: [
           {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              config: {
-                path: './styleguide/postcss.config.js'
-              }
-            }
+            loader: 'raw-loader'
           }
         ]
       },
@@ -115,10 +104,7 @@ module.exports = {
             loader: 'html-loader'
           },
           {
-            loader: 'markdown-loader',
-            options: {
-
-            }
+            loader: 'markdown-loader'
           }
         ]
       }

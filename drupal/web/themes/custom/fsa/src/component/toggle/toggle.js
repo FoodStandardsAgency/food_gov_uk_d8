@@ -5,7 +5,7 @@ import checkMediaQuery from '../../helper/checkMediaQuery'
 import breakpoints from '../../helper/breakpoints'
 import debounce from '../../helper/debounce'
 import closestParent from '../../helper/closestParent'
-import { setStateOff, setStateOn, toggleState } from '../../helper/toggleHelpers'
+import state from '../../helper/toggleHelpers'
 
 function toggle () {
   const KEYCODE = {
@@ -45,7 +45,7 @@ function toggle () {
   // Set default state
   function setDefaultState (elem, elemRef, elemState) {
     // Set default state for the 'button'
-    setStateOff({ element: elem, type: 'button' }, elemState)
+    state.off({ element: elem, type: 'button' }, elemState)
 
     elemRef.forEach((elemRefItem) => {
       if (elem.getAttribute('data-breakpoint')) {
@@ -61,7 +61,7 @@ function toggle () {
               if (checkMediaQuery() === breakpoints.small ||
               checkMediaQuery() === breakpoints.xsmall) {
                 // Set state off
-                setStateOff({
+                state.off({
                   element: elemRefItem,
                   type: 'content'
                 }, elemState)
@@ -87,7 +87,7 @@ function toggle () {
                 }
               } else {
                 // Set state on
-                setStateOn({ element: elemRefItem, type: 'content' }, elemState)
+                state.on({ element: elemRefItem, type: 'content' }, elemState)
 
                 // Remove theme
                 if (elem.getAttribute('data-theme')) {
@@ -109,7 +109,7 @@ function toggle () {
         })
       } else {
         // Set default state for the 'content'
-        setStateOff({ element: elemRefItem, type: 'content' }, elemState)
+        state.off({ element: elemRefItem, type: 'content' }, elemState)
 
         // Set theme
         if (elem.getAttribute('data-theme')) {
@@ -163,32 +163,32 @@ function toggle () {
     elemRef.forEach((elemRefItem) => {
       switch (elemBehaviour) {
         case 'add':
-          setStateOn({ element: elem, type: 'button' }, elemState)
-          setStateOn({ element: elemRefItem, type: 'content' }, elemState)
+          state.on({ element: elem, type: 'button' }, elemState)
+          state.on({ element: elemRefItem, type: 'content' }, elemState)
           break
 
         case 'remove':
-          setStateOff({ element: elem, type: 'button' }, elemState)
-          setStateOff({ element: elemRefItem, type: 'content' }, elemState)
+          state.off({ element: elem, type: 'button' }, elemState)
+          state.off({ element: elemRefItem, type: 'content' }, elemState)
           break
 
         case 'remove-all':
           elemScopeObject.button.forEach((elemScopeButtonArrayItem) => {
             if (elem !== elemScopeButtonArrayItem) {
-              setStateOff({ element: elemScopeButtonArrayItem, type: 'button' }, elemState)
+              state.off({ element: elemScopeButtonArrayItem, type: 'button' }, elemState)
             }
           })
 
           elemScopeObject.content.forEach((elemScopeContentArrayItem) => {
             if (elemRefItem !== elemScopeContentArrayItem) {
-              setStateOff({ element: elemScopeContentArrayItem, type: 'content' }, elemState)
+              state.off({ element: elemScopeContentArrayItem, type: 'content' }, elemState)
             }
           })
-          toggleState(elem, elemRefItem, elemState)
+          state.toggle(elem, elemRefItem, elemState)
           break
 
         default:
-          toggleState(elem, elemRefItem, elemState)
+          state.toggle(elem, elemRefItem, elemState)
           break
       }
     })

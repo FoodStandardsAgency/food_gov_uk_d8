@@ -1,44 +1,49 @@
+/* eslint-disable import/no-webpack-loader-syntax */
 import toCamelCase from 'to-camel-case'
 import readme from '../../README.md'
-// import customProperties from '../helper/custom-property.css'
+import customProperties from '../helper/custom-property.css'
 import styles from './styleguide.css'
 import guid from '../helper/guid'
 import safeTagsReplace from '../helper/safeTagsReplace'
-// import isColor from '../helper/isColor'
+import isColor from '../helper/isColor'
 
 function parsePartialMarkup (string) {
   const re = /= "|";/
   return string.split(re)[1]
 }
 
-// const myArray = customProperties.toString().split(/[{}]+/).filter(function(e) { return e; });
+function preprocessCSS (string) {
+  return string.replace(/"/g, '&quot;')
+}
 
-// const parts = myArray[1].replace(/\s/g, '').split(';');
-// const colorArray = [];
-// for (let i = 0; i < parts.length; i++) {
-//   const subParts = parts[i].split(':');
+const myArray = customProperties.toString().split(/[{}]+/).filter(function (e) { return e })
 
-//   if (isColor(subParts[1])) {
-//     colorArray.push({
-//       customProperty: subParts[0],
-//       value: subParts[1],
-//     });
-//   }
-// }
+const parts = myArray[1].replace(/\s/g, '').split(';')
+const colorArray = []
+for (let i = 0; i < parts.length; i++) {
+  const subParts = parts[i].split(':')
 
-// const colors = colorArray.map((color) => {
-//   return parsePartialMarkup(require("template-string-loader!./partial/color.html")({
-//     guid: guid(),
-//     customProperty: (color.customProperty !== undefined) ? color.customProperty : 'color',
-//     value: (color.value !== undefined) ? color.value : 'Not available',
-//     styles,
-//   }));
-// }).join('');
+  if (isColor(subParts[1])) {
+    colorArray.push({
+      customProperty: subParts[0],
+      value: subParts[1]
+    })
+  }
+}
+
+const colors = colorArray.map((color) => {
+  return parsePartialMarkup(require('template-string-loader!./partial/color.html')({
+    guid: guid(),
+    customProperty: (color.customProperty !== undefined) ? color.customProperty : 'color',
+    value: (color.value !== undefined) ? color.value : 'Not available',
+    styles
+  }))
+}).join('')
 
 const intro = parsePartialMarkup(require('template-string-loader!./partial/intro.html')({
   guid: guid(),
   title: 'CSS Custom Properties',
-  // content: customProperties,
+  content: customProperties,
   styles
 }))
 
@@ -62,7 +67,7 @@ const components = componentArray.map((component) => {
     description: (component.description !== undefined) ? component.description : '',
     element: (component.html !== undefined) ? component.html : 'Not available',
     html: (component.html !== undefined) ? safeTagsReplace(component.html) : 'Not available',
-    css: (component.css !== undefined) ? component.css : 'Not available',
+    css: (component.css !== undefined) ? preprocessCSS(component.css) : 'Not available',
     js: (component.js !== undefined) ? component.js : 'Not available',
     styles
   }))
@@ -86,11 +91,11 @@ const introComponentArray = [
     title: 'CSS Custom Properties',
     description: 'These are custom properties. Use them with var() function',
     element: intro
+  },
+  {
+    title: 'Colors',
+    element: colors
   }
-  // {
-  //   title: 'Colors',
-  //   element: colors,
-  // },
 ]
 
 const introComponents = introComponentArray.map((component) => {

@@ -15,20 +15,6 @@ function peek () {
     })
   }
 
-  // Set default dataset
-  peekElementInstanceArray.forEach((item) => {
-    // if (item.dataset.length === 0) {
-    //   item.dataset = {
-    //     declaration: 'transform',
-    //     element: 'translateY',
-    //     start: 0,
-    //     end: -10,
-    //     unit: 'em',
-    //   };
-    // }
-  })
-
-  let latestKnownScrollY = 0
   let ticking = false
   let currentValue
 
@@ -37,8 +23,6 @@ function peek () {
   }
 
   function update () {
-    // reset the tick so we can
-    // capture the next onScroll
     ticking = false
 
     peekElementInstanceArray.forEach((item) => {
@@ -65,17 +49,11 @@ function peek () {
   }
 
   function onScroll () {
-    latestKnownScrollY = window.scrollY
     requestTick()
   }
 
   update()
   window.addEventListener('scroll', onScroll, false)
-
-  // const handleScroll = debounce((e) => {
-  //   console.log('Window scrolled. debounce')
-  // }, 100);
-  // window.addEventListener('scroll', handleScroll);
 }
 
 module.exports = peek
