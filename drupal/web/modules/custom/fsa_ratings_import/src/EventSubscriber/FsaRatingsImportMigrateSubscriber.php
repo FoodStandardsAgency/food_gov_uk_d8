@@ -54,7 +54,6 @@ class FsaRatingsImportMigrateSubscriber implements EventSubscriberInterface {
       else {
         \Drupal::state()->set(self::RATING_IMPORT_START_OFFSET_VAR, $offset + 1);
       }
-      drush_print_r($offset);
     }
   }
 
