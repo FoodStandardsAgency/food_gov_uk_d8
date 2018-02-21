@@ -2,6 +2,7 @@
 
 namespace Drupal\fsa_ratings_import\EventSubscriber;
 
+use Drupal\Component\Utility\Timer;
 use Drupal\migrate\Event\MigrateEvents;
 use Drupal\migrate\Event\MigrateImportEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -28,8 +29,20 @@ class FsaRatingsImportMigrateSubscriber implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents() {
     return [
+      MigrateEvents::PRE_IMPORT => 'onMigratePreImport',
       MigrateEvents::POST_IMPORT => 'onMigratePostImport',
     ];
+  }
+
+  /**
+   * Sets an offset for next establishment migration process.
+   *
+   * @param \Drupal\migrate\Event\MigrateImportEvent $event
+   *   The import event.
+   */
+  public function onMigratePreImport(MigrateImportEvent $event) {
+    $timername = $event->getMigration()->id();
+    Timer::start($timername);
   }
 
   /**
@@ -55,6 +68,10 @@ class FsaRatingsImportMigrateSubscriber implements EventSubscriberInterface {
         \Drupal::state()->set(self::RATING_IMPORT_START_OFFSET_VAR, $offset + 1);
       }
     }
+
+    $timername = $event->getMigration()->id();
+    drush_print_r('Timer for ' . $timername . ': ' . Timer::read($timername));
+    Timer::stop($timername);
   }
 
 }
