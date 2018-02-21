@@ -72,6 +72,9 @@ class FhrsApiController extends ControllerBase {
    */
   public static function totalCount(array $filters = []) {
 
+    // Get only one item from API to get the meta (reduces the response time).
+    $filters['pageSize'] = 1;
+
     // Take filters and build a query for the API.
     $query = UrlHelper::buildQuery($filters);
 
