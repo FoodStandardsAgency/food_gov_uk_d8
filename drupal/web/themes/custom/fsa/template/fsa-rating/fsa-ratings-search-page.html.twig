@@ -56,7 +56,7 @@
           {% endif %}
         </div>
 
-        <h2 class="visually-hidden" aria-labelledby="sortable">{% trans %}Food hygiene ratings search results{% endtrans %}</h2>
+        <h2 class="visually-hidden" aria-labelledby="sortable">{% trans %}Food hygiene ratings search results{% endtrans %} - {{ hits_total }} {% if keywords %}{{ 'results for '|t }} "{{ keywords }}"{% else %}{{ 'results'|t }}{% endif %}</h2>
         <div class="table table--with-background js-table ratings__table" id="sortable" role="grid">
           <div class="table__row table__row--header table__row--negative js-table-header" role="row">
             <div class="table__item table__item--large" role="columnheader">{% trans %}Name{% endtrans %}</div>

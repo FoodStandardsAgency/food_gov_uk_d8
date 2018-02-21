@@ -1,20 +1,18 @@
+/* stylelint-disable selector-pseudo-class-no-unknown */
 @import "../helper/custom-property";
 @import "../helper/helper";
 
 :root {
   --styleguide-color-black: var(--color-black, #000);
   --styleguide-color-white: var(--color-white, #fff);
-  --styleguide-color-gray-light: var(--color-gray-light, #EEEEEE);
-  --styleguide-color-gray: var(--color-gray, #9E9E9E);
-
+  --styleguide-color-gray-light: var(--color-gray-light, #eee);
+  --styleguide-color-gray: var(--color-gray, #9e9e9e);
   --styleguide-color-blue-light: var(--color-blue-light, #6db2e7);
   --styleguide-color-blue: var(--color-blue, #2572ad);
   --styleguide-color-blue-dark: var(--color-blue-dark, #18507b);
-
   --styleguide-primary-color-light: var(--styleguide-color-blue-light);
   --styleguide-primary-color: var(--styleguide-color-blue);
   --styleguide-primary-color-dark: var(--styleguide-color-blue-dark);
-
   --styleguide-box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -57,27 +55,27 @@ body.styleguide {
 
 .hero h1 {
   @mixin responsive-declaration font-size, 1.5em, 3em;
-  /* color: var(--styleguide-color-white); */
 }
 
 .hero h2 {
   @mixin responsive-declaration font-size, 1em, 2em;
-  /* color: var(--styleguide-primary-color-light); */
 }
 
 .layout {
-  position: relative;
   @mixin responsive-declaration padding-left, 2em, 4em;
   @mixin responsive-declaration padding-right, 2em, 4em;
+
+  position: relative;
 }
 
 .navigation {
+  @mixin responsive-declaration padding, 1em, 2em;
+
   position: relative;
   z-index: var(--z-middle);
   color: var(--color-white);
   display: flex;
   flex-flow: row wrap;
-  @mixin responsive-declaration padding, 1em, 2em;
 
   @media (--breakpoint-md) {
     flex-flow: column nowrap;
@@ -130,17 +128,18 @@ body.styleguide {
 }
 
 .layout__content {
-  position: relative;
-  z-index: var(--z-bottom);
-  flex: 1 1 100%;
-  min-height: 100vh;
   @mixin responsive-declaration padding-bottom, 1em, 3em;
   @mixin responsive-declaration padding-right, 1em, 4em;
   @mixin responsive-declaration padding-left, 1em, 4em;
 
+  position: relative;
+  z-index: var(--z-bottom);
+  flex: 1 1 100%;
+  min-height: 100vh;
+
   @media (--breakpoint-md) {
     margin-right: 20em;
-    padding-right: 0em;
+    padding-right: 0;
   }
 
   @media (--breakpoint-lg) {
@@ -168,20 +167,23 @@ body.styleguide {
 }
 
 .color__property {
+  @mixin responsive-declaration padding, 1em, 1.5em;
+
   text-align: center;
   font-family: monospace;
   margin: 0;
-  @mixin responsive-declaration padding, 1em, 1.5em;
 }
 
 .color__value {
-  font-family: monospace;
   @mixin responsive-declaration padding, 1em, 1.5em;
+
+  font-family: monospace;
 }
 
 .item {
-  background-color: var(--styleguide-color-white);
   @mixin responsive-declaration margin-bottom, 1em, 2em;
+
+  background-color: var(--styleguide-color-white);
   position: relative;
 }
 
@@ -195,18 +197,18 @@ body.styleguide {
 
 .item__title {
   @mixin responsive-declaration font-size, 1.5em, 2em;
+
   margin: 0;
-  display: inline-block;
-  padding: 0.25em 0em;
+  padding: 0.25em 0;
   display: block;
   border-bottom: 1px solid var(--styleguide-color-gray);
 }
 
 .item__description {
-  margin: 0;
-  display: inline-block;
-  padding: 0.25em 1em;
   @mixin responsive-declaration margin-top, 1em, 2em;
+
+  margin: 0;
+  padding: 0.25em 1em;
   display: block;
   border-left: 3px solid var(--styleguide-color-gray);
 }
@@ -216,13 +218,10 @@ body.styleguide {
 }
 
 .item__element {
-  /* @mixin responsive-declaration padding, 1em, 2em; */
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
-  flex: 0 0 50%;
   @mixin responsive-declaration margin-top, 1em, 2em;
   @mixin responsive-declaration margin-bottom, 1em, 2em;
+
+  flex: 0 0 50%;
 }
 
 .item__code {
@@ -243,9 +242,10 @@ body.styleguide {
 .item__content h2,
 .item__content h3,
 .item__content h4 {
-  font-weight: 600;
   @mixin responsive-declaration margin-top, 1em, 2em;
   @mixin responsive-declaration margin-bottom, 0.5em, 1.5em;
+
+  font-weight: 600;
 }
 
 .item__input {
@@ -258,6 +258,7 @@ body.styleguide {
 
 .item__tabItem {
   @mixin responsive-declaration padding, 0.5em, 1em;
+
   cursor: pointer;
   flex: 1 1 auto;
   text-align: center;
@@ -290,6 +291,6 @@ body.styleguide {
 
 .item__input.item__html:checked ~ .item__tabContent .item__tabCode.item__html,
 .item__input.item__css:checked ~ .item__tabContent .item__tabCode.item__css,
-.item__input.item__js:checked ~ .item__tabContent .item__tabCode.item__js  {
+.item__input.item__js:checked ~ .item__tabContent .item__tabCode.item__js {
   display: block;
 }

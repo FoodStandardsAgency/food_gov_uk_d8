@@ -1,6 +1,5 @@
-// Import Styles
-import css from './topics.css';
+import css from './topics.css'
 
 module.exports = {
-  css,
-};
+  css
+}

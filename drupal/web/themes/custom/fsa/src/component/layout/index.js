@@ -1,14 +1,7 @@
-// Import HTML
-import html from './layout.html';
-
-// Import Styles
-import css from './layout.css';
-
-// Import JavaScript
-import js from './layout';
+import html from './layout.html'
+import css from './layout.css'
 
 module.exports = {
   html,
-  css,
-  js,
-};
+  css
+}

@@ -842,6 +842,14 @@
     }
   }
 
+  .header & {
+    display: none;
+
+    @media (--breakpoint-sm) {
+      display: block;
+    }
+  }
+
   h3 {
     position: absolute !important;
     clip: rect(1px, 1px, 1px, 1px);

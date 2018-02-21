@@ -1,9 +1,8 @@
-/* global Element */
 import debounce from '../../helper/debounce'
 import checkMediaQuery from '../../helper/checkMediaQuery'
 import breakpoints from '../../helper/breakpoints'
 import closestParent from '../../helper/closestParent'
-import { setStateOff, setStateOn, removeState, toggleState } from '../../helper/toggleHelpers'
+import state from '../../helper/toggleHelpers'
 
 function navigation () {
   const settings = {
@@ -40,22 +39,6 @@ function navigation () {
   }
 
   const queryParents = (elem, selector) => {
-    // Element.matches() polyfill
-    if (!Element.prototype.matches) {
-      Element.prototype.matches =
-        Element.prototype.matchesSelector ||
-        Element.prototype.mozMatchesSelector ||
-        Element.prototype.msMatchesSelector ||
-        Element.prototype.oMatchesSelector ||
-        Element.prototype.webkitMatchesSelector ||
-        function (s) {
-          var matches = (this.document || this.ownerDocument).querySelectorAll(s)
-          var i = matches.length
-          while (--i >= 0 && matches.item(i) !== this) {}
-          return i > -1
-        }
-    }
-
     // Get the closest matching element
     for (; elem && elem !== document; elem = elem.parentNode) {
       if (elem.matches(selector)) return elem
@@ -67,35 +50,35 @@ function navigation () {
   const traversing = {
     // Functions for traversing between items and levels.
     prev: function (item) {
-      let currentItem
+      let currentItem = queryParents(item, settings.listItemSelector)
 
-      if (currentItem = queryParents(item, settings.listItemSelector)) {
+      if (currentItem) {
         return currentItem.previousElementSibling
       }
     },
     next: function (item) {
-      let currentItem
+      let currentItem = queryParents(item, settings.listItemSelector)
 
-      if (currentItem = queryParents(item, settings.listItemSelector)) {
+      if (currentItem) {
         return currentItem.nextElementSibling
       }
     },
     out: function (item) {
-      let parentItem
+      let parentItem = queryParents(item.parentNode, settings.listItemSelector)
 
       // If item has parent menu item, query for its parent menu.
-      if (parentItem = queryParents(item.parentNode, settings.listItemSelector)) {
+      if (parentItem) {
         return parentItem
       }
     },
     in: function (item) {
-      let childList
+      let childList = item.querySelector(settings.menuSelector)
 
       // If item has a child list, return its first item.
-      if (childList = item.querySelector(settings.menuSelector)) {
-        let firstItem
+      if (childList) {
+        let firstItem = childList.querySelector(settings.listItemSelector)
 
-        if (firstItem = childList.querySelector(settings.listItemSelector)) {
+        if (firstItem) {
           return firstItem
         }
       }
@@ -131,10 +114,10 @@ function navigation () {
     // Functions for traversing between top level items.
     top: {
       topItem: function (item) {
-        let parentItem
+        let parentItem = queryParents(item.parentNode, settings.listItemSelector)
 
         // If item has parent menu item, query for its parent menu.
-        if (parentItem = queryParents(item.parentNode, settings.listItemSelector)) {
+        if (parentItem) {
           return traversing.top.topItem(parentItem)
         }
 
@@ -203,16 +186,18 @@ function navigation () {
         // traverse to the previous top item.
         case keyboard.LEFT:
           listItem = queryParents(item, settings.listItemSelector)
+          group = traversing.group.prev(listItem)
 
           // 1. Traverse to the previous group.
-          if (group = traversing.group.prev(listItem)) {
+          if (group) {
             traversing.focus(group)
             event.preventDefault()
             break
           }
 
           // 2. Traverse to the previous top item.
-          if (prevTopLevelItem = traversing.top.prev(listItem)) {
+          prevTopLevelItem = traversing.top.prev(listItem)
+          if (prevTopLevelItem) {
             traversing.focus(prevTopLevelItem)
             event.preventDefault()
             break
@@ -238,7 +223,8 @@ function navigation () {
           }
 
           // 2. Traverse out to the upper level.
-          if (upperItem = traversing.out(listItem)) {
+          upperItem = traversing.out(listItem)
+          if (upperItem) {
             traversing.focus(upperItem)
             event.preventDefault()
 
@@ -257,14 +243,16 @@ function navigation () {
           listItem = queryParents(item, settings.listItemSelector)
 
           // 1. Traverse to the next group.
-          if (group = traversing.group.next(listItem)) {
+          group = traversing.group.next(listItem)
+          if (group) {
             traversing.focus(group)
             event.preventDefault()
             break
           }
 
           // 2. Traverse to the next top item.
-          if (nextTopLevelItem = traversing.top.next(listItem)) {
+          nextTopLevelItem = traversing.top.next(listItem)
+          if (nextTopLevelItem) {
             traversing.focus(nextTopLevelItem)
             event.preventDefault()
             break
@@ -280,10 +268,10 @@ function navigation () {
         // 3. If there's no sibling, traverse to next group.
         case keyboard.DOWN:
           listItem = queryParents(item, settings.listItemSelector)
-          let innerItem
+          let innerItem = traversing.in(listItem)
 
           // 1. Try and traverse into the list item's child list.
-          if (innerItem = traversing.in(listItem)) {
+          if (innerItem) {
             // TODO: Ask megamenu to open first.
 
             traversing.focus(innerItem)
@@ -292,14 +280,16 @@ function navigation () {
           }
 
           // 2. Traverse to the next sibling.
-          if (siblingItem = traversing.next(item)) {
+          siblingItem = traversing.next(item)
+          if (siblingItem) {
             traversing.focus(siblingItem)
             event.preventDefault()
             break
           }
 
           // 3. Traverse to the next group.
-          if (group = traversing.group.next(listItem)) {
+          group = traversing.group.next(listItem)
+          if (group) {
             traversing.focus(group)
             event.preventDefault()
             break
@@ -333,6 +323,14 @@ function navigation () {
     }
   })
 
+  let thirdLevelMenuArray = []
+
+  navigationMenuElementsArray.forEach((element) => {
+    if ([...element.classList].indexOf('navigation__menu--level-3') !== -1) {
+      thirdLevelMenuArray = [...thirdLevelMenuArray, element]
+    }
+  })
+
   let firstLevelLinkArray = []
 
   navigationParentItemsArray.forEach((element) => {
@@ -341,60 +339,198 @@ function navigation () {
     }
   })
 
-  // Add click listener for menu button
-  menuButtonOpenElement.addEventListener('click', function (e) {
-    setStateOn({element: menuButtonOpenElement, type: 'button'}, 'is-open')
-    setStateOn({element: menuButtonCloseElement, type: 'button'}, 'is-open')
-    setStateOn({element: navigationElementArray[0], type: 'content'}, 'is-open')
-    siteElementArray[0].classList.add('is-moved')
-    root.classList.add('is-fixed')
-    menuButtonCloseElement.focus()
-  })
+  let secondLevelLinkArray = []
 
-  // Add click listener for menu button
-  menuButtonCloseElement.addEventListener('click', function (e) {
-    setStateOff({element: menuButtonOpenElement, type: 'button'}, 'is-open')
-    setStateOff({element: menuButtonCloseElement, type: 'button'}, 'is-open')
-    setStateOff({element: navigationElementArray[0], type: 'content'}, 'is-open')
-    siteElementArray[0].classList.remove('is-moved')
-    root.classList.remove('is-fixed')
-    menuButtonOpenElement.focus()
-  })
-
-  // Items with children
   navigationParentItemsArray.forEach((element) => {
-    // Add tabindex
-    element.setAttribute('tabindex', '0')
-
-    // Add click listener
-    element.addEventListener('click', function (e) {
-      if (checkMediaQuery() === breakpoints.xsmall) {
-        e.preventDefault()
-        setStateOn({element: element, type: 'button'}, 'is-open')
-        setStateOn({element: element.nextElementSibling, type: 'content'}, 'is-open')
-        element.nextElementSibling.children[0].children[0].focus()
-        navigationElementArray[0].classList.add('has-open-submenu')
-      }
-    })
+    if ([...element.classList].indexOf('navigation__link--level-2') !== -1) {
+      secondLevelLinkArray = [...secondLevelLinkArray, element]
+    }
   })
 
-  // Back link
-  navigationBackLinksArray.forEach((element) => {
-    // Add click listener
-    element.addEventListener('click', function (e) {
-      if (checkMediaQuery() === breakpoints.xsmall) {
-        e.preventDefault()
-        setStateOff({element: element, type: 'button'}, 'is-open')
-        setStateOff({element: closestParent(element, 'js-nav-menu'), type: 'content'}, 'is-open')
-        setStateOff({element: closestParent(element, 'js-nav-menu').previousElementSibling, type: 'button'}, 'is-open')
-        closestParent(element, 'js-nav-menu').previousElementSibling.focus()
+  function initializeListeners () {
+    // // Add listeners
+    // firstLevelLinkArray.forEach((element) => {
+    //   // Add a focus listener
+    //   element.addEventListener('focus', function (e) {
+    //     firstLevelLinkArray.forEach((element) => {
+    //       state.off({element: element, type: 'button'}, 'is-open')
+    //     })
 
-        if ([...closestParent(element, 'js-nav-menu').classList].indexOf('navigation__menu--level-2') !== -1) {
-          navigationElementArray[0].classList.remove('has-open-submenu')
+    //     secondLevelMenuArray.forEach((element) => {
+    //       state.off({element, type: 'content'}, 'is-open')
+    //     })
+    //   }, true)
+
+    //   // Add a keypress listener
+    //   element.addEventListener('keypress', function (e) {
+    //     const content = element.nextElementSibling
+
+    //     if (e.which === KEYCODE.SPACE) {
+    //       e.preventDefault()
+    //       state.toggle(element, content, 'is-open')
+    //     }
+    //     if (e.which === KEYCODE.ENTER) {
+    //       if ([...content.classList].indexOf('is-open') !== -1) {
+    //         state.off({element: element, type: 'button'}, 'is-open')
+    //         state.off({element: content, type: 'content'}, 'is-open')
+    //       } else {
+    //         e.preventDefault()
+    //         state.on({element: element, type: 'button'}, 'is-open')
+    //         state.on({element: content, type: 'content'}, 'is-open')
+    //       }
+    //     }
+    //   })
+
+    //   // If touch device
+    //   element.addEventListener('touchstart', function addtouchclass (e) {
+    //     if (checkMediaQuery() !== breakpoints.xsmall) {
+    //       const content = element.nextElementSibling
+    //       if ([...content.classList].indexOf('is-open') !== -1) {
+    //         element.classList.remove('is-open')
+    //         content.classList.remove('is-open')
+    //       } else {
+    //         e.preventDefault()
+    //         firstLevelLinkArray.forEach((element) => {
+    //           element.classList.remove('is-open')
+    //         })
+    //         element.classList.add('is-open')
+    //         secondLevelMenuArray.forEach((element) => {
+    //           element.classList.remove('is-open')
+    //         })
+    //         content.classList.add('is-open')
+    //       }
+    //     }
+    //   }, false)
+
+    //   // Add a mouseenter listener
+    //   element.addEventListener('mouseenter', function (e) {
+    //     firstLevelLinkArray.forEach((element) => {
+    //       state.remove({element: element, type: 'button'}, 'is-open')
+    //     })
+
+    //     secondLevelMenuArray.forEach((element) => {
+    //       state.remove({element: element, type: 'content'}, 'is-open')
+    //     })
+    //   }, true)
+    // })
+
+    // Add click listener for menu button
+    menuButtonOpenElement.addEventListener('click', function (e) {
+      console.log(navigationElementArray[0])
+      state.on({element: menuButtonOpenElement, type: 'button'}, 'is-open')
+      state.on({element: menuButtonCloseElement, type: 'button'}, 'is-open')
+      state.on({element: navigationElementArray[0], type: 'content'}, 'is-open')
+      siteElementArray[0].classList.add('is-moved')
+      root.classList.add('is-fixed')
+      menuButtonCloseElement.focus()
+    })
+
+    // Add click listener for menu button
+    menuButtonCloseElement.addEventListener('click', function (e) {
+      state.off({element: menuButtonOpenElement, type: 'button'}, 'is-open')
+      state.off({element: menuButtonCloseElement, type: 'button'}, 'is-open')
+      state.off({element: navigationElementArray[0], type: 'content'}, 'is-open')
+      siteElementArray[0].classList.remove('is-moved')
+      root.classList.remove('is-fixed')
+      menuButtonOpenElement.focus()
+    })
+
+    // Items with children
+    navigationParentItemsArray.forEach((element) => {
+      // Content element
+      const content = element.nextElementSibling
+
+      // Add click listener
+      element.addEventListener('click', function (e) {
+        if (checkMediaQuery() === breakpoints.xsmall) {
+          e.preventDefault()
+          state.on({element: element, type: 'button'}, 'is-open')
+          state.on({element: content, type: 'content'}, 'is-open')
+          content.children[0].children[0].focus()
+          navigationElementArray[0].classList.add('has-open-submenu')
         }
-      }
+      })
+
+      // Add a keypress listener
+      element.addEventListener('keypress', function (e) {
+        if (e.which === KEYCODE.SPACE) {
+          e.preventDefault()
+          state.toggle(element, content, 'is-open')
+        }
+        if (e.which === KEYCODE.ENTER) {
+          state.toggle(element, content, 'is-open')
+        }
+      })
+
+      // Add a focus listener
+      element.addEventListener('focus', function (e) {
+        if (checkMediaQuery() === breakpoints.xsmall) {
+          if ([...element.classList].indexOf('navigation__link--level-1') !== -1) {
+            firstLevelLinkArray.forEach((element) => {
+              state.off({element: element, type: 'button'}, 'is-open')
+            })
+
+            secondLevelMenuArray.forEach((element) => {
+              state.off({element, type: 'content'}, 'is-open')
+            })
+          }
+
+          if ([...element.classList].indexOf('navigation__link--level-2') !== -1) {
+            secondLevelLinkArray.forEach((element) => {
+              state.off({element: element, type: 'button'}, 'is-open')
+            })
+
+            thirdLevelMenuArray.forEach((element) => {
+              state.off({element, type: 'content'}, 'is-open')
+            })
+          }
+        } else {
+          if ([...element.classList].indexOf('navigation__link--level-1') !== -1) {
+            firstLevelLinkArray.forEach((element) => {
+              state.off({element: element, type: 'button'}, 'is-open')
+            })
+
+            secondLevelMenuArray.forEach((element) => {
+              state.off({element, type: 'content'}, 'is-open')
+            })
+          }
+        }
+      }, true)
+
+      // Add a mouseenter listener
+      element.addEventListener('mouseenter', function (e) {
+        if (checkMediaQuery() === breakpoints.xsmall) {
+
+        } else {
+          firstLevelLinkArray.forEach((element) => {
+            state.remove({element: element, type: 'button'}, 'is-open')
+          })
+
+          secondLevelMenuArray.forEach((element) => {
+            state.remove({element: element, type: 'content'}, 'is-open')
+          })
+        }
+      }, true)
     })
-  })
+
+    // Back link
+    navigationBackLinksArray.forEach((element) => {
+      // Add click listener
+      element.addEventListener('click', function (e) {
+        if (checkMediaQuery() === breakpoints.xsmall) {
+          e.preventDefault()
+          state.off({element: element, type: 'button'}, 'is-open')
+          state.off({element: closestParent(element, 'js-nav-menu'), type: 'content'}, 'is-open')
+          state.off({element: closestParent(element, 'js-nav-menu').previousElementSibling, type: 'button'}, 'is-open')
+          closestParent(element, 'js-nav-menu').previousElementSibling.focus()
+
+          if ([...closestParent(element, 'js-nav-menu').classList].indexOf('navigation__menu--level-2') !== -1) {
+            navigationElementArray[0].classList.remove('has-open-submenu')
+          }
+        }
+      })
+    })
+  }
 
   // Initialize navigation
   function initializeNav () {
@@ -404,116 +540,62 @@ function navigation () {
 
     // Set initial states
     if (checkMediaQuery() === breakpoints.xsmall) {
-      setStateOff({element: menuButtonOpenElement, type: 'button'}, 'is-open')
-      setStateOff({element: menuButtonCloseElement, type: 'button'}, 'is-open')
-      setStateOff({element: navigationElementArray[0], type: 'content'}, 'is-open')
+      state.off({element: menuButtonOpenElement, type: 'button'}, 'is-open')
+      state.off({element: menuButtonCloseElement, type: 'button'}, 'is-open')
+      state.off({element: navigationElementArray[0], type: 'content'}, 'is-open')
 
+      // Set state off from link items with children
       navigationParentItemsArray.forEach((element) => {
-        setStateOff({element: element, type: 'button'}, 'is-open')
+        // Add tabindex
+        element.setAttribute('tabindex', '0')
+
+        state.off({element: element, type: 'button'}, 'is-open')
+
+        if ([...element.classList].indexOf('navigation__link--level-2') !== -1) {
+          element.setAttribute('tabindex', '0')
+        }
       })
 
-      navigationMenuElementsArray.forEach((element) => {
-        setStateOff({element: element, type: 'content'}, 'is-open')
+      // Set state off from second subnavigation
+      secondLevelMenuArray.forEach((element) => {
+        state.off({element: element, type: 'content'}, 'is-open')
       })
 
-      navigationBackLinksArray.forEach((element) => {
-        setStateOff({element: element, type: 'button'}, 'is-open')
+      // Set state off from third subnavigation
+      thirdLevelMenuArray.forEach((element) => {
+        state.off({element: element, type: 'content'}, 'is-open')
       })
     } else {
-      removeState({element: menuButtonOpenElement, type: 'button'}, 'is-open')
-      removeState({element: menuButtonCloseElement, type: 'button'}, 'is-open')
-      removeState({element: navigationElementArray[0], type: 'content'}, 'is-open')
+      state.remove({element: menuButtonOpenElement, type: 'button'}, 'is-open')
+      state.remove({element: menuButtonCloseElement, type: 'button'}, 'is-open')
+      state.remove({element: navigationElementArray[0], type: 'content'}, 'is-open')
 
+      // Set state off from link items with children
       navigationParentItemsArray.forEach((element) => {
-        removeState({element: element, type: 'button'}, 'is-open')
+        // Add tabindex
+        element.setAttribute('tabindex', '0')
+
+        state.off({element: element, type: 'button'}, 'is-open')
+
+        if ([...element.classList].indexOf('navigation__link--level-2') !== -1) {
+          element.setAttribute('tabindex', '-1')
+        }
       })
 
-      navigationMenuElementsArray.forEach((element) => {
-        removeState({element: element, type: 'content'}, 'is-open')
+      // Set state off from second subnavigation
+      secondLevelMenuArray.forEach((element) => {
+        state.off({element: element, type: 'content'}, 'is-open')
       })
 
-      navigationBackLinksArray.forEach((element) => {
-        removeState({element: element, type: 'button'}, 'is-open')
+      // Set state off from third subnavigation
+      thirdLevelMenuArray.forEach((element) => {
+        state.remove({element: element, type: 'content'}, 'is-open')
       })
     }
 
-    // Add listeners
-    firstLevelLinkArray.forEach((element) => {
-      // Add a focus listener
-      element.addEventListener('focus', function (e) {
-        firstLevelLinkArray.forEach((element) => {
-          setStateOff({element: element, type: 'button'}, 'is-open')
-        })
-
-        secondLevelMenuArray.forEach((element) => {
-          setStateOff({element, type: 'content'}, 'is-open')
-        })
-      }, true)
-
-      // Add a keypress listener
-      element.addEventListener('keypress', function (e) {
-        const content = element.nextElementSibling
-
-        if (e.which === KEYCODE.SPACE) {
-          e.preventDefault()
-          toggleState(element, content, 'is-open')
-        }
-        if (e.which === KEYCODE.ENTER) {
-          if ([...content.classList].indexOf('is-open') !== -1) {
-            setStateOff({element: element, type: 'button'}, 'is-open')
-            setStateOff({element: content, type: 'content'}, 'is-open')
-          } else {
-            e.preventDefault()
-            setStateOn({element: element, type: 'button'}, 'is-open')
-            setStateOn({element: content, type: 'content'}, 'is-open')
-          }
-        }
-      })
-
-      // If touch device
-      element.addEventListener('touchstart', function addtouchclass (e) {
-        if (checkMediaQuery() !== breakpoints.xsmall) {
-          const content = element.nextElementSibling
-          if ([...content.classList].indexOf('is-open') !== -1) {
-            element.classList.remove('is-open')
-            content.classList.remove('is-open')
-          } else {
-            e.preventDefault()
-            firstLevelLinkArray.forEach((element) => {
-              element.classList.remove('is-open')
-            })
-            element.classList.add('is-open')
-            secondLevelMenuArray.forEach((element) => {
-              element.classList.remove('is-open')
-            })
-            content.classList.add('is-open')
-          }
-        }
-      }, false)
-
-      // Add a mouseenter listener
-      element.addEventListener('mouseenter', function (e) {
-        firstLevelLinkArray.forEach((element) => {
-          removeState({element: element, type: 'button'}, 'is-open')
-        })
-
-        secondLevelMenuArray.forEach((element) => {
-          removeState({element: element, type: 'content'}, 'is-open')
-        })
-      }, true)
-    })
-
-    // Remove states
-    removeState({element: menuButtonOpenElement, type: 'button'}, 'is-open')
-    removeState({element: menuButtonCloseElement, type: 'button'}, 'is-open')
-    removeState({element: navigationElementArray[0], type: 'content'}, 'is-open')
-
-    secondLevelMenuArray.forEach((element) => {
-      setStateOff({element, type: 'content'}, 'is-open')
-    })
-
+    // Set state off from back links
     navigationBackLinksArray.forEach((element) => {
-      removeState({element, type: 'button'}, 'is-open')
+      state.off({element: element, type: 'button'}, 'is-open')
     })
   }
 
@@ -533,6 +615,7 @@ function navigation () {
 
   window.addEventListener('resize', resizeHandler)
 
+  initializeListeners()
   initializeNav()
 }
 

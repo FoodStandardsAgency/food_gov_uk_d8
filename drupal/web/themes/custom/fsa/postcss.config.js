@@ -15,5 +15,5 @@ module.exports = {
     'postcss-nested': {},
     'postcss-normalize': {},
     'postcss-discard-comments': {}
-  },
-};
+  }
+}
