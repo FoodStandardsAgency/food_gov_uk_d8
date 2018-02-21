@@ -35,18 +35,20 @@ class FsaRatingsImportMigrateSubscriber implements EventSubscriberInterface {
   }
 
   /**
-   * Sets an offset for next establishment migration process.
+   * Pre import event.
    *
    * @param \Drupal\migrate\Event\MigrateImportEvent $event
    *   The import event.
    */
   public function onMigratePreImport(MigrateImportEvent $event) {
+
+    // @todo: temporary timer to track excecution times.
     $timername = $event->getMigration()->id();
     Timer::start($timername);
   }
 
   /**
-   * Sets an offset for next establishment migration process.
+   * Post import event.
    *
    * @param \Drupal\migrate\Event\MigrateImportEvent $event
    *   The import event.
@@ -70,7 +72,7 @@ class FsaRatingsImportMigrateSubscriber implements EventSubscriberInterface {
     }
 
     $timername = $event->getMigration()->id();
-    drush_print_r('Timer for ' . $timername . ': ' . Timer::read($timername));
+    drush_print('Migration ' . $timername . ' took ' . floor(Timer::read($timername) / 1000) . ' seconds to execute');
     Timer::stop($timername);
   }
 
