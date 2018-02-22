@@ -1,0 +1,597 @@
+# Welsh translation of Food Standards Agency
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2017-09-14 15:46+0100\n"
+"PO-Revision-Date: 2018-02-26 07:48+0000\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"Language: cy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.0.4\n"
+
+msgid "A–Z"
+msgstr "A–Y"
+
+msgid "Search from..."
+msgstr "Chwilio o…"
+
+msgid "About us"
+msgstr "Amdanom ni"
+
+msgid ""
+"Food Standards Agency makes sure food is safe to eat and what it says it is."
+msgstr ""
+"Mae’r Asiantaeth Safonau Bwyd yn sicrhau bod bwyd yn ddiogel i’w fwyta a "
+"beth y mae’n ei ddweud."
+
+msgid "Search"
+msgstr "Chwilio"
+
+msgid "Jan"
+msgstr "Ion"
+
+msgid "Feb"
+msgstr "Chwef"
+
+msgid "Mar"
+msgstr "Maw"
+
+msgid "Apr"
+msgstr "Ebr"
+
+msgid "May"
+msgstr "Mai"
+
+msgid "Jun"
+msgstr "Meh"
+
+msgid "Jul"
+msgstr "Gorff"
+
+msgid "Aug"
+msgstr "Awst"
+
+msgid "Sep"
+msgstr "Medi"
+
+msgid "Oct"
+msgstr "Hyd"
+
+msgid "Nov"
+msgstr "Tach"
+
+msgid "Dec"
+msgstr "Rhag"
+
+msgid "Home"
+msgstr "Hafan"
+
+msgid "Food hygiene ratings search"
+msgstr "Chwiliad sgoriau hylendid bwyd"
+
+msgid "Business name/or location"
+msgstr "Enw busnes/neu’r lleoliad"
+
+msgid "More search options"
+msgstr "Rhagor o opsiynau chwilio"
+
+msgid "Business type"
+msgstr "Math o fusnes"
+
+msgid "Local authority"
+msgstr "Awdurdod lleol"
+
+msgid "Hygiene rating"
+msgstr "Hylendid"
+
+msgid "Exempt"
+msgstr "Wedi’i eithrio"
+
+msgid "Results"
+msgstr "Canlyniadau"
+
+msgid "Sort results by"
+msgstr "Didoli canlyniadau gan"
+
+msgid "Relevance"
+msgstr "Allweddair perthnasol"
+
+msgid "Ratings (highest to lowest)"
+msgstr "Graddfa (uchaf i’r isaf)"
+
+msgid "Rating (lowest to highest)"
+msgstr "Graddfa (isaf i'r uchaf)"
+
+msgid "Name (A to Z)"
+msgstr "Enw (A i Z)"
+
+msgid "Name (Z to A)"
+msgstr "Enw (Z i A)"
+
+msgid "Rating"
+msgstr "Sgôr"
+
+msgid "Inspection date"
+msgstr "Dyddiad arolygu"
+
+msgid "Page @start of @end"
+msgstr "Tudalen @start o @end"
+
+msgid "Back to form"
+msgstr "Yn ôl at y ffurflen"
+
+msgid "{Empty}"
+msgstr "{Gwag}"
+
+msgid "View PDF"
+msgstr "Gweler PDF"
+
+msgid "Enter a location"
+msgstr "Rhowch leoliad"
+
+msgid "Yes"
+msgstr "Ydw"
+
+msgid "No"
+msgstr "Na"
+
+msgid "Manage your preferences"
+msgstr "Rheoli eich dewisiadau"
+
+msgid "Manage your subscription"
+msgstr "Rheoli eich tanysgrifiadau"
+
+msgid "Logout"
+msgstr "Allgofnodi"
+
+msgid "Cancel your subscription"
+msgstr "Canslo eich tanysgrifiad"
+
+msgid "Save your changes"
+msgstr "Arbed eich newidiadau"
+
+msgid "News and consultations"
+msgstr "Newyddion ac ymgynghoriadau"
+
+msgid "Delivery options"
+msgstr "Opsiynau anfon"
+
+msgid ""
+"Update your subscription or unsubscribe from the alerts you're receiving"
+msgstr ""
+"Ewch ati i ddiweddaru eich tanysgrifiad neu ddatdanysgrifio o'r rhybuddion "
+"rydych chi'n eu cael"
+
+msgid "Password"
+msgstr "Cyfrinair"
+
+msgid "Password should be at least @length characters"
+msgstr "Dylai'r cyfrinair gynnwys o leiaf @length nod"
+
+msgid "Profile removed"
+msgstr "Proffil wedi'i ddileu"
+
+msgid "Passwords match:"
+msgstr "Cyfrineiriau yn cyd-fynd:"
+
+msgid ""
+"This will cancel all your subscriptions and permanently remove your personal "
+"details."
+msgstr ""
+"Bydd hyn yn canslo eich holl danysgrifiadau ac yn dileu eich manylion "
+"personol."
+
+msgid "Confirm removal"
+msgstr "Cadarnhau eich bod am ddileu"
+
+msgid "Remove your profile"
+msgstr "Dileu eich proffil"
+
+msgid "Save changes"
+msgstr "Arbed newidiadau"
+
+msgid "Subscribe to news and alerts"
+msgstr "Tanysgrifio i newyddion a rhybuddion"
+
+msgid ""
+"Stay up to date with food and allergy alerts, FSA news and consultations."
+msgstr ""
+"Y diweddaraf am rybuddion bwyd ac alergedd, newyddion ac ymgynghoriadau'r "
+"ASB."
+
+msgid "Food and allergy alerts"
+msgstr "Rhybuddion bwyd ac alergedd"
+
+msgid "Food alerts"
+msgstr "Rhybuddion bwyd"
+
+msgid "Allergy alerts"
+msgstr "Rhybuddion alergedd"
+
+msgid "News"
+msgstr "Newyddion"
+
+msgid "Consultations"
+msgstr "Ymgynghoriadau"
+
+msgid "I want to receive food and allergy alerts via"
+msgstr "Rydw i eisiau cael rhybuddion bwyd ac alergedd drwy..."
+
+msgid "I want to receive news and consultations via"
+msgstr "Rydw i eisiau cael newyddion ac ymgynghoriadau drwy..."
+
+msgid "Frequency"
+msgstr "Pa mor aml"
+
+msgid "SMS frequency"
+msgstr "Amlder SMS"
+
+msgid "SMS updates are sent immediately"
+msgstr "Hysbysiadau SMS yn cael eu hanfon ar unwaith"
+
+msgid "Email frequency"
+msgstr "Amlder e-bost"
+
+msgid "Personal information"
+msgstr "Gwybodaeth bersonol"
+
+msgid "Language preference"
+msgstr "Dewis iaith"
+
+msgid "All allergy alerts"
+msgstr "Yr holl rybuddion alergedd"
+
+msgid "Celery"
+msgstr "Seleri"
+
+msgid "Crustaceans"
+msgstr "Cramenogion"
+
+msgid "Egg"
+msgstr "Wyau"
+
+msgid "Fish"
+msgstr "Pysgod"
+
+msgid "Gluten"
+msgstr "Glwten"
+
+msgid "Lupin"
+msgstr "Bys y blaidd"
+
+msgid "Milk"
+msgstr "Llaeth"
+
+msgid "Molluscs"
+msgstr "Molysgiaid"
+
+msgid "Mustard"
+msgstr "Mwstard"
+
+msgid "Nuts"
+msgstr "Cnau"
+
+msgid "Peanuts"
+msgstr "Pysgnau"
+
+msgid "Sesame"
+msgstr "Sesame"
+
+msgid "Soya"
+msgstr "Soai"
+
+msgid "Sulphur dioxide and/or sulphites"
+msgstr "Sylffwr deuocsid a/neu sylffitau"
+
+msgid "All news"
+msgstr "Yr holl newyddion"
+
+msgid "Board meeting news"
+msgstr "Newyddion am y cyfarfod bwrdd"
+
+msgid "Business and industry news"
+msgstr "Newyddion busnes a'r diwydiant"
+
+msgid "Northern Ireland news"
+msgstr "Newyddion Gogledd Iwerddon"
+
+msgid "Science news"
+msgstr "Newyddion gwyddoniaeth"
+
+msgid "Wales news"
+msgstr "Newyddion Cymru"
+
+msgid "All consultations"
+msgstr "Yr holl ymgynghoriadau"
+
+msgid "Consultation"
+msgstr "Ymgynghoriad"
+
+msgid "Help shape our policies"
+msgstr "Helpu i lywio ein polisïau"
+
+msgid "Rapidly developing policies"
+msgstr "Polisïau sy'n datblygu'n gyflym"
+
+msgid "Email"
+msgstr "E-bost"
+
+msgid "Send updates immediately"
+msgstr "Anfon hysbysiadau ar unwaith"
+
+msgid "Send updates daily"
+msgstr "Anfon diweddariadau bob dydd"
+
+msgid "Send updates weekly"
+msgstr "Anfon diweddariadau bob wythnos"
+
+msgid "Email address"
+msgstr "Cyfeiriad e-bost"
+
+msgid "Back"
+msgstr "Yn ôl"
+
+msgid "Your profile"
+msgstr "Eich proffil chi"
+
+msgid "Manage your profile"
+msgstr "Rheoli eich proffil"
+
+msgid "Privacy notice"
+msgstr "Hysbysiad preifatrwydd"
+
+msgid "New password"
+msgstr "Cyfrinair newydd"
+
+msgid "Confirm password"
+msgstr "Cadarnhau'r cyfrinair"
+
+msgid "Food hygiene ratings"
+msgstr "Sgoriau Hylendid Bwyd"
+
+msgid "Country or local authority"
+msgstr "Gwlad neu awdurdod lleol"
+
+msgid "Hygiene"
+msgstr "Hylendid"
+
+msgid "England, Northern Ireland, Wales"
+msgstr "Lloegr, Canllawiau Gogledd, Cymru"
+
+msgid "Hygiene status"
+msgstr "Statws hylendid"
+
+msgid "Scotland"
+msgstr "Yr Alban"
+
+msgid "Very good"
+msgstr "Da iawn"
+
+msgid "Good"
+msgstr "Da"
+
+msgid "Generally satisfactory"
+msgstr "Boddhaol ar y cyfan"
+
+msgid "Improvement necessary"
+msgstr "Angen gwella"
+
+msgid "Major improvement necessary"
+msgstr "Angen gwella yn sylweddol"
+
+msgid "Urgent improvement necessary"
+msgstr "Angen gwella ar frys"
+
+msgid "Back to ratings search"
+msgstr "Yn ôl i chwilio am sgoriau"
+
+msgid "Find out more about food hygiene ratings"
+msgstr "Rhagor o wybodaeth am y sgoriau"
+
+msgid "Area inspected by food safety officer"
+msgstr "Yr ardal a arolygwyd gan y swyddog diogelwch bwyd"
+
+msgid ""
+"Hygienic handling of food including preparation, cooking, re-heating, "
+"cooling and storage"
+msgstr ""
+"Trin bwyd yn hylan gan gynnwys paratoi, coginio, ailgynhesu, oeri a storio"
+
+msgid "Cleanliness and condition of facilities and building"
+msgstr "Glanweithdra a chyflwr y cyfleusterau a'r adeilad"
+
+msgid ""
+"Cleanliness and condition of facilities and building (including having "
+"appropriate layout, ventilation, hand washing facilities and pest control) "
+"to enable good food hygiene"
+msgstr ""
+"Glanweithdra a chyflwr y cyfleusterau a'r adeilad (gan gynnwys dyluniad "
+"priodol, awyru, cyfleusterau golchi dwylo a rheoli plâu) yn galluogi "
+"hylendid bwyd da"
+
+msgid "Management of food safety"
+msgstr "Mesurau rheoli diogelwch bwyd"
+
+msgid ""
+"System or checks in place to ensure that food sold or served is safe to eat, "
+"evidence that staff know about food safety, and the food safety officer has "
+"confidence that standards will be maintained in future."
+msgstr ""
+"System neu wiriadau ar waith i sicrhau bod y bwyd a gaiff ei werthu neu ei "
+"weini yn ddiogel i'w fwyta, tystiolaeth bod y staff yn gwybod am ddiogelwch "
+"bwyd, a bod gan y swyddog diogelwch bwyd hyder y bydd y safonau'n cael eu "
+"cynnal yn y dyfodol."
+
+msgid "Are you the business owner or manager?"
+msgstr "Ai chi yw perchennog neu reolwr y busnes?"
+
+msgid ""
+"If any information on this page is incorrect you can email the correct "
+"information to your local authority by using the email address below."
+msgstr ""
+"Os oes unrhyw wybodaeth sy'n anghywir ar y dudalen hon, gallwch anfon yr "
+"wybodaeth gywir at eich awdurdod lleol gan ddefnyddio'r cyfeiriad e-bost "
+"isod."
+
+msgid ""
+"You can find out how to appeal against the rating given and find out about "
+"your right to reply. You can also ask for a re-inspection."
+msgstr ""
+"Gallwch ganfod sut i apelio yn erbyn y sgôr a dderbyniwyd ac am eich hawl i "
+"ymateb. Gallwch hefyd ofyn am ailarolygiad."
+
+msgid "Display this rating on your website"
+msgstr "Arddangos y sgôr hon ar eich gwefan"
+
+msgid "You can display this rating on your website."
+msgstr "Gallwch arddangos y sgôr hon ar eich gwefan."
+
+msgid "Get badges"
+msgstr "Bathodynnau"
+
+msgid "Do you want to get a copy of the report?"
+msgstr "Ydych chi eisiau copi o'r adroddiad?"
+
+msgid ""
+"If you wish to see the food safety officer’s report on which this rating is "
+"based, you can request this from the local authority that carried out the "
+"inspection. You can do this by sending an email to the address below. The "
+"local authority will consider your request and will usually send you a copy "
+"of the report. In some cases, the local authority may decide that they "
+"cannot do so but will let you know this and explain why."
+msgstr ""
+"Os hoffech weld adroddiad y swyddog diogelwch bwyd sy'n sail i'r sgôr hon, "
+"gallwch ofyn i’w weld gan yr awdurdod lleol a gynhaliodd yr arolygiad. "
+"Gallwch wneud hyn drwy anfon e-bost i’r cyfeiriad isod. Bydd yr awdurdod "
+"lleol yn ystyried eich cais, ac fel arfer bydd yn anfon copi o’r adroddiad "
+"atoch. Mewn rhai achosion, gallai’r awdurdod lleol benderfynu nad oes modd "
+"iddo wneud hynny. Os felly, bydd yr awdurdod lleol yn rhoi gwybod i chi am "
+"hynny ac yn egluro pam."
+
+msgid "Inspecting council"
+msgstr "Cyngor arolygu"
+
+msgid "Hygienic food handling"
+msgstr "Trin bwyd yn hylan"
+
+msgid "Standards found"
+msgstr "Y safonau a ganfuwyd"
+
+msgid "Awaiting Rating"
+msgstr "Aros am sgôr"
+
+msgid "Address"
+msgstr "Cyfeiriad"
+
+msgid "Show on a map"
+msgstr "Dangos ar fap"
+
+msgid "Next ›"
+msgstr "Nesaf ›"
+
+msgid "Last »"
+msgstr "Diwethaf »"
+
+msgid "« First"
+msgstr "« Gyntaf"
+
+msgid "‹ Previous"
+msgstr "‹ Blaenorol"
+
+msgid "What is the Food Hygiene Rating Scheme?"
+msgstr "Beth yw'r Cynllun Sgorio Hylendid Bwyd?"
+
+msgid "What do the different ratings mean"
+msgstr "Beth mae'r sgoriau'n ei olygu"
+
+msgid "Showing <span>@items</span> of <span>@total</span>"
+msgstr "Yn dangos <span>@items</span> o <span>@total</span>"
+
+msgid "results"
+msgstr "canlyniadau"
+
+msgid "January"
+msgstr "Ionawr"
+
+msgid "February"
+msgstr "Chwefror"
+
+msgid "March"
+msgstr "Mawrth"
+
+msgid "April"
+msgstr "Ebrill"
+
+msgid "June"
+msgstr "Mehefin"
+
+msgid "July"
+msgstr "Gorffennaf"
+
+msgid "August"
+msgstr "Awst"
+
+msgid "September"
+msgstr "Medi"
+
+msgid "October"
+msgstr ""
+
+msgid "November"
+msgstr "Tachwedd"
+
+msgid "December"
+msgstr "Rhagfyr"
+
+msgid ""
+"This is a new service – your <a href=\"/feedback\">feedback</a> will help us "
+"to improve it."
+msgstr ""
+"Mae hwn yn wasanaeth newydd – bydd eich <a href=\"/cy/feedback\">adborth</a> "
+"yn ein helpu i'w wella."
+
+msgid "Search..."
+msgstr "Chwilio..."
+
+msgid "Is there anything wrong with this page?"
+msgstr "Oes rhywbeth o’i le â’r dudalen hon?"
+
+msgid "Close"
+msgstr "Cau"
+
+msgid "Subject"
+msgstr "Pwnc"
+
+msgid "Message"
+msgstr "Neges"
+
+msgid "Send message"
+msgstr "Anfon neges"
+
+msgid " result found"
+msgstr " canlyniad a ganfuwyd"
+
+msgid " results found"
+msgstr "Heb ganfod canlyniad."
+
+#~ msgid "\">@total</span> result found"
+#~ msgstr "\">@total</span> canlyniad a ganfuwyd"
+
+#~ msgid "\">@total</span> results found"
+#~ msgstr "\">@total</span> canlyniada a ganfuwyd"
+
+#~ msgid ""
+#~ "<div class=\"toggle-button js-toggle-button ratings__advanced-search-"
+#~ "button\" role=\"button\" aria-expanded=\"false\" aria-controls="
+#~ "\"collapsible-12345zxcv\"><div class=\"toggle-button__item\">More search "
+#~ "options</div>"
+#~ msgstr ""
+#~ "<div class=“toggle-button js-toggle-button ratings__advanced-search-"
+#~ "button” role=“button” aria-expanded=“false” aria-"
+#~ "controls=“collapsible-12345zxcv”><div class=“toggle-button__item”>Rhagor "
+#~ "o opsiynau chwilio</div>"
