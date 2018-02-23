@@ -1,0 +1,9 @@
+display:
+  default:
+    display_options:
+      header:
+        area:
+          content:
+            value: "<div class=\"listing__header\">\r\n<h3 class=\"listing__heading\">Sgoriau hylendid bwyd</h3>\r\n</div>\r\n"
+            format: full_html
+      use_more_text: 'Rhagor o sgoriau hylendid bwyd'
