@@ -48,12 +48,4 @@ function fsa_webform_validation_form_alter(&$form, FormStateInterface $form_stat
       }
     }
   }
-
-  // Translate yes/no options in page feedback.
-  if (isset($form['#webform_id']) && $form['#webform_id'] == 'page_feedback') {
-    $form['elements']['is_useful']['#options'] = [
-      'Yes' => t('Yes'),
-      'No' => t('No'),
-    ];
-  }
 }
