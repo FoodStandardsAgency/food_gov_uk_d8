@@ -13,4 +13,4 @@ id: taxonomy_term.alerts_allergen
 target_entity_type_id: taxonomy_term
 target_bundle: alerts_allergen
 default_langcode: site_default
-language_alterable: true
+language_alterable: false

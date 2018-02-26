@@ -12,7 +12,7 @@ bundle: alerts_allergen
 label: Description
 description: 'The short description of this allergen. Can be edited manually on this site but will be later pulled from the Alerts API.'
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
