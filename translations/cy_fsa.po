@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2017-09-14 15:46+0100\n"
-"PO-Revision-Date: 2018-02-19 13:53+0000\n"
+"PO-Revision-Date: 2018-02-26 07:48+0000\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -34,6 +34,9 @@ msgstr "Chwilio"
 
 msgid "Jan"
 msgstr "Ion"
+
+msgid "Feb"
+msgstr "Chwef"
 
 msgid "Mar"
 msgstr "Maw"
@@ -348,11 +351,239 @@ msgstr "Cyfrinair newydd"
 msgid "Confirm password"
 msgstr "Cadarnhau'r cyfrinair"
 
-#~ msgid "Food hygiene ratings"
-#~ msgstr "Sgoriau Hylendid Bwyd"
+msgid "Food hygiene ratings"
+msgstr "Sgoriau Hylendid Bwyd"
 
-#~ msgid "Print this page"
-#~ msgstr "Argraffu’r dudalen hon"
+msgid "Country or local authority"
+msgstr "Gwlad neu awdurdod lleol"
+
+msgid "Hygiene"
+msgstr "Hylendid"
+
+msgid "England, Northern Ireland, Wales"
+msgstr "Lloegr, Canllawiau Gogledd, Cymru"
+
+msgid "Hygiene status"
+msgstr "Statws hylendid"
+
+msgid "Scotland"
+msgstr "Yr Alban"
+
+msgid "Very good"
+msgstr "Da iawn"
+
+msgid "Good"
+msgstr "Da"
+
+msgid "Generally satisfactory"
+msgstr "Boddhaol ar y cyfan"
+
+msgid "Improvement necessary"
+msgstr "Angen gwella"
+
+msgid "Major improvement necessary"
+msgstr "Angen gwella yn sylweddol"
+
+msgid "Urgent improvement necessary"
+msgstr "Angen gwella ar frys"
+
+msgid "Back to ratings search"
+msgstr "Yn ôl i chwilio am sgoriau"
+
+msgid "Find out more about food hygiene ratings"
+msgstr "Rhagor o wybodaeth am y sgoriau"
+
+msgid "Area inspected by food safety officer"
+msgstr "Yr ardal a arolygwyd gan y swyddog diogelwch bwyd"
+
+msgid ""
+"Hygienic handling of food including preparation, cooking, re-heating, "
+"cooling and storage"
+msgstr ""
+"Trin bwyd yn hylan gan gynnwys paratoi, coginio, ailgynhesu, oeri a storio"
+
+msgid "Cleanliness and condition of facilities and building"
+msgstr "Glanweithdra a chyflwr y cyfleusterau a'r adeilad"
+
+msgid ""
+"Cleanliness and condition of facilities and building (including having "
+"appropriate layout, ventilation, hand washing facilities and pest control) "
+"to enable good food hygiene"
+msgstr ""
+"Glanweithdra a chyflwr y cyfleusterau a'r adeilad (gan gynnwys dyluniad "
+"priodol, awyru, cyfleusterau golchi dwylo a rheoli plâu) yn galluogi "
+"hylendid bwyd da"
+
+msgid "Management of food safety"
+msgstr "Mesurau rheoli diogelwch bwyd"
+
+msgid ""
+"System or checks in place to ensure that food sold or served is safe to eat, "
+"evidence that staff know about food safety, and the food safety officer has "
+"confidence that standards will be maintained in future."
+msgstr ""
+"System neu wiriadau ar waith i sicrhau bod y bwyd a gaiff ei werthu neu ei "
+"weini yn ddiogel i'w fwyta, tystiolaeth bod y staff yn gwybod am ddiogelwch "
+"bwyd, a bod gan y swyddog diogelwch bwyd hyder y bydd y safonau'n cael eu "
+"cynnal yn y dyfodol."
+
+msgid "Are you the business owner or manager?"
+msgstr "Ai chi yw perchennog neu reolwr y busnes?"
+
+msgid ""
+"If any information on this page is incorrect you can email the correct "
+"information to your local authority by using the email address below."
+msgstr ""
+"Os oes unrhyw wybodaeth sy'n anghywir ar y dudalen hon, gallwch anfon yr "
+"wybodaeth gywir at eich awdurdod lleol gan ddefnyddio'r cyfeiriad e-bost "
+"isod."
+
+msgid ""
+"You can find out how to appeal against the rating given and find out about "
+"your right to reply. You can also ask for a re-inspection."
+msgstr ""
+"Gallwch ganfod sut i apelio yn erbyn y sgôr a dderbyniwyd ac am eich hawl i "
+"ymateb. Gallwch hefyd ofyn am ailarolygiad."
+
+msgid "Display this rating on your website"
+msgstr "Arddangos y sgôr hon ar eich gwefan"
+
+msgid "You can display this rating on your website."
+msgstr "Gallwch arddangos y sgôr hon ar eich gwefan."
+
+msgid "Get badges"
+msgstr "Bathodynnau"
+
+msgid "Do you want to get a copy of the report?"
+msgstr "Ydych chi eisiau copi o'r adroddiad?"
+
+msgid ""
+"If you wish to see the food safety officer’s report on which this rating is "
+"based, you can request this from the local authority that carried out the "
+"inspection. You can do this by sending an email to the address below. The "
+"local authority will consider your request and will usually send you a copy "
+"of the report. In some cases, the local authority may decide that they "
+"cannot do so but will let you know this and explain why."
+msgstr ""
+"Os hoffech weld adroddiad y swyddog diogelwch bwyd sy'n sail i'r sgôr hon, "
+"gallwch ofyn i’w weld gan yr awdurdod lleol a gynhaliodd yr arolygiad. "
+"Gallwch wneud hyn drwy anfon e-bost i’r cyfeiriad isod. Bydd yr awdurdod "
+"lleol yn ystyried eich cais, ac fel arfer bydd yn anfon copi o’r adroddiad "
+"atoch. Mewn rhai achosion, gallai’r awdurdod lleol benderfynu nad oes modd "
+"iddo wneud hynny. Os felly, bydd yr awdurdod lleol yn rhoi gwybod i chi am "
+"hynny ac yn egluro pam."
+
+msgid "Inspecting council"
+msgstr "Cyngor arolygu"
+
+msgid "Hygienic food handling"
+msgstr "Trin bwyd yn hylan"
+
+msgid "Standards found"
+msgstr "Y safonau a ganfuwyd"
+
+msgid "Awaiting Rating"
+msgstr "Aros am sgôr"
+
+msgid "Address"
+msgstr "Cyfeiriad"
+
+msgid "Show on a map"
+msgstr "Dangos ar fap"
+
+msgid "Next ›"
+msgstr "Nesaf ›"
+
+msgid "Last »"
+msgstr "Diwethaf »"
+
+msgid "« First"
+msgstr "« Gyntaf"
+
+msgid "‹ Previous"
+msgstr "‹ Blaenorol"
+
+msgid "What is the Food Hygiene Rating Scheme?"
+msgstr "Beth yw'r Cynllun Sgorio Hylendid Bwyd?"
+
+msgid "What do the different ratings mean"
+msgstr "Beth mae'r sgoriau'n ei olygu"
+
+msgid "Showing <span>@items</span> of <span>@total</span>"
+msgstr "Yn dangos <span>@items</span> o <span>@total</span>"
+
+msgid "results"
+msgstr "canlyniadau"
+
+msgid "January"
+msgstr "Ionawr"
+
+msgid "February"
+msgstr "Chwefror"
+
+msgid "March"
+msgstr "Mawrth"
+
+msgid "April"
+msgstr "Ebrill"
+
+msgid "June"
+msgstr "Mehefin"
+
+msgid "July"
+msgstr "Gorffennaf"
+
+msgid "August"
+msgstr "Awst"
+
+msgid "September"
+msgstr "Medi"
+
+msgid "October"
+msgstr ""
+
+msgid "November"
+msgstr "Tachwedd"
+
+msgid "December"
+msgstr "Rhagfyr"
+
+msgid ""
+"This is a new service – your <a href=\"/feedback\">feedback</a> will help us "
+"to improve it."
+msgstr ""
+"Mae hwn yn wasanaeth newydd – bydd eich <a href=\"/cy/feedback\">adborth</a> "
+"yn ein helpu i'w wella."
+
+msgid "Search..."
+msgstr "Chwilio..."
+
+msgid "Is there anything wrong with this page?"
+msgstr "Oes rhywbeth o’i le â’r dudalen hon?"
+
+msgid "Close"
+msgstr "Cau"
+
+msgid "Subject"
+msgstr "Pwnc"
+
+msgid "Message"
+msgstr "Neges"
+
+msgid "Send message"
+msgstr "Anfon neges"
+
+msgid " result found"
+msgstr " canlyniad a ganfuwyd"
+
+msgid " results found"
+msgstr "Heb ganfod canlyniad."
+
+#~ msgid "\">@total</span> result found"
+#~ msgstr "\">@total</span> canlyniad a ganfuwyd"
+
+#~ msgid "\">@total</span> results found"
+#~ msgstr "\">@total</span> canlyniada a ganfuwyd"
 
 #~ msgid ""
 #~ "<div class=\"toggle-button js-toggle-button ratings__advanced-search-"
