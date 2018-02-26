@@ -7,13 +7,33 @@ import guid from '../helper/guid'
 import safeTagsReplace from '../helper/safeTagsReplace'
 import isColor from '../helper/isColor'
 
+// Parse partial markup
 function parsePartialMarkup (string) {
   const re = /= "|";/
   return string.split(re)[1]
 }
 
-function preprocessCSS (string) {
-  return string.replace(/"/g, '&quot;')
+// Preprocess html
+function preprocessHTML (array) {
+  let string = []
+  array.forEach(element => {
+    string = [...string, safeTagsReplace(element)]
+  })
+  return string.join('')
+}
+
+// Preprocess css
+function preprocessCSS (array) {
+  return array.map(element => {
+    return element.replace(/"/g, '&quot;')
+  }).join('')
+}
+
+// Preprocess js
+function preprocessJS (array) {
+  return array.map(element => {
+    return element
+  }).join('')
 }
 
 const myArray = customProperties.toString().split(/[{}]+/).filter(function (e) { return e })
@@ -47,16 +67,57 @@ const intro = parsePartialMarkup(require('template-string-loader!./partial/intro
   styles
 }))
 
-const requiredComponents = require.context('../component/', true, /index\.js$/).keys()
+const requiredHTMLComponents = require.context('../component/', true, /\.html$/)
+const requiredCSSComponents = require.context('../component/', true, /\.css$/)
+const requiredJSComponents = require.context('raw-loader!../component/', true, /\.js$/)
 
-const componentArray = requiredComponents.map((component) => {
-  /*
-  @todo - require doesn't currently support imports
-          from npm folder
-  */
-  const requiredComponent = require(`../component/${component.replace('./', '')}`)
-  requiredComponent.title = component.split('/')[1]
-  return requiredComponent
+function uniq (a) {
+  return a.sort().filter(function (item, pos, ary) {
+    return !pos || item !== ary[pos - 1]
+  })
+}
+
+const componentNameArrayConstructor = (html, css, js) => {
+  let combinedComponentArray = [...html, ...css, ...js]
+  combinedComponentArray = [...combinedComponentArray.map((element) => {
+    const componentName = element.split('/')[1]
+    return componentName
+  })]
+
+  return combinedComponentArray
+}
+
+const componentNameArray = uniq(componentNameArrayConstructor(requiredHTMLComponents.keys(), requiredCSSComponents.keys(), requiredJSComponents.keys()))
+
+const componentArray = componentNameArray.map((componentName) => {
+  let HTMLArray = []
+  let CSSArray = []
+  let JSArray = []
+
+  requiredHTMLComponents.keys().forEach((key) => {
+    if (componentName === key.split('/')[1]) {
+      HTMLArray = [...HTMLArray, requiredHTMLComponents(key)]
+    }
+  })
+
+  requiredCSSComponents.keys().forEach((key) => {
+    if (componentName === key.split('/')[1]) {
+      CSSArray = [...CSSArray, requiredCSSComponents(key)]
+    }
+  })
+
+  requiredJSComponents.keys().forEach((key) => {
+    if (componentName === key.split('/')[1]) {
+      JSArray = [...JSArray, requiredJSComponents(key)]
+    }
+  })
+
+  return {
+    title: componentName,
+    html: HTMLArray,
+    css: CSSArray,
+    js: JSArray
+  }
 })
 
 const components = componentArray.map((component) => {
@@ -66,9 +127,9 @@ const components = componentArray.map((component) => {
     title: (component.title !== undefined) ? component.title : 'Component',
     description: (component.description !== undefined) ? component.description : '',
     element: (component.html !== undefined) ? component.html : 'Not available',
-    html: (component.html !== undefined) ? safeTagsReplace(component.html) : 'Not available',
+    html: (component.html !== undefined) ? preprocessHTML(component.html) : 'Not available',
     css: (component.css !== undefined) ? preprocessCSS(component.css) : 'Not available',
-    js: (component.js !== undefined) ? component.js : 'Not available',
+    js: (component.js !== undefined) ? preprocessJS(component.js) : 'Not available',
     styles
   }))
 }).join('')
@@ -152,4 +213,4 @@ const styleGuide = (templateParams) => {
   return html
 }
 
-module.exports = styleGuide
+export default styleGuide

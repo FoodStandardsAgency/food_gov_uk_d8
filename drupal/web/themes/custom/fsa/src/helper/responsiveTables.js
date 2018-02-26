@@ -44,4 +44,4 @@ function responsiveTables () {
   }
 }
 
-module.exports = responsiveTables
+export default responsiveTables

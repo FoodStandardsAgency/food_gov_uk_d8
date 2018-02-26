@@ -30,6 +30,16 @@ module.exports = {
           }
         }
       },
+      // {
+      //   test: /\.js$/,
+      //   // resourceQuery: /styleguide/,
+      //   include: /(component)/,
+      //   use: [
+      //     {
+      //       loader: 'raw-loader'
+      //     }
+      //   ]
+      // },
       {
         test: /\.css$/,
         exclude: /(component|styleguide|helper)/,
@@ -115,14 +125,23 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   plugins: [
+    // Clean dist folder before building
     new CleanWebpackPlugin(['dist']),
+
+    // Extract CSS to its own file
     new ExtractCSSPlugin({
       filename: '[name].css'
     }),
+
+    // Create SVG sprite
     new SpritePlugin(),
+
+    // Create a custom template for styleguide
     new HtmlWebpackPlugin({
       template: 'styleguide/template.js'
     }),
+
+    // Hotmodulereplacement for developing with styleguide
     new webpack.HotModuleReplacementPlugin()
   ]
 }
