@@ -1,0 +1,336 @@
+# LANGUAGE translation of PROJECT
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2017-09-14 15:46+0100\n"
+"PO-Revision-Date: 2017-09-14 20:08+0300\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.0.3\n"
+
+msgid "A–Z"
+msgstr ""
+
+msgid "Search from..."
+msgstr ""
+
+msgid "About us"
+msgstr ""
+
+msgid "Food Standards Agency makes sure food is safe to eat and what it says it is."
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Jan"
+msgstr ""
+
+msgid "Mar"
+msgstr ""
+
+msgid "Apr"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
+msgid "Jun"
+msgstr ""
+
+msgid "Jul"
+msgstr ""
+
+msgid "Aug"
+msgstr ""
+
+msgid "Sep"
+msgstr ""
+
+msgid "Oct"
+msgstr ""
+
+msgid "Nov"
+msgstr ""
+
+msgid "Dec"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Food hygiene ratings search"
+msgstr ""
+
+msgid "Business name/or location"
+msgstr ""
+
+msgid "More search options"
+msgstr ""
+
+msgid "Business type"
+msgstr ""
+
+msgid "Local authority"
+msgstr ""
+
+msgid "Hygiene rating"
+msgstr ""
+
+msgid "Exempt"
+msgstr ""
+
+msgid "Results"
+msgstr ""
+
+msgid "Sort results by"
+msgstr ""
+
+msgid "Relevance"
+msgstr ""
+
+msgid "Ratings (highest to lowest)"
+msgstr ""
+
+msgid "Rating (lowest to highest)"
+msgstr ""
+
+msgid "Name (A to Z)"
+msgstr ""
+
+msgid "Name (Z to A)"
+msgstr ""
+
+msgid "Rating"
+msgstr ""
+
+msgid "Inspection date"
+msgstr ""
+
+msgid "Page @start of @end"
+msgstr ""
+
+msgid "Back to form"
+msgstr ""
+
+msgid "{Empty}"
+msgstr ""
+
+msgid "View PDF"
+msgstr ""
+
+msgid "Enter a location"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "Manage your preferences"
+msgstr ""
+
+msgid "Manage your subscription"
+msgstr ""
+
+msgid "Logout"
+msgstr ""
+
+msgid "Cancel your subscription"
+msgstr ""
+
+msgid "Save your changes"
+msgstr ""
+
+msgid "News and consultations"
+msgstr ""
+
+msgid "Delivery options"
+msgstr ""
+
+msgid "Update your subscription or unsubscribe from the alerts you're receiving"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Password should be at least @length characters"
+msgstr ""
+
+msgid "Profile removed"
+msgstr ""
+
+msgid "Passwords match:"
+msgstr ""
+
+msgid "This will cancel all your subscriptions and permanently remove your personal details."
+msgstr ""
+
+msgid "Confirm removal"
+msgstr ""
+
+msgid "Remove your profile"
+msgstr ""
+
+msgid "Save changes"
+msgstr ""
+
+msgid "Subscribe to news and alerts"
+msgstr ""
+
+msgid "Stay up to date with food and allergy alerts, FSA news and consultations."
+msgstr ""
+
+msgid "Food and allergy alerts"
+msgstr ""
+
+msgid "Food alerts"
+msgstr ""
+
+msgid "Allergy alerts"
+msgstr ""
+
+msgid "News"
+msgstr ""
+
+msgid "Consultations"
+msgstr ""
+
+msgid "I want to receive food and allergy alerts via"
+msgstr ""
+
+msgid "I want to receive news and consultations via"
+msgstr ""
+
+msgid "Frequency"
+msgstr ""
+
+msgid "SMS frequency"
+msgstr ""
+
+msgid "SMS updates are sent immediately"
+msgstr ""
+
+msgid "Email frequency"
+msgstr ""
+
+msgid "Personal information"
+msgstr ""
+
+msgid "Language preference"
+msgstr ""
+
+msgid "All allergy alerts"
+msgstr ""
+
+msgid "Celery"
+msgstr ""
+
+msgid "Crustaceans"
+msgstr ""
+
+msgid "Egg"
+msgstr ""
+
+msgid "Fish"
+msgstr ""
+
+msgid "Gluten"
+msgstr ""
+
+msgid "Lupin"
+msgstr ""
+
+msgid "Milk"
+msgstr ""
+
+msgid "Molluscs"
+msgstr ""
+
+msgid "Mustard"
+msgstr ""
+
+msgid "Nuts"
+msgstr ""
+
+msgid "Peanuts"
+msgstr ""
+
+msgid "Sesame"
+msgstr ""
+
+msgid "Soya"
+msgstr ""
+
+msgid "Sulphur dioxide and/or sulphites"
+msgstr ""
+
+msgid "All news"
+msgstr ""
+
+msgid "Board meeting news"
+msgstr ""
+
+msgid "Business and industry news"
+msgstr ""
+
+msgid "Northern Ireland news"
+msgstr ""
+
+msgid "Science news"
+msgstr ""
+
+msgid "Wales news"
+msgstr ""
+
+msgid "All consultations"
+msgstr ""
+
+msgid "Consultation"
+msgstr ""
+
+msgid "Help shape our policies"
+msgstr ""
+
+msgid "Rapidly developing policies"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Send updates immediately"
+msgstr ""
+
+msgid "Send updates daily"
+msgstr ""
+
+msgid "Send updates weekly"
+msgstr ""
+
+msgid "Email address"
+msgstr ""
+
+msgid "Back"
+msgstr ""
+
+msgid "Your profile"
+msgstr ""
+
+msgid "Manage your profile"
+msgstr ""
+
+msgid "Privacy notice"
+msgstr ""
+
+msgid "New password"
+msgstr ""
+
+msgid "Confirm password"
+msgstr ""
