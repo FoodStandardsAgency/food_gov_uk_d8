@@ -23,7 +23,7 @@ settings:
   default_preview_prev_button_label: Previous
   default_preview_label: Preview
   default_preview_title: '[webform:title]: Preview'
-  default_preview_message: 'Here are the details you are about to report.'
+  default_preview_message: ''
   default_draft_button_label: 'Save Draft'
   default_draft_saved_message: 'Submission saved. You may return to this form later and it will restore the current values.'
   default_draft_loaded_message: 'A partially-completed form was found. Please complete the remaining portions.'

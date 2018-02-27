@@ -6,7 +6,6 @@ settings:
   default_preview_next_button_label: Rhagolwg
   default_preview_prev_button_label: Blaenorol
   default_preview_label: Rhagolwg
-  default_preview_message: 'Dyma''r manylion yr ydych ar fin adrodd amdanynt.'
   default_confirmation_back_label: 'Yn ôl at y ffurflen'
 element:
   empty_message: '{Gwag}'
