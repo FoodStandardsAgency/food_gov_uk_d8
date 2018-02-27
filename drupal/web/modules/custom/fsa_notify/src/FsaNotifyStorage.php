@@ -60,32 +60,50 @@ class FsaNotifyStorage {
   }
 
   /**
-   * Store alert to all relevant users by matching allergy taxonomy terms.
+   * Store nodes for notify sending to all relevant users.
    *
-   * @param \Drupal\node\Entity\Node $alert
+   * Queries are done by matching the users subscribe term preference existence
+   * on the nodes queued for sending.
+   *
+   * @param \Drupal\node\Entity\Node $node
    *   The alert node.
    */
-  public function store(Node $alert) {
-
-    $nid = $alert->id();
-    $allergens = $alert->field_alert_allergen->getValue();
-    $allergens = array_map(
-      function ($a) {
-        return $a['target_id'];
-      },
-      $allergens
-    );
+  public function store(Node $node) {
 
     $uids = [];
-    if (!empty($allergens)) {
-      $query = \Drupal::entityQuery('user');
-      $query->condition('uid', 0, '>');
-      $query->condition('status', 1);
-      $query->condition('field_notification_method', 'none', '!=');
-      $query->condition('field_subscribed_notifications', $allergens, 'in');
-      // $query->sort('uid').
-      $uids = $query->execute();
+    $nid = $node->id();
+
+    // Alerts.
+    if ($node->hasField('field_alert_allergen')) {
+      $allergens = array_map(
+        function ($a) {
+          return $a['target_id'];
+        },
+        $node->field_alert_allergen->getValue()
+      );
+
+      if (!empty($allergens)) {
+        $query = $this->queryUsersWithSubscribePreferences('field_subscribed_notifications', $allergens);
+        $uids = $query->execute();
+      }
     }
+
+    // Store news items for sending.
+    if ($node->hasField('field_news_type')) {
+      $news_types = array_map(
+        function ($n) {
+          return $n['target_id'];
+        },
+        $node->field_news_type->getValue()
+      );
+
+      if (!empty($news_types)) {
+        $query = $this->queryUsersWithSubscribePreferences('field_subscribed_news', $news_types);
+        $uids = $query->execute();
+      }
+    }
+
+    // @todo: add consultations.
 
     foreach ($uids as $uid) {
       $u = User::load($uid);
@@ -95,6 +113,31 @@ class FsaNotifyStorage {
 
     \Drupal::entityManager()->getStorage('user')->resetCache();
 
+  }
+
+  /**
+   * Query users with their subscribe preferences (term ref values).
+   *
+   * @param string $field
+   *   The name of the field to filter.
+   * @param array $values
+   *   Array of values for the field.
+   *
+   * @return \Drupal\Core\Entity\Query\QueryInterface
+   *   Query object.
+   */
+  protected function queryUsersWithSubscribePreferences($field, array $values) {
+
+    // Build the basics for getting user subscribe preferences.
+    $query = \Drupal::entityQuery('user');
+    $query->condition('uid', 0, '>');
+    $query->condition('status', 1);
+    $query->condition('field_notification_method', 'none', '!=');
+
+    // This is our only varying query for different alerts notifiers.
+    $query->condition($field, $values, 'in');
+
+    return $query;
   }
 
   /**
