@@ -73,17 +73,30 @@ class FsaNotifyStorage {
     $uids = [];
     $nid = $node->id();
 
-    // Alerts.
-    if ($node->hasField('field_alert_allergen')) {
-      $allergens = array_map(
-        function ($a) {
-          return $a['target_id'];
-        },
-        $node->field_alert_allergen->getValue()
-      );
+    // Store alerts for sending.
+    if ($node->hasField('field_alert_type')) {
 
-      if (!empty($allergens)) {
-        $query = $this->queryUsersWithSubscribePreferences('field_subscribed_notifications', $allergens);
+      // Get the alert type, one of AA, PRIN or FAFA.
+      $alert_type = $node->field_alert_type->value;
+
+      // Allergy alerts.
+      if ($alert_type === 'AA' && $node->hasField('field_alert_allergen')) {
+        // Store allergy alerts.
+        $allergens = array_map(
+          function ($a) {
+            return $a['target_id'];
+          },
+          $node->field_alert_allergen->getValue()
+        );
+
+        if (!empty($allergens)) {
+          $query = $this->queryUsersWithSubscribePreferences('field_subscribed_notifications', $allergens);
+          $uids = $query->execute();
+        }
+      }
+      elseif (in_array($alert_type, ['FAFA', 'PRIN'])) {
+        // Rest are food alerts, get user's prefs to store for sending.
+        $query = $this->queryUsersWithSubscribePreferences('field_subscribed_food_alerts', ['all']);
         $uids = $query->execute();
       }
     }
