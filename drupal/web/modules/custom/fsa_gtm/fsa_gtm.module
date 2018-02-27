@@ -2,10 +2,13 @@
 
 /**
  * @file
- * Expose data to page layer for GTM.
+ * Expose navrefs, and data to page layer, for GTM.
  */
 
 use Drupal\views\ViewExecutable;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\Core\Breadcrumb\Breadcrumb;
+use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
  * Implements hook_views_pre_render().
@@ -39,5 +42,167 @@ function fsa_gtm_views_pre_render(ViewExecutable $view) {
         ],
       ],
     ];
+  }
+}
+
+/**
+ * Implements hook_preprocess_menu().
+ */
+function fsa_gtm_preprocess_menu(&$variables) {
+  if ($variables['menu_name'] != 'admin') {
+
+    // Append navrefs to menu items.
+    foreach ($variables['items'] as $key => &$item) {
+      _fsa_gtm_set_navref($item, $variables['menu_name']);
+    }
+  }
+}
+
+/**
+ * Set navref for the item and all its children.
+ */
+function _fsa_gtm_set_navref(&$item, $navref) {
+  if (!$item['url']->isExternal()) {
+
+    // @todo: Seems to work only for urls which are in menus, not in fields.
+    $item['url']->setOption('query', ['navref' => $navref]);
+  }
+  if (isset($item['below'])) {
+    foreach ($item['below'] as $key => &$child_item) {
+      _fsa_gtm_set_navref($child_item, $navref);
+    }
+  }
+}
+
+/**
+ * Implements hook_link_alter().
+ */
+function fsa_gtm_link_alter(&$variables) {
+
+  // @todo: Refactor hardcoded feedback link in page template.
+  // @todo: Find a way of targeting paragraph and related links.
+
+  /* $url = $variables['url'];
+  if ($url->isRouted() && $url->getRouteName() == 'foo') {
+    $variables['options']['query'] = ['navref' => 'bar'];
+  } */
+}
+
+/**
+ * Implements template_preprocess_block().
+ */
+function fsa_gtm_preprocess_block(&$variables) {
+
+  // @todo: Display the logo, and its link, via the system branding block.
+
+  // Append navrefs to language switcher.
+  if ($variables['base_plugin_id'] == 'language_block') {
+    $variables['elements']['content']['#links']['en']['url']->setOption('query', [
+      'navref' => 'quicklink',
+    ]);
+    $variables['elements']['content']['#links']['cy']['url']->setOption('query', [
+      'navref' => 'quicklink',
+    ]);
+  }
+}
+
+/**
+ * Implements of template_preprocess_page().
+ */
+function fsa_gtm_preprocess_page(&$variables) {
+
+  // Append navrefs to hardcoded utility menu links.
+  if (isset($variables['utility_menu']['#items'])) {
+    $items = $variables['utility_menu']['#items'];
+    foreach ($items as $item) {
+      if (isset($item['#markup'])) {
+        $generated_link = $item['#markup']->getGeneratedLink();
+        if ($generated_link) {
+          $link = new SimpleXMLElement($generated_link);
+          $content = $link[0];
+          $href = $link['href'] . '?navref=quicklink';
+          $markup = '<a href="' . $href . '">' . $content . '</a>';
+          $item['#markup']->setGeneratedLink($markup);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function fsa_gtm_preprocess_node(&$variables) {
+  if ($variables['view_mode'] == 'search_result') {
+
+    // Maintain a static variable to keep row count.
+    static $counter = 0;
+    $counter++;
+
+    // Reassign for ease of use.
+    $node = $variables['node'];
+
+    // Use bundle name as default tag.
+    $tag = $node->bundle();
+
+    // Conditionally set tag.
+    switch ($node->getType()) {
+      case 'page':
+
+        // Use content type taxonomy.
+        $tid = ($node->hasField('field_content_type')) ? $node->get('field_content_type')->target_id : 0;
+        if (is_numeric($tid) && $term = Term::load($tid)) {
+          $tag = $term->label();
+        }
+        break;
+
+      case 'alert':
+        if ($node->hasField('field_alert_type')) {
+          $tag = $node->field_alert_type->view([
+            'type' => 'fsa_alert_type_formatter',
+          ]);
+        }
+        break;
+
+      case 'consultation':
+        if ($node->hasField('field_consultations_type')) {
+          $tag = $node->field_consultations_type->view([
+            'label' => 'hidden',
+            'settings' => [
+              'link' => FALSE,
+            ],
+          ]);
+        }
+        break;
+
+      case 'news':
+        $tag = t('News');
+        break;
+
+      case 'research_project':
+        $tag = t('Research project');
+        break;
+    }
+
+    // Slugify tag.
+    $tag = str_replace(' ', '-', strtolower($tag));
+
+    // Set query parameter.
+    $query = implode("-", ['?navref=search', $tag, $counter]);
+
+    // Append query parameter to url.
+    $variables['url'] .= $query;
+  }
+}
+
+/**
+ * Implements hook_system_breadcrumb_alter().
+ */
+function fsa_gtm_system_breadcrumb_alter(Breadcrumb &$breadcrumb, RouteMatchInterface $route_match, array $context) {
+  $links = $breadcrumb->getLinks();
+  foreach ($links as $link) {
+    $url = $link->getUrl();
+    $url->setOption('query', ['navref' => 'breadcrumb']);
+    $link->setUrl($url);
   }
 }
