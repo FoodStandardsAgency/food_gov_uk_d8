@@ -103,7 +103,21 @@ class FsaNotifyStorage {
       }
     }
 
-    // @todo: add consultations.
+    // Store consultations for sending.
+    if ($node->hasField('field_consultations_type')) {
+      $consultations_type = $node->field_consultations_type->getValue();
+      $consultations_type = array_map(
+        function ($c) {
+          return $c['target_id'];
+        },
+        $consultations_type
+      );
+
+      if (!empty($consultations_type)) {
+        $query = $this->queryUsersWithSubscribePreferences('field_subscribed_cons', $consultations_type);
+        $uids = $query->execute();
+      }
+    }
 
     foreach ($uids as $uid) {
       $u = User::load($uid);
