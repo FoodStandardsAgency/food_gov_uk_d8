@@ -139,12 +139,3 @@ function fsa_es_preprocess_views_view(&$variables) {
     }
   }
 }
-
-/**
- * Implements hook_form_alter().
- */
-function fsa_es_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  if ($form_id == 'search_keyword') {
-    $form['keywords']['#placeholder'] = t('Search...');
-  }
-}
