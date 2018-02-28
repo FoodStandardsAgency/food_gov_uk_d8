@@ -51,7 +51,7 @@ function fsa_gtm_views_pre_render(ViewExecutable $view) {
 function fsa_gtm_preprocess_menu(&$variables) {
   if ($variables['menu_name'] != 'admin') {
 
-    // Append navrefs to menu items.
+    // Append navrefs to menu items, using helper function, below.
     foreach ($variables['items'] as $key => &$item) {
       _fsa_gtm_set_navref($item, $variables['menu_name']);
     }
@@ -59,12 +59,10 @@ function fsa_gtm_preprocess_menu(&$variables) {
 }
 
 /**
- * Set navref for the item and all its children.
+ * Set navref for item and its children.
  */
 function _fsa_gtm_set_navref(&$item, $navref) {
   if (!$item['url']->isExternal()) {
-
-    // @todo: Seems to work only for urls which are in menus, not in fields.
     $item['url']->setOption('query', ['navref' => $navref]);
   }
   if (isset($item['below'])) {
@@ -81,7 +79,6 @@ function fsa_gtm_link_alter(&$variables) {
 
   // @todo: Refactor hardcoded feedback link in page template.
   // @todo: Find a way of targeting paragraph and related links.
-
   /* $url = $variables['url'];
   if ($url->isRouted() && $url->getRouteName() == 'foo') {
     $variables['options']['query'] = ['navref' => 'bar'];
@@ -94,7 +91,6 @@ function fsa_gtm_link_alter(&$variables) {
 function fsa_gtm_preprocess_block(&$variables) {
 
   // @todo: Display the logo, and its link, via the system branding block.
-
   // Append navrefs to language switcher.
   if ($variables['base_plugin_id'] == 'language_block') {
     $variables['elements']['content']['#links']['en']['url']->setOption('query', [
@@ -134,13 +130,11 @@ function fsa_gtm_preprocess_page(&$variables) {
  */
 function fsa_gtm_preprocess_node(&$variables) {
   if ($variables['view_mode'] == 'search_result') {
+    $node = $variables['node'];
 
-    // Maintain a static variable to keep row count.
+    // Maintain static variable to keep row count.
     static $counter = 0;
     $counter++;
-
-    // Reassign for ease of use.
-    $node = $variables['node'];
 
     // Use bundle name as default tag.
     $tag = $node->bundle();
@@ -149,7 +143,7 @@ function fsa_gtm_preprocess_node(&$variables) {
     switch ($node->getType()) {
       case 'page':
 
-        // Use content type taxonomy.
+        // Use content type taxonomy to get tag.
         $tid = ($node->hasField('field_content_type')) ? $node->get('field_content_type')->target_id : 0;
         if (is_numeric($tid) && $term = Term::load($tid)) {
           $tag = $term->label();
