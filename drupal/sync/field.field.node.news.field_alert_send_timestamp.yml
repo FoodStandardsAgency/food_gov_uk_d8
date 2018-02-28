@@ -1,0 +1,21 @@
+uuid: 9295d63f-6190-43b3-8f3c-c6b064113d75
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_alert_send_timestamp
+    - node.type.news
+  module:
+    - datetime
+id: node.news.field_alert_send_timestamp
+field_name: field_alert_send_timestamp
+entity_type: node
+bundle: news
+label: 'Alert sent'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime
