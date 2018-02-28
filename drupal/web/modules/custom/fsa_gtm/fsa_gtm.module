@@ -162,9 +162,22 @@ function fsa_gtm_preprocess_node(&$variables) {
     $variables['url'] .= $query;
   }
 
-  // Append navrefs to related items.
+  // Append navrefs to related link promos.
   if ($variables['view_mode'] == 'related_link_promo') {
     $variables['url'] .= '?navref=related';
+  }
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function fsa_gtm_preprocess_field(&$variables) {
+
+  // Append navrefs to related content block field links.
+  if ($variables['field_name'] == 'field_related_content_block') {
+    if (isset($variables['items'][0]['content']['field_link'][0]['#plain_text'])) {
+      $variables['items'][0]['content']['field_link'][0]['#plain_text'] .= '?navref=related';
+    }
   }
 }
 
