@@ -78,11 +78,14 @@ function fsa_notify_node_presave(NodeInterface $node) {
     if ($node->field_alert_send->value) {
       // Stamp the node sent date field with current time. Informational only.
       $node->field_alert_send_timestamp[] = date('Y-m-d\TH:i:s', \Drupal::service('datetime.time')->getCurrentTime());
+
+      // Let user know the alert was queued.
+      drupal_set_message(t('This @type item was queued to be sent as alert for all subscribers', ['@type' => $node->getType()]), 'warning');
     }
   }
 
   // And unset the alert sending checkbox.
-  $node->field_alert_send = 'Off';
+  $node->field_alert_send = 0;
 }
 
 /**
