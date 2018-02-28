@@ -51,8 +51,8 @@ function fsa_notify_validate(&$form, FormStateInterface $form_state) {
  */
 function fsa_notify_entity_insert(EntityInterface $entity) {
 
-  // Define content types that may be sent via Notify.
-  $types_to_send = ['alert', 'news', 'consultation'];
+  // Define content types that may be queued immediately to be sent via Notify.
+  $types_to_send = ['alert'];
 
   if (!($entity instanceof NodeInterface)) {
     return;
@@ -66,6 +66,9 @@ function fsa_notify_entity_insert(EntityInterface $entity) {
   $queue->createItem($data);
 }
 
+/**
+ * Implements hook_node_presave().
+ */
 function fsa_notify_node_presave(NodeInterface $node) {
 
   // Define content types that may be sent via Notify.
@@ -74,14 +77,16 @@ function fsa_notify_node_presave(NodeInterface $node) {
     return;
   }
 
-  if ($node->hasField('field_alert_send')) {
-    if ($node->field_alert_send->value) {
-      // Stamp the node sent date field with current time. Informational only.
-      $node->field_alert_send_timestamp[] = date('Y-m-d\TH:i:s', \Drupal::service('datetime.time')->getCurrentTime());
+  if ($node->hasField('field_alert_send') && $node->field_alert_send->value) {
+    // Stamp the node sent date field with current time. Informational only.
+    $node->field_alert_send_timestamp[] = date('Y-m-d\TH:i:s', \Drupal::service('datetime.time')->getCurrentTime());
 
-      // Let user know the alert was queued.
-      drupal_set_message(t('This @type item was queued to be sent as alert for all subscribers', ['@type' => $node->getType()]), 'warning');
-    }
+    $queue = \Drupal::service('queue')->get('fsa_notify_store');
+    $data = $node->id();
+    $queue->createItem($data);
+
+    // Let user know the alert was queued.
+    drupal_set_message(t('This @type item was queued to be sent as alert for all subscribers', ['@type' => $node->getType()]), 'warning');
   }
 
   // And unset the alert sending checkbox.
