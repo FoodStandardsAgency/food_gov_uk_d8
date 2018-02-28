@@ -131,6 +131,8 @@ function fsa_gtm_preprocess_page(&$variables) {
  * Implements hook_preprocess_node().
  */
 function fsa_gtm_preprocess_node(&$variables) {
+
+  // Append navrefs to search items.
   if ($variables['view_mode'] == 'search_result') {
     $node = $variables['node'];
 
@@ -195,6 +197,8 @@ function fsa_gtm_preprocess_node(&$variables) {
  * Implements hook_system_breadcrumb_alter().
  */
 function fsa_gtm_system_breadcrumb_alter(Breadcrumb &$breadcrumb, RouteMatchInterface $route_match, array $context) {
+
+  // Append navrefs to breadcrumbs.
   $links = $breadcrumb->getLinks();
   foreach ($links as $link) {
     $url = $link->getUrl();
