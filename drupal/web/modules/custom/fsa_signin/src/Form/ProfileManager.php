@@ -68,7 +68,7 @@ class ProfileManager extends FormBase {
       '#type' => 'checkboxes',
       '#title' => $this->t('Food alerts'),
       '#options' => $this->signInService->foodAlertsAsOptions(),
-      '#default_value' => array_column($account->get('field_subscribed_food_alerts')->getValue(), 'target_id'),
+      '#default_value' => array_column($account->get('field_subscribed_food_alerts')->getValue(), 'value'),
     ];
     $form[$wrapper]['subscribed_allergy_alerts'] = [
       '#type' => 'checkboxes',
@@ -246,7 +246,7 @@ class ProfileManager extends FormBase {
     /** @var \Drupal\user\Entity\User $account */
     $account = $form_state->getValue('account');
 
-    $food_alerts = $form_state->getValue('subscribed_food_alerts');
+    $food_alerts = DefaultController::storableProfileFieldValue($form_state->getValue('subscribed_food_alerts'));
     $account->set('field_subscribed_food_alerts', $food_alerts);
 
     $allergy_alerts = $form_state->getValue('subscribed_allergy_alerts');

@@ -68,7 +68,12 @@ class RatingsHelper extends ControllerBase {
       elseif ($entity->hasField($field)) {
         $value = $entity->get($field);
         // @todo: consider handling fields with multiple values?
-        $value = $value->first()->getValue()['value'];
+        if ($value->first()) {
+          $value = $value->first()->getValue()['value'];
+        }
+        else {
+          $value = '';
+        }
       }
     }
 

@@ -25,6 +25,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: '/news-alerts/subscribe*'
+    pages: "/news-alerts/subscribe\r\n/news-alerts/subscribe/alerts\r\n/news-alerts/subscribe/news\r\n/news-alerts/subscribe/delivery"
     negate: false
     context_mapping: {  }

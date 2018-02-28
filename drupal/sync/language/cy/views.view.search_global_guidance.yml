@@ -1,0 +1,20 @@
+display:
+  default:
+    display_options:
+      pager:
+        options:
+          tags:
+            previous: '‹ Blaenorol'
+            next: 'Nesaf ›'
+            first: '« Gyntaf'
+            last: 'Diwethaf »'
+      filters:
+        guidance_audience:
+          expose:
+            label: Cynulleidfa
+        nation:
+          expose:
+            label: Rhanbarth
+      footer:
+        result:
+          content: 'Yn dangos @start-@end o @total'
