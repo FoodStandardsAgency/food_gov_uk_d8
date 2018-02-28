@@ -13,7 +13,6 @@ All notification related stuff lives in one module `fsa_notify`.
 Decisions and/or further investigation needed:
 * Need to decide and work with what happens when sending fails to particular user. Stop sending altogether? Or continue? We dont know if this is some common error or just isolated case. In `src/FsaNotifyAPI*.php`, see `send()` method.
 * Unsubscribe by email functionality (FSA-318)
-* Optout by sms functionality (FSA-321)
 * Email bounce handling
 * SMS bounce handling
 * Multilingual functionality
@@ -84,10 +83,20 @@ When alerts are sent out, this field is emptied.
 
 List of allergens user has signed up to.
 
+### node.field_alert_send
+
+Boolean field to trigger sending a node (news or consultation) to notify sending queue.
+
+### node.field_alert_send_timestamp
+
+Date field to store if node (news or consultation) was sent to sending queue.
+
 ## What happens when new alert is created?
 
-* First it is queued for processing.
-* Then during cron run the alert will be cached to every user who has signed up for particular allergen(s).
+News and Consultation content type items behave similarly when editor selects the `field_alert_send` checkbox on node edit form.
+
+* First node is queued for processing.
+* Then during cron run the alert will be cached to every user who has signed up for particular terms.
 * During send-out event all cached notifications are sent out and user cache emptied.
 
 ## Cron
@@ -105,7 +114,7 @@ Digest sending times can be configured in following functions:
 
 ## Queue
 
-New alerts are queued. Drupal Queue is used. Because processing of them takes considerable time. Might be 1-2minutes per queue item.
+Alerts are queued immediately. Drupal Queue is used. Because processing of them takes considerable time. Might be 1-2minutes per queue item.
 
 Queue processing distributes alert references to users who have signed up for them.
 
