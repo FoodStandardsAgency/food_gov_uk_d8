@@ -4,6 +4,8 @@ status: true
 dependencies:
   config:
     - field.field.node.consultation.body
+    - field.field.node.consultation.field_alert_send
+    - field.field.node.consultation.field_alert_send_timestamp
     - field.field.node.consultation.field_consultation_closing_date
     - field.field.node.consultation.field_consultation_launch_date
     - field.field.node.consultation.field_consultation_summary
@@ -51,6 +53,21 @@ third_party_settings:
         description: ''
         required_fields: true
       label: 'Consultation metadata'
+    group_notify:
+      children:
+        - field_alert_send
+        - field_alert_send_timestamp
+      parent_name: ''
+      weight: 15
+      format_type: tab
+      format_settings:
+        label: Alerts/Notify
+        formatter: open
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+      label: Alerts/Notify
 id: node.consultation.default
 targetEntityType: node
 bundle: consultation
@@ -58,7 +75,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 6
+    weight: 5
     settings:
       rows: 9
       summary_rows: 3
@@ -67,10 +84,23 @@ content:
     region: content
   created:
     type: datetime_timestamp
-    weight: 9
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_alert_send:
+    weight: 16
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_alert_send_timestamp:
+    weight: 17
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
   field_consultation_closing_date:
     weight: 5
     settings: {  }
@@ -105,7 +135,7 @@ content:
     type: options_select
     region: content
   field_intro:
-    weight: 5
+    weight: 4
     settings:
       rows: 3
       placeholder: ''
@@ -126,20 +156,20 @@ content:
     region: content
   langcode:
     type: language_select
-    weight: 7
+    weight: 6
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 12
+    weight: 11
     settings: {  }
     region: content
     third_party_settings: {  }
   path:
     type: path
-    weight: 11
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -147,12 +177,12 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 14
+    weight: 13
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 13
+    weight: 12
     region: content
     settings:
       display_label: true
@@ -166,18 +196,23 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 10
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 8
+    weight: 7
     settings:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
     region: content
+    third_party_settings: {  }
+  url_redirects:
+    weight: 14
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   promote: true
