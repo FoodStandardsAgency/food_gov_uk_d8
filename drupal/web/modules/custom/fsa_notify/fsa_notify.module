@@ -98,14 +98,30 @@ function fsa_notify_node_presave(NodeInterface $node) {
  */
 function fsa_notify_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
-  $forms = [
-    'node_news_edit_form',
-    'node_consultation_edit_form',
-  ];
-  if (in_array($form_id, $forms)) {
-    // Prevent editors tampering the alert sent -timestamps.
-    $form['field_alert_send_timestamp']['widget']['add_more']['#access'] = FALSE;
-    $form['field_alert_send_timestamp']['#disabled'] = 'disabled';
+  // Unset widget settings from alert sent timestamp field.
+  $field = 'field_alert_send_timestamp';
+  if (!empty($form[$field])) {
+    // Prevent editors tampering the the field values.
+    $form[$field]['#disabled'] = 'disabled';
+    $form[$field]['widget']['add_more']['#access'] = FALSE;
+
+    // Remove the dragging + weight options on the form.
+    $form[$field]['widget']['#cardinality_multiple'] = FALSE;
+    foreach ($form[$field]['widget'] as $key => $value) {
+      if (is_numeric($key)) {
+        unset($form[$field]['widget'][$key]['#theme_wrappers']);
+        unset($form[$field]['widget'][$key]['_weight']);
+
+        // Remove the last empty item.
+        if ($form[$field]['widget'][$key]['value']['#default_value'] === NULL) {
+          unset($form[$field]['widget'][$key]);
+        }
+      }
+    }
+    if ($form[$field]['widget']['#max_delta'] > 0) {
+      $form[$field]['#prefix'] = '<strong>' . t('This item has been previously marked to be sent on') . '</strong>';
+    }
+
   }
 }
 
