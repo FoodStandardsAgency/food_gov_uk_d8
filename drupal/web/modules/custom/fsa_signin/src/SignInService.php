@@ -212,6 +212,9 @@ class SignInService {
           case 'all':
             // Unsubscribe from all notifications.
             $user->field_subscribed_notifications->setValue([]);
+            $user->field_subscribed_food_alerts->setValue([]);
+            $user->field_subscribed_news->setValue([]);
+            $user->field_subscribed_cons->setValue([]);
             $user->save();
 
             $ret['success'] = TRUE;
