@@ -78,15 +78,35 @@ function fsa_notify_node_presave(NodeInterface $node) {
   }
 
   if ($node->hasField('field_alert_send') && $node->field_alert_send->value) {
-    // Stamp the node sent date field with current time. Informational only.
-    $node->field_alert_send_timestamp[] = date('Y-m-d\TH:i:s', \Drupal::service('datetime.time')->getCurrentTime());
 
-    $queue = \Drupal::service('queue')->get('fsa_notify_store');
-    $data = $node->id();
-    $queue->createItem($data);
+    if (is_numeric($node->id())) {
+      // Stamp the node sent date field with current time. Informational only.
+      $node->field_alert_send_timestamp[] = date('Y-m-d\TH:i:s', \Drupal::service('datetime.time')->getCurrentTime());
 
-    // Let user know the alert was queued.
-    drupal_set_message(t('This @type item was queued to be sent as alert for all subscribers', ['@type' => $node->getType()]), 'warning');
+      $queue = \Drupal::service('queue')->get('fsa_notify_store');
+      $data = $node->id();
+      $queue->createItem($data);
+
+      // Let user know the alert was queued.
+      drupal_set_message(
+        t('This @type item was queued to be sent as alert for all subscribers',
+          ['@type' => $node->getType()]
+        ),
+        'warning');
+    }
+    else {
+      // Let user know the item was not sent and prompt to re-edit.
+      // This happens when creating a new node but is a borderline case.
+      drupal_set_message(
+        t(
+          'Queuing @type to an alert failed.<br />Edit again and re-select the "<em>@label</em>" checkbox',
+          [
+            '@type' => $node->getType(),
+            '@label' => $node->field_alert_send->getItemDefinition()->getFieldDefinition()->getLabel(),
+          ]
+        ),
+        'error');
+    }
   }
 
   // And unset the alert sending checkbox.
