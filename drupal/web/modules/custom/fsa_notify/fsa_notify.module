@@ -98,6 +98,7 @@ function fsa_notify_form_alter(&$form, FormStateInterface $form_state, $form_id)
     'node_consultation_edit_form',
   ];
   if (in_array($form_id, $forms)) {
+    // Prevent editors tampering the alert sent -timestamps.
     $form['field_alert_send_timestamp']['widget']['add_more']['#access'] = FALSE;
     $form['field_alert_send_timestamp']['#disabled'] = 'disabled';
   }
