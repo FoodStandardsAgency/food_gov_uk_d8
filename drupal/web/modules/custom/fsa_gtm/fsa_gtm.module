@@ -73,19 +73,6 @@ function _fsa_gtm_set_navref(&$item, $navref) {
 }
 
 /**
- * Implements hook_link_alter().
- */
-function fsa_gtm_link_alter(&$variables) {
-
-  // @todo: Refactor hardcoded feedback link in page template.
-  // @todo: Find a way of targeting paragraph and related links.
-  /* $url = $variables['url'];
-  if ($url->isRouted() && $url->getRouteName() == 'foo') {
-    $variables['options']['query'] = ['navref' => 'bar'];
-  } */
-}
-
-/**
  * Implements of template_preprocess_page().
  */
 function fsa_gtm_preprocess_page(&$variables) {
