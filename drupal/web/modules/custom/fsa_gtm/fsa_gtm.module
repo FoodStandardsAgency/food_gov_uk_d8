@@ -161,6 +161,11 @@ function fsa_gtm_preprocess_node(&$variables) {
     // Append query parameter to url.
     $variables['url'] .= $query;
   }
+
+  // Append navrefs to related items.
+  if ($variables['view_mode'] == 'related_link_promo') {
+    $variables['url'] .= '?navref=related';
+  }
 }
 
 /**
