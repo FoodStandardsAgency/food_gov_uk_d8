@@ -86,23 +86,6 @@ function fsa_gtm_link_alter(&$variables) {
 }
 
 /**
- * Implements template_preprocess_block().
- */
-function fsa_gtm_preprocess_block(&$variables) {
-
-  // @todo: Display the logo, and its link, via the system branding block.
-  // Append navrefs to language switcher.
-  if ($variables['base_plugin_id'] == 'language_block') {
-    $variables['elements']['content']['#links']['en']['url']->setOption('query', [
-      'navref' => 'quicklink',
-    ]);
-    $variables['elements']['content']['#links']['cy']['url']->setOption('query', [
-      'navref' => 'quicklink',
-    ]);
-  }
-}
-
-/**
  * Implements of template_preprocess_page().
  */
 function fsa_gtm_preprocess_page(&$variables) {
