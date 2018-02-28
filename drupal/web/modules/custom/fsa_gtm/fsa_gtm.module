@@ -115,10 +115,12 @@ function fsa_gtm_preprocess_page(&$variables) {
         $generated_link = $item['#markup']->getGeneratedLink();
         if ($generated_link) {
           $link = new SimpleXMLElement($generated_link);
-          $content = $link[0];
-          $href = $link['href'] . '?navref=quicklink';
-          $markup = '<a href="' . $href . '">' . $content . '</a>';
-          $item['#markup']->setGeneratedLink($markup);
+          if (isset($link[0]) && isset($link['href'])) {
+            $content = $link[0];
+            $href = $link['href'] . '?navref=quicklink';
+            $markup = '<a href="' . $href . '">' . $content . '</a>';
+            $item['#markup']->setGeneratedLink($markup);
+          }
         }
       }
     }
