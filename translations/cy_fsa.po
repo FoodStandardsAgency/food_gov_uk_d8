@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2017-09-14 15:46+0100\n"
-"PO-Revision-Date: 2018-02-26 17:33+0000\n"
+"PO-Revision-Date: 2018-03-01 15:53+0000\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -540,7 +540,7 @@ msgid "September"
 msgstr "Medi"
 
 msgid "October"
-msgstr ""
+msgstr "Hydref"
 
 msgid "November"
 msgstr "Tachwedd"
@@ -576,17 +576,77 @@ msgstr "Anfon neges"
 msgid "Step @start of @end"
 msgstr "Cam @start o @end"
 
+msgid "optional"
+msgstr "dewisol"
+
+msgid "Awaiting Publication"
+msgstr "I’w gyhoeddi’n fuan"
+
+msgid "Awaiting Inspection"
+msgstr "Aros am arolygiad"
+
+msgid "<span class=\"@class_number\">@count</span> page"
+msgstr "<span class=\"@class_number\">@count</span> tudalen"
+
+msgid "<span class=\"@class_number\">@count</span> pages"
+msgstr "<span class=\"@class_number\">@count</span> tudlennau"
+
+msgid "<span class=\"@class_number\">@count</span> food hygiene ratings result"
+msgstr ""
+"<span class=\"@class_number\">@count</span> canlyniad sgôr hylendid bwyd"
+
+msgid ""
+"<span class=\"@class_number\">@count</span> food hygiene ratings results"
+msgstr ""
+"<span class=\"@class_number\">@count</span> canlyniadau sgoriau hylendid bwyd"
+
+msgid "<span class=\"@class_number\">@count</span> result found"
+msgstr "<span class=\"@class_number\">@count</span> wedi dod o hyd i ganlyniad"
+
+msgid "<span class=\"@class_number\">@count</span> results found"
+msgstr ""
+"<span class=\"@class_number\">@count</span> wedi dod o hyd i ganlyniadau"
+
+msgid ""
+"<span class=\"@class_number\">@count</span> result found for <span class="
+"\"@class_keyword\">%keywords</span>"
+msgstr ""
+"<span class=\"@class_number\">@count</span> wedi dod o hyd i ganlyniad ar "
+"gyfer <span class=\"@class_keyword\">%keywords</span>"
+
+msgid ""
+"<span class=\"@class_number\">@count</span> results found for <span class="
+"\"@class_keyword\">%keywords</span>"
+msgstr ""
+"<span class=\"@class_number\">@count</span> wedi dod o hyd i ganlyniadau ar "
+"gyfer <span class=\"@class_keyword\">%keywords</span>"
+
+msgid ""
+"!main_view_string and !ratings_string found for <span class=\"@class_keyword"
+"\">%keywords</span>"
+msgstr ""
+"!main_view_string a !ratings_string ar gyfer <span class=\"@class_keyword\">"
+"%keywords</span>"
+
+msgid ""
+"!ratings_string found for <span class=\"@class_keyword\">%keywords</span>"
+msgstr ""
+"!ratings_string ar gyfer <span class=\"@class_keyword\">%keywords</span>"
+
+msgid "!main_view_string and !ratings_string found"
+msgstr "!main_view_string a !ratings_string wedi canfod"
+
+msgid "!ratings_string found"
+msgstr "!ratings_string wedi canfod"
+
+msgid "All news and alerts"
+msgstr "Yr holl newyddion a rhybuddion"
+
+#~ msgid " results found for "
+#~ msgstr " wedi dod o hyd i ganlyniadau ar gyfer "
+
 #~ msgid " result found"
 #~ msgstr " canlyniad a ganfuwyd"
-
-#~ msgid " results found"
-#~ msgstr "Heb ganfod canlyniad."
-
-#~ msgid "\">@total</span> result found"
-#~ msgstr "\">@total</span> canlyniad a ganfuwyd"
-
-#~ msgid "\">@total</span> results found"
-#~ msgstr "\">@total</span> canlyniada a ganfuwyd"
 
 #~ msgid ""
 #~ "<div class=\"toggle-button js-toggle-button ratings__advanced-search-"

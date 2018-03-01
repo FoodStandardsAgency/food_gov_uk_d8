@@ -520,3 +520,51 @@ msgstr ""
 
 msgid "Step @start of @end"
 msgstr ""
+
+msgid "optional"
+msgstr ""
+
+msgid "Awaiting Publication"
+msgstr ""
+
+msgid "Awaiting Inspection"
+msgstr ""
+
+msgid "<span class=\"@class_number\">@count</span> page"
+msgstr ""
+
+msgid "<span class=\"@class_number\">@count</span> pages"
+msgstr ""
+
+msgid "<span class=\"@class_number\">@count</span> food hygiene ratings result"
+msgstr ""
+
+msgid "<span class=\"@class_number\">@count</span> food hygiene ratings results"
+msgstr ""
+
+msgid "<span class=\"@class_number\">@count</span> result found"
+msgstr ""
+
+msgid "<span class=\"@class_number\">@count</span> results found"
+msgstr ""
+
+msgid "<span class=\"@class_number\">@count</span> result found for <span class=\"@class_keyword\">%keywords</span>"
+msgstr ""
+
+msgid "<span class=\"@class_number\">@count</span> results found for <span class=\"@class_keyword\">%keywords</span>"
+msgstr ""
+
+msgid "!main_view_string and !ratings_string found for <span class=\"@class_keyword\">%keywords</span>"
+msgstr ""
+
+msgid "!ratings_string found for <span class=\"@class_keyword\">%keywords</span>"
+msgstr ""
+
+msgid "!main_view_string and !ratings_string found"
+msgstr ""
+
+msgid "!ratings_string found"
+msgstr ""
+
+msgid "All news and alerts"
+msgstr ""
