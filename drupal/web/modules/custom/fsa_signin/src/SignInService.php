@@ -13,6 +13,8 @@ class SignInService {
 
   use StringTranslationTrait;
 
+  const DEFAULT_COUNTRY_CODE = 44;
+
   /**
    * Constructs a new DefaultService object.
    */
@@ -161,8 +163,6 @@ class SignInService {
     }
     else {
       // Assume the identifier is a phone number.
-      // @todo: match all possible cases of formats for the phone number.
-      $identifier = '+' . $identifier;
       $match_with = 'phone';
     }
 
@@ -193,11 +193,13 @@ class SignInService {
 
     switch ($match_with) {
       case 'phone':
-        // Get user(s) with phone number from the callback.
+
+        // Get user(s) with phone number matching from the callback (match only
+        // with the last 7 characters of the phone number.
         $query = \Drupal::entityQuery('user');
         $query->condition('uid', 0, '>');
         $query->condition('status', 1);
-        $query->condition('field_notification_sms', $identifier, '=');
+        $query->condition('field_notification_sms', '%' . substr($identifier, -7), 'LIKE');
         $uids = $query->execute();
         break;
 
