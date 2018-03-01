@@ -90,13 +90,13 @@ class FsaNotifyStorage {
         );
 
         if (!empty($allergens)) {
-          $query = $this->queryUsersWithSubscribePreferences('field_subscribed_notifications', $allergens);
+          $query = $this->queryUsersWithSubscribePreferences('field_subscribed_notifications', $allergens, 'allergy');
           $uids = $query->execute();
         }
       }
       elseif (in_array($alert_type, ['FAFA', 'PRIN'])) {
         // Rest are food alerts, get user's prefs to store for sending.
-        $query = $this->queryUsersWithSubscribePreferences('field_subscribed_food_alerts', ['all']);
+        $query = $this->queryUsersWithSubscribePreferences('field_subscribed_food_alerts', ['all'], 'food');
         $uids = $query->execute();
       }
     }
@@ -111,7 +111,7 @@ class FsaNotifyStorage {
       );
 
       if (!empty($news_types)) {
-        $query = $this->queryUsersWithSubscribePreferences('field_subscribed_news', $news_types);
+        $query = $this->queryUsersWithSubscribePreferences('field_subscribed_news', $news_types, 'news');
         $uids = $query->execute();
       }
     }
@@ -127,7 +127,7 @@ class FsaNotifyStorage {
       );
 
       if (!empty($consultations_type)) {
-        $query = $this->queryUsersWithSubscribePreferences('field_subscribed_cons', $consultations_type);
+        $query = $this->queryUsersWithSubscribePreferences('field_subscribed_cons', $consultations_type, 'consultation');
         $uids = $query->execute();
       }
     }
@@ -149,11 +149,13 @@ class FsaNotifyStorage {
    *   The name of the field to filter.
    * @param array $values
    *   Array of values for the field.
+   * @param string $type
+   *   The type of content to identify the notification method preference.
    *
    * @return \Drupal\Core\Entity\Query\QueryInterface
    *   Query object.
    */
-  protected function queryUsersWithSubscribePreferences($field, array $values) {
+  protected function queryUsersWithSubscribePreferences($field, array $values, $type) {
 
     // Build the basics for getting user subscribe preferences.
     $query = \Drupal::entityQuery('user');
@@ -161,7 +163,23 @@ class FsaNotifyStorage {
     $query->condition('status', 1);
     $query->condition('field_notification_method', 'none', '!=');
 
-    // This is our only varying query for different alerts notifiers.
+    // Filter the users who have their checkboxes for receiving with certain
+    // delivery methods.
+    switch ($type) {
+      case 'allergy':
+      case 'food':
+        $query->condition('field_delivery_method', NULL, 'IS NOT');
+        break;
+
+      case 'news':
+      case 'consultation':
+        $query->condition('field_delivery_method_news', NULL, 'IS NOT');
+        break;
+
+    }
+
+    // Get the user's subscribe preferences for type of the content to be stored
+    // for sending.
     $query->condition($field, $values, 'in');
 
     return $query;
