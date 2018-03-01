@@ -2,15 +2,16 @@
 
 namespace Drupal\fsa_es\Plugin\Block;
 
-use Drupal\Component\Utility\Html;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Form\FormInterface;
 use Drupal\Core\Form\FormState;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\SubformStateInterface;
+use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -33,6 +34,9 @@ class SearchKeyword extends BlockBase implements FormInterface, ContainerFactory
   /** @var \Drupal\Core\Routing\RouteMatchInterface $currentRouteMatch */
   protected $currentRouteMatch;
 
+  /** @var \Drupal\Core\Language\LanguageManagerInterface $languageManager */
+  protected $languageManager;
+
   /**
    * SearchKeyword constructor.
    *
@@ -42,12 +46,14 @@ class SearchKeyword extends BlockBase implements FormInterface, ContainerFactory
    * @param \Drupal\Core\Form\FormBuilderInterface $form_builder
    * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
    * @param \Drupal\Core\Routing\RouteMatchInterface $current_route_match
+   * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, FormBuilderInterface $form_builder, RequestStack $request_stack, RouteMatchInterface $current_route_match) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, FormBuilderInterface $form_builder, RequestStack $request_stack, RouteMatchInterface $current_route_match, LanguageManagerInterface $language_manager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->formBuilder = $form_builder;
     $this->request = $request_stack->getCurrentRequest();
     $this->currentRouteMatch = $current_route_match;
+    $this->languageManager = $language_manager;
   }
 
   /**
@@ -60,7 +66,8 @@ class SearchKeyword extends BlockBase implements FormInterface, ContainerFactory
       $plugin_definition,
       $container->get('form_builder'),
       $container->get('request_stack'),
-      $container->get('current_route_match')
+      $container->get('current_route_match'),
+      $container->get('language_manager')
     );
   }
 
@@ -202,7 +209,15 @@ class SearchKeyword extends BlockBase implements FormInterface, ContainerFactory
       ],
     ];
 
-    $form['#action'] = !empty($this->configuration['action_url']) ? $this->configuration['action_url'] : $this->request->getPathInfo();
+    // Prepare action URL.
+    if (!empty($this->configuration['action_url'])) {
+      $action_url = Url::fromUserInput($this->configuration['action_url'], ['language' => $this->languageManager->getCurrentLanguage()])->toString();
+    }
+    else {
+      $action_url = $this->request->getPathInfo();
+    }
+
+    $form['#action'] = $action_url;
     $form['#method'] = $this->configuration['form_method'];
 
     if ($this->configuration['form_submit_button']) {
