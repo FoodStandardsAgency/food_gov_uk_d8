@@ -4,6 +4,7 @@ namespace Drupal\fsa_notify;
 
 use Alphagov\Notifications\Exception\ApiException;
 use Alphagov\Notifications\Exception\NotifyException;
+use Drupal\fsa_signin\SignInService;
 use Drupal\user\Entity\User;
 
 /**
@@ -31,6 +32,14 @@ class FsaNotifyAPIsms extends FsaNotifyAPI {
     if (empty($phoneNumber)) {
       return;
     }
+
+    // Add the country code if missing.
+    if (substr($phoneNumber, '0', '2') != SignInService::DEFAULT_COUNTRY_CODE) {
+      $phoneNumber = SignInService::DEFAULT_COUNTRY_CODE . $phoneNumber;
+    }
+
+    // And the plus is required by notify.
+    $phoneNumber = '+' . $phoneNumber;
 
     try {
       $msg = sprintf('Notify API: sendSms(%s)', $phoneNumber);

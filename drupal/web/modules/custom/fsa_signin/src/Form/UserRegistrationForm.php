@@ -121,7 +121,7 @@ class UserRegistrationForm extends FormBase {
       '#type' => 'tel',
       '#title' => $this->t('Phone number'),
       '#description' => $this->t('This service is only for UK telephone numbers'),
-      '#field_prefix' => SignInService::DEFAULT_COUNTRY_CODE,
+      '#field_prefix' => '+' . SignInService::DEFAULT_COUNTRY_CODE,
       '#states' => [
         'visible' => [
           ':input[name="delivery_method[sms]"]' => ['checked' => TRUE],
