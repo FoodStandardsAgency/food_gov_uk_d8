@@ -271,7 +271,7 @@ class ProfileManager extends FormBase {
     $delivery_method = array_filter(array_values($delivery_method));
     $account->set('field_delivery_method', $delivery_method);
 
-    $phone = $form_state->getValue('phone');
+    $phone = str_replace(' ', '', $form_state->getValue('phone'));
     if (in_array('sms', $delivery_method)) {
       // Only store the phone number if user subscribed via SMS.
       $account->set('field_notification_sms', $phone);

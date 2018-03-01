@@ -192,7 +192,7 @@ class UserRegistrationForm extends FormBase {
     $subscribed_cons = $form_state->getValue('subscribed_cons');
     $delivery_method = $form_state->getValue('delivery_method');
     $delivery_method = array_filter(array_values($delivery_method));
-    $phone = $form_state->getValue('phone');
+    $phone = str_replace(' ', '', $form_state->getValue('phone'));
 
     // Mandatory settings.
     $user->setPassword(user_password());
