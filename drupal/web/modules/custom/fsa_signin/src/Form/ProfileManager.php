@@ -217,8 +217,8 @@ class ProfileManager extends FormBase {
     if (in_array('sms', $delivery_method)) {
       $phone = $form_state->getValue('phone');
 
-      if (!preg_match('/^\+[0-9 ]{7,}$/', $phone)) {
-        $form_state->setErrorByName('phone', $this->t('Please prefix your phone number with international country code and use only numbers.'));
+      if (!preg_match('/^44[0-9 ]{7,}$/', $phone)) {
+        $form_state->setErrorByName('phone', ['#markup' => $this->t('Phone number should be prefixed with international country code, "44" for UK. Special characters are not allowed.<br /><br />Proper phone number format is "447700912345"')]);
       }
       if ($phone == '') {
         $form_state->setErrorByName('phone', $this->t('You selected to receive alerts via SMS, please enter your phone number.'));
