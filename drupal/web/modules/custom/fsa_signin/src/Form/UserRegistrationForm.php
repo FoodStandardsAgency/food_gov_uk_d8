@@ -4,6 +4,7 @@ namespace Drupal\fsa_signin\Form;
 
 use Drupal\fsa_custom\FsaCustomHelper;
 use Drupal\fsa_signin\Controller\DefaultController;
+use Drupal\fsa_signin\SignInService;
 use Drupal\user\Entity\User;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -120,6 +121,7 @@ class UserRegistrationForm extends FormBase {
       '#type' => 'tel',
       '#title' => $this->t('Phone number'),
       '#description' => $this->t('This service is only for UK telephone numbers'),
+      '#field_prefix' => SignInService::DEFAULT_COUNTRY_CODE,
       '#states' => [
         'visible' => [
           ':input[name="delivery_method[sms]"]' => ['checked' => TRUE],
@@ -169,8 +171,11 @@ class UserRegistrationForm extends FormBase {
     $delivery_method = array_filter(array_values($delivery_method));
     if (in_array('sms', $delivery_method)) {
       $phone = $form_state->getValue('phone');
-      if (!preg_match('/^44[0-9 ]{7,}$/', $phone)) {
-        $form_state->setErrorByName('phone', ['#markup' => $this->t('Phone number should be prefixed with international country code "44" for UK. Special characters are not allowed.<br /><br />Proper phone number format is "447700912345"')]);
+      if (!preg_match('/^[0-9 ]{0,}$/', $phone)) {
+        $form_state->setErrorByName('phone', $this->t('Special characters are not allowed in phone number.'));
+      }
+      elseif (!preg_match('/^[0-9 ]{8,}$/', $phone)) {
+        $form_state->setErrorByName('phone', $this->t('Phone number appears to be too short.'));
       }
       if ($phone == '') {
         $form_state->setErrorByName('phone', $this->t('You selected to receive alerts via SMS, please enter your phone number.'));
@@ -193,7 +198,7 @@ class UserRegistrationForm extends FormBase {
     $subscribed_cons = $form_state->getValue('subscribed_cons');
     $delivery_method = $form_state->getValue('delivery_method');
     $delivery_method = array_filter(array_values($delivery_method));
-    $phone = str_replace(' ', '', $form_state->getValue('phone'));
+    $phone = ltrim(str_replace(' ', '', $form_state->getValue('phone')), SignInService::DEFAULT_COUNTRY_CODE);
 
     // Mandatory settings.
     $user->setPassword(user_password());

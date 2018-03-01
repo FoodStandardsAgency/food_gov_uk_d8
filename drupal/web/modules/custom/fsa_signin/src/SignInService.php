@@ -13,6 +13,8 @@ class SignInService {
 
   use StringTranslationTrait;
 
+  const DEFAULT_COUNTRY_CODE = 44;
+
   /**
    * Constructs a new DefaultService object.
    */
