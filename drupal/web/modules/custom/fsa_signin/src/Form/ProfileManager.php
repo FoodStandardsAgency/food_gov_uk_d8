@@ -118,9 +118,12 @@ class ProfileManager extends FormBase {
       '#type' => 'item',
       '#markup' => '<h3>' . $this->t('I want to receive news and consultations via') . '</h3>',
     ];
-    $form[$wrapper]['news_notifications_method'] = [
-      '#type' => 'item',
-      '#markup' => '[not implemented yet]',
+    $form[$wrapper]['delivery_method_news'] = [
+      '#type' => 'checkboxes',
+      '#options' => [
+        'email' => $this->t('Email'),
+      ],
+      '#default_value' => array_column($account->get('field_delivery_method_news')->getValue(), 'value'),
     ];
     $form[$wrapper]['frequency'] = [
       '#type' => 'item',
@@ -274,6 +277,10 @@ class ProfileManager extends FormBase {
     $delivery_method = $form_state->getValue('delivery_method');
     $delivery_method = array_filter(array_values($delivery_method));
     $account->set('field_delivery_method', $delivery_method);
+
+    $delivery_method_news = $form_state->getValue('delivery_method_news');
+    $delivery_method_news = array_filter(array_values($delivery_method_news));
+    $account->set('field_delivery_method_news', $delivery_method_news);
 
     // Store phone without spaces and remove countrycode if it was entered.
     $phone = ltrim(str_replace(' ', '', $form_state->getValue('phone')), SignInService::DEFAULT_COUNTRY_CODE);
