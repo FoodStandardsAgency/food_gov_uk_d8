@@ -69,7 +69,8 @@ const intro = parsePartialMarkup(require('template-string-loader!./partial/intro
 
 const requiredHTMLComponents = require.context('../component/', true, /\.html$/)
 const requiredCSSComponents = require.context('../component/', true, /\.css$/)
-const requiredJSComponents = require.context('raw-loader!../component/', true, /\.js$/)
+const requiredJSComponents = require.context('../component/', true, /\.js$/)
+console.log(requiredJSComponents)
 
 function uniq (a) {
   return a.sort().filter(function (item, pos, ary) {
