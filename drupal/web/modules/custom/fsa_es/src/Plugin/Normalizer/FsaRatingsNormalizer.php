@@ -71,11 +71,6 @@ class FsaRatingsNormalizer extends NormalizerBase {
 
     foreach ($field_names as $field_name) {
       $value = $this->getFieldValue($object, $field_name);
-      if ($field_name == 'businesstype') {
-        $langcode = $object->language()->getId();
-        // Businesstype value needs translation since the establishment import doesn't bring in translation at the moment due technical issues.
-        $value[0]['label'] = $this->t($value[0]['label'], [], ['context' => 'FHRS business type', 'langcode' => $langcode])->render();
-      }
       $data[$field_name] = $value;
     }
 
@@ -179,9 +174,21 @@ class FsaRatingsNormalizer extends NormalizerBase {
           $ret = [];
           foreach ($content_entity->{$field_name} as $ref) {
             if (isset($ref->entity)) {
+              // See if there's translation of the referenced entity in entity
+              // language.
+              $langcode = $content_entity->language()->getId();
+
+              if ($ref->entity->hasTranslation($langcode)) {
+                $field_entity = $ref->entity->getTranslation($langcode);
+              }
+              // If not, use the default referenced entity.
+              else {
+                $field_entity = $ref->entity;
+              }
+
               $ret[] = [
-                'id' => $ref->entity->id(),
-                'label' => $ref->entity->label(),
+                'id' => $field_entity->id(),
+                'label' => $field_entity->label(),
               ];
             }
           }

@@ -186,7 +186,7 @@ class UserRegistrationForm extends FormBase {
     $email = $form_state->getValue('email');
     $language = $form_state->getValue('language');
     $email_frequency = $form_state->getValue('delivery_frequency_email');
-    $subscribed_food_alerts = DefaultController::storableProfileFieldValue($form_state->getValue('subscribed_food_alerts'));
+    $subscribed_food_alerts = reset($form_state->getValue('subscribed_food_alerts'));
     $subscribed_notifications = $form_state->getValue('subscribed_notifications');
     $subscribed_news = $form_state->getValue('subscribed_news');
     $subscribed_cons = $form_state->getValue('subscribed_cons');

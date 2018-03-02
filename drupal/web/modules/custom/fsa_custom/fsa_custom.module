@@ -88,8 +88,9 @@ function fsa_custom_preprocess_page(&$variables) {
  */
 function fsa_custom_preprocess_page_title(&$variables) {
   $is_admin = \Drupal::service('router.admin_context')->isAdminRoute();
-
   $route = \Drupal::routeMatch();
+  $routename = $route->getParentRouteMatch()->getRouteName();
+
   $entity = FALSE;
   if ($route->getParameter('node')) {
     $entity = $route->getParameter('node');
@@ -192,14 +193,18 @@ function fsa_custom_preprocess_page_title(&$variables) {
 
   }
   else {
-    $route = \Drupal::routeMatch();
-    $routename = $route->getParentRouteMatch()->getRouteName();
+    if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
+      // Add a title suffix on signup pages.
+      if (!\Drupal::service('router.admin_context')->isAdminRoute() && substr($routename, 0, 10) == 'fsa_signin') {
+        $variables['title_suffix'] = ['#markup' => '<p>' . t('Stay up to date with food and allergy alerts, FSA news and consultations.') . '</p>'];
+      }
 
-    // Add a title suffix on signup pages.
-    if (!\Drupal::service('router.admin_context')->isAdminRoute() && substr($routename, 0, 10) == 'fsa_signin') {
-      $variables['title_suffix'] = ['#markup' => '<p>' . t('Stay up to date with food and allergy alerts, FSA news and consultations.') . '</p>'];
+      // Add hygiene ratings hero copy text below title.
+      if (in_array($routename, ['view.search_global_ratings.page_1', 'fsa_ratings.ratings_search'])) {
+        $fsa_ratings_config = \Drupal::config('config.fsa_ratings');
+        $variables['title_suffix'] = ['#markup' => '<p>' . check_markup($fsa_ratings_config->get('hero_copy'), 'basic_html') . '</p>'];
+      }
     }
-
   }
 
 }
@@ -468,6 +473,15 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
           }
         }
 
+        // Define routes to show pagetitle within content.
+        $routes = [
+          'entity.user.canonical',
+        ];
+        if (in_array($routename, $routes)) {
+          return AccessResult::allowed()
+            ->addCacheableDependency($block);
+        }
+
         // Default to not showing title in content area.
         return AccessResult::forbidden()
           ->addCacheableDependency($block);
@@ -476,8 +490,9 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
       // Page title in hero area.
       if ($block->id() == 'pagetitle_hero') {
 
-        // Enter all speficic routes to remove the page title in hero area.
+        // Define routes to remove the page title in hero area.
         $routes = [
+          'entity.user.canonical',
           'fsa_signin.user_registration_thank_you',
         ];
 

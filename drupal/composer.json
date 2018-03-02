@@ -106,6 +106,9 @@
             "web/drush/commands/{$name}": ["type:drupal-drush"]
         },
         "patches": {
+            "drupal/core": {
+                "Combination of language negotiation and path aliasing can cause a corrupted route cache, 404s": "https://www.drupal.org/files/issues/routing-cache-language-2802403-214.patch"
+            },
             "drupal/migrate_plus": {
                 "Allow setting request headers": "https://www.drupal.org/files/issues/fix_headers-2849153-3.patch"
             },

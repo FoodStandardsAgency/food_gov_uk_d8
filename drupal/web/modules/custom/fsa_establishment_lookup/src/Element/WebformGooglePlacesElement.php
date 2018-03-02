@@ -104,6 +104,8 @@ class WebformGooglePlacesElement extends FormElement {
         if (!in_array($route, $routes)) {
           $form_state->setValue('fsa_establishment_la_email', RatingsHelper::getEntityDetail('fsa_authority', $la, 'field_email'));
         }
+        $form_state->setValue('fsa_establishment_la_email_overridden', RatingsHelper::getEntityDetail('fsa_authority', $la, 'field_email_overridden'));
+        $form_state->setValue('fsa_establishment_la_email_alt', RatingsHelper::getEntityDetail('fsa_authority', $la, 'field_email_alt'));
       }
 
     }

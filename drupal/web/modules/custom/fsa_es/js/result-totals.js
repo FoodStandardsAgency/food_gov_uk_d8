@@ -21,9 +21,9 @@
       var getComboMainViewString = function(total) {
         return Drupal.formatPlural(
           total,
-          '<span class="' + class_number + '">@total</span> page',
-          '<span class="' + class_number + '">@total</span> pages',
-          {'@total': total}
+          '<span class="@class_number">@count</span> page',
+          '<span class="@class_number">@count</span> pages',
+          {'@class_number': class_number}
         );
       };
 
@@ -36,9 +36,9 @@
       var getComboRatingsString = function(total) {
         return Drupal.formatPlural(
           total,
-          '<span class="' + class_number + '">@total</span> food hygiene ratings result',
-          '<span class="' + class_number + '">@total</span> food hygiene ratings results',
-          {'@total': total}
+          '<span class="@class_number">@count</span> food hygiene ratings result',
+          '<span class="@class_number">@count</span> food hygiene ratings results',
+          {'@class_number': class_number}
         );
       };
 
@@ -51,9 +51,9 @@
       var getMainViewString = function(total) {
         return Drupal.formatPlural(
           total,
-          '<span class="' + class_number + '">@total</span> result found',
-          '<span class="' + class_number + '">@total</span> results found',
-          {'@total': total}
+          '<span class="@class_number">@count</span> result found',
+          '<span class="@class_number">@count</span> results found',
+          {'@class_number': class_number}
         );
       };
 
@@ -64,26 +64,28 @@
        * @returns {string}
        */
       var getMainViewWithKeywordsString = function(total, keywords) {
+        // A bit of cheating. Drupal will scramble strings for translations only if they are wrapped in Drupal.t().
+        //
         return Drupal.formatPlural(
           total,
-          '<span class="' + class_number + '">@total</span> result found for <span class="' + class_keyword + '">%keywords</span>',
-          '<span class="' + class_number + '">@total</span> results found for <span class="' + class_keyword + '">%keywords</span>',
-          {'@total': total, '%keywords': keywords}
+          '<span class="@class_number">@count</span> result found for <span class="@class_keyword">%keywords</span>',
+          '<span class="@class_number">@count</span> results found for <span class="@class_keyword">%keywords</span>',
+          {'%keywords': keywords, '@class_number': class_number, '@class_keyword': class_keyword}
         );
       };
 
-      $(selector).each(function() {
+      $(selector).once('views-result-totals').each(function() {
         if (keywords) {
           // Show main view and ratings totals in combo.
           if (total_main_view && total_ratings) {
-            result_string = Drupal.t('!main_view_string and !ratings_string found for <span class="' + class_keyword + '">%keywords</span>',
-              {'!main_view_string': getComboMainViewString(total_main_view), '!ratings_string': getComboRatingsString(total_ratings), '%keywords': keywords}
+            result_string = Drupal.t('!main_view_string and !ratings_string found for <span class="@class_keyword">%keywords</span>',
+              {'!main_view_string': getComboMainViewString(total_main_view), '!ratings_string': getComboRatingsString(total_ratings), '%keywords': keywords, '@class_keyword': class_keyword}
             );
           }
           // Show only ratings totals with keywords.
           else if (total_ratings) {
-            result_string = Drupal.t('!ratings_string found for <span class="' + class_keyword + '">%keywords</span>',
-              {'!ratings_string': getComboRatingsString(total_ratings), '%keywords': keywords}
+            result_string = Drupal.t('!ratings_string found for <span class="@class_keyword">%keywords</span>',
+              {'!ratings_string': getComboRatingsString(total_ratings), '%keywords': keywords, '@class_keyword': class_keyword}
             );
           }
           // Show only main view totals with keywords.
