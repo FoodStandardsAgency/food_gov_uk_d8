@@ -1,4 +1,20 @@
 views.filter.fsa_guidance_content_type:
   type: views.filter.many_to_one
+
 views.filter.fsa_consultation_responses_published:
   type: views.filter.many_to_one
+
+block.settings.search_keyword:
+  type: block_settings
+  label: 'Search keyword settings'
+  mapping:
+    form_element:
+      type: mapping
+      label: 'Search keyword block form settings'
+      mapping:
+        title:
+          type: label
+          label: 'Title'
+        placeholder:
+          type: label
+          label: 'Placeholder'
