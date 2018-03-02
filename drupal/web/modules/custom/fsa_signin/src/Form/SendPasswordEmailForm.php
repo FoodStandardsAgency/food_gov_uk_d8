@@ -21,12 +21,21 @@ class SendPasswordEmailForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+
+    if ($default_value = \Drupal::request()->query->get('name')) {
+      $email = $default_value;
+    }
+    else {
+      $email = '';
+    }
+
     $form['email_address'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Email address'),
       '#maxlength' => 64,
       '#size' => 64,
       '#required' => TRUE,
+      '#default_value' => $email,
     ];
     $form['submit'] = [
       '#type' => 'submit',

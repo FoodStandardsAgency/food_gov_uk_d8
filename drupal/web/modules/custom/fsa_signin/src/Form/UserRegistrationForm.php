@@ -81,7 +81,7 @@ class UserRegistrationForm extends FormBase {
         'sms' => $this->t('SMS'),
       ],
     ];
-    $form['alert_container']['news_delivery_method'] = [
+    $form['alert_container']['delivery_method_news'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('I want to receive news and consultations via'),
       '#description' => $this->t('News is available only via email.'),
@@ -167,6 +167,12 @@ class UserRegistrationForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
+
+    $email = $form_state->getValue('email');
+    if (user_load_by_mail($email)) {
+      $form_state->setErrorByName('email', $this->t('Account with @email already exist. Please <a href="/user">log in</a>.', ['@email' => $email]));
+    }
+
     $delivery_method = $form_state->getValue('delivery_method');
     $delivery_method = array_filter(array_values($delivery_method));
     if (in_array('sms', $delivery_method)) {
@@ -198,6 +204,8 @@ class UserRegistrationForm extends FormBase {
     $subscribed_cons = $form_state->getValue('subscribed_cons');
     $delivery_method = $form_state->getValue('delivery_method');
     $delivery_method = array_filter(array_values($delivery_method));
+    $delivery_method_news = $form_state->getValue('delivery_method_news');
+    $delivery_method_news = array_filter(array_values($delivery_method_news));
     $phone = ltrim(str_replace(' ', '', $form_state->getValue('phone')), SignInService::DEFAULT_COUNTRY_CODE);
 
     // Mandatory settings.
@@ -219,6 +227,7 @@ class UserRegistrationForm extends FormBase {
     $user->set('field_subscribed_cons', $subscribed_cons);
     $user->set('field_notification_method', $email_frequency);
     $user->set('field_delivery_method', $delivery_method);
+    $user->set('field_delivery_method_news', $delivery_method_news);
 
     if (in_array('sms', $delivery_method)) {
       // Only store the phone number if user subscribed via SMS.

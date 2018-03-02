@@ -24,6 +24,7 @@ class RouteSubscriber implements EventSubscriberInterface {
    * Check if a redirect is required.
    */
   public function checkForRedirection(GetResponseEvent $event) {
+    $request = $event->getRequest();
     $route_name = \Drupal::routeMatch()->getRouteName();
 
     $current_user = \Drupal::currentUser();
@@ -73,13 +74,25 @@ class RouteSubscriber implements EventSubscriberInterface {
       $event->setResponse(new RedirectResponse($url, 301));
     }
 
-    if ($route_name == 'user.login') {
+    if ($route_name == 'user.login' || $route_name == 'user.register') {
       $url = Url::fromRoute('fsa_signin.default_controller_signInPage')->toString();
       $event->setResponse(new RedirectResponse($url, 301));
     }
-    elseif ($is_subscriber && ($route_name == 'user.page' || $route_name == 'entity.user.canonical')) {
-      $url = Url::fromRoute('fsa_signin.default_controller_profilePage')->toString();
+    elseif ($route_name == 'user.pass') {
+      $url = Url::fromRoute('fsa_signin.default_controller_resetPassword', [], ['query' => $request->query->all()])->toString();
       $event->setResponse(new RedirectResponse($url, 301));
+    }
+    elseif ($is_subscriber) {
+      if ($route_name == 'entity.user.edit_form') {
+        // Redirect subscriber user edit page to the custom profile manage page.
+        $url = Url::fromRoute('fsa_signin.default_controller_manageProfilePage')->toString();
+        $event->setResponse(new RedirectResponse($url, 301));
+      }
+      if ($route_name == 'user.page' || $route_name == 'entity.user.canonical') {
+        // Redirect subscribers to the custom profile page.
+        $url = Url::fromRoute('fsa_signin.default_controller_profilePage')->toString();
+        $event->setResponse(new RedirectResponse($url, 301));
+      }
     }
     elseif ($route_name == 'user.register') {
       $url = Url::fromRoute('fsa_signin.user_preregistration_alerts_form')->toString();
