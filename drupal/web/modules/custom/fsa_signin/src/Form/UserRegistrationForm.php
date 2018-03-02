@@ -167,6 +167,12 @@ class UserRegistrationForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
+
+    $email = $form_state->getValue('email');
+    if (user_load_by_mail($email)) {
+      $form_state->setErrorByName('email', $this->t('Account with @email already exist. Please <a href="/user">log in</a>.', ['@email' => $email]));
+    }
+
     $delivery_method = $form_state->getValue('delivery_method');
     $delivery_method = array_filter(array_values($delivery_method));
     if (in_array('sms', $delivery_method)) {
