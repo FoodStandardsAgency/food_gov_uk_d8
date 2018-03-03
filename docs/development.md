@@ -33,10 +33,11 @@ Copy local `drupal/conf/settings.local.php` [template from here](settings.local.
 
 #### Drupal console & codeception on local environment
 
-Drupal console or codeception do not work out of the box as they cannot read `getenv()` from the `$databases` array. Workaround is to export db user & password to bash:
+Drupal console or codeception do not work out of the box as they cannot read `getenv()` from the `$databases` array. Workaround is to export db user, pass and host to bash:
  ```
  export DB_USER_DRUPAL=drupal
  export DB_PASS_DRUPAL=password
+ export DB_HOST_DRUPAL=localhost
  ```
  
 FHRS Rating Search
