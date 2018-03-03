@@ -85,17 +85,26 @@ class FsaSettings extends FormBase {
       '#button_type' => 'primary',
     ];
 
-    // @todo: move repetitive tasks to functions for stats displaying.
+    $form['stats_heading'] = [
+      '#markup' => '<h2>' . t('User statistics') . '</h2>',
+      '#weight' => $weight++,
+    ];
+
+    $form['users'] = [
+      '#type' => 'details',
+      '#open' => TRUE,
+      '#title' => t('Users'),
+      '#weight' => $weight++,
+    ];
 
     $query = \Drupal::entityQuery('user');
     $query->condition('uid', 0, '>');
     $query->condition('status', 1);
     $query->count();
     $count = $query->execute();
-    $form['user_status_enabled'] = [
+    $form['users']['user_status_enabled'] = [
       '#type' => 'item',
-      '#title' => t('Enabled users'),
-      '#plain_text' => $count,
+      '#title' => $this->formatPlural($count, '1 enabled user', '@count enabled users'),
       '#weight' => $weight++,
     ];
 
@@ -104,80 +113,70 @@ class FsaSettings extends FormBase {
     $query->condition('status', 0);
     $query->count();
     $count = $query->execute();
-    $form['user_status_disabled'] = [
+    $form['users']['user_status_disabled'] = [
       '#type' => 'item',
-      '#title' => t('Disabled users'),
-      '#plain_text' => $count,
+      '#title' => $this->formatPlural($count, '1 disabled user', '@count disabled users'),
       '#weight' => $weight++,
     ];
 
     $entityManager = \Drupal::service('entity_field.manager');
     $fields = $entityManager->getFieldStorageDefinitions('user', 'user');
 
-    $form['delivery_method_note'] = [
-      '#type' => 'item',
-      '#markup' => '<h3>' . t('Allergy alert delivery method (field_delivery_method)') . '</h3>',
-      '#weight' => $weight++,
+    $stats_fields = [
+      'field_delivery_method' => t('Allergy alert delivery method'),
+      'field_delivery_method_news' => t('News and consultation delivery method'),
+      'field_notification_method' => t('Notification Method'),
     ];
-
-    $methods = options_allowed_values($fields['field_delivery_method']);
-    foreach ($methods as $key => $description) {
-      $query = \Drupal::entityQuery('user');
-      $query->condition('uid', 0, '>');
-      $query->condition('status', 1);
-      $query->condition('field_delivery_method', $key);
-      $query->count();
-      $count = $query->execute();
-      $form["m_user_method_$key"] = [
-        '#type' => 'item',
-        '#title' => $description,
-        '#plain_text' => $count,
-        '#weight' => $weight++,
-      ];
+    foreach ($stats_fields as $key => $name) {
+      $form[$key] = $this->fsaNotifyStatsDisplay($fields, $key, $name, $weight++);
     }
 
+    return $form;
+  }
 
-    $form['delivery_method_note_news'] = [
-      '#type' => 'item',
-      '#markup' => '<h3>' . t('News and consultation alert delivery method (field_delivery_method_news)') . '</h3>',
-      '#weight' => $weight++,
-    ];
+  /**
+   * Pull user preferences for stats.
+   *
+   * @param object $fields
+   *   Fields storagedefinitions.
+   * @param string $field
+   *   NAme of the field to use in query.
+   * @param string $name
+   *   Human readable name to print out.
+   * @param int $weight
+   *   Desired weight of the form element.
+   *
+   * @return array
+   *   FAPI form element to display user stats.
+   */
+  protected function fsaNotifyStatsDisplay($fields, $field, $name, $weight) {
 
-    $methods = options_allowed_values($fields['field_delivery_method_news']);
-    foreach ($methods as $key => $description) {
-      $query = \Drupal::entityQuery('user');
-      $query->condition('uid', 0, '>');
-      $query->condition('status', 1);
-      $query->condition('field_delivery_method_news', $key);
-      $query->count();
-      $count = $query->execute();
-      $form["nc_user_method_$key"] = [
-        '#type' => 'item',
-        '#title' => $description,
-        '#plain_text' => $count,
-        '#weight' => $weight++,
-      ];
+    if (!isset($fields[$field])) {
+      return [];
     }
-
-    $form['notification_method_note'] = [
-      '#type' => 'item',
-      '#markup' => '<h3>' . t('Email frequency (field_notification_method)') . '</h3>',
-      '#weight' => $weight++,
+    $wrapper = str_replace('field_', '', $field);
+    $form = [
+      '#type' => 'details',
+      '#open' => TRUE,
+      '#title' => $name . ' (' . $field . ')',
+      '#weight' => $weight,
     ];
 
-    $methods = options_allowed_values($fields['field_notification_method']);
+    $methods = options_allowed_values($fields[$field]);
     foreach ($methods as $key => $description) {
       $query = \Drupal::entityQuery('user');
       $query->condition('uid', 0, '>');
       $query->condition('status', 1);
-      $query->condition('field_notification_method', $key);
+      $query->condition($field, $key);
       $query->count();
       $count = $query->execute();
-      $form["nuser_method_$key"] = [
+      if (empty($count)) {
+        $count = t('none');
+      }
+      $form[$wrapper][$key] = [
         '#type' => 'item',
         '#title' => $description,
         '#plain_text' => $count,
-        '#weight' => $weight++,
       ];
     }
 
