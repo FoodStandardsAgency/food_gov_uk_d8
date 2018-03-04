@@ -1,0 +1,4 @@
+elements: "is_useful:\n  '#title': 'Ydy''r dudalen hon yn ddefnyddiol?'\nfeedback_wrapper:\n  '#title': 'Sut ddylen ni wella''r dudalen hon?'\nactions:\n  '#submit__label': 'Anfon neges'\n"
+settings:
+  confirmation_message: 'Diolch am eich adborth.'
+  limit_user_message: 'Diolch, rydym wedi nodi''ch adborth.'

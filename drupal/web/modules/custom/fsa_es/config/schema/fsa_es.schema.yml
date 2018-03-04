@@ -18,3 +18,47 @@ block.settings.search_keyword:
         placeholder:
           type: label
           label: 'Placeholder'
+
+block.settings.fsa_link_tabs:
+  type: block_settings
+  label: 'Search link tab settings'
+  mapping:
+    links:
+      type: mapping
+      label: 'Tab settings'
+      mapping:
+        link-0:
+          type: mapping
+          label: 'Link 0'
+          mapping:
+            text:
+              type: label
+              label: 'Text'
+        link-1:
+          type: mapping
+          label: 'Link 1'
+          mapping:
+            text:
+              type: label
+              label: 'Text'
+        link-2:
+          type: mapping
+          label: 'Link 2'
+          mapping:
+            text:
+              type: label
+              label: 'Text'
+        link-3:
+          type: mapping
+          label: 'Link 3'
+          mapping:
+            text:
+              type: label
+              label: 'Text'
+        link-4:
+          type: mapping
+          label: 'Link 4'
+          mapping:
+            text:
+              type: label
+              label: 'Text'

@@ -1,3 +1,4 @@
+import tabbable from 'tabbable'
 import debounce from '../../helper/debounce'
 import checkMediaQuery from '../../helper/checkMediaQuery'
 import breakpoints from '../../helper/breakpoints'
@@ -163,6 +164,27 @@ function navigation () {
   // Html element
   const root = document.documentElement
 
+  // Tabbable elements inside of navigation
+  const tabbableNavigationItems = tabbable(navigationElementArray[0])
+
+  // Mobile navigation object
+  const mobileNavigation = {
+    on: () => {
+      state.on({ element: menuButtonOpenElement, type: 'button' }, 'is-open')
+      state.on({ element: menuButtonCloseElement, type: 'button' }, 'is-open')
+      state.on({ element: navigationElementArray[0], type: 'content' }, 'is-open')
+      siteElementArray[0].classList.add('is-moved')
+      root.classList.add('is-fixed')
+    },
+    off: () => {
+      state.off({ element: menuButtonOpenElement, type: 'button' }, 'is-open')
+      state.off({ element: menuButtonCloseElement, type: 'button' }, 'is-open')
+      state.off({ element: navigationElementArray[0], type: 'content' }, 'is-open')
+      siteElementArray[0].classList.remove('is-moved')
+      root.classList.remove('is-fixed')
+    }
+  }
+
   // Add keyboard navigation so the megamenu is easy to use with a keyboard.
   const menuItemActionArray = [...navigationElementArray[0].querySelectorAll(settings.menuItemActionSelector)]
   menuItemActionArray.forEach((element) => {
@@ -305,8 +327,6 @@ function navigation () {
     })
   })
 
-  /// Mobile navigation
-
   // Check everything found
   if (menuButtonOpenElement.length <= 0 ||
     menuButtonCloseElement.length <= 0 ||
@@ -348,90 +368,15 @@ function navigation () {
   })
 
   function initializeListeners () {
-    // // Add listeners
-    // firstLevelLinkArray.forEach((element) => {
-    //   // Add a focus listener
-    //   element.addEventListener('focus', function (e) {
-    //     firstLevelLinkArray.forEach((element) => {
-    //       state.off({element: element, type: 'button'}, 'is-open')
-    //     })
-
-    //     secondLevelMenuArray.forEach((element) => {
-    //       state.off({element, type: 'content'}, 'is-open')
-    //     })
-    //   }, true)
-
-    //   // Add a keypress listener
-    //   element.addEventListener('keypress', function (e) {
-    //     const content = element.nextElementSibling
-
-    //     if (e.which === KEYCODE.SPACE) {
-    //       e.preventDefault()
-    //       state.toggle(element, content, 'is-open')
-    //     }
-    //     if (e.which === KEYCODE.ENTER) {
-    //       if ([...content.classList].indexOf('is-open') !== -1) {
-    //         state.off({element: element, type: 'button'}, 'is-open')
-    //         state.off({element: content, type: 'content'}, 'is-open')
-    //       } else {
-    //         e.preventDefault()
-    //         state.on({element: element, type: 'button'}, 'is-open')
-    //         state.on({element: content, type: 'content'}, 'is-open')
-    //       }
-    //     }
-    //   })
-
-    //   // If touch device
-    //   element.addEventListener('touchstart', function addtouchclass (e) {
-    //     if (checkMediaQuery() !== breakpoints.xsmall) {
-    //       const content = element.nextElementSibling
-    //       if ([...content.classList].indexOf('is-open') !== -1) {
-    //         element.classList.remove('is-open')
-    //         content.classList.remove('is-open')
-    //       } else {
-    //         e.preventDefault()
-    //         firstLevelLinkArray.forEach((element) => {
-    //           element.classList.remove('is-open')
-    //         })
-    //         element.classList.add('is-open')
-    //         secondLevelMenuArray.forEach((element) => {
-    //           element.classList.remove('is-open')
-    //         })
-    //         content.classList.add('is-open')
-    //       }
-    //     }
-    //   }, false)
-
-    //   // Add a mouseenter listener
-    //   element.addEventListener('mouseenter', function (e) {
-    //     firstLevelLinkArray.forEach((element) => {
-    //       state.remove({element: element, type: 'button'}, 'is-open')
-    //     })
-
-    //     secondLevelMenuArray.forEach((element) => {
-    //       state.remove({element: element, type: 'content'}, 'is-open')
-    //     })
-    //   }, true)
-    // })
-
     // Add click listener for menu button
     menuButtonOpenElement.addEventListener('click', function (e) {
-      console.log(navigationElementArray[0])
-      state.on({element: menuButtonOpenElement, type: 'button'}, 'is-open')
-      state.on({element: menuButtonCloseElement, type: 'button'}, 'is-open')
-      state.on({element: navigationElementArray[0], type: 'content'}, 'is-open')
-      siteElementArray[0].classList.add('is-moved')
-      root.classList.add('is-fixed')
+      mobileNavigation.on()
       menuButtonCloseElement.focus()
     })
 
     // Add click listener for menu button
     menuButtonCloseElement.addEventListener('click', function (e) {
-      state.off({element: menuButtonOpenElement, type: 'button'}, 'is-open')
-      state.off({element: menuButtonCloseElement, type: 'button'}, 'is-open')
-      state.off({element: navigationElementArray[0], type: 'content'}, 'is-open')
-      siteElementArray[0].classList.remove('is-moved')
-      root.classList.remove('is-fixed')
+      mobileNavigation.off()
       menuButtonOpenElement.focus()
     })
 
@@ -511,6 +456,28 @@ function navigation () {
           })
         }
       }, true)
+
+      // If touch device
+      element.addEventListener('touchstart', function addtouchclass (e) {
+        if (checkMediaQuery() !== breakpoints.xsmall) {
+          if ([...content.classList].indexOf('is-open') !== -1) {
+            state.off({ element: content, type: 'content' }, 'is-open')
+          } else {
+            e.preventDefault()
+
+            firstLevelLinkArray.forEach((element) => {
+              state.off({ element: element, type: 'button' }, 'is-open')
+            })
+
+            secondLevelMenuArray.forEach((element) => {
+              state.off({ element, type: 'content' }, 'is-open')
+            })
+
+            state.on({ element, type: 'button' }, 'is-open')
+            state.on({ element: content, type: 'content' }, 'is-open')
+          }
+        }
+      }, false)
     })
 
     // Back link
@@ -526,6 +493,29 @@ function navigation () {
 
           if ([...closestParent(element, 'js-nav-menu').classList].indexOf('navigation__menu--level-2') !== -1) {
             navigationElementArray[0].classList.remove('has-open-submenu')
+          }
+        }
+      })
+    })
+
+    // Close navigation/subnavigation when focued outside of navigation
+    tabbableNavigationItems.forEach((element) => {
+      element.addEventListener('blur', function (e) {
+        if (e.relatedTarget !== null) {
+          if (checkMediaQuery() === breakpoints.xsmall) {
+            if (tabbableNavigationItems.indexOf(e.relatedTarget) === -1) {
+              mobileNavigation.off()
+            }
+          } else {
+            if (tabbableNavigationItems.indexOf(e.relatedTarget) === -1) {
+              firstLevelLinkArray.forEach((element) => {
+                state.off({ element: element, type: 'button' }, 'is-open')
+              })
+
+              secondLevelMenuArray.forEach((element) => {
+                state.off({ element, type: 'content' }, 'is-open')
+              })
+            }
           }
         }
       })

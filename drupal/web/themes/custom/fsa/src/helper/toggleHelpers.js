@@ -7,10 +7,8 @@ const state = {
         break
       case 'content':
         options.element.classList.add(elemState)
-        // options.element.setAttribute('aria-hidden', 'false')
         options.element.inert = false
-        // console.log('onnnnnn', options.element)
-        // console.log('content on, aria-hidden=', element.getAttribute('aria-hidden'))
+        options.element.setAttribute('aria-hidden', 'false')
         break
       default:
         break
@@ -25,10 +23,8 @@ const state = {
         break
       case 'content':
         options.element.classList.remove(elemState)
-        // options.element.setAttribute('aria-hidden', 'false')
         options.element.inert = true
-        // console.log('offfffff', options.element)
-        console.log('content off, aria-hidden=', options.element.getAttribute('aria-hidden'))
+        options.element.setAttribute('aria-hidden', 'true')
         break
       default:
         break

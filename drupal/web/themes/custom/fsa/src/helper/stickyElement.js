@@ -32,8 +32,8 @@ function stickyElement (containers, stickyElements) {
     calcInview () {
       var rect = this.element.getBoundingClientRect()
       return (
-          rect.top - window.innerHeight <= 0 &&
-          rect.bottom >= 0
+        rect.top - window.innerHeight <= 0 &&
+        rect.bottom >= 0
       )
     }
 

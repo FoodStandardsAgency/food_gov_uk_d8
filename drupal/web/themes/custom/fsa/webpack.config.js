@@ -3,7 +3,7 @@ const path = require('path')
 
 // Plugins
 const ExtractCSSPlugin = require('extract-text-webpack-plugin')
-const SpritePlugin = require('svg-sprite-loader/plugin')
+// const SpritePlugin = require('svg-sprite-loader/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
@@ -11,6 +11,7 @@ module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: {
     app: './index.js',
+    editor: './editor.js',
     styleguide: './styleguide/index.js'
   },
   devServer: {
@@ -30,6 +31,16 @@ module.exports = {
           }
         }
       },
+      // {
+      //   test: /\.js$/,
+      //   // resourceQuery: /styleguide/,
+      //   include: /(component)/,
+      //   use: [
+      //     {
+      //       loader: 'raw-loader'
+      //     }
+      //   ]
+      // },
       {
         test: /\.css$/,
         exclude: /(component|styleguide|helper)/,
@@ -115,14 +126,23 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   plugins: [
+    // Clean dist folder before building
     new CleanWebpackPlugin(['dist']),
+
+    // Extract CSS to its own file
     new ExtractCSSPlugin({
       filename: '[name].css'
     }),
-    new SpritePlugin(),
+
+    // Create SVG sprite
+    // new SpritePlugin(),
+
+    // Create a custom template for styleguide
     new HtmlWebpackPlugin({
       template: 'styleguide/template.js'
     }),
+
+    // Hotmodulereplacement for developing with styleguide
     new webpack.HotModuleReplacementPlugin()
   ]
 }
