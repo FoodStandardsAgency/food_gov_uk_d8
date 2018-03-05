@@ -66,7 +66,7 @@
         <button class="header__menu-button js-menu-button-open">
           <div class="svg">
             <span class="visually-hidden">{{ 'Open mobile navigation'|t }}</span>
-            <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#menu-icon"></use></svg>
+            {{ include('/themes/custom/fsa/template/base/svg-sprite.html.twig', {icon_id: 'menu-icon'}) }}
           </div>
         </button>
 
@@ -92,14 +92,14 @@
           <button class="navigation-mobile-header__button js-menu-button-close">
             <span class="visually-hidden">{{ 'Close mobile navigation'|t }}</span>
             <div class="svg">
-              <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#close-icon"></use></svg>
+              {{ include('/themes/custom/fsa/template/base/svg-sprite.html.twig', {icon_id: 'close-icon'}) }}
             </div>
           </button>
 
           <a href="/" class="header__logo block-link">
             <span class="visually-hidden">{{ 'Food Standards Agency - Frontpage'|t }}</span>
             <div class="svg" aria-hidden="true">
-              <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#logo-desktop-white-{{ current_language }}"></use></svg>
+              {{ include('/themes/custom/fsa/template/base/svg-sprite.html.twig', {icon_id: 'logo-desktop-white-' ~ current_language}) }}
             </div>
           </a>
 
@@ -127,35 +127,35 @@
                 <a href="https://www.facebook.com/FoodStandardsAgency" class="social-media__link">
                   <span class="visually-hidden">Facebook</span>
                   <div class="svg" aria-hidden="true">
-                    <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Facebook_icon"></use></svg>
+                    {{ include('/themes/custom/fsa/template/base/svg-sprite.html.twig', {icon_id: 'Facebook_icon'}) }}
                   </div>
                 </a>
 
                 <a href="https://twitter.com/foodgov" class="social-media__link">
                   <span class="visually-hidden">Twitter</span>
                   <div class="svg" aria-hidden="true">
-                    <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Twitter_icon"></use></svg>
+                    {{ include('/themes/custom/fsa/template/base/svg-sprite.html.twig', {icon_id: 'Twitter_icon'}) }}
                   </div>
                 </a>
 
                 <a href="https://www.linkedin.com/company/food-standards-agency" class="social-media__link">
                   <span class="visually-hidden">Linkedin</span>
                   <div class="svg" aria-hidden="true">
-                    <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#LinkedIN_icon"></use></svg>
+                    {{ include('/themes/custom/fsa/template/base/svg-sprite.html.twig', {icon_id: 'LinkedIN_icon'}) }}
                   </div>
                 </a>
 
                 <a href="https://www.youtube.com/user/FoodStandardsAgency" class="social-media__link">
                   <span class="visually-hidden">Youtube</span>
                   <div class="svg" aria-hidden="true">
-                    <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Youtube_icon"></use></svg>
+                    {{ include('/themes/custom/fsa/template/base/svg-sprite.html.twig', {icon_id: 'Youtube_icon'}) }}
                   </div>
                 </a>
 
                 <a href="https://www.instagram.com/foodgov/" class="social-media__link">
                   <span class="visually-hidden">Instagram</span>
                   <div class="svg" aria-hidden="true">
-                    <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#instagram-icon"></use></svg>
+                    {{ include('/themes/custom/fsa/template/base/svg-sprite.html.twig', {icon_id: 'instagram-icon'}) }}
                   </div>
                 </a>
               </div>
@@ -284,35 +284,35 @@
               <a href="https://www.facebook.com/FoodStandardsAgency" class="social-media__link">
                 <span class="visually-hidden">Facebook</span>
                 <div class="svg" aria-hidden="true">
-                  <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Facebook_icon"></use></svg>
+                  {{ include('/themes/custom/fsa/template/base/svg-sprite.html.twig', {icon_id: 'Facebook_icon'}) }}
                 </div>
               </a>
 
               <a href="https://twitter.com/foodgov" class="social-media__link">
                 <span class="visually-hidden">Twitter</span>
                 <div class="svg" aria-hidden="true">
-                  <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Twitter_icon"></use></svg>
+                  {{ include('/themes/custom/fsa/template/base/svg-sprite.html.twig', {icon_id: 'Twitter_icon'}) }}
                 </div>
               </a>
 
               <a href="https://www.linkedin.com/company/food-standards-agency" class="social-media__link">
                 <span class="visually-hidden">Linkedin</span>
                 <div class="svg" aria-hidden="true">
-                  <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#LinkedIN_icon"></use></svg>
+                  {{ include('/themes/custom/fsa/template/base/svg-sprite.html.twig', {icon_id: 'LinkedIN_icon'}) }}
                 </div>
               </a>
 
               <a href="https://www.youtube.com/user/FoodStandardsAgency" class="social-media__link">
                 <span class="visually-hidden">Youtube</span>
                 <div class="svg" aria-hidden="true">
-                  <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#Youtube_icon"></use></svg>
+                  {{ include('/themes/custom/fsa/template/base/svg-sprite.html.twig', {icon_id: 'Youtube_icon'}) }}
                 </div>
               </a>
 
               <a href="https://www.instagram.com/foodgov/" class="social-media__link">
                 <span class="visually-hidden">Instagram</span>
                 <div class="svg" aria-hidden="true">
-                  <svg role="presentation"><use xlink:href="/themes/custom/fsa/dist/sprite.svg#instagram-icon"></use></svg>
+                  {{ include('/themes/custom/fsa/template/base/svg-sprite.html.twig', {icon_id: 'instagram-icon'}) }}
                 </div>
               </a>
             </div>
