@@ -66,11 +66,17 @@ class EstablishmentApiUrl extends Url {
 
     // Use the Url plugin provided config option.
     $configuration['urls'] = [];
-    for ($i = $start_at_page; $i <= $page_count; $i++) {
-      // Append pageNumber "manually", calling buildQuery() again for every item
-      // would double the excecution time.
-      $configuration['urls'][] = $configuration['base_url'] . '?' . $query . '&pageNumber=' . $i;
-    }
+
+    // @todo: this is the original way of creating all pages to send for migrate processing.
+//    for ($i = $start_at_page; $i <= $page_count; $i++) {
+//      // Append pageNumber "manually", calling buildQuery() again for every item
+//      // would double the excecution time.
+//      $configuration['urls'][] = $configuration['base_url'] . '?' . $query . '&pageNumber=' . $i;
+//    }
+
+    // @todo: here we build the urls array to fetch single items by fhrsid.
+    $configuration['urls'] = FhrsApiController::getUrlForItemsToUpdate();
+//    drush_print_r($configuration['urls']);
 
     // Pass in the URL's to fetch the content from.
     $this->sourceUrls = $configuration['urls'];

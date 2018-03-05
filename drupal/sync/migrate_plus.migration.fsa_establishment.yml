@@ -22,7 +22,7 @@ source:
     accept: application/json
     x-api-version: '2'
     accept-language: en-GB
-  item_selector: establishments
+  item_selector: ''
   track_changes: true
   fields:
     -

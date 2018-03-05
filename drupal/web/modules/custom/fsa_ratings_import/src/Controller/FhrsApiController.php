@@ -23,7 +23,8 @@ class FhrsApiController extends ControllerBase {
    */
   protected function baseUrl() {
     // @todo: Move URL to configs
-    $url = 'http://api.ratings.food.gov.uk/';
+    // @todo: USING STAGING UNTIL API UPDATES THE PRODUCTION.
+    $url = 'http://staging-api.ratings.food.gov.uk/';
     return $url;
   }
 
@@ -89,6 +90,41 @@ class FhrsApiController extends ControllerBase {
       $count = Json::decode($res->getBody());
       $count = $count['meta']['totalCount'];
       return $count;
+    }
+    catch (RequestException $e) {
+      return FALSE;
+    }
+  }
+
+  /**
+   * Build array of single-establishment only API calls.
+   *
+   * @param string $since
+   *   Updated since string date value.
+   *
+   * @return array|bool
+   *   Array of urls.
+   */
+  public static function getUrlForItemsToUpdate($since = '-3 day') {
+    $urls = [];
+    $query = UrlHelper::buildQuery(['updatedSince' => date("Y-m-d", strtotime($since))]);
+    $url = FhrsApiController::baseUrl() . 'Establishments/basic?' . $query;
+
+    // Add FHRS required headers.
+    $headers = FhrsApiController::headers();
+
+    $client = \Drupal::httpClient();
+    try {
+      $res = $client->get($url, $headers);
+      $body = Json::decode($res->getBody());
+
+      $establishments = $body['establishmentsExtended'];
+      foreach ($establishments as $establishment) {
+        $urls[] = FhrsApiController::baseUrl() . 'Establishments/' . $establishment['FHRSID'];
+      }
+
+      return $urls;
+
     }
     catch (RequestException $e) {
       return FALSE;
