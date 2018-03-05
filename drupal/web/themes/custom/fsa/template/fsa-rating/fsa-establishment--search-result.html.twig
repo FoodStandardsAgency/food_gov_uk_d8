@@ -43,11 +43,11 @@
     <div class="ratings__mobile-rating-value">
       {% if ratingvalue_id == "exempt" %}
         <div class="svg exempt">
-          <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#exempt-icon"></use></svg>
+          {{ include('/themes/custom/fsa/template/base/svg-sprite.html.twig', {icon_id: 'exempt-icon'}) }}
         </div>
       {% elseif ratingvalue_id == "awaitinginspection" %}
         <div class="svg awaitinginspection">
-          <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#awaiting-icon"></use></svg>
+          {{ include('/themes/custom/fsa/template/base/svg-sprite.html.twig', {icon_id: 'awaiting-icon'}) }}
         </div>
       {% elseif (ratingvalue_id == "pass") or
       (ratingvalue_id == "pass-and-eat-safe") or
@@ -73,7 +73,7 @@
   </a>
   <button class="ratings__toggle-button toggle-button" data-state="is-open" data-theme="dynamic" data-state-element="#collapsible-{{ randomID }}" data-breakpoint="mobile" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
     <div class="svg">
-      <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#nav-arrow-icon"></use></svg>
+      {{ include('/themes/custom/fsa/template/base/svg-sprite.html.twig', {icon_id: 'nav-arrow-icon'}) }}
     </div>
   </button>
 </div>

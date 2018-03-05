@@ -26,11 +26,11 @@
       {% if (item.ratingvalue_class == "rating--exempt") and
       (item.schemetype|clean_id == "fhrs") %}
         <div class="svg exempt">
-          <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#exempt-icon"></use></svg>
+          {{ include('/themes/custom/fsa/template/base/svg-sprite.html.twig', {icon_id: 'exempt-icon'}) }}
         </div>
       {% elseif item.ratingvalue_class == "rating--awaitinginspection" %}
         <div class="svg awaitinginspection">
-          <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#awaiting-icon"></use></svg>
+          {{ include('/themes/custom/fsa/template/base/svg-sprite.html.twig', {icon_id: 'awaiting-icon'}) }}
         </div>
       {% elseif (item.ratingvalue_class == "rating--pass") or
       (item.ratingvalue_class == "rating--pass-and-eat-safe") or
@@ -57,7 +57,7 @@
   </a>
   <button class="ratings__toggle-button toggle-button" data-state="is-open" data-theme="dynamic" data-state-element="#collapsible-{{ randomID }}" data-breakpoint="mobile" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
     <div class="svg">
-      <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#nav-arrow-icon"></use></svg>
+      {{ include('/themes/custom/fsa/template/base/svg-sprite.html.twig', {icon_id: 'nav-arrow-icon'}) }}
     </div>
   </button>
 </div>
