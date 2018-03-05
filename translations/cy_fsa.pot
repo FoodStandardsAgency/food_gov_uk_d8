@@ -1,0 +1,522 @@
+# LANGUAGE translation of PROJECT
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2017-09-14 15:46+0100\n"
+"PO-Revision-Date: 2017-09-14 20:08+0300\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.0.3\n"
+
+msgid "A–Z"
+msgstr ""
+
+msgid "Search from..."
+msgstr ""
+
+msgid "About us"
+msgstr ""
+
+msgid "Food Standards Agency makes sure food is safe to eat and what it says it is."
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Jan"
+msgstr ""
+
+msgid "Feb"
+msgstr ""
+
+msgid "Mar"
+msgstr ""
+
+msgid "Apr"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
+msgid "Jun"
+msgstr ""
+
+msgid "Jul"
+msgstr ""
+
+msgid "Aug"
+msgstr ""
+
+msgid "Sep"
+msgstr ""
+
+msgid "Oct"
+msgstr ""
+
+msgid "Nov"
+msgstr ""
+
+msgid "Dec"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Food hygiene ratings search"
+msgstr ""
+
+msgid "Business name/or location"
+msgstr ""
+
+msgid "More search options"
+msgstr ""
+
+msgid "Business type"
+msgstr ""
+
+msgid "Local authority"
+msgstr ""
+
+msgid "Hygiene rating"
+msgstr ""
+
+msgid "Exempt"
+msgstr ""
+
+msgid "Results"
+msgstr ""
+
+msgid "Sort results by"
+msgstr ""
+
+msgid "Relevance"
+msgstr ""
+
+msgid "Ratings (highest to lowest)"
+msgstr ""
+
+msgid "Rating (lowest to highest)"
+msgstr ""
+
+msgid "Name (A to Z)"
+msgstr ""
+
+msgid "Name (Z to A)"
+msgstr ""
+
+msgid "Rating"
+msgstr ""
+
+msgid "Inspection date"
+msgstr ""
+
+msgid "Page @start of @end"
+msgstr ""
+
+msgid "Back to form"
+msgstr ""
+
+msgid "{Empty}"
+msgstr ""
+
+msgid "View PDF"
+msgstr ""
+
+msgid "Enter a location"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "Manage your preferences"
+msgstr ""
+
+msgid "Manage your subscription"
+msgstr ""
+
+msgid "Logout"
+msgstr ""
+
+msgid "Cancel your subscription"
+msgstr ""
+
+msgid "Save your changes"
+msgstr ""
+
+msgid "News and consultations"
+msgstr ""
+
+msgid "Delivery options"
+msgstr ""
+
+msgid "Update your subscription or unsubscribe from the alerts you're receiving"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Password should be at least @length characters"
+msgstr ""
+
+msgid "Profile removed"
+msgstr ""
+
+msgid "Passwords match:"
+msgstr ""
+
+msgid "This will cancel all your subscriptions and permanently remove your personal details."
+msgstr ""
+
+msgid "Confirm removal"
+msgstr ""
+
+msgid "Remove your profile"
+msgstr ""
+
+msgid "Save changes"
+msgstr ""
+
+msgid "Subscribe to news and alerts"
+msgstr ""
+
+msgid "Stay up to date with food and allergy alerts, FSA news and consultations."
+msgstr ""
+
+msgid "Food and allergy alerts"
+msgstr ""
+
+msgid "Food alerts"
+msgstr ""
+
+msgid "Allergy alerts"
+msgstr ""
+
+msgid "News"
+msgstr ""
+
+msgid "Consultations"
+msgstr ""
+
+msgid "I want to receive food and allergy alerts via"
+msgstr ""
+
+msgid "I want to receive news and consultations via"
+msgstr ""
+
+msgid "Frequency"
+msgstr ""
+
+msgid "SMS frequency"
+msgstr ""
+
+msgid "SMS updates are sent immediately"
+msgstr ""
+
+msgid "Email frequency"
+msgstr ""
+
+msgid "Personal information"
+msgstr ""
+
+msgid "Language preference"
+msgstr ""
+
+msgid "All allergy alerts"
+msgstr ""
+
+msgid "Celery"
+msgstr ""
+
+msgid "Crustaceans"
+msgstr ""
+
+msgid "Egg"
+msgstr ""
+
+msgid "Fish"
+msgstr ""
+
+msgid "Gluten"
+msgstr ""
+
+msgid "Lupin"
+msgstr ""
+
+msgid "Milk"
+msgstr ""
+
+msgid "Molluscs"
+msgstr ""
+
+msgid "Mustard"
+msgstr ""
+
+msgid "Nuts"
+msgstr ""
+
+msgid "Peanuts"
+msgstr ""
+
+msgid "Sesame"
+msgstr ""
+
+msgid "Soya"
+msgstr ""
+
+msgid "Sulphur dioxide and/or sulphites"
+msgstr ""
+
+msgid "All news"
+msgstr ""
+
+msgid "Board meeting news"
+msgstr ""
+
+msgid "Business and industry news"
+msgstr ""
+
+msgid "Northern Ireland news"
+msgstr ""
+
+msgid "Science news"
+msgstr ""
+
+msgid "Wales news"
+msgstr ""
+
+msgid "All consultations"
+msgstr ""
+
+msgid "Consultation"
+msgstr ""
+
+msgid "Help shape our policies"
+msgstr ""
+
+msgid "Rapidly developing policies"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Send updates immediately"
+msgstr ""
+
+msgid "Send updates daily"
+msgstr ""
+
+msgid "Send updates weekly"
+msgstr ""
+
+msgid "Email address"
+msgstr ""
+
+msgid "Back"
+msgstr ""
+
+msgid "Your profile"
+msgstr ""
+
+msgid "Manage your profile"
+msgstr ""
+
+msgid "Privacy notice"
+msgstr ""
+
+msgid "New password"
+msgstr ""
+
+msgid "Confirm password"
+msgstr ""
+
+msgid "Food hygiene ratings"
+msgstr ""
+
+msgid "Country or local authority"
+msgstr ""
+
+msgid "Hygiene"
+msgstr ""
+
+msgid "England, Northern Ireland, Wales"
+msgstr ""
+
+msgid "Hygiene status"
+msgstr ""
+
+msgid "Scotland"
+msgstr ""
+
+msgid "Very good"
+msgstr ""
+
+msgid "Good"
+msgstr ""
+
+msgid "Generally satisfactory"
+msgstr ""
+
+msgid "Improvement necessary"
+msgstr ""
+
+msgid "Major improvement necessary"
+msgstr ""
+
+msgid "Urgent improvement necessary"
+msgstr ""
+
+msgid "Back to ratings search"
+msgstr ""
+
+msgid "Find out more about food hygiene ratings"
+msgstr ""
+
+msgid "Area inspected by food safety officer"
+msgstr ""
+
+msgid "Hygienic handling of food including preparation, cooking, re-heating, cooling and storage"
+msgstr ""
+
+msgid "Cleanliness and condition of facilities and building"
+msgstr ""
+
+msgid "Cleanliness and condition of facilities and building (including having appropriate layout, ventilation, hand washing facilities and pest control) to enable good food hygiene"
+msgstr ""
+
+msgid "Management of food safety"
+msgstr ""
+
+msgid "System or checks in place to ensure that food sold or served is safe to eat, evidence that staff know about food safety, and the food safety officer has confidence that standards will be maintained in future."
+msgstr ""
+
+msgid "Are you the business owner or manager?"
+msgstr ""
+
+msgid "If any information on this page is incorrect you can email the correct information to your local authority by using the email address below."
+msgstr ""
+
+msgid "You can find out how to appeal against the rating given and find out about your right to reply. You can also ask for a re-inspection."
+msgstr ""
+
+msgid "Display this rating on your website"
+msgstr ""
+
+msgid "You can display this rating on your website."
+msgstr ""
+
+msgid "Get badges"
+msgstr ""
+
+msgid "Do you want to get a copy of the report?"
+msgstr ""
+
+msgid "If you wish to see the food safety officer’s report on which this rating is based, you can request this from the local authority that carried out the inspection. You can do this by sending an email to the address below. The local authority will consider your request and will usually send you a copy of the report. In some cases, the local authority may decide that they cannot do so but will let you know this and explain why."
+msgstr ""
+
+msgid "Inspecting council"
+msgstr ""
+
+msgid "Hygienic food handling"
+msgstr ""
+
+msgid "Standards found"
+msgstr ""
+
+msgid "Awaiting Rating"
+msgstr ""
+
+msgid "Address"
+msgstr ""
+
+msgid "Show on a map"
+msgstr ""
+
+msgid "Next ›"
+msgstr ""
+
+msgid "Last »"
+msgstr ""
+
+msgid "« First"
+msgstr ""
+
+msgid "‹ Previous"
+msgstr ""
+
+msgid "What is the Food Hygiene Rating Scheme?"
+msgstr ""
+
+msgid "What do the different ratings mean"
+msgstr ""
+
+msgid "Showing <span>@items</span> of <span>@total</span>"
+msgstr ""
+
+msgid "results"
+msgstr ""
+
+msgid "January"
+msgstr ""
+
+msgid "February"
+msgstr ""
+
+msgid "March"
+msgstr ""
+
+msgid "April"
+msgstr ""
+
+msgid "June"
+msgstr ""
+
+msgid "July"
+msgstr ""
+
+msgid "August"
+msgstr ""
+
+msgid "September"
+msgstr ""
+
+msgid "October"
+msgstr ""
+
+msgid "November"
+msgstr ""
+
+msgid "December"
+msgstr ""
+
+msgid "This is a new service – your <a href=\"/feedback\">feedback</a> will help us to improve it."
+msgstr ""
+
+msgid "Search..."
+msgstr ""
+
+msgid "Is there anything wrong with this page?"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Message"
+msgstr ""
+
+msgid "Send message"
+msgstr ""
+
+msgid "Step @start of @end"
+msgstr ""

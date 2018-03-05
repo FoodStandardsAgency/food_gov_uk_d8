@@ -13,7 +13,6 @@ require_once 'inc/fieldset.inc';
 require_once 'inc/page.inc';
 require_once 'inc/media.inc';
 require_once 'inc/fsa-ratings-search-page.inc';
-require_once 'inc/status_messages.inc';
 require_once 'inc/video_embed_iframe__youtube.inc';
 
 /**
