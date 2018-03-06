@@ -11,7 +11,7 @@ cck_plugin_method: null
 migration_tags:
   - authorities
   - welsh
-migration_group: fsa
+migration_group: fsa_rating
 label: 'FSA Authorities (welsh)'
 source:
   plugin: url
