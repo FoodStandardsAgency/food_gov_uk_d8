@@ -26,9 +26,18 @@
   - dev-vars.yml
   - error-page.yml
 
-  #tasks:
+  tasks:
   # Drupal cron job
   #- cron: name="Example Drupal cron job" minute="*/2" job="su nginx --shell=/bin/sh -c '/usr/lib/composer/vendor/bin/drush --root=/var/www/example.com/current elysia-cron run > /dev/null 2>&1'" state="present"
+
+    - name: "Fetch FHRS establishments from the API"
+      cron:
+        name: "Run Migrate API to fetch FHRS establishment updates from the API"
+        minute: "*/15"
+        job: "/usr/lib/composer/vendor/bin/drush --root=/var/www/fsa/current/web mim --tag=establishments"
+        state: "present"
+        user: nginx
+      tags: ['cron']
 
   vars:
     wkv_site_env: develop
