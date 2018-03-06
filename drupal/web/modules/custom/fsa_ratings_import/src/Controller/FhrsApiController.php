@@ -92,6 +92,7 @@ class FhrsApiController extends ControllerBase {
       return $count;
     }
     catch (RequestException $e) {
+      \Drupal::logger('fsa_ratings_import')->error('Failed getting totalcount from the API: ' . $e);
       return FALSE;
     }
   }
@@ -127,6 +128,7 @@ class FhrsApiController extends ControllerBase {
 
     }
     catch (RequestException $e) {
+      \Drupal::logger('fsa_ratings_import')->error('Failed to request for updated establishment items: ' . $e);
       return FALSE;
     }
   }
