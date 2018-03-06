@@ -1,9 +1,5 @@
 How to use Elasticsearch in FSA site?
 
-FSA ES has two indexes:
-- `page_index` for global site search 
-- `fsa_ratings_index` for FHRS
-
 1. Install Elasticsearch by running `vagrant provision` (in local development environment)
 2. Make sure `fsa_es` module is enabled (should be fine if you've run `drush cim`)
 3. Make sure you have imported some amount of `fsa_establisment` entities into Drupal (you should have if you have fetched prod or stage db)
@@ -22,3 +18,6 @@ FSA ES has two indexes:
    - Alternatively run `watch -n1 drush queue-run elasticsearch_helper_indexing` (with `watch` to proceed after timeouts) 
    - Note you may want to clear the queue first:
       - `drush sqlq "DELETE from queue WHERE name = 'elasticsearch_helper_indexing';"`
+
+* List of ES index names in this project:
+`fsa_ratings_index,alert_index,consultation_index,news_index,page_index,research_index`

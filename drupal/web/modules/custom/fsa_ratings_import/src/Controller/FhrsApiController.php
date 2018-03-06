@@ -23,7 +23,8 @@ class FhrsApiController extends ControllerBase {
    */
   protected function baseUrl() {
     // @todo: Move URL to configs
-    $url = 'http://api.ratings.food.gov.uk/';
+    // @todo: USING STAGING UNTIL API UPDATES THE PRODUCTION.
+    $url = 'http://staging-api.ratings.food.gov.uk/';
     return $url;
   }
 
@@ -91,6 +92,50 @@ class FhrsApiController extends ControllerBase {
       return $count;
     }
     catch (RequestException $e) {
+      \Drupal::logger('fsa_ratings_import')->error('Failed getting totalcount from the API: ' . $e);
+      return FALSE;
+    }
+  }
+
+  /**
+   * Build array of single-establishment only API calls.
+   *
+   * @param string $since
+   *   Updated since string date value. Defaults to a week.
+   *
+   * @return array|bool
+   *   Array of urls.
+   */
+  public static function getUrlForItemsToUpdate($since = '-7 day') {
+    $urls = [];
+    $sinceDate = date("Y-m-d", strtotime($since));
+    $query = UrlHelper::buildQuery(['updatedSince' => $sinceDate]);
+    $url = FhrsApiController::baseUrl() . 'Establishments/basic?' . $query;
+
+    // Add FHRS required headers.
+    $headers = FhrsApiController::headers();
+
+    $client = \Drupal::httpClient();
+    try {
+      $res = $client->get($url, $headers);
+      $body = Json::decode($res->getBody());
+
+      if (!empty($body['establishmentsExtended'])) {
+        $establishments = $body['establishmentsExtended'];
+        foreach ($establishments as $establishment) {
+          $urls[] = FhrsApiController::baseUrl() . 'Establishments/' . $establishment['FHRSID'];
+        }
+
+        return $urls;
+      }
+      else {
+        \Drupal::logger('fsa_ratings_import')->notice('No establishment updates since ' . $sinceDate . ' from the ratings API');
+        return FALSE;
+      }
+
+    }
+    catch (RequestException $e) {
+      \Drupal::logger('fsa_ratings_import')->error('Failed to request for updated establishment items: ' . $e);
       return FALSE;
     }
   }
