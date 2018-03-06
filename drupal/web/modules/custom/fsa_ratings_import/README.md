@@ -1,9 +1,11 @@
 FSA Ratings import
 =======
 
-FSA RAtings import module uses Drupal Migrate API to fetch `fsa_establishment` and `fsa_authority` content entities.
+FSA RAtings import module uses Drupal Migrate API to fetch `fsa_establishment`
+and `fsa_authority` content entities.
 
-FHRS rating API documentation: [api.ratings.food.gov.uk](http://api.ratings.food.gov.uk) 
+FHRS rating API documentation: 
+[api.ratings.food.gov.uk](http://api.ratings.food.gov.uk) 
 
 ### Import/migrate Rating content
 
@@ -19,28 +21,33 @@ FHRS rating API documentation: [api.ratings.food.gov.uk](http://api.ratings.food
 * If import fails or is stopped set back to idle:
   * `drush mrs fsa_establishment` or `drush mrs fsa_authority`
 
-* The process can be memory-consuming. Especially on full reimport it may be required to run the command with physical memory limit: `php -dmemory_limit=-1 /usr/lib/composer/vendor/bin/drush mi fsa_establishment`
+* The process can be memory-consuming. Especially on full reimport it may be 
+required to run the command with physical memory limit:
+`php -dmemory_limit=-1 /usr/lib/composer/vendor/bin/drush mi fsa_establishment`
 
 ### Establishment import/frequency note
 Module implements an eventsubscriberwhich sets the API url start page offset
  to avoid bloating the memory with fetching all +500K entities at once.
  
-* To handle with the memomry consumption the module currently increments the offset of API calls and sets it to a state.
- The state can be reset with `drush sset fsa_rating_api_offset 1` or use `drush sget fsa_rating_api_offset` to check the 
- current offset. 
+* To handle with the memomry consumption the module currently increments the 
+offset of API calls and sets it to a state. The state can be reset with 
+`drush sset fsa_rating_api_offset 1` or use `drush sget fsa_rating_api_offset`
+to check the current offset. 
 
 ### Establishment full import vs. update only
 
-FHRS API provides only limited set of return data for `GET Establishments/basic?updatedSince={Y-m-d}`
-`\Drupal\fsa_ratings_import\Plugin\migrate\source\EstablishmentApiUrl` has `$update` variable to control if everything 
-should be fetched or updates only
+* FHRS API provides only limited set of return data for 
+`GET Establishments/basic?updatedSince={Y-m-d}`
+* `\Drupal\fsa_ratings_import\Plugin\migrate\source\EstablishmentApiUrl` has 
+`$update` variable to control if everything should be fetched or updates only.
 
 ##### todo:
 [] move the update flag to configurations. 
 
 ### Development options 
 
-To import smaller batch of content for testing/development add following line(s) to your local `settings.local.php` file:
+To import smaller batch of content for testing/development add following 
+line(s) to your local `settings.local.php` file:
 
 `$config['fsa_ratings_import']['import_mode'] = 'development';`
 
