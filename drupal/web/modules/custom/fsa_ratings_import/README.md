@@ -29,6 +29,15 @@ Module implements an eventsubscriberwhich sets the API url start page offset
  The state can be reset with `drush sset fsa_rating_api_offset 1` or use `drush sget fsa_rating_api_offset` to check the 
  current offset. 
 
+### Establishment full import vs. update only
+
+FHRS API provides only limited set of return data for `GET Establishments/basic?updatedSince={Y-m-d}`
+`\Drupal\fsa_ratings_import\Plugin\migrate\source\EstablishmentApiUrl` has `$update` variable to control if everything 
+should be fetched or updates only
+
+##### todo:
+[] move the update flag to configurations. 
+
 ### Development options 
 
 To import smaller batch of content for testing/development add following line(s) to your local `settings.local.php` file:
