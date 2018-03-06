@@ -29,42 +29,6 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-msgid "Jan"
-msgstr ""
-
-msgid "Feb"
-msgstr ""
-
-msgid "Mar"
-msgstr ""
-
-msgid "Apr"
-msgstr ""
-
-msgid "May"
-msgstr ""
-
-msgid "Jun"
-msgstr ""
-
-msgid "Jul"
-msgstr ""
-
-msgid "Aug"
-msgstr ""
-
-msgid "Sep"
-msgstr ""
-
-msgid "Oct"
-msgstr ""
-
-msgid "Nov"
-msgstr ""
-
-msgid "Dec"
-msgstr ""
-
 msgid "Home"
 msgstr ""
 
@@ -464,39 +428,6 @@ msgstr ""
 msgid "results"
 msgstr ""
 
-msgid "January"
-msgstr ""
-
-msgid "February"
-msgstr ""
-
-msgid "March"
-msgstr ""
-
-msgid "April"
-msgstr ""
-
-msgid "June"
-msgstr ""
-
-msgid "July"
-msgstr ""
-
-msgid "August"
-msgstr ""
-
-msgid "September"
-msgstr ""
-
-msgid "October"
-msgstr ""
-
-msgid "November"
-msgstr ""
-
-msgid "December"
-msgstr ""
-
 msgid "This is a new service – your <a href=\"/feedback\">feedback</a> will help us to improve it."
 msgstr ""
 
@@ -521,59 +452,71 @@ msgstr ""
 msgid "Step @start of @end"
 msgstr ""
 
-msgid "optional"
+msgctxt "Long month name"
+msgid "January"
 msgstr ""
 
-msgid "Awaiting Publication"
+msgctxt "Long month name"
+msgid "February"
 msgstr ""
 
-msgid "Awaiting Inspection"
+msgctxt "Long month name"
+msgid "March"
+msgstr ""
+
+msgctxt "Long month name"
+msgid "April"
+msgstr ""
+
+msgctxt "Long month name"
+msgid "May"
+msgstr ""
+
+msgctxt "Long month name"
+msgid "June"
+msgstr ""
+
+msgctxt "Long month name"
+msgid "July"
+msgstr ""
+
+msgctxt "Long month name"
+msgid "August"
+msgstr ""
+
+msgctxt "Long month name"
+msgid "September"
+msgstr ""
+
+msgctxt "Long month name"
+msgid "October"
+msgstr ""
+
+msgctxt "Long month name"
+msgid "November"
+msgstr ""
+
+msgctxt "Long month name"
+msgid "December"
 msgstr ""
 
 msgid "<span class=\"@class_number\">@count</span> page"
-msgstr ""
-
-msgid "<span class=\"@class_number\">@count</span> pages"
-msgstr ""
+msgid_plural "<span class=\"@class_number\">@count</span> pages"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "<span class=\"@class_number\">@count</span> food hygiene ratings result"
-msgstr ""
+msgid_plural "<span class=\"@class_number\">@count</span> food hygiene ratings results"
+msgstr[0] ""
+msgstr[1] ""
 
-msgid "<span class=\"@class_number\">@count</span> food hygiene ratings results"
-msgstr ""
 
 msgid "<span class=\"@class_number\">@count</span> result found"
-msgstr ""
-
-msgid "<span class=\"@class_number\">@count</span> results found"
-msgstr ""
+msgid_plural "<span class=\"@class_number\">@count</span> results found"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "<span class=\"@class_number\">@count</span> result found for <span class=\"@class_keyword\">%keywords</span>"
-msgstr ""
-
-msgid "<span class=\"@class_number\">@count</span> results found for <span class=\"@class_keyword\">%keywords</span>"
-msgstr ""
-
-msgid "!main_view_string and !ratings_string found for <span class=\"@class_keyword\">%keywords</span>"
-msgstr ""
-
-msgid "!ratings_string found for <span class=\"@class_keyword\">%keywords</span>"
-msgstr ""
-
-msgid "!main_view_string and !ratings_string found"
-msgstr ""
-
-msgid "!ratings_string found"
-msgstr ""
-
-msgid "All news and alerts"
-msgstr ""
-
-msgid "Find a food safety team"
-msgstr ""
-
-msgid "Please enter a postcode to find the food safety team in the area"
-msgstr ""
-
-msgid "Enter a full postcode"
-msgstr ""
+msgid_plural "<span class=\"@class_number\">@count</span> results found for <span class=\"@class_keyword\">%keywords</span>"
+msgstr[0] ""
+msgstr[1] ""

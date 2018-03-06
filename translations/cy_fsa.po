@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2017-09-14 15:46+0100\n"
-"PO-Revision-Date: 2018-03-02 08:20+0000\n"
+"PO-Revision-Date: 2018-03-06 08:06+0100\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -31,42 +31,6 @@ msgstr ""
 
 msgid "Search"
 msgstr "Chwilio"
-
-msgid "Jan"
-msgstr "Ion"
-
-msgid "Feb"
-msgstr "Chwef"
-
-msgid "Mar"
-msgstr "Maw"
-
-msgid "Apr"
-msgstr "Ebr"
-
-msgid "May"
-msgstr "Mai"
-
-msgid "Jun"
-msgstr "Meh"
-
-msgid "Jul"
-msgstr "Gorff"
-
-msgid "Aug"
-msgstr "Awst"
-
-msgid "Sep"
-msgstr "Medi"
-
-msgid "Oct"
-msgstr "Hyd"
-
-msgid "Nov"
-msgstr "Tach"
-
-msgid "Dec"
-msgstr "Rhag"
 
 msgid "Home"
 msgstr "Hafan"
@@ -515,39 +479,6 @@ msgstr "Yn dangos <span>@items</span> o <span>@total</span>"
 msgid "results"
 msgstr "canlyniadau"
 
-msgid "January"
-msgstr "Ionawr"
-
-msgid "February"
-msgstr "Chwefror"
-
-msgid "March"
-msgstr "Mawrth"
-
-msgid "April"
-msgstr "Ebrill"
-
-msgid "June"
-msgstr "Mehefin"
-
-msgid "July"
-msgstr "Gorffennaf"
-
-msgid "August"
-msgstr "Awst"
-
-msgid "September"
-msgstr "Medi"
-
-msgid "October"
-msgstr "Hydref"
-
-msgid "November"
-msgstr "Tachwedd"
-
-msgid "December"
-msgstr "Rhagfyr"
-
 msgid ""
 "This is a new service – your <a href=\"/feedback\">feedback</a> will help us "
 "to improve it."
@@ -576,80 +507,178 @@ msgstr "Anfon neges"
 msgid "Step @start of @end"
 msgstr "Cam @start o @end"
 
-msgid "optional"
-msgstr "dewisol"
+msgctxt "Long month name"
+msgid "January"
+msgstr "Ionawr"
 
-msgid "Awaiting Publication"
-msgstr "I’w gyhoeddi’n fuan"
+msgctxt "Long month name"
+msgid "February"
+msgstr "Chwefror"
 
-msgid "Awaiting Inspection"
-msgstr "Aros am arolygiad"
+msgctxt "Long month name"
+msgid "March"
+msgstr "Mawrth"
+
+msgctxt "Long month name"
+msgid "April"
+msgstr "Ebrill"
+
+msgctxt "Long month name"
+msgid "May"
+msgstr "Mai"
+
+msgctxt "Long month name"
+msgid "June"
+msgstr "Mehefin"
+
+msgctxt "Long month name"
+msgid "July"
+msgstr "Gorffennaf"
+
+msgctxt "Long month name"
+msgid "August"
+msgstr "Awst"
+
+msgctxt "Long month name"
+msgid "September"
+msgstr "Medi"
+
+msgctxt "Long month name"
+msgid "October"
+msgstr "Hydref"
+
+msgctxt "Long month name"
+msgid "November"
+msgstr "Tachwedd"
+
+msgctxt "Long month name"
+msgid "December"
+msgstr "Rhagfyr"
 
 msgid "<span class=\"@class_number\">@count</span> page"
-msgstr "<span class=\"@class_number\">@count</span> tudalen"
-
-msgid "<span class=\"@class_number\">@count</span> pages"
-msgstr "<span class=\"@class_number\">@count</span> tudlennau"
+msgid_plural "<span class=\"@class_number\">@count</span> pages"
+msgstr[0] "<span class=\"@class_number\">@count</span> tudalen"
+msgstr[1] "<span class=\"@class_number\">@count</span> tudlennau"
 
 msgid "<span class=\"@class_number\">@count</span> food hygiene ratings result"
-msgstr ""
-"<span class=\"@class_number\">@count</span> canlyniad sgôr hylendid bwyd"
-
-msgid ""
+msgid_plural ""
 "<span class=\"@class_number\">@count</span> food hygiene ratings results"
-msgstr ""
+msgstr[0] ""
+"<span class=\"@class_number\">@count</span> canlyniad sgôr hylendid bwyd"
+msgstr[1] ""
 "<span class=\"@class_number\">@count</span> canlyniadau sgoriau hylendid bwyd"
 
 msgid "<span class=\"@class_number\">@count</span> result found"
-msgstr "<span class=\"@class_number\">@count</span> wedi dod o hyd i ganlyniad"
-
-msgid "<span class=\"@class_number\">@count</span> results found"
-msgstr ""
+msgid_plural "<span class=\"@class_number\">@count</span> results found"
+msgstr[0] ""
+"<span class=\"@class_number\">@count</span> wedi dod o hyd i ganlyniad"
+msgstr[1] ""
 "<span class=\"@class_number\">@count</span> wedi dod o hyd i ganlyniadau"
 
 msgid ""
 "<span class=\"@class_number\">@count</span> result found for <span class="
 "\"@class_keyword\">%keywords</span>"
-msgstr ""
-"<span class=\"@class_number\">@count</span> wedi dod o hyd i ganlyniad ar "
-"gyfer <span class=\"@class_keyword\">%keywords</span>"
-
-msgid ""
+msgid_plural ""
 "<span class=\"@class_number\">@count</span> results found for <span class="
 "\"@class_keyword\">%keywords</span>"
-msgstr ""
+msgstr[0] ""
+"<span class=\"@class_number\">@count</span> wedi dod o hyd i ganlyniad ar "
+"gyfer <span class=\"@class_keyword\">%keywords</span>"
+msgstr[1] ""
 "<span class=\"@class_number\">@count</span> wedi dod o hyd i ganlyniadau ar "
 "gyfer <span class=\"@class_keyword\">%keywords</span>"
 
-msgid ""
-"!main_view_string and !ratings_string found for <span class=\"@class_keyword"
-"\">%keywords</span>"
-msgstr ""
-"!main_view_string a !ratings_string ar gyfer <span class=\"@class_keyword\">"
-"%keywords</span>"
+#~ msgid "Jan"
+#~ msgstr "Ion"
 
-msgid ""
-"!ratings_string found for <span class=\"@class_keyword\">%keywords</span>"
-msgstr ""
-"!ratings_string ar gyfer <span class=\"@class_keyword\">%keywords</span>"
+#~ msgid "Feb"
+#~ msgstr "Chwef"
 
-msgid "!main_view_string and !ratings_string found"
-msgstr "!main_view_string a !ratings_string wedi canfod"
+#~ msgid "Mar"
+#~ msgstr "Maw"
 
-msgid "!ratings_string found"
-msgstr "!ratings_string wedi canfod"
+#~ msgid "Apr"
+#~ msgstr "Ebr"
 
-msgid "All news and alerts"
-msgstr "Yr holl newyddion a rhybuddion"
+#~ msgid "Jun"
+#~ msgstr "Meh"
 
-msgid "Find a food safety team"
-msgstr "Dewch o hyd i’ch tîm diogelwch bwyd"
+#~ msgid "Jul"
+#~ msgstr "Gorff"
 
-msgid "Please enter a postcode to find the food safety team in the area"
-msgstr "Nodwch god post i chwilio am y tîm diogelwch bwyd yn yr ardal"
+#~ msgid "Aug"
+#~ msgstr "Awst"
 
-msgid "Enter a full postcode"
-msgstr "Nodwch god post llawn"
+#~ msgid "Sep"
+#~ msgstr "Medi"
+
+#~ msgid "Oct"
+#~ msgstr "Hyd"
+
+#~ msgid "Nov"
+#~ msgstr "Tach"
+
+#~ msgid "Dec"
+#~ msgstr "Rhag"
+
+#~ msgid "optional"
+#~ msgstr "dewisol"
+
+#~ msgid "Awaiting Publication"
+#~ msgstr "I’w gyhoeddi’n fuan"
+
+#~ msgid "Awaiting Inspection"
+#~ msgstr "Aros am arolygiad"
+
+#~ msgid "<span class=\"@class_number\">@count</span> pages"
+#~ msgstr "<span class=\"@class_number\">@count</span> tudlennau"
+
+#~ msgid ""
+#~ "<span class=\"@class_number\">@count</span> food hygiene ratings results"
+#~ msgstr ""
+#~ "<span class=\"@class_number\">@count</span> canlyniadau sgoriau hylendid "
+#~ "bwyd"
+
+#~ msgid "<span class=\"@class_number\">@count</span> results found"
+#~ msgstr ""
+#~ "<span class=\"@class_number\">@count</span> wedi dod o hyd i ganlyniadau"
+
+#~ msgid ""
+#~ "<span class=\"@class_number\">@count</span> results found for <span class="
+#~ "\"@class_keyword\">%keywords</span>"
+#~ msgstr ""
+#~ "<span class=\"@class_number\">@count</span> wedi dod o hyd i ganlyniadau "
+#~ "ar gyfer <span class=\"@class_keyword\">%keywords</span>"
+
+#~ msgid ""
+#~ "!main_view_string and !ratings_string found for <span class="
+#~ "\"@class_keyword\">%keywords</span>"
+#~ msgstr ""
+#~ "!main_view_string a !ratings_string ar gyfer <span class=\"@class_keyword"
+#~ "\">%keywords</span>"
+
+#~ msgid ""
+#~ "!ratings_string found for <span class=\"@class_keyword\">%keywords</span>"
+#~ msgstr ""
+#~ "!ratings_string ar gyfer <span class=\"@class_keyword\">%keywords</span>"
+
+#~ msgid "!main_view_string and !ratings_string found"
+#~ msgstr "!main_view_string a !ratings_string wedi canfod"
+
+#~ msgid "!ratings_string found"
+#~ msgstr "!ratings_string wedi canfod"
+
+#~ msgid "All news and alerts"
+#~ msgstr "Yr holl newyddion a rhybuddion"
+
+#~ msgid "Find a food safety team"
+#~ msgstr "Dewch o hyd i’ch tîm diogelwch bwyd"
+
+#~ msgid "Please enter a postcode to find the food safety team in the area"
+#~ msgstr "Nodwch god post i chwilio am y tîm diogelwch bwyd yn yr ardal"
+
+#~ msgid "Enter a full postcode"
+#~ msgstr "Nodwch god post llawn"
 
 #~ msgid "Showing @start-@end of @total"
 #~ msgstr "Yn dangos @start-@end o @total"
