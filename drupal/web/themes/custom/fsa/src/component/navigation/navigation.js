@@ -14,12 +14,6 @@ function navigation () {
     menuItemActionSelector: '.navigation__item a, .navigation__item button'
   }
 
-  const KEYCODE = {
-    ENTER: 13,
-    ESC: 27,
-    SPACE: 32
-  }
-
   const keyboard = {
     BACKSPACE: 8,
     COMMA: 188,
@@ -398,11 +392,11 @@ function navigation () {
 
       // Add a keypress listener
       element.addEventListener('keypress', function (e) {
-        if (e.which === KEYCODE.SPACE) {
+        if (e.which === keyboard.SPACE) {
           e.preventDefault()
           state.toggle(element, content, 'is-open')
         }
-        if (e.which === KEYCODE.ENTER) {
+        if (e.which === keyboard.ENTER) {
           state.toggle(element, content, 'is-open')
         }
       })
