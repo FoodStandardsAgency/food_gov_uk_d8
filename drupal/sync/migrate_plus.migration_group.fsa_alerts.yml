@@ -1,0 +1,10 @@
+uuid: 55ddb514-9c60-4380-8e53-0336eeb13265
+langcode: en
+status: true
+dependencies: {  }
+id: fsa_alerts
+label: fsa_alerts
+description: ''
+source_type: null
+module: null
+shared_configuration: null
