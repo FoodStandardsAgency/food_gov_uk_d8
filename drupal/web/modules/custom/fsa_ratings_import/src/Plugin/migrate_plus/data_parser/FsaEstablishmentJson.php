@@ -49,9 +49,8 @@ class FsaEstablishmentJson extends Json {
   /**
    * Modify any of the rows in the file.
    *
-   * Any classes that implement JsonMymodule can simply declare
-   * a protected prepareRows function and massage the data as needed
-   * before returning it.
+   * Any class that implement FsaEstablishmentJson can simply declare protected
+   * prepareRows function and massage the data as needed before returning it.
    *
    * @param array $source_data
    *   Array of data.
