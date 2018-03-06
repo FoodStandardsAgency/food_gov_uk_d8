@@ -420,6 +420,11 @@ class SearchService {
           $value = t('Awaiting Publication');
           break;
 
+        case 'Exempt':
+          // Make this label translatable.
+          $value = t('Exempt');
+          break;
+
         default:
           $value = $a['key'];
       }
