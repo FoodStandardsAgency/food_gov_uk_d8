@@ -101,14 +101,15 @@ class FhrsApiController extends ControllerBase {
    * Build array of single-establishment only API calls.
    *
    * @param string $since
-   *   Updated since string date value.
+   *   Updated since string date value. Defaults to a week.
    *
    * @return array|bool
    *   Array of urls.
    */
-  public static function getUrlForItemsToUpdate($since = '-3 day') {
+  public static function getUrlForItemsToUpdate($since = '-7 day') {
     $urls = [];
-    $query = UrlHelper::buildQuery(['updatedSince' => date("Y-m-d", strtotime($since))]);
+    $sinceDate = date("Y-m-d", strtotime($since));
+    $query = UrlHelper::buildQuery(['updatedSince' => $sinceDate]);
     $url = FhrsApiController::baseUrl() . 'Establishments/basic?' . $query;
 
     // Add FHRS required headers.
@@ -119,12 +120,18 @@ class FhrsApiController extends ControllerBase {
       $res = $client->get($url, $headers);
       $body = Json::decode($res->getBody());
 
-      $establishments = $body['establishmentsExtended'];
-      foreach ($establishments as $establishment) {
-        $urls[] = FhrsApiController::baseUrl() . 'Establishments/' . $establishment['FHRSID'];
-      }
+      if (!empty($body['establishmentsExtended'])) {
+        $establishments = $body['establishmentsExtended'];
+        foreach ($establishments as $establishment) {
+          $urls[] = FhrsApiController::baseUrl() . 'Establishments/' . $establishment['FHRSID'];
+        }
 
-      return $urls;
+        return $urls;
+      }
+      else {
+        \Drupal::logger('fsa_ratings_import')->notice('No establishment updates since ' . $sinceDate . ' from the ratings API');
+        return FALSE;
+      }
 
     }
     catch (RequestException $e) {
