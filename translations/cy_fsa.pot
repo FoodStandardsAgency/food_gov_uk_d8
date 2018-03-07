@@ -29,42 +29,6 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-msgid "Jan"
-msgstr ""
-
-msgid "Feb"
-msgstr ""
-
-msgid "Mar"
-msgstr ""
-
-msgid "Apr"
-msgstr ""
-
-msgid "May"
-msgstr ""
-
-msgid "Jun"
-msgstr ""
-
-msgid "Jul"
-msgstr ""
-
-msgid "Aug"
-msgstr ""
-
-msgid "Sep"
-msgstr ""
-
-msgid "Oct"
-msgstr ""
-
-msgid "Nov"
-msgstr ""
-
-msgid "Dec"
-msgstr ""
-
 msgid "Home"
 msgstr ""
 
@@ -464,39 +428,6 @@ msgstr ""
 msgid "results"
 msgstr ""
 
-msgid "January"
-msgstr ""
-
-msgid "February"
-msgstr ""
-
-msgid "March"
-msgstr ""
-
-msgid "April"
-msgstr ""
-
-msgid "June"
-msgstr ""
-
-msgid "July"
-msgstr ""
-
-msgid "August"
-msgstr ""
-
-msgid "September"
-msgstr ""
-
-msgid "October"
-msgstr ""
-
-msgid "November"
-msgstr ""
-
-msgid "December"
-msgstr ""
-
 msgid "This is a new service – your <a href=\"/feedback\">feedback</a> will help us to improve it."
 msgstr ""
 
@@ -519,4 +450,94 @@ msgid "Send message"
 msgstr ""
 
 msgid "Step @start of @end"
+msgstr ""
+
+msgctxt "Long month name"
+msgid "January"
+msgstr ""
+
+msgctxt "Long month name"
+msgid "February"
+msgstr ""
+
+msgctxt "Long month name"
+msgid "March"
+msgstr ""
+
+msgctxt "Long month name"
+msgid "April"
+msgstr ""
+
+msgctxt "Long month name"
+msgid "May"
+msgstr ""
+
+msgctxt "Long month name"
+msgid "June"
+msgstr ""
+
+msgctxt "Long month name"
+msgid "July"
+msgstr ""
+
+msgctxt "Long month name"
+msgid "August"
+msgstr ""
+
+msgctxt "Long month name"
+msgid "September"
+msgstr ""
+
+msgctxt "Long month name"
+msgid "October"
+msgstr ""
+
+msgctxt "Long month name"
+msgid "November"
+msgstr ""
+
+msgctxt "Long month name"
+msgid "December"
+msgstr ""
+
+msgid "<span class=\"@class_number\">@count</span> page"
+msgid_plural "<span class=\"@class_number\">@count</span> pages"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "<span class=\"@class_number\">@count</span> food hygiene ratings result"
+msgid_plural "<span class=\"@class_number\">@count</span> food hygiene ratings results"
+msgstr[0] ""
+msgstr[1] ""
+
+
+msgid "<span class=\"@class_number\">@count</span> result found"
+msgid_plural "<span class=\"@class_number\">@count</span> results found"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "<span class=\"@class_number\">@count</span> result found for <span class=\"@class_keyword\">%keywords</span>"
+msgid_plural "<span class=\"@class_number\">@count</span> results found for <span class=\"@class_keyword\">%keywords</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Contact us"
+msgstr ""
+
+msgid "Report a food problem, give us feedback or find our contact details."
+msgstr ""
+
+msgid "Please enter a business name/location or use search options below."
+msgstr ""
+
+msgid "!main_view_string and !ratings_string found for <span class=\"@class_keyword\">%keywords</span>"
+msgstr ""
+
+msgid "!ratings_string found for <span class=\"@class_keyword\">%keywords</span>"
+msgstr ""
+
+msgid "!main_view_string and !ratings_string found"
+msgstr ""
+
+msgid "!ratings_string found"
 msgstr ""
