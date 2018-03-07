@@ -85,11 +85,12 @@ class FsaEstablishmentEntityPurger extends QueueWorkerBase implements ContainerF
         $entity->delete();
       }
 
-      // In order to clean the migration map, a specific entry is located by
-      // entity destination ID and language code, then manually removed from
-      // migration map and message table. The reason for manual process is that
-      // with migration the process is rather slow, but the end result is the
-      // same (migration events are not fired, though).
+      // In order to clean the migration map, a specific row in mapping table
+      // is located by entity destination ID and language code, then manually
+      // removed from migration map and message table.
+      // The reason for manual process is that
+      // invoking migration methods for this purpose is rather slow, but the
+      // end result is the same (migration events are not fired, though).
 
       // Get source ID hash.
       $query = $this->database->select($map_table, 'm')

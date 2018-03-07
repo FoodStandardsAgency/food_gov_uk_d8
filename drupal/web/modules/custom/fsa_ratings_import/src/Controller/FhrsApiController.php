@@ -8,7 +8,6 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Drupal\Component\Serialization\Json;
 use Drupal\Component\Utility\UrlHelper;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class FhrsApiController.
@@ -17,29 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class FhrsApiController extends ControllerBase {
 
-  /** Max result per page size. */
   const RATINGS_API_MAX_PAGE_SIZE = 5000;
-
-  /** @var \GuzzleHttp\Client $httpClient */
-  protected $httpClient;
-
-  /**
-   * FhrsApiController constructor.
-   *
-   * @param \GuzzleHttp\Client $http_client
-   */
-  public function __construct(Client $http_client) {
-    $this->httpClient = $http_client;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('http_client')
-    );
-  }
 
   /**
    * FHRS API base URL.
@@ -47,9 +24,9 @@ class FhrsApiController extends ControllerBase {
    * @return string
    *   The API base url.
    */
-  public function baseUrl() {
+  protected function baseUrl() {
     // @todo: Move URL to configs
-    $url = 'http://api.ratings.food.gov.uk';
+    $url = 'http://api.ratings.food.gov.uk/';
     return $url;
   }
 
@@ -70,24 +47,16 @@ class FhrsApiController extends ControllerBase {
   }
 
   /**
-   * Returns max page size.
-   *
-   * @return int
-   */
-  public function getMaxPageSize() {
-    return self::RATINGS_API_MAX_PAGE_SIZE;
-  }
-
-  /**
    * Get status code of FHRS API.
    *
    * @return \Drupal\Core\StringTranslation\TranslatableMarkup|int
    *   Status code or error.
    */
-  public function status() {
+  public static function status() {
 
+    $client = new Client();
     try {
-      $res = $this->httpClient->get($this->baseUrl(), ['http_errors' => FALSE]);
+      $res = $client->get(FhrsApiController::baseUrl(), ['http_errors' => FALSE]);
       return($res->getStatusCode());
     }
     catch (RequestException $e) {
@@ -104,7 +73,7 @@ class FhrsApiController extends ControllerBase {
    * @return int
    *   Total count
    */
-  public function totalCount(array $filters = []) {
+  public static function totalCount(array $filters = []) {
 
     // Get only one item from API to get the meta (reduces the response time).
     $filters['pageSize'] = 1;
@@ -112,13 +81,14 @@ class FhrsApiController extends ControllerBase {
     // Take filters and build a query for the API.
     $query = UrlHelper::buildQuery($filters);
 
-    $url = $this->baseUrl() . '/Establishments?' . $query;
+    $url = FhrsApiController::baseUrl() . 'Establishments?' . $query;
 
     // Add FHRS required headers.
-    $headers = $this->headers();
+    $headers = FhrsApiController::headers();
 
+    $client = \Drupal::httpClient();
     try {
-      $res = $this->httpClient->get($url, $headers);
+      $res = $client->get($url, $headers);
       $count = Json::decode($res->getBody());
       $count = $count['meta']['totalCount'];
       return $count;
@@ -129,6 +99,15 @@ class FhrsApiController extends ControllerBase {
   }
 
   /**
+   * Returns max page size.
+   *
+   * @return int
+   */
+  public function getMaxPageSize() {
+    return self::RATINGS_API_MAX_PAGE_SIZE;
+  }
+
+  /**
    * Returns total number of pages.
    *
    * @param array $filters
@@ -136,7 +115,7 @@ class FhrsApiController extends ControllerBase {
    * @return int
    */
   public function pagesTotal(array $filters = []) {
-    $result = $this->totalCount($filters) / $this->getMaxPageSize();
+    $result = self::totalCount($filters) / self::RATINGS_API_MAX_PAGE_SIZE;
     // 4.5 means 5 pages.
     return ceil($result);
   }
@@ -168,7 +147,7 @@ class FhrsApiController extends ControllerBase {
     $url = $this->getFetchUrl($page_number, $page_size, $options);
 
     try {
-      return $this->httpClient->get($url, $this->headers());
+      return \Drupal::httpClient()->get($url, $this->headers());
     }
     catch (RequestException $e) {
       return FALSE;

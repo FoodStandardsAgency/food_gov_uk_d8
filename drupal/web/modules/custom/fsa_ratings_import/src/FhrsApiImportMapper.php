@@ -19,7 +19,7 @@ class FhrsApiImportMapper {
   /** Defines DB table where all results from API are stored. */
   const MAP_TABLE = 'fsa_establishment_api_import';
 
-  /** Defines DB table where establishment  */
+  /** Defines migrations which imported result-set should be compared against.  */
   const FHRS_MIGRATIONS = ['fsa_establishment', 'fsa_establishment_cy'];
 
   /** @var int $batchSize */

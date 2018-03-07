@@ -2,6 +2,7 @@
 
 namespace Drupal\fsa_ratings_import\Plugin\migrate\source;
 
+use Drupal\fsa_ratings_import\Controller\FhrsApiController;
 use Drupal\migrate_plus\Plugin\migrate\source\Url;
 use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\Component\Utility\UrlHelper;
@@ -15,12 +16,12 @@ use Drupal\Component\Utility\UrlHelper;
  */
 class EstablishmentApiUrl extends Url {
 
+  const RATINGS_API_MAX_PAGE_SIZE = 5000;
+
   /**
    * {@inheritdoc}
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration) {
-    /** @var \Drupal\fsa_ratings_import\Controller\FhrsApiController $api_controller */
-    $api_controller = \Drupal::service('class_resolver')->getInstanceFromDefinition('\Drupal\fsa_ratings_import\Controller\FhrsApiController');
 
     $filters = [];
     $start_at_page = 1;
@@ -29,14 +30,14 @@ class EstablishmentApiUrl extends Url {
       // For welsh language migration limit establishments to only those located
       // in Wales (countryID 4).
       $filters['countryId'] = 4;
-      $count = $api_controller->totalCount($filters);
+      $count = FhrsApiController::totalCount($filters);
     }
     else {
-      $count = $api_controller->totalCount();
+      $count = FhrsApiController::totalCount();
     }
 
-    $page_count = $count / $api_controller::RATINGS_API_MAX_PAGE_SIZE;
-    $page_size = $api_controller->pagesTotal($filters);
+    $page_count = $count / self::RATINGS_API_MAX_PAGE_SIZE;
+    $page_size = self::RATINGS_API_MAX_PAGE_SIZE;
 
     $import_mode = \Drupal::config('fsa_ratings_import')->get('import_mode');
     $import_random = \Drupal::config('fsa_ratings_import')->get('import_random');
@@ -67,7 +68,7 @@ class EstablishmentApiUrl extends Url {
     $configuration['urls'] = [];
     for ($i = $start_at_page; $i <= $page_count; $i++) {
       // Append pageNumber "manually", calling buildQuery() again for every item
-      // would double the execution time.
+      // would double the excecution time.
       $configuration['urls'][] = $configuration['base_url'] . '?' . $query . '&pageNumber=' . $i;
     }
 
