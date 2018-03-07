@@ -60,7 +60,10 @@ class FsaRatingsConfigurations extends ConfigFormBase {
       '#title' => $this->t('API update mode information'),
     ];
     $form['fsa_ratings_settings']['update_mode'] = [
-      '#markup' => $update_mode,
+      '#markup' => '<p>' . $update_mode . '</p>',
+    ];
+    $form['fsa_ratings_settings']['api_url'] = [
+      '#markup' => '<p>' . $this->t('API base URL: <a href="@url">@url</a>', ['@url' => FhrsApiController::FSA_FHRS_API_URL]) . '</p>',
     ];
 
     $form['fsa_ratings_hero'] = [

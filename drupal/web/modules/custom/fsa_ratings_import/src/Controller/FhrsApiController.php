@@ -18,6 +18,10 @@ class FhrsApiController extends ControllerBase {
   // The default time window to fetch updates from.
   const FSA_RATING_UPDATE_SINCE = '-1 week';
 
+  // FHRS API base URL.
+  // @todo: USING FHRS STAGING UNTIL API UPDATES ARE IN THEIR PRODUCTION.
+  const FSA_FHRS_API_URL = 'http://staging-api.ratings.food.gov.uk/';
+
   /**
    * FHRS API base URL.
    *
@@ -25,9 +29,7 @@ class FhrsApiController extends ControllerBase {
    *   The API base url.
    */
   protected function baseUrl() {
-    // @todo: Move URL to configs
-    // @todo: USING STAGING UNTIL API UPDATES THE PRODUCTION.
-    $url = 'http://staging-api.ratings.food.gov.uk/';
+    $url = self::FSA_FHRS_API_URL;
     return $url;
   }
 
