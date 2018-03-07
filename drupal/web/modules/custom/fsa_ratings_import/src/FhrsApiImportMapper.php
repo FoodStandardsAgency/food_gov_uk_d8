@@ -6,6 +6,7 @@ use Drupal\Core\Database\Connection;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\KeyValueStore\KeyValueFactoryInterface;
 use Drupal\Core\Queue\QueueFactory;
 use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\Plugin\MigrationPluginManagerInterface;
@@ -57,13 +58,14 @@ class FhrsApiImportMapper {
    * @param \Drupal\Core\Queue\QueueFactory $queue_factory
    * @param \Psr\Log\LoggerInterface $logger
    */
-  public function __construct(Connection $database, FileSystemInterface $file_system, DateFormatterInterface $date_formatter, EntityTypeManagerInterface $entity_type_manager, MigrationPluginManagerInterface $migration_plugin_manager, QueueFactory $queue_factory, LoggerInterface $logger) {
+  public function __construct(Connection $database, FileSystemInterface $file_system, DateFormatterInterface $date_formatter, EntityTypeManagerInterface $entity_type_manager, MigrationPluginManagerInterface $migration_plugin_manager, QueueFactory $queue_factory, KeyValueFactoryInterface $key_value_factory, LoggerInterface $logger) {
     $this->database = $database;
     $this->fileSystem = $file_system;
     $this->dateFormatter = $date_formatter;
     $this->entityTypeManager = $entity_type_manager;
     $this->migrationPluginManager = $migration_plugin_manager;
     $this->obsoleteEntityPurgerQueue = $queue_factory->get('fsa_ratings_import_entity_purger');
+    $this->keyValueStorage = $key_value_factory->get('fsa_ratings_import');
     $this->logger = $logger;
   }
 
@@ -74,6 +76,26 @@ class FhrsApiImportMapper {
    */
   public function getTablename() {
     return self::MAP_TABLE;
+  }
+
+  /**
+   * Marks the finish of entity purging for the day.
+   *
+   * @return mixed
+   */
+  public function finish() {
+    return $this->keyValueStorage->set('entity_purge_finish_last_date', $this->getDateValue('Y-m-d'));
+  }
+
+  /**
+   * Returns TRUE if entity purging is finished for the day.
+   *
+   * @return bool
+   */
+  public function isFinished() {
+    $finished_last_day = $this->keyValueStorage->get('entity_purge_finish_last_date');
+
+    return $finished_last_day == $this->getDateValue('Y-m-d');
   }
 
   /**
@@ -205,7 +227,7 @@ class FhrsApiImportMapper {
    * Removes the entities which are not found in API provided result-set.
    */
   public function rollback() {
-    if ($this->obsoleteEntityPurgerQueue->numberOfItems() == 0) {
+    if (!$this->isFinished() && $this->obsoleteEntityPurgerQueue->numberOfItems() == 0) {
       foreach ($this->getMigrations() as $migration_plugin_id => $migration_plugin) {
         $entity_type_id = $this->getEntityTypeId($migration_plugin);
         $map_table = $this->getMigrationMapTable($migration_plugin);
@@ -227,6 +249,13 @@ class FhrsApiImportMapper {
           $this->obsoleteEntityPurgerQueue->createItem($data);
         }
       }
+
+      // Mark process as finished.
+      $this->finish();
+
+      $this->logger->info('Entity purging is finished for {date}', [
+        'date' => $this->getDateValue('Y-m-d'),
+      ]);
     }
   }
 

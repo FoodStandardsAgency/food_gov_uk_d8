@@ -6,7 +6,7 @@ use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\DependencyInjection\ClassResolverInterface;
 use Drupal\Core\File\FileSystemInterface;
-use Drupal\Core\KeyValueStore\KeyValueFactory;
+use Drupal\Core\KeyValueStore\KeyValueFactoryInterface;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -56,10 +56,10 @@ class FhrsApiFetcher {
    * @param \Drupal\Core\DependencyInjection\ClassResolverInterface $class_resolver
    * @param \Drupal\Core\File\FileSystemInterface $file_system
    * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
-   * @param \Drupal\Core\KeyValueStore\KeyValueFactory $key_value_factory
+   * @param \Drupal\Core\KeyValueStore\KeyValueFactoryInterface $key_value_factory
    * @param \Psr\Log\LoggerInterface $logger
    */
-  public function __construct(ClassResolverInterface $class_resolver, FileSystemInterface $file_system, DateFormatterInterface $date_formatter, KeyValueFactory $key_value_factory, LoggerInterface $logger) {
+  public function __construct(ClassResolverInterface $class_resolver, FileSystemInterface $file_system, DateFormatterInterface $date_formatter, KeyValueFactoryInterface $key_value_factory, LoggerInterface $logger) {
     $this->apiController = $class_resolver->getInstanceFromDefinition($this->apiControllerClass);
     $this->fileSystem = $file_system;
     $this->dateFormatter = $date_formatter;
