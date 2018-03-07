@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2017-09-14 15:46+0100\n"
-"PO-Revision-Date: 2018-03-07 11:40+0100\n"
+"PO-Revision-Date: 2018-03-07 14:35+0100\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -617,6 +617,37 @@ msgstr "!main_view_string a !ratings_string wedi canfod"
 
 msgid "!ratings_string found"
 msgstr "!ratings_string wedi canfod"
+
+msgid "Refine search"
+msgstr "Chwilio'n fanylach"
+
+msgid "Open"
+msgstr "Ar agor"
+
+msgid "Closed"
+msgstr "Wedi’i orffen"
+
+msgid "Responses published"
+msgstr "Ymatebion wedi'u cyhoeddi"
+
+#~ msgid "England"
+#~ msgstr "Lloegr"
+
+#~ msgid "Northern Ireland"
+#~ msgstr "Gogledd Iwerddon"
+
+#~ msgid "Wales"
+#~ msgstr "Cymru"
+
+#, fuzzy
+#~| msgid "England, Northern Ireland, Wales"
+#~ msgid "Hygiene rating (England, Northern Ireland, Wales)"
+#~ msgstr "Lloegr, Canllawiau Gogledd, Cymru"
+
+#, fuzzy
+#~| msgid "Hygiene rating"
+#~ msgid "Hygiene rating (Scotland)"
+#~ msgstr "Hylendid"
 
 #~ msgid "Jan"
 #~ msgstr "Ion"
