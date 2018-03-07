@@ -10,6 +10,14 @@ use Drupal\Component\Utility\UrlHelper;
 /**
  * Source plugin for retrieving data via URLs.
  *
+ * FHRS API return different format for timestamped query and full updates,
+ * this plugin handles both. Full import can be toggled with a drupal stage.
+ *
+ * Enable full import:
+ * @code drush sset fsa_rating_import.full_import 1
+ * Disable full import:
+ * @code drush sdel fsa_rating_import.full_import
+ *
  * @MigrateSource(
  *   id = "establishment_api_url"
  * )
@@ -23,12 +31,17 @@ class EstablishmentApiUrl extends Url {
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration) {
 
-    // TRUE to get updates only or FALSE pull all data.
-    // @todo: move this into a state or configuration?
-    $update = TRUE;
+    // By default we should be pulling updates only. Use a state to toggle the
+    // full update mode (see documentation).
+    $full_import = \Drupal::state()->get('fsa_rating_import.full_import');
+    if ($full_import) {
+      $update = FALSE;
+    }
+    else {
+      $update = TRUE;
+    }
 
     if ($update) {
-
       // We can think 0 as the root level.
       $configuration['item_selector'] = '0';
 
