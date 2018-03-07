@@ -15,6 +15,9 @@ use Drupal\Component\Utility\UrlHelper;
  */
 class FhrsApiController extends ControllerBase {
 
+  // The default time window to fetch updates from.
+  const FSA_RATING_UPDATE_SINCE = '-1 week';
+
   /**
    * FHRS API base URL.
    *
@@ -109,8 +112,7 @@ class FhrsApiController extends ControllerBase {
    */
   public static function getUrlForItemsToUpdate() {
 
-    // Default to fetching week back results.
-    $since_default = '-1 week';
+    $since_default = self::FSA_RATING_UPDATE_SINCE;
 
     // Get the updatedSince timestamp from a state (validation is performed.
     $since = \Drupal::state()->get('fsa_rating_import.updated_since');
