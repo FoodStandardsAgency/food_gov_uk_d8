@@ -3,9 +3,10 @@ import state from '../../helper/toggleHelpers'
 function form () {
   // If there's an error, open the content where the error is
   const profileManager = document.querySelector('#profile-manager')
-  const problemElement = profileManager.querySelector('input.error')
+  if (!profileManager) return
 
-  if (!profileManager || !problemElement) return
+  const problemElement = profileManager.querySelector('input.error')
+  if (!problemElement) return
 
   const toggleContent = problemElement.closest('.toggle-content')
   const toggleButton = toggleContent.previousElementSibling
