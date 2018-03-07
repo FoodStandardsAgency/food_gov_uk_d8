@@ -21,15 +21,31 @@ abstract class FsaNotifyMessage {
    */
   public function __construct() {
 
-    $url = \Drupal::request()->getSchemeAndHttpHost();
-    $this->base_url = $url;
+    switch (getenv("WKV_SITE_ENV")) {
+      case 'local':
+        $base_url = 'https://local.food.gov.uk';
+        break;
 
-    $url = Url::fromRoute('user.login', [], ['absolute' => TRUE]);
-    $url = $url->toString();
-    $this->login_url = $url;
+      case 'development':
+        $base_url = 'https://fsa.dev.wunder.io';
+        break;
 
-    $url = 'http://.../unsubscribe';
-    $this->unsubscribe_url = $url;
+      case 'stage':
+        $base_url = 'https://fsa.stage.wunder.io';
+        break;
+
+      default:
+        $base_url = 'https://beta.food.gov.uk';
+        break;
+    }
+
+    $this->base_url = $base_url;
+
+    $url = Url::fromRoute('fsa_signin.default_controller_signInPage', []);
+    $this->login_url = $base_url . $url->toString();
+
+    $url = Url::fromRoute('fsa_signin.default_controller_unsubscribe', []);
+    $this->unsubscribe_url = $base_url . $url->toString();
 
     $this->date = date('j F Y');
   }
