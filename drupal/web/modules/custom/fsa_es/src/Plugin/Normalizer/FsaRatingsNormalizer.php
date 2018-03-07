@@ -50,6 +50,11 @@ class FsaRatingsNormalizer extends NormalizerBase {
       'name' => $object->get('name')->getString(),
     ] + $parent_data;
 
+    // Full serialization is not required for deletion.
+    if (!empty($context['method']) && $context['method'] == 'delete') {
+      return $data;
+    }
+
     $field_names = [
       'address',
       'businesstype',

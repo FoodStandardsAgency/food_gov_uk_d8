@@ -130,6 +130,40 @@ class FhrsApiFetcher {
   }
 
   /**
+   * Removes old folders from import folder.
+   */
+  public function purge() {
+    // Get real today path.
+    $real_today_path = $this->fileSystem->realpath($this->getPath());
+    // $this->path is used here for purpose as path root.
+    $real_path = $this->fileSystem->realpath($this->path);
+
+    $match_callback = function ($return_matches, $real_dir_path) use ($real_today_path) {
+      if ($real_dir_path != $real_today_path) {
+        $return_matches[] = $real_dir_path;
+      }
+
+      return $return_matches;
+    };
+
+    // Get all removable folders.
+    $removable_folders = array_reduce(glob($real_path . '/*', GLOB_ONLYDIR), $match_callback, []);
+    $removed_folders = [];
+
+    // Recursively remove folders.
+    array_map(function($dir) use (&$removed_folders) {
+      if (file_unmanaged_delete_recursive($dir)) {
+        $removed_folders[] = $dir;
+      }
+
+    }, $removable_folders);
+
+    $this->logger->info('Old API import folders were removed: {folders}', [
+      'folders' => implode(', ', $removed_folders),
+    ]);
+  }
+
+  /**
    * Returns TRUE if fetching is finished for the day.
    *
    * @return bool
@@ -279,6 +313,11 @@ class FhrsApiFetcher {
 
       // Check if next page number can be retrieved.
       if (($next_page = $this->getNextPageNumber()) !== FALSE) {
+        // Remove old files if starting anew.
+        if ($next_page == self::FIRST_PAGE) {
+          $this->purge();
+        }
+
         // Sort is added to have a consistent order on the results. While sort is
         // only performed on result-set only, it still gives some structure.
         $options = ['sortOptionKey' => 'alpha'];
