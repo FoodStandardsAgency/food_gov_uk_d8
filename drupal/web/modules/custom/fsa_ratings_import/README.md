@@ -25,24 +25,26 @@ FHRS rating API documentation:
 required to run the command with physical memory limit:
 `php -dmemory_limit=-1 /usr/lib/composer/vendor/bin/drush mi fsa_establishment`
 
-### Establishment import/frequency note
-Module implements an eventsubscriberwhich sets the API url start page offset
- to avoid bloating the memory with fetching all +500K entities at once.
- 
-* To handle with the memomry consumption the module currently increments the 
-offset of API calls and sets it to a state. The state can be reset with 
-`drush sset fsa_rating_api_offset 1` or use `drush sget fsa_rating_api_offset`
-to check the current offset. 
+### Establishment full import and update time window control override
 
-### Establishment full import vs. update only
+By default only establishment updates are fetched from the API. 
+Current update mode is shown at `/admin/config/fsa/ratings`
 
-* FHRS API provides only limited set of return data for 
-`GET Establishments/basic?updatedSince={Y-m-d}`
-* `\Drupal\fsa_ratings_import\Plugin\migrate\source\EstablishmentApiUrl` has 
-`$update` variable to control if everything should be fetched or updates only.
+Update mode and time window can be controlled with Drupal state variables.
 
-##### todo:
-[] move the update flag to configurations. 
+##### Update time window 
+Override the default update time window:  
+`drush sset fsa_rating_import.updated_since "2018-01-30"`
+
+To use default (-1 week) just delete the state:  
+`drush sdel fsa_rating_import.updated_since`
+
+##### Toggle update/full import mode:  
+Enable full import mode:  
+`drush sset fsa_rating_import.full_import 1`
+
+Disable full import mode:  
+`drush sdel fsa_rating_import.full_import`
 
 ### Development options 
 
