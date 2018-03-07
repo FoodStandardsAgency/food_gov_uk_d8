@@ -529,3 +529,15 @@ msgstr ""
 
 msgid "Please enter a business name/location or use search options below."
 msgstr ""
+
+msgid "!main_view_string and !ratings_string found for <span class=\"@class_keyword\">%keywords</span>"
+msgstr ""
+
+msgid "!ratings_string found for <span class=\"@class_keyword\">%keywords</span>"
+msgstr ""
+
+msgid "!main_view_string and !ratings_string found"
+msgstr ""
+
+msgid "!ratings_string found"
+msgstr ""

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2017-09-14 15:46+0100\n"
-"PO-Revision-Date: 2018-03-07 07:52+0100\n"
+"PO-Revision-Date: 2018-03-07 11:40+0100\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -600,6 +600,24 @@ msgid "Please enter a business name/location or use search options below."
 msgstr ""
 "Rhowch enw/lleoliad y busnes yn y DU neu ddefnyddio'r opsiynau chwilio isod."
 
+msgid ""
+"!main_view_string and !ratings_string found for <span class=\"@class_keyword"
+"\">%keywords</span>"
+msgstr ""
+"!main_view_string a !ratings_string ar gyfer <span class=\"@class_keyword\">"
+"%keywords</span>"
+
+msgid ""
+"!ratings_string found for <span class=\"@class_keyword\">%keywords</span>"
+msgstr ""
+"!ratings_string ar gyfer <span class=\"@class_keyword\">%keywords</span>"
+
+msgid "!main_view_string and !ratings_string found"
+msgstr "!main_view_string a !ratings_string wedi canfod"
+
+msgid "!ratings_string found"
+msgstr "!ratings_string wedi canfod"
+
 #~ msgid "Jan"
 #~ msgstr "Ion"
 
@@ -661,24 +679,6 @@ msgstr ""
 #~ msgstr ""
 #~ "<span class=\"@class_number\">@count</span> wedi dod o hyd i ganlyniadau "
 #~ "ar gyfer <span class=\"@class_keyword\">%keywords</span>"
-
-#~ msgid ""
-#~ "!main_view_string and !ratings_string found for <span class="
-#~ "\"@class_keyword\">%keywords</span>"
-#~ msgstr ""
-#~ "!main_view_string a !ratings_string ar gyfer <span class=\"@class_keyword"
-#~ "\">%keywords</span>"
-
-#~ msgid ""
-#~ "!ratings_string found for <span class=\"@class_keyword\">%keywords</span>"
-#~ msgstr ""
-#~ "!ratings_string ar gyfer <span class=\"@class_keyword\">%keywords</span>"
-
-#~ msgid "!main_view_string and !ratings_string found"
-#~ msgstr "!main_view_string a !ratings_string wedi canfod"
-
-#~ msgid "!ratings_string found"
-#~ msgstr "!ratings_string wedi canfod"
 
 #~ msgid "All news and alerts"
 #~ msgstr "Yr holl newyddion a rhybuddion"
