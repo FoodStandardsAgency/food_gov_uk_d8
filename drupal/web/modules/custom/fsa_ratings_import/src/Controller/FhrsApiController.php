@@ -98,17 +98,31 @@ class FhrsApiController extends ControllerBase {
   }
 
   /**
-   * Build array of single-establishment only API calls.
+   * Build array of URL's to get establishments updates.
    *
-   * @param string $since
-   *   Updated since string date value. Defaults to a week.
+   * Default time to get updates from is the previous week.
+   * Use a drupal state to override the updatedSince parameter:
+   * @code drush sset fsa_rating_import.updated_since "2018-01-30"
    *
    * @return array|bool
    *   Array of urls.
    */
-  public static function getUrlForItemsToUpdate($since = '-7 day') {
-    $urls = [];
-    $sinceDate = date("Y-m-d", strtotime($since));
+  public static function getUrlForItemsToUpdate() {
+
+    // Default to fetching week back results.
+    $since_default = '-1 week';
+
+    // Get the updatedSince timestamp from a state (validation is performed.
+    $since = \Drupal::state()->get('fsa_rating_import.updated_since');
+    if (!isset($since) || !is_int(strtotime($since))) {
+      // Be sure we have proper time from the state and fallback to default.
+      $since = $since_default;
+    }
+
+    $since = strtotime($since);
+    $sinceDate = date("Y-m-d", $since);
+    $nowDate = date("Y-m-d", strtotime('now'));
+
     $query = UrlHelper::buildQuery(['updatedSince' => $sinceDate]);
     $url = FhrsApiController::baseUrl() . 'Establishments/basic?' . $query;
 
@@ -117,6 +131,7 @@ class FhrsApiController extends ControllerBase {
 
     $client = \Drupal::httpClient();
     try {
+      $urls = [];
       $res = $client->get($url, $headers);
       $body = Json::decode($res->getBody());
 
@@ -126,16 +141,19 @@ class FhrsApiController extends ControllerBase {
           $urls[] = FhrsApiController::baseUrl() . 'Establishments/' . $establishment['FHRSID'];
         }
 
+        // Log the attempt.
+        \Drupal::logger('fsa_ratings_import')->info('FHRS API: Update from ' . $url);
+
         return $urls;
       }
       else {
-        \Drupal::logger('fsa_ratings_import')->notice('No establishment updates since ' . $sinceDate . ' from the ratings API');
+        \Drupal::logger('fsa_ratings_import')->notice('FHRS API: No establishment updates between ' . $sinceDate . ' and ' . $nowDate);
         return FALSE;
       }
 
     }
     catch (RequestException $e) {
-      \Drupal::logger('fsa_ratings_import')->error('Failed to request for updated establishment items: ' . $e);
+      \Drupal::logger('fsa_ratings_import')->error('FHRS API: Failed getting establishment updates: <pre>' . $e . '</pre>');
       return FALSE;
     }
   }
