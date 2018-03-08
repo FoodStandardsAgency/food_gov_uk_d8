@@ -29,9 +29,9 @@ function fsa_ratings_import_schema() {
 }
 
 /**
- * Implements hook_update_N().
+ * Create "fsa_establishment_api_import" table where fetched result IDs are stored.
  */
-function fsa_ratings_import_update_8002(&$sandbox) {
+function fsa_ratings_import_update_8001(&$sandbox) {
   $connection = \Drupal::database();
   $table = 'fsa_establishment_api_import';
 
