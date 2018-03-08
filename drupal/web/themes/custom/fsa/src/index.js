@@ -16,6 +16,7 @@ import toggle from './component/toggle/toggle'
 import peek from './component/peek/peek'
 import fhrs from './component/fhrs/fhrs'
 import toc from './component/toc/toc'
+import form from './component/form/form'
 
 // Require every image asset inside of img folder
 require.context('./img/', true, /\.(gif|png|svg|jpe?g)$/)
@@ -47,6 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Responsive tables
   responsiveTables()
+
+  // Form
+  form()
 })
 
 // Sticky element
