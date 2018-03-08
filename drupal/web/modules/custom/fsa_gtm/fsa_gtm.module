@@ -9,6 +9,8 @@ use Drupal\views\ViewExecutable;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\Core\Breadcrumb\Breadcrumb;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+use Drupal\Core\Link;
 
 /**
  * Implements hook_views_pre_render().
@@ -86,10 +88,9 @@ function fsa_gtm_preprocess_page(&$variables) {
         if ($generated_link) {
           $link = new SimpleXMLElement($generated_link);
           if (isset($link[0]) && isset($link['href'])) {
-            $content = $link[0];
-            $href = $link['href'] . '?navref=quicklink';
-            $markup = '<a href="' . $href . '">' . $content . '</a>';
-            $item['#markup']->setGeneratedLink($markup);
+            $url = Url::fromUserInput($link['href']);
+            $url->setOptions(['query' => ['navref' => 'quicklink']]);
+            $item['#markup']->setGeneratedLink(Link::fromTextAndUrl($link[0], $url)->toString());
           }
         }
       }
