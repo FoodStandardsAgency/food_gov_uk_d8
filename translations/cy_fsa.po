@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2017-09-14 15:46+0100\n"
-"PO-Revision-Date: 2018-03-07 14:35+0100\n"
+"PO-Revision-Date: 2018-03-08 11:53+0100\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -630,14 +630,92 @@ msgstr "Wedi’i orffen"
 msgid "Responses published"
 msgstr "Ymatebion wedi'u cyhoeddi"
 
-#~ msgid "England"
-#~ msgstr "Lloegr"
+msgid "Find a food safety team"
+msgstr "Dewch o hyd i’ch tîm diogelwch bwyd"
 
-#~ msgid "Northern Ireland"
-#~ msgstr "Gogledd Iwerddon"
+msgid "Please enter a postcode to find the food safety team in the area"
+msgstr "Nodwch god post i chwilio am y tîm diogelwch bwyd yn yr ardal"
 
-#~ msgid "Wales"
-#~ msgstr "Cymru"
+msgid "Enter a full postcode"
+msgstr "Nodwch god post llawn"
+
+msgid "Awaiting Publication"
+msgstr "I’w gyhoeddi’n fuan"
+
+msgid "Awaiting Inspection"
+msgstr "Aros am arolygiad"
+
+msgid "optional"
+msgstr "dewisol"
+
+msgid "All news and alerts"
+msgstr "Yr holl newyddion a rhybuddion"
+
+msgid "Showing @start-@end of @total"
+msgstr "Yn dangos @start-@end o @total"
+
+msgid "FSA explains"
+msgstr "ASB yn Esbonio"
+
+msgid "England"
+msgstr "Lloegr"
+
+msgid "Northern ireland"
+msgstr "Gogledd iwerddon"
+
+msgid "Northern Ireland"
+msgstr "Gogledd Iwerddon"
+
+msgid "Wales"
+msgstr "Cymru"
+
+msgid "England and northern ireland"
+msgstr "Lloegr a gogledd iwerddon"
+
+msgid "England and Northern Ireland"
+msgstr "Lloegr a Gogledd Iwerddon"
+
+msgid "England and wales"
+msgstr "Cymru a lloegr"
+
+msgid "England and Wales"
+msgstr "Cymru a Lloegr"
+
+msgid "Wales and northern ireland"
+msgstr "Cymru a nogledd iwerddon"
+
+msgid "Wales and Northern Ireland"
+msgstr "Cymru a Gogledd Iwerddon"
+
+msgid "England, wales and northern ireland"
+msgstr "Cymru, lloegr a gogledd iwerddon"
+
+msgid "England, Wales and Northern Ireland"
+msgstr "Cymru, Lloegr a Gogledd Iwerddon"
+
+msgid "England specific guidance"
+msgstr "Canllawiau lloegr"
+
+msgid "Northern ireland specific guidance"
+msgstr "Canllawiau gogledd iwerddon"
+
+msgid "Northern Ireland specific guidance"
+msgstr "Canllawiau Gogledd Iwerddon"
+
+msgid "Wales specific guidance"
+msgstr "Canllawiau Cymru"
+
+msgid "England and wales specific guidance"
+msgstr "Canllawiau cymru a lloegr"
+
+msgid "England and Wales specific guidance"
+msgstr "Canllawiau Cymru a Lloegr"
+
+msgid "Wales and northern ireland specific guidance"
+msgstr "Canllawiau cymru a gogledd iwerddon"
+
+msgid "Wales and Northern Ireland specific guidance"
+msgstr "Canllawiau Cymru a Gogledd Iwerddon"
 
 #, fuzzy
 #~| msgid "England, Northern Ireland, Wales"
@@ -682,15 +760,6 @@ msgstr "Ymatebion wedi'u cyhoeddi"
 #~ msgid "Dec"
 #~ msgstr "Rhag"
 
-#~ msgid "optional"
-#~ msgstr "dewisol"
-
-#~ msgid "Awaiting Publication"
-#~ msgstr "I’w gyhoeddi’n fuan"
-
-#~ msgid "Awaiting Inspection"
-#~ msgstr "Aros am arolygiad"
-
 #~ msgid "<span class=\"@class_number\">@count</span> pages"
 #~ msgstr "<span class=\"@class_number\">@count</span> tudlennau"
 
@@ -710,21 +779,6 @@ msgstr "Ymatebion wedi'u cyhoeddi"
 #~ msgstr ""
 #~ "<span class=\"@class_number\">@count</span> wedi dod o hyd i ganlyniadau "
 #~ "ar gyfer <span class=\"@class_keyword\">%keywords</span>"
-
-#~ msgid "All news and alerts"
-#~ msgstr "Yr holl newyddion a rhybuddion"
-
-#~ msgid "Find a food safety team"
-#~ msgstr "Dewch o hyd i’ch tîm diogelwch bwyd"
-
-#~ msgid "Please enter a postcode to find the food safety team in the area"
-#~ msgstr "Nodwch god post i chwilio am y tîm diogelwch bwyd yn yr ardal"
-
-#~ msgid "Enter a full postcode"
-#~ msgstr "Nodwch god post llawn"
-
-#~ msgid "Showing @start-@end of @total"
-#~ msgstr "Yn dangos @start-@end o @total"
 
 #~ msgid " results found for "
 #~ msgstr " wedi dod o hyd i ganlyniadau ar gyfer "
