@@ -23,6 +23,9 @@ class FhrsApiImportMapper {
   /** Defines migrations which imported result-set should be compared against.  */
   const FHRS_MIGRATIONS = ['fsa_establishment', 'fsa_establishment_cy'];
 
+  /** @var string $establishmentEntityType */
+  protected $establishmentEntityType = 'fsa_establishment';
+
   /** @var int $batchSize */
   protected $batchSize = 30;
 
@@ -189,7 +192,7 @@ class FhrsApiImportMapper {
       $tables = [];
 
       foreach (self::FHRS_MIGRATIONS as $migration_plugin_id) {
-        $tables[$migration_plugin_id] = $this->migrationPluginManager->createInstance($migration_plugin_id);
+        $tables[$migration_plugin_id] = 'migrate_map_' . $migration_plugin_id;
       }
     }
 
@@ -197,41 +200,11 @@ class FhrsApiImportMapper {
   }
 
   /**
-   * Returns migration map table name.
-   *
-   * @param \Drupal\migrate\Plugin\MigrationInterface $migration_plugin
-   *
-   * @return string
-   */
-  public function getMigrationMapTable(MigrationInterface $migration_plugin) {
-    return $migration_plugin->getIdMap()->mapTableName();
-  }
-
-  /**
-   * Returns the entity type from configuration or plugin ID.
-   *
-   * Destination plugin has a method that does this but it's protected.
-   *
-   * @param \Drupal\migrate\Plugin\MigrationInterface $migration_plugin
-   *
-   * @return string
-   */
-  public function getEntityTypeId(MigrationInterface $migration_plugin) {
-    $plugin_id = $migration_plugin->getDestinationPlugin()->getPluginDefinition()['id'];
-
-    // Remove "entity:".
-    return substr($plugin_id, 7);
-  }
-
-  /**
    * Removes the entities which are not found in API provided result-set.
    */
   public function rollback() {
     if (!$this->isFinished() && $this->obsoleteEntityPurgerQueue->numberOfItems() == 0) {
-      foreach ($this->getMigrations() as $migration_plugin_id => $migration_plugin) {
-        $entity_type_id = $this->getEntityTypeId($migration_plugin);
-        $map_table = $this->getMigrationMapTable($migration_plugin);
-
+      foreach ($this->getMigrations() as $migration_plugin_id => $map_table) {
         $query = $this->database->select($map_table, 'm');
         $query->fields('m', ['destid1', 'destid2']);
         $query->leftJoin($this->getTablename(), 'ai', 'm.sourceid1 = ai.fhrsid');
@@ -244,7 +217,7 @@ class FhrsApiImportMapper {
         foreach (array_chunk($obsolete_entity_ids, $this->batchSize, TRUE) as $ids) {
           $data = new \stdClass();
           $data->ids = $ids;
-          $data->entity_type_id = $entity_type_id;
+          $data->entity_type_id = $this->establishmentEntityType;
           $data->migration_plugin_id = $migration_plugin_id;
           $this->obsoleteEntityPurgerQueue->createItem($data);
         }

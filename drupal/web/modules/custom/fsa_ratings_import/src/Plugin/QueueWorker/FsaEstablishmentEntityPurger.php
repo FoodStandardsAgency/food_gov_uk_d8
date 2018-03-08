@@ -75,15 +75,20 @@ class FsaEstablishmentEntityPurger extends QueueWorkerBase implements ContainerF
   public function processItem($data) {
     /** @var \Drupal\Core\Entity\ContentEntityStorageInterface $storage */
     $storage = $this->entityTypeManager->getStorage($data->entity_type_id);
-    /** @var \Drupal\migrate\Plugin\MigrationInterface $migration_plugin */
-    $migration_plugin = $this->migrationPluginManager->createInstance($data->migration_plugin_id);
-    $map_table = $migration_plugin->getIdMap()->mapTableName();
-    $message_table = $migration_plugin->getIdMap()->messageTableName();
+    // Get migration tables.
+    $migration_tables = $this->getMigrationTables($data->migration_plugin_id);
+    $map_table = $migration_tables['map'];
+    $message_table = $migration_tables['message'];
 
-    foreach ($data->ids as $entity_id => $entity_langcode) {
-      if ($entity = $storage->load($entity_id)) {
-        $entity->delete();
-      }
+    // Load all entities with one go.
+    $entities = $storage->loadMultiple(array_keys($data->ids));
+
+    foreach ($entities as $entity_id => $entity) {
+      // Get entity language.
+      $entity_langcode = $data->ids[$entity_id];
+
+      // Remove the entity.
+      $entity->delete();
 
       // In order to clean the migration map, a specific row in mapping table
       // is located by entity destination ID and language code, then manually
