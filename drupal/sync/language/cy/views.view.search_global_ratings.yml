@@ -1,0 +1,19 @@
+display:
+  default:
+    display_options:
+      footer:
+        result:
+          content: 'Yn dangos @start-@end o @total'
+      filters:
+        ratings_business_type:
+          expose:
+            label: 'Math o fusnes'
+        ratings_local_authority:
+          expose:
+            label: 'Gwlad neu awdurdod lleol'
+        ratings_fhrs_rating_value:
+          expose:
+            label: 'Sgôr Hylendid (Lloegr, Canllawiau Gogledd, Cymru)'
+        ratings_fhis_rating_value:
+          expose:
+            label: 'Sgôr Hylendid (Yr Alban)'
