@@ -24,7 +24,7 @@ class FsaNotifyMessageImmediate extends FsaNotifyMessage {
 
     foreach ($items as &$item) {
       $item = [
-        'subject' => $this->subject,
+        'subject' => $this->subject->render(),
         'date' => $this->date,
         'allergy_alerts' => $item,
         'login' => $this->login_url,

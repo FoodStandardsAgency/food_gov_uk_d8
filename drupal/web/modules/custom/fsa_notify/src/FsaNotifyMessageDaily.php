@@ -25,7 +25,7 @@ class FsaNotifyMessageDaily extends FsaNotifyMessage {
     $items = implode("\n", $items);
 
     $items = [[
-      'subject' => $this->subject,
+      'subject' => $this->subject->render(),
       'date' => $this->date,
       'allergy_alerts' => $items,
       'login' => $this->login_url,
