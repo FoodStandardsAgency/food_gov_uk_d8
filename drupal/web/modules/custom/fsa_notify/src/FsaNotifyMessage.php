@@ -21,6 +21,9 @@ abstract class FsaNotifyMessage {
    */
   public function __construct() {
 
+    // Sending is done via cron, hardcode domain for links based on WKV_SITE_ENV
+    // if/when cron is triggered without --uri flag to avoid the links being
+    // created as http://default/....
     switch (getenv("WKV_SITE_ENV")) {
       case 'local':
         $base_url = 'https://local.food.gov.uk';

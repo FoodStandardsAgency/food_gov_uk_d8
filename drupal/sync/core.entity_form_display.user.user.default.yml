@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.user.user.field_delivery_method
     - field.field.user.user.field_delivery_method_news
+    - field.field.user.user.field_email_frequency
     - field.field.user.user.field_notification_cache
     - field.field.user.user.field_notification_method
     - field.field.user.user.field_notification_sms
@@ -37,6 +38,12 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
+    region: content
+  field_email_frequency:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
     region: content
   field_notification_method:
     weight: 8

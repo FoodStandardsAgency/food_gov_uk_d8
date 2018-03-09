@@ -60,10 +60,9 @@ Consult LastPass, Luke or Sally for access. We have a shared team.
 
 ## Fields used
 
-### user.field_notification_method
+### user.field_notification_method DEPRECATED in favor of field_email_frequency
 
-User can choose between different kind of methods for getting updates from the site.
-Also, can turn it off here.
+User can choose the email frequency for getting updates from the site.
 
 ### user.field_notification_sms
 

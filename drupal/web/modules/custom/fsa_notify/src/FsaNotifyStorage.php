@@ -33,7 +33,7 @@ class FsaNotifyStorage {
     $query = \Drupal::entityQuery('user');
     $query->condition('uid', 0, '>');
     $query->condition('status', 1);
-    $query->condition('field_notification_method', $type);
+    $query->condition('field_email_frequency', $type);
     $query->Exists('field_notification_cache');
     $query->range(0, $batch_size);
     // $query->sort('uid');.
@@ -161,8 +161,8 @@ class FsaNotifyStorage {
     $query = \Drupal::entityQuery('user');
     $query->condition('uid', 0, '>');
     $query->condition('status', 1);
-    $query->condition('field_notification_method', 'none', '!=');
-
+    $query->condition('field_email_frequency', 'none', '!=');
+    drush_print_r('sdquery users prefs');
     // Filter the users who have their checkboxes for receiving with certain
     // delivery methods.
     switch ($type) {
@@ -182,6 +182,7 @@ class FsaNotifyStorage {
     // for sending.
     $query->condition($field, $values, 'in');
 
+    drush_print_r($query->execute());
     return $query;
   }
 

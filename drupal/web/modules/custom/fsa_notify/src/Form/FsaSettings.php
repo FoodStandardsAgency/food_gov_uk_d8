@@ -125,7 +125,7 @@ class FsaSettings extends FormBase {
     $stats_fields = [
       'field_delivery_method' => t('Allergy alert delivery method'),
       'field_delivery_method_news' => t('News and consultation delivery method'),
-      'field_notification_method' => t('Notification Method'),
+      'field_email_frequency' => t('EMail frequency'),
     ];
     foreach ($stats_fields as $key => $name) {
       $form[$key] = $this->fsaNotifyStatsDisplay($fields, $key, $name, $weight++);

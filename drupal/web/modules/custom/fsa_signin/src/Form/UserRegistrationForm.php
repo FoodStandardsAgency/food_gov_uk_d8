@@ -225,7 +225,7 @@ class UserRegistrationForm extends FormBase {
     $user->set('field_subscribed_notifications', $subscribed_notifications);
     $user->set('field_subscribed_news', $subscribed_news);
     $user->set('field_subscribed_cons', $subscribed_cons);
-    $user->set('field_notification_method', $email_frequency);
+    $user->set('field_email_frequency', $email_frequency);
     $user->set('field_delivery_method', $delivery_method);
     $user->set('field_delivery_method_news', $delivery_method_news);
 
