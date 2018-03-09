@@ -127,29 +127,35 @@ function fsa_gtm_preprocess_node(&$variables) {
 
       case 'alert':
         if ($node->hasField('field_alert_type')) {
-          $tag = $node->field_alert_type->view([
+          $field = $node->field_alert_type->view([
             'type' => 'fsa_alert_type_formatter',
           ]);
+          if ($field[0]['#title']->render()) {
+            $tag = $field[0]['#title']->render();
+          }
         }
         break;
 
       case 'consultation':
         if ($node->hasField('field_consultations_type')) {
-          $tag = $node->field_consultations_type->view([
+          $field = $node->field_consultations_type->view([
             'label' => 'hidden',
             'settings' => [
               'link' => FALSE,
             ],
           ]);
+          if (isset($field[0]['#plain_text'])) {
+            $tag = $field[0]['#plain_text'];
+          }
         }
         break;
 
       case 'news':
-        $tag = t('News');
+        $tag = (string) t('News');
         break;
 
       case 'research_project':
-        $tag = t('Research project');
+        $tag = (string) t('Research project');
         break;
     }
 
