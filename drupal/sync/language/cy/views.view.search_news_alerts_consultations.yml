@@ -24,3 +24,13 @@ display:
       footer:
         result:
           content: 'Yn dangos @start-@end o @total'
+      exposed_form:
+        options:
+          submit_button: Chwilio
+      pager:
+        options:
+          tags:
+            previous: '‹ Blaenorol'
+            next: 'Nesaf ›'
+            first: '« Gyntaf'
+            last: 'Diwethaf »'
