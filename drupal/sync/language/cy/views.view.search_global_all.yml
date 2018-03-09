@@ -1,0 +1,6 @@
+display:
+  default:
+    display_options:
+      footer:
+        result:
+          content: 'Yn dangos @start-@end o @total'
