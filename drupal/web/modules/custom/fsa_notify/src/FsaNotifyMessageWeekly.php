@@ -24,13 +24,15 @@ class FsaNotifyMessageWeekly extends FsaNotifyMessage {
 
     $items = implode("\n", $items);
 
-    $items = [[
-      'subject' => $this->subject->render(),
-      'date' => $this->date,
-      'allergy_alerts' => $items,
-      'login' => $this->login_url,
-      'unsubscribe' => $this->unsubscribe_url,
-    ],
+    // Variables for the Notify template.
+    $items = [
+      [
+        'subject' => $this->subject->render(),
+        'date' => $this->date,
+        'alert_items' => $items,
+        'login' => $this->login_url,
+        'unsubscribe' => $this->unsubscribe_url,
+      ],
     ];
 
     return $items;

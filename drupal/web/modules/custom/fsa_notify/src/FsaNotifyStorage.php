@@ -162,7 +162,6 @@ class FsaNotifyStorage {
     $query->condition('uid', 0, '>');
     $query->condition('status', 1);
     $query->condition('field_email_frequency', 'none', '!=');
-    drush_print_r('sdquery users prefs');
     // Filter the users who have their checkboxes for receiving with certain
     // delivery methods.
     switch ($type) {
