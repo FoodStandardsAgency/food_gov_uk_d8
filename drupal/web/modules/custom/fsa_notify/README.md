@@ -12,7 +12,6 @@ All notification related stuff lives in one module `fsa_notify`.
 
 Decisions and/or further investigation needed:
 * Need to decide and work with what happens when sending fails to particular user. Stop sending altogether? Or continue? We dont know if this is some common error or just isolated case. In `src/FsaNotifyAPI*.php`, see `send()` method.
-* Unsubscribe by email functionality (FSA-318)
 * Email bounce handling
 * SMS bounce handling
 * Multilingual functionality
