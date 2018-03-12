@@ -34,7 +34,7 @@ class FsaNotifyAPIemail extends FsaNotifyAPI {
 
     // Debugging mode, just log the Notify template variables.
     if (\Drupal::state()->get('fsa_notify.collect_send_log_only')) {
-      \Drupal::logger('fsa_notify')->debug('FsaNotifyAPIemail sent values:<ul><li>email: %email</li><li>template_id %template_id</li><li>personalization: <pre>%personalization</pre></li><li>reference: %reference</li></ul>', [
+      \Drupal::logger('fsa_notify')->debug('Notify email: <ul><li>To: %email</li><li>template_id %template_id</li><li>personalization: <pre>%personalization</pre></li><li>reference: %reference</li></ul>', [
         '%email' => $email,
         '%template_id' => $this->template_id,
         '%personalization' => print_r($personalisation, 1),

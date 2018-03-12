@@ -181,7 +181,6 @@ class FsaNotifyStorage {
     // for sending.
     $query->condition($field, $values, 'in');
 
-    drush_print_r($query->execute());
     return $query;
   }
 
