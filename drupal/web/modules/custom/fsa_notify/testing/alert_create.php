@@ -25,11 +25,16 @@ foreach ($rand as $k) {
   $allergys[] = $terms[$k];
 }
 
+// One of 'AA', 'PRIN' or 'FAFA'.
+$alert_type = 'AA';
+$notation = Random::name(15);
 $node = Node::create([
   'type'        => 'alert',
-  'title'       => Random::name(32),
-  'field_alert_notation' => Random::name(32),
+  'title'       => $alert_type . ' alert ' . $notation,
+  'field_alert_notation' => $notation,
+  'field_alert_type' => $alert_type,
   'field_alert_allergen' => $allergys,
+  'field_alert_smstext' => $notation,
 ]);
 $node->save();
 

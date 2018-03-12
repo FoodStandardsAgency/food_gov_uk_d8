@@ -4,6 +4,8 @@ status: true
 dependencies:
   config:
     - field.field.user.user.field_delivery_method
+    - field.field.user.user.field_delivery_method_news
+    - field.field.user.user.field_email_frequency
     - field.field.user.user.field_notification_cache
     - field.field.user.user.field_notification_method
     - field.field.user.user.field_notification_sms
@@ -31,8 +33,20 @@ content:
     third_party_settings: {  }
     type: options_buttons
     region: content
+  field_delivery_method_news:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_email_frequency:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_notification_method:
-    weight: 7
+    weight: 8
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -46,31 +60,31 @@ content:
     type: string_textfield
     region: content
   field_subscribed_cons:
-    weight: 6
+    weight: 7
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_subscribed_food_alerts:
-    weight: 3
-    settings: {  }
-    third_party_settings: {  }
-    type: options_buttons
-    region: content
-  field_subscribed_news:
-    weight: 5
-    settings: {  }
-    third_party_settings: {  }
-    type: options_buttons
-    region: content
-  field_subscribed_notifications:
     weight: 4
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
+  field_subscribed_news:
+    weight: 6
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_subscribed_notifications:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
   language:
-    weight: 8
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }

@@ -13,6 +13,8 @@ class SignInService {
 
   use StringTranslationTrait;
 
+  const DEFAULT_COUNTRY_CODE = 44;
+
   /**
    * Constructs a new DefaultService object.
    */
@@ -161,36 +163,43 @@ class SignInService {
     }
     else {
       // Assume the identifier is a phone number.
-      // @todo: match all possible cases of formats for the phone number.
-      $identifier = '+' . $identifier;
       $match_with = 'phone';
     }
 
     $values = explode(' ', $values);
     $values = array_map('strtolower', $values);
+    $cmd = $values[0];
 
-    // Strings to match with "all".
-    $all = [
-      '',
-      'all',
-      'gyd',
-    ];
-
-    if (in_array($values[0], $all)) {
+    // Figure out what user intended to unsubscribe from.
+    if (in_array($cmd, ['', 'all', 'gyd'])) {
       $unsubscribe = 'all';
+    }
+    elseif (in_array($cmd, ['allergy', 'alergedd'])) {
+      $unsubscribe = 'allergy';
+    }
+    elseif (in_array($cmd, ['food', 'bwyd'])) {
+      $unsubscribe = 'food';
+    }
+    elseif (in_array($cmd, ['news', 'newydd'])) {
+      $unsubscribe = 'news';
+    }
+    elseif (in_array($cmd, ['consultation', 'ymgynghoriad'])) {
+      $unsubscribe = 'consultation';
     }
     else {
       // We probably want to unsubscribe per term/tid.
-      $unsubscribe = 'ids';
+      $unsubscribe = FALSE;
     }
 
     switch ($match_with) {
       case 'phone':
-        // Get user(s) with phone number from the callback.
+
+        // Get user(s) with phone number matching from the callback (match only
+        // with the last 7 characters of the phone number.
         $query = \Drupal::entityQuery('user');
         $query->condition('uid', 0, '>');
         $query->condition('status', 1);
-        $query->condition('field_notification_sms', $identifier, '=');
+        $query->condition('field_notification_sms', '%' . substr($identifier, -7), 'LIKE');
         $uids = $query->execute();
         break;
 
@@ -204,25 +213,63 @@ class SignInService {
     }
 
     if (!empty($uids)) {
-      // Could match multiple users since phone number is not unique field.
+      // Can match multiple users since phone number is not unique field.
       foreach ($uids as $uid) {
         $user = User::load($uid);
 
         switch ($unsubscribe) {
           case 'all':
-            // Unsubscribe from all notifications.
+            $user->field_subscribed_notifications->setValue([]);
+            $user->field_subscribed_food_alerts->setValue([]);
+            $user->field_subscribed_news->setValue([]);
+            $user->field_subscribed_cons->setValue([]);
+            $user->save();
+
+            $ret['message'] = $this->t('User @uid unsubscribed from all alerts', ['@uid' => $uid]);
+            $ret['success'] = TRUE;
+            $ret['uid'] = $uid;
+            break;
+
+          case 'allergy':
             $user->field_subscribed_notifications->setValue([]);
             $user->save();
 
             $ret['success'] = TRUE;
-            $ret['message'] = 'User ' . $uid . ' unsubscribed from all alerts';
+            $ret['message'] = $this->t('User @uid unsubscribed from all allergy alerts', ['@uid' => $uid]);
             $ret['uid'] = $uid;
             break;
 
-          case 'ids':
-            // @todo: allow unsubscribe form specific terms.
+          case 'food':
+            $user->field_subscribed_food_alerts->setValue([]);
+            $user->save();
+
+            $ret['success'] = TRUE;
+            $ret['message'] = $this->t('User @uid unsubscribed from food alerts', ['@uid' => $uid]);
+            $ret['uid'] = $uid;
+            break;
+
+          case 'news':
+            // Unsubscribe from all notifications.
+            $user->field_subscribed_news->setValue([]);
+            $user->save();
+
+            $ret['success'] = TRUE;
+            $ret['message'] = $this->t('User @uid unsubscribed from all news alerts', ['@uid' => $uid]);
+            $ret['uid'] = $uid;
+            break;
+
+          case 'consultation':
+            $user->field_subscribed_cons->setValue([]);
+            $user->save();
+
+            $ret['success'] = TRUE;
+            $ret['message'] = $this->t('User @uid unsubscribed from all consultation alerts', ['@uid' => $uid]);
+            $ret['uid'] = $uid;
+            break;
+
+          default:
             $ret['success'] = FALSE;
-            $ret['message'] = $this->t('Unsubscribe per term not possible yet.');
+            $ret['message'] = $this->t('Unsubscribe command @cmd did not match', ['@cmd' => $cmd]);
             $ret['uid'] = $uid;
             break;
         }

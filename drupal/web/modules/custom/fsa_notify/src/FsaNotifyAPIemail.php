@@ -5,6 +5,7 @@ namespace Drupal\fsa_notify;
 use Alphagov\Notifications\Exception\ApiException;
 use Alphagov\Notifications\Exception\NotifyException;
 use Drupal\user\Entity\User;
+use Drupal\Component\Utility\UrlHelper;
 
 /**
  * FSA Notify Emailing class.
@@ -28,8 +29,24 @@ class FsaNotifyAPIemail extends FsaNotifyAPI {
 
     $email = $user->getEmail();
 
+    // Add the user parameters to the unsubscribe URL.
+    $personalisation['unsubscribe'] = $personalisation['unsubscribe'] . '?' . UrlHelper::buildQuery(['id' => $user->id(), 'email' => $email]);
+
+    // Debugging mode, just log the Notify template variables.
+    if (\Drupal::state()->get('fsa_notify.collect_send_log_only')) {
+      \Drupal::logger('fsa_notify')->debug('Notify email: <ul><li>To: %email</li><li>template_id %template_id</li><li>personalization: <pre>%personalization</pre></li><li>reference: %reference</li></ul>', [
+        '%email' => $email,
+        '%template_id' => $this->template_id,
+        '%personalization' => print_r($personalisation, 1),
+        '%reference' => $reference,
+      ]);
+
+      return FALSE;
+    }
+
     try {
       $msg = sprintf('Notify API: sendEmail(%s)', $email);
+
       $this->api->sendEmail(
         $email,
         $this->template_id,

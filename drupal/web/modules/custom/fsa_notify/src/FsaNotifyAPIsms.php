@@ -4,6 +4,7 @@ namespace Drupal\fsa_notify;
 
 use Alphagov\Notifications\Exception\ApiException;
 use Alphagov\Notifications\Exception\NotifyException;
+use Drupal\fsa_signin\SignInService;
 use Drupal\user\Entity\User;
 
 /**
@@ -30,6 +31,26 @@ class FsaNotifyAPIsms extends FsaNotifyAPI {
     // Phone number is optional field!
     if (empty($phoneNumber)) {
       return;
+    }
+
+    // Add the country code if missing.
+    if (substr($phoneNumber, '0', '2') != SignInService::DEFAULT_COUNTRY_CODE) {
+      $phoneNumber = SignInService::DEFAULT_COUNTRY_CODE . $phoneNumber;
+    }
+
+    // And the plus is required by notify.
+    $phoneNumber = '+' . $phoneNumber;
+
+    // Debugging mode, just log the Notify template variables.
+    if (\Drupal::state()->get('fsa_notify.collect_send_log_only')) {
+      \Drupal::logger('fsa_notify')->debug('Notify SMS: <ul><li>To: %phoneNumber</li><li>template_id %template_id</li><li>personalization: <pre>%personalization</pre></li><li>reference: %reference</li></ul>', [
+        '%phoneNumber' => $phoneNumber,
+        '%template_id' => $this->template_id,
+        '%personalization' => print_r($personalisation, 1),
+        '%reference' => $reference,
+      ]);
+
+      return FALSE;
     }
 
     try {

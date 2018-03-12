@@ -4,6 +4,8 @@ status: true
 dependencies:
   config:
     - field.field.user.user.field_delivery_method
+    - field.field.user.user.field_delivery_method_news
+    - field.field.user.user.field_email_frequency
     - field.field.user.user.field_notification_cache
     - field.field.user.user.field_notification_method
     - field.field.user.user.field_notification_sms
@@ -23,6 +25,20 @@ mode: default
 content:
   field_delivery_method:
     weight: 10
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_delivery_method_news:
+    weight: 11
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_email_frequency:
+    weight: 12
     label: above
     settings: {  }
     third_party_settings: {  }

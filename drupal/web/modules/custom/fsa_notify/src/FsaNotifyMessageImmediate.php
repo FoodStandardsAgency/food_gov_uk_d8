@@ -23,10 +23,12 @@ class FsaNotifyMessageImmediate extends FsaNotifyMessage {
   protected function assemble($items) {
 
     foreach ($items as &$item) {
+
+      // Variables for the Notify template.
       $item = [
-        'subject' => $this->subject,
+        'subject' => $this->subject->render(),
         'date' => $this->date,
-        'allergy_alerts' => $item,
+        'alert_items' => $item,
         'login' => $this->login_url,
         'unsubscribe' => $this->unsubscribe_url,
       ];

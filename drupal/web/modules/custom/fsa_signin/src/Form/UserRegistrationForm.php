@@ -4,6 +4,7 @@ namespace Drupal\fsa_signin\Form;
 
 use Drupal\fsa_custom\FsaCustomHelper;
 use Drupal\fsa_signin\Controller\DefaultController;
+use Drupal\fsa_signin\SignInService;
 use Drupal\user\Entity\User;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -80,7 +81,7 @@ class UserRegistrationForm extends FormBase {
         'sms' => $this->t('SMS'),
       ],
     ];
-    $form['alert_container']['news_delivery_method'] = [
+    $form['alert_container']['delivery_method_news'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('I want to receive news and consultations via'),
       '#description' => $this->t('News is available only via email.'),
@@ -119,6 +120,8 @@ class UserRegistrationForm extends FormBase {
     $form['personal_container']['phone'] = [
       '#type' => 'tel',
       '#title' => $this->t('Phone number'),
+      '#description' => $this->t('This service is only for UK telephone numbers'),
+      '#field_prefix' => '+' . SignInService::DEFAULT_COUNTRY_CODE,
       '#states' => [
         'visible' => [
           ':input[name="delivery_method[sms]"]' => ['checked' => TRUE],
@@ -164,12 +167,21 @@ class UserRegistrationForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
+
+    $email = $form_state->getValue('email');
+    if (user_load_by_mail($email)) {
+      $form_state->setErrorByName('email', $this->t('Account with @email already exist. Please <a href="/user">log in</a>.', ['@email' => $email]));
+    }
+
     $delivery_method = $form_state->getValue('delivery_method');
     $delivery_method = array_filter(array_values($delivery_method));
     if (in_array('sms', $delivery_method)) {
       $phone = $form_state->getValue('phone');
-      if (!preg_match('/^\+[0-9 ]{7,}$/', $phone)) {
-        $form_state->setErrorByName('phone', $this->t('Please prefix your phone number with international country code and use only numbers.'));
+      if (!preg_match('/^[0-9 ]{0,}$/', $phone)) {
+        $form_state->setErrorByName('phone', $this->t('Special characters are not allowed in phone number.'));
+      }
+      elseif (!preg_match('/^[0-9 ]{8,}$/', $phone)) {
+        $form_state->setErrorByName('phone', $this->t('Phone number appears to be too short.'));
       }
       if ($phone == '') {
         $form_state->setErrorByName('phone', $this->t('You selected to receive alerts via SMS, please enter your phone number.'));
@@ -192,7 +204,9 @@ class UserRegistrationForm extends FormBase {
     $subscribed_cons = $form_state->getValue('subscribed_cons');
     $delivery_method = $form_state->getValue('delivery_method');
     $delivery_method = array_filter(array_values($delivery_method));
-    $phone = $form_state->getValue('phone');
+    $delivery_method_news = $form_state->getValue('delivery_method_news');
+    $delivery_method_news = array_filter(array_values($delivery_method_news));
+    $phone = ltrim(str_replace(' ', '', $form_state->getValue('phone')), SignInService::DEFAULT_COUNTRY_CODE);
 
     // Mandatory settings.
     $user->setPassword(user_password());
@@ -211,8 +225,9 @@ class UserRegistrationForm extends FormBase {
     $user->set('field_subscribed_notifications', $subscribed_notifications);
     $user->set('field_subscribed_news', $subscribed_news);
     $user->set('field_subscribed_cons', $subscribed_cons);
-    $user->set('field_notification_method', $email_frequency);
+    $user->set('field_email_frequency', $email_frequency);
     $user->set('field_delivery_method', $delivery_method);
+    $user->set('field_delivery_method_news', $delivery_method_news);
 
     if (in_array('sms', $delivery_method)) {
       // Only store the phone number if user subscribed via SMS.

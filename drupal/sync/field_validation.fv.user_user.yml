@@ -7,16 +7,6 @@ label: 'user user validation'
 entity_type: user
 bundle: user
 field_validation_rules:
-  6769345c-5bd5-437e-869c-2e8a37fffda6:
-    uuid: 6769345c-5bd5-437e-869c-2e8a37fffda6
-    id: regex_field_validation_rule
-    title: +number
-    weight: '-9'
-    field_name: field_notification_sms
-    column: value
-    error_message: 'This field must begin with + followed by number only.'
-    data:
-      setting: /^\+\d+$/
   9402f8f4-21f1-41b0-a66c-ff9d046a8447:
     uuid: 9402f8f4-21f1-41b0-a66c-ff9d046a8447
     id: regex_field_validation_rule
@@ -27,3 +17,13 @@ field_validation_rules:
     error_message: 'Make sure there are no spaces - in the beginning, in the end or in between.'
     data:
       setting: '/^\S*$/'
+  019b798c-e664-4ce1-9c0a-1210594b1b9c:
+    uuid: 019b798c-e664-4ce1-9c0a-1210594b1b9c
+    id: regex_field_validation_rule
+    title: numbers_only
+    weight: '-9'
+    field_name: field_notification_sms
+    column: value
+    error_message: 'This field must contain number only.'
+    data:
+      setting: /^\d+$/
