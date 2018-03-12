@@ -29,7 +29,7 @@ Once sync is done you need to run the ratings migrate commands in order to have 
 
 #### Local settings.php overrides
 
-Copy local `drupal/conf/settings.local.php` [template from here](settings.local.php.txt).
+Copy local settings overrides file `drupal/conf/settings.private.php` [template from here](settings.private.php.txt).
 
 #### Drupal console & codeception on local environment
 

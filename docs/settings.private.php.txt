@@ -96,4 +96,4 @@ $settings['skip_permissions_hardening'] = TRUE;
 /**
  * Set FHRS migrate to development mode
  */
-$config['fsa_ratings_import']['import_mode'] = 'development';
+# $config['fsa_ratings_import']['import_mode'] = 'development';
