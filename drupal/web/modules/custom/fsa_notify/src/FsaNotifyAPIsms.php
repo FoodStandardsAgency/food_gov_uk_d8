@@ -41,6 +41,18 @@ class FsaNotifyAPIsms extends FsaNotifyAPI {
     // And the plus is required by notify.
     $phoneNumber = '+' . $phoneNumber;
 
+    // Debugging mode, just log the Notify template variables.
+    if (\Drupal::state()->get('fsa_notify.collect_send_log_only')) {
+      \Drupal::logger('fsa_notify')->debug('FsaNotifyAPIemail sent values:<ul><li>phoneNumber: %phoneNumber</li><li>template_id %template_id</li><li>personalization: <pre>%personalization</pre></li><li>reference: %reference</li></ul>', [
+        '%phoneNumber' => $phoneNumber,
+        '%template_id' => $this->template_id,
+        '%personalization' => print_r($personalisation, 1),
+        '%reference' => $reference,
+      ]);
+
+      return FALSE;
+    }
+
     try {
       $msg = sprintf('Notify API: sendSms(%s)', $phoneNumber);
       $this->api->sendSms(

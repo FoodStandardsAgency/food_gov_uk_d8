@@ -67,6 +67,22 @@ class FsaSettings extends FormBase {
       '#weight' => $weight++,
     ];
 
+    if (\Drupal::state()->get('fsa_notify.collect_send_log_only')) {
+      drupal_set_message(t('<strong>Notify debug mode</strong>: alert collecting is enabled but messages are not sent via Notify.'), 'warning');
+    }
+    $form['collect_send_log_only'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Debug mode'),
+      '#description' => t('Alerts are collected and processed but not sent to subscribers.'),
+      '#default_value' => \Drupal::state()->get('fsa_notify.collect_send_log_only'),
+      '#weight' => $weight++,
+      '#states' => [
+        'visible' => [
+          ':input[name="status_new"]' => ['checked' => TRUE],
+        ],
+      ],
+    ];
+
     $form['log_callback_errors'] = [
       '#type' => 'checkbox',
       '#title' => t('Log all Notify callback errors.'),
@@ -225,6 +241,13 @@ class FsaSettings extends FormBase {
     }
     else {
       \Drupal::state()->set('fsa_notify.log_callback_errors', 1);
+    }
+
+    if (empty($form_state->getValue('collect_send_log_only'))) {
+      \Drupal::state()->delete('fsa_notify.collect_send_log_only');
+    }
+    else {
+      \Drupal::state()->set('fsa_notify.collect_send_log_only', 1);
     }
 
     // Let the user know something happened.

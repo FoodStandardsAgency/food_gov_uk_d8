@@ -39,6 +39,7 @@ Basic configuration parameters are held in Drupal state variables and can be man
 * `fsa_notify.api` - Notify API key
 * `fsa_notify.template_sms` - Notify API SMS Template ID
 * `fsa_notify.template_email` - Notify API Email Template ID
+* `fsa_notify.collect_send_log_only` - Debug mode to collect alerts but only writing the content to log 
 
 Runtime state variables are:
 
@@ -222,6 +223,8 @@ Use `Makefile` in `fsa_notify/testing` directory.
 * `src/Form/FsaSettings.php`
   * Edit key and id-s
   * Enable/Disable distributing and sending notifications
+  * Enable/disable notification sending debug mode
+  * Enable/disable callback error logging
   * Basic stats
 * `src/Plugin/QueueWorker/FsaNotifyStorageQueue.php`
   * Item processing (storing / distributing)  
