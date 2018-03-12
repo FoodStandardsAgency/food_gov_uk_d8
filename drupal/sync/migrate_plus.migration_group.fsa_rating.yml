@@ -1,0 +1,10 @@
+uuid: 4b61e185-c8db-4c59-9048-c18131e50cff
+langcode: en
+status: true
+dependencies: {  }
+id: fsa_rating
+label: fsa_rating
+description: ''
+source_type: null
+module: null
+shared_configuration: null

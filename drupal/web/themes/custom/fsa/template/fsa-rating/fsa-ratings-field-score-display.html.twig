@@ -11,7 +11,7 @@
   <div class="toggle-button__item"><strong>{{ title }}</strong></div>
   <div class="toggle-button__item toggle-button__item--align-right establishment__score">{{ score }}</div>
   <div class="toggle-button__item toggle-button__item--icon svg">
-    <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#toggle-icon"></use></svg>
+    {{ include('/themes/custom/fsa/template/base/svg-sprite.html.twig', {icon_id: 'toggle-icon'}) }}
   </div>
 </button>
 

@@ -10,7 +10,7 @@ field_plugin_method: null
 cck_plugin_method: null
 migration_tags:
   - allergens
-migration_group: fsa
+migration_group: fsa_alerts
 label: 'FSA Alerts Allergen import'
 source:
   plugin: fsa_alerts_api_url
