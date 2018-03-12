@@ -28,7 +28,7 @@ class FsaSettings extends FormBase {
 
     $form['note'] = [
       '#type' => 'item',
-      '#plain_text' => t('Please get following values from https://www.notifications.service.gov.uk/'),
+      '#markup' => t('Get Notify API keys and tokens from <a href="https://www.notifications.service.gov.uk/services/6f00837a-4b8f-4ddd-ae96-ca2d3035fe57">www.notifications.service.gov.uk</a>'),
       '#weight' => $weight++,
     ];
 

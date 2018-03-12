@@ -44,7 +44,6 @@ class FsaNotifyAPIemail extends FsaNotifyAPI {
       return FALSE;
     }
 
-
     try {
       $msg = sprintf('Notify API: sendEmail(%s)', $email);
 
