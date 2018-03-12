@@ -32,6 +32,9 @@ source:
     -
       name: broader
       selector: broader
+    -
+      name: '@id'
+      selector: '@id'
   ids:
     notation:
       type: string
@@ -45,6 +48,9 @@ process:
   parent:
     plugin: allergen_parent
     source: broader
+  field_description:
+    plugin: allergen_description
+    source: '@id'
   field_alert_notation: notation
   field_alert_riskstatement: riskStatement
 destination:
