@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2017-09-14 15:46+0100\n"
-"PO-Revision-Date: 2018-03-12 15:51+0100\n"
+"PO-Revision-Date: 2018-03-13 08:04+0100\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -716,6 +716,16 @@ msgstr "Canllawiau cymru a gogledd iwerddon"
 
 msgid "Wales and Northern Ireland specific guidance"
 msgstr "Canllawiau Cymru a Gogledd Iwerddon"
+
+msgid "Food safety team details"
+msgstr "Manylion y tîm diogelwch bwyd"
+
+msgid ""
+"Details of the food safety team covering <strong>@query</strong> are shown "
+"below."
+msgstr ""
+"Mae manylion y tîm diogelwch bwyd sy'n gyfrifol am <strong>@query</strong> "
+"wedi'u nodi isod."
 
 #, fuzzy
 #~| msgid "England, Northern Ireland, Wales"
