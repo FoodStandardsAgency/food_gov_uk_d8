@@ -476,6 +476,9 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
         // Define routes to show pagetitle within content.
         $routes = [
           'entity.user.canonical',
+          'user.reset',
+          'user.reset.login',
+          'user.reset.form',
         ];
         if (in_array($routename, $routes)) {
           return AccessResult::allowed()
@@ -492,6 +495,9 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
 
         // Define routes to remove the page title in hero area.
         $routes = [
+          'user.reset',
+          'user.reset.login',
+          'user.reset.form',
           'entity.user.canonical',
           'fsa_signin.user_registration_thank_you',
         ];

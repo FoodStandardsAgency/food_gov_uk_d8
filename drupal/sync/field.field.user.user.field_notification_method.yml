@@ -11,8 +11,8 @@ id: user.user.field_notification_method
 field_name: field_notification_method
 entity_type: user
 bundle: user
-label: 'Notification method'
-description: 'How often would you like to receive news and/or alerts?'
+label: 'Notification method (deprecated)'
+description: 'This field is deprecated. Use email frequency to store the preference.'
 required: true
 translatable: false
 default_value:

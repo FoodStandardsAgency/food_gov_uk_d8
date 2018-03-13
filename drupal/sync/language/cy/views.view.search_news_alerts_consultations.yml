@@ -1,0 +1,36 @@
+display:
+  default:
+    display_options:
+      title: 'Ymgynghoriadau '
+      filters:
+        keyword:
+          expose:
+            label: Chwilio
+        news_type:
+          expose:
+            label: 'Math o archwiliad'
+        consultation_status:
+          expose:
+            label: Statws
+        consultation_responses_published:
+          expose:
+            label: Ymatebion
+        consultation_year:
+          expose:
+            label: Blwyddyn
+        nation:
+          expose:
+            label: Rhanbarth
+      footer:
+        result:
+          content: 'Yn dangos @start-@end o @total'
+      exposed_form:
+        options:
+          submit_button: Chwilio
+      pager:
+        options:
+          tags:
+            previous: '‹ Blaenorol'
+            next: 'Nesaf ›'
+            first: '« Gyntaf'
+            last: 'Diwethaf »'

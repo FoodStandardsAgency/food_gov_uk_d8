@@ -1,0 +1,23 @@
+uuid: cd134338-431b-4d47-93b6-407dc5d2562f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_alert_send
+    - node.type.news
+id: node.news.field_alert_send
+field_name: field_alert_send
+entity_type: node
+bundle: news
+label: 'Send alert to subscribers'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

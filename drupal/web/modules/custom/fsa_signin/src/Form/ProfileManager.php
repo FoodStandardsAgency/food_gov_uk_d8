@@ -118,9 +118,12 @@ class ProfileManager extends FormBase {
       '#type' => 'item',
       '#markup' => '<h3>' . $this->t('I want to receive news and consultations via') . '</h3>',
     ];
-    $form[$wrapper]['news_notifications_method'] = [
-      '#type' => 'item',
-      '#markup' => '[not implemented yet]',
+    $form[$wrapper]['delivery_method_news'] = [
+      '#type' => 'checkboxes',
+      '#options' => [
+        'email' => $this->t('Email'),
+      ],
+      '#default_value' => array_column($account->get('field_delivery_method_news')->getValue(), 'value'),
     ];
     $form[$wrapper]['frequency'] = [
       '#type' => 'item',
@@ -132,7 +135,13 @@ class ProfileManager extends FormBase {
       '#title' => $this->t('SMS frequency'),
       '#markup' => '<p>' . $this->t('SMS updates are sent immediately') . '</p>',
     ];
-    $form[$wrapper]['email_notification_delivery'] = [
+
+    // field_email_frequency is a new field replacing old combined
+    // field_notification_method hence can be empty on some users. Set default
+    // in case is empty.
+    $email_frequency = $account->get('field_email_frequency')->getString();
+    $email_frequency = ($email_frequency) ? $email_frequency : 'immediate';
+    $form[$wrapper]['email_frequency'] = [
       '#type' => 'radios',
       '#title' => $this->t('Email frequency'),
       '#required' => TRUE,
@@ -141,7 +150,7 @@ class ProfileManager extends FormBase {
         'daily' => $this->t('Send updates daily'),
         'weekly' => $this->t('Send updates weekly'),
       ],
-      '#default_value' => $account->get('field_notification_method')->getString(),
+      '#default_value' => $email_frequency,
     ];
     $form[$wrapper]['personal_info'] = [
       '#type' => 'item',
@@ -157,6 +166,7 @@ class ProfileManager extends FormBase {
       '#title' => $this->t('Phone number'),
       '#default_value' => $account->get('field_notification_sms')->getString(),
       '#description' => $this->t('This service is only for UK telephone numbers'),
+      '#field_prefix' => '+' . SignInService::DEFAULT_COUNTRY_CODE,
       '#states' => [
         'visible' => [
           ':input[name="delivery_method[sms]"]' => ['checked' => TRUE],
@@ -217,8 +227,11 @@ class ProfileManager extends FormBase {
     if (in_array('sms', $delivery_method)) {
       $phone = $form_state->getValue('phone');
 
-      if (!preg_match('/^\+[0-9 ]{7,}$/', $phone)) {
-        $form_state->setErrorByName('phone', $this->t('Please prefix your phone number with international country code and use only numbers.'));
+      if (!preg_match('/^[0-9 ]{0,}$/', $phone)) {
+        $form_state->setErrorByName('phone', $this->t('Special characters are not allowed in phone number.'));
+      }
+      elseif (!preg_match('/^[0-9 ]{8,}$/', $phone)) {
+        $form_state->setErrorByName('phone', $this->t('Phone number appears to be too short.'));
       }
       if ($phone == '') {
         $form_state->setErrorByName('phone', $this->t('You selected to receive alerts via SMS, please enter your phone number.'));
@@ -271,7 +284,12 @@ class ProfileManager extends FormBase {
     $delivery_method = array_filter(array_values($delivery_method));
     $account->set('field_delivery_method', $delivery_method);
 
-    $phone = $form_state->getValue('phone');
+    $delivery_method_news = $form_state->getValue('delivery_method_news');
+    $delivery_method_news = array_filter(array_values($delivery_method_news));
+    $account->set('field_delivery_method_news', $delivery_method_news);
+
+    // Store phone without spaces and remove countrycode if it was entered.
+    $phone = ltrim(str_replace(' ', '', $form_state->getValue('phone')), SignInService::DEFAULT_COUNTRY_CODE);
     if (in_array('sms', $delivery_method)) {
       // Only store the phone number if user subscribed via SMS.
       $account->set('field_notification_sms', $phone);
@@ -280,8 +298,8 @@ class ProfileManager extends FormBase {
       $account->set('field_notification_sms', '');
     }
 
-    $email_notification_delivery = $form_state->getValue('email_notification_delivery');
-    $account->set('field_notification_method', $email_notification_delivery);
+    $email_frequency = $form_state->getValue('email_frequency');
+    $account->set('field_email_frequency', $email_frequency);
 
     $language = $form_state->getValue('email_notification_language');
     $account->set('preferred_langcode', $language);
