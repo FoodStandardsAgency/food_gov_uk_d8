@@ -55,6 +55,15 @@ function fsa_alerts_preprocess_node(&$variables) {
     if ($about_title != '' && $about_copy != '') {
       $variables['content']['about_allergy_alerts'] = [
         '#markup' => '<div class="field__about_alert_description"><h3>' . $about_title . '</h3><p>' . $about_copy . '</p></div>',
+        '#weight' => 48,
+      ];
+    }
+
+    // Display alert ref number after the static text(s).
+    if ($node->hasField('field_alert_notation')) {
+      $field_alert_notation = $node->field_alert_notation->view(['label' => 'inline']);
+      $variables['content']['alert_ref'] = [
+        '#markup' => '<p class="field__field_alert_notation">' . $field_alert_notation['#title'] . ' ' . $node->field_alert_notation->getString() . '</p>',
         '#weight' => 49,
       ];
     }
