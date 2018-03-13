@@ -28,7 +28,7 @@ class FsaSettings extends FormBase {
 
     $form['note'] = [
       '#type' => 'item',
-      '#plain_text' => t('Please get following values from https://www.notifications.service.gov.uk/'),
+      '#markup' => t('Get Notify API keys and tokens from <a href="https://www.notifications.service.gov.uk/services/6f00837a-4b8f-4ddd-ae96-ca2d3035fe57">www.notifications.service.gov.uk</a>'),
       '#weight' => $weight++,
     ];
 
@@ -67,6 +67,22 @@ class FsaSettings extends FormBase {
       '#weight' => $weight++,
     ];
 
+    if (\Drupal::state()->get('fsa_notify.collect_send_log_only')) {
+      drupal_set_message(t('<strong>Notify debug mode</strong>: alert collecting is enabled but messages are not sent via Notify.'), 'warning');
+    }
+    $form['collect_send_log_only'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Debug mode'),
+      '#description' => t('Alerts are collected and processed but not sent to subscribers.'),
+      '#default_value' => \Drupal::state()->get('fsa_notify.collect_send_log_only'),
+      '#weight' => $weight++,
+      '#states' => [
+        'visible' => [
+          ':input[name="status_new"]' => ['checked' => TRUE],
+        ],
+      ],
+    ];
+
     $form['log_callback_errors'] = [
       '#type' => 'checkbox',
       '#title' => t('Log all Notify callback errors.'),
@@ -85,15 +101,26 @@ class FsaSettings extends FormBase {
       '#button_type' => 'primary',
     ];
 
+    $form['stats_heading'] = [
+      '#markup' => '<h2>' . t('User statistics') . '</h2>',
+      '#weight' => $weight++,
+    ];
+
+    $form['users'] = [
+      '#type' => 'details',
+      '#open' => TRUE,
+      '#title' => t('Users'),
+      '#weight' => $weight++,
+    ];
+
     $query = \Drupal::entityQuery('user');
     $query->condition('uid', 0, '>');
     $query->condition('status', 1);
     $query->count();
     $count = $query->execute();
-    $form['user_status_enabled'] = [
+    $form['users']['user_status_enabled'] = [
       '#type' => 'item',
-      '#title' => t('Enabled users'),
-      '#plain_text' => $count,
+      '#title' => $this->formatPlural($count, '1 enabled user', '@count enabled users'),
       '#weight' => $weight++,
     ];
 
@@ -102,34 +129,70 @@ class FsaSettings extends FormBase {
     $query->condition('status', 0);
     $query->count();
     $count = $query->execute();
-    $form['user_status_disabled'] = [
+    $form['users']['user_status_disabled'] = [
       '#type' => 'item',
-      '#title' => t('Disabled users'),
-      '#plain_text' => $count,
-      '#weight' => $weight++,
-    ];
-
-    $form['stats_note'] = [
-      '#type' => 'item',
-      '#plain_text' => t('Following stats is counted only per enabled users:'),
+      '#title' => $this->formatPlural($count, '1 disabled user', '@count disabled users'),
       '#weight' => $weight++,
     ];
 
     $entityManager = \Drupal::service('entity_field.manager');
     $fields = $entityManager->getFieldStorageDefinitions('user', 'user');
-    $methods = options_allowed_values($fields['field_notification_method']);
+
+    $stats_fields = [
+      'field_delivery_method' => t('Allergy alert delivery method'),
+      'field_delivery_method_news' => t('News and consultation delivery method'),
+      'field_email_frequency' => t('EMail frequency'),
+    ];
+    foreach ($stats_fields as $key => $name) {
+      $form[$key] = $this->fsaNotifyStatsDisplay($fields, $key, $name, $weight++);
+    }
+
+    return $form;
+  }
+
+  /**
+   * Pull user preferences for stats.
+   *
+   * @param object $fields
+   *   Fields storagedefinitions.
+   * @param string $field
+   *   NAme of the field to use in query.
+   * @param string $name
+   *   Human readable name to print out.
+   * @param int $weight
+   *   Desired weight of the form element.
+   *
+   * @return array
+   *   FAPI form element to display user stats.
+   */
+  protected function fsaNotifyStatsDisplay($fields, $field, $name, $weight) {
+
+    if (!isset($fields[$field])) {
+      return [];
+    }
+    $wrapper = str_replace('field_', '', $field);
+    $form = [
+      '#type' => 'details',
+      '#open' => TRUE,
+      '#title' => $name . ' (' . $field . ')',
+      '#weight' => $weight,
+    ];
+
+    $methods = options_allowed_values($fields[$field]);
     foreach ($methods as $key => $description) {
       $query = \Drupal::entityQuery('user');
       $query->condition('uid', 0, '>');
       $query->condition('status', 1);
-      $query->condition('field_notification_method', $key);
+      $query->condition($field, $key);
       $query->count();
       $count = $query->execute();
-      $form["user_method_$key"] = [
+      if (empty($count)) {
+        $count = t('none');
+      }
+      $form[$wrapper][$key] = [
         '#type' => 'item',
         '#title' => $description,
         '#plain_text' => $count,
-        '#weight' => $weight++,
       ];
     }
 
@@ -178,6 +241,13 @@ class FsaSettings extends FormBase {
     }
     else {
       \Drupal::state()->set('fsa_notify.log_callback_errors', 1);
+    }
+
+    if (empty($form_state->getValue('collect_send_log_only'))) {
+      \Drupal::state()->delete('fsa_notify.collect_send_log_only');
+    }
+    else {
+      \Drupal::state()->set('fsa_notify.collect_send_log_only', 1);
     }
 
     // Let the user know something happened.

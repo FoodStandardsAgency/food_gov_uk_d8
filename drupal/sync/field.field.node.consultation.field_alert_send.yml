@@ -1,0 +1,23 @@
+uuid: 0c549bd0-9a62-42a1-ad80-340e9ce68f48
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_alert_send
+    - node.type.consultation
+id: node.consultation.field_alert_send
+field_name: field_alert_send
+entity_type: node
+bundle: consultation
+label: 'Send alert to subscribers'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

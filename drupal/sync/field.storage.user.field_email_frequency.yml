@@ -1,0 +1,30 @@
+uuid: 5b2654a0-cca4-44cc-b1ec-2c3616c7b667
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - user
+id: user.field_email_frequency
+field_name: field_email_frequency
+entity_type: user
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: immediate
+      label: 'Send updates immediately'
+    -
+      value: daily
+      label: 'Send updates daily'
+    -
+      value: weekly
+      label: 'Send updates weekly'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

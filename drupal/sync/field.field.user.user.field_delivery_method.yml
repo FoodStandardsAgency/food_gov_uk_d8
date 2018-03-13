@@ -11,7 +11,7 @@ id: user.user.field_delivery_method
 field_name: field_delivery_method
 entity_type: user
 bundle: user
-label: 'Delivery method'
+label: 'Food and allergy alert delivery method'
 description: ''
 required: false
 translatable: false

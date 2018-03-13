@@ -1,0 +1,21 @@
+uuid: 891e237f-301f-4f8e-a720-0f53ab2e317f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_email_frequency
+  module:
+    - options
+    - user
+id: user.user.field_email_frequency
+field_name: field_email_frequency
+entity_type: user
+bundle: user
+label: 'Email frequency'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

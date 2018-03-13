@@ -1,0 +1,21 @@
+uuid: a12b4b0f-47fc-437e-876a-d9cd7e3d6059
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_delivery_method_news
+  module:
+    - options
+    - user
+id: user.user.field_delivery_method_news
+field_name: field_delivery_method_news
+entity_type: user
+bundle: user
+label: 'News and consultations delivery method'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

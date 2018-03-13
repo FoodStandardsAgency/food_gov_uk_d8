@@ -1,0 +1,21 @@
+uuid: af13f196-a9a6-4df2-b454-2778e79d97d4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_alert_send_timestamp
+    - node.type.consultation
+  module:
+    - datetime
+id: node.consultation.field_alert_send_timestamp
+field_name: field_alert_send_timestamp
+entity_type: node
+bundle: consultation
+label: 'Alert sent'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime
