@@ -11,6 +11,7 @@ use Drupal\Core\Breadcrumb\Breadcrumb;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
+use Drupal\Component\Utility\Html;
 
 /**
  * Implements hook_views_pre_render().
@@ -130,7 +131,7 @@ function fsa_gtm_preprocess_node(&$variables) {
           $field = $node->field_alert_type->view([
             'type' => 'fsa_alert_type_formatter',
           ]);
-          if ($field[0]['#title']->render()) {
+          if (isset($field[0]['#title'])) {
             $tag = $field[0]['#title']->render();
           }
         }
@@ -160,7 +161,7 @@ function fsa_gtm_preprocess_node(&$variables) {
     }
 
     // Slugify tag.
-    $tag = str_replace(' ', '-', strtolower($tag));
+    $tag = strtolower(Html::cleanCssIdentifier($tag));
 
     // Set query parameter.
     $query = implode("-", ['?navref=search', $tag, $counter]);
@@ -220,4 +221,14 @@ function fsa_gtm_system_breadcrumb_alter(Breadcrumb &$breadcrumb, RouteMatchInte
     $url->setOption('query', ['navref' => 'breadcrumb']);
     $link->setUrl($url);
   }
+}
+
+/**
+ * Implements hook_language_switch_links_alter().
+ */
+function fsa_gtm_language_switch_links_alter(array &$links, $type, $path) {
+  foreach ($links as $lang => $link) {
+    $links[$lang]['query']['navref'] = 'quicklinks';
+  }
+  return $links;
 }
