@@ -14,7 +14,7 @@ class FsaNotifyMessageWeekly extends FsaNotifyMessage {
    */
   public function __construct() {
     parent::__construct();
-    $this->subject = t('Weekly digest');
+    $this->subject = t('FSA weekly digest update');
   }
 
   /**

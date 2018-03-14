@@ -14,7 +14,7 @@ class FsaNotifyMessageDaily extends FsaNotifyMessage {
    */
   public function __construct() {
     parent::__construct();
-    $this->subject = t('Daily digest');
+    $this->subject = t('FSA daily digest update');
   }
 
   /**
