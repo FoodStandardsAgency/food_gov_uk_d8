@@ -229,6 +229,11 @@ function fsa_gtm_system_breadcrumb_alter(Breadcrumb &$breadcrumb, RouteMatchInte
 function fsa_gtm_language_switch_links_alter(array &$links, $type, $path) {
   foreach ($links as $lang => $link) {
     $links[$lang]['query']['navref'] = 'quicklinks';
+
+    // Make sure the is-active class is preserved.
+    if (\Drupal::languageManager()->getCurrentLanguage()->getId() == $lang) {
+      $links[$lang]['attributes']['class'][] = 'is-active';
+    }
   }
   return $links;
 }
