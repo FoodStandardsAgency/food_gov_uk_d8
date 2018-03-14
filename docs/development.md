@@ -20,6 +20,10 @@ drush $SOURCE dumpdb --structure-tables-list=fsa_establish*,migrate_message_fsa_
 Once sync is done you need to run the ratings migrate commands in order to have ratings data locally: 
 [fsa_ratings_import/README.md](/drupal/web/modules/custom/fsa_ratings_import/README) 
 
+#### Deploying to dev/stage/production
+
+Refer to [deployment.md](deployment.md).
+
 #### Configuration management
 
 * Project uses `config_readonly` module to prevent configuration changes on other than local dev environments. See `$settings['config_readonly']` in `settings.php`
