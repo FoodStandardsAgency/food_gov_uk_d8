@@ -2,10 +2,16 @@
 
 /**
  * @file
- * Expose data to page layer for GTM.
+ * Expose navrefs, and data to page layer, for GTM.
  */
 
 use Drupal\views\ViewExecutable;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\Core\Breadcrumb\Breadcrumb;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+use Drupal\Core\Link;
+use Drupal\Component\Utility\Html;
 
 /**
  * Implements hook_views_pre_render().
@@ -40,4 +46,194 @@ function fsa_gtm_views_pre_render(ViewExecutable $view) {
       ],
     ];
   }
+}
+
+/**
+ * Implements hook_preprocess_menu().
+ */
+function fsa_gtm_preprocess_menu(&$variables) {
+  if ($variables['menu_name'] != 'admin') {
+
+    // Append navrefs to menu items, using helper function, below.
+    foreach ($variables['items'] as $key => &$item) {
+      _fsa_gtm_set_navref($item, $variables['menu_name']);
+    }
+  }
+}
+
+/**
+ * Set navref for item and its children.
+ */
+function _fsa_gtm_set_navref(&$item, $navref) {
+  if (!$item['url']->isExternal()) {
+    $item['url']->setOption('query', ['navref' => $navref]);
+  }
+  if (isset($item['below'])) {
+    foreach ($item['below'] as $key => &$child_item) {
+      _fsa_gtm_set_navref($child_item, $navref);
+    }
+  }
+}
+
+/**
+ * Implements of template_preprocess_page().
+ */
+function fsa_gtm_preprocess_page(&$variables) {
+
+  // Append navrefs to hardcoded utility menu links.
+  if (isset($variables['utility_menu']['#items'])) {
+    $items = $variables['utility_menu']['#items'];
+    foreach ($items as $item) {
+      if (isset($item['#markup'])) {
+        $generated_link = $item['#markup']->getGeneratedLink();
+        if ($generated_link) {
+          $link = new SimpleXMLElement($generated_link);
+          if (isset($link[0]) && isset($link['href'])) {
+            $url = Url::fromUserInput($link['href']);
+            $url->setOptions(['query' => ['navref' => 'quicklink']]);
+            $item['#markup']->setGeneratedLink(Link::fromTextAndUrl($link[0], $url)->toString());
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function fsa_gtm_preprocess_node(&$variables) {
+
+  // Append navrefs to search items.
+  if ($variables['view_mode'] == 'search_result') {
+    $node = $variables['node'];
+
+    // Maintain static variable to keep row count.
+    static $counter = 0;
+    $counter++;
+
+    // Use bundle name as default tag.
+    $tag = $node->bundle();
+
+    // Conditionally set tag.
+    switch ($node->getType()) {
+      case 'page':
+
+        // Use content type taxonomy to get tag.
+        $tid = ($node->hasField('field_content_type')) ? $node->get('field_content_type')->target_id : 0;
+        if (is_numeric($tid) && $term = Term::load($tid)) {
+          $tag = $term->label();
+        }
+        break;
+
+      case 'alert':
+        if ($node->hasField('field_alert_type')) {
+          $field = $node->field_alert_type->view([
+            'type' => 'fsa_alert_type_formatter',
+          ]);
+          if (isset($field[0]['#title'])) {
+            $tag = $field[0]['#title']->render();
+          }
+        }
+        break;
+
+      case 'consultation':
+        if ($node->hasField('field_consultations_type')) {
+          $field = $node->field_consultations_type->view([
+            'label' => 'hidden',
+            'settings' => [
+              'link' => FALSE,
+            ],
+          ]);
+          if (isset($field[0]['#plain_text'])) {
+            $tag = $field[0]['#plain_text'];
+          }
+        }
+        break;
+
+      case 'news':
+        $tag = (string) t('News');
+        break;
+
+      case 'research_project':
+        $tag = (string) t('Research project');
+        break;
+    }
+
+    // Slugify tag.
+    $tag = strtolower(Html::cleanCssIdentifier($tag));
+
+    // Set query parameter.
+    $query = implode("-", ['?navref=search', $tag, $counter]);
+
+    // Append query parameter to url.
+    $variables['url'] .= $query;
+  }
+
+  // Append navrefs to related link promos.
+  if ($variables['view_mode'] == 'related_link_promo') {
+    $variables['url'] .= '?navref=related';
+  }
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function fsa_gtm_preprocess_field(&$variables) {
+
+  // Append navrefs to related content block field links.
+  if ($variables['field_name'] == 'field_related_content_block') {
+    if (isset($variables['items'][0]['content']['field_link'][0]['#plain_text'])) {
+      $variables['items'][0]['content']['field_link'][0]['#plain_text'] .= '?navref=related';
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_fsa_establishment().
+ */
+function fsa_gtm_preprocess_fsa_establishment(&$variables) {
+
+  // Append navrefs to food hygiene ratings search items.
+  if ($variables['view_mode'] == 'search_result') {
+
+    // Maintain static variable to keep row count.
+    static $counter = 0;
+    $counter++;
+
+    // Set query parameter.
+    $query = 'search-rating-' . $counter;
+
+    // Append query parameter to url.
+    $variables['url']->setOption('query', ['navref' => $query]);
+  }
+}
+
+/**
+ * Implements hook_system_breadcrumb_alter().
+ */
+function fsa_gtm_system_breadcrumb_alter(Breadcrumb &$breadcrumb, RouteMatchInterface $route_match, array $context) {
+
+  // Append navrefs to breadcrumbs.
+  $links = $breadcrumb->getLinks();
+  foreach ($links as $link) {
+    $url = $link->getUrl();
+    $url->setOption('query', ['navref' => 'breadcrumb']);
+    $link->setUrl($url);
+  }
+}
+
+/**
+ * Implements hook_language_switch_links_alter().
+ */
+function fsa_gtm_language_switch_links_alter(array &$links, $type, $path) {
+  foreach ($links as $lang => $link) {
+    $links[$lang]['query']['navref'] = 'quicklinks';
+
+    // Make sure the is-active class is preserved.
+    if (\Drupal::languageManager()->getCurrentLanguage()->getId() == $lang) {
+      $links[$lang]['attributes']['class'][] = 'is-active';
+    }
+  }
+  return $links;
 }
