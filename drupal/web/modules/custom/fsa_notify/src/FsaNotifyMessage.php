@@ -89,4 +89,24 @@ abstract class FsaNotifyMessage {
     return $url;
   }
 
+  /**
+   * Get the value of SMStext API content (field_alert_smstext).
+   *
+   * @param \Drupal\node\Entity\Node $node
+   *   The node object.
+   *
+   * @return string
+   *   Value of field_alert_smstext.
+   */
+  protected function smsText(Node $node) {
+    if ($node->hasField('field_alert_smstext') && $node->field_alert_smstext->value != '') {
+      $message = $node->field_alert_smstext->value;
+    }
+    else {
+      // Fallback in case field is removed.
+      $message = $node->getTitle();
+    }
+    return $message;
+  }
+
 }
