@@ -44,9 +44,8 @@ class FsaNotifyAPIemail extends FsaNotifyAPI {
       return FALSE;
     }
 
+    $msg = sprintf('Notify API: sendEmail(%s)', $email);
     try {
-      $msg = sprintf('Notify API: sendEmail(%s)', $email);
-
       $this->api->sendEmail(
         $email,
         $this->template_id,
@@ -55,6 +54,8 @@ class FsaNotifyAPIemail extends FsaNotifyAPI {
       );
     }
     catch (ApiException $e) {
+      // Get response body (the actual error message).
+      $msg .= (string) $e->getResponse()->getBody();
       $this->logAndException($msg, $e);
     }
     catch (NotifyException $e) {
