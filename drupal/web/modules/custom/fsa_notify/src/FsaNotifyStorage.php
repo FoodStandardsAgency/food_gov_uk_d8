@@ -33,7 +33,16 @@ class FsaNotifyStorage {
     $query = \Drupal::entityQuery('user');
     $query->condition('uid', 0, '>');
     $query->condition('status', 1);
-    $query->condition('field_email_frequency', $type);
+
+    if ($type == 'sms') {
+      // Get users who prefer SMS's.
+      $query->condition('field_delivery_method', $type, '=');
+    }
+    else {
+      // And email subscriber's with their preferred frequency.
+      $query->condition('field_email_frequency', $type);
+    }
+
     $query->Exists('field_notification_cache');
     $query->range(0, $batch_size);
     // $query->sort('uid');.
