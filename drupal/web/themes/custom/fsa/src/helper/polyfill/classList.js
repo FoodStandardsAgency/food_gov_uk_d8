@@ -1,3 +1,4 @@
+/* eslint-disable */
 /*
  * classList.js: Cross-browser full element.classList implementation.
  * 1.1.20170427

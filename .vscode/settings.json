@@ -1,10 +1,13 @@
 {
+  "editor.formatOnPaste": true,
   "editor.tabSize": 2,
   "css.validate": false,
   "postcss.validate": false,
   "stylelint.enable": true,
   "files.associations": {
     "*.css": "postcss",
-    "*.module": "php"
+    "*.module": "php",
+    "*.theme": "php",
+    "*.inc": "php"
   }
 }

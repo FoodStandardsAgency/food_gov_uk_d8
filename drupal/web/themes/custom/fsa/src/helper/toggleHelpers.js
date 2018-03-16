@@ -1,70 +1,61 @@
-// Set state off
-function setStateOff (options, elemState) {
-  const element = options.element
-  switch (options.type) {
-    case 'button':
-      element.classList.remove(elemState)
-      element.setAttribute('aria-expanded', 'false')
-      break
-    case 'content':
-      element.classList.remove(elemState)
-      element.setAttribute('aria-hidden', 'false')
-      element.inert = true
-      // console.log('content off, aria-hidden=', element.getAttribute('aria-hidden'));
-      break
-    default:
-      break
+const state = {
+  on: (options, elemState) => {
+    switch (options.type) {
+      case 'button':
+        options.element.classList.add(elemState)
+        options.element.setAttribute('aria-expanded', 'true')
+        break
+      case 'content':
+        options.element.classList.add(elemState)
+        options.element.inert = false
+        options.element.setAttribute('aria-hidden', 'false')
+        break
+      default:
+        break
+    }
+  },
+
+  off: (options, elemState) => {
+    switch (options.type) {
+      case 'button':
+        options.element.classList.remove(elemState)
+        options.element.setAttribute('aria-expanded', 'false')
+        break
+      case 'content':
+        options.element.classList.remove(elemState)
+        options.element.inert = true
+        options.element.setAttribute('aria-hidden', 'true')
+        break
+      default:
+        break
+    }
+  },
+
+  toggle: (elem, elemRefItem, elemState) => {
+    if (elemRefItem.classList.contains(elemState)) {
+      state.off({element: elem, type: 'button'}, elemState)
+      state.off({element: elemRefItem, type: 'content'}, elemState)
+    } else {
+      state.on({element: elem, type: 'button'}, elemState)
+      state.on({element: elemRefItem, type: 'content'}, elemState)
+    }
+  },
+
+  remove: (options, elemState) => {
+    switch (options.type) {
+      case 'button':
+        options.element.classList.remove(elemState)
+        options.element.removeAttribute('aria-expanded')
+        break
+      case 'content':
+        options.element.classList.remove(elemState)
+        options.element.removeAttribute('aria-hidden')
+        options.element.inert = false
+        break
+      default:
+        break
+    }
   }
 }
 
-// Set state on
-function setStateOn (options, elemState) {
-  const element = options.element
-
-  switch (options.type) {
-    case 'button':
-      element.classList.add(elemState)
-      element.setAttribute('aria-expanded', 'true')
-      break
-    case 'content':
-      element.classList.add(elemState)
-      element.setAttribute('aria-hidden', 'false')
-      element.inert = false
-      // console.log('content on, aria-hidden=', element.getAttribute('aria-hidden'));
-      break
-    default:
-      break
-  }
-}
-
-// Remove state
-function removeState (options, elemState) {
-  const element = options.element
-
-  switch (options.type) {
-    case 'button':
-      element.classList.remove(elemState)
-      element.removeAttribute('aria-expanded')
-      break
-    case 'content':
-      element.classList.remove(elemState)
-      element.removeAttribute('aria-hidden')
-      element.inert = false
-      break
-    default:
-      break
-  }
-}
-
-// Toggle state
-function toggleState (elem, elemRefItem, elemState) {
-  if (elemRefItem.classList.contains(elemState)) {
-    setStateOff({element: elem, type: 'button'}, elemState)
-    setStateOff({element: elemRefItem, type: 'content'}, elemState)
-  } else {
-    setStateOn({element: elem, type: 'button'}, elemState)
-    setStateOn({element: elemRefItem, type: 'content'}, elemState)
-  }
-}
-
-module.exports = { setStateOff, setStateOn, removeState, toggleState }
+module.exports = state

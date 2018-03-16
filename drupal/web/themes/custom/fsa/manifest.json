@@ -1,18 +1,18 @@
 {
-    "name": "FSA",
-    "icons": [
-        {
-            "src": "/themes/custom/fsa/dist/img/favicon/android-chrome-192x192.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "/themes/custom/fsa/dist/img/favicon/android-chrome-384x384.png",
-            "sizes": "384x384",
-            "type": "image/png"
-        }
-    ],
-    "theme_color": "#009688",
-    "background_color": "#009688",
-    "display": "standalone"
+  "name": "FSA",
+  "icons": [
+    {
+      "src": "/themes/custom/fsa/dist/img/favicon/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/themes/custom/fsa/dist/img/favicon/android-chrome-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#009688",
+  "background_color": "#009688",
+  "display": "standalone"
 }
