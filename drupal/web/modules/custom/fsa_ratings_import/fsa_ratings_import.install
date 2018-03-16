@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function fsa_ratings_import_schema() {
+  $schema['fsa_establishment_api_import'] = [
+    'description' => 'Establishments imported from API.',
+    'fields' => [
+      'date' => [
+        'description' => 'The date when establishment was imported.',
+        'type' => 'varchar',
+        'length' => 20,
+      ],
+      'fhrsid' => [
+        'description' => 'Establishment ID.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['date', 'fhrsid'],
+    'indexes' => [
+      'fhrsid_date' => ['date', 'fhrsid'],
+    ],
+  ];
+
+  return $schema;
+}
+
+/**
+ * Create "fsa_establishment_api_import" table where fetched result IDs are stored.
+ */
+function fsa_ratings_import_update_8001(&$sandbox) {
+  $connection = \Drupal::database();
+  $table = 'fsa_establishment_api_import';
+
+  if (!$connection->schema()->tableExists($table)) {
+    // Get schema.
+    $schema = fsa_ratings_import_schema();
+    // Create table.
+    $connection->schema()->createTable($table, $schema[$table]);
+  }
+}

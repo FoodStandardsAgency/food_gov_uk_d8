@@ -3,3 +3,12 @@ services:
     class: Drupal\fsa_ratings_import\EventSubscriber\FsaRatingsImportMigrateSubscriber
     tags:
       - { name: event_subscriber }
+  fsa_ratings_import.fetcher:
+    class: Drupal\fsa_ratings_import\FhrsApiFetcher
+    arguments: ['@class_resolver', '@file_system', '@date.formatter', '@keyvalue', '@logger.channel.fsa_ratings_import']
+  fsa_ratings_import.import_mapper:
+    class: Drupal\fsa_ratings_import\FhrsApiImportMapper
+    arguments: ['@database', '@file_system', '@date.formatter', '@entity_type.manager', '@plugin.manager.migration', '@queue', '@keyvalue', '@logger.channel.fsa_ratings_import']
+  logger.channel.fsa_ratings_import:
+    parent: logger.channel_base
+    arguments: ['fsa_ratings_import']

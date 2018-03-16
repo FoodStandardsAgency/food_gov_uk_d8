@@ -46,6 +46,36 @@ Enable full import mode:
 Disable full import mode:  
 `drush sdel fsa_rating_import.full_import`
 
+### Removal of non-existing establishments
+
+FHRS API does not have permanent establishment id's (FHRSID) and establishments 
+may get deleted over time from the API. To overcome this issue an establishment 
+deletion feature was added to module.
+
+Every day a full set of establishments is fetched from API (Establishments/basic
+endpoint) and stored in:
+ * as paged files in `public://api/[date]/fhrs_results_[page].json`
+ * as FHRSID and date in `fsa_establishment_api_import` table.
+ 
+On cron run the following steps are performed:
+* Page number to fetch is determined from previous stored paged result .json 
+file (if last json is `fhrs_results_003.json`, then API is queried with page 4) 
+and results from API are downloaded to `public://api/[date]`
+* Saved JSON file is parsed and FHRS values are merged into 
+`fsa_establishment_api_import` table (existing FHRS values are unique, values 
+are added or updated if they exist)
+* When the full set of establishments are fetched:
+  * entry `api_fetch_finish_last_date` is set to current date in 
+  `fsa_ratings_import` key/value collection (this allows skip the process of 
+  determining the next page, etc)
+  * all values in `fsa_establishment_api_import` table are matched against 
+  migrated establishment entities in `migrate_map_fsa_establishment` tables and 
+  entities that are defined as migrated but not available in fetched set are 
+  removed as non-existing
+  * entry `entity_purge_finish_last_date` is set to current date in 
+  `fsa_ratings_import` key/value collection (this allows skip the process of 
+  finding the result-set/migrated entity diff, etc)
+
 ### Development options 
 
 To import smaller batch of content for testing/development add following 

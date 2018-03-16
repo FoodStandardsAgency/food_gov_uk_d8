@@ -3,6 +3,7 @@
 namespace Drupal\fsa_ratings_import\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Url;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Drupal\Component\Serialization\Json;
@@ -14,6 +15,8 @@ use Drupal\Component\Utility\UrlHelper;
  * @package Drupal\fhrs_api\Controller
  */
 class FhrsApiController extends ControllerBase {
+
+  const RATINGS_API_MAX_PAGE_SIZE = 5000;
 
   // The default time window to fetch updates from.
   const FSA_RATING_UPDATE_SINCE = '-1 week';
@@ -158,6 +161,62 @@ class FhrsApiController extends ControllerBase {
     }
     catch (RequestException $e) {
       \Drupal::logger('fsa_ratings_import')->error('FHRS API: Failed getting establishment updates: <pre>' . $e . '</pre>');
+      return FALSE;
+    }
+  }
+
+  /**
+   * Returns max page size.
+   *
+   * @return int
+   */
+  public function getMaxPageSize() {
+    return self::RATINGS_API_MAX_PAGE_SIZE;
+  }
+
+  /**
+   * Returns total number of pages.
+   *
+   * @param array $filters
+   *
+   * @return int
+   */
+  public function pagesTotal(array $filters = []) {
+    $result = self::totalCount($filters) / self::RATINGS_API_MAX_PAGE_SIZE;
+    // 4.5 means 5 pages.
+    return ceil($result);
+  }
+
+  /**
+   * Prepares fetch URL.
+   *
+   * @param int $page_number
+   * @param int $page_size
+   * @param array $options
+   *
+   * @return string
+   */
+  public function getFetchUrl($page_number = 1, $page_size = 5000, $options = []) {
+    return Url::fromUri(sprintf('%s/Establishments/basic/%d/%d', $this->baseUrl(), $page_number, $page_size), $options)->toString();
+  }
+
+  /**
+   * Fetches the results from API.
+   *
+   * @param int $page_number
+   * @param int $page_size
+   * @param array $options
+   *
+   * @return bool|\Psr\Http\Message\ResponseInterface
+   */
+  public function fetch($page_number = 1, $page_size = 5000, $options = []) {
+    // Get URL.
+    $url = $this->getFetchUrl($page_number, $page_size, $options);
+
+    try {
+      return \Drupal::httpClient()->get($url, $this->headers());
+    }
+    catch (RequestException $e) {
       return FALSE;
     }
   }
