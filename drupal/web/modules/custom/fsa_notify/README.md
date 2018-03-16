@@ -11,14 +11,21 @@ All notification related stuff lives in one module `fsa_notify`.
 ## TODO
 
 Decisions and/or further investigation needed:
-* Need to decide and work with what happens when sending fails to particular user. Stop sending altogether? Or continue? We dont know if this is some common error or just isolated case. In `src/FsaNotifyAPI*.php`, see `send()` method.
+* Need to decide and work with what happens when sending fails to particular 
+user. Stop sending altogether? Or continue? We dont know if this is some common 
+error or just isolated case. In `src/FsaNotifyAPI*.php`, see `send()` method.
 * Email bounce handling
 * SMS bounce handling
 * Multilingual functionality
 
 ## Known bugs
 
-* In very rare cases people may get two non-overlapping digests for same period. It may happen when the system is not able to send all messages out in one cron shot (very exceptional cases). And in between multiple attempts there is added new content which goes to the digest. Likelihood for this event is virtually nonexistent as sending is expected almost always to succeed (within say 15min) in first attempt and there are only few alerts per day.
+* In very rare cases people may get two non-overlapping digests for same period.
+ It may happen when the system is not able to send all messages out in one cron 
+ shot (very exceptional cases). And in between multiple attempts there is added 
+ new content which goes to the digest. Likelihood for this event is virtually 
+ nonexistent as sending is expected almost always to succeed (within say 15min)
+ in first attempt and there are only few alerts per day.
 
 ## Configuration
 
@@ -33,17 +40,21 @@ That page contains three things:
 
 ### State
 
-Basic configuration parameters are held in Drupal state variables and can be managed by UI (or `drush`).
+Basic configuration parameters are held in Drupal state variables and can be 
+managed by UI (or `drush`).
 
 * `fsa_notify.api` - Notify API key
 * `fsa_notify.template_sms` - Notify API SMS Template ID
 * `fsa_notify.template_email` - Notify API Email Template ID
-* `fsa_notify.collect_send_log_only` - Debug mode to collect alerts but only writing the content to log 
+* `fsa_notify.collect_send_log_only` - Debug mode to collect alerts but only 
+writing the content to log 
 
 Runtime state variables are:
 
-* `fsa_notify.last_daily` - timestamp of last time when daily was finished last time.
-* `fsa_notify.last_weekly` - timestamp of last time when weekly was finished last time.
+* `fsa_notify.last_daily` - timestamp of last time when daily was finished last 
+time.
+* `fsa_notify.last_weekly` - timestamp of last time when weekly was finished 
+last time.
 
 ## API keys and Template IDs
 
@@ -74,7 +85,8 @@ This field has additional check by `Field validation` module for data integrity:
 
 ### user.field_notification_cache
 
-This field is not visible for user, but here we collect alerts per user to be sent.
+This field is not visible for user, but here we collect alerts per user to be 
+sent.
 
 When alerts are sent out, this field is emptied.
 
@@ -84,7 +96,8 @@ List of allergens user has signed up to.
 
 ### node.field_alert_send
 
-Boolean field to trigger sending a node (news or consultation) to notify sending queue.
+Boolean field to trigger sending a node (news or consultation) to notify sending
+ queue.
 
 ### node.field_alert_send_timestamp
 
@@ -92,16 +105,20 @@ Date field to store if node (news or consultation) was sent to sending queue.
 
 ## What happens when new alert is created?
 
-News and Consultation content type items behave similarly when editor selects the `field_alert_send` checkbox on node edit form.
+News and Consultation content type items behave similarly when editor selects
+the `field_alert_send` checkbox on node edit form.
 
 * First node is queued for processing.
-* Then during cron run the alert will be cached to every user who has signed up for particular terms.
-* During send-out event all cached notifications are sent out and user cache emptied.
+* Then during cron run the alert will be cached to every user who has signed up
+for particular terms.
+* During send-out event all cached notifications are sent out and user cache
+emptied.
 
 ## Cron
 
 During cron run following things happen:
-* Queue is processed for each queued alert and the alerts will be reference from user caches according to user allergen sign up field.
+* Queue is processed for each queued alert and the alerts will be reference from
+user caches according to user allergen sign up field.
 * All SMS messages are sent out
 * All immediate messages are sent out
 * All daily messages are sent out - if it is appropriate time
@@ -113,9 +130,11 @@ Digest sending times can be configured in following functions:
 
 ## Queue
 
-Alerts are queued immediately. Drupal Queue is used. Because processing of them takes considerable time. Might be 1-2minutes per queue item.
+Alerts are queued immediately. Drupal Queue is used. Because processing of them
+takes considerable time. Might be 1-2minutes per queue item.
 
-Queue processing distributes alert references to users who have signed up for them.
+Queue processing distributes alert references to users who have signed up for
+them.
 
 ## Sending out SMS and Email
 
@@ -124,7 +143,9 @@ Message body is constructed and then sent.
 
 ## Timing
 
-Since sending out messages are quite slow process and in order to track performance and have some stats there is timer functionality included which logs some stats only if something is sent out to Drupal Watchdog.
+Since sending out messages are quite slow process and in order to track
+performance and have some stats there is timer functionality included which logs
+some stats only if something is sent out to Drupal Watchdog.
 
 ```
 Timer: type weekly; elapsed 164.101; 968 items; 5.899 items/sec.
@@ -136,20 +157,29 @@ Timer: type queue; elapsed 73.326; 1 items; 0.014 items/sec.
 
 ## Digest times
 
-In `fsa_notify.module` there is functionality which decides if it is time to send out daily or weekly.
+In `fsa_notify.module` there is functionality which decides if it is time to
+send out daily or weekly.
 Here follows ho it is decided.
 There are 2 major factors:
-* There has to be passed enough time since last time (a bit less than a day or a bit less than a week).
-* It has to be certain time period of day or week when notification delivery may happen.
+* There has to be passed enough time since last time (a bit less than a day or a
+bit less than a week).
+* It has to be certain time period of day or week when notification delivery may
+happen.
 
-There is time window (few hours) during which the sending may happen. It is few hours because if sending fails for whatever reason it will be attempted again.
+There is time window (few hours) during which the sending may happen. It is few
+hours because if sending fails for whatever reason it will be attempted again.
 
 For details, please refer to following functions:
-* `fsa_notify_daily_is_ready_to_send()` - check if we can send out daily digests now
-* `fsa_notify_weekly_is_ready_to_send()` - check if we can send out weekly digests now
-* `fsa_notify_is_ready_to_send()` - underlying general functionality for previous functions
+* `fsa_notify_daily_is_ready_to_send()` - check if we can send out daily digests
+now
+* `fsa_notify_weekly_is_ready_to_send()` - check if we can send out weekly
+digests now
+* `fsa_notify_is_ready_to_send()` - underlying general functionality for
+previous functions
 
-When digest is sent (successfully finished), then is recorded by `fsa_notify_sent()`. It is needed to calculate if enough time is passed since last time.
+When digest is sent (successfully finished), then is recorded by
+`fsa_notify_sent()`. It is needed to calculate if enough time is passed since 
+last time.
 
 ## If you need to change how a notification looks
 
@@ -176,9 +206,17 @@ SMS sent to Notify number +44(0)7860064543 creates a callback defined in [Notify
 
 ## Testing
 
-Use `Makefile` in `fsa_notify/testing` directory.
+* On `/admin/config/fsa/notify` 
+  * "*Collect notifications and send out to subscribers*" Selected. This will 
+  send the API requsts to Notify.
+  * "*Debug mode*" keeps collecting alerts but only log the requests that would 
+  be sent to notify but. Excecution is terminated before the API call.
+ 
+Use `Makefile` in `fsa_notify/testing` directory for creating alert nodes. (To 
+test news/consultations alerts edit the content manually)
 
-* Use testing keys in `/admin/config/fsa/notify`
+* Use testing keys in `/admin/config/fsa/notify` (or the actual keys if using 
+debug mode)
 * have 1 user in your local with at least 1 allergy.
 * clear local alerts and possibly migration data
   * drush mr --tag=alerts
@@ -188,6 +226,7 @@ Use `Makefile` in `fsa_notify/testing` directory.
 * Run `make test`
   * Have `drush wd-show --tail --full --extended &` open in another tab
 * View the message logs at [Notify api tab](https://www.notifications.service.gov.uk/services/6f00837a-4b8f-4ddd-ae96-ca2d3035fe57/api)
+  * Or local logs if debugging mode enabled.
 
 ## Files in this module
 
