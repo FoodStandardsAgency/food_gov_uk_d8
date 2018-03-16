@@ -1,5 +1,5 @@
 name: FSA GTM
-description: Expose data to page layer for GTM.
+description: Expose navrefs, and data to page layer, for GTM.
 type: module
 core: 8.x
 package: FSA

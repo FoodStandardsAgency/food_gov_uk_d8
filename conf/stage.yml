@@ -30,11 +30,27 @@
   # Drupal cron job
   #- cron: name="Example Drupal cron job" minute="*/2" job="su nginx --shell=/bin/sh -c '/usr/lib/composer/vendor/bin/drush --root=/var/www/example.com/current elysia-cron run > /dev/null 2>&1'" state="present"
 
+    - name: "Run drupal cronjob at even minutes"
+      cron:
+        name: "Run Drupal cronjobs with drush"
+        minute: "*/2"
+        job: "/usr/lib/composer/vendor/bin/drush --root=/var/www/fsa/current/web cron"
+        state: "present"
+        user: nginx
+      tags: ['cron']
     - name: "Fetch Alerts from Epimorphics server"
       cron:
         name: "Run Migrate API task to pull alerts from the API"
         minute: "*/10"
         job: "/usr/lib/composer/vendor/bin/drush --root=/var/www/fsa/current/web mi --tag=alerts"
+        state: "present"
+        user: nginx
+      tags: ['cron']
+    - name: "Fetch Authority updates from FHRS API"
+      cron:
+        name: "Run Migrate API task to pull authority updates from the API"
+        hour: "4"
+        job: "/usr/lib/composer/vendor/bin/drush --root=/var/www/fsa/current/web mim --tag=authorities"
         state: "present"
         user: nginx
       tags: ['cron']

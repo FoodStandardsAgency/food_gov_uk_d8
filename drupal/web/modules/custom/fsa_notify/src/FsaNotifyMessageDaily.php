@@ -14,7 +14,7 @@ class FsaNotifyMessageDaily extends FsaNotifyMessage {
    */
   public function __construct() {
     parent::__construct();
-    $this->subject = t('Daily digest');
+    $this->subject = t('FSA daily digest update');
   }
 
   /**
@@ -24,13 +24,15 @@ class FsaNotifyMessageDaily extends FsaNotifyMessage {
 
     $items = implode("\n", $items);
 
-    $items = [[
-      'subject' => $this->subject,
-      'date' => $this->date,
-      'allergy_alerts' => $items,
-      'login' => $this->login_url,
-      'unsubscribe' => $this->unsubscribe_url,
-    ],
+    // Variables for the Notify template.
+    $items = [
+      [
+        'subject' => $this->subject->render(),
+        'date' => $this->date,
+        'alert_items' => $items,
+        'login' => $this->login_url,
+        'unsubscribe' => $this->unsubscribe_url,
+      ],
     ];
 
     return $items;

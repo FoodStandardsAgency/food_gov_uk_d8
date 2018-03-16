@@ -21,15 +21,34 @@ abstract class FsaNotifyMessage {
    */
   public function __construct() {
 
-    $url = \Drupal::request()->getSchemeAndHttpHost();
-    $this->base_url = $url;
+    // Sending is done via cron, hardcode domain for links based on WKV_SITE_ENV
+    // if/when cron is triggered without --uri flag to avoid the links being
+    // created as http://default/....
+    switch (getenv("WKV_SITE_ENV")) {
+      case 'local':
+        $base_url = 'https://local.food.gov.uk';
+        break;
 
-    $url = Url::fromRoute('user.login', [], ['absolute' => TRUE]);
-    $url = $url->toString();
-    $this->login_url = $url;
+      case 'development':
+        $base_url = 'https://fsa.dev.wunder.io';
+        break;
 
-    $url = 'http://.../unsubscribe';
-    $this->unsubscribe_url = $url;
+      case 'stage':
+        $base_url = 'https://fsa.stage.wunder.io';
+        break;
+
+      default:
+        $base_url = 'https://beta.food.gov.uk';
+        break;
+    }
+
+    $this->base_url = $base_url;
+
+    $url = Url::fromRoute('fsa_signin.default_controller_signInPage', []);
+    $this->login_url = $base_url . $url->toString();
+
+    $url = Url::fromRoute('fsa_signin.default_controller_unsubscribe', []);
+    $this->unsubscribe_url = $base_url . $url->toString();
 
     $this->date = date('j F Y');
   }
@@ -68,6 +87,26 @@ abstract class FsaNotifyMessage {
     $nid = $node->id();
     $url = sprintf('%s/node/%d', $this->base_url, $nid);
     return $url;
+  }
+
+  /**
+   * Get the value of SMStext API content (field_alert_smstext).
+   *
+   * @param \Drupal\node\Entity\Node $node
+   *   The node object.
+   *
+   * @return string
+   *   Value of field_alert_smstext.
+   */
+  protected function smsText(Node $node) {
+    if ($node->hasField('field_alert_smstext') && $node->field_alert_smstext->value != '') {
+      $message = $node->field_alert_smstext->value;
+    }
+    else {
+      // Fallback in case field is removed.
+      $message = $node->getTitle();
+    }
+    return $message;
   }
 
 }

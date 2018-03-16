@@ -82,7 +82,7 @@ class AlertJsonToHtml extends FormatterBase {
             if (isset($b_value['useByDate'])) {
               $table_rows[] = [t('Use by date'), $b_value['useByDate']];
             }
-            if (isset($b_value['useByDate'])) {
+            if (isset($b_value['useByDescription'])) {
               $table_rows[] = [t('Use by description'), $b_value['useByDescription']];
             }
           }
@@ -93,6 +93,21 @@ class AlertJsonToHtml extends FormatterBase {
           '#caption' => $table_caption,
           '#header' => NULL,
           '#rows' => $table_rows,
+        ];
+      }
+    }
+
+    // Check if the entity has a reporting business field with value and append
+    // additional information at the bottom of product details.
+    if ($items->getEntity()->hasField('field_alert_reportingbusiness')) {
+      // Field is multi-value but API always have only one value (delta)
+      $reporting_business = $items->getEntity()->get('field_alert_reportingbusiness')->getValue();
+      if (isset($reporting_business[0]['value'])) {
+        $elements[] = [
+          '#markup' => '<p class="disclaimer">' . $this->t(
+            'No other @reporting_business products are known to be affected.',
+            ['@reporting_business' => $reporting_business[0]['value']]
+          ) . '</p>',
         ];
       }
     }

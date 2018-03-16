@@ -24,6 +24,7 @@ source:
     x-api-version: '2'
     accept-language: en-GB
   item_selector: authorities
+  track_changes: true
   fields:
     -
       name: LocalAuthorityId

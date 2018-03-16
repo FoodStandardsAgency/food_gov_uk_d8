@@ -10,8 +10,8 @@ id: user.user.field_notification_sms
 field_name: field_notification_sms
 entity_type: user
 bundle: user
-label: 'Notification SMS'
-description: "Fill in if you want to receive SMS notifications and please choose \"Notification method\" accordingly.<br>\r\nEnter phone numbers with plus sign followed by international prefix followed by your number.<br>\r\nExample: +449988776655<br>"
+label: 'Phone number'
+description: 'This service is only for UK telephone numbers'
 required: false
 translatable: false
 default_value: {  }

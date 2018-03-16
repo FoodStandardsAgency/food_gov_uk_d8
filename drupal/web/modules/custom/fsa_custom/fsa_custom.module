@@ -194,8 +194,12 @@ function fsa_custom_preprocess_page_title(&$variables) {
   }
   else {
     if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
-      // Add a title suffix on signup pages.
-      if (!\Drupal::service('router.admin_context')->isAdminRoute() && substr($routename, 0, 10) == 'fsa_signin') {
+      // Title suffix on signup pages (except on the delete & unsubscribe).
+      $exceptions = [
+        'fsa_signin.default_controller_unsubscribe',
+        'fsa_signin.delete_account_confirmation',
+      ];
+      if (!\Drupal::service('router.admin_context')->isAdminRoute() && substr($routename, 0, 10) == 'fsa_signin' && !in_array($routename, $exceptions)) {
         $variables['title_suffix'] = ['#markup' => '<p>' . t('Stay up to date with food and allergy alerts, FSA news and consultations.') . '</p>'];
       }
 
@@ -476,6 +480,11 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
         // Define routes to show pagetitle within content.
         $routes = [
           'entity.user.canonical',
+          'user.reset',
+          'user.reset.login',
+          'user.reset.form',
+          'fsa_signin.default_controller_unsubscribe',
+          'fsa_signin.delete_account_confirmation',
         ];
         if (in_array($routename, $routes)) {
           return AccessResult::allowed()
@@ -492,8 +501,13 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
 
         // Define routes to remove the page title in hero area.
         $routes = [
+          'user.reset',
+          'user.reset.login',
+          'user.reset.form',
           'entity.user.canonical',
           'fsa_signin.user_registration_thank_you',
+          'fsa_signin.default_controller_unsubscribe',
+          'fsa_signin.delete_account_confirmation',
         ];
 
         if (in_array($routename, $routes) || $routematch->getParameter('fsa_establishment')) {

@@ -1,17 +1,17 @@
-uuid: 43e5d140-9a6d-4c2d-b619-e3d11954d9d9
+uuid: 891e237f-301f-4f8e-a720-0f53ab2e317f
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.user.field_delivery_method
+    - field.storage.user.field_email_frequency
   module:
     - options
     - user
-id: user.user.field_delivery_method
-field_name: field_delivery_method
+id: user.user.field_email_frequency
+field_name: field_email_frequency
 entity_type: user
 bundle: user
-label: 'Food and allergy alert delivery method'
+label: 'Email frequency'
 description: ''
 required: false
 translatable: false
