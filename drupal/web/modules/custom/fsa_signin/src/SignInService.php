@@ -171,7 +171,10 @@ class SignInService {
     $cmd = $values[0];
 
     // Figure out what user intended to unsubscribe from.
-    if (in_array($cmd, ['', 'all', 'gyd'])) {
+    if (in_array($cmd, ['', 'sms'])) {
+      $unsubscribe = 'sms';
+    }
+    elseif (in_array($cmd, ['all', 'gyd'])) {
       $unsubscribe = 'all';
     }
     elseif (in_array($cmd, ['allergy', 'alergedd'])) {
@@ -218,6 +221,25 @@ class SignInService {
         $user = User::load($uid);
 
         switch ($unsubscribe) {
+          case 'sms':
+            // SMS unsubscribe removes user phone number preference and the SMS
+            // subscribe option maintaining other possible preferences.
+            $methods = $user->field_delivery_method->getValue();
+            $updated_methods = [];
+            foreach ($methods as $method) {
+              if ($method['value'] != 'sms') {
+                $updated_methods[] = $method['value'];
+              }
+            }
+            $user->field_delivery_method->setValue($updated_methods);
+            $user->field_notification_sms->setValue('');
+            $user->save();
+
+            $ret['message'] = $this->t('User @uid unsubsribed from SMS (and phone number removed from profile)', ['@uid' => $uid]);
+            $ret['success'] = TRUE;
+            $ret['uid'] = $uid;
+            break;
+
           case 'all':
             $user->field_subscribed_notifications->setValue([]);
             $user->field_subscribed_food_alerts->setValue([]);
