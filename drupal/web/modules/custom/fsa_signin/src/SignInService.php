@@ -91,7 +91,7 @@ class SignInService {
 
     $all_terms = \Drupal::entityTypeManager()
       ->getStorage('taxonomy_term')
-      ->loadTree('consultations_type', 0, 1, FALSE);
+      ->loadTree('consultations_type_alerts', 0, 1, FALSE);
     $options = [];
     foreach ($all_terms as $term) {
       $options[$term->tid] = $this->t($term->name)->render();

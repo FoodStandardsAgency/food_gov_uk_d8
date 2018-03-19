@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.consultation.field_consultation_launch_date
     - field.field.node.consultation.field_consultation_summary
     - field.field.node.consultation.field_consultations_type
+    - field.field.node.consultation.field_consultations_type_alert
     - field.field.node.consultation.field_intro
     - field.field.node.consultation.field_nation
     - field.field.node.consultation.field_status
@@ -55,6 +56,7 @@ third_party_settings:
       label: 'Consultation metadata'
     group_notify:
       children:
+        - field_consultations_type_alert
         - field_alert_send
         - field_alert_send_timestamp
       parent_name: ''
@@ -89,14 +91,14 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_alert_send:
-    weight: 16
+    weight: 27
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_alert_send_timestamp:
-    weight: 17
+    weight: 28
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
@@ -133,6 +135,12 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_select
+    region: content
+  field_consultations_type_alert:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
     region: content
   field_intro:
     weight: 4

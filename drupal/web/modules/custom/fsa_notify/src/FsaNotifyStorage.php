@@ -126,8 +126,8 @@ class FsaNotifyStorage {
     }
 
     // Store consultations for sending.
-    if ($node->hasField('field_consultations_type')) {
-      $consultations_type = $node->field_consultations_type->getValue();
+    if ($node->hasField('field_consultations_type_alert')) {
+      $consultations_type = $node->field_consultations_type_alert->getValue();
       $consultations_type = array_map(
         function ($c) {
           return $c['target_id'];

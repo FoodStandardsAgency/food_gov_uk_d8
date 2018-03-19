@@ -1,0 +1,29 @@
+uuid: 698762cf-3e90-4486-8afd-c9d40cc9ae48
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_consultations_type_alert
+    - node.type.consultation
+    - taxonomy.vocabulary.consultations_type_alerts
+id: node.consultation.field_consultations_type_alert
+field_name: field_consultations_type_alert
+entity_type: node
+bundle: consultation
+label: 'Consultation type(s) for subscribers'
+description: "<p>Select subscriber categories to send alert to about this consultation item to.<br />\r\n<strong>NB!</strong> Alerts will be sent only if below checkbox <em>Send alert to subscribers</em> is selected.</p>"
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      consultations_type_alerts: consultations_type_alerts
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

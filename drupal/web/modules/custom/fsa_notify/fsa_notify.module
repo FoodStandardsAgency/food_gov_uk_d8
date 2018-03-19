@@ -118,6 +118,10 @@ function fsa_notify_node_presave(NodeInterface $node) {
  */
 function fsa_notify_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
+  if (isset($form['field_alert_send'])) {
+    $form['field_alert_send']['#prefix'] = '<hr />';
+  }
+
   // Unset widget settings from alert sent timestamp field.
   $field = 'field_alert_send_timestamp';
   if (!empty($form[$field])) {
