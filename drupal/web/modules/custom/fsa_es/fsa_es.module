@@ -80,9 +80,21 @@ function fsa_es_preprocess_views_view(&$variables) {
   if ($view->storage->id() == 'search_global_all' && empty($view->pager->current_page)) {
     $embed_view_id = 'search_global_ratings_embed';
     $embed_view_display = 'embed_1';
+    $decoupled = FALSE;
+
+    if (\Drupal::state()->get('fsa_ratings.decoupled')) {
+      $current_user = \Drupal::currentUser();
+      $roles = $current_user->getRoles();
+      if (in_array('administrator', $roles)) {
+        drupal_set_message(t("Ratings content is decoupled, visitors will not see the Food hygiene ratings results."), 'warning');
+      }
+      else {
+        $decoupled = TRUE;
+      }
+    }
 
     // Get embed view (if not in decoupled mode).
-    if (!\Drupal::state()->get('fsa_ratings.decoupled') && $ratings_embed_view = Views::getView($embed_view_id)) {
+    if (!$decoupled && $ratings_embed_view = Views::getView($embed_view_id)) {
       // Get keywords filter value from the parent view.
       // It's important that keyword is either a value or NULL (no empty
       // stings) since ViewExecutable::_buildArguments() will produce a failed
