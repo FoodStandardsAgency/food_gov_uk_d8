@@ -10,6 +10,8 @@ use Drupal\Core\Form\ConfigFormBase;
  */
 class FsaRatingsConfigurations extends ConfigFormBase {
 
+  private $ratingsDecoupled = 'fsa_ratings.decoupled';
+
   /**
    * {@inheritdoc}
    */
@@ -42,9 +44,19 @@ class FsaRatingsConfigurations extends ConfigFormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $fsa_ratings = $this->config('config.fsa_ratings');
 
+    $rating_site = 'http://ratings.food.gov.uk/';
+    $rating_decoupled = (bool) \Drupal::state()->get($this->ratingsDecoupled);
+
+    $form['decoupled'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Decouple ratings service'),
+      '#description' => t('Disable FHRS rating content and redirect related traffic to old service <a href="@url">@url</a>', ['@url' => $rating_site]),
+      '#default_value' => $rating_decoupled,
+    ];
+
     $form['fsa_ratings_hero'] = [
       '#type' => 'details',
-      '#open' => TRUE,
+      '#open' => FALSE,
       '#title' => $this->t('Hero copy text'),
       '#description' => $this->t('Hero copy text shown below "Food hygiene ratings" title on <a href="/hygiene-ratings">Ratings</a> related pages.'),
     ];
@@ -80,6 +92,16 @@ class FsaRatingsConfigurations extends ConfigFormBase {
    *   The current state of the form.
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+
+    if (empty($form_state->getValue('decoupled'))) {
+      \Drupal::state()->delete($this->ratingsDecoupled);
+      drupal_set_message($this->t('FHRS rating content is available on this site'));
+    }
+    else {
+      \Drupal::state()->set($this->ratingsDecoupled, 1);
+      drupal_set_message($this->t('FHRS rating content disabled and visitors redirected to old service'));
+    }
+
     $this->config('config.fsa_ratings')
       ->set('hero_copy', $form_state->getValue('hero_copy'))
       ->set('ratings_info_content', $form_state->getValue('ratings_info_content')['value'])
