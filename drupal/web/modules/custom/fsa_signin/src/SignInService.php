@@ -113,8 +113,8 @@ class SignInService {
     foreach ($all_terms as $term) {
       $description = FALSE;
       $full_term = Term::load($term->tid);
-      if ($full_term->hasField('field_description') && $full_term->field_description->value != '') {
-        $description = ' <span class="light">(' . $full_term->field_description->value . ')</span>';
+      if ($full_term->hasField('field_alternative_label') && $full_term->field_alternative_label->value != '') {
+        $description = ' <span class="light">' . $full_term->field_alternative_label->value . '</span>';
       }
       $options[$term->tid] = $this->t($term->name)->render() . $description;
     }

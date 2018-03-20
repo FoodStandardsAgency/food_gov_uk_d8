@@ -1,0 +1,19 @@
+uuid: 872320ac-a530-42ab-8374-fedbdfe86fbb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_alternative_label
+    - taxonomy.vocabulary.alerts_allergen
+id: taxonomy_term.alerts_allergen.field_alternative_label
+field_name: field_alternative_label
+entity_type: taxonomy_term
+bundle: alerts_allergen
+label: 'Alternative label'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
