@@ -51,6 +51,9 @@ process:
   field_description:
     plugin: allergen_description
     source: '@id'
+  field_alternative_label:
+    plugin: allergen_alt_label
+    source: '@id'
   field_alert_notation: notation
   field_alert_riskstatement: riskStatement
 destination:
