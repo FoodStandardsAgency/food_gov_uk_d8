@@ -5,13 +5,15 @@ dependencies:
   config:
     - field.storage.user.field_notification_cache
     - node.type.alert
+    - node.type.consultation
+    - node.type.news
   module:
     - user
 id: user.user.field_notification_cache
 field_name: field_notification_cache
 entity_type: user
 bundle: user
-label: 'Notification cache'
+label: 'Notification cache for email'
 description: "This field is not visible to user.\r\nIt accumulates references to nodes which are about to be sent out."
 required: false
 translatable: false
@@ -22,8 +24,10 @@ settings:
   handler_settings:
     target_bundles:
       alert: alert
+      consultation: consultation
+      news: news
     sort:
       field: _none
     auto_create: false
-    auto_create_bundle: ''
+    auto_create_bundle: alert
 field_type: entity_reference
