@@ -44,11 +44,32 @@ class DefaultController extends ControllerBase {
    * Create signin page.
    */
   public function signInPage() {
-    $title = ['#markup' => '<h2>' . $this->t('Sign in or manage your subscription') . '</h2>'];
+
+    $legal = FALSE;
+    $title = '<h2>' . $this->t('Log in') . '</h2>';
+    if (\Drupal::request()->query->get('user') != 'fsa') {
+      $title = '<h2>' . $this->t('Sign in or manage your subscription') . '</h2>';
+      $legal = $this->t('<p>We would like you to
+subscribe to our new service to receive news, consultations and food and allergy
+alerts by email and sms.</p><p>This is a new beta service. Which means you’re
+looking at the first version of our new service.</p>
+<p>If you are already subscribed you will continue to receive alerts from the
+existing service. This means that for a short time you may receive two alerts on
+the same subject. If you are a new subscriber you will only receive alerts from
+the new service.</p><p>There could be technical issues found with the new
+service. If you are concerned about not receiving alerts, sign-up to our
+existing service too. <a href="https://www.food.gov.uk/about-us/subscribe">
+www.food.gov.uk/about-us/subscribe</a></p><p>Once we have tested the new service
+we will stop sending alerts from the oldservice. We will let our subscribers
+know when we intend to do this.</p>');
+    }
+
+    $content = ['#markup' => $title . $legal];
+
     $login_form = \Drupal::formBuilder()->getForm(UserLoginForm::class);
 
     return [
-      $title,
+      $content,
       $login_form,
     ];
   }
