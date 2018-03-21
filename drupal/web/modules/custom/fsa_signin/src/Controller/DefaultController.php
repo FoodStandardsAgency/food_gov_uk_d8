@@ -44,11 +44,34 @@ class DefaultController extends ControllerBase {
    * Create signin page.
    */
   public function signInPage() {
-    $title = ['#markup' => '<h2>' . $this->t('Sign in or manage your subscription') . '</h2>'];
+
+    // If coming from /user add a signing button even though the form is exactly
+    // the same. This for UX separation of subscribers and FSA editors.
+    $title = self::linkMarkup('fsa_signin.default_controller_signInPage', t('Alert subscription signin'), ['button']) . '<h2>' . $this->t('User log in') . '</h2>';
+    $body = FALSE;
+    if (\Drupal::request()->query->get('user') != 'fsa') {
+      $title = '<h2>' . $this->t('Sign in or manage your subscription') . '</h2>';
+      $body = $this->t('<p>We would like you to
+subscribe to our new service to receive news, consultations and food and allergy
+alerts by email and sms.</p><p>This is a new beta service. Which means you’re
+looking at the first version of our new service.</p>
+<p>If you are already subscribed you will continue to receive alerts from the
+existing service. This means that for a short time you may receive two alerts on
+the same subject. If you are a new subscriber you will only receive alerts from
+the new service.</p><p>There could be technical issues found with the new
+service. If you are concerned about not receiving alerts, sign-up to our
+existing service too. <a href="https://www.food.gov.uk/about-us/subscribe">
+www.food.gov.uk/about-us/subscribe</a></p><p>Once we have tested the new service
+we will stop sending alerts from the oldservice. We will let our subscribers
+know when we intend to do this.</p>');
+    }
+
+    $content = ['#markup' => $title . $body];
+
     $login_form = \Drupal::formBuilder()->getForm(UserLoginForm::class);
 
     return [
-      $title,
+      $content,
       $login_form,
     ];
   }
@@ -266,6 +289,16 @@ class DefaultController extends ControllerBase {
    */
   public static function isMoreThanRegistered($user) {
     return count($user->getRoles()) > 1;
+  }
+
+  /**
+   * Short text to be displayed on subscription flow pages.
+   *
+   * @return \Drupal\Core\StringTranslation\TranslatableMarkup
+   *   Translatable text.
+   */
+  public static function betaShortDescription() {
+    return t('This is a new beta service. Which means you’re looking at the first version of our new service. <a href="/node/724" target="_blank">What this means for you</a>.');
   }
 
 }

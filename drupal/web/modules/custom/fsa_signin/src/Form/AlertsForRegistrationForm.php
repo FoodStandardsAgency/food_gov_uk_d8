@@ -4,6 +4,7 @@ namespace Drupal\fsa_signin\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\fsa_signin\Controller\DefaultController;
 use Drupal\fsa_signin\SignInService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -54,6 +55,9 @@ class AlertsForRegistrationForm extends FormBase {
     $food_alert_defaults = $tempstore->get('food_alert_registration');
     $food_alert_defaults = ($food_alert_defaults === NULL) ? [] : $food_alert_defaults;
 
+    $form['beta_description'] = [
+      '#markup' => '<p><small>' . DefaultController::betaShortDescription() . '</small></p>',
+    ];
     $form['title'] = [
       '#markup' => '<h2>' . $this->t('Alerts') . '</h2>',
     ];

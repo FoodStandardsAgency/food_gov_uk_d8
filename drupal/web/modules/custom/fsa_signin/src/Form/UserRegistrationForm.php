@@ -65,10 +65,12 @@ class UserRegistrationForm extends FormBase {
       '#type' => 'value',
       '#value' => $cons_registration,
     ];
+    $form['beta_description'] = [
+      '#markup' => '<p><small>' . DefaultController::betaShortDescription() . '</small></p>',
+    ];
     $form['description'] = [
       '#markup' => '<h2>' . $this->t('Delivery options') . '</h2><p>' . $this->t('How do you want to receive information from us?') . '</p>',
     ];
-
     $form['alert_container'] = [
       '#type' => 'container',
       '#attributes' => ['class' => ['alert-preferences']],
