@@ -291,4 +291,14 @@ know when we intend to do this.</p>');
     return count($user->getRoles()) > 1;
   }
 
+  /**
+   * Short text to be displayed on subscription flow pages.
+   *
+   * @return \Drupal\Core\StringTranslation\TranslatableMarkup
+   *   Translatable text.
+   */
+  public static function betaShortDescription() {
+    return t('This is a new beta service. Which means you’re looking at the first version of our new service. <a href="/node/724" target="_blank">What this means for you</a>.');
+  }
+
 }
