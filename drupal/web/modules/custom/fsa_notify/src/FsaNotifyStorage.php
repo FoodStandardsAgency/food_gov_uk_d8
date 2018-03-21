@@ -185,8 +185,8 @@ class FsaNotifyStorage {
     $query = \Drupal::entityQuery('user');
     $query->condition('uid', 0, '>');
     $query->condition('status', 1);
-    $query->condition('field_email_frequency', 'none', '!=');
-    // Filter the users who have their checkboxes for receiving with certain
+
+    // Filter users who have their checkboxes for receiving with certain
     // delivery methods.
     switch ($type) {
       case 'allergy':
