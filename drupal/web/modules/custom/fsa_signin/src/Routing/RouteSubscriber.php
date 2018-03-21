@@ -75,7 +75,13 @@ class RouteSubscriber implements EventSubscriberInterface {
     }
 
     if ($route_name == 'user.login' || $route_name == 'user.register') {
-      $url = Url::fromRoute('fsa_signin.default_controller_signInPage')->toString();
+      $url = Url::fromRoute('fsa_signin.default_controller_signInPage');
+      if ($route_name == 'user.login') {
+        // If accessing login via /user set a query parameter to sign in page to
+        // display informative beta text.
+        $url->setOption('query', ['user' => 'fsa']);
+      }
+      $url = $url->toString();
       $event->setResponse(new RedirectResponse($url, 301));
     }
     elseif ($route_name == 'user.pass') {

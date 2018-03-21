@@ -45,11 +45,13 @@ class DefaultController extends ControllerBase {
    */
   public function signInPage() {
 
-    $legal = FALSE;
-    $title = '<h2>' . $this->t('Log in') . '</h2>';
+    // If coming from /user add a signing button even though the form is exactly
+    // the same. This for UX separation of subscribers and FSA editors.
+    $title = self::linkMarkup('fsa_signin.default_controller_signInPage', t('Alert subscription signin'), ['button']) . '<h2>' . $this->t('User log in') . '</h2>';
+    $body = FALSE;
     if (\Drupal::request()->query->get('user') != 'fsa') {
       $title = '<h2>' . $this->t('Sign in or manage your subscription') . '</h2>';
-      $legal = $this->t('<p>We would like you to
+      $body = $this->t('<p>We would like you to
 subscribe to our new service to receive news, consultations and food and allergy
 alerts by email and sms.</p><p>This is a new beta service. Which means you’re
 looking at the first version of our new service.</p>
@@ -64,7 +66,7 @@ we will stop sending alerts from the oldservice. We will let our subscribers
 know when we intend to do this.</p>');
     }
 
-    $content = ['#markup' => $title . $legal];
+    $content = ['#markup' => $title . $body];
 
     $login_form = \Drupal::formBuilder()->getForm(UserLoginForm::class);
 
