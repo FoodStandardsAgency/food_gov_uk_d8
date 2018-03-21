@@ -1,0 +1,20 @@
+uuid: 915e4051-47e8-40ff-bde2-e0d1b4a034d6
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - user
+id: user.field_notification_cache_sms
+field_name: field_notification_cache_sms
+entity_type: user
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 100
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -7,6 +7,7 @@ dependencies:
     - field.field.user.user.field_delivery_method_news
     - field.field.user.user.field_email_frequency
     - field.field.user.user.field_notification_cache
+    - field.field.user.user.field_notification_cache_sms
     - field.field.user.user.field_notification_method
     - field.field.user.user.field_notification_sms
     - field.field.user.user.field_subscribed_cons
@@ -91,5 +92,6 @@ content:
 hidden:
   contact: true
   field_notification_cache: true
+  field_notification_cache_sms: true
   langcode: true
   timezone: true

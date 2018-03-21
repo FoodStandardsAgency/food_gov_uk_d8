@@ -351,7 +351,7 @@ function fsa_notify_send(FsaNotifyStorage $storage, $notifier, $formatter, $type
         $notifier->send($user, $type, $personalisation);
         fsa_notify_timer('count', $type);
       }
-      $storage->reset($user);
+      $storage->reset($user, $type);
     }
     \Drupal::entityManager()->getStorage('node')->resetCache();
     \Drupal::entityManager()->getStorage('user')->resetCache();

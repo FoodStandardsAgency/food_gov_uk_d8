@@ -37,13 +37,16 @@ class FsaNotifyStorage {
     if ($type == 'sms') {
       // Get users who prefer SMS's.
       $query->condition('field_delivery_method', $type, '=');
+
+      $query->Exists('field_notification_cache_sms');
     }
     else {
       // And email subscriber's with their preferred frequency.
       $query->condition('field_email_frequency', $type);
+
+      $query->Exists('field_notification_cache');
     }
 
-    $query->Exists('field_notification_cache');
     $query->range(0, $batch_size);
     // $query->sort('uid');.
     $uids = $query->execute();
@@ -51,7 +54,13 @@ class FsaNotifyStorage {
     $notifications = [];
     foreach ($uids as $uid) {
       $u = User::load($uid);
-      $nids = $u->field_notification_cache->getValue();
+      if ($type == 'sms') {
+        $nids = $u->field_notification_cache_sms->getValue();
+      }
+      else {
+        $nids = $u->field_notification_cache->getValue();
+      }
+
       $nids = array_map(
         function ($nid) {
           return (int) $nid['target_id'];
@@ -81,6 +90,7 @@ class FsaNotifyStorage {
 
     $uids = [];
     $nid = $node->id();
+    $node_type = $node->getType();
 
     // Store alerts for sending.
     if ($node->hasField('field_alert_type')) {
@@ -144,6 +154,11 @@ class FsaNotifyStorage {
     foreach ($uids as $uid) {
       $u = User::load($uid);
       $u->field_notification_cache[] = $nid;
+
+      // Only alerts should be stored for SMS sending.
+      if ($node_type === 'alert') {
+        $u->field_notification_cache_sms[] = $nid;
+      }
       $u->save();
     }
 
@@ -170,8 +185,8 @@ class FsaNotifyStorage {
     $query = \Drupal::entityQuery('user');
     $query->condition('uid', 0, '>');
     $query->condition('status', 1);
-    $query->condition('field_email_frequency', 'none', '!=');
-    // Filter the users who have their checkboxes for receiving with certain
+
+    // Filter users who have their checkboxes for receiving with certain
     // delivery methods.
     switch ($type) {
       case 'allergy':
@@ -194,18 +209,23 @@ class FsaNotifyStorage {
   }
 
   /**
-   * Clear cache of notifications for particular user.
+   * Clear particular cache of notifications for a user.
    *
    * @param \Drupal\user\Entity\User $user
    *   User object.
-   * @param bool $save
-   *   If user should be saved.
+   * @param string $type
+   *   The type of notification cache to reset.
    */
-  public function reset(User $user, bool $save = TRUE) {
-    $user->field_notification_cache = NULL;
-    if ($save) {
-      $user->save();
+  public function reset(User $user, string $type) {
+
+    if ($type === 'sms') {
+      $user->field_notification_cache_sms = NULL;
     }
+    else {
+      $user->field_notification_cache = NULL;
+    }
+
+    $user->save();
   }
 
 }
