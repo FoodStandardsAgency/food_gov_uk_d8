@@ -148,8 +148,11 @@ class UserRegistrationForm extends FormBase {
     ];
 
     $form['links']['privacy_notice'] = [
-      '#type' => 'item',
-      '#markup' => FsaCustomHelper::privacyNoticeLink('alerts'),
+      '#type' => 'checkboxes',
+      '#options' => [
+        'yes' => $this->t('I accept the terms of this privacy statement'),
+      ],
+      '#description' => FsaCustomHelper::privacyNoticeLink('alerts'),
     ];
 
     $form['actions'] = ['#type' => 'actions'];
@@ -160,6 +163,11 @@ class UserRegistrationForm extends FormBase {
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
+      '#states' => [
+        'enabled' => [
+          ':input[name="privacy_notice[yes]"]' => ['checked' => TRUE],
+        ],
+      ],
     ];
 
     return $form;
@@ -189,6 +197,12 @@ class UserRegistrationForm extends FormBase {
         $form_state->setErrorByName('phone', $this->t('You selected to receive alerts via SMS, please enter your phone number.'));
       }
     }
+
+    $privacy_notice = $form_state->getValue('privacy_notice');
+    if (empty(array_filter(array_values($privacy_notice)))) {
+      $form_state->setErrorByName('privacy_notice', $this->t('Please accept the privacy statement'));
+    }
+
   }
 
   /**
