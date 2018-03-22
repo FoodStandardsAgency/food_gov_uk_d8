@@ -10,10 +10,10 @@ id: node.news.field_news_type
 field_name: field_news_type
 entity_type: node
 bundle: news
-label: Type
-description: ''
-required: true
-translatable: false
+label: 'News type(s) for subscribers'
+description: "<p>Select subscriber categories to send alert to about this news item to.<br />\r\n<strong>NB!</strong> Alerts will be sent only if below checkbox <em>Send alert to subscribers</em> is selected.</p>"
+required: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

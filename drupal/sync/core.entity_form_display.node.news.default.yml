@@ -23,7 +23,6 @@ third_party_settings:
   field_group:
     group_taxonomies:
       children:
-        - field_news_type
         - field_nation
         - field_topic
       parent_name: ''
@@ -38,6 +37,7 @@ third_party_settings:
       label: Taxonomies
     group_notify:
       children:
+        - field_news_type
         - field_alert_send
         - field_alert_send_timestamp
       parent_name: ''
@@ -72,14 +72,14 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_alert_send:
-    weight: 51
+    weight: 3
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_alert_send_timestamp:
-    weight: 52
+    weight: 4
     settings: {  }
     third_party_settings: {  }
     type: datetime_default

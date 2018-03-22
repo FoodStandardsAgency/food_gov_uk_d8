@@ -56,12 +56,15 @@ abstract class FsaNotifyMessage {
   /**
    * Todo: document.
    */
-  public function format($nids) {
+  public function format($nids, $lang) {
     sort($nids, SORT_NUMERIC);
     $items = [];
     foreach ($nids as $nid) {
       $node = Node::load($nid);
       if (empty($this->cache[$nid])) {
+        if ($node->getType() != 'alert') {
+          $node = $node->getTranslation($lang);
+        }
         $this->cache[$nid] = $this->theme($node);
       }
       $items[] = $this->cache[$nid];

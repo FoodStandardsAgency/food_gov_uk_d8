@@ -63,7 +63,8 @@ function fsa_notify_entity_insert(EntityInterface $entity) {
 
   $queue = \Drupal::service('queue')->get('fsa_notify_store');
   $data = $entity->id();
-  $queue->createItem($data);
+  $lang = $entity->language()->getId();
+  $queue->createItem(['lang' => $lang, 'nid' => $data]);
 }
 
 /**
@@ -85,7 +86,8 @@ function fsa_notify_node_presave(NodeInterface $node) {
 
       $queue = \Drupal::service('queue')->get('fsa_notify_store');
       $data = $node->id();
-      $queue->createItem($data);
+      $lang = $node->language()->getId();
+      $queue->createItem(['lang' => $lang, 'nid' => $data]);
 
       // Let user know the alert was queued.
       drupal_set_message(
@@ -346,7 +348,8 @@ function fsa_notify_send(FsaNotifyStorage $storage, $notifier, $formatter, $type
   while ($batch = $storage->getAllType($type)) {
     foreach ($batch as $uid => $messages) {
       $user = User::load($uid);
-      $messages = $formatter->format($messages);
+      $lang = $user->getPreferredLangcode(TRUE);
+      $messages = $formatter->format($messages, $lang);
       foreach ($messages as $personalisation) {
         $notifier->send($user, $type, $personalisation);
         fsa_notify_timer('count', $type);

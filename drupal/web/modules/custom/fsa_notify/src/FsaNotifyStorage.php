@@ -85,8 +85,10 @@ class FsaNotifyStorage {
    *
    * @param \Drupal\node\Entity\Node $node
    *   The alert node.
+   * @param string $lang
+   *   Language code.
    */
-  public function store(Node $node) {
+  public function store(Node $node, $lang) {
 
     $uids = [];
     $nid = $node->id();
@@ -109,13 +111,13 @@ class FsaNotifyStorage {
         );
 
         if (!empty($allergens)) {
-          $query = $this->queryUsersWithSubscribePreferences('field_subscribed_notifications', $allergens, 'allergy');
+          $query = $this->queryUsersWithSubscribePreferences('field_subscribed_notifications', $allergens, 'allergy', $lang);
           $uids = $query->execute();
         }
       }
       elseif (in_array($alert_type, ['FAFA', 'PRIN'])) {
         // Rest are food alerts, get user's prefs to store for sending.
-        $query = $this->queryUsersWithSubscribePreferences('field_subscribed_food_alerts', ['all'], 'food');
+        $query = $this->queryUsersWithSubscribePreferences('field_subscribed_food_alerts', ['all'], 'food', $lang);
         $uids = $query->execute();
       }
     }
@@ -130,7 +132,7 @@ class FsaNotifyStorage {
       );
 
       if (!empty($news_types)) {
-        $query = $this->queryUsersWithSubscribePreferences('field_subscribed_news', $news_types, 'news');
+        $query = $this->queryUsersWithSubscribePreferences('field_subscribed_news', $news_types, 'news', $lang);
         $uids = $query->execute();
       }
     }
@@ -146,7 +148,7 @@ class FsaNotifyStorage {
       );
 
       if (!empty($consultations_type)) {
-        $query = $this->queryUsersWithSubscribePreferences('field_subscribed_cons', $consultations_type, 'consultation');
+        $query = $this->queryUsersWithSubscribePreferences('field_subscribed_cons', $consultations_type, 'consultation', $lang);
         $uids = $query->execute();
       }
     }
@@ -175,35 +177,54 @@ class FsaNotifyStorage {
    *   Array of values for the field.
    * @param string $type
    *   The type of content to identify the notification method preference.
+   * @param string $lang
+   *   Language.
    *
    * @return \Drupal\Core\Entity\Query\QueryInterface
    *   Query object.
    */
-  protected function queryUsersWithSubscribePreferences($field, array $values, $type) {
+  protected function queryUsersWithSubscribePreferences($field, array $values, $type, $lang) {
 
     // Build the basics for getting user subscribe preferences.
     $query = \Drupal::entityQuery('user');
     $query->condition('uid', 0, '>');
     $query->condition('status', 1);
 
+    if ($lang == 'zxx') {
+      // On language neutrals we accept both.
+      $query->orConditionGroup()
+        ->condition('langcode', 'en')
+        ->condition('langcode', 'cy');
+    }
+
     // Filter users who have their checkboxes for receiving with certain
     // delivery methods.
     switch ($type) {
       case 'allergy':
       case 'food':
-        $query->condition('field_delivery_method', NULL, 'IS NOT');
+        $query->condition('field_delivery_method', NULL, 'IS NOT', 'en');
         break;
 
       case 'news':
       case 'consultation':
-        $query->condition('field_delivery_method_news', NULL, 'IS NOT');
+
+        if ($lang == 'cy') {
+          // do we need to thinkg of something here?
+
+        }
+        $query->condition('field_delivery_method_news', NULL, 'IS NOT', $lang);
         break;
 
     }
 
     // Get the user's subscribe preferences for type of the content to be stored
-    // for sending.
-    $query->condition($field, $values, 'in');
+    // for sending. On language neutral alerts we don't care about lang.
+    if ($lang == 'zxx') {
+      $query->condition($field, $values, 'in');
+    }
+    else {
+      $query->condition($field, $values, 'in', $lang);
+    }
 
     return $query;
   }
