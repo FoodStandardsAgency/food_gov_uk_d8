@@ -26,6 +26,7 @@ class UserRegistrationForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
+    // User language should be the same langauge as s/he subscribed into from.
     $form['language'] = [
       '#type' => 'value',
       '#value' => \Drupal::languageManager()->getCurrentLanguage()->getId(),
