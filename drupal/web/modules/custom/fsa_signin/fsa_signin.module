@@ -13,6 +13,16 @@ use Drupal\taxonomy\Entity\Term;
  * Implements hook_form_alter().
  */
 function fsa_signin_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  if ($form_id == 'user_form') {
+    // Loop through allergy subscriptions and unset second-level options.
+    foreach ($form['field_subscribed_notifications']['widget']['#options'] as $key => $value) {
+      if (substr($value->__toString(), 0, 1) === '-') {
+        unset($form['field_subscribed_notifications']['widget']['#options'][$key]);
+      }
+    }
+  }
+
   if ($form_id == 'user_login_form') {
     $form['forgot_link'] = [
       '#markup' => t("Forgot or do not have a password?") . ' ' . DefaultController::linkMarkup(
@@ -39,7 +49,6 @@ function fsa_signin_mail($key, &$message, $params) {
       break;
   }
 }
-
 
 /**
  * Create consultation subscription categories.
