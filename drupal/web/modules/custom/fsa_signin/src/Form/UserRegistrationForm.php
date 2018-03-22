@@ -160,14 +160,15 @@ class UserRegistrationForm extends FormBase {
       '#markup' => DefaultController::linkMarkup('fsa_signin.user_preregistration_news_form', $this->t('Previous'), ['back arrow']),
     ];
 
+    // @todo: Once FSA-975 add styling for disabled buttons uncomment the states definition.
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
-      '#states' => [
-        'enabled' => [
-          ':input[name="privacy_notice[yes]"]' => ['checked' => TRUE],
-        ],
-      ],
+//      '#states' => [
+//        'enabled' => [
+//          ':input[name="privacy_notice[yes]"]' => ['checked' => TRUE],
+//        ],
+//      ],
     ];
 
     return $form;
