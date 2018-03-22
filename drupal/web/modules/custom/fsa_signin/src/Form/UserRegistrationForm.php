@@ -25,6 +25,13 @@ class UserRegistrationForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+
+    // User language should be the same langauge as s/he subscribed into from.
+    $form['language'] = [
+      '#type' => 'value',
+      '#value' => \Drupal::languageManager()->getCurrentLanguage()->getId(),
+    ];
+
     /** @var \Drupal\user\PrivateTempStore $tempstore */
     $tempstore = \Drupal::service('user.private_tempstore')->get('fsa_signin');
     $food_alerts = $tempstore->get('food_alert_registration');
@@ -129,22 +136,6 @@ class UserRegistrationForm extends FormBase {
           ':input[name="delivery_method[sms]"]' => ['checked' => TRUE],
         ],
       ],
-    ];
-
-    $form['language_container'] = [
-      '#type' => 'container',
-      '#attributes' => ['class' => ['language-info']],
-    ];
-    $form['language_container']['title'] = [
-      '#markup' => '<h3>' . $this->t('Choose language') . '</h3>',
-    ];
-    $form['language_container']['language'] = [
-      '#type' => 'radios',
-      '#options' => [
-        'en' => $this->t('English'),
-        'cy' => $this->t('Cymraeg'),
-      ],
-      '#default_value' => \Drupal::languageManager()->getCurrentLanguage()->getId(),
     ];
 
     $form['links']['privacy_notice'] = [
