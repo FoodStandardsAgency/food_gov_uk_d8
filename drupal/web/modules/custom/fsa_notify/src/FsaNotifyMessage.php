@@ -62,10 +62,10 @@ abstract class FsaNotifyMessage {
     foreach ($nids as $nid) {
       $node = Node::load($nid);
       if (empty($this->cache[$nid]) && is_object($node)) {
-        if ($node->getType() != 'alert') {
+        if ($node->hasTranslation($lang)) {
           $node = $node->getTranslation($lang);
         }
-        $this->cache[$nid] = $this->theme($node);
+        $this->cache[$nid] = $this->theme($node, $lang);
       }
       $items[] = $this->cache[$nid];
     }
@@ -76,7 +76,7 @@ abstract class FsaNotifyMessage {
   /**
    * Todo: document.
    */
-  abstract protected function theme($item);
+  abstract protected function theme($item, $lang);
 
   /**
    * Todo: document.
@@ -86,9 +86,15 @@ abstract class FsaNotifyMessage {
   /**
    * Generate "short" for nodes in messages.
    */
-  protected function url($node) {
+  protected function url($node, $lang) {
+
+    $prefix = FALSE;
+    if ($lang === 'cy') {
+      $prefix = '/' . $lang;
+    }
+
     $nid = $node->id();
-    $url = sprintf('%s/node/%d', $this->base_url, $nid);
+    $url = sprintf('%s%s/node/%d', $this->base_url, $prefix, $nid);
     return $url;
   }
 

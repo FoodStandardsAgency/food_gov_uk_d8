@@ -190,13 +190,6 @@ class FsaNotifyStorage {
     $query->condition('uid', 0, '>');
     $query->condition('status', 1);
 
-    if ($lang == 'zxx') {
-      // On language neutrals we accept both.
-      $query->orConditionGroup()
-        ->condition('langcode', 'en')
-        ->condition('langcode', 'cy');
-    }
-
     // Filter users who have their checkboxes for receiving with certain
     // delivery methods.
     switch ($type) {
@@ -236,10 +229,10 @@ class FsaNotifyStorage {
   public function reset(User $user, string $type) {
 
     if ($type === 'sms') {
-      $user->field_notification_cache_sms = NULL;
+      $user->set('field_notification_cache_sms', []);
     }
     else {
-      $user->field_notification_cache = NULL;
+      $user->set('field_notification_cache', []);
     }
 
     $user->save();
