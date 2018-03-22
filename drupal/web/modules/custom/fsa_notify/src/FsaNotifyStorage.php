@@ -202,17 +202,13 @@ class FsaNotifyStorage {
     switch ($type) {
       case 'allergy':
       case 'food':
-        $query->condition('field_delivery_method', NULL, 'IS NOT', 'en');
+        $query->condition('field_delivery_method', NULL, 'IS NOT');
         break;
 
       case 'news':
       case 'consultation':
 
-        if ($lang == 'cy') {
-          // do we need to thinkg of something here?
-
-        }
-        $query->condition('field_delivery_method_news', NULL, 'IS NOT', $lang);
+        $query->condition('field_delivery_method_news', NULL, 'IS NOT');
         break;
 
     }

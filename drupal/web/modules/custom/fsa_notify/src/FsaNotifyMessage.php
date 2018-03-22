@@ -61,7 +61,7 @@ abstract class FsaNotifyMessage {
     $items = [];
     foreach ($nids as $nid) {
       $node = Node::load($nid);
-      if (empty($this->cache[$nid])) {
+      if (empty($this->cache[$nid]) && is_object($node)) {
         if ($node->getType() != 'alert') {
           $node = $node->getTranslation($lang);
         }
