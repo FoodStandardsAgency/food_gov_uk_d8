@@ -25,17 +25,28 @@ foreach ($rand as $k) {
   $allergys[] = $terms[$k];
 }
 
-// One of 'AA', 'PRIN' or 'FAFA'.
-$alert_type = 'AA';
-$notation = Random::name(15);
+// Get type from argument.
+if (in_array(end($_SERVER['argv']), ['AA', 'PRIN', 'FAFA'])) {
+  $alert_type = end($_SERVER['argv']);
+}
+else {
+  $alert_type = 'AA';
+}
+
+$random_words = [
+  Random::word(rand(3, 10)),
+  Random::word(rand(3, 10)),
+];
+$title = $random_words[0] . ' ' . $random_words[1];
+
 $node = Node::create([
   'type'        => 'alert',
-  'title'       => $alert_type . ' alert ' . $notation,
-  'field_alert_notation' => $notation,
+  'title'       => $alert_type . ' Alert: ' . $title,
+  'field_alert_notation' => $alert_type . '-' . $random_words[0],
   'field_alert_type' => $alert_type,
   'field_alert_allergen' => $allergys,
-  'field_alert_smstext' => $notation,
+  'field_alert_smstext' => $alert_type . ': ' . $title,
 ]);
 $node->save();
 
-printf("nid=%d\n", $node->id());
+printf("Created %s: %s\nnode/%d\n", $alert_type, $title, $node->id());

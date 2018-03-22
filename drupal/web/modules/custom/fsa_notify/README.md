@@ -219,10 +219,12 @@ test news/consultations alerts edit the content manually)
 debug mode)
 * have 1 user in your local with at least 1 allergy.
 * clear local alerts and possibly migration data
-  * drush mr --tag=alerts
+  * `drush mr --tag=alerts`
 * run the import
   * `drush mi --tag=alerts`
-  * Or use `make alert_add` to add arbitrary nonsense-alert
+* Or use `make alert_add` to add arbitrary nonsense-alert
+  * Creates AA alert by default, pass type (AA/PRIN/FAFA) as parameter:
+    for example `make alert_add TYPE=FAFA`
 * Run `make test`
   * Have `drush wd-show --tail --full --extended &` open in another tab
 * View the message logs at [Notify api tab](https://www.notifications.service.gov.uk/services/6f00837a-4b8f-4ddd-ae96-ca2d3035fe57/api)
