@@ -286,12 +286,6 @@ class ProfileManager extends FormBase {
 
     $delivery_method_news = $form_state->getValue('delivery_method_news');
     $delivery_method_news = array_filter(array_values($delivery_method_news));
-
-    // Reset notification caches in case unsubscribed from everything.
-    if (empty($delivery_method_news) && empty($delivery_method)) {
-      $account->field_notification_cache = NULL;
-    }
-
     $account->set('field_delivery_method_news', $delivery_method_news);
 
     // Store phone without spaces and remove countrycode if it was entered.
@@ -302,9 +296,6 @@ class ProfileManager extends FormBase {
     }
     else {
       $account->set('field_notification_sms', '');
-
-      // Unset possible SMS notification caches.
-      $account->field_notification_cache_sms = NULL;
     }
 
     $email_frequency = $form_state->getValue('email_frequency');
