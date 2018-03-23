@@ -173,6 +173,15 @@ class ProfileManager extends FormBase {
         ],
       ],
     ];
+    $form[$wrapper]['language'] = [
+      '#type' => 'radios',
+      '#title' => $this->t('Language preference'),
+      '#options' => [
+        'en' => $this->t('English'),
+        'cy' => $this->t('Cymraeg'),
+      ],
+      '#default_value' => $account->getPreferredLangcode(),
+    ];
     $form[$wrapper]['privacy_notice'] = [
       '#type' => 'item',
       '#markup' => FsaCustomHelper::privacyNoticeLink('alerts'),
@@ -291,6 +300,9 @@ class ProfileManager extends FormBase {
 
     $email_frequency = $form_state->getValue('email_frequency');
     $account->set('field_email_frequency', $email_frequency);
+
+    $language = $form_state->getValue('language');
+    $account->set('preferred_langcode', $language);
 
     $account->save();
 
