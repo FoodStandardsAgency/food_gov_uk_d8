@@ -304,9 +304,22 @@ class ProfileManager extends FormBase {
     $language = $form_state->getValue('language');
     $account->set('preferred_langcode', $language);
 
-    $account->save();
+    $password = $form_state->getValue('new_password');
+    if ($password != '') {
+      $account->setPassword($password);
+    }
 
-    drupal_set_message($this->t('Changes saved.'));
+    if ($account->save()) {
+      if ($password != '') {
+        drupal_set_message($this->t('Your preferences are updated and password was successfully changed.'));
+      }
+      else {
+        drupal_set_message($this->t('Your preferences are updated.'));
+      }
+    }
+    else {
+      drupal_set_message($this->t('There was an error updating your preferences. Please try again.'));
+    }
   }
 
   /**
