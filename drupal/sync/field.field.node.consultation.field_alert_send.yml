@@ -12,7 +12,7 @@ bundle: consultation
 label: 'Send alert to subscribers'
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value:
   -
     value: 0

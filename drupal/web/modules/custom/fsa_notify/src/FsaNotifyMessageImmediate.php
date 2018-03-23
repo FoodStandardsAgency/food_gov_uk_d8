@@ -45,11 +45,15 @@ class FsaNotifyMessageImmediate extends FsaNotifyMessage {
   /**
    * {@inheritdoc}
    */
-  protected function theme($item) {
+  protected function theme($item, $lang) {
+    if ($item->hasTranslation($lang)) {
+      $item = $item->getTranslation($lang);
+    }
+
     $title = $item->getTitle();
     $line1 = sprintf('%s', $title);
 
-    $link = $this->url($item);
+    $link = $this->url($item, $lang);
     $more = t('Read more');
     $line2 = sprintf('%s: %s', $more, $link);
 

@@ -50,16 +50,16 @@ class FsaNotifyStorageQueue extends QueueWorkerBase implements ContainerFactoryP
   /**
    * Todo: document.
    */
-  public function processItem($nid) {
+  public function processItem($data) {
 
-    $node = $this->nodeStorage->load($nid);
+    $node = $this->nodeStorage->load($data['nid']);
 
     if (empty($node)) {
       return;
     }
 
     // time-consuming.
-    $this->notifyStorage->store($node);
+    $this->notifyStorage->store($node, $data['lang']);
 
   }
 
