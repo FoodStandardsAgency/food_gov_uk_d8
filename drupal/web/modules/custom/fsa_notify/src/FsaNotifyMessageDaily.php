@@ -14,7 +14,7 @@ class FsaNotifyMessageDaily extends FsaNotifyMessage {
    */
   public function __construct() {
     parent::__construct();
-    $this->subject = t('Daily digest');
+    $this->subject = t('FSA daily digest update');
   }
 
   /**
@@ -41,11 +41,15 @@ class FsaNotifyMessageDaily extends FsaNotifyMessage {
   /**
    * {@inheritdoc}
    */
-  protected function theme($item) {
+  protected function theme($item, $lang) {
+    if ($item->hasTranslation($lang)) {
+      $item = $item->getTranslation($lang);
+    }
+
     $title = $item->getTitle();
     $line1 = sprintf('%s', $title);
 
-    $link = $this->url($item);
+    $link = $this->url($item, $lang);
     $more = t('Read more');
     $line2 = sprintf('%s: %s', $more, $link);
 

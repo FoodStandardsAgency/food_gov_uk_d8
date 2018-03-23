@@ -25,6 +25,13 @@ class UserRegistrationForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+
+    // User language should be the same langauge as s/he subscribed into from.
+    $form['language'] = [
+      '#type' => 'value',
+      '#value' => \Drupal::languageManager()->getCurrentLanguage()->getId(),
+    ];
+
     /** @var \Drupal\user\PrivateTempStore $tempstore */
     $tempstore = \Drupal::service('user.private_tempstore')->get('fsa_signin');
     $food_alerts = $tempstore->get('food_alert_registration');
@@ -65,10 +72,12 @@ class UserRegistrationForm extends FormBase {
       '#type' => 'value',
       '#value' => $cons_registration,
     ];
+    $form['beta_description'] = [
+      '#markup' => '<p><small>' . DefaultController::betaShortDescription() . '</small></p>',
+    ];
     $form['description'] = [
       '#markup' => '<h2>' . $this->t('Delivery options') . '</h2><p>' . $this->t('How do you want to receive information from us?') . '</p>',
     ];
-
     $form['alert_container'] = [
       '#type' => 'container',
       '#attributes' => ['class' => ['alert-preferences']],
@@ -129,25 +138,12 @@ class UserRegistrationForm extends FormBase {
       ],
     ];
 
-    $form['language_container'] = [
-      '#type' => 'container',
-      '#attributes' => ['class' => ['language-info']],
-    ];
-    $form['language_container']['title'] = [
-      '#markup' => '<h3>' . $this->t('Choose language') . '</h3>',
-    ];
-    $form['language_container']['language'] = [
-      '#type' => 'radios',
-      '#options' => [
-        'en' => $this->t('English'),
-        'cy' => $this->t('Cymraeg'),
-      ],
-      '#default_value' => \Drupal::languageManager()->getCurrentLanguage()->getId(),
-    ];
-
     $form['links']['privacy_notice'] = [
-      '#type' => 'item',
-      '#markup' => FsaCustomHelper::privacyNoticeLink('alerts'),
+      '#type' => 'checkboxes',
+      '#options' => [
+        'yes' => $this->t('I accept the terms of this privacy statement'),
+      ],
+      '#description' => FsaCustomHelper::privacyNoticeLink('alerts'),
     ];
 
     $form['actions'] = ['#type' => 'actions'];
@@ -155,9 +151,15 @@ class UserRegistrationForm extends FormBase {
       '#markup' => DefaultController::linkMarkup('fsa_signin.user_preregistration_news_form', $this->t('Previous'), ['back arrow']),
     ];
 
+    // @todo: Once FSA-975 add styling for disabled buttons uncomment the states definition.
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
+//      '#states' => [
+//        'enabled' => [
+//          ':input[name="privacy_notice[yes]"]' => ['checked' => TRUE],
+//        ],
+//      ],
     ];
 
     return $form;
@@ -187,6 +189,12 @@ class UserRegistrationForm extends FormBase {
         $form_state->setErrorByName('phone', $this->t('You selected to receive alerts via SMS, please enter your phone number.'));
       }
     }
+
+    $privacy_notice = $form_state->getValue('privacy_notice');
+    if (empty(array_filter(array_values($privacy_notice)))) {
+      $form_state->setErrorByName('privacy_notice', $this->t('Please accept the privacy statement'));
+    }
+
   }
 
   /**

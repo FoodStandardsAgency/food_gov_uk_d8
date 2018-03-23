@@ -1,15 +1,15 @@
 const tagsToReplace = {
   '&': '&amp;',
   '<': '&lt;',
-  '>': '&gt;',
-};
-
-function replaceTag(tag) {
-  return tagsToReplace[tag] || tag;
+  '>': '&gt;'
 }
 
-function safeTagsReplace(str) {
-  return str.replace(/[&<>]/g, replaceTag);
+function replaceTag (tag) {
+  return tagsToReplace[tag] || tag
 }
 
-module.exports = safeTagsReplace;
+function safeTagsReplace (str) {
+  return str.replace(/[&<>]/g, replaceTag)
+}
+
+module.exports = safeTagsReplace

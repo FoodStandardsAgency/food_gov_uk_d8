@@ -1,8 +1,10 @@
 import 'babel-polyfill'
 import 'mutationobserver-shim'
-import 'wicg-inert'
+import 'inert-polyfill'
 import './helper/polyfill/classList'
 import './helper/polyfill/closest'
+import './helper/polyfill/matches'
+import './helper/polyfill/pointerEvents'
 import svg4everybody from 'svg4everybody'
 import responsiveTables from './helper/responsiveTables'
 import stickyElement from './helper/stickyElement'
@@ -14,9 +16,12 @@ import toggle from './component/toggle/toggle'
 import peek from './component/peek/peek'
 import fhrs from './component/fhrs/fhrs'
 import toc from './component/toc/toc'
+import form from './component/form/form'
 
 // Require every image asset inside of img folder
 require.context('./img/', true, /\.(gif|png|svg|jpe?g)$/)
+
+// Require application style
 require('./style.css')
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -43,6 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Responsive tables
   responsiveTables()
+
+  // Form
+  form()
 })
 
 // Sticky element

@@ -1,0 +1,5 @@
+services:
+  fsa_ratings.route_subscriber:
+    class: Drupal\fsa_ratings\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }

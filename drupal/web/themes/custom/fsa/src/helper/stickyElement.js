@@ -1,50 +1,49 @@
-function stickyElement(containers, stickyElements) {
+function stickyElement (containers, stickyElements) {
   // Area class
   class Area {
-    constructor(element) {
-      this.element = element;
-      this._relatedInstance;
+    constructor (element) {
+      this.element = element
     }
 
-    set relatedInstance(item) {
-      this._relatedInstance = item;
+    set relatedInstance (item) {
+      this._relatedInstance = item
     }
 
-    get relatedInstance() {
-      return this._relatedInstance;
+    get relatedInstance () {
+      return this._relatedInstance
     }
 
-    get thisElement() {
-      return this.element;
+    get thisElement () {
+      return this.element
     }
 
-    get offset() {
-      return this.calcOffset();
+    get offset () {
+      return this.calcOffset()
     }
 
-    calcOffset() {
-      return this.element.getBoundingClientRect().top;
+    calcOffset () {
+      return this.element.getBoundingClientRect().top
     }
 
-    get inview() {
-      return this.calcInview();
+    get inview () {
+      return this.calcInview()
     }
 
-    calcInview() {
-      var rect = this.element.getBoundingClientRect();
+    calcInview () {
+      var rect = this.element.getBoundingClientRect()
       return (
-          rect.top - window.innerHeight <= 0 &&
-          rect.bottom >= 0
-      );
+        rect.top - window.innerHeight <= 0 &&
+        rect.bottom >= 0
+      )
     }
 
-    get isBottom() {
-      return this.calcBottom();
+    get isBottom () {
+      return this.calcBottom()
     }
 
-    calcBottom() {
-      var elementHeight = this._relatedInstance.element.offsetHeight;
-      return this.element.getBoundingClientRect().bottom <= elementHeight;
+    calcBottom () {
+      var elementHeight = this._relatedInstance.element.offsetHeight
+      return this.element.getBoundingClientRect().bottom <= elementHeight
     }
   }
 
@@ -53,53 +52,52 @@ function stickyElement(containers, stickyElements) {
 
   }
 
-  const containerArray = [],
-  stickyElementArray = [];
+  const containerArray = []
+  const stickyElementArray = []
 
   // Push all containerArray into an array
   for (let i = 0; i < containers.length; i++) {
     // Query all content sections inside area
-    let allSections = stickyElements;
+    let allSections = stickyElements
 
     // Loop through every sections inside current content area
     for (let y = 0; y < allSections.length; y++) {
-      let stickyScrollableElement = allSections[y];
-      stickyElementArray.push(new Section(stickyScrollableElement));
+      let stickyScrollableElement = allSections[y]
+      stickyElementArray.push(new Section(stickyScrollableElement))
     }
 
-    containerArray.push(new Area(containers[i]));
+    containerArray.push(new Area(containers[i]))
   }
 
   // Set related instance for each instance of the container
   for (var i = 0; i < containerArray.length; i++) {
-    containerArray[i].relatedInstance = stickyElementArray[i];
+    containerArray[i].relatedInstance = stickyElementArray[i]
   }
 
   // Function to toggle sticky navigation
   const toggleStickyElement = () => {
-
-    containerArray.forEach(function(container){
+    containerArray.forEach(function (container) {
       // Check if element is bottom of the content area
       if (container.isBottom) {
-        container.relatedInstance.element.classList.add('is-bottom');
+        container.relatedInstance.element.classList.add('is-bottom')
       } else {
-        container.relatedInstance.element.classList.remove('is-bottom');
+        container.relatedInstance.element.classList.remove('is-bottom')
       }
 
       // Check if element is in view
       if (container.inview && container.offset < 0) {
-        container.relatedInstance.element.classList.add('is-sticky');
+        container.relatedInstance.element.classList.add('is-sticky')
       } else {
-        container.relatedInstance.element.classList.remove('is-sticky');
+        container.relatedInstance.element.classList.remove('is-sticky')
       }
-    });
+    })
   }
 
   // Add scroll listener
-  window.addEventListener("scroll", toggleStickyElement);
+  window.addEventListener('scroll', toggleStickyElement)
 
   // Add load listener
-  window.addEventListener("load", toggleStickyElement);
+  window.addEventListener('load', toggleStickyElement)
 }
 
-module.exports = stickyElement;
+module.exports = stickyElement

@@ -53,8 +53,8 @@ class FsaNotifyAPIsms extends FsaNotifyAPI {
       return FALSE;
     }
 
+    $msg = sprintf('Notify API: sendSms(%s)', $phoneNumber);
     try {
-      $msg = sprintf('Notify API: sendSms(%s)', $phoneNumber);
       $this->api->sendSms(
         $phoneNumber,
         $this->template_id,
@@ -63,6 +63,8 @@ class FsaNotifyAPIsms extends FsaNotifyAPI {
       );
     }
     catch (ApiException $e) {
+      // Get response body (the actual error message).
+      $msg .= (string) $e->getResponse()->getBody();
       $this->logAndException($msg, $e);
     }
     catch (NotifyException $e) {

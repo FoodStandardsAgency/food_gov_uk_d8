@@ -38,7 +38,7 @@
       class="{{ 'navigation__menu navigation__menu--level-' ~ (menu_level + 1) }}
         {% if menu_level != 0 %} js-nav-menu{% endif %}"
       {{ attributes.setAttribute('data-menu-level', (menu_level + 1)) }}>
-  
+
     {% if menu_level != 0 %}
       <header class="navigation__header">
         <button
@@ -51,7 +51,7 @@
           {% if firstItem.url|render|striptags|trim %}
             <a href="{{ firstItem.url }}" title="{{ firstItem.title }}" class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}">{{ firstItem.title }}</a>
           {% else %}
-            <button title="{{ firstItem.title }}" class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}">{{ firstItem.title }}</button>
+            <span title="{{ firstItem.title }}" class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}">{{ firstItem.title }}</span>
           {% endif %}
         </h2>
       </header>

@@ -120,6 +120,7 @@ module:
   shs: 0
   simple_sitemap: 0
   simplei: 0
+  syslog: 0
   system: 0
   taxonomy: 0
   term_reference_tree: 0

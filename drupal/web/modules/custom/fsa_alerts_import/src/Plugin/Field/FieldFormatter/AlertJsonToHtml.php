@@ -82,7 +82,7 @@ class AlertJsonToHtml extends FormatterBase {
             if (isset($b_value['useByDate'])) {
               $table_rows[] = [t('Use by date'), $b_value['useByDate']];
             }
-            if (isset($b_value['useByDate'])) {
+            if (isset($b_value['useByDescription'])) {
               $table_rows[] = [t('Use by description'), $b_value['useByDescription']];
             }
           }

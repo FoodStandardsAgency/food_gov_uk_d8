@@ -55,6 +55,9 @@ class NewsForRegistrationForm extends FormBase {
     $cons_defaults = $tempstore->get('cons_tids_for_registration');
     $cons_defaults = ($cons_defaults === NULL) ? [] : $cons_defaults;
 
+    $form['beta_description'] = [
+      '#markup' => '<p>' . DefaultController::betaShortDescription() . '</p>',
+    ];
     $form['title'] = [
       '#markup' => '<h2>' . $this->t('News and consultations') . '</h2>',
     ];

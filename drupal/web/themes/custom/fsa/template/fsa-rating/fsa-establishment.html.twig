@@ -112,11 +112,11 @@
           {% else %}
           <button class="establishment__button toggle-button fsa-show-on-a-map" data-state="is-open" data-theme="dynamic" data-state-element="#collapsible-{{ randomID }}" aria-expanded="false" aria-controls="collapsible-{{ randomID }}">
             <div class="toggle-button__item toggle-button__item--presentation-icon svg">
-              <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#map-icon"></use></svg>
+              {{ include('/themes/custom/fsa/template/base/svg-sprite.html.twig', {icon_id: 'map-icon'}) }}
             </div>
             <div class="toggle-button__item">{% trans %}Show on a map{% endtrans %}</div>
             <div class="toggle-button__item toggle-button__item--icon svg">
-              <svg><use xlink:href="/themes/custom/fsa/dist/sprite.svg#nav-arrow-icon"></use></svg>
+              {{ include('/themes/custom/fsa/template/base/svg-sprite.html.twig', {icon_id: 'nav-arrow-icon'}) }}
             </div>
           </button>
 

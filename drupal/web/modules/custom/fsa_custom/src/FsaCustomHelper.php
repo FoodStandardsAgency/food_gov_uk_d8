@@ -56,7 +56,7 @@ class FsaCustomHelper extends ControllerBase {
         ['media' => $ent_id],
         [
           'attributes' => [
-            'class' => 'privacy-link',
+            'class' => 'privacy-link ext',
             'target' => '_blank',
           ],
         ])->toString();

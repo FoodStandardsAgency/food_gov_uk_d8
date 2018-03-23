@@ -26,9 +26,18 @@
   - dev-vars.yml
   - error-page.yml
 
-  #tasks:
+  tasks:
   # Drupal cron job
   #- cron: name="Example Drupal cron job" minute="*/2" job="su nginx --shell=/bin/sh -c '/usr/lib/composer/vendor/bin/drush --root=/var/www/example.com/current elysia-cron run > /dev/null 2>&1'" state="present"
+
+    - name: "Run drupal cronjob at even minutes"
+      cron:
+        name: "Run Drupal cronjobs with drush"
+        minute: "*/2"
+        job: "/usr/lib/composer/vendor/bin/drush --root=/var/www/fsa/current/web cron"
+        state: "present"
+        user: nginx
+      tags: ['cron']
 
   vars:
     wkv_site_env: develop

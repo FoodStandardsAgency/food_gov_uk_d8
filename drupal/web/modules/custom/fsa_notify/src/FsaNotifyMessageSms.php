@@ -20,9 +20,9 @@ class FsaNotifyMessageSms extends FsaNotifyMessage {
   /**
    * Todo: document.
    */
-  protected function theme($item) {
-    $url = $this->url($item);
-    return $url;
+  protected function theme($item, $lang) {
+    $message = $this->smsText($item);
+    return $message;
   }
 
 }
