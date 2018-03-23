@@ -62,7 +62,7 @@ the new service.</p><p>There could be technical issues found with the new
 service. If you are concerned about not receiving alerts, sign-up to our
 existing service too. <a href="https://www.food.gov.uk/about-us/subscribe">
 www.food.gov.uk/about-us/subscribe</a></p><p>Once we have tested the new service
-we will stop sending alerts from the oldservice. We will let our subscribers
+we will stop sending alerts from the old service. We will let our subscribers
 know when we intend to do this.</p>');
     }
 
