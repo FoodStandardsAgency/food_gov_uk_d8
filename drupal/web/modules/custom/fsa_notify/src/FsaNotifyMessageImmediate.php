@@ -33,7 +33,7 @@ class FsaNotifyMessageImmediate extends FsaNotifyMessage {
       $item = [
         'subject' => $this->subject->render() . ': ' . $title,
         'date' => $this->date,
-        'alert_items' => $item,
+        'alert_items' => preg_replace('/^/m', self::NOTIFY_TEMPLATE_MESSAGE_STYLE_PREFIX, $item),
         'login' => $this->login_url,
         'unsubscribe' => $this->unsubscribe_url,
       ];

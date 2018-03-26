@@ -173,6 +173,15 @@ class ProfileManager extends FormBase {
         ],
       ],
     ];
+    $form[$wrapper]['language'] = [
+      '#type' => 'radios',
+      '#title' => $this->t('Language preference'),
+      '#options' => [
+        'en' => $this->t('English'),
+        'cy' => $this->t('Cymraeg'),
+      ],
+      '#default_value' => $account->getPreferredLangcode(),
+    ];
     $form[$wrapper]['privacy_notice'] = [
       '#type' => 'item',
       '#markup' => FsaCustomHelper::privacyNoticeLink('alerts'),
@@ -292,9 +301,25 @@ class ProfileManager extends FormBase {
     $email_frequency = $form_state->getValue('email_frequency');
     $account->set('field_email_frequency', $email_frequency);
 
-    $account->save();
+    $language = $form_state->getValue('language');
+    $account->set('preferred_langcode', $language);
 
-    drupal_set_message($this->t('Changes saved.'));
+    $password = $form_state->getValue('new_password');
+    if ($password != '') {
+      $account->setPassword($password);
+    }
+
+    if ($account->save()) {
+      if ($password != '') {
+        drupal_set_message($this->t('Your preferences are updated and password was successfully changed.'));
+      }
+      else {
+        drupal_set_message($this->t('Your preferences are updated.'));
+      }
+    }
+    else {
+      drupal_set_message($this->t('There was an error updating your preferences. Please try again.'));
+    }
   }
 
   /**
