@@ -21,7 +21,7 @@ This project deploys using [Deploybot](https://wunder.deploybot.com/111465-FSA-A
 
 #### 1. Setup local environment
 
-```$ git clone git@github.com:wunderio/client-UK-FSA-alpha.git```
+```$ git clone git@github.com:wunderio/client-UK-FSA-beta.git```
 
 ```$ vagrant up``` 
 

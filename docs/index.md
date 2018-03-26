@@ -20,7 +20,7 @@ Project management
 
 The project is managed using:
 
-* [Github](https://github.com/wunderio/client-UK-FSA-alpha)
+* [Github](https://github.com/wunderio/client-UK-FSA-beta)
 * [JIRA](https://wunder.atlassian.net/projects/FSA)
 * [Google docs](https://drive.google.com/drive/folders/0B1DPg56m9B33bmZlRFJYVVNuSmM)
 
