@@ -10,6 +10,8 @@ use Drupal\node\Entity\Node;
  */
 abstract class FsaNotifyMessage {
 
+  const NOTIFY_TEMPLATE_MESSAGE_STYLE_PREFIX = '^ ';
+
   protected static $cache = [];
   protected static $base_url;
   protected static $login_url;

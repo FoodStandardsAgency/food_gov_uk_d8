@@ -29,7 +29,7 @@ class FsaNotifyMessageDaily extends FsaNotifyMessage {
       [
         'subject' => $this->subject->render(),
         'date' => $this->date,
-        'alert_items' => $items,
+        'alert_items' => preg_replace('/^/m', self::NOTIFY_TEMPLATE_MESSAGE_STYLE_PREFIX, $items),
         'login' => $this->login_url,
         'unsubscribe' => $this->unsubscribe_url,
       ],
