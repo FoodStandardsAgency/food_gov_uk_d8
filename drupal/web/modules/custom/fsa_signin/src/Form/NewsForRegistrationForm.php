@@ -56,7 +56,7 @@ class NewsForRegistrationForm extends FormBase {
     $cons_defaults = ($cons_defaults === NULL) ? [] : $cons_defaults;
 
     $form['beta_description'] = [
-      '#markup' => '<p>' . DefaultController::betaShortDescription() . '</p>',
+      '#markup' => DefaultController::betaSigninDescription(),
     ];
     $form['title'] = [
       '#markup' => '<h2>' . $this->t('News and consultations') . '</h2>',

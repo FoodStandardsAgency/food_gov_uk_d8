@@ -55,14 +55,16 @@ class AlertsForRegistrationForm extends FormBase {
     $food_alert_defaults = $tempstore->get('food_alert_registration');
     $food_alert_defaults = ($food_alert_defaults === NULL) ? [] : $food_alert_defaults;
 
-    $form['beta_description'] = [
-      '#markup' => '<p><small>' . DefaultController::betaShortDescription() . '</small></p>',
-    ];
     $form['title'] = [
       '#markup' => '<h2>' . $this->t('Alerts') . '</h2>',
     ];
     $form['description'] = [
       '#markup' => '<p>' . $this->t("Get food alerts and allergy alerts by email or SMS text message. This is a free service.") . '</p>',
+    ];
+    $form['beta_description'] = [
+      '#prefix' => '<small>',
+      '#suffix' => '</small>',
+      '#markup' => DefaultController::betaSigninDescription('long'),
     ];
     $form['food_alert_registration'] = [
       '#type' => 'checkboxes',
