@@ -11,5 +11,5 @@ tags:
   description: '[node:field_intro][node:field_hero_copy]'
   title: '[node:title] | [site:name]'
   og_description: '[node:field_intro][node:field_hero_copy]'
-  og_image: '[site:url]/themes/custom/fsa/share-default.png,[node:field_header_image:entity:field_image:hero:url]'
+  og_image: '[site:url]/themes/custom/fsa/share-default.png'
   twitter_cards_description: '[node:field_intro][node:field_hero_copy]'
