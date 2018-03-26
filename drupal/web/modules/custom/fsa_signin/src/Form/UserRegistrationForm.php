@@ -67,7 +67,7 @@ class UserRegistrationForm extends FormBase {
       '#value' => $cons_registration,
     ];
     $form['beta_description'] = [
-      '#markup' => '<p><small>' . DefaultController::betaShortDescription() . '</small></p>',
+      '#markup' => '<p><small>' . DefaultController::betaSigninDescription() . '</small></p>',
     ];
     $form['description'] = [
       '#markup' => '<h2>' . $this->t('Delivery options') . '</h2><p>' . $this->t('How do you want to receive information from us?') . '</p>',
