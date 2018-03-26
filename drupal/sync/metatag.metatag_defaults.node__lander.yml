@@ -1,0 +1,9 @@
+uuid: 636c61e8-807f-4ac0-a264-ba95695e3784
+langcode: en
+status: true
+dependencies: {  }
+id: node__lander
+label: 'Content: Landing page'
+tags:
+  og_image: '[node:field_header_image:entity:field_image:hero:url]'
+  twitter_cards_image: '[node:field_header_image:entity:field_image:hero:url]'
