@@ -8,7 +8,7 @@
 use Drupal\node\Entity\Node;
 use Drupal\Component\Utility\Random;
 
-$terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadTree('alerts_allergen');
+$terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadTree('alerts_allergen', 0, 1);
 $terms = array_map(function ($t) {
   return $t->tid;
 }, $terms);
@@ -25,12 +25,28 @@ foreach ($rand as $k) {
   $allergys[] = $terms[$k];
 }
 
+// Get type from argument.
+if (in_array(end($_SERVER['argv']), ['AA', 'PRIN', 'FAFA'])) {
+  $alert_type = end($_SERVER['argv']);
+}
+else {
+  $alert_type = 'AA';
+}
+
+$random_words = [
+  Random::word(rand(3, 10)),
+  Random::word(rand(3, 10)),
+];
+$title = $random_words[0] . ' ' . $random_words[1];
+
 $node = Node::create([
   'type'        => 'alert',
-  'title'       => Random::name(32),
-  'field_alert_notation' => Random::name(32),
+  'title'       => $alert_type . ' Alert: ' . $title,
+  'field_alert_notation' => $alert_type . '-' . $random_words[0],
+  'field_alert_type' => $alert_type,
   'field_alert_allergen' => $allergys,
+  'field_alert_smstext' => $alert_type . ': ' . $title,
 ]);
 $node->save();
 
-printf("nid=%d\n", $node->id());
+printf("Created %s: %s\nnode/%d\n", $alert_type, $title, $node->id());

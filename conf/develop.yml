@@ -35,6 +35,11 @@
         name: "Run Migrate API to fetch FHRS establishment updates from the API"
         minute: "*/15"
         job: "/usr/lib/composer/vendor/bin/drush --root=/var/www/fsa/current/web mim --tag=establishments"
+    - name: "Run drupal cronjob at even minutes"
+      cron:
+        name: "Run Drupal cronjobs with drush"
+        minute: "*/2"
+        job: "/usr/lib/composer/vendor/bin/drush --root=/var/www/fsa/current/web cron"
         state: "present"
         user: nginx
       tags: ['cron']

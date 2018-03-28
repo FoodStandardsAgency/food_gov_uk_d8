@@ -5,7 +5,9 @@ dependencies:
   config:
     - field.field.user.user.field_delivery_method
     - field.field.user.user.field_delivery_method_news
+    - field.field.user.user.field_email_frequency
     - field.field.user.user.field_notification_cache
+    - field.field.user.user.field_notification_cache_sms
     - field.field.user.user.field_notification_method
     - field.field.user.user.field_notification_sms
     - field.field.user.user.field_subscribed_cons
@@ -23,21 +25,28 @@ bundle: user
 mode: default
 content:
   field_delivery_method:
-    weight: 10
+    weight: 5
     label: above
     settings: {  }
     third_party_settings: {  }
     type: list_default
     region: content
   field_delivery_method_news:
-    weight: 11
+    weight: 6
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_email_frequency:
+    weight: 7
     label: above
     settings: {  }
     third_party_settings: {  }
     type: list_default
     region: content
   field_subscribed_cons:
-    weight: 9
+    weight: 4
     label: above
     settings:
       link: true
@@ -45,14 +54,14 @@ content:
     type: entity_reference_label
     region: content
   field_subscribed_food_alerts:
-    weight: 7
+    weight: 2
     label: above
     settings: {  }
     third_party_settings: {  }
     type: list_default
     region: content
   field_subscribed_news:
-    weight: 8
+    weight: 3
     label: above
     settings:
       link: false
@@ -60,7 +69,7 @@ content:
     type: entity_reference_label
     region: content
   field_subscribed_notifications:
-    weight: 6
+    weight: 1
     label: above
     settings:
       link: false
@@ -68,7 +77,7 @@ content:
     type: entity_reference_label
     region: content
   member_for:
-    weight: 1
+    weight: 0
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -77,6 +86,7 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_notification_cache: true
+  field_notification_cache_sms: true
   field_notification_method: true
   field_notification_sms: true
   langcode: true

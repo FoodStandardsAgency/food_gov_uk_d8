@@ -33,8 +33,20 @@ class FsaNotifyStorage {
     $query = \Drupal::entityQuery('user');
     $query->condition('uid', 0, '>');
     $query->condition('status', 1);
-    $query->condition('field_notification_method', $type);
-    $query->Exists('field_notification_cache');
+
+    if ($type == 'sms') {
+      // Get users who prefer SMS's.
+      $query->condition('field_delivery_method', $type, '=');
+
+      $query->Exists('field_notification_cache_sms');
+    }
+    else {
+      // And email subscriber's with their preferred frequency.
+      $query->condition('field_email_frequency', $type);
+
+      $query->Exists('field_notification_cache');
+    }
+
     $query->range(0, $batch_size);
     // $query->sort('uid');.
     $uids = $query->execute();
@@ -42,7 +54,13 @@ class FsaNotifyStorage {
     $notifications = [];
     foreach ($uids as $uid) {
       $u = User::load($uid);
-      $nids = $u->field_notification_cache->getValue();
+      if ($type == 'sms') {
+        $nids = $u->field_notification_cache_sms->getValue();
+      }
+      else {
+        $nids = $u->field_notification_cache->getValue();
+      }
+
       $nids = array_map(
         function ($nid) {
           return (int) $nid['target_id'];
@@ -67,11 +85,14 @@ class FsaNotifyStorage {
    *
    * @param \Drupal\node\Entity\Node $node
    *   The alert node.
+   * @param string $lang
+   *   Language code.
    */
-  public function store(Node $node) {
+  public function store(Node $node, $lang) {
 
     $uids = [];
     $nid = $node->id();
+    $node_type = $node->getType();
 
     // Store alerts for sending.
     if ($node->hasField('field_alert_type')) {
@@ -90,13 +111,13 @@ class FsaNotifyStorage {
         );
 
         if (!empty($allergens)) {
-          $query = $this->queryUsersWithSubscribePreferences('field_subscribed_notifications', $allergens, 'allergy');
+          $query = $this->queryUsersWithSubscribePreferences('field_subscribed_notifications', $allergens, 'allergy', $lang);
           $uids = $query->execute();
         }
       }
       elseif (in_array($alert_type, ['FAFA', 'PRIN'])) {
         // Rest are food alerts, get user's prefs to store for sending.
-        $query = $this->queryUsersWithSubscribePreferences('field_subscribed_food_alerts', ['all'], 'food');
+        $query = $this->queryUsersWithSubscribePreferences('field_subscribed_food_alerts', ['all'], 'food', $lang);
         $uids = $query->execute();
       }
     }
@@ -111,14 +132,14 @@ class FsaNotifyStorage {
       );
 
       if (!empty($news_types)) {
-        $query = $this->queryUsersWithSubscribePreferences('field_subscribed_news', $news_types, 'news');
+        $query = $this->queryUsersWithSubscribePreferences('field_subscribed_news', $news_types, 'news', $lang);
         $uids = $query->execute();
       }
     }
 
     // Store consultations for sending.
-    if ($node->hasField('field_consultations_type')) {
-      $consultations_type = $node->field_consultations_type->getValue();
+    if ($node->hasField('field_consultations_type_alert')) {
+      $consultations_type = $node->field_consultations_type_alert->getValue();
       $consultations_type = array_map(
         function ($c) {
           return $c['target_id'];
@@ -127,7 +148,7 @@ class FsaNotifyStorage {
       );
 
       if (!empty($consultations_type)) {
-        $query = $this->queryUsersWithSubscribePreferences('field_subscribed_cons', $consultations_type, 'consultation');
+        $query = $this->queryUsersWithSubscribePreferences('field_subscribed_cons', $consultations_type, 'consultation', $lang);
         $uids = $query->execute();
       }
     }
@@ -135,6 +156,11 @@ class FsaNotifyStorage {
     foreach ($uids as $uid) {
       $u = User::load($uid);
       $u->field_notification_cache[] = $nid;
+
+      // Only alerts should be stored for SMS sending.
+      if ($node_type === 'alert') {
+        $u->field_notification_cache_sms[] = $nid;
+      }
       $u->save();
     }
 
@@ -151,19 +177,20 @@ class FsaNotifyStorage {
    *   Array of values for the field.
    * @param string $type
    *   The type of content to identify the notification method preference.
+   * @param string $lang
+   *   Language.
    *
    * @return \Drupal\Core\Entity\Query\QueryInterface
    *   Query object.
    */
-  protected function queryUsersWithSubscribePreferences($field, array $values, $type) {
+  protected function queryUsersWithSubscribePreferences($field, array $values, $type, $lang) {
 
     // Build the basics for getting user subscribe preferences.
     $query = \Drupal::entityQuery('user');
     $query->condition('uid', 0, '>');
     $query->condition('status', 1);
-    $query->condition('field_notification_method', 'none', '!=');
 
-    // Filter the users who have their checkboxes for receiving with certain
+    // Filter users who have their checkboxes for receiving with certain
     // delivery methods.
     switch ($type) {
       case 'allergy':
@@ -173,31 +200,42 @@ class FsaNotifyStorage {
 
       case 'news':
       case 'consultation':
+
         $query->condition('field_delivery_method_news', NULL, 'IS NOT');
         break;
 
     }
 
     // Get the user's subscribe preferences for type of the content to be stored
-    // for sending.
-    $query->condition($field, $values, 'in');
+    // for sending. On language neutral alerts we don't care about lang.
+    if ($lang == 'zxx') {
+      $query->condition($field, $values, 'in');
+    }
+    else {
+      $query->condition($field, $values, 'in', $lang);
+    }
 
     return $query;
   }
 
   /**
-   * Clear cache of notifications for particular user.
+   * Clear particular cache of notifications for a user.
    *
    * @param \Drupal\user\Entity\User $user
    *   User object.
-   * @param bool $save
-   *   If user should be saved.
+   * @param string $type
+   *   The type of notification cache to reset.
    */
-  public function reset(User $user, bool $save = TRUE) {
-    $user->field_notification_cache = NULL;
-    if ($save) {
-      $user->save();
+  public function reset(User $user, string $type) {
+
+    if ($type === 'sms') {
+      $user->set('field_notification_cache_sms', []);
     }
+    else {
+      $user->set('field_notification_cache', []);
+    }
+
+    $user->save();
   }
 
 }

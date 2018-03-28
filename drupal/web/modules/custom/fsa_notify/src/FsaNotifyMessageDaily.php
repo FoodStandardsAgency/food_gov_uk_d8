@@ -14,7 +14,7 @@ class FsaNotifyMessageDaily extends FsaNotifyMessage {
    */
   public function __construct() {
     parent::__construct();
-    $this->subject = t('Daily digest');
+    $this->subject = t('FSA daily digest update');
   }
 
   /**
@@ -24,13 +24,15 @@ class FsaNotifyMessageDaily extends FsaNotifyMessage {
 
     $items = implode("\n", $items);
 
-    $items = [[
-      'subject' => $this->subject,
-      'date' => $this->date,
-      'allergy_alerts' => $items,
-      'login' => $this->login_url,
-      'unsubscribe' => $this->unsubscribe_url,
-    ],
+    // Variables for the Notify template.
+    $items = [
+      [
+        'subject' => $this->subject->render(),
+        'date' => $this->date,
+        'alert_items' => preg_replace('/^/m', self::NOTIFY_TEMPLATE_MESSAGE_STYLE_PREFIX, $items),
+        'login' => $this->login_url,
+        'unsubscribe' => $this->unsubscribe_url,
+      ],
     ];
 
     return $items;
@@ -39,11 +41,15 @@ class FsaNotifyMessageDaily extends FsaNotifyMessage {
   /**
    * {@inheritdoc}
    */
-  protected function theme($item) {
+  protected function theme($item, $lang) {
+    if ($item->hasTranslation($lang)) {
+      $item = $item->getTranslation($lang);
+    }
+
     $title = $item->getTitle();
     $line1 = sprintf('%s', $title);
 
-    $link = $this->url($item);
+    $link = $this->url($item, $lang);
     $more = t('Read more');
     $line2 = sprintf('%s: %s', $more, $link);
 

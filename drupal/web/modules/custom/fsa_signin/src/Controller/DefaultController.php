@@ -44,11 +44,22 @@ class DefaultController extends ControllerBase {
    * Create signin page.
    */
   public function signInPage() {
-    $title = ['#markup' => '<h2>' . $this->t('Sign in or manage your subscription') . '</h2>'];
+
+    // If coming from /user add a signing button even though the form is exactly
+    // the same. This for UX separation of subscribers and FSA editors.
+    $title = self::linkMarkup('fsa_signin.default_controller_signInPage', t('Alert subscription signin'), ['button']) . '<h2>' . $this->t('User log in') . '</h2>';
+    $body = FALSE;
+    if (\Drupal::request()->query->get('user') != 'fsa') {
+      $title = '<h2>' . $this->t('Sign in or manage your subscription') . '</h2>';
+      $body = self::betaSigninDescription();
+    }
+
+    $content = ['#markup' => $title . $body];
+
     $login_form = \Drupal::formBuilder()->getForm(UserLoginForm::class);
 
     return [
-      $title,
+      $content,
       $login_form,
     ];
   }
@@ -154,6 +165,7 @@ class DefaultController extends ControllerBase {
   public function thankYouPage() {
     $markup = '<h1>' . $this->t('Subscription complete') . '</h1>';
     $markup .= '<p>' . $this->t("Thank you for subscribing to Food Standards Agency's updates.") . '</p>';
+    $markup .= '<p>' . self::betaSigninDescription() . '</p>';
     $markup .= self::linkMarkup('fsa_signin.default_controller_manageProfilePage', $this->t('Manage your preferences'), ['button']);
 
     return [
@@ -266,6 +278,38 @@ class DefaultController extends ControllerBase {
    */
   public static function isMoreThanRegistered($user) {
     return count($user->getRoles()) > 1;
+  }
+
+  /**
+   * Short text to be displayed on subscription flow pages.
+   *
+   * @param string $version
+   *   The version of text (short|long)
+   *
+   * @return \Drupal\Core\StringTranslation\TranslatableMarkup
+   *   Translatable text.
+   */
+  public static function betaSigninDescription($version = 'short') {
+
+    switch ($version) {
+      case 'short':
+        // @todo: Move short description to configuration?
+        $description = t('This is a new beta service. Which means you’re looking at the first version of our new service. <a href="/node/724" target="_blank">What this means for you</a>.') . '<p></p>';
+        break;
+
+      case 'long':
+        // @todo: Move long description to configuration?
+        $description = t('<p>This is a new beta service. Which means you’re looking at the first version of our new service.</p><p>If you are already subscribed you will continue to receive alerts from the existing service. This means that for a short time you may receive two alerts on the same subject. If you are a new subscriber you will only receive alerts from the new service.</p><p>There could be technical issues found with the new service. If you are concerned about not receiving alerts, <a href="https://www.food.gov.uk/about-us/subscribe">sign-up to our existing service too</a>.</p><p>Once we have tested the new service we will stop sending alerts from the old service. We will let our subscribers know when we intend to do this.</p>') . '<p></p>';
+
+        break;
+
+      default:
+        $description = '<!-- no description set -->';
+        break;
+    }
+
+
+    return $description;
   }
 
 }

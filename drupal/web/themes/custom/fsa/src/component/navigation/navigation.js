@@ -14,12 +14,6 @@ function navigation () {
     menuItemActionSelector: '.navigation__item a, .navigation__item button'
   }
 
-  const KEYCODE = {
-    ENTER: 13,
-    ESC: 27,
-    SPACE: 32
-  }
-
   const keyboard = {
     BACKSPACE: 8,
     COMMA: 188,
@@ -398,11 +392,11 @@ function navigation () {
 
       // Add a keypress listener
       element.addEventListener('keypress', function (e) {
-        if (e.which === KEYCODE.SPACE) {
+        if (e.which === keyboard.SPACE) {
           e.preventDefault()
           state.toggle(element, content, 'is-open')
         }
-        if (e.which === KEYCODE.ENTER) {
+        if (e.which === keyboard.ENTER) {
           state.toggle(element, content, 'is-open')
         }
       })
@@ -498,13 +492,20 @@ function navigation () {
       })
     })
 
-    // Close navigation/subnavigation when focued outside of navigation
+    // Close navigation/subnavigation when focused outside of navigation
     tabbableNavigationItems.forEach((element) => {
       element.addEventListener('blur', function (e) {
         if (e.relatedTarget !== null) {
           if (checkMediaQuery() === breakpoints.xsmall) {
             if (tabbableNavigationItems.indexOf(e.relatedTarget) === -1) {
               mobileNavigation.off()
+            } else if (e.relatedTarget.classList.contains('language-link')) {
+              firstLevelLinkArray.forEach((element) => {
+                state.off({ element: element, type: 'button' }, 'is-open')
+              })
+              secondLevelMenuArray.forEach((element) => {
+                state.off({ element, type: 'content' }, 'is-open')
+              })
             }
           } else {
             if (tabbableNavigationItems.indexOf(e.relatedTarget) === -1) {

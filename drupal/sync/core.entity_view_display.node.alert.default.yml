@@ -37,23 +37,14 @@ mode: default
 content:
   field_alert_actiontaken:
     type: basic_string
-    weight: 5
+    weight: 3
     region: content
     label: above
     settings: {  }
     third_party_settings: {  }
-  field_alert_allergen:
-    type: entity_reference_entity_view
-    weight: 2
-    region: content
-    label: above
-    settings:
-      view_mode: teaser
-      link: false
-    third_party_settings: {  }
   field_alert_consumeradvice:
     type: basic_string
-    weight: 6
+    weight: 5
     region: content
     label: above
     settings: {  }
@@ -65,17 +56,9 @@ content:
     third_party_settings: {  }
     type: text_default
     region: content
-  field_alert_notation:
-    type: string
-    weight: 9
-    region: content
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
   field_alert_otherbusiness:
     type: string
-    weight: 8
+    weight: 6
     region: content
     label: above
     settings:
@@ -100,16 +83,8 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-  field_alert_reportingbusiness:
-    type: string
-    weight: 7
-    region: content
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
   field_alert_riskstatement:
-    weight: 3
+    weight: 2
     label: above
     settings: {  }
     third_party_settings: {  }
@@ -120,7 +95,10 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_alert_allergen: true
   field_alert_modified: true
+  field_alert_notation: true
+  field_alert_reportingbusiness: true
   field_alert_smstext: true
   field_alert_type: true
   field_nation: true

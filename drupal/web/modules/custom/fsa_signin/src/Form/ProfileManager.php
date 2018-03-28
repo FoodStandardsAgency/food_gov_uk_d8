@@ -135,7 +135,13 @@ class ProfileManager extends FormBase {
       '#title' => $this->t('SMS frequency'),
       '#markup' => '<p>' . $this->t('SMS updates are sent immediately') . '</p>',
     ];
-    $form[$wrapper]['email_notification_delivery'] = [
+
+    // field_email_frequency is a new field replacing old combined
+    // field_notification_method hence can be empty on some users. Set default
+    // in case is empty.
+    $email_frequency = $account->get('field_email_frequency')->getString();
+    $email_frequency = ($email_frequency) ? $email_frequency : 'immediate';
+    $form[$wrapper]['email_frequency'] = [
       '#type' => 'radios',
       '#title' => $this->t('Email frequency'),
       '#required' => TRUE,
@@ -144,7 +150,7 @@ class ProfileManager extends FormBase {
         'daily' => $this->t('Send updates daily'),
         'weekly' => $this->t('Send updates weekly'),
       ],
-      '#default_value' => $account->get('field_notification_method')->getString(),
+      '#default_value' => $email_frequency,
     ];
     $form[$wrapper]['personal_info'] = [
       '#type' => 'item',
@@ -167,7 +173,7 @@ class ProfileManager extends FormBase {
         ],
       ],
     ];
-    $form[$wrapper]['email_notification_language'] = [
+    $form[$wrapper]['language'] = [
       '#type' => 'radios',
       '#title' => $this->t('Language preference'),
       '#options' => [
@@ -292,15 +298,28 @@ class ProfileManager extends FormBase {
       $account->set('field_notification_sms', '');
     }
 
-    $email_notification_delivery = $form_state->getValue('email_notification_delivery');
-    $account->set('field_notification_method', $email_notification_delivery);
+    $email_frequency = $form_state->getValue('email_frequency');
+    $account->set('field_email_frequency', $email_frequency);
 
-    $language = $form_state->getValue('email_notification_language');
+    $language = $form_state->getValue('language');
     $account->set('preferred_langcode', $language);
 
-    $account->save();
+    $password = $form_state->getValue('new_password');
+    if ($password != '') {
+      $account->setPassword($password);
+    }
 
-    drupal_set_message($this->t('Changes saved.'));
+    if ($account->save()) {
+      if ($password != '') {
+        drupal_set_message($this->t('Your preferences are updated and password was successfully changed.'));
+      }
+      else {
+        drupal_set_message($this->t('Your preferences are updated.'));
+      }
+    }
+    else {
+      drupal_set_message($this->t('There was an error updating your preferences. Please try again.'));
+    }
   }
 
   /**

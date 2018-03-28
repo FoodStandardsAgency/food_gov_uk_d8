@@ -3,7 +3,7 @@ const path = require('path')
 
 // Plugins
 const ExtractCSSPlugin = require('extract-text-webpack-plugin')
-// const SpritePlugin = require('svg-sprite-loader/plugin')
+const SpritePlugin = require('svg-sprite-loader/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
@@ -135,7 +135,7 @@ module.exports = {
     }),
 
     // Create SVG sprite
-    // new SpritePlugin(),
+    new SpritePlugin(),
 
     // Create a custom template for styleguide
     new HtmlWebpackPlugin({

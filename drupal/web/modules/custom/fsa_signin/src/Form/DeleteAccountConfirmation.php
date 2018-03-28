@@ -48,8 +48,7 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
     }
     $user = \Drupal::currentUser();
     $email = $user->getEmail();
-    $message = '<h1>' . $this->t('Confirm removal') . '</h1>';
-    $message .= '<p>' . $this->t('You are about to remove subscription with email <strong>@email</strong>.', ['@email' => $email]) . '</p>';
+    $message = '<p>' . $this->t('You are about to remove subscription with email <strong>@email</strong>.', ['@email' => $email]) . '</p>';
     $message .= '<p>' . $this->t('This will cancel all your subscriptions and permanently remove your personal details.') . '</p>';
     $message .= '<p>' . $privacy_link . '</p>';
     return $message;
@@ -75,8 +74,7 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
 
     if (\Drupal::request()->query->has('done')) {
-      $markup = '<h1>' . $this->t('Profile removed') . '</h1>';
-      $markup .= '<p>' . $this->t('Your profile has been successfully removed.') . '</p>';
+      $markup = '<p>' . $this->t('Your profile has been successfully removed.') . '</p>';
 
       return [
         '#markup' => $markup,

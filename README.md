@@ -4,7 +4,7 @@
 Food Standards Agency (FSA) Drupal 8 site code repository.
 
 ### Continuous integration
-This project deploys using [Deploybot](https://wunder.deploybot.com/111465-FSA-Alpha) and uses [Travis](https://travis-ci.com/wunderio/client-UK-FSA-alpha) for tests.
+This project deploys using [Deploybot](https://wunder.deploybot.com/111465) and uses [Travis](https://travis-ci.com/wunderio/client-UK-FSA-alpha) for tests.
 * Production [beta.food.gov.uk](https://beta.food.gov.uk)
 * Development: [fsa.dev.wunder.io](https://fsa.dev.wunder.io)
 * Staging [fsa.stage.wunder.io](https://fsa.stage.wunder.io)
@@ -21,7 +21,7 @@ This project deploys using [Deploybot](https://wunder.deploybot.com/111465-FSA-A
 
 #### 1. Setup local environment
 
-```$ git clone git@github.com:wunderio/client-UK-FSA-alpha.git```
+```$ git clone git@github.com:wunderio/client-UK-FSA-beta.git```
 
 ```$ vagrant up``` 
 

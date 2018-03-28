@@ -223,6 +223,26 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
+  remove_personal_data:
+    id: action
+    label: 'Remove personal data'
+    handler_id: remove_personal_data
+    status: true
+    conditions:
+      disabled:
+        ':input[name="fsa_establishment_la_email"]':
+          empty: true
+    weight: 3
+    settings:
+      states:
+        - completed
+        - updated
+      notes: 'Personal data was removed automatically on submit'
+      sticky: null
+      data: "name: ''\r\nemail: ''\r\ntelephone: ''"
+      message: ''
+      message_type: status
+      debug: false
   copy_to_la_email_alt:
     id: email
     label: 'Copy to local authority (alternative email)'
@@ -266,23 +286,3 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-  remove_personal_data:
-    id: action
-    label: 'Remove personal data'
-    handler_id: remove_personal_data
-    status: true
-    conditions:
-      disabled:
-        ':input[name="fsa_establishment_la_email"]':
-          empty: true
-    weight: 3
-    settings:
-      states:
-        - completed
-        - updated
-      notes: 'Personal data was removed automatically on submit'
-      sticky: null
-      data: "name: ''\r\nemail: ''\r\ntelephone: ''"
-      message: ''
-      message_type: status
-      debug: false

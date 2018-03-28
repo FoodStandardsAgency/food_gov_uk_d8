@@ -133,14 +133,13 @@ class AlertItemProperties extends ProcessPluginBase {
     if (isset($item['problem'][0]['allergen'])) {
       $tids = [];
       foreach ($item['problem'][0]['allergen'] as $key => $field) {
-        // Since we don't know the tid go hard way mapping to the terms with
-        // notation field match.
+        // We don't know the tid, map allergen terms with notation field match.
         $term_name = $field['notation'];
         $term = \Drupal::entityTypeManager()
           ->getStorage('taxonomy_term')
           ->loadByProperties([
             'vid' => 'alerts_allergen',
-            'name' => $term_name,
+            'field_alert_notation' => $term_name,
           ]);
 
         foreach ($term as $a => $b) {

@@ -8,7 +8,7 @@ test:
 	drush eval 'fsa_notify_cron();'
 
 alert_add:
-	drush scr $$(pwd)/alert_create.php
+	drush scr $$(pwd)/alert_create.php $(TYPE)
 
 cron:
 	drush cron

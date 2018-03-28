@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.user.field_subscribed_cons
-    - taxonomy.vocabulary.consultations_type
+    - taxonomy.vocabulary.consultations_type_alerts
   module:
     - user
 id: user.user.field_subscribed_cons
@@ -21,7 +21,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      consultations_type: consultations_type
+      consultations_type_alerts: consultations_type_alerts
     sort:
       field: name
       direction: asc
