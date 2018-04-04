@@ -161,6 +161,11 @@ then
   source syncdb_local.sh
 fi
 
+# Prevent other than production environments sending alerts via Notify.
+echo "Set Notify/alerts sending to debug mode and API test key"
+drush $TARGET sset fsa_notify.collect_send_log_only TRUE
+drush $TARGET sset fsa_notify.api test_key-6f00837a-4b8f-4ddd-ae96-ca2d3035fe57-cf19add9-e802-4fbf-8f92-dfb941ec8813
+
 # Get Drupal major version to do version specific commands like cache clearing.
 DVER=$(drush $SOURCE status | awk 'NR==1{print substr ($4, 0, 1)}')
 

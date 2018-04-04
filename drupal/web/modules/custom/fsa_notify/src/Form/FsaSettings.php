@@ -211,6 +211,8 @@ class FsaSettings extends FormBase {
       'fsa_notify.template_sms',
     ];
 
+    // @todo: Use configuration instead of states and come up with a procedure that by default prevent other than production sending real alerts via Notify API.
+    // Currently that risk is mitigated on syncdb.sh with drush sset...
     foreach ($keys as $key) {
       // Cannot have dot in render array key.
       $key2 = str_replace('.', '___', $key);

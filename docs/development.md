@@ -2,11 +2,14 @@ Development instructions
 ========================
 
 #### Database syncing
-Use wundertools default `./syncdb.sh -s [SOURCE] -t [TARGET]` for syncing. The target parameter (`-t`) is optional.
 
-For example to sync staging to local run following outside the box:
+*Important*: Notify settings are defined as Drupal state in the db: make sure your local will not send alerts to subscribers after copying database from production. See `/admin/config/fsa/notify` for these settings. If using `./syncdb.sh` this is taken care on database import. 
+
+*syncdb.sh usage*: `./syncdb.sh -s [SOURCE] -t [TARGET]`
+
+For example to sync production to local run following outside the box:
 ```bash
-`./syncdb.sh -s stage -t local`
+./syncdb.sh -s prod -t local
 ```
 
 If this sputters errors you may need to do `export WKV_SITE_ENV=local`.
