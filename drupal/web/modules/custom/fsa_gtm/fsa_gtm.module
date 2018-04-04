@@ -17,7 +17,8 @@ use Drupal\Component\Utility\Html;
  * Implements hook_datalayer_alter().
  */
 function fsa_gtm_datalayer_alter(&$data_layer) {
-  // Unset user email from datalayer.
+  // Unset user email and name from datalayer.
+  unset($data_layer['userName']);
   unset($data_layer['userMail']);
 }
 
