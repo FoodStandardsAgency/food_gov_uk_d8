@@ -19,6 +19,7 @@ vocabs:
   alerts_allergen: '0'
   audience: '0'
   consultations_type: '0'
+  consultations_type_alerts: '0'
   content_type: '0'
   document_category: '0'
   fhrs_businesstype: '0'
@@ -30,7 +31,7 @@ vocabs:
   research_topic: '0'
   tags: '0'
   topic: '0'
-expose_user_details: ''
+expose_user_details: '*'
 expose_user_details_roles:
   authenticated: '0'
   author: '0'
