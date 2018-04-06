@@ -55,6 +55,9 @@ class AlertsForRegistrationForm extends FormBase {
     $food_alert_defaults = $tempstore->get('food_alert_registration');
     $food_alert_defaults = ($food_alert_defaults === NULL) ? [] : $food_alert_defaults;
 
+    // Set a temporary message about system status.
+    DefaultController::betaTemporaryMessage();
+
     $form['title'] = [
       '#markup' => '<h2>' . $this->t('Alerts') . '</h2>',
     ];
