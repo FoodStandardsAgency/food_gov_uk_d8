@@ -351,7 +351,12 @@ function fsa_notify_send(FsaNotifyStorage $storage, $notifier, $formatter, $type
       $lang = $user->getPreferredLangcode(TRUE);
       $messages = $formatter->format($messages, $lang);
       foreach ($messages as $personalisation) {
+	try {
         $notifier->send($user, $type, $personalisation);
+	}
+	catch (\Exception $e) {
+          \Drupal::logger('fsa_notify')->error("Exception thrown during send. Moving on");
+	}
         fsa_notify_timer('count', $type);
       }
       $storage->reset($user, $type);
