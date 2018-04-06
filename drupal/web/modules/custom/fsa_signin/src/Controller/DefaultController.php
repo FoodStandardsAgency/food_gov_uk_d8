@@ -308,8 +308,17 @@ class DefaultController extends ControllerBase {
         break;
     }
 
-
     return $description;
+  }
+
+  /**
+   * Print out a temporary message about beta system status.
+   *
+   * @param string $type
+   *   The type of message (status|warning|error)
+   */
+  public static function betaTemporaryMessage($type = 'warning') {
+    drupal_set_message(t('We are currently having some technical issues so you may not receive alerts from this service between 5-9 April.'), $type);
   }
 
 }

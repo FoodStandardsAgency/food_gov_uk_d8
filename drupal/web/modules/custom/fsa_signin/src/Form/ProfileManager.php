@@ -53,6 +53,9 @@ class ProfileManager extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state, User $account = NULL) {
 
+    // Set a temporary message about system status.
+    DefaultController::betaTemporaryMessage();
+
     $form['account'] = [
       '#type' => 'value',
       '#value' => $account,
