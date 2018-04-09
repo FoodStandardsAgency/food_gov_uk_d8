@@ -5912,8 +5912,8 @@ html:not(.is-touch) .user-login-form a:hover,
 .js-form-item .with-prefix{
     display:-ms-flexbox;
     display:flex;
-    -ms-flex-align:baseline;
-        align-items:baseline;
+    -ms-flex-align:center;
+        align-items:center;
   }
 .js-form-item .with-prefix .field-prefix{
       padding-right:0.5rem;

@@ -1047,7 +1047,7 @@ input[type="password"] {
 .js-form-item {
   .with-prefix {
     display: flex;
-    align-items: baseline;
+    align-items: center;
 
     .field-prefix {
       padding-right: 0.5rem;
