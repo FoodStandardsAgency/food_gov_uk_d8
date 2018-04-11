@@ -312,13 +312,17 @@ function fsa_notify_queue_process() {
 
   fsa_notify_timer('start', 'queue');
 
-  while ($item = $queue->claimItem()) {
+  // The lease time is set to ten years, just in case this process crashes and it's picked up by a later cron.
+  while ($item = $queue->claimItem(315360000)) {
     try {
+      \Drupal::logger('fsa_notify')->info("Processing item " . $item->data['nid']);
       $worker->processItem($item->data);
+      \Drupal::logger('fsa_notify')->info("Deleting item " . $item->data['nid']);
       $queue->deleteItem($item);
     }
     catch (FsaNotifyStorageQueue $e) {
-      $queue->releaseItem($item);
+      // We've thrown an exception - do not release the item otherwise it might get picked up again
+      \Drupal::logger('fsa_notify')->error("Some odd thing occurred during queue processing. Item remains held");
       break;
     }
     catch (\Exception $e) {
