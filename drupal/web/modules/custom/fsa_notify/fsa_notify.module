@@ -349,25 +349,24 @@ function fsa_notify_queue_process() {
  */
 function fsa_notify_send(FsaNotifyStorage $storage, $notifier, $formatter, $type) {
   fsa_notify_timer('start', $type);
-  while ($batch = $storage->getAllType($type)) {
-    foreach ($batch as $uid => $messages) {
-      $user = User::load($uid);
-      $lang = $user->getPreferredLangcode(TRUE);
-      $messages = $formatter->format($messages, $lang);
-      foreach ($messages as $personalisation) {
-	try {
+  $batch = $storage->getAllType($type);
+  foreach ($batch as $uid => $messages) {
+    $user = User::load($uid);
+    $lang = $user->getPreferredLangcode(TRUE);
+    $messages = $formatter->format($messages, $lang);
+    foreach ($messages as $personalisation) {
+      try {
         $notifier->send($user, $type, $personalisation);
-	}
-	catch (\Exception $e) {
-          \Drupal::logger('fsa_notify')->error("Exception thrown during send. Moving on");
-	}
-        fsa_notify_timer('count', $type);
       }
-      $storage->reset($user, $type);
+      catch (\Exception $e) {
+        \Drupal::logger('fsa_notify')->error("Exception thrown during send. Moving on");
+      }
+      fsa_notify_timer('count', $type);
     }
-    \Drupal::entityManager()->getStorage('node')->resetCache();
-    \Drupal::entityManager()->getStorage('user')->resetCache();
+    $storage->reset($user, $type);
   }
+  \Drupal::entityManager()->getStorage('node')->resetCache();
+  \Drupal::entityManager()->getStorage('user')->resetCache();
   fsa_notify_timer('stop', $type);
 }
 
