@@ -410,11 +410,13 @@ function fsa_notify_timer($event, $type) {
       $rate = $elapsed > 0 ? $items / $elapsed : 'n/a';
       $elapsed = sprintf('%.3f', $elapsed);
       $rate = sprintf('%.3f', $rate);
-      \Drupal::logger('fsa_notify')->info('Timer: type %type; elapsed %elapsed; %items items; %rate items/sec.', [
+      $memory = memory_get_peak_usage(TRUE);
+      \Drupal::logger('fsa_notify')->info('Timer: type %type; elapsed %elapsed; %items items; %rate items/sec. memory_get_peak_usage reporting %memory', [
         '%type' => $type,
         '%elapsed' => $elapsed,
         '%items' => $items,
         '%rate' => $rate,
+        '%memory' => $memory,
       ]);
       break;
   }

@@ -6,6 +6,7 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Queue\QueueWorkerBase;
 use Drupal\fsa_notify\FsaNotifyStorage;
+use Drupal\fsa_notify\FsaNotifyStorageDBConnection;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -33,7 +34,9 @@ class FsaNotifyStorageQueue extends QueueWorkerBase implements ContainerFactoryP
   }
 
   /**
-   * Todo: document.
+   * Creates the new queue worker. Change the second parameter to
+   * either FsaNotifyStorage to User::load (very memory intensive)
+   * or FsaNotifyStorageDB to use database connection directly.
    */
   public static function create(
     ContainerInterface $container,
@@ -43,7 +46,7 @@ class FsaNotifyStorageQueue extends QueueWorkerBase implements ContainerFactoryP
   ) {
     return new static(
       $container->get('entity.manager')->getStorage('node'),
-      new FsaNotifyStorage()
+      new FsaNotifyStorageDBConnection()
     );
   }
 
