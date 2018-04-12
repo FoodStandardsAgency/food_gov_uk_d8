@@ -4,7 +4,6 @@ namespace Drupal\fsa_notify;
 
 use Drupal\node\Entity\Node;
 use Drupal\user\Entity\User;
-use Drupal\Core\Database\Database;
 
 /**
  * Class FsaNotifyStorage.
@@ -154,35 +153,29 @@ class FsaNotifyStorage {
       }
     }
 
-    $connection = Database::getConnection();
-    $options = [];
     foreach ($uids as $uid) {
-      $delivery_methods = $connection->query('SELECT field_delivery_method_value FROM user__field_delivery_method WHERE entity_id = :entity_id',
-        [':entity_id' => $uid],
-        $options
-      )->fetchAll();
-
-      foreach($delivery_methods as $delivery_method) {
-        if ($delivery_method->field_delivery_method_value == 'sms' && $node_type == 'alert') {
-          $connection->query("INSERT INTO user__field_notification_cache_sms (bundle, deleted, entity_id, revision_id, langcode, delta, field_notification_cache_sms_target_id) values ('user', 0, :entity_id, :entity_id, 'en', 0, :nid)",
-            [
-              ':entity_id' => $uid,
-              ':nid' => $nid,
-            ],
-            $options
-          );
-        }
-        elseif ($delivery_method->field_delivery_method_value == 'email') {
-          $connection->query("INSERT INTO user__field_notification_cache (bundle, deleted, entity_id, revision_id, langcode, delta, field_notification_cache_target_id) values ('user', 0, :entity_id, :entity_id, 'en', 0, :nid)",
-            [
-              ':entity_id' => $uid,
-              ':nid' => $nid,
-            ],
-            $options
-          );
-        }
+      $u = User::load($uid);
+       
+      $need_to_save = FALSE;
+      foreach($u->field_delivery_method->getValue() as $delivery_method) {
+        if ($delivery_method['value'] == 'sms' && $node_type == 'alert') {
+          $u->field_notification_cache_sms[] = $nid;
+	  $need_to_save = TRUE;
+	}
+	else if ($delivery_method['value'] == 'email') {
+          $u->field_notification_cache[] = $nid;
+	  $need_to_save = TRUE;
+	}
       }
+
+      if ($need_to_save) {
+        $u->save();
+      }
+      $u = NULL;
+      \Drupal::entityManager()->getStorage('user')->resetCache();
     }
+
+
   }
 
   /**
