@@ -314,11 +314,12 @@ class DefaultController extends ControllerBase {
   /**
    * Print out a temporary message about beta system status.
    *
+   * You should use drupal_set_message(t('blah blah'), $type) to set the message.
+   *
    * @param string $type
    *   The type of message (status|warning|error)
    */
   public static function betaTemporaryMessage($type = 'warning') {
-    drupal_set_message(t('Some subscribers may have received email and SMS messages from this service multiple times. We apologise for this and it has been temporarily switched off while we investigate the problem.'), $type);
   }
 
 }
