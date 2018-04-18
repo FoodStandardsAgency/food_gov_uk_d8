@@ -29,7 +29,7 @@ function scrollToMultiStepForm () {
   })
 
   // Focus the first form input
-  const firstInput = webform.querySelector('input')
+  const firstInput = webform.querySelector('input, textarea, select')
   if (firstInput) firstInput.focus()
 }
 
