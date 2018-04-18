@@ -27,6 +27,10 @@ function scrollToMultiStepForm () {
     top: webform.getBoundingClientRect().top,
     behavior: 'smooth'
   })
+
+  // Focus the first form input
+  const firstInput = webform.querySelector('input')
+  if (firstInput) firstInput.focus()
 }
 
 module.exports = { autoOpenFormError, scrollToMultiStepForm }
