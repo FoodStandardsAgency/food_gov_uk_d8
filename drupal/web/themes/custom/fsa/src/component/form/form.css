@@ -646,32 +646,32 @@ input[type="password"] {
       flex-flow: row wrap;
       @mixin responsive-declaration margin-right, -1.5em, -2em;
       @mixin responsive-declaration margin-left, -1.5em, -2em;
-  
+
       & > label {
         flex: 1 1 100%;
         @mixin responsive-declaration padding-right, 1.5rem, 2rem;
         @mixin responsive-declaration padding-left, 1.5rem, 2rem;
       }
-  
+
       & > .description {
         flex: 1 1 100%;
         @mixin responsive-declaration padding-right, 1.5em, 2em;
         @mixin responsive-declaration padding-left, 1.5em, 2em;
         margin-bottom: 0;
       }
-  
+
       &  > .form-item {
         flex: 1 1 100%;
         @mixin responsive-declaration margin-top, 1em, 2em;
         @mixin responsive-declaration margin-bottom, 0.5em, 1em;
         @mixin responsive-declaration padding-right, 1.5em, 2em;
         @mixin responsive-declaration padding-left, 1.5em, 2em;
-      
+
         @media (--breakpoint-xxs) {
           flex: 0 0 33%;
         }
       }
-  
+
       & > .form-item input {
         width: 100%;
       }
@@ -724,7 +724,7 @@ input[type="password"] {
       padding-left: 1.5em;
       color: var(--primary-color);
       box-shadow: none;
-    
+
       &:hover {
         background-color: transparent;
         color: var(--dark-primary-color);
@@ -746,16 +746,16 @@ input[type="password"] {
     font-weight: 600;
     box-shadow: var(--box-shadow);
   }
-  
+
   .toggle-button__item {
     padding-right: 1em;
   }
-  
+
   .toggle-button.is-open {
     background-color: var(--primary-color);
     color: var(--color-white);
   }
-  
+
   .toggle-button__item--icon {
     width: 3em;
     height: 3em;
@@ -763,24 +763,24 @@ input[type="password"] {
     background-color: var(--primary-color);
     box-shadow: var(--box-shadow);
   }
-  
+
   .toggle-button.is-open .toggle-button__item--icon {
     box-shadow: none;
     background-color: var(--color-white);
   }
-  
+
   .toggle-button__item--icon svg {
     transform: translateY(-50%) translateX(-50%) scale(0.3);
   }
-  
+
   .toggle-button__item--icon path {
     color: var(--color-white);
   }
-  
+
   .toggle-button.is-open .toggle-button__item--icon path {
     color: var(--primary-color);
   }
-  
+
   .toggle-content {
     background-color: var(--color-white);
     @mixin responsive-declaration padding, 1em, 2em;
@@ -1015,7 +1015,7 @@ input[type="password"] {
         padding: 1em 0;
       }
     }
-  
+
     &:after {
       content: '';
       clear: both;
@@ -1041,5 +1041,21 @@ input[type="password"] {
     padding-top: 0.5em;
     font-size: 0.8889em;
     color: var(--color-gray);
+  }
+}
+
+.js-form-item {
+  .with-prefix {
+    display: flex;
+    align-items: center;
+
+    .field-prefix {
+      padding-right: 0.5rem;
+    }
+
+    /* Firefox fix for flex overflow */
+    input {
+      min-width: 0;
+    }
   }
 }

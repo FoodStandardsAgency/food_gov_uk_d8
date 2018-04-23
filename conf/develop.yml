@@ -10,6 +10,7 @@
   user: root
   roles:
    - { role: base, tags: [ 'base' ] }
+   - { role: papertrail, tags: [ 'papertrail' ] }
    - { role: varnish, tags: [ 'varnish' ] }
    - { role: dbserver, tags: [ 'dbserver' ] }
    - { role: drupal-db, tags: [ 'drupal-db' ] }
@@ -21,6 +22,8 @@
    - { role: drupal-log, tags: [ 'drupal-log' ] }
    - { role: fsa_elasticsearch, tags: [ 'elasticsearch' ] }
    - { role: wkhtmltopdf, tags: [ 'wkhtmltopdf' ] }
+   - { role: newrelic-sysmon, tags: [ 'newrelic-sysmon' ] }
+   - { role: newrelic-infra, tags: [ 'newrelic-infra' ] }
 
   vars_files:
   - dev-vars.yml
@@ -83,7 +86,7 @@
     # On dev and stage it's good idea to protect the site with htauth
     basicauth_enabled: True
     basicauth_username: fsawunder
-    basicauth_password: wndrfsabfguk
+    basicauth_password: "{{ basicauth_pass }}"
     # Basic auth can also be disabled for certain ip's
     basicauth_ip:
       - address: 84.20.132.177
@@ -138,3 +141,25 @@
           - "localhost"
 
     elasticsearch_heap_size: 512m
+
+    ## Papertrail ##
+    papertrail_enabled: True
+    papertrail_remote_syslog2_version: "0.16"
+    papertrail_conf: "/etc/log_files.yml"
+    papertrail_logs:
+      - /var/log/secure
+      - /var/log/maillog
+
+    # papertrail host and port defined in prod-vars.yml
+
+    # Define additional papertrail logs from nginx (from nginx role)
+    nginx_papertrail_follow:
+      - /var/log/nginx/http-*error.log
+
+    php_fpm_papertrail_follow:
+      - /var/log/php-fpm/www-error.log
+
+    ## Newrelic ##
+    newrelic_enabled: True
+    newrelic_infra_enabled: True
+ 
