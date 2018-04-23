@@ -1,4 +1,3 @@
-const webpack = require('webpack')
 const path = require('path')
 
 // Plugins
@@ -13,11 +12,6 @@ module.exports = {
     app: './index.js',
     editor: './editor.js',
     styleguide: './styleguide/index.js'
-  },
-  devServer: {
-    contentBase: './dist',
-    port: 9000,
-    hot: true
   },
   module: {
     rules: [
@@ -140,9 +134,6 @@ module.exports = {
     // Create a custom template for styleguide
     new HtmlWebpackPlugin({
       template: 'styleguide/template.js'
-    }),
-
-    // Hotmodulereplacement for developing with styleguide
-    new webpack.HotModuleReplacementPlugin()
+    })
   ]
 }

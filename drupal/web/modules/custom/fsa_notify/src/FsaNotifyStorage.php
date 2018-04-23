@@ -155,16 +155,26 @@ class FsaNotifyStorage {
 
     foreach ($uids as $uid) {
       $u = User::load($uid);
-      $u->field_notification_cache[] = $nid;
-
-      // Only alerts should be stored for SMS sending.
-      if ($node_type === 'alert') {
-        $u->field_notification_cache_sms[] = $nid;
+       
+      $need_to_save = FALSE;
+      foreach($u->field_delivery_method->getValue() as $delivery_method) {
+        if ($delivery_method['value'] == 'sms' && $node_type == 'alert') {
+          $u->field_notification_cache_sms[] = $nid;
+	  $need_to_save = TRUE;
+	}
+	else if ($delivery_method['value'] == 'email') {
+          $u->field_notification_cache[] = $nid;
+	  $need_to_save = TRUE;
+	}
       }
-      $u->save();
+
+      if ($need_to_save) {
+        $u->save();
+      }
+      $u = NULL;
+      \Drupal::entityManager()->getStorage('user')->resetCache();
     }
 
-    \Drupal::entityManager()->getStorage('user')->resetCache();
 
   }
 
