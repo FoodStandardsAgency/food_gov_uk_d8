@@ -3353,6 +3353,7 @@ blockquote:after{
   .content-toolbar button{
     position:relative;
     display:block;
+    font-family:'Open Sans', sans-serif;
     font-size:1em !important;
     font-weight:600;
     text-align:left;
@@ -5909,6 +5910,18 @@ html:not(.is-touch) .user-login-form a:hover,
     font-size:0.8889em;
     color:#848b8e;
   }
+.js-form-item .with-prefix{
+    display:-ms-flexbox;
+    display:flex;
+    -ms-flex-align:center;
+        align-items:center;
+  }
+.js-form-item .with-prefix .field-prefix{
+      padding-right:0.5rem;
+    }
+.js-form-item .with-prefix input{
+      min-width:0;
+    }
 .header:not(.profile){
   position:relative;
   z-index:30;
@@ -10107,6 +10120,31 @@ html:not(.is-touch) .listing .more-link a:hover,
     width:1px;
     word-wrap:normal;
   }
+.link-to-archieve{
+  position:absolute;
+  right:10px;
+  display:inline-block;
+  text-align:right; }
+@media (max-width: 30em){
+  .link-to-archieve{
+    position:relative;
+    display:block;
+    text-align:left;
+    padding-left:10px; }
+}
+.link-to-archieve span{
+  display:block; }
+@media (max-width: 30em){
+  .link-to-archieve span{
+    display:inline-block; }
+}
+.link-to-archieve a{
+  display:block;
+  text-decoration:underline; }
+@media (max-width: 30em){
+  .link-to-archieve a{
+    display:inline-block; }
+}
 .social-media{
   padding:1em 0;
   text-align:center;
