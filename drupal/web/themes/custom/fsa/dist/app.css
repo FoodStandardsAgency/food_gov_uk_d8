@@ -3353,6 +3353,7 @@ blockquote:after{
   .content-toolbar button{
     position:relative;
     display:block;
+    font-family:'Open Sans', sans-serif;
     font-size:1em !important;
     font-weight:600;
     text-align:left;
