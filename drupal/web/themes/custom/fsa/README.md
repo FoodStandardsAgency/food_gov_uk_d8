@@ -10,20 +10,18 @@ To get the started with theming, complete the following steps:
 
 1. Install [Node.js](https://nodejs.org/)
 
-  * If you are using macOS please install [Homebrew](https://brew.sh/index_fi.html) first. Then install both [Yarn](https://yarnpkg.com/lang/en/) (depency manager) and [Node.js](https://nodejs.org/) at the same time by running: `brew install yarn`
-
 2. Install project dependencies by running the following task
-  * `npm install` or `yarn`
+  * `npm install`
 
 ## Workflow summary
-__Run__ `npm run watch` or `yarn watch` while developing.
+__Run__ `npm run watch` while developing.
 
-__Build__ before commiting `npm run build` or `yarn build`.
+__Build__ before committing `npm run build`.
 
 ## Development
 When developing FSA Theme, you may want assets automatically compiled. To do this, run the following watch task:
 
-* `npm run watch` or `yarn watch`
+* `npm run watch`
 
 This will create a folder called `dist`, into which the required assets will be created.
 
@@ -183,38 +181,4 @@ Remember to restart varnish after generating a new sprite.
 ## Building the theme assets
 Remember to create the static assets of this theme before committing your changes to version control. Build the assets by running the following task:
 
-* `npm run build` or `yarn build`
-
-## Repository structure
-Theme folder/file structure
-
-```
-├─ dist/               # Distributed assets that Drupal uses
-│  ├─ img/             # Compressed bitmap images
-│  ├─ app.js        # Minified JavaScript file that bundles all the JavaScript files
-│  ├─ app.css         # Minified CSS files
-│  └─ sprites.svg      # Main SVG sprite file
-│
-├─ inc/                # Theme function includes
-│
-├─ src/
-│  ├─ css/             # CSS files
-│  │  ├─ style.css     # Entrypoint CSS file, includes all the imports for other css files
-│  │  └─ *.css
-|  |
-│  ├─ img/             # Bitmap and vector images
-│  │
-│  │
-│  └─ index.js         # Entrypoint JavaScript file
-|
-├─ template/           # Drupal Twig templates
-│
-├─ .gitignore          # List of files and folders not tracked by Git
-├─ browserconfig.xml   # Browser configuration files
-├─ manifest.json       # Site metadata
-├─ postcss.config.js   # PostCSS Plugin configurations
-├─ webpack.config.js   # Webpack configurations
-├─ package.json        # Npm dependancies
-├─ yarn.lock           # Store exactly which versions of each npm dependency were installed
-└─ README.md           # README file
-```
+* `npm run build`

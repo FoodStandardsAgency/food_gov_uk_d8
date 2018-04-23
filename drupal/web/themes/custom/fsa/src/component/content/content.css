@@ -621,6 +621,7 @@ blockquote {
   button {
     position: relative;
     display: block;
+    font-family: var(--font-family-content);
     font-size: 1em !important;
     font-weight: 600;
     text-align: left;
