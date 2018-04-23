@@ -5909,6 +5909,18 @@ html:not(.is-touch) .user-login-form a:hover,
     font-size:0.8889em;
     color:#848b8e;
   }
+.js-form-item .with-prefix{
+    display:-ms-flexbox;
+    display:flex;
+    -ms-flex-align:center;
+        align-items:center;
+  }
+.js-form-item .with-prefix .field-prefix{
+      padding-right:0.5rem;
+    }
+.js-form-item .with-prefix input{
+      min-width:0;
+    }
 .header:not(.profile){
   position:relative;
   z-index:30;
