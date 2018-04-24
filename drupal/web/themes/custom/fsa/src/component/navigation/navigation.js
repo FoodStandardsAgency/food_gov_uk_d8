@@ -9,9 +9,9 @@ function navigation () {
   const settings = {
     hoverClass: 'is-open',
     menuSelector: 'ul.navigation__menu',
-    groupSelector: 'header.navigation__header, li.navigation__item.navigation__item--level-2',
-    listItemSelector: 'header.navigation__header, li.navigation__item',
-    menuItemActionSelector: '.navigation__item a, .navigation__item button'
+    groupSelector: 'li.navigation__item.navigation__item--level-2',
+    listItemSelector: 'li.navigation__item--level-1, li.navigation__item--level-3',
+    menuItemActionSelector: 'li.navigation__item--level-1 .navigation__link--level-1, li.navigation__item--level-3 .navigation__link--level-3'
   }
 
   const keyboard = {
@@ -47,14 +47,14 @@ function navigation () {
     prev: function (item) {
       let currentItem = queryParents(item, settings.listItemSelector)
 
-      if (currentItem) {
+      if (currentItem && currentItem.previousElementSibling.matches(settings.listItemSelector)) {
         return currentItem.previousElementSibling
       }
     },
     next: function (item) {
       let currentItem = queryParents(item, settings.listItemSelector)
 
-      if (currentItem) {
+      if (currentItem && currentItem.nextElementSibling.matches(settings.listItemSelector)) {
         return currentItem.nextElementSibling
       }
     },
@@ -84,6 +84,8 @@ function navigation () {
       if (itemLevel) {
         return parseInt(itemLevel)
       }
+
+      return false
     },
 
     // Functions for traversing between groups.
@@ -91,7 +93,7 @@ function navigation () {
       prev: function (item) {
         let currentGroup = queryParents(item, settings.groupSelector)
         if (currentGroup) {
-          return currentGroup.previousElementSibling
+          return traversing.siblings.prev(currentGroup, settings.groupSelector)
         }
 
         return null
@@ -99,7 +101,7 @@ function navigation () {
       next: function (item) {
         let currentGroup = queryParents(item, settings.groupSelector)
         if (currentGroup) {
-          return currentGroup.nextElementSibling
+          return traversing.siblings.next(currentGroup, settings.groupSelector)
         }
 
         return null
@@ -128,10 +130,26 @@ function navigation () {
     },
 
     focus: function (item) {
-      const link = item.querySelector('a')
+      const link = item.querySelector(settings.menuItemActionSelector)
 
       if (link) {
         link.focus()
+        return link
+      }
+
+      return null
+    },
+
+    siblings: {
+      prev: function(item, selector) {
+        if (item && item.previousElementSibling && item.previousElementSibling.matches(selector)) {
+          return item.previousElementSibling
+        }
+      },
+      next: function (item, selector) {
+        if (item && item.nextElementSibling && item.nextElementSibling.matches(selector)) {
+          return item.nextElementSibling
+        }
       }
     }
   }
@@ -243,9 +261,6 @@ function navigation () {
           if (upperItem) {
             traversing.focus(upperItem)
             event.preventDefault()
-
-            // TODO: Ask megamenu to close.
-            break
           }
 
           break
