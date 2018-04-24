@@ -207,6 +207,7 @@ function navigation () {
       const keycode = event.keyCode
 
       let group
+      let itemLevel
       let prevTopLevelItem
       let nextTopLevelItem
       let listItem
@@ -246,7 +247,7 @@ function navigation () {
         // 2. If no sibling, try and traverse to the outer level.
         case keyboard.UP:
           listItem = queryParents(item, settings.listItemSelector)
-          let itemLevel = traversing.getLevel(listItem)
+          itemLevel = traversing.getLevel(listItem)
           let upperItem
 
           // 1. If item level is over 2, traverse between siblings first.
@@ -299,11 +300,17 @@ function navigation () {
         // 3. If there's no sibling, traverse to next group.
         case keyboard.DOWN:
           listItem = queryParents(item, settings.listItemSelector)
+          itemLevel = traversing.getLevel(listItem)
           let innerItem = traversing.in(listItem)
 
           // 1. Try and traverse into the list item's child list.
           if (innerItem) {
-            // TODO: Ask megamenu to open first.
+            // Open megamenu first.
+            if (itemLevel == 1) {
+              let linkElement = listItem.querySelector(settings.menuItemActionSelector)
+              let openEvent = new Event('navigation:open');
+              linkElement.dispatchEvent(openEvent);
+            }
 
             traversing.focus(innerItem)
             event.preventDefault()
@@ -414,6 +421,12 @@ function navigation () {
         if (e.which === keyboard.ENTER) {
           state.toggle(element, content, 'is-open')
         }
+      })
+
+      // Add custom event listener
+      element.addEventListener('navigation:open', function(e) {
+        e.preventDefault()
+        state.toggle(element, content, 'is-open')
       })
 
       // Add a focus listener
