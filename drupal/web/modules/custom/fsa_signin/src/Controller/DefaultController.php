@@ -292,6 +292,11 @@ class DefaultController extends ControllerBase {
   public static function betaSigninDescription($version = 'short') {
 
     switch ($version) {
+
+      case 'long':
+        $description = t('This is a new beta service. Which means you’re looking at the first version of our new service. <a href="/node/724" target="_blank">What this means for you</a>.') . '<p></p>';
+        break;
+
       default:
         $description = '<!-- no description set -->';
         break;
