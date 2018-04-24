@@ -292,17 +292,6 @@ class DefaultController extends ControllerBase {
   public static function betaSigninDescription($version = 'short') {
 
     switch ($version) {
-      case 'short':
-        // @todo: Move short description to configuration?
-        $description = t('This is a new beta service. Which means you’re looking at the first version of our new service. <a href="/node/724" target="_blank">What this means for you</a>.') . '<p></p>';
-        break;
-
-      case 'long':
-        // @todo: Move long description to configuration?
-        $description = t('<p>This is a new beta service. Which means you’re looking at the first version of our new service.</p><p>If you are already subscribed you will continue to receive alerts from the existing service. This means that for a short time you may receive two alerts on the same subject. If you are a new subscriber you will only receive alerts from the new service.</p><p>There could be technical issues found with the new service. If you are concerned about not receiving alerts, <a href="https://www.food.gov.uk/about-us/subscribe">sign-up to our existing service too</a>.</p><p>Once we have tested the new service we will stop sending alerts from the old service. We will let our subscribers know when we intend to do this.</p>') . '<p></p>';
-
-        break;
-
       default:
         $description = '<!-- no description set -->';
         break;
