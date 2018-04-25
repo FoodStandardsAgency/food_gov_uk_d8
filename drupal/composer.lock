@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "59187ad5aa3bb7aad01dffa51eaa6057",
+    "content-hash": "d06cb1fea55f82acb2f946faa046fcdf",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2510,7 +2510,8 @@
             "type": "drupal-core",
             "extra": {
                 "patches_applied": {
-                    "Combination of language negotiation and path aliasing can cause a corrupted route cache, 404s": "https://www.drupal.org/files/issues/routing-cache-language-2802403-214.patch"
+                    "Combination of language negotiation and path aliasing can cause a corrupted route cache, 404s": "https://www.drupal.org/files/issues/routing-cache-language-2802403-214.patch",
+                    "Fix exporting of new_revision when content moderation is enabled": "https://www.drupal.org/files/issues/2865223-7.patch"
                 }
             },
             "autoload": {
@@ -2954,7 +2955,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/elasticsearch_helper"
             },
-            "time": "2017-08-30T13:04:27+00:00"
+            "time": "2017-08-30 13:04:27"
         },
         {
             "name": "drupal/email_registration",
@@ -4262,7 +4263,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/media_entity_browser"
             },
-            "time": "2017-02-27T07:23:31+00:00"
+            "time": "2017-02-27 07:23:31"
         },
         {
             "name": "drupal/media_entity_document",
@@ -6543,7 +6544,7 @@
                 "source": "https://github.com/maijs/elasticsearch_helper_views/tree/8.x-1.x",
                 "issues": "https://github.com/maijs/elasticsearch_helper_views/issues"
             },
-            "time": "2018-01-30T07:15:18+00:00"
+            "time": "2018-01-30 07:15:18"
         },
         {
             "name": "masterminds/html5",
@@ -9323,7 +9324,7 @@
                 "drupal",
                 "warden"
             ],
-            "time": "2016-02-10T20:34:02+00:00"
+            "time": "2016-02-10 20:34:02"
         },
         {
             "name": "twig/twig",
