@@ -26,7 +26,7 @@ function addHeading () {
       heading.innerHTML = Drupal.t(`England and Northern Ireland`)
     } else if (element.classList.contains('js-northern-ireland-wales')) {
       heading.classList.add(`heading--small`)
-      heading.innerHTML = Drupal.t(`Northern Ireland and wales`)
+      heading.innerHTML = Drupal.t('Northern Ireland and wales')
     } else if (element.classList.contains('js-wales')) {
       heading.classList.add(`heading--small`)
       heading.innerHTML = Drupal.t(`Wales`)

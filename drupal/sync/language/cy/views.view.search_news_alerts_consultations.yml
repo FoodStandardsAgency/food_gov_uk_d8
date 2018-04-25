@@ -24,6 +24,8 @@ display:
       footer:
         result:
           content: 'Yn dangos @start-@end o @total'
+        area_text_custom:
+          content: "<div class=\"link-to-archieve\">\r\n<span>Ymgynghoriadau blaenorol</span> <a href=\"http://webarchive.nationalarchives.gov.uk/20171207145535/https://www.food.gov.uk/news-updates/consultations/search\">Archifau Cenedlaethol</a>\r\n</div>"
       exposed_form:
         options:
           submit_button: Chwilio
