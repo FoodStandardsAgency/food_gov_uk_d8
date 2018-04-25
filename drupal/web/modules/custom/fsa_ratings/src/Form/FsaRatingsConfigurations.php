@@ -66,6 +66,7 @@ class FsaRatingsConfigurations extends ConfigFormBase {
     ];
     $form['fsa_ratings_settings']['api_url'] = [
       '#markup' => '<p>' . $this->t('API base URL: <a href="@url">@url</a>', ['@url' => FhrsApiController::FSA_FHRS_API_URL]) . '</p>',
+    ];
 
     $rating_site = 'http://ratings.food.gov.uk/';
     $rating_decoupled = (bool) \Drupal::state()->get($this->ratingsDecoupled);
