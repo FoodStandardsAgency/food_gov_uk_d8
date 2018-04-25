@@ -24,7 +24,7 @@ function scrollToMultiStepForm () {
 
   // Scroll to the form element
   window.scrollTo({
-    top: webform.getBoundingClientRect().top,
+    top: webform.getBoundingClientRect().top + window.scrollY,
     behavior: 'smooth'
   })
 
