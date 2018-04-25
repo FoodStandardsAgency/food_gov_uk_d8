@@ -1301,21 +1301,20 @@ blockquote {
 }
 
 .off-canvas {
+  left: -999rem;
   position: absolute;
   top: -999rem;
-  left: 0.5rem;
-
-  &:focus {
-    top: 0.5rem;
-    z-index: 99;
-    background-color: white;
-  }
 }
 
 .off-canvas--focusable {
- &:focus {
-   top: 0.5rem;
-    z-index: 99;
-    background-color: white;
+  &:focus {
+    left: 0;
+    top: 0;
   }
+}
+
+.skip-to-content {
+  background: var(--color-white);
+  padding: 1rem;
+  z-index: 9999;
 }
