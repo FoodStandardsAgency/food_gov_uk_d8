@@ -2,6 +2,3 @@ display:
   default:
     display_options:
       title: Rhybuddion
-      footer:
-        area_text_custom:
-          content: "<div class=\"link-to-archieve\">\r\n<span>Newyddion a rhybuddion blaenorol</span> <a href=\"http://webarchive.nationalarchives.gov.uk/20171207145352/https://www.food.gov.uk/news-updates/news\">Archifau Cenedlaethol</a>\r\n</div>"
