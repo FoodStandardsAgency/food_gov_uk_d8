@@ -83,6 +83,7 @@ module:
   image: 0
   image_widget_crop: 0
   inline_entity_form: 0
+  ip_anon: 0
   language: 0
   libraries: 0
   link: 0

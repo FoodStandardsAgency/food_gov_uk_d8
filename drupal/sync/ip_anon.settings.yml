@@ -1,0 +1,7 @@
+policy: 1
+period_sessions: 21600
+period_comment_field_data: 21600
+period_watchdog: 21600
+_core:
+  default_config_hash: 1sU7Im1Zn_b-z48nlZBgNgouAPPV6Puem-U-_PKGhAY
+period_webform_submission: '0'
