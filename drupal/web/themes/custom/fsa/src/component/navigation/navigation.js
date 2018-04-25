@@ -426,7 +426,7 @@ function navigation () {
       // Add custom event listener
       element.addEventListener('navigation:open', function(e) {
         e.preventDefault()
-        state.toggle(element, content, 'is-open')
+        state.toggle(element, content, 'is-open', true)
       })
 
       // Add a focus listener
