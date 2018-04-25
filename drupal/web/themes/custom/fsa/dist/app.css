@@ -4156,6 +4156,21 @@ html:not(.is-touch) .cc_btn:hover,
   html:not(.is-touch) .cc_btn:active{
     color:#005e59 !important;
   }
+.off-canvas{
+  position:absolute;
+  top:-999rem;
+  left:0.5rem;
+}
+.off-canvas:focus{
+    top:0.5rem;
+    z-index:99;
+    background-color:white;
+  }
+.off-canvas--focusable:focus{
+   top:0.5rem;
+    z-index:99;
+    background-color:white;
+  }
 .field__field_link a,
 .button{
   display:inline-block;

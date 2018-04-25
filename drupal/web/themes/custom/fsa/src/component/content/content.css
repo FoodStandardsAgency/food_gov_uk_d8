@@ -1299,3 +1299,23 @@ blockquote {
     color: var(--darker-primary-color) !important;
   }
 }
+
+.off-canvas {
+  position: absolute;
+  top: -999rem;
+  left: 0.5rem;
+
+  &:focus {
+    top: 0.5rem;
+    z-index: 99;
+    background-color: white;
+  }
+}
+
+.off-canvas--focusable {
+ &:focus {
+   top: 0.5rem;
+    z-index: 99;
+    background-color: white;
+  }
+}
