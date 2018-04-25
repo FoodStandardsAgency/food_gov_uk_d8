@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "973d56b776350f1fdf9cd580db7cfb29",
+    "content-hash": "ca3a12bbeeaff9fb4b95448d6fe56dc3",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -3981,6 +3981,53 @@
             "homepage": "https://www.drupal.org/project/inline_entity_form",
             "support": {
                 "source": "http://cgit.drupalcode.org/inline_entity_form"
+            }
+        },
+        {
+            "name": "drupal/ip_anon",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/ip_anon",
+                "reference": "8.x-1.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/ip_anon-8.x-1.2.zip",
+                "reference": "8.x-1.2",
+                "shasum": "89256c2fd686d12a80b43d6306690fb14e4d9d21"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.2",
+                    "datestamp": "1487056984",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "mfb",
+                    "homepage": "https://www.drupal.org/user/12302"
+                }
+            ],
+            "description": "Implements an IP address retention policy.",
+            "homepage": "https://www.drupal.org/project/ip_anon",
+            "support": {
+                "source": "http://cgit.drupalcode.org/ip_anon"
             }
         },
         {
