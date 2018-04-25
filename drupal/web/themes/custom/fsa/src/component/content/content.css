@@ -1299,3 +1299,22 @@ blockquote {
     color: var(--darker-primary-color) !important;
   }
 }
+
+.off-canvas {
+  left: -999rem;
+  position: absolute;
+  top: -999rem;
+}
+
+.off-canvas--focusable {
+  &:focus {
+    left: 0;
+    top: 0;
+  }
+}
+
+.skip-to-content {
+  background: var(--color-white);
+  padding: 1rem;
+  z-index: 9999;
+}
