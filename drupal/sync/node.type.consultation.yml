@@ -12,6 +12,6 @@ name: Consultation
 type: consultation
 description: 'Use <em>Consultation</em> content type to create <strong>Consultation</strong>, <strong>Help shape our policies</strong> or <strong>Rapidly developing policies</strong> content pages.'
 help: ''
-new_revision: false
+new_revision: true
 preview_mode: 1
 display_submitted: false
