@@ -29,3 +29,4 @@ drupal/conf/settings.private.php
 
 # Ignore local development services
 drupal/web/sites/development.services.yml
+/drupal/web/sites/default/settings.private.php
