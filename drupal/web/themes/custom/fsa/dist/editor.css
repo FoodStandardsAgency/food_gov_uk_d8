@@ -2385,3 +2385,17 @@ html:not(.is-touch) .cc_btn:hover,
   html:not(.is-touch) .cc_btn:active{
     color:#005e59 !important;
   }
+.off-canvas{
+  left:-999rem;
+  position:absolute;
+  top:-999rem;
+}
+.off-canvas--focusable:focus{
+    left:0;
+    top:0;
+  }
+.skip-to-content{
+  background:#fff;
+  padding:1rem;
+  z-index:9999;
+}

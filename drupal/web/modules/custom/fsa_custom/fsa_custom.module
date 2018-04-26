@@ -112,7 +112,8 @@ function fsa_custom_preprocess_page_title(&$variables) {
     if ($entity->hasField('field_nation')) {
       $nations = $entity->get('field_nation');
 
-      if (!empty($nations)) {
+      if (!$nations->isEmpty()) {
+
         // Get current language code to be able to translate taxonomy vocabulary later
         $current_langcode = \Drupal::languageManager()->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)->getId();
 
