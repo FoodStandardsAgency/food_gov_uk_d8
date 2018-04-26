@@ -161,6 +161,13 @@
         use_dhparam: True
         backends:
           - 127.0.0.1:8081
+        extra_forwards:
+          - forward_from_path: '^/sites/default/files/([^]+).pdf$'
+            forward_to: /sites/default/files/media/document/$1.pdf
+            type: permanent
+          - forward_from_path: '^/sites/default/files/multimedia/pdfs/(.*)$'
+            forward_to: /sites/default/files/media/document/$1
+            type: permanent
       - server_name: "{{ domain2_name }}"
         # Certbot is configured to smash all certificates into the first one
         # So domain2 uses domain1 certificate
@@ -171,6 +178,13 @@
         use_dhparam: True
         backends:
           - 127.0.0.1:8081
+        extra_forwards:
+          - forward_from_path: '^/sites/default/files/([^/]+).pdf$'
+            forward_to: /sites/default/files/media/document/$1.pdf
+            type: permanent
+          - forward_from_path: '^/sites/default/files/multimedia/pdfs/(.*)$'
+            forward_to: /sites/default/files/media/document/$1
+            type: permanent
 
     # Forward to www and https.
     httpforwards:
