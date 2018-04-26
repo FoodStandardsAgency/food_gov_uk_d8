@@ -29,6 +29,9 @@ function fsa_custom_preprocess_page(&$variables) {
   // (".page-print-trigger" html class).
   $variables['#attached']['library'][] = 'fsa_custom/page_print';
 
+  // Attach addToAny js(workaround to set main share button label transalted)
+  $variables['#attached']['library'][] = 'fsa_custom/add_to_any';
+
   // Hardcoded "utility menu" links.
   // Get the contact link from settings. Default to 58 which happened to be the
   // first version contact lander.

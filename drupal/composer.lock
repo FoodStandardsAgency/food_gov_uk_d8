@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "59187ad5aa3bb7aad01dffa51eaa6057",
+    "content-hash": "faf8f4bc286151895c6d4466986a3326",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2514,7 +2514,8 @@
             "type": "drupal-core",
             "extra": {
                 "patches_applied": {
-                    "Combination of language negotiation and path aliasing can cause a corrupted route cache, 404s": "https://www.drupal.org/files/issues/routing-cache-language-2802403-214.patch"
+                    "Combination of language negotiation and path aliasing can cause a corrupted route cache, 404s": "https://www.drupal.org/files/issues/routing-cache-language-2802403-214.patch",
+                    "Fix exporting of new_revision when content moderation is enabled": "https://www.drupal.org/files/issues/2865223-7.patch"
                 }
             },
             "autoload": {
@@ -2958,7 +2959,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/elasticsearch_helper"
             },
-            "time": "2017-08-30T13:04:27+00:00"
+            "time": "2017-08-30 13:04:27"
         },
         {
             "name": "drupal/email_registration",
@@ -4266,7 +4267,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/media_entity_browser"
             },
-            "time": "2017-02-27T07:23:31+00:00"
+            "time": "2017-02-27 07:23:31"
         },
         {
             "name": "drupal/media_entity_document",
@@ -4846,6 +4847,62 @@
             }
         },
         {
+            "name": "drupal/path_redirect_import",
+            "version": "1.0.0-beta1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/path_redirect_import",
+                "reference": "8.x-1.0-beta1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/path_redirect_import-8.x-1.0-beta1.zip",
+                "reference": "8.x-1.0-beta1",
+                "shasum": "b072114023a1dc44ceb31969b13083afb4120dd7"
+            },
+            "require": {
+                "drupal/core": "~8.0",
+                "drupal/redirect": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-beta1",
+                    "datestamp": "1485452283",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "gabrielu",
+                    "homepage": "https://www.drupal.org/user/279352"
+                },
+                {
+                    "name": "plopesc",
+                    "homepage": "https://www.drupal.org/user/282415"
+                },
+                {
+                    "name": "tjwelde",
+                    "homepage": "https://www.drupal.org/user/3411453"
+                }
+            ],
+            "description": "Provides the ability to import redirects for the Redirect module",
+            "homepage": "https://www.drupal.org/project/path_redirect_import",
+            "support": {
+                "source": "http://cgit.drupalcode.org/path_redirect_import"
+            }
+        },
+        {
             "name": "drupal/pathauto",
             "version": "1.0.0",
             "source": {
@@ -4973,17 +5030,17 @@
         },
         {
             "name": "drupal/redirect",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/redirect",
-                "reference": "8.x-1.0"
+                "reference": "8.x-1.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/redirect-8.x-1.0.zip",
-                "reference": "8.x-1.0",
-                "shasum": "93021b77f225a3035fbee361a21850a36a8cd684"
+                "url": "https://ftp.drupal.org/files/projects/redirect-8.x-1.1.zip",
+                "reference": "8.x-1.1",
+                "shasum": "32916081c436ea325b51bc5b3ec840fa19857cf7"
             },
             "require": {
                 "drupal/core": "~8"
@@ -4994,12 +5051,15 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0",
-                    "datestamp": "1513767485",
+                    "version": "8.x-1.1",
+                    "datestamp": "1520897880",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
+                },
+                "patches_applied": {
+                    "Allow wildcards": "https://www.drupal.org/files/issues/2018-03-16/support_for_wildcards-2831605-11.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -5534,6 +5594,65 @@
             "homepage": "https://www.drupal.org/project/video_embed_field",
             "support": {
                 "source": "http://cgit.drupalcode.org/video_embed_field"
+            }
+        },
+        {
+            "name": "drupal/view_unpublished",
+            "version": "1.0.0-alpha1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/view_unpublished",
+                "reference": "8.x-1.0-alpha1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/view_unpublished-8.x-1.0-alpha1.zip",
+                "reference": "8.x-1.0-alpha1",
+                "shasum": "6c5928295162027cd4da8f45aba6111d11e899f0"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-alpha1",
+                    "datestamp": "1483493344",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Alpha releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "amaria",
+                    "homepage": "https://www.drupal.org/user/66428"
+                },
+                {
+                    "name": "beeradb",
+                    "homepage": "https://www.drupal.org/user/120651"
+                },
+                {
+                    "name": "elevins",
+                    "homepage": "https://www.drupal.org/user/781882"
+                },
+                {
+                    "name": "entendu",
+                    "homepage": "https://www.drupal.org/user/173461"
+                }
+            ],
+            "description": "Select which roles should be able to see unpublished nodes.",
+            "homepage": "https://www.drupal.org/project/view_unpublished",
+            "support": {
+                "source": "http://cgit.drupalcode.org/view_unpublished"
             }
         },
         {
@@ -6547,7 +6666,7 @@
                 "source": "https://github.com/maijs/elasticsearch_helper_views/tree/8.x-1.x",
                 "issues": "https://github.com/maijs/elasticsearch_helper_views/issues"
             },
-            "time": "2018-01-30T07:15:18+00:00"
+            "time": "2018-01-30 07:15:18"
         },
         {
             "name": "masterminds/html5",
@@ -9327,7 +9446,7 @@
                 "drupal",
                 "warden"
             ],
-            "time": "2016-02-10T20:34:02+00:00"
+            "time": "2016-02-10 20:34:02"
         },
         {
             "name": "twig/twig",
@@ -11494,13 +11613,13 @@
         "drupal/better_exposed_filters": 15,
         "drupal/email_registration": 5,
         "drupal/field_validation": 15,
-        "drupal/redirect": 10,
         "drupal/config_readonly": 10,
         "drupal/webform_views": 15,
         "drupal/diff": 5,
         "drupal/icon_select": 10,
         "maijs/elasticsearch_helper_views": 20,
-        "drupal/datalayer": 10
+        "drupal/datalayer": 10,
+        "drupal/path_redirect_import": 10
     },
     "prefer-stable": true,
     "prefer-lowest": false,
