@@ -21,7 +21,7 @@
   },
   "scripts": {
     "test": "standard",
-    "watch": "webpack --mode development --watch",
+    "watch": "webpack --mode development --watch --devtool source-map",
     "build": "webpack --mode production"
   },
   "keywords": [],
