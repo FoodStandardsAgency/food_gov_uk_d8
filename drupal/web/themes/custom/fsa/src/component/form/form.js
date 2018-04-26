@@ -22,15 +22,17 @@ function scrollToMultiStepForm () {
   const webform = document.querySelector('.webform-submission-form')
   if (!webform || !webform.querySelector('input[value="Previous"]')) return
 
-  // Scroll to the form element
-  window.scrollTo({
-    top: webform.getBoundingClientRect().top + window.scrollY,
-    behavior: 'smooth'
-  })
-
   // Focus the first form input
   const firstInput = webform.querySelector('input, textarea, select')
-  if (firstInput) firstInput.focus()
+  if (firstInput) {
+    firstInput.focus({'preventScroll': true})
+
+    // Scroll to the form element
+    window.scrollTo({
+      top: webform.getBoundingClientRect().top + window.scrollY,
+      behavior: 'smooth'
+    })
+  }
 }
 
 module.exports = { autoOpenFormError, scrollToMultiStepForm }
