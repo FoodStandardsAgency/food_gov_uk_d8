@@ -12,8 +12,11 @@ function fsa_preprocess_fieldset(&$variables) {
     'edit-region',
     'edit-fhrs-rating-value--11',
     'edit-fhis-rating-value--11',
+    'edit-consultation-year',
+    'edit-consultation-status',
+    'edit-consultation-responses-published'
   ];
-  
+
   $variables['toggle_fieldset'] = false;
 
   if (in_array($variables['element']['#id'], $add_attrs)) {

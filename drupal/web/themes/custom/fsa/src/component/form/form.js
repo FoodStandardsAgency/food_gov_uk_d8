@@ -1,6 +1,6 @@
 import state from '../../helper/toggleHelpers'
 
-function form () {
+function autoOpenFormError () {
   // If there's an error, open the content where the error is
   const profileManager = document.querySelector('#profile-manager')
   if (!profileManager) return
@@ -15,4 +15,22 @@ function form () {
   state.on({ element: toggleButton, type: 'button' }, 'is-open')
 }
 
-module.exports = form
+function scrollToMultiStepForm () {
+  // If user is completing a form with multiple steps, autoscroll to each step
+
+  // Check if user is halfway through completing a multi-step form
+  const webform = document.querySelector('.webform-submission-form')
+  if (!webform || !webform.querySelector('input[value="Previous"]')) return
+
+  // Scroll to the form element
+  window.scrollTo({
+    top: webform.getBoundingClientRect().top + window.scrollY,
+    behavior: 'smooth'
+  })
+
+  // Focus the first form input
+  const firstInput = webform.querySelector('input, textarea, select')
+  if (firstInput) firstInput.focus()
+}
+
+module.exports = { autoOpenFormError, scrollToMultiStepForm }
