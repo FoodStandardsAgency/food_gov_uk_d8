@@ -12,3 +12,10 @@ page_print:
   dependencies:
     - core/drupal
     - core/jquery.once
+add_to_any:
+  version: 1.x
+  js:
+    js/add-to-any.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery.once
