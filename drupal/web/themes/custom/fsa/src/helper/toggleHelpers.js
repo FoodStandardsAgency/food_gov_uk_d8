@@ -31,8 +31,12 @@ const state = {
     }
   },
 
-  toggle: (elem, elemRefItem, elemState) => {
-    if (elemRefItem.classList.contains(elemState)) {
+  toggle: (elem, elemRefItem, elemState, newState) => {
+    if (newState == undefined) {
+      newState = !elemRefItem.classList.contains(elemState)
+    }
+
+    if (!newState) {
       state.off({element: elem, type: 'button'}, elemState)
       state.off({element: elemRefItem, type: 'content'}, elemState)
     } else {
