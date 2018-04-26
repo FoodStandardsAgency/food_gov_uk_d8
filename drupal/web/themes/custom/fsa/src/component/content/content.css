@@ -704,10 +704,6 @@ blockquote {
         background-image: var(--icon-share-primary);
       }
 
-      &:after {
-        content: 'Share';
-      }
-
       img {
         position: absolute !important;
         clip: rect(1px, 1px, 1px, 1px);
