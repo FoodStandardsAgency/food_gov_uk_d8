@@ -1,15 +1,15 @@
-uuid: 3cac6ff1-feb9-4543-b5c3-15c4fcb4cd86
+uuid: 9cd55e45-d095-4038-b787-6b6d42117fa4
 langcode: en
 status: true
 dependencies:
   config:
-    - node.type.page
-id: node.page.status
+    - node.type.generic
+id: node.generic.status
 field_name: status
 entity_type: node
-bundle: page
-label: 'Publishing status'
-description: 'A boolean indicating the published state.'
+bundle: generic
+label: Published
+description: ''
 required: false
 translatable: true
 default_value:

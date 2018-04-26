@@ -7,8 +7,8 @@ dependencies:
 third_party_settings:
   menu_ui:
     available_menus:
-      - footer
       - help
+      - footer
       - main
     parent: 'main:'
 name: 'Generic page'
