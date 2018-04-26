@@ -74,7 +74,7 @@ function fsa_gtm_preprocess_menu(&$variables) {
  * Set navref for item and its children.
  */
 function _fsa_gtm_set_navref(&$item, $navref) {
-  if (!$item['url']->isExternal()) {
+  if (!$item['url']->isExternal() && !empty($item['url']->toString())) {
     $item['url']->setOption('query', ['navref' => $navref]);
   }
   if (isset($item['below'])) {

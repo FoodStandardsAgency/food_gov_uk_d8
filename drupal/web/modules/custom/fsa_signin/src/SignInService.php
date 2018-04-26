@@ -114,7 +114,9 @@ class SignInService {
       $description = FALSE;
       $full_term = Term::load($term->tid);
       if ($full_term->hasField('field_alternative_label') && $full_term->field_alternative_label->value != '') {
-        $description = ' <span class="light">' . $full_term->field_alternative_label->value . '</span>';
+        $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        $localized_term = \Drupal::service('entity.repository')->getTranslationFromContext($full_term, $langcode);
+        $description = ' <span class="light">' . $localized_term->field_alternative_label->value . '</span>';
       }
       $options[$term->tid] = $this->t($term->name)->render() . $description;
     }
