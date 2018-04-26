@@ -37,7 +37,7 @@ class AlertSubscribeNav extends BlockBase {
       $delivery_page = DefaultController::linkMarkup('fsa_signin.user_registration_form', $delivery_title);
     }
     else {
-      $delivery_page = $delivery_title;
+      $delivery_page = '<span>' . $delivery_title . '</span>';
     }
 
     $items = [
