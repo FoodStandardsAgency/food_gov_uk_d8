@@ -704,10 +704,6 @@ blockquote {
         background-image: var(--icon-share-primary);
       }
 
-      &:after {
-        content: 'Share';
-      }
-
       img {
         position: absolute !important;
         clip: rect(1px, 1px, 1px, 1px);
@@ -1298,4 +1294,23 @@ blockquote {
   :--not-touch &:--enter {
     color: var(--darker-primary-color) !important;
   }
+}
+
+.off-canvas {
+  left: -999rem;
+  position: absolute;
+  top: -999rem;
+}
+
+.off-canvas--focusable {
+  &:focus {
+    left: 0;
+    top: 0;
+  }
+}
+
+.skip-to-content {
+  background: var(--color-white);
+  padding: 1rem;
+  z-index: 9999;
 }
