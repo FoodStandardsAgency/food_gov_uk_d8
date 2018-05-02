@@ -40,7 +40,7 @@ abstract class FsaNotifyMessage {
         break;
 
       default:
-        $base_url = 'https://beta.food.gov.uk';
+        $base_url = 'https://www.food.gov.uk';
         break;
     }
 
