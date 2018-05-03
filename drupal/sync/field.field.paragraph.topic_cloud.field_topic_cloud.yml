@@ -13,7 +13,7 @@ bundle: topic_cloud
 label: 'Information by topic'
 description: 'Select topics to create a cloud of topic links.'
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
