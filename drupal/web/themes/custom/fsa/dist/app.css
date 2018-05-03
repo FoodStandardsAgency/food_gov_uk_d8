@@ -7599,8 +7599,8 @@ html:not(.is-touch) .sub-navigation > .menu > li:not(.menu-item--active-trail) >
   }
 @media (min-width: 60em){
 .sub-navigation > .menu > li > .menu > li{
-    -ms-flex:1 1 0px;
-        flex:1 1 0;
+    -ms-flex:1 1 100%;
+        flex:1 1 100%;
     margin:0 0.25em;
     margin-bottom:0
 }
