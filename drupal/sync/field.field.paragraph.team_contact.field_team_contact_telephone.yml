@@ -12,7 +12,7 @@ bundle: team_contact
 label: Telephone
 description: 'Use this format: 020 7276 8829'
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
