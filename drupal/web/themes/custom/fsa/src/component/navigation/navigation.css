@@ -1210,7 +1210,7 @@
   }
 
   @media (--breakpoint-md) {
-    flex: 1 1 0;
+    flex: 1 1 100%;
     margin: 0 0.25em;
     margin-bottom: 0;
   }
