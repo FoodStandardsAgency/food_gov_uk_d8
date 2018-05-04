@@ -56,34 +56,33 @@ class AlertJsonToHtml extends FormatterBase {
           $table_caption = $this->itemWrapper(FALSE, nl2br($value['productName']), 'p');
         }
 
+        // Optional product code(s).
+        if (isset($value['productCode'])) {
+          $table_rows[] = [t('Product code'), $value['productCode']];
+        }
+
         // Optional pack size description.
         if (isset($value['packSizeDescription'])) {
           $table_rows[] = [t('Pack size'), $value['packSizeDescription']];
         }
 
-        // Optional product code(s).
-        if (isset($value['productCodes'])) {
-          $table_rows[] = [t('Product code'), $value['productCodes']];
-        }
-
         if (isset($value['batchDescription'])) {
           // Loop through batch descriptions and get only content from keys we
-          // care about.
+          // care about. Define content we want mapped with translatable labels.
+          $batch_fields = [
+            'batchCode' => t('Batch code'),
+            'lotNumber' => t('Lot number'),
+            'bestBeforeDate' => t('Best before date'),
+            'useByDescription' => t('Use by'),
+            'bestBeforeDescription' => t('Best before'),
+            'batchTextDescription' => t('Batch description'),
+            'useByDate' => t('Use by date'),
+          ];
           foreach ($value['batchDescription'] as $b_key => $b_value) {
-            if (isset($b_value['batchCode'])) {
-              $table_rows[] = [t('Batch code'), $b_value['batchCode']];
-            }
-            if (isset($b_value['bestBeforeDate'])) {
-              $table_rows[] = [t('Best before date'), $b_value['bestBeforeDate']];
-            }
-            if (isset($b_value['bestBeforeDescription'])) {
-              $table_rows[] = [t('Best before description'), $b_value['bestBeforeDescription']];
-            }
-            if (isset($b_value['useByDate'])) {
-              $table_rows[] = [t('Use by date'), $b_value['useByDate']];
-            }
-            if (isset($b_value['useByDescription'])) {
-              $table_rows[] = [t('Use by description'), $b_value['useByDescription']];
+            foreach ($batch_fields as $batch_field_key => $batch_field_value) {
+              if (isset($b_value[$batch_field_key])) {
+                $table_rows[] = [$batch_field_value, $b_value[$batch_field_key]];
+              }
             }
           }
         }
