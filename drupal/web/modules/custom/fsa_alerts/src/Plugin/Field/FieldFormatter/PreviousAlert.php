@@ -44,13 +44,15 @@ class PreviousAlert extends BasicStringFormatter {
         }
       }
 
-      if ($link) {
-        $elements[$delta] = [
-          '#type' => 'inline_template',
-          '#template' => '{{ value|nl2br }}',
-          '#context' => ['value' => $link],
-        ];
-      }
+      // In case there was no match to a node just display the field value.
+      $value = ($link) ? $link : $item->value;
+
+      $elements[$delta] = [
+        '#type' => 'inline_template',
+        '#template' => '{{ value|nl2br }}',
+        '#context' => ['value' => $value],
+      ];
+
     }
 
     return $elements;
