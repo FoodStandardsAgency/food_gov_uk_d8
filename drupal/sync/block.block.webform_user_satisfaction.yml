@@ -1,4 +1,4 @@
-uuid: 53fcdd5f-cfb8-435c-94e9-311c77b077f2
+uuid: ebb0e10b-e508-4983-942b-d165c6cbbd6b
 langcode: en
 status: true
 dependencies:
@@ -9,18 +9,18 @@ dependencies:
     - fsa
 third_party_settings:
   block_class:
-    classes: 'page-feedback form-autosubmit-on-yes'
-id: webform_page_feedback
+    classes: ''
+id: webform_user_satisfaction
 theme: fsa
-region: footer_top
-weight: -23
+region: hidden
+weight: -17
 provider: null
 plugin: webform_block
 settings:
   id: webform_block
-  label: 'Page feedback'
+  label: 'Give feedback'
   provider: webform
-  label_display: '0'
-  webform_id: page_feedback
+  label_display: visible
+  webform_id: user_satisfaction
   default_data: ''
 visibility: {  }
