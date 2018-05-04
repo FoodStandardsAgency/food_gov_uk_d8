@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.alert.field_alert_modified
     - field.field.node.alert.field_alert_notation
     - field.field.node.alert.field_alert_otherbusiness
+    - field.field.node.alert.field_alert_previous
     - field.field.node.alert.field_alert_productdetails_raw
     - field.field.node.alert.field_alert_relatedmedia
     - field.field.node.alert.field_alert_reportingbusiness
@@ -21,6 +22,7 @@ dependencies:
     - node.type.alert
   module:
     - entity_print
+    - fsa_alerts
     - fsa_alerts_import
     - link
     - text
@@ -55,6 +57,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: text_default
+    region: content
+  field_alert_previous:
+    weight: 7
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: fsa_previous_alert
     region: content
   field_alert_productdetails_raw:
     type: fsa_alert_json_formatter
