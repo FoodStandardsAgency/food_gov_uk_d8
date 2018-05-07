@@ -8,8 +8,7 @@
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\fsa_custom\FsaCustomHelper;
 use Drupal\block\Entity\Block;
-use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Access\AccessResult;
+
 /**
  * Implements hook_webform_element_alter().
  */
@@ -63,7 +62,7 @@ function fsa_contactus_preprocess_webform_progress(array &$variables) {
  * @param array $variables
  *   Fieldset element.
  */
-function fsa_contactus_preprocess_webform_container_base_html(&$variables) {
+function fsa_contactus_preprocess_webform_container_base_html(array &$variables) {
 
   if (isset($variables['webform_submission']) && isset($variables['value']['#id'])) {
     if ($audience = $variables['webform_submission']->getElementData('audience')) {
@@ -88,7 +87,7 @@ function fsa_contactus_preprocess_webform_container_base_html(&$variables) {
  */
 function fsa_contactus_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
-  // Add user satisfaciton form.
+  // Add the user satisfaction form to thank you page of following webforms.
   $webform_ids = [
     'foreign_object',
     'poor_hygiene_practices',
