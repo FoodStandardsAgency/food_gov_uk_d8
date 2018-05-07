@@ -12,6 +12,6 @@ name: 'Research project'
 type: research_project
 description: 'Use for <em>Research project</em> page with a reference to research programmes.'
 help: ''
-new_revision: false
+new_revision: true
 preview_mode: 1
 display_submitted: false
