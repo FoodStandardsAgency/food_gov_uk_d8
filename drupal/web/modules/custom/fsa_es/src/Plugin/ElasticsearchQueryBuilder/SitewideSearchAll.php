@@ -72,6 +72,26 @@ class SitewideSearchAll extends SitewideSearchBase {
           'operator' => 'and',
         ],
       ];
+      // Sort the result by priority list and date created
+      $query['body']['sort'] = [
+        '_script' => [
+          'type' => 'number',
+          'script' => [
+            'source' => "params.factor.get(doc[\"_type\"].value)",
+            'params' => [
+              'factor' => [
+                'page' => 0,
+                'news' => 1,
+                'alert' => 2,
+                'consultation' => 3,
+                'research' => 4,
+              ],
+            ],
+          ],
+          'order' => 'asc',
+        ],
+        'created' => 'desc',
+      ];
     }
     else {
       // Sort by created if no keywords are given.
