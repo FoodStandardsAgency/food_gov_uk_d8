@@ -2,6 +2,8 @@ uuid: b2f70c35-6fb1-4227-8436-88960bc56b35
 langcode: en
 status: true
 dependencies:
+  config:
+    - node.type.news
   module:
     - content_moderation
 _core:
@@ -59,4 +61,6 @@ type_settings:
       from:
         - draft
         - published
-  entity_types: {  }
+  entity_types:
+    node:
+      - news
