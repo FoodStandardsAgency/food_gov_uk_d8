@@ -77,7 +77,7 @@ class SitewideSearchAll extends SitewideSearchBase {
         '_script' => [
           'type' => 'number',
           'script' => [
-            'source' => "params.factor.get(doc[\"_type\"].value)",
+            'inline' => "params.factor.get(doc[\"_type\"].value)",
             'params' => [
               'factor' => [
                 'page' => 0,
