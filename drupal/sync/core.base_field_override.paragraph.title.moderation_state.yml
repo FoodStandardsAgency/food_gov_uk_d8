@@ -1,16 +1,15 @@
-uuid: d9c02733-70fb-43bf-ab86-4ad9156e0b2c
+uuid: 7df00a8a-553f-41b7-b8a7-5c96a0fabcba
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_title
     - paragraphs.paragraphs_type.title
-id: paragraph.title.field_title
-field_name: field_title
+id: paragraph.title.moderation_state
+field_name: moderation_state
 entity_type: paragraph
 bundle: title
-label: Title
-description: ''
+label: 'Moderation state'
+description: 'The moderation state of this piece of content.'
 required: false
 translatable: false
 default_value: {  }
