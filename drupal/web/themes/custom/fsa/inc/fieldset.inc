@@ -14,7 +14,10 @@ function fsa_preprocess_fieldset(&$variables) {
     'edit-fhis-rating-value--11',
     'edit-consultation-year',
     'edit-consultation-status',
-    'edit-consultation-responses-published'
+    'edit-consultation-responses-published',
+    'edit-year',
+    'edit-status',
+    'edit-responses-published'
   ];
 
   $variables['toggle_fieldset'] = false;
