@@ -274,6 +274,9 @@ fieldset {
   }
 }
 
+input, textarea {
+  appearance: none;
+}
 
 input, textarea, select {
   font-family: var(--font-family-content);

@@ -4536,6 +4536,11 @@ fieldset legend{
 .toggle-fieldset__content > *:last-child{
       padding-bottom:1em;
     }
+input, textarea{
+  -webkit-appearance:none;
+     -moz-appearance:none;
+          appearance:none;
+}
 input, textarea, select{
   font-family:'Open Sans', sans-serif;
   display:block;
@@ -13364,6 +13369,14 @@ html:not(.is-touch) .profile__logout:hover,
           border-top-right-radius:100px;
           border-bottom-right-radius:100px;
         }
+.search-block > form label{
+      position:absolute !important;
+      clip:rect(1px, 1px, 1px, 1px);
+      overflow:hidden;
+      height:1px;
+      width:1px;
+      word-wrap:normal;
+    }
 .search-block > form input:not([type="submit"]),
     .search-block > form select{
       display:none;
