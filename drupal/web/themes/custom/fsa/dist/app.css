@@ -4536,6 +4536,11 @@ fieldset legend{
 .toggle-fieldset__content > *:last-child{
       padding-bottom:1em;
     }
+input, textarea{
+  -webkit-appearance:none;
+     -moz-appearance:none;
+          appearance:none;
+}
 input, textarea, select{
   font-family:'Open Sans', sans-serif;
   display:block;
