@@ -942,7 +942,7 @@ display:
           admin_label: ''
           operator: in
           value:
-            editorial-published: editorial-published
+            editorial-archived: editorial-archived
           group: 1
           exposed: false
           expose:
