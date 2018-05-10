@@ -4,6 +4,8 @@ status: true
 dependencies:
   config:
     - node.type.consultation
+    - node.type.page
+    - node.type.research_project
   module:
     - content_moderation
 _core:
@@ -77,3 +79,5 @@ type_settings:
   entity_types:
     node:
       - consultation
+      - page
+      - research_project
