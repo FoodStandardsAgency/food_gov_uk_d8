@@ -5,6 +5,7 @@ const ExtractCSSPlugin = require('extract-text-webpack-plugin')
 const SpritePlugin = require('svg-sprite-loader/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
@@ -126,6 +127,10 @@ module.exports = {
     // Extract CSS to its own file
     new ExtractCSSPlugin({
       filename: '[name].css'
+    }),
+
+    new OptimizeCssAssetsPlugin({
+      cssProcessorOptions: { discardComments: { removeAll: true } }
     }),
 
     // Create SVG sprite
