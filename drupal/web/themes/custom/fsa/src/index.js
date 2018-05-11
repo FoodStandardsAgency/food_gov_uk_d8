@@ -17,6 +17,7 @@ import peek from './component/peek/peek'
 import fhrs from './component/fhrs/fhrs'
 import toc from './component/toc/toc'
 import { autoOpenFormError, scrollToMultiStepForm } from './component/form/form'
+import autoOpenFirstSearchFilter from './component/search/search'
 
 // Require every image asset inside of img folder
 require.context('./img/', true, /\.(gif|png|svg|jpe?g)$/)
@@ -52,6 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Forms
   autoOpenFormError()
   scrollToMultiStepForm()
+
+  // Auto-open first search filter (on desktop only)
+  autoOpenFirstSearchFilter()
 })
 
 // Sticky element
