@@ -362,7 +362,7 @@ display:
       path: admin/content/translations
       menu:
         type: tab
-        title: 'Translations required'
+        title: 'Translation required'
         description: ''
         expanded: false
         parent: ''
