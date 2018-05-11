@@ -1,6 +1,6 @@
 uuid: e725964d-7635-4224-b42b-8b62d9c417d6
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - workflows.workflow.editorial
@@ -628,7 +628,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: admin/content-moderation
+      path: admin/content-moderation/ready-to-review
       display_description: ''
       menu:
         type: 'default tab'
