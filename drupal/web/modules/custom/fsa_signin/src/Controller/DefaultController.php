@@ -3,7 +3,6 @@
 namespace Drupal\fsa_signin\Controller;
 
 use Drupal\Core\Link;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\fsa_signin\Form\ProfileManager;
 use Drupal\fsa_signin\Form\SendPasswordEmailForm;
 use Drupal\user\Form\UserLoginForm;
@@ -45,6 +44,7 @@ class DefaultController extends ControllerBase {
    * Create signin page.
    */
   public function signInPage() {
+
     // If coming from /user add a signing button even though the form is exactly
     // the same. This for UX separation of subscribers and FSA editors.
     $title = self::linkMarkup('fsa_signin.default_controller_signInPage', t('Alert subscription signin'), ['button']) . '<h2>' . $this->t('User log in') . '</h2>';
@@ -118,13 +118,26 @@ class DefaultController extends ControllerBase {
    * Create manage profile page.
    */
   public function manageProfilePage() {
+    $uid = \Drupal::currentUser()->id();
+    $account = User::load($uid);
+
+    $options = [
+      'subscribed_notifications' => $this->signInService->allergenTermsAsOptions(),
+      'subscribed_food_alerts' => $this->signInService->foodAlertsAsOptions(),
+    ];
+
+    $default_values = [
+      'subscribed_food_alerts' => $this->signInService->subscribedFoodAlerts($account),
+      'subscribed_notifications' => $this->signInService->subscribedTermIds($account),
+    ];
+
     $header = '<header class="profile__header">';
     $header .= '<h2 class="profile__heading">' . $this->t('Manage your preferences') . '</h2>';
     $header .= self::linkMarkup('user.logout.http', $this->t('Logout'), ['profile__logout']);
     $header .= '</header>';
     $header .= '<p class="profile__intro">' . $this->t("Update your subscription or unsubscribe from the alerts you're receiving") . '</p>';
 
-    $manage_form = \Drupal::formBuilder()->getForm(ProfileManager::class);
+    $manage_form = \Drupal::formBuilder()->getForm(ProfileManager::class, $account, $options, $default_values);
 
     return [
       ['#markup' => $header],
@@ -153,6 +166,7 @@ class DefaultController extends ControllerBase {
     $markup = '<h1>' . $this->t('Subscription complete') . '</h1>';
     $markup .= '<p>' . $this->t("Thank you for subscribing to Food Standards Agency's updates.") . '</p>';
     $markup .= '<p>' . self::betaSigninDescription() . '</p>';
+    $markup .= self::linkMarkup('fsa_signin.default_controller_manageProfilePage', $this->t('Manage your preferences'), ['button']);
 
     return [
       '#markup' => $markup,
@@ -166,6 +180,7 @@ class DefaultController extends ControllerBase {
    *   Drupal\fsa_signin\Form\UnsubscribeForm.
    */
   public function unsubscribePage() {
+
     $unsubscribe_form = \Drupal::formBuilder()->getForm(UnsubscribeForm::class);
 
     return [$unsubscribe_form];
@@ -261,7 +276,7 @@ class DefaultController extends ControllerBase {
    * @return bool
    *   TRUE if user has more than one role
    */
-  public static function isMoreThanRegistered(AccountInterface $user) {
+  public static function isMoreThanRegistered($user) {
     return count($user->getRoles()) > 1;
   }
 
@@ -271,11 +286,13 @@ class DefaultController extends ControllerBase {
    * @param string $version
    *   The version of text (short|long)
    *
-   * @return \Drupal\Core\StringTranslation\TranslatableMarkup|string
+   * @return \Drupal\Core\StringTranslation\TranslatableMarkup
    *   Translatable text.
    */
   public static function betaSigninDescription($version = 'short') {
+
     switch ($version) {
+
       case 'long':
         $description = t('This is a new beta service. Which means you’re looking at the first version of our new service. <a href="/node/724" target="_blank">What this means for you</a>.') . '<p></p>';
         break;
@@ -286,6 +303,17 @@ class DefaultController extends ControllerBase {
     }
 
     return $description;
+  }
+
+  /**
+   * Print out a temporary message about beta system status.
+   *
+   * You should use drupal_set_message(t('blah blah'), $type) to set the message.
+   *
+   * @param string $type
+   *   The type of message (status|warning|error)
+   */
+  public static function betaTemporaryMessage($type = 'warning') {
   }
 
 }

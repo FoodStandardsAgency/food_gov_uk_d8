@@ -17,6 +17,7 @@ class RouteSubscriber implements EventSubscriberInterface {
   const PREREGISTRATION_ROUTES = [
     'fsa_signin.user_preregistration_alerts_form',
     'fsa_signin.user_preregistration_news_form',
+    'fsa_signin.user_registration_form',
   ];
 
   /**
@@ -42,6 +43,16 @@ class RouteSubscriber implements EventSubscriberInterface {
       }
     }
 
+    // Redirect subscribers to profile manage page from the signup pages.
+    if (\Drupal::currentUser()->isAuthenticated()) {
+      // Add signin route to the preregistration pages array.
+      $preregistration_pages[] = 'fsa_signin.default_controller_signInPage';
+      if (in_array($route_name, $preregistration_pages)) {
+        $url = Url::fromRoute('fsa_signin.default_controller_manageProfilePage')->toString();
+        $event->setResponse(new RedirectResponse($url, 301));
+      }
+    }
+
     // Redirect Administrators/editors to their Drupal profile pages. Only
     // subscribed users should be using the profile pages.
     if (\Drupal::currentUser()->isAuthenticated() && !$is_subscriber) {
@@ -54,6 +65,13 @@ class RouteSubscriber implements EventSubscriberInterface {
         $url = Url::fromRoute('entity.user.canonical', ['user' => $current_user->id()])->toString();
         $event->setResponse(new RedirectResponse($url, 301));
       }
+    }
+
+    // Signin/subscribe redirections.
+    if ($route_name == 'fsa_signin.user_preregistration') {
+      // Pre-registration "landing" page to alerts subscription.
+      $url = Url::fromRoute('fsa_signin.user_preregistration_alerts_form')->toString();
+      $event->setResponse(new RedirectResponse($url, 301));
     }
 
     if ($route_name == 'user.login' || $route_name == 'user.register') {

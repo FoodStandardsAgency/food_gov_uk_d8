@@ -6,7 +6,6 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\fsa_signin\Controller\DefaultController;
 use Drupal\fsa_signin\SignInService;
-use Drupal\user\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -48,17 +47,13 @@ class NewsForRegistrationForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    /** @var \Drupal\user\Entity\User $user */
-    $user = User::load(\Drupal::currentUser()->id());
+    /** @var \Drupal\user\PrivateTempStore $tempstore */
+    $tempstore = \Drupal::service('user.private_tempstore')->get('fsa_signin');
 
-    $news_defaults = [];
-    foreach ($user->get('field_subscribed_news')->getValue() as $value) {
-      $news_defaults[] = array_shift($value);
-    }
-    $cons_defaults = [];
-    foreach ($user->get('field_subscribed_cons')->getValue() as $value) {
-      $cons_defaults[] = array_shift($value);
-    }
+    $news_defaults = $tempstore->get('news_tids_for_registration');
+    $news_defaults = ($news_defaults === NULL) ? [] : $news_defaults;
+    $cons_defaults = $tempstore->get('cons_tids_for_registration');
+    $cons_defaults = ($cons_defaults === NULL) ? [] : $cons_defaults;
 
     $form['beta_description'] = [
       '#markup' => DefaultController::betaSigninDescription(),
@@ -87,7 +82,7 @@ class NewsForRegistrationForm extends FormBase {
     ];
     $form['actions']['submit'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Save your changes'),
+      '#value' => $this->t('Next'),
     ];
     $form['#attached']['library'][] = 'fsa_signin/subscription_alerts';
     return $form;
@@ -96,25 +91,38 @@ class NewsForRegistrationForm extends FormBase {
   /**
    * {@inheritdoc}
    */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    /** @var \Drupal\user\Entity\User $user */
-    $user = User::load(\Drupal::currentUser()->id());
+    // Start a manual session for anonymous users.
+    if (\Drupal::currentUser()->isAnonymous() && !isset($_SESSION['multistep_form_holds_session'])) {
+      $_SESSION['multistep_form_holds_session'] = TRUE;
+      \Drupal::service('session_manager')->start();
+    }
 
     $news_registration = $form_state->getValue('news_tids_for_registration');
     unset($news_registration['all']);
+
     // Filter only those user has selected:
     $selected_tids = array_filter(array_values($news_registration));
 
     $cons_registration = $form_state->getValue('cons_tids_for_registration');
     unset($cons_registration['all']);
+
     // Filter only those user has selected:
     $selected_cons_tids = array_filter(array_values($cons_registration));
 
-    $user->set('field_subscribed_news', $selected_tids);
-    $user->set('field_subscribed_cons', $selected_cons_tids);
+    /** @var \Drupal\user\PrivateTempStore $tempstore */
+    $tempstore = \Drupal::service('user.private_tempstore')->get('fsa_signin');
+    $tempstore->set('news_tids_for_registration', $selected_tids);
+    $tempstore->set('cons_tids_for_registration', $selected_cons_tids);
+    $form_state->setRedirect('fsa_signin.user_registration_form');
 
-    $user->save();
-    $form_state->setRedirect('fsa_signin.default_controller_manageProfilePage');
   }
 
 }
