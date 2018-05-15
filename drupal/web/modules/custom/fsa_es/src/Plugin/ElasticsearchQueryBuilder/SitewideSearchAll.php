@@ -74,18 +74,19 @@ class SitewideSearchAll extends SitewideSearchBase {
       ];
       // Sort the result by priority list and date created
       $query['body']['sort'] = [
+        // Sort by the content type
         '_script' => [
           'type' => 'number',
           'script' => [
-            'inline' => "params.factor.get(doc[\"_type\"].value)",
+            'lang' => 'painless',
+            'inline' => 'params.content_type.get(doc._type.value)',
             'params' => [
-              'factor' => [
+              'content_type' => [
                 'page' => 0,
-                'news' => 1,
-                'alert' => 2,
-                'consultation' => 3,
-                'research' => 4,
-              ],
+                'news' => 10,
+                'alert' => 20,
+                'consultation' => 30,
+                'research' => 40,
             ],
           ],
           'order' => 'asc',
