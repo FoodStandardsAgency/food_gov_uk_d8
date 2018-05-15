@@ -87,6 +87,7 @@ class SitewideSearchAll extends SitewideSearchBase {
                 'alert' => 20,
                 'consultation' => 30,
                 'research' => 40,
+              ],
             ],
           ],
           'order' => 'asc',
