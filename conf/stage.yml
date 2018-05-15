@@ -49,14 +49,14 @@
         state: "present"
         user: nginx
       tags: ['cron']
-    - name: "Fetch Authority updates from FHRS API"
-      cron:
-        name: "Run Migrate API task to pull authority updates from the API"
-        hour: "4"
-        job: "/usr/lib/composer/vendor/bin/drush --root=/var/www/fsa/current/web mim --tag=authorities"
-        state: "present"
-        user: nginx
-      tags: ['cron']
+      #    - name: "Fetch Authority updates from FHRS API"
+      #cron:
+      #  name: "Run Migrate API task to pull authority updates from the API"
+      #  hour: "4"
+      #  job: "/usr/lib/composer/vendor/bin/drush --root=/var/www/fsa/current/web mim --tag=authorities"
+      #  state: "present"
+      #  user: nginx
+      #tags: ['cron']
 #    - name: "Fetch FHRS establishments from the API"
 #      cron:
 #        name: "Run Migrate API task twice a day to fetch FHRS establishment updates from the API"

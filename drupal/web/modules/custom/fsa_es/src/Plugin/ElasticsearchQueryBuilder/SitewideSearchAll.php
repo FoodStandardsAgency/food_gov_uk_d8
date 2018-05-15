@@ -63,13 +63,36 @@ class SitewideSearchAll extends SitewideSearchBase {
 
     // Apply the filters to the query.
     if (!empty($values['keyword'])) {
+      // Fuzzy search for All tab
       $query_must_filters[] = [
         'multi_match' => [
           'query' => $values['keyword'],
           'fields' => ['name^3', 'body'],
-          'type' => 'cross_fields',
+          'fuzziness' => 1,
           'operator' => 'and',
         ],
+      ];
+      // Sort the result by priority list and date created
+      $query['body']['sort'] = [
+        // Sort by the content type
+        '_script' => [
+          'type' => 'number',
+          'script' => [
+            'lang' => 'painless',
+            'inline' => 'params.content_type.get(doc._type.value)',
+            'params' => [
+              'content_type' => [
+                'page' => 0,
+                'news' => 10,
+                'alert' => 20,
+                'consultation' => 30,
+                'research' => 40,
+              ],
+            ],
+          ],
+          'order' => 'asc',
+        ],
+        'created' => 'desc',
       ];
     }
     else {
@@ -109,12 +132,11 @@ class SitewideSearchAll extends SitewideSearchBase {
     $langcode = $this->currentLanguage->getId();
 
     return [
+      'page-' . $langcode,
+      'news-' . $langcode,
       'alert',
       'consultation-' . $langcode,
-      'news-' . $langcode,
-      'page-' . $langcode,
       'research-' . $langcode,
     ];
   }
-
 }

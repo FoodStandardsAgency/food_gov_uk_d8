@@ -4,8 +4,10 @@ namespace Drupal\fsa_signin\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\editor\Element;
 use Drupal\fsa_signin\Controller\DefaultController;
 use Drupal\fsa_signin\SignInService;
+use Drupal\user\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -47,16 +49,17 @@ class AlertsForRegistrationForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    /** @var \Drupal\user\PrivateTempStore $tempstore */
-    $tempstore = \Drupal::service('user.private_tempstore')->get('fsa_signin');
-    $alert_tid_defaults = $tempstore->get('alert_tids_for_registration');
-    $alert_tid_defaults = ($alert_tid_defaults === NULL) ? [] : $alert_tid_defaults;
+    /** @var \Drupal\user\Entity\User $user */
+    $user = User::load(\Drupal::currentUser()->id());
 
-    $food_alert_defaults = $tempstore->get('food_alert_registration');
-    $food_alert_defaults = ($food_alert_defaults === NULL) ? [] : $food_alert_defaults;
-
-    // Set a temporary message about system status.
-    DefaultController::betaTemporaryMessage();
+    $food_alert_defaults = [];
+    foreach ($user->get('field_subscribed_food_alerts')->getValue() as $value) {
+      $food_alert_defaults[] = array_shift($value);
+    }
+    $alert_tid_defaults = [];
+    foreach ($user->get('field_subscribed_notifications')->getValue() as $value) {
+      $alert_tid_defaults[] = array_shift($value);
+    }
 
     $form['title'] = [
       '#markup' => '<h2>' . $this->t('Alerts') . '</h2>',
@@ -84,6 +87,9 @@ class AlertsForRegistrationForm extends FormBase {
       '#description' => $this->t('Select all that apply'),
     ];
     $form['actions'] = ['#type' => 'actions'];
+    $form['actions']['back'] = [
+      '#markup' => DefaultController::linkMarkup('fsa_signin.default_controller_manageProfilePage', $this->t('Previous'), ['back arrow']),
+    ];
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Next'),
@@ -95,19 +101,9 @@ class AlertsForRegistrationForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    // Start a manual session for anonymous users.
-    if (\Drupal::currentUser()->isAnonymous() && !isset($_SESSION['multistep_form_holds_session'])) {
-      $_SESSION['multistep_form_holds_session'] = TRUE;
-      \Drupal::service('session_manager')->start();
-    }
+    /** @var \Drupal\user\Entity\User $user */
+    $user = User::load(\Drupal::currentUser()->id());
 
     $food_alert_registration = $form_state->getValue('food_alert_registration');
     $food_alert_registration = array_filter(array_values($food_alert_registration));
@@ -117,10 +113,10 @@ class AlertsForRegistrationForm extends FormBase {
     // Filter only those user has selected:
     $selected_tids = array_filter(array_values($alert_tids));
 
-    /** @var \Drupal\user\PrivateTempStore $tempstore */
-    $tempstore = \Drupal::service('user.private_tempstore')->get('fsa_signin');
-    $tempstore->set('food_alert_registration', $food_alert_registration);
-    $tempstore->set('alert_tids_for_registration', $selected_tids);
+    $user->set('field_subscribed_food_alerts', $food_alert_registration);
+    $user->set('field_subscribed_notifications', $selected_tids);
+
+    $user->save();
     $form_state->setRedirect('fsa_signin.user_preregistration_news_form');
   }
 

@@ -8,9 +8,9 @@ dependencies:
     - content_translation
 third_party_settings:
   content_translation:
-    enabled: true
+    enabled: false
 id: paragraph.manual_promo
 target_entity_type_id: paragraph
 target_bundle: manual_promo
 default_langcode: site_default
-language_alterable: true
+language_alterable: false
