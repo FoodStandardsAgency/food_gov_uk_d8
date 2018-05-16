@@ -1206,7 +1206,7 @@
 }
 
 .sub-navigation > .menu > li > .menu > li {
-  // position: relative;
+  position: relative;
   margin-bottom: 0.5em;
 
   &:last-child {
@@ -1214,8 +1214,6 @@
   }
 
   @media (--breakpoint-md) {
-    // flex: 1 1 100%;
-    // flex-direction: row;
     margin: 0 0.25em;
     margin-bottom: 0;
   }
