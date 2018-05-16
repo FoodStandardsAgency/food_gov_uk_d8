@@ -1,0 +1,12 @@
+fsa_signin.manage:
+  route_name: fsa_signin.default_controller_manageProfilePage
+  title: 'Preferences'
+  base_route: fsa_signin.default_controller_manageProfilePage
+fsa_signin.manage_alerts:
+  route_name: fsa_signin.user_preregistration_alerts_form
+  title: 'Food and allergy alerts'
+  base_route: fsa_signin.default_controller_manageProfilePage
+fsa_signin.manage_news:
+  route_name: fsa_signin.user_preregistration_news_form
+  title: 'News and consultations'
+  base_route: fsa_signin.default_controller_manageProfilePage

@@ -73,6 +73,7 @@ module:
   fsa_toc: 0
   fsa_topic_listing: 0
   fsa_translate: 0
+  fsa_webform: 0
   fsa_webform_validation: 0
   geolocation: 0
   google_tag: 0
@@ -145,7 +146,6 @@ module:
   workflows: 0
   extlink: 1
   fsa_40x: 1
-  fsa_noindex: 1
   menu_link_content: 1
   pathauto: 1
   content_translation: 10

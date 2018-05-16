@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @file
+ * Adds custom webform functionality.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ *
+ * Adds a copy of "Save" button to webform submission edit form. Also removes
+ * Continue and Previous buttons from webform submission edit form where they
+ * make little sense.
+ *
+ * This simplifies the process of saving a webform submission entity without
+ * requiring to go through every webform page.
+ */
+function fsa_webform_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Target specific webforms.
+  $webform_ids = [
+    'foreign_object',
+    'poor_hygiene_practices',
+    'food_poisoning',
+  ];
+
+  if (isset($form['#webform_id']) && in_array($form['#webform_id'], $webform_ids)) {
+    $form_object = $form_state->getFormObject();
+    /** @var \Drupal\webform\WebformSubmissionInterface $webform_submission */
+    $webform_submission = $form_object->getEntity();
+
+    // Work only in edit context.
+    if (!$webform_submission->isNew()) {
+      // Only administrative roles are allowed to see the save button.
+      if ($update_permission = !empty(array_intersect(['fsa_admin', 'administrator'], \Drupal::currentUser()->getRoles()))) {
+        // Copy submit button into a new one.
+        $form['actions']['save'] = $form['actions']['submit'];
+        $form['actions']['save']['#access'] = $update_permission;
+
+        // Remove preview/wizard prev/next buttons when in edit context.
+        foreach (['preview_prev', 'wizard_prev', 'preview_next', 'wizard_next'] as $button_name) {
+          if (isset($form['actions'][$button_name])) {
+            $form['actions'][$button_name]['#access'] = FALSE;
+          }
+        }
+      }
+    }
+  }
+}
