@@ -1012,6 +1012,7 @@
     margin-bottom: -3.5em;
     transform: translateY(-3.5em);
     border-bottom: none;
+    padding-bottom: 0;
   }
 }
 
