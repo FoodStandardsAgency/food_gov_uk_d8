@@ -331,7 +331,20 @@ display:
       title: 'Translations required'
       header: {  }
       footer: {  }
-      empty: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: 'Nothing to translate'
+            format: full_html
+          plugin_id: text
       relationships:
         nid:
           id: nid
