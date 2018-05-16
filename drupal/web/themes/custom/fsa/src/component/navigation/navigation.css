@@ -1012,6 +1012,7 @@
     margin-bottom: -3.5em;
     transform: translateY(-3.5em);
     border-bottom: none;
+    padding-bottom: 0;
   }
 }
 
@@ -1194,6 +1195,11 @@
 .sub-navigation > .menu > li.menu-item--active-trail > .menu,
 .sub-navigation > .menu > li > .menu.is-open {
   display: flex;
+  flex-direction: column;
+
+  @media (--breakpoint-md) {
+    flex-direction: row;
+  }
 }
 
 .sub-navigation > .menu > li > .menu.is-closed {
@@ -1201,7 +1207,6 @@
 }
 
 .sub-navigation > .menu > li > .menu > li {
-  display: flex;
   position: relative;
   margin-bottom: 0.5em;
 
@@ -1210,7 +1215,6 @@
   }
 
   @media (--breakpoint-md) {
-    flex: 1 1 100%;
     margin: 0 0.25em;
     margin-bottom: 0;
   }
