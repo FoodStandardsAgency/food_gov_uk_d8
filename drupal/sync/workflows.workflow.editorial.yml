@@ -2,6 +2,10 @@ uuid: b2f70c35-6fb1-4227-8436-88960bc56b35
 langcode: en
 status: true
 dependencies:
+  config:
+    - node.type.consultation
+    - node.type.page
+    - node.type.research_project
   module:
     - content_moderation
 _core:
@@ -20,66 +24,60 @@ type_settings:
       label: Draft
       published: false
       default_revision: false
-      weight: 0
-    drafted:
-      published: false
-      default_revision: true
-      label: Drafted
-      weight: 1
+      weight: -5
     published:
       label: Published
       published: true
       default_revision: true
-      weight: 4
+      weight: 0
+    ready_for_review:
+      published: false
+      default_revision: false
+      label: 'Ready for review'
+      weight: -4
   transitions:
     archive:
       label: Archive
       from:
         - published
       to: archived
-      weight: 5
+      weight: 3
     archived_draft:
-      label: 'Restore from archived to draft'
+      label: 'Restore to Draft'
       from:
         - archived
+        - ready_for_review
       to: draft
-      weight: 7
+      weight: 4
     archived_published:
-      label: 'Restore from archived'
+      label: Restore
       from:
         - archived
       to: published
-      weight: 6
+      weight: 5
     create_new_draft:
       label: 'Create new draft'
       to: draft
       weight: 0
       from:
         - draft
+        - published
     publish:
       label: Publish
       to: published
-      weight: 3
-      from:
-        - drafted
-        - published
-    ready_for_review:
-      label: 'Ready for review'
+      weight: 2
       from:
         - draft
-        - drafted
-      to: drafted
-      weight: 1
-    restore_from_drafted:
-      label: 'Restore from drafted'
-      from:
-        - drafted
-      to: draft
-      weight: 2
-    restore_from_published_to_drafted:
-      label: 'Restore from published to drafted'
-      from:
         - published
-      to: drafted
-      weight: 4
-  entity_types: {  }
+        - ready_for_review
+    submit_draft:
+      label: 'Submit draft'
+      from:
+        - draft
+      to: ready_for_review
+      weight: 1
+  entity_types:
+    node:
+      - consultation
+      - page
+      - research_project

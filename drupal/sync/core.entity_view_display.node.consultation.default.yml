@@ -56,6 +56,9 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
+  content_moderation_control:
+    weight: -20
+    region: content
   field_consultation_closing_date:
     weight: 5
     label: inline

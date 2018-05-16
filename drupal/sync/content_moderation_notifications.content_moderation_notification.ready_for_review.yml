@@ -1,0 +1,17 @@
+uuid: 968fd912-7a75-4c32-b514-75c5a4d3ad0c
+langcode: en
+status: true
+dependencies: {  }
+id: ready_for_review
+workflow: editorial
+transitions:
+  submit_draft: submit_draft
+roles:
+  editor: editor
+author: true
+emails: ''
+subject: 'Ready for review!'
+body:
+  value: "<p>New draft content has been submitted for review.</p>\r\n"
+  format: full_html
+label: 'Ready for review'
