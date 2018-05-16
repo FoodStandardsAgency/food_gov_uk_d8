@@ -27,6 +27,9 @@ settings:
   views_label: ''
   filters:
     type: type
+    status: status
+    responses_published: responses_published
+    year: year
     region: region
     keywords: 0
   post_route_name: ''

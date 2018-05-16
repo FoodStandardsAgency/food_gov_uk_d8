@@ -59,7 +59,7 @@ display:
               more_options:
                 is_secondary: false
                 placeholder_text: ''
-            ratings_business_type:
+            news_type:
               bef_format: default
               more_options:
                 bef_select_all_none: false
@@ -67,7 +67,7 @@ display:
                 is_secondary: false
                 rewrite:
                   filter_rewrite_values: ''
-            ratings_local_authority:
+            consultation_status:
               bef_format: default
               more_options:
                 bef_select_all_none: false
@@ -75,7 +75,7 @@ display:
                 is_secondary: false
                 rewrite:
                   filter_rewrite_values: ''
-            ratings_fhrs_rating_value:
+            consultation_responses_published:
               bef_format: default
               more_options:
                 bef_select_all_none: false
@@ -83,7 +83,15 @@ display:
                 is_secondary: false
                 rewrite:
                   filter_rewrite_values: ''
-            ratings_fhis_rating_value:
+            consultation_year:
+              bef_format: bef
+              more_options:
+                bef_select_all_none: false
+                bef_collapsible: false
+                is_secondary: false
+                rewrite:
+                  filter_rewrite_values: ''
+            nation:
               bef_format: default
               more_options:
                 bef_select_all_none: false
@@ -360,27 +368,30 @@ display:
             identifier: year
             required: false
             remember: false
-            multiple: false
+            multiple: true
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
-              editor: '0'
               author: '0'
+              editor: '0'
               fsa_admin: '0'
               administrator: '0'
             reduce: 0
           is_grouped: false
           group_info:
-            label: ''
-            description: ''
-            identifier: ''
+            label: Year
+            description: null
+            identifier: consultation_year
             optional: true
             widget: select
             multiple: false
             remember: false
             default_group: All
             default_group_multiple: {  }
-            group_items: {  }
+            group_items:
+              1: {  }
+              2: {  }
+              3: {  }
           plugin_id: fsa_consultation_year
         nation:
           id: nation
