@@ -72,14 +72,21 @@ class SitewideSearchAll extends SitewideSearchBase {
           'operator' => 'and',
         ],
       ];
-      // Sort the result by priority list and date created
+      // Sort the result by priority list and date created params.content_type.get(doc[\'_type\'].value)
       $query['body']['sort'] = [
-        // Sort by the content type
+        // If the index `type` is `page`, then sort by page taxonomy `content_type`
+        // Else, sort by index `type`
         '_script' => [
           'type' => 'number',
           'script' => [
             'lang' => 'painless',
-            'inline' => 'params.content_type.get(doc._type.value)',
+            'inline' => '
+                if (doc._type.value == "page") {
+                  params.page_taxonomy.get(params._source.content_type[0].label)
+                } else {
+                  params.content_type.get(doc._type.value)
+                }
+            ',
             'params' => [
               'content_type' => [
                 'page' => 0,
@@ -87,6 +94,14 @@ class SitewideSearchAll extends SitewideSearchBase {
                 'alert' => 20,
                 'consultation' => 30,
                 'research' => 40,
+              ],
+              'page_taxonomy' => [
+                'Business guidance' => 1,
+                'Consumer guidance' => 2,
+                'About us' => 3,
+                'Help' => 4,
+                'News & alerts' => 5,
+                'Other' => 6,
               ],
             ],
           ],
