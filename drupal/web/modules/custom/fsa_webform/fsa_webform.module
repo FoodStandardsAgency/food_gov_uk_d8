@@ -25,7 +25,7 @@ function fsa_webform_form_alter(&$form, FormStateInterface $form_state, $form_id
     'food_poisoning',
   ];
 
-  if (isset($form['#webform_id']) && in_array($form['#webform_id'], $webform_ids)) {
+  if (isset($form['#webform_id']) && in_array($form['#webform_id'], $webform_ids) && strpos($form_id, 'webform_submission_') === 0) {
     $form_object = $form_state->getFormObject();
     /** @var \Drupal\webform\WebformSubmissionInterface $webform_submission */
     $webform_submission = $form_object->getEntity();
@@ -34,9 +34,30 @@ function fsa_webform_form_alter(&$form, FormStateInterface $form_state, $form_id
     if (!$webform_submission->isNew()) {
       // Only administrative roles are allowed to see the save button.
       if ($update_permission = !empty(array_intersect(['fsa_admin', 'administrator'], \Drupal::currentUser()->getRoles()))) {
-        // Copy submit button into a new one.
+        // Copy submit button into a new "save" button.
         $form['actions']['save'] = $form['actions']['submit'];
         $form['actions']['save']['#access'] = $update_permission;
+
+        // Create message handler instance. It will send out the message.
+        /** @var \Drupal\fsa_webform\WebformSubmissionMessageHandler $message_handler */
+        $message_handler = \Drupal::service('class_resolver')->getInstanceFromDefinition('\Drupal\fsa_webform\WebformSubmissionMessageHandler');
+        // Set message handler ID.
+        $message_handler->setMessageHandlerId('copy_to_la');
+
+        // Create "Save and send to local authority" button.
+        $form['actions']['save_and_send_to_la'] = [
+          '#type' => 'submit',
+          '#value' => t('Save and send to local authority'),
+          '#access' => $update_permission,
+          '#states' => [
+            'visible' => [
+              ':input[name="manually_sent"]' => ['checked' => TRUE],
+            ],
+          ],
+          '#weight' => 15,
+          '#validate' => $form['actions']['submit']['#validate'],
+          '#submit' => array_merge($form['actions']['submit']['#submit'], [[$message_handler, 'sendWebformSubmission']])
+        ];
 
         // Remove preview/wizard prev/next buttons when in edit context.
         foreach (['preview_prev', 'wizard_prev', 'preview_next', 'wizard_next'] as $button_name) {
