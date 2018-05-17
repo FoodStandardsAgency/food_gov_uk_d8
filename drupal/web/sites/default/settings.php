@@ -101,6 +101,24 @@ switch ($env) {
 
     $config['elasticsearch_helper.settings']['elasticsearch_helper']['host'] = '10.2.3.85';
 
+    // Warden settings.
+    // Shared secret between the site and Warden server.
+    $config['warden.settings']['warden_token'] = 'aCsTnss8YMAPzU6COnaYKFcr7BTiir';
+    // Location of your Warden server. No trailing slash.
+    $config['warden.settings']['warden_server_host_path'] = 'https://warden.wunder.io';
+    // Allow external callbacks to the site. When set to FALSE pressing refresh site
+    // data in Warden will not work.
+    $config['warden.settings']['warden_allow_requests'] = TRUE;
+    // Basic HTTP authorization credentials.
+    $config['warden.settings']['warden_http_username'] = 'warden';
+    $config['warden.settings']['warden_http_password'] = 'wunder';
+    // IP address of the Warden server. Only these IP addresses will be allowed to
+    // make callback # requests.
+    $config['warden.settings']['warden_public_allow_ips'] = '83.136.254.41,2a04:3541:1000:500:d456:61ff:fee3:7d8da';
+    // Define module locations.
+    $config['warden.settings']['warden_preg_match_custom'] = '{^modules\/custom\/*}';
+    $config['warden.settings']['warden_preg_match_contrib'] = '{^modules\/contrib\/*}';
+
     break;
 
   case 'develop':
