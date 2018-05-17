@@ -129,6 +129,9 @@
             },
             "drupal/redirect": {
                 "Allow wildcards": "https://www.drupal.org/files/issues/2018-03-16/support_for_wildcards-2831605-11.patch"
+            },
+            "drupal/cookieconsent": {
+                "Language prefix fix": "https://www.drupal.org/files/issues/cookieconsent-policy_link_language_aware-2937005-3-d8.patch"
             }
         }
     },
