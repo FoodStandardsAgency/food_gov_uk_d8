@@ -183,11 +183,12 @@ const navigationIntroComponentItems = introComponentArray.map((component) => {
 }).join('')
 
 const styleGuide = (templateParams) => {
-  const html =
-    `
-    <html>
+  return `
+    <html lang="en">
       <head>
-        <title>${templateParams.htmlWebpackPlugin.options.title}</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>FSA Style Guide</title>
         <style>
           ${styles}
         </style>
@@ -195,7 +196,7 @@ const styleGuide = (templateParams) => {
       <body class="${styles.locals.styleguide}">
        <article class="${styles.locals.styleGuide}">
         <section class="${styles.locals.hero}">
-          <span><b>${templateParams.htmlWebpackPlugin.options.title}</b></span> — <span class="${styles.locals.underline}">Technical Style Guide </span>
+          <span><b>Food Standards Agency</b></span> — <span class="${styles.locals.underline}">Theming Style Guide </span>
         </section>
         <section class="${styles.locals.layout} js-sticky-container">
           <aside class="${styles.locals.navigation} js-sticky-element">
@@ -212,8 +213,7 @@ const styleGuide = (templateParams) => {
       </article>
       </body>
     </html>
-    `
-  return html
+  `
 }
 
 export default styleGuide
