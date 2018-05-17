@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ca3a12bbeeaff9fb4b95448d6fe56dc3",
+    "content-hash": "956c747c557f9d7ff0dcd673a9a9dd57",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2373,6 +2373,9 @@
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
+                },
+                "patches_applied": {
+                    "Language prefix fix": "https://www.drupal.org/files/issues/cookieconsent-policy_link_language_aware-2937005-3-d8.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
