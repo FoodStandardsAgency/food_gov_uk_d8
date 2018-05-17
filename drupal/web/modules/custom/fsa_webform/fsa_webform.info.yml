@@ -1,7 +1,0 @@
-name: FSA Webform
-description: Adds support for custom webform features.
-type: module
-core: 8.x
-package: FSA
-dependencies:
-  - drupal:webform
