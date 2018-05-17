@@ -25,6 +25,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: "/admin/structure/webform/manage/foreign_object/submission/*/edit\r\n/admin/structure/webform/manage/poor_hygiene_practices/submission/*/edit\r\n/admin/structure/webform/manage/food_poisoning/submission/*/edit"
+    pages: "/admin/structure/webform/manage/foreign_object/submission/*/edit\r\n/admin/structure/webform/manage/hygiene_practices/submission/*/edit\r\n/admin/structure/webform/manage/food_poisoning/submission/*/edit"
     negate: false
     context_mapping: {  }
