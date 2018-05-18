@@ -7,6 +7,8 @@ import guid from '../helper/guid'
 import safeTagsReplace from '../helper/safeTagsReplace'
 import isColor from '../helper/isColor'
 
+const excludedComponents = ['fhrs', 'general', 'layout', 'peek']
+
 // Parse partial markup
 function parsePartialMarkup (string) {
   const re = /= "|";/
@@ -36,9 +38,9 @@ function preprocessJS (array) {
   }).join('')
 }
 
-const myArray = customProperties.toString().split(/[{}]+/).filter(function (e) { return e })
+const customPropertiesArray = customProperties.toString().split(/[{}]+/).filter(function (e) { return e })
 
-const parts = myArray[1].replace(/\s/g, '').split(';')
+const parts = customPropertiesArray[1].replace(/\s/g, '').split(';')
 const colorArray = []
 for (let i = 0; i < parts.length; i++) {
   const subParts = parts[i].split(':')
@@ -70,7 +72,6 @@ const intro = parsePartialMarkup(require('template-string-loader!./partial/intro
 const requiredHTMLComponents = require.context('../component/', true, /\.html$/)
 const requiredCSSComponents = require.context('../component/', true, /\.css$/)
 const requiredJSComponents = require.context('../component/', true, /\.js$/)
-console.log(requiredJSComponents)
 
 function uniq (a) {
   return a.sort().filter(function (item, pos, ary) {
@@ -89,6 +90,7 @@ const componentNameArrayConstructor = (html, css, js) => {
 }
 
 const componentNameArray = uniq(componentNameArrayConstructor(requiredHTMLComponents.keys(), requiredCSSComponents.keys(), requiredJSComponents.keys()))
+  .filter(name => ![...excludedComponents].includes(name))
 
 const componentArray = componentNameArray.map((componentName) => {
   let HTMLArray = []
@@ -181,11 +183,12 @@ const navigationIntroComponentItems = introComponentArray.map((component) => {
 }).join('')
 
 const styleGuide = (templateParams) => {
-  const html =
-    `
-    <html>
+  return `
+    <html lang="en">
       <head>
-        <title>${templateParams.htmlWebpackPlugin.options.title}</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>FSA Style Guide</title>
         <style>
           ${styles}
         </style>
@@ -193,7 +196,7 @@ const styleGuide = (templateParams) => {
       <body class="${styles.locals.styleguide}">
        <article class="${styles.locals.styleGuide}">
         <section class="${styles.locals.hero}">
-          <span><b>${templateParams.htmlWebpackPlugin.options.title}</b></span> — <span class="${styles.locals.underline}">Technical Style Guide </span>
+          <span><b>Food Standards Agency</b></span> — <span class="${styles.locals.underline}">Theming Style Guide </span>
         </section>
         <section class="${styles.locals.layout} js-sticky-container">
           <aside class="${styles.locals.navigation} js-sticky-element">
@@ -210,8 +213,7 @@ const styleGuide = (templateParams) => {
       </article>
       </body>
     </html>
-    `
-  return html
+  `
 }
 
 export default styleGuide

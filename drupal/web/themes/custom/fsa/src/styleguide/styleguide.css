@@ -111,6 +111,10 @@ body.styleguide {
   }
 }
 
+:global .navigation__menu.navigation__menu--level-2.js-nav-menu {
+  top: -99999px;
+}
+
 .navigation__heading {
   color: var(--styleguide-color-black);
 }
