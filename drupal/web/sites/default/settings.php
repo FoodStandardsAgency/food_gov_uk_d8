@@ -114,7 +114,7 @@ switch ($env) {
     $config['warden.settings']['warden_http_password'] = 'wunder';
     // IP address of the Warden server. Only these IP addresses will be allowed to
     // make callback # requests.
-    $config['warden.settings']['warden_public_allow_ips'] = '83.136.254.41,2a04:3541:1000:500:d456:61ff:fee3:7d8da';
+    $config['warden.settings']['warden_public_allow_ips'] = '83.136.254.41,2a04:3541:1000:500:d456:61ff:fee3:7d8d';
     // Define module locations.
     $config['warden.settings']['warden_preg_match_custom'] = '{^modules\/custom\/*}';
     $config['warden.settings']['warden_preg_match_contrib'] = '{^modules\/contrib\/*}';
