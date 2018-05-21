@@ -96,6 +96,12 @@ body.styleguide {
   margin-top: 0;
 }
 
+:global #fsa-logo {
+  width: 250px;
+  height: 160px;
+  padding-right: 30px;
+}
+
 :global .is-sticky {
   @media (--breakpoint-md) {
     position: fixed;

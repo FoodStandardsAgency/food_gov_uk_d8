@@ -6,6 +6,7 @@ import styles from './styleguide.css'
 import guid from '../helper/guid'
 import safeTagsReplace from '../helper/safeTagsReplace'
 import isColor from '../helper/isColor'
+import fsaLogo from './fsa-logo'
 
 const excludedComponents = ['fhrs', 'general', 'layout', 'peek']
 
@@ -196,6 +197,7 @@ const styleGuide = (templateParams) => {
       <body class="${styles.locals.styleguide}">
        <article class="${styles.locals.styleGuide}">
         <section class="${styles.locals.hero}">
+          ${fsaLogo}
           <span><b>Food Standards Agency</b></span> — <span class="${styles.locals.underline}">Theming Style Guide </span>
         </section>
         <section class="${styles.locals.layout} js-sticky-container">
