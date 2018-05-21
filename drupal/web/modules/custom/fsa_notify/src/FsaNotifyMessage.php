@@ -120,4 +120,68 @@ abstract class FsaNotifyMessage {
     return $message;
   }
 
+  /**
+   * Get node update timestamp to alerts.
+   *
+   * @param \Drupal\node\Entity\Node $node
+   *   The node object.
+   * @param string $format
+   *   Time display format.
+   *
+   * @return string
+   *   Formatted display of field_alert_modified, node creation time if the
+   *    field is empty.
+   */
+  public function alertModifiedDate(Node $node, $format = 'medium') {
+    if (isset($node->field_alert_modified->value)) {
+      $date = \Drupal::service('date.formatter')->format(strtotime($node->field_alert_modified->value), $format);
+    }
+    else {
+      // Get the node creation time.
+      $date = \Drupal::service('date.formatter')->format($node->getCreatedTime(), $format);
+    }
+    return $date;
+  }
+
+  /**
+   * Get alert subcription category from node.
+   *
+   * @param \Drupal\node\Entity\Node $node
+   *   The node object.
+   *
+   * @return string
+   *   The alert type/category of the node.
+   */
+  public function alertSubscriptionCategory(Node $node) {
+
+    if ($node->hasField('field_alert_type')) {
+      switch ($node->field_alert_type->value) {
+        case 'AA':
+          $category = t('Allergy alert');
+          break;
+
+        default:
+          $category = t('Food alert');
+      }
+    }
+    else {
+      switch ($node->getType()) {
+        case 'news':
+          $category = t('News update');
+          break;
+
+        case 'consultation':
+          $category = t('Consultation update');
+          break;
+
+        default:
+          // Default to whatever the node type machine name is.
+          $category = ucfirst($node->getType());
+      }
+
+    }
+
+    return $category;
+  }
+
 }
