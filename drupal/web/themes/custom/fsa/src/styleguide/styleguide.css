@@ -1,6 +1,7 @@
 /* stylelint-disable selector-pseudo-class-no-unknown */
-@import "../helper/custom-property";
-@import "../helper/helper";
+@import '../style.css';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans');
 
 :root {
   --styleguide-color-black: var(--color-black, #000);
@@ -16,9 +17,8 @@
   --styleguide-box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.1);
 }
 
-body.styleguide {
-  font-family: sans-serif;
-  font-weight: 300;
+section {
+  background-color: #fff !important;
 }
 
 .underline {
@@ -44,9 +44,6 @@ body.styleguide {
 }
 
 .hero {
-  /* background-color: var(--styleguide-primary-color-dark);
-  @mixin responsive-declaration padding, 1em, 3em;
-  text-align: center; */
   display: flex;
   align-items: center;
 
@@ -94,6 +91,21 @@ body.styleguide {
 
 .navigation > *:first-child {
   margin-top: 0;
+}
+
+:global .visually-hidden {
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  word-wrap: normal;
+}
+
+:global #fsa-logo {
+  width: 250px;
+  height: 160px;
+  padding-right: 30px;
 }
 
 :global .is-sticky {
