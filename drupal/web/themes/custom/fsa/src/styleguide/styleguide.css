@@ -21,6 +21,12 @@ section {
   background-color: #fff !important;
 }
 
+.container {
+  max-width: 1400px;
+  margin: 0 10px;
+  padding: 5px !important;
+}
+
 .underline {
   text-decoration: underline;
 }
@@ -46,6 +52,7 @@ section {
 .hero {
   display: flex;
   align-items: center;
+  background-color: #f0f3f5 !important;
 
   @mixin responsive-declaration padding, 1em, 2em;
 }
@@ -71,26 +78,15 @@ section {
   position: relative;
   z-index: var(--z-middle);
   color: var(--color-white);
-  display: flex;
-  flex-flow: row wrap;
-
-  @media (--breakpoint-md) {
-    flex-flow: column nowrap;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 20em;
-    height: 100vh;
-    overflow: auto;
   }
-
-  @media (--breakpoint-lg) {
-    width: 25.5em;
-  }
-}
 
 .navigation > *:first-child {
   margin-top: 0;
+}
+
+.navigation__links {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 :global .visually-hidden {
@@ -106,12 +102,6 @@ section {
   width: 250px;
   height: 160px;
   padding-right: 30px;
-}
-
-:global .is-sticky {
-  @media (--breakpoint-md) {
-    position: fixed;
-  }
 }
 
 :global .is-bottom {
@@ -135,8 +125,7 @@ section {
   font-size: 1em;
   text-decoration: none;
   color: var(--styleguide-primary-color);
-  display: block;
-  padding: 0.5rem 2rem;
+  padding: 5px 30px;
 }
 
 .navigationItem:hover {
@@ -165,6 +154,7 @@ section {
 
 .main {
   @mixin responsive-declaration padding, 1em, 2em;
+  margin: 0;
 }
 
 .color {

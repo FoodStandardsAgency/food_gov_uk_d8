@@ -10,13 +10,21 @@ import fsaLogo from './fsa-logo'
 
 const excludedComponents = ['fhrs', 'general', 'layout', 'peek']
 
-// Parse partial markup
+function uniq(a) {
+  return a.sort().filter(function (item, pos, ary) {
+    return !pos || item !== ary[pos - 1]
+  })
+}
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 function parsePartialMarkup (string) {
   const re = /= "|";/
   return string.split(re)[1]
 }
 
-// Preprocess html
 function preprocessHTML (array) {
   let string = []
   array.forEach(element => {
@@ -25,14 +33,12 @@ function preprocessHTML (array) {
   return string.join('')
 }
 
-// Preprocess css
 function preprocessCSS (array) {
   return array.map(element => {
     return element.replace(/"/g, '&quot;')
   }).join('')
 }
 
-// Preprocess js
 function preprocessJS (array) {
   return array.map(element => {
     return element
@@ -73,12 +79,6 @@ const intro = parsePartialMarkup(require('template-string-loader!./partial/intro
 const requiredHTMLComponents = require.context('../component/', true, /\.html$/)
 const requiredCSSComponents = require.context('../component/', true, /\.css$/)
 const requiredJSComponents = require.context('../component/', true, /\.js$/)
-
-function uniq (a) {
-  return a.sort().filter(function (item, pos, ary) {
-    return !pos || item !== ary[pos - 1]
-  })
-}
 
 const componentNameArrayConstructor = (html, css, js) => {
   let combinedComponentArray = [...html, ...css, ...js]
@@ -121,7 +121,7 @@ const componentArray = componentNameArray.map((componentName) => {
   }
 
   return {
-    title: componentName,
+    title: capitalizeFirstLetter(componentName),
     html: HTMLArray,
     css: CSSArray,
     js: JSArray
@@ -162,7 +162,7 @@ const introComponentArray = [
     element: intro
   },
   {
-    title: 'Colors',
+    title: 'Colours',
     element: colors
   }
 ]
@@ -198,8 +198,8 @@ const styleGuide = (templateParams) => {
           ${styles}
         </style>
       </head>
-      <body class="${styles.locals.styleguide}">
-       <article class="${styles.locals.styleGuide}">
+      <body id="${styles.locals.container}">
+       <article>
         <section class="${styles.locals.hero}">
           ${fsaLogo}
           <span><b>Food Standards Agency</b></span> — <span class="${styles.locals.underline}">Theming Style Guide </span>
@@ -207,9 +207,13 @@ const styleGuide = (templateParams) => {
         <section class="${styles.locals.layout} js-sticky-container">
           <aside class="${styles.locals.navigation} js-sticky-element">
             <h3 class="${styles.locals.navigation__heading}">Getting started</h3>
-            ${navigationIntroComponentItems}
+            <div class="${styles.locals.navigation__links}">
+              ${navigationIntroComponentItems}
+            </div>
             <h3 class="${styles.locals.navigation__heading}">Components</h3>
-            ${navigationComponentItems}
+            <div class="${styles.locals.navigation__links}">
+              ${navigationComponentItems}
+            </div>
           </aside>
           <main class="${styles.locals.layout__content} ${styles.locals.main}">
             ${introComponents}
