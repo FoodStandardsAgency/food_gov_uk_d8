@@ -3,9 +3,9 @@
     <h3 class="${scope.styles.locals.item__title}">${scope.title}</h3>
     <p class="${scope.styles.locals.item__description}">${scope.description}</p>
   </header>
-  
+
   <div class="${scope.styles.locals.item__element}">${scope.element}</div>
-  
+
   <form class="${scope.styles.locals.item__code}" role="region">
 
     <input name="info-input" id="tabHTML-${scope.guid}" type="radio" class="${scope.styles.locals.item__input} ${scope.styles.locals.item__html}" checked="">
@@ -20,15 +20,15 @@
 
     <div class="${scope.styles.locals.item__tabContent}">
       <div class="${scope.styles.locals.item__tabCode} ${scope.styles.locals.item__html}" role="tabpanel">
-        <pre class="${scope.styles.locals.pre}"><code class="${scope.styles.locals.code} html">${scope.html}</code></pre>
+        <pre class="${scope.styles.locals.pre}"><code class="${scope.styles.locals.code} html">${scope.html || 'No component-specific HTML required.'}</code></pre>
       </div>
 
       <div class="${scope.styles.locals.item__tabCode} ${scope.styles.locals.item__css}" role="tabpanel">
-        <pre class="${scope.styles.locals.pre}"><code class="${scope.styles.locals.code} css">${scope.css}</code></pre>
+        <pre class="${scope.styles.locals.pre}"><code class="${scope.styles.locals.code} css">${scope.css || 'No component-specific CSS required.'}</code></pre>
       </div>
 
       <div class="${scope.styles.locals.item__tabCode} ${scope.styles.locals.item__js}" role="tabpanel">
-        <pre class="${scope.styles.locals.pre}"><code class="${scope.styles.locals.code} js">${scope.js}</code></pre>
+        <pre class="${scope.styles.locals.pre}"><code class="${scope.styles.locals.code} js">${scope.js || 'No component-specific JavaScript required.'}</code></pre>
       </div>
     </div>
 
