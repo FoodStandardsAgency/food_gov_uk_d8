@@ -20,6 +20,24 @@ use Drupal\user\Entity\User;
 use Drupal\Component\Datetime\Time;
 
 /**
+ * Implements of template_preprocess_page().
+ */
+function fsa_notify_preprocess_page(&$variables) {
+
+  // Scream a warning for admins about using notify live key and not debug-mode
+  // at non-production environments.
+  if (getenv("WKV_SITE_ENV") != 'prod' && !empty(array_intersect(['fsa_admin', 'administrator'], \Drupal::currentUser()->getRoles()))) {
+    $killswitch = \Drupal::state()->get('fsa_notify.killswitch');
+    $api_key = \Drupal::state()->get('fsa_notify.api');
+    $debug = \Drupal::state()->get('fsa_notify.collect_send_log_only');
+
+    if ($killswitch && !$debug && strpos($api_key, 'live') !== FALSE) {
+      drupal_set_message(t('<strong>NB!</strong> Notify sending is enabled with the live key and next cron run could potentially send notifications to subscribers of this environment database.<br /><br />Unless you know what you are doing immediately go to <a href="/admin/config/fsa/notify">Notify settings</a> and set sending in debug mode, use test-key or disable completely.'), 'warning');
+    }
+  }
+}
+
+/**
  * Implements hook_form_user_form_alter().
  */
 function fsa_notify_form_user_form_alter(&$form, FormStateInterface $form_state, $form_id) {
