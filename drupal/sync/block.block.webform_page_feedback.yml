@@ -2,6 +2,8 @@ uuid: 53fcdd5f-cfb8-435c-94e9-311c77b077f2
 langcode: en
 status: true
 dependencies:
+  config:
+    - webform.webform.page_feedback
   module:
     - block_class
     - webform

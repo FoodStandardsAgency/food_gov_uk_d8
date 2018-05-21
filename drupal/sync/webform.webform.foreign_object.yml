@@ -1,4 +1,3 @@
-uuid: d2d999c1-4f0d-4019-b4ad-be78e6198ade
 langcode: en
 status: open
 dependencies: {  }
@@ -34,6 +33,8 @@ settings:
   form_reset: false
   form_disable_autocomplete: false
   form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
   form_unsaved: true
   form_disable_back: false
   form_submit_back: false
@@ -61,6 +62,10 @@ settings:
   submission_login: false
   submission_login_message: ''
   submission_exception_message: ''
+  submission_locked_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
   wizard_progress_bar: false
   wizard_progress_pages: true
   wizard_progress_percentage: false
@@ -94,6 +99,8 @@ settings:
   confirmation_back: false
   confirmation_back_label: ''
   confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
   limit_total: null
   limit_total_interval: null
   limit_total_message: ''
@@ -145,6 +152,10 @@ access:
     users: {  }
     permissions: {  }
   administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
     roles: {  }
     users: {  }
     permissions: {  }
@@ -241,6 +252,7 @@ handlers:
         - updated
       notes: 'Personal data was removed automatically on submit'
       sticky: null
+      locked: null
       data: "name: ''\r\nemail: ''\r\ntelephone: ''"
       message: ''
       message_type: status
@@ -290,3 +302,4 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
+uuid: d2d999c1-4f0d-4019-b4ad-be78e6198ade
