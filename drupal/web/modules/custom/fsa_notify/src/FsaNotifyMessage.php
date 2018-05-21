@@ -129,17 +129,11 @@ abstract class FsaNotifyMessage {
    *   Time display format.
    *
    * @return string
-   *   Formatted display of field_alert_modified, node creation time if the
-   *    field is empty.
+   *   Formatted display of node changed timestamp.
    */
-  public function alertModifiedDate(Node $node, $format = 'medium') {
-    if (isset($node->field_alert_modified->value)) {
-      $date = \Drupal::service('date.formatter')->format(strtotime($node->field_alert_modified->value), $format);
-    }
-    else {
-      // Get the node creation time.
-      $date = \Drupal::service('date.formatter')->format($node->getCreatedTime(), $format);
-    }
+  public function alertDate(Node $node, $format = 'medium') {
+    $date = \Drupal::service('date.formatter')->format($node->getChangedTime(), $format);
+
     return $date;
   }
 
