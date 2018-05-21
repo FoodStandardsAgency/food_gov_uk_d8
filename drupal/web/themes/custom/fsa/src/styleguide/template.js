@@ -116,6 +116,10 @@ const componentArray = componentNameArray.map((componentName) => {
     }
   })
 
+  if (componentName === 'pager') {
+    componentName = 'pagination'
+  }
+
   return {
     title: componentName,
     html: HTMLArray,
