@@ -150,8 +150,8 @@ class DefaultController extends ControllerBase {
    * Registration thank you page.
    */
   public function thankYouPage() {
-    $markup = '<h1>' . $this->t('Subscription complete') . '</h1>';
-    $markup .= '<p>' . $this->t("Thank you for subscribing to Food Standards Agency's updates.") . '</p>';
+    $markup = '<h1>' . $this->t('A verification email has been sent to your inbox.') . '</h1>';
+    $markup .= '<p>' . $this->t('Please check your email and click on the one-time verification link within the mail. If you do not see the email, please check your spam folder.') . '</p>';
     $markup .= '<p>' . self::betaSigninDescription() . '</p>';
 
     return [
