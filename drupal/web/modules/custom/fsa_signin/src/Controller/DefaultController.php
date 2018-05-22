@@ -107,7 +107,6 @@ class DefaultController extends ControllerBase {
     $header .= '<p class="profile__intro">' . $this->t("Hello @name", ['@name' => $account->getUsername()]) . '</p>';
     $header .= '</header>';
     $header .= self::linkMarkup('fsa_signin.default_controller_manageProfilePage', $this->t('Manage your profile'), ['button']);
-    $header .= self::linkMarkup('user.logout.http', $this->t('Logout'), ['profile__logout']);
 
     return [
       ['#markup' => $header],
@@ -119,8 +118,7 @@ class DefaultController extends ControllerBase {
    */
   public function manageProfilePage() {
     $header = '<header class="profile__header">';
-    $header .= '<h2 class="profile__heading">' . $this->t('Manage your preferences') . '</h2>';
-    $header .= self::linkMarkup('user.logout.http', $this->t('Logout'), ['profile__logout']);
+    $header .= '<h2 class="profile__heading">' . $this->t('Delivery options') . '</h2>';
     $header .= '</header>';
     $header .= '<p class="profile__intro">' . $this->t("Update your subscription or unsubscribe from the alerts you're receiving") . '</p>';
 
