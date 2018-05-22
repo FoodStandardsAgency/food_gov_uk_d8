@@ -101,9 +101,9 @@ class DeliveryOptions extends FormBase {
       '#markup' => '<h3>' . $this->t('Personal information') . '</h3>',
     ];
     $form['delivery']['email'] = [
-      '#type' => 'email',
+      '#type' => 'item',
       '#title' => $this->t('Email address'),
-      '#default_value' => $account->getEmail(),
+      '#markup' => '<i>' . $account->getEmail() . '</i>',
     ];
     $form['delivery']['phone'] = [
       '#type' => 'tel',
@@ -181,8 +181,8 @@ class DeliveryOptions extends FormBase {
     /** @var \Drupal\user\Entity\User $account */
     $account = User::load(\Drupal::currentUser()->id());
 
-    $email = $form_state->getValue('email');
-    $account->setEmail($email);
+//    $email = $form_state->getValue('email');
+//    $account->setEmail($email);
 
     $delivery_method = $form_state->getValue('delivery_method');
     $delivery_method = array_filter(array_values($delivery_method));
