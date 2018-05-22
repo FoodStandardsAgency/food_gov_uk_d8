@@ -49,4 +49,5 @@ class ProfileManageTabs extends BlockBase {
 
     return $build;
   }
+
 }

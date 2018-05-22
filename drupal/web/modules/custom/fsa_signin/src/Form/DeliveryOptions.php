@@ -5,7 +5,6 @@ namespace Drupal\fsa_signin\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\fsa_custom\FsaCustomHelper;
-use Drupal\fsa_signin\Controller\DefaultController;
 use Drupal\user\Entity\User;
 use Drupal\fsa_signin\SignInService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -139,9 +138,6 @@ class DeliveryOptions extends FormBase {
       '#executes_submit_callback' => TRUE,
       '#value' => $this->t('Save your changes'),
     ];
-//    $form['actions']['delete'] = [
-//      '#markup' => DefaultController::linkMarkup('fsa_signin.delete_account_confirmation', $this->t('Cancel your subscription'), ['button cancel']),
-//    ];
     // Attach js for the "select all" feature.
     $form['#attached']['library'][] = 'fsa_signin/subscription_alerts';
     return $form;
@@ -151,10 +147,13 @@ class DeliveryOptions extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
+
+    /*
     $email = $form_state->getValue('email');
     if (!\Drupal::service('email.validator')->isValid($email)) {
-      $form_state->setErrorByName('email', $this->t('Email value is not valid.'));
+    $form_state->setErrorByName('email',$this->t('Email value is not valid.'));
     }
+     */
 
     $delivery_method = $form_state->getValue('delivery_method');
     $delivery_method = array_filter(array_values($delivery_method));
@@ -181,9 +180,8 @@ class DeliveryOptions extends FormBase {
     /** @var \Drupal\user\Entity\User $account */
     $account = User::load(\Drupal::currentUser()->id());
 
-//    $email = $form_state->getValue('email');
-//    $account->setEmail($email);
-
+    // $email = $form_state->getValue('email');
+    // $account->setEmail($email);
     $delivery_method = $form_state->getValue('delivery_method');
     $delivery_method = array_filter(array_values($delivery_method));
     $account->set('field_delivery_method', $delivery_method);
