@@ -114,7 +114,7 @@ class NewsForRegistrationForm extends FormBase {
     $user->set('field_subscribed_cons', $selected_cons_tids);
 
     $user->save();
-    $form_state->setRedirect('fsa_signin.default_controller_manageProfilePage');
+    $form_state->setRedirect('fsa_signin.default_controller_deliveryOptionsPage');
   }
 
 }

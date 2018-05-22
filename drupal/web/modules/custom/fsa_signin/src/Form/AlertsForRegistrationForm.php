@@ -80,7 +80,7 @@ class AlertsForRegistrationForm extends FormBase {
     ];
     $form['actions'] = ['#type' => 'actions'];
     $form['actions']['back'] = [
-      '#markup' => DefaultController::linkMarkup('fsa_signin.default_controller_manageProfilePage', $this->t('Previous'), ['back arrow']),
+      '#markup' => DefaultController::linkMarkup('fsa_signin.default_controller_deliveryOptionsPage', $this->t('Previous'), ['back arrow']),
     ];
     $form['actions']['submit'] = [
       '#type' => 'submit',

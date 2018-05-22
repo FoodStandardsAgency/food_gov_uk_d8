@@ -23,10 +23,10 @@ fsa_signin.default_controller_profilePage:
   requirements:
     _user_is_logged_in: 'TRUE'
 
-fsa_signin.default_controller_manageProfilePage:
-  path: '/profile/manage'
+fsa_signin.default_controller_deliveryOptionsPage:
+  path: '/profile/manage/delivery'
   defaults:
-    _controller: '\Drupal\fsa_signin\Controller\DefaultController::manageProfilePage'
+    _controller: '\Drupal\fsa_signin\Controller\DefaultController::deliveryOptionsPage'
     _title: 'Manage your preferences'
   requirements:
     _user_is_logged_in: 'TRUE'

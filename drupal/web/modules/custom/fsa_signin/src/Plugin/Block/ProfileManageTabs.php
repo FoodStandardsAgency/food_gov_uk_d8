@@ -30,7 +30,7 @@ class ProfileManageTabs extends BlockBase {
     $items = [
       ['#markup' => DefaultController::linkMarkup('fsa_signin.user_preregistration_alerts_form', $this->t('Food and allergy alerts'))],
       ['#markup' => DefaultController::linkMarkup('fsa_signin.user_preregistration_news_form', $this->t('News and consultations'))],
-      ['#markup' => DefaultController::linkMarkup('fsa_signin.default_controller_manageProfilePage', $this->t('Delivery options'))],
+      ['#markup' => DefaultController::linkMarkup('fsa_signin.default_controller_deliveryOptionsPage', $this->t('Delivery options'))],
     ];
 
     // Build the menu as item_list.

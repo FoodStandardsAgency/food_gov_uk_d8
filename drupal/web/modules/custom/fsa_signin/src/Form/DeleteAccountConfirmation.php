@@ -31,7 +31,7 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function getCancelUrl() {
-    return new Url('fsa_signin.default_controller_manageProfilePage');
+    return new Url('fsa_signin.default_controller_deliveryOptionsPage');
   }
 
   /**
@@ -92,7 +92,7 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
 
     $form['back'] = [
       '#prefix' => '<header class="profile__header">',
-      '#markup' => DefaultController::linkMarkup('fsa_signin.default_controller_manageProfilePage', $this->t('Back'), ['back']),
+      '#markup' => DefaultController::linkMarkup('fsa_signin.default_controller_deliveryOptionsPage', $this->t('Back'), ['back']),
     ];
     $form['logout'] = [
       '#suffix' => '</header>',
