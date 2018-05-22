@@ -56,14 +56,6 @@ content:
     third_party_settings: {  }
     type: text_default
     region: content
-  field_alert_otherbusiness:
-    type: string
-    weight: 6
-    region: content
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
   field_alert_productdetails_raw:
     type: fsa_alert_json_formatter
     weight: 1
@@ -88,7 +80,7 @@ content:
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
+    type: fsa_allergen_formatter
     region: content
 hidden:
   addtoany: true
@@ -98,6 +90,7 @@ hidden:
   field_alert_allergen: true
   field_alert_modified: true
   field_alert_notation: true
+  field_alert_otherbusiness: true
   field_alert_reportingbusiness: true
   field_alert_smstext: true
   field_alert_type: true

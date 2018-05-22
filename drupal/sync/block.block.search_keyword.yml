@@ -25,7 +25,7 @@ settings:
   form_method: get
   form_element:
     name: keywords
-    title: ''
+    title: 'Search terms'
     placeholder: Search...
   form_submit_button: 1
 visibility: {  }

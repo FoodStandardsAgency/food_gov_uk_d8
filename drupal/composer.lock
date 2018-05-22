@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "faf8f4bc286151895c6d4466986a3326",
+    "content-hash": "956c747c557f9d7ff0dcd673a9a9dd57",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2318,6 +2318,9 @@
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
+                },
+                "patches_applied": {
+                    "Language prefix fix": "https://www.drupal.org/files/issues/cookieconsent-policy_link_language_aware-2937005-3-d8.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -2959,7 +2962,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/elasticsearch_helper"
             },
-            "time": "2017-08-30 13:04:27"
+            "time": "2017-08-30T13:04:27+00:00"
         },
         {
             "name": "drupal/email_registration",
@@ -4267,7 +4270,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/media_entity_browser"
             },
-            "time": "2017-02-27 07:23:31"
+            "time": "2017-02-27T07:23:31+00:00"
         },
         {
             "name": "drupal/media_entity_document",
@@ -6666,7 +6669,7 @@
                 "source": "https://github.com/maijs/elasticsearch_helper_views/tree/8.x-1.x",
                 "issues": "https://github.com/maijs/elasticsearch_helper_views/issues"
             },
-            "time": "2018-01-30 07:15:18"
+            "time": "2018-01-30T07:15:18+00:00"
         },
         {
             "name": "masterminds/html5",
@@ -9446,7 +9449,7 @@
                 "drupal",
                 "warden"
             ],
-            "time": "2016-02-10 20:34:02"
+            "time": "2016-02-10T20:34:02+00:00"
         },
         {
             "name": "twig/twig",
