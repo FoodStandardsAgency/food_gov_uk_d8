@@ -4,12 +4,13 @@ namespace Drupal\fsa_signin\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\fsa_signin\Controller\DefaultController;
 use Drupal\user\Entity\User;
 use Drupal\fsa_signin\SignInService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class ProfileManager.
+ * Class ChangePassword.
  */
 class ChangePassword extends FormBase {
 
@@ -55,6 +56,9 @@ class ChangePassword extends FormBase {
       '#description' => $this->t('Password should be at least @length characters', ['@length' => ChangePassword::PROFILE_PASSWORD_LENGTH]),
     ];
 
+    $form['actions']['back'] = [
+      '#markup' => DefaultController::linkMarkup('fsa_signin.default_controller_accountSettingsPage', $this->t('Cancel'), ['cancel']),
+    ];
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Change password'),
@@ -93,13 +97,11 @@ class ChangePassword extends FormBase {
     }
 
     if ($account->save()) {
-      drupal_set_message($this->t('Your preferences are updated and password was successfully changed.'));
+      drupal_set_message($this->t('Your password was successfully changed.'));
+      $form_state->setRedirect('fsa_signin.default_controller_accountSettingsPage');
     }
     else {
-      drupal_set_message($this->t('There was an error updating your preferences. Please try again.'));
-    }
-    if ($form_state->getTriggeringElement()['#type'] != 'submit') {
-      $form_state->setRedirect('fsa_signin.user_preregistration_alerts_form');
+      drupal_set_message($this->t('An error occurred saving your password. Please try again.'), 'error');
     }
   }
 

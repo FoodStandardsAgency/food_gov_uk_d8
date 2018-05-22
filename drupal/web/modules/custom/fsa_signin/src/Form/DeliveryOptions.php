@@ -11,9 +11,9 @@ use Drupal\fsa_signin\SignInService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class ProfileManager.
+ * Class DeliveryOptions.
  */
-class ProfileManager extends FormBase {
+class DeliveryOptions extends FormBase {
 
   /**
    * Signin service.
@@ -42,7 +42,7 @@ class ProfileManager extends FormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'profile_manager';
+    return 'delivery_options';
   }
 
   /**
@@ -117,18 +117,7 @@ class ProfileManager extends FormBase {
         ],
       ],
     ];
-    $form['profile'] = [
-      '#type' => 'item',
-      '#markup' => '<h3>' . $this->t('Account settings') . '</h3>',
-    ];
-    $form['profile']['change_password'] = [
-      '#type' => 'item',
-      '#markup' => DefaultController::linkMarkup('fsa_signin.default_controller_changePasswordPage', $this->t('Change your password')),
-    ];
-    $form['profile']['delete'] = [
-      '#type' => 'item',
-      '#markup' => DefaultController::linkMarkup('fsa_signin.delete_account_confirmation', $this->t('Cancel your subscription'), ['cancel']),
-    ];
+
     $form['profile']['language'] = [
       '#type' => 'radios',
       '#title' => $this->t('Language preference'),

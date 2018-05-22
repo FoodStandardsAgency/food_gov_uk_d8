@@ -5,7 +5,7 @@ namespace Drupal\fsa_signin\Controller;
 use Drupal\Core\Link;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\fsa_signin\Form\ChangePassword;
-use Drupal\fsa_signin\Form\ProfileManager;
+use Drupal\fsa_signin\Form\DeliveryOptions;
 use Drupal\fsa_signin\Form\SendPasswordEmailForm;
 use Drupal\user\Form\UserLoginForm;
 use Drupal\Core\Controller\ControllerBase;
@@ -115,7 +115,21 @@ class DefaultController extends ControllerBase {
   }
 
   /**
-   * Create manage profile page.
+   * Create Account settings page.
+   */
+  public function accountSettingsPage() {
+    $content = '<p>' . $this->t('Change password or cancel your subscription here.') . '</p>';
+    $content .= '<p>' . DefaultController::linkMarkup('fsa_signin.default_controller_changePasswordPage', $this->t('Change password'), ['button cancel']) . ' ';
+    $content .= DefaultController::linkMarkup('fsa_signin.delete_account_confirmation', $this->t('Cancel subscription'), ['button cancel']) . '</p>';
+
+    return [
+      ['#markup' => $content],
+    ];
+
+  }
+
+  /**
+   * Create Delivery options page.
    */
   public function deliveryOptionsPage() {
     $header = '<header class="profile__header">';
@@ -123,7 +137,7 @@ class DefaultController extends ControllerBase {
     $header .= '</header>';
     $header .= '<p class="profile__intro">' . $this->t("Update your subscription or unsubscribe from the alerts you're receiving") . '</p>';
 
-    $manage_form = \Drupal::formBuilder()->getForm(ProfileManager::class);
+    $manage_form = \Drupal::formBuilder()->getForm(DeliveryOptions::class);
 
     return [
       ['#markup' => $header],
