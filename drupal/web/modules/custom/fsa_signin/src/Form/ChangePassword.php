@@ -98,7 +98,7 @@ class ChangePassword extends FormBase {
 
     if ($account->save()) {
       drupal_set_message($this->t('Your password was successfully changed.'));
-      $form_state->setRedirect('fsa_signin.default_controller_accountSettingsPage');
+      $form_state->setRedirect('fsa_signin.user_preregistration_alerts_form');
     }
     else {
       drupal_set_message($this->t('An error occurred saving your password. Please try again.'), 'error');

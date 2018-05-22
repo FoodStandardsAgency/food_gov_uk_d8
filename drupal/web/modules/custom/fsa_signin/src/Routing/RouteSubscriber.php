@@ -91,7 +91,7 @@ class RouteSubscriber implements EventSubscriberInterface {
     elseif ($is_subscriber) {
       if ($route_name == 'entity.user.edit_form') {
         // Redirect subscriber user edit page to the custom profile manage page.
-        $url = Url::fromRoute('fsa_signin.default_controller_deliveryOptionsPage')->toString();
+        $url = Url::fromRoute('fsa_signin.default_controller_accountSettingsPage')->toString();
         $event->setResponse(new RedirectResponse($url, 301));
       }
       if ($route_name == 'user.page' || $route_name == 'entity.user.canonical') {
