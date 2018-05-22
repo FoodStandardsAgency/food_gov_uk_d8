@@ -64,14 +64,6 @@ class AlertsForRegistrationForm extends FormBase {
     $form['title'] = [
       '#markup' => '<h2>' . $this->t('Alerts') . '</h2>',
     ];
-    $form['description'] = [
-      '#markup' => '<p>' . $this->t("Get food alerts and allergy alerts by email or SMS text message. This is a free service.") . '</p>',
-    ];
-    $form['beta_description'] = [
-      '#prefix' => '<small>',
-      '#suffix' => '</small>',
-      '#markup' => DefaultController::betaSigninDescription('long'),
-    ];
     $form['food_alert_registration'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Food alerts'),
