@@ -15,9 +15,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class ProfileManager extends FormBase {
 
-  const PROFILE_PASSWORD_LENGTH = 8;
-
-
   /**
    * Signin service.
    *
@@ -55,17 +52,6 @@ class ProfileManager extends FormBase {
     /** @var \Drupal\user\Entity\User $account */
     $account = User::load(\Drupal::currentUser()->id());
 
-    $form['password']['new_password'] = [
-      '#title' => $this->t('Password'),
-      '#type' => 'password_confirm',
-      '#title' => $this->t('New password'),
-      '#description' => $this->t('Password should be at least @length characters', ['@length' => ProfileManager::PROFILE_PASSWORD_LENGTH]),
-    ];
-
-    // Delivery options.
-    $form['delivery'] = [
-      '#markup' => '<h3>' . $this->t('Delivery options') . '</h3>',
-    ];
     $form['delivery']['delivery_method'] = [
       '#title' => $this->t('I want to receive food and allergy alerts via'),
       '#type' => 'checkboxes',
@@ -131,7 +117,15 @@ class ProfileManager extends FormBase {
         ],
       ],
     ];
-    $form['delivery']['language'] = [
+    $form['profile'] = [
+      '#type' => 'item',
+      '#markup' => '<h3>' . $this->t('Account settings') . '</h3>',
+    ];
+    $form['profile']['change_password'] = [
+      '#type' => 'item',
+      '#markup' => DefaultController::linkMarkup('fsa_signin.default_controller_changePasswordPage', $this->t('Change your password')),
+    ];
+    $form['profile']['language'] = [
       '#type' => 'radios',
       '#title' => $this->t('Language preference'),
       '#options' => [
@@ -140,7 +134,7 @@ class ProfileManager extends FormBase {
       ],
       '#default_value' => $account->getPreferredLangcode(),
     ];
-    $form['delivery']['privacy_notice'] = [
+    $form['extra']['privacy_notice'] = [
       '#type' => 'item',
       '#markup' => FsaCustomHelper::privacyNoticeLink('alerts'),
     ];
@@ -151,10 +145,6 @@ class ProfileManager extends FormBase {
       '#type' => 'button',
       '#executes_submit_callback' => TRUE,
       '#value' => $this->t('Edit subscriptions'),
-    ];
-    $form['actions']['submit'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Save your changes'),
     ];
     $form['actions']['delete'] = [
       '#markup' => DefaultController::linkMarkup('fsa_signin.delete_account_confirmation', $this->t('Cancel your subscription'), ['button cancel']),
@@ -189,16 +179,6 @@ class ProfileManager extends FormBase {
       }
     }
 
-    $password = $form_state->getValue('new_password');
-    $length = ProfileManager::PROFILE_PASSWORD_LENGTH;
-    if ($password != '' && strlen($password) < $length) {
-      $form_state->setErrorByName(
-        'new_password',
-        $this->t('Password not updated: Please use a password of @length or more characters.',
-          ['@length' => $length]
-        )
-      );
-    }
   }
 
   /**
@@ -235,18 +215,8 @@ class ProfileManager extends FormBase {
     $language = $form_state->getValue('language');
     $account->set('preferred_langcode', $language);
 
-    $password = $form_state->getValue('new_password');
-    if ($password != '') {
-      $account->setPassword($password);
-    }
-
     if ($account->save()) {
-      if ($password != '') {
-        drupal_set_message($this->t('Your preferences are updated and password was successfully changed.'));
-      }
-      else {
-        drupal_set_message($this->t('Your preferences are updated.'));
-      }
+      drupal_set_message($this->t('Your preferences are updated.'));
     }
     else {
       drupal_set_message($this->t('There was an error updating your preferences. Please try again.'));

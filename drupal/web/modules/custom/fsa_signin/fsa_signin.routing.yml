@@ -31,6 +31,14 @@ fsa_signin.default_controller_manageProfilePage:
   requirements:
     _user_is_logged_in: 'TRUE'
 
+fsa_signin.default_controller_changePasswordPage:
+  path: '/profile/manage/password'
+  defaults:
+    _controller: '\Drupal\fsa_signin\Controller\DefaultController::changePasswordPage'
+    _title: 'Change password'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
 fsa_signin.user_preregistration_alerts_form:
   path: '/profile/manage/alerts'
   defaults:

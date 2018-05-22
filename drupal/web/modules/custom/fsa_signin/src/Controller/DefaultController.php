@@ -4,6 +4,7 @@ namespace Drupal\fsa_signin\Controller;
 
 use Drupal\Core\Link;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\fsa_signin\Form\ChangePassword;
 use Drupal\fsa_signin\Form\ProfileManager;
 use Drupal\fsa_signin\Form\SendPasswordEmailForm;
 use Drupal\user\Form\UserLoginForm;
@@ -123,6 +124,24 @@ class DefaultController extends ControllerBase {
     $header .= '<p class="profile__intro">' . $this->t("Update your subscription or unsubscribe from the alerts you're receiving") . '</p>';
 
     $manage_form = \Drupal::formBuilder()->getForm(ProfileManager::class);
+
+    return [
+      ['#markup' => $header],
+      $manage_form,
+    ];
+
+  }
+
+  /**
+   * Create manage profile page.
+   */
+  public function changePasswordPage() {
+    $header = '<header class="profile__header">';
+    $header .= '<h2 class="profile__heading">' . $this->t('Change password') . '</h2>';
+    $header .= '</header>';
+    $header .= '<p class="profile__intro">' . $this->t("Change your password") . '</p>';
+
+    $manage_form = \Drupal::formBuilder()->getForm(ChangePassword::class);
 
     return [
       ['#markup' => $header],
