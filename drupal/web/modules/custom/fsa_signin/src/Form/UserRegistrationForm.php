@@ -28,7 +28,7 @@ class UserRegistrationForm extends FormBase {
       '#markup' => '<p>' . $this->t("Create an account to get food and allergy alerts by email or text message. This is a free service.") . '</p>',
     ];
     $form['subscribe_description_2'] = [
-      '#markup' => '<p><small>' . $this->t('Before you can subscribe we need to verify your email address. Please enter a valid email address in the box below and hit submit.') . '</small></p>',
+      '#markup' => '<p><small>' . $this->t('Before you can subscribe we need to verify your email address. Please enter a valid email address in the box below and click "Create account".') . '</small></p>',
     ];
     $form['email'] = [
       '#type' => 'email',
