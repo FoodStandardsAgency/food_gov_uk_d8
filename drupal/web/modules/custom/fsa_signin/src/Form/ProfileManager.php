@@ -125,6 +125,10 @@ class ProfileManager extends FormBase {
       '#type' => 'item',
       '#markup' => DefaultController::linkMarkup('fsa_signin.default_controller_changePasswordPage', $this->t('Change your password')),
     ];
+    $form['profile']['delete'] = [
+      '#type' => 'item',
+      '#markup' => DefaultController::linkMarkup('fsa_signin.delete_account_confirmation', $this->t('Cancel your subscription'), ['cancel']),
+    ];
     $form['profile']['language'] = [
       '#type' => 'radios',
       '#title' => $this->t('Language preference'),
@@ -144,11 +148,11 @@ class ProfileManager extends FormBase {
     $form['actions']['submit_edit'] = [
       '#type' => 'button',
       '#executes_submit_callback' => TRUE,
-      '#value' => $this->t('Edit subscriptions'),
+      '#value' => $this->t('Save your changes'),
     ];
-    $form['actions']['delete'] = [
-      '#markup' => DefaultController::linkMarkup('fsa_signin.delete_account_confirmation', $this->t('Cancel your subscription'), ['button cancel']),
-    ];
+//    $form['actions']['delete'] = [
+//      '#markup' => DefaultController::linkMarkup('fsa_signin.delete_account_confirmation', $this->t('Cancel your subscription'), ['button cancel']),
+//    ];
     // Attach js for the "select all" feature.
     $form['#attached']['library'][] = 'fsa_signin/subscription_alerts';
     return $form;
@@ -220,9 +224,6 @@ class ProfileManager extends FormBase {
     }
     else {
       drupal_set_message($this->t('There was an error updating your preferences. Please try again.'));
-    }
-    if ($form_state->getTriggeringElement()['#type'] != 'submit') {
-      $form_state->setRedirect('fsa_signin.user_preregistration_alerts_form');
     }
   }
 

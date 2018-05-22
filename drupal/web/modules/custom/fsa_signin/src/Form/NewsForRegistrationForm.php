@@ -87,7 +87,7 @@ class NewsForRegistrationForm extends FormBase {
     ];
     $form['actions']['submit'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Save your changes'),
+      '#value' => $this->t('Next'),
     ];
     $form['#attached']['library'][] = 'fsa_signin/subscription_alerts';
     return $form;
