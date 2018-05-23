@@ -68,7 +68,7 @@ settings:
   wizard_start_label: ''
   wizard_confirmation: true
   wizard_confirmation_label: ''
-  wizard_track: ''
+  wizard_track: index
   preview: 2
   preview_label: Summary
   preview_title: ''
