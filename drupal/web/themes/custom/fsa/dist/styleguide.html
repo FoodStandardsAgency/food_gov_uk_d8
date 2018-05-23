@@ -14700,7 +14700,7 @@ section{
           <aside class="styleguide__navigation___3JtxI js-sticky-element">
             <h3 class="styleguide__navigation__heading___14TQj">Getting started</h3>
             <div class="styleguide__navigation__links___mVwfi">
-              <a href="#workflow" class="styleguide__navigationItem___3_fiN js-scroll">Workflow</a><a href="#cssCustomProperties" class="styleguide__navigationItem___3_fiN js-scroll">CSS Custom Properties</a><a href="#colours" class="styleguide__navigationItem___3_fiN js-scroll">Colours</a>
+              <a href="#developerWorkflow" class="styleguide__navigationItem___3_fiN js-scroll">Developer Workflow</a><a href="#cssCustomProperties" class="styleguide__navigationItem___3_fiN js-scroll">CSS Custom Properties</a><a href="#colours" class="styleguide__navigationItem___3_fiN js-scroll">Colours</a>
             </div>
             <h3 class="styleguide__navigation__heading___14TQj">Components</h3>
             <div class="styleguide__navigation__links___mVwfi">
@@ -14708,41 +14708,33 @@ section{
             </div>
           </aside>
           <main class="styleguide__layout__content___1yeYf styleguide__main___1vvRi">
-            <article class="styleguide__item___28nPp" id="workflow">
+            <article class="styleguide__item___28nPp" id="developerWorkflow">
   <header class="styleguide__item__header___2u3FN">
-    <h3 class="styleguide__item__title___2gjuP">Workflow</h3>
+    <h3 class="styleguide__item__title___2gjuP">Developer Workflow</h3>
     <p class="styleguide__item__description___34e69"></p>
   </header>
   
   <div class="styleguide__item__content___iDzu-"><p><a href="https://github.com/standard/standard"><img src="https://cdn.rawgit.com/standard/standard/master/badge.svg" alt="JavaScript Style Guide"></a></p>
-<h1 id="fsa-drupal-theme">FSA Drupal Theme</h1>
 <h2 id="requirements">Requirements</h2>
-<p>FSA Theme uses ES6 features, so it is recommended to have a latest version of <a href="https://nodejs.org/">Node.js</a> installed locally (<a href="https://nodejs.org/">Node.js</a> v4.0+ required). <a href="https://nodejs.org/">Node.js</a> is the only global requirement as this project does not use any task runners. We are using <a href="https://webpack.js.org/">Webpack</a> instead.</p>
+<p>FSA Theme uses ES6 features, so it is recommended to have a recent version of <a href="https://nodejs.org/">Node.js</a> installed globally (v5.0 minimum required, for <code>package-lock.json</code> support). <a href="https://nodejs.org/">Node.js</a> is the only global requirement as this project uses <a href="https://webpack.js.org/">Webpack</a> in lieu of task runners.</p>
 <h2 id="installation">Installation</h2>
 <p>To get the started with theming, complete the following steps:</p>
 <ol>
 <li><p>Install <a href="https://nodejs.org/">Node.js</a></p>
 </li>
-<li><p>Install project dependencies by running the following task</p>
-<ul>
-<li><code>npm install</code></li>
-</ul>
+<li><p>Install project dependencies by running <code>npm install</code></p>
 </li>
 </ol>
 <h2 id="workflow-summary">Workflow summary</h2>
-<p><strong>Run</strong> <code>npm run watch</code> while developing.</p>
-<p><strong>Build</strong> before committing <code>npm run build</code>.</p>
-<h2 id="development">Development</h2>
-<p>When developing FSA Theme, you may want assets automatically compiled. To do this, run the following watch task:</p>
-<ul>
-<li><code>npm run watch</code></li>
-</ul>
-<p>This will create a folder called <code>dist</code>, into which the required assets will be created.</p>
+<p>When developing, run <code>npm run watch</code> to automatically compile assets.</p>
+<p>Build for production before committing any changes, with <code>npm run build</code>. This will create a <code>dist</code> folder, into which the required assets will be created.</p>
 <h3 id="javascript-development">JavaScript development</h3>
 <p>The file <code>index.js</code> is the entry point for all the assests used by this theme. This file contains <code>require</code> function for style and image files. This function should not be removed ever.</p>
-<p>Npm dependencies and theme related <a href="https://github.com/lukehoban/es6features#modules">modular JavaScript files</a> can be imported at the beginning of every JavaScript file with following line of code:</p>
-<pre><code>import defaultMember from &#39;module-name&#39;
-</code></pre><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import">ES6 import syntax</a>. To export a JavaScript module use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export">ES6 export syntax</a> such as <code>module.exports = myFunction;</code>.</p>
+<p>NPM dependencies and theme related <a href="https://github.com/lukehoban/es6features#modules">modular JavaScript files</a> can be imported at the beginning of every JavaScript file with following line of code:</p>
+<pre><code class="lang-js">import defaultMember from &#39;module-name&#39;
+</code></pre>
+<p>This project uses <a href="https://babeljs.io/">Babel</a> to transpile modern JavaScript into a form that can be used across browsers.</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import">ES6 import syntax</a>. To export a JavaScript module use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export">ES6 export syntax</a> such as <code>module.exports = myFunction</code>.</p>
 <p>There are number of other really useful ES6 features that can be also used, like:</p>
 <ul>
 <li><a href="https://github.com/lukehoban/es6features#arrows">Arrows</a></li>
@@ -14753,35 +14745,39 @@ section{
 <li><a href="https://github.com/lukehoban/es6features#let--const">Block-scoped binding constructs</a></li>
 </ul>
 <h3 id="css-development">CSS development</h3>
-<p>This theme uses number of postCSS plugins with  <a href="http://cssnext.io/">postCSS-cssnext</a> plugin collection. Cssnext helps developer to use the latest CSS syntax today. Active plugins of the cssnext collection can be managed inside of a <code>postcss.config.js</code> file and available features can be browsed on <a href="https://github.com/MoOx/postcss-cssnext/blob/master/docs/content/features.md">GitHub</a>.</p>
+<p>This theme uses number of postCSS plugins with  <a href="http://cssnext.io/">postCSS-cssnext</a> plugin collection. Cssnext allows developers to use the latest CSS syntax today. Active plugins of the cssnext collection can be managed inside of a <code>postcss.config.js</code> file and available features can be browsed on <a href="https://github.com/MoOx/postcss-cssnext/blob/master/docs/content/features.md">GitHub</a>.</p>
 <p>All the css files are extracted and bundled into one file with Webpack <a href="https://github.com/webpack-contrib/extract-text-webpack-plugin"><em>extract-text-webpack-plugin</em></a>.</p>
 <h4 id="units">Units</h4>
-<p>Developer should choose a right unit to use depending on the context. _Em_ is great for responsive values such as <em>paddings</em> and <em>margins</em> while _px_ is good choice for fixed sized icons.</p>
+<p>The correct unit should be chosen depending on the context. _Em_ is great for responsive values such as <em>paddings</em> and <em>margins</em> while _px_ is good choice for fixed sized icons.</p>
 <h4 id="css-custom-properties">CSS Custom Properties</h4>
 <p><em>Related PostCSS plugin: <a href="https://github.com/postcss/postcss-custom-properties">postcss-custom-properties</a></em></p>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/--*">CSS custom properties</a> can be used in this theme. To support <a href="http://caniuse.com/#feat=css-variables">older IE browsers</a> CSS custom properties should only be used inside of a <code>:root</code> selector. Cssnext has been configurated to preserve custom property values.</p>
 <p>CSS Custom properties are defined at the beginning of the <code>base.css</code> file with following line of code:</p>
-<pre><code>:root {
+<pre><code class="lang-css">:root {
   --font-size-base: 112.5%;
 }
-</code></pre><p>CSS Custom properties can be reused throughout the CSS files using the (var()) function.</p>
-<pre><code>html {
+</code></pre>
+<p>CSS Custom properties can be reused throughout the CSS files using the <code>var()</code> function.</p>
+<pre><code class="lang-js">html {
   font-size: var(--font-size-base);
 }
-</code></pre><h4 id="media-queries">Media Queries</h4>
+</code></pre>
+<h4 id="media-queries">Media Queries</h4>
 <p><em>Related PostCSS plugin: <a href="https://github.com/postcss/postcss-custom-media">postcss-custom-media</a></em></p>
 <p>As this theme uses <em>mobile first</em> approach all media queries should use <code>min-width</code>.</p>
 <p>Custom media queries are defined at the beginning of the <code>base.css</code> file with following line of code:</p>
-<pre><code>@custom-media --breakpoint-sm (min-width: 50em);
-</code></pre><p>Custom variables can be used with a following line of code inside of a css file:</p>
-<pre><code>@media (--breakpoint-sm) {
+<pre><code class="lang-css">@custom-media --breakpoint-sm (min-width: 50em);
+</code></pre>
+<p>Custom variables can be used inside of a css file like so:</p>
+<pre><code class="lang-css">@media (--breakpoint-sm) {
   width: 100%;
 }
-</code></pre><h4 id="mixins">Mixins</h4>
+</code></pre>
+<h4 id="mixins">Mixins</h4>
 <p><em>Related PostCSS plugin: <a href="https://github.com/postcss/postcss-mixins">postcss-custom-media</a></em></p>
-<p>Cssnext is providing a <a href="https://github.com/pascalduez/postcss-apply">PostCSS-apply</a> plugin but it doesn&#39;t support arguments. That&#39;s why PostCSS-mixin plugin is also included in this theme.</p>
+<p>Cssnext is providing a <a href="https://github.com/pascalduez/postcss-apply">PostCSS-apply</a> plugin but it doesn&#39;t support arguments. That&#39;s why PostCSS-mixin plugin is also used in this theme.</p>
 <p>PostCSS Mixin is currently only used for defining one mixin:</p>
-<pre><code>@define-mixin responsive-declaration $property, $valueMin, $valueMax {
+<pre><code class="lang-css">@define-mixin responsive-declaration $property, $valueMin, $valueMax {
   $(property): $valueMin;
 
   @media (--breakpoint-xs) {
@@ -14800,44 +14796,42 @@ section{
     $(property): calc($valueMin + (($valueMax - $valueMin) / 4) * 4);
   }
 }
-</code></pre><p>This responsive-declaration mixin is used throughout the CSS files to help creating both mobile and desktop styles with one line of code. This is great for declaring <em>paddings</em>, <em>margins</em>, <em>font sizes</em> etc.</p>
-<p>Mixin takes three arguments: <em>Property name</em>, <em>Minimum value</em> and <em>Maximum value</em>. Responsive-declaration mixin can be used with following line of code:</p>
-<pre><code>h1 {
+</code></pre>
+<p>This responsive-declaration mixin is used throughout the CSS files to create both mobile and desktop styles with one line of code. This is great for declaring <em>paddings</em>, <em>margins</em>, <em>font sizes</em> etc.</p>
+<p>The mixin takes three arguments: <em>Property name</em>, <em>Minimum value</em> and <em>Maximum value</em>. It can be used like this:</p>
+<pre><code class="lang-css">h1 {
   @mixin responsive-declaration font-size, 2.2em, 3.333em;
 }
-</code></pre><h4 id="selector-and-nesting">Selector and nesting</h4>
+</code></pre>
+<h4 id="selectors-and-nesting">Selectors and nesting</h4>
 <p><em>Related PostCSS plugins: <a href="https://github.com/jonathantneal/postcss-nesting">postcss-nesting</a> and <a href="https://github.com/postcss/postcss-custom-selectors">postcss-custom-selectors</a></em></p>
-<p>Custom selectors can be declared with a following line of code:</p>
-<pre><code>@custom-selector :--not-js html:not(.js);
-</code></pre><p>They can be used as a selectors like this:</p>
-<pre><code>:--not-js .toggle-content {
+<p>Custom selectors can be declared like this:</p>
+<pre><code class="lang-css">@custom-selector :--not-js html:not(.js);
+</code></pre>
+<p>And used as a selector like this:</p>
+<pre><code class="lang-css">:--not-js .toggle-content {
   display: inherit;
 }
-</code></pre><p>Selector nesting can also be used:</p>
-<pre><code>ul {
+</code></pre>
+<p>Selectors can also be nested:</p>
+<pre><code class="lang-css">ul {
   margin-top: 0.5em;
 
   &amp; li:not(:last-child) {
     margin-bottom: 1em;
   }
 }
-</code></pre><h4 id="css-naming-conventions">CSS Naming conventions</h4>
-<p>This theme uses <a href="http://getbem.com/">BEM</a> as much as it is possible.</p>
+</code></pre>
+<h4 id="css-naming-conventions">CSS Naming conventions</h4>
+<p>This theme uses <a href="http://getbem.com/">BEM</a> as much as possible.</p>
 <h3 id="bitmap-and-vector-assets">Bitmap and vector assets</h3>
-<p>Webpack loaders check for bitmap and vector images separately. Bitmap images are compressed and copied to <code>dist/img/</code> folder. All the vector images on the other hand are turned into one sprite (<code>dist/sprite.svg</code>). Developer can reference to a specific vector image with this line of code:</p>
-<pre><code>&lt;div class=&quot;svg&quot;&gt;
+<p>Webpack loaders check for bitmap and vector images separately. Bitmap images are compressed and copied to <code>dist/img/</code> directory. All the vector images on the other hand are turned into one sprite (<code>dist/sprite.svg</code>). Specific vector images can be referenced like this:</p>
+<pre><code class="lang-html">&lt;div class=&quot;svg&quot;&gt;
   &lt;svg&gt;&lt;use xlink:href=&quot;/themes/custom/fsa/dist/sprite.svg#name-of-the-svg-file&quot;&gt;&lt;/use&gt;&lt;/svg&gt;
 &lt;/div&gt;
-</code></pre><p>To polyfill browsers that don&#39;t support <code>&lt;use&gt;</code> tags every svg reference will be turned into inline svg by browser with <a href="https://github.com/jonathantneal/svg4everybody">svg4everybody</a> JavaScript plugin.</p>
-<p>Remember to restart varnish after generating a new sprite.</p>
-<ul>
-<li><code>sudo systemctl restart varnish</code></li>
-</ul>
-<h2 id="building-the-theme-assets">Building the theme assets</h2>
-<p>Remember to create the static assets of this theme before committing your changes to version control. Build the assets by running the following task:</p>
-<ul>
-<li><code>npm run build</code></li>
-</ul>
+</code></pre>
+<p>To polyfill browsers that don&#39;t support <code>&lt;use&gt;</code> tags, every svg reference will be turned into an inline svg by the browser with the <a href="https://github.com/jonathantneal/svg4everybody">svg4everybody</a> JavaScript plugin.</p>
+<p>Remember to restart varnish with <code>sudo systemctl restart varnish</code> after generating a new sprite, in order to rebuild the cache.</p>
 </div>
 </article>
 <article class="styleguide__item___28nPp" id="cssCustomProperties">
@@ -15141,14 +15135,14 @@ Plugin documentation:
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-69dcc52e-5d1b-9502-}d43c-8cd4e722c9c3" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-69dcc52e-5d1b-9502-}d43c-8cd4e722c9c3" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-69dcc52e-5d1b-9502-}d43c-8cd4e722c9c3" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-5d82ec5b-56b3-3eec-}2882-39dccbe82c11" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-5d82ec5b-56b3-3eec-}2882-39dccbe82c11" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-5d82ec5b-56b3-3eec-}2882-39dccbe82c11" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-69dcc52e-5d1b-9502-}d43c-8cd4e722c9c3" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-69dcc52e-5d1b-9502-}d43c-8cd4e722c9c3" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-69dcc52e-5d1b-9502-}d43c-8cd4e722c9c3" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-5d82ec5b-56b3-3eec-}2882-39dccbe82c11" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-5d82ec5b-56b3-3eec-}2882-39dccbe82c11" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-5d82ec5b-56b3-3eec-}2882-39dccbe82c11" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -16671,14 +16665,14 @@ blockquote {
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-fba7ff67-2eb7-f312-}0471-e057ca3caf02" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-fba7ff67-2eb7-f312-}0471-e057ca3caf02" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-fba7ff67-2eb7-f312-}0471-e057ca3caf02" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-67ff6b68-3d39-bea4-}a32e-e72afd2a543e" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-67ff6b68-3d39-bea4-}a32e-e72afd2a543e" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-67ff6b68-3d39-bea4-}a32e-e72afd2a543e" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-fba7ff67-2eb7-f312-}0471-e057ca3caf02" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-fba7ff67-2eb7-f312-}0471-e057ca3caf02" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-fba7ff67-2eb7-f312-}0471-e057ca3caf02" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-67ff6b68-3d39-bea4-}a32e-e72afd2a543e" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-67ff6b68-3d39-bea4-}a32e-e72afd2a543e" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-67ff6b68-3d39-bea4-}a32e-e72afd2a543e" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -16952,14 +16946,14 @@ blockquote {
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-391d2658-216a-5da8-}4474-175e37c0033c" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-391d2658-216a-5da8-}4474-175e37c0033c" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-391d2658-216a-5da8-}4474-175e37c0033c" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-a15c4aa7-af95-0168-}ef65-f7e7dbd6a4c8" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-a15c4aa7-af95-0168-}ef65-f7e7dbd6a4c8" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-a15c4aa7-af95-0168-}ef65-f7e7dbd6a4c8" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-391d2658-216a-5da8-}4474-175e37c0033c" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-391d2658-216a-5da8-}4474-175e37c0033c" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-391d2658-216a-5da8-}4474-175e37c0033c" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-a15c4aa7-af95-0168-}ef65-f7e7dbd6a4c8" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-a15c4aa7-af95-0168-}ef65-f7e7dbd6a4c8" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-a15c4aa7-af95-0168-}ef65-f7e7dbd6a4c8" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -18115,14 +18109,14 @@ input[type=&quot;password&quot;] {
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-3dbb191a-aec7-4315-}8fb4-09ef6c33c513" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-3dbb191a-aec7-4315-}8fb4-09ef6c33c513" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-3dbb191a-aec7-4315-}8fb4-09ef6c33c513" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-5ca65364-2668-89f3-}9321-27238c5f9884" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-5ca65364-2668-89f3-}9321-27238c5f9884" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-5ca65364-2668-89f3-}9321-27238c5f9884" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-3dbb191a-aec7-4315-}8fb4-09ef6c33c513" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-3dbb191a-aec7-4315-}8fb4-09ef6c33c513" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-3dbb191a-aec7-4315-}8fb4-09ef6c33c513" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-5ca65364-2668-89f3-}9321-27238c5f9884" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-5ca65364-2668-89f3-}9321-27238c5f9884" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-5ca65364-2668-89f3-}9321-27238c5f9884" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -18492,14 +18486,14 @@ input[type=&quot;password&quot;] {
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-b00f1f10-a0db-a991-}3bd9-79346966a5b9" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-b00f1f10-a0db-a991-}3bd9-79346966a5b9" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-b00f1f10-a0db-a991-}3bd9-79346966a5b9" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-2d70d46f-c3aa-ebcd-}0cce-2381b3922d86" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-2d70d46f-c3aa-ebcd-}0cce-2381b3922d86" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-2d70d46f-c3aa-ebcd-}0cce-2381b3922d86" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-b00f1f10-a0db-a991-}3bd9-79346966a5b9" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-b00f1f10-a0db-a991-}3bd9-79346966a5b9" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-b00f1f10-a0db-a991-}3bd9-79346966a5b9" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-2d70d46f-c3aa-ebcd-}0cce-2381b3922d86" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-2d70d46f-c3aa-ebcd-}0cce-2381b3922d86" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-2d70d46f-c3aa-ebcd-}0cce-2381b3922d86" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -19043,14 +19037,14 @@ input[type=&quot;password&quot;] {
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-fb7c93ac-1763-20b3-}593e-0bf7bed9d5f4" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-fb7c93ac-1763-20b3-}593e-0bf7bed9d5f4" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-fb7c93ac-1763-20b3-}593e-0bf7bed9d5f4" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-ac0ec04d-88b5-8f30-}adbb-e137ad9f439b" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-ac0ec04d-88b5-8f30-}adbb-e137ad9f439b" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-ac0ec04d-88b5-8f30-}adbb-e137ad9f439b" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-fb7c93ac-1763-20b3-}593e-0bf7bed9d5f4" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-fb7c93ac-1763-20b3-}593e-0bf7bed9d5f4" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-fb7c93ac-1763-20b3-}593e-0bf7bed9d5f4" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-ac0ec04d-88b5-8f30-}adbb-e137ad9f439b" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-ac0ec04d-88b5-8f30-}adbb-e137ad9f439b" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-ac0ec04d-88b5-8f30-}adbb-e137ad9f439b" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -19329,14 +19323,14 @@ input[type=&quot;password&quot;] {
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-732b3bbb-cf4e-6a80-}d664-f3d5f42e17c0" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-732b3bbb-cf4e-6a80-}d664-f3d5f42e17c0" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-732b3bbb-cf4e-6a80-}d664-f3d5f42e17c0" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-2a7ab456-1e81-48e9-}4cc1-231c4e47dfc6" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-2a7ab456-1e81-48e9-}4cc1-231c4e47dfc6" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-2a7ab456-1e81-48e9-}4cc1-231c4e47dfc6" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-732b3bbb-cf4e-6a80-}d664-f3d5f42e17c0" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-732b3bbb-cf4e-6a80-}d664-f3d5f42e17c0" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-732b3bbb-cf4e-6a80-}d664-f3d5f42e17c0" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-2a7ab456-1e81-48e9-}4cc1-231c4e47dfc6" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-2a7ab456-1e81-48e9-}4cc1-231c4e47dfc6" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-2a7ab456-1e81-48e9-}4cc1-231c4e47dfc6" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -20544,14 +20538,14 @@ input[type=&quot;password&quot;] {
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-bed69c22-cdc2-92a6-}b8e9-a4c16169cce2" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-bed69c22-cdc2-92a6-}b8e9-a4c16169cce2" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-bed69c22-cdc2-92a6-}b8e9-a4c16169cce2" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-ceed6d4b-0d36-99a3-}64c6-d9eca1c9e297" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-ceed6d4b-0d36-99a3-}64c6-d9eca1c9e297" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-ceed6d4b-0d36-99a3-}64c6-d9eca1c9e297" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-bed69c22-cdc2-92a6-}b8e9-a4c16169cce2" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-bed69c22-cdc2-92a6-}b8e9-a4c16169cce2" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-bed69c22-cdc2-92a6-}b8e9-a4c16169cce2" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-ceed6d4b-0d36-99a3-}64c6-d9eca1c9e297" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-ceed6d4b-0d36-99a3-}64c6-d9eca1c9e297" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-ceed6d4b-0d36-99a3-}64c6-d9eca1c9e297" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -23171,14 +23165,14 @@ input[type=&quot;password&quot;] {
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-5f8b0a56-cc5e-217c-}0d77-dc189f54a764" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-5f8b0a56-cc5e-217c-}0d77-dc189f54a764" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-5f8b0a56-cc5e-217c-}0d77-dc189f54a764" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-39efb639-d606-2790-}ade2-f28037773eae" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-39efb639-d606-2790-}ade2-f28037773eae" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-39efb639-d606-2790-}ade2-f28037773eae" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-5f8b0a56-cc5e-217c-}0d77-dc189f54a764" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-5f8b0a56-cc5e-217c-}0d77-dc189f54a764" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-5f8b0a56-cc5e-217c-}0d77-dc189f54a764" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-39efb639-d606-2790-}ade2-f28037773eae" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-39efb639-d606-2790-}ade2-f28037773eae" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-39efb639-d606-2790-}ade2-f28037773eae" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -23308,14 +23302,14 @@ input[type=&quot;password&quot;] {
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-191b87ea-bbf5-6d84-}e33a-abda64150459" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-191b87ea-bbf5-6d84-}e33a-abda64150459" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-191b87ea-bbf5-6d84-}e33a-abda64150459" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-14da266b-2674-5b0d-}14d7-abd89ed21395" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-14da266b-2674-5b0d-}14d7-abd89ed21395" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-14da266b-2674-5b0d-}14d7-abd89ed21395" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-191b87ea-bbf5-6d84-}e33a-abda64150459" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-191b87ea-bbf5-6d84-}e33a-abda64150459" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-191b87ea-bbf5-6d84-}e33a-abda64150459" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-14da266b-2674-5b0d-}14d7-abd89ed21395" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-14da266b-2674-5b0d-}14d7-abd89ed21395" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-14da266b-2674-5b0d-}14d7-abd89ed21395" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -23550,14 +23544,14 @@ input[type=&quot;password&quot;] {
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-394ec851-9d12-26f1-}8c9d-e9f10f3bfb12" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-394ec851-9d12-26f1-}8c9d-e9f10f3bfb12" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-394ec851-9d12-26f1-}8c9d-e9f10f3bfb12" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-4a405b30-3cab-7d17-}7538-cd3d8959f608" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-4a405b30-3cab-7d17-}7538-cd3d8959f608" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-4a405b30-3cab-7d17-}7538-cd3d8959f608" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-394ec851-9d12-26f1-}8c9d-e9f10f3bfb12" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-394ec851-9d12-26f1-}8c9d-e9f10f3bfb12" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-394ec851-9d12-26f1-}8c9d-e9f10f3bfb12" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-4a405b30-3cab-7d17-}7538-cd3d8959f608" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-4a405b30-3cab-7d17-}7538-cd3d8959f608" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-4a405b30-3cab-7d17-}7538-cd3d8959f608" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -24527,14 +24521,14 @@ a.field__field_content_promo__item {
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-577b393c-aea0-39a1-}c3a0-dc3d277e6325" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-577b393c-aea0-39a1-}c3a0-dc3d277e6325" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-577b393c-aea0-39a1-}c3a0-dc3d277e6325" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-26b7c6ef-d181-c6c1-}a905-c95759139182" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-26b7c6ef-d181-c6c1-}a905-c95759139182" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-26b7c6ef-d181-c6c1-}a905-c95759139182" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-577b393c-aea0-39a1-}c3a0-dc3d277e6325" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-577b393c-aea0-39a1-}c3a0-dc3d277e6325" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-577b393c-aea0-39a1-}c3a0-dc3d277e6325" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-26b7c6ef-d181-c6c1-}a905-c95759139182" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-26b7c6ef-d181-c6c1-}a905-c95759139182" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-26b7c6ef-d181-c6c1-}a905-c95759139182" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -24860,14 +24854,14 @@ a.field__field_content_promo__item {
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-53950ad5-0e11-ce8c-}f14f-11d9f8635c24" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-53950ad5-0e11-ce8c-}f14f-11d9f8635c24" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-53950ad5-0e11-ce8c-}f14f-11d9f8635c24" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-a641b26d-06f6-b056-}688a-92724036aa57" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-a641b26d-06f6-b056-}688a-92724036aa57" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-a641b26d-06f6-b056-}688a-92724036aa57" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-53950ad5-0e11-ce8c-}f14f-11d9f8635c24" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-53950ad5-0e11-ce8c-}f14f-11d9f8635c24" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-53950ad5-0e11-ce8c-}f14f-11d9f8635c24" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-a641b26d-06f6-b056-}688a-92724036aa57" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-a641b26d-06f6-b056-}688a-92724036aa57" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-a641b26d-06f6-b056-}688a-92724036aa57" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -25009,14 +25003,14 @@ a.field__field_content_promo__item {
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-77230e77-a274-1007-}8820-b0a27d563611" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-77230e77-a274-1007-}8820-b0a27d563611" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-77230e77-a274-1007-}8820-b0a27d563611" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-d20cfb88-bc5a-92ab-}a0f3-f3444df2bb36" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-d20cfb88-bc5a-92ab-}a0f3-f3444df2bb36" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-d20cfb88-bc5a-92ab-}a0f3-f3444df2bb36" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-77230e77-a274-1007-}8820-b0a27d563611" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-77230e77-a274-1007-}8820-b0a27d563611" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-77230e77-a274-1007-}8820-b0a27d563611" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-d20cfb88-bc5a-92ab-}a0f3-f3444df2bb36" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-d20cfb88-bc5a-92ab-}a0f3-f3444df2bb36" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-d20cfb88-bc5a-92ab-}a0f3-f3444df2bb36" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -25164,14 +25158,14 @@ a.field__field_content_promo__item {
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-d8cbd913-1e07-4a1d-}c7cc-345b4f5d6fe6" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-d8cbd913-1e07-4a1d-}c7cc-345b4f5d6fe6" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-d8cbd913-1e07-4a1d-}c7cc-345b4f5d6fe6" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-ea1e828e-3c7d-5c17-}6003-3401e8ea913d" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-ea1e828e-3c7d-5c17-}6003-3401e8ea913d" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-ea1e828e-3c7d-5c17-}6003-3401e8ea913d" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-d8cbd913-1e07-4a1d-}c7cc-345b4f5d6fe6" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-d8cbd913-1e07-4a1d-}c7cc-345b4f5d6fe6" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-d8cbd913-1e07-4a1d-}c7cc-345b4f5d6fe6" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-ea1e828e-3c7d-5c17-}6003-3401e8ea913d" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-ea1e828e-3c7d-5c17-}6003-3401e8ea913d" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-ea1e828e-3c7d-5c17-}6003-3401e8ea913d" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -25608,14 +25602,14 @@ a.field__field_content_promo__item {
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-53b06c07-01da-1dcb-}6bdd-e7a3121055b5" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-53b06c07-01da-1dcb-}6bdd-e7a3121055b5" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-53b06c07-01da-1dcb-}6bdd-e7a3121055b5" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-b1157e2e-b459-9bc7-}6ba9-01c2ace93e1b" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-b1157e2e-b459-9bc7-}6ba9-01c2ace93e1b" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-b1157e2e-b459-9bc7-}6ba9-01c2ace93e1b" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-53b06c07-01da-1dcb-}6bdd-e7a3121055b5" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-53b06c07-01da-1dcb-}6bdd-e7a3121055b5" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-53b06c07-01da-1dcb-}6bdd-e7a3121055b5" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-b1157e2e-b459-9bc7-}6ba9-01c2ace93e1b" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-b1157e2e-b459-9bc7-}6ba9-01c2ace93e1b" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-b1157e2e-b459-9bc7-}6ba9-01c2ace93e1b" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">

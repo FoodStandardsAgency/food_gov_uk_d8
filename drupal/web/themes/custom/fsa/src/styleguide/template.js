@@ -153,7 +153,7 @@ const navigationComponentItems = componentArray.map((component) => {
 
 const introComponentArray = [
   {
-    title: 'Workflow',
+    title: 'Developer Workflow',
     element: readme
   },
   {
