@@ -118,7 +118,10 @@ class DefaultController extends ControllerBase {
    * Create Account settings page.
    */
   public function accountSettingsPage() {
-    $content = '<p>' . $this->t('Change password or cancel your subscription here.') . '</p>';
+    $account = User::load(\Drupal::currentUser()->id());
+
+    $email = $account->getEmail();
+    $content = '<p>' . $this->t('Change password or cancel your subscription for @mail here.', ['@mail' => $email]) . '</p>';
     $content .= '<p>' . DefaultController::linkMarkup('fsa_signin.default_controller_changePasswordPage', $this->t('Set password'), ['button']) . ' ';
     $content .= DefaultController::linkMarkup('fsa_signin.delete_account_confirmation', $this->t('Cancel subscription'), ['cancel button red']) . '</p>';
     $content .= '<p>' . DefaultController::linkMarkup('user.logout.http', $this->t('Logout'), ['logout button']) . '</p>';
@@ -136,7 +139,7 @@ class DefaultController extends ControllerBase {
     $header = '<header class="profile__header">';
     $header .= '<h2 class="profile__heading">' . $this->t('Delivery options') . '</h2>';
     $header .= '</header>';
-    $header .= '<p class="profile__intro">' . $this->t("Update your subscription or unsubscribe from the alerts you're receiving") . '</p>';
+    $header .= '<p class="profile__intro">' . $this->t("Select delivery options and frequency for the alerts you chose to receive.") . '</p>';
 
     $manage_form = \Drupal::formBuilder()->getForm(DeliveryOptions::class);
 
