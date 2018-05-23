@@ -76,8 +76,8 @@ class DefaultController extends ControllerBase {
         ['back arrow']
       ),
     ];
-    $title = ['#markup' => '<h2>' . $this->t('Use one-time sign in') . '</h2>'];
-    $content = ['#markup' => '<p>' . $this->t("Enter your email address below and we'll send you a one-time sign in link") . '</p>'];
+    $title = ['#markup' => '<h2>' . $this->t('Forgot password?') . '</h2>'];
+    $content = ['#markup' => '<p>' . $this->t("Enter your email address and we'll send you a login link so you can set a password.") . '</p>'];
     $send_pwd_form = \Drupal::formBuilder()->getForm(SendPasswordEmailForm::class);
 
     return [
@@ -119,8 +119,9 @@ class DefaultController extends ControllerBase {
    */
   public function accountSettingsPage() {
     $content = '<p>' . $this->t('Change password or cancel your subscription here.') . '</p>';
-    $content .= '<p>' . DefaultController::linkMarkup('fsa_signin.default_controller_changePasswordPage', $this->t('Change password'), ['button cancel']) . ' ';
-    $content .= DefaultController::linkMarkup('fsa_signin.delete_account_confirmation', $this->t('Cancel subscription'), ['button cancel']) . '</p>';
+    $content .= '<p>' . DefaultController::linkMarkup('fsa_signin.default_controller_changePasswordPage', $this->t('Set password'), ['button']) . ' ';
+    $content .= DefaultController::linkMarkup('fsa_signin.delete_account_confirmation', $this->t('Cancel subscription'), ['cancel button red']) . '</p>';
+    $content .= '<p>' . DefaultController::linkMarkup('user.logout.http', $this->t('Logout'), ['logout button']) . '</p>';
 
     return [
       ['#markup' => $content],
@@ -151,9 +152,8 @@ class DefaultController extends ControllerBase {
    */
   public function changePasswordPage() {
     $header = '<header class="profile__header">';
-    $header .= '<h2 class="profile__heading">' . $this->t('Change password') . '</h2>';
+    $header .= '<h2 class="profile__heading">' . $this->t('Set a new password') . '</h2>';
     $header .= '</header>';
-    $header .= '<p class="profile__intro">' . $this->t("Change your password") . '</p>';
 
     $manage_form = \Drupal::formBuilder()->getForm(ChangePassword::class);
 

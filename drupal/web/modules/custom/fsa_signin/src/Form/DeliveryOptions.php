@@ -5,6 +5,7 @@ namespace Drupal\fsa_signin\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\fsa_custom\FsaCustomHelper;
+use Drupal\fsa_signin\Controller\DefaultController;
 use Drupal\user\Entity\User;
 use Drupal\fsa_signin\SignInService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -133,10 +134,13 @@ class DeliveryOptions extends FormBase {
 
     // Submit and other actions.
     $form['actions'] = ['#type' => 'actions'];
+    $form['actions']['back'] = [
+      '#markup' => DefaultController::linkMarkup('fsa_signin.user_preregistration_news_form', $this->t('Previous'), ['back arrow']),
+    ];
     $form['actions']['submit_edit'] = [
       '#type' => 'button',
       '#executes_submit_callback' => TRUE,
-      '#value' => $this->t('Save your changes'),
+      '#value' => $this->t('Save'),
     ];
     // Attach js for the "select all" feature.
     $form['#attached']['library'][] = 'fsa_signin/subscription_alerts';

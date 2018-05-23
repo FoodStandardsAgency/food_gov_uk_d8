@@ -61,7 +61,10 @@ class AlertsForRegistrationForm extends FormBase {
     }
 
     $form['title'] = [
-      '#markup' => '<h2>' . $this->t('Alerts') . '</h2>',
+      '#markup' => '<h2>' . $this->t('Food and allergy alerts') . '</h2>',
+    ];
+    $form['description'] = [
+      '#markup' => '<p>' . $this->t("Stay up to date with the FSA's latest food and allergy alerts by email or SMS.") . '</p>',
     ];
     $form['food_alert_registration'] = [
       '#type' => 'checkboxes',
@@ -78,9 +81,6 @@ class AlertsForRegistrationForm extends FormBase {
       '#description' => $this->t('Select all that apply'),
     ];
     $form['actions'] = ['#type' => 'actions'];
-    $form['actions']['back'] = [
-      '#markup' => DefaultController::linkMarkup('fsa_signin.default_controller_deliveryOptionsPage', $this->t('Previous'), ['back arrow']),
-    ];
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Next'),

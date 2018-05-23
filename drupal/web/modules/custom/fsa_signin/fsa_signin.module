@@ -25,9 +25,9 @@ function fsa_signin_form_alter(&$form, FormStateInterface $form_state, $form_id)
 
   if ($form_id == 'user_login_form') {
     $form['forgot_link'] = [
-      '#markup' => t("Forgot or do not have a password?") . ' ' . DefaultController::linkMarkup(
+      '#markup' => DefaultController::linkMarkup(
           'fsa_signin.default_controller_resetPassword',
-          t('Get a link for one-time sign in.')
+          t('Forgot or do not have a password?')
       ),
     ];
   }

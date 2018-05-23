@@ -55,10 +55,6 @@ class ChangePassword extends FormBase {
       '#type' => 'password_confirm',
       '#description' => $this->t('Password should be at least @length characters', ['@length' => ChangePassword::PROFILE_PASSWORD_LENGTH]),
     ];
-
-    $form['actions']['back'] = [
-      '#markup' => DefaultController::linkMarkup('fsa_signin.default_controller_accountSettingsPage', $this->t('Cancel'), ['cancel']),
-    ];
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Change password'),
