@@ -30,7 +30,22 @@ function fsa_signin_form_alter(&$form, FormStateInterface $form_state, $form_id)
           t('Get a link for one-time sign in.')
       ),
     ];
+  }
 
+  if ($form_id == 'user_pass_reset') {
+    // Override core provided password reset form texts.
+    // See core/modules/user/src/Form/UserPasswordResetForm.php.
+    if ($form['#title']->getUntranslatedString() == 'Set password') {
+      $arguments = $form['message']['#markup']->getArguments();
+      $form['#title'] = t('Thanks for verifying your email');
+      $form['message']['#markup'] = t('You now need to set a password for your account %user_name', ['%user_name' => $arguments['%user_name']]);
+
+      // Unset the "This login can be used only once." text.
+      unset($form['help']);
+
+      // Change the "Log in" button text.
+      $form['actions']['submit']['#value'] = t('Set password');
+    }
   }
 }
 
