@@ -3,6 +3,7 @@
 namespace Drupal\fsa_signin\Form;
 
 use Drupal\fsa_custom\FsaCustomHelper;
+use Drupal\fsa_signin\Controller\DefaultController;
 use Drupal\user\Entity\User;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -23,6 +24,12 @@ class UserRegistrationForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+    $form['subscribe_description_1'] = [
+      '#markup' => '<p>' . $this->t("Create an account to get food and allergy alerts by email or text message. This is a free service.") . '</p>',
+    ];
+    $form['subscribe_description_2'] = [
+      '#markup' => '<p><small>' . $this->t('Before you can subscribe we need to verify your email address. Please enter a valid email address in the box below and click "Create account".') . '</small></p>',
+    ];
     $form['email'] = [
       '#type' => 'email',
       '#title' => $this->t('Email address'),
@@ -52,10 +59,14 @@ class UserRegistrationForm extends FormBase {
       ],
       '#description' => FsaCustomHelper::privacyNoticeLink('alerts'),
     ];
-
     $form['actions']['submit'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Submit'),
+      '#value' => $this->t('Create account'),
+    ];
+    $form['subscribe_beta_description'] = [
+      '#prefix' => '<br /><br /><small>',
+      '#suffix' => '</small><br />',
+      '#markup' => DefaultController::betaSigninDescription('long'),
     ];
 
     return $form;

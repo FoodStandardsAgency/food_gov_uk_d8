@@ -11,12 +11,9 @@ use Drupal\fsa_signin\SignInService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class ProfileManager.
+ * Class DeliveryOptions.
  */
-class ProfileManager extends FormBase {
-
-  const PROFILE_PASSWORD_LENGTH = 8;
-
+class DeliveryOptions extends FormBase {
 
   /**
    * Signin service.
@@ -45,7 +42,7 @@ class ProfileManager extends FormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'profile_manager';
+    return 'delivery_options';
   }
 
   /**
@@ -55,17 +52,6 @@ class ProfileManager extends FormBase {
     /** @var \Drupal\user\Entity\User $account */
     $account = User::load(\Drupal::currentUser()->id());
 
-    $form['password']['new_password'] = [
-      '#title' => $this->t('Password'),
-      '#type' => 'password_confirm',
-      '#title' => $this->t('New password'),
-      '#description' => $this->t('Password should be at least @length characters', ['@length' => ProfileManager::PROFILE_PASSWORD_LENGTH]),
-    ];
-
-    // Delivery options.
-    $form['delivery'] = [
-      '#markup' => '<h3>' . $this->t('Delivery options') . '</h3>',
-    ];
     $form['delivery']['delivery_method'] = [
       '#title' => $this->t('I want to receive food and allergy alerts via'),
       '#type' => 'checkboxes',
@@ -115,9 +101,9 @@ class ProfileManager extends FormBase {
       '#markup' => '<h3>' . $this->t('Personal information') . '</h3>',
     ];
     $form['delivery']['email'] = [
-      '#type' => 'email',
+      '#type' => 'item',
       '#title' => $this->t('Email address'),
-      '#default_value' => $account->getEmail(),
+      '#markup' => '<i>' . $account->getEmail() . '</i>',
     ];
     $form['delivery']['phone'] = [
       '#type' => 'tel',
@@ -131,7 +117,8 @@ class ProfileManager extends FormBase {
         ],
       ],
     ];
-    $form['delivery']['language'] = [
+
+    $form['profile']['language'] = [
       '#type' => 'radios',
       '#title' => $this->t('Language preference'),
       '#options' => [
@@ -140,24 +127,20 @@ class ProfileManager extends FormBase {
       ],
       '#default_value' => $account->getPreferredLangcode(),
     ];
-    $form['delivery']['privacy_notice'] = [
+    $form['extra']['privacy_notice'] = [
       '#type' => 'item',
       '#markup' => FsaCustomHelper::privacyNoticeLink('alerts'),
     ];
 
     // Submit and other actions.
     $form['actions'] = ['#type' => 'actions'];
+    $form['actions']['back'] = [
+      '#markup' => DefaultController::linkMarkup('fsa_signin.user_preregistration_news_form', $this->t('Previous'), ['back arrow']),
+    ];
     $form['actions']['submit_edit'] = [
       '#type' => 'button',
       '#executes_submit_callback' => TRUE,
-      '#value' => $this->t('Edit subscriptions'),
-    ];
-    $form['actions']['submit'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Save your changes'),
-    ];
-    $form['actions']['delete'] = [
-      '#markup' => DefaultController::linkMarkup('fsa_signin.delete_account_confirmation', $this->t('Cancel your subscription'), ['button cancel']),
+      '#value' => $this->t('Save'),
     ];
     // Attach js for the "select all" feature.
     $form['#attached']['library'][] = 'fsa_signin/subscription_alerts';
@@ -168,10 +151,13 @@ class ProfileManager extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
+
+    /*
     $email = $form_state->getValue('email');
     if (!\Drupal::service('email.validator')->isValid($email)) {
-      $form_state->setErrorByName('email', $this->t('Email value is not valid.'));
+    $form_state->setErrorByName('email',$this->t('Email value is not valid.'));
     }
+     */
 
     $delivery_method = $form_state->getValue('delivery_method');
     $delivery_method = array_filter(array_values($delivery_method));
@@ -189,16 +175,6 @@ class ProfileManager extends FormBase {
       }
     }
 
-    $password = $form_state->getValue('new_password');
-    $length = ProfileManager::PROFILE_PASSWORD_LENGTH;
-    if ($password != '' && strlen($password) < $length) {
-      $form_state->setErrorByName(
-        'new_password',
-        $this->t('Password not updated: Please use a password of @length or more characters.',
-          ['@length' => $length]
-        )
-      );
-    }
   }
 
   /**
@@ -208,9 +184,8 @@ class ProfileManager extends FormBase {
     /** @var \Drupal\user\Entity\User $account */
     $account = User::load(\Drupal::currentUser()->id());
 
-    $email = $form_state->getValue('email');
-    $account->setEmail($email);
-
+    // $email = $form_state->getValue('email');
+    // $account->setEmail($email);
     $delivery_method = $form_state->getValue('delivery_method');
     $delivery_method = array_filter(array_values($delivery_method));
     $account->set('field_delivery_method', $delivery_method);
@@ -235,24 +210,11 @@ class ProfileManager extends FormBase {
     $language = $form_state->getValue('language');
     $account->set('preferred_langcode', $language);
 
-    $password = $form_state->getValue('new_password');
-    if ($password != '') {
-      $account->setPassword($password);
-    }
-
     if ($account->save()) {
-      if ($password != '') {
-        drupal_set_message($this->t('Your preferences are updated and password was successfully changed.'));
-      }
-      else {
-        drupal_set_message($this->t('Your preferences are updated.'));
-      }
+      drupal_set_message($this->t('Your preferences are updated.'));
     }
     else {
       drupal_set_message($this->t('There was an error updating your preferences. Please try again.'));
-    }
-    if ($form_state->getTriggeringElement()['#type'] != 'submit') {
-      $form_state->setRedirect('fsa_signin.user_preregistration_alerts_form');
     }
   }
 

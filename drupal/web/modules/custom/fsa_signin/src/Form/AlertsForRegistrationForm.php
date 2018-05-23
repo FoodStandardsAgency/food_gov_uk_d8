@@ -4,7 +4,6 @@ namespace Drupal\fsa_signin\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\editor\Element;
 use Drupal\fsa_signin\Controller\DefaultController;
 use Drupal\fsa_signin\SignInService;
 use Drupal\user\Entity\User;
@@ -62,15 +61,10 @@ class AlertsForRegistrationForm extends FormBase {
     }
 
     $form['title'] = [
-      '#markup' => '<h2>' . $this->t('Alerts') . '</h2>',
+      '#markup' => '<h2>' . $this->t('Food and allergy alerts') . '</h2>',
     ];
     $form['description'] = [
-      '#markup' => '<p>' . $this->t("Get food alerts and allergy alerts by email or SMS text message. This is a free service.") . '</p>',
-    ];
-    $form['beta_description'] = [
-      '#prefix' => '<small>',
-      '#suffix' => '</small>',
-      '#markup' => DefaultController::betaSigninDescription('long'),
+      '#markup' => '<p>' . $this->t("Stay up to date with the FSA's latest food and allergy alerts by email or SMS.") . '</p>',
     ];
     $form['food_alert_registration'] = [
       '#type' => 'checkboxes',
@@ -87,9 +81,6 @@ class AlertsForRegistrationForm extends FormBase {
       '#description' => $this->t('Select all that apply'),
     ];
     $form['actions'] = ['#type' => 'actions'];
-    $form['actions']['back'] = [
-      '#markup' => DefaultController::linkMarkup('fsa_signin.default_controller_manageProfilePage', $this->t('Previous'), ['back arrow']),
-    ];
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Next'),

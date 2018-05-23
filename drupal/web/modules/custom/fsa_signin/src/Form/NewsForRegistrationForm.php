@@ -87,7 +87,7 @@ class NewsForRegistrationForm extends FormBase {
     ];
     $form['actions']['submit'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Save your changes'),
+      '#value' => $this->t('Next'),
     ];
     $form['#attached']['library'][] = 'fsa_signin/subscription_alerts';
     return $form;
@@ -114,7 +114,7 @@ class NewsForRegistrationForm extends FormBase {
     $user->set('field_subscribed_cons', $selected_cons_tids);
 
     $user->save();
-    $form_state->setRedirect('fsa_signin.default_controller_manageProfilePage');
+    $form_state->setRedirect('fsa_signin.default_controller_deliveryOptionsPage');
   }
 
 }

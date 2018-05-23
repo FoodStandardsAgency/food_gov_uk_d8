@@ -25,12 +25,33 @@ function fsa_signin_form_alter(&$form, FormStateInterface $form_state, $form_id)
 
   if ($form_id == 'user_login_form') {
     $form['forgot_link'] = [
-      '#markup' => t("Forgot or do not have a password?") . ' ' . DefaultController::linkMarkup(
+      '#markup' => DefaultController::linkMarkup(
           'fsa_signin.default_controller_resetPassword',
-          t('Get a link for one-time sign in.')
+          t('Forgot or do not have a password?')
       ),
     ];
+  }
 
+  if ($form_id == 'user_pass_reset') {
+    // Override core provided password reset form texts.
+    // See core/modules/user/src/Form/UserPasswordResetForm.php.
+    $form_title = $form['#title']->getUntranslatedString();
+    if ($form_title == 'Set password') {
+      $arguments = $form['message']['#markup']->getArguments();
+      $form['#title'] = t('Thanks for verifying your email');
+      $form['message']['#markup'] = t('You now need to set a password for your account %user_name', ['%user_name' => $arguments['%user_name']]);
+    }
+
+    if ($form_title == 'Reset password') {
+      $form['#title'] = t('Reset your password');
+      $form['message']['#markup'] = t('Click the button below to log in to the site and change your password');
+    }
+
+    // Unset the "This login can be used only once." text.
+    unset($form['help']);
+
+    // Change the "Log in" button text.
+    $form['actions']['submit']['#value'] = t('Log in and set password');
   }
 }
 
