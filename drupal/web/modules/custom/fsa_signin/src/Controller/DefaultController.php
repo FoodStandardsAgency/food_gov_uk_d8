@@ -121,7 +121,8 @@ class DefaultController extends ControllerBase {
     $account = User::load(\Drupal::currentUser()->id());
 
     $email = $account->getEmail();
-    $content = '<p>' . $this->t('Change password or cancel your subscription for @mail here.', ['@mail' => $email]) . '</p>';
+    $content = '<h2>' . $this->t('Welcome @mail', ['@mail' => $email]) . '</h2>';
+    $content .= '<p>' . $this->t('Manage your profile from links below or set your alert subscription preferences from the tabs above.') . '</p>';
     $content .= '<p>' . DefaultController::linkMarkup('fsa_signin.default_controller_changePasswordPage', $this->t('Set password'), ['button']) . ' ';
     $content .= DefaultController::linkMarkup('fsa_signin.delete_account_confirmation', $this->t('Cancel subscription'), ['cancel button red']) . '</p>';
     $content .= '<p>' . DefaultController::linkMarkup('user.logout.http', $this->t('Logout'), ['logout button']) . '</p>';
