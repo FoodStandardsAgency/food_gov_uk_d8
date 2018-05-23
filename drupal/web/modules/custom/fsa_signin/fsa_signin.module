@@ -38,8 +38,8 @@ function fsa_signin_form_alter(&$form, FormStateInterface $form_state, $form_id)
     $form_title = $form['#title']->getUntranslatedString();
     if ($form_title == 'Set password') {
       $arguments = $form['message']['#markup']->getArguments();
-      $form['#title'] = t('Thanks for verifying your email');
-      $form['message']['#markup'] = t('You now need to set a password for your account %user_name', ['%user_name' => $arguments['%user_name']]);
+      $form['#title'] = t('Thanks for verifying your email %user_name', ['%user_name' => $arguments['%user_name']]);
+      $form['message']['#markup'] = t('To complete your alerts subscription you must set a password for your account and select your subscription preferences.');
     }
 
     if ($form_title == 'Reset password') {
