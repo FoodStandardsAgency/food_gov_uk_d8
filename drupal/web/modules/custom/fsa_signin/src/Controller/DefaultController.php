@@ -2,6 +2,7 @@
 
 namespace Drupal\fsa_signin\Controller;
 
+use Drupal\block\Entity\Block;
 use Drupal\Core\Link;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\fsa_signin\Form\ChangePassword;
@@ -121,7 +122,8 @@ class DefaultController extends ControllerBase {
     $account = User::load(\Drupal::currentUser()->id());
 
     $email = $account->getEmail();
-    $content = '<p>' . $this->t('Change password or cancel your subscription for @mail here.', ['@mail' => $email]) . '</p>';
+    $content = '<h2>' . $this->t('Hello @mail', ['@mail' => $email]) . '</h2>';
+    $content .= '<p>' . $this->t('Manage your profile from links below or set your alert subscription preferences from the tabs above.') . '</p>';
     $content .= '<p>' . DefaultController::linkMarkup('fsa_signin.default_controller_changePasswordPage', $this->t('Set password'), ['button']) . ' ';
     $content .= DefaultController::linkMarkup('fsa_signin.delete_account_confirmation', $this->t('Cancel subscription'), ['cancel button red']) . '</p>';
     $content .= '<p>' . DefaultController::linkMarkup('user.logout.http', $this->t('Logout'), ['logout button']) . '</p>';
@@ -185,7 +187,7 @@ class DefaultController extends ControllerBase {
    */
   public function thankYouPage() {
     $markup = '<h1>' . $this->t('A verification email has been sent to your inbox.') . '</h1>';
-    $markup .= '<p>' . $this->t('Please check your email and click on the one-time verification link within the mail. If you do not see the email, please check your spam folder.') . '</p>';
+    $markup .= '<p>' . $this->t('<p>To complete you subcription please follow the instructions within the email.</p><p>If you do not see the email, please check your spam folder.</p>') . '</p>';
     $markup .= '<p>' . self::betaSigninDescription() . '</p>';
 
     return [
