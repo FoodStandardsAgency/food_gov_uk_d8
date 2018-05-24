@@ -2,12 +2,12 @@
 @import "../../helper/custom-property";
 
 .user-registration-form .fieldgroup,
-.alert-for-registration-form .fieldgroup {
+.profile-manage-form .fieldgroup {
 
 }
 
 .user-registration-form legend,
-.alert-for-registration-form legend {
+.profile-manage-form legend {
   font-family: var(--font-family-heading);
   font-weight: 700;
   @mixin responsive-declaration font-size, 1.25em, 1.7em;
@@ -18,25 +18,25 @@
 }
 
 .user-registration-form p,
-.alert-for-registration-form p {
+.profile-manage-form p {
   @mixin responsive-declaration font-size, 1.125em, 1.33em;
   @mixin responsive-declaration line-height, 1.3, 1.4;
 }
 
 .user-registration-form .fieldset-wrapper,
-.alert-for-registration-form .fieldset-wrapper {
+.profile-manage-form .fieldset-wrapper {
   @mixin responsive-declaration margin-bottom, 1em, 2em;
   display: flex;
   flex-direction: column;
 }
 
 .user-registration-form .fieldset-wrapper > *:first-child,
-.alert-for-registration-form .fieldset-wrapper > *:first-child {
+.profile-manage-form .fieldset-wrapper > *:first-child {
   order: 100
 }
 
 .user-registration-form .description,
-.alert-for-registration-form .description {
+.profile-manage-form .description {
   order: 1;
   font-weight: 600;
   text-transform: uppercase;
@@ -44,35 +44,41 @@
 }
 
 .user-registration-form label,
-.alert-for-registration-form label {
+.profile-manage-form label {
   display: block;
   margin-bottom: 0.5em;
 }
 
+.profile-manage-form {
+  .js-form-type-radio {
+    margin-bottom: 0 !important;
+  }
+}
+
 .user-registration-form .form-wrapper,
-.alert-for-registration-form .form-wrapper {
+.profile-manage-form .form-wrapper {
   @mixin responsive-declaration padding-top, 1em, 1em;
 }
 
 .user-registration-form .form-actions,
-.alert-for-registration-form .form-actions {
+.profile-manage-form .form-actions {
   @mixin responsive-declaration padding-top, 2em, 3em;
   display: flex;
   justify-content: space-between;
 }
 
 .user-registration-form .form-actions .button.black.left,
-.alert-for-registration-form .form-actions .button.black.left {
+.profile-manage-form .form-actions .button.black.left {
   order: -1;
   background-color: var(--color-black);
 }
 
 .user-registration-form .form-actions .form-submit,
-.alert-for-registration-form .form-actions .form-submit {
+.profile-manage-form .form-actions .form-submit {
   margin-left: auto;
 }
 
 :--not-touch .user-registration-form .form-actions .button.black.left:--enter,
-:--not-touch .alert-for-registration-form .form-actions .button.black.left:--enter {
+:--not-touch .profile-manage-form .form-actions .button.black.left:--enter {
   color: var(--color-white);
 }
