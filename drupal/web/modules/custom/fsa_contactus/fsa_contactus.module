@@ -8,8 +8,6 @@
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\fsa_custom\FsaCustomHelper;
 use Drupal\block\Entity\Block;
-use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Access\AccessResult;
 
 /**
  * Implements hook_webform_element_alter().
