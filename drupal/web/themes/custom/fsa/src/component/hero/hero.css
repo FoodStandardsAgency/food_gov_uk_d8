@@ -430,14 +430,17 @@
     position: relative;
     color: var(--color-white);
     font-size: 0.8889em;
-    padding-left: 2.25em;
     text-decoration: underline;
 
     .hero:not(.hero--with-content) & {
       color: var(--dark-primary-color);
     }
 
-    &:before {
+    &.gear {
+      padding-left: 2.25em;
+    }
+
+    &.gear:before {
       content: '';
       position: absolute;
       left: 0;
