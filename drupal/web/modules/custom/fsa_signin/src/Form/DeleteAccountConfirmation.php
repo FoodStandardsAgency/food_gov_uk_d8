@@ -73,6 +73,8 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
+    $form['#attributes']['class'][] = DefaultController::PROFILE_FORM_HTML_CLASS;
+
     if (\Drupal::request()->query->has('done')) {
       $markup = '<p>' . $this->t('Your profile has been successfully removed.') . '</p>';
       $markup .= '<p>' . $this->t('If you change your mind you can always <a href="/news-alerts/subscribe">re-subscribe</a>.') . '</p>';

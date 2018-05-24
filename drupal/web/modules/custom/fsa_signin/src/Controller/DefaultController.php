@@ -20,6 +20,8 @@ use Drupal\fsa_signin\Form\UnsubscribeForm;
  */
 class DefaultController extends ControllerBase {
 
+  const PROFILE_FORM_HTML_CLASS = 'profile-manage-form';
+
   /**
    * Signin service.
    *

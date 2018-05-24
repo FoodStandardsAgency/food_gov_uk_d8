@@ -48,6 +48,9 @@ class NewsForRegistrationForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+
+    $form['#attributes']['class'][] = DefaultController::PROFILE_FORM_HTML_CLASS;
+
     /** @var \Drupal\user\Entity\User $user */
     $user = User::load(\Drupal::currentUser()->id());
 
