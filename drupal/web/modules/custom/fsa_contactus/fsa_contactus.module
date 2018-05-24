@@ -8,6 +8,8 @@
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\fsa_custom\FsaCustomHelper;
 use Drupal\block\Entity\Block;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Access\AccessResult;
 
 /**
  * Implements hook_webform_element_alter().
@@ -83,23 +85,22 @@ function fsa_contactus_preprocess_webform_container_base_html(array &$variables)
 }
 
 /**
- * Implements hook_form_alter().
+ * Implements template_preprocess_webform().
  */
-function fsa_contactus_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+function fsa_contactus_preprocess_webform(array &$variables) {
 
-  // Add the user satisfaction form to thank you page of following webforms.
+  // Webforms id's to attach the user satisfaction form to.
   $webform_ids = [
     'foreign_object',
     'poor_hygiene_practices',
     'food_poisoning',
   ];
-  if (isset($form['#webform_id']) && in_array($form['#webform_id'], $webform_ids)) {
-    if (isset($form['confirmation'])) {
-      // Add user satisfaction form on the confirmation (thank you) page.
-      $block = Block::load('webform_user_satisfaction');
-      if (is_object($block)) {
+  if (isset($variables['element']['#webform_id']) && in_array($variables['element']['#webform_id'], $webform_ids)) {
+    $form_page = \Drupal::request()->query->get('page');
+    if ($form_page == 'webform_confirmation') {
+      if (is_object($block = Block::load('user_satisfaction_form'))) {
         $block = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block);
-        $form['user_satisfaction'] = ['#markup' => render($block)];
+        $variables['satisfaction_form'] = render($block);
       }
     }
   }

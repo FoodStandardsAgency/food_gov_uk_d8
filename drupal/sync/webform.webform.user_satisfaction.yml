@@ -8,7 +8,7 @@ uid: 1
 template: false
 id: user_satisfaction
 title: 'User satisfaction form'
-description: ''
+description: 'The form displayed at the end of multi-page contact forms.'
 category: Feedback
 elements: "page_title:\n  '#type': hidden\n  '#title': 'Page title'\n  '#value': '[current-page:title]'\npage_url:\n  '#type': hidden\n  '#title': 'Page url'\n  '#value': '[current-page:url:unaliased:absolute]'\nsatisfaction:\n  '#type': radios\n  '#title': 'How did you feel about this service?'\n  '#options':\n    2: 'Very satisfied'\n    1: Satisfied\n    0: 'Neither satisfied or dissatisfied'\n    -1: Dissatisfied\n    -2: 'Very dissatisfied'\n  '#required': true\nmessage:\n  '#type': textarea\n  '#title': 'How could we improve this service?'\n  '#required': true\n"
 css: ''
@@ -68,7 +68,7 @@ settings:
   draft_loaded_message: ''
   confirmation_type: inline
   confirmation_title: ''
-  confirmation_message: ''
+  confirmation_message: 'Thank you for your feedback.'
   confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: false
@@ -89,6 +89,14 @@ settings:
   results_disabled: false
   results_disabled_ignore: false
   token_update: false
+  form_disable_inline_errors: false
+  form_required: false
+  submission_locked_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
 access:
   create:
     roles:

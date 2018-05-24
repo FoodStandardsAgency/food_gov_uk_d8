@@ -1,7 +1,9 @@
-uuid: ebb0e10b-e508-4983-942b-d165c6cbbd6b
+uuid: 57889cc8-e8c5-4278-801d-bd06088355b0
 langcode: en
 status: true
 dependencies:
+  config:
+    - webform.webform.user_satisfaction
   module:
     - block_class
     - webform
@@ -10,10 +12,10 @@ dependencies:
 third_party_settings:
   block_class:
     classes: ''
-id: webform_user_satisfaction
+id: user_satisfaction_form
 theme: fsa
 region: hidden
-weight: -17
+weight: -16
 provider: null
 plugin: webform_block
 settings:
