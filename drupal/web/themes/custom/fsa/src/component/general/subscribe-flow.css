@@ -1,9 +1,8 @@
 @import "../../helper/helper";
 @import "../../helper/custom-property";
 
-.user-registration-form .fieldgroup,
-.profile-manage-form .fieldgroup {
-
+.profile-manage-form {
+  margin-bottom: 2.2em;
 }
 
 .user-registration-form legend,
@@ -62,7 +61,7 @@
 
 .user-registration-form .form-actions,
 .profile-manage-form .form-actions {
-  @mixin responsive-declaration padding-top, 2em, 3em;
+  padding-top: 0;
   display: flex;
   justify-content: space-between;
 }
