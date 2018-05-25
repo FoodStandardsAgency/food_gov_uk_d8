@@ -5,12 +5,11 @@
 
       var block = '#block-user-satisfaction-form',
           container = '#block-user-satisfaction-form .webform',
-          close_text = Drupal.t('Close'),
           has_messages = '#block-user-satisfaction-form .message-list',
           is_submitted = '#block-user-satisfaction-form .webform-confirmation';
 
       // Supporting button to close the satisfaction form.
-      $(container).once().prepend('<button type="button" value="close" class="toggler close-satisfaction-form">'+close_text+'</button>');
+      $(container).once().prepend('<button type="button" value="close" class="toggler close-satisfaction-form">'+Drupal.t('Close')+'</button>');
 
       // Hide the form as long as there are no errors and user did not already
       // submit feedback.
@@ -35,6 +34,10 @@
         $(block).removeClass('form-visible');
         $(container).slideUp();
       });
+
+      // Actual form disappears on submit, as a quick usability win add the
+      // approximate height of the form to prevent page jumping.
+      $(is_submitted).height(650);
 
     }
   };
