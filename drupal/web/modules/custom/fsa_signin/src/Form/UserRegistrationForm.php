@@ -24,6 +24,9 @@ class UserRegistrationForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+
+    $form['#attributes']['class'][] = DefaultController::PROFILE_FORM_HTML_CLASS;
+
     $form['subscribe_description_1'] = [
       '#markup' => '<p>' . $this->t("Create an account to get food and allergy alerts by email or text message. This is a free service.") . '</p>',
     ];

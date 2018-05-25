@@ -51,6 +51,8 @@ class ChangePassword extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
+    $form['#attributes']['class'][] = DefaultController::PROFILE_FORM_HTML_CLASS;
+
     $form['password']['new_password'] = [
       '#type' => 'password_confirm',
       '#description' => $this->t('Password should be at least @length characters', ['@length' => ChangePassword::PROFILE_PASSWORD_LENGTH]),

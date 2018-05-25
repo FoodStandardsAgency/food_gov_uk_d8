@@ -49,6 +49,9 @@ class DeliveryOptions extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+
+    $form['#attributes']['class'][] = DefaultController::PROFILE_FORM_HTML_CLASS;
+
     /** @var \Drupal\user\Entity\User $account */
     $account = User::load(\Drupal::currentUser()->id());
 
