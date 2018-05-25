@@ -8,7 +8,7 @@ dependencies:
     - content_translation
 third_party_settings:
   content_translation:
-    enabled: false
+    enabled: true
 id: block_content.content_promo_related
 target_entity_type_id: block_content
 target_bundle: content_promo_related
