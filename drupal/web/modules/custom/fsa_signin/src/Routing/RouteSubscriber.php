@@ -60,20 +60,6 @@ class RouteSubscriber implements EventSubscriberInterface {
       }
     }
 
-    // Redirect Administrators/editors to their Drupal profile pages. Only
-    // subscribed users should be using the profile pages.
-    if ($is_authenticated && !$is_subscriber) {
-      $routes = [
-        'fsa_signin.default_controller_profilePage',
-        'fsa_signin.default_controller_deliveryOptionsPage',
-        'fsa_signin.delete_account_confirmation',
-      ];
-      if (in_array($route_name, $routes)) {
-        $url = Url::fromRoute('entity.user.canonical', ['user' => $current_user->id()])->toString();
-        $event->setResponse(new RedirectResponse($url, 301));
-      }
-    }
-
     if ($route_name == 'user.login' || $route_name == 'user.register') {
       $url = Url::fromRoute('fsa_signin.default_controller_signInPage');
       if ($route_name == 'user.login') {

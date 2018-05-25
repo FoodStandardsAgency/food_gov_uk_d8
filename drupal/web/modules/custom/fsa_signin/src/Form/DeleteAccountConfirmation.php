@@ -94,10 +94,15 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
     }
 
     if (DefaultController::isMoreThanRegistered($user)) {
+      $user_roles = $user->getRoles();
+      unset($user_roles[0]);
+      $roles = implode(', ', $user_roles);
+      $count = count($user_roles);
       // Don't let people with more than just "Authenticated" role to delete
       // their account.
       $form['message'] = [
-        '#markup' => '<p><strong>' . $this->t('This functionality is not available for users with multiple roles.') . '</strong></p>',
+        '#markup' => $this->formatPlural($count, 'You you cannot delete your profile because you have <pre>@roles</pre> role', 'You you cannot delete your profile because your account has following roles: <pre>@roles</pre>', ['@roles' => $roles]) .
+        ' ' . t('<a href="/profile/manage">Back to account settings page</a>'),
       ];
 
       return $form;
