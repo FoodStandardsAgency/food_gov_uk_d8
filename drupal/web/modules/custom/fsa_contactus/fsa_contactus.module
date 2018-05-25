@@ -92,6 +92,7 @@ function fsa_contactus_preprocess_webform(array &$variables) {
     'foreign_object',
     'poor_hygiene_practices',
     'food_poisoning',
+    'food_fraud_crime',
   ];
   if (isset($variables['element']['#webform_id']) && in_array($variables['element']['#webform_id'], $webform_ids)) {
     $form_page = \Drupal::request()->query->get('page');
