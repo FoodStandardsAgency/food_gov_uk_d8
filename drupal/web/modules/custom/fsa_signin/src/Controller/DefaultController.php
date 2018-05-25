@@ -125,10 +125,10 @@ class DefaultController extends ControllerBase {
 
     $email = $account->getEmail();
     $content = '<h2>' . $this->t('Hello @mail', ['@mail' => $email]) . '</h2>';
-    $content .= '<p>' . $this->t('Manage your profile from links below or set your alert subscription preferences from the tabs above.') . '</p>';
-    $content .= '<p>' . DefaultController::linkMarkup('fsa_signin.default_controller_changePasswordPage', $this->t('Set password'), ['button button--profile-manage']) . ' ';
-    $content .= DefaultController::linkMarkup('fsa_signin.delete_account_confirmation', $this->t('Cancel subscription'), ['cancel button red button--profile-manage']) . '</p>';
-    $content .= '<p>' . DefaultController::linkMarkup('user.logout.http', $this->t('Logout'), ['logout button button--profile-manage']) . '</p>';
+    $content .= '<p>' . $this->t('Manage your profile from the links below or set your alert subscription preferences from the tabs above.') . '</p>';
+    $content .= '<p>' . DefaultController::linkMarkup('fsa_signin.default_controller_changePasswordPage', $this->t('Update password'), ['button button--profile-manage']) . '</p>';
+    // @todo: inline-css to demo alternative on the page. Move to css.
+    $content .= '<p>' . DefaultController::linkMarkup('fsa_signin.delete_account_confirmation', $this->t('Cancel your subscription'), ['cancel button red button--profile-manage']) . '</p>';
 
     return [
       ['#markup' => $content],
