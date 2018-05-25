@@ -29,13 +29,14 @@ class ManageSubscriptionCta extends BlockBase {
       $url->setOptions(['attributes' => ['class' => ['gear icon']]]);
       $content = Link::fromTextAndUrl($text, $url)->toString();
     }
+    elseif (\Drupal::currentUser()->isAuthenticated()) {
+      $content = DefaultController::linkMarkup('fsa_signin.user_preregistration_alerts_form', $text, ['gear icon']);
+      $content .= ' / ' . DefaultController::linkMarkup('user.logout.http', $this->t('Logout'), ['logout icon']);
+    }
     else {
       $content = DefaultController::linkMarkup('fsa_signin.default_controller_signInPage', $text, ['gear icon']);
     }
 
-    if (\Drupal::currentUser()->isAuthenticated()) {
-      $content .= ' / ' . DefaultController::linkMarkup('user.logout.http', $this->t('Logout'), ['logout icon']);
-    }
 
     return ['#markup' => $content];
 
