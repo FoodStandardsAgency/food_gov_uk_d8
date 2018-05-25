@@ -1062,3 +1062,12 @@ input[type="password"] {
     }
   }
 }
+
+/* User satisfaction form e.g. ./contact/consumers/report-problem/report-suspected-food-poisoning?page=webform_confirmation */
+#block-user-satisfaction-form {
+  button.open-satisfaction-form {
+    color: red;
+    background-color: yellow;
+    cursor: pointer;
+  }
+}
