@@ -42,6 +42,12 @@
   margin-bottom: 1em;
 }
 
+.user-registration-form #edit-new-password--description,
+.profile-manage-form #edit-new-password--description {
+  text-transform: none;
+  font-weight: normal;
+}
+
 .user-registration-form a,
 .profile-manage-form a {
   text-transform: none;
