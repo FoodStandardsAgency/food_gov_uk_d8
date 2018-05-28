@@ -48,6 +48,11 @@
   text-decoration: underline;
 }
 
+.user-registration-form .g-recaptcha,
+.profile-manage-form .g-recaptcha {
+  margin-bottom: 2em;
+}
+
 .user-registration-form label,
 .profile-manage-form label {
   display: block;
