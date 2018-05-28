@@ -83,6 +83,21 @@ function fsa_contactus_preprocess_webform_container_base_html(array &$variables)
 }
 
 /**
+ * Implements template_preprocess_page().
+ */
+function fsa_contactus_preprocess_page(array &$variables) {
+  /* @var $route_name = \Symfony\Component\Routing\Route\routeMatch() */
+  $route = \Drupal::routeMatch();
+  // Route(s) to attach the user satisfaction form to.
+  $routes = [
+    'fsa_signin.user_registration_thank_you',
+  ];
+  if (in_array($route->getRouteName(), $routes)) {
+    fsa_attach_satisfaction_form($variables);
+  }
+}
+
+/**
  * Implements template_preprocess_webform().
  */
 function fsa_contactus_preprocess_webform(array &$variables) {
@@ -97,14 +112,30 @@ function fsa_contactus_preprocess_webform(array &$variables) {
   if (isset($variables['element']['#webform_id']) && in_array($variables['element']['#webform_id'], $webform_ids)) {
     $form_page = \Drupal::request()->query->get('page');
     if ($form_page == 'webform_confirmation') {
-      if (is_object($block = Block::load('user_satisfaction_form'))) {
-
-        // Add js to accordion the feedback form.
-        $variables['#attached']['library'][] = 'fsa_contactus/user_satisfaction';
-
-        $block = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block);
-        $variables['satisfaction_form'] = render($block);
-      }
+      // @todo: consider attaching the form in fsa_contactus_preprocess_page() as for the thank you page above.
+      fsa_attach_satisfaction_form($variables);
     }
+  }
+}
+
+/**
+ * Get and attach a form block to page template.
+ *
+ * @param array $variables
+ *   Page template variables.
+ * @param string $block_id
+ *   ID of the block to attach.
+ */
+function fsa_attach_satisfaction_form(array &$variables, $block_id = 'user_satisfaction_form') {
+
+  if (is_object($block = Block::load($block_id))) {
+
+    // Add js to accordion the feedback form.
+    $variables['#attached']['library'][] = 'fsa_contactus/user_satisfaction';
+
+    $block = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block);
+
+    // Introduce a variable to display the form via twig template.
+    $variables['satisfaction_form'] = render($block);
   }
 }
