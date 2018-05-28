@@ -1071,6 +1071,11 @@ input[type="password"] {
 
   button.open-satisfaction-form {
     color: var(--dark-primary-color);
+    background-image: var(--icon-arrow-right-primary);
+    background-position: left 0 top 50%;
+    background-size: 1em auto;
+    background-repeat: no-repeat;
+    padding-left: 1.5em;
     cursor: pointer;
   }
 
