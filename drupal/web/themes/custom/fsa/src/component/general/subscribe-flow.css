@@ -42,6 +42,12 @@
   margin-bottom: 1em;
 }
 
+.user-registration-form a,
+.profile-manage-form a {
+  text-transform: none;
+  text-decoration: underline;
+}
+
 .user-registration-form label,
 .profile-manage-form label {
   display: block;
