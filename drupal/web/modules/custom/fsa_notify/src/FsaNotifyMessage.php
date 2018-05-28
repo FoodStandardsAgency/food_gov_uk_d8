@@ -86,9 +86,17 @@ abstract class FsaNotifyMessage {
   abstract protected function assemble($items);
 
   /**
-   * Generate "short" for nodes in messages.
+   * Get short url for message links.
+   *
+   * @param \Drupal\node\Entity\Node $node
+   *   The node object.
+   * @param string $lang
+   *   Language code.
+   *
+   * @return string
+   *   Absolute short URL.
    */
-  protected function url($node, $lang) {
+  protected function url(Node $node, $lang) {
 
     $prefix = FALSE;
     if ($lang === 'cy') {
@@ -97,6 +105,28 @@ abstract class FsaNotifyMessage {
 
     $nid = $node->id();
     $url = sprintf('%s%s/node/%d', $this->base_url, $prefix, $nid);
+    return $url;
+  }
+
+  /**
+   * Get aliased node url for message links.
+   *
+   * @param \Drupal\node\Entity\Node $node
+   *   The node object.
+   * @param string $lang
+   *   Language code.
+   *
+   * @return string
+   *   Aliased, absolute URL.
+   */
+  protected function urlAlias(Node $node, $lang) {
+
+    $prefix = FALSE;
+    if ($lang === 'cy') {
+      $prefix = '/' . $lang;
+    }
+
+    $url = $this->base_url . $prefix . \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $node->id(), $lang);
     return $url;
   }
 

@@ -56,7 +56,7 @@ class FsaNotifyMessageImmediate extends FsaNotifyMessage {
 
     $line2 = $item->getTitle();
 
-    $link = $this->url($item, $lang);
+    $link = $this->urlAlias($item, $lang);
     $more = t('Read more');
     $line3 = sprintf('%s: %s', $more, $link);
 
