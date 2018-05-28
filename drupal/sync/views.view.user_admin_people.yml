@@ -796,10 +796,10 @@ display:
           group: 1
           exposed: true
           expose:
-            operator_id: roles_target_id_op
+            operator_id: roles_op
             label: Role
             description: ''
-            use_operator: false
+            use_operator: true
             operator: roles_target_id_op
             identifier: role
             required: false
@@ -808,6 +808,9 @@ display:
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
+              author: '0'
+              editor: '0'
+              fsa_admin: '0'
               administrator: '0'
             reduce: false
           is_grouped: false
@@ -824,46 +827,6 @@ display:
             group_items: {  }
           reduce_duplicates: false
           plugin_id: user_roles
-        permission:
-          id: permission
-          table: user__roles
-          field: permission
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: permission_op
-            label: Permission
-            description: ''
-            use_operator: false
-            operator: permission_op
-            identifier: permission
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          plugin_id: user_permissions
         default_langcode:
           id: default_langcode
           table: users_field_data
