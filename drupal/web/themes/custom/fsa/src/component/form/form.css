@@ -1077,6 +1077,14 @@ input[type="password"] {
   @mixin responsive-declaration margin-top, 2em, 3em;
   @mixin responsive-declaration padding-top, 2em, 3em;
 
+  button.close-satisfaction-form {
+    float: right;
+    transform: translateY(-2.75em);
+    color: var(--dark-primary-color);
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
   button.open-satisfaction-form {
     color: var(--dark-primary-color);
     background-image: var(--icon-arrow-right-primary);
@@ -1087,22 +1095,14 @@ input[type="password"] {
     cursor: pointer;
   }
 
-  &.form-visible {
-    button.open-satisfaction-form {
-        @mixin responsive-declaration font-size, 1.25em, 1.7em;
-        @mixin responsive-declaration line-height, 1.2, 1.25;
-        font-family: var(--font-family-heading);
-        font-weight: 700;
-        color: var(--color-black);
-        cursor: auto;
-    }
-
-    button.close-satisfaction-form {
-      float: right;
-      transform: translateY(-2.75em);
-      color: var(--dark-primary-color);
-      cursor: pointer;
-      text-decoration: underline;
-    }
+  &.form-visible button.open-satisfaction-form {
+    @mixin responsive-declaration font-size, 1.25em, 1.7em;
+    @mixin responsive-declaration line-height, 1.2, 1.25;
+    font-family: var(--font-family-heading);
+    font-weight: 700;
+    color: var(--color-black);
+    background-image: none;
+    padding-left: 0;
+    cursor: auto;
   }
 }
