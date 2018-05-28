@@ -48,7 +48,7 @@ class FsaNotifyMessageWeekly extends FsaNotifyMessage {
 
     $category = self::alertSubscriptionCategory($item);
     $date = self::alertDate($item);
-    $line1 = sprintf('%s %s:', $category, $date);
+    $line1 = sprintf('%s - %s:', $category, $date);
 
     $line2 = $item->getTitle();
 
