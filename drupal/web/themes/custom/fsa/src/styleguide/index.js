@@ -1,6 +1,9 @@
 import stickyElement from '../helper/stickyElement'
 import scrollToElement from '../helper/scrollToElement'
 
+// Fix frustrating Chrome issue with 100vh navigation height...
+document.querySelector('.navigation-wrapper__main').style.height = '82px'
+
 // Sticky element
 const container = [...document.querySelectorAll('.js-sticky-container')]
 const stickyElem = [...document.querySelectorAll('.js-sticky-element')]
