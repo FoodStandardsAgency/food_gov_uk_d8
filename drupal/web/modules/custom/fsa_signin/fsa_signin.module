@@ -8,6 +8,24 @@
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\fsa_signin\Controller\DefaultController;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\Core\Url;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+/**
+ * Implements hook_user_login().
+ */
+function fsa_signin_user_login($account) {
+
+  // Get the current route name.
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  \Drupal::logger('fsa_signing')->notice($route_name);
+  if ($route_name == 'user.reset.login') {
+    // Redirect the user with login reset link to change their password.
+    $url = Url::fromRoute('fsa_signin.default_controller_changePasswordPage');
+    $response = new RedirectResponse($url->toString());
+    $response->send();
+  }
+}
 
 /**
  * Implements hook_form_alter().
