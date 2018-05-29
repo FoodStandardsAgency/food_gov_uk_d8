@@ -10,7 +10,7 @@ id: user_satisfaction
 title: 'User satisfaction form'
 description: 'The form displayed at the end of multi-page contact forms.'
 category: Feedback
-elements: "page_title:\n  '#type': hidden\n  '#title': 'Page title'\n  '#value': '[current-page:title]'\npage_url:\n  '#type': hidden\n  '#title': 'Page url'\n  '#value': '[current-page:url:unaliased:absolute]'\nsatisfaction:\n  '#type': radios\n  '#title': 'How did you feel about this service?'\n  '#options':\n    2: 'Very satisfied'\n    1: Satisfied\n    0: 'Neither satisfied or dissatisfied'\n    -1: Dissatisfied\n    -2: 'Very dissatisfied'\n  '#required': true\nmessage:\n  '#type': textarea\n  '#title': 'How could we improve this service?'\n  '#description': 'Please don&#39;t include any personal information.'\n  '#required': true\n"
+elements: "service:\n  '#type': hidden\n  '#title': Service\n  '#value': Website\npage_url:\n  '#type': hidden\n  '#title': 'Page url'\n  '#value': '[current-page:url:unaliased:absolute]'\nsatisfaction:\n  '#type': radios\n  '#title': 'How did you feel about this service?'\n  '#options':\n    2: 'Very satisfied'\n    1: Satisfied\n    0: 'Neither satisfied or dissatisfied'\n    -1: Dissatisfied\n    -2: 'Very dissatisfied'\n  '#required': true\nmessage:\n  '#type': textarea\n  '#title': 'How could we improve this service?'\n  '#description': 'Please don&#39;t include any personal information.'\n  '#required': true\n"
 css: ''
 javascript: ''
 settings:
@@ -156,7 +156,7 @@ handlers:
       from_mail: default
       from_options: {  }
       from_name: default
-      subject: 'User satisfaction response from [site:url-brief]'
+      subject: 'User satisfaction response from [site:url-brief] [webform_submission:values:service] service'
       body: "<p>This is a user satisfaction form response from <a href=\"{{ webform_token('[site:url]', webform_submission) }}\">{{ webform_token('[site:url-brief]', webform_submission) }}</a></p>\r\n<p>Submitted on {{ webform_token('[webform_submission:created]', webform_submission) }}</p>\r\n{{ webform_token('[webform_submission:values]', webform_submission) }}\r\n"
       excluded_elements: {  }
       ignore_access: false

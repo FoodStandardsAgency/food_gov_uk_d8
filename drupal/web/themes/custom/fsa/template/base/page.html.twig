@@ -27,6 +27,10 @@
  *   page's path (e.g. node/12345 and node/12345/revisions, but not
  *   comment/reply/12345).
  *
+ * Custom module introduced variables:
+ * - satisfaction_form: The user satisfaction webform to attach on selected
+ *   pages and multipage webforms (@see fsa_contactus.module).
+ *
  * Regions:
  * - page.header: Items for the header region.
  * - page.primary_menu: Items for the primary menu region.
@@ -233,7 +237,7 @@
 
         <div class="layout__content layout__content--main {% if page.sidebar_first or page.sidebar_second %}layout__content--with-sidebar{% endif %} js-content">
           {{ page.content }}
-          {{ satisfaction_form }}
+          {{ satisfaction_form }} {# satisfaction_form is the "Give us feedback" form attached to the end of selected pages #}
         </div>
 
         {% if page.sidebar_second %}

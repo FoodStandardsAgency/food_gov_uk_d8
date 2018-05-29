@@ -83,38 +83,70 @@ function fsa_contactus_preprocess_webform_container_base_html(array &$variables)
 }
 
 /**
+ * Implements hook_form_alter().
+ */
+function fsa_contactus_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  // Add the service name to user satisfaction form hidden field.
+  if (isset($form['#webform_id']) && $form['#webform_id'] == 'user_satisfaction') {
+    $route_match = \Drupal::routeMatch();
+    $title = \Drupal::service('title_resolver')->getTitle(\Drupal::request(), $route_match->getRouteObject());
+
+    // Get page title.
+    if (is_object($title)) {
+      $page_title = $title->render();
+    }
+    elseif (is_string($title)) {
+      $page_title = $title;
+    }
+
+    // Make sure captured service name is human-friendly and it make sense.
+    if ($route_match->getRouteName() == 'fsa_signin.user_registration_thank_you') {
+      $service = 'Alerts subscription';
+    }
+    elseif (isset($page_title)) {
+      // In most cases we are happy with actual page title.
+      $service = $page_title;
+    }
+    else {
+      // If getting the page title failed get default from the webform
+      // configuration.
+      $service = $form['elements']['service']['#value'];
+    }
+
+    $form['elements']['service']['#value'] = $service;
+  }
+}
+
+/**
  * Implements template_preprocess_page().
  */
 function fsa_contactus_preprocess_page(array &$variables) {
   /* @var $route_name = \Symfony\Component\Routing\Route\routeMatch() */
   $route = \Drupal::routeMatch();
-  // Route(s) to attach the user satisfaction form to.
-  $routes = [
-    'fsa_signin.user_registration_thank_you',
-  ];
-  if (in_array($route->getRouteName(), $routes)) {
-    fsa_attach_satisfaction_form($variables);
-  }
-}
 
-/**
- * Implements template_preprocess_webform().
- */
-function fsa_contactus_preprocess_webform(array &$variables) {
+  if (isset($variables['node']) && $variables['node']->hasField('webform')) {
+    // Webforms id's we want the user satisfaction form to be attached to.
+    $webform_ids = [
+      'foreign_object',
+      'poor_hygiene_practices',
+      'food_poisoning',
+      'food_fraud_crime',
+    ];
+    $webform = $variables['node']->get('webform')->getValue();
+    $webform_page = \Drupal::request()->query->get('page');
 
-  // Webforms id's to attach the user satisfaction form to.
-  $webform_ids = [
-    'foreign_object',
-    'poor_hygiene_practices',
-    'food_poisoning',
-    'food_fraud_crime',
-  ];
-  if (isset($variables['element']['#webform_id']) && in_array($variables['element']['#webform_id'], $webform_ids)) {
-    $form_page = \Drupal::request()->query->get('page');
-    if ($form_page == 'webform_confirmation') {
-      // @todo: consider attaching the form in fsa_contactus_preprocess_page() as for the thank you page above.
+    // Add the satisfaction survey once user proceeded to the end of the
+    // form submission flow, to the "webform_confirmation" page.
+    if ($webform_page == 'webform_confirmation' && in_array($webform[0]['target_id'], $webform_ids)) {
       fsa_attach_satisfaction_form($variables);
     }
+  }
+
+  // Attach the user satisfaction form to alerts subscribe thank you page and
+  // extend condition(s) here if the survey should be on other routes.
+  if ($route->getRouteName() == 'fsa_signin.user_registration_thank_you') {
+    fsa_attach_satisfaction_form($variables);
   }
 }
 
