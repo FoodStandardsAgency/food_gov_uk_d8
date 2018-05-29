@@ -88,33 +88,29 @@ function fsa_contactus_preprocess_webform_container_base_html(array &$variables)
 function fsa_contactus_preprocess_page(array &$variables) {
   /* @var $route_name = \Symfony\Component\Routing\Route\routeMatch() */
   $route = \Drupal::routeMatch();
-  // Route(s) to attach the user satisfaction form to.
-  $routes = [
-    'fsa_signin.user_registration_thank_you',
-  ];
-  if (in_array($route->getRouteName(), $routes)) {
-    fsa_attach_satisfaction_form($variables);
-  }
-}
 
-/**
- * Implements template_preprocess_webform().
- */
-function fsa_contactus_preprocess_webform(array &$variables) {
+  if (isset($variables['node']) && $variables['node']->hasField('webform')) {
+    // Webforms id's we want the user satisfaction form to be attached to.
+    $webform_ids = [
+      'foreign_object',
+      'poor_hygiene_practices',
+      'food_poisoning',
+      'food_fraud_crime',
+    ];
+    $webform = $variables['node']->get('webform')->getValue();
+    $webform_page = \Drupal::request()->query->get('page');
 
-  // Webforms id's to attach the user satisfaction form to.
-  $webform_ids = [
-    'foreign_object',
-    'poor_hygiene_practices',
-    'food_poisoning',
-    'food_fraud_crime',
-  ];
-  if (isset($variables['element']['#webform_id']) && in_array($variables['element']['#webform_id'], $webform_ids)) {
-    $form_page = \Drupal::request()->query->get('page');
-    if ($form_page == 'webform_confirmation') {
-      // @todo: consider attaching the form in fsa_contactus_preprocess_page() as for the thank you page above.
+    // Add the satisfaction survey once user proceeded to the end of the
+    // form submission flow, to the "webform_confirmation" page.
+    if ($webform_page == 'webform_confirmation' && in_array($webform[0]['target_id'], $webform_ids)) {
       fsa_attach_satisfaction_form($variables);
     }
+  }
+
+  // Attach the user satisfaction form to alerts subscribe thank you page and
+  // extend condition(s) here if the survey should be on other routes.
+  if ($route->getRouteName() == 'fsa_signin.user_registration_thank_you') {
+    fsa_attach_satisfaction_form($variables);
   }
 }
 
