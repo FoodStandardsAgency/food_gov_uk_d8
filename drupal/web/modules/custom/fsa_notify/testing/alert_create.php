@@ -39,6 +39,8 @@ $random_words = [
 ];
 $title = $random_words[0] . ' ' . $random_words[1];
 
+$dt = new DateTime();
+
 $node = Node::create([
   'type'        => 'alert',
   'title'       => $alert_type . ' Alert: ' . $title,
@@ -46,6 +48,9 @@ $node = Node::create([
   'field_alert_type' => $alert_type,
   'field_alert_allergen' => $allergys,
   'field_alert_smstext' => $alert_type . ': ' . $title,
+  'field_alert_description' => 'This is a test-alert',
+  'field_alert_riskstatement' => $alert_type . ': ' . $title,
+  'field_alert_modified' => $dt->format('Y-m-d\TH:i:s'),
 ]);
 $node->save();
 

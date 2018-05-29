@@ -80,7 +80,7 @@ content:
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
+    type: fsa_allergen_formatter
     region: content
 hidden:
   addtoany: true

@@ -39,7 +39,7 @@ class UserRegistrationForm extends FormBase {
     $form['language_container']['language'] = [
       '#type' => 'radios',
       '#options' => [
-        'en' => 'English',
+        'en' => $this->t('English'),
         'cy' => $this->t('Cymraeg'),
       ],
       '#default_value' => \Drupal::languageManager()->getCurrentLanguage()->getId(),
