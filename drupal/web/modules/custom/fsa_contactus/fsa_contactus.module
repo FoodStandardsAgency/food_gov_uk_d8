@@ -83,6 +83,42 @@ function fsa_contactus_preprocess_webform_container_base_html(array &$variables)
 }
 
 /**
+ * Implements hook_form_alter().
+ */
+function fsa_contactus_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  // Add the service name to user satisfaction form hidden field.
+  if (isset($form['#webform_id']) && $form['#webform_id'] == 'user_satisfaction') {
+    $route_match = \Drupal::routeMatch();
+    $title = \Drupal::service('title_resolver')->getTitle(\Drupal::request(), $route_match->getRouteObject());
+
+    // Get page title.
+    if (is_object($title)) {
+      $page_title = $title->render();
+    }
+    elseif (is_string($title)) {
+      $page_title = $title;
+    }
+
+    // Make sure captured service name is human-friendly and it make sense.
+    if ($route_match->getRouteName() == 'fsa_signin.user_registration_thank_you') {
+      $service = 'Alerts subscription';
+    }
+    elseif (isset($page_title)) {
+      // In most cases we are happy with actual page title.
+      $service = $page_title;
+    }
+    else {
+      // If getting the page title failed get default from the webform
+      // configuration.
+      $service = $form['elements']['service']['#value'];
+    }
+
+    $form['elements']['service']['#value'] = $service;
+  }
+}
+
+/**
  * Implements template_preprocess_page().
  */
 function fsa_contactus_preprocess_page(array &$variables) {
