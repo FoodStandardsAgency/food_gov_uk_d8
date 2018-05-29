@@ -1069,6 +1069,10 @@ input[type="password"] {
   @mixin responsive-declaration margin-top, 2em, 3em;
   @mixin responsive-declaration padding-top, 2em, 3em;
 
+  .webform-confirmation {
+    border: none;
+  }
+
   button.close-satisfaction-form {
     float: right;
     transform: translateY(-2.75em);
