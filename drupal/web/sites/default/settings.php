@@ -26,7 +26,7 @@ $databases['default']['default'] = array (
  * Drupal core string overrides for FSA setup.
  */
 $settings['locale_custom_strings_en'][''] = [
-  'You have just used your one-time login link. It is no longer necessary to use this link to log in. Please change your password.' => 'You have just used your one-time login link. Please set yourself a <a href="/profile/manage/password">password</a> that you can use to log in again.',
+  'You have just used your one-time login link. It is no longer necessary to use this link to log in. Please change your password.' => 'You have just used your one-time login link. Please set yourself a password that you can use to log in again.',
 ];
 
 $settings['hash_salt'] = 'B081u6MDeLm3bRi5niieR-797DOulNMA-SGCoprrcy5Gjn-hDNAkiy1k8Pnb9y8n1zSXWu4aQQ';

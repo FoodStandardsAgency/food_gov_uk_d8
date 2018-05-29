@@ -2,7 +2,6 @@
 
 namespace Drupal\fsa_signin\Controller;
 
-use Drupal\block\Entity\Block;
 use Drupal\Core\Link;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\fsa_signin\Form\ChangePassword;

@@ -37,7 +37,6 @@ class ManageSubscriptionCta extends BlockBase {
       $content = DefaultController::linkMarkup('fsa_signin.default_controller_signInPage', $text, ['gear icon']);
     }
 
-
     return ['#markup' => $content];
 
   }
