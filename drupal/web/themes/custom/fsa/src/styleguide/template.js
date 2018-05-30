@@ -8,7 +8,7 @@ import safeTagsReplace from '../helper/safeTagsReplace'
 import isColor from '../helper/isColor'
 import fsaLogo from './fsa-logo'
 
-const excludedComponents = ['fhrs', 'general', 'layout', 'peek']
+const excludedComponents = ['content', 'fhrs', 'form', 'general', 'layout', 'peek', 'profile', 'search', 'sidebar', 'toc', 'toggle', 'topics']
 
 function uniq(a) {
   return a.sort().filter(function (item, pos, ary) {
@@ -73,6 +73,12 @@ const intro = parsePartialMarkup(require('template-string-loader!./partial/intro
   guid: guid(),
   title: 'CSS Custom Properties',
   content: customProperties,
+  styles
+}))
+
+const typography = parsePartialMarkup(require('template-string-loader!./partial/typography.html')({
+  guid: guid(),
+  title: 'Typography',
   styles
 }))
 
@@ -166,6 +172,11 @@ const introComponentArray = [
     description: `The colours used throughout this project are based on the FSA Brand Guidelines. Any further modifications to this site should consult this document and/or the FSA design team.
     Below, the colours that have been defined in the Custom Properties (above) are demonstrated, with the colours from the FSA Brand Guidelines appear first.`,
     element: colors
+  },
+  {
+    title: 'Typography',
+    description: `Here are some examples of the basic typography used throughout the site. The font family is Fira Sans for headings and Open Sans for content. Font styles are set with mixins and custom properties as shown above, and are overridden with more specific styles where appropriate.`,
+    element: typography
   }
 ]
 
