@@ -163,6 +163,8 @@ const introComponentArray = [
   },
   {
     title: 'Colours',
+    description: `The colours used throughout this project are based on the FSA Brand Guidelines. Any further modifications to this site should consult this document and/or the FSA design team.
+    Below, the colours that have been defined in the Custom Properties (above) are demonstrated, with the colours from the FSA Brand Guidelines appear first.`,
     element: colors
   }
 ]

@@ -159,7 +159,7 @@ section {
 
 .color {
   flex: 1 1 25%;
-  min-height: 10em;
+  min-height: 4em;
   display: flex;
   flex-flow: column nowrap;
   margin-bottom: 1em;
@@ -168,21 +168,19 @@ section {
 
 .color__example {
   width: 100%;
-  height: 5em;
+  height: 1em;
   border-bottom: 1px solid var(--styleguide-color-gray-light);
 }
 
 .color__property {
-  @mixin responsive-declaration padding, 1em, 1.5em;
-
+  margin: 0;
   text-align: center;
   font-family: monospace;
-  margin: 0;
 }
 
 .color__value {
-  @mixin responsive-declaration padding, 1em, 1.5em;
-
+  margin: 0;
+  padding: 0.1em;
   font-family: monospace;
 }
 
