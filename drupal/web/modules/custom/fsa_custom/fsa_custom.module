@@ -17,6 +17,16 @@ use Drupal\Core\Url;
 use Drupal\views\ViewExecutable;
 
 /**
+ * Implements hook_language_switch_links_alter().
+ */
+function fsa_custom_language_switch_links_alter(array &$links, $type, $path) {
+  if (isset($links['cy']['title'])) {
+    $links['cy']['title'] = 'Cymraeg';
+  }
+  return $links;
+}
+
+/**
  * Implements of template_preprocess_page().
  */
 function fsa_custom_preprocess_page(&$variables) {
