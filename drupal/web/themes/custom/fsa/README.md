@@ -1,5 +1,3 @@
-[![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
-
 ## Requirements
 
 FSA Theme uses ES6 features, so it is recommended to have a recent version of [Node.js](https://nodejs.org/) installed globally (v5.0 minimum required, for `package-lock.json` support). [Node.js](https://nodejs.org/) is the only global requirement as this project uses [Webpack](https://webpack.js.org/) in lieu of task runners.
@@ -19,6 +17,10 @@ When developing, run `npm run watch` to automatically compile assets.
 Build for production before committing any changes, with `npm run build`. This will create a `dist` folder, into which the required assets will be created.
 
 ### JavaScript development
+
+[![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
+
+This theme uses the 'Standard' JavaScript code style as linked above. It is recommended to use an appropriate linting tool to ensure this is followed, such as the 'JavaScript Standard Style' VS Code extension, or appropriate ESLint rule.
 
 The file `index.js` is the entry point for all the assests used by this theme. This file contains `require` function for style and image files. This function should not be removed ever.
 
