@@ -8,7 +8,7 @@ import safeTagsReplace from '../helper/safeTagsReplace'
 import isColor from '../helper/isColor'
 import fsaLogo from './fsa-logo'
 
-const excludedComponents = ['content', 'fhrs', 'form', 'general', 'layout', 'peek', 'profile', 'search', 'sidebar', 'toc', 'toggle', 'topics']
+const includedComponents = ['footer', 'header', 'hero', 'infobox', 'listing', 'navigation', 'pager', 'pagination', 'promo']
 
 function uniq(a) {
   return a.sort().filter(function (item, pos, ary) {
@@ -97,7 +97,7 @@ const componentNameArrayConstructor = (html, css, js) => {
 }
 
 const componentNameArray = uniq(componentNameArrayConstructor(requiredHTMLComponents.keys(), requiredCSSComponents.keys(), requiredJSComponents.keys()))
-  .filter(name => ![...excludedComponents].includes(name))
+  .filter(name => [...includedComponents].includes(name))
 
 const componentArray = componentNameArray.map((componentName) => {
   let HTMLArray = []
@@ -164,18 +164,18 @@ const introComponentArray = [
   },
   {
     title: 'CSS Custom Properties',
-    description: 'These are custom properties. Use them with var() function',
+    description: 'These are custom properties. Use them with var() function. There are also some examples of this function being used in the code below.',
     element: intro
   },
   {
     title: 'Colours',
     description: `The colours used throughout this project are based on the FSA Brand Guidelines. Any further modifications to this site should consult this document and/or the FSA design team.
-    Below, the colours that have been defined in the Custom Properties (above) are demonstrated, with the colours from the FSA Brand Guidelines appear first.`,
+    Below, the colours that have been defined in the Custom Properties are demonstrated. Colours from the FSA Brand Guidelines appear first.`,
     element: colors
   },
   {
     title: 'Typography',
-    description: `Here are some examples of the basic typography used throughout the site. The font family is Fira Sans for headings and Open Sans for content. Font styles are set with mixins and custom properties as shown above, and are overridden with more specific styles where appropriate.`,
+    description: `Here are some examples of the typography used throughout the site. The font family is Fira Sans for headings and Open Sans for content. Font styles are set with mixins and custom properties as shown above, and are overridden with more specific styles where appropriate.`,
     element: typography
   }
 ]
@@ -215,7 +215,7 @@ const styleGuide = (templateParams) => {
        <article>
         <section class="${styles.locals.hero}">
           ${fsaLogo}
-          <span><b>Food Standards Agency</b></span> — <span class="${styles.locals.underline}">Theming Style Guide </span>
+          <span class="${styles.locals.underline}"><strong>food.gov.uk</strong> Style Guide </span>
         </section>
         <section class="${styles.locals.layout} js-sticky-container">
           <aside class="${styles.locals.navigation} js-sticky-element">

@@ -17,6 +17,10 @@
   --styleguide-box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.1);
 }
 
+#fsa-logo {
+  color: #fff;
+}
+
 section {
   background-color: #fff !important;
 }
@@ -52,9 +56,13 @@ section {
 .hero {
   display: flex;
   align-items: center;
-  background-color: #f0f3f5 !important;
-
+  background-color: var(--fsa-primary_light-green) !important;
+  color: #fff;
   @mixin responsive-declaration padding, 1em, 2em;
+
+  span {
+    font-size: 1.5em;
+  }
 }
 
 .hero h1 {
@@ -206,6 +214,7 @@ section {
   padding: 0.25em 0;
   display: block;
   border-bottom: 1px solid var(--styleguide-color-gray);
+  color: var(--fsa-primary_dark-green);
 }
 
 .item__description {

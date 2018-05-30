@@ -13943,6 +13943,9 @@ body:after{
         transform:none
 }
   }
+#styleguide__fsa-logo___3GAAM{
+  color:#fff;
+}
 section{
   background-color:#fff !important;
 }
@@ -13973,29 +13976,32 @@ section{
   display:flex;
   -ms-flex-align:center;
       align-items:center;
-  background-color:#f0f3f5 !important;
-
+  background-color:#A9C47F !important;
+  color:#fff;
   padding:1em;
 }
 @media (min-width: 30em){
 .styleguide__hero___1tcOO{
-    padding:1.25em;
+    padding:1.25em
 }
   }
 @media (min-width: 50em){
 .styleguide__hero___1tcOO{
-    padding:1.5em;
+    padding:1.5em
 }
   }
 @media (min-width: 60em){
 .styleguide__hero___1tcOO{
-    padding:1.75em;
+    padding:1.75em
 }
   }
 @media (min-width: 80em){
 .styleguide__hero___1tcOO{
-    padding:2em;
+    padding:2em
 }
+  }
+.styleguide__hero___1tcOO span{
+    font-size:1.5em;
   }
 .styleguide__hero___1tcOO h1{
   font-size:1.5em;
@@ -14377,6 +14383,7 @@ section{
   display:block;
   border-bottom:1px solid #9e9e9e;
   border-bottom:1px solid #848b8e;
+  color:#006F51;
 }
 @media (min-width: 30em){
 .styleguide__item__title___2gjuP{
@@ -14652,7 +14659,7 @@ section{
   </g>
 </svg>
 
-          <span><b>Food Standards Agency</b></span> — <span class="styleguide__underline___2SXuk">Theming Style Guide </span>
+          <span class="styleguide__underline___2SXuk"><strong>food.gov.uk</strong> Style Guide </span>
         </section>
         <section class="styleguide__layout___m-h-G js-sticky-container">
           <aside class="styleguide__navigation___3JtxI js-sticky-element">
@@ -14672,8 +14679,7 @@ section{
     <p class="styleguide__item__description___34e69"></p>
   </header>
   
-  <div class="styleguide__item__content___iDzu-"><p><a href="https://github.com/standard/standard"><img src="https://cdn.rawgit.com/standard/standard/master/badge.svg" alt="JavaScript Style Guide"></a></p>
-<h2 id="requirements">Requirements</h2>
+  <div class="styleguide__item__content___iDzu-"><h2 id="requirements">Requirements</h2>
 <p>FSA Theme uses ES6 features, so it is recommended to have a recent version of <a href="https://nodejs.org/">Node.js</a> installed globally (v5.0 minimum required, for <code>package-lock.json</code> support). <a href="https://nodejs.org/">Node.js</a> is the only global requirement as this project uses <a href="https://webpack.js.org/">Webpack</a> in lieu of task runners.</p>
 <h2 id="installation">Installation</h2>
 <p>To get the started with theming, complete the following steps:</p>
@@ -14687,6 +14693,8 @@ section{
 <p>When developing, run <code>npm run watch</code> to automatically compile assets.</p>
 <p>Build for production before committing any changes, with <code>npm run build</code>. This will create a <code>dist</code> folder, into which the required assets will be created.</p>
 <h3 id="javascript-development">JavaScript development</h3>
+<p><a href="https://github.com/standard/standard"><img src="https://cdn.rawgit.com/standard/standard/master/badge.svg" alt="JavaScript Style Guide"></a></p>
+<p>This theme uses the &#39;Standard&#39; JavaScript code style as linked above. It is recommended to use an appropriate linting tool to ensure this is followed, such as the &#39;JavaScript Standard Style&#39; VS Code extension, or appropriate ESLint rule.</p>
 <p>The file <code>index.js</code> is the entry point for all the assests used by this theme. This file contains <code>require</code> function for style and image files. This function should not be removed ever.</p>
 <p>NPM dependencies and theme related <a href="https://github.com/lukehoban/es6features#modules">modular JavaScript files</a> can be imported at the beginning of every JavaScript file with following line of code:</p>
 <pre><code class="lang-js">import defaultMember from &#39;module-name&#39;
@@ -14795,7 +14803,7 @@ section{
 <article class="styleguide__item___28nPp" id="cssCustomProperties">
   <header class="styleguide__item__header___2u3FN">
     <h3 class="styleguide__item__title___2gjuP">CSS Custom Properties</h3>
-    <p class="styleguide__item__description___34e69">These are custom properties. Use them with var() function</p>
+    <p class="styleguide__item__description___34e69">These are custom properties. Use them with var() function. There are also some examples of this function being used in the code below.</p>
   </header>
   
   <div class="styleguide__item__content___iDzu-"><div class="undefined">
@@ -14908,7 +14916,7 @@ Plugin documentation:
   <header class="styleguide__item__header___2u3FN">
     <h3 class="styleguide__item__title___2gjuP">Colours</h3>
     <p class="styleguide__item__description___34e69">The colours used throughout this project are based on the FSA Brand Guidelines. Any further modifications to this site should consult this document and/or the FSA design team.
-    Below, the colours that have been defined in the Custom Properties (above) are demonstrated, with the colours from the FSA Brand Guidelines appear first.</p>
+    Below, the colours that have been defined in the Custom Properties are demonstrated. Colours from the FSA Brand Guidelines appear first.</p>
   </header>
   
   <div class="styleguide__item__content___iDzu-"><div class="styleguide__color___1X5SD">
@@ -15168,7 +15176,7 @@ Plugin documentation:
 <article class="styleguide__item___28nPp" id="typography">
   <header class="styleguide__item__header___2u3FN">
     <h3 class="styleguide__item__title___2gjuP">Typography</h3>
-    <p class="styleguide__item__description___34e69">Here are some examples of the basic typography used throughout the site. The font family is Fira Sans for headings and Open Sans for content. Font styles are set with mixins and custom properties as shown above, and are overridden with more specific styles where appropriate.</p>
+    <p class="styleguide__item__description___34e69">Here are some examples of the typography used throughout the site. The font family is Fira Sans for headings and Open Sans for content. Font styles are set with mixins and custom properties as shown above, and are overridden with more specific styles where appropriate.</p>
   </header>
   
   <div class="styleguide__item__content___iDzu-"><h1>Heading Level 1</h1>
@@ -15199,7 +15207,20 @@ Plugin documentation:
   Regional variation: Northern Ireland
 </div>
 
-<div class="explanation js-explanation">FSA Explains</div>
+<div class="regional-variation regional-variation--england-wales js-regional-variation js-england-wales">
+  Regional variation: England and Wales #TODO
+</div>
+
+<div class="regional-variation regional-variation--england-northern-ireland js-regional-variation js-england-northern-ireland">
+  Regional variation: England and Northern Ireland #TODO
+</div>
+
+<div class="regional-variation regional-variation--northern-ireland-wales js-regional-variation js-northern-ireland-wales">
+  Regional variation: Northern Ireland and Wales #TODO
+</div>
+
+<div class="explanation js-explanation">Content variation: Explanation</div>
+<div class="important js-important">Content variation: Important #TODO</div>
 </div>
 </article>
 
@@ -15299,14 +15320,14 @@ Plugin documentation:
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-d8cf8a07-bd69-362e-}d8ed-c1b355929d1d" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-d8cf8a07-bd69-362e-}d8ed-c1b355929d1d" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-d8cf8a07-bd69-362e-}d8ed-c1b355929d1d" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-74ea90fe-6eec-8cf3-}46c6-c16b380800fa" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-74ea90fe-6eec-8cf3-}46c6-c16b380800fa" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-74ea90fe-6eec-8cf3-}46c6-c16b380800fa" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-d8cf8a07-bd69-362e-}d8ed-c1b355929d1d" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-d8cf8a07-bd69-362e-}d8ed-c1b355929d1d" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-d8cf8a07-bd69-362e-}d8ed-c1b355929d1d" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-74ea90fe-6eec-8cf3-}46c6-c16b380800fa" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-74ea90fe-6eec-8cf3-}46c6-c16b380800fa" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-74ea90fe-6eec-8cf3-}46c6-c16b380800fa" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -15548,7 +15569,7 @@ Plugin documentation:
       </div>
 
       <div class="styleguide__item__tabCode___ofaNu styleguide__item__js___3IO7y" role="tabpanel">
-        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- js"><br>No component-specific JavaScript required.</code></pre>
+        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- js"><br>// No component-specific JavaScript required.</code></pre>
       </div>
     </div>
 
@@ -15611,14 +15632,14 @@ Plugin documentation:
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-7969ca49-30e5-44c6-}399d-2b93a2235c38" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-7969ca49-30e5-44c6-}399d-2b93a2235c38" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-7969ca49-30e5-44c6-}399d-2b93a2235c38" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-31e401bf-37d4-4d41-}a230-0f9578878169" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-31e401bf-37d4-4d41-}a230-0f9578878169" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-31e401bf-37d4-4d41-}a230-0f9578878169" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-7969ca49-30e5-44c6-}399d-2b93a2235c38" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-7969ca49-30e5-44c6-}399d-2b93a2235c38" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-7969ca49-30e5-44c6-}399d-2b93a2235c38" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-31e401bf-37d4-4d41-}a230-0f9578878169" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-31e401bf-37d4-4d41-}a230-0f9578878169" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-31e401bf-37d4-4d41-}a230-0f9578878169" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -15947,7 +15968,7 @@ Plugin documentation:
       </div>
 
       <div class="styleguide__item__tabCode___ofaNu styleguide__item__js___3IO7y" role="tabpanel">
-        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- js"><br>No component-specific JavaScript required.</code></pre>
+        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- js"><br>// No component-specific JavaScript required.</code></pre>
       </div>
     </div>
 
@@ -15988,14 +16009,14 @@ Plugin documentation:
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-ed8fb46c-8334-fbc8-}f04d-04c56385315e" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-ed8fb46c-8334-fbc8-}f04d-04c56385315e" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-ed8fb46c-8334-fbc8-}f04d-04c56385315e" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-a62f9e28-d432-c44f-}3ff7-351666837a12" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-a62f9e28-d432-c44f-}3ff7-351666837a12" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-a62f9e28-d432-c44f-}3ff7-351666837a12" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-ed8fb46c-8334-fbc8-}f04d-04c56385315e" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-ed8fb46c-8334-fbc8-}f04d-04c56385315e" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-ed8fb46c-8334-fbc8-}f04d-04c56385315e" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-a62f9e28-d432-c44f-}3ff7-351666837a12" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-a62f9e28-d432-c44f-}3ff7-351666837a12" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-a62f9e28-d432-c44f-}3ff7-351666837a12" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -16502,7 +16523,7 @@ Plugin documentation:
       </div>
 
       <div class="styleguide__item__tabCode___ofaNu styleguide__item__js___3IO7y" role="tabpanel">
-        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- js"><br>No component-specific JavaScript required.</code></pre>
+        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- js"><br>// No component-specific JavaScript required.</code></pre>
       </div>
     </div>
 
@@ -16539,14 +16560,14 @@ Plugin documentation:
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-d7188b49-cb4f-b64f-}8975-702b3186f335" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-d7188b49-cb4f-b64f-}8975-702b3186f335" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-d7188b49-cb4f-b64f-}8975-702b3186f335" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-16cb395f-790d-8361-}cf61-ed794f27925b" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-16cb395f-790d-8361-}cf61-ed794f27925b" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-16cb395f-790d-8361-}cf61-ed794f27925b" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-d7188b49-cb4f-b64f-}8975-702b3186f335" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-d7188b49-cb4f-b64f-}8975-702b3186f335" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-d7188b49-cb4f-b64f-}8975-702b3186f335" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-16cb395f-790d-8361-}cf61-ed794f27925b" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-16cb395f-790d-8361-}cf61-ed794f27925b" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-16cb395f-790d-8361-}cf61-ed794f27925b" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -16631,7 +16652,7 @@ Plugin documentation:
       </div>
 
       <div class="styleguide__item__tabCode___ofaNu styleguide__item__js___3IO7y" role="tabpanel">
-        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- js"><br>No component-specific JavaScript required.</code></pre>
+        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- js"><br>// No component-specific JavaScript required.</code></pre>
       </div>
     </div>
 
@@ -16825,14 +16846,14 @@ Plugin documentation:
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-ef61e49b-a928-9641-}649b-1989a3d32519" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-ef61e49b-a928-9641-}649b-1989a3d32519" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-ef61e49b-a928-9641-}649b-1989a3d32519" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-114aa910-aaf2-d062-}dcad-aff5fb1f5ba6" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-114aa910-aaf2-d062-}dcad-aff5fb1f5ba6" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-114aa910-aaf2-d062-}dcad-aff5fb1f5ba6" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-ef61e49b-a928-9641-}649b-1989a3d32519" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-ef61e49b-a928-9641-}649b-1989a3d32519" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-ef61e49b-a928-9641-}649b-1989a3d32519" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-114aa910-aaf2-d062-}dcad-aff5fb1f5ba6" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-114aa910-aaf2-d062-}dcad-aff5fb1f5ba6" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-114aa910-aaf2-d062-}dcad-aff5fb1f5ba6" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -17378,7 +17399,7 @@ Plugin documentation:
       </div>
 
       <div class="styleguide__item__tabCode___ofaNu styleguide__item__js___3IO7y" role="tabpanel">
-        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- js"><br>No component-specific JavaScript required.</code></pre>
+        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- js"><br>// No component-specific JavaScript required.</code></pre>
       </div>
     </div>
 
@@ -18040,14 +18061,14 @@ Plugin documentation:
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-e1f5e6bc-307f-dd42-}79de-0ba6c18e157b" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-e1f5e6bc-307f-dd42-}79de-0ba6c18e157b" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-e1f5e6bc-307f-dd42-}79de-0ba6c18e157b" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-980ff8ed-ca5f-5e07-}a113-f84e739e479a" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-980ff8ed-ca5f-5e07-}a113-f84e739e479a" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-980ff8ed-ca5f-5e07-}a113-f84e739e479a" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-e1f5e6bc-307f-dd42-}79de-0ba6c18e157b" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-e1f5e6bc-307f-dd42-}79de-0ba6c18e157b" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-e1f5e6bc-307f-dd42-}79de-0ba6c18e157b" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-980ff8ed-ca5f-5e07-}a113-f84e739e479a" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-980ff8ed-ca5f-5e07-}a113-f84e739e479a" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-980ff8ed-ca5f-5e07-}a113-f84e739e479a" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -20667,14 +20688,14 @@ Plugin documentation:
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-4d1baacf-aa99-c765-}eb79-61accd2752e5" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-4d1baacf-aa99-c765-}eb79-61accd2752e5" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-4d1baacf-aa99-c765-}eb79-61accd2752e5" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-15956740-632e-64f5-}ee08-2d89d9d24d5f" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-15956740-632e-64f5-}ee08-2d89d9d24d5f" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-15956740-632e-64f5-}ee08-2d89d9d24d5f" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-4d1baacf-aa99-c765-}eb79-61accd2752e5" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-4d1baacf-aa99-c765-}eb79-61accd2752e5" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-4d1baacf-aa99-c765-}eb79-61accd2752e5" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-15956740-632e-64f5-}ee08-2d89d9d24d5f" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-15956740-632e-64f5-}ee08-2d89d9d24d5f" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-15956740-632e-64f5-}ee08-2d89d9d24d5f" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -20788,7 +20809,7 @@ Plugin documentation:
       </div>
 
       <div class="styleguide__item__tabCode___ofaNu styleguide__item__js___3IO7y" role="tabpanel">
-        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- js"><br>No component-specific JavaScript required.</code></pre>
+        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- js"><br>// No component-specific JavaScript required.</code></pre>
       </div>
     </div>
 
@@ -20841,14 +20862,14 @@ Plugin documentation:
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-1d979bf4-6849-7e3e-}bb8c-5f201aa339c8" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-1d979bf4-6849-7e3e-}bb8c-5f201aa339c8" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-1d979bf4-6849-7e3e-}bb8c-5f201aa339c8" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-ef95cc17-4e11-cfa1-}0fce-935453c1e910" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-ef95cc17-4e11-cfa1-}0fce-935453c1e910" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-ef95cc17-4e11-cfa1-}0fce-935453c1e910" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-1d979bf4-6849-7e3e-}bb8c-5f201aa339c8" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-1d979bf4-6849-7e3e-}bb8c-5f201aa339c8" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-1d979bf4-6849-7e3e-}bb8c-5f201aa339c8" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-ef95cc17-4e11-cfa1-}0fce-935453c1e910" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-ef95cc17-4e11-cfa1-}0fce-935453c1e910" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-ef95cc17-4e11-cfa1-}0fce-935453c1e910" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -21791,7 +21812,7 @@ a.field__field_content_promo__item {
       </div>
 
       <div class="styleguide__item__tabCode___ofaNu styleguide__item__js___3IO7y" role="tabpanel">
-        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- js"><br>No component-specific JavaScript required.</code></pre>
+        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- js"><br>// No component-specific JavaScript required.</code></pre>
       </div>
     </div>
 
