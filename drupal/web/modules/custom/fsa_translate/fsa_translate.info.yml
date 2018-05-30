@@ -1,7 +1,5 @@
 name: FSA translate
-description: Alters default translation settings.
+description: Alters default translation settings. This was deprecated and uninstalled within FSA-997. Left in codebase for if we want to later take in use for translations workflow.
 package: FSA
 type: module
 core: 8.x
-dependencies:
-  - entity_print
