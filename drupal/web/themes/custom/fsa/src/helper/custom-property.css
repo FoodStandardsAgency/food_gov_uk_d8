@@ -4,7 +4,25 @@ Plugin documentation:
   https://github.com/postcss/postcss-custom-properties */
 
 :root {
-  /* Color palette */
+  --fsa-primary_dark-green: #006F51;
+  --fsa-primary_mid-green: #6CB33F;
+  --fsa-primary_light-green: #A9C47F;
+  --fsa-primary_dark-grey: #53565A;
+  --fsa-primary_mid-grey: #97999B;
+  --fsa-primary_light-grey: #D9D9D6;
+  --fsa-secondary_mid-red: #E31837;
+  --fsa-secondary_orange: #F15D22;
+  --fsa-secondary_mid-yellow: #FDB913;
+  --fsa-secondary_mid-purple: #49176D;
+  --fsa-secondary_light-purple: #9F218B;
+  --fsa-secondary_mid-blue: #007FB2;
+  --fsa-tertiary_dark-red: #B04A5A;
+  --fsa-tertiary_light-red: #EF3340;
+  --fsa-tertiary_light-yellow: #F1C400;
+  --fsa-tertiary_teal: #00B2A9;
+  --fsa-tertiary_light-blue: #8DC8E8;
+  --fsa-tertiary_dark-purple: #51284F;
+  /* End of FSA Branding Guidelines colours */
   --color-black: #000;
   --color-white: #fff;
   --color-dark-gray: #2c3a40;
