@@ -53,7 +53,7 @@ class DefaultController extends ControllerBase {
     $title = self::linkMarkup('fsa_signin.default_controller_signInPage', t('Alert subscription signin'), ['button']) . '<h2>' . $this->t('User log in') . '</h2>';
     $body = FALSE;
     if (\Drupal::request()->query->get('user') != 'fsa') {
-      $title = '<h2>' . $this->t('Sign in or manage your subscription') . '</h2>';
+      $title = '<h2>' . $this->t('Sign in to manage your subscription') . '</h2>';
       $body = self::betaSigninDescription();
     }
 
