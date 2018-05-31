@@ -22,11 +22,19 @@ class SendPasswordEmailForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    if ($default_value = \Drupal::request()->query->get('name')) {
-      $email = $default_value;
+    $user = $this->currentUser();
+    $usermail = $user->getEmail();
+
+    if (isset($usermail)) {
+      $email = $usermail;
+      $disabled = TRUE;
+      $description = $this->t('You can also set a password on <a href="/user">your profile page</a>.');
     }
     else {
-      $email = '';
+      // Get mail form query, it may've been set by the login page.
+      $email = \Drupal::request()->query->get('name');
+      $disabled = FALSE;
+      $description = FALSE;
     }
 
     $form['email_address'] = [
@@ -36,6 +44,8 @@ class SendPasswordEmailForm extends FormBase {
       '#size' => 64,
       '#required' => TRUE,
       '#default_value' => $email,
+      '#disabled' => $disabled,
+      '#description' => $description,
     ];
     $form['submit'] = [
       '#type' => 'submit',

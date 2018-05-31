@@ -20,7 +20,7 @@ provider: null
 plugin: webform_block
 settings:
   id: webform_block
-  label: 'Give feedback'
+  label: 'Give feedback about this service'
   provider: webform
   label_display: visible
   webform_id: user_satisfaction
