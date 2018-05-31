@@ -13,7 +13,7 @@ third_party_settings:
 id: addtoany
 theme: fsa
 region: hidden
-weight: 0
+weight: -23
 provider: null
 plugin: addtoany_block
 settings:

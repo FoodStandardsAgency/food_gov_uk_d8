@@ -14,7 +14,7 @@ third_party_settings:
 id: search_global_result_totals
 theme: fsa
 region: content_top
-weight: -11
+weight: -19
 provider: null
 plugin: views_result_totals
 settings:

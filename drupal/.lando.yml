@@ -1,0 +1,60 @@
+name: fsa
+recipe: drupal8
+
+compose:
+  - compose.yml
+
+config:
+  webroot: web
+  via: nginx
+  php: '7.1'
+  database: mariadb:10.1
+  xdebug: true
+  conf:
+    php: conf/php.ini
+
+tooling:
+  build.sh:
+    service: appserver
+    description: Execute build.sh
+    cmd:
+      - ./build.sh
+  codeception:
+    service: appserver
+    description: Run codeception
+    cmd:
+      - ./vendor/bin/codecept
+      - "--env=lando"
+
+services:
+  mailhog:
+    type: mailhog
+    hogfrom:
+      - appserver
+
+  appserver:
+    extras:
+      - "apt-get update -y"
+      - "apt-get install python-yaml -y"
+    overrides:
+      services:
+        environment:
+          WKV_SITE_ENV: lando
+          DB_PASS_DRUPAL: drupal8
+          DB_USER_DRUPAL: drupal8
+          DB_HOST_DRUPAL: database
+          DB_NAME_DRUPAL: drupal8
+
+  elasticsearch:
+    type: elasticsearch:5.5
+
+proxy:
+  mailhog:
+    - mail.lndo.site
+  elasticsearch:
+    - elasticsearch.lndo.site:9200
+
+events:
+  # Clear caches after a database import
+  post-db-import:
+    - appserver: cd $LANDO_WEBROOT && drush cr -y

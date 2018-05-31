@@ -5,6 +5,7 @@
  * You could use this to add general settings to be used for all environments.
  */
 
+
 /**
  * Database settings (overridden per environment)
  */
@@ -19,6 +20,14 @@ $databases['default']['default'] = array (
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',
 );
+
+
+/**
+ * Drupal core string overrides for FSA setup.
+ */
+$settings['locale_custom_strings_en'][''] = [
+  'You have just used your one-time login link. It is no longer necessary to use this link to log in. Please change your password.' => 'You have just used your one-time login link. Please set yourself a password that you can use to log in again.',
+];
 
 $settings['hash_salt'] = 'B081u6MDeLm3bRi5niieR-797DOulNMA-SGCoprrcy5Gjn-hDNAkiy1k8Pnb9y8n1zSXWu4aQQ';
 
@@ -114,7 +123,7 @@ switch ($env) {
     $config['warden.settings']['warden_http_password'] = 'wunder';
     // IP address of the Warden server. Only these IP addresses will be allowed to
     // make callback # requests.
-    $config['warden.settings']['warden_public_allow_ips'] = '83.136.254.41,2a04:3541:1000:500:d456:61ff:fee3:7d8da';
+    $config['warden.settings']['warden_public_allow_ips'] = '83.136.254.41,2a04:3541:1000:500:d456:61ff:fee3:7d8d';
     // Define module locations.
     $config['warden.settings']['warden_preg_match_custom'] = '{^modules\/custom\/*}';
     $config['warden.settings']['warden_preg_match_contrib'] = '{^modules\/contrib\/*}';

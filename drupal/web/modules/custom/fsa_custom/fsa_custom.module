@@ -337,6 +337,14 @@ function fsa_custom_form_alter(&$form, $form_state, $form_id) {
   if (strpos($form_id, 'contact_message_') !== FALSE) {
     $form['actions']['preview']['#access'] = FALSE;
   }
+
+  if ($form['#id'] == 'views-exposed-form-user-admin-people-page-1') {
+    if (isset($form['roles_op'])) {
+      // Helper text for the role operator.
+      $form['roles_op']['#title'] = t('Role filter operator');
+      $form['roles_op']['#description'] = t('List only alert subscribers by selecting users who<br />"Only has the \'authenticated user\' role"');
+    }
+  }
 }
 
 /**

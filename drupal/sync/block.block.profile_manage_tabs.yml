@@ -1,4 +1,4 @@
-uuid: 2da74cc4-908f-4d54-ba38-be46ed11f501
+uuid: b75c84b6-65a5-4151-bdec-359f4d66a2d5
 langcode: en
 status: true
 dependencies:
@@ -11,20 +11,20 @@ dependencies:
 third_party_settings:
   block_class:
     classes: tab-row
-id: alerts_subscribe_navigation
+id: profile_manage_tabs
 theme: fsa
 region: content_top
-weight: -14
+weight: -22
 provider: null
-plugin: alert_subscribe_nav
+plugin: profile_manage_tabs
 settings:
-  id: alert_subscribe_nav
-  label: 'Alerts subscribe navigation'
+  id: profile_manage_tabs
+  label: 'Profile manage tabs'
   provider: fsa_signin
   label_display: '0'
 visibility:
   request_path:
     id: request_path
-    pages: "/news-alerts/subscribe\r\n/news-alerts/subscribe/alerts\r\n/news-alerts/subscribe/news\r\n/news-alerts/subscribe/delivery"
+    pages: "/profile/manage\r\n/profile/manage/*"
     negate: false
     context_mapping: {  }

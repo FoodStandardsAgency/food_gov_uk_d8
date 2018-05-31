@@ -15,7 +15,7 @@ third_party_settings:
 id: menu_help_secondary
 theme: fsa
 region: content_top
-weight: -13
+weight: -21
 provider: null
 plugin: 'menu_block:help'
 settings:

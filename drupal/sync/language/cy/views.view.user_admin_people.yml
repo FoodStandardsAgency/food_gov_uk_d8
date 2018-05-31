@@ -40,9 +40,6 @@ display:
         roles_target_id:
           expose:
             label: Swyddogaeth
-        permission:
-          expose:
-            label: Caniatâd
       title: Pobl
       use_more_text: mwy
   page_1:

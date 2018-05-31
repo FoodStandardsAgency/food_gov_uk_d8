@@ -86,7 +86,7 @@ class UnsubscribeForm extends FormBase {
           $message = $this->t('Cannot unsubscribe. You may need <a href="@url">to log in</a>.', ['@url' => Url::fromRoute('fsa_signin.default_controller_signInPage')->toString()]);
         }
         else {
-          $message = $this->t('Cannot unsubscribe. Visit your <a href="@url">profile page</a> to unsubscribe.', ['@url' => Url::fromRoute('fsa_signin.default_controller_manageProfilePage')->toString()]);
+          $message = $this->t('Cannot unsubscribe. Visit your <a href="@url">profile page</a> to unsubscribe.', ['@url' => Url::fromRoute('fsa_signin.default_controller_deliveryOptionsPage')->toString()]);
         }
         drupal_set_message($message);
       }

@@ -13,7 +13,7 @@ third_party_settings:
 id: page_content_header
 theme: fsa
 region: content
-weight: 0
+weight: -23
 provider: null
 plugin: page_content_header
 settings:

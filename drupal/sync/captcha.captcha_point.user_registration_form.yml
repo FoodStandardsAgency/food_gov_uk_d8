@@ -1,6 +1,6 @@
 uuid: 1426234f-40b3-41d5-935b-b11722d38a83
 langcode: en
-status: false
+status: true
 dependencies: {  }
 formId: user_registration_form
 captchaType: default
