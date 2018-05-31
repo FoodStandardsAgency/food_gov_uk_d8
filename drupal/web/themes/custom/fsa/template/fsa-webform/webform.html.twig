@@ -14,8 +14,6 @@
  *   displayed in front of the main title tag that appears in the template.
  * - title_suffix: Additional output populated by modules, intended to be
  *   displayed after the main title tag that appears in the template.
- * - satisfaction_form: The user satisfaction webform to attach on selected
- *   multipage webforms (@see fsa_contactus.module).
  *
  * @see template_preprocess_webform()
  * @see _webform_form_after_build()
@@ -31,7 +29,5 @@
       {{ children }}
       {{ title_suffix }}
     </form>
-    {# satisfaction_form is the "Give us feedback" form attached to the end of selected contact us forms #}
-    {{ satisfaction_form }}
   </div>
 </div>
