@@ -1,6 +1,7 @@
 /* eslint-disable import/no-webpack-loader-syntax */
 import toCamelCase from 'to-camel-case'
 import readme from '../../README.md'
+import aboutThisStyleguide from './about.md'
 import customProperties from '../helper/custom-property.css'
 import styles from './styleguide.css'
 import guid from '../helper/guid'
@@ -49,7 +50,8 @@ const customPropertiesArray = customProperties.toString().split(/[{}]+/).filter(
 
 const parts = customPropertiesArray[1].replace(/\s/g, '').split(';')
 const colorArray = []
-for (let i = 0; i < parts.length; i++) {
+const numberOfColors = 18
+for (let i = 0; i < numberOfColors; i++) {
   const subParts = parts[i].split(':')
 
   if (isColor(subParts[1])) {
@@ -159,18 +161,22 @@ const navigationComponentItems = componentArray.map((component) => {
 
 const introComponentArray = [
   {
+    title: 'About This Style Guide',
+    element: aboutThisStyleguide
+  },
+  {
     title: 'Developer Workflow',
     element: readme
   },
   {
     title: 'CSS Custom Properties',
-    description: 'These are custom properties. Use them with var() function. There are also some examples of this function being used in the code below.',
+    description: 'These are custom properties, which are defined in the file `custom-property.css`. They can be used with var() function. There are also some examples of this function being used in the code below.',
     element: intro
   },
   {
     title: 'Colours',
     description: `The colours used throughout this project are based on the FSA Brand Guidelines. Any further modifications to this site should consult this document and/or the FSA design team.
-    Below, the colours that have been defined in the Custom Properties are demonstrated. Colours from the FSA Brand Guidelines appear first.`,
+    Below, colours from the FSA Brand Guidelines are shown. These are all present in the \`custom-property.css\` file, along with other colours used throughout the site.`,
     element: colors
   },
   {
