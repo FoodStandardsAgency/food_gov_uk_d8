@@ -24,8 +24,16 @@
   transition:
     background-color var(--transition-enter-fast);
 
+  &.button--profile-manage {
+    margin-bottom: 0.85em;
+  }
+
   &:disabled {
     opacity: 50%
+  }
+
+  &.red {
+    background-color: rgba(227, 24, 55, 0.8);
   }
 
   &.invisible {
