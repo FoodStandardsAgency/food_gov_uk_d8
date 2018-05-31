@@ -3,7 +3,7 @@
       <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title>FSA Style Guide</title>
+        <title>food.gov.uk style guide</title>
         <style>
           @import url(https://fonts.googleapis.com/css?family=Open+Sans);@import url(https://fonts.googleapis.com/css?family=Fira+Sans);
 :root{
@@ -13976,8 +13976,9 @@ section{
   display:flex;
   -ms-flex-align:center;
       align-items:center;
-  background-color:#A9C47F !important;
-  color:#fff;
+  background-color:#fff;
+  color:#006F51;
+  border-bottom:2px solid #A9C47F;
   padding:1em;
 }
 @media (min-width: 30em){
@@ -14002,6 +14003,7 @@ section{
   }
 .styleguide__hero___1tcOO span{
     font-size:1.5em;
+    margin-left:80px;
   }
 .styleguide__hero___1tcOO h1{
   font-size:1.5em;
@@ -14659,13 +14661,13 @@ section{
   </g>
 </svg>
 
-          <span class="styleguide__underline___2SXuk"><strong>food.gov.uk</strong> Style Guide </span>
+          <span class=""><strong>food.gov.uk</strong> style guide </span>
         </section>
         <section class="styleguide__layout___m-h-G js-sticky-container">
           <aside class="styleguide__navigation___3JtxI js-sticky-element">
             <h3 class="styleguide__navigation__heading___14TQj">Getting started</h3>
             <div class="styleguide__navigation__links___mVwfi">
-              <a href="#aboutThisStyleGuide" class="styleguide__navigationItem___3_fiN js-scroll">About This Style Guide</a><a href="#developerWorkflow" class="styleguide__navigationItem___3_fiN js-scroll">Developer Workflow</a><a href="#cssCustomProperties" class="styleguide__navigationItem___3_fiN js-scroll">CSS Custom Properties</a><a href="#colours" class="styleguide__navigationItem___3_fiN js-scroll">Colours</a><a href="#typography" class="styleguide__navigationItem___3_fiN js-scroll">Typography</a>
+              <a href="#about" class="styleguide__navigationItem___3_fiN js-scroll">About</a><a href="#developerWorkflow" class="styleguide__navigationItem___3_fiN js-scroll">Developer Workflow</a><a href="#cssCustomProperties" class="styleguide__navigationItem___3_fiN js-scroll">CSS Custom Properties</a><a href="#colours" class="styleguide__navigationItem___3_fiN js-scroll">Colours</a><a href="#typography" class="styleguide__navigationItem___3_fiN js-scroll">Typography</a>
             </div>
             <h3 class="styleguide__navigation__heading___14TQj">Components</h3>
             <div class="styleguide__navigation__links___mVwfi">
@@ -14673,13 +14675,13 @@ section{
             </div>
           </aside>
           <main class="styleguide__layout__content___1yeYf styleguide__main___1vvRi">
-            <article class="styleguide__item___28nPp" id="aboutThisStyleGuide">
+            <article class="styleguide__item___28nPp" id="about">
   <header class="styleguide__item__header___2u3FN">
-    <h3 class="styleguide__item__title___2gjuP">About This Style Guide</h3>
+    <h3 class="styleguide__item__title___2gjuP">About</h3>
     <p class="styleguide__item__description___34e69"></p>
   </header>
   
-  <div class="styleguide__item__content___iDzu-"><p>This Style Guide is intended to assist front-end developers and designers who work on food.gov.uk in the future. It aims to provide introductory information around the three following areas:</p>
+  <div class="styleguide__item__content___iDzu-"><p>This style guide is intended to assist front-end developers and designers who work on food.gov.uk in the future. It aims to provide introductory information around the three following areas:</p>
 <ul>
 <li>The front-end structure and tooling used throughout the site</li>
 <li>The coding style and approaches to development</li>
@@ -15078,20 +15080,29 @@ Plugin documentation:
 </div>
 
 <div class="regional-variation regional-variation--england-wales js-regional-variation js-england-wales">
-  Regional variation: England and Wales #TODO
+  Regional variation: Applies to multiple regions (e.g. England and Wales)
 </div>
 
-<div class="regional-variation regional-variation--england-northern-ireland js-regional-variation js-england-northern-ireland">
-  Regional variation: England and Northern Ireland #TODO
-</div>
+<div class="important">This style is for important content, indicated by the 'important' className.</div>
+<div class="explanation js-explanation">'FSA Explains' -> #TODO put the full component here</div>
 
-<div class="regional-variation regional-variation--northern-ireland-wales js-regional-variation js-northern-ireland-wales">
-  Regional variation: Northern Ireland and Wales #TODO
-</div>
+<article class="embedded-entity">
+  <article class="media media-document view-mode-document-link">
+    <div class="field field__field_document">
+      <div class="file__type_application-pdf">
+        <div>
+          <a href="" class="ext">This is an example of a link to a pdf document.
+            <span class="ext">
+              <span class="element-invisible"> </span>
+            </span>
+          </a>
+          <span>(100 KB)</span>
+        </div>
+      </div>
+    </div>
 
-<div class="explanation js-explanation">Content variation: Explanation</div>
-<div class="important js-important">Content variation: Important #TODO</div>
-</div>
+  </article>
+</article></div>
 </article>
 
             <article class="styleguide__item___28nPp" id="footer">
@@ -15190,14 +15201,14 @@ Plugin documentation:
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-80e40501-9920-1ffe-}c747-45a634aad731" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-80e40501-9920-1ffe-}c747-45a634aad731" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-80e40501-9920-1ffe-}c747-45a634aad731" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-ccf813bb-274f-0d94-}4215-f468bfd453dd" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-ccf813bb-274f-0d94-}4215-f468bfd453dd" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-ccf813bb-274f-0d94-}4215-f468bfd453dd" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-80e40501-9920-1ffe-}c747-45a634aad731" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-80e40501-9920-1ffe-}c747-45a634aad731" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-80e40501-9920-1ffe-}c747-45a634aad731" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-ccf813bb-274f-0d94-}4215-f468bfd453dd" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-ccf813bb-274f-0d94-}4215-f468bfd453dd" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-ccf813bb-274f-0d94-}4215-f468bfd453dd" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -15502,14 +15513,14 @@ Plugin documentation:
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-3bcaf114-86c4-91ba-}a6ad-d52f1fa1faaf" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-3bcaf114-86c4-91ba-}a6ad-d52f1fa1faaf" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-3bcaf114-86c4-91ba-}a6ad-d52f1fa1faaf" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-6ea726bb-0658-7d3e-}fe02-61fe5fa9d730" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-6ea726bb-0658-7d3e-}fe02-61fe5fa9d730" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-6ea726bb-0658-7d3e-}fe02-61fe5fa9d730" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-3bcaf114-86c4-91ba-}a6ad-d52f1fa1faaf" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-3bcaf114-86c4-91ba-}a6ad-d52f1fa1faaf" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-3bcaf114-86c4-91ba-}a6ad-d52f1fa1faaf" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-6ea726bb-0658-7d3e-}fe02-61fe5fa9d730" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-6ea726bb-0658-7d3e-}fe02-61fe5fa9d730" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-6ea726bb-0658-7d3e-}fe02-61fe5fa9d730" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -15879,14 +15890,14 @@ Plugin documentation:
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-1afb61c6-ffd5-ba21-}c546-318aab5ae861" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-1afb61c6-ffd5-ba21-}c546-318aab5ae861" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-1afb61c6-ffd5-ba21-}c546-318aab5ae861" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-529d7005-f588-441e-}aa5e-26e7a05c0f60" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-529d7005-f588-441e-}aa5e-26e7a05c0f60" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-529d7005-f588-441e-}aa5e-26e7a05c0f60" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-1afb61c6-ffd5-ba21-}c546-318aab5ae861" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-1afb61c6-ffd5-ba21-}c546-318aab5ae861" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-1afb61c6-ffd5-ba21-}c546-318aab5ae861" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-529d7005-f588-441e-}aa5e-26e7a05c0f60" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-529d7005-f588-441e-}aa5e-26e7a05c0f60" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-529d7005-f588-441e-}aa5e-26e7a05c0f60" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -16430,14 +16441,14 @@ Plugin documentation:
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-c7fd7d58-0743-ae99-}3eb6-e45d2beaa33e" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-c7fd7d58-0743-ae99-}3eb6-e45d2beaa33e" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-c7fd7d58-0743-ae99-}3eb6-e45d2beaa33e" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-5a704794-4db7-1d2a-}88a2-99bde67f62fb" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-5a704794-4db7-1d2a-}88a2-99bde67f62fb" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-5a704794-4db7-1d2a-}88a2-99bde67f62fb" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-c7fd7d58-0743-ae99-}3eb6-e45d2beaa33e" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-c7fd7d58-0743-ae99-}3eb6-e45d2beaa33e" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-c7fd7d58-0743-ae99-}3eb6-e45d2beaa33e" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-5a704794-4db7-1d2a-}88a2-99bde67f62fb" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-5a704794-4db7-1d2a-}88a2-99bde67f62fb" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-5a704794-4db7-1d2a-}88a2-99bde67f62fb" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -16716,14 +16727,14 @@ Plugin documentation:
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-71f6b769-cdd5-38a9-}23cc-1cfc90743e1c" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-71f6b769-cdd5-38a9-}23cc-1cfc90743e1c" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-71f6b769-cdd5-38a9-}23cc-1cfc90743e1c" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-48b77445-d864-ccc4-}d9d7-bb344c2e4917" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-48b77445-d864-ccc4-}d9d7-bb344c2e4917" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-48b77445-d864-ccc4-}d9d7-bb344c2e4917" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-71f6b769-cdd5-38a9-}23cc-1cfc90743e1c" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-71f6b769-cdd5-38a9-}23cc-1cfc90743e1c" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-71f6b769-cdd5-38a9-}23cc-1cfc90743e1c" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-48b77445-d864-ccc4-}d9d7-bb344c2e4917" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-48b77445-d864-ccc4-}d9d7-bb344c2e4917" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-48b77445-d864-ccc4-}d9d7-bb344c2e4917" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -17931,14 +17942,14 @@ Plugin documentation:
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-ac30c006-d274-7d4b-}d900-5f1443899dc3" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-ac30c006-d274-7d4b-}d900-5f1443899dc3" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-ac30c006-d274-7d4b-}d900-5f1443899dc3" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-6f1a02b3-309f-85b9-}285b-7bbf1051fd9f" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-6f1a02b3-309f-85b9-}285b-7bbf1051fd9f" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-6f1a02b3-309f-85b9-}285b-7bbf1051fd9f" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-ac30c006-d274-7d4b-}d900-5f1443899dc3" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-ac30c006-d274-7d4b-}d900-5f1443899dc3" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-ac30c006-d274-7d4b-}d900-5f1443899dc3" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-6f1a02b3-309f-85b9-}285b-7bbf1051fd9f" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-6f1a02b3-309f-85b9-}285b-7bbf1051fd9f" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-6f1a02b3-309f-85b9-}285b-7bbf1051fd9f" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -20558,14 +20569,14 @@ Plugin documentation:
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-d180e537-5af5-19dc-}2f73-02f91da5ece1" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-d180e537-5af5-19dc-}2f73-02f91da5ece1" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-d180e537-5af5-19dc-}2f73-02f91da5ece1" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-51b73385-a443-ed21-}7d60-9127667a05fd" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-51b73385-a443-ed21-}7d60-9127667a05fd" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-51b73385-a443-ed21-}7d60-9127667a05fd" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-d180e537-5af5-19dc-}2f73-02f91da5ece1" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-d180e537-5af5-19dc-}2f73-02f91da5ece1" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-d180e537-5af5-19dc-}2f73-02f91da5ece1" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-51b73385-a443-ed21-}7d60-9127667a05fd" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-51b73385-a443-ed21-}7d60-9127667a05fd" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-51b73385-a443-ed21-}7d60-9127667a05fd" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -20732,14 +20743,14 @@ Plugin documentation:
 
   <form class="styleguide__item__code___3rQWa" role="region">
 
-    <input name="info-input" id="tabHTML-f9d1939f-df44-3a27-}24d4-acda8d2d2b3c" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-f9d1939f-df44-3a27-}24d4-acda8d2d2b3c" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-f9d1939f-df44-3a27-}24d4-acda8d2d2b3c" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+    <input name="info-input" id="tabHTML-38205ba1-3619-0061-}7ec6-0f4d51de6f1a" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-38205ba1-3619-0061-}7ec6-0f4d51de6f1a" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-38205ba1-3619-0061-}7ec6-0f4d51de6f1a" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-f9d1939f-df44-3a27-}24d4-acda8d2d2b3c" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-f9d1939f-df44-3a27-}24d4-acda8d2d2b3c" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-f9d1939f-df44-3a27-}24d4-acda8d2d2b3c" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-38205ba1-3619-0061-}7ec6-0f4d51de6f1a" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-38205ba1-3619-0061-}7ec6-0f4d51de6f1a" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-38205ba1-3619-0061-}7ec6-0f4d51de6f1a" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">

@@ -161,7 +161,7 @@ const navigationComponentItems = componentArray.map((component) => {
 
 const introComponentArray = [
   {
-    title: 'About This Style Guide',
+    title: 'About',
     element: aboutThisStyleguide
   },
   {
@@ -212,7 +212,7 @@ const styleGuide = (templateParams) => {
       <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title>FSA Style Guide</title>
+        <title>food.gov.uk style guide</title>
         <style>
           ${styles}
         </style>
@@ -221,7 +221,7 @@ const styleGuide = (templateParams) => {
        <article>
         <section class="${styles.locals.hero}">
           ${fsaLogo}
-          <span class="${styles.locals.underline}"><strong>food.gov.uk</strong> Style Guide </span>
+          <span class=""><strong>food.gov.uk</strong> style guide </span>
         </section>
         <section class="${styles.locals.layout} js-sticky-container">
           <aside class="${styles.locals.navigation} js-sticky-element">

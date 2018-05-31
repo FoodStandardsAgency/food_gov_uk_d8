@@ -56,12 +56,14 @@ section {
 .hero {
   display: flex;
   align-items: center;
-  background-color: var(--fsa-primary_light-green) !important;
-  color: #fff;
+  background-color: #fff;
+  color: var(--fsa-primary_dark-green);
+  border-bottom: 2px solid var(--fsa-primary_light-green);
   @mixin responsive-declaration padding, 1em, 2em;
 
   span {
     font-size: 1.5em;
+    margin-left: 80px;
   }
 }
 
