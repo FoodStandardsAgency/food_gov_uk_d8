@@ -1,7 +1,7 @@
 /* stylelint-disable selector-pseudo-class-no-unknown */
 @import '../style.css';
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
-@import url('https://fonts.googleapis.com/css?family=Fira+Sans');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,700');
 
 :root {
   --styleguide-color-black: var(--color-black, #000);
