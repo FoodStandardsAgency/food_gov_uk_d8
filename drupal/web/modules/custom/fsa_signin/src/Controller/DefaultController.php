@@ -4,7 +4,8 @@ namespace Drupal\fsa_signin\Controller;
 
 use Drupal\Core\Link;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\fsa_signin\Form\ProfileManager;
+use Drupal\fsa_signin\Form\ChangePassword;
+use Drupal\fsa_signin\Form\DeliveryOptions;
 use Drupal\fsa_signin\Form\SendPasswordEmailForm;
 use Drupal\user\Form\UserLoginForm;
 use Drupal\Core\Controller\ControllerBase;
@@ -17,6 +18,8 @@ use Drupal\fsa_signin\Form\UnsubscribeForm;
  * Class DefaultController.
  */
 class DefaultController extends ControllerBase {
+
+  const PROFILE_FORM_HTML_CLASS = 'profile-manage-form';
 
   /**
    * Signin service.
@@ -75,8 +78,8 @@ class DefaultController extends ControllerBase {
         ['back arrow']
       ),
     ];
-    $title = ['#markup' => '<h2>' . $this->t('Use one-time sign in') . '</h2>'];
-    $content = ['#markup' => '<p>' . $this->t("Enter your email address below and we'll send you a one-time sign in link") . '</p>'];
+    $title = ['#markup' => '<h2>' . $this->t('Forgot password?') . '</h2>'];
+    $content = ['#markup' => '<p>' . $this->t("Enter your email address and we'll send you a login link so you can set a password.") . '</p>'];
     $send_pwd_form = \Drupal::formBuilder()->getForm(SendPasswordEmailForm::class);
 
     return [
@@ -106,8 +109,7 @@ class DefaultController extends ControllerBase {
     $header .= '<h2 class="profile__heading">' . $this->t('Your profile') . '</h2>';
     $header .= '<p class="profile__intro">' . $this->t("Hello @name", ['@name' => $account->getUsername()]) . '</p>';
     $header .= '</header>';
-    $header .= self::linkMarkup('fsa_signin.default_controller_manageProfilePage', $this->t('Manage your profile'), ['button']);
-    $header .= self::linkMarkup('user.logout.http', $this->t('Logout'), ['profile__logout']);
+    $header .= self::linkMarkup('fsa_signin.default_controller_deliveryOptionsPage', $this->t('Manage your profile'), ['button']);
 
     return [
       ['#markup' => $header],
@@ -115,16 +117,51 @@ class DefaultController extends ControllerBase {
   }
 
   /**
+   * Create Account settings page.
+   */
+  public function accountSettingsPage() {
+    $account = User::load(\Drupal::currentUser()->id());
+
+    $email = $account->getEmail();
+    $content = '<h2>' . $this->t('Hello @mail', ['@mail' => $email]) . '</h2>';
+    $content .= '<p>' . DefaultController::linkMarkup('fsa_signin.user_preregistration_alerts_form', $this->t('Update subscription preferences'), ['button button--profile-manage']) . '</p>';
+    $content .= '<br /><br />';
+    $content .= '<p>' . DefaultController::linkMarkup('fsa_signin.default_controller_changePasswordPage', $this->t('Change password'), ['button button--profile-manage']) . '&nbsp;&nbsp;';
+    $content .= DefaultController::linkMarkup('fsa_signin.delete_account_confirmation', $this->t('Cancel subscription'), ['cancel button red button--profile-manage']) . '</p><br >';
+
+    return [
+      ['#markup' => $content],
+    ];
+
+  }
+
+  /**
+   * Create Delivery options page.
+   */
+  public function deliveryOptionsPage() {
+    $header = '<header class="profile__header">';
+    $header .= '<h2 class="profile__heading">' . $this->t('Delivery options') . '</h2>';
+    $header .= '</header>';
+    $header .= '<p class="profile__intro">' . $this->t("Select delivery options and frequency for the alerts you chose to receive.") . '</p>';
+
+    $manage_form = \Drupal::formBuilder()->getForm(DeliveryOptions::class);
+
+    return [
+      ['#markup' => $header],
+      $manage_form,
+    ];
+
+  }
+
+  /**
    * Create manage profile page.
    */
-  public function manageProfilePage() {
+  public function changePasswordPage() {
     $header = '<header class="profile__header">';
-    $header .= '<h2 class="profile__heading">' . $this->t('Manage your preferences') . '</h2>';
-    $header .= self::linkMarkup('user.logout.http', $this->t('Logout'), ['profile__logout']);
+    $header .= '<h2 class="profile__heading">' . $this->t('Set a new password') . '</h2>';
     $header .= '</header>';
-    $header .= '<p class="profile__intro">' . $this->t("Update your subscription or unsubscribe from the alerts you're receiving") . '</p>';
 
-    $manage_form = \Drupal::formBuilder()->getForm(ProfileManager::class);
+    $manage_form = \Drupal::formBuilder()->getForm(ChangePassword::class);
 
     return [
       ['#markup' => $header],
@@ -150,8 +187,8 @@ class DefaultController extends ControllerBase {
    * Registration thank you page.
    */
   public function thankYouPage() {
-    $markup = '<h1>' . $this->t('Subscription complete') . '</h1>';
-    $markup .= '<p>' . $this->t("Thank you for subscribing to Food Standards Agency's updates.") . '</p>';
+    $markup = '<h1>' . $this->t('A verification email has been sent to your inbox.') . '</h1>';
+    $markup .= '<p>' . $this->t('<p>To complete you subcription please follow the instructions within the email.</p><p>If you do not see the email, please check your spam folder.</p>') . '</p>';
     $markup .= '<p>' . self::betaSigninDescription() . '</p>';
 
     return [

@@ -8,6 +8,8 @@ use Drupal\taxonomy\Entity\Term;
 /**
  * Provides 'My Subscriptions' block for registration flow.
  *
+ * @deprecated This block is not used after signin process overhaul.
+ *
  * @Block(
  *  id = "my_subscriptions",
  *  admin_label = @Translation("My subscriptions"),
