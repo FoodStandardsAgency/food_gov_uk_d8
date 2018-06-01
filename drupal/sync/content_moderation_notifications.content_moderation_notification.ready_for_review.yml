@@ -6,12 +6,11 @@ id: ready_for_review
 workflow: editorial
 transitions:
   submit_draft: submit_draft
-roles:
-  editor: editor
-author: true
-emails: ''
-subject: 'Ready for review!'
+roles: {  }
+author: false
+emails: fsa.communications@food.gov.uk
+subject: 'Content ready for review at [site:url-brief]'
 body:
-  value: "<p>New draft content has been submitted for review.</p>\r\n"
+  value: "<p>Draft content \"<strong>[node:title]</strong>\" has been submitted for review at <a href=\"[site:url]\">[site:url-brief]</a>.</p>\r\n\r\n<ul>\r\n\t<li>Updated: [node:changed:long]</li>\r\n\t<li>Updated by: [current-user:mail] ([current-user:url:brief])</li>\r\n\t<li>Log message: [node:log]</li>\r\n\t<li>View: [node:url:unaliased]/latest</li>\r\n\t<li>Edit: [node:edit-url]</li>\r\n</ul>\r\n"
   format: full_html
 label: 'Ready for review'
