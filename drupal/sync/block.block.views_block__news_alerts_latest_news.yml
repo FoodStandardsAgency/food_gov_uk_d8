@@ -15,7 +15,7 @@ third_party_settings:
 id: views_block__news_alerts_latest_news
 theme: fsa
 region: hidden
-weight: 0
+weight: -20
 provider: null
 plugin: 'views_block:news_alerts-latest_news'
 settings:

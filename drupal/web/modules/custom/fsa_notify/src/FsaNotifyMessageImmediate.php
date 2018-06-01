@@ -50,14 +50,17 @@ class FsaNotifyMessageImmediate extends FsaNotifyMessage {
       $item = $item->getTranslation($lang);
     }
 
-    $title = $item->getTitle();
-    $line1 = sprintf('%s', $title);
+    $category = self::alertSubscriptionCategory($item);
+    $date = self::alertDate($item);
+    $line1 = sprintf('%s - %s:', $category, $date);
 
-    $link = $this->url($item, $lang);
+    $line2 = $item->getTitle();
+
+    $link = $this->urlAlias($item, $lang);
     $more = t('Read more');
-    $line2 = sprintf('%s: %s', $more, $link);
+    $line3 = sprintf('%s: %s', $more, $link);
 
-    $item = "$line1\n$line2\n";
+    $item = "$line1\n$line2\n$line3";
     return $item;
   }
 

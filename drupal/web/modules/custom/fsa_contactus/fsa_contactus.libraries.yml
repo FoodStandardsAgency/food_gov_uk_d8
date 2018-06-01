@@ -1,0 +1,7 @@
+user_satisfaction:
+  version: 1.x
+  js:
+    js/user-satisfaction.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery.once

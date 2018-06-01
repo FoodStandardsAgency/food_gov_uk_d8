@@ -1,31 +1,30 @@
-uuid: ffb565a4-9b48-46af-89a6-62101e20735c
+uuid: b75c84b6-65a5-4151-bdec-359f4d66a2d5
 langcode: en
 status: true
 dependencies:
   module:
     - block_class
-    - fsa_es
+    - fsa_signin
     - system
   theme:
     - fsa
 third_party_settings:
   block_class:
-    classes: search-global-result-totals
-id: search_global_result_totals
+    classes: tab-row
+id: profile_manage_tabs
 theme: fsa
 region: content_top
-weight: -19
+weight: -22
 provider: null
-plugin: views_result_totals
+plugin: profile_manage_tabs
 settings:
-  id: views_result_totals
-  label: 'Views result totals'
-  provider: fsa_es
+  id: profile_manage_tabs
+  label: 'Profile manage tabs'
+  provider: fsa_signin
   label_display: '0'
-  view_name: search_global_ratings
 visibility:
   request_path:
     id: request_path
-    pages: '/search*'
+    pages: "/profile/manage\r\n/profile/manage/*"
     negate: false
     context_mapping: {  }
