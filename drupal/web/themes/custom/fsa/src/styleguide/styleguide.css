@@ -114,6 +114,10 @@ section {
   padding-right: 30px;
 }
 
+:global #fsa-explains-heading {
+  margin-bottom: 0;
+}
+
 :global .is-bottom {
   @media (--breakpoint-md) {
     position: absolute;
