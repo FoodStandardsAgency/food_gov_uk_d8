@@ -9,7 +9,7 @@ import safeTagsReplace from '../helper/safeTagsReplace'
 import isColor from '../helper/isColor'
 import fsaLogo from './fsa-logo'
 
-const includedComponents = ['footer', 'header', 'hero', 'infobox', 'listing', 'navigation', 'pager', 'pagination', 'promo']
+const includedComponents = ['button', 'breadcrumb', 'footer', 'header', 'hero', 'infobox', 'link-list', 'listing', 'navigation', 'pager', 'pagination', 'promo', 'share']
 
 function uniq(a) {
   return a.sort().filter(function (item, pos, ary) {
@@ -236,6 +236,8 @@ const styleGuide = (templateParams) => {
           </aside>
           <main class="${styles.locals.layout__content} ${styles.locals.main}">
             ${introComponents}
+            <h1>Components</h1>
+            <hr>
             ${components}
           </main>
         </section>

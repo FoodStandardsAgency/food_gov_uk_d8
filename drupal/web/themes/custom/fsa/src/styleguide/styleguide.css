@@ -59,6 +59,7 @@ section {
   background-color: #fff;
   color: var(--fsa-primary_dark-green);
   border-bottom: 2px solid var(--fsa-primary_light-green);
+  margin-bottom: 30px;
   @mixin responsive-declaration padding, 1em, 2em;
 
   span {
