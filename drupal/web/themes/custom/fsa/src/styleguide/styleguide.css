@@ -1,7 +1,7 @@
 /* stylelint-disable selector-pseudo-class-no-unknown */
 @import '../style.css';
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
-@import url('https://fonts.googleapis.com/css?family=Fira+Sans');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,700');
 
 :root {
   --styleguide-color-black: var(--color-black, #000);
@@ -56,12 +56,15 @@ section {
 .hero {
   display: flex;
   align-items: center;
-  background-color: var(--fsa-primary_light-green) !important;
-  color: #fff;
+  background-color: #fff;
+  color: var(--fsa-primary_dark-green);
+  border-bottom: 2px solid var(--fsa-primary_light-green);
+  margin-bottom: 30px;
   @mixin responsive-declaration padding, 1em, 2em;
 
   span {
     font-size: 1.5em;
+    margin-left: 80px;
   }
 }
 
@@ -110,6 +113,10 @@ section {
   width: 250px;
   height: 160px;
   padding-right: 30px;
+}
+
+:global #fsa-explains-heading {
+  margin-bottom: 0;
 }
 
 :global .is-bottom {

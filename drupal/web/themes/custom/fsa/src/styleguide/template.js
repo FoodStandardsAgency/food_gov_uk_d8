@@ -9,7 +9,7 @@ import safeTagsReplace from '../helper/safeTagsReplace'
 import isColor from '../helper/isColor'
 import fsaLogo from './fsa-logo'
 
-const includedComponents = ['footer', 'header', 'hero', 'infobox', 'listing', 'navigation', 'pager', 'pagination', 'promo']
+const includedComponents = ['button', 'breadcrumb', 'footer', 'header', 'hero', 'infobox', 'landing-promo', 'link-list', 'listing', 'navigation', 'pager', 'pagination', 'promo', 'share']
 
 function uniq(a) {
   return a.sort().filter(function (item, pos, ary) {
@@ -161,7 +161,7 @@ const navigationComponentItems = componentArray.map((component) => {
 
 const introComponentArray = [
   {
-    title: 'About This Style Guide',
+    title: 'About',
     element: aboutThisStyleguide
   },
   {
@@ -212,7 +212,7 @@ const styleGuide = (templateParams) => {
       <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title>FSA Style Guide</title>
+        <title>food.gov.uk style guide</title>
         <style>
           ${styles}
         </style>
@@ -221,7 +221,7 @@ const styleGuide = (templateParams) => {
        <article>
         <section class="${styles.locals.hero}">
           ${fsaLogo}
-          <span class="${styles.locals.underline}"><strong>food.gov.uk</strong> Style Guide </span>
+          <span class=""><strong>food.gov.uk</strong> style guide </span>
         </section>
         <section class="${styles.locals.layout} js-sticky-container">
           <aside class="${styles.locals.navigation} js-sticky-element">
@@ -236,6 +236,8 @@ const styleGuide = (templateParams) => {
           </aside>
           <main class="${styles.locals.layout__content} ${styles.locals.main}">
             ${introComponents}
+            <h1>Components</h1>
+            <hr>
             ${components}
           </main>
         </section>
