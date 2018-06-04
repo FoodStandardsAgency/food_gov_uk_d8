@@ -9,7 +9,7 @@ import safeTagsReplace from '../helper/safeTagsReplace'
 import isColor from '../helper/isColor'
 import fsaLogo from './fsa-logo'
 
-const includedComponents = ['button', 'breadcrumb', 'contact-links', 'footer', 'header', 'hero', 'infobox', 'landing-links', 'landing-promo', 'language-bar', 'link-list', 'listing', 'navigation', 'pager', 'pagination', 'promo', 'share']
+const includedComponents = ['button', 'breadcrumb', 'contact-links', 'feedback', 'footer', 'header', 'hero', 'infobox', 'landing-links', 'landing-promo', 'language-bar', 'link-list', 'listing', 'navigation', 'pager', 'pagination', 'promo', 'share']
 
 function uniq(a) {
   return a.sort().filter(function (item, pos, ary) {
@@ -223,8 +223,8 @@ const styleGuide = (templateParams) => {
           ${fsaLogo}
           <span class=""><strong>food.gov.uk</strong> style guide </span>
         </section>
-        <section class="${styles.locals.layout} js-sticky-container">
-          <aside class="${styles.locals.navigation} js-sticky-element">
+        <section class="${styles.locals.layout}">
+          <aside class="${styles.locals.navigation}">
             <h3 class="${styles.locals.navigation__heading}">Getting started</h3>
             <div class="${styles.locals.navigation__links}">
               ${navigationIntroComponentItems}

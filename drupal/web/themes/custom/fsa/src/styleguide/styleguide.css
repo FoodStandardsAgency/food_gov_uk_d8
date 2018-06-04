@@ -134,8 +134,25 @@ section {
   }
 }
 
+:global .footer-top-wrapper,
+:global .navigation-wrapper {
+  background-color: #fff !important;
+}
+
 :global .navigation__menu.navigation__menu--level-2.js-nav-menu {
   top: -99999px;
+}
+
+:global .edit-is-useful-yes-input,
+:global .edit-is-useful-yes-label,
+:global .edit-is-useful-no-input,
+:global .edit-is-useful-no-label {
+  display: inline;
+  float: right;
+}
+
+:global .edit-is-useful-no-label {
+  padding-left: 15px !important;
 }
 
 .navigation__heading {
@@ -144,7 +161,6 @@ section {
 
 .navigationItem {
   font-size: 1em;
-  text-decoration: none;
   color: var(--styleguide-primary-color);
   padding: 5px 30px;
 }
