@@ -14134,6 +14134,11 @@ section{
   -ms-flex-wrap:wrap;
       flex-wrap:wrap;
 }
+.hero-wrapper,
+.header,
+.footer-wrapper{
+  background-color:#fff !important;
+}
 .visually-hidden{
   position:absolute !important;
   clip:rect(1px, 1px, 1px, 1px);
@@ -14306,6 +14311,9 @@ section{
   margin:0;
   padding:0.1em;
   font-family:monospace;
+}
+form.code-form.hidden{
+  display:none;
 }
 .styleguide__item___28nPp{
   margin-bottom:1em;
@@ -14675,7 +14683,7 @@ section{
             </div>
             <h3 class="styleguide__navigation__heading___14TQj">Components</h3>
             <div class="styleguide__navigation__links___mVwfi">
-              <a href="#breadcrumb" class="styleguide__navigationItem___3_fiN js-scroll">Breadcrumb</a><a href="#button" class="styleguide__navigationItem___3_fiN js-scroll">Button</a><a href="#footer" class="styleguide__navigationItem___3_fiN js-scroll">Footer</a><a href="#header" class="styleguide__navigationItem___3_fiN js-scroll">Header</a><a href="#hero" class="styleguide__navigationItem___3_fiN js-scroll">Hero</a><a href="#infobox" class="styleguide__navigationItem___3_fiN js-scroll">Infobox</a><a href="#landingPromo" class="styleguide__navigationItem___3_fiN js-scroll">Landing-promo</a><a href="#linkList" class="styleguide__navigationItem___3_fiN js-scroll">Link-list</a><a href="#listing" class="styleguide__navigationItem___3_fiN js-scroll">Listing</a><a href="#navigation" class="styleguide__navigationItem___3_fiN js-scroll">Navigation</a><a href="#pagination" class="styleguide__navigationItem___3_fiN js-scroll">Pagination</a><a href="#promo" class="styleguide__navigationItem___3_fiN js-scroll">Promo</a><a href="#share" class="styleguide__navigationItem___3_fiN js-scroll">Share</a>
+              <a href="#breadcrumb" class="styleguide__navigationItem___3_fiN js-scroll">Breadcrumb</a><a href="#button" class="styleguide__navigationItem___3_fiN js-scroll">Button</a><a href="#contactLinks" class="styleguide__navigationItem___3_fiN js-scroll">Contact-links</a><a href="#footer" class="styleguide__navigationItem___3_fiN js-scroll">Footer</a><a href="#header" class="styleguide__navigationItem___3_fiN js-scroll">Header</a><a href="#hero" class="styleguide__navigationItem___3_fiN js-scroll">Hero</a><a href="#infobox" class="styleguide__navigationItem___3_fiN js-scroll">Infobox</a><a href="#landingLinks" class="styleguide__navigationItem___3_fiN js-scroll">Landing-links</a><a href="#landingPromo" class="styleguide__navigationItem___3_fiN js-scroll">Landing-promo</a><a href="#linkList" class="styleguide__navigationItem___3_fiN js-scroll">Link-list</a><a href="#listing" class="styleguide__navigationItem___3_fiN js-scroll">Listing</a><a href="#navigation" class="styleguide__navigationItem___3_fiN js-scroll">Navigation</a><a href="#pagination" class="styleguide__navigationItem___3_fiN js-scroll">Pagination</a><a href="#promo" class="styleguide__navigationItem___3_fiN js-scroll">Promo</a><a href="#share" class="styleguide__navigationItem___3_fiN js-scroll">Share</a>
             </div>
           </aside>
           <main class="styleguide__layout__content___1yeYf styleguide__main___1vvRi">
@@ -14691,7 +14699,7 @@ section{
 <li>The coding style and approaches to development</li>
 <li>Visual examples of the components and colours used</li>
 </ul>
-<p>Many of the components have been built in isolation, with CSS and JS tightly coupled with the HTML. Where this is the case, you can see the corresponding CSS and JS for that component by clicking on the respective tab. Where this is not available in this document, it can be found by searching for the related classes and IDs throughout the codebase.</p>
+<p>Many of the components have been built in isolation, with CSS and JS tightly coupled with the HTML. Where this is the case, you can see the corresponding CSS and JS for that component by clicking on the respective tab. Where this is not the case, try inspecting the element in devtools to see where any styles have cascaded from.</p>
 <p>This style guide is best viewed at desktop resolutions (&gt;1000px). Since the actual site is served by a Drupal backend, and this style guide is a static html file, some component functionalities (such as form submissions, links etc) are restricted.</p>
 </div>
 </article>
@@ -14702,7 +14710,7 @@ section{
   </header>
   
   <div class="styleguide__item__content___iDzu-"><h2 id="requirements">Requirements</h2>
-<p>FSA Theme uses ES6 features, so it is recommended to have a recent version of <a href="https://nodejs.org/">Node.js</a> installed globally (v5.0 minimum required, for <code>package-lock.json</code> support). <a href="https://nodejs.org/">Node.js</a> is the only global requirement as this project uses <a href="https://webpack.js.org/">Webpack</a> in lieu of task runners.</p>
+<p>FSA Theme uses ES6 features, so it is recommended to have a recent version of <a href="https://nodejs.org/">Node.js</a> installed globally (v5.0 minimum required, for <code>package-lock.json</code> support). Node.js is the only global requirement as this project uses <a href="https://webpack.js.org/">Webpack</a> in lieu of task runners.</p>
 <h2 id="installation">Installation</h2>
 <p>To get the started with theming, complete the following steps:</p>
 <ol>
@@ -15153,16 +15161,21 @@ Plugin documentation:
   </div>
 </div></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-breadcrumb" data-corresponding-code="code-form-breadcrumb">
+    <label for="show-code-breadcrumb">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-72bb27c2-b872-4acd-}c655-541f763bec03" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-72bb27c2-b872-4acd-}c655-541f763bec03" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-72bb27c2-b872-4acd-}c655-541f763bec03" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-breadcrumb hidden" role="region">
+
+    <input name="info-input" id="tabHTML-d1a7e012-d8de-98a3-}92cf-f08b9a6a36c0" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-d1a7e012-d8de-98a3-}92cf-f08b9a6a36c0" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-d1a7e012-d8de-98a3-}92cf-f08b9a6a36c0" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-72bb27c2-b872-4acd-}c655-541f763bec03" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-72bb27c2-b872-4acd-}c655-541f763bec03" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-72bb27c2-b872-4acd-}c655-541f763bec03" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-d1a7e012-d8de-98a3-}92cf-f08b9a6a36c0" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-d1a7e012-d8de-98a3-}92cf-f08b9a6a36c0" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-d1a7e012-d8de-98a3-}92cf-f08b9a6a36c0" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -15187,7 +15200,7 @@ Plugin documentation:
       </div>
 
       <div class="styleguide__item__tabCode___ofaNu styleguide__item__css___3ALxg" role="tabpanel">
-        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- css"><br>/* No component-specific CSS required. */</code></pre>
+        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- css"><br>/* No component-specific CSS required, but inspecting via devtools will reveal where styles have cascaded from. */</code></pre>
       </div>
 
       <div class="styleguide__item__tabCode___ofaNu styleguide__item__js___3IO7y" role="tabpanel">
@@ -15207,16 +15220,21 @@ Plugin documentation:
   <a href="#button" class="button">All news</a>
 </div></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-button" data-corresponding-code="code-form-button">
+    <label for="show-code-button">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-7cf04207-854c-4e90-}7ab5-48bd33adbaf6" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-7cf04207-854c-4e90-}7ab5-48bd33adbaf6" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-7cf04207-854c-4e90-}7ab5-48bd33adbaf6" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-button hidden" role="region">
+
+    <input name="info-input" id="tabHTML-08cdf1af-b92f-7763-}18e6-c90d03be403f" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-08cdf1af-b92f-7763-}18e6-c90d03be403f" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-08cdf1af-b92f-7763-}18e6-c90d03be403f" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-7cf04207-854c-4e90-}7ab5-48bd33adbaf6" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-7cf04207-854c-4e90-}7ab5-48bd33adbaf6" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-7cf04207-854c-4e90-}7ab5-48bd33adbaf6" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-08cdf1af-b92f-7763-}18e6-c90d03be403f" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-08cdf1af-b92f-7763-}18e6-c90d03be403f" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-08cdf1af-b92f-7763-}18e6-c90d03be403f" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -15227,7 +15245,450 @@ Plugin documentation:
       </div>
 
       <div class="styleguide__item__tabCode___ofaNu styleguide__item__css___3ALxg" role="tabpanel">
-        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- css"><br>/* No component-specific CSS required. */</code></pre>
+        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- css"><br>/* No component-specific CSS required, but inspecting via devtools will reveal where styles have cascaded from. */</code></pre>
+      </div>
+
+      <div class="styleguide__item__tabCode___ofaNu styleguide__item__js___3IO7y" role="tabpanel">
+        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- js"><br>// No component-specific JavaScript required.</code></pre>
+      </div>
+    </div>
+
+  </form>
+</article>
+<article class="styleguide__item___28nPp" id="contactLinks">
+  <header class="styleguide__item__header___2u3FN">
+    <h3 class="styleguide__item__title___2gjuP">Contact-links</h3>
+    <p class="styleguide__item__description___34e69"></p>
+  </header>
+
+  <div class="styleguide__item__element___3qaWj"><div class="layout__content layout__content--main  js-content">
+  <div>
+    <article role="article" about="/contact/consumers/report-problem">
+      <div>
+        <div class="field field__field_liftups">
+          <div class="field__field_liftups__item field__field_liftups__item--even">
+            <div class="paragraph paragraph--type-liftups paragraph--view-mode--default">
+              <div class="field field__field_content_reference">
+                <div class="field__field_content_reference__item field__field_content_reference__item--even">
+                  <a href="#contact-links" rel="bookmark" class="promo promo--inline-content promo--with-summary"
+                    data-ytta-id="-">
+                    <div class="promo__icon">
+                      <div>
+                        <div class="field field__field_icon_ref">
+                          <div class="svg" aria-hidden="true">
+                            <svg width="100" height="100" class="icon icon--food-poisoning" role="presentation" viewBox="0 0 50 50">
+
+                              <defs>
+                                <style>
+                                  .\35 92db083-d581-4bca-92e4-66d94fe8b556 {
+                                    fill: none;
+                                  }
+                                </style>
+                              </defs>
+                              <title>food-poisoning</title>
+                              <g id="3d3749f9-0345-4622-b868-c3e3d05c6e55" data-name="suspected-food-poisoning">
+                                <rect class="592db083-d581-4bca-92e4-66d94fe8b556" width="50" height="50"></rect>
+                                <path d="M23,49.5a2.94,2.94,0,0,1-1.17-.25,31.55,31.55,0,0,1-8.27-5.1,21.05,21.05,0,0,1-1.66-1.64,18.09,18.09,0,0,1-1.16-1.41A15.72,15.72,0,0,1,7.5,31.56a21.33,21.33,0,0,1,2.83-10.18,25.94,25.94,0,0,1,2.81-4.2,2.94,2.94,0,0,1,2.23-1,3,3,0,0,1,.48,0,11,11,0,0,0,17.94,0,2.92,2.92,0,0,1,2.53.82,25.8,25.8,0,0,1,3,3.81A17.35,17.35,0,0,1,42.5,30a11.12,11.12,0,0,1-3.24,7.84q-.39.4-.82.78a17.08,17.08,0,0,1-2.25,1.66,28.4,28.4,0,0,1-7.31,3.06,2.86,2.86,0,0,1-.79.11,3,3,0,0,1-2.83-2.16,3,3,0,0,1,.89-3,2.85,2.85,0,0,1,1.15-.63C31.8,36.35,34,34.78,35,33.69l.23-.27c.11-.13.22-.27.32-.39a.5.5,0,0,0-.64-.74l-.44.25a35.58,35.58,0,0,1-7.72,3.28,4.72,4.72,0,0,0-1.24.55,4.84,4.84,0,0,0-2.23,3.49,4.7,4.7,0,0,0,0,1.18,5.42,5.42,0,0,0,.09.54,21.09,21.09,0,0,1-7.35-5.73c-.44-.48-.84-.91-1.2-1.27a.5.5,0,0,0-.35-.14.5.5,0,0,0-.47.68,10.57,10.57,0,0,0,1.36,2.45c1.68,2.27,4.43,4.29,8.2,6l.52.24a2.94,2.94,0,0,1,1.26,1.06,3,3,0,0,1,.26,2.84,3.09,3.09,0,0,1-.26.47A3,3,0,0,1,23,49.5Zm-.34-30.28a9.64,9.64,0,0,0,9.7-3.34,9.69,9.69,0,1,0-15,0,9.61,9.61,0,0,0,5.3,3.34ZM31,9a1,1,0,0,1-1,1,4,4,0,0,1-4-4,1,1,0,0,1,2,0,2,2,0,0,0,2,2A1,1,0,0,1,31,9ZM20,10a1,1,0,0,1,0-2,2,2,0,0,0,2-2,1,1,0,0,1,2,0A4,4,0,0,1,20,10Zm10.5,4a.5.5,0,0,1-1,0,.5.5,0,0,0-1,0,1.5,1.5,0,0,1-3,0,.5.5,0,0,0-1,0,1.5,1.5,0,0,1-3,0,.5.5,0,0,0-1,0,.5.5,0,0,1-1,0,1.5,1.5,0,0,1,3,0,.5.5,0,0,0,1,0,1.5,1.5,0,0,1,3,0,.5.5,0,0,0,1,0,1.5,1.5,0,0,1,3,0Z"></path>
+                              </g>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="promo__content">
+                      <header class="promo__header">
+                        <h4 class="promo__heading">Suspected food poisoning</h4>
+                      </header>
+                      <div class="promo__intro">
+                        <div class="field field__field_liftup_summary">Report suspected food poisoning from a restaurant, takeaway or food shop</div>
+                      </div>
+                    </div>
+                    <div class="promo__read-more" aria-hidden="true">
+                      <div class="svg">
+                        <svg role="presentation" viewBox="0 0 41 30">
+                          <g fill="#007C75" fill-rule="evenodd">
+                            <path d="M0 16.464h34.597V12H0z"></path>
+                            <path d="M25.126 29.912L22 26.786l11.832-11.83L22 3.126 25.126 0 40.08 14.956z"></path>
+                          </g>
+                        </svg>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <div class="field__field_content_reference__item field__field_content_reference__item--odd">
+                  <a href="#contact-links" rel="bookmark" class="promo promo--inline-content promo--with-summary"
+                    data-ytta-id="-">
+                    <div class="promo__icon">
+                      <div>
+                        <div class="field field__field_icon_ref">
+                          <div class="svg" aria-hidden="true">
+                            <svg width="100" height="100" class="icon icon--food-product" role="presentation" viewBox="0 0 50 50">
+
+                              <defs>
+                                <style>
+                                  .\32 4329348-4b9a-4158-b8f6-9522361231a2 {
+                                    fill: none;
+                                  }
+                                </style>
+                              </defs>
+                              <title>food-product</title>
+                              <g id="5f798f5c-e67a-4cf2-b87a-f811eabc85d4" data-name="food-product">
+                                <rect class="24329348-4b9a-4158-b8f6-9522361231a2" width="50" height="50"></rect>
+                                <path d="M23.89,17l2.17-2.17A68.51,68.51,0,0,1,38,5.33C40.09,4,43.78,1.87,45.14,2a3.18,3.18,0,0,1,1.93.92h0a3.19,3.19,0,0,1,0,4.51L30.72,23.79Zm-7.06,7.06-.54.54a3.19,3.19,0,0,0,0,4.51l0,0L2.93,42.56a3.19,3.19,0,0,0,4.51,4.51L23.66,30.84Zm3.08-12.51L10.6,2.29a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l8.65,8.6h0a.62.62,0,0,1,0,.88.63.63,0,0,1-.88,0h0L8.3,4.57a1,1,0,0,0-1.42,0A1,1,0,0,0,6.89,6l8.65,8.6h0a.62.62,0,0,1,0,.88.63.63,0,0,1-.88,0h0L6,6.86a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l8.65,8.6h0a.62.62,0,0,1,0,.88.63.63,0,0,1-.88,0h0L3.71,9.14a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.41L11.6,19.8l.05,0,0,0a5.9,5.9,0,0,0,5.37,1.58L42.88,47.13a3,3,0,0,0,4.24,0,3,3,0,0,0,0-4.22L21.47,17.41A5.81,5.81,0,0,0,20,11.64l-.05,0,0-.05Z"></path>
+                              </g>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="promo__content">
+                      <header class="promo__header">
+                        <h4 class="promo__heading">Food product</h4>
+                      </header>
+                      <div class="promo__intro">
+                        <div class="field field__field_liftup_summary">Report a problem with food that you've bought to the local authority.</div>
+                      </div>
+                    </div>
+                    <div class="promo__read-more" aria-hidden="true">
+                      <div class="svg">
+                        <svg role="presentation" viewBox="0 0 41 30">
+                          <g fill="#007C75" fill-rule="evenodd">
+                            <path d="M0 16.464h34.597V12H0z"></path>
+                            <path d="M25.126 29.912L22 26.786l11.832-11.83L22 3.126 25.126 0 40.08 14.956z"></path>
+                          </g>
+                        </svg>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <div class="field__field_content_reference__item field__field_content_reference__item--even">
+                  <a href="#contact-links" rel="bookmark" class="promo promo--inline-content promo--with-summary"
+                    data-ytta-id="-">
+                    <div class="promo__icon">
+                      <div class="teaser__content">
+                        <div class="field field__field_icon_ref">
+                          <div class="svg" aria-hidden="true">
+                            <svg width="100" height="100" class="icon icon--labelling" role="presentation" viewBox="0 0 50 50">
+                              <defs>
+                                <style>
+                                  .c3446752-8497-443a-b19e-d0d1acdf5040 {
+                                    fill: none;
+                                  }
+                                </style>
+                              </defs>
+                              <title>labelling</title>
+                              <g id="f54d2c58-39b7-4a59-a120-0213d307b2c5" data-name="product-labelling">
+                                <rect class="c3446752-8497-443a-b19e-d0d1acdf5040" width="50" height="50"></rect>
+                                <path d="M38,12h0a1,1,0,0,1,0-1.4l8.39-8.39a1,1,0,0,1,1.4,0h0a1,1,0,0,1,0,1.4L39.44,12A1,1,0,0,1,38,12ZM45,7.84l-4,4A3,3,0,1,1,38.19,9l4-4A11.4,11.4,0,0,0,27.21,6L2.4,30.83a1,1,0,0,0,0,1.4L17.77,47.6a1,1,0,0,0,1.4,0L44,22.79A11.4,11.4,0,0,0,45,7.84ZM25.46,32.93l-8.39-8.39a1,1,0,0,1,0-1.4h0a1,1,0,0,1,1.4,0l8.39,8.39a1,1,0,0,1,0,1.4h0A1,1,0,0,1,25.46,32.93Zm-2.8,2.8-8.39-8.39a1,1,0,0,1,0-1.4h0a1,1,0,0,1,1.4,0l8.39,8.39a1,1,0,0,1,0,1.4h0A1,1,0,0,1,22.67,35.72Zm-2.8,2.8-8.39-8.39a1,1,0,0,1,0-1.4h0a1,1,0,0,1,1.4,0l8.39,8.39a1,1,0,0,1,0,1.4h0A1,1,0,0,1,19.87,38.52Z"></path>
+                              </g>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="promo__content">
+                      <header class="promo__header">
+                        <h4 class="promo__heading">Product labelling</h4>
+                      </header>
+                      <div class="promo__intro">
+                        <div class="field field__field_liftup_summary">Report a problem with misleading or incorrect food product labelling</div>
+
+                      </div>
+                    </div>
+                    <div class="promo__read-more" aria-hidden="true">
+                      <div class="svg">
+                        <svg role="presentation" viewBox="0 0 41 30">
+                          <g fill="#007C75" fill-rule="evenodd">
+                            <path d="M0 16.464h34.597V12H0z"></path>
+                            <path d="M25.126 29.912L22 26.786l11.832-11.83L22 3.126 25.126 0 40.08 14.956z"></path>
+                          </g>
+                        </svg>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <div class="field__field_content_reference__item field__field_content_reference__item--odd">
+                  <a href="#contact-links" rel="bookmark" class="promo promo--inline-content promo--with-summary"
+                    data-ytta-id="-">
+                    <div class="promo__icon">
+                      <div>
+                        <div class="field field__field_icon_ref">
+                          <div class="svg" aria-hidden="true">
+                            <svg width="100" height="100" class="icon icon--hygiene" role="presentation" viewBox="0 0 50 50">
+
+                              <defs>
+                                <style>
+                                  .\38 abaf986-6f1c-4842-99d1-4cc98e10fa08 {
+                                    fill: none;
+                                  }
+                                </style>
+                              </defs>
+                              <title>hygiene</title>
+                              <g id="8831b2b3-72e2-4fca-b792-e9cb78df947a" data-name="poor-hygiene-practices">
+                                <rect class="8abaf986-6f1c-4842-99d1-4cc98e10fa08" width="50" height="50"></rect>
+                                <path d="M22,20.33a.44.44,0,0,0,0,.34,1.22,1.22,0,0,1,.07,1l0,.06a2.7,2.7,0,0,0-1,.44,1.26,1.26,0,0,1-.73-.58l0-.06a.45.45,0,0,0-.61-.17.44.44,0,0,0-.17.6l0,.06a2.12,2.12,0,0,0,.86.84A2.66,2.66,0,0,0,20,24a1.27,1.27,0,0,1-.82-.11l-.06,0a.45.45,0,0,0-.44,0,.44.44,0,0,0,0,.77l.06,0a2.16,2.16,0,0,0,1.26.21,2.67,2.67,0,0,0,.49,1.08,1.24,1.24,0,0,1-.75.47h-.06a.44.44,0,0,0-.35.52.45.45,0,0,0,.53.34H20a2.16,2.16,0,0,0,1.19-.7l.78.75a1.24,1.24,0,0,1-.5.8l-.05,0a.44.44,0,0,0-.2.29.44.44,0,0,0,.08.34.45.45,0,0,0,.65.08l.05,0A2.12,2.12,0,0,0,22.7,28a2.74,2.74,0,0,0,1.11.41,1.22,1.22,0,0,1,.06,1l0,.06a.44.44,0,0,0,.27.57.45.45,0,0,0,.57-.27l0-.06a2.11,2.11,0,0,0,0-1.3,2.71,2.71,0,0,0,1-.41,2.16,2.16,0,0,0,1.17.75.45.45,0,0,0,.35,0A.44.44,0,0,0,27.4,28a.45.45,0,0,0-.29-.2,1.24,1.24,0,0,1-.74-.5,2.67,2.67,0,0,0,.48-1.11,2.18,2.18,0,0,0,1.34-.05.45.45,0,0,0,.28-.23.44.44,0,0,0,0-.36.44.44,0,0,0-.25-.25.45.45,0,0,0-.36,0,1.26,1.26,0,0,1-1-.06h0a2.67,2.67,0,0,0-.45-1.07,2.13,2.13,0,0,0,.9-.82.44.44,0,0,0-.16-.61.45.45,0,0,0-.61.16,1.25,1.25,0,0,1-.79.58l-.87-.83a2.11,2.11,0,0,0,.51-1.29.44.44,0,0,0-.12-.32.45.45,0,0,0-.31-.14.45.45,0,0,0-.46.43,1.23,1.23,0,0,1-.29.75A2.74,2.74,0,0,0,23,21.66a2.1,2.1,0,0,0-.21-1.41.45.45,0,0,0-.82.08Zm14.19-6.85a.44.44,0,0,0-.34,0,1.22,1.22,0,0,1-1,.07l-.06,0a2.7,2.7,0,0,0-.44-1,1.26,1.26,0,0,1,.58-.73l.06,0a.45.45,0,0,0,.17-.61.44.44,0,0,0-.6-.17l-.06,0a2.12,2.12,0,0,0-.84.86,2.66,2.66,0,0,0-1.13-.43,1.27,1.27,0,0,1,.11-.82l0-.06a.45.45,0,0,0,0-.44.44.44,0,0,0-.77,0l0,.06a2.16,2.16,0,0,0-.21,1.26,2.67,2.67,0,0,0-1.08.49,1.24,1.24,0,0,1-.47-.75v-.06a.44.44,0,0,0-.52-.35.45.45,0,0,0-.34.53v.06h0a2.16,2.16,0,0,0,.7,1.19l-.75.78a1.24,1.24,0,0,1-.8-.5l0-.05a.44.44,0,0,0-.29-.2.44.44,0,0,0-.34.08.45.45,0,0,0-.08.65l0,.05a2.12,2.12,0,0,0,.89.72,2.74,2.74,0,0,0-.41,1.11,1.22,1.22,0,0,1-1,.06l-.06,0a.44.44,0,0,0-.57.27.45.45,0,0,0,.27.57l.06,0a2.11,2.11,0,0,0,1.3,0,2.71,2.71,0,0,0,.41,1,2.16,2.16,0,0,0-.75,1.17.45.45,0,0,0,0,.35.44.44,0,0,0,.62.15.45.45,0,0,0,.2-.29,1.24,1.24,0,0,1,.5-.74,2.67,2.67,0,0,0,1.11.48,2.18,2.18,0,0,0,.05,1.34.45.45,0,0,0,.23.28A.44.44,0,0,0,31,20a.44.44,0,0,0,.25-.25.45.45,0,0,0,0-.36,1.26,1.26,0,0,1,.06-1v0h0a2.67,2.67,0,0,0,1.07-.45,2.13,2.13,0,0,0,.82.9.44.44,0,0,0,.61-.16.45.45,0,0,0-.16-.61,1.25,1.25,0,0,1-.58-.79l.83-.87a2.11,2.11,0,0,0,1.29.51.44.44,0,0,0,.32-.12.45.45,0,0,0,.14-.31.45.45,0,0,0-.43-.46,1.23,1.23,0,0,1-.75-.29,2.74,2.74,0,0,0,.41-1.18,2.1,2.1,0,0,0,1.41-.21.45.45,0,0,0-.08-.82ZM22.74,3.65a.44.44,0,0,0-.21.26,1.22,1.22,0,0,1-.65.75l-.06,0a2.7,2.7,0,0,0-1-.37,1.26,1.26,0,0,1-.1-.93l0-.06a.45.45,0,0,0-.31-.55.44.44,0,0,0-.55.3l0,.06a2.12,2.12,0,0,0,0,1.2,2.66,2.66,0,0,0-1.1.49,1.27,1.27,0,0,1-.51-.66l0-.06a.45.45,0,0,0-.33-.3.44.44,0,0,0-.52.57l0,.06a2.16,2.16,0,0,0,.75,1,2.67,2.67,0,0,0-.42,1.12,1.24,1.24,0,0,1-.86-.19l-.06,0a.44.44,0,0,0-.62.12.45.45,0,0,0,.13.62l.05,0h0a2.16,2.16,0,0,0,1.34.35l0,1.08a1.24,1.24,0,0,1-.92.21h-.07a.44.44,0,0,0-.35.06.44.44,0,0,0-.19.3.45.45,0,0,0,.4.52h.07a2.12,2.12,0,0,0,1.14-.12,2.74,2.74,0,0,0,.5,1.07,1.22,1.22,0,0,1-.64.73l-.06,0a.44.44,0,0,0-.21.59.45.45,0,0,0,.6.21l.06,0a2.11,2.11,0,0,0,.94-.89,2.71,2.71,0,0,0,1,.39,2.16,2.16,0,0,0,.3,1.35.45.45,0,0,0,.28.22.44.44,0,0,0,.55-.33.45.45,0,0,0-.07-.34,1.24,1.24,0,0,1-.17-.88A2.67,2.67,0,0,0,22,11.22a2.18,2.18,0,0,0,1,.91.45.45,0,0,0,.36,0,.44.44,0,0,0,.27-.24.44.44,0,0,0,0-.36.45.45,0,0,0-.26-.25,1.26,1.26,0,0,1-.67-.75v0h0a2.67,2.67,0,0,0,.44-1.07,2.13,2.13,0,0,0,1.22.06A.44.44,0,0,0,24.68,9a.45.45,0,0,0-.55-.32,1.25,1.25,0,0,1-1-.15l0-1.2a2.11,2.11,0,0,0,1.28-.56.44.44,0,0,0,.14-.31.45.45,0,0,0-.12-.32.45.45,0,0,0-.63,0,1.23,1.23,0,0,1-.74.32,2.74,2.74,0,0,0-.54-1.12,2.1,2.1,0,0,0,.85-1.14.45.45,0,0,0-.64-.53ZM13.32,47.15a4.12,4.12,0,0,0-1.79-2.49L7.62,41.9a3.06,3.06,0,0,1-1.39-2l-4-14.3a4.72,4.72,0,0,1,.19-3.52l6-14.9a3,3,0,0,1,2.38,1.66c.83,1.67.82,5.4-3.43,13.08a3.76,3.76,0,0,0-.25,3.44c.7,2.57,1.37,5,2.24,7.39a4.59,4.59,0,0,0,1.76,2.23.51.51,0,0,0,.7-.09.65.65,0,0,0,0-.71,1.24,1.24,0,0,0-.27-.31,3.81,3.81,0,0,1-1.13-1.64C9.69,29.81,9,27.5,8.29,25a3.43,3.43,0,0,1,.31-2.84A17.4,17.4,0,0,1,10,19.82c1-1.82,1.67-.13,2,1a29.45,29.45,0,0,1,1.06,5.26,5.11,5.11,0,0,0,1.34,3.13l4.27,4.24A4.2,4.2,0,0,1,20,36.1ZM30,36.1a4.2,4.2,0,0,1,1.35-2.61l4.27-4.24a5.11,5.11,0,0,0,1.34-3.13A29.45,29.45,0,0,1,38,20.86c.37-1.17,1-2.86,2-1a17.4,17.4,0,0,1,1.35,2.34A3.43,3.43,0,0,1,41.71,25c-.69,2.5-1.4,4.81-2.2,7.2a3.81,3.81,0,0,1-1.13,1.64,1.24,1.24,0,0,0-.27.31.65.65,0,0,0,0,.71.51.51,0,0,0,.7.09,4.59,4.59,0,0,0,1.76-2.23c.87-2.43,1.54-4.82,2.24-7.39a3.76,3.76,0,0,0-.25-3.44c-4.25-7.68-4.26-11.41-3.43-13.08a3,3,0,0,1,2.38-1.66l6,14.9a4.72,4.72,0,0,1,.19,3.52l-4,14.3a3.06,3.06,0,0,1-1.39,2l-3.9,2.77a4.12,4.12,0,0,0-1.79,2.49Z"></path>
+                              </g>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="promo__content">
+                      <header class="promo__header">
+                        <h4 class="promo__heading">Poor hygiene practices</h4>
+                      </header>
+                      <div class="promo__intro">
+                        <div class="field field__field_liftup_summary">Report poor hygiene practices in a restaurant or food shop</div>
+                      </div>
+                    </div>
+                    <div class="promo__read-more" aria-hidden="true">
+                      <div class="svg">
+                        <svg role="presentation" viewBox="0 0 41 30">
+                          <g fill="#007C75" fill-rule="evenodd">
+                            <path d="M0 16.464h34.597V12H0z"></path>
+                            <path d="M25.126 29.912L22 26.786l11.832-11.83L22 3.126 25.126 0 40.08 14.956z"></path>
+                          </g>
+                        </svg>
+                      </div>
+                    </div>
+                  </a>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+</div>
+
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-contactLinks" data-corresponding-code="code-form-contactLinks">
+    <label for="show-code-contactLinks">Show code?</label>
+  </form>
+
+  <form class="styleguide__item__code___3rQWa code-form code-form-contactLinks hidden" role="region">
+
+    <input name="info-input" id="tabHTML-1420a865-bf94-a811-}3587-4b36d8d24d42" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-1420a865-bf94-a811-}3587-4b36d8d24d42" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-1420a865-bf94-a811-}3587-4b36d8d24d42" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+
+    <div class="styleguide__item__tabList___1KcXt" role="tablist">
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-1420a865-bf94-a811-}3587-4b36d8d24d42" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-1420a865-bf94-a811-}3587-4b36d8d24d42" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-1420a865-bf94-a811-}3587-4b36d8d24d42" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+    </div>
+
+    <div class="styleguide__item__tabContent___10uG2">
+      <div class="styleguide__item__tabCode___ofaNu styleguide__item__html___22enY" role="tabpanel">
+        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- html">&lt;div class="layout__content layout__content--main  js-content"&gt;
+  &lt;div&gt;
+    &lt;article role="article" about="/contact/consumers/report-problem"&gt;
+      &lt;div&gt;
+        &lt;div class="field field__field_liftups"&gt;
+          &lt;div class="field__field_liftups__item field__field_liftups__item--even"&gt;
+            &lt;div class="paragraph paragraph--type-liftups paragraph--view-mode--default"&gt;
+              &lt;div class="field field__field_content_reference"&gt;
+                &lt;div class="field__field_content_reference__item field__field_content_reference__item--even"&gt;
+                  &lt;a href="#contact-links" rel="bookmark" class="promo promo--inline-content promo--with-summary"
+                    data-ytta-id="-"&gt;
+                    &lt;div class="promo__icon"&gt;
+                      &lt;div&gt;
+                        &lt;div class="field field__field_icon_ref"&gt;
+                          &lt;div class="svg" aria-hidden="true"&gt;
+                            &lt;svg width="100" height="100" class="icon icon--food-poisoning" role="presentation" viewBox="0 0 50 50"&gt;
+
+                              &lt;defs&gt;
+                                &lt;style&gt;
+                                  .\35 92db083-d581-4bca-92e4-66d94fe8b556 {
+                                    fill: none;
+                                  }
+                                &lt;/style&gt;
+                              &lt;/defs&gt;
+                              &lt;title&gt;food-poisoning&lt;/title&gt;
+                              &lt;g id="3d3749f9-0345-4622-b868-c3e3d05c6e55" data-name="suspected-food-poisoning"&gt;
+                                &lt;rect class="592db083-d581-4bca-92e4-66d94fe8b556" width="50" height="50"&gt;&lt;/rect&gt;
+                                &lt;path d="M23,49.5a2.94,2.94,0,0,1-1.17-.25,31.55,31.55,0,0,1-8.27-5.1,21.05,21.05,0,0,1-1.66-1.64,18.09,18.09,0,0,1-1.16-1.41A15.72,15.72,0,0,1,7.5,31.56a21.33,21.33,0,0,1,2.83-10.18,25.94,25.94,0,0,1,2.81-4.2,2.94,2.94,0,0,1,2.23-1,3,3,0,0,1,.48,0,11,11,0,0,0,17.94,0,2.92,2.92,0,0,1,2.53.82,25.8,25.8,0,0,1,3,3.81A17.35,17.35,0,0,1,42.5,30a11.12,11.12,0,0,1-3.24,7.84q-.39.4-.82.78a17.08,17.08,0,0,1-2.25,1.66,28.4,28.4,0,0,1-7.31,3.06,2.86,2.86,0,0,1-.79.11,3,3,0,0,1-2.83-2.16,3,3,0,0,1,.89-3,2.85,2.85,0,0,1,1.15-.63C31.8,36.35,34,34.78,35,33.69l.23-.27c.11-.13.22-.27.32-.39a.5.5,0,0,0-.64-.74l-.44.25a35.58,35.58,0,0,1-7.72,3.28,4.72,4.72,0,0,0-1.24.55,4.84,4.84,0,0,0-2.23,3.49,4.7,4.7,0,0,0,0,1.18,5.42,5.42,0,0,0,.09.54,21.09,21.09,0,0,1-7.35-5.73c-.44-.48-.84-.91-1.2-1.27a.5.5,0,0,0-.35-.14.5.5,0,0,0-.47.68,10.57,10.57,0,0,0,1.36,2.45c1.68,2.27,4.43,4.29,8.2,6l.52.24a2.94,2.94,0,0,1,1.26,1.06,3,3,0,0,1,.26,2.84,3.09,3.09,0,0,1-.26.47A3,3,0,0,1,23,49.5Zm-.34-30.28a9.64,9.64,0,0,0,9.7-3.34,9.69,9.69,0,1,0-15,0,9.61,9.61,0,0,0,5.3,3.34ZM31,9a1,1,0,0,1-1,1,4,4,0,0,1-4-4,1,1,0,0,1,2,0,2,2,0,0,0,2,2A1,1,0,0,1,31,9ZM20,10a1,1,0,0,1,0-2,2,2,0,0,0,2-2,1,1,0,0,1,2,0A4,4,0,0,1,20,10Zm10.5,4a.5.5,0,0,1-1,0,.5.5,0,0,0-1,0,1.5,1.5,0,0,1-3,0,.5.5,0,0,0-1,0,1.5,1.5,0,0,1-3,0,.5.5,0,0,0-1,0,.5.5,0,0,1-1,0,1.5,1.5,0,0,1,3,0,.5.5,0,0,0,1,0,1.5,1.5,0,0,1,3,0,.5.5,0,0,0,1,0,1.5,1.5,0,0,1,3,0Z"&gt;&lt;/path&gt;
+                              &lt;/g&gt;
+                            &lt;/svg&gt;
+                          &lt;/div&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="promo__content"&gt;
+                      &lt;header class="promo__header"&gt;
+                        &lt;h4 class="promo__heading"&gt;Suspected food poisoning&lt;/h4&gt;
+                      &lt;/header&gt;
+                      &lt;div class="promo__intro"&gt;
+                        &lt;div class="field field__field_liftup_summary"&gt;Report suspected food poisoning from a restaurant, takeaway or food shop&lt;/div&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="promo__read-more" aria-hidden="true"&gt;
+                      &lt;div class="svg"&gt;
+                        &lt;svg role="presentation" viewBox="0 0 41 30"&gt;
+                          &lt;g fill="#007C75" fill-rule="evenodd"&gt;
+                            &lt;path d="M0 16.464h34.597V12H0z"&gt;&lt;/path&gt;
+                            &lt;path d="M25.126 29.912L22 26.786l11.832-11.83L22 3.126 25.126 0 40.08 14.956z"&gt;&lt;/path&gt;
+                          &lt;/g&gt;
+                        &lt;/svg&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/a&gt;
+                &lt;/div&gt;
+                &lt;div class="field__field_content_reference__item field__field_content_reference__item--odd"&gt;
+                  &lt;a href="#contact-links" rel="bookmark" class="promo promo--inline-content promo--with-summary"
+                    data-ytta-id="-"&gt;
+                    &lt;div class="promo__icon"&gt;
+                      &lt;div&gt;
+                        &lt;div class="field field__field_icon_ref"&gt;
+                          &lt;div class="svg" aria-hidden="true"&gt;
+                            &lt;svg width="100" height="100" class="icon icon--food-product" role="presentation" viewBox="0 0 50 50"&gt;
+
+                              &lt;defs&gt;
+                                &lt;style&gt;
+                                  .\32 4329348-4b9a-4158-b8f6-9522361231a2 {
+                                    fill: none;
+                                  }
+                                &lt;/style&gt;
+                              &lt;/defs&gt;
+                              &lt;title&gt;food-product&lt;/title&gt;
+                              &lt;g id="5f798f5c-e67a-4cf2-b87a-f811eabc85d4" data-name="food-product"&gt;
+                                &lt;rect class="24329348-4b9a-4158-b8f6-9522361231a2" width="50" height="50"&gt;&lt;/rect&gt;
+                                &lt;path d="M23.89,17l2.17-2.17A68.51,68.51,0,0,1,38,5.33C40.09,4,43.78,1.87,45.14,2a3.18,3.18,0,0,1,1.93.92h0a3.19,3.19,0,0,1,0,4.51L30.72,23.79Zm-7.06,7.06-.54.54a3.19,3.19,0,0,0,0,4.51l0,0L2.93,42.56a3.19,3.19,0,0,0,4.51,4.51L23.66,30.84Zm3.08-12.51L10.6,2.29a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l8.65,8.6h0a.62.62,0,0,1,0,.88.63.63,0,0,1-.88,0h0L8.3,4.57a1,1,0,0,0-1.42,0A1,1,0,0,0,6.89,6l8.65,8.6h0a.62.62,0,0,1,0,.88.63.63,0,0,1-.88,0h0L6,6.86a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l8.65,8.6h0a.62.62,0,0,1,0,.88.63.63,0,0,1-.88,0h0L3.71,9.14a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.41L11.6,19.8l.05,0,0,0a5.9,5.9,0,0,0,5.37,1.58L42.88,47.13a3,3,0,0,0,4.24,0,3,3,0,0,0,0-4.22L21.47,17.41A5.81,5.81,0,0,0,20,11.64l-.05,0,0-.05Z"&gt;&lt;/path&gt;
+                              &lt;/g&gt;
+                            &lt;/svg&gt;
+                          &lt;/div&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="promo__content"&gt;
+                      &lt;header class="promo__header"&gt;
+                        &lt;h4 class="promo__heading"&gt;Food product&lt;/h4&gt;
+                      &lt;/header&gt;
+                      &lt;div class="promo__intro"&gt;
+                        &lt;div class="field field__field_liftup_summary"&gt;Report a problem with food that you've bought to the local authority.&lt;/div&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="promo__read-more" aria-hidden="true"&gt;
+                      &lt;div class="svg"&gt;
+                        &lt;svg role="presentation" viewBox="0 0 41 30"&gt;
+                          &lt;g fill="#007C75" fill-rule="evenodd"&gt;
+                            &lt;path d="M0 16.464h34.597V12H0z"&gt;&lt;/path&gt;
+                            &lt;path d="M25.126 29.912L22 26.786l11.832-11.83L22 3.126 25.126 0 40.08 14.956z"&gt;&lt;/path&gt;
+                          &lt;/g&gt;
+                        &lt;/svg&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/a&gt;
+                &lt;/div&gt;
+                &lt;div class="field__field_content_reference__item field__field_content_reference__item--even"&gt;
+                  &lt;a href="#contact-links" rel="bookmark" class="promo promo--inline-content promo--with-summary"
+                    data-ytta-id="-"&gt;
+                    &lt;div class="promo__icon"&gt;
+                      &lt;div class="teaser__content"&gt;
+                        &lt;div class="field field__field_icon_ref"&gt;
+                          &lt;div class="svg" aria-hidden="true"&gt;
+                            &lt;svg width="100" height="100" class="icon icon--labelling" role="presentation" viewBox="0 0 50 50"&gt;
+                              &lt;defs&gt;
+                                &lt;style&gt;
+                                  .c3446752-8497-443a-b19e-d0d1acdf5040 {
+                                    fill: none;
+                                  }
+                                &lt;/style&gt;
+                              &lt;/defs&gt;
+                              &lt;title&gt;labelling&lt;/title&gt;
+                              &lt;g id="f54d2c58-39b7-4a59-a120-0213d307b2c5" data-name="product-labelling"&gt;
+                                &lt;rect class="c3446752-8497-443a-b19e-d0d1acdf5040" width="50" height="50"&gt;&lt;/rect&gt;
+                                &lt;path d="M38,12h0a1,1,0,0,1,0-1.4l8.39-8.39a1,1,0,0,1,1.4,0h0a1,1,0,0,1,0,1.4L39.44,12A1,1,0,0,1,38,12ZM45,7.84l-4,4A3,3,0,1,1,38.19,9l4-4A11.4,11.4,0,0,0,27.21,6L2.4,30.83a1,1,0,0,0,0,1.4L17.77,47.6a1,1,0,0,0,1.4,0L44,22.79A11.4,11.4,0,0,0,45,7.84ZM25.46,32.93l-8.39-8.39a1,1,0,0,1,0-1.4h0a1,1,0,0,1,1.4,0l8.39,8.39a1,1,0,0,1,0,1.4h0A1,1,0,0,1,25.46,32.93Zm-2.8,2.8-8.39-8.39a1,1,0,0,1,0-1.4h0a1,1,0,0,1,1.4,0l8.39,8.39a1,1,0,0,1,0,1.4h0A1,1,0,0,1,22.67,35.72Zm-2.8,2.8-8.39-8.39a1,1,0,0,1,0-1.4h0a1,1,0,0,1,1.4,0l8.39,8.39a1,1,0,0,1,0,1.4h0A1,1,0,0,1,19.87,38.52Z"&gt;&lt;/path&gt;
+                              &lt;/g&gt;
+                            &lt;/svg&gt;
+                          &lt;/div&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="promo__content"&gt;
+                      &lt;header class="promo__header"&gt;
+                        &lt;h4 class="promo__heading"&gt;Product labelling&lt;/h4&gt;
+                      &lt;/header&gt;
+                      &lt;div class="promo__intro"&gt;
+                        &lt;div class="field field__field_liftup_summary"&gt;Report a problem with misleading or incorrect food product labelling&lt;/div&gt;
+
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="promo__read-more" aria-hidden="true"&gt;
+                      &lt;div class="svg"&gt;
+                        &lt;svg role="presentation" viewBox="0 0 41 30"&gt;
+                          &lt;g fill="#007C75" fill-rule="evenodd"&gt;
+                            &lt;path d="M0 16.464h34.597V12H0z"&gt;&lt;/path&gt;
+                            &lt;path d="M25.126 29.912L22 26.786l11.832-11.83L22 3.126 25.126 0 40.08 14.956z"&gt;&lt;/path&gt;
+                          &lt;/g&gt;
+                        &lt;/svg&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/a&gt;
+                &lt;/div&gt;
+                &lt;div class="field__field_content_reference__item field__field_content_reference__item--odd"&gt;
+                  &lt;a href="#contact-links" rel="bookmark" class="promo promo--inline-content promo--with-summary"
+                    data-ytta-id="-"&gt;
+                    &lt;div class="promo__icon"&gt;
+                      &lt;div&gt;
+                        &lt;div class="field field__field_icon_ref"&gt;
+                          &lt;div class="svg" aria-hidden="true"&gt;
+                            &lt;svg width="100" height="100" class="icon icon--hygiene" role="presentation" viewBox="0 0 50 50"&gt;
+
+                              &lt;defs&gt;
+                                &lt;style&gt;
+                                  .\38 abaf986-6f1c-4842-99d1-4cc98e10fa08 {
+                                    fill: none;
+                                  }
+                                &lt;/style&gt;
+                              &lt;/defs&gt;
+                              &lt;title&gt;hygiene&lt;/title&gt;
+                              &lt;g id="8831b2b3-72e2-4fca-b792-e9cb78df947a" data-name="poor-hygiene-practices"&gt;
+                                &lt;rect class="8abaf986-6f1c-4842-99d1-4cc98e10fa08" width="50" height="50"&gt;&lt;/rect&gt;
+                                &lt;path d="M22,20.33a.44.44,0,0,0,0,.34,1.22,1.22,0,0,1,.07,1l0,.06a2.7,2.7,0,0,0-1,.44,1.26,1.26,0,0,1-.73-.58l0-.06a.45.45,0,0,0-.61-.17.44.44,0,0,0-.17.6l0,.06a2.12,2.12,0,0,0,.86.84A2.66,2.66,0,0,0,20,24a1.27,1.27,0,0,1-.82-.11l-.06,0a.45.45,0,0,0-.44,0,.44.44,0,0,0,0,.77l.06,0a2.16,2.16,0,0,0,1.26.21,2.67,2.67,0,0,0,.49,1.08,1.24,1.24,0,0,1-.75.47h-.06a.44.44,0,0,0-.35.52.45.45,0,0,0,.53.34H20a2.16,2.16,0,0,0,1.19-.7l.78.75a1.24,1.24,0,0,1-.5.8l-.05,0a.44.44,0,0,0-.2.29.44.44,0,0,0,.08.34.45.45,0,0,0,.65.08l.05,0A2.12,2.12,0,0,0,22.7,28a2.74,2.74,0,0,0,1.11.41,1.22,1.22,0,0,1,.06,1l0,.06a.44.44,0,0,0,.27.57.45.45,0,0,0,.57-.27l0-.06a2.11,2.11,0,0,0,0-1.3,2.71,2.71,0,0,0,1-.41,2.16,2.16,0,0,0,1.17.75.45.45,0,0,0,.35,0A.44.44,0,0,0,27.4,28a.45.45,0,0,0-.29-.2,1.24,1.24,0,0,1-.74-.5,2.67,2.67,0,0,0,.48-1.11,2.18,2.18,0,0,0,1.34-.05.45.45,0,0,0,.28-.23.44.44,0,0,0,0-.36.44.44,0,0,0-.25-.25.45.45,0,0,0-.36,0,1.26,1.26,0,0,1-1-.06h0a2.67,2.67,0,0,0-.45-1.07,2.13,2.13,0,0,0,.9-.82.44.44,0,0,0-.16-.61.45.45,0,0,0-.61.16,1.25,1.25,0,0,1-.79.58l-.87-.83a2.11,2.11,0,0,0,.51-1.29.44.44,0,0,0-.12-.32.45.45,0,0,0-.31-.14.45.45,0,0,0-.46.43,1.23,1.23,0,0,1-.29.75A2.74,2.74,0,0,0,23,21.66a2.1,2.1,0,0,0-.21-1.41.45.45,0,0,0-.82.08Zm14.19-6.85a.44.44,0,0,0-.34,0,1.22,1.22,0,0,1-1,.07l-.06,0a2.7,2.7,0,0,0-.44-1,1.26,1.26,0,0,1,.58-.73l.06,0a.45.45,0,0,0,.17-.61.44.44,0,0,0-.6-.17l-.06,0a2.12,2.12,0,0,0-.84.86,2.66,2.66,0,0,0-1.13-.43,1.27,1.27,0,0,1,.11-.82l0-.06a.45.45,0,0,0,0-.44.44.44,0,0,0-.77,0l0,.06a2.16,2.16,0,0,0-.21,1.26,2.67,2.67,0,0,0-1.08.49,1.24,1.24,0,0,1-.47-.75v-.06a.44.44,0,0,0-.52-.35.45.45,0,0,0-.34.53v.06h0a2.16,2.16,0,0,0,.7,1.19l-.75.78a1.24,1.24,0,0,1-.8-.5l0-.05a.44.44,0,0,0-.29-.2.44.44,0,0,0-.34.08.45.45,0,0,0-.08.65l0,.05a2.12,2.12,0,0,0,.89.72,2.74,2.74,0,0,0-.41,1.11,1.22,1.22,0,0,1-1,.06l-.06,0a.44.44,0,0,0-.57.27.45.45,0,0,0,.27.57l.06,0a2.11,2.11,0,0,0,1.3,0,2.71,2.71,0,0,0,.41,1,2.16,2.16,0,0,0-.75,1.17.45.45,0,0,0,0,.35.44.44,0,0,0,.62.15.45.45,0,0,0,.2-.29,1.24,1.24,0,0,1,.5-.74,2.67,2.67,0,0,0,1.11.48,2.18,2.18,0,0,0,.05,1.34.45.45,0,0,0,.23.28A.44.44,0,0,0,31,20a.44.44,0,0,0,.25-.25.45.45,0,0,0,0-.36,1.26,1.26,0,0,1,.06-1v0h0a2.67,2.67,0,0,0,1.07-.45,2.13,2.13,0,0,0,.82.9.44.44,0,0,0,.61-.16.45.45,0,0,0-.16-.61,1.25,1.25,0,0,1-.58-.79l.83-.87a2.11,2.11,0,0,0,1.29.51.44.44,0,0,0,.32-.12.45.45,0,0,0,.14-.31.45.45,0,0,0-.43-.46,1.23,1.23,0,0,1-.75-.29,2.74,2.74,0,0,0,.41-1.18,2.1,2.1,0,0,0,1.41-.21.45.45,0,0,0-.08-.82ZM22.74,3.65a.44.44,0,0,0-.21.26,1.22,1.22,0,0,1-.65.75l-.06,0a2.7,2.7,0,0,0-1-.37,1.26,1.26,0,0,1-.1-.93l0-.06a.45.45,0,0,0-.31-.55.44.44,0,0,0-.55.3l0,.06a2.12,2.12,0,0,0,0,1.2,2.66,2.66,0,0,0-1.1.49,1.27,1.27,0,0,1-.51-.66l0-.06a.45.45,0,0,0-.33-.3.44.44,0,0,0-.52.57l0,.06a2.16,2.16,0,0,0,.75,1,2.67,2.67,0,0,0-.42,1.12,1.24,1.24,0,0,1-.86-.19l-.06,0a.44.44,0,0,0-.62.12.45.45,0,0,0,.13.62l.05,0h0a2.16,2.16,0,0,0,1.34.35l0,1.08a1.24,1.24,0,0,1-.92.21h-.07a.44.44,0,0,0-.35.06.44.44,0,0,0-.19.3.45.45,0,0,0,.4.52h.07a2.12,2.12,0,0,0,1.14-.12,2.74,2.74,0,0,0,.5,1.07,1.22,1.22,0,0,1-.64.73l-.06,0a.44.44,0,0,0-.21.59.45.45,0,0,0,.6.21l.06,0a2.11,2.11,0,0,0,.94-.89,2.71,2.71,0,0,0,1,.39,2.16,2.16,0,0,0,.3,1.35.45.45,0,0,0,.28.22.44.44,0,0,0,.55-.33.45.45,0,0,0-.07-.34,1.24,1.24,0,0,1-.17-.88A2.67,2.67,0,0,0,22,11.22a2.18,2.18,0,0,0,1,.91.45.45,0,0,0,.36,0,.44.44,0,0,0,.27-.24.44.44,0,0,0,0-.36.45.45,0,0,0-.26-.25,1.26,1.26,0,0,1-.67-.75v0h0a2.67,2.67,0,0,0,.44-1.07,2.13,2.13,0,0,0,1.22.06A.44.44,0,0,0,24.68,9a.45.45,0,0,0-.55-.32,1.25,1.25,0,0,1-1-.15l0-1.2a2.11,2.11,0,0,0,1.28-.56.44.44,0,0,0,.14-.31.45.45,0,0,0-.12-.32.45.45,0,0,0-.63,0,1.23,1.23,0,0,1-.74.32,2.74,2.74,0,0,0-.54-1.12,2.1,2.1,0,0,0,.85-1.14.45.45,0,0,0-.64-.53ZM13.32,47.15a4.12,4.12,0,0,0-1.79-2.49L7.62,41.9a3.06,3.06,0,0,1-1.39-2l-4-14.3a4.72,4.72,0,0,1,.19-3.52l6-14.9a3,3,0,0,1,2.38,1.66c.83,1.67.82,5.4-3.43,13.08a3.76,3.76,0,0,0-.25,3.44c.7,2.57,1.37,5,2.24,7.39a4.59,4.59,0,0,0,1.76,2.23.51.51,0,0,0,.7-.09.65.65,0,0,0,0-.71,1.24,1.24,0,0,0-.27-.31,3.81,3.81,0,0,1-1.13-1.64C9.69,29.81,9,27.5,8.29,25a3.43,3.43,0,0,1,.31-2.84A17.4,17.4,0,0,1,10,19.82c1-1.82,1.67-.13,2,1a29.45,29.45,0,0,1,1.06,5.26,5.11,5.11,0,0,0,1.34,3.13l4.27,4.24A4.2,4.2,0,0,1,20,36.1ZM30,36.1a4.2,4.2,0,0,1,1.35-2.61l4.27-4.24a5.11,5.11,0,0,0,1.34-3.13A29.45,29.45,0,0,1,38,20.86c.37-1.17,1-2.86,2-1a17.4,17.4,0,0,1,1.35,2.34A3.43,3.43,0,0,1,41.71,25c-.69,2.5-1.4,4.81-2.2,7.2a3.81,3.81,0,0,1-1.13,1.64,1.24,1.24,0,0,0-.27.31.65.65,0,0,0,0,.71.51.51,0,0,0,.7.09,4.59,4.59,0,0,0,1.76-2.23c.87-2.43,1.54-4.82,2.24-7.39a3.76,3.76,0,0,0-.25-3.44c-4.25-7.68-4.26-11.41-3.43-13.08a3,3,0,0,1,2.38-1.66l6,14.9a4.72,4.72,0,0,1,.19,3.52l-4,14.3a3.06,3.06,0,0,1-1.39,2l-3.9,2.77a4.12,4.12,0,0,0-1.79,2.49Z"&gt;&lt;/path&gt;
+                              &lt;/g&gt;
+                            &lt;/svg&gt;
+                          &lt;/div&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="promo__content"&gt;
+                      &lt;header class="promo__header"&gt;
+                        &lt;h4 class="promo__heading"&gt;Poor hygiene practices&lt;/h4&gt;
+                      &lt;/header&gt;
+                      &lt;div class="promo__intro"&gt;
+                        &lt;div class="field field__field_liftup_summary"&gt;Report poor hygiene practices in a restaurant or food shop&lt;/div&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="promo__read-more" aria-hidden="true"&gt;
+                      &lt;div class="svg"&gt;
+                        &lt;svg role="presentation" viewBox="0 0 41 30"&gt;
+                          &lt;g fill="#007C75" fill-rule="evenodd"&gt;
+                            &lt;path d="M0 16.464h34.597V12H0z"&gt;&lt;/path&gt;
+                            &lt;path d="M25.126 29.912L22 26.786l11.832-11.83L22 3.126 25.126 0 40.08 14.956z"&gt;&lt;/path&gt;
+                          &lt;/g&gt;
+                        &lt;/svg&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/a&gt;
+
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/article&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+      </div>
+
+      <div class="styleguide__item__tabCode___ofaNu styleguide__item__css___3ALxg" role="tabpanel">
+        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- css"><br>/* No component-specific CSS required, but inspecting via devtools will reveal where styles have cascaded from. */</code></pre>
       </div>
 
       <div class="styleguide__item__tabCode___ofaNu styleguide__item__js___3IO7y" role="tabpanel">
@@ -15331,16 +15792,21 @@ Plugin documentation:
   </div>
 </footer></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-footer" data-corresponding-code="code-form-footer">
+    <label for="show-code-footer">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-bb52a047-e89f-320f-}80f5-b2ea811af003" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-bb52a047-e89f-320f-}80f5-b2ea811af003" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-bb52a047-e89f-320f-}80f5-b2ea811af003" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-footer hidden" role="region">
+
+    <input name="info-input" id="tabHTML-8d602377-6aa2-2421-}7c4a-318d1ed1a381" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-8d602377-6aa2-2421-}7c4a-318d1ed1a381" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-8d602377-6aa2-2421-}7c4a-318d1ed1a381" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-bb52a047-e89f-320f-}80f5-b2ea811af003" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-bb52a047-e89f-320f-}80f5-b2ea811af003" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-bb52a047-e89f-320f-}80f5-b2ea811af003" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-8d602377-6aa2-2421-}7c4a-318d1ed1a381" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-8d602377-6aa2-2421-}7c4a-318d1ed1a381" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-8d602377-6aa2-2421-}7c4a-318d1ed1a381" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -15643,16 +16109,21 @@ Plugin documentation:
     </div>
  </header></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-header" data-corresponding-code="code-form-header">
+    <label for="show-code-header">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-ea3011ee-b5a5-f61c-}d80f-88bd4b542b94" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-ea3011ee-b5a5-f61c-}d80f-88bd4b542b94" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-ea3011ee-b5a5-f61c-}d80f-88bd4b542b94" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-header hidden" role="region">
+
+    <input name="info-input" id="tabHTML-d91ecccd-efc3-8607-}709a-09c8a6119419" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-d91ecccd-efc3-8607-}709a-09c8a6119419" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-d91ecccd-efc3-8607-}709a-09c8a6119419" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-ea3011ee-b5a5-f61c-}d80f-88bd4b542b94" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-ea3011ee-b5a5-f61c-}d80f-88bd4b542b94" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-ea3011ee-b5a5-f61c-}d80f-88bd4b542b94" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-d91ecccd-efc3-8607-}709a-09c8a6119419" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-d91ecccd-efc3-8607-}709a-09c8a6119419" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-d91ecccd-efc3-8607-}709a-09c8a6119419" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -16020,16 +16491,21 @@ Plugin documentation:
   </div>
 </div></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-hero" data-corresponding-code="code-form-hero">
+    <label for="show-code-hero">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-3bf1403b-897b-ab4a-}0bd7-948004e36eff" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-3bf1403b-897b-ab4a-}0bd7-948004e36eff" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-3bf1403b-897b-ab4a-}0bd7-948004e36eff" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-hero hidden" role="region">
+
+    <input name="info-input" id="tabHTML-df6697db-8375-5b1b-}6743-fa27cbc5672e" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-df6697db-8375-5b1b-}6743-fa27cbc5672e" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-df6697db-8375-5b1b-}6743-fa27cbc5672e" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-3bf1403b-897b-ab4a-}0bd7-948004e36eff" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-3bf1403b-897b-ab4a-}0bd7-948004e36eff" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-3bf1403b-897b-ab4a-}0bd7-948004e36eff" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-df6697db-8375-5b1b-}6743-fa27cbc5672e" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-df6697db-8375-5b1b-}6743-fa27cbc5672e" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-df6697db-8375-5b1b-}6743-fa27cbc5672e" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -16571,16 +17047,21 @@ Plugin documentation:
   </ul>
 </div></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-infobox" data-corresponding-code="code-form-infobox">
+    <label for="show-code-infobox">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-8a5d7b02-a9da-6021-}c07d-ee3687db3034" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-8a5d7b02-a9da-6021-}c07d-ee3687db3034" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-8a5d7b02-a9da-6021-}c07d-ee3687db3034" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-infobox hidden" role="region">
+
+    <input name="info-input" id="tabHTML-a014dcbf-9d4c-244d-}21da-13a2176c192d" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-a014dcbf-9d4c-244d-}21da-13a2176c192d" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-a014dcbf-9d4c-244d-}21da-13a2176c192d" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-8a5d7b02-a9da-6021-}c07d-ee3687db3034" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-8a5d7b02-a9da-6021-}c07d-ee3687db3034" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-8a5d7b02-a9da-6021-}c07d-ee3687db3034" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-a014dcbf-9d4c-244d-}21da-13a2176c192d" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-a014dcbf-9d4c-244d-}21da-13a2176c192d" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-a014dcbf-9d4c-244d-}21da-13a2176c192d" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -16671,6 +17152,351 @@ Plugin documentation:
 
   </form>
 </article>
+<article class="styleguide__item___28nPp" id="landingLinks">
+  <header class="styleguide__item__header___2u3FN">
+    <h3 class="styleguide__item__title___2gjuP">Landing-links</h3>
+    <p class="styleguide__item__description___34e69"></p>
+  </header>
+
+  <div class="styleguide__item__element___3qaWj"><div class="field__field_lander_row__item field__field_lander_row__item--odd">
+  <div class="paragraph paragraph--type-icon-link paragraph--view-mode--default">
+    <div class="field field__field_title">
+      <h2 class="field__field_title__item field__field_title__item--even">Are you looking for specific business guidance?</h2>
+    </div>
+    <div class="field field__field_icon_link">
+      <div class="field__field_icon_link__item field__field_icon_link__item--even">
+        <div class="paragraph paragraph--type-icon-link-item paragraph--view-mode--default">
+          <a href="#landing-links" style="display: block; border: 1px solid;">
+            <div class="field field__field_icon">
+              <div class="svg" aria-hidden="true">
+                <svg class="icon icon--farming" role="presentation" viewBox="0 0 50 50">
+                  <defs>
+                    <style>
+                      .\33 1e5ef2a-d41c-4f5b-bb40-58e0142f3098 {
+                        fill: none;
+                      }
+                    </style>
+                  </defs>
+                  <title>farming</title>
+                  <g id="1b5ce56c-3e34-46b2-afe6-5aaf0b0558c1" data-name="farming">
+                    <rect class="31e5ef2a-d41c-4f5b-bb40-58e0142f3098" width="50" height="50"></rect>
+                    <path d="M11.79,34.53a3.44,3.44,0,0,1,3.54,3.32,3.39,3.39,0,0,1-3.54,3.32,3.44,3.44,0,0,1-3.54-3.32A3.39,3.39,0,0,1,11.79,34.53Zm24.68-6a4.61,4.61,0,1,1,0,9.23,4.61,4.61,0,1,1,0-9.23Zm-8.82-18.4H37V21.62h-.51a11.35,11.35,0,0,0-4,.74l-8-.65,3.13-11.53ZM21.21,21.66H15.79V10.59H13.44v11l-7.77,1,.64,7.2H2v7.61H5v.51a6.85,6.85,0,1,0,13.69,0,6.63,6.63,0,0,0-1.06-3.64h7.44a11.49,11.49,0,1,0,15.07-12V7.32H25.3Z"></path>
+                  </g>
+                </svg>
+              </div>
+            </div>
+            Farming and animal feed
+          </a>
+        </div>
+      </div>
+      <div class="field__field_icon_link__item field__field_icon_link__item--odd">
+        <div class="paragraph paragraph--type-icon-link-item paragraph--view-mode--default">
+          <a href="#landing-links" style="display: block; border: 1px solid;" data-ytta-id="-">
+            <div class="field field__field_icon">
+              <div class="svg" aria-hidden="true">
+                <svg class="icon icon--export" role="presentation" viewBox="0 0 50 50">
+                  <defs>
+                    <style>
+                      .f494b09c-e784-4f47-a136-ddf9cd12f6d3 {
+                        fill: none;
+                      }
+                    </style>
+                  </defs>
+                  <title>export</title>
+                  <g id="af7dd439-a34a-4b07-b3b0-2c08c345ed2d" data-name="export">
+                    <path d="M41,32a3,3,0,1,1-3,3A3,3,0,0,1,41,32ZM22,35a3,3,0,1,0,3-3A3,3,0,0,0,22,35ZM10,35a3,3,0,1,0,3-3A3,3,0,0,0,10,35ZM33,18V34a1,1,0,0,0,1,1h2a5,5,0,0,1,10,0h1a1,1,0,0,0,1-1V28H36V20h8.12l-.95-1.89A2,2,0,0,0,41.38,17H34A1,1,0,0,0,33,18Zm5,8h9l-2-4H38ZM16,23H7V34a1,1,0,0,0,1,1,5,5,0,0,1,10,0h2a5,5,0,0,1,10,0,1,1,0,0,0,1-1V14a2,2,0,0,0-2-2H8a1,1,0,0,0-1,1v6h9V16a1,1,0,0,1,1.64-.77l6,5a1,1,0,0,1,0,1.54l-6,5A1,1,0,0,1,16,26ZM2,20v2a1,1,0,0,0,1,1H7V19H3A1,1,0,0,0,2,20Z"></path>
+                    <rect class="f494b09c-e784-4f47-a136-ddf9cd12f6d3" width="50" height="50"></rect>
+                  </g>
+                </svg>
+              </div>
+            </div>
+            Imports and exports
+          </a>
+        </div>
+      </div>
+      <div class="field__field_icon_link__item field__field_icon_link__item--even">
+        <div class="paragraph paragraph--type-icon-link-item paragraph--view-mode--default">
+          <a href="#landing-links" style="display: block; border: 1px solid;" data-ytta-id="-">
+            <div class="field field__field_icon">
+              <div class="svg" aria-hidden="true">
+                <svg class="icon icon--fish-shellfish" role="presentation" viewBox="0 0 50 50">
+                  <defs>
+                    <style>
+                      .e6c4f930-7e2d-4419-b946-a1c9c37f8270 {
+                        fill: none;
+                      }
+                      .c736717c-aca0-4efc-96b0-7ba721cb96d1 {
+                        fill-rule: evenodd;
+                      }
+                    </style>
+                  </defs>
+                  <title>fish-shellfish</title>
+                  <g id="448454d0-d150-462c-a15d-676634df9214" data-name="fish-shellfish">
+                    <rect class="e6c4f930-7e2d-4419-b946-a1c9c37f8270" width="50" height="50"></rect>
+                    <g>
+                      <path class="c736717c-aca0-4efc-96b0-7ba721cb96d1" d="M20.37,28.44a29,29,0,0,0,.38,6.66h8.09A27.42,27.42,0,0,0,29,28.43c-.53-7-2.24-12.27-4.31-12.27h0C22.41,16.16,20.61,21.69,20.37,28.44Z"></path>
+                      <path class="c736717c-aca0-4efc-96b0-7ba721cb96d1" d="M29.28,37.25a1,1,0,0,0-.8-1H21.39c-.44,0-.8.51-.8,1a1,1,0,0,0,.8,1h2.28l4.81,0A1,1,0,0,0,29.28,37.25Z"></path>
+                      <path class="c736717c-aca0-4efc-96b0-7ba721cb96d1" d="M22.53,39.67c-.44,0-.8.51-.8,1a1,1,0,0,0,.8,1l4.8,0a1,1,0,0,0,0-2Z"></path>
+                      <path class="c736717c-aca0-4efc-96b0-7ba721cb96d1" d="M28,42.89c-.05,0-.11,0-.17.06h0a.7.7,0,0,0-.66-.42H22.68a.71.71,0,0,0-.66.42l-.11,0a2.21,2.21,0,0,0,0,4.36,1.67,1.67,0,0,0,1-.35A2.93,2.93,0,0,0,25,48a3.15,3.15,0,0,0,2.07-1,1.66,1.66,0,0,0,.91.28,2.22,2.22,0,0,0,0-4.38Z"></path>
+                      <path class="c736717c-aca0-4efc-96b0-7ba721cb96d1" d="M17.84,28.61a24.89,24.89,0,0,1-3.71-2.93A2,2,0,0,1,14.2,23c.93-1,3.14-3.5,3.71-6a3.85,3.85,0,0,1,.64-1.29c.4-.47,3-3.62,2.5-7.07,0-.42-.4-.33-.67,0-.91,1.2-2.8,3.64-3.75,4.59a.73.73,0,0,1-.4.14.47.47,0,0,1-.38-.71,26.15,26.15,0,0,1,2.22-3.24.63.63,0,0,0-.41-1.1s-5.51-1-8.23,9.69c0,0-1.07,6.21,2.36,6.56a.73.73,0,0,1,.43.17c.23.25.26.76-.57,1.26-1.07.65-.71,1.22-.14,1.64s4.33,3.62,4.33,3.62h0c.48.41,1.13,1.14,1.58,1.52,0,0,.43.24.69-.36a9,9,0,0,0,.43-1.83c.09-.62.26-1.36,0-1.66Z"></path>
+                      <path class="c736717c-aca0-4efc-96b0-7ba721cb96d1" d="M37.76,26.14c-.83-.51-.8-1-.57-1.26a.75.75,0,0,1,.43-.17C41,24.36,40,18.15,40,18.15c-2.71-10.71-8.23-9.7-8.23-9.7h0a.63.63,0,0,0-.41,1.1,26.26,26.26,0,0,1,2.22,3.24.46.46,0,0,1-.38.71.74.74,0,0,1-.41-.14c-.95-1-2.84-3.39-3.76-4.59-.26-.31-.63-.41-.67,0-.49,3.44,2.1,6.6,2.5,7.07a3.88,3.88,0,0,1,.64,1.29c.57,2.5,2.78,5,3.71,6a2,2,0,0,1,.07,2.64,25.14,25.14,0,0,1-3.71,2.92l-.64.36c-.31.31-.13,1,0,1.66a9,9,0,0,0,.43,1.83c.26.59.69.36.69.36.45-.38,1.11-1.12,1.59-1.52,0,0,3.77-3.18,4.33-3.61S38.83,26.79,37.76,26.14Z"></path>
+                      <path class="c736717c-aca0-4efc-96b0-7ba721cb96d1" d="M25.63,15c.5,0,.56-.57.56-.57s-.19-9,6.93-11.29a.62.62,0,0,0,.43-.69c-.1-.59-.79-.43-.81-.42h0c-7.56,2.52-7.67,11.51-7.67,12.25C25.07,14.27,25.07,14.94,25.63,15Z"></path>
+                      <path class="c736717c-aca0-4efc-96b0-7ba721cb96d1" d="M16.09,3.12C23.21,5.43,23,14.41,23,14.41h0s.06.61.56.57.56-.71.56-.72c0-.74-.11-9.74-7.67-12.26,0,0-.71-.17-.81.42A.62.62,0,0,0,16.09,3.12Z"></path>
+                      <path class="c736717c-aca0-4efc-96b0-7ba721cb96d1" d="M12,37,9.84,32.72S8.89,28,6.53,26.1c0,0-4.53,3.58-3.31,10.74L2,39H4.16a33,33,0,0,0,1.55,3h0L3.15,45.76c1.22-1.55,5.54-1.55,6.69,0,0,0-2.16-3.24-2.63-3.72,0,0,2.23-3,2.5-5ZM6.73,30.89a1,1,0,0,1-1-1,1.05,1.05,0,0,1,1-1.08,1.07,1.07,0,0,1,1.08,1.08A1.05,1.05,0,0,1,6.73,30.89Z"></path>
+                      <path class="c736717c-aca0-4efc-96b0-7ba721cb96d1" d="M45.7,37,48,37l-2.16-4.26S44.89,28,42.53,26.1c0,0-4.53,3.58-3.31,10.74L38,39h2.16a33,33,0,0,0,1.55,3h0l-2.57,3.72c1.22-1.55,5.54-1.55,6.69,0,0,0-2.16-3.24-2.63-3.72C43.2,42,45.43,39.07,45.7,37Zm-4-7.16a1.05,1.05,0,0,1,1-1.08,1.07,1.07,0,0,1,1.08,1.08,1.05,1.05,0,0,1-1.08,1A1,1,0,0,1,41.72,29.88Z"></path>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+            </div>
+            Fish and shellfish
+          </a>
+        </div>
+      </div>
+      <div class="field__field_icon_link__item field__field_icon_link__item--odd">
+        <div class="paragraph paragraph--type-icon-link-item paragraph--view-mode--default">
+          <a href="#landing-links" style="display: block; border: 1px solid;"
+            data-ytta-id="-">
+            <div class="field field__field_icon">
+              <div class="svg" aria-hidden="true">
+                <svg class="icon icon--meat" role="presentation" viewBox="0 0 50 50">
+                  <defs>
+                    <style>
+                      .a2d14fdf-8511-43a3-b348-5cbbf2c38392 {
+                        fill: none;
+                      }
+                    </style>
+                  </defs>
+                  <title>meat</title>
+                  <g id="a50d8c5e-6bbe-4b88-a373-a47eb9e1f966" data-name="meat">
+                    <rect class="a2d14fdf-8511-43a3-b348-5cbbf2c38392" width="50" height="50"></rect>
+                    <g>
+                      <path d="M13,29.47c-1.25,1.25-.6,3.78,1.52,5.89a7.93,7.93,0,0,0,3,1.93,4.07,4.07,0,0,0,1.28.23,2.28,2.28,0,0,0,1.66-.64c1.25-1.25.59-3.78-1.53-5.9S14.27,28.22,13,29.47Z"></path>
+                      <path d="M46.88,7.16a3.83,3.83,0,0,0-3-1.1,3.82,3.82,0,0,0-6.51-2.95A5.79,5.79,0,0,0,35.7,7.24,3.93,3.93,0,0,1,34.53,10l-2.8,2.8c-3.59-1.22-8.42-.58-13.71,1.93C13.21,13.44,8.89,14.25,6.14,17L3.36,19.77l0,0,0,0L3,20.16H3a1,1,0,0,0-.23.4c-2.31,3.77,1,11.66,8,18.68C16.32,44.77,22.4,48,26.58,48a5,5,0,0,0,3.69-1.32,4.23,4.23,0,0,0,.66-.89l2-2C35.72,41,36.53,36.7,35.2,31.9c2.52-5.27,3.16-10.1,1.94-13.67l2.81-2.8a4,4,0,0,1,2.8-1.16h0a5.81,5.81,0,0,0,4.13-1.71A3.81,3.81,0,0,0,46.88,7.16ZM12.17,37.85c-6.93-6.91-9.49-14.07-7.6-16.46,1.17-.9,3.38-.79,6.18.36A33.17,33.17,0,0,1,21,29a33.06,33.06,0,0,1,7.23,10.2c1.22,3,1.29,5.29.19,6.38h0a.93.93,0,0,0-.09.14C25.6,47.06,18.77,44.42,12.17,37.85Z"></path>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+            </div>
+            Meat and slaughterhouses
+          </a>
+        </div>
+      </div>
+      <div class="field__field_icon_link__item field__field_icon_link__item--even">
+        <div class="paragraph paragraph--type-icon-link-item paragraph--view-mode--default">
+          <a href="#landing-links" style="display: block; border: 1px solid;" data-ytta-id="-">
+            <div class="field field__field_icon">
+              <div class="svg" aria-hidden="true">
+                <svg class="icon icon--wine" role="presentation" viewBox="0 0 50 50">
+                  <defs>
+                    <style>
+                      .\34 53048b1-fa5e-4b70-8b1e-ef405c3131a7 {
+                        fill: none;
+                      }
+                    </style>
+                  </defs>
+                  <title>wine</title>
+                  <g id="0e1bdde7-7cb8-46a1-a101-adbad6267e35" data-name="wine">
+                    <rect class="453048b1-fa5e-4b70-8b1e-ef405c3131a7" width="50" height="50"></rect>
+                    <path d="M22.23,47.4c.2,0,.3.13.3.3a.3.3,0,0,1-.3.3H10.76a.28.28,0,0,1-.3-.3.29.29,0,0,1,.3-.3s5.11-.72,5.11-3.84V38.1c.3-6-9.36-7-4.51-20.1H21.63c4.85,13.05-4.81,14.1-4.51,20.1v5.45c0,3.12,5.11,3.84,5.11,3.84ZM33,43V22h7V20.5a6.52,6.52,0,0,0-5-6.32V4a1,1,0,0,0,0-2H31a1,1,0,0,0,0,2V14.18a6.52,6.52,0,0,0-5,6.32V46a2,2,0,0,0,2,2H38a2,2,0,0,0,2-2V43Z"></path>
+                  </g>
+                </svg>
+              </div>
+            </div>
+            Wine
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div></div>
+
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-landingLinks" data-corresponding-code="code-form-landingLinks">
+    <label for="show-code-landingLinks">Show code?</label>
+  </form>
+
+  <form class="styleguide__item__code___3rQWa code-form code-form-landingLinks hidden" role="region">
+
+    <input name="info-input" id="tabHTML-e0e4ccbc-a2e6-5722-}2eb5-cfbd0a23abd9" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-e0e4ccbc-a2e6-5722-}2eb5-cfbd0a23abd9" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-e0e4ccbc-a2e6-5722-}2eb5-cfbd0a23abd9" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+
+    <div class="styleguide__item__tabList___1KcXt" role="tablist">
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-e0e4ccbc-a2e6-5722-}2eb5-cfbd0a23abd9" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-e0e4ccbc-a2e6-5722-}2eb5-cfbd0a23abd9" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-e0e4ccbc-a2e6-5722-}2eb5-cfbd0a23abd9" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+    </div>
+
+    <div class="styleguide__item__tabContent___10uG2">
+      <div class="styleguide__item__tabCode___ofaNu styleguide__item__html___22enY" role="tabpanel">
+        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- html">&lt;div class="field__field_lander_row__item field__field_lander_row__item--odd"&gt;
+  &lt;div class="paragraph paragraph--type-icon-link paragraph--view-mode--default"&gt;
+    &lt;div class="field field__field_title"&gt;
+      &lt;h2 class="field__field_title__item field__field_title__item--even"&gt;Are you looking for specific business guidance?&lt;/h2&gt;
+    &lt;/div&gt;
+    &lt;div class="field field__field_icon_link"&gt;
+      &lt;div class="field__field_icon_link__item field__field_icon_link__item--even"&gt;
+        &lt;div class="paragraph paragraph--type-icon-link-item paragraph--view-mode--default"&gt;
+          &lt;a href="#landing-links" style="display: block; border: 1px solid;"&gt;
+            &lt;div class="field field__field_icon"&gt;
+              &lt;div class="svg" aria-hidden="true"&gt;
+                &lt;svg class="icon icon--farming" role="presentation" viewBox="0 0 50 50"&gt;
+                  &lt;defs&gt;
+                    &lt;style&gt;
+                      .\33 1e5ef2a-d41c-4f5b-bb40-58e0142f3098 {
+                        fill: none;
+                      }
+                    &lt;/style&gt;
+                  &lt;/defs&gt;
+                  &lt;title&gt;farming&lt;/title&gt;
+                  &lt;g id="1b5ce56c-3e34-46b2-afe6-5aaf0b0558c1" data-name="farming"&gt;
+                    &lt;rect class="31e5ef2a-d41c-4f5b-bb40-58e0142f3098" width="50" height="50"&gt;&lt;/rect&gt;
+                    &lt;path d="M11.79,34.53a3.44,3.44,0,0,1,3.54,3.32,3.39,3.39,0,0,1-3.54,3.32,3.44,3.44,0,0,1-3.54-3.32A3.39,3.39,0,0,1,11.79,34.53Zm24.68-6a4.61,4.61,0,1,1,0,9.23,4.61,4.61,0,1,1,0-9.23Zm-8.82-18.4H37V21.62h-.51a11.35,11.35,0,0,0-4,.74l-8-.65,3.13-11.53ZM21.21,21.66H15.79V10.59H13.44v11l-7.77,1,.64,7.2H2v7.61H5v.51a6.85,6.85,0,1,0,13.69,0,6.63,6.63,0,0,0-1.06-3.64h7.44a11.49,11.49,0,1,0,15.07-12V7.32H25.3Z"&gt;&lt;/path&gt;
+                  &lt;/g&gt;
+                &lt;/svg&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            Farming and animal feed
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="field__field_icon_link__item field__field_icon_link__item--odd"&gt;
+        &lt;div class="paragraph paragraph--type-icon-link-item paragraph--view-mode--default"&gt;
+          &lt;a href="#landing-links" style="display: block; border: 1px solid;" data-ytta-id="-"&gt;
+            &lt;div class="field field__field_icon"&gt;
+              &lt;div class="svg" aria-hidden="true"&gt;
+                &lt;svg class="icon icon--export" role="presentation" viewBox="0 0 50 50"&gt;
+                  &lt;defs&gt;
+                    &lt;style&gt;
+                      .f494b09c-e784-4f47-a136-ddf9cd12f6d3 {
+                        fill: none;
+                      }
+                    &lt;/style&gt;
+                  &lt;/defs&gt;
+                  &lt;title&gt;export&lt;/title&gt;
+                  &lt;g id="af7dd439-a34a-4b07-b3b0-2c08c345ed2d" data-name="export"&gt;
+                    &lt;path d="M41,32a3,3,0,1,1-3,3A3,3,0,0,1,41,32ZM22,35a3,3,0,1,0,3-3A3,3,0,0,0,22,35ZM10,35a3,3,0,1,0,3-3A3,3,0,0,0,10,35ZM33,18V34a1,1,0,0,0,1,1h2a5,5,0,0,1,10,0h1a1,1,0,0,0,1-1V28H36V20h8.12l-.95-1.89A2,2,0,0,0,41.38,17H34A1,1,0,0,0,33,18Zm5,8h9l-2-4H38ZM16,23H7V34a1,1,0,0,0,1,1,5,5,0,0,1,10,0h2a5,5,0,0,1,10,0,1,1,0,0,0,1-1V14a2,2,0,0,0-2-2H8a1,1,0,0,0-1,1v6h9V16a1,1,0,0,1,1.64-.77l6,5a1,1,0,0,1,0,1.54l-6,5A1,1,0,0,1,16,26ZM2,20v2a1,1,0,0,0,1,1H7V19H3A1,1,0,0,0,2,20Z"&gt;&lt;/path&gt;
+                    &lt;rect class="f494b09c-e784-4f47-a136-ddf9cd12f6d3" width="50" height="50"&gt;&lt;/rect&gt;
+                  &lt;/g&gt;
+                &lt;/svg&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            Imports and exports
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="field__field_icon_link__item field__field_icon_link__item--even"&gt;
+        &lt;div class="paragraph paragraph--type-icon-link-item paragraph--view-mode--default"&gt;
+          &lt;a href="#landing-links" style="display: block; border: 1px solid;" data-ytta-id="-"&gt;
+            &lt;div class="field field__field_icon"&gt;
+              &lt;div class="svg" aria-hidden="true"&gt;
+                &lt;svg class="icon icon--fish-shellfish" role="presentation" viewBox="0 0 50 50"&gt;
+                  &lt;defs&gt;
+                    &lt;style&gt;
+                      .e6c4f930-7e2d-4419-b946-a1c9c37f8270 {
+                        fill: none;
+                      }
+                      .c736717c-aca0-4efc-96b0-7ba721cb96d1 {
+                        fill-rule: evenodd;
+                      }
+                    &lt;/style&gt;
+                  &lt;/defs&gt;
+                  &lt;title&gt;fish-shellfish&lt;/title&gt;
+                  &lt;g id="448454d0-d150-462c-a15d-676634df9214" data-name="fish-shellfish"&gt;
+                    &lt;rect class="e6c4f930-7e2d-4419-b946-a1c9c37f8270" width="50" height="50"&gt;&lt;/rect&gt;
+                    &lt;g&gt;
+                      &lt;path class="c736717c-aca0-4efc-96b0-7ba721cb96d1" d="M20.37,28.44a29,29,0,0,0,.38,6.66h8.09A27.42,27.42,0,0,0,29,28.43c-.53-7-2.24-12.27-4.31-12.27h0C22.41,16.16,20.61,21.69,20.37,28.44Z"&gt;&lt;/path&gt;
+                      &lt;path class="c736717c-aca0-4efc-96b0-7ba721cb96d1" d="M29.28,37.25a1,1,0,0,0-.8-1H21.39c-.44,0-.8.51-.8,1a1,1,0,0,0,.8,1h2.28l4.81,0A1,1,0,0,0,29.28,37.25Z"&gt;&lt;/path&gt;
+                      &lt;path class="c736717c-aca0-4efc-96b0-7ba721cb96d1" d="M22.53,39.67c-.44,0-.8.51-.8,1a1,1,0,0,0,.8,1l4.8,0a1,1,0,0,0,0-2Z"&gt;&lt;/path&gt;
+                      &lt;path class="c736717c-aca0-4efc-96b0-7ba721cb96d1" d="M28,42.89c-.05,0-.11,0-.17.06h0a.7.7,0,0,0-.66-.42H22.68a.71.71,0,0,0-.66.42l-.11,0a2.21,2.21,0,0,0,0,4.36,1.67,1.67,0,0,0,1-.35A2.93,2.93,0,0,0,25,48a3.15,3.15,0,0,0,2.07-1,1.66,1.66,0,0,0,.91.28,2.22,2.22,0,0,0,0-4.38Z"&gt;&lt;/path&gt;
+                      &lt;path class="c736717c-aca0-4efc-96b0-7ba721cb96d1" d="M17.84,28.61a24.89,24.89,0,0,1-3.71-2.93A2,2,0,0,1,14.2,23c.93-1,3.14-3.5,3.71-6a3.85,3.85,0,0,1,.64-1.29c.4-.47,3-3.62,2.5-7.07,0-.42-.4-.33-.67,0-.91,1.2-2.8,3.64-3.75,4.59a.73.73,0,0,1-.4.14.47.47,0,0,1-.38-.71,26.15,26.15,0,0,1,2.22-3.24.63.63,0,0,0-.41-1.1s-5.51-1-8.23,9.69c0,0-1.07,6.21,2.36,6.56a.73.73,0,0,1,.43.17c.23.25.26.76-.57,1.26-1.07.65-.71,1.22-.14,1.64s4.33,3.62,4.33,3.62h0c.48.41,1.13,1.14,1.58,1.52,0,0,.43.24.69-.36a9,9,0,0,0,.43-1.83c.09-.62.26-1.36,0-1.66Z"&gt;&lt;/path&gt;
+                      &lt;path class="c736717c-aca0-4efc-96b0-7ba721cb96d1" d="M37.76,26.14c-.83-.51-.8-1-.57-1.26a.75.75,0,0,1,.43-.17C41,24.36,40,18.15,40,18.15c-2.71-10.71-8.23-9.7-8.23-9.7h0a.63.63,0,0,0-.41,1.1,26.26,26.26,0,0,1,2.22,3.24.46.46,0,0,1-.38.71.74.74,0,0,1-.41-.14c-.95-1-2.84-3.39-3.76-4.59-.26-.31-.63-.41-.67,0-.49,3.44,2.1,6.6,2.5,7.07a3.88,3.88,0,0,1,.64,1.29c.57,2.5,2.78,5,3.71,6a2,2,0,0,1,.07,2.64,25.14,25.14,0,0,1-3.71,2.92l-.64.36c-.31.31-.13,1,0,1.66a9,9,0,0,0,.43,1.83c.26.59.69.36.69.36.45-.38,1.11-1.12,1.59-1.52,0,0,3.77-3.18,4.33-3.61S38.83,26.79,37.76,26.14Z"&gt;&lt;/path&gt;
+                      &lt;path class="c736717c-aca0-4efc-96b0-7ba721cb96d1" d="M25.63,15c.5,0,.56-.57.56-.57s-.19-9,6.93-11.29a.62.62,0,0,0,.43-.69c-.1-.59-.79-.43-.81-.42h0c-7.56,2.52-7.67,11.51-7.67,12.25C25.07,14.27,25.07,14.94,25.63,15Z"&gt;&lt;/path&gt;
+                      &lt;path class="c736717c-aca0-4efc-96b0-7ba721cb96d1" d="M16.09,3.12C23.21,5.43,23,14.41,23,14.41h0s.06.61.56.57.56-.71.56-.72c0-.74-.11-9.74-7.67-12.26,0,0-.71-.17-.81.42A.62.62,0,0,0,16.09,3.12Z"&gt;&lt;/path&gt;
+                      &lt;path class="c736717c-aca0-4efc-96b0-7ba721cb96d1" d="M12,37,9.84,32.72S8.89,28,6.53,26.1c0,0-4.53,3.58-3.31,10.74L2,39H4.16a33,33,0,0,0,1.55,3h0L3.15,45.76c1.22-1.55,5.54-1.55,6.69,0,0,0-2.16-3.24-2.63-3.72,0,0,2.23-3,2.5-5ZM6.73,30.89a1,1,0,0,1-1-1,1.05,1.05,0,0,1,1-1.08,1.07,1.07,0,0,1,1.08,1.08A1.05,1.05,0,0,1,6.73,30.89Z"&gt;&lt;/path&gt;
+                      &lt;path class="c736717c-aca0-4efc-96b0-7ba721cb96d1" d="M45.7,37,48,37l-2.16-4.26S44.89,28,42.53,26.1c0,0-4.53,3.58-3.31,10.74L38,39h2.16a33,33,0,0,0,1.55,3h0l-2.57,3.72c1.22-1.55,5.54-1.55,6.69,0,0,0-2.16-3.24-2.63-3.72C43.2,42,45.43,39.07,45.7,37Zm-4-7.16a1.05,1.05,0,0,1,1-1.08,1.07,1.07,0,0,1,1.08,1.08,1.05,1.05,0,0,1-1.08,1A1,1,0,0,1,41.72,29.88Z"&gt;&lt;/path&gt;
+                    &lt;/g&gt;
+                  &lt;/g&gt;
+                &lt;/svg&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            Fish and shellfish
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="field__field_icon_link__item field__field_icon_link__item--odd"&gt;
+        &lt;div class="paragraph paragraph--type-icon-link-item paragraph--view-mode--default"&gt;
+          &lt;a href="#landing-links" style="display: block; border: 1px solid;"
+            data-ytta-id="-"&gt;
+            &lt;div class="field field__field_icon"&gt;
+              &lt;div class="svg" aria-hidden="true"&gt;
+                &lt;svg class="icon icon--meat" role="presentation" viewBox="0 0 50 50"&gt;
+                  &lt;defs&gt;
+                    &lt;style&gt;
+                      .a2d14fdf-8511-43a3-b348-5cbbf2c38392 {
+                        fill: none;
+                      }
+                    &lt;/style&gt;
+                  &lt;/defs&gt;
+                  &lt;title&gt;meat&lt;/title&gt;
+                  &lt;g id="a50d8c5e-6bbe-4b88-a373-a47eb9e1f966" data-name="meat"&gt;
+                    &lt;rect class="a2d14fdf-8511-43a3-b348-5cbbf2c38392" width="50" height="50"&gt;&lt;/rect&gt;
+                    &lt;g&gt;
+                      &lt;path d="M13,29.47c-1.25,1.25-.6,3.78,1.52,5.89a7.93,7.93,0,0,0,3,1.93,4.07,4.07,0,0,0,1.28.23,2.28,2.28,0,0,0,1.66-.64c1.25-1.25.59-3.78-1.53-5.9S14.27,28.22,13,29.47Z"&gt;&lt;/path&gt;
+                      &lt;path d="M46.88,7.16a3.83,3.83,0,0,0-3-1.1,3.82,3.82,0,0,0-6.51-2.95A5.79,5.79,0,0,0,35.7,7.24,3.93,3.93,0,0,1,34.53,10l-2.8,2.8c-3.59-1.22-8.42-.58-13.71,1.93C13.21,13.44,8.89,14.25,6.14,17L3.36,19.77l0,0,0,0L3,20.16H3a1,1,0,0,0-.23.4c-2.31,3.77,1,11.66,8,18.68C16.32,44.77,22.4,48,26.58,48a5,5,0,0,0,3.69-1.32,4.23,4.23,0,0,0,.66-.89l2-2C35.72,41,36.53,36.7,35.2,31.9c2.52-5.27,3.16-10.1,1.94-13.67l2.81-2.8a4,4,0,0,1,2.8-1.16h0a5.81,5.81,0,0,0,4.13-1.71A3.81,3.81,0,0,0,46.88,7.16ZM12.17,37.85c-6.93-6.91-9.49-14.07-7.6-16.46,1.17-.9,3.38-.79,6.18.36A33.17,33.17,0,0,1,21,29a33.06,33.06,0,0,1,7.23,10.2c1.22,3,1.29,5.29.19,6.38h0a.93.93,0,0,0-.09.14C25.6,47.06,18.77,44.42,12.17,37.85Z"&gt;&lt;/path&gt;
+                    &lt;/g&gt;
+                  &lt;/g&gt;
+                &lt;/svg&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            Meat and slaughterhouses
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="field__field_icon_link__item field__field_icon_link__item--even"&gt;
+        &lt;div class="paragraph paragraph--type-icon-link-item paragraph--view-mode--default"&gt;
+          &lt;a href="#landing-links" style="display: block; border: 1px solid;" data-ytta-id="-"&gt;
+            &lt;div class="field field__field_icon"&gt;
+              &lt;div class="svg" aria-hidden="true"&gt;
+                &lt;svg class="icon icon--wine" role="presentation" viewBox="0 0 50 50"&gt;
+                  &lt;defs&gt;
+                    &lt;style&gt;
+                      .\34 53048b1-fa5e-4b70-8b1e-ef405c3131a7 {
+                        fill: none;
+                      }
+                    &lt;/style&gt;
+                  &lt;/defs&gt;
+                  &lt;title&gt;wine&lt;/title&gt;
+                  &lt;g id="0e1bdde7-7cb8-46a1-a101-adbad6267e35" data-name="wine"&gt;
+                    &lt;rect class="453048b1-fa5e-4b70-8b1e-ef405c3131a7" width="50" height="50"&gt;&lt;/rect&gt;
+                    &lt;path d="M22.23,47.4c.2,0,.3.13.3.3a.3.3,0,0,1-.3.3H10.76a.28.28,0,0,1-.3-.3.29.29,0,0,1,.3-.3s5.11-.72,5.11-3.84V38.1c.3-6-9.36-7-4.51-20.1H21.63c4.85,13.05-4.81,14.1-4.51,20.1v5.45c0,3.12,5.11,3.84,5.11,3.84ZM33,43V22h7V20.5a6.52,6.52,0,0,0-5-6.32V4a1,1,0,0,0,0-2H31a1,1,0,0,0,0,2V14.18a6.52,6.52,0,0,0-5,6.32V46a2,2,0,0,0,2,2H38a2,2,0,0,0,2-2V43Z"&gt;&lt;/path&gt;
+                  &lt;/g&gt;
+                &lt;/svg&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            Wine
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+
+      <div class="styleguide__item__tabCode___ofaNu styleguide__item__css___3ALxg" role="tabpanel">
+        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- css"><br>/* No component-specific CSS required, but inspecting via devtools will reveal where styles have cascaded from. */</code></pre>
+      </div>
+
+      <div class="styleguide__item__tabCode___ofaNu styleguide__item__js___3IO7y" role="tabpanel">
+        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- js"><br>// No component-specific JavaScript required.</code></pre>
+      </div>
+    </div>
+
+  </form>
+</article>
 <article class="styleguide__item___28nPp" id="landingPromo">
   <header class="styleguide__item__header___2u3FN">
     <h3 class="styleguide__item__title___2gjuP">Landing-promo</h3>
@@ -16712,16 +17538,21 @@ Plugin documentation:
   </div>
 </div></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-landingPromo" data-corresponding-code="code-form-landingPromo">
+    <label for="show-code-landingPromo">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-f0d7ebc3-4c91-11f0-}6e85-d907233e37ae" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-f0d7ebc3-4c91-11f0-}6e85-d907233e37ae" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-f0d7ebc3-4c91-11f0-}6e85-d907233e37ae" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-landingPromo hidden" role="region">
+
+    <input name="info-input" id="tabHTML-494f0956-0359-2fdb-}a1f1-b12bddf67d49" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-494f0956-0359-2fdb-}a1f1-b12bddf67d49" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-494f0956-0359-2fdb-}a1f1-b12bddf67d49" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-f0d7ebc3-4c91-11f0-}6e85-d907233e37ae" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-f0d7ebc3-4c91-11f0-}6e85-d907233e37ae" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-f0d7ebc3-4c91-11f0-}6e85-d907233e37ae" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-494f0956-0359-2fdb-}a1f1-b12bddf67d49" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-494f0956-0359-2fdb-}a1f1-b12bddf67d49" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-494f0956-0359-2fdb-}a1f1-b12bddf67d49" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -16763,7 +17594,7 @@ Plugin documentation:
       </div>
 
       <div class="styleguide__item__tabCode___ofaNu styleguide__item__css___3ALxg" role="tabpanel">
-        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- css"><br>/* No component-specific CSS required. */</code></pre>
+        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- css"><br>/* No component-specific CSS required, but inspecting via devtools will reveal where styles have cascaded from. */</code></pre>
       </div>
 
       <div class="styleguide__item__tabCode___ofaNu styleguide__item__js___3IO7y" role="tabpanel">
@@ -16822,16 +17653,21 @@ Plugin documentation:
 </div>
 </div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-linkList" data-corresponding-code="code-form-linkList">
+    <label for="show-code-linkList">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-6e894987-7a1c-5c42-}e287-68493994d812" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-6e894987-7a1c-5c42-}e287-68493994d812" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-6e894987-7a1c-5c42-}e287-68493994d812" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-linkList hidden" role="region">
+
+    <input name="info-input" id="tabHTML-d7add8db-443e-006e-}32b0-d60309412889" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-d7add8db-443e-006e-}32b0-d60309412889" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-d7add8db-443e-006e-}32b0-d60309412889" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-6e894987-7a1c-5c42-}e287-68493994d812" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-6e894987-7a1c-5c42-}e287-68493994d812" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-6e894987-7a1c-5c42-}e287-68493994d812" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-d7add8db-443e-006e-}32b0-d60309412889" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-d7add8db-443e-006e-}32b0-d60309412889" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-d7add8db-443e-006e-}32b0-d60309412889" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -16881,7 +17717,7 @@ Plugin documentation:
       </div>
 
       <div class="styleguide__item__tabCode___ofaNu styleguide__item__css___3ALxg" role="tabpanel">
-        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- css"><br>/* No component-specific CSS required. */</code></pre>
+        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- css"><br>/* No component-specific CSS required, but inspecting via devtools will reveal where styles have cascaded from. */</code></pre>
       </div>
 
       <div class="styleguide__item__tabCode___ofaNu styleguide__item__js___3IO7y" role="tabpanel">
@@ -17077,16 +17913,21 @@ Plugin documentation:
   </footer>
 </div></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-listing" data-corresponding-code="code-form-listing">
+    <label for="show-code-listing">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-2579a288-8d8e-f8ea-}9534-4758282ca347" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-2579a288-8d8e-f8ea-}9534-4758282ca347" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-2579a288-8d8e-f8ea-}9534-4758282ca347" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-listing hidden" role="region">
+
+    <input name="info-input" id="tabHTML-2410a863-bc3c-bce2-}4a15-25242a77797c" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-2410a863-bc3c-bce2-}4a15-25242a77797c" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-2410a863-bc3c-bce2-}4a15-25242a77797c" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-2579a288-8d8e-f8ea-}9534-4758282ca347" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-2579a288-8d8e-f8ea-}9534-4758282ca347" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-2579a288-8d8e-f8ea-}9534-4758282ca347" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-2410a863-bc3c-bce2-}4a15-25242a77797c" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-2410a863-bc3c-bce2-}4a15-25242a77797c" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-2410a863-bc3c-bce2-}4a15-25242a77797c" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -18292,16 +19133,21 @@ Plugin documentation:
     </div>
  </div></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-navigation" data-corresponding-code="code-form-navigation">
+    <label for="show-code-navigation">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-5e540ecf-fbf8-cd11-}487e-6fc5e1628326" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-5e540ecf-fbf8-cd11-}487e-6fc5e1628326" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-5e540ecf-fbf8-cd11-}487e-6fc5e1628326" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-navigation hidden" role="region">
+
+    <input name="info-input" id="tabHTML-24bbd460-914f-c452-}4751-410b0e4010e7" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-24bbd460-914f-c452-}4751-410b0e4010e7" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-24bbd460-914f-c452-}4751-410b0e4010e7" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-5e540ecf-fbf8-cd11-}487e-6fc5e1628326" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-5e540ecf-fbf8-cd11-}487e-6fc5e1628326" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-5e540ecf-fbf8-cd11-}487e-6fc5e1628326" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-24bbd460-914f-c452-}4751-410b0e4010e7" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-24bbd460-914f-c452-}4751-410b0e4010e7" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-24bbd460-914f-c452-}4751-410b0e4010e7" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -20919,16 +21765,21 @@ Plugin documentation:
     </ul>
  </nav></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-pagination" data-corresponding-code="code-form-pagination">
+    <label for="show-code-pagination">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-f630d984-4de5-a8c2-}7880-37381bd9c1cb" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-f630d984-4de5-a8c2-}7880-37381bd9c1cb" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-f630d984-4de5-a8c2-}7880-37381bd9c1cb" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-pagination hidden" role="region">
+
+    <input name="info-input" id="tabHTML-4cf04713-1687-9984-}bb8a-29e62085793a" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-4cf04713-1687-9984-}bb8a-29e62085793a" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-4cf04713-1687-9984-}bb8a-29e62085793a" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-f630d984-4de5-a8c2-}7880-37381bd9c1cb" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-f630d984-4de5-a8c2-}7880-37381bd9c1cb" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-f630d984-4de5-a8c2-}7880-37381bd9c1cb" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-4cf04713-1687-9984-}bb8a-29e62085793a" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-4cf04713-1687-9984-}bb8a-29e62085793a" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-4cf04713-1687-9984-}bb8a-29e62085793a" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -21093,16 +21944,21 @@ Plugin documentation:
     </div>
 </div></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-promo" data-corresponding-code="code-form-promo">
+    <label for="show-code-promo">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-d4a22aa3-e987-04cb-}2259-9507cf884100" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-d4a22aa3-e987-04cb-}2259-9507cf884100" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-d4a22aa3-e987-04cb-}2259-9507cf884100" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-promo hidden" role="region">
+
+    <input name="info-input" id="tabHTML-583b71ee-4968-9c25-}9227-ea1bce86562a" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-583b71ee-4968-9c25-}9227-ea1bce86562a" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-583b71ee-4968-9c25-}9227-ea1bce86562a" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-d4a22aa3-e987-04cb-}2259-9507cf884100" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-d4a22aa3-e987-04cb-}2259-9507cf884100" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-d4a22aa3-e987-04cb-}2259-9507cf884100" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-583b71ee-4968-9c25-}9227-ea1bce86562a" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-583b71ee-4968-9c25-}9227-ea1bce86562a" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-583b71ee-4968-9c25-}9227-ea1bce86562a" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -22077,16 +22933,21 @@ a.field__field_content_promo__item {
   </div>
 </div></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-share" data-corresponding-code="code-form-share">
+    <label for="show-code-share">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-e48a06b4-f5d9-a5a1-}a52a-2de3bea6421a" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-e48a06b4-f5d9-a5a1-}a52a-2de3bea6421a" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-e48a06b4-f5d9-a5a1-}a52a-2de3bea6421a" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-share hidden" role="region">
+
+    <input name="info-input" id="tabHTML-281c452f-86a9-23d6-}3d7d-aff26894ebf9" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-281c452f-86a9-23d6-}3d7d-aff26894ebf9" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-281c452f-86a9-23d6-}3d7d-aff26894ebf9" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-e48a06b4-f5d9-a5a1-}a52a-2de3bea6421a" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-e48a06b4-f5d9-a5a1-}a52a-2de3bea6421a" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-e48a06b4-f5d9-a5a1-}a52a-2de3bea6421a" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-281c452f-86a9-23d6-}3d7d-aff26894ebf9" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-281c452f-86a9-23d6-}3d7d-aff26894ebf9" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-281c452f-86a9-23d6-}3d7d-aff26894ebf9" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -22113,7 +22974,7 @@ a.field__field_content_promo__item {
       </div>
 
       <div class="styleguide__item__tabCode___ofaNu styleguide__item__css___3ALxg" role="tabpanel">
-        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- css"><br>/* No component-specific CSS required. */</code></pre>
+        <pre class="styleguide__pre___3OTm0"><code class="styleguide__code___2aCA- css"><br>/* No component-specific CSS required, but inspecting via devtools will reveal where styles have cascaded from. */</code></pre>
       </div>
 
       <div class="styleguide__item__tabCode___ofaNu styleguide__item__js___3IO7y" role="tabpanel">

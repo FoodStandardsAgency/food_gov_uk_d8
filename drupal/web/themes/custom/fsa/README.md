@@ -1,6 +1,6 @@
 ## Requirements
 
-FSA Theme uses ES6 features, so it is recommended to have a recent version of [Node.js](https://nodejs.org/) installed globally (v5.0 minimum required, for `package-lock.json` support). [Node.js](https://nodejs.org/) is the only global requirement as this project uses [Webpack](https://webpack.js.org/) in lieu of task runners.
+FSA Theme uses ES6 features, so it is recommended to have a recent version of [Node.js](https://nodejs.org/) installed globally (v5.0 minimum required, for `package-lock.json` support). Node.js is the only global requirement as this project uses [Webpack](https://webpack.js.org/) in lieu of task runners.
 
 ## Installation
 

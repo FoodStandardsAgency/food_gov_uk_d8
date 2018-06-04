@@ -4,6 +4,6 @@ This style guide is intended to assist front-end developers and designers who wo
 - The coding style and approaches to development
 - Visual examples of the components and colours used
 
-Many of the components have been built in isolation, with CSS and JS tightly coupled with the HTML. Where this is the case, you can see the corresponding CSS and JS for that component by clicking on the respective tab. Where this is not available in this document, it can be found by searching for the related classes and IDs throughout the codebase.
+Many of the components have been built in isolation, with CSS and JS tightly coupled with the HTML. Where this is the case, you can see the corresponding CSS and JS for that component by clicking on the respective tab. Where this is not the case, try inspecting the element in devtools to see where any styles have cascaded from.
 
 This style guide is best viewed at desktop resolutions (>1000px). Since the actual site is served by a Drupal backend, and this style guide is a static html file, some component functionalities (such as form submissions, links etc) are restricted.

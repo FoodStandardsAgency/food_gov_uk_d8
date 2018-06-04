@@ -1,12 +1,14 @@
 import stickyElement from '../helper/stickyElement'
 import scrollToElement from '../helper/scrollToElement'
 
-// Fix frustrating Chrome issue with 100vh navigation height...
+// Fix issues with 100vh flex height
 document.querySelector('.navigation-wrapper__main').style.height = '82px'
-
-// Fix similar issue with height of promo items
 document.querySelectorAll('.promo-listing__item').forEach(promo => {
   promo.style.height = '400px'
+})
+document.querySelectorAll('.field__field_content_reference__item').forEach(el => {
+  el.style.height = '130.5px'
+  el.style.marginBottom = '17.5px'
 })
 
 // Sticky element
@@ -32,3 +34,12 @@ if (scrollElementArray != null) {
     })
   }
 }
+
+// Show or hide code using checkbox
+const checkboxes = document.querySelectorAll('input[type="checkbox"].show-code')
+checkboxes.forEach(checkbox => {
+  checkbox.addEventListener('change', function() {
+    const code = document.querySelector(`form.${this.dataset.correspondingCode}`)
+    code.classList.toggle('hidden')
+  })
+})
