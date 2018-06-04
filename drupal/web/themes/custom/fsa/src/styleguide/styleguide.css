@@ -25,12 +25,6 @@ section {
   background-color: #fff !important;
 }
 
-.container {
-  max-width: 1400px;
-  margin: 0 10px;
-  padding: 5px !important;
-}
-
 .underline {
   text-decoration: underline;
 }
@@ -51,6 +45,7 @@ section {
 .container {
   max-width: 40em;
   margin: 0 auto;
+  padding: 5px !important;
 }
 
 .hero {
@@ -153,6 +148,12 @@ section {
 
 :global .edit-is-useful-no-label {
   padding-left: 15px !important;
+}
+
+:global .styleguide-field-container {
+  max-width: 702px !important;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .navigation__heading {
