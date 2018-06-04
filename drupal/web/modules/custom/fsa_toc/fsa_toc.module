@@ -7,6 +7,7 @@
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\toc_api\TocFormatter;
+use Drupal\Component\Utility\Html;
 
 /**
  * Implements hook_entity_presave().
@@ -31,12 +32,7 @@ function fsa_toc_entity_presave(EntityInterface $entity) {
     // Convert html-entities in order to preserve any special character.
     $text_body = mb_convert_encoding($text_body, 'HTML-ENTITIES', 'UTF-8');
 
-    // We are using DOMDocument directly, because Html::load adds
-    // unnecessary DOCTYPE headers.
-    // @see Drupal\Component\Utility\Html::load
-    $html_dom = new \DOMDocument();
-    @$html_dom->loadHTML($text_body, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-
+    $html_dom = Html::load($text_body);
     $xpath = new \DOMXPath($html_dom);
 
     // Find all h1-h6 tags, add id attribute, if the element doesn't have one.
@@ -60,8 +56,10 @@ function fsa_toc_entity_presave(EntityInterface $entity) {
         }
       }
 
-      // Convert xml structure back to html.
-      $text_body = $html_dom->saveHTML();
+      // Convert structure back to html removing doctype, head, meta and body
+      // tags (Html::load() adds the doctype etc but we don't want to save them
+      // for body field values).
+      $text_body = preg_replace('~<(?:!DOCTYPE|/?(?:html|head|meta|body))[^>]*>\s*~i', '', $html_dom->saveHTML());
 
       // Set the body field value and save node.
       $entity->body->setValue(['value' => $text_body, 'format' => $text_format]);
