@@ -139,7 +139,7 @@ module.exports = {
     // Create a custom template for styleguide
     new HtmlWebpackPlugin({
       template: 'styleguide/template.js',
-      filename: 'styleguide.html'
+      filename: 'styleguide/index.html'
     })
   ]
 }
