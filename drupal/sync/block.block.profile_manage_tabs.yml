@@ -1,0 +1,30 @@
+uuid: b75c84b6-65a5-4151-bdec-359f4d66a2d5
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - fsa_signin
+    - system
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: tab-row
+id: profile_manage_tabs
+theme: fsa
+region: content_top
+weight: -22
+provider: null
+plugin: profile_manage_tabs
+settings:
+  id: profile_manage_tabs
+  label: 'Profile manage tabs'
+  provider: fsa_signin
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: "/profile/manage\r\n/profile/manage/*"
+    negate: false
+    context_mapping: {  }

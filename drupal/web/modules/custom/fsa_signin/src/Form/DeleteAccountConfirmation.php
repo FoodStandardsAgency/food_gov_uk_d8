@@ -31,7 +31,7 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function getCancelUrl() {
-    return new Url('fsa_signin.default_controller_manageProfilePage');
+    return new Url('fsa_signin.default_controller_accountSettingsPage');
   }
 
   /**
@@ -48,8 +48,8 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
     }
     $user = \Drupal::currentUser();
     $email = $user->getEmail();
-    $message = '<p>' . $this->t('You are about to remove subscription with email <strong>@email</strong>.', ['@email' => $email]) . '</p>';
-    $message .= '<p>' . $this->t('This will cancel all your subscriptions and permanently remove your personal details.') . '</p>';
+    $message = '<p>' . $this->t('You are about to remove your account with email <i>@email</i>.', ['@email' => $email]) . '</p>';
+    $message .= '<p>' . $this->t('Deleting your account will cancel all your subscriptions and permanently remove your personal details from FSA website.') . '</p>';
     $message .= '<p>' . $privacy_link . '</p>';
     return $message;
   }
@@ -75,6 +75,7 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
 
     if (\Drupal::request()->query->has('done')) {
       $markup = '<p>' . $this->t('Your profile has been successfully removed.') . '</p>';
+      $markup .= '<p>' . $this->t('If you change your mind you can always <a href="/news-alerts/subscribe">re-subscribe</a>.') . '</p>';
 
       return [
         '#markup' => $markup,
@@ -83,27 +84,23 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
 
     $user = \Drupal::currentUser();
     if ($user->isAnonymous()) {
-      $markup = $this->t('Log in or create account');
+      $markup = $this->t('You need to be <a href="/news-alerts/signin">logged in</a> in order to delete your profile.');
 
       return [
         '#markup' => $markup,
       ];
     }
 
-    $form['back'] = [
-      '#prefix' => '<header class="profile__header">',
-      '#markup' => DefaultController::linkMarkup('fsa_signin.default_controller_manageProfilePage', $this->t('Back'), ['back']),
-    ];
-    $form['logout'] = [
-      '#suffix' => '</header>',
-      '#markup' => DefaultController::linkMarkup('user.logout.http', $this->t('Logout'), ['profile__logout']),
-    ];
-
     if (DefaultController::isMoreThanRegistered($user)) {
+      $user_roles = $user->getRoles();
+      unset($user_roles[0]);
+      $roles = implode(', ', $user_roles);
+      $count = count($user_roles);
       // Don't let people with more than just "Authenticated" role to delete
       // their account.
       $form['message'] = [
-        '#markup' => '<p><strong>' . $this->t('This functionality is not available for users with multiple roles.') . '</strong></p>',
+        '#markup' => $this->formatPlural($count, 'You you cannot delete your profile because you have <pre>@roles</pre> role', 'You you cannot delete your profile because your account has following roles: <pre>@roles</pre>', ['@roles' => $roles]) .
+        ' ' . t('<a href="/profile/manage">Back to account settings page</a>'),
       ];
 
       return $form;

@@ -57,7 +57,7 @@ $aliases['stage'] = array(
 );
 
 $aliases['prod'] = array(
-  'uri' => 'https://fsa.prod.wunder.io',
+  'uri' => 'https://www.food.gov.uk',
   'remote-user' => 'www-admin',
   'remote-host' => '83.136.255.30',
   'root' => '/var/www/fsa.prod.wunder.io/current/web',

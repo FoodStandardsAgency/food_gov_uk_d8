@@ -23,11 +23,27 @@ fsa_signin.default_controller_profilePage:
   requirements:
     _user_is_logged_in: 'TRUE'
 
-fsa_signin.default_controller_manageProfilePage:
+fsa_signin.default_controller_accountSettingsPage:
   path: '/profile/manage'
   defaults:
-    _controller: '\Drupal\fsa_signin\Controller\DefaultController::manageProfilePage'
+    _controller: '\Drupal\fsa_signin\Controller\DefaultController::accountSettingsPage'
     _title: 'Manage your preferences'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+fsa_signin.default_controller_deliveryOptionsPage:
+  path: '/profile/manage/delivery'
+  defaults:
+    _controller: '\Drupal\fsa_signin\Controller\DefaultController::deliveryOptionsPage'
+    _title: 'Manage your preferences'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+fsa_signin.default_controller_changePasswordPage:
+  path: '/profile/manage/password'
+  defaults:
+    _controller: '\Drupal\fsa_signin\Controller\DefaultController::changePasswordPage'
+    _title: 'Change password'
   requirements:
     _user_is_logged_in: 'TRUE'
 

@@ -1,0 +1,28 @@
+uuid: 57889cc8-e8c5-4278-801d-bd06088355b0
+langcode: en
+status: true
+dependencies:
+  config:
+    - webform.webform.user_satisfaction
+  module:
+    - block_class
+    - webform
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: user_satisfaction_form
+theme: fsa
+region: hidden
+weight: -16
+provider: null
+plugin: webform_block
+settings:
+  id: webform_block
+  label: 'Give feedback about this service'
+  provider: webform
+  label_display: visible
+  webform_id: user_satisfaction
+  default_data: ''
+visibility: {  }

@@ -10,7 +10,7 @@ id: foreign_object
 title: 'Report a problem with a food product'
 description: 'Foreign object in food report form'
 category: 'Food problem'
-elements: "business:\n  '#type': webform_wizard_page\n  '#title': Business\n  business_explanation:\n    '#type': webform_markup\n    '#markup': \"<p>Report a problem with food that you&#39;ve bought.</p>\\n\\n<p>For example</p>\\n\\n<ul>\\n\\t<li>Foreign object found in food</li>\\n\\t<li>Food that appears to be contaminated with chemicals</li>\\n</ul>\\n\"\n  where_lookup:\n    '#type': webform_googleplace\n    '#title': 'Where did you purchase the food?'\n    '#description': 'Enter the name and address of the UK business where you bought the product and select from the dropdown list.'\n    '#required': true\n  fsa_establishment_la_name:\n    '#type': hidden\n    '#title': 'Local authority name'\n    '#access_create_roles':\n      - anonymous\n      - authenticated\n  fsa_establishment_postal_code:\n    '#type': hidden\n    '#title': 'Postal code'\n  fsa_establishment_la_email:\n    '#type': textfield\n    '#title': 'Local authority email'\n    '#help': 'Use the <em>Find a food safety team</em> lookup, below. Enter a local authority email. Click on&nbsp;<em>Save</em> to save without sending or <em>Save and send to local authority</em> to save and send the report to local authority.'\n    '#description': 'Report will be sent to local authority automatically unless&nbsp;<em>Manually sent to local authority</em> checkbox is checked<em>.</em>'\n    '#access_create_roles': {  }\n    '#access_update_roles':\n      - fsa_admin\n      - administrator\n    '#access_view_roles':\n      - fsa_admin\n      - administrator\n  fsa_establishment_la_email_overridden:\n    '#type': hidden\n    '#title': 'Local authority email overridden'\n  fsa_establishment_la_email_alt:\n    '#type': hidden\n    '#title': \"Local authority alternative email\\t\"\n  manually_sent:\n    '#type': checkbox\n    '#title': 'Manually sent to local authority'\n    '#access_create_roles': {  }\n    '#access_update_roles':\n      - fsa_admin\n      - administrator\n    '#access_view_roles':\n      - fsa_admin\n      - administrator\npage_description:\n  '#type': webform_wizard_page\n  '#title': Description\n  product_name:\n    '#type': textfield\n    '#title': 'What is the name of the product?'\n    '#description': 'Please include the full product name and brand, if possible.'\n    '#required': true\n  problem_details:\n    '#type': textarea\n    '#title': 'What is wrong with the product?'\n    '#description': 'Please give us as much detail as possible to help investigate the issue.'\n    '#required': true\n  label_details:\n    '#type': textarea\n    '#title': 'Please provide any details on the label.'\n    '#description': 'For example batch codes, a barcode, use by/best before date, or health marks'\n    '#required': true\n  evidence:\n    '#type': radios\n    '#title': 'Do you have any evidence?'\n    '#options':\n      'Yes': 'Yes'\n      'No': 'No'\n    '#required': true\n  evidence_details:\n    '#type': textarea\n    '#title': 'Please tell us what evidence you have.'\n    '#description': 'For example photos or receipts. Your local authority might request them from you at a later date.'\n    '#states':\n      visible:\n        ':input[name=\"evidence\"]':\n          value: 'Yes'\npage_business:\n  '#type': webform_wizard_page\n  '#title': Details\n  when_purchased:\n    '#type': textfield\n    '#title': 'When did you purchase the food?'\n    '#required': true\n  premises_contacted_action_taken:\n    '#type': radios\n    '#title': 'Have you contacted the business directly?'\n    '#options':\n      'yes': 'Yes'\n      'no': 'No'\n    '#required': true\npage_contact_details:\n  '#type': webform_wizard_page\n  '#title': 'Contact details'\n  header_contact_info:\n    '#type': webform_markup\n    '#markup': \"<h3>Your contact details</h3>\\r\\n\\r\\n<p>This information will only be used by the local authority to contact you about your issue, and to send you a confirmation email about your report. To fully investigate the issue it may be necessary to contact you to seek clarification.</p>\"\n  name:\n    '#type': textfield\n    '#title': 'Full name'\n  email:\n    '#type': email\n    '#title': 'Email address'\n    '#required': true\n  telephone:\n    '#type': tel\n    '#title': 'Phone number'\n  fsa_privacy_link_rafp:\n    '#type': webform_markup\n  captcha:\n    '#type': captcha\n"
+elements: "business:\n  '#type': webform_wizard_page\n  '#title': Business\n  business_explanation:\n    '#type': webform_markup\n    '#markup': \"<p>Report a problem with food that you&#39;ve bought.</p>\\n\\n<p>For example</p>\\n\\n<ul>\\n\\t<li>Foreign object found in food</li>\\n\\t<li>Food that appears to be contaminated with chemicals</li>\\n</ul>\\n\"\n  where_lookup:\n    '#type': webform_googleplace\n    '#title': 'Where did you purchase the food?'\n    '#description': 'Enter the name and address of the UK business where you bought the product and select from the dropdown list.'\n    '#required': true\n  fsa_establishment_la_name:\n    '#type': hidden\n    '#title': 'Local authority name'\n    '#access_create_roles':\n      - anonymous\n      - authenticated\n  fsa_establishment_postal_code:\n    '#type': hidden\n    '#title': 'Postal code'\n  fsa_establishment_la_email:\n    '#type': textfield\n    '#title': 'Local authority email'\n    '#help': 'Use the <em>Find a food safety team</em> lookup, below. Enter a local authority email. Check <em>Manually sent to local authority</em>. Continue and save. Visit the <em>Resend</em> tab, above, to send the data.'\n    '#access_create_roles': {  }\n    '#access_update_roles':\n      - fsa_admin\n      - administrator\n    '#access_view_roles':\n      - fsa_admin\n      - administrator\n  fsa_establishment_la_email_overridden:\n    '#type': hidden\n    '#title': 'Local authority email overridden'\n  fsa_establishment_la_email_alt:\n    '#type': hidden\n    '#title': \"Local authority alternative email\\t\"\n  manually_sent:\n    '#type': checkbox\n    '#title': 'Manually sent to local authority'\n    '#access_create_roles': {  }\n    '#access_update_roles':\n      - fsa_admin\n      - administrator\n    '#access_view_roles':\n      - fsa_admin\n      - administrator\npage_description:\n  '#type': webform_wizard_page\n  '#title': Description\n  product_name:\n    '#type': textfield\n    '#title': 'What is the name of the product?'\n    '#description': 'Please include the full product name and brand, if possible.'\n    '#required': true\n  problem_details:\n    '#type': textarea\n    '#title': 'What is wrong with the product?'\n    '#description': 'Please give us as much detail as possible to help investigate the issue.'\n    '#required': true\n  label_details:\n    '#type': textarea\n    '#title': 'Please provide any details on the label.'\n    '#description': 'For example batch codes, a barcode, use by/best before date, or health marks'\n    '#required': true\n  evidence:\n    '#type': radios\n    '#title': 'Do you have any evidence?'\n    '#options':\n      'Yes': 'Yes'\n      'No': 'No'\n    '#required': true\n  evidence_details:\n    '#type': textarea\n    '#title': 'Please tell us what evidence you have.'\n    '#description': 'For example photos or receipts. Your local authority might request them from you at a later date.'\n    '#states':\n      visible:\n        ':input[name=\"evidence\"]':\n          value: 'Yes'\npage_business:\n  '#type': webform_wizard_page\n  '#title': Details\n  when_purchased:\n    '#type': textfield\n    '#title': 'When did you purchase the food?'\n    '#required': true\n  premises_contacted_action_taken:\n    '#type': radios\n    '#title': 'Have you contacted the business directly?'\n    '#options':\n      'yes': 'Yes'\n      'no': 'No'\n    '#required': true\npage_contact_details:\n  '#type': webform_wizard_page\n  '#title': 'Contact details'\n  header_contact_info:\n    '#type': webform_markup\n    '#markup': \"<h3>Your contact details</h3>\\r\\n\\r\\n<p>This information will only be used by the local authority to contact you about your issue, and to send you a confirmation email about your report. To fully investigate the issue it may be necessary to contact you to seek clarification.</p>\"\n  name:\n    '#type': textfield\n    '#title': 'Full name'\n  email:\n    '#type': email\n    '#title': 'Email address'\n    '#required': true\n  telephone:\n    '#type': tel\n    '#title': 'Phone number'\n  fsa_privacy_link_rafp:\n    '#type': webform_markup\n  captcha:\n    '#type': captcha\n"
 css: ''
 javascript: ''
 settings:
@@ -34,6 +34,8 @@ settings:
   form_reset: false
   form_disable_autocomplete: false
   form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
   form_unsaved: true
   form_disable_back: false
   form_submit_back: false
@@ -61,13 +63,17 @@ settings:
   submission_login: false
   submission_login_message: ''
   submission_exception_message: ''
+  submission_locked_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
   wizard_progress_bar: false
   wizard_progress_pages: true
   wizard_progress_percentage: false
   wizard_start_label: ''
   wizard_confirmation: true
   wizard_confirmation_label: ''
-  wizard_track: ''
+  wizard_track: name
   preview: 2
   preview_label: Summary
   preview_title: ''
@@ -94,6 +100,8 @@ settings:
   confirmation_back: false
   confirmation_back_label: ''
   confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
   limit_total: null
   limit_total_interval: null
   limit_total_message: ''
@@ -148,6 +156,10 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
 handlers:
   copy_of_report:
     id: email
@@ -188,12 +200,13 @@ handlers:
     status: true
     conditions:
       enabled:
-        ':input[name="manually_sent"]':
-          unchecked: true
-        ':input[name="fsa_establishment_la_email_overridden"]':
-          empty: true
-        ':input[name="fsa_establishment_la_email_alt"]':
-          empty: true
+        -
+          ':input[name="fsa_establishment_la_email_overridden"]':
+            value: '0'
+        - or
+        -
+          ':input[name="fsa_establishment_la_email_alt"]':
+            empty: true
     weight: 0
     settings:
       states:
@@ -241,6 +254,7 @@ handlers:
         - updated
       notes: 'Personal data was removed automatically on submit'
       sticky: null
+      locked: null
       data: "name: ''\r\nemail: ''\r\ntelephone: ''"
       message: ''
       message_type: status
@@ -252,8 +266,6 @@ handlers:
     status: true
     conditions:
       enabled:
-        ':input[name="manually_sent"]':
-          unchecked: true
         ':input[name="fsa_establishment_la_email_overridden"]':
           value: '1'
         ':input[name="fsa_establishment_la_email_alt"]':

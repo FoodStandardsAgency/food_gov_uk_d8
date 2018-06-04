@@ -40,7 +40,7 @@ abstract class FsaNotifyMessage {
         break;
 
       default:
-        $base_url = 'https://food.gov.uk';
+        $base_url = 'https://www.food.gov.uk';
         break;
     }
 
@@ -86,9 +86,17 @@ abstract class FsaNotifyMessage {
   abstract protected function assemble($items);
 
   /**
-   * Generate "short" for nodes in messages.
+   * Get short url for message links.
+   *
+   * @param \Drupal\node\Entity\Node $node
+   *   The node object.
+   * @param string $lang
+   *   Language code.
+   *
+   * @return string
+   *   Absolute short URL.
    */
-  protected function url($node, $lang) {
+  protected function url(Node $node, $lang) {
 
     $prefix = FALSE;
     if ($lang === 'cy') {
@@ -97,6 +105,28 @@ abstract class FsaNotifyMessage {
 
     $nid = $node->id();
     $url = sprintf('%s%s/node/%d', $this->base_url, $prefix, $nid);
+    return $url;
+  }
+
+  /**
+   * Get aliased node url for message links.
+   *
+   * @param \Drupal\node\Entity\Node $node
+   *   The node object.
+   * @param string $lang
+   *   Language code.
+   *
+   * @return string
+   *   Aliased, absolute URL.
+   */
+  protected function urlAlias(Node $node, $lang) {
+
+    $prefix = FALSE;
+    if ($lang === 'cy') {
+      $prefix = '/' . $lang;
+    }
+
+    $url = $this->base_url . $prefix . \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $node->id(), $lang);
     return $url;
   }
 
@@ -118,6 +148,64 @@ abstract class FsaNotifyMessage {
       $message = $node->getTitle();
     }
     return $message;
+  }
+
+  /**
+   * Get node update timestamp to alerts.
+   *
+   * @param \Drupal\node\Entity\Node $node
+   *   The node object.
+   * @param string $format
+   *   Time display format.
+   *
+   * @return string
+   *   Formatted display of node changed timestamp.
+   */
+  public function alertDate(Node $node, $format = 'medium') {
+    $date = \Drupal::service('date.formatter')->format($node->getChangedTime(), $format);
+
+    return $date;
+  }
+
+  /**
+   * Get alert subcription category from node.
+   *
+   * @param \Drupal\node\Entity\Node $node
+   *   The node object.
+   *
+   * @return string
+   *   The alert type/category of the node.
+   */
+  public function alertSubscriptionCategory(Node $node) {
+
+    if ($node->hasField('field_alert_type')) {
+      switch ($node->field_alert_type->value) {
+        case 'AA':
+          $category = t('Allergy alert');
+          break;
+
+        default:
+          $category = t('Food alert');
+      }
+    }
+    else {
+      switch ($node->getType()) {
+        case 'news':
+          $category = t('News update');
+          break;
+
+        case 'consultation':
+          $category = t('Consultation update');
+          break;
+
+        default:
+          // Default to whatever the node type machine name is.
+          $category = ucfirst($node->getType());
+      }
+
+    }
+
+    return $category;
   }
 
 }
