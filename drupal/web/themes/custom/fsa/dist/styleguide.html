@@ -14312,6 +14312,9 @@ section{
   padding:0.1em;
   font-family:monospace;
 }
+form.code-form.hidden{
+  display:none;
+}
 .styleguide__item___28nPp{
   margin-bottom:1em;
 
@@ -14707,7 +14710,7 @@ section{
   </header>
   
   <div class="styleguide__item__content___iDzu-"><h2 id="requirements">Requirements</h2>
-<p>FSA Theme uses ES6 features, so it is recommended to have a recent version of <a href="https://nodejs.org/">Node.js</a> installed globally (v5.0 minimum required, for <code>package-lock.json</code> support). <a href="https://nodejs.org/">Node.js</a> is the only global requirement as this project uses <a href="https://webpack.js.org/">Webpack</a> in lieu of task runners.</p>
+<p>FSA Theme uses ES6 features, so it is recommended to have a recent version of <a href="https://nodejs.org/">Node.js</a> installed globally (v5.0 minimum required, for <code>package-lock.json</code> support). Node.js is the only global requirement as this project uses <a href="https://webpack.js.org/">Webpack</a> in lieu of task runners.</p>
 <h2 id="installation">Installation</h2>
 <p>To get the started with theming, complete the following steps:</p>
 <ol>
@@ -15158,16 +15161,21 @@ Plugin documentation:
   </div>
 </div></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-breadcrumb" data-corresponding-code="code-form-breadcrumb">
+    <label for="show-code-breadcrumb">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-e542aa7f-f512-77ca-}6297-f089d88a3332" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-e542aa7f-f512-77ca-}6297-f089d88a3332" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-e542aa7f-f512-77ca-}6297-f089d88a3332" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-breadcrumb hidden" role="region">
+
+    <input name="info-input" id="tabHTML-d1a7e012-d8de-98a3-}92cf-f08b9a6a36c0" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-d1a7e012-d8de-98a3-}92cf-f08b9a6a36c0" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-d1a7e012-d8de-98a3-}92cf-f08b9a6a36c0" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-e542aa7f-f512-77ca-}6297-f089d88a3332" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-e542aa7f-f512-77ca-}6297-f089d88a3332" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-e542aa7f-f512-77ca-}6297-f089d88a3332" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-d1a7e012-d8de-98a3-}92cf-f08b9a6a36c0" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-d1a7e012-d8de-98a3-}92cf-f08b9a6a36c0" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-d1a7e012-d8de-98a3-}92cf-f08b9a6a36c0" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -15212,16 +15220,21 @@ Plugin documentation:
   <a href="#button" class="button">All news</a>
 </div></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-button" data-corresponding-code="code-form-button">
+    <label for="show-code-button">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-1ce4ca76-b36b-5644-}7974-49b94a9e07d3" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-1ce4ca76-b36b-5644-}7974-49b94a9e07d3" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-1ce4ca76-b36b-5644-}7974-49b94a9e07d3" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-button hidden" role="region">
+
+    <input name="info-input" id="tabHTML-08cdf1af-b92f-7763-}18e6-c90d03be403f" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-08cdf1af-b92f-7763-}18e6-c90d03be403f" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-08cdf1af-b92f-7763-}18e6-c90d03be403f" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-1ce4ca76-b36b-5644-}7974-49b94a9e07d3" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-1ce4ca76-b36b-5644-}7974-49b94a9e07d3" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-1ce4ca76-b36b-5644-}7974-49b94a9e07d3" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-08cdf1af-b92f-7763-}18e6-c90d03be403f" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-08cdf1af-b92f-7763-}18e6-c90d03be403f" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-08cdf1af-b92f-7763-}18e6-c90d03be403f" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -15451,16 +15464,21 @@ Plugin documentation:
 </div>
 </div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-contactLinks" data-corresponding-code="code-form-contactLinks">
+    <label for="show-code-contactLinks">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-9f03bcc0-c957-0f2b-}baa3-30a4dd88aabf" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-9f03bcc0-c957-0f2b-}baa3-30a4dd88aabf" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-9f03bcc0-c957-0f2b-}baa3-30a4dd88aabf" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-contactLinks hidden" role="region">
+
+    <input name="info-input" id="tabHTML-1420a865-bf94-a811-}3587-4b36d8d24d42" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-1420a865-bf94-a811-}3587-4b36d8d24d42" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-1420a865-bf94-a811-}3587-4b36d8d24d42" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-9f03bcc0-c957-0f2b-}baa3-30a4dd88aabf" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-9f03bcc0-c957-0f2b-}baa3-30a4dd88aabf" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-9f03bcc0-c957-0f2b-}baa3-30a4dd88aabf" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-1420a865-bf94-a811-}3587-4b36d8d24d42" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-1420a865-bf94-a811-}3587-4b36d8d24d42" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-1420a865-bf94-a811-}3587-4b36d8d24d42" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -15774,16 +15792,21 @@ Plugin documentation:
   </div>
 </footer></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-footer" data-corresponding-code="code-form-footer">
+    <label for="show-code-footer">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-45eeff3b-5dc0-0f5f-}a419-0a95d49549fc" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-45eeff3b-5dc0-0f5f-}a419-0a95d49549fc" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-45eeff3b-5dc0-0f5f-}a419-0a95d49549fc" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-footer hidden" role="region">
+
+    <input name="info-input" id="tabHTML-8d602377-6aa2-2421-}7c4a-318d1ed1a381" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-8d602377-6aa2-2421-}7c4a-318d1ed1a381" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-8d602377-6aa2-2421-}7c4a-318d1ed1a381" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-45eeff3b-5dc0-0f5f-}a419-0a95d49549fc" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-45eeff3b-5dc0-0f5f-}a419-0a95d49549fc" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-45eeff3b-5dc0-0f5f-}a419-0a95d49549fc" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-8d602377-6aa2-2421-}7c4a-318d1ed1a381" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-8d602377-6aa2-2421-}7c4a-318d1ed1a381" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-8d602377-6aa2-2421-}7c4a-318d1ed1a381" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -16086,16 +16109,21 @@ Plugin documentation:
     </div>
  </header></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-header" data-corresponding-code="code-form-header">
+    <label for="show-code-header">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-5eb30494-89d4-a73c-}95b2-8ea40f3059f7" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-5eb30494-89d4-a73c-}95b2-8ea40f3059f7" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-5eb30494-89d4-a73c-}95b2-8ea40f3059f7" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-header hidden" role="region">
+
+    <input name="info-input" id="tabHTML-d91ecccd-efc3-8607-}709a-09c8a6119419" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-d91ecccd-efc3-8607-}709a-09c8a6119419" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-d91ecccd-efc3-8607-}709a-09c8a6119419" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-5eb30494-89d4-a73c-}95b2-8ea40f3059f7" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-5eb30494-89d4-a73c-}95b2-8ea40f3059f7" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-5eb30494-89d4-a73c-}95b2-8ea40f3059f7" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-d91ecccd-efc3-8607-}709a-09c8a6119419" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-d91ecccd-efc3-8607-}709a-09c8a6119419" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-d91ecccd-efc3-8607-}709a-09c8a6119419" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -16463,16 +16491,21 @@ Plugin documentation:
   </div>
 </div></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-hero" data-corresponding-code="code-form-hero">
+    <label for="show-code-hero">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-0fe69870-fdab-ac09-}28e4-872c34a474ec" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-0fe69870-fdab-ac09-}28e4-872c34a474ec" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-0fe69870-fdab-ac09-}28e4-872c34a474ec" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-hero hidden" role="region">
+
+    <input name="info-input" id="tabHTML-df6697db-8375-5b1b-}6743-fa27cbc5672e" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-df6697db-8375-5b1b-}6743-fa27cbc5672e" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-df6697db-8375-5b1b-}6743-fa27cbc5672e" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-0fe69870-fdab-ac09-}28e4-872c34a474ec" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-0fe69870-fdab-ac09-}28e4-872c34a474ec" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-0fe69870-fdab-ac09-}28e4-872c34a474ec" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-df6697db-8375-5b1b-}6743-fa27cbc5672e" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-df6697db-8375-5b1b-}6743-fa27cbc5672e" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-df6697db-8375-5b1b-}6743-fa27cbc5672e" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -17014,16 +17047,21 @@ Plugin documentation:
   </ul>
 </div></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-infobox" data-corresponding-code="code-form-infobox">
+    <label for="show-code-infobox">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-36c3a7b4-9ee7-3560-}f6d1-cf6fda08688c" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-36c3a7b4-9ee7-3560-}f6d1-cf6fda08688c" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-36c3a7b4-9ee7-3560-}f6d1-cf6fda08688c" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-infobox hidden" role="region">
+
+    <input name="info-input" id="tabHTML-a014dcbf-9d4c-244d-}21da-13a2176c192d" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-a014dcbf-9d4c-244d-}21da-13a2176c192d" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-a014dcbf-9d4c-244d-}21da-13a2176c192d" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-36c3a7b4-9ee7-3560-}f6d1-cf6fda08688c" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-36c3a7b4-9ee7-3560-}f6d1-cf6fda08688c" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-36c3a7b4-9ee7-3560-}f6d1-cf6fda08688c" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-a014dcbf-9d4c-244d-}21da-13a2176c192d" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-a014dcbf-9d4c-244d-}21da-13a2176c192d" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-a014dcbf-9d4c-244d-}21da-13a2176c192d" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -17274,16 +17312,21 @@ Plugin documentation:
   </div>
 </div></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-landingLinks" data-corresponding-code="code-form-landingLinks">
+    <label for="show-code-landingLinks">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-692732dc-4a2c-afe9-}7822-0c4036442f77" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-692732dc-4a2c-afe9-}7822-0c4036442f77" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-692732dc-4a2c-afe9-}7822-0c4036442f77" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-landingLinks hidden" role="region">
+
+    <input name="info-input" id="tabHTML-e0e4ccbc-a2e6-5722-}2eb5-cfbd0a23abd9" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-e0e4ccbc-a2e6-5722-}2eb5-cfbd0a23abd9" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-e0e4ccbc-a2e6-5722-}2eb5-cfbd0a23abd9" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-692732dc-4a2c-afe9-}7822-0c4036442f77" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-692732dc-4a2c-afe9-}7822-0c4036442f77" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-692732dc-4a2c-afe9-}7822-0c4036442f77" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-e0e4ccbc-a2e6-5722-}2eb5-cfbd0a23abd9" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-e0e4ccbc-a2e6-5722-}2eb5-cfbd0a23abd9" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-e0e4ccbc-a2e6-5722-}2eb5-cfbd0a23abd9" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -17495,16 +17538,21 @@ Plugin documentation:
   </div>
 </div></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-landingPromo" data-corresponding-code="code-form-landingPromo">
+    <label for="show-code-landingPromo">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-db8729a1-a1ae-f68b-}b826-557a7ce1e337" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-db8729a1-a1ae-f68b-}b826-557a7ce1e337" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-db8729a1-a1ae-f68b-}b826-557a7ce1e337" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-landingPromo hidden" role="region">
+
+    <input name="info-input" id="tabHTML-494f0956-0359-2fdb-}a1f1-b12bddf67d49" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-494f0956-0359-2fdb-}a1f1-b12bddf67d49" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-494f0956-0359-2fdb-}a1f1-b12bddf67d49" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-db8729a1-a1ae-f68b-}b826-557a7ce1e337" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-db8729a1-a1ae-f68b-}b826-557a7ce1e337" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-db8729a1-a1ae-f68b-}b826-557a7ce1e337" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-494f0956-0359-2fdb-}a1f1-b12bddf67d49" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-494f0956-0359-2fdb-}a1f1-b12bddf67d49" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-494f0956-0359-2fdb-}a1f1-b12bddf67d49" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -17605,16 +17653,21 @@ Plugin documentation:
 </div>
 </div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-linkList" data-corresponding-code="code-form-linkList">
+    <label for="show-code-linkList">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-5c730d42-8964-281d-}c75a-52bbe0244d1a" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-5c730d42-8964-281d-}c75a-52bbe0244d1a" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-5c730d42-8964-281d-}c75a-52bbe0244d1a" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-linkList hidden" role="region">
+
+    <input name="info-input" id="tabHTML-d7add8db-443e-006e-}32b0-d60309412889" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-d7add8db-443e-006e-}32b0-d60309412889" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-d7add8db-443e-006e-}32b0-d60309412889" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-5c730d42-8964-281d-}c75a-52bbe0244d1a" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-5c730d42-8964-281d-}c75a-52bbe0244d1a" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-5c730d42-8964-281d-}c75a-52bbe0244d1a" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-d7add8db-443e-006e-}32b0-d60309412889" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-d7add8db-443e-006e-}32b0-d60309412889" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-d7add8db-443e-006e-}32b0-d60309412889" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -17860,16 +17913,21 @@ Plugin documentation:
   </footer>
 </div></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-listing" data-corresponding-code="code-form-listing">
+    <label for="show-code-listing">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-5b283459-d3ee-b2d6-}6df2-688e18dbbb2f" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-5b283459-d3ee-b2d6-}6df2-688e18dbbb2f" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-5b283459-d3ee-b2d6-}6df2-688e18dbbb2f" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-listing hidden" role="region">
+
+    <input name="info-input" id="tabHTML-2410a863-bc3c-bce2-}4a15-25242a77797c" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-2410a863-bc3c-bce2-}4a15-25242a77797c" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-2410a863-bc3c-bce2-}4a15-25242a77797c" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-5b283459-d3ee-b2d6-}6df2-688e18dbbb2f" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-5b283459-d3ee-b2d6-}6df2-688e18dbbb2f" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-5b283459-d3ee-b2d6-}6df2-688e18dbbb2f" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-2410a863-bc3c-bce2-}4a15-25242a77797c" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-2410a863-bc3c-bce2-}4a15-25242a77797c" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-2410a863-bc3c-bce2-}4a15-25242a77797c" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -19075,16 +19133,21 @@ Plugin documentation:
     </div>
  </div></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-navigation" data-corresponding-code="code-form-navigation">
+    <label for="show-code-navigation">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-9e4e0b1a-f202-1d82-}d03b-a15433c289b9" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-9e4e0b1a-f202-1d82-}d03b-a15433c289b9" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-9e4e0b1a-f202-1d82-}d03b-a15433c289b9" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-navigation hidden" role="region">
+
+    <input name="info-input" id="tabHTML-24bbd460-914f-c452-}4751-410b0e4010e7" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-24bbd460-914f-c452-}4751-410b0e4010e7" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-24bbd460-914f-c452-}4751-410b0e4010e7" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-9e4e0b1a-f202-1d82-}d03b-a15433c289b9" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-9e4e0b1a-f202-1d82-}d03b-a15433c289b9" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-9e4e0b1a-f202-1d82-}d03b-a15433c289b9" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-24bbd460-914f-c452-}4751-410b0e4010e7" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-24bbd460-914f-c452-}4751-410b0e4010e7" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-24bbd460-914f-c452-}4751-410b0e4010e7" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -21702,16 +21765,21 @@ Plugin documentation:
     </ul>
  </nav></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-pagination" data-corresponding-code="code-form-pagination">
+    <label for="show-code-pagination">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-57219b88-96db-e0c6-}56de-fe84a4a8cff1" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-57219b88-96db-e0c6-}56de-fe84a4a8cff1" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-57219b88-96db-e0c6-}56de-fe84a4a8cff1" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-pagination hidden" role="region">
+
+    <input name="info-input" id="tabHTML-4cf04713-1687-9984-}bb8a-29e62085793a" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-4cf04713-1687-9984-}bb8a-29e62085793a" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-4cf04713-1687-9984-}bb8a-29e62085793a" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-57219b88-96db-e0c6-}56de-fe84a4a8cff1" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-57219b88-96db-e0c6-}56de-fe84a4a8cff1" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-57219b88-96db-e0c6-}56de-fe84a4a8cff1" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-4cf04713-1687-9984-}bb8a-29e62085793a" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-4cf04713-1687-9984-}bb8a-29e62085793a" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-4cf04713-1687-9984-}bb8a-29e62085793a" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -21876,16 +21944,21 @@ Plugin documentation:
     </div>
 </div></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-promo" data-corresponding-code="code-form-promo">
+    <label for="show-code-promo">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-317ec198-8459-ed78-}ba22-16c90af87642" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-317ec198-8459-ed78-}ba22-16c90af87642" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-317ec198-8459-ed78-}ba22-16c90af87642" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-promo hidden" role="region">
+
+    <input name="info-input" id="tabHTML-583b71ee-4968-9c25-}9227-ea1bce86562a" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-583b71ee-4968-9c25-}9227-ea1bce86562a" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-583b71ee-4968-9c25-}9227-ea1bce86562a" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-317ec198-8459-ed78-}ba22-16c90af87642" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-317ec198-8459-ed78-}ba22-16c90af87642" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-317ec198-8459-ed78-}ba22-16c90af87642" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-583b71ee-4968-9c25-}9227-ea1bce86562a" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-583b71ee-4968-9c25-}9227-ea1bce86562a" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-583b71ee-4968-9c25-}9227-ea1bce86562a" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">
@@ -22860,16 +22933,21 @@ a.field__field_content_promo__item {
   </div>
 </div></div>
 
-  <form class="styleguide__item__code___3rQWa" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-share" data-corresponding-code="code-form-share">
+    <label for="show-code-share">Show code?</label>
+  </form>
 
-    <input name="info-input" id="tabHTML-781a85da-fe33-6870-}572c-946184371d54" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
-    <input name="info-input" id="tabCSS-781a85da-fe33-6870-}572c-946184371d54" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
-    <input name="info-input" id="tabJS-781a85da-fe33-6870-}572c-946184371d54" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
+  <form class="styleguide__item__code___3rQWa code-form code-form-share hidden" role="region">
+
+    <input name="info-input" id="tabHTML-281c452f-86a9-23d6-}3d7d-aff26894ebf9" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__html___22enY" checked="">
+    <input name="info-input" id="tabCSS-281c452f-86a9-23d6-}3d7d-aff26894ebf9" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__css___3ALxg">
+    <input name="info-input" id="tabJS-281c452f-86a9-23d6-}3d7d-aff26894ebf9" type="radio" class="styleguide__item__input___1jS7_ styleguide__item__js___3IO7y">
 
     <div class="styleguide__item__tabList___1KcXt" role="tablist">
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-781a85da-fe33-6870-}572c-946184371d54" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-781a85da-fe33-6870-}572c-946184371d54" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
-      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-781a85da-fe33-6870-}572c-946184371d54" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__html___22enY" for="tabHTML-281c452f-86a9-23d6-}3d7d-aff26894ebf9" role="tab" aria-selected="true"><span class="info-tab-label-text">HTML</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__css___3ALxg" for="tabCSS-281c452f-86a9-23d6-}3d7d-aff26894ebf9" role="tab" aria-selected="false"><span class="info-tab-label-text">CSS</span></label>
+      <label class="styleguide__item__tabItem___3zme3 styleguide__item__js___3IO7y" for="tabJS-281c452f-86a9-23d6-}3d7d-aff26894ebf9" role="tab" aria-selected="false"><span class="info-tab-label-text">JS</span></label>
     </div>
 
     <div class="styleguide__item__tabContent___10uG2">

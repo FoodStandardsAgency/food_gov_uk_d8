@@ -34,3 +34,12 @@ if (scrollElementArray != null) {
     })
   }
 }
+
+// Show or hide code using checkbox
+const checkboxes = document.querySelectorAll('input[type="checkbox"].show-code')
+checkboxes.forEach(checkbox => {
+  checkbox.addEventListener('change', function() {
+    const code = document.querySelector(`form.${this.dataset.correspondingCode}`)
+    code.classList.toggle('hidden')
+  })
+})

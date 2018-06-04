@@ -6,7 +6,12 @@
 
   <div class="${scope.styles.locals.item__element}">${scope.element}</div>
 
-  <form class="${scope.styles.locals.item__code}" role="region">
+  <form class="show-code-checkbox">
+    <input type="checkbox" class="show-code" name="show-code" value="show-code" id="show-code-${scope.id}" data-corresponding-code="code-form-${scope.id}">
+    <label for="show-code-${scope.id}">Show code?</label>
+  </form>
+
+  <form class="${scope.styles.locals.item__code} code-form code-form-${scope.id} hidden" role="region">
 
     <input name="info-input" id="tabHTML-${scope.guid}" type="radio" class="${scope.styles.locals.item__input} ${scope.styles.locals.item__html}" checked="">
     <input name="info-input" id="tabCSS-${scope.guid}" type="radio" class="${scope.styles.locals.item__input} ${scope.styles.locals.item__css}">

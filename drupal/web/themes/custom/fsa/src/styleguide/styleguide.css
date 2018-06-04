@@ -205,6 +205,10 @@ section {
   font-family: monospace;
 }
 
+:global form.code-form.hidden {
+  display: none;
+}
+
 .item {
   @mixin responsive-declaration margin-bottom, 1em, 2em;
 
