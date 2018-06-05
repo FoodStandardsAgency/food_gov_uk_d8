@@ -76,6 +76,12 @@ class AlertItemProperties extends ProcessPluginBase {
     }
     $row->setDestinationProperty('field_nation', $cids);
 
+    // Map previous alert, store only alert ID.
+    if (isset($item['previousAlert'])) {
+      $prev = AlertImportHelpers::getIdFromUri($item['previousAlert']['@id']);
+      $row->setDestinationProperty('field_alert_previous', $prev);
+    }
+
     // Map single textfield values.
     $mapping = [
       'SMStext' => 'field_alert_smstext',
@@ -85,6 +91,7 @@ class AlertItemProperties extends ProcessPluginBase {
     ];
     // Map single-values.
     foreach ($mapping as $key => $field) {
+
       if (is_string($item[$key])) {
         $row->setDestinationProperty($field, $item[$key]);
       }
