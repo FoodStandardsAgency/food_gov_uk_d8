@@ -14,7 +14,7 @@ To get the started with theming, complete the following steps:
 
 When developing, run `npm run watch` to automatically compile assets.
 
-Build for production before committing any changes, with `npm run build`. This will create a `dist` folder, into which the required assets will be created.
+Build for production before committing any changes, with `npm run build`. This will create a `dist` folder, into which the required assets will be created. In addition to assets for the site itself, the style guide will also be built (as a static html file) at `dist/styleguide/index.html`.
 
 ### JavaScript development
 
