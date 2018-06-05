@@ -217,30 +217,34 @@ const styleGuide = (templateParams) => {
           ${styles}
         </style>
       </head>
-      <body id="${styles.locals.container}">
+      <body>
        <article>
         <section class="${styles.locals.hero}">
-          ${fsaLogo}
-          <span class=""><strong>food.gov.uk</strong> style guide </span>
+          <div class="${styles.locals.heroContainer}">
+            ${fsaLogo}
+            <span class=""><strong>food.gov.uk</strong> style guide </span>
+          </div>
         </section>
-        <section class="${styles.locals.layout}">
-          <aside class="${styles.locals.navigation}">
-            <h3 class="${styles.locals.navigation__heading}">Getting started</h3>
-            <div class="${styles.locals.navigation__links}">
-              ${navigationIntroComponentItems}
-            </div>
-            <h3 class="${styles.locals.navigation__heading}">Components</h3>
-            <div class="${styles.locals.navigation__links}">
-              ${navigationComponentItems}
-            </div>
-          </aside>
-          <main class="${styles.locals.layout__content} ${styles.locals.main}">
-            ${introComponents}
-            <h1>Components</h1>
-            <hr>
-            ${components}
-          </main>
-        </section>
+        <div id="${styles.locals.container}">
+          <section class="${styles.locals.layout}">
+            <aside class="${styles.locals.navigation}">
+              <h3 class="${styles.locals.navigation__heading}">Getting started</h3>
+              <div class="${styles.locals.navigation__links}">
+                ${navigationIntroComponentItems}
+              </div>
+              <h3 class="${styles.locals.navigation__heading}">Components</h3>
+              <div class="${styles.locals.navigation__links}">
+                ${navigationComponentItems}
+              </div>
+            </aside>
+            <main class="${styles.locals.layout__content} ${styles.locals.main}">
+              ${introComponents}
+              <h1>Components</h1>
+              <hr>
+              ${components}
+            </main>
+          </section>
+        </div>
       </article>
       <link rel="stylesheet"
       href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.12.0/build/styles/default.min.css">

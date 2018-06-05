@@ -42,24 +42,32 @@ section {
   margin: 0;
 }
 
-.container {
-  max-width: 40em;
-  margin: 0 auto;
-  padding: 5px !important;
+#container {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
 }
 
 .hero {
-  display: flex;
-  align-items: center;
   background-color: #fff;
   color: var(--fsa-primary_dark-green);
   border-bottom: 2px solid var(--fsa-primary_light-green);
   margin-bottom: 30px;
   @mixin responsive-declaration padding, 1em, 2em;
 
+  .heroContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   span {
     font-size: 1.5em;
-    margin-left: 80px;
   }
 }
 
@@ -148,12 +156,6 @@ section {
 
 :global .edit-is-useful-no-label {
   padding-left: 15px !important;
-}
-
-:global .styleguide-field-container {
-  max-width: 702px !important;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .navigation__heading {
