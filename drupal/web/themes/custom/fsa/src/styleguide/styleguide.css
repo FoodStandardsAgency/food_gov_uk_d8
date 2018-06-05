@@ -1,6 +1,7 @@
 /* stylelint-disable selector-pseudo-class-no-unknown */
-@import "../helper/custom-property";
-@import "../helper/helper";
+@import '../style.css';
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
 
 :root {
   --styleguide-color-black: var(--color-black, #000);
@@ -16,9 +17,12 @@
   --styleguide-box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.1);
 }
 
-body.styleguide {
-  font-family: sans-serif;
-  font-weight: 300;
+#fsa-logo {
+  color: #fff;
+}
+
+section {
+  background-color: #fff !important;
 }
 
 .underline {
@@ -38,19 +42,33 @@ body.styleguide {
   margin: 0;
 }
 
-.container {
-  max-width: 40em;
-  margin: 0 auto;
+#container {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
 }
 
 .hero {
-  /* background-color: var(--styleguide-primary-color-dark);
-  @mixin responsive-declaration padding, 1em, 3em;
-  text-align: center; */
-  display: flex;
-  align-items: center;
-
+  background-color: #fff;
+  color: var(--fsa-primary_dark-green);
+  border-bottom: 2px solid var(--fsa-primary_light-green);
+  margin-bottom: 30px;
   @mixin responsive-declaration padding, 1em, 2em;
+
+  .heroContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  span {
+    font-size: 1.5em;
+  }
 }
 
 .hero h1 {
@@ -74,32 +92,40 @@ body.styleguide {
   position: relative;
   z-index: var(--z-middle);
   color: var(--color-white);
-  display: flex;
-  flex-flow: row wrap;
-
-  @media (--breakpoint-md) {
-    flex-flow: column nowrap;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 20em;
-    height: 100vh;
-    overflow: auto;
   }
-
-  @media (--breakpoint-lg) {
-    width: 25.5em;
-  }
-}
 
 .navigation > *:first-child {
   margin-top: 0;
 }
 
-:global .is-sticky {
-  @media (--breakpoint-md) {
-    position: fixed;
-  }
+.navigation__links {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+:global .hero-wrapper,
+:global .header,
+:global .footer-wrapper {
+  background-color: #fff !important;
+}
+
+:global .visually-hidden {
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  word-wrap: normal;
+}
+
+:global #fsa-logo {
+  width: 250px;
+  height: 160px;
+  padding-right: 30px;
+}
+
+:global #fsa-explains-heading {
+  margin-bottom: 0;
 }
 
 :global .is-bottom {
@@ -111,16 +137,35 @@ body.styleguide {
   }
 }
 
+:global .footer-top-wrapper,
+:global .navigation-wrapper {
+  background-color: #fff !important;
+}
+
+:global .navigation__menu.navigation__menu--level-2.js-nav-menu {
+  top: -99999px;
+}
+
+:global .edit-is-useful-yes-input,
+:global .edit-is-useful-yes-label,
+:global .edit-is-useful-no-input,
+:global .edit-is-useful-no-label {
+  display: inline;
+  float: right;
+}
+
+:global .edit-is-useful-no-label {
+  padding-left: 15px !important;
+}
+
 .navigation__heading {
   color: var(--styleguide-color-black);
 }
 
 .navigationItem {
   font-size: 1em;
-  text-decoration: none;
   color: var(--styleguide-primary-color);
-  display: block;
-  padding: 0.5rem 2rem;
+  padding: 5px 30px;
 }
 
 .navigationItem:hover {
@@ -149,11 +194,12 @@ body.styleguide {
 
 .main {
   @mixin responsive-declaration padding, 1em, 2em;
+  margin: 0;
 }
 
 .color {
   flex: 1 1 25%;
-  min-height: 10em;
+  min-height: 4em;
   display: flex;
   flex-flow: column nowrap;
   margin-bottom: 1em;
@@ -162,22 +208,24 @@ body.styleguide {
 
 .color__example {
   width: 100%;
-  height: 5em;
+  height: 1em;
   border-bottom: 1px solid var(--styleguide-color-gray-light);
 }
 
 .color__property {
-  @mixin responsive-declaration padding, 1em, 1.5em;
-
+  margin: 0;
   text-align: center;
   font-family: monospace;
-  margin: 0;
 }
 
 .color__value {
-  @mixin responsive-declaration padding, 1em, 1.5em;
-
+  margin: 0;
+  padding: 0.1em;
   font-family: monospace;
+}
+
+:global form.code-form.hidden {
+  display: none;
 }
 
 .item {
@@ -202,6 +250,7 @@ body.styleguide {
   padding: 0.25em 0;
   display: block;
   border-bottom: 1px solid var(--styleguide-color-gray);
+  color: var(--fsa-primary_dark-green);
 }
 
 .item__description {
