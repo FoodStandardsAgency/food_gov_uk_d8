@@ -11,6 +11,12 @@ document.querySelectorAll('.field__field_content_reference__item').forEach(el =>
   el.style.marginBottom = '17.5px'
 })
 
+function resizeLatestNews () {
+  document.querySelectorAll('div.promo-wrapper').forEach(el => {
+    el.style.height = window.innerWidth < 1280 ? '183px' : '286px'
+  })
+}
+
 // Sticky element
 const container = [...document.querySelectorAll('.js-sticky-container')]
 const stickyElem = [...document.querySelectorAll('.js-sticky-element')]
@@ -43,3 +49,6 @@ checkboxes.forEach(checkbox => {
     code.classList.toggle('hidden')
   })
 })
+
+resizeLatestNews()
+window.addEventListener('resize', () => { resizeLatestNews() })
