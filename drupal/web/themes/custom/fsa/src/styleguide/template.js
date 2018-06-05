@@ -9,7 +9,7 @@ import safeTagsReplace from '../helper/safeTagsReplace'
 import isColor from '../helper/isColor'
 import fsaLogo from './fsa-logo'
 
-const includedComponents = ['button', 'breadcrumb', 'contact-links', 'feedback', 'footer', 'form', 'header', 'hero', 'infobox', 'landing-links', 'landing-promo', 'language-bar', 'link-list', 'listing', 'navigation', 'pager', 'pagination', 'promo', 'share']
+const includedComponents = ['button', 'breadcrumb', 'contact-links', 'feedback', 'footer', 'form', 'header', 'hero', 'infobox', 'landing-links', 'landing-promo', 'language-bar', 'latest-news', 'link-list', 'listing', 'navigation', 'pager', 'pagination', 'promo', 'share']
 
 function uniq(a) {
   return a.sort().filter(function (item, pos, ary) {
