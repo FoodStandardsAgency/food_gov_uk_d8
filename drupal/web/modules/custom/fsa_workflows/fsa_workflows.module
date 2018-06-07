@@ -39,6 +39,7 @@ function fsa_workflows_form_alter(&$form, FormStateInterface $form_state, $form_
     $moderation_information = \Drupal::service('content_moderation.moderation_information');
     /** @var $node \Drupal\node\NodeInterface */
     $node = \Drupal::routeMatch()->getParameter('node');
+
     if ($node instanceof NodeInterface && $moderation_information->isModeratedEntity($node) && $moderation_information->isDefaultRevisionPublished($node)) {
       $form['moderation_state']['widget'][0]['state']['#default_value'] = 'published';
     }
