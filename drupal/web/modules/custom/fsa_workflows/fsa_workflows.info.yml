@@ -1,0 +1,8 @@
+name: FSA Workflows
+description: Enhances workflows / content moderation functionalities.
+type: module
+core: 8.x
+package: FSA
+dependencies:
+  - drupal:workflows
+  - drupal:content_moderation
