@@ -600,10 +600,9 @@ function fsa_custom_preprocess_block(&$variables) {
  * Implements hook_editor_js_settings_alter().
  */
 function fsa_custom_editor_js_settings_alter(array &$settings) {
-
   foreach ($settings['editor']['formats'] as $key => $value) {
     // Limit headings/tags of "Format" dropdown.
-    $settings['editor']['formats'][$key]['editorSettings']['format_tags'] = "p;h2;h3";
+    $settings['editor']['formats'][$key]['editorSettings']['format_tags'] = "p;h2;h3;h4";
   }
 }
 
