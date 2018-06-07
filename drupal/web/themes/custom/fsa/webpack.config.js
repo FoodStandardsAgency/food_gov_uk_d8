@@ -4,8 +4,8 @@ const path = require('path')
 const ExtractCSSPlugin = require('extract-text-webpack-plugin')
 const SpritePlugin = require('svg-sprite-loader/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const FileManagerPlugin = require('filemanager-webpack-plugin')
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
@@ -121,8 +121,26 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   plugins: [
-    // Clean dist folder before building
-    new CleanWebpackPlugin(['dist']),
+
+    // Before building clean dist folder
+    // After building copy CSS files with styleguide HTML for standalone serving
+    new FileManagerPlugin({
+      onStart: [
+        {
+          delete: [
+            "./dist/"
+          ]
+        }
+      ],
+      onEnd: [
+        {
+          copy: [
+            { source: './dist/editor.css', destination: './dist/styleguide/editor.css' },
+            { source: './dist/app.css', destination: './dist/styleguide/app.css' },
+          ]
+        }
+      ]
+    }),
 
     // Extract CSS to its own file
     new ExtractCSSPlugin({
