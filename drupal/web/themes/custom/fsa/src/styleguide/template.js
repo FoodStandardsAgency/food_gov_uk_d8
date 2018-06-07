@@ -216,6 +216,8 @@ const styleGuide = (templateParams) => {
         <style>
           ${styles}
         </style>
+        <link href="app.css" rel="stylesheet">
+        <link href="editor.css" rel="stylesheet">
       </head>
       <body>
        <article>
@@ -250,6 +252,9 @@ const styleGuide = (templateParams) => {
       href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.12.0/build/styles/default.min.css">
       <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.12.0/build/highlight.min.js"></script>
       <script>hljs.initHighlightingOnLoad();</script>
+      <script type="text/javascript" src="app.js"></script>
+      <script type="text/javascript" src="editor.js"></script>
+      <script type="text/javascript" src="styleguide.js"></script>
       </body>
     </html>
   `
