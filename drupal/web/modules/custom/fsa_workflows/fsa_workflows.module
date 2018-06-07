@@ -1,0 +1,47 @@
+<?php
+
+/**
+ * @file
+ * Enhances workflows / content moderation functionality.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_help().
+ */
+function fsa_workflows_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.fsa_workflows':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Enhances the workflows / content moderation functionalities.') . '</p>';
+      $output .= '<ul>';
+      $output .= '<li>' . t('Preserves the workflow state (published) on node edit to avoid accidentally unpublishing a node.') . '</li>';
+      $output .= '</ul>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function fsa_workflows_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  if (isset($form['moderation_state'])) {
+    // Check if the node is already published and retain published state as the
+    // default for dropdown.
+    /** @var $moderation_information Drupal\content_moderation\ModerationInformation */
+    $moderation_information = \Drupal::service('content_moderation.moderation_information');
+    /** @var $node \Drupal\node\NodeInterface */
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if ($node instanceof NodeInterface && $moderation_information->isDefaultRevisionPublished($node)) {
+      $form['moderation_state']['widget'][0]['state']['#default_value'] = 'published';
+    }
+  }
+
+}
