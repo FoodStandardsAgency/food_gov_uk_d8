@@ -122,8 +122,9 @@ module.exports = {
   },
   plugins: [
 
-    // Before building clean dist folder
-    // After building copy CSS files with styleguide HTML for standalone serving
+    // Before building clean dist folder.
+    // After building copy CSS and JS files
+    // to styleguide directory for standalone serving.
     new FileManagerPlugin({
       onStart: [
         {
@@ -137,6 +138,9 @@ module.exports = {
           copy: [
             { source: './dist/editor.css', destination: './dist/styleguide/editor.css' },
             { source: './dist/app.css', destination: './dist/styleguide/app.css' },
+            { source: './dist/app.js', destination: './dist/styleguide/app.js' },
+            { source: './dist/editor.js', destination: './dist/styleguide/editor.js' },
+            { source: './dist/styleguide.js', destination: './dist/styleguide/styleguide.js' },
           ]
         }
       ]
@@ -154,10 +158,13 @@ module.exports = {
     // Create SVG sprite
     new SpritePlugin(),
 
-    // Create a custom template for styleguide
+    // Create a custom template for styleguide.
+    // We do not inject links to JS and CSS files here, but to copies
+    // of these files in styleguide directory for standalone serving.
     new HtmlWebpackPlugin({
       template: 'styleguide/template.js',
-      filename: 'styleguide/index.html'
+      filename: 'styleguide/index.html',
+      inject: false,
     })
   ]
 }
