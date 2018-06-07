@@ -24,7 +24,7 @@ content:
     weight: 0
     settings: {  }
     third_party_settings: {  }
-    type: options_select
+    type: options_buttons
     region: content
   field_team_contact_telephone:
     weight: 1
