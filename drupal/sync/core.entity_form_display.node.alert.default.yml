@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.alert.field_alert_modified
     - field.field.node.alert.field_alert_notation
     - field.field.node.alert.field_alert_otherbusiness
+    - field.field.node.alert.field_alert_previous
     - field.field.node.alert.field_alert_productdetails_raw
     - field.field.node.alert.field_alert_relatedmedia
     - field.field.node.alert.field_alert_reportingbusiness
@@ -86,6 +87,14 @@ content:
     region: content
   field_alert_otherbusiness:
     weight: 14
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_alert_previous:
+    weight: 25
     settings:
       size: 60
       placeholder: ''
