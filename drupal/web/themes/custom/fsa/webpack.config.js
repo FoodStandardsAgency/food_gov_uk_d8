@@ -4,8 +4,8 @@ const path = require('path')
 const ExtractCSSPlugin = require('extract-text-webpack-plugin')
 const SpritePlugin = require('svg-sprite-loader/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const FileManagerPlugin = require('filemanager-webpack-plugin')
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
@@ -121,8 +121,30 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   plugins: [
-    // Clean dist folder before building
-    new CleanWebpackPlugin(['dist']),
+
+    // Before building clean dist folder.
+    // After building copy CSS and JS files
+    // to styleguide directory for standalone serving.
+    new FileManagerPlugin({
+      onStart: [
+        {
+          delete: [
+            "./dist/"
+          ]
+        }
+      ],
+      onEnd: [
+        {
+          copy: [
+            { source: './dist/editor.css', destination: './dist/styleguide/editor.css' },
+            { source: './dist/app.css', destination: './dist/styleguide/app.css' },
+            { source: './dist/app.js', destination: './dist/styleguide/app.js' },
+            { source: './dist/editor.js', destination: './dist/styleguide/editor.js' },
+            { source: './dist/styleguide.js', destination: './dist/styleguide/styleguide.js' },
+          ]
+        }
+      ]
+    }),
 
     // Extract CSS to its own file
     new ExtractCSSPlugin({
@@ -136,10 +158,13 @@ module.exports = {
     // Create SVG sprite
     new SpritePlugin(),
 
-    // Create a custom template for styleguide
+    // Create a custom template for styleguide.
+    // We do not inject links to JS and CSS files here, but to copies
+    // of these files in styleguide directory for standalone serving.
     new HtmlWebpackPlugin({
       template: 'styleguide/template.js',
-      filename: 'styleguide/index.html'
+      filename: 'styleguide/index.html',
+      inject: false,
     })
   ]
 }
