@@ -11,5 +11,23 @@ definitions:
     parent: ''
     expanded: false
     enabled: true
+  entity__fsa_authority__collection:
+    weight: 1
+    menu_name: admin
+    parent: system.admin_content
+    expanded: false
+    enabled: true
+  entity__fsa_establishment__collection:
+    weight: 2
+    menu_name: admin
+    parent: system.admin_content
+    expanded: false
+    enabled: true
+  entity__media__collection:
+    weight: 3
+    menu_name: admin
+    parent: system.admin_content
+    expanded: false
+    enabled: true
 _core:
   default_config_hash: jdY7AU0tU-QsjmiOw3W8vwpYMb-By--_MSFgbqKUTYM
