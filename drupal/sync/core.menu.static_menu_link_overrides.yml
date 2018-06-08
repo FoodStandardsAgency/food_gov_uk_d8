@@ -12,17 +12,17 @@ definitions:
     expanded: false
     enabled: true
   entity__fsa_authority__collection:
+    enabled: false
+    menu_name: admin
+    parent: system.admin_content
+    expanded: false
     weight: 1
-    menu_name: admin
-    parent: system.admin_content
-    expanded: false
-    enabled: true
   entity__fsa_establishment__collection:
-    weight: 2
+    enabled: false
     menu_name: admin
     parent: system.admin_content
     expanded: false
-    enabled: true
+    weight: 2
   entity__media__collection:
     weight: 3
     menu_name: admin
