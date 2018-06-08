@@ -76,10 +76,8 @@
       {{ tag }}
     </div>
     <div class="item__date">
-      {% if content.field_update_date %}
+      {% if content.field_update_date and node.bundle != 'alert' %}
         {{ content.field_update_date }}
-      {% elseif content.field_alert_modified %}
-        {{ content.field_alert_modified }}
       {% else %}
         {{ date }}
       {% endif %}
