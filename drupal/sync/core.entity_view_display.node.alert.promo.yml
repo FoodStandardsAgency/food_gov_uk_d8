@@ -11,14 +11,17 @@ dependencies:
     - field.field.node.alert.field_alert_modified
     - field.field.node.alert.field_alert_notation
     - field.field.node.alert.field_alert_otherbusiness
+    - field.field.node.alert.field_alert_previous
     - field.field.node.alert.field_alert_productdetails_raw
     - field.field.node.alert.field_alert_relatedmedia
     - field.field.node.alert.field_alert_reportingbusiness
+    - field.field.node.alert.field_alert_riskstatement
     - field.field.node.alert.field_alert_smstext
     - field.field.node.alert.field_alert_type
+    - field.field.node.alert.field_nation
+    - field.field.node.alert.field_short_title
     - node.type.alert
   module:
-    - datetime
     - entity_print
     - fsa_alerts_import
     - user
@@ -30,15 +33,6 @@ targetEntityType: node
 bundle: alert
 mode: promo
 content:
-  field_alert_modified:
-    type: datetime_default
-    weight: 1
-    region: content
-    label: inline
-    settings:
-      format_type: medium
-      timezone_override: ''
-    third_party_settings: {  }
   field_alert_type:
     type: fsa_alert_type_formatter
     weight: 0
@@ -47,6 +41,7 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  addtoany: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
@@ -54,11 +49,16 @@ hidden:
   field_alert_allergen: true
   field_alert_consumeradvice: true
   field_alert_description: true
+  field_alert_modified: true
   field_alert_notation: true
   field_alert_otherbusiness: true
+  field_alert_previous: true
   field_alert_productdetails_raw: true
   field_alert_relatedmedia: true
   field_alert_reportingbusiness: true
+  field_alert_riskstatement: true
   field_alert_smstext: true
+  field_nation: true
+  field_short_title: true
   langcode: true
   links: true
