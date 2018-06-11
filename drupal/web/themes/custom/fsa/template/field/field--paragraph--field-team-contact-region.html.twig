@@ -1,0 +1,16 @@
+{#
+/**
+ * @file
+ * FSA theme override to display one or multiple team contact region value(s).
+ */
+#}
+<div{{ attributes }}>
+  {% for item in items %}
+    {% if loop.last %}
+      {% set separator = '' %}
+    {% else %}
+      {% set separator = ', ' %}
+    {% endif %}
+    {{ item.content }}{{ separator }}
+  {% endfor %}
+</div>

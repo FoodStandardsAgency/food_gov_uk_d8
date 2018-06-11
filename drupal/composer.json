@@ -110,7 +110,8 @@
         "patches": {
             "drupal/core": {
                 "Combination of language negotiation and path aliasing can cause a corrupted route cache, 404s": "https://www.drupal.org/files/issues/routing-cache-language-2802403-214.patch",
-                "Fix exporting of new_revision when content moderation is enabled": "https://www.drupal.org/files/issues/2865223-7.patch"
+                "Fix exporting of new_revision when content moderation is enabled": "https://www.drupal.org/files/issues/2865223-7.patch",
+                "RSS view with fields give wrong URL from path field": "https://www.drupal.org/files/issues/2018-04-20/2673980-36.patch"
             },
             "drupal/migrate_plus": {
                 "Allow setting request headers": "https://www.drupal.org/files/issues/fix_headers-2849153-3.patch"

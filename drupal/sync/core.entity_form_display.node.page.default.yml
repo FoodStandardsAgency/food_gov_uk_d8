@@ -5,19 +5,15 @@ dependencies:
   config:
     - field.field.node.page.body
     - field.field.node.page.field_audience
-    - field.field.node.page.field_block
-    - field.field.node.page.field_block_reference
     - field.field.node.page.field_content_type
     - field.field.node.page.field_document
     - field.field.node.page.field_fsa_toc
     - field.field.node.page.field_intro
     - field.field.node.page.field_liftup_summary
     - field.field.node.page.field_liftup_title
-    - field.field.node.page.field_liftups
     - field.field.node.page.field_media_library_liftup_image
     - field.field.node.page.field_nation
     - field.field.node.page.field_related
-    - field.field.node.page.field_related_content
     - field.field.node.page.field_team_contacts
     - field.field.node.page.field_topic
     - field.field.node.page.field_update_date
@@ -67,36 +63,6 @@ third_party_settings:
         id: ''
         classes: ''
       label: 'Landing Page Promo'
-    group_code_block_references:
-      children:
-        - field_block_reference
-      parent_name: group_development_required
-      weight: 19
-      format_type: tab
-      format_settings:
-        id: ''
-        classes: ''
-        formatter: closed
-        description: 'Add programmatically created blocks to the bottom of this page.'
-        required_fields: true
-      label: 'Code block references'
-    group_development_required:
-      children:
-        - field_liftups
-        - field_block
-        - field_related_content
-        - group_code_block_references
-      parent_name: ''
-      weight: 17
-      format_type: tab
-      format_settings:
-        label: 'Development required / do not use (liftups, related content, block references)'
-        formatter: closed
-        description: 'The fields in this tab require further development: do not use (unless you know what you are doing)'
-        required_fields: true
-        id: ''
-        classes: ''
-      label: 'Development required / do not use (liftups, related content, block references)'
     group_related:
       children:
         - field_related
@@ -138,24 +104,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
-    region: content
-  field_block:
-    weight: 17
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
-  field_block_reference:
-    weight: 20
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
     region: content
   field_content_type:
     weight: 14
@@ -209,18 +157,6 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_liftups:
-    type: entity_reference_paragraphs
-    weight: 16
-    settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: ''
-    third_party_settings: {  }
-    region: content
   field_media_library_liftup_image:
     weight: 9
     settings:
@@ -249,15 +185,6 @@ content:
       form_display_mode: default
       default_paragraph_type: _none
     third_party_settings: {  }
-    region: content
-  field_related_content:
-    weight: 18
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
     region: content
   field_team_contacts:
     weight: 16
@@ -339,5 +266,8 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
 hidden:
   promote: true
