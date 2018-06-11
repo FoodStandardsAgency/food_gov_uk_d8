@@ -45,7 +45,7 @@
     - name: Set common facts
       set_fact:
         domain1_name: "fsa.prod.wunder.io"
-        domain2_name: "beta.food.gov.uk"
+        domain2_name: "food.gov.uk"
         wkv_site_env: "prod"
         databases: "{{ database }}"
         varnish_control_key: "{{ varnish_control_key }}"

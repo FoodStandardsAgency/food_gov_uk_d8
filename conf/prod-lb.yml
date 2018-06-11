@@ -46,7 +46,6 @@
     certbot_email: "{{ support_email }}"
     certbot_domains:
       - "{{ domain1_name }}"
-      - "{{ domain2_name }}"
     certbot_renewal_docroot: /var/www/letsencrypt-auto
     #certbot_commands: allows yo uto customize the command to run, see ansible/playbook/roles/certbot/defaults/main.yml
 
@@ -90,7 +89,7 @@
               address: "{{ front2_ip }}"
               port: 8080
         - name: prod2
-          host: "{{ domain2_name }}"
+          host: "www.{{ domain2_name }}"
           backends:
             - name: prod2_http1
               address: "{{ front1_ip }}"
@@ -98,6 +97,16 @@
             - name: prod2_http2
               address: "{{ front2_ip }}"
               port: 8080
+        - name: prod3
+          host: "pl.{{ domain2_name }}"
+          backends:
+            - name: prod3_http1
+              address: "{{ front1_ip }}"
+              port: 8080
+            - name: prod3_http2
+              address: "{{ front2_ip }}"
+              port: 8080
+
 
     # There is more customization options for hashes, cookies etc. see ansible/playbook/roles/varnish/templates/default.vcl.j2 for reference
 
@@ -162,17 +171,14 @@
         backends:
           - 127.0.0.1:8081
         extra_forwards:
-          - forward_from_path: '^/sites/default/files/([^]+).pdf$'
+          - forward_from_path: '^/sites/default/files/([^/]+).pdf$'
             forward_to: /sites/default/files/media/document/$1.pdf
             type: permanent
           - forward_from_path: '^/sites/default/files/multimedia/pdfs/(.*)$'
             forward_to: /sites/default/files/media/document/$1
             type: permanent
-      - server_name: "{{ domain2_name }}"
-        # Certbot is configured to smash all certificates into the first one
-        # So domain2 uses domain1 certificate
-        #ssl_certificate: "/etc/letsencrypt/live/{{ domain1_name }}/fullchain.pem"
-        #ssl_certificate_key: "/etc/letsencrypt/live/{{ domain1_name}}/privkey.pem"
+      - server_name: "www.{{ domain2_name }}"
+        server_forwards: "beta.{{ domain2_name }} {{ domain2_name }}"
         ssl_certificate: "/etc/nginx/ssl/{{ domain2_name }}.crt"
         ssl_certificate_key: "/etc/nginx/ssl/{{ domain2_name}}.key"
         use_dhparam: True
@@ -185,13 +191,19 @@
           - forward_from_path: '^/sites/default/files/multimedia/pdfs/(.*)$'
             forward_to: /sites/default/files/media/document/$1
             type: permanent
-
+      - server_name: "pl.{{ domain2_name }}"
+        ssl_certificate: "/etc/nginx/ssl/{{ domain2_name }}.crt"
+        ssl_certificate_key: "/etc/nginx/ssl/{{ domain2_name}}.key"
+        use_dhparam: True
+        backends:
+          - 127.0.0.1:8081
+ 
     # Forward to www and https.
     httpforwards:
       - server_name: "{{ domain1_name }}"
         forwarded_domains: "{{ domain1_name}}"
-      - server_name: "{{ domain2_name }}"
-        forwarded_domains: "{{ domain2_name}}"
+      - server_name: "www.{{ domain2_name }}"
+        forwarded_domains: "{{ domain2_name}} www.{{ domain2_name }}"
     # You can also use extra_forwards and httpextraforwards to define additional domains to listen & forward
     # See ansible/playbook/roles/sslterminator/templates/ssl_terminators.conf.j2 for reference.
 
