@@ -34,6 +34,12 @@ drush: {
 drush_use_launcher: False
 php_env_vars_include_db: True
 
+nginx_drupal_override_locations:
+  - operator: "~*"
+    condition: "^/admin/structure/webform/manage/(.*)/results/download/file/(.*).+\\.(?:csv?)$"
+    action: |
+      try_files $uri @drupal;
+
 firewall_web_whitelist_enabled: true
 
 # Variables to create/update UpCloud Servers
