@@ -736,12 +736,14 @@ display:
     display_options:
       path: admin/content/files
       menu:
-        type: tab
+        type: none
         title: Files
         description: ''
-        menu_name: admin
+        expanded: false
+        parent: ''
         weight: 0
-        context: ''
+        context: '0'
+        menu_name: admin
       display_description: ''
       defaults:
         pager: true
