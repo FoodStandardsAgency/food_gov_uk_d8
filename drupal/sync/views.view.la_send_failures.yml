@@ -193,6 +193,8 @@ display:
           text: view
           entity_type: webform_submission
           plugin_id: entity_link
+          output_url_as_text: false
+          absolute: false
         completed:
           id: completed
           table: webform_submission
@@ -333,6 +335,7 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -369,6 +372,7 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -405,6 +409,7 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -582,7 +587,7 @@ display:
           2: AND
           3: AND
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -599,7 +604,7 @@ display:
       display_extenders: {  }
       path: admin/reports/send-to-la-failures
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
