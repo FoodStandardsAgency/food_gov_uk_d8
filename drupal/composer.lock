@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "922a583d953202924c58d75cc730eaea",
+    "content-hash": "38dd4e9358ac4ea5937215af5fd8f2e9",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -5137,6 +5137,60 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/redirect"
             }
+        },
+        {
+            "name": "drupal/role_delegation",
+            "version": "dev-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/role_delegation",
+                "reference": "f0ea52faf87b8683de43a6149e3df704dbb3c995"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-alpha1+3-dev",
+                    "datestamp": "1467332339",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
+                    }
+                },
+                "patches_applied": {
+                    "Lock assignable permissions in VBO": "https://www.drupal.org/files/issues/2018-04-29/2862360-Lock-down-assignable-permissions-in-the-VBO-action-15.patch",
+                    "Allow to delegate roles on user creation": "https://www.drupal.org/files/issues/role-delegation-user-forms-2811851-27.patch"
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Andrew Schulman",
+                    "homepage": "https://www.drupal.org/user/279446"
+                },
+                {
+                    "name": "David Lesieur",
+                    "homepage": "https://www.drupal.org/user/17157"
+                },
+                {
+                    "name": "benjy",
+                    "homepage": "https://www.drupal.org/user/1852732"
+                }
+            ],
+            "description": "Allows site administrators to grant some roles the authority to assign selected roles to users.",
+            "homepage": "https://www.drupal.org/project/role_delegation",
+            "support": {
+                "source": "http://cgit.drupalcode.org/role_delegation"
+            },
+            "time": "2016-07-01T00:19:03+00:00"
         },
         {
             "name": "drupal/seo_checklist",
@@ -10441,6 +10495,108 @@
             "time": "2015-06-14T21:17:01+00:00"
         },
         {
+            "name": "drupal/content_moderation_notifications",
+            "version": "3.0.0-rc2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/content_moderation_notifications",
+                "reference": "8.x-3.0-rc2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/content_moderation_notifications-8.x-3.0-rc2.zip",
+                "reference": "8.x-3.0-rc2",
+                "shasum": "e51ac2174d0262812aa13cee782861a53fd9583b"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "require-dev": {
+                "drupal/token": "^1.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-3.x": "3.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-3.0-rc2",
+                    "datestamp": "1517332380",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "RC releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Holmes",
+                    "homepage": "https://www.drupal.org/user/1774034"
+                },
+                {
+                    "name": "jhedstrom",
+                    "homepage": "https://www.drupal.org/user/208732"
+                }
+            ],
+            "description": "Manage notifications for content moderation transitions.",
+            "homepage": "https://www.drupal.org/project/content_moderation_notifications",
+            "support": {
+                "source": "http://cgit.drupalcode.org/content_moderation_notifications",
+                "issues": "https://www.drupal.org/project/issues/content_moderation_notifications"
+            }
+        },
+        {
+            "name": "drupal/ip_anon",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/ip_anon",
+                "reference": "8.x-1.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/ip_anon-8.x-1.2.zip",
+                "reference": "8.x-1.2",
+                "shasum": "89256c2fd686d12a80b43d6306690fb14e4d9d21"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.2",
+                    "datestamp": "1528244580",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "mfb",
+                    "homepage": "https://www.drupal.org/user/12302"
+                }
+            ],
+            "description": "Implements an IP address retention policy.",
+            "homepage": "https://www.drupal.org/project/ip_anon",
+            "support": {
+                "source": "http://cgit.drupalcode.org/ip_anon"
+            }
+        },
+        {
             "name": "facebook/webdriver",
             "version": "1.5.0",
             "source": {
@@ -11916,7 +12072,8 @@
         "drupal/icon_select": 10,
         "maijs/elasticsearch_helper_views": 20,
         "drupal/datalayer": 10,
-        "drupal/path_redirect_import": 10
+        "drupal/path_redirect_import": 10,
+        "drupal/role_delegation": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
