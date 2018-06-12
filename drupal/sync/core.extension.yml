@@ -116,6 +116,7 @@ module:
   rdf: 0
   recaptcha: 0
   redirect: 0
+  role_delegation: 0
   search: 0
   seo_checklist: 0
   serialization: 0
