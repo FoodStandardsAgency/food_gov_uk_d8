@@ -21,6 +21,7 @@ settings:
         -
           name: Linking
           items:
+            - Link
             - Anchor
             - DrupalLink
             - Unlink
@@ -54,13 +55,13 @@ settings:
             - ShowBlocks
             - Source
   plugins:
-    stylescombo:
-      styles: "section.important|Important\r\nsection.explanation.js-explanation|FSA Explains\r\naside.regional-variation.regional-variation--england.js-regional-variation.js-england|England: style 1\r\naside.regional-variation.regional-variation--northern-ireland.js-regional-variation.js-northern-ireland|Northern Ireland: style 1\r\naside.regional-variation.regional-variation--wales.js-regional-variation.js-wales|Wales: style 1\r\naside.regional-variation.regional-variation--england-northern-ireland.js-regional-variation.js-england-northern-ireland|England and Northern Ireland: style 1\r\naside.regional-variation.regional-variation--england-wales.js-regional-variation.js-england-wales|England and Wales: style 1\r\naside.regional-variation.regional-variation--northern-ireland-wales.js-regional-variation.js-northern-ireland-wales|Northern Ireland and Wales: style 1\r\ndiv.regional-variation.regional-variation--alternative.regional-variation--england.js-regional-variation.js-england.js-alternative-text|England: style 2\r\ndiv.regional-variation.regional-variation--alternative.regional-variation--northern-ireland.js-regional-variation.js-northern-ireland.js-alternative-text|Northern Ireland: style 2\r\ndiv.regional-variation.regional-variation--alternative.regional-variation--wales.js-regional-variation.js-wales.js-alternative-text|Wales: style 2\r\ndiv.regional-variation.regional-variation--alternative.regional-variation--england-northern-ireland.js-regional-variation.js-england-northern-ireland.js-alternative-text|England and Northern Ireland: style 2\r\ndiv.regional-variation.regional-variation--alternative.regional-variation--england-wales.js-regional-variation.js-england-wales.js-alternative-text|England and Wales: style 2\r\ndiv.regional-variation.regional-variation--alternative.regional-variation--northern-ireland-wales.js-regional-variation.js-northern-ireland-wales.js-alternative-text|Northern Ireland and Wales: style 2"
     drupallink:
       linkit_enabled: true
       linkit_profile: default
     language:
       language_list: un
+    stylescombo:
+      styles: "section.important|Important\r\nsection.explanation.js-explanation|FSA Explains\r\naside.regional-variation.regional-variation--england.js-regional-variation.js-england|England: style 1\r\naside.regional-variation.regional-variation--northern-ireland.js-regional-variation.js-northern-ireland|Northern Ireland: style 1\r\naside.regional-variation.regional-variation--wales.js-regional-variation.js-wales|Wales: style 1\r\naside.regional-variation.regional-variation--england-northern-ireland.js-regional-variation.js-england-northern-ireland|England and Northern Ireland: style 1\r\naside.regional-variation.regional-variation--england-wales.js-regional-variation.js-england-wales|England and Wales: style 1\r\naside.regional-variation.regional-variation--northern-ireland-wales.js-regional-variation.js-northern-ireland-wales|Northern Ireland and Wales: style 1\r\ndiv.regional-variation.regional-variation--alternative.regional-variation--england.js-regional-variation.js-england.js-alternative-text|England: style 2\r\ndiv.regional-variation.regional-variation--alternative.regional-variation--northern-ireland.js-regional-variation.js-northern-ireland.js-alternative-text|Northern Ireland: style 2\r\ndiv.regional-variation.regional-variation--alternative.regional-variation--wales.js-regional-variation.js-wales.js-alternative-text|Wales: style 2\r\ndiv.regional-variation.regional-variation--alternative.regional-variation--england-northern-ireland.js-regional-variation.js-england-northern-ireland.js-alternative-text|England and Northern Ireland: style 2\r\ndiv.regional-variation.regional-variation--alternative.regional-variation--england-wales.js-regional-variation.js-england-wales.js-alternative-text|England and Wales: style 2\r\ndiv.regional-variation.regional-variation--alternative.regional-variation--northern-ireland-wales.js-regional-variation.js-northern-ireland-wales.js-alternative-text|Northern Ireland and Wales: style 2"
     video_embed:
       defaults:
         children:
