@@ -15,6 +15,7 @@ use Drupal\Core\Link;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Url;
 use Drupal\views\ViewExecutable;
+use Drupal\Core\Asset\AttachedAssetsInterface;
 
 /**
  * Implements of template_preprocess_page().
@@ -603,6 +604,9 @@ function fsa_custom_editor_js_settings_alter(array &$settings) {
   foreach ($settings['editor']['formats'] as $key => $value) {
     // Limit headings/tags of "Format" dropdown.
     $settings['editor']['formats'][$key]['editorSettings']['format_tags'] = "p;h2;h3;h4";
+    // Trigger magic line to appear for all block level elements.
+    $settings['editor']['formats'][$key]['editorSettings']['magicline_everywhere'] = TRUE;
+    $settings['editor']['formats'][$key]['editorSettings']['magicline_color'] = 'mediumaquamarine';
   }
 }
 
