@@ -15,7 +15,6 @@ use Drupal\Core\Link;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Url;
 use Drupal\views\ViewExecutable;
-use Drupal\Core\Asset\AttachedAssetsInterface;
 
 /**
  * Implements of template_preprocess_page().
