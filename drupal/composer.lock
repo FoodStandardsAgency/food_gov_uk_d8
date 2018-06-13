@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "38dd4e9358ac4ea5937215af5fd8f2e9",
+    "content-hash": "45964306f6186b1b197837c1ae349727",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2297,6 +2297,61 @@
             ],
             "description": "Drupal Console Extend Plugin",
             "time": "2017-07-28T17:11:54+00:00"
+        },
+        {
+            "name": "drupal/content_moderation_notifications",
+            "version": "3.0.0-rc2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/content_moderation_notifications",
+                "reference": "8.x-3.0-rc2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/content_moderation_notifications-8.x-3.0-rc2.zip",
+                "reference": "8.x-3.0-rc2",
+                "shasum": "e51ac2174d0262812aa13cee782861a53fd9583b"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "require-dev": {
+                "drupal/token": "^1.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-3.x": "3.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-3.0-rc2",
+                    "datestamp": "1517332380",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "RC releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Holmes",
+                    "homepage": "https://www.drupal.org/user/1774034"
+                },
+                {
+                    "name": "jhedstrom",
+                    "homepage": "https://www.drupal.org/user/208732"
+                }
+            ],
+            "description": "Manage notifications for content moderation transitions.",
+            "homepage": "https://www.drupal.org/project/content_moderation_notifications",
+            "support": {
+                "source": "http://cgit.drupalcode.org/content_moderation_notifications",
+                "issues": "https://www.drupal.org/project/issues/content_moderation_notifications"
+            }
         },
         {
             "name": "drupal/cookieconsent",
@@ -10495,61 +10550,6 @@
             "time": "2015-06-14T21:17:01+00:00"
         },
         {
-            "name": "drupal/content_moderation_notifications",
-            "version": "3.0.0-rc2",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupal.org/project/content_moderation_notifications",
-                "reference": "8.x-3.0-rc2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/content_moderation_notifications-8.x-3.0-rc2.zip",
-                "reference": "8.x-3.0-rc2",
-                "shasum": "e51ac2174d0262812aa13cee782861a53fd9583b"
-            },
-            "require": {
-                "drupal/core": "*"
-            },
-            "require-dev": {
-                "drupal/token": "^1.0"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-3.x": "3.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-3.0-rc2",
-                    "datestamp": "1517332380",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "RC releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Rob Holmes",
-                    "homepage": "https://www.drupal.org/user/1774034"
-                },
-                {
-                    "name": "jhedstrom",
-                    "homepage": "https://www.drupal.org/user/208732"
-                }
-            ],
-            "description": "Manage notifications for content moderation transitions.",
-            "homepage": "https://www.drupal.org/project/content_moderation_notifications",
-            "support": {
-                "source": "http://cgit.drupalcode.org/content_moderation_notifications",
-                "issues": "https://www.drupal.org/project/issues/content_moderation_notifications"
-            }
-        },
-        {
             "name": "drupal/ip_anon",
             "version": "1.2.0",
             "source": {
@@ -12073,6 +12073,7 @@
         "maijs/elasticsearch_helper_views": 20,
         "drupal/datalayer": 10,
         "drupal/path_redirect_import": 10,
+        "drupal/content_moderation_notifications": 5,
         "drupal/role_delegation": 20
     },
     "prefer-stable": true,

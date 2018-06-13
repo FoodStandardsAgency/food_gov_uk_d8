@@ -1,19 +1,17 @@
 # Workflows
 
-## Editoral
+## Editoral workflow
 
-Two roles are pertinent to the editorial workflow:
-1. **_Author_**
-2. **_Editor_**
+Two roles are pertinent to the editorial workflow:_author_ and _editor_.
 
-An _author_ may view published content, create new content, and view or edit any unpublished content. They may also translate content. When they are satisfied, they may move their content from a _draft_ state into a _drafted_ state. They may, also, move their content back into a _draft_ state if, for example, they notice a mistake in what they have authored. Authors can, also, edit each others content.
+An _author_ may create a new draft of the following content types:
 
-**Author: Draft <-> Drafted**
+- consultations
+- pages
+- research reports
 
-An _editor_ can perform most operations on content. The editor can move content  into a _published_ state, at which point its status will automatically change to published. The content can, now, be viewed by all visitors to the site, and indexed by search engines. They can also move the content, or content translation, back into a _draft_ state, if they feel it requires more work.
+They may not publish the above content, but when they are satisfied with their initial draft they can mark it as _ready to review_. If they change their mind they may move it back into draft, however, be aware that when an author marks content as _ready to review_ an email alert to all editors is triggered. 
 
-**Editor: Draft <- Drafted -> Published**
+Once published an _author_ may still move content back into draft to revise it. The initial, now published, revision will stay live while the new revision is worked on. Only after the revision has been moved, again, into _ready to review_ and then _published_ will the new revision go live.
 
-Alternatively, after publication, content can be put into an _archived_ state, if it is no longer needed. It will automatically be unpublished. It can be restored to either a _published_ or _draft_ state. This can be useful for seasonal content, which is re-purposed year after year.
-
-**Editor: Published / Draft <-> Archived**
+It is only an _editor_ who may publish and archive content. In most cases it will be appropriate to give a user, who has the _editor_ role, the _author_ role also, so that they can intervene at any stage of the workflow.

@@ -5,23 +5,73 @@
  * Alters default translation settings.
  */
 
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\NodeInterface;
+
 /**
- * Implements hook_language_switch_links_alter().
+ * Implements hook_form_BASE_FORM_ID_alter().
  */
-function fsa_translate_language_switch_links_alter(array &$links, $type, $path) {
-  if (isset($links['cy']['title'])) {
-    $links['cy']['title'] = 'Cymraeg';
+function fsa_translate_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  // Get node identifier.
+  $nid = $form_state->getFormObject()->getEntity()->id();
+
+  // Query tracking table.
+  $connection = \Drupal::database();
+  $query = $connection->select('fsa_translation_required', 'f');
+  $query->condition('nid', $nid);
+  $query->addField('f', 'translation_required');
+  $result = $query->execute();
+  $translation_required = $result->fetchField();
+
+  // Add entity meta details.
+  $form['translation'] = [
+    '#type' => 'details',
+    '#title' => t('Translation'),
+    '#open' => $translation_required,
+    '#group' => 'advanced',
+    'translation_required' => [
+      '#type' => 'checkbox',
+      '#title' => t('Translation required'),
+      '#default_value' => $translation_required,
+    ],
+  ];
+
+  // Add submit handler.
+  foreach (array_keys($form['actions']) as $action) {
+    if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+      $form['actions'][$action]['#submit'][] = 'fsa_translate_submit';
+    }
   }
-  return $links;
 }
 
 /**
- * Implements hook_entity_view_alter().
+ * Custom submit handler.
  */
-function fsa_translate_entity_view_alter(array &$build, $entity, $display) {
-  if ($build['#view_mode'] == 'full' && isset($build['entity_print_view_pdf'])) {
-    if ($build['entity_print_view_pdf']['#title'] == 'View PDF') {
-      $build['entity_print_view_pdf']['#title'] = t('View PDF');
-    }
-  }
+function fsa_translate_submit(array $form, FormStateInterface $form_state) {
+
+  // Get node identifier.
+  $nid = $form_state->getFormObject()->getEntity()->id();
+
+  // Get translation required status.
+  $translation_required = $form_state->getValue('translation_required');
+
+  // Merge value into tracking table.
+  $connection = \Drupal::database();
+  $connection->merge('fsa_translation_required')
+    ->key(['nid' => $nid])
+    ->fields(['translation_required' => $translation_required])
+    ->execute();
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function fsa_translate_node_delete(NodeInterface $node) {
+
+  // Delete row from tracking table.
+  $connection = \Drupal::database();
+  $connection->delete('fsa_translation_required')
+    ->condition('nid', $node->id())
+    ->execute();
 }
