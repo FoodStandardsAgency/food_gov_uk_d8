@@ -54,7 +54,7 @@ third_party_settings:
         - field_liftup_summary
         - field_media_library_liftup_image
       parent_name: ''
-      weight: 2
+      weight: 3
       format_type: tab
       format_settings:
         label: 'Landing Page Promo'
@@ -68,7 +68,7 @@ third_party_settings:
       children:
         - field_related
       parent_name: ''
-      weight: 14
+      weight: 15
       format_type: tab
       format_settings:
         label: 'Related content'
@@ -82,7 +82,7 @@ third_party_settings:
       children:
         - field_search_exclude
       parent_name: ''
-      weight: 19
+      weight: 2
       format_type: tab
       format_settings:
         id: ''
@@ -100,7 +100,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 6
+    weight: 7
     region: content
     settings:
       rows: 9
@@ -109,7 +109,7 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 10
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -126,7 +126,7 @@ content:
     type: options_select
     region: content
   field_document:
-    weight: 7
+    weight: 8
     settings:
       form_mode: default
       label_singular: ''
@@ -141,14 +141,14 @@ content:
     type: inline_entity_form_complex
     region: content
   field_fsa_toc:
-    weight: 5
+    weight: 6
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_intro:
-    weight: 4
+    weight: 5
     settings:
       rows: 3
       placeholder: ''
@@ -208,7 +208,7 @@ content:
     type: boolean_checkbox
     region: content
   field_team_contacts:
-    weight: 15
+    weight: 16
     settings:
       match_operator: CONTAINS
       size: 60
@@ -227,27 +227,27 @@ content:
     type: options_shs
     region: content
   field_update_date:
-    weight: 3
+    weight: 4
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
     region: content
   langcode:
     type: language_select
-    weight: 8
+    weight: 9
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 18
+    weight: 19
     settings: {  }
     region: content
     third_party_settings: {  }
   path:
     type: path
-    weight: 12
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -255,12 +255,12 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 13
+    weight: 14
     third_party_settings: {  }
     region: content
   sticky:
     type: boolean_checkbox
-    weight: 16
+    weight: 17
     region: content
     settings:
       display_label: true
@@ -274,13 +274,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 11
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 9
+    weight: 10
     region: content
     settings:
       match_operator: CONTAINS
@@ -288,7 +288,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 17
+    weight: 18
     region: content
     settings: {  }
     third_party_settings: {  }

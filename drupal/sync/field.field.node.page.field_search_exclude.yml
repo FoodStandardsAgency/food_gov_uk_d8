@@ -10,7 +10,7 @@ field_name: field_search_exclude
 entity_type: node
 bundle: page
 label: 'Exclude from search'
-description: ''
+description: 'Select to exclude this page from the internal search index. This does not prevent the page being indexed by external search engines like Google.'
 required: false
 translatable: false
 default_value:
