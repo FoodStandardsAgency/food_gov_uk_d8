@@ -1,0 +1,68 @@
+<?php
+
+/**
+ * @file
+ * Installs FSA translate.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function fsa_translate_schema() {
+  $schema['fsa_translation_required'] = [
+    'description' => 'Tracking table for nodes requiring translation.',
+    'fields' => [
+      'nid' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'translation_required' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['nid'],
+  ];
+  return $schema;
+}
+
+/**
+ * Add tracking table for nodes requiring translation.
+ */
+function fsa_translate_update_8001(&$sandbox) {
+  $connection = \Drupal::database();
+  $schema = $connection->schema();
+  if (!$schema->tableExists('fsa_translation_required')) {
+    $spec = [
+      'description' => 'Tracking table for nodes requiring translation.',
+      'fields' => [
+        'nid' => [
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ],
+        'translation_required' => [
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ],
+      ],
+      'primary key' => ['nid'],
+    ];
+    $schema->createTable('fsa_translation_required', $spec);
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function fsa_translate_uninstall_schema() {
+
+  // Uninstall the table module created.
+  drupal_uninstall_schema('fsa_translation_required');
+
+  // Delete the views created by the module.
+  \Drupal::configFactory()->getEditable('views.view.translations_required')->delete();
+}

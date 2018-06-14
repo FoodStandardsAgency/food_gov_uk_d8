@@ -33,6 +33,14 @@ $ ./provision.sh -p ~/.ansible-pass-file upcloud
 Provisioning troubleshooting
 -------------------------
 
+#### Locale ValueError
+If you get `ValueError: unknown locale: UTF-8` while provisioning do following (or add to your `~/.profile`)
+```
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+```
+
+#### Provisioning halts
 In case provisioning halts because of search server fingerprint/key temporarily remove from `conf/server.inventory` the following lines 
 ```
 prod-search

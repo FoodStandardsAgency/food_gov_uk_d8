@@ -89,6 +89,25 @@
         #server_forwards: "{{ domain2_name }}"  # we redirect to www subdomain
         http_port: 8080
         docroot: "{{ drupal_web_root }}"
+      - server_name: "pl.{{ domain2_name }}"
+        http_port: 8080
+        docroot: "{{ drupal_web_root }}/themes/custom/fsa/dist/styleguide"
+        custom_app: |
+          index index.html;
+          location / {
+            include conf.d/php_fpm_status.conf;
+            location = /_ping.php {
+              root /var/www/fsa.prod.wunder.io/current/web;
+              include conf.d/fastcgi_drupal.conf;
+              fastcgi_param  SCRIPT_FILENAME    $document_root/_ping.php;
+              fastcgi_pass phpcgi;
+              access_log off;
+            }
+            location ~* ^.+\.(?:css|js?)$ {
+              try_files $uri =404;
+            }
+          }
+
 
     # You can also define aliases with app_dir_aliases, see ansible/playbook/roles/nginx/templates/all_apps.conf.j2
 

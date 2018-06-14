@@ -17,6 +17,16 @@ use Drupal\Core\Url;
 use Drupal\views\ViewExecutable;
 
 /**
+ * Implements hook_language_switch_links_alter().
+ */
+function fsa_custom_language_switch_links_alter(array &$links, $type, $path) {
+  if (isset($links['cy']['title'])) {
+    $links['cy']['title'] = 'Cymraeg';
+  }
+  return $links;
+}
+
+/**
  * Implements of template_preprocess_page().
  */
 function fsa_custom_preprocess_page(&$variables) {
@@ -603,6 +613,9 @@ function fsa_custom_editor_js_settings_alter(array &$settings) {
   foreach ($settings['editor']['formats'] as $key => $value) {
     // Limit headings/tags of "Format" dropdown.
     $settings['editor']['formats'][$key]['editorSettings']['format_tags'] = "p;h2;h3;h4";
+    // Trigger magic line to appear for all block level elements.
+    $settings['editor']['formats'][$key]['editorSettings']['magicline_everywhere'] = TRUE;
+    $settings['editor']['formats'][$key]['editorSettings']['magicline_color'] = 'mediumaquamarine';
   }
 }
 

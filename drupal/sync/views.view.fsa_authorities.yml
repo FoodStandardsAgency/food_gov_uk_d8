@@ -58,7 +58,7 @@ display:
       pager:
         type: full
         options:
-          items_per_page: 10
+          items_per_page: 50
           offset: 0
           id: 0
           total_pages: null
@@ -390,6 +390,87 @@ display:
           entity_type: fsa_authority
           plugin_id: entity_operations
       filters:
+        default_langcode:
+          id: default_langcode
+          table: fsa_authority_field_data
+          field: default_langcode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: fsa_authority
+          entity_field: default_langcode
+          plugin_id: boolean
+        name:
+          id: name
+          table: fsa_authority_field_data
+          field: name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: name_op
+            label: Name
+            description: ''
+            use_operator: false
+            operator: name_op
+            identifier: name
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              author: '0'
+              editor: '0'
+              fsa_admin: '0'
+              administrator: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: fsa_authority
+          entity_field: name
+          plugin_id: string
         field_regionname_target_id:
           id: field_regionname_target_id
           table: fsa_authority__field_regionname
@@ -435,44 +516,6 @@ display:
           hierarchy: false
           error_message: true
           plugin_id: taxonomy_index_tid
-        default_langcode:
-          id: default_langcode
-          table: fsa_authority_field_data
-          field: default_langcode
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '='
-          value: '1'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: fsa_authority
-          entity_field: default_langcode
-          plugin_id: boolean
         field_email_overridden_value:
           id: field_email_overridden_value
           table: fsa_authority__field_email_overridden
@@ -590,7 +633,7 @@ display:
         groups:
           1: AND
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -609,9 +652,18 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: admin/reports/fsa-authorities
+      path: admin/content/fsa-authorities
+      menu:
+        type: tab
+        title: 'FSA authorities'
+        description: ''
+        expanded: false
+        parent: system.admin_content
+        weight: 0
+        context: '0'
+        menu_name: admin
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'

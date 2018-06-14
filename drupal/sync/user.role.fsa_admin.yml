@@ -4,7 +4,7 @@ status: true
 dependencies: {  }
 id: fsa_admin
 label: 'FSA Admin'
-weight: -6
+weight: -5
 is_admin: null
 permissions:
   - 'access administration pages'
@@ -28,6 +28,9 @@ permissions:
   - 'administer users'
   - 'administer webform'
   - 'administer webform submission'
+  - 'assign advanced_editor role'
+  - 'assign author role'
+  - 'assign editor role'
   - 'bypass node access'
   - 'create help content'
   - 'create lander content'

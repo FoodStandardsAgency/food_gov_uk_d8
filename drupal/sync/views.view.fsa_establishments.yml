@@ -1,21 +1,25 @@
-uuid: 6d57262d-03f5-4ed4-bd3b-d8d7ba3ee2b5
+uuid: 6879b081-22e0-4f09-86ba-7076ea85fc87
 langcode: en
 status: true
 dependencies:
   config:
+    - field.storage.fsa_establishment.field_businesstype
+    - field.storage.fsa_establishment.field_schemetype
+    - taxonomy.vocabulary.fhrs_businesstype
     - user.role.administrator
     - user.role.fsa_admin
   module:
+    - fsa_ratings
+    - options
+    - taxonomy
     - user
-    - webform
-    - webform_views
-id: la_send_failures
-label: 'LA send failures'
+id: fsa_establishments
+label: 'FSA establishments'
 module: views
-description: 'Contact submissions that failed to send data to a local authority.'
+description: ''
 tag: ''
-base_table: webform_submission
-base_field: sid
+base_table: fsa_establishment_field_data
+base_field: id
 core: 8.x
 display:
   default:
@@ -45,7 +49,7 @@ display:
         type: basic
         options:
           submit_button: Apply
-          reset_button: false
+          reset_button: true
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
           expose_sort_order: true
@@ -54,10 +58,15 @@ display:
       pager:
         type: full
         options:
-          items_per_page: 10
+          items_per_page: 50
           offset: 0
           id: 0
           total_pages: null
+          tags:
+            previous: ‹‹
+            next: ››
+            first: '« First'
+            last: 'Last »'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -66,26 +75,21 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
-          tags:
-            previous: ‹‹
-            next: ››
-            first: '« First'
-            last: 'Last »'
           quantity: 9
       style:
         type: table
       row:
         type: fields
       fields:
-        webform_id:
-          id: webform_id
-          table: webform_submission
-          field: webform_id
+        name:
+          id: name
+          table: fsa_establishment_field_data
+          field: name
           relationship: none
           group_type: group
           admin_label: ''
-          label: Webform
-          exclude: true
+          label: Name
+          exclude: false
           alter:
             alter_text: false
             text: ''
@@ -103,9 +107,74 @@ display:
             suffix: ''
             target: ''
             nl2br: false
-            max_length: null
-            word_boundary: false
-            ellipsis: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          entity_type: null
+          entity_field: name
+          plugin_id: field
+        field_businesstype:
+          id: field_businesstype
+          table: fsa_establishment__field_businesstype
+          field: field_businesstype
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Business Type'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
             more_link: false
             more_link_text: ''
             more_link_path: ''
@@ -139,70 +208,15 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: webform_submission
-          entity_field: webform_id
           plugin_id: field
-        view_webform_submission:
-          id: view_webform_submission
-          table: webform_submission
-          field: view_webform_submission
+        field_schemetype:
+          id: field_schemetype
+          table: fsa_establishment__field_schemetype
+          field: field_schemetype
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Contact submission'
-          exclude: false
-          alter:
-            alter_text: true
-            text: '{{ webform_id }}'
-            make_link: true
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: _blank
-            nl2br: false
-            max_length: null
-            word_boundary: false
-            ellipsis: false
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          text: view
-          entity_type: webform_submission
-          plugin_id: entity_link
-          output_url_as_text: false
-          absolute: false
-        completed:
-          id: completed
-          table: webform_submission
-          field: completed
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: 'Failed to send'
+          label: 'Scheme Type'
           exclude: false
           alter:
             alter_text: false
@@ -221,9 +235,9 @@ display:
             suffix: ''
             target: ''
             nl2br: false
-            max_length: null
-            word_boundary: false
-            ellipsis: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
             more_link: false
             more_link_text: ''
             more_link_path: ''
@@ -244,9 +258,8 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: timestamp_ago
-          settings:
-            granularity: 2
+          type: list_default
+          settings: {  }
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -257,12 +270,10 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: webform_submission
-          entity_field: completed
           plugin_id: field
         operations:
           id: operations
-          table: webform_submission
+          table: fsa_establishment
           field: operations
           relationship: none
           group_type: group
@@ -309,70 +320,37 @@ display:
           empty_zero: false
           hide_alter_empty: true
           destination: true
-          entity_type: webform_submission
+          entity_type: fsa_establishment
           plugin_id: entity_operations
       filters:
-        webform_submission_value:
-          id: webform_submission_value
-          table: webform_submission_field_food_poisoning_fsa_establishment_la_email
-          field: webform_submission_value
+        name:
+          id: name
+          table: fsa_establishment_field_data
+          field: name
           relationship: none
           group_type: group
           admin_label: ''
-          operator: regular_expression
-          value: ^$
-          group: 3
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          plugin_id: webform_submission_field_filter
-        webform_submission_value_1:
-          id: webform_submission_value_1
-          table: webform_submission_field_foreign_object_fsa_establishment_la_email
-          field: webform_submission_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: regular_expression
-          value: ^$
+          operator: contains
+          value: ''
           group: 1
-          exposed: false
+          exposed: true
           expose:
-            operator_id: ''
-            label: ''
+            operator_id: name_op
+            label: Name
             description: ''
             use_operator: false
-            operator: ''
-            identifier: ''
+            operator: name_op
+            identifier: name
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
-            placeholder: ''
+              anonymous: '0'
+              author: '0'
+              editor: '0'
+              fsa_admin: '0'
+              administrator: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -385,67 +363,40 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: webform_submission_field_filter
-        webform_submission_value_2:
-          id: webform_submission_value_2
-          table: webform_submission_field_poor_hygiene_practices_fsa_establishment_la_email
-          field: webform_submission_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: regular_expression
-          value: ^$
-          group: 2
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          plugin_id: webform_submission_field_filter
-        webform_submission_value_3:
-          id: webform_submission_value_3
-          table: webform_submission_field_foreign_object_manually_sent
-          field: webform_submission_value
+          entity_type: fsa_establishment
+          entity_field: name
+          plugin_id: string
+        id:
+          id: id
+          table: fsa_establishment_field_data
+          field: id
           relationship: none
           group_type: group
           admin_label: ''
           operator: '='
-          value: '0'
+          value:
+            min: ''
+            max: ''
+            value: ''
           group: 1
-          exposed: false
+          exposed: true
           expose:
-            operator_id: ''
-            label: ''
+            operator_id: id_op
+            label: ID
             description: ''
             use_operator: false
-            operator: ''
-            identifier: ''
+            operator: id_op
+            identifier: id
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+              anonymous: '0'
+              author: '0'
+              editor: '0'
+              fsa_admin: '0'
+              administrator: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -458,30 +409,38 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: webform_submission_checkbox_filter
-        webform_submission_value_4:
-          id: webform_submission_value_4
-          table: webform_submission_field_poor_hygiene_practices_manually_sent
-          field: webform_submission_value
+          entity_type: fsa_establishment
+          entity_field: id
+          plugin_id: numeric
+        field_businesstype_target_id:
+          id: field_businesstype_target_id
+          table: fsa_establishment__field_businesstype
+          field: field_businesstype_target_id
           relationship: none
           group_type: group
           admin_label: ''
-          operator: '='
-          value: '0'
-          group: 2
-          exposed: false
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
           expose:
-            operator_id: ''
-            label: ''
+            operator_id: field_businesstype_target_id_op
+            label: BusinessType
             description: ''
             use_operator: false
-            operator: ''
-            identifier: ''
+            operator: field_businesstype_target_id_op
+            identifier: businesstype
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+              anonymous: '0'
+              author: '0'
+              editor: '0'
+              fsa_admin: '0'
+              administrator: '0'
+            reduce: false
           is_grouped: false
           group_info:
             label: ''
@@ -494,30 +453,42 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: webform_submission_checkbox_filter
-        webform_submission_value_5:
-          id: webform_submission_value_5
-          table: webform_submission_field_food_poisoning_manually_sent
-          field: webform_submission_value
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: fhrs_businesstype
+          hierarchy: true
+          error_message: true
+          plugin_id: taxonomy_index_tid
+        field_schemetype_value:
+          id: field_schemetype_value
+          table: fsa_establishment__field_schemetype
+          field: field_schemetype_value
           relationship: none
           group_type: group
           admin_label: ''
-          operator: '='
-          value: '0'
-          group: 3
-          exposed: false
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
           expose:
-            operator_id: ''
-            label: ''
+            operator_id: field_schemetype_value_op
+            label: 'Scheme Type'
             description: ''
             use_operator: false
-            operator: ''
-            identifier: ''
+            operator: field_schemetype_value_op
+            identifier: schemetype
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+              anonymous: '0'
+              author: '0'
+              editor: '0'
+              fsa_admin: '0'
+              administrator: '0'
+            reduce: false
           is_grouped: false
           group_info:
             label: ''
@@ -530,71 +501,32 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: webform_submission_checkbox_filter
-      sorts:
-        completed:
-          id: completed
-          table: webform_submission
-          field: completed
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: DESC
-          exposed: false
-          expose:
-            label: ''
-          granularity: second
-          entity_type: webform_submission
-          entity_field: completed
-          plugin_id: date
-      title: 'Failed to send'
-      header:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content:
-            value: '<p>Contact submissions that failed to send data to a local authority.</p>'
-            format: basic_html
-          plugin_id: text
+          reduce_duplicates: false
+          plugin_id: list_field
+      sorts: {  }
+      title: 'FSA establishments'
+      header: {  }
       footer: {  }
-      empty:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: true
-          tokenize: false
-          content:
-            value: '<p>None</p>'
-            format: basic_html
-          plugin_id: text
+      empty: {  }
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
       filter_groups:
-        operator: OR
+        operator: AND
         groups:
           1: AND
-          2: AND
-          3: AND
     cache_metadata:
-      max-age: -1
+      max-age: 0
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - url.query_args
         - user
         - user.roles
-      tags: {  }
+      tags:
+        - 'config:field.storage.fsa_establishment.field_businesstype'
+        - 'config:field.storage.fsa_establishment.field_schemetype'
   page_1:
     display_plugin: page
     id: page_1
@@ -602,13 +534,25 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: admin/reports/send-to-la-failures
+      path: admin/content/fsa-establishments
+      menu:
+        type: tab
+        title: 'FSA establishments'
+        description: ''
+        expanded: false
+        parent: system.admin_content
+        weight: 0
+        context: '0'
+        menu_name: admin
     cache_metadata:
-      max-age: -1
+      max-age: 0
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - url.query_args
         - user
         - user.roles
-      tags: {  }
+      tags:
+        - 'config:field.storage.fsa_establishment.field_businesstype'
+        - 'config:field.storage.fsa_establishment.field_schemetype'
