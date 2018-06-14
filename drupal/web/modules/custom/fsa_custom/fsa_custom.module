@@ -611,7 +611,6 @@ function fsa_custom_preprocess_block(&$variables) {
  */
 function fsa_custom_editor_js_settings_alter(array &$settings) {
   foreach ($settings['editor']['formats'] as $key => $value) {
-    drupal_set_message(t('Test result: @result', array('@result' => var_export($key, TRUE))));
     // Limit headings/tags of "Format" dropdown.
     $settings['editor']['formats'][$key]['editorSettings']['format_tags'] = "p;h2;h3;h4";
     // Trigger magic line to appear for all block level elements.
