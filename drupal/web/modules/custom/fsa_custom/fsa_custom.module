@@ -611,11 +611,13 @@ function fsa_custom_preprocess_block(&$variables) {
  */
 function fsa_custom_editor_js_settings_alter(array &$settings) {
   foreach ($settings['editor']['formats'] as $key => $value) {
+    drupal_set_message(t('Test result: @result', array('@result' => var_export($key, TRUE))));
     // Limit headings/tags of "Format" dropdown.
     $settings['editor']['formats'][$key]['editorSettings']['format_tags'] = "p;h2;h3;h4";
     // Trigger magic line to appear for all block level elements.
     $settings['editor']['formats'][$key]['editorSettings']['magicline_everywhere'] = TRUE;
     $settings['editor']['formats'][$key]['editorSettings']['magicline_color'] = 'mediumaquamarine';
+    $settings['editor']['formats'][$key]['editorSettings']['skin'] = 'fsa-moono-lisa,' . base_path() . drupal_get_path('module', 'fsa_custom') . '/skins/fsa-moono-lisa/';
   }
 }
 
