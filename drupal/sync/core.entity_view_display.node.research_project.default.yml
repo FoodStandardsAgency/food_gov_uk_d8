@@ -61,6 +61,9 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
+  content_moderation_control:
+    weight: -20
+    region: content
   field_conducted_by:
     weight: 12
     label: inline
