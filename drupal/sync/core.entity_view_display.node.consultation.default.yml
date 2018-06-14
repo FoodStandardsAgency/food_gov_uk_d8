@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.consultation.field_consultations_type_alert
     - field.field.node.consultation.field_intro
     - field.field.node.consultation.field_nation
+    - field.field.node.consultation.field_search_exclude
     - field.field.node.consultation.field_status
     - node.type.consultation
   module:
@@ -29,7 +30,7 @@ third_party_settings:
         - field_consultation_launch_date
         - field_consultation_closing_date
       parent_name: ''
-      weight: 0
+      weight: 1
       format_type: html_element
       format_settings:
         label: Metadata
@@ -52,13 +53,15 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 2
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     region: content
   content_moderation_control:
-    weight: -20
+    weight: 0
     region: content
+    settings: {  }
+    third_party_settings: {  }
   field_consultation_closing_date:
     weight: 5
     label: inline
@@ -78,7 +81,7 @@ content:
     type: datetime_default
     region: content
   field_consultation_summary:
-    weight: 1
+    weight: 2
     label: inline
     settings:
       view_mode: document_link
@@ -107,5 +110,6 @@ hidden:
   field_consultations_type_alert: true
   field_intro: true
   field_nation: true
+  field_search_exclude: true
   langcode: true
   links: true

@@ -1,0 +1,23 @@
+uuid: 20248b83-4678-4e99-be61-b75ff0be1c0c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_search_exclude
+    - node.type.news
+id: node.news.field_search_exclude
+field_name: field_search_exclude
+entity_type: node
+bundle: news
+label: 'Exclude from search'
+description: 'Select to exclude this news item from the internal search index. This does not prevent the page being indexed by external search engines like Google.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
