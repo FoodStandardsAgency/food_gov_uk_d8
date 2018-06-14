@@ -83,7 +83,7 @@ class FsaIndexBase extends ElasticsearchIndexBase {
           $exclude = $translation->get('field_search_exclude')->getValue()[0]['value'];
         }
 
-        if ($translation->isPublished() && $exclude != 0) {
+        if ($translation->isPublished() && !$exclude) {
           parent::index($translation);
         }
         else {
