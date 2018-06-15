@@ -87,7 +87,8 @@
         "drupal/view_unpublished": "1.0-alpha1",
         "drupal/path_redirect_import": "^1.0@beta",
         "drupal/content_moderation_notifications": "^3.0@RC",
-        "drupal/rules": "^3.0@alpha"
+        "drupal/rules": "^3.0@alpha",
+        "drupal/role_delegation": "1.x-dev"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
@@ -111,7 +112,8 @@
         },
         "patches": {
             "drupal/core": {
-                "RSS view with fields give wrong URL from path field": "https://www.drupal.org/files/issues/2018-04-20/2673980-36.patch"
+                "RSS view with fields give wrong URL from path field": "https://www.drupal.org/files/issues/2018-04-20/2673980-36.patch",
+                "InvalidArgumentException when trying to save programatically created node translation with workflow enabled": "https://www.drupal.org/files/issues/2018-04-16/drupal_workflow-initial-state-fix-2901459-16.patch"
             },
             "drupal/migrate_plus": {
                 "Allow setting request headers": "https://www.drupal.org/files/issues/fix_headers-2849153-3.patch"
@@ -130,6 +132,10 @@
             },
             "drupal/redirect": {
                 "Allow wildcards": "https://www.drupal.org/files/issues/2018-03-16/support_for_wildcards-2831605-11.patch"
+            },
+            "drupal/role_delegation": {
+                "Lock assignable permissions in VBO": "https://www.drupal.org/files/issues/2018-04-29/2862360-Lock-down-assignable-permissions-in-the-VBO-action-15.patch",
+                "Allow to delegate roles on user creation": "https://www.drupal.org/files/issues/role-delegation-user-forms-2811851-27.patch"
             },
             "drupal/cookieconsent": {
                 "Language prefix fix": "https://www.drupal.org/files/issues/cookieconsent-policy_link_language_aware-2937005-3-d8.patch"

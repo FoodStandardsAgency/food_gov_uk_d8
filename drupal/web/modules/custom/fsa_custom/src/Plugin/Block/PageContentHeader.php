@@ -47,7 +47,8 @@ class PageContentHeader extends BlockBase {
         $intro = NULL;
       }
 
-      if ($parameter == 'node' && $entity->getType() == 'news') {
+      if ($parameter == 'node' && in_array($entity->getType(), ['news', 'alert'])) {
+        // News and alerts should display their created date.
         $date = \Drupal::service('date.formatter')->format($entity->getCreatedTime(), 'medium');
       }
       elseif ($parameter == 'media' && $entity->bundle() == 'document') {
@@ -67,10 +68,6 @@ class PageContentHeader extends BlockBase {
       elseif (isset($entity->field_update_date->value)) {
         // Last updated with inlined label.
         $date = $entity->field_update_date->view(['label' => 'inline']);
-      }
-      elseif (isset($entity->field_alert_modified->value)) {
-        // Alert modified date.
-        $date = $entity->field_alert_modified->view(['label' => 'inline']);
       }
       else {
         $date = NULL;

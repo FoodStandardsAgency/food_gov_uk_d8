@@ -41,31 +41,37 @@ type_settings:
       from:
         - published
       to: archived
-      weight: 3
+      weight: 0
     archived_draft:
       label: 'Restore to Draft'
       from:
         - archived
         - ready_for_review
       to: draft
-      weight: 4
+      weight: 1
     archived_published:
       label: Restore
       from:
         - archived
       to: published
-      weight: 5
+      weight: 2
     create_new_draft:
       label: 'Create new draft'
       to: draft
-      weight: 0
+      weight: -4
       from:
         - draft
         - published
+    maintain_review:
+      label: 'Maintain review'
+      from:
+        - ready_for_review
+      to: ready_for_review
+      weight: -2
     publish:
       label: Publish
       to: published
-      weight: 2
+      weight: -1
       from:
         - draft
         - published
@@ -75,7 +81,7 @@ type_settings:
       from:
         - draft
       to: ready_for_review
-      weight: 1
+      weight: -3
   entity_types:
     node:
       - consultation

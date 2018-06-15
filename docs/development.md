@@ -42,6 +42,7 @@ Copy local settings overrides file `drupal/conf/settings.private.php` [template 
 
 Drupal console or codeception do not work out of the box as they cannot read `getenv()` from the `$databases` array. Workaround is to export db user, pass and host to bash:
  ```
+ export DB_NAME_DRUPAL=drupal
  export DB_USER_DRUPAL=drupal
  export DB_PASS_DRUPAL=password
  export DB_HOST_DRUPAL=localhost
