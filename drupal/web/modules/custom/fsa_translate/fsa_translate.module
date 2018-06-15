@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Alters default translation settings.
+ * Enables content translation management.
  */
 
 use Drupal\Core\Form\FormStateInterface;
