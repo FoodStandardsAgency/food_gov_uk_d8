@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Alters default translation settings.
+ * Enables content translation management.
  */
 
 use Drupal\Core\Form\FormStateInterface;
@@ -27,12 +27,12 @@ function fsa_translate_form_node_form_alter(&$form, FormStateInterface $form_sta
   // Add entity meta details.
   $form['translation'] = [
     '#type' => 'details',
-    '#title' => t('Translation'),
+    '#title' => t('Translation status'),
     '#open' => $translation_required,
     '#group' => 'advanced',
     'translation_required' => [
       '#type' => 'checkbox',
-      '#title' => t('Translation required'),
+      '#title' => t('Required'),
       '#default_value' => $translation_required,
     ],
   ];
