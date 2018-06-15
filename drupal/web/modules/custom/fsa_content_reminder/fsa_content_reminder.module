@@ -1,0 +1,119 @@
+<?php
+
+/**
+ * @file
+ * Contains fsa_content_reminder.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function fsa_content_reminder_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.fsa_content_reminder':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Sends content reminders to authors') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+
+/**
+ * Implements hook_mail().
+ */
+function fsa_content_reminder_mail($key, &$message, $params) {
+  $options = array(
+    'langcode' => $message['langcode'],
+  );
+  switch ($key) {
+    case 'content_reminder':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('Content has reached its long-term review date: @title', array('@title' => $params['node_title']), $options);
+      $message['body'][] = $params['message'];
+      break;
+  }
+}
+
+/**
+ * Implements hook_cron().
+ */
+function fsa_content_reminder_cron() {
+
+  if(TRUE) { // @todo: get the timestamp state and compare if anything should be sent. We want to do this once a week.
+
+
+    // @todo: find out the date comparison to get nids we want to send messages abot.
+    $nids = [
+      '1115',
+      '271',
+    ];
+    foreach ($nids as $nid) {
+
+
+      $entity = \Drupal\node\Entity\Node::load($nid);
+
+      $mailManager = \Drupal::service('plugin.manager.mail');
+      $module = 'fsa_content_reminder';
+      $key = 'content_reminder';
+
+      // @todo: get email for whom to send the reminder.
+      // Is assymingly fsa.communications@food.gov.uk but check before enabling the feature (and/or add a config option to fetch the email)
+      $to = 'timo.kirkkala@wunder.io';
+      //    $params['message'] = $entity->get('body')->value;
+
+      $node_title = $entity->label();
+      if ($entity->hasField('field_content_review_date')) {
+        $node_review_date = \Drupal::service('date.formatter')->format(time(), 'long');
+      }
+      else {
+        $node_review_date = \Drupal::service('date.formatter')->format(time(), 'long');
+      }
+      $node_updated = $entity->getChangedTime();
+      $node_updated = \Drupal::service('date.formatter')->format($node_updated, 'long');
+      $node_edit = $entity->toLink();
+
+      $node_link = render($node_edit->toString());
+
+      $params['message'] = "Content $node_title reached it's long-term review date on $node_review_date
+
+Please check this content and complete one of the following actions:
+* If it's still up-to-date and relevant reset the review date.
+* If it requires updating, complete the updates and reset the review date.
+* If it's no longer required, archive the content.
+
+Page information:
+* Last updated: $node_updated
+* View: $node_link
+
+";
+
+      $params['node_title'] = $entity->label();
+      $langcode = \Drupal::currentUser()->getPreferredLangcode();
+      $send = true;
+      $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+
+      if ($result['result'] !== true) {
+        // @todo: drush printning only for dev/debugging.
+        drush_print_r('There was a problem sending a reminder.');
+        _fsa_content_reminder_sent();
+      }
+      else {
+        drush_print_r('Reminder was sent');
+      }
+    }
+
+  }
+}
+
+/**
+ * Store the timestamp of last succesful content reminder sending.
+ */
+function _fsa_content_reminder_sent() {
+  $now = time();
+  \Drupal::state()->set('fsa_content_reminder', $now);
+}

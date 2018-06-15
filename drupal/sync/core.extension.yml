@@ -57,6 +57,7 @@ module:
   fsa_contact_path: 0
   fsa_contactus: 0
   fsa_contactus_data: 0
+  fsa_content_reminder: 0
   fsa_custom: 0
   fsa_document_library: 0
   fsa_es: 0
@@ -117,8 +118,8 @@ module:
   rdf: 0
   recaptcha: 0
   redirect: 0
-  rules: 0
   role_delegation: 0
+  rules: 0
   search: 0
   seo_checklist: 0
   serialization: 0
