@@ -39,6 +39,9 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  content_moderation_control:
+    weight: -20
+    region: content
   field_document:
     weight: 2
     label: above
