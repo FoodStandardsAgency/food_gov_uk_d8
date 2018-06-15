@@ -113,7 +113,8 @@
         "patches": {
             "drupal/core": {
                 "RSS view with fields give wrong URL from path field": "https://www.drupal.org/files/issues/2018-04-20/2673980-36.patch",
-                "InvalidArgumentException when trying to save programatically created node translation with workflow enabled": "https://www.drupal.org/files/issues/2018-04-16/drupal_workflow-initial-state-fix-2901459-16.patch"
+                "InvalidArgumentException when trying to save programatically created node translation with workflow enabled": "https://www.drupal.org/files/issues/2018-04-16/drupal_workflow-initial-state-fix-2901459-16.patch",
+                "Empty alias check on translated pages": "https://www.drupal.org/files/issues/2018-05-02/empty-alias-check-2930599.patch"
             },
             "drupal/migrate_plus": {
                 "Allow setting request headers": "https://www.drupal.org/files/issues/fix_headers-2849153-3.patch"
