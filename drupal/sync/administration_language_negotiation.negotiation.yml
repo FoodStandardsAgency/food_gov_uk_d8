@@ -1,0 +1,12 @@
+default_language: en
+paths:
+  - /admin
+  - '/admin/*'
+  - '/admin*'
+  - '/node/add/*'
+  - '/node/*/edit'
+  - '/node/*/translations'
+  - /node
+admin_routes: false
+_core:
+  default_config_hash: LU_jn4kbs2DRd6k_EPJpg6Uc6KqApzjAj9_fVb50AF8
