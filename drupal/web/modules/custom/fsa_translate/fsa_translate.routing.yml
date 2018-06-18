@@ -1,0 +1,7 @@
+fsa_translate.translation_required_configuration:
+  path: '/admin/config/fsa/translation-required'
+  defaults:
+    _form: '\Drupal\fsa_translate\Form\TranslationRequiredConfiguration'
+    _title: 'Translation required configuration'
+  requirements:
+    _permission: 'administer site configuration'

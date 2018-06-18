@@ -1,0 +1,3 @@
+translation_required_mail_recipient: john.durance@wunder.io
+translation_required_mail_subject: 'Translation required'
+translation_required_mail_body: "<p>Draft content <strong>[node:title]</strong> has been flagged as requiring translation at [site:url-brief].</p>\r\n\r\n<ul>\r\n\t<li>Edit: [node:edit-url]</li>\r\n</ul>\r\n"
