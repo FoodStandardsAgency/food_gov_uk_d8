@@ -1,0 +1,5 @@
+fsa_translate.translation_required_configuration:
+  title: 'Translation required'
+  parent: system.admin_config_fsa
+  description: 'Translation required configuration.'
+  route_name: fsa_translate.translation_required_configuration
