@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "45964306f6186b1b197837c1ae349727",
+    "content-hash": "311c9b5e2fd9b159ef5d23ed4d0af0e2",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -1585,6 +1585,58 @@
             }
         },
         {
+            "name": "drupal/bundle_redirect",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/bundle_redirect",
+                "reference": "8.x-1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/bundle_redirect-8.x-1.0.zip",
+                "reference": "8.x-1.0",
+                "shasum": "5a428886d05d26b910ee40466e748ecc58976061"
+            },
+            "require": {
+                "drupal/core": "~8.0",
+                "drupal/redirect": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0",
+                    "datestamp": "1513861984",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "aburrows",
+                    "homepage": "https://www.drupal.org/user/577844"
+                },
+                {
+                    "name": "chandraraj",
+                    "homepage": "https://www.drupal.org/user/2393416"
+                }
+            ],
+            "description": "Module allows to set a redirect from a node itself",
+            "homepage": "https://www.drupal.org/project/bundle_redirect",
+            "support": {
+                "source": "http://cgit.drupalcode.org/bundle_redirect"
+            }
+        },
+        {
             "name": "drupal/captcha",
             "version": "1.0.0-beta1",
             "source": {
@@ -2626,7 +2678,8 @@
                     "merge-extra": false
                 },
                 "patches_applied": {
-                    "RSS view with fields give wrong URL from path field": "https://www.drupal.org/files/issues/2018-04-20/2673980-36.patch"
+                    "RSS view with fields give wrong URL from path field": "https://www.drupal.org/files/issues/2018-04-20/2673980-36.patch",
+                    "InvalidArgumentException when trying to save programatically created node translation with workflow enabled": "https://www.drupal.org/files/issues/2018-04-16/drupal_workflow-initial-state-fix-2901459-16.patch"
                 }
             },
             "autoload": {
