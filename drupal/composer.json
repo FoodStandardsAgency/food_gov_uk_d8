@@ -89,7 +89,8 @@
         "drupal/path_redirect_import": "^1.0@beta",
         "drupal/content_moderation_notifications": "^3.0@RC",
         "drupal/role_delegation": "1.x-dev",
-        "drupal/administration_language_negotiation": "^1.5"
+        "drupal/administration_language_negotiation": "^1.5",
+        "drupal/bundle_redirect": "^1.0"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
