@@ -79,6 +79,7 @@ $config_allowed = [
   '/admin/config/content/embed/button/manage/media_entity_embed',
   '/admin/config/content/embed/button/manage/image',
   '/admin/config/content/embed/button/manage/node',
+  '/admin/config/people/force_password_change',
 ];
 
 // Allow config changes on specified path pattern and command line.
