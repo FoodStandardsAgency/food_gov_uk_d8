@@ -26,13 +26,11 @@ function fsa_translate_form_node_form_alter(&$form, FormStateInterface $form_sta
 
   // Add entity meta details.
   $form['translation'] = [
-    '#type' => 'details',
-    '#title' => t('Translation status'),
-    '#open' => $translation_required,
-    '#group' => 'advanced',
+    '#type' => 'container',
+    '#group' => 'footer',
     'translation_required' => [
       '#type' => 'checkbox',
-      '#title' => t('Required'),
+      '#title' => t('Translation required'),
       '#default_value' => $translation_required,
     ],
     'notify' => [
