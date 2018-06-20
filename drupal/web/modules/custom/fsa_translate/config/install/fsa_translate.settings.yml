@@ -1,3 +1,3 @@
-translation_required_mail_recipient: fsa.communications@food.gov.uk
+translation_required_mail_recipient: welsh.language.translation.unit@food.gov.uk
 translation_required_mail_subject: 'Translation required'
 translation_required_mail_body: '<p>Draft content <strong>[node:title]</strong> has been flagged as requiring translation at [site:url-brief].</p><ul><li>Edit: [node:edit-url]</li>>Draft content <strong>[node:title]</strong> has been flagged</ul>'
