@@ -65,7 +65,7 @@ function fsa_translate_update_8002() {
   $config = $config_factory->getEditable('config.fsa_translate');
   $config->set('translation_required_mail_recipient', 'fsa.communications@food.gov.uk');
   $config->set('translation_required_mail_subject', 'Translation required');
-  $config->set('translation_required_mail_body', '<p>Draft content <strong>[node:title]</strong> has been flagged as requiring translation at [site:url-brief].</p><ul><li>Edit: [node:edit-url]</li></ul>');
+  $config->set('translation_required_mail_body', '<p>Draft content <strong>[node:title]</strong> has been flagged as requiring translation at [site:url-brief].</p><ul><li>Edit: [node:edit-url]</li><li>Revisions: [site:url]/node/[node:nid]/revisions</li></ul>');
   $config->save(TRUE);
 }
 
