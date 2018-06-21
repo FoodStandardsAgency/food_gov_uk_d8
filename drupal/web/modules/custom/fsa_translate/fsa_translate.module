@@ -105,11 +105,12 @@ function fsa_translate_mail($key, &$message, $params) {
 
       // Print subject.
       $config = \Drupal::config('config.fsa_translate');
-      $message['subject'] = $config->get('translation_required_mail_subject');
-
-      // Print body with replaced tokens.
-      $text = $config->get('translation_required_mail_body');
       $data = ['node' => $params];
+      $text = $config->get('translation_required_mail_subject');
+      $message['subject'] = \Drupal::token()->replace($text, $data);
+
+      // Print body.
+      $text = $config->get('translation_required_mail_body');
       $message['body'][] = \Drupal::token()->replace($text, $data);
       break;
   }
