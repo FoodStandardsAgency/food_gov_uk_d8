@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * @file
+ * Enables links to be referenced from a single managed source.
+ */
+
+use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+
+/**
+ * Implements hook_token_info().
+ */
+function fsa_managed_links_token_info() {
+  return [
+    'types' => [
+      'link' => [
+        'name' => t('Links'),
+        'description' => t('Managed link tokens.'),
+        'needs-data' => 'link',
+      ],
+    ],
+    'tokens' => [
+      'link' => [
+        'example.com' => [
+          'name' => 'example.com',
+          'description' => t('Example domain for illustrative use.'),
+        ],
+        'example.org' => [
+          'name' => 'example.org',
+          'description' => t('Example domain for illustrative use.'),
+        ],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function fsa_managed_links_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
+  $replacements = [];
+  $replacements['[link:example.com]'] = Link::fromTextAndUrl(t('example.com'), Url::fromUri('http://example.com/', array()))->toString();
+  $replacements['[link:example.org]'] = Link::fromTextAndUrl(t('example.org'), Url::fromUri('http://example.org/', array()))->toString();
+  return $replacements;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function fsa_managed_links_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  if ($build['#node']->hasField('body')) {
+    $body = $build['#node']->get('body')->getValue();
+    $text = $body[0]['value'];
+    $build['body'][0]['#text'] = \Drupal::token()->replace($text);
+  }
+}
