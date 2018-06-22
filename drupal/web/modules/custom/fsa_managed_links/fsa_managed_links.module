@@ -15,26 +15,36 @@ use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
  * Implements hook_token_info().
  */
 function fsa_managed_links_token_info() {
+  $data = [
+    'managed_links' => [
+      'example_company' => [
+        'text' => 'example company',
+        'url' => 'http://example.com/',
+      ],
+      'example_organisation' => [
+        'text' => 'example organisation',
+        'url' => 'http://example.org/',
+      ],
+    ],
+  ];
+
+  $tokens = [];
+  foreach ($data['managed_links'] as $key => $link) {
+    $tokens['link'][$key] = [
+      'name' => $link['text'],
+      'description' => $link['url'],
+      'needs-data' => 'managed_links',
+    ];
+  }
+
   return [
     'types' => [
-      'link' => [
-        'name' => t('Links'),
+      'managed_link' => [
+        'name' => t('Managed links'),
         'description' => t('Managed link tokens.'),
-        'needs-data' => 'link',
       ],
     ],
-    'tokens' => [
-      'link' => [
-        'example.com' => [
-          'name' => 'example.com',
-          'description' => t('Example domain for illustrative use.'),
-        ],
-        'example.org' => [
-          'name' => 'example.org',
-          'description' => t('Example domain for illustrative use.'),
-        ],
-      ],
-    ],
+    'tokens' => $tokens,
   ];
 }
 
@@ -43,8 +53,13 @@ function fsa_managed_links_token_info() {
  */
 function fsa_managed_links_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
   $replacements = [];
-  $replacements['[link:example.com]'] = Link::fromTextAndUrl(t('example.com'), Url::fromUri('http://example.com/', array()))->toString();
-  $replacements['[link:example.org]'] = Link::fromTextAndUrl(t('example.org'), Url::fromUri('http://example.org/', array()))->toString();
+  if ($type == 'managed_link') {
+    foreach ($tokens as $key => $token) {
+      $text = $data['managed_links'][$key]['text'];
+      $url = $data['managed_links'][$key]['url'];
+      $replacements[$token] = Link::fromTextAndUrl($text, Url::fromUri($url, []))->toString();
+    }
+  }
   return $replacements;
 }
 
@@ -52,9 +67,23 @@ function fsa_managed_links_tokens($type, $tokens, array $data, array $options, B
  * Implements hook_ENTITY_TYPE_view().
  */
 function fsa_managed_links_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+
+  $data = [
+    'managed_links' => [
+      'example_company' => [
+        'text' => 'example company',
+        'url' => 'http://example.com/',
+      ],
+      'example_organisation' => [
+        'text' => 'example organisation',
+        'url' => 'http://example.org/',
+      ],
+    ],
+  ];
+
   if ($build['#node']->hasField('body')) {
     $body = $build['#node']->get('body')->getValue();
     $text = $body[0]['value'];
-    $build['body'][0]['#text'] = \Drupal::token()->replace($text);
+    $build['body'][0]['#text'] = \Drupal::token()->replace($text, $data);
   }
 }
