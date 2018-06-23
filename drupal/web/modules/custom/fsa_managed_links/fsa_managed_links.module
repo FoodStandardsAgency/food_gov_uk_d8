@@ -10,6 +10,7 @@ use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_token_info().
@@ -30,7 +31,7 @@ function fsa_managed_links_token_info() {
 
   $tokens = [];
   foreach ($data['managed_links'] as $key => $link) {
-    $tokens['link'][$key] = [
+    $tokens['managed_link'][$key] = [
       'name' => $link['text'],
       'description' => $link['url'],
       'needs-data' => 'managed_links',
@@ -86,4 +87,16 @@ function fsa_managed_links_node_view(array &$build, EntityInterface $entity, Ent
     $text = $body[0]['value'];
     $build['body'][0]['#text'] = \Drupal::token()->replace($text, $data);
   }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function fsa_managed_links_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['body']['managed_links'] = array(
+    '#theme' => 'token_tree_link',
+    '#token_types' => ['managed_link'],
+    '#global_types' => FALSE,
+    '#text' => t('Insert managed link'),
+  );
 }
