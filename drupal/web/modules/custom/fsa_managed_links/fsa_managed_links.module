@@ -16,6 +16,8 @@ use Drupal\Core\Form\FormStateInterface;
  * Implements hook_token_info().
  */
 function fsa_managed_links_token_info() {
+
+  // Load all managed links.
   $data = [
     'managed_links' => [
       'example_company' => [
@@ -29,6 +31,7 @@ function fsa_managed_links_token_info() {
     ],
   ];
 
+  // Generate tokens array.
   $tokens = [];
   foreach ($data['managed_links'] as $key => $link) {
     $tokens['managed_link'][$key] = [
@@ -38,6 +41,7 @@ function fsa_managed_links_token_info() {
     ];
   }
 
+  // Provide token information.
   return [
     'types' => [
       'managed_link' => [
@@ -53,6 +57,8 @@ function fsa_managed_links_token_info() {
  * Implements hook_tokens().
  */
 function fsa_managed_links_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
+
+  // Provide replacement values for tokens.
   $replacements = [];
   if ($type == 'managed_link') {
     foreach ($tokens as $key => $token) {
@@ -69,6 +75,7 @@ function fsa_managed_links_tokens($type, $tokens, array $data, array $options, B
  */
 function fsa_managed_links_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
 
+  // Load all managed links.
   $data = [
     'managed_links' => [
       'example_company' => [
@@ -82,6 +89,7 @@ function fsa_managed_links_node_view(array &$build, EntityInterface $entity, Ent
     ],
   ];
 
+  // Replace tokens with their replacement values.
   if ($build['#node']->hasField('body')) {
     $body = $build['#node']->get('body')->getValue();
     $text = $body[0]['value'];
@@ -93,6 +101,8 @@ function fsa_managed_links_node_view(array &$build, EntityInterface $entity, Ent
  * Implements hook_form_BASE_FORM_ID_alter().
  */
 function fsa_managed_links_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  // Add token tree links under body widget.
   $form['body']['managed_links'] = array(
     '#theme' => 'token_tree_link',
     '#token_types' => ['managed_link'],
