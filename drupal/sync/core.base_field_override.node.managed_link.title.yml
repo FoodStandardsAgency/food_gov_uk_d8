@@ -1,0 +1,18 @@
+uuid: d16f2bc8-e223-4c03-8758-7d3d761cf388
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.managed_link
+id: node.managed_link.title
+field_name: title
+entity_type: node
+bundle: managed_link
+label: Name
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

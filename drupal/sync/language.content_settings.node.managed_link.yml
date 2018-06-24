@@ -1,0 +1,11 @@
+uuid: cdca4488-74cc-4033-bd96-c2669e8df3aa
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.managed_link
+id: node.managed_link
+target_entity_type_id: node
+target_bundle: managed_link
+default_langcode: site_default
+language_alterable: false

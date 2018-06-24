@@ -1,0 +1,25 @@
+uuid: 0e1b4fa7-a6cb-43d9-a8ea-c9429a9fbc83
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.managed_link.field_managed_link_url
+    - node.type.managed_link
+  module:
+    - user
+id: node.managed_link.teaser
+targetEntityType: node
+bundle: managed_link
+mode: teaser
+content:
+  links:
+    weight: 100
+    region: content
+hidden:
+  addtoany: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_managed_link_url: true
+  langcode: true
