@@ -69,10 +69,12 @@ function fsa_managed_links_node_view(array &$build, EntityInterface $entity, Ent
   $data = _fsa_managed_links_data();
 
   // Replace tokens with their replacement values.
-  if (isset($body[0]['value']) && !empty($body[0]['value'])) {
+  if ($build['#node']->hasField('body')) {
     $body = $build['#node']->get('body')->getValue();
-    $text = $body[0]['value'];
-    $build['body'][0]['#text'] = \Drupal::token()->replace($text, $data);
+    if (isset($body[0]['value'])) {
+      $text = $body[0]['value'];
+      $build['body'][0]['#text'] = \Drupal::token()->replace($text, $data);
+    }
   }
 }
 
