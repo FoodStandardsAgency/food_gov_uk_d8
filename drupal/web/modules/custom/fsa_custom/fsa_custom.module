@@ -616,6 +616,7 @@ function fsa_custom_editor_js_settings_alter(array &$settings) {
     // Trigger magic line to appear for all block level elements.
     $settings['editor']['formats'][$key]['editorSettings']['magicline_everywhere'] = TRUE;
     $settings['editor']['formats'][$key]['editorSettings']['magicline_color'] = 'mediumaquamarine';
+    $settings['editor']['formats'][$key]['editorSettings']['skin'] = 'fsa-moono-lisa,' . base_path() . drupal_get_path('module', 'fsa_custom') . '/skins/fsa-moono-lisa/';
   }
 }
 

@@ -51,6 +51,7 @@ module:
   field_validation: 0
   file: 0
   filter: 0
+  force_password_change: 0
   fsa_alerts: 0
   fsa_alerts_import: 0
   fsa_authorities_exp_filter: 0
@@ -112,6 +113,10 @@ module:
   node: 0
   options: 0
   page_cache: 0
+  password_policy: 0
+  password_policy_character_types: 0
+  password_policy_characters: 0
+  password_policy_length: 0
   path: 0
   path_redirect_import: 0
   quickedit: 0
