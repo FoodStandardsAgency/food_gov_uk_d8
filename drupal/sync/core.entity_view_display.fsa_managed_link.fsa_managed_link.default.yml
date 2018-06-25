@@ -1,0 +1,35 @@
+uuid: 44393f8d-4ea4-48f0-b3da-cb6ed36b9fcc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.fsa_managed_link.fsa_managed_link.field_managed_link_url
+  module:
+    - fsa_managed_links
+id: fsa_managed_link.fsa_managed_link.default
+targetEntityType: fsa_managed_link
+bundle: fsa_managed_link
+mode: default
+content:
+  field_managed_link_url:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  name:
+    label: hidden
+    type: string
+    weight: 0
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true
+  user_id: true
