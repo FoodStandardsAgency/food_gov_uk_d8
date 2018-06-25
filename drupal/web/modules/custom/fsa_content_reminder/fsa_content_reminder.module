@@ -46,9 +46,15 @@ function fsa_content_reminder_mail($key, &$message, $params) {
  */
 function fsa_content_reminder_cron() {
 
-  if (\Drupal::state()->get('fsa_content_reminder') < time()) {
+  $next_dispatch = \Drupal::state()->get('fsa_content_reminder.next_dispatch');
+  if ($next_dispatch == '' || $next_dispatch < time()) {
 
-    drush_print_r('sending reminders');
+    $mailManager = \Drupal::service('plugin.manager.mail');
+    $module = 'fsa_content_reminder';
+    $key = 'content_reminder';
+
+    $config = \Drupal::config('fsa_content_reminder.settings');
+    $to = $config->get('email');
 
     $now = new DrupalDateTime('now');
     $query = \Drupal::entityQuery('node');
@@ -60,14 +66,6 @@ function fsa_content_reminder_cron() {
 
       $entity = Node::load($nid);
 
-      $mailManager = \Drupal::service('plugin.manager.mail');
-      $module = 'fsa_content_reminder';
-      $key = 'content_reminder';
-
-      // @todo: Fix email for whom to send the reminder.
-      // Should be fsa.communications@food.gov.uk but check before enabling
-      // functionality. Or add a config option to store the recipient email.
-      $to = 'timo.kirkkala@wunder.io';
       $node_title = $entity->label();
       if ($entity->hasField('field_content_reminder')) {
         $node_review_date = \Drupal::service('date.formatter')->format(time(), 'short');
@@ -127,6 +125,7 @@ function _fsa_content_reminder_sent($success, $nid, $email) {
   }
 
   // Set the state to try again tomorrow.
-  $now = strtotime('+1 day', time());
-  \Drupal::state()->set('fsa_content_reminder', $now);
+  $tomorrow = strtotime('+1 day', time());
+  \Drupal::state()->set('fsa_content_reminder.next_dispatch', $tomorrow);
+  drush_print_r('foobar');
 }
