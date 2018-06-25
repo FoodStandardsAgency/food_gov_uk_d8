@@ -42,7 +42,7 @@ function fsa_workflows_form_alter(&$form, FormStateInterface $form_state, $form_
 
     if ($node instanceof NodeInterface && $moderation_information->isModeratedEntity($node) && $moderation_information->isDefaultRevisionPublished($node)) {
       // Check if we're creating a translation.
-      if ($form_state->getFormObject()->getEntity()->get('default_langcode')->value == false) {
+      if ($form_state->getFormObject()->getEntity()->get('default_langcode')->value == FALSE) {
         $form['moderation_state']['widget'][0]['state']['#default_value'] = 'draft';
       }
       else {
