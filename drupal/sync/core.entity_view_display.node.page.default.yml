@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.page.field_media_library_liftup_image
     - field.field.node.page.field_nation
     - field.field.node.page.field_related
+    - field.field.node.page.field_search_exclude
     - field.field.node.page.field_team_contacts
     - field.field.node.page.field_topic
     - field.field.node.page.field_update_date
@@ -45,6 +46,9 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  content_moderation_control:
+    weight: -20
+    region: content
   field_document:
     weight: 2
     label: above
@@ -78,6 +82,7 @@ hidden:
   field_media_library_liftup_image: true
   field_nation: true
   field_related: true
+  field_search_exclude: true
   field_topic: true
   field_update_date: true
   langcode: true
