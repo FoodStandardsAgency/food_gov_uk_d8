@@ -53,25 +53,4 @@ interface FsaManagedLinkInterface extends ContentEntityInterface, EntityChangedI
    */
   public function setCreatedTime($timestamp);
 
-  /**
-   * Returns the FSA managed link published status indicator.
-   *
-   * Unpublished FSA managed link are only visible to restricted users.
-   *
-   * @return bool
-   *   TRUE if the FSA managed link is published.
-   */
-  public function isPublished();
-
-  /**
-   * Sets the published status of a FSA managed link.
-   *
-   * @param bool $published
-   *   TRUE to set this FSA managed link to published, FALSE to set it to unpublished.
-   *
-   * @return \Drupal\fsa_managed_links\Entity\FsaManagedLinkInterface
-   *   The called FSA managed link entity.
-   */
-  public function setPublished($published);
-
 }

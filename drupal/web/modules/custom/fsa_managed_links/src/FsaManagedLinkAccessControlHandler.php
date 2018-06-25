@@ -21,10 +21,7 @@ class FsaManagedLinkAccessControlHandler extends EntityAccessControlHandler {
     /** @var \Drupal\fsa_managed_links\Entity\FsaManagedLinkInterface $entity */
     switch ($operation) {
       case 'view':
-        if (!$entity->isPublished()) {
-          return AccessResult::allowedIfHasPermission($account, 'view unpublished fsa managed link entities');
-        }
-        return AccessResult::allowedIfHasPermission($account, 'view published fsa managed link entities');
+        return AccessResult::allowedIfHasPermission($account, 'view fsa managed link entities');
 
       case 'update':
         return AccessResult::allowedIfHasPermission($account, 'edit fsa managed link entities');

@@ -12,8 +12,5 @@ delete fsa managed link entities:
 edit fsa managed link entities:
   title: 'Edit FSA managed link entities'
 
-view published fsa managed link entities:
-  title: 'View published FSA managed link entities'
-
-view unpublished fsa managed link entities:
-  title: 'View unpublished FSA managed link entities'
+view fsa managed link entities:
+  title: 'View FSA managed link entities'
