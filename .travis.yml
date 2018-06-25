@@ -50,7 +50,7 @@ before_script:
 
 script:
   # Static analysis of custom PHP code with PHPCS/PHPCBF.
-  - ./phpcs.sh
+  - ${DEPLOY_SRC}/phpcs.sh
   # Install drupal components
   - cd ${DEPLOY_SRC}
     #  - ./build.sh build
