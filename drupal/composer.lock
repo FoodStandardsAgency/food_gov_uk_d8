@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0ef3120749ccccab3f13203e69e68a37",
+    "content-hash": "c4cec31cfb25e5aa217b080d65219f57",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -229,111 +229,6 @@
                 "html"
             ],
             "time": "2017-06-12T17:35:44+00:00"
-        },
-        {
-            "name": "chillerlan/php-qrcode",
-            "version": "1.0.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/chillerlan/php-qrcode.git",
-                "reference": "37daf05058f6f5569c304e8491257f0da90d957e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/chillerlan/php-qrcode/zipball/37daf05058f6f5569c304e8491257f0da90d957e",
-                "reference": "37daf05058f6f5569c304e8491257f0da90d957e",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.6.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^5.7"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "chillerlan\\QRCode\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Smiley",
-                    "email": "smiley@chillerlan.net"
-                },
-                {
-                    "name": "Kazuhiko Arase",
-                    "homepage": "https://github.com/kazuhikoarase"
-                }
-            ],
-            "description": "A QR code generator. PHP 7+",
-            "homepage": "https://github.com/codemasher/php-qrcode",
-            "keywords": [
-                "qr code"
-            ],
-            "time": "2018-01-19T05:06:49+00:00"
-        },
-        {
-            "name": "christian-riesen/otp",
-            "version": "2.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ChristianRiesen/otp.git",
-                "reference": "9b31f024114b3b5bc393a1fb4b0ad19cb7931e81"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ChristianRiesen/otp/zipball/9b31f024114b3b5bc393a1fb4b0ad19cb7931e81",
-                "reference": "9b31f024114b3b5bc393a1fb4b0ad19cb7931e81",
-                "shasum": ""
-            },
-            "require": {
-                "paragonie/constant_time_encoding": "^1|^2",
-                "paragonie/random_compat": "^1|^2",
-                "php": ">=5.4.0",
-                "symfony/polyfill-php56": "^1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.8.35 || ^5.7.11 || ^6.0.5"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Otp\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Christian Riesen",
-                    "email": "chris.riesen@gmail.com",
-                    "homepage": "http://christianriesen.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "One Time Passwords, hotp and totp according to RFC4226 and RFC6238",
-            "homepage": "https://github.com/ChristianRiesen/otp",
-            "keywords": [
-                "googleauthenticator",
-                "hotp",
-                "otp",
-                "rfc4226",
-                "rfc6238",
-                "totp"
-            ],
-            "time": "2018-05-04T09:41:44+00:00"
         },
         {
             "name": "composer/installers",
@@ -657,69 +552,6 @@
             ],
             "description": "Provides a way to patch Composer packages.",
             "time": "2017-08-30T16:41:23+00:00"
-        },
-        {
-            "name": "defuse/php-encryption",
-            "version": "v2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/defuse/php-encryption.git",
-                "reference": "0d4d27c368ca6798bc162469e43248c363c73495"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/defuse/php-encryption/zipball/0d4d27c368ca6798bc162469e43248c363c73495",
-                "reference": "0d4d27c368ca6798bc162469e43248c363c73495",
-                "shasum": ""
-            },
-            "require": {
-                "ext-openssl": "*",
-                "paragonie/random_compat": "~2.0",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "nikic/php-parser": "^2.0|^3.0|^4.0",
-                "phpunit/phpunit": "^4|^5"
-            },
-            "bin": [
-                "bin/generate-defuse-key"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Defuse\\Crypto\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Hornby",
-                    "email": "taylor@defuse.ca",
-                    "homepage": "https://defuse.ca/"
-                },
-                {
-                    "name": "Scott Arciszewski",
-                    "email": "info@paragonie.com",
-                    "homepage": "https://paragonie.com"
-                }
-            ],
-            "description": "Secure PHP Encryption Library",
-            "keywords": [
-                "aes",
-                "authenticated encryption",
-                "cipher",
-                "crypto",
-                "cryptography",
-                "encrypt",
-                "encryption",
-                "openssl",
-                "security",
-                "symmetric key cryptography"
-            ],
-            "time": "2018-04-23T19:33:40+00:00"
         },
         {
             "name": "dflydev/dot-access-configuration",
@@ -1565,6 +1397,77 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/admin_toolbar",
                 "issues": "https://www.drupal.org/project/issues/admin_toolbar"
+            }
+        },
+        {
+            "name": "drupal/administration_language_negotiation",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/administration_language_negotiation",
+                "reference": "8.x-1.5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/administration_language_negotiation-8.x-1.5.zip",
+                "reference": "8.x-1.5",
+                "shasum": "b9dc33fce23688da6dd5a0ae39b077c7e084146e"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.7",
+                "phpmd/phpmd": "^2.6",
+                "phpro/grumphp": "^0.12",
+                "sebastian/phpcpd": "^3.0",
+                "sensiolabs/security-checker": "^4.1",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.5",
+                    "datestamp": "1525425484",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                },
+                "patches_applied": {
+                    "Fix admin_routes": "https://www.drupal.org/files/issues/2018-06-06/admin-routes-config-2972446-2.patch",
+                    "Restore the default language configuration": "https://cgit.drupalcode.org/administration_language_negotiation/patch/?id=426d504296dfa44a726b27bc73f270421816560d"
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "scripts": {
+                "grumphp": [
+                    "./vendor/bin/grumphp run"
+                ]
+            },
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Pol Dellaiera (@drupol)",
+                    "homepage": "https://www.drupal.org/u/pol",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Pol",
+                    "homepage": "https://www.drupal.org/user/47194"
+                }
+            ],
+            "description": "This module allows the users to browse particular pages in a specific language.",
+            "homepage": "https://drupal.org/project/administration_language_negotiation",
+            "support": {
+                "source": "https://cgit.drupalcode.org/TODO",
+                "issues": "https://drupal.org/project/issues/TODO",
+                "irc": "irc://irc.freenode.org/drupal-contribute"
             }
         },
         {
@@ -2796,6 +2699,7 @@
                 "patches_applied": {
                     "RSS view with fields give wrong URL from path field": "https://www.drupal.org/files/issues/2018-04-20/2673980-36.patch",
                     "InvalidArgumentException when trying to save programatically created node translation with workflow enabled": "https://www.drupal.org/files/issues/2018-04-16/drupal_workflow-initial-state-fix-2901459-16.patch",
+                    "Make the Date Time input format and descriptive text consistent": "https://www.drupal.org/files/issues/2791693-23.patch",
                     "Empty alias check on translated pages": "https://www.drupal.org/files/issues/2018-05-02/empty-alias-check-2930599.patch"
                 }
             },
@@ -2849,7 +2753,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.3",
-                    "datestamp": "1516120085",
+                    "datestamp": "1509015245",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3367,70 +3271,6 @@
             }
         },
         {
-            "name": "drupal/encrypt",
-            "version": "3.0.0-alpha3",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupal.org/project/encrypt",
-                "reference": "8.x-3.0-alpha3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/encrypt-8.x-3.0-alpha3.zip",
-                "reference": "8.x-3.0-alpha3",
-                "shasum": "427d1330d64eb2946bd2c375296f30b2e6465ded"
-            },
-            "require": {
-                "drupal/core": "~8.0",
-                "drupal/key": "*"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-3.x": "3.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-3.0-alpha3",
-                    "datestamp": "1499723642",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Alpha releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "greggles",
-                    "homepage": "https://www.drupal.org/user/36762"
-                },
-                {
-                    "name": "nerdstein",
-                    "homepage": "https://www.drupal.org/user/1557710"
-                },
-                {
-                    "name": "rlhawk",
-                    "homepage": "https://www.drupal.org/user/352283"
-                },
-                {
-                    "name": "theunraveler",
-                    "homepage": "https://www.drupal.org/user/71548"
-                },
-                {
-                    "name": "zzolo",
-                    "homepage": "https://www.drupal.org/user/147331"
-                }
-            ],
-            "description": "Provides an API for two-way encryption.",
-            "homepage": "https://www.drupal.org/project/encrypt",
-            "support": {
-                "source": "http://cgit.drupalcode.org/encrypt"
-            }
-        },
-        {
             "name": "drupal/entity",
             "version": "1.0.0-beta1",
             "source": {
@@ -3454,7 +3294,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.0-beta1",
-                    "datestamp": "1520873280",
+                    "datestamp": "1505895844",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
@@ -3525,7 +3365,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.4",
-                    "datestamp": "1528140780",
+                    "datestamp": "1512033785",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3734,7 +3574,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.3",
-                    "datestamp": "1515143885",
+                    "datestamp": "1495814284",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3743,7 +3583,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0-or-later"
+                "GPL-2.0+"
             ],
             "authors": [
                 {
@@ -3789,7 +3629,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.0",
-                    "datestamp": "1524232684",
+                    "datestamp": "1481932083",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3798,7 +3638,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0-or-later"
+                "GPL-2.0+"
             ],
             "authors": [
                 {
@@ -3989,75 +3829,6 @@
             }
         },
         {
-            "name": "drupal/ga_login",
-            "version": "1.0.0-alpha4",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupal.org/project/ga_login",
-                "reference": "8.x-1.0-alpha4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/ga_login-8.x-1.0-alpha4.zip",
-                "reference": "8.x-1.0-alpha4",
-                "shasum": "ab47d722638b8d0ea2386567c34a8953dc6eee69"
-            },
-            "require": {
-                "chillerlan/php-qrcode": "1.0.8",
-                "christian-riesen/otp": "2.*",
-                "drupal/core": "~8.0",
-                "drupal/tfa": "~1.0"
-            },
-            "require-dev": {
-                "drupal/tfa": "1.x-dev"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-1.0-alpha4",
-                    "datestamp": "1521587880",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Alpha releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Jelle_S",
-                    "homepage": "https://www.drupal.org/user/829198"
-                },
-                {
-                    "name": "attiks",
-                    "homepage": "https://www.drupal.org/user/105002"
-                },
-                {
-                    "name": "daggerhart",
-                    "homepage": "https://www.drupal.org/user/167806"
-                },
-                {
-                    "name": "nerdstein",
-                    "homepage": "https://www.drupal.org/user/1557710"
-                },
-                {
-                    "name": "therealssj",
-                    "homepage": "https://www.drupal.org/user/3408074"
-                }
-            ],
-            "description": "TFA plugins for Hmac-Based One Time Passwords & Time Based One Time Password with recovery codes as fallback.",
-            "homepage": "https://www.drupal.org/project/ga_login",
-            "support": {
-                "source": "http://cgit.drupalcode.org/ga_login"
-            }
-        },
-        {
             "name": "drupal/geolocation",
             "version": "1.11.0",
             "source": {
@@ -4179,7 +3950,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.0-alpha1",
-                    "datestamp": "1514911385",
+                    "datestamp": "1488319983",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Alpha releases are not covered by Drupal security advisories."
@@ -4188,7 +3959,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0-or-later"
+                "GPL-2.0+"
             ],
             "authors": [
                 {
@@ -4282,7 +4053,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.0-beta4",
-                    "datestamp": "1517390884",
+                    "datestamp": "1508927348",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -4416,7 +4187,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.0-beta1",
-                    "datestamp": "1527030784",
+                    "datestamp": "1477868343",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
@@ -4453,74 +4224,6 @@
             "homepage": "https://www.drupal.org/project/inline_entity_form",
             "support": {
                 "source": "http://cgit.drupalcode.org/inline_entity_form"
-            }
-        },
-        {
-            "name": "drupal/key",
-            "version": "1.7.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupal.org/project/key",
-                "reference": "8.x-1.7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/key-8.x-1.7.zip",
-                "reference": "8.x-1.7",
-                "shasum": "2f6cf737604fdf6b59c10d6e3872e967ce12a6fd"
-            },
-            "require": {
-                "drupal/core": "~8.0"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-1.7",
-                    "datestamp": "1517255284",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                },
-                "drush": {
-                    "services": {
-                        "drush.services.yml": "^9"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Cellar Door",
-                    "homepage": "https://www.drupal.org/user/658076"
-                },
-                {
-                    "name": "CrashTest_",
-                    "homepage": "https://www.drupal.org/user/261457"
-                },
-                {
-                    "name": "nerdstein",
-                    "homepage": "https://www.drupal.org/user/1557710"
-                },
-                {
-                    "name": "rlhawk",
-                    "homepage": "https://www.drupal.org/user/352283"
-                }
-            ],
-            "description": "Provides the ability to manage site-wide keys",
-            "homepage": "http://drupal.org/project/key",
-            "keywords": [
-                "Drupal"
-            ],
-            "support": {
-                "source": "http://cgit.drupalcode.org/key",
-                "issues": "http://drupal.org/project/key"
             }
         },
         {
@@ -4638,60 +4341,6 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/linkit",
                 "issues": "http://drupal.org/project/linkit"
-            }
-        },
-        {
-            "name": "drupal/lockr",
-            "version": "2.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupal.org/project/lockr",
-                "reference": "8.x-2.3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/lockr-8.x-2.3.zip",
-                "reference": "8.x-2.3",
-                "shasum": "a8ddd1337a9e626b1f2a6aa0dee62d186110feb5"
-            },
-            "require": {
-                "drupal/core": "~8.0",
-                "drupal/key": "*",
-                "lockr/lockr-client": "^1.6"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-2.x": "2.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-2.3",
-                    "datestamp": "1507065843",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Tynor Fujimoto",
-                    "homepage": "https://www.drupal.org/user/658076",
-                    "email": "tynor@lockr.io"
-                },
-                {
-                    "name": "tynor",
-                    "homepage": "https://www.drupal.org/user/2477108"
-                }
-            ],
-            "description": "Plugin for the Key module to integrate with Lockr, a hosted offsite key management platform.",
-            "homepage": "https://www.drupal.org/project/lockr",
-            "support": {
-                "source": "http://cgit.drupalcode.org/lockr"
             }
         },
         {
@@ -4942,7 +4591,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.2",
-                    "datestamp": "1525218780",
+                    "datestamp": "1470170939",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -4964,14 +4613,6 @@
                 {
                     "name": "Primsi",
                     "homepage": "https://www.drupal.org/user/282629"
-                },
-                {
-                    "name": "marcoscano",
-                    "homepage": "https://www.drupal.org/user/1288796"
-                },
-                {
-                    "name": "phenaproxima",
-                    "homepage": "https://www.drupal.org/user/205645"
                 },
                 {
                     "name": "slashrsm",
@@ -5014,7 +4655,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.4",
-                    "datestamp": "1525200184",
+                    "datestamp": "1473063239",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5023,7 +4664,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0-or-later"
+                "GPL-2.0+"
             ],
             "authors": [
                 {
@@ -5207,7 +4848,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.4",
-                    "datestamp": "1522344484",
+                    "datestamp": "1513959187",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5405,7 +5046,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.2",
-                    "datestamp": "1527502684",
+                    "datestamp": "1505802867",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5590,7 +5231,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.0",
-                    "datestamp": "1520092685",
+                    "datestamp": "1493468044",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5599,7 +5240,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0-or-later"
+                "GPL-2.0+"
             ],
             "authors": [
                 {
@@ -5623,63 +5264,6 @@
             "homepage": "https://www.drupal.org/project/pathauto",
             "support": {
                 "source": "http://cgit.drupalcode.org/pathauto"
-            }
-        },
-        {
-            "name": "drupal/real_aes",
-            "version": "2.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupal.org/project/real_aes",
-                "reference": "8.x-2.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/real_aes-8.x-2.1.zip",
-                "reference": "8.x-2.1",
-                "shasum": "1fd8a7cea1eda08d9e20dd56f3bb624b018b0de2"
-            },
-            "require": {
-                "defuse/php-encryption": "^2.0",
-                "drupal/core": "~8.0",
-                "drupal/encrypt": "*"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-2.x": "2.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-2.1",
-                    "datestamp": "1526056384",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Heine",
-                    "homepage": "https://www.drupal.org/user/17943"
-                },
-                {
-                    "name": "nerdstein",
-                    "homepage": "https://www.drupal.org/user/1557710"
-                },
-                {
-                    "name": "rlhawk",
-                    "homepage": "https://www.drupal.org/user/352283"
-                }
-            ],
-            "description": "Provides an Authenticated AES encryption method for Encrypt though the Defuse PHP Encryption library.",
-            "homepage": "https://www.drupal.org/project/real_aes",
-            "support": {
-                "source": "http://cgit.drupalcode.org/real_aes"
             }
         },
         {
@@ -5707,7 +5291,7 @@
                 },
                 "drupal": {
                     "version": "8.x-2.2",
-                    "datestamp": "1521320880",
+                    "datestamp": "1469859539",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5856,6 +5440,74 @@
             "time": "2016-07-01T00:19:03+00:00"
         },
         {
+            "name": "drupal/scheduler",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/scheduler",
+                "reference": "8.x-1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/scheduler-8.x-1.0.zip",
+                "reference": "8.x-1.0",
+                "shasum": "213025b64b417f459b73d260d7287ca1f916d587"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "require-dev": {
+                "drupal/devel_generate": "*",
+                "drupal/rules": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0",
+                    "datestamp": "1510690385",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Eric Schaefer (Eric Schaefer)",
+                    "homepage": "https://www.drupal.org/u/eric-schaefer",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Jonathan Smith (jonathan1055)",
+                    "homepage": "https://www.drupal.org/u/jonathan1055",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Pieter Frenssen (pfrenssen)",
+                    "homepage": "https://www.drupal.org/u/pfrenssen",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Rick Manelius (rickmanelius)",
+                    "homepage": "https://www.drupal.org/u/rickmanelius",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Automatically publish and unpublish content at specified dates and times.",
+            "homepage": "https://drupal.org/project/scheduler",
+            "support": {
+                "source": "http://cgit.drupalcode.org/scheduler",
+                "issues": "https://www.drupal.org/project/issues/scheduler"
+            }
+        },
+        {
             "name": "drupal/seo_checklist",
             "version": "4.1.0",
             "source": {
@@ -5985,7 +5637,7 @@
                 },
                 "drupal": {
                     "version": "8.x-2.10",
-                    "datestamp": "1513114985",
+                    "datestamp": "1506805827",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -6143,73 +5795,6 @@
             }
         },
         {
-            "name": "drupal/tfa",
-            "version": "1.0.0-alpha4",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupal.org/project/tfa",
-                "reference": "8.x-1.0-alpha4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/tfa-8.x-1.0-alpha4.zip",
-                "reference": "8.x-1.0-alpha4",
-                "shasum": "785e49e132f5acf95134be1d65e7b22a6632cdc7"
-            },
-            "require": {
-                "christian-riesen/otp": "2.*",
-                "drupal/core": "~8.0",
-                "drupal/encrypt": "*"
-            },
-            "require-dev": {
-                "drupal/encrypt": "*",
-                "drupal/key": "*",
-                "drupal/services": "*"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-1.0-alpha4",
-                    "datestamp": "1521586980",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Alpha releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "coltrane",
-                    "homepage": "https://www.drupal.org/user/91990"
-                },
-                {
-                    "name": "daggerhart",
-                    "homepage": "https://www.drupal.org/user/167806"
-                },
-                {
-                    "name": "greggles",
-                    "homepage": "https://www.drupal.org/user/36762"
-                },
-                {
-                    "name": "nerdstein",
-                    "homepage": "https://www.drupal.org/user/1557710"
-                }
-            ],
-            "description": "Pluggable provider of two factor authentication for Drupal",
-            "homepage": "https://www.drupal.org/project/tfa",
-            "support": {
-                "source": "http://cgit.drupalcode.org/tfa",
-                "error": "Invalid dependency: \"tfa_test_plugins\" is an unknown drupal 8 package name"
-            }
-        },
-        {
             "name": "drupal/toc_api",
             "version": "1.0.0-beta1",
             "source": {
@@ -6332,7 +5917,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.1",
-                    "datestamp": "1527112080",
+                    "datestamp": "1513810384",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -6341,7 +5926,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0-or-later"
+                "GPL-2.0+"
             ],
             "authors": [
                 {
@@ -6587,7 +6172,7 @@
                 },
                 "drupal": {
                     "version": "8.x-5.0-rc12",
-                    "datestamp": "1528137480",
+                    "datestamp": "1524706684",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "RC releases are not covered by Drupal security advisories."
@@ -6681,7 +6266,7 @@
                 },
                 "drupal": {
                     "version": "8.x-5.0-alpha2",
-                    "datestamp": "1512044585",
+                    "datestamp": "1498870443",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Alpha releases are not covered by Drupal security advisories."
@@ -6690,7 +6275,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0-or-later"
+                "GPL-2.0+"
             ],
             "authors": [
                 {
@@ -7492,39 +7077,6 @@
             "time": "2015-04-20T18:58:01+00:00"
         },
         {
-            "name": "lockr/lockr-client",
-            "version": "v1.6.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lockr/lockr-client.git",
-                "reference": "c30fbbcb069c0b3687cfc2435eb80bf749ba8016"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lockr/lockr-client/zipball/c30fbbcb069c0b3687cfc2435eb80bf749ba8016",
-                "reference": "c30fbbcb069c0b3687cfc2435eb80bf749ba8016",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Lockr\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Tynor Fujimoto",
-                    "email": "tynor@lockr.io"
-                }
-            ],
-            "description": "Client for use with Lockr off-site key management service.",
-            "time": "2017-11-21T00:54:14+00:00"
-        },
-        {
             "name": "maijs/elasticsearch_helper_views",
             "version": "dev-8.x-1.x",
             "source": {
@@ -7832,68 +7384,6 @@
                 "php"
             ],
             "time": "2017-11-04T11:48:34+00:00"
-        },
-        {
-            "name": "paragonie/constant_time_encoding",
-            "version": "v2.2.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/paragonie/constant_time_encoding.git",
-                "reference": "eccf915f45f911bfb189d1d1638d940ec6ee6e33"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/constant_time_encoding/zipball/eccf915f45f911bfb189d1d1638d940ec6ee6e33",
-                "reference": "eccf915f45f911bfb189d1d1638d940ec6ee6e33",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^6|^7",
-                "vimeo/psalm": "^1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ParagonIE\\ConstantTime\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paragon Initiative Enterprises",
-                    "email": "security@paragonie.com",
-                    "homepage": "https://paragonie.com",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "Steve 'Sc00bz' Thomas",
-                    "email": "steve@tobtu.com",
-                    "homepage": "https://www.tobtu.com",
-                    "role": "Original Developer"
-                }
-            ],
-            "description": "Constant-time Implementations of RFC 4648 Encoding (Base-64, Base-32, Base-16)",
-            "keywords": [
-                "base16",
-                "base32",
-                "base32_decode",
-                "base32_encode",
-                "base64",
-                "base64_decode",
-                "base64_encode",
-                "bin2hex",
-                "encoding",
-                "hex",
-                "hex2bin",
-                "rfc4648"
-            ],
-            "time": "2018-03-10T19:47:49+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -9969,62 +9459,6 @@
             "time": "2018-04-26T10:06:28+00:00"
         },
         {
-            "name": "symfony/polyfill-php56",
-            "version": "v1.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-php56.git",
-                "reference": "af98553c84912459db3f636329567809d639a8f6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/af98553c84912459db3f636329567809d639a8f6",
-                "reference": "af98553c84912459db3f636329567809d639a8f6",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3",
-                "symfony/polyfill-util": "~1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.8-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Php56\\": ""
-                },
-                "files": [
-                    "bootstrap.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony polyfill backporting some PHP 5.6+ features to lower PHP versions",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compatibility",
-                "polyfill",
-                "portable",
-                "shim"
-            ],
-            "time": "2018-04-26T10:06:28+00:00"
-        },
-        {
             "name": "symfony/polyfill-php70",
             "version": "v1.8.0",
             "source": {
@@ -10079,58 +9513,6 @@
                 "compatibility",
                 "polyfill",
                 "portable",
-                "shim"
-            ],
-            "time": "2018-04-26T10:06:28+00:00"
-        },
-        {
-            "name": "symfony/polyfill-util",
-            "version": "v1.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-util.git",
-                "reference": "1a5ad95d9436cbff3296034fe9f8d586dce3fb3a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-util/zipball/1a5ad95d9436cbff3296034fe9f8d586dce3fb3a",
-                "reference": "1a5ad95d9436cbff3296034fe9f8d586dce3fb3a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.8-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Util\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony utilities for portability of PHP codes",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compat",
-                "compatibility",
-                "polyfill",
                 "shim"
             ],
             "time": "2018-04-26T10:06:28+00:00"
@@ -12953,10 +12335,7 @@
         "drupal/path_redirect_import": 10,
         "drupal/content_moderation_notifications": 5,
         "drupal/role_delegation": 20,
-        "drupal/password_policy": 15,
-        "drupal/tfa": 15,
-        "drupal/ga_login": 15,
-        "drupal/encrypt": 15
+        "drupal/password_policy": 15
     },
     "prefer-stable": true,
     "prefer-lowest": false,

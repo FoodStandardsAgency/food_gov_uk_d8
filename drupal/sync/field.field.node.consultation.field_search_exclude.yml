@@ -1,0 +1,23 @@
+uuid: 14681261-ac56-4aa9-a62a-43e77f3d4bff
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_search_exclude
+    - node.type.consultation
+id: node.consultation.field_search_exclude
+field_name: field_search_exclude
+entity_type: node
+bundle: consultation
+label: 'Exclude from search'
+description: 'Select to exclude this consultation item from the internal search index. This does not prevent the page being indexed by external search engines like Google.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
