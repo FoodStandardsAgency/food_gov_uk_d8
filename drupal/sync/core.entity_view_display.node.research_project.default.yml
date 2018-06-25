@@ -63,7 +63,7 @@ content:
     third_party_settings: {  }
     region: content
   content_moderation_control:
-    weight: 0
+    weight: -20
     region: content
     settings: {  }
     third_party_settings: {  }
