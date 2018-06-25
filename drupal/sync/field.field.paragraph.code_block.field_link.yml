@@ -14,7 +14,7 @@ bundle: code_block
 label: Link
 description: 'Enter e.g. a "Read more" link that relates to the code block below.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
