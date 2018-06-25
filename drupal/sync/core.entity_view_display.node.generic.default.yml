@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.generic.field_fsa_toc
     - field.field.node.generic.field_liftup_title
     - field.field.node.generic.field_media_library_liftup_image
+    - field.field.node.generic.field_search_exclude
     - node.type.generic
   module:
     - entity_print
@@ -37,5 +38,6 @@ hidden:
   field_fsa_toc: true
   field_liftup_title: true
   field_media_library_liftup_image: true
+  field_search_exclude: true
   langcode: true
   links: true
