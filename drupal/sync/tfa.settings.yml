@@ -1,23 +1,23 @@
 enabled: 1
 required_roles:
-  authenticated: authenticated
-  author: '0'
-  editor: '0'
-  advanced_editor: '0'
-  fsa_admin: '0'
-  administrator: '0'
+  author: author
+  editor: editor
+  advanced_editor: advanced_editor
+  fsa_admin: fsa_admin
+  administrator: administrator
+  authenticated: '0'
 send_plugins: {  }
 login_plugins: {  }
 default_validation_plugin: tfa_totp
 validation_plugin_settings:
   tfa_totp:
     time_skew: 30
-    site_name_prefix: 1
+    site_name_prefix: 0
     name_prefix: TFA
     issuer: Drupal
   tfa_hotp:
     counter_window: 10
-    site_name_prefix: 0
+    site_name_prefix: 1
     name_prefix: TFA
     issuer: Drupal
 allowed_validation_plugins:
@@ -36,7 +36,7 @@ fallback_plugins:
         recovery_codes_amount: 9
       weight: -2
 help_text: 'Contact support to reset your access'
-validation_skip: 0
+validation_skip: 2
 encryption: fsa_2fa_profile
 trust_cookie_expiration: 2592000
 cookie_name: TFA
