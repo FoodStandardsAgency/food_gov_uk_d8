@@ -12,7 +12,7 @@ field_name: field_content_reminder
 entity_type: node
 bundle: page
 label: 'Content reminder'
-description: 'Date when fsa.communications@food.gov.uk will be sent a content review reminder of this page.'
+description: 'Long-term review date: a reminder will be sent on this date to review, update or archive this content.'
 required: false
 translatable: true
 default_value:
