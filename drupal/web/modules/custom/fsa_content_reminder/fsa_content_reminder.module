@@ -46,8 +46,9 @@ function fsa_content_reminder_mail($key, &$message, $params) {
  */
 function fsa_content_reminder_cron() {
 
-  // @todo: get the timestamp state and compare if anything should be sent. We want to do this once a week.
-  if (TRUE) {
+  if (\Drupal::state()->get('fsa_content_reminder') < time()) {
+
+    drush_print_r('sending reminders');
 
     $now = new DrupalDateTime('now');
     $query = \Drupal::entityQuery('node');
@@ -63,11 +64,10 @@ function fsa_content_reminder_cron() {
       $module = 'fsa_content_reminder';
       $key = 'content_reminder';
 
-      // @todo: get email for whom to send the reminder.
-      // Is assymingly fsa.communications@food.gov.uk but check before enabling the feature (and/or add a config option to fetch the email)
+      // @todo: Fix email for whom to send the reminder.
+      // Should be fsa.communications@food.gov.uk but check before enabling
+      // functionality. Or add a config option to store the recipient email.
       $to = 'timo.kirkkala@wunder.io';
-      //    $params['message'] = $entity->get('body')->value;
-
       $node_title = $entity->label();
       if ($entity->hasField('field_content_reminder')) {
         $node_review_date = \Drupal::service('date.formatter')->format(time(), 'short');
@@ -96,16 +96,14 @@ Page information:
 
       $params['node_title'] = $entity->label();
       $langcode = \Drupal::currentUser()->getPreferredLangcode();
-      $send = true;
+      $send = TRUE;
       $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
 
-      if ($result['result'] !== true) {
-        // @todo: drush printning only for dev/debugging.
-        drush_print_r('There was a problem sending a reminder.');
-        _fsa_content_reminder_sent();
+      if ($result['result'] !== TRUE) {
+        _fsa_content_reminder_sent(FALSE, $nid, $to);
       }
       else {
-        drush_print_r('Reminder was sent');
+        _fsa_content_reminder_sent(TRUE, $nid, $to);
       }
     }
 
@@ -113,9 +111,22 @@ Page information:
 }
 
 /**
- * Store the timestamp of last succesful content reminder sending.
+ * Store the timestamp of last succesful content reminder sending and log it.
+ *
+ * @param bool $success
+ *   Sending success.
+ * @param int $nid
+ *   Node id.
  */
-function _fsa_content_reminder_sent() {
-  $now = time();
+function _fsa_content_reminder_sent($success, $nid, $email) {
+  if ($success) {
+    \Drupal::logger('fsa_content_reminder')->info(t("Content reminder email sent to @email about node/@nid.", ['@nid' => $nid, '@email' => $email]));
+  }
+  else {
+    \Drupal::logger('fsa_content_reminder')->error(t("There was a problem sending the content reminder email for node/@nid.", ['@nid' => $nid]));
+  }
+
+  // Set the state to try again tomorrow.
+  $now = strtotime('+1 day', time());
   \Drupal::state()->set('fsa_content_reminder', $now);
 }
