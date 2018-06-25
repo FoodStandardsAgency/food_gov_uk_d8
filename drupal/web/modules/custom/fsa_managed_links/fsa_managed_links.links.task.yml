@@ -1,0 +1,22 @@
+# FSA managed link routing definition
+fsa_managed_link.settings_tab:
+  route_name: fsa_managed_link.settings
+  title: 'Settings'
+  base_route: fsa_managed_link.settings
+
+entity.fsa_managed_link.canonical:
+  route_name: entity.fsa_managed_link.canonical
+  base_route: entity.fsa_managed_link.canonical
+  title: 'View'
+
+entity.fsa_managed_link.edit_form:
+  route_name: entity.fsa_managed_link.edit_form
+  base_route: entity.fsa_managed_link.canonical
+  title: 'Edit'
+
+entity.fsa_managed_link.delete_form:
+  route_name:  entity.fsa_managed_link.delete_form
+  base_route:  entity.fsa_managed_link.canonical
+  title: Delete
+  weight: 10
+

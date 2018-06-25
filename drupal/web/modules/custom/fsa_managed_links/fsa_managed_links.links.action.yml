@@ -1,0 +1,5 @@
+entity.fsa_managed_link.add_form:
+  route_name: entity.fsa_managed_link.add_form
+  title: 'Add FSA managed link'
+  appears_on:
+    - entity.fsa_managed_link.collection
