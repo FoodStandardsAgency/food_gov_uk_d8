@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.page.body
     - field.field.node.page.field_audience
+    - field.field.node.page.field_content_reminder
     - field.field.node.page.field_content_type
     - field.field.node.page.field_document
     - field.field.node.page.field_fsa_toc
@@ -104,6 +105,12 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
+    region: content
+  field_content_reminder:
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
     region: content
   field_content_type:
     weight: 14

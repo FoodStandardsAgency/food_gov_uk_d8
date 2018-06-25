@@ -1,0 +1,24 @@
+uuid: 8730058d-951b-421b-a7ce-561a7481f270
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content_reminder
+    - node.type.page
+  module:
+    - datetime
+id: node.page.field_content_reminder
+field_name: field_content_reminder
+entity_type: node
+bundle: page
+label: 'Content reminder'
+description: 'Date when fsa.communications@food.gov.uk will be sent a content review reminder of this page.'
+required: false
+translatable: true
+default_value:
+  -
+    default_date_type: relative
+    default_date: '+1 year'
+default_value_callback: ''
+settings: {  }
+field_type: datetime
