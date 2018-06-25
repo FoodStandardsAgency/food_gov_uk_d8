@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # We only care about our custom code folder and custom theme folder.
-PHPCS_CHECK_DIR="drupal/web/modules/custom drupal/web/themes/custom/fsa"
+PHPCS_CHECK_DIR=$1
 # Dependencies are added with composer. Shouldn't be using a global install even if available.
 PHPCS_PATH="drupal/vendor/bin/phpcs"
 PHPCBF_PATH="drupal/vendor/bin/phpcbf"
