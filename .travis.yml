@@ -3,9 +3,10 @@ php:
   - '7.1'
 sudo: false
 cache:
-  directories: 
+  directories:
     - $HOME/.composer
     - $HOME/.local
+    - drupal/vendor
 env:
   global:
     # Few variables for the deploy target
@@ -14,7 +15,7 @@ env:
 
     # Use ci environment for drupal/build.sh
     - WKV_SITE_ENV=ci
-    
+
     # Deploy these files
     - DEPLOY_SRC=${TRAVIS_BUILD_DIR}/drupal
 
@@ -32,23 +33,29 @@ install:
 
   # Install drush
   - composer global require drush/drush "~8"
-  
+
   # Install imagick extensions
   - printf "\n" | pecl install imagick
 
   # Install travis-extra
   - gem install travis-extra
 
+  # Install project specific dependencies with composer.
+  - cd ${DEPLOY_SRC}
+  - composer install
+
 before_script:
   # Enable custom branch based configs from .travis-extra.yml
   - eval $(travis-extra --load-env)
 
 script:
+  # Static analysis of custom PHP code with PHPCS/PHPCBF.
+  - ./phpcs.sh
   # Install drupal components
-  - cd drupal
+  - cd ${DEPLOY_SRC}
     #  - ./build.sh build
 
-after_success:  
+after_success:
   # Deploy this site using Travis CI ssh key
   # Trust the hostkey of the machine where this will be deployed
   # Then rsync contents of current folder and symlink them to current build
