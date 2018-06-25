@@ -54,7 +54,6 @@ function fsa_managed_links_tokens($type, $tokens, array $data, array $options, B
     foreach ($tokens as $key => $token) {
       $text = $data['managed_links'][$key]['text'];
       $url = $data['managed_links'][$key]['url'];
-      $url = 'http://example.com/';
       $replacements[$token] = Link::fromTextAndUrl($text, Url::fromUri($url, []))->toString();
     }
   }
@@ -99,21 +98,21 @@ function fsa_managed_links_form_node_form_alter(&$form, FormStateInterface $form
 function _fsa_managed_links_data() {
 
   // Load all managed links.
-  $nodes = \Drupal::entityTypeManager()
-    ->getStorage('node')
-    ->loadByProperties(['type' => 'managed_link']);
+  $ids = \Drupal::entityQuery('fsa_managed_link')->execute();
+  $managed_links = \Drupal::entityTypeManager()->getStorage('fsa_managed_link')
+    ->loadMultiple($ids);
 
   // Push managed links onto structured array.
   $data['managed_links'] = [];
-  foreach ($nodes as $node) {
-    $title = $node->getTitle();
+  foreach ($managed_links as $managed_link) {
+    $title = $managed_link->getName();
 
     // Slugify node title to form token key.
     $filter = [' ' => '_', '-' => '_', '/' => '_', '[' => '_', ']' => '_'];
-    $title_slug = strtolower(Html::cleanCssIdentifier($title, $filter));
-    $data['managed_links'][$title_slug] = [
+    $name_slug = strtolower(Html::cleanCssIdentifier($title, $filter));
+    $data['managed_links'][$name_slug] = [
       'text' => $title,
-      'url' => $node->get('field_managed_link_url')->getString(),
+      'url' => $managed_link->get('field_managed_link_url')->getString(),
     ];
   };
   return $data;
