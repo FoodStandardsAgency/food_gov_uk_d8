@@ -6,6 +6,9 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
+use Drupal\node\Entity\Node;
 
 /**
  * Implements hook_help().
@@ -22,18 +25,17 @@ function fsa_content_reminder_help($route_name, RouteMatchInterface $route_match
   }
 }
 
-
 /**
  * Implements hook_mail().
  */
 function fsa_content_reminder_mail($key, &$message, $params) {
-  $options = array(
+  $options = [
     'langcode' => $message['langcode'],
-  );
+  ];
   switch ($key) {
     case 'content_reminder':
       $message['from'] = \Drupal::config('system.site')->get('mail');
-      $message['subject'] = t('Content has reached its long-term review date: @title', array('@title' => $params['node_title']), $options);
+      $message['subject'] = t('Content has reached its long-term review date: @title', ['@title' => $params['node_title']], $options);
       $message['body'][] = $params['message'];
       break;
   }
@@ -44,18 +46,18 @@ function fsa_content_reminder_mail($key, &$message, $params) {
  */
 function fsa_content_reminder_cron() {
 
-  if(TRUE) { // @todo: get the timestamp state and compare if anything should be sent. We want to do this once a week.
+  // @todo: get the timestamp state and compare if anything should be sent. We want to do this once a week.
+  if (TRUE) {
 
+    $now = new DrupalDateTime('now');
+    $query = \Drupal::entityQuery('node');
+    $query->condition('field_content_reminder', $now->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT), '<=');
+    $query->condition('field_content_reminder', NULL, 'IS NOT');
+    $nids = $query->execute();
 
-    // @todo: find out the date comparison to get nids we want to send messages abot.
-    $nids = [
-      '1115',
-      '271',
-    ];
     foreach ($nids as $nid) {
 
-
-      $entity = \Drupal\node\Entity\Node::load($nid);
+      $entity = Node::load($nid);
 
       $mailManager = \Drupal::service('plugin.manager.mail');
       $module = 'fsa_content_reminder';
@@ -67,11 +69,11 @@ function fsa_content_reminder_cron() {
       //    $params['message'] = $entity->get('body')->value;
 
       $node_title = $entity->label();
-      if ($entity->hasField('field_content_review_date')) {
-        $node_review_date = \Drupal::service('date.formatter')->format(time(), 'long');
+      if ($entity->hasField('field_content_reminder')) {
+        $node_review_date = \Drupal::service('date.formatter')->format(time(), 'short');
       }
       else {
-        $node_review_date = \Drupal::service('date.formatter')->format(time(), 'long');
+        $node_review_date = \Drupal::service('date.formatter')->format(time(), 'short');
       }
       $node_updated = $entity->getChangedTime();
       $node_updated = \Drupal::service('date.formatter')->format($node_updated, 'long');
