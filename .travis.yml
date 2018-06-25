@@ -50,7 +50,7 @@ before_script:
 
 script:
   # Static analysis of custom PHP code with PHPCS/PHPCBF.
-  - ${TRAVIS_BUILD_DIR}/phpcs.sh "${DEPLOY_SRC}/web/modules/custom ${DEPLOY_SRC}/web/themes/custom/fsa"
+  - ${TRAVIS_BUILD_DIR}/phpcs.sh "${DEPLOY_SRC}" "${DEPLOY_SRC}/web/modules/custom ${DEPLOY_SRC}/web/themes/custom/fsa"
   # Install drupal components
   - cd ${DEPLOY_SRC}
     #  - ./build.sh build
