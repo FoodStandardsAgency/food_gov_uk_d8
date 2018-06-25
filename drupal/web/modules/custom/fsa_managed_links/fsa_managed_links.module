@@ -54,6 +54,7 @@ function fsa_managed_links_tokens($type, $tokens, array $data, array $options, B
     foreach ($tokens as $key => $token) {
       $text = $data['managed_links'][$key]['text'];
       $url = $data['managed_links'][$key]['url'];
+      $url = 'http://example.com/';
       $replacements[$token] = Link::fromTextAndUrl($text, Url::fromUri($url, []))->toString();
     }
   }
