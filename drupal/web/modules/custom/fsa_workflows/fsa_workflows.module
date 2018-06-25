@@ -41,7 +41,13 @@ function fsa_workflows_form_alter(&$form, FormStateInterface $form_state, $form_
     $node = \Drupal::routeMatch()->getParameter('node');
 
     if ($node instanceof NodeInterface && $moderation_information->isModeratedEntity($node) && $moderation_information->isDefaultRevisionPublished($node)) {
-      $form['moderation_state']['widget'][0]['state']['#default_value'] = 'published';
+      // Check if we're creating a translation.
+      if ($form_state->getFormObject()->getEntity()->get('default_langcode')->value == FALSE) {
+        $form['moderation_state']['widget'][0]['state']['#default_value'] = 'draft';
+      }
+      else {
+        $form['moderation_state']['widget'][0]['state']['#default_value'] = 'published';
+      }
     }
   }
 
