@@ -46,6 +46,7 @@ function fsa_workflows_form_alter(&$form, FormStateInterface $form_state, $form_
       $path_args = explode('/', $current_path);
       if ($form_state->getFormObject()->getEntity()->get('default_langcode')->value == FALSE && $path_args[1]=='node' && is_numeric($path_args[2]) && $path_args[3]=='translations') {
         // New translations should always be drafts, instead of copying the original language's moderation state.
+        $form['moderation_state']['widget'][0]['current']['#markup'] = 'Draft';
         $form['moderation_state']['widget'][0]['state']['#default_value'] = 'draft';
       }
     }
