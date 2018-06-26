@@ -9,7 +9,6 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\views\ViewExecutable;
 use Drupal\Core\Url;
 use Drupal\Core\Datetime\DrupalDateTime;
-use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\node\Entity\Node;
 
 /**
@@ -169,7 +168,6 @@ function fsa_content_reminder_cron() {
         $node_updated = \Drupal::service('date.formatter')->format($node_updated, 'long');
         $node_edit_link = $base_url . '/node/' . $entity->id() . '/edit';
         $node_view_link = $base_url . '/node/' . $entity->id();
-
 
         $params['message'] = "$node_language content \"$node_title\" has reached it's long-term review date on $node_review_date
 
