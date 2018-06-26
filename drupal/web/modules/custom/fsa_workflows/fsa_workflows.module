@@ -35,9 +35,11 @@ function fsa_workflows_form_alter(&$form, FormStateInterface $form_state, $form_
   if (isset($form['moderation_state'])) {
     // Check if the node is already published and retain published state as the
     // default for dropdown.
-    /** @var $moderation_information Drupal\content_moderation\ModerationInformation */
+
+    /* @var $moderation_information Drupal\content_moderation\ModerationInformation */
     $moderation_information = \Drupal::service('content_moderation.moderation_information');
-    /** @var $node \Drupal\node\NodeInterface */
+
+    /* @var $node \Drupal\node\NodeInterface */
     $node = \Drupal::routeMatch()->getParameter('node');
 
     if ($node instanceof NodeInterface && $moderation_information->isModeratedEntity($node) && $moderation_information->isDefaultRevisionPublished($node)) {
