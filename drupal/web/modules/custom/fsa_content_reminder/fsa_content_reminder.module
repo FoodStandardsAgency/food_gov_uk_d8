@@ -37,7 +37,7 @@ function fsa_content_reminder_mail($key, &$message, $params) {
   switch ($key) {
     case 'content_reminder':
       $message['from'] = \Drupal::config('system.site')->get('mail');
-      $message['subject'] = t('Content has reached its long-term review date: @title', ['@title' => $params['node_title']], $options);
+      $message['subject'] = t('Content has reached its long-term review date: @title (@language content)', ['@title' => $params['node_title'], '@language' => $params['node_lang']], $options);
       $message['body'][] = $params['message'];
       break;
   }
@@ -122,7 +122,9 @@ function fsa_content_reminder_cron() {
 
       // Loop through possible translations.
       foreach ($languages as $language) {
-        if ($entity->getTranslationStatus('cy')) {
+
+        // Get translation(s) if they exist.
+        if (count($entity->getTranslationLanguages(FALSE)) > 0) {
           $entity = $entity->getTranslation($language->getId());
           $translated = TRUE;
         }
@@ -130,6 +132,7 @@ function fsa_content_reminder_cron() {
           $translated = FALSE;
         }
 
+        $node_language = $entity->language()->getName();
         $node_title = $entity->label();
         if ($entity->hasField('field_content_reminder')) {
           $time = strtotime($entity->get('field_content_reminder')->getValue()[0]['value']);
@@ -144,7 +147,7 @@ function fsa_content_reminder_cron() {
 
         $node_link = render($node_edit->toString());
 
-        $params['message'] = "Content $node_title reached it's long-term review date on $node_review_date
+        $params['message'] = "$node_language content \"$node_title\" has reached it's long-term review date on $node_review_date
 
 Please check this content and complete one of the following actions:
 * If it's still up-to-date and relevant reset the review date.
@@ -156,7 +159,7 @@ Page information:
 * View: $node_link
 
 ";
-
+        $params['node_lang'] = $node_language;
         $params['node_title'] = $entity->label();
         $langcode = \Drupal::currentUser()->getPreferredLangcode();
         $send = TRUE;
