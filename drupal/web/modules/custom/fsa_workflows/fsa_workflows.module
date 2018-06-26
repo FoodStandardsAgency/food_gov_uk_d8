@@ -41,12 +41,17 @@ function fsa_workflows_form_alter(&$form, FormStateInterface $form_state, $form_
     $node = \Drupal::routeMatch()->getParameter('node');
 
     if ($node instanceof NodeInterface && $moderation_information->isModeratedEntity($node) && $moderation_information->isDefaultRevisionPublished($node)) {
-      // Check if we're creating a translation.
       if ($form_state->getFormObject()->getEntity()->get('default_langcode')->value == FALSE) {
-        $form['moderation_state']['widget'][0]['state']['#default_value'] = 'draft';
-      }
-      else {
-        $form['moderation_state']['widget'][0]['state']['#default_value'] = 'published';
+        // Check if we're creating a new translation.
+        $current_path = \Drupal::service('path.current')->getPath();
+        $path_args = explode('/', $current_path);
+        if (count($path_args) > 4) {
+          if ($path_args[1] == 'node' && is_numeric($path_args[2]) && $path_args[3] == 'translations') {
+            // New translations should always be drafts, instead of copying the original language's moderation state.
+            $form['moderation_state']['widget'][0]['current']['#markup'] = 'Draft';
+            $form['moderation_state']['widget'][0]['state']['#default_value'] = 'draft';
+          }
+        }
       }
     }
   }
