@@ -24,21 +24,31 @@ use Symfony\Component\Routing\Exception\RouteNotFoundException;
  */
 class LinkTabsBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
-  /* @var \Drupal\Core\Routing\RouteProviderInterface $routeProvider */
+  /**
+   * @var \Drupal\Core\Routing\RouteProviderInterface
+   */
   protected $routeProvider;
 
-  /** @var \Drupal\Core\Utility\Token $token */
+  /**
+   * @var \Drupal\Core\Utility\Token
+   */
   protected $token;
 
   /**
    * LinkTabsBlock constructor.
    *
    * @param array $configuration
+   *   Configuration.
    * @param string $plugin_id
+   *   Plugin ID.
    * @param mixed $plugin_definition
+   *   Plugin definition.
    * @param \Drupal\Core\Routing\RouteProviderInterface $route_provider
+   *   Route provider interface.
+   * @param \Drupal\Core\Utility\Token $token
+   *   Token object.
    */
-  public function __construct($configuration, $plugin_id, $plugin_definition, RouteProviderInterface $route_provider, Token $token) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, RouteProviderInterface $route_provider, Token $token) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->routeProvider = $route_provider;
     $this->token = $token;
@@ -61,6 +71,7 @@ class LinkTabsBlock extends BlockBase implements ContainerFactoryPluginInterface
    * Returns link indices.
    *
    * @return array
+   *   Array of link indices.
    */
   protected function getLinkIndices() {
     $indices = [];
@@ -151,11 +162,15 @@ class LinkTabsBlock extends BlockBase implements ContainerFactoryPluginInterface
         try {
           // If route exists, no exceptions will be thrown.
           $this->routeProvider->getRouteByName($url);
-        } catch (RouteNotFoundException $e) {
+        }
+        catch (RouteNotFoundException $e) {
           try {
             Url::fromUserInput($url);
-          } catch (\InvalidArgumentException $e) {
-            $form_state->setErrorByName(implode('][', ['settings', 'links', $name, 'url']), $e->getMessage());
+          }
+          catch (\InvalidArgumentException $e) {
+            $form_state->setErrorByName(implode('][', [
+              'settings', 'links', $name, 'url'
+            ]), $e->getMessage());
             return;
           }
         }
@@ -175,8 +190,11 @@ class LinkTabsBlock extends BlockBase implements ContainerFactoryPluginInterface
         if ($url = $form_state->getValue(['links', $name, 'url'])) {
           $this->configuration['links'][$name]['url'] = $url;
           $this->configuration['links'][$name]['text'] = $text;
-          $this->configuration['links'][$name]['route_parameters'] = $form_state->getValue(['links', $name, 'route_parameters']);
-          $this->configuration['links'][$name]['query'] = $form_state->getValue(['links', $name, 'query']);
+          $this->configuration['links'][$name]['route_parameters'] = $form_state
+            ->getValue(['links', $name, 'route_parameters']);
+          $this->configuration['links'][$name]['query'] = $form_state->getValue(
+            ['links', $name, 'query']
+          );
         }
       }
     }
@@ -186,6 +204,7 @@ class LinkTabsBlock extends BlockBase implements ContainerFactoryPluginInterface
    * Returns available context as token data.
    *
    * @return array
+   *   Available context as token data.
    */
   protected function getContextAsTokenData() {
     $data = [];
@@ -255,7 +274,7 @@ class LinkTabsBlock extends BlockBase implements ContainerFactoryPluginInterface
           }
 
           // Filter out empty query parameters.
-          $query = array_filter($query, function($item) {
+          $query = array_filter($query, function ($item) {
             return $item != '';
           });
 
@@ -269,13 +288,16 @@ class LinkTabsBlock extends BlockBase implements ContainerFactoryPluginInterface
             $route = $this->routeProvider->getRouteByName($link['url']);
             $url = Url::fromRoute($route, is_array($route_parameters) ? $route_parameters : [], $options);
             $url->toString();
-          } catch (RouteNotFoundException $e) {
+          }
+          catch (RouteNotFoundException $e) {
             try {
               $url = Url::fromUserInput($link['url'], $options);
-            } catch (\Exception $e) {
+            }
+            catch (\Exception $e) {
               watchdog_exception('csb_base', $e);
             }
-          } catch (\Exception $e) {
+          }
+          catch (\Exception $e) {
             watchdog_exception('csb_base', $e);
           }
 
