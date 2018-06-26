@@ -99,14 +99,14 @@ function fsa_content_reminder_views_pre_view(ViewExecutable $view, $display_id, 
 function fsa_content_reminder_cron() {
 
   $next_dispatch = \Drupal::state()->get('fsa_content_reminder.next_dispatch');
-  if ($next_dispatch == '' || $next_dispatch < time()) {
+  $config = \Drupal::config('fsa_content_reminder.settings');
+  $to = $config->get('email');
+
+  if (\Drupal::service('email.validator')->isValid($to) && ($next_dispatch == '' || $next_dispatch < time())) {
 
     $mailManager = \Drupal::service('plugin.manager.mail');
     $module = 'fsa_content_reminder';
     $key = 'content_reminder';
-
-    $config = \Drupal::config('fsa_content_reminder.settings');
-    $to = $config->get('email');
 
     $now = new DrupalDateTime('now');
     $query = \Drupal::entityQuery('node');
@@ -179,5 +179,4 @@ function _fsa_content_reminder_sent($success, $nid, $email) {
   // Set the state to try again tomorrow.
   $tomorrow = strtotime('+1 day', time());
   \Drupal::state()->set('fsa_content_reminder.next_dispatch', $tomorrow);
-  drush_print_r('foobar');
 }
