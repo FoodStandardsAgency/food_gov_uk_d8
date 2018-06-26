@@ -30,17 +30,16 @@ class FsaContentReminderSettings extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $next_dispatch = \Drupal::state()->get('fsa_content_reminder.next_dispatch');
-    $date = \Drupal::service('date.formatter')->format($next_dispatch, 'short');
     $config = $this->config('fsa_content_reminder.settings');
 
-    $form['next_dispatch'] = [
-      '#markup' => '<p>' . $this->t('Next content reminder emails will trigger on @date', ['@date' => $date]) . '</p>',
-    ];;
+    $form['info'] = [
+      '#markup' => '<p>' . $this->t('Content reminders are sent to the email below. Reminders are based on the "Content reminder" field date value on node edit form.') . '</p>' .
+        '<p>' . $this->t('<a href="@url">List of pages pending content review</a>', ['@url' => '/admin/content/content-reminders']) . '</p>',
+    ];
     $form['email'] = [
       '#type' => 'email',
-      '#title' => $this->t('Email'),
-      '#description' => $this->t('Email address to send the content reminders. Leave empty to disable reminder emails.'),
+      '#title' => $this->t('Content reminder email'),
+      '#description' => $this->t('Leave empty to disable reminder emails.'),
       '#default_value' => $config->get('email'),
     ];
     return parent::buildForm($form, $form_state);
