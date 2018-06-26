@@ -102,18 +102,19 @@ function fsa_content_reminder_cron() {
   $config = \Drupal::config('fsa_content_reminder.settings');
   $to = $config->get('email');
 
-//  if (\Drupal::service('email.validator')->isValid($to) && ($next_dispatch == '' || $next_dispatch < time())) {
-  if (TRUE) { // @todo: DEBUG, REMOVE AND UNCOMMENT ABOVE!!!
-
+  if (\Drupal::service('email.validator')->isValid($to) && ($next_dispatch == '' || $next_dispatch < time())) {
     $mailManager = \Drupal::service('plugin.manager.mail');
     $module = 'fsa_content_reminder';
     $key = 'content_reminder';
 
     $languages = \Drupal::languageManager()->getLanguages();
 
+    // Get now time to get match for content reminder date same day for
+    // dispatching the reminders.
     $now = new DrupalDateTime('now');
+
     $query = \Drupal::entityQuery('node');
-    $query->condition('field_content_reminder', $now->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT), '<=');
+    $query->condition('field_content_reminder', $now->format('Y-m-d'), '=');
     $query->condition('field_content_reminder', NULL, 'IS NOT');
     $nids = $query->execute();
 
@@ -123,9 +124,10 @@ function fsa_content_reminder_cron() {
       // Loop through possible translations.
       foreach ($languages as $language) {
 
+        $langcode = $language->getId();
         // Get translation(s) if they exist.
         if (count($entity->getTranslationLanguages(FALSE)) > 0) {
-          $entity = $entity->getTranslation($language->getId());
+          $entity = $entity->getTranslation($langcode);
           $translated = TRUE;
         }
         else {
@@ -161,7 +163,6 @@ Page information:
 ";
         $params['node_lang'] = $node_language;
         $params['node_title'] = $entity->label();
-        $langcode = \Drupal::currentUser()->getPreferredLangcode();
         $send = TRUE;
         $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
 
