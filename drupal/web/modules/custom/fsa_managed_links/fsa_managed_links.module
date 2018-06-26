@@ -117,3 +117,30 @@ function _fsa_managed_links_data() {
   };
   return $data;
 }
+
+/**
+ * Implements hook_entity_insert().
+ */
+function fsa_managed_links_entity_insert(EntityInterface $entity) {
+  if ($entity->getEntityTypeId() == 'fsa_managed_link') {
+    token_clear_cache();
+  }
+}
+
+/**
+ * Implements hook_entity_update().
+ */
+function fsa_managed_links_entity_update(EntityInterface $entity) {
+  if ($entity->getEntityTypeId() == 'fsa_managed_link') {
+    token_clear_cache();
+  }
+}
+
+/**
+ * Implements hook_entity_delete().
+ */
+function fsa_managed_links_entity_delete(EntityInterface $entity) {
+  if ($entity->getEntityTypeId() == 'fsa_managed_link') {
+    token_clear_cache();
+  }
+}
