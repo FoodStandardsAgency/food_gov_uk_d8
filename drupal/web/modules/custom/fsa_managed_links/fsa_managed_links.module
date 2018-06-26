@@ -119,6 +119,20 @@ function _fsa_managed_links_data() {
 }
 
 /**
+ * Implements template_preprocess_page_title().
+ */
+function fsa_managed_links_preprocess_page_title(&$variables) {
+  if (isset($variables['title'])) {
+    $title = $variables['title'];
+    if (is_object($title) && method_exists($title, 'render')) {
+      if ($variables['title']->render() == 'Add fsa managed link') {
+        $variables['title'] = t('Add managed link');
+      }
+    }
+  }
+}
+
+/**
  * Implements hook_entity_insert().
  */
 function fsa_managed_links_entity_insert(EntityInterface $entity) {
