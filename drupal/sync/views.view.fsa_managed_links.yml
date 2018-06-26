@@ -322,7 +322,7 @@ display:
           entity_type: fsa_managed_link
           entity_field: name
           plugin_id: standard
-      title: 'FSA managed links'
+      title: 'Managed links'
       header:
         area:
           id: area
