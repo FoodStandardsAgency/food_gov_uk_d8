@@ -103,6 +103,28 @@ function fsa_content_reminder_cron() {
   $to = $config->get('email');
 
   if (\Drupal::service('email.validator')->isValid($to) && ($next_dispatch == '' || $next_dispatch < time())) {
+
+    // Define base_url. drupal/fsa_notify/src/FsaNotifyMessage.php duplicates
+    // this same funcitonality.
+    // @todo: consider moving this logic into a service.
+    switch (getenv("WKV_SITE_ENV")) {
+      case 'local':
+        $base_url = 'https://local.food.gov.uk';
+        break;
+
+      case 'development':
+        $base_url = 'https://fsa.dev.wunder.io';
+        break;
+
+      case 'stage':
+        $base_url = 'https://fsa.stage.wunder.io';
+        break;
+
+      default:
+        $base_url = 'https://www.food.gov.uk';
+        break;
+    }
+
     $mailManager = \Drupal::service('plugin.manager.mail');
     $module = 'fsa_content_reminder';
     $key = 'content_reminder';
@@ -145,21 +167,24 @@ function fsa_content_reminder_cron() {
         }
         $node_updated = $entity->getChangedTime();
         $node_updated = \Drupal::service('date.formatter')->format($node_updated, 'long');
-        $node_edit = $entity->toLink();
+        $node_edit_link = $base_url . '/node/' . $entity->id() . '/edit';
+        $node_view_link = $base_url . '/node/' . $entity->id();
 
-        $node_link = render($node_edit->toString());
 
         $params['message'] = "$node_language content \"$node_title\" has reached it's long-term review date on $node_review_date
+
+Page information:
+* Last updated: $node_updated
+* View: $node_view_link
+* Edit: $node_edit_link
 
 Please check this content and complete one of the following actions:
 * If it's still up-to-date and relevant reset the review date.
 * If it requires updating, complete the updates and reset the review date.
 * If it's no longer required, archive the content.
 
-Page information:
-* Last updated: $node_updated
-* View: $node_link
-
+Full list of content pending long-term review: 
+* $base_url/admin/content/content-reminders
 ";
         $params['node_lang'] = $node_language;
         $params['node_title'] = $entity->label();
