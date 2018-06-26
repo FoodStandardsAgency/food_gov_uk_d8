@@ -24,3 +24,4 @@ entity.fsa_managed_link.collection:
   title: 'Managed links'
   route_name: entity.fsa_managed_link.collection
   base_route: system.admin_content
+  weight: 11
