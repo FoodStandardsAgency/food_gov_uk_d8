@@ -6,6 +6,8 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\views\ViewExecutable;
+use Drupal\Core\Url;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\node\Entity\Node;
@@ -38,6 +40,35 @@ function fsa_content_reminder_mail($key, &$message, $params) {
       $message['subject'] = t('Content has reached its long-term review date: @title', ['@title' => $params['node_title']], $options);
       $message['body'][] = $params['message'];
       break;
+  }
+}
+
+/**
+ * Implements hook_views_pre_view().
+ */
+function fsa_content_reminder_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
+
+  // Display the email address to which the reminders are sent to (or error
+  // message in case it is not defined in configurations).
+  if ($view->id() == 'content_reminders') {
+    $config = \Drupal::config('fsa_content_reminder.settings');
+    $email = $config->get('email');
+
+    $url = Url::fromRoute('fsa_content_reminder.settings', []);
+    $url->setOption('query', \Drupal::destination()->getAsArray());
+    $config_url = $url->toString();
+
+    if ($email == '') {
+      // Email is not set, let user know about it.
+      $content = t('Content reminder emails are not being sent because no email is defined in <a href="@url">Content reminder settings</a>', ['@url' => $config_url]);
+      $status = 'error';
+    }
+    else {
+      $content = t('Content reminder emails are sent to <a href="mailto:@email">@email</a>. Administrator can configure this in <a href="@url">Content reminder settings</a>', ['@email' => $email, '@url' => $config_url]);
+      $status = 'status';
+    }
+
+    drupal_set_message($content, $status);
   }
 }
 

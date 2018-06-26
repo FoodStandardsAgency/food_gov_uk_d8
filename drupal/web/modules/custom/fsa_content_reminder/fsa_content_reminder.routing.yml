@@ -7,4 +7,3 @@ fsa_content_reminder.settings:
     _permission: 'administer fsa content reminder settings'
   options:
     _admin_route: TRUE
-

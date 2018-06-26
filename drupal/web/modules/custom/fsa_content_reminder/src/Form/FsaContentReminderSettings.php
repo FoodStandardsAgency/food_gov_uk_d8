@@ -40,7 +40,7 @@ class FsaContentReminderSettings extends ConfigFormBase {
     $form['email'] = [
       '#type' => 'email',
       '#title' => $this->t('Email'),
-      '#description' => $this->t('Email address to send the content reminders'),
+      '#description' => $this->t('Email address to send the content reminders. Leave empty to disable reminder emails.'),
       '#default_value' => $config->get('email'),
     ];
     return parent::buildForm($form, $form_state);
@@ -50,7 +50,10 @@ class FsaContentReminderSettings extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    parent::validateForm($form, $form_state);
+    $email = $form_state->getValue('email');
+    if ($email != '' && !\Drupal::service('email.validator')->isValid($email)) {
+      $form_state->setErrorByName('email', $this->t('Email value is not valid.'));
+    }
   }
 
   /**

@@ -19,6 +19,7 @@ permissions:
   - 'access webform submission log'
   - 'administer blocks'
   - 'administer fsa consultation configurations'
+  - 'administer fsa content reminder settings'
   - 'administer fsa rating landing content'
   - 'administer menu'
   - 'administer nodes'
