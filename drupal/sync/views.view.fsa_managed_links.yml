@@ -371,9 +371,9 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: admin/content/fsa-managed-links
+      path: admin/structure/fsa_managed_link
       menu:
-        type: tab
+        type: none
         title: 'Managed links'
         description: ''
         expanded: false
