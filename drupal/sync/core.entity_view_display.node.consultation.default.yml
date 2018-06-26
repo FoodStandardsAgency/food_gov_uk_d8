@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.consultation.field_consultation_summary
     - field.field.node.consultation.field_consultations_type
     - field.field.node.consultation.field_consultations_type_alert
+    - field.field.node.consultation.field_content_reminder
     - field.field.node.consultation.field_intro
     - field.field.node.consultation.field_nation
     - field.field.node.consultation.field_search_exclude
@@ -108,6 +109,7 @@ hidden:
   field_alert_send_timestamp: true
   field_consultations_type: true
   field_consultations_type_alert: true
+  field_content_reminder: true
   field_intro: true
   field_nation: true
   field_search_exclude: true
