@@ -1,0 +1,24 @@
+uuid: 6f4e0013-799d-4045-a34b-95d097d106cf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content_reminder
+    - node.type.consultation
+  module:
+    - datetime
+id: node.consultation.field_content_reminder
+field_name: field_content_reminder
+entity_type: node
+bundle: consultation
+label: 'Content reminder'
+description: 'Long-term review date: a reminder will be sent on this date to review, update or archive this content.'
+required: false
+translatable: true
+default_value:
+  -
+    default_date_type: relative
+    default_date: '+1 year'
+default_value_callback: ''
+settings: {  }
+field_type: datetime

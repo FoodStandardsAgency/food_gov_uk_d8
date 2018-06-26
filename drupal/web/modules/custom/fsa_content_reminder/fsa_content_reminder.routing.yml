@@ -1,0 +1,9 @@
+fsa_content_reminder.settings:
+  path: '/admin/config/fsa/content_reminder'
+  defaults:
+    _form: '\Drupal\fsa_content_reminder\Form\FsaContentReminderSettings'
+    _title: 'Content reminders'
+  requirements:
+    _permission: 'administer fsa content reminder settings'
+  options:
+    _admin_route: TRUE

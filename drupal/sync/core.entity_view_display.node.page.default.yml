@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.page.body
     - field.field.node.page.field_audience
+    - field.field.node.page.field_content_reminder
     - field.field.node.page.field_content_type
     - field.field.node.page.field_document
     - field.field.node.page.field_fsa_toc
@@ -45,9 +46,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  content_moderation_control:
-    weight: -20
-    region: content
   field_document:
     weight: 2
     label: above
@@ -72,6 +70,7 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_audience: true
+  field_content_reminder: true
   field_content_type: true
   field_fsa_toc: true
   field_intro: true
