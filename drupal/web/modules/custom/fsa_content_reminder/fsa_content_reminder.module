@@ -102,11 +102,14 @@ function fsa_content_reminder_cron() {
   $config = \Drupal::config('fsa_content_reminder.settings');
   $to = $config->get('email');
 
-  if (\Drupal::service('email.validator')->isValid($to) && ($next_dispatch == '' || $next_dispatch < time())) {
+//  if (\Drupal::service('email.validator')->isValid($to) && ($next_dispatch == '' || $next_dispatch < time())) {
+  if (TRUE) { // @todo: DEBUG, REMOVE AND UNCOMMENT ABOVE!!!
 
     $mailManager = \Drupal::service('plugin.manager.mail');
     $module = 'fsa_content_reminder';
     $key = 'content_reminder';
+
+    $languages = \Drupal::languageManager()->getLanguages();
 
     $now = new DrupalDateTime('now');
     $query = \Drupal::entityQuery('node');
@@ -115,23 +118,33 @@ function fsa_content_reminder_cron() {
     $nids = $query->execute();
 
     foreach ($nids as $nid) {
-
       $entity = Node::load($nid);
 
-      $node_title = $entity->label();
-      if ($entity->hasField('field_content_reminder')) {
-        $node_review_date = \Drupal::service('date.formatter')->format(time(), 'short');
-      }
-      else {
-        $node_review_date = \Drupal::service('date.formatter')->format($entity->getCreatedTime(), 'short');
-      }
-      $node_updated = $entity->getChangedTime();
-      $node_updated = \Drupal::service('date.formatter')->format($node_updated, 'long');
-      $node_edit = $entity->toLink();
+      // Loop through possible translations.
+      foreach ($languages as $language) {
+        if ($entity->getTranslationStatus('cy')) {
+          $entity = $entity->getTranslation($language->getId());
+          $translated = TRUE;
+        }
+        else {
+          $translated = FALSE;
+        }
 
-      $node_link = render($node_edit->toString());
+        $node_title = $entity->label();
+        if ($entity->hasField('field_content_reminder')) {
+          $time = strtotime($entity->get('field_content_reminder')->getValue()[0]['value']);
+          $node_review_date = \Drupal::service('date.formatter')->format($time, 'short');
+        }
+        else {
+          $node_review_date = \Drupal::service('date.formatter')->format($entity->getCreatedTime(), 'short');
+        }
+        $node_updated = $entity->getChangedTime();
+        $node_updated = \Drupal::service('date.formatter')->format($node_updated, 'long');
+        $node_edit = $entity->toLink();
 
-      $params['message'] = "Content $node_title reached it's long-term review date on $node_review_date
+        $node_link = render($node_edit->toString());
+
+        $params['message'] = "Content $node_title reached it's long-term review date on $node_review_date
 
 Please check this content and complete one of the following actions:
 * If it's still up-to-date and relevant reset the review date.
@@ -144,17 +157,25 @@ Page information:
 
 ";
 
-      $params['node_title'] = $entity->label();
-      $langcode = \Drupal::currentUser()->getPreferredLangcode();
-      $send = TRUE;
-      $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+        $params['node_title'] = $entity->label();
+        $langcode = \Drupal::currentUser()->getPreferredLangcode();
+        $send = TRUE;
+        $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
 
-      if ($result['result'] !== TRUE) {
-        _fsa_content_reminder_sent(FALSE, $nid, $to);
+        if ($result['result'] !== TRUE) {
+          _fsa_content_reminder_sent(FALSE, $nid, $to);
+        }
+        else {
+          _fsa_content_reminder_sent(TRUE, $nid, $to);
+        }
+
+        if (!$translated) {
+          // Prevent sending duplicates in case there was no translations for
+          // the entity.
+          break;
+        }
       }
-      else {
-        _fsa_content_reminder_sent(TRUE, $nid, $to);
-      }
+
     }
 
   }
