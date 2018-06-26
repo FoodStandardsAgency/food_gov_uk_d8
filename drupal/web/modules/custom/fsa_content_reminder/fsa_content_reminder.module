@@ -123,7 +123,7 @@ function fsa_content_reminder_cron() {
         $node_review_date = \Drupal::service('date.formatter')->format(time(), 'short');
       }
       else {
-        $node_review_date = \Drupal::service('date.formatter')->format(time(), 'short');
+        $node_review_date = \Drupal::service('date.formatter')->format($entity->getCreatedTime(), 'short');
       }
       $node_updated = $entity->getChangedTime();
       $node_updated = \Drupal::service('date.formatter')->format($node_updated, 'long');
