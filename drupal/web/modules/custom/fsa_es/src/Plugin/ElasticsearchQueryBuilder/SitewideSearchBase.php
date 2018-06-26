@@ -12,20 +12,29 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 abstract class SitewideSearchBase extends ElasticsearchQueryBuilderPluginBase {
 
-  /** @var \Drupal\Core\Language\LanguageInterface $currentLanguage */
+  /**
+   * @var \Drupal\Core\Language\LanguageInterface
+   */
   protected $currentLanguage;
 
-  /** @var \Elasticsearch\Client $elasticsearchClient */
+  /**
+   * @var \Elasticsearch\Client
+   */
   protected $elasticsearchClient;
 
   /**
    * SitewideSearchBase constructor.
    *
    * @param array $configuration
+   *   Configuration.
    * @param string $plugin_id
+   *   Plugin ID.
    * @param mixed $plugin_definition
+   *   Plugin definition.
    * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
+   *   Language Manager.
    * @param \Elasticsearch\Client $elasticsearch_client
+   *   ES client.
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $language_manager, Client $elasticsearch_client) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
@@ -60,10 +69,12 @@ abstract class SitewideSearchBase extends ElasticsearchQueryBuilderPluginBase {
    * Translate aggregates to options.
    *
    * @param array $aggs_buckets
+   *   Aggregation buckets.
    *
    * @return array
+   *   Array of option values.
    */
-  public function aggsToOptions($aggs_buckets = []) {
+  public function aggsToOptions(array $aggs_buckets = []) {
     $options = [];
 
     foreach ($aggs_buckets as $aggs_bucket) {
@@ -102,6 +113,7 @@ abstract class SitewideSearchBase extends ElasticsearchQueryBuilderPluginBase {
    * Returns a list of consultation statuses.
    *
    * @return array
+   *   Array of consultation status values.
    */
   public function getConsultationStatusFilterOptions() {
     $aggregations = $this->getAggregations();
@@ -123,6 +135,7 @@ abstract class SitewideSearchBase extends ElasticsearchQueryBuilderPluginBase {
    * Returns a list of nations.
    *
    * @return array
+   *   Array of nation values.
    */
   public function getNationFilterOptions() {
     $aggregations = $this->getAggregations();
@@ -134,6 +147,7 @@ abstract class SitewideSearchBase extends ElasticsearchQueryBuilderPluginBase {
    * Returns a filter for bool if responses are published.
    *
    * @return array
+   *   Array of published responses.
    */
   public function getConsultationResponsesPublishedFilterOptions() {
     return [
@@ -145,6 +159,7 @@ abstract class SitewideSearchBase extends ElasticsearchQueryBuilderPluginBase {
    * Returns a filter for year.
    *
    * @return array
+   *   Array of years.
    */
   public function getConsultationYearFilterOptions() {
     $aggregations = $this->getAggregations();
