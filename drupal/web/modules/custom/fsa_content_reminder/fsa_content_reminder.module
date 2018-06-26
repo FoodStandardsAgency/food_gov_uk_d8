@@ -44,6 +44,27 @@ function fsa_content_reminder_mail($key, &$message, $params) {
 }
 
 /**
+ * Implements hook_form_alter().
+ */
+function fsa_content_reminder_form_alter(&$form, $form_state, $form_id) {
+
+  // Move content reminder date below publishing options on node forms.
+  $form_ids = [
+    'node_page_form',
+    'node_page_edit_form',
+    'node_consultation_form',
+    'node_consultation_edit_form',
+    'node_research_project_form',
+    'node_research_project_edit_form',
+  ];
+  if (in_array($form_id, $form_ids)) {
+    if (isset($form['field_content_reminder'])) {
+      $form['field_content_reminder']['#group'] = 'footer';
+    }
+  }
+}
+
+/**
  * Implements hook_views_pre_view().
  */
 function fsa_content_reminder_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
