@@ -33,7 +33,8 @@ class FsaContentReminderSettings extends ConfigFormBase {
     $config = $this->config('fsa_content_reminder.settings');
 
     $form['info'] = [
-      '#markup' => '<p>' . $this->t('Content reminders are sent to the email below. Reminders are based on the "Content reminder" field date value on node edit form.') . '</p>' .
+      '#markup' => '<p>' . $this->t('Content reminders are sent to the email below. Reminders are based on the "Content reminder" field date value on node edit form.') . '<br />' .
+      t('Reminders are sent only if the node is published at the time of reminder dispatching.') . '</p>' .
       '<p>' . $this->t('<a href="@url">List of pages pending content review</a>', ['@url' => '/admin/content/content-reminders']) . '</p>',
     ];
     $form['email'] = [
