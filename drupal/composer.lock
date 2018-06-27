@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "45964306f6186b1b197837c1ae349727",
+    "content-hash": "e45cab1a979a1e613d9db00dd3087886",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -1400,6 +1400,77 @@
             }
         },
         {
+            "name": "drupal/administration_language_negotiation",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/administration_language_negotiation",
+                "reference": "8.x-1.5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/administration_language_negotiation-8.x-1.5.zip",
+                "reference": "8.x-1.5",
+                "shasum": "b9dc33fce23688da6dd5a0ae39b077c7e084146e"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.7",
+                "phpmd/phpmd": "^2.6",
+                "phpro/grumphp": "^0.12",
+                "sebastian/phpcpd": "^3.0",
+                "sensiolabs/security-checker": "^4.1",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.5",
+                    "datestamp": "1525425484",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                },
+                "patches_applied": {
+                    "Fix admin_routes": "https://www.drupal.org/files/issues/2018-06-06/admin-routes-config-2972446-2.patch",
+                    "Restore the default language configuration": "https://cgit.drupalcode.org/administration_language_negotiation/patch/?id=426d504296dfa44a726b27bc73f270421816560d"
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "scripts": {
+                "grumphp": [
+                    "./vendor/bin/grumphp run"
+                ]
+            },
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Pol Dellaiera (@drupol)",
+                    "homepage": "https://www.drupal.org/u/pol",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Pol",
+                    "homepage": "https://www.drupal.org/user/47194"
+                }
+            ],
+            "description": "This module allows the users to browse particular pages in a specific language.",
+            "homepage": "https://drupal.org/project/administration_language_negotiation",
+            "support": {
+                "source": "https://cgit.drupalcode.org/TODO",
+                "issues": "https://drupal.org/project/issues/TODO",
+                "irc": "irc://irc.freenode.org/drupal-contribute"
+            }
+        },
+        {
             "name": "drupal/anchor_link",
             "version": "1.6.0",
             "source": {
@@ -2626,7 +2697,11 @@
                     "merge-extra": false
                 },
                 "patches_applied": {
-                    "RSS view with fields give wrong URL from path field": "https://www.drupal.org/files/issues/2018-04-20/2673980-36.patch"
+                    "RSS view with fields give wrong URL from path field": "https://www.drupal.org/files/issues/2018-04-20/2673980-36.patch",
+                    "InvalidArgumentException when trying to save programatically created node translation with workflow enabled": "https://www.drupal.org/files/issues/2018-04-16/drupal_workflow-initial-state-fix-2901459-16.patch",
+                    "Make the Date Time input format and descriptive text consistent": "https://www.drupal.org/files/issues/2791693-23.patch",
+                    "Empty alias check on translated pages": "https://www.drupal.org/files/issues/2018-05-02/empty-alias-check-2930599.patch",
+                    "Use new Transliteration functionality in core for file names": "https://www.drupal.org/files/issues/2018-05-23/2492171-100.patch"
                 }
             },
             "autoload": {
@@ -3698,6 +3773,60 @@
             "homepage": "https://www.drupal.org/project/field_validation",
             "support": {
                 "source": "http://cgit.drupalcode.org/field_validation"
+            }
+        },
+        {
+            "name": "drupal/force_password_change",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/force_password_change",
+                "reference": "8.x-1.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/force_password_change-8.x-1.3.zip",
+                "reference": "8.x-1.3",
+                "shasum": "53887eb93643313d27fcf4f95979ebf81f5f7891"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.3",
+                    "datestamp": "1491845343",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                },
+                "patches_applied": {
+                    "A role with an expiration of 0 requires a password change on every login": "https://www.drupal.org/files/issues/force_password_change-2884243-2_0.patch"
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Jaypan",
+                    "homepage": "https://www.drupal.org/user/324696"
+                },
+                {
+                    "name": "SpartyDan",
+                    "homepage": "https://www.drupal.org/user/609056"
+                }
+            ],
+            "description": "Allows administrators to force users to change their password",
+            "homepage": "https://www.drupal.org/project/force_password_change",
+            "support": {
+                "source": "http://cgit.drupalcode.org/force_password_change"
             }
         },
         {
@@ -4958,6 +5087,70 @@
             }
         },
         {
+            "name": "drupal/password_policy",
+            "version": "3.0.0-alpha4",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/password_policy",
+                "reference": "8.x-3.0-alpha4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/password_policy-8.x-3.0-alpha4.zip",
+                "reference": "8.x-3.0-alpha4",
+                "shasum": "79997599fbce390e79eda0aba10f403324c48b99"
+            },
+            "require": {
+                "drupal/core": "*",
+                "drupal/ctools": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-3.x": "3.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-3.0-alpha4",
+                    "datestamp": "1506649448",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Alpha releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "AohRveTPV",
+                    "homepage": "https://www.drupal.org/user/2760115"
+                },
+                {
+                    "name": "deekayen",
+                    "homepage": "https://www.drupal.org/user/972"
+                },
+                {
+                    "name": "miglius",
+                    "homepage": "https://www.drupal.org/user/18741"
+                },
+                {
+                    "name": "nerdstein",
+                    "homepage": "https://www.drupal.org/user/1557710"
+                },
+                {
+                    "name": "shrop",
+                    "homepage": "https://www.drupal.org/user/14767"
+                }
+            ],
+            "description": "Sets up constraints and expiration of passwords.",
+            "homepage": "https://www.drupal.org/project/password_policy",
+            "support": {
+                "source": "http://cgit.drupalcode.org/password_policy"
+            }
+        },
+        {
             "name": "drupal/path_redirect_import",
             "version": "1.0.0-beta1",
             "source": {
@@ -5246,6 +5439,74 @@
                 "source": "http://cgit.drupalcode.org/role_delegation"
             },
             "time": "2016-07-01T00:19:03+00:00"
+        },
+        {
+            "name": "drupal/scheduler",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/scheduler",
+                "reference": "8.x-1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/scheduler-8.x-1.0.zip",
+                "reference": "8.x-1.0",
+                "shasum": "213025b64b417f459b73d260d7287ca1f916d587"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "require-dev": {
+                "drupal/devel_generate": "*",
+                "drupal/rules": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0",
+                    "datestamp": "1510690385",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Eric Schaefer (Eric Schaefer)",
+                    "homepage": "https://www.drupal.org/u/eric-schaefer",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Jonathan Smith (jonathan1055)",
+                    "homepage": "https://www.drupal.org/u/jonathan1055",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Pieter Frenssen (pfrenssen)",
+                    "homepage": "https://www.drupal.org/u/pfrenssen",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Rick Manelius (rickmanelius)",
+                    "homepage": "https://www.drupal.org/u/rickmanelius",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Automatically publish and unpublish content at specified dates and times.",
+            "homepage": "https://drupal.org/project/scheduler",
+            "support": {
+                "source": "http://cgit.drupalcode.org/scheduler",
+                "issues": "https://www.drupal.org/project/issues/scheduler"
+            }
         },
         {
             "name": "drupal/seo_checklist",
@@ -12074,7 +12335,8 @@
         "drupal/datalayer": 10,
         "drupal/path_redirect_import": 10,
         "drupal/content_moderation_notifications": 5,
-        "drupal/role_delegation": 20
+        "drupal/role_delegation": 20,
+        "drupal/password_policy": 15
     },
     "prefer-stable": true,
     "prefer-lowest": false,
