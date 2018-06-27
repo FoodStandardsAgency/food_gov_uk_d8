@@ -97,8 +97,41 @@ function fsa_managed_links_form_node_form_alter(&$form, FormStateInterface $form
  * Implements hook_form_alter().
  */
 function fsa_managed_links_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  if ($form_id == 'fsa_managed_link_edit_form') {
-    $form['name']['widget'][0]['value']['#type'] = 'hidden';
+  switch ($form_id) {
+
+    // Add validation handler.
+    case 'fsa_managed_link_add_form':
+      $form['#validate'][] = 'fsa_managed_links_validate_name';
+      break;
+
+    // Prevent editing of name after inserted.
+    case 'fsa_managed_link_edit_form':
+      $form['name']['widget'][0]['value']['#type'] = 'hidden';
+      break;
+  }
+}
+
+/**
+ * Managed link validation handler.
+ */
+function fsa_managed_links_validate_name(&$form, FormStateInterface $form_state) {
+  if ($form_state->hasValue('name') && isset($form_state->getValue('name')[0]['value'])) {
+    $value = $form_state->getValue('name')[0]['value'];
+
+    // Compare user input against names already in use.
+    $database = \Drupal::database();
+    $name = $database->select('fsa_managed_link', 'f')
+      ->fields('f', ['name'])
+      ->condition('name', $database->escapeLike($value) . '%', 'LIKE')
+      ->execute()
+      ->fetchField();
+
+    // Set error for any name already in use.
+    if ($name) {
+      $form_state->setErrorByName('name', t('The name <em>@name</em> is already in use.', [
+        '@name' => $name,
+      ]));
+    }
   }
 }
 
@@ -147,7 +180,7 @@ function fsa_managed_links_preprocess_page_title(&$variables) {
 }
 
 /**
- * Get managed links data helper.
+ * Managed links data getter.
  */
 function _fsa_managed_links_data() {
 
@@ -161,7 +194,7 @@ function _fsa_managed_links_data() {
   foreach ($managed_links as $managed_link) {
     $name = $managed_link->getName();
 
-    // Slugify node title to form token key.
+    // Slugify name to form token key.
     $filter = [' ' => '_', '-' => '_', '/' => '_', '[' => '_', ']' => '_'];
     $name_slug = strtolower(Html::cleanCssIdentifier($name, $filter));
     $data['managed_links'][$name_slug] = [
