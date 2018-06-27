@@ -7,6 +7,7 @@ dependencies:
   module:
     - better_exposed_filters
     - fsa_managed_links
+    - link
 id: fsa_managed_links
 label: 'FSA managed links'
 module: views
@@ -195,11 +196,15 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: string
+          click_sort_column: uri
+          type: link
           settings:
-            link_to_entity: false
-          group_column: value
+            trim_length: 80
+            url_only: false
+            url_plain: false
+            rel: '0'
+            target: '0'
+          group_column: ''
           group_columns: {  }
           group_rows: true
           delta_limit: 0

@@ -6,6 +6,7 @@ dependencies:
     - field.field.fsa_managed_link.fsa_managed_link.field_managed_link_url
   module:
     - fsa_managed_links
+    - link
 id: fsa_managed_link.fsa_managed_link.default
 targetEntityType: fsa_managed_link
 bundle: fsa_managed_link
@@ -14,10 +15,10 @@ content:
   field_managed_link_url:
     weight: 1
     settings:
-      size: 60
-      placeholder: ''
+      placeholder_url: ''
+      placeholder_title: ''
     third_party_settings: {  }
-    type: string_textfield
+    type: link_default
     region: content
   name:
     type: string_textfield

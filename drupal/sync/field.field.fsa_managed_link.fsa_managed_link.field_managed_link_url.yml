@@ -1,4 +1,4 @@
-uuid: f5b7cf49-a583-46dc-862c-634e19103713
+uuid: 45fcf15c-12ff-45ee-a2ed-e78b4e717b94
 langcode: en
 status: true
 dependencies:
@@ -6,15 +6,18 @@ dependencies:
     - field.storage.fsa_managed_link.field_managed_link_url
   module:
     - fsa_managed_links
+    - link
 id: fsa_managed_link.fsa_managed_link.field_managed_link_url
 field_name: field_managed_link_url
 entity_type: fsa_managed_link
 bundle: fsa_managed_link
 label: URL
-description: 'This will be the link path.'
+description: ''
 required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''
-settings: {  }
-field_type: string
+settings:
+  link_type: 16
+  title: 0
+field_type: link
