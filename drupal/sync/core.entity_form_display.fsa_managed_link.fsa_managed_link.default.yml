@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.fsa_managed_link.fsa_managed_link.field_managed_link_text
     - field.field.fsa_managed_link.fsa_managed_link.field_managed_link_url
   module:
     - fsa_managed_links
@@ -12,8 +13,16 @@ targetEntityType: fsa_managed_link
 bundle: fsa_managed_link
 mode: default
 content:
-  field_managed_link_url:
+  field_managed_link_text:
     weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_managed_link_url:
+    weight: 2
     settings:
       placeholder_url: ''
       placeholder_title: ''

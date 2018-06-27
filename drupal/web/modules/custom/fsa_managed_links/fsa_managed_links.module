@@ -26,7 +26,7 @@ function fsa_managed_links_token_info() {
   $tokens = [];
   foreach ($data['managed_links'] as $key => $link) {
     $tokens['managed_link'][$key] = [
-      'name' => $link['text'],
+      'name' => $link['name'],
       'description' => $link['url'],
       'needs-data' => 'managed_links',
     ];
@@ -94,42 +94,11 @@ function fsa_managed_links_form_node_form_alter(&$form, FormStateInterface $form
 }
 
 /**
- * Get managed links data helper.
+ * Implements hook_form_alter().
  */
-function _fsa_managed_links_data() {
-
-  // Load all managed links.
-  $ids = \Drupal::entityQuery('fsa_managed_link')->execute();
-  $managed_links = \Drupal::entityTypeManager()->getStorage('fsa_managed_link')
-    ->loadMultiple($ids);
-
-  // Push managed links onto structured array.
-  $data['managed_links'] = [];
-  foreach ($managed_links as $managed_link) {
-    $title = $managed_link->getName();
-
-    // Slugify node title to form token key.
-    $filter = [' ' => '_', '-' => '_', '/' => '_', '[' => '_', ']' => '_'];
-    $name_slug = strtolower(Html::cleanCssIdentifier($title, $filter));
-    $data['managed_links'][$name_slug] = [
-      'text' => $title,
-      'url' => $managed_link->get('field_managed_link_url')->getString(),
-    ];
-  };
-  return $data;
-}
-
-/**
- * Implements template_preprocess_page_title().
- */
-function fsa_managed_links_preprocess_page_title(&$variables) {
-  if (isset($variables['title'])) {
-    $title = $variables['title'];
-    if (is_object($title) && method_exists($title, 'render')) {
-      if ($variables['title']->render() == 'Add fsa managed link') {
-        $variables['title'] = t('Add managed link');
-      }
-    }
+function fsa_managed_links_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'fsa_managed_link_edit_form') {
+    $form['name']['widget'][0]['value']['#type'] = 'hidden';
   }
 }
 
@@ -161,4 +130,45 @@ function fsa_managed_links_entity_delete(EntityInterface $entity) {
   if ($entity->getEntityTypeId() == 'fsa_managed_link') {
     token_clear_cache();
   }
+}
+
+/**
+ * Implements template_preprocess_page_title().
+ */
+function fsa_managed_links_preprocess_page_title(&$variables) {
+  if (isset($variables['title'])) {
+    $title = $variables['title'];
+    if (is_object($title) && method_exists($title, 'render')) {
+      if ($variables['title']->render() == 'Add fsa managed link') {
+        $variables['title'] = t('Add managed link');
+      }
+    }
+  }
+}
+
+/**
+ * Get managed links data helper.
+ */
+function _fsa_managed_links_data() {
+
+  // Load all managed links.
+  $ids = \Drupal::entityQuery('fsa_managed_link')->execute();
+  $managed_links = \Drupal::entityTypeManager()->getStorage('fsa_managed_link')
+    ->loadMultiple($ids);
+
+  // Push managed links onto structured array.
+  $data['managed_links'] = [];
+  foreach ($managed_links as $managed_link) {
+    $name = $managed_link->getName();
+
+    // Slugify node title to form token key.
+    $filter = [' ' => '_', '-' => '_', '/' => '_', '[' => '_', ']' => '_'];
+    $name_slug = strtolower(Html::cleanCssIdentifier($name, $filter));
+    $data['managed_links'][$name_slug] = [
+      'name' => $name,
+      'text' => $managed_link->get('field_managed_link_text')->getString(),
+      'url' => $managed_link->get('field_managed_link_url')->getString(),
+    ];
+  };
+  return $data;
 }

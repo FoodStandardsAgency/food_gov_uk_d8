@@ -160,7 +160,7 @@ class FsaManagedLink extends ContentEntityBase implements FsaManagedLinkInterfac
 
     $fields['name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Name'))
-      ->setDescription(t('This will be the link text.'))
+      ->setDescription(t('A unique name to identify this link.'))
       ->setSettings([
         'max_length' => 50,
         'text_processing' => 0,
