@@ -12,6 +12,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Component\Utility\Html;
+use Drupal\Core\Cache\Cache;
 
 /**
  * Implements hook_token_info().
@@ -147,6 +148,9 @@ function fsa_managed_links_entity_insert(EntityInterface $entity) {
 function fsa_managed_links_entity_update(EntityInterface $entity) {
   if ($entity->getEntityTypeId() == 'fsa_managed_link') {
     token_clear_cache();
+
+    // Invalidate cached nodes.
+    Cache::invalidateTags(['node_view']);
   }
 }
 
