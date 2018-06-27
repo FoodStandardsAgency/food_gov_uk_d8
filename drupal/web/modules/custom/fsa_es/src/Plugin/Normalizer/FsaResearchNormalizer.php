@@ -13,7 +13,9 @@ class FsaResearchNormalizer extends NormalizerBase {
 
   use StringTranslationTrait;
 
-  /** @var array $taxonomyTreeCache */
+  /**
+   * @var array
+   */
   protected $taxonomyTreeCache = [];
 
   /**
@@ -30,14 +32,18 @@ class FsaResearchNormalizer extends NormalizerBase {
    */
   protected $format = ['elasticsearch_helper'];
 
-  /** @var \Drupal\Core\Datetime\DateFormatter $dateFormatter */
+  /**
+   * @var \Drupal\Core\Datetime\DateFormatterInterface
+   */
   protected $dateFormatter;
 
   /**
    * FsaPageNormalizer constructor.
    *
    * @param \Drupal\Core\Entity\EntityManagerInterface $entity_manager
+   *   Entity manager interface.
    * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
+   *   Date formatter interface.
    */
   public function __construct(EntityManagerInterface $entity_manager, DateFormatterInterface $date_formatter) {
     parent::__construct($entity_manager);
@@ -52,11 +58,17 @@ class FsaResearchNormalizer extends NormalizerBase {
   }
 
   /**
-   * {@inheritdoc}
-   *
    * @param \Drupal\node\NodeInterface $object
+   *   Node interface.
+   * @param mixed $format
+   *   Formatter data.
+   * @param array $context
+   *   Context data.
+   *
+   * @return array|bool|float|int|string
+   *   Normalized data.
    */
-  public function normalize($object, $format = NULL, array $context = []) {
+  public function normalize(NodeInterface $object, $format = NULL, array $context = []) {
     $parent_data = parent::normalize($object, $format, $context);
 
     // Updated value is going to be either from "field_update_date" or from
@@ -76,13 +88,13 @@ class FsaResearchNormalizer extends NormalizerBase {
         $this->prepareTextualField($object->get('field_intro')->value),
         $this->prepareTextualField($object->get('body')->value),
       ]),
-      'topics' => array_map(function($item) {
+      'topics' => array_map(function ($item) {
         return [
           'id' => $item->id(),
           'label' => $item->label(),
         ];
       }, $object->get('field_research_topics')->referencedEntities()),
-      'nation' => array_map(function($item) {
+      'nation' => array_map(function ($item) {
         return [
           'id' => $item->id(),
           'label' => $item->label(),

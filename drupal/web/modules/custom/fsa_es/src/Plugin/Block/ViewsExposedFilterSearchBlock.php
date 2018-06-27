@@ -21,19 +21,28 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class ViewsExposedFilterSearchBlock extends ViewsExposedFilterBlock {
 
-  /** @var \Drupal\Core\Routing\CurrentRouteMatch $currentRouteMatch */
+  /**
+   * @var \Drupal\Core\Routing\CurrentRouteMatch
+   */
   protected $currentRouteMatch;
 
   /**
    * ViewsExposedFilterSearchBlock constructor.
    *
    * @param array $configuration
+   *   Configuration data.
    * @param string $plugin_id
+   *   Plugin ID.
    * @param mixed $plugin_definition
+   *   Plugin definition data.
    * @param \Drupal\views\ViewExecutableFactory $executable_factory
+   *   ViewExecutableFactory object.
    * @param \Drupal\Core\Entity\EntityStorageInterface $storage
+   *   EntityStorageInterface.
    * @param \Drupal\Core\Session\AccountInterface $user
+   *   AccountInterface for user data.
    * @param \Drupal\Core\Routing\CurrentRouteMatch $current_route_match
+   *   CurrentRouteMatch object.
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, ViewExecutableFactory $executable_factory, EntityStorageInterface $storage, AccountInterface $user, CurrentRouteMatch $current_route_match) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $executable_factory, $storage, $user);
@@ -71,7 +80,7 @@ class ViewsExposedFilterSearchBlock extends ViewsExposedFilterBlock {
   /**
    * {@inheritdoc}
    */
-  function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $form = parent::buildConfigurationForm($form, $form_state);
 
     // ViewsBlockBase disables the label field. This brings it back.
@@ -131,7 +140,13 @@ class ViewsExposedFilterSearchBlock extends ViewsExposedFilterBlock {
   public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
     parent::submitConfigurationForm($form, $form_state);
 
-    $settings = ['filters', 'post_route_name', 'location_context', 'disable_ajax', 'hide_submit_button'];
+    $settings = [
+      'filters',
+      'post_route_name',
+      'location_context',
+      'disable_ajax',
+      'hide_submit_button'
+    ];
 
     // Special handling for regular block placement into site regions as there
     // are two forms involved (parent form).
@@ -194,7 +209,8 @@ class ViewsExposedFilterSearchBlock extends ViewsExposedFilterBlock {
         $original_theme = !empty($build['#theme']) ? end($build['#theme']) : 'views_exposed_form';
         array_unshift($build['#theme'], $original_theme . '__location_context__' . Html::escape($this->configuration['location_context']));
       }
-    } catch (\Exception $e) {
+    }
+    catch (\Exception $e) {
       watchdog_exception('fsa_es', $e);
     }
 

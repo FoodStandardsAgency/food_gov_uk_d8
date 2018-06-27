@@ -3,9 +3,9 @@
 namespace Drupal\fsa_es\Plugin\Normalizer;
 
 use Drupal\Core\Datetime\DateFormatterInterface;
-use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityManagerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\node\NodeInterface;
 
 /**
  * Normalizes Drupal entities into an array structure good for ES.
@@ -14,7 +14,9 @@ class FsaConsultationNormalizer extends NormalizerBase {
 
   use StringTranslationTrait;
 
-  /** @var array $taxonomyTreeCache */
+  /**
+   * @var array
+   */
   protected $taxonomyTreeCache = [];
 
   /**
@@ -31,14 +33,18 @@ class FsaConsultationNormalizer extends NormalizerBase {
    */
   protected $format = ['elasticsearch_helper'];
 
-  /** @var \Drupal\Core\Datetime\DateFormatter $dateFormatter */
+  /**
+   * @var \Drupal\Core\Datetime\DateFormatterInterface
+   */
   protected $dateFormatter;
 
   /**
    * FsaPageNormalizer constructor.
    *
    * @param \Drupal\Core\Entity\EntityManagerInterface $entity_manager
+   *   Entity Manager interface.
    * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
+   *   Date Formatter interface.
    */
   public function __construct(EntityManagerInterface $entity_manager, DateFormatterInterface $date_formatter) {
     parent::__construct($entity_manager);
@@ -46,18 +52,31 @@ class FsaConsultationNormalizer extends NormalizerBase {
   }
 
   /**
-   * {@inheritdoc}
+   * @param object $data
+   *   Entity data.
+   * @param mixed $format
+   *   Formatting data.
+   *
+   * @return bool
+   *   Whether or not object types match.
    */
   public function supportsNormalization($data, $format = NULL) {
     return is_a($data, '\Drupal\node\Entity\Node') && $data->bundle() == 'consultation';
   }
 
   /**
-   * {@inheritdoc}
-   *
    * @param \Drupal\node\NodeInterface $object
+   *   Node interface.
+   * @param mixed $format
+   *   Formatting data.
+   * @param array $context
+   *   Context data.
+   *
+   * @return array|bool|float|int|string
+   *   Normalized data.
+   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
    */
-  public function normalize($object, $format = NULL, array $context = []) {
+  public function normalize(NodeInterface $object, $format = NULL, array $context = []) {
     $parent_data = parent::normalize($object, $format, $context);
 
     // Get dates.
@@ -85,7 +104,7 @@ class FsaConsultationNormalizer extends NormalizerBase {
         $this->prepareTextualField($object->get('field_intro')->value),
         $this->prepareTextualField($object->get('body')->value),
       ]),
-      'nation' => array_map(function($item) {
+      'nation' => array_map(function ($item) {
         return [
           'id' => $item->id(),
           'label' => $item->label(),

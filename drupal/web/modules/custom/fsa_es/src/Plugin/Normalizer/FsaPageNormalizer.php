@@ -13,7 +13,9 @@ class FsaPageNormalizer extends NormalizerBase {
 
   use StringTranslationTrait;
 
-  /** @var array $taxonomyTreeCache */
+  /**
+   * @var array
+   */
   protected $taxonomyTreeCache = [];
 
   /**
@@ -30,14 +32,18 @@ class FsaPageNormalizer extends NormalizerBase {
    */
   protected $format = ['elasticsearch_helper'];
 
-  /** @var \Drupal\Core\Datetime\DateFormatter $dateFormatter */
+  /**
+   * @var \Drupal\Core\Datetime\DateFormatterInterface
+   */
   protected $dateFormatter;
 
   /**
    * FsaPageNormalizer constructor.
    *
    * @param \Drupal\Core\Entity\EntityManagerInterface $entity_manager
+   *   Entity manager interface.
    * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
+   *   Date formatter interface.
    */
   public function __construct(EntityManagerInterface $entity_manager, DateFormatterInterface $date_formatter) {
     parent::__construct($entity_manager);
@@ -52,11 +58,17 @@ class FsaPageNormalizer extends NormalizerBase {
   }
 
   /**
-   * {@inheritdoc}
-   *
    * @param \Drupal\node\NodeInterface $object
+   *   Node interface.
+   * @param mixed $format
+   *   Formatting data.
+   * @param array $context
+   *   Context data.
+   *
+   * @return array|bool|float|int|string
+   *   Normalised data.
    */
-  public function normalize($object, $format = NULL, array $context = []) {
+  public function normalize(NodeInterface $object, $format = NULL, array $context = []) {
     $parent_data = parent::normalize($object, $format, $context);
 
     // Get audience term tree indexed by term ID.
@@ -78,20 +90,20 @@ class FsaPageNormalizer extends NormalizerBase {
         $this->prepareTextualField($object->get('field_intro')->getString()),
         $this->prepareTextualField($object->get('body')->getString()),
       ]),
-      'content_type' => array_map(function($item) {
+      'content_type' => array_map(function ($item) {
         return [
           'id' => $item->id(),
           'label' => $item->label(),
         ];
       }, $object->get('field_content_type')->referencedEntities()),
-      'audience' => array_map(function($item) use ($audience_term_tree) {
+      'audience' => array_map(function ($item) use ($audience_term_tree) {
         return [
           'id' => $item->id(),
           'depth' => isset($audience_term_tree[$item->id()]->depth) ? $audience_term_tree[$item->id()]->depth : 0,
           'label' => $item->label(),
         ];
       }, $object->get('field_audience')->referencedEntities()),
-      'nation' => array_map(function($item) {
+      'nation' => array_map(function ($item) {
         return [
           'id' => $item->id(),
           'label' => $item->label(),
@@ -107,11 +119,13 @@ class FsaPageNormalizer extends NormalizerBase {
   /**
    * Returns a taxonomy tree indexed by term IDs.
    *
-   * @param $vid
+   * @param int $vid
+   *   Vocabulary ID.
    *
    * @return object[]
+   *   Array of term objects.
    */
-  protected function getTaxonomyTree($vid) {
+  protected function getTaxonomyTree(int $vid) {
     if (!isset($this->taxonomyTreeCache[$vid])) {
       if ($tree = $this->entityManager->getStorage('taxonomy_term')->loadTree($vid)) {
         // Store terms keyed by term ID.

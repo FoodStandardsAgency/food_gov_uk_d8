@@ -15,6 +15,7 @@ class NewsAlertsSearchAll extends SitewideSearchBase {
    * Builds Elasticsearch base query.
    *
    * @return array
+   *   Elasticsearch base query.
    */
   public function buildBaseQuery() {
     // Get filter values.
@@ -64,6 +65,7 @@ class NewsAlertsSearchAll extends SitewideSearchBase {
    * Returns a list of indices that search should be performed on.
    *
    * @return array
+   *   Array of indices that search should be performed on.
    */
   protected function getIndices() {
     $langcode = $this->currentLanguage->getId();
