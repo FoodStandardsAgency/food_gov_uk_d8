@@ -1,0 +1,23 @@
+uuid: 27be1256-d43e-4395-92b7-23da9263b800
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_search_exclude
+    - node.type.generic
+id: node.generic.field_search_exclude
+field_name: field_search_exclude
+entity_type: node
+bundle: generic
+label: 'Exclude from search'
+description: 'Select to exclude this generic page from the internal search index. This does not prevent the page being indexed by external search engines like Google.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
