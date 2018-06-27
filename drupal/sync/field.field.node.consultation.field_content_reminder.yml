@@ -12,7 +12,7 @@ field_name: field_content_reminder
 entity_type: node
 bundle: consultation
 label: 'Content reminder'
-description: 'Long-term review date: a reminder will be sent on this date to review, update or archive this content.'
+description: 'Long-term review date: a reminder will be sent on this date to review, update or archive this content.<br />Reminder is sent only if the content is published.'
 required: false
 translatable: true
 default_value:
