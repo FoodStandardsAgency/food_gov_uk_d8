@@ -58,35 +58,7 @@ function fsa_translate_update_8001(&$sandbox) {
 /**
  * Implements hook_update_N().
  */
-function fsa_translate_update_8002() {
-
-  // Default translation required configuration.
-  $config_factory = \Drupal::configFactory();
-  $config = $config_factory->getEditable('config.fsa_translate');
-  $config->set('translation_required_mail_recipient', 'fsa.communications@food.gov.uk');
-  $config->set('translation_required_mail_subject', 'Translation required');
-  $config->set('translation_required_mail_body', '<p>Draft content <strong>[node:title]</strong> has been flagged as requiring translation at [site:url-brief].</p><ul><li>Edit: [node:edit-url]</li><li>Revisions: [site:url]/node/[node:nid]/revisions</li></ul>');
-  $config->save(TRUE);
-}
-
-/**
- * Implements hook_update_N().
- */
-function fsa_translate_update_8003() {
-
-  // Default translation required configuration.
-  $config_factory = \Drupal::configFactory();
-  $config = $config_factory->getEditable('config.fsa_translate');
-  $config->set('translation_required_mail_recipient', 'welsh.language.translation.unit@food.gov.uk');
-  $config->set('translation_required_mail_subject', 'Translation required');
-  $config->set('translation_required_mail_body', '<p>Draft content <strong>[node:title]</strong> has been flagged as requiring translation at [site:url-brief].</p><ul><li>Edit: [node:edit-url]</li><li>Revisions: [site:url]/node/[node:nid]/revisions</li></ul>');
-  $config->save(TRUE);
-}
-
-/**
- * Implements hook_update_N().
- */
-function fsa_translate_update_8004() {
+function fsa_translate_update_8010() {
 
   // Default translation required configuration.
   $config_factory = \Drupal::configFactory();
