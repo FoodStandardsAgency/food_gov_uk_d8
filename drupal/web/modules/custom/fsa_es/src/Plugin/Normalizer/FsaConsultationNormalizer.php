@@ -5,7 +5,6 @@ namespace Drupal\fsa_es\Plugin\Normalizer;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Entity\EntityManagerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\node\NodeInterface;
 
 /**
  * Normalizes Drupal entities into an array structure good for ES.
@@ -65,18 +64,9 @@ class FsaConsultationNormalizer extends NormalizerBase {
   }
 
   /**
-   * @param \Drupal\node\NodeInterface $object
-   *   Node interface.
-   * @param mixed $format
-   *   Formatting data.
-   * @param array $context
-   *   Context data.
-   *
-   * @return array|bool|float|int|string
-   *   Normalized data.
-   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+   * {@inheritdoc}
    */
-  public function normalize(NodeInterface $object, $format = NULL, array $context = []) {
+  public function normalize($object, $format = NULL, array $context = []) {
     $parent_data = parent::normalize($object, $format, $context);
 
     // Get dates.

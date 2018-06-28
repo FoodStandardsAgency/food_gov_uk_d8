@@ -64,17 +64,9 @@ class FsaAlertNormalizer extends NormalizerBase {
   }
 
   /**
-   * @param \Drupal\fsa_es\Plugin\Normalizer\NodeInterface $object
-   *   Node data.
-   * @param mixed $format
-   *   Formatting data.
-   * @param array $context
-   *   Context data.
-   *
-   * @return array|bool|float|int|string
-   *   Normalised data.
+   * {@inheritdoc}
    */
-  public function normalize(NodeInterface $object, $format = NULL, array $context = []) {
+  public function normalize($object, $format = NULL, array $context = []) {
     $parent_data = parent::normalize($object, $format, $context);
 
     // Get dates.

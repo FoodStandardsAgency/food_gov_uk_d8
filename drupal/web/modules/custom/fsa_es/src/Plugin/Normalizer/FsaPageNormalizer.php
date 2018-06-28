@@ -58,17 +58,9 @@ class FsaPageNormalizer extends NormalizerBase {
   }
 
   /**
-   * @param \Drupal\node\NodeInterface $object
-   *   Node interface.
-   * @param mixed $format
-   *   Formatting data.
-   * @param array $context
-   *   Context data.
-   *
-   * @return array|bool|float|int|string
-   *   Normalised data.
+   * {@inheritdoc}
    */
-  public function normalize(NodeInterface $object, $format = NULL, array $context = []) {
+  public function normalize($object, $format = NULL, array $context = []) {
     $parent_data = parent::normalize($object, $format, $context);
 
     // Get audience term tree indexed by term ID.

@@ -29,17 +29,9 @@ class NormalizerBase extends ContentEntityNormalizer {
   }
 
   /**
-   * @param \Drupal\fsa_es\Plugin\Normalizer\NodeInterface $object
-   *   Node to normalize.
-   * @param mixed $format
-   *   Format options.
-   * @param array $context
-   *   Context data.
-   *
-   * @return array|bool|float|int|string
-   *   Normalized node entity.
+   * {@inheritdoc}
    */
-  public function normalize(NodeInterface $object, $format = NULL, array $context = []) {
+  public function normalize($object, $format = NULL, array $context = []) {
     return [
       'entity_type' => $object->getEntityTypeId(),
     ];

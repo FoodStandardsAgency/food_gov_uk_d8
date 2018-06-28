@@ -58,17 +58,9 @@ class FsaResearchNormalizer extends NormalizerBase {
   }
 
   /**
-   * @param \Drupal\node\NodeInterface $object
-   *   Node interface.
-   * @param mixed $format
-   *   Formatter data.
-   * @param array $context
-   *   Context data.
-   *
-   * @return array|bool|float|int|string
-   *   Normalized data.
+   * {@inheritdoc}
    */
-  public function normalize(NodeInterface $object, $format = NULL, array $context = []) {
+  public function normalize($object, $format = NULL, array $context = []) {
     $parent_data = parent::normalize($object, $format, $context);
 
     // Updated value is going to be either from "field_update_date" or from

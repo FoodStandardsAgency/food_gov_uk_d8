@@ -39,17 +39,9 @@ class FsaRatingsNormalizer extends NormalizerBase {
   }
 
   /**
-   * @param \Drupal\fsa_es\Plugin\Normalizer\NodeInterface $object
-   *   Node entity to normalize.
-   * @param mixed $format
-   *   Format options.
-   * @param array $context
-   *   Context data.
-   *
-   * @return array|bool|float|int|string
-   *   Normalized data.
+   * {@inheritdoc}
    */
-  public function normalize(NodeInterface $object, $format = NULL, array $context = []) {
+  public function normalize($object, $format = NULL, array $context = []) {
     $parent_data = parent::normalize($object, $format, $context);
 
     $data = [
