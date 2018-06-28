@@ -71,6 +71,11 @@ $settings['config_readonly_whitelist_patterns'] = [
   'force_password_change.settings',
 ];
 
+// Allow configuration changes via drush (command line).
+if (PHP_SAPI === 'cli') {
+  $settings['config_readonly'] = FALSE;
+}
+
 // Be sure to have config_split.dev disabled by default.
 $config['config_split.config_split.dev']['status'] = FALSE;
 
