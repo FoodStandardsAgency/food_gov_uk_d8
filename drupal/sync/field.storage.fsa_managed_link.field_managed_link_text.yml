@@ -1,0 +1,21 @@
+uuid: 9155cfb1-e004-4dcd-98bf-89c8e1cb7d73
+langcode: en
+status: true
+dependencies:
+  module:
+    - fsa_managed_links
+id: fsa_managed_link.field_managed_link_text
+field_name: field_managed_link_text
+entity_type: fsa_managed_link
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
