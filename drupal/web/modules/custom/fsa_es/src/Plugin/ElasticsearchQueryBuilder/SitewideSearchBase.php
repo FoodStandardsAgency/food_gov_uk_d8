@@ -8,7 +8,7 @@ use Elasticsearch\Client;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class SitewideSearchBase
+ * Class SitewideSearchBase.
  */
 abstract class SitewideSearchBase extends ElasticsearchQueryBuilderPluginBase {
 
@@ -59,7 +59,7 @@ abstract class SitewideSearchBase extends ElasticsearchQueryBuilderPluginBase {
   /**
    * Returns aggregations.
    *
-   * return array
+   * Return array.
    */
   public function getAggregations() {
     return [];

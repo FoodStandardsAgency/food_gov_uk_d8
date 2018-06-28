@@ -145,7 +145,7 @@ function fsa_custom_preprocess_page_title(&$variables) {
             [
               '@nation' => \Drupal::service('entity.repository')
                 ->getTranslationFromContext($nation1, $current_langcode)
-                ->name->value
+                ->name->value,
             ]
           );
         }

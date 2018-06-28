@@ -192,7 +192,7 @@ class FsaRatingsIndex extends FsaIndexBase {
       'filter' => [
         'standard',
         'lowercase',
-        'postcode_edge_ngram'
+        'postcode_edge_ngram',
       ],
     ];
 

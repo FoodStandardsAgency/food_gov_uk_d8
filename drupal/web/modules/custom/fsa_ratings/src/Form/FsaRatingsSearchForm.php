@@ -196,7 +196,7 @@ class FsaRatingsSearchForm extends FormBase {
 
     // Read all the single values.
     $ratings_search_values = [
-      RatingsSearch::KEYWORDS_QUERY_PARAM, 'business_type', 'local_authority'
+      RatingsSearch::KEYWORDS_QUERY_PARAM, 'business_type', 'local_authority',
     ];
 
     foreach ($ratings_search_values as $p) {

@@ -20,7 +20,6 @@ use Symfony\Component\Routing\Exception\RouteNotFoundException;
  *   id = "fsa_link_tabs",
  *   admin_label = @Translation("Link tabs block")
  * )
- *
  */
 class LinkTabsBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
@@ -169,7 +168,7 @@ class LinkTabsBlock extends BlockBase implements ContainerFactoryPluginInterface
           }
           catch (\InvalidArgumentException $e) {
             $form_state->setErrorByName(implode('][', [
-              'settings', 'links', $name, 'url'
+              'settings', 'links', $name, 'url',
             ]), $e->getMessage());
             return;
           }

@@ -15,7 +15,7 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class ViewsExposedFilterSearchBlock
+ * Class ViewsExposedFilterSearchBlock.
  *
  * This block displays only keyword field on search view's exposed form.
  */

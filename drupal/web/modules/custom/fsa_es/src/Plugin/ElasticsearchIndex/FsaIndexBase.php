@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Serializer\Serializer;
 
 /**
- * Class FsaIndexBase
+ * Class FsaIndexBase.
  */
 class FsaIndexBase extends ElasticsearchIndexBase {
 

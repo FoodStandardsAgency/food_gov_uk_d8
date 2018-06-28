@@ -3,14 +3,13 @@
 namespace Drupal\fsa_notify;
 
 use Drupal\node\Entity\Node;
-use Drupal\user\Entity\User;
 use Drupal\Core\Database\Database;
 
 /**
  * Class FsaNotifyStorageDBConnection.
  *
  * Uses Direct database connection to save notification cache fields
- * to prevent out of memory errors by using too many calls to User::load
+ * to prevent out of memory errors by using too many calls to User::load.
  *
  * @package Drupal\fsa_notify
  */

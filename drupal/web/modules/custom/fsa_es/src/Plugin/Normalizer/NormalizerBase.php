@@ -5,7 +5,7 @@ namespace Drupal\fsa_es\Plugin\Normalizer;
 use Drupal\serialization\Normalizer\ContentEntityNormalizer;
 
 /**
- * Class NormalizerBase
+ * Class NormalizerBase.
  */
 class NormalizerBase extends ContentEntityNormalizer {
 

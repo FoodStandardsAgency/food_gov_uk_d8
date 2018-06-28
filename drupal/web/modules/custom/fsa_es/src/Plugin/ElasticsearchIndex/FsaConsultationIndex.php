@@ -51,13 +51,13 @@ class FsaConsultationIndex extends FsaIndexBase {
               // Refers to news type that is displayed as a facet on the news
               // search page.
               'news_type' => [
-                'type' => 'keyword'
+                'type' => 'keyword',
               ],
               'status' => [
-                'type' => 'boolean'
+                'type' => 'boolean',
               ],
               'responses_published' => [
-                'type' => 'boolean'
+                'type' => 'boolean',
               ],
               'consultation_start_date' => [
                 'type' => 'date',

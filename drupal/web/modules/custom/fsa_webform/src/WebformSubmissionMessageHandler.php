@@ -6,7 +6,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\WebformSubmissionInterface;
 
 /**
- * Class WebformSubmissionSendHanWebformSubmissionMessageHandlerdler
+ * Class WebformSubmissionSendHanWebformSubmissionMessageHandlerdler.
  */
 class WebformSubmissionMessageHandler {
 
@@ -67,6 +67,7 @@ class WebformSubmissionMessageHandler {
    *
    * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
    *   Webform submission interface.
+   *
    * @return array
    *   Array of results.
    */
