@@ -111,13 +111,13 @@ class FsaPageNormalizer extends NormalizerBase {
   /**
    * Returns a taxonomy tree indexed by term IDs.
    *
-   * @param int $vid
-   *   Vocabulary ID.
+   * @param string $vid
+   *   Vocabulary machine name.
    *
    * @return object[]
    *   Array of term objects.
    */
-  protected function getTaxonomyTree(int $vid) {
+  protected function getTaxonomyTree(string $vid) {
     if (!isset($this->taxonomyTreeCache[$vid])) {
       if ($tree = $this->entityManager->getStorage('taxonomy_term')->loadTree($vid)) {
         // Store terms keyed by term ID.
