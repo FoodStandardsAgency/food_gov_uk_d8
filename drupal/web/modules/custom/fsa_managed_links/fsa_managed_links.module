@@ -18,30 +18,34 @@ use Drupal\Core\Cache\Cache;
  * Implements hook_token_info().
  */
 function fsa_managed_links_token_info() {
+  $info = [];
 
   // Get managed links.
   $data = _fsa_managed_links_data();
 
   // Generate tokens array.
-  $tokens = [];
-  foreach ($data['managed_links'] as $key => $link) {
-    $tokens['managed_link'][$key] = [
-      'name' => $link['name'],
-      'description' => $link['url'],
-      'needs-data' => 'managed_links',
+  if (!empty($data)) {
+    $tokens = [];
+    foreach ($data['managed_links'] as $key => $link) {
+      $tokens['managed_link'][$key] = [
+        'name' => $link['name'],
+        'description' => $link['url'],
+        'needs-data' => 'managed_links',
+      ];
+    }
+
+    // Provide token information.
+    $info = [
+      'types' => [
+        'managed_link' => [
+          'name' => t('Managed links'),
+          'description' => t('Managed link tokens.'),
+        ],
+      ],
+      'tokens' => $tokens,
     ];
   }
-
-  // Provide token information.
-  return [
-    'types' => [
-      'managed_link' => [
-        'name' => t('Managed links'),
-        'description' => t('Managed link tokens.'),
-      ],
-    ],
-    'tokens' => $tokens,
-  ];
+  return $info;
 }
 
 /**
@@ -51,11 +55,14 @@ function fsa_managed_links_tokens($type, $tokens, array $data, array $options, B
 
   // Provide replacement values for tokens.
   $replacements = [];
-  if ($type == 'managed_link') {
+  if ($type == 'managed_link' && !empty($tokens) && !empty($data)) {
+    $data_keys = array_keys($data['managed_links']);
     foreach ($tokens as $key => $token) {
-      $text = $data['managed_links'][$key]['text'];
-      $url = $data['managed_links'][$key]['url'];
-      $replacements[$token] = Link::fromTextAndUrl($text, Url::fromUri($url, []))->toString();
+      if (in_array($key, $data_keys)) {
+        $text = $data['managed_links'][$key]['text'];
+        $url = $data['managed_links'][$key]['url'];
+        $replacements[$token] = Link::fromTextAndUrl($text, Url::fromUri($url, []))->toString();
+      }
     }
   }
   return $replacements;
@@ -107,6 +114,19 @@ function fsa_managed_links_form_alter(&$form, FormStateInterface $form_state, $f
     // Prevent editing of name after inserted.
     case 'fsa_managed_link_edit_form':
       $form['name']['widget'][0]['value']['#type'] = 'hidden';
+      break;
+
+    // Warn about creating orphaned tokens.
+    case 'fsa_managed_link_delete_form':
+      $description = $form['description'];
+      $warning = [
+        '#markup' => t('<p><em>Warning: If you delete a managed link, remember to remove the resulting orphaned links from the content.</em></p>'),
+        '#weight' => 0,
+      ];
+      $form['description'] = [
+        $warning,
+        $description,
+      ];
       break;
   }
 }
@@ -189,19 +209,23 @@ function _fsa_managed_links_data() {
   $managed_links = \Drupal::entityTypeManager()->getStorage('fsa_managed_link')
     ->loadMultiple($ids);
 
-  // Push managed links onto structured array.
-  $data['managed_links'] = [];
-  foreach ($managed_links as $managed_link) {
-    $name = $managed_link->getName();
+  $data = [];
+  if (!empty($managed_links)) {
 
-    // Slugify name to form token key.
-    $filter = [' ' => '_', '-' => '_', '/' => '_', '[' => '_', ']' => '_'];
-    $name_slug = strtolower(Html::cleanCssIdentifier($name, $filter));
-    $data['managed_links'][$name_slug] = [
-      'name' => $name,
-      'text' => $managed_link->get('field_managed_link_text')->getString(),
-      'url' => $managed_link->get('field_managed_link_url')->getString(),
-    ];
-  };
+    // Push managed links onto structured array.
+    $data['managed_links'] = [];
+    foreach ($managed_links as $managed_link) {
+      $name = $managed_link->getName();
+
+      // Slugify name to form token key.
+      $filter = [' ' => '_', '-' => '_', '/' => '_', '[' => '_', ']' => '_'];
+      $name_slug = strtolower(Html::cleanCssIdentifier($name, $filter));
+      $data['managed_links'][$name_slug] = [
+        'name' => $name,
+        'text' => $managed_link->get('field_managed_link_text')->getString(),
+        'url' => $managed_link->get('field_managed_link_url')->getString(),
+      ];
+    };
+  }
   return $data;
 }
