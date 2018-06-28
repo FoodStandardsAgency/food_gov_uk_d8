@@ -42,6 +42,8 @@ function fsa_custom_preprocess_page(&$variables) {
   // Attach addToAny js(workaround to set main share button label transalted)
   $variables['#attached']['library'][] = 'fsa_custom/add_to_any';
 
+  // Attach search filter js (forces filter settings to be visible when user
+  // visits a URL path with parameters).
   $variables['#attached']['library'][] = 'fsa_custom/search_filters';
 
   // Hardcoded "utility menu" links.
