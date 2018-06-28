@@ -145,7 +145,7 @@ class ViewsExposedFilterSearchBlock extends ViewsExposedFilterBlock {
       'post_route_name',
       'location_context',
       'disable_ajax',
-      'hide_submit_button'
+      'hide_submit_button',
     ];
 
     // Special handling for regular block placement into site regions as there

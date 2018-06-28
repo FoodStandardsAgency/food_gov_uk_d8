@@ -220,21 +220,17 @@ class FsaIndexBase extends ElasticsearchIndexBase {
         'filter' => [
           // Synonyms filter goes first to add tokens.
           'synonym',
-          /*
-           * Lowercase filter should go before stemmers to normalize the input
-           * data. Otherwise strings like "Ivy" and "ivy" will be stemmed
-           * differently.
-           */
+          // Lowercase filter should go before stemmers to normalize the input
+          // data. Otherwise strings like "Ivy" and "ivy" will be stemmed
+          // differently.
           'lowercase',
-          /*
-           * Possessive stemmer should go next in the list; if it goes after
-           * generic stemmer, apostrophes will remain at the end of the tokens.
-           * To test this out, try this:
-           * curl 'http://localhost:9200/ratings-en/_analyze?pretty=true' -d '{
-           * "field": "name",
-           * "text" : "Santa'\''s will bring all the joy"
-           * }'
-           */
+          // Possessive stemmer should go next in the list; if it goes after
+          // generic stemmer, apostrophes will remain at the end of the tokens.
+          // To test this out, try this:
+          // curl 'http://localhost:9200/ratings-en/_analyze?pretty=true' -d '{
+          // "field": "name",
+          // "text" : "Santa'\''s will bring all the joy"
+          // }'.
           $language . '_possessive_stemmer',
           $language . '_stemmer',
           // Stopword filter goes last to remove tokens.

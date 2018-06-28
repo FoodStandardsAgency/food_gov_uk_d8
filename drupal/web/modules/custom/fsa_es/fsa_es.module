@@ -129,10 +129,7 @@ function fsa_es_preprocess_views_view(&$variables) {
             $variables['rows'][0]['#rows'][] = $ratings_embed_build;
           }
         }
-        /*
-         * If there are no results in "search_global_all", add directly to
-         * "rows" element
-         */
+        // If there are no results in "search_global_all", add directly to "rows" element.
         else {
           $variables['rows'][] = $ratings_embed_build;
         }

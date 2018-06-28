@@ -180,10 +180,9 @@ class FsaRatingsIndex extends FsaIndexBase {
       'replacement' => '',
     ];
 
-    /* This analyzer edge n-grams the postcode - removes the spaces,
-     * lower-cases, makes at least 2 char long tokens from the left side.
-     * E.g., SW19 5EG => "sw", "sw1", "sw19", "sw195", "sw195e", "sw195eg"
-     */
+    // This analyzer edge n-grams the postcode - removes the spaces,
+    // lower-cases, makes at least 2 char long tokens from the left side.
+    // E.g., SW19 5EG => "sw", "sw1", "sw19", "sw195", "sw195e", "sw195eg".
     $filters_analyzers['analysis']['analyzer']['postcode_edge_ngram'] = [
       'type' => 'custom',
       'tokenizer' => 'standard',

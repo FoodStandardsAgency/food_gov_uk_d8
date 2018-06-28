@@ -88,9 +88,8 @@ class SitewideSearchAll extends SitewideSearchBase {
       ];
       // Sort the result by priority list and date created params.content_type.get(doc[\'_type\'].value)
       $query['body']['sort'] = [
-         /* If the index `type` is `page`, then sort by
-            page taxonomy `content_type`
-            Else, sort by index `type` */
+        // If the index `type` is `page`, then sort by page taxonomy `content_type`,
+        // Else, sort by index `type`.
         '_script' => [
           'type' => 'number',
           'script' => [
