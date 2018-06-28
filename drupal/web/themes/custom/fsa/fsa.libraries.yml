@@ -9,3 +9,7 @@ global:
 active-link-incl-query:
   js:
     js/active-link-incl-query.js: {}
+
+clipboard:
+  js:
+    node_modules/clipboard/dist/clipboard.min.js: { minified: true }
