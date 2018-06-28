@@ -15,7 +15,7 @@
             var param = pathParams[i].split('=');
             // Find the values in the page search filters and make them active.
             if ($('#fieldset-edit-' + param[0]).length) {
-              $('#fieldset-edit-' + param[0]+' #edit-' + param[0] + ' :input[value="' + param[1] + '"]').prop('checked', true);
+              $('#fieldset-edit-' + param[0] + ' #edit-' + param[0] + ' :input[value="' + param[1] + '"]').prop('checked', true);
               $('#edit-' + param[0] + '--wrapper legend').addClass('is-open');
               $('#fieldset-edit-' + param[0]).addClass('is-open');
             }
