@@ -7,7 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const FileManagerPlugin = require('filemanager-webpack-plugin')
 
-module.exports = {
+var config = {
   context: path.resolve(__dirname, 'src'),
   entry: {
     app: './index.js',
@@ -121,30 +121,42 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   plugins: [
+  ]
+};
 
-    // Before building clean dist folder.
-    // After building copy CSS and JS files
-    // to styleguide directory for standalone serving.
-    new FileManagerPlugin({
-      onStart: [
-        {
-          delete: [
-            "./dist/"
-          ]
-        }
-      ],
-      onEnd: [
-        {
-          copy: [
-            { source: './dist/editor.css', destination: './dist/styleguide/editor.css' },
-            { source: './dist/app.css', destination: './dist/styleguide/app.css' },
-            { source: './dist/app.js', destination: './dist/styleguide/app.js' },
-            { source: './dist/editor.js', destination: './dist/styleguide/editor.js' },
-            { source: './dist/styleguide.js', destination: './dist/styleguide/styleguide.js' },
-          ]
-        }
-      ]
-    }),
+module.exports = (env, argv) => {
+  config.plugins = []
+
+  if (argv.mode === 'production') {
+
+    config.plugins = [
+      // Before building clean dist folder. After building copy CSS and JS files
+      // to styleguide directory for standalone serving.
+      new FileManagerPlugin({
+        onStart: [
+          {
+            delete: [
+              "./dist/"
+            ]
+          }
+        ],
+        onEnd: [
+          {
+            copy: [
+              { source: './dist/editor.css', destination: './dist/styleguide/editor.css' },
+              { source: './dist/app.css', destination: './dist/styleguide/app.css' },
+              { source: './dist/app.js', destination: './dist/styleguide/app.js' },
+              { source: './dist/editor.js', destination: './dist/styleguide/editor.js' },
+              { source: './dist/styleguide.js', destination: './dist/styleguide/styleguide.js' },
+            ]
+          }
+        ]
+      })
+    ]
+  }
+
+  config.plugins = [
+      ...config.plugins,
 
     // Extract CSS to its own file
     new ExtractCSSPlugin({
@@ -166,5 +178,8 @@ module.exports = {
       filename: 'styleguide/index.html',
       inject: false,
     })
+
   ]
+
+  return config;
 }

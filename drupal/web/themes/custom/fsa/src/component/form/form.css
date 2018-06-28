@@ -1112,3 +1112,37 @@ input[type="password"] {
     cursor: auto;
   }
 }
+
+/* Copy link search results e.g. ./news-alerts/search */
+/* @SEE drupal/web/modules/custom/fsa_es/js/result-copy-link.js */
+.copy-link__link {
+  position: relative;
+  margin: 0 .5em;
+  padding-right: 25px;
+
+  &:after {
+    content: '';
+    display: block;
+
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    background-image: var(--icon-checkmark-primary);
+    background-size: 70% 70%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    transform: translateY(-50%);
+
+    opacity: 0;
+    transition: opacity 1s;
+  }
+
+  &.link__success {
+    &:after {
+      opacity: 1;
+      transition: opacity .1s;
+    }
+  }
+}
