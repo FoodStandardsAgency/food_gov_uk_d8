@@ -14,9 +14,6 @@ use Drupal\views\Views;
  * hands that to a custom block plugin which will only show relevant elements
  * on the search form.
  *
- * @param array $info
- *   Block data.
- *
  * @see Drupal\fsa_es\Plugin\Block\ViewsExposedFilterSearchBlock
  */
 function fsa_es_block_alter(array &$info) {
