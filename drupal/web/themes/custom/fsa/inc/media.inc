@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Includes FSA theme media preprocess functionality.

@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * FSA ES views hook implementations.
+ */
+
+/**
  * Implements hook_views_data_alter().
  *
  * Defines Elasticsearch result filters and their plugins.

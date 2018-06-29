@@ -16,13 +16,26 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class SitewideSearchRatingsEmbed extends SitewideSearchBase {
 
-  /** @var \Drupal\fsa_es\SearchService $ratingsSearchService */
+  /**
+   * @var \Drupal\fsa_es\SearchService
+   */
   protected $ratingsSearchService;
 
   /**
-   * {@inheritdoc}
+   * SitewideSearchRatingsEmbed constructor.
    *
+   * @param array $configuration
+   *   Configuration.
+   * @param string $plugin_id
+   *   Plugin id value.
+   * @param mixed $plugin_definition
+   *   Plugin definition value.
+   * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
+   *   Language manager.
+   * @param \Elasticsearch\Client $elasticsearch_client
+   *   ES client.
    * @param \Drupal\fsa_es\SearchService $ratings_search_service
+   *   Ratings search service client.
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $language_manager, Client $elasticsearch_client, SearchService $ratings_search_service) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $language_manager, $elasticsearch_client);

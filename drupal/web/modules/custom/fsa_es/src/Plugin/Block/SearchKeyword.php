@@ -25,28 +25,28 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class SearchKeyword extends BlockBase implements FormInterface, ContainerFactoryPluginInterface {
 
-  /** @var \Drupal\Core\Form\FormBuilderInterface $formBuilder */
+  /**
+   * @var \Drupal\Core\Form\FormBuilderInterface
+   */
   protected $formBuilder;
 
-  /** @var null|\Symfony\Component\HttpFoundation\Request $request */
+  /**
+   * @var null|\Symfony\Component\HttpFoundation\Request
+   */
   protected $request;
 
-  /** @var \Drupal\Core\Routing\RouteMatchInterface $currentRouteMatch */
+  /**
+   * @var \Drupal\Core\Routing\RouteMatchInterface
+   */
   protected $currentRouteMatch;
 
-  /** @var \Drupal\Core\Language\LanguageManagerInterface $languageManager */
+  /**
+   * @var \Drupal\Core\Language\LanguageManagerInterface
+   */
   protected $languageManager;
 
   /**
-   * SearchKeyword constructor.
-   *
-   * @param array $configuration
-   * @param string $plugin_id
-   * @param mixed $plugin_definition
-   * @param \Drupal\Core\Form\FormBuilderInterface $form_builder
-   * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
-   * @param \Drupal\Core\Routing\RouteMatchInterface $current_route_match
-   * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
+   * {@inheritdoc}
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, FormBuilderInterface $form_builder, RequestStack $request_stack, RouteMatchInterface $current_route_match, LanguageManagerInterface $language_manager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
@@ -90,7 +90,7 @@ class SearchKeyword extends BlockBase implements FormInterface, ContainerFactory
   /**
    * {@inheritdoc}
    */
-  function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $form = parent::buildConfigurationForm($form, $form_state);
 
     $form['action_url'] = [

@@ -163,7 +163,7 @@ class AlertJsonToHtml extends FormatterBase {
    * @return array
    *   Markup array of wrapped product detail.
    */
-  protected function itemWrapper($label, $content, $tag = 'div', $label_options = ['tag' => 'b', 'separator' => ': ']) {
+  protected function itemWrapper($label, $content, $tag = 'div', array $label_options = ['tag' => 'b', 'separator' => ': ']) {
     if (!$label) {
       $markup = '<' . $tag . '>' . $content . '</' . $tag . '>';
     }

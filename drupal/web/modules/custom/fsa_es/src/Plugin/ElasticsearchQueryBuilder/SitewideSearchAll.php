@@ -16,13 +16,26 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class SitewideSearchAll extends SitewideSearchBase {
 
-  /** @var \Drupal\fsa_es\SearchService $ratingsSearchService */
+  /**
+   * @var \Drupal\fsa_es\SearchService
+   */
   protected $ratingsSearchService;
 
   /**
-   * {@inheritdoc}
+   * SitewideSearchAll constructor.
    *
+   * @param array $configuration
+   *   Configuration data.
+   * @param string $plugin_id
+   *   Search plugin ID.
+   * @param mixed $plugin_definition
+   *   Plugin definition data.
+   * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
+   *   Language manager object.
+   * @param \Elasticsearch\Client $elasticsearch_client
+   *   ES client.
    * @param \Drupal\fsa_es\SearchService $ratings_search_service
+   *   Ratings search object.
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $language_manager, Client $elasticsearch_client, SearchService $ratings_search_service) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $language_manager, $elasticsearch_client);
@@ -48,6 +61,7 @@ class SitewideSearchAll extends SitewideSearchBase {
    * Builds Elasticsearch base query.
    *
    * @return array
+   *   Elasticsearch base query.
    */
   public function buildBaseQuery() {
     // Get filter values.
@@ -63,7 +77,7 @@ class SitewideSearchAll extends SitewideSearchBase {
 
     // Apply the filters to the query.
     if (!empty($values['keyword'])) {
-      // Fuzzy search for All tab
+      // Fuzzy search for All tab.
       $query_must_filters[] = [
         'multi_match' => [
           'query' => $values['keyword'],
@@ -74,8 +88,8 @@ class SitewideSearchAll extends SitewideSearchBase {
       ];
       // Sort the result by priority list and date created params.content_type.get(doc[\'_type\'].value)
       $query['body']['sort'] = [
-        // If the index `type` is `page`, then sort by page taxonomy `content_type`
-        // Else, sort by index `type`
+        // If the index `type` is `page`, then sort by page taxonomy `content_type`,
+        // Else, sort by index `type`.
         '_script' => [
           'type' => 'number',
           'script' => [
@@ -142,6 +156,7 @@ class SitewideSearchAll extends SitewideSearchBase {
    * Returns a list of indices that search should be performed on.
    *
    * @return array
+   *   Array of indices that search should be performed on.
    */
   protected function getIndices() {
     $langcode = $this->currentLanguage->getId();
@@ -154,4 +169,5 @@ class SitewideSearchAll extends SitewideSearchBase {
       'research-' . $langcode,
     ];
   }
+
 }

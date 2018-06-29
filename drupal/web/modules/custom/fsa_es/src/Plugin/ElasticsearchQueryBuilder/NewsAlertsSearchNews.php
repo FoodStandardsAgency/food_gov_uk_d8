@@ -11,13 +11,16 @@ namespace Drupal\fsa_es\Plugin\ElasticsearchQueryBuilder;
  */
 class NewsAlertsSearchNews extends SitewideSearchBase {
 
-  /** @var null|array $aggregations */
+  /**
+   * @var null
+   */
   protected $aggregations = NULL;
 
   /**
    * Builds Elasticsearch base query.
    *
    * @return array
+   *   Elasticsearch base query.
    */
   public function buildBaseQuery() {
     // Get filter values.
@@ -81,6 +84,7 @@ class NewsAlertsSearchNews extends SitewideSearchBase {
    * Returns a list of indices that search should be performed on.
    *
    * @return array
+   *   Array of indices that search should be performed on.
    */
   protected function getIndices() {
     $langcode = $this->currentLanguage->getId();
@@ -94,6 +98,7 @@ class NewsAlertsSearchNews extends SitewideSearchBase {
    * Returns rating aggregations.
    *
    * @return array
+   *   Array of rating aggregations.
    */
   public function getAggregations() {
     if (!is_array($this->aggregations)) {
