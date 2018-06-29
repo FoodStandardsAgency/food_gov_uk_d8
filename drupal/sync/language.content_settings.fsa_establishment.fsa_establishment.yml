@@ -8,6 +8,8 @@ dependencies:
 third_party_settings:
   content_translation:
     enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '0'
 id: fsa_establishment.fsa_establishment
 target_entity_type_id: fsa_establishment
 target_bundle: fsa_establishment
