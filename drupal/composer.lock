@@ -1943,17 +1943,17 @@
         },
         {
             "name": "drupal/config_readonly",
-            "version": "1.0.0-beta2",
+            "version": "1.0.0-beta3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/config_readonly",
-                "reference": "8.x-1.0-beta2"
+                "reference": "8.x-1.0-beta3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/config_readonly-8.x-1.0-beta2.zip",
-                "reference": "8.x-1.0-beta2",
-                "shasum": "d3309a69ee9950a3e696a407981673ce5b041a16"
+                "url": "https://ftp.drupal.org/files/projects/config_readonly-8.x-1.0-beta3.zip",
+                "reference": "8.x-1.0-beta3",
+                "shasum": "ef474bcf5f46221e88b1cf4fa2b6abe99439b878"
             },
             "require": {
                 "drupal/core": "~8.0"
@@ -1964,8 +1964,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0-beta2",
-                    "datestamp": "1453962636",
+                    "version": "8.x-1.0-beta3",
+                    "datestamp": "1519398184",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -1974,7 +1974,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
