@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4f748a425d292af4ce1431c12bb539c7",
+    "content-hash": "850b997111e794c5ebc38eb1e394a0b2",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -5099,6 +5099,58 @@
             "homepage": "https://www.drupal.org/project/paragraphs",
             "support": {
                 "source": "http://cgit.drupalcode.org/paragraphs"
+            }
+        },
+        {
+            "name": "drupal/paragraphs_asymmetric_translation_widgets",
+            "version": "1.0.0-alpha2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/paragraphs_asymmetric_translation_widgets",
+                "reference": "8.x-1.0-alpha2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/paragraphs_asymmetric_translation_widgets-8.x-1.0-alpha2.zip",
+                "reference": "8.x-1.0-alpha2",
+                "shasum": "1f817a7a37dce795c0b9f0fc579b4cd3df11ce98"
+            },
+            "require": {
+                "drupal/core": "~8",
+                "drupal/paragraphs": "~1.3"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-alpha2",
+                    "datestamp": "1529596725",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Grayle",
+                    "homepage": "https://www.drupal.org/user/3145497"
+                },
+                {
+                    "name": "efpapado",
+                    "homepage": "https://www.drupal.org/user/1009348"
+                }
+            ],
+            "description": "Extends the paragraphs field widgets to support asymmetric translations.",
+            "homepage": "https://www.drupal.org/project/paragraphs_asymmetric_translation_widgets",
+            "support": {
+                "source": "http://cgit.drupalcode.org/paragraphs_asymmetric_translation_widgets"
             }
         },
         {
@@ -12460,7 +12512,8 @@
         "drupal/path_redirect_import": 10,
         "drupal/content_moderation_notifications": 5,
         "drupal/role_delegation": 20,
-        "drupal/password_policy": 15
+        "drupal/password_policy": 15,
+        "drupal/paragraphs_asymmetric_translation_widgets": 15
     },
     "prefer-stable": true,
     "prefer-lowest": false,
