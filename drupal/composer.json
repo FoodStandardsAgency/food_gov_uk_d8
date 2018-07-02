@@ -119,7 +119,7 @@
                 "InvalidArgumentException when trying to save programatically created node translation with workflow enabled": "https://www.drupal.org/files/issues/2018-04-16/drupal_workflow-initial-state-fix-2901459-16.patch",
                 "Make the Date Time input format and descriptive text consistent": "https://www.drupal.org/files/issues/2791693-23.patch",
                 "Empty alias check on translated pages": "https://www.drupal.org/files/issues/2018-05-02/empty-alias-check-2930599.patch",
-                "Use new Transliteration functionality in core for file names": "https://www.drupal.org/files/issues/2018-05-23/2492171-100.patch"
+                "Use new Transliteration functionality in core for file names": "https://www.drupal.org/files/issues/2018-06-29/transliterate-file-uploads-2492171-104.patch"
             },
             "drupal/administration_language_negotiation": {
                 "Fix admin_routes": "https://www.drupal.org/files/issues/2018-06-06/admin-routes-config-2972446-2.patch",
