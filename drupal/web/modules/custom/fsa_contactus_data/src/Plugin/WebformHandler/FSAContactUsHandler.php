@@ -49,9 +49,6 @@ class FSAContactUsHandler extends WebformHandlerBase {
       foreach ($webform->getElementsDecodedAndFlattened() as $e_key => $elem) {
         if (isset($elem['#personal_data']) && $elem['#personal_data'] === TRUE) {
           $personal_data_field_names[] = $e_key;
-
-          // If we want to anonymise already here?
-//          $webform_submission->setData([$e_key => '']);
         }
       }
 

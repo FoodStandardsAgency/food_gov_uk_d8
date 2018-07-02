@@ -11,13 +11,16 @@ namespace Drupal\fsa_es\Plugin\ElasticsearchQueryBuilder;
  */
 class SitewideSearchNewsAlerts extends SitewideSearchBase {
 
-  /** @var null|array $aggregations */
+  /**
+   * @var null
+   */
   protected $aggregations = NULL;
 
   /**
    * Builds Elasticsearch base query.
    *
    * @return array
+   *   Elasticsearch base query
    */
   public function buildBaseQuery() {
     $langcode = $this->currentLanguage->getId();
@@ -87,13 +90,13 @@ class SitewideSearchNewsAlerts extends SitewideSearchBase {
       if (!empty($values['consultation_status'])) {
         // Selected checkbox values come as strings, so "0" would mean that
         // value of "0" is selected, while 0 would mean that it was not selected.
-        $filtered_status_values = array_filter($values['consultation_status'], function($item) {
+        $filtered_status_values = array_filter($values['consultation_status'], function ($item) {
           return is_string($item);
         });
 
         $index_filter_filter[] = [
           'terms' => [
-            'status' => array_map(function($item) {
+            'status' => array_map(function ($item) {
               return (bool) $item;
             }, array_values($filtered_status_values)),
           ],
@@ -104,13 +107,13 @@ class SitewideSearchNewsAlerts extends SitewideSearchBase {
       if (!empty($values['consultation_responses_published'])) {
         // Selected checkbox values come as strings, so "0" would mean that
         // value of "0" is selected, while 0 would mean that it was not selected.
-        $filtered_responses_published_values = array_filter($values['consultation_responses_published'], function($item) {
+        $filtered_responses_published_values = array_filter($values['consultation_responses_published'], function ($item) {
           return is_string($item);
         });
 
         $index_filter_filter[] = [
           'terms' => [
-            'responses_published' => array_map(function($item) {
+            'responses_published' => array_map(function ($item) {
               return (bool) $item;
             }, array_values($filtered_responses_published_values)),
           ],
@@ -185,6 +188,7 @@ class SitewideSearchNewsAlerts extends SitewideSearchBase {
    * Returns index/news type mapping.
    *
    * @return array
+   *   Index/news type mapping
    */
   protected function getIndexNewsTypeMapping() {
     $langcode = $this->currentLanguage->getId();
@@ -209,10 +213,12 @@ class SitewideSearchNewsAlerts extends SitewideSearchBase {
    * Returns a list of indices that search should be performed on.
    *
    * @param array $news_types
+   *   Array of news types.
    *
    * @return array
+   *   Unique indices.
    */
-  protected function getIndices($news_types = []) {
+  protected function getIndices(array $news_types = []) {
     // Get news type => index mapping.
     $type_index_mapping = $this->getIndexNewsTypeMapping();
 
@@ -237,6 +243,7 @@ class SitewideSearchNewsAlerts extends SitewideSearchBase {
    * Returns rating aggregations.
    *
    * @return array
+   *   Array of rating aggregations.
    */
   public function getAggregations() {
     if (!is_array($this->aggregations)) {
@@ -304,6 +311,7 @@ class SitewideSearchNewsAlerts extends SitewideSearchBase {
    * Returns a list of news and alert types.
    *
    * @return array
+   *   Array of news and alert types.
    */
   public function getNewsTypeFilterOptions() {
     $aggregations = $this->getAggregations();
@@ -319,10 +327,6 @@ class SitewideSearchNewsAlerts extends SitewideSearchBase {
         (string) $this->t('Rapidly developing policies'),
       ]
     );
-
-    // This is more simple way to display options which is sorted by label.
-    // $aggregations = $this->getAggregations();
-    // return $this->aggsToOptions($aggregations['type']);
   }
 
 }

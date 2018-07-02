@@ -9,8 +9,10 @@ dependencies:
 third_party_settings:
   content_translation:
     enabled: false
+    bundle_settings:
+      untranslatable_fields_hide: '0'
 id: paragraph.liftups
 target_entity_type_id: paragraph
 target_bundle: liftups
 default_langcode: site_default
-language_alterable: false
+language_alterable: true

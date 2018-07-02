@@ -3,14 +3,13 @@
 namespace Drupal\fsa_notify;
 
 use Drupal\node\Entity\Node;
-use Drupal\user\Entity\User;
 use Drupal\Core\Database\Database;
 
 /**
  * Class FsaNotifyStorageDBConnection.
  *
  * Uses Direct database connection to save notification cache fields
- * to prevent out of memory errors by using too many calls to User::load
+ * to prevent out of memory errors by using too many calls to User::load.
  *
  * @package Drupal\fsa_notify
  */
@@ -100,7 +99,7 @@ class FsaNotifyStorageDBConnection extends FsaNotifyStorage {
         $options
       )->fetchAll();
 
-      foreach($delivery_methods as $delivery_method) {
+      foreach ($delivery_methods as $delivery_method) {
         if ($delivery_method->field_delivery_method_value == 'sms' && $node_type == 'alert') {
 
           $delta = $connection->query('select max(delta) as max_delta from user__field_notification_cache_sms where entity_id = :entity_id',
@@ -115,14 +114,14 @@ class FsaNotifyStorageDBConnection extends FsaNotifyStorage {
             $delta++;
           }
 
-            $connection->query("INSERT INTO user__field_notification_cache_sms (bundle, deleted, entity_id, revision_id, langcode, delta, field_notification_cache_sms_target_id) values ('user', 0, :entity_id, :entity_id, 'en', :delta, :nid)",
-              [
-                ':delta' => $delta,
-                ':entity_id' => $uid,
-                ':nid' => $nid,
-              ],
-              $options
-            );
+          $connection->query("INSERT INTO user__field_notification_cache_sms (bundle, deleted, entity_id, revision_id, langcode, delta, field_notification_cache_sms_target_id) values ('user', 0, :entity_id, :entity_id, 'en', :delta, :nid)",
+            [
+              ':delta' => $delta,
+              ':entity_id' => $uid,
+              ':nid' => $nid,
+            ],
+            $options
+          );
         }
         elseif ($delivery_method->field_delivery_method_value == 'email') {
           $delta = $connection->query('select max(delta) as max_delta from user__field_notification_cache where entity_id = :entity_id',

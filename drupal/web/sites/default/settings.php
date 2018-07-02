@@ -60,39 +60,21 @@ if(!empty($_SERVER['SERVER_ADDR'])){
 // Disallow configuration changes by default.
 $settings['config_readonly'] = TRUE;
 
-// Define specific admin pages to allow configuration changes on production.
-// @todo: follow issue https://www.drupal.org/node/2826274 for a fix on this.
-$config_allowed = [
-  '/admin/structure/menu/manage/account',
-  '/admin/structure/menu/manage/main',
-  '/admin/structure/menu/manage/help',
-  '/admin/structure/menu/manage/footer',
-  '/admin/config/system/site-information',
-  '/admin/config/fsa/ratings',
-  '/admin/config/fsa/ratings/translate/cy/add',
-  '/admin/config/fsa/ratings/translate/cy/edit',
-  '/admin/config/fsa/consultations',
-  '/admin/config/fsa/consultations/translate/cy/add',
-  '/admin/config/fsa/consultations/translate/cy/edit',
-  '/admin/config/content/embed/button/manage/document',
-  '/admin/config/content/embed/button/manage/media_entity_embed',
-  '/admin/config/content/embed/button/manage/image',
-  '/admin/config/content/embed/button/manage/node',
-  '/admin/config/people/force_password_change',
+// The config names that are allowed to be changed in readonly environments.
+$settings['config_readonly_whitelist_patterns'] = [
+  'system.site',
+  'system.menu.*',
+  'system.performance',
+  'core.menu.static_menu_link_overrides',
+  'config.fsa_ratings',
+  'config.fsa_consultations',
+  'force_password_change.settings',
 ];
 
-// Allow config changes on specified path pattern and command line.
-if (in_array($_SERVER['REQUEST_URI'], $config_allowed) || PHP_SAPI === 'cli') {
+// Allow configuration changes via drush (command line).
+if (PHP_SAPI === 'cli') {
   $settings['config_readonly'] = FALSE;
 }
-
-// We want to sometimes manage webforms on staging, temporarily allow config
-// changes here.
-/*
-if (strpos($_SERVER['REQUEST_URI'], '/admin/structure/webform/manage') === 0) {
-  $settings['config_readonly'] = FALSE;
-}
-*/
 
 // Be sure to have config_split.dev disabled by default.
 $config['config_split.config_split.dev']['status'] = FALSE;

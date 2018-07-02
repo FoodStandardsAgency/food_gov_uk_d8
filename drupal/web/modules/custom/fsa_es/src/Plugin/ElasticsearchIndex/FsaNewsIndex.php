@@ -19,7 +19,7 @@ class FsaNewsIndex extends FsaIndexBase {
    */
   public function setup() {
     // Create one index per language, so that we can have different analyzers.
-    foreach ($this->language_manager->getLanguages() as $langcode => $language) {
+    foreach ($this->languageManager->getLanguages() as $langcode => $language) {
       $index_name = 'news-' . $langcode;
 
       if (!$this->client->indices()->exists(['index' => $index_name])) {
@@ -51,7 +51,7 @@ class FsaNewsIndex extends FsaIndexBase {
               // Refers to news type that is displayed as a facet on the news
               // search page.
               'news_type' => [
-                'type' => 'keyword'
+                'type' => 'keyword',
               ],
               'name' => [
                 'type' => 'text',

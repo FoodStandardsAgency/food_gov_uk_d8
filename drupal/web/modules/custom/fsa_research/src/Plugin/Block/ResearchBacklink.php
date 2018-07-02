@@ -7,7 +7,6 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Link;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Provides a 'ResearchBacklink' block.

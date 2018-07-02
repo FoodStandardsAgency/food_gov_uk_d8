@@ -155,17 +155,17 @@ class FsaNotifyStorage {
 
     foreach ($uids as $uid) {
       $u = User::load($uid);
-       
+
       $need_to_save = FALSE;
-      foreach($u->field_delivery_method->getValue() as $delivery_method) {
+      foreach ($u->field_delivery_method->getValue() as $delivery_method) {
         if ($delivery_method['value'] == 'sms' && $node_type == 'alert') {
           $u->field_notification_cache_sms[] = $nid;
-	  $need_to_save = TRUE;
-	}
-	else if ($delivery_method['value'] == 'email') {
+          $need_to_save = TRUE;
+        }
+        elseif ($delivery_method['value'] == 'email') {
           $u->field_notification_cache[] = $nid;
-	  $need_to_save = TRUE;
-	}
+          $need_to_save = TRUE;
+        }
       }
 
       if ($need_to_save) {
@@ -174,8 +174,6 @@ class FsaNotifyStorage {
       $u = NULL;
       \Drupal::entityManager()->getStorage('user')->resetCache();
     }
-
-
   }
 
   /**

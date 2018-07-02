@@ -11,13 +11,16 @@ namespace Drupal\fsa_es\Plugin\ElasticsearchQueryBuilder;
  */
 class NewsAlertsSearchAlerts extends SitewideSearchBase {
 
-  /** @var null|array $aggregations */
+  /**
+   * @var null
+   */
   protected $aggregations = NULL;
 
   /**
    * Builds Elasticsearch base query.
    *
    * @return array
+   *   Query array.
    */
   public function buildBaseQuery() {
     // Get filter values.
@@ -90,6 +93,7 @@ class NewsAlertsSearchAlerts extends SitewideSearchBase {
    * Returns a list of indices that search should be performed on.
    *
    * @return array
+   *   Array of indices a search should operate on.
    */
   protected function getIndices() {
     return [
@@ -101,6 +105,7 @@ class NewsAlertsSearchAlerts extends SitewideSearchBase {
    * Returns rating aggregations.
    *
    * @return array
+   *   Array of rating aggregations.
    */
   public function getAggregations() {
     if (!is_array($this->aggregations)) {
@@ -144,6 +149,7 @@ class NewsAlertsSearchAlerts extends SitewideSearchBase {
    * Returns a list of news and alert types.
    *
    * @return array
+   *   News and alert types
    */
   public function getNewsTypeFilterOptions() {
     $aggregations = $this->getAggregations();
@@ -155,10 +161,6 @@ class NewsAlertsSearchAlerts extends SitewideSearchBase {
         (string) $this->t('Food alert'),
       ]
     );
-
-    // This is more simple way to display options which is sorted by label.
-    // $aggregations = $this->getAggregations();
-    // return $this->aggsToOptions($aggregations['type']);
   }
 
 }
