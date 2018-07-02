@@ -36,11 +36,16 @@ class SearchService {
    * Builds Elasticsearch base query.
    *
    * @param \Drupal\Core\Language\LanguageInterface $language
+   *   Language interface.
    * @param array $filters
+   *   Query filters.
    * @param int $max_items
+   *   Max items.
    * @param int $offset
+   *   Offset value.
    *
    * @return array
+   *   Array of results.
    */
   public function buildBaseQuery(LanguageInterface $language, array $filters, $max_items = self::DEFAULT_MAX_RESULT_ITEMS, $offset = 0) {
     $query_filter_filters = [];
@@ -141,14 +146,20 @@ class SearchService {
    * Builds Elasticsearch query.
    *
    * @param \Drupal\Core\Language\LanguageInterface $language
+   *   Language interface.
    * @param string $input
+   *   Search keywords.
    * @param array $filters
+   *   Filter options.
    * @param int $max_items
+   *   Max items value.
    * @param int $offset
+   *   Offset value.
    *
    * @return array
+   *   Array of query results.
    */
-  public function buildQuery(LanguageInterface $language, $input = '', $filters = [], $max_items = self::DEFAULT_MAX_RESULT_ITEMS, $offset = 0) {
+  public function buildQuery(LanguageInterface $language, $input = '', array $filters = [], $max_items = self::DEFAULT_MAX_RESULT_ITEMS, $offset = 0) {
     $query_must_filters = [];
     $query_should_filters = [];
     $query = $this->buildBaseQuery($language, $filters, $max_items, $offset);
@@ -225,14 +236,20 @@ class SearchService {
    * Builds fallback Elasticsearch query.
    *
    * @param \Drupal\Core\Language\LanguageInterface $language
+   *   Language interface.
    * @param string $input
+   *   Search keywords.
    * @param array $filters
+   *   Filter options.
    * @param int $max_items
+   *   Max items value.
    * @param int $offset
+   *   Offset value.
    *
    * @return array
+   *   Array of query results.
    */
-  public function buildFallbackQuery(LanguageInterface $language, $input = '', $filters = [], $max_items = self::DEFAULT_MAX_RESULT_ITEMS, $offset = 0) {
+  public function buildFallbackQuery(LanguageInterface $language, $input = '', array $filters = [], $max_items = self::DEFAULT_MAX_RESULT_ITEMS, $offset = 0) {
     $query_must_filters = [];
     $query = $this->buildBaseQuery($language, $filters, $max_items, $offset);
 
@@ -242,7 +259,8 @@ class SearchService {
         'combinedvalues' => [
           'query' => $input,
           'fuzziness' => 'AUTO',
-          'prefix_length' => 1, // Don't let the first letter be fuzzy.
+          // Don't let the first letter be fuzzy.
+          'prefix_length' => 1,
           'operator' => 'and',
         ],
       ],
@@ -270,7 +288,7 @@ class SearchService {
    * @return array
    *   An associated array containing results and metadata. Something like this: ['results' => [...], 'total' => 100, 'aggs' => [...]]
    */
-  public function search(LanguageInterface $language, $input = '', $filters = [], $max_items = self::DEFAULT_MAX_RESULT_ITEMS, $offset = 0) {
+  public function search(LanguageInterface $language, $input = '', array $filters = [], $max_items = self::DEFAULT_MAX_RESULT_ITEMS, $offset = 0) {
     // Get query.
     $query = $this->buildQuery($language, $input, $filters, $max_items, $offset);
 

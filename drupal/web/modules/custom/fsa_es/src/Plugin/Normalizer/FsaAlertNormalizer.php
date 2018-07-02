@@ -13,7 +13,9 @@ class FsaAlertNormalizer extends NormalizerBase {
 
   use StringTranslationTrait;
 
-  /** @var array $taxonomyTreeCache */
+  /**
+   * @var array
+   */
   protected $taxonomyTreeCache = [];
 
   /**
@@ -30,14 +32,18 @@ class FsaAlertNormalizer extends NormalizerBase {
    */
   protected $format = ['elasticsearch_helper'];
 
-  /** @var \Drupal\Core\Datetime\DateFormatter $dateFormatter */
+  /**
+   * @var \Drupal\Core\Datetime\DateFormatterInterface
+   */
   protected $dateFormatter;
 
   /**
    * FsaPageNormalizer constructor.
    *
    * @param \Drupal\Core\Entity\EntityManagerInterface $entity_manager
+   *   Entity manager interface.
    * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
+   *   Date formatter interface.
    */
   public function __construct(EntityManagerInterface $entity_manager, DateFormatterInterface $date_formatter) {
     parent::__construct($entity_manager);
@@ -45,7 +51,13 @@ class FsaAlertNormalizer extends NormalizerBase {
   }
 
   /**
-   * {@inheritdoc}
+   * @param object $data
+   *   Entity data.
+   * @param mixed $format
+   *   Format options.
+   *
+   * @return bool
+   *   Whether object comparison is true or false.
    */
   public function supportsNormalization($data, $format = NULL) {
     return is_a($data, '\Drupal\node\Entity\Node') && $data->bundle() == 'alert';
@@ -53,8 +65,6 @@ class FsaAlertNormalizer extends NormalizerBase {
 
   /**
    * {@inheritdoc}
-   *
-   * @param \Drupal\node\NodeInterface $object
    */
   public function normalize($object, $format = NULL, array $context = []) {
     $parent_data = parent::normalize($object, $format, $context);
@@ -76,7 +86,7 @@ class FsaAlertNormalizer extends NormalizerBase {
         $this->prepareTextualField($object->get('field_alert_actiontaken')->value),
         $this->prepareTextualField($object->get('field_alert_description')->value),
       ]),
-      'nation' => array_map(function($item) {
+      'nation' => array_map(function ($item) {
         return [
           'id' => $item->id(),
           'label' => $item->label(),
@@ -92,9 +102,11 @@ class FsaAlertNormalizer extends NormalizerBase {
   /**
    * Returns new type depending on alert type field value.
    *
-   * @param $value
+   * @param string $value
+   *   Specified value.
    *
    * @return array|null
+   *   Results or null if no matches.
    */
   protected function getNewsType($value) {
     $types = [

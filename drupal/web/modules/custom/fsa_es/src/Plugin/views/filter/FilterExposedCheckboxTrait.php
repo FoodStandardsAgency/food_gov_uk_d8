@@ -3,7 +3,7 @@
 namespace Drupal\fsa_es\Plugin\views\filter;
 
 /**
- * Class FilterExposedCheckboxTrait
+ * Class FilterExposedCheckboxTrait.
  */
 trait FilterExposedCheckboxTrait {
 

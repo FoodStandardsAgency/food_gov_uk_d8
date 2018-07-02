@@ -128,11 +128,12 @@ function fsa_custom_preprocess_page_title(&$variables) {
 
       if (!$nations->isEmpty()) {
 
-        // Get current language code to be able to translate taxonomy vocabulary later
-        $current_langcode = \Drupal::languageManager()->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)->getId();
+        // Get current language code to translate taxonomy vocabulary later.
+        $current_langcode = \Drupal::languageManager()
+          ->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)->getId();
 
-        // Load first nation
-        $nation1 = \Drupal\taxonomy\Entity\Term::load($nations[0]->getValue()['target_id']);
+        // Load first nation.
+        $nation1 = Term::load($nations[0]->getValue()['target_id']);
 
         // Add regional variations label with same classes as would be added via
         // WYSIWYG editor.
@@ -140,21 +141,25 @@ function fsa_custom_preprocess_page_title(&$variables) {
         $nation_label = '';
 
         if (!isset($nations[1])) {
-          // If only one nation selected
-          $class .= ' regional-variation--' . strtolower(Html::cleanCssIdentifier($nation1->getName()));
+          // If only one nation selected.
+          $class .= ' regional-variation--' . strtolower(
+            Html::cleanCssIdentifier($nation1->getName())
+          );
           $nation_label = t('@nation specific',
             [
-              '@nation' => \Drupal::service('entity.repository')->getTranslationFromContext($nation1, $current_langcode)->name->value
+              '@nation' => \Drupal::service('entity.repository')
+                ->getTranslationFromContext($nation1, $current_langcode)
+                ->name->value,
             ]
           );
         }
 
-        elseif (isset($nations[1]) && ! isset($nations[2])) {
-          // If two nations are selected
+        elseif (isset($nations[1]) && !isset($nations[2])) {
+          // If two nations are selected.
           $class .= ' regional-variation--multi-regional';
 
-          // Load second nation
-          $nation2 = \Drupal\taxonomy\Entity\Term::load($nations[1]->getValue()['target_id']);
+          // Load second nation.
+          $nation2 = Term::load($nations[1]->getValue()['target_id']);
 
           $nation_label = t(
             '@nation_1 and @nation_2 specific',

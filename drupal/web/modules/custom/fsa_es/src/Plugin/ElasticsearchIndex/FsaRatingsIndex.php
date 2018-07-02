@@ -18,7 +18,7 @@ class FsaRatingsIndex extends FsaIndexBase {
    */
   public function setup() {
     // Create one index per language, so that we can have different analyzers.
-    foreach ($this->language_manager->getLanguages() as $langcode => $language) {
+    foreach ($this->languageManager->getLanguages() as $langcode => $language) {
       $index_name = 'ratings-' . $langcode;
 
       if (!$this->client->indices()->exists(['index' => $index_name])) {
@@ -182,7 +182,7 @@ class FsaRatingsIndex extends FsaIndexBase {
 
     // This analyzer edge n-grams the postcode - removes the spaces,
     // lower-cases, makes at least 2 char long tokens from the left side.
-    // E.g., SW19 5EG => "sw", "sw1", "sw19", "sw195", "sw195e", "sw195eg"
+    // E.g., SW19 5EG => "sw", "sw1", "sw19", "sw195", "sw195e", "sw195eg".
     $filters_analyzers['analysis']['analyzer']['postcode_edge_ngram'] = [
       'type' => 'custom',
       'tokenizer' => 'standard',
@@ -192,7 +192,7 @@ class FsaRatingsIndex extends FsaIndexBase {
       'filter' => [
         'standard',
         'lowercase',
-        'postcode_edge_ngram'
+        'postcode_edge_ngram',
       ],
     ];
 
@@ -202,9 +202,11 @@ class FsaRatingsIndex extends FsaIndexBase {
   /**
    * Returns filters.
    *
-   * @param $langcode
+   * @param string $langcode
+   *   Language code.
    *
    * @return array
+   *   Array of matching filters.
    *
    * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-lang-analyzer.html
    */
