@@ -19,13 +19,21 @@ class FsaNotifyAPIemail extends FsaNotifyAPI {
    */
   public function __construct() {
     $state_key = "fsa_notify.template_email";
-    parent::__construct($state_key);
+    $state_key_cy = "fsa_notify.template_email_cy";
+    parent::__construct($state_key, $state_key_cy);
   }
 
   /**
    * {@inheritdoc}
    */
   public function send(User $user, string $reference, array $personalisation) {
+
+    if ($user->getPreferredLangcode() == 'cy') {
+      $template_id = $this->templateIdCy;
+    }
+    else {
+      $template_id = $this->templateId;
+    }
 
     $email = $user->getEmail();
 
@@ -36,7 +44,7 @@ class FsaNotifyAPIemail extends FsaNotifyAPI {
     if (\Drupal::state()->get('fsa_notify.collect_send_log_only')) {
       \Drupal::logger('fsa_notify')->debug('Notify email: <ul><li>To: %email</li><li>template_id %template_id</li><li>personalization: <pre>%personalization</pre></li><li>reference: %reference</li></ul>', [
         '%email' => $email,
-        '%template_id' => $this->templateId,
+        '%template_id' => $template_id,
         '%personalization' => print_r($personalisation, 1),
         '%reference' => $reference,
       ]);
@@ -48,7 +56,7 @@ class FsaNotifyAPIemail extends FsaNotifyAPI {
     try {
       $this->api->sendEmail(
         $email,
-        $this->templateId,
+        $template_id,
         $personalisation,
         $reference
       );
