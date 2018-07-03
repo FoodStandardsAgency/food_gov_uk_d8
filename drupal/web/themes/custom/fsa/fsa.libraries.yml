@@ -12,4 +12,4 @@ active-link-incl-query:
 
 clipboard:
   js:
-    node_modules/clipboard/dist/clipboard.min.js: { minified: true }
+    dist/clipboard.min.js: { minified: true }

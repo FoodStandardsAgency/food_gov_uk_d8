@@ -4,7 +4,7 @@
   Drupal.behaviors.fsaElasticsearchResultCopyLink = {
     attach: function (context, settings) {
 
-      $('#block-search-news-alerts-consultations-filters', context).each(function() {
+      $('.navigation-side .views-exposed-form', context).each(function() {
           var filters = $(this);
 
           // Prepare copy link.
@@ -17,7 +17,7 @@
               });
 
           // Insert copy link.
-          $('.form-actions', this).append(copy_link);
+          $('.form-actions', this).after(copy_link);
 
           // Add copy functionality to link.
           var copy_link_clipboard = new ClipboardJS(copy_link[0], {
@@ -31,7 +31,13 @@
                 current_query.push($(this).attr('name') + '=' + $(this).attr('value'));
               });
 
-              return current_url + '?' + current_query.join('&');
+              if (current_query.length > 0) {
+                return current_url + '?' + current_query.join('&');
+              }
+              else {
+                return current_url;
+              }
+
             }
           });
 
