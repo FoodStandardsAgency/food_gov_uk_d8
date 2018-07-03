@@ -45,7 +45,7 @@ class FsaNotifyAPIsms extends FsaNotifyAPI {
     if (\Drupal::state()->get('fsa_notify.collect_send_log_only')) {
       \Drupal::logger('fsa_notify')->debug('Notify SMS: <ul><li>To: %phoneNumber</li><li>template_id %template_id</li><li>personalization: <pre>%personalization</pre></li><li>reference: %reference</li></ul>', [
         '%phoneNumber' => $phoneNumber,
-        '%template_id' => $this->template_id,
+        '%template_id' => $this->templateId,
         '%personalization' => print_r($personalisation, 1),
         '%reference' => $reference,
       ]);
@@ -57,7 +57,7 @@ class FsaNotifyAPIsms extends FsaNotifyAPI {
     try {
       $this->api->sendSms(
         $phoneNumber,
-        $this->template_id,
+        $this->templateId,
         $personalisation,
         $reference
       );

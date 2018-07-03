@@ -5,7 +5,7 @@ namespace Drupal\fsa_es\Plugin\views\filter;
 use Drupal\views\Plugin\views\filter\InOperator;
 
 /**
- * Class FilterInOperatorBase
+ * Class FilterInOperatorBase.
  */
 abstract class FilterInOperatorBase extends InOperator {
 

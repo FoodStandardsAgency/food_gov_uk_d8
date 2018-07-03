@@ -20,12 +20,6 @@ if (isset($_SERVER['REMOTE_ADDR'])) {
 }
 
 /**
- * Disable CSS and JS aggregation.
- */
-$config['system.performance']['css']['preprocess'] = FALSE;
-$config['system.performance']['js']['preprocess'] = FALSE;
-
-/**
  * Disable the render cache (this includes the page cache).
  *
  * Note: you should test with the render cache enabled, to ensure the correct

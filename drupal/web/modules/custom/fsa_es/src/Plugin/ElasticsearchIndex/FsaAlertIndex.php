@@ -53,7 +53,7 @@ class FsaAlertIndex extends FsaIndexBase {
             // Refers to news type that is displayed as a facet on the news
             // search page.
             'news_type' => [
-              'type' => 'keyword'
+              'type' => 'keyword',
             ],
             'name' => [
               'type' => 'text',

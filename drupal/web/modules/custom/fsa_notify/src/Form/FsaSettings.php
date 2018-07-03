@@ -10,7 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
  */
 class FsaSettings extends FormBase {
 
-  private $state_key = 'fsa_notify.killswitch';
+  private $stateKey = 'fsa_notify.killswitch';
 
   /**
    * {@inheritdoc}
@@ -51,7 +51,7 @@ class FsaSettings extends FormBase {
       ];
     }
 
-    $killswitch = \Drupal::state()->get($this->state_key);
+    $killswitch = \Drupal::state()->get($this->stateKey);
     $killswitch = (bool) $killswitch;
 
     $form['status_old'] = [
@@ -224,10 +224,10 @@ class FsaSettings extends FormBase {
     $status_new = $form_state->getValue('status_new');
 
     if (empty($status_new)) {
-      \Drupal::state()->delete($this->state_key);
+      \Drupal::state()->delete($this->stateKey);
     }
     else {
-      \Drupal::state()->set($this->state_key, 1);
+      \Drupal::state()->set($this->stateKey, 1);
     }
 
     if (empty($status_old) && !empty($status_new)) {

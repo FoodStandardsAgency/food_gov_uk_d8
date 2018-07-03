@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * @file
+ */
+
+/**
  * Implements hook_preprocess_HOOK().
  */
 function fsa_preprocess_fieldset(&$variables) {
@@ -20,11 +24,11 @@ function fsa_preprocess_fieldset(&$variables) {
     'edit-responses-published'
   ];
 
-  $variables['toggle_fieldset'] = false;
+  $variables['toggle_fieldset'] = FALSE;
 
   if (in_array($variables['element']['#id'], $add_attrs)) {
     $id = 'fieldset-' . $variables['element']['#id'];
-    $variables['toggle_fieldset'] = true;
+    $variables['toggle_fieldset'] = TRUE;
     $variables['fieldset_wrapper_id'] = $id;
 
     $variables['legend']['attributes']['data-state'] = ['is-open'];

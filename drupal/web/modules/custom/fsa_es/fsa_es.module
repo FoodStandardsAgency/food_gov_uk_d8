@@ -1,7 +1,11 @@
 <?php
 
+/**
+ * @file
+ * FSA ES module file.
+ */
+
 use Drupal\views\Views;
-use Drupal\views\ViewExecutable;
 
 /**
  * Implements hook_block_alter().
@@ -10,11 +14,9 @@ use Drupal\views\ViewExecutable;
  * hands that to a custom block plugin which will only show relevant elements
  * on the search form.
  *
- * @param $info
- *
  * @see Drupal\fsa_es\Plugin\Block\ViewsExposedFilterSearchBlock
  */
-function fsa_es_block_alter(&$info) {
+function fsa_es_block_alter(array &$info) {
   foreach ($info as $delta => $block) {
     if (stripos($delta, 'views_exposed_filter_block:') === 0) {
       $info[$delta]['class'] = 'Drupal\fsa_es\Plugin\Block\ViewsExposedFilterSearchBlock';
@@ -43,6 +45,7 @@ function fsa_es_theme_suggestions_alter(array &$suggestions, array $variables, $
         $suggestions[] = 'block__' . $variables['elements']['#base_plugin_id'] . '__search_global_filters';
       }
       break;
+
     case 'views_view':
       $view = $variables['view'];
 
@@ -138,8 +141,7 @@ function fsa_es_preprocess_views_view(&$variables) {
             $variables['rows'][0]['#rows'][] = $ratings_embed_build;
           }
         }
-        // If there are no results in "search_global_all", add directly to
-        // "rows" element
+        // If there are no results in "search_global_all", add directly to "rows" element.
         else {
           $variables['rows'][] = $ratings_embed_build;
         }
