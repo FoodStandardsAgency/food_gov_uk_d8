@@ -33,9 +33,8 @@ class Letters extends AreaPluginBase {
       $name_first_chars = [];
       foreach ($terms as $term) {
         if ($term->hasTranslation($language)) {
-          $tid = $term->id();
           $translated_term = \Drupal::service('entity.repository')->getTranslationFromContext($term, $language);
-          $name_first_chars[$tid] = strtoupper(substr($translated_term->getName(), 0, 1));
+          $name_first_chars[$term->id()] = strtoupper(substr($translated_term->getName(), 0, 1));
         }
       }
 
