@@ -8,6 +8,12 @@ Small module to force noindex robot metatag on all pages in order to avoid site 
 
 The module should be uninstalled and removed once site is launched to public.
 
+## FSA Content reminder (`fsa_content_reminder`)
+Sends reminders and displays a list of content that may require attention from 
+editorial team. 
+
+See [README.md](../drupal/web/modules/custom/fsa_content_reminder/README.md) for
+more information.
 
 ## FSA Custom (`fsa_custom`)
 FSA site small customizations and configuration pages. 

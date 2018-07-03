@@ -60,6 +60,7 @@ module:
   fsa_contact_path: 0
   fsa_contactus: 0
   fsa_contactus_data: 0
+  fsa_content_reminder: 0
   fsa_custom: 0
   fsa_document_library: 0
   fsa_es: 0
