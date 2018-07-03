@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\fsa_custom\Plugin\views\area;
+namespace Drupal\fsa_topic_listing\Plugin\views\area;
 
 use Drupal\Core\Link;
 use Drupal\taxonomy\Entity\Term;
