@@ -1,6 +1,8 @@
 import 'babel-polyfill'
 import 'mutationobserver-shim'
 import 'inert-polyfill'
+// import clipboard from 'clipboard-polyfill';
+
 import './helper/polyfill/classList'
 import './helper/polyfill/closest'
 import './helper/polyfill/matches'
@@ -74,4 +76,10 @@ document.addEventListener('touchstart', function addtouchclass (e) {
 // // Add class if css custom properties are supported
 // if (cssCustomPropertySupport()) {
 //   document.documentElement.classList.add('is-modern')
+// }
+
+// Drupal.behaviors.exampleModule = {
+//   attach: function (context, settings) {
+//     clipboard.writeText('Fuuuuuuuuuuuu.')
+//   }
 // }
