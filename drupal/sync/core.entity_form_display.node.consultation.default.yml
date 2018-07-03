@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.consultation.field_consultation_summary
     - field.field.node.consultation.field_consultations_type
     - field.field.node.consultation.field_consultations_type_alert
+    - field.field.node.consultation.field_content_reminder
     - field.field.node.consultation.field_intro
     - field.field.node.consultation.field_nation
     - field.field.node.consultation.field_search_exclude
@@ -23,6 +24,7 @@ dependencies:
     - field_group
     - inline_entity_form
     - path
+    - scheduler
     - text
 third_party_settings:
   field_group:
@@ -155,6 +157,12 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
+    region: content
+  field_content_reminder:
+    weight: 102
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
     region: content
   field_intro:
     weight: 5
