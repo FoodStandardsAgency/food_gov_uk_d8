@@ -40,6 +40,7 @@ module:
   elasticsearch_helper_views: 0
   email_registration: 0
   embed: 0
+  encrypt: 0
   entity: 0
   entity_browser: 0
   entity_browser_entity_form: 0
@@ -83,6 +84,7 @@ module:
   fsa_webform: 0
   fsa_webform_validation: 0
   fsa_workflows: 0
+  ga_login: 0
   geolocation: 0
   google_tag: 0
   help: 0
@@ -93,12 +95,14 @@ module:
   image_widget_crop: 0
   inline_entity_form: 0
   ip_anon: 0
+  key: 0
   language: 0
   libraries: 0
   link: 0
   linkit: 0
   linkit_content: 0
   locale: 0
+  lockr: 0
   media_entity: 0
   media_entity_browser: 0
   media_entity_document: 0
@@ -126,6 +130,7 @@ module:
   path_redirect_import: 0
   quickedit: 0
   rdf: 0
+  real_aes: 0
   recaptcha: 0
   redirect: 0
   role_delegation: 0
@@ -142,6 +147,7 @@ module:
   taxonomy: 0
   term_reference_tree: 0
   text: 0
+  tfa: 0
   toc_api: 0
   toc_filter: 0
   token: 0

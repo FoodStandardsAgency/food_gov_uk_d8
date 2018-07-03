@@ -7,3 +7,4 @@ dependencies:
   - drupal:user
   - drupal:email_registration
   - fsa_custom
+  - tfa
