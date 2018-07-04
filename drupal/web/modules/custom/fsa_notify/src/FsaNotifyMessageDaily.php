@@ -14,7 +14,7 @@ class FsaNotifyMessageDaily extends FsaNotifyMessage {
    */
   public function __construct() {
     parent::__construct();
-    $this->subject = t('FSA daily digest update', [], ['langcode' => 'cy']);
+    $this->subject = t('FSA daily digest update');
   }
 
   /**
