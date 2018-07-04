@@ -13,19 +13,27 @@ abstract class FsaNotifyMessage {
   const NOTIFY_TEMPLATE_MESSAGE_STYLE_PREFIX = '^ ';
 
   protected static $cache = [];
-  protected static $baseUrl;
-  protected static $loginUrl;
-  protected static $unsubscribeUrl;
   protected static $date;
 
   /**
    * Construct the object.
    */
   public function __construct() {
+    $this->date = date('j F Y');
+  }
+
+  /**
+   * Get the base url of current environment.
+   *
+   * @return string
+   *   The site base url.
+   */
+  public static function baseUrl() {
 
     // Sending is done via cron, hardcode domain for links based on WKV_SITE_ENV
     // if/when cron is triggered without --uri flag to avoid the links being
     // created as http://default/....
+    // @todo: fsa_content_reminder_cron() duplicates this logic, consider moving into a service.
     switch (getenv("WKV_SITE_ENV")) {
       case 'local':
         $baseUrl = 'https://local.food.gov.uk';
@@ -44,15 +52,7 @@ abstract class FsaNotifyMessage {
         break;
     }
 
-    $this->baseUrl = $baseUrl;
-
-    $url = Url::fromRoute('fsa_signin.default_controller_signInPage', []);
-    $this->loginUrl = $baseUrl . $url->toString();
-
-    $url = Url::fromRoute('fsa_signin.default_controller_unsubscribe', []);
-    $this->unsubscribeUrl = $baseUrl . $url->toString();
-
-    $this->date = date('j F Y');
+    return $baseUrl;
   }
 
   /**
@@ -104,7 +104,7 @@ abstract class FsaNotifyMessage {
     }
 
     $nid = $node->id();
-    $url = sprintf('%s%s/node/%d', $this->baseUrl, $prefix, $nid);
+    $url = sprintf('%s%s/node/%d', FsaNotifyMessage::baseUrl(), $prefix, $nid);
     return $url;
   }
 
@@ -126,7 +126,7 @@ abstract class FsaNotifyMessage {
       $prefix = '/' . $lang;
     }
 
-    $url = $this->baseUrl . $prefix . \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $node->id(), $lang);
+    $url = self::baseUrl() . $prefix . \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $node->id(), $lang);
     return $url;
   }
 

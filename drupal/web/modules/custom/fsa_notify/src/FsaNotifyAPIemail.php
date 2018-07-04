@@ -4,6 +4,7 @@ namespace Drupal\fsa_notify;
 
 use Alphagov\Notifications\Exception\ApiException;
 use Alphagov\Notifications\Exception\NotifyException;
+use Drupal\Core\Url;
 use Drupal\user\Entity\User;
 use Drupal\Component\Utility\UrlHelper;
 
@@ -28,8 +29,11 @@ class FsaNotifyAPIemail extends FsaNotifyAPI {
    */
   public function send(User $user, string $reference, array $personalisation) {
 
+    $base_url = FsaNotifyMessage::baseUrl();
+
     if ($user->getPreferredLangcode() == 'cy') {
       $template_id = $this->templateIdCy;
+      $base_url .= '/cy';
     }
     else {
       $template_id = $this->templateId;
@@ -37,8 +41,12 @@ class FsaNotifyAPIemail extends FsaNotifyAPI {
 
     $email = $user->getEmail();
 
-    // Add the user parameters to the unsubscribe URL.
-    $personalisation['unsubscribe'] = $personalisation['unsubscribe'] . '?' . UrlHelper::buildQuery(['id' => $user->id(), 'email' => $email]);
+    // Craft the login url.
+    $personalisation['login'] = $base_url . Url::fromRoute('fsa_signin.default_controller_signInPage', [])->toString();
+
+    // Craft the unsubscribe url and add user parameters.
+    $unsubscribe = $base_url . Url::fromRoute('fsa_signin.default_controller_unsubscribe', [])->toString();
+    $personalisation['unsubscribe'] = $unsubscribe . '?' . UrlHelper::buildQuery(['id' => $user->id(), 'email' => $email]);
 
     // Debugging mode, just log the Notify template variables.
     if (\Drupal::state()->get('fsa_notify.collect_send_log_only')) {
