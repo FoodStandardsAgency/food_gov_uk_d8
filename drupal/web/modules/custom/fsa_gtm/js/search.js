@@ -80,7 +80,6 @@
             checked.region = guidanceRegion.join(",");
             data.search.tags.nation = checked.region ? checked.region : null;
 
-            dataLayer.push(data);
           });
           break;
 
@@ -120,7 +119,6 @@
             checked.status = hygieneStatus.join(",");
             data.search.tags.hygieneStatus = checked.status ? checked.status : null;
 
-            dataLayer.push(data);
           });
           break;
 
@@ -150,7 +148,6 @@
             checked.nation = nation.join(",");
             data.search.tags.nation = checked.nation ? checked.nation : null;
 
-            dataLayer.push(data);
           });
           break;
 
@@ -180,7 +177,6 @@
             checked.nation = nation.join(",");
             data.search.tags.nation = checked.nation ? checked.nation : null;
 
-            dataLayer.push(data);
           });
           break;
       }
