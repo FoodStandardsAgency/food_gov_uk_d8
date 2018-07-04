@@ -1117,7 +1117,8 @@ input[type="password"] {
 /* @SEE drupal/web/modules/custom/fsa_es/js/result-copy-link.js */
 .copy-link__link {
   position: relative;
-  margin: 0 .5em;
+  display: block;
+  margin: 1em .5em 1em 1em;
   padding-right: 25px;
 
   &:after {

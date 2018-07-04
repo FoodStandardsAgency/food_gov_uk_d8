@@ -119,9 +119,7 @@ var config = {
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist')
-  },
-  plugins: [
-  ]
+  }
 };
 
 module.exports = (env, argv) => {
@@ -131,7 +129,8 @@ module.exports = (env, argv) => {
 
     config.plugins = [
       // Before building clean dist folder. After building copy CSS and JS files
-      // to styleguide directory for standalone serving.
+      // to styleguide directory for standalone serving. We also copy
+      // clipboard.min.js to dist for usage with libraries.yml.
       new FileManagerPlugin({
         onStart: [
           {
@@ -148,6 +147,7 @@ module.exports = (env, argv) => {
               { source: './dist/app.js', destination: './dist/styleguide/app.js' },
               { source: './dist/editor.js', destination: './dist/styleguide/editor.js' },
               { source: './dist/styleguide.js', destination: './dist/styleguide/styleguide.js' },
+              { source: './node_modules/clipboard/dist/clipboard.min.js', destination: './dist/clipboard.min.js' },
             ]
           }
         ]

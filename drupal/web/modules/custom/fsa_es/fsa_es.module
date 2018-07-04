@@ -62,10 +62,11 @@ function fsa_es_theme_suggestions_alter(array &$suggestions, array $variables, $
  * Adds "Copy results URL" link to search view exposed filters.
  */
 function fsa_es_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-  $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
-  if ($user->hasRole('editor') || $user->hasRole('advanced_editor')) {
-    $view_name_part = 'views-exposed-form-search-news-alerts';
-    if (substr($form['#id'], 0, strlen($view_name_part)) === $view_name_part) {
+  if (!\Drupal::currentUser()->isAnonymous()) {
+    $view_name_part_global = 'views-exposed-form-search-global';
+    $view_name_part_news = 'views-exposed-form-search-news';
+    if (substr($form['#id'], 0, strlen($view_name_part_global)) === $view_name_part_global ||
+      substr($form['#id'], 0, strlen($view_name_part_news)) === $view_name_part_news) {
       $form['#attached']['library'][] = 'fsa_es/result_copy_link';
     }
   }
