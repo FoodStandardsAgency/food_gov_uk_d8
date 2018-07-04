@@ -70,7 +70,9 @@ $settings['config_readonly_whitelist_patterns'] = [
   'config.fsa_consultations',
   'force_password_change.settings',
   'fsa_content_reminder.settings',
-  'key.key',
+  'key.*',
+  'encrypt.*',
+  'tfa.*',
 ];
 
 // Allow configuration changes via drush (command line).
