@@ -311,7 +311,7 @@ display:
           group_type: group
           admin_label: ''
           empty: false
-          content: 'Showing @start-@end of @total'
+          content: '<span class="search-result-page-count">Showing @start-@end of @total</span>'
           plugin_id: result
         area_text_custom:
           id: area_text_custom

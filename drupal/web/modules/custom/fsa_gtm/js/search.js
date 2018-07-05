@@ -10,6 +10,7 @@
       // Get view identifier.
       var viewName = drupalSettings.fsa_ratings.data_layer.view_id;
       var viewID = '#views-exposed-form-' + viewName.replace(/_/g, "-") + '-page-1';
+      console.log(viewName);
 
       // Define one of two data objects: simple and full (with tags property).
       var data = {
@@ -21,14 +22,25 @@
           "resultsPage": undefined
         }
       };
-      if (viewName != "search_global_all") {
+      if (!(viewName === "search_global_all" || viewName === "search_global_ratings_embed" || viewName === "search_news_alerts_all")) {
         data.search.tags = {};
       }
 
-      // Add category to data (coerced from views identifier).
-      var category = viewName.replace("search_global_", "");
-      if (category === "ratings") {
-        data.search.category = "hygiene-" + category;
+      // Extract category from views name and make namespace.
+      var category = null;
+      if (viewName.startsWith("search_global_")) {
+        category = viewName.replace("search_global_", "global__");
+      } else {
+        category = viewName.replace("search_news_alerts_", "news_alerts__");
+      }
+
+      // Improve namespace__category and add to data.
+      if (category === "global__ratings") {
+        // Replace ratings category with hygiene-ratings.
+        data.search.category = "global__hygiene_ratings";
+      } else if (category === "global__ratings_embed") {
+        // In decoupled mode view name is search_global_ratings_embed, rename for consistency.
+        data.search.category = "global__all";
       } else {
         data.search.category = category;
       }
@@ -64,9 +76,9 @@
       // Add hits and pages information to data from pager.
       function getDataHits() {
         data.search.results = '0';
-        if ($(".listing footer").length > 0) {
-          var footer = $(".listing footer").text().trim().split(" ");
-          var hits = footer[footer.length - 1];
+        if ($(".search-result-page-count").length > 0) {
+          var count = $(".search-result-page-count").text().trim().split(" ");
+          var hits = count[count.length - 1];
           if (hits) {data.search.results = hits;}
         }
       }
