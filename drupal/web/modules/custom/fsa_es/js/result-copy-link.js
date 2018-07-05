@@ -24,15 +24,17 @@
             text: function() {
               // Prepare link URL parts.
               var current_url = [location.protocol, '//', location.host, location.pathname].join('');
-              var current_query = [];
+              var current_query_parts = [];
 
               // Collect all checked checkboxes and add their names and values to current query.
               $('input.form-checkbox:checked', filters).each(function() {
-                current_query.push($(this).attr('name') + '=' + $(this).attr('value'));
+                current_query_parts.push($(this).attr('name') + '=' + $(this).attr('value'));
               });
 
-              if (current_query.length > 0) {
-                return current_url + '?' + current_query.join('&');
+              if (current_query_parts.length > 0) {
+                var current_query = '?' + current_query_parts.join('&');
+                current_query = encodeURI(current_query);
+                return current_url + current_query;
               }
               else {
                 return current_url;
