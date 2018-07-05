@@ -34,6 +34,7 @@ function fsa_gtm_views_pre_render(ViewExecutable $view) {
       '#attached' => [
         'library' => [
           'fsa_gtm/data_layer.search',
+          'fsa_gtm/data_layer.navref',
         ],
         'drupalSettings' => [
           'fsa_ratings' => [
@@ -105,68 +106,12 @@ function fsa_gtm_preprocess_node(&$variables) {
 
   // Append navrefs to search items.
   if ($variables['view_mode'] == 'search_result') {
-    $node = $variables['node'];
 
     // Maintain static variable to keep row count.
     static $counter = 0;
     $counter++;
 
-    // Use bundle name as default tag.
-    $tag = $node->bundle();
-
-    // Conditionally set tag.
-    switch ($node->getType()) {
-      case 'page':
-
-        // Use content type taxonomy to get tag.
-        $tid = ($node->hasField('field_content_type')) ? $node->get('field_content_type')->target_id : 0;
-        if (is_numeric($tid) && $term = Term::load($tid)) {
-          $tag = $term->label();
-        }
-        break;
-
-      case 'alert':
-        if ($node->hasField('field_alert_type')) {
-          $field = $node->field_alert_type->view([
-            'type' => 'fsa_alert_type_formatter',
-          ]);
-          if (isset($field[0]['#title'])) {
-            $tag = $field[0]['#title']->render();
-          }
-        }
-        break;
-
-      case 'consultation':
-        if ($node->hasField('field_consultations_type')) {
-          $field = $node->field_consultations_type->view([
-            'label' => 'hidden',
-            'settings' => [
-              'link' => FALSE,
-            ],
-          ]);
-          if (isset($field[0]['#plain_text'])) {
-            $tag = $field[0]['#plain_text'];
-          }
-        }
-        break;
-
-      case 'news':
-        $tag = (string) t('News');
-        break;
-
-      case 'research_project':
-        $tag = (string) t('Research project');
-        break;
-    }
-
-    // Slugify tag.
-    $tag = strtolower(Html::cleanCssIdentifier($tag));
-
-    // Set query parameter.
-    $query = implode("-", ['?navref=search', $tag, $counter]);
-
-    // Append query parameter to url.
-    $variables['url'] .= $query;
+    $variables['attributes']['data-search-result-counter'] = $counter;
   }
 
   // Append navrefs to related link promos.
