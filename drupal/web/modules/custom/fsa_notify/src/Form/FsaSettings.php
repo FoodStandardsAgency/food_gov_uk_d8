@@ -33,10 +33,11 @@ class FsaSettings extends FormBase {
     ];
 
     $keys = [
-      'fsa_notify.bearer_token' => t('Notify: Bearer token'),
-      'fsa_notify.api' => t('Notify API: API key'),
-      'fsa_notify.template_email' => t('Notify API: Template ID: Email'),
-      'fsa_notify.template_sms' => t('Notify API: Template ID: Sms'),
+      'fsa_notify.bearer_token' => t('Notify Bearer token'),
+      'fsa_notify.api' => t('Notify API key'),
+      'fsa_notify.template_email' => t('Notify Email template ID (English)'),
+      'fsa_notify.template_email_cy' => t('Notify Email template ID (Welsh)'),
+      'fsa_notify.template_sms' => t('Notify SMS template ID'),
     ];
 
     foreach ($keys as $key => $title) {
@@ -208,6 +209,7 @@ class FsaSettings extends FormBase {
       'fsa_notify.bearer_token',
       'fsa_notify.api',
       'fsa_notify.template_email',
+      'fsa_notify.template_email_cy',
       'fsa_notify.template_sms',
     ];
 

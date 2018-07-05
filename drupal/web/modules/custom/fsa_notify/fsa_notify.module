@@ -372,7 +372,7 @@ function fsa_notify_send(FsaNotifyStorage $storage, $notifier, $formatter, $type
   $batch = $storage->getAllType($type);
   foreach ($batch as $uid => $messages) {
     $user = User::load($uid);
-    $lang = $user->getPreferredLangcode(TRUE);
+    $lang = $user->getPreferredLangcode();
     $messages = $formatter->format($messages, $lang);
     foreach ($messages as $personalisation) {
       try {

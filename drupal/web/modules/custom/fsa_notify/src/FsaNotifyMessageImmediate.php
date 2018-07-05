@@ -29,13 +29,11 @@ class FsaNotifyMessageImmediate extends FsaNotifyMessage {
       $title = explode(PHP_EOL, $item);
       $title = $title[0];
 
-      // Variables for the Notify template.
+      // Gather alert content for the Notify template.
       $item = [
         'subject' => $this->subject->render() . ': ' . $title,
         'date' => $this->date,
         'alert_items' => preg_replace('/^/m', self::NOTIFY_TEMPLATE_MESSAGE_STYLE_PREFIX, $item),
-        'login' => $this->loginUrl,
-        'unsubscribe' => $this->unsubscribeUrl,
       ];
     }
 
@@ -46,7 +44,7 @@ class FsaNotifyMessageImmediate extends FsaNotifyMessage {
    * {@inheritdoc}
    */
   protected function theme($item, $lang) {
-    if ($item->hasTranslation($lang)) {
+    if ($item->getType() != 'alert' && $item->hasTranslation($lang)) {
       $item = $item->getTranslation($lang);
     }
 

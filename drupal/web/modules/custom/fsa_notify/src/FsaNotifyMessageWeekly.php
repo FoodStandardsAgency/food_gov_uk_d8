@@ -24,14 +24,12 @@ class FsaNotifyMessageWeekly extends FsaNotifyMessage {
 
     $items = implode("\n", $items);
 
-    // Variables for the Notify template.
+    // Gather alert content for the Notify template.
     $items = [
       [
         'subject' => $this->subject->render(),
         'date' => $this->date,
         'alert_items' => preg_replace('/^/m', self::NOTIFY_TEMPLATE_MESSAGE_STYLE_PREFIX, $items),
-        'login' => $this->loginUrl,
-        'unsubscribe' => $this->unsubscribeUrl,
       ],
     ];
 
@@ -42,7 +40,7 @@ class FsaNotifyMessageWeekly extends FsaNotifyMessage {
    * {@inheritdoc}
    */
   protected function theme($item, $lang) {
-    if ($item->hasTranslation($lang)) {
+    if ($item->getType() != 'alert' && $item->hasTranslation($lang)) {
       $item = $item->getTranslation($lang);
     }
 
