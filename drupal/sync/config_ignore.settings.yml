@@ -2,7 +2,7 @@ ignored_config_entities:
   0: system.site
   2: config.fsa_ratings
   4: config.fsa_consultations
-  6: fsa_content_reminder.settings
+  6: 'encrypt.*'
   8: 'embed.button.document:icon_uuid'
   10: 'embed.button.document:dependencies.content'
   12: 'embed.button.media_entity_embed:icon_uuid'
@@ -11,5 +11,7 @@ ignored_config_entities:
   18: 'embed.button.image:dependencies.content'
   20: 'embed.button.node:icon_uuid'
   22: 'embed.button.node:dependencies.content'
+  24: 'key.*'
+  26: 'tfa.*'
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
