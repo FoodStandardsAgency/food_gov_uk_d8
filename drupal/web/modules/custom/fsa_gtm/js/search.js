@@ -8,7 +8,8 @@
     attach: function (context, settings) {
 
       // Get view identifier.
-      var viewId = drupalSettings.fsa_ratings.data_layer.view_id;
+      var viewName = drupalSettings.fsa_ratings.data_layer.view_id;
+      var viewID = '#views-exposed-form-' + viewName.replace(/_/g, "-") + '-page-1';
 
       // Define one of two data objects: simple and full (with tags property).
       var data = {
@@ -20,200 +21,129 @@
           "resultsPage": undefined
         }
       };
-      if (viewId != "search_global_all") {
+      if (viewName != "search_global_all") {
         data.search.tags = {};
       }
 
       // Add category to data (coerced from views identifier).
-      var category = viewId.replace("search_global_", "");
-      if (category == "ratings") {
+      var category = viewName.replace("search_global_", "");
+      if (category === "ratings") {
         data.search.category = "hygiene-" + category;
-      }
-      else {
+      } else {
         data.search.category = category;
       }
 
-      // Push search term and pages information on page load response.
-      $(document, context).once("data-layer-page").each(function () {
-        pushSearchTerm();
-        pushHitsAndPages();
+      // Push updated dataLayer on page load.
+      $(document, context).once('search-page-load').each(function () {
+        getDataSearchTerm();
+        getDataHits();
+        getDataPages();
+        getDataFilters();
         dataLayer.push(data);
-        // console.log('push document');
         // console.log(data);
       });
 
-
-      // Push pager information on ajax response.
-      $(document, context).once("data-layer-ajax").ajaxSuccess(function() {
-        pushHitsAndPages();
-        dataLayer.push(data);
-        // console.log('push ajaxSuccess');
-        // console.log(data);
+      // Push updated dataLayer on ajax success.
+      $(document, context).once('search-ajax-load').ajaxSuccess(function(event, xhr, settings) {
+        if (settings.url.startsWith('/views')) {
+          getDataSearchTerm();
+          getDataHits();
+          getDataPages();
+          getDataFilters();
+          dataLayer.push(data);
+          // console.log(data);
+        }
       });
 
-      // Add all data when filters are used for any of five search tabs.
-      switch(viewId) {
-
-        // Guidance search.
-        case "search_global_guidance":
-
-          // Initialise tags property.
-          data.search.tags.guidanceAudience = null;
-          data.search.tags.nation = null;
-
-          // On change push to data layer.
-          $("#views-exposed-form-search-global-guidance-page-1", context).change(function () {
-
-            // Add search term to data
-            pushSearchTerm();
-
-            var checked = {};
-
-            // Select filtered values and add to data
-            var guidanceAudience = [];
-            $("[id^=edit-audience] .form-checkbox:checked").each(function() {
-              guidanceAudience.push($(this).val().toLowerCase());
-            });
-            checked.audience = guidanceAudience.join(",");
-            data.search.tags.guidanceAudience = checked.audience ? checked.audience : null;
-
-            var guidanceRegion = [];
-            $("[id^=edit-region] .form-checkbox:checked").each(function() {
-              guidanceRegion.push($(this).val().toLowerCase());
-            });
-            checked.region = guidanceRegion.join(",");
-            data.search.tags.nation = checked.region ? checked.region : null;
-
-          });
-          break;
-
-        // Ratings search - see comments for guidance search.
-        case "search_global_ratings":
-
-          data.search.tags.businessType = null;
-          data.search.tags.localAuthority = null;
-          data.search.tags.hygieneRating = null;
-          data.search.tags.hygieneStatus = null;
-
-          $("#views-exposed-form-search-global-ratings-page-1", context).change(function () {
-
-            pushSearchTerm();
-
-            var selected;
-
-            selected = $("[id^=edit-business-type] option:selected").val().toLowerCase();
-            data.search.tags.businessType = selected == "all" ? null : selected;
-
-            selected = $("[id^=edit-local-authority] option:selected").val().toLowerCase();
-            data.search.tags.localAuthority = selected == "all" ? null : selected;
-
-            var checked = {};
-
-            var hygieneRating = [];
-            $("[id^=edit-fhrs-rating-value] .form-checkbox:checked").each(function() {
-              hygieneRating.push($(this).val().toLowerCase());
-            });
-            checked.rating = hygieneRating.join(",");
-            data.search.tags.hygieneRating = checked.rating ? checked.rating : null;
-
-            var hygieneStatus = [];
-            $("[id^=edit-fhis-rating-value] .form-checkbox:checked").each(function() {
-              hygieneStatus.push($(this).val().toLowerCase());
-            });
-            checked.status = hygieneStatus.join(",");
-            data.search.tags.hygieneStatus = checked.status ? checked.status : null;
-
-          });
-          break;
-
-        // News & alerts search - see comments for guidance search.
-        case "search_global_news_and_alerts":
-
-          data.search.tags.newsType = null;
-          data.search.tags.nation = null;
-
-          $("#views-exposed-form-search-global-news-and-alerts-page-1", context).change(function () {
-
-            pushSearchTerm();
-
-            var checked = {};
-
-            var newsType = [];
-            $("[id^=edit-local-type] .form-checkbox:checked").each(function() {
-              newsType.push($(this).val().toLowerCase());
-            });
-            checked.type = newsType.join(",");
-            data.search.tags.newsType = checked.type ? checked.type : null;
-
-            var nation = [];
-            $("[id^=edit-region] .form-checkbox:checked").each(function() {
-              nation.push($(this).val().toLowerCase());
-            });
-            checked.nation = nation.join(",");
-            data.search.tags.nation = checked.nation ? checked.nation : null;
-
-          });
-          break;
-
-        // Research search - see comments for guidance search.
-        case "search_global_research":
-
-          data.search.tags.researchTopic = null;
-          data.search.tags.nation = null;
-
-          $("#views-exposed-form-search-global-research-page-1", context).change(function () {
-
-            pushSearchTerm();
-
-            var checked = {};
-
-            var researchTopic = [];
-            $("[id^=edit-topic] .form-checkbox:checked").each(function() {
-              researchTopic.push($(this).val().toLowerCase());
-            });
-            checked.topic = researchTopic.join(",");
-            data.search.tags.researchTopic = checked.topic ? checked.topic : null;
-
-            var nation = [];
-            $("[id^=edit-region] .form-checkbox:checked").each(function() {
-              nation.push($(this).val().toLowerCase());
-            });
-            checked.nation = nation.join(",");
-            data.search.tags.nation = checked.nation ? checked.nation : null;
-
-          });
-          break;
-      }
-
-      // Add search term data.
-      function pushSearchTerm() {
+      // Add search term data from search form.
+      function getDataSearchTerm() {
         var term = $("[id^=edit-keywords]").val();
         data.search.keywords = term ? term : undefined;
       }
 
       // Add hits and pages information to data from pager.
-      function pushHitsAndPages() {
+      function getDataHits() {
         data.search.results = '0';
         if ($(".listing footer").length > 0) {
-          // Add hits to data.
           var footer = $(".listing footer").text().trim().split(" ");
           var hits = footer[footer.length - 1];
-          if (hits) {
-            data.search.results = hits;
-          }
+          if (hits) {data.search.results = hits;}
         }
+      }
 
+      // Add hits and pages information to data from pager.
+      function getDataPages() {
         data.search.resultsPage = '1 of 1';
         if ($(".pager__items").length > 0) {
           // Add pages to data.
-          isActiveQuery = $(".pager__item.is-active a").attr("href");
-          lastQuery = $(".pager__items li:nth-last-of-type(1) a").attr("href");
+          var isActiveQuery = $(".pager__item.is-active a").attr("href");
+          var lastQuery = $(".pager__items li:nth-last-of-type(1) a").attr("href");
           if (isActiveQuery && lastQuery) {
             var pageNumber = parseInt(isActiveQuery.trim().split("=").pop()) + 1;
             var numberOfPages = parseInt(lastQuery.trim().split("=").pop()) + 1;
             data.search.resultsPage = pageNumber + " of " + numberOfPages;
           }
         }
+      }
+
+      // Add filter data from filters.
+      function getDataFilters() {
+
+        // Add all data when filters are used for any of five search tabs.
+        switch(viewName) {
+          case "search_global_guidance":
+            $(viewID, context).each(function () {
+              _checkboxes_to_data($("[id^=edit-audience]", this), 'guidanceAudience');
+              _checkboxes_to_data($("[id^=edit-region]", this), 'nation');
+            });
+            break;
+
+          case "search_global_ratings":
+            data.search.tags.businessType = null;
+            data.search.tags.localAuthority = null;
+
+            $(viewID, context).each(function () {
+              var selected;
+              selected = $("[id^=edit-business-type] option:selected", this).val().toLowerCase();
+              data.search.tags.businessType = selected == "all" ? null : selected;
+              selected = $("[id^=edit-local-authority] option:selected", this).val().toLowerCase();
+              data.search.tags.localAuthority = selected == "all" ? null : selected;
+
+              _checkboxes_to_data($("[id^=edit-fhrs-rating-value]", this), 'hygieneRating');
+              _checkboxes_to_data($("[id^=edit-fhis-rating-value]", this), 'hygieneStatus');
+            });
+            break;
+
+          case "search_global_news_and_alerts":
+            $(viewID, context).each(function () {
+              _checkboxes_to_data($("[id^=edit-type]", this), 'newsType');
+              _checkboxes_to_data($("[id^=edit-consultation-year]", this), 'consultationYear');
+              _checkboxes_to_data($("[id^=edit-consultation-status]", this), 'consultationStatus');
+              _checkboxes_to_data($("[id^=edit-consultation-responses]", this), 'consultationResponses');
+              _checkboxes_to_data($("[id^=edit-region]", this), 'nation');
+            });
+            break;
+
+          case "search_global_research":
+            $(viewID, context).each(function () {
+              _checkboxes_to_data($("[id^=edit-topic]", this), 'researchTopic');
+              _checkboxes_to_data($("[id^=edit-region]", this), 'nation');
+            });
+            break;
+        }
+      }
+
+      // Helper function to extract data from fieldset.
+      function _checkboxes_to_data(fieldset, tagName) {
+        var checked = {};
+        data.search.tags[tagName] = null;
+
+        var current = [];
+        $('.form-checkbox:checked', fieldset).each(function() {
+          current.push($(this).val().toLowerCase());
+        });
+        checked.current = current.join(",");
+        data.search.tags[tagName] = checked.current ? checked.current : null;
       }
     }
   };
