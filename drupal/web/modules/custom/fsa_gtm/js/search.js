@@ -38,6 +38,8 @@
         pushSearchTerm();
         pushHitsAndPages();
         dataLayer.push(data);
+        // console.log('push document');
+        // console.log(data);
       });
 
 
@@ -45,6 +47,8 @@
       $(document, context).once("data-layer-ajax").ajaxSuccess(function() {
         pushHitsAndPages();
         dataLayer.push(data);
+        // console.log('push ajaxSuccess');
+        // console.log(data);
       });
 
       // Add all data when filters are used for any of five search tabs.
@@ -189,21 +193,25 @@
 
       // Add hits and pages information to data from pager.
       function pushHitsAndPages() {
-        if ($(".pager__items")[0]) {
-
+        data.search.results = '0';
+        if ($(".listing footer").length > 0) {
           // Add hits to data.
-          var hits = $(".listing footer").text().trim().split(" ")[3].replace(/[^0-9]/, "");
+          var footer = $(".listing footer").text().trim().split(" ");
+          var hits = footer[footer.length - 1];
           if (hits) {
             data.search.results = hits;
           }
+        }
 
+        data.search.resultsPage = '1 of 1';
+        if ($(".pager__items").length > 0) {
           // Add pages to data.
           isActiveQuery = $(".pager__item.is-active a").attr("href");
           lastQuery = $(".pager__items li:nth-last-of-type(1) a").attr("href");
           if (isActiveQuery && lastQuery) {
-            var pageNumber = isActiveQuery.trim().split("=").pop();
-            var numberOfPages = lastQuery.trim().split("=").pop();
-            data.search.resultsPage = pageNumber + "-" + numberOfPages;
+            var pageNumber = parseInt(isActiveQuery.trim().split("=").pop()) + 1;
+            var numberOfPages = parseInt(lastQuery.trim().split("=").pop()) + 1;
+            data.search.resultsPage = pageNumber + " of " + numberOfPages;
           }
         }
       }
