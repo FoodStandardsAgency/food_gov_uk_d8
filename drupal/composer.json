@@ -38,7 +38,7 @@
         "drupal/extlink": "^1.0",
         "drupal/field_group": "^1.0@RC",
         "drupal/webform": "~5.0",
-        "drupal/paragraphs": "^1.1",
+        "drupal/paragraphs": "1.3.0",
         "drupal/anchor_link": "^1.5",
         "drupal/toc_filter": "^2.0@beta",
         "drupal/inline_entity_form": "^1.0@beta",
@@ -96,7 +96,8 @@
         "drupal/ga_login": "^1.0@alpha",
         "drupal/encrypt": "^3.0@alpha",
         "drupal/lockr": "^2.3",
-        "drupal/real_aes": "^2.1"
+        "drupal/real_aes": "^2.1",
+        "drupal/entity_reference_revisions": "1.5.0"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
