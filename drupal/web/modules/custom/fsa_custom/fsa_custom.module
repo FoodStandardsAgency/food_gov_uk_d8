@@ -23,7 +23,15 @@ function fsa_custom_language_switch_links_alter(array &$links, $type, $path) {
   if (isset($links['cy']['title'])) {
     $links['cy']['title'] = 'Cymraeg';
   }
-  return $links;
+
+  // Add class to language link if translation of content is not available.
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    foreach ($links as $langcode => $link) {
+      if ($langcode !== 'en' && $node && !array_key_exists($langcode, $node->getTranslationLanguages(TRUE))) {
+        $links[$langcode]['attributes']['class'][] = 'language-link--disabled';
+      }
+    }
+  }
 }
 
 /**
