@@ -178,24 +178,26 @@ abstract class FsaNotifyMessage {
    */
   public function alertSubscriptionCategory(Node $node) {
 
+    $lang = $node->language()->getId();
+
     if ($node->hasField('field_alert_type')) {
       switch ($node->field_alert_type->value) {
         case 'AA':
-          $category = t('Allergy alert');
+          $category = t('Allergy alert', [], ['langcode' => $lang]);
           break;
 
         default:
-          $category = t('Food alert');
+          $category = t('Food alert', [], ['langcode' => $lang]);
       }
     }
     else {
       switch ($node->getType()) {
         case 'news':
-          $category = t('News update');
+          $category = t('News update', [], ['langcode' => $lang]);
           break;
 
         case 'consultation':
-          $category = t('Consultation update');
+          $category = t('Consultation update', [], ['langcode' => $lang]);
           break;
 
         default:
