@@ -15,3 +15,12 @@ data_layer.search:
     - core/jquery.once
     - core/drupal
     - core/drupalSettings
+
+data_layer.navref:
+  js:
+    js/navref.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
+    - core/drupalSettings
