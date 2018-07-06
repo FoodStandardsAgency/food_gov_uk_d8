@@ -117,16 +117,16 @@ class FsaSettings extends FormBase {
 
     $form['last_sent']['daily'] = [
       '#type' => 'item',
-      '#title' => $this->t('Last daily digest @date', [
-        '@date' => $date_formatter->format(\Drupal::state()->get('fsa_notify.last_daily'), 'long'),
+      '#title' => $this->t('Last daily: @date', [
+        '@date' => $date_formatter->format(\Drupal::state()->get('fsa_notify.last_daily'), 'custom', 'l, d.m.Y - g:ia'),
       ]),
       '#weight' => $weight++,
     ];
 
     $form['last_sent']['weekly'] = [
       '#type' => 'item',
-      '#title' => $this->t('Last weekly digest @date', [
-        '@date' => $date_formatter->format(\Drupal::state()->get('fsa_notify.last_weekly'), 'long'),
+      '#title' => $this->t('Last weekly: @date', [
+        '@date' => $date_formatter->format(\Drupal::state()->get('fsa_notify.last_weekly'), 'custom', 'l, d.m.Y - g:ia'),
       ]),
       '#weight' => $weight++,
     ];
