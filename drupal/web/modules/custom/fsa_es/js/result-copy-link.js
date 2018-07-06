@@ -31,6 +31,11 @@
                 current_query_parts.push($(this).attr('name') + '=' + $(this).attr('value'));
               });
 
+              // Collect all selects and add their names and values to current query.
+              $('select', filters).each(function() {
+                current_query_parts.push($(this).attr('name') + '=' + $(this).val());
+              });
+
               if (current_query_parts.length > 0) {
                 var current_query = '?' + current_query_parts.join('&');
                 current_query = encodeURI(current_query);
