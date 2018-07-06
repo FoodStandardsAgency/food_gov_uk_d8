@@ -2,6 +2,7 @@
 
 namespace Drupal\fsa_es\Plugin\Normalizer;
 
+use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityManager;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\file\Entity\File;
@@ -32,6 +33,7 @@ class FsaRatingsNormalizer extends NormalizerBase {
    * FsaRatingsNormalizer constructor.
    *
    * @param \Drupal\Core\Entity\EntityManager $entityManager
+   *   Entity manager object.
    */
   public function __construct(EntityManager $entityManager) {
     parent::__construct($entityManager);
@@ -39,8 +41,6 @@ class FsaRatingsNormalizer extends NormalizerBase {
 
   /**
    * {@inheritdoc}
-   *
-   * @param \Drupal\fsa_ratings\Entity\FsaEstablishment $object
    */
   public function normalize($object, $format = NULL, array $context = []) {
     $parent_data = parent::normalize($object, $format, $context);
@@ -75,7 +75,7 @@ class FsaRatingsNormalizer extends NormalizerBase {
     }
 
     // Create edge n-grams of the postcode at normalization time.
-    $data['postcode_tokenized'] = strtolower($data['postcode'] . ' ' . implode(' ', $this->edgeNGram(str_replace(' ', '', $data['postcode']))));
+    $data['postcode_tokenized'] = strtolower($data['postcode'] . ' ' . implode(' ', $this->edgeNgram(str_replace(' ', '', $data['postcode']))));
 
     // Merge the values of values from name, address, postcode and LA into single field for more robust search querying.
     $data['combinedvalues'] = $data['name'] . ' ' . $data['address'] . ' ' . $data['postcode'] . ' ' . $data['localauthoritycode'][0]['label'];
@@ -95,12 +95,15 @@ class FsaRatingsNormalizer extends NormalizerBase {
   /**
    * Returns a list of edge n-grams of the value.
    *
-   * @param $value
-   * @param int $min_gram_length
+   * @param \Drupal\fsa_es\Plugin\Normalizer\string $value
+   *   Value to calculate n-grams for.
+   * @param \Drupal\fsa_es\Plugin\Normalizer\int $min_gram_length
+   *   N-gram length.
    *
    * @return array
+   *   Unique N-grams.
    */
-  protected function edgeNGram($value, $min_gram_length = 2) {
+  protected function edgeNgram(string $value, int $min_gram_length = 2) {
     $ngrams = [];
     $value = trim($value);
     $len = mb_strlen($value);
@@ -128,7 +131,7 @@ class FsaRatingsNormalizer extends NormalizerBase {
    *
    * @TODO: move this into a service class
    */
-  protected function getFieldValue($content_entity, $field_name) {
+  protected function getFieldValue(ContentEntityBase $content_entity, $field_name) {
     $ret = NULL;
 
     if (strpos($field_name, 'field_') !== 0 && strpos($field_name, 'user_') !== 0) {

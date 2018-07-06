@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.research_project.body
     - field.field.node.research_project.field_conducted_by
+    - field.field.node.research_project.field_content_reminder
     - field.field.node.research_project.field_date_range
     - field.field.node.research_project.field_document
     - field.field.node.research_project.field_intro
@@ -15,6 +16,7 @@ dependencies:
     - field.field.node.research_project.field_research_project_code
     - field.field.node.research_project.field_research_topics
     - field.field.node.research_project.field_results_available
+    - field.field.node.research_project.field_search_exclude
     - field.field.node.research_project.field_team_contacts
     - field.field.node.research_project.field_update_date
     - node.type.research_project
@@ -27,6 +29,7 @@ dependencies:
     - inline_entity_form
     - paragraphs
     - path
+    - scheduler
     - text
 third_party_settings:
   field_group:
@@ -53,7 +56,7 @@ third_party_settings:
       children:
         - field_related
       parent_name: ''
-      weight: 8
+      weight: 9
       format_type: tab
       format_settings:
         id: ''
@@ -62,6 +65,19 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Related
+    group_sea:
+      children:
+        - field_search_exclude
+      parent_name: ''
+      weight: 5
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: open
+        description: ''
+        required_fields: true
+      label: 'Search options'
 id: node.research_project.default
 targetEntityType: node
 bundle: research_project
@@ -69,7 +85,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 6
+    weight: 7
     settings:
       rows: 9
       summary_rows: 3
@@ -78,7 +94,7 @@ content:
     region: content
   created:
     type: datetime_timestamp
-    weight: 11
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -90,6 +106,12 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_content_reminder:
+    weight: 102
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
   field_date_range:
     weight: 38
     settings: {  }
@@ -97,7 +119,7 @@ content:
     type: daterange_default
     region: content
   field_document:
-    weight: 7
+    weight: 8
     settings:
       form_mode: default
       label_singular: ''
@@ -112,7 +134,7 @@ content:
     type: inline_entity_form_complex
     region: content
   field_intro:
-    weight: 5
+    weight: 6
     settings:
       rows: 3
       placeholder: ''
@@ -172,8 +194,15 @@ content:
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
+  field_search_exclude:
+    weight: 101
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   field_team_contacts:
-    weight: 9
+    weight: 10
     settings:
       match_operator: CONTAINS
       size: 60
@@ -196,13 +225,19 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 100
+    weight: 18
     settings: {  }
     region: content
     third_party_settings: {  }
   path:
     type: path
-    weight: 12
+    weight: 13
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -228,15 +263,21 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 10
+    weight: 11
     settings:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
     region: content
     third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   url_redirects:
-    weight: 50
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }

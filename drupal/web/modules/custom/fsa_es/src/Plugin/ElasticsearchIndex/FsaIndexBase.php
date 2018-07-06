@@ -10,38 +10,50 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Serializer\Serializer;
 
 /**
- * Class FsaIndexBase
+ * Class FsaIndexBase.
  */
 class FsaIndexBase extends ElasticsearchIndexBase {
 
   /**
    * @var \Drupal\Core\Language\LanguageManagerInterface
    */
-  protected $language_manager;
+  protected $languageManager;
 
   /**
-   * PageIndex constructor.
+   * FsaIndexBase constructor.
    *
    * @param array $configuration
+   *   Configuration data.
    * @param string $plugin_id
+   *   Plugin id.
    * @param mixed $plugin_definition
+   *   Plugin definition data.
    * @param \Elasticsearch\Client $client
+   *   ES client.
    * @param \Symfony\Component\Serializer\Serializer $serializer
+   *   Serializer object.
    * @param \Psr\Log\LoggerInterface $logger
+   *   Logger.
    * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
+   *   Language manager.
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, Client $client, Serializer $serializer, LoggerInterface $logger, LanguageManagerInterface $languageManager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $client, $serializer, $logger);
 
-    $this->language_manager = $languageManager;
+    $this->languageManager = $languageManager;
   }
 
   /**
    * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+   *   DI container.
    * @param array $configuration
+   *   Configuration data.
    * @param string $plugin_id
+   *   Plugin ID.
    * @param mixed $plugin_definition
+   *   Plugin definition data.
    * @return static
+   *   Runtime data instances from DI container.
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
@@ -78,7 +90,12 @@ class FsaIndexBase extends ElasticsearchIndexBase {
       if ($source->hasTranslation($langcode)) {
         $translation = $source->getTranslation($langcode);
 
-        if ($translation->isPublished()) {
+        $exclude = 0;
+        if ($translation->hasField('field_search_exclude')) {
+          $exclude = $translation->get('field_search_exclude')->getValue()[0]['value'];
+        }
+
+        if ($translation->isPublished() && !$exclude) {
           parent::index($translation);
         }
         else {
@@ -103,15 +120,17 @@ class FsaIndexBase extends ElasticsearchIndexBase {
   /**
    * Get the name of the language analyzer to be used for a given language code.
    *
-   * @param $langcode
+   * @param string $langcode
+   *   Two character language code.
    *
    * @return mixed|string
+   *   Language name.
    */
   protected function getLanguageName($langcode) {
     $language_analyzers = [
       'en' => 'english',
       // There's no language analyzer for Welsh implemented in ES.
-      // 'cy' => 'welsh',
+      // 'cy' => 'welsh'.
     ];
 
     if (isset($language_analyzers[$langcode])) {
@@ -141,9 +160,11 @@ class FsaIndexBase extends ElasticsearchIndexBase {
   /**
    * Returns filters.
    *
-   * @param $langcode
+   * @param string $langcode
+   *   Language code.
    *
    * @return array
+   *   Array of filters.
    *
    * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-lang-analyzer.html
    */
@@ -182,9 +203,11 @@ class FsaIndexBase extends ElasticsearchIndexBase {
   /**
    * Returns language analyzer.
    *
-   * @param $langcode
+   * @param string $langcode
+   *   Language code.
    *
    * @return array
+   *   Language analyzer data.
    *
    * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-lang-analyzer.html
    */
@@ -205,9 +228,9 @@ class FsaIndexBase extends ElasticsearchIndexBase {
           // generic stemmer, apostrophes will remain at the end of the tokens.
           // To test this out, try this:
           // curl 'http://localhost:9200/ratings-en/_analyze?pretty=true' -d '{
-          //     "field": "name",
-          //     "text" : "Santa'\''s will bring all the joy"
-          // }'
+          // "field": "name",
+          // "text" : "Santa'\''s will bring all the joy"
+          // }'.
           $language . '_possessive_stemmer',
           $language . '_stemmer',
           // Stopword filter goes last to remove tokens.
@@ -220,9 +243,11 @@ class FsaIndexBase extends ElasticsearchIndexBase {
   /**
    * Returns synonyms.
    *
-   * @param $langcode
+   * @param string $langcode
+   *   Language code.
    *
    * @return string
+   *   Text data from synonyms file.
    *
    * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-synonym-tokenfilter.html#_solr_synonyms
    */

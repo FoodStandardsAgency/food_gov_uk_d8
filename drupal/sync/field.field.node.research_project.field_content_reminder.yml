@@ -1,0 +1,24 @@
+uuid: 347d117f-9968-4766-8c63-625cb783fb64
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content_reminder
+    - node.type.research_project
+  module:
+    - datetime
+id: node.research_project.field_content_reminder
+field_name: field_content_reminder
+entity_type: node
+bundle: research_project
+label: 'Content reminder'
+description: 'Long-term review date: a reminder will be sent on this date to review, update or archive this content.<br />Reminder is sent only if the content is published.'
+required: false
+translatable: true
+default_value:
+  -
+    default_date_type: relative
+    default_date: '+1 year'
+default_value_callback: ''
+settings: {  }
+field_type: datetime

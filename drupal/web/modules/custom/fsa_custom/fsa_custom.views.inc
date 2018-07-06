@@ -26,12 +26,12 @@ function fsa_custom_views_data_alter(array &$data) {
  * Implements hook_views_data().
  */
 function fsa_custom_views_data() {
-  $data['views']['letters'] = array(
+  $data['views']['letters'] = [
     'title' => t('Letters'),
     'help' => t('Letter anchors for A-Z.'),
-    'area' => array(
+    'area' => [
       'id' => 'letters',
-    ),
-  );
+    ],
+  ];
   return $data;
 }

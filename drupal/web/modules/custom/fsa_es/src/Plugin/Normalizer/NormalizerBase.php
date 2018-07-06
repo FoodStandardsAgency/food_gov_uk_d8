@@ -5,17 +5,20 @@ namespace Drupal\fsa_es\Plugin\Normalizer;
 use Drupal\serialization\Normalizer\ContentEntityNormalizer;
 
 /**
- * Class NormalizerBase
+ * Class NormalizerBase.
  */
 class NormalizerBase extends ContentEntityNormalizer {
 
   /**
    * Prepares textual field (strips tags, removes newlines).
    *
-   * @param $string
-   * @param $allowed_tags
+   * @param string $string
+   *   Text to process.
+   * @param string $allowed_tags
+   *   Whitelist of permitted tags.
    *
    * @return string
+   *   Sanitised text string.
    */
   public function prepareTextualField($string, $allowed_tags = '') {
     $string = strip_tags($string, $allowed_tags);
@@ -27,8 +30,6 @@ class NormalizerBase extends ContentEntityNormalizer {
 
   /**
    * {@inheritdoc}
-   *
-   * @param \Drupal\node\NodeInterface $object
    */
   public function normalize($object, $format = NULL, array $context = []) {
     return [

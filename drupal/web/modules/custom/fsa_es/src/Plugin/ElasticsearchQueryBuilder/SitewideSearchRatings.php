@@ -16,16 +16,18 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class SitewideSearchRatings extends SitewideSearchBase {
 
-  /** @var \Drupal\fsa_es\SearchService $ratingsSearchService */
+  /**
+   * @var \Drupal\fsa_es\SearchService
+   */
   protected $ratingsSearchService;
 
-  /** @var null|array $aggregations */
+  /**
+   * @var null
+   */
   protected $aggregations = NULL;
 
   /**
    * {@inheritdoc}
-   *
-   * @param \Drupal\fsa_es\SearchService $ratings_search_service
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $language_manager, Client $elasticsearch_client, SearchService $ratings_search_service) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $language_manager, $elasticsearch_client);
@@ -71,7 +73,7 @@ class SitewideSearchRatings extends SitewideSearchBase {
     // Map filter keys to the keys mapped in $filter_map.
     foreach ($filter_map as $filter_key => $filter_value) {
       if (!empty($values[$filter_value])) {
-        $filters[$filter_key] = join(',', array_filter($values[$filter_value]));
+        $filters[$filter_key] = implode(',', array_filter($values[$filter_value]));
       }
     }
 
@@ -85,6 +87,7 @@ class SitewideSearchRatings extends SitewideSearchBase {
    * Returns rating aggregations.
    *
    * @return array
+   *   Array of rating aggregations.
    */
   public function getAggregations() {
     if (!is_array($this->aggregations)) {
@@ -98,6 +101,7 @@ class SitewideSearchRatings extends SitewideSearchBase {
    * Returns a list of business types.
    *
    * @return array
+   *   Array of business types.
    */
   public function getBusinessTypeFilterOptions() {
     $aggregations = $this->getAggregations();
@@ -108,6 +112,7 @@ class SitewideSearchRatings extends SitewideSearchBase {
    * Returns a list of local authorities.
    *
    * @return array
+   *   Array of local authorities.
    */
   public function getLocalAuthorityFilterOptions() {
     $aggregations = $this->getAggregations();
@@ -118,6 +123,7 @@ class SitewideSearchRatings extends SitewideSearchBase {
    * Returns a list of hygiene rating values for England, Northern Ireland, Wales.
    *
    * @return array
+   *   Array of hygiene rating values for England, Northern Ireland, Wales.
    */
   public function getFhrsRatingValueFilterOptions() {
     $aggregations = $this->getAggregations();
@@ -141,6 +147,7 @@ class SitewideSearchRatings extends SitewideSearchBase {
    * Returns a list of hygiene rating values for Scotland.
    *
    * @return array
+   *   Array of hygiene rating values for Scotland.
    */
   public function getFhisRatingValueFilterOptions() {
     $aggregations = $this->getAggregations();

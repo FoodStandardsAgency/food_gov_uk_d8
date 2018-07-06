@@ -11,13 +11,16 @@ namespace Drupal\fsa_es\Plugin\ElasticsearchQueryBuilder;
  */
 class SitewideSearchGuidance extends SitewideSearchBase {
 
-  /** @var null|array $aggregations */
+  /**
+   * @var null
+   */
   protected $aggregations = NULL;
 
   /**
    * Builds Elasticsearch base query.
    *
    * @return array
+   *   Elasticsearch base query.
    */
   public function buildBaseQuery() {
     // Get filter values.
@@ -99,6 +102,7 @@ class SitewideSearchGuidance extends SitewideSearchBase {
    * Returns rating aggregations.
    *
    * @return array
+   *   Array of rating aggregations.
    */
   public function getAggregations() {
     if (!is_array($this->aggregations)) {
@@ -154,6 +158,7 @@ class SitewideSearchGuidance extends SitewideSearchBase {
    * Returns a list of audiences.
    *
    * @return array
+   *   Array of audiences.
    */
   public function getAudienceFilterOptions() {
     $aggregations = $this->getAggregations();

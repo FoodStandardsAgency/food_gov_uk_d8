@@ -6,7 +6,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\WebformSubmissionInterface;
 
 /**
- * Class WebformSubmissionSendHanWebformSubmissionMessageHandlerdler
+ * Class WebformSubmissionSendHanWebformSubmissionMessageHandlerdler.
  */
 class WebformSubmissionMessageHandler {
 
@@ -18,7 +18,8 @@ class WebformSubmissionMessageHandler {
   /**
    * Sets message handler ID.
    *
-   * @param $message_handler_id
+   * @param string $message_handler_id
+   *   The message handler id.
    */
   public function setMessageHandlerId($message_handler_id) {
     $this->messageHandlerId = $message_handler_id;
@@ -28,7 +29,9 @@ class WebformSubmissionMessageHandler {
    * Sends the submission using given message handler.
    *
    * @param array $form
+   *   The form.
    * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The form state interface.
    */
   public function sendWebformSubmission(array $form, FormStateInterface $form_state) {
     $form_object = $form_state->getFormObject();
@@ -47,9 +50,12 @@ class WebformSubmissionMessageHandler {
    * Returns webform message handler.
    *
    * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
+   *   Webform submission interface.
    * @param string|null $handler
+   *   Optional handler reference.
    *
    * @return \Drupal\webform\Plugin\WebformHandlerInterface
+   *   The webform handler interface.
    */
   public function getMessageHandler(WebformSubmissionInterface $webform_submission, $handler = NULL) {
     $handler = $handler ? $handler : $this->messageHandlerId;
@@ -60,8 +66,10 @@ class WebformSubmissionMessageHandler {
    * Returns message configuration (to, from, subject, body).
    *
    * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
+   *   Webform submission interface.
    *
-   * @return array|bool
+   * @return array
+   *   Array of results.
    */
   public function getMessage(WebformSubmissionInterface $webform_submission) {
     $result = [];

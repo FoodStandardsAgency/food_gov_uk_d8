@@ -13,9 +13,9 @@ abstract class FsaNotifyMessage {
   const NOTIFY_TEMPLATE_MESSAGE_STYLE_PREFIX = '^ ';
 
   protected static $cache = [];
-  protected static $base_url;
-  protected static $login_url;
-  protected static $unsubscribe_url;
+  protected static $baseUrl;
+  protected static $loginUrl;
+  protected static $unsubscribeUrl;
   protected static $date;
 
   /**
@@ -28,29 +28,29 @@ abstract class FsaNotifyMessage {
     // created as http://default/....
     switch (getenv("WKV_SITE_ENV")) {
       case 'local':
-        $base_url = 'https://local.food.gov.uk';
+        $baseUrl = 'https://local.food.gov.uk';
         break;
 
       case 'development':
-        $base_url = 'https://fsa.dev.wunder.io';
+        $baseUrl = 'https://fsa.dev.wunder.io';
         break;
 
       case 'stage':
-        $base_url = 'https://fsa.stage.wunder.io';
+        $baseUrl = 'https://fsa.stage.wunder.io';
         break;
 
       default:
-        $base_url = 'https://www.food.gov.uk';
+        $baseUrl = 'https://www.food.gov.uk';
         break;
     }
 
-    $this->base_url = $base_url;
+    $this->baseUrl = $baseUrl;
 
     $url = Url::fromRoute('fsa_signin.default_controller_signInPage', []);
-    $this->login_url = $base_url . $url->toString();
+    $this->loginUrl = $baseUrl . $url->toString();
 
     $url = Url::fromRoute('fsa_signin.default_controller_unsubscribe', []);
-    $this->unsubscribe_url = $base_url . $url->toString();
+    $this->unsubscribeUrl = $baseUrl . $url->toString();
 
     $this->date = date('j F Y');
   }
@@ -104,7 +104,7 @@ abstract class FsaNotifyMessage {
     }
 
     $nid = $node->id();
-    $url = sprintf('%s%s/node/%d', $this->base_url, $prefix, $nid);
+    $url = sprintf('%s%s/node/%d', $this->baseUrl, $prefix, $nid);
     return $url;
   }
 
@@ -126,7 +126,7 @@ abstract class FsaNotifyMessage {
       $prefix = '/' . $lang;
     }
 
-    $url = $this->base_url . $prefix . \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $node->id(), $lang);
+    $url = $this->baseUrl . $prefix . \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $node->id(), $lang);
     return $url;
   }
 

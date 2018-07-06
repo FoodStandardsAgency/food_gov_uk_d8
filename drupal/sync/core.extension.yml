@@ -3,6 +3,7 @@ module:
   admin_toolbar: 0
   admin_toolbar_links_access_filter: 0
   admin_toolbar_tools: 0
+  administration_language_negotiation: 0
   anchor_link: 0
   automated_cron: 0
   better_exposed_filters: 0
@@ -58,6 +59,7 @@ module:
   fsa_contact_path: 0
   fsa_contactus: 0
   fsa_contactus_data: 0
+  fsa_content_reminder: 0
   fsa_custom: 0
   fsa_document_library: 0
   fsa_es: 0
@@ -124,6 +126,7 @@ module:
   recaptcha: 0
   redirect: 0
   role_delegation: 0
+  scheduler: 0
   search: 0
   seo_checklist: 0
   serialization: 0
