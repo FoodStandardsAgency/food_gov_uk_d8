@@ -29,9 +29,10 @@ class FsaNotifyAPIemail extends FsaNotifyAPI {
    */
   public function send(User $user, string $reference, array $personalisation) {
 
+    $user_lang = $user->getPreferredLangcode();
     $base_url = FsaNotifyMessage::baseUrl();
 
-    if ($user->getPreferredLangcode() == 'cy') {
+    if ($user_lang == 'cy') {
       $template_id = $this->templateIdCy;
       $base_url .= '/cy';
     }
@@ -40,6 +41,25 @@ class FsaNotifyAPIemail extends FsaNotifyAPI {
     }
 
     $email = $user->getEmail();
+
+    // Get email subject based on if immediate or digest emails.
+    switch ($reference) {
+      case 'immediate':
+        $subject = t('FSA Update: @title', ['@title' => $personalisation['subject']], ['langcode' => $user_lang])->render();
+        break;
+
+      case 'daily':
+        $subject = t('FSA daily digest update', ['langcode' => $user_lang])->render();
+        break;
+
+      case 'weekly':
+        $subject = t('FSA weekly digest update', ['langcode' => $user_lang])->render();
+        break;
+
+      default:
+        $subject = t('FSA Update', [], ['langcode' => $user_lang])->render();
+    }
+    $personalisation['subject'] = $subject;
 
     // Craft the login url.
     $personalisation['login'] = $base_url . Url::fromRoute('fsa_signin.default_controller_signInPage', [])->toString();
