@@ -33,6 +33,13 @@ class AlertPlainTextFormatter extends BasicStringFormatter {
   public function viewElements(FieldItemListInterface $items, $langcode) {
     $elements = [];
 
+    if ($items->getEntity()->hasField('field_alert_type')) {
+      $alert_type = $items->getEntity()->field_alert_type->value;
+    }
+    else {
+      $alert_type = FALSE;
+    }
+
     foreach ($items as $delta => $item) {
       $formatted = [];
       $lines = explode(PHP_EOL, $item->value);
@@ -44,7 +51,7 @@ class AlertPlainTextFormatter extends BasicStringFormatter {
           continue;
         }
         // If there is more then 1 line, first line should contain extra data.
-        if (count($lines) > 1 && $i == 0) {
+        if ($alert_type == 'AA' && count($lines) > 1 && $i == 0) {
           $label = $this->t('Allergen(s)');
           $formatted[] = '<p><b>' . $label . ': </b>' . $line . '</p>';
           $i++;
