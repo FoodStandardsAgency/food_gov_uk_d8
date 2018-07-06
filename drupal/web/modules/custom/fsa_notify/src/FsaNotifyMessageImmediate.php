@@ -7,14 +7,11 @@ namespace Drupal\fsa_notify;
  */
 class FsaNotifyMessageImmediate extends FsaNotifyMessage {
 
-  private $subject;
-
   /**
    * {@inheritdoc}
    */
   public function __construct() {
     parent::__construct();
-    $this->subject = t('FSA Update');
   }
 
   /**
@@ -31,7 +28,7 @@ class FsaNotifyMessageImmediate extends FsaNotifyMessage {
 
       // Gather alert content for the Notify template.
       $item = [
-        'subject' => $this->subject->render() . ': ' . $title,
+        'subject' => $title,
         'date' => $this->date,
         'alert_items' => preg_replace('/^/m', self::NOTIFY_TEMPLATE_MESSAGE_STYLE_PREFIX, $item),
       ];
