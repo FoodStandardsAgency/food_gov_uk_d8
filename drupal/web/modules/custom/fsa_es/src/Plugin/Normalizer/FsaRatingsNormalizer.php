@@ -2,6 +2,7 @@
 
 namespace Drupal\fsa_es\Plugin\Normalizer;
 
+use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityManager;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\file\Entity\File;
