@@ -45,7 +45,7 @@ class FsaNotifyAPIemail extends FsaNotifyAPI {
     // Get email subject based on if immediate or digest emails.
     switch ($reference) {
       case 'immediate':
-        $subject = t('FSA Update: @title', ['@title' => $personalisation['subject']], ['langcode' => $user_lang])->render();
+        $subject = t('FSA update: @title', ['@title' => $personalisation['subject']], ['langcode' => $user_lang])->render();
         break;
 
       case 'daily':
@@ -57,7 +57,7 @@ class FsaNotifyAPIemail extends FsaNotifyAPI {
         break;
 
       default:
-        $subject = t('FSA Update', [], ['langcode' => $user_lang])->render();
+        $subject = t('FSA update', [], ['langcode' => $user_lang])->render();
     }
     $personalisation['subject'] = $subject;
 
