@@ -25,6 +25,7 @@ class FsaSettings extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
 
     $weight = 0;
+    $date_formatter = \Drupal::service('date.formatter');
 
     $form['note'] = [
       '#type' => 'item',
@@ -103,7 +104,30 @@ class FsaSettings extends FormBase {
     ];
 
     $form['stats_heading'] = [
-      '#markup' => '<h2>' . t('User statistics') . '</h2>',
+      '#markup' => '<h2>' . t('Statistics') . '</h2>',
+      '#weight' => $weight++,
+    ];
+
+    $form['last_sent'] = [
+      '#type' => 'details',
+      '#open' => TRUE,
+      '#title' => t('Last sent digests'),
+      '#weight' => $weight++,
+    ];
+
+    $form['last_sent']['daily'] = [
+      '#type' => 'item',
+      '#title' => $this->t('Last daily digest @date', [
+        '@date' => $date_formatter->format(\Drupal::state()->get('fsa_notify.last_daily'), 'long'),
+      ]),
+      '#weight' => $weight++,
+    ];
+
+    $form['last_sent']['weekly'] = [
+      '#type' => 'item',
+      '#title' => $this->t('Last weekly digest @date', [
+        '@date' => $date_formatter->format(\Drupal::state()->get('fsa_notify.last_weekly'), 'long'),
+      ]),
       '#weight' => $weight++,
     ];
 
