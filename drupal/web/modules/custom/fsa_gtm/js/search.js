@@ -52,7 +52,7 @@
         getDataPages();
         getDataFilters();
         dataLayer.push(data);
-        // console.log(data);
+        console.log(data);
       });
 
       // Push updated dataLayer on ajax success.
@@ -63,7 +63,7 @@
           getDataPages();
           getDataFilters();
           dataLayer.push(data);
-          // console.log(data);
+          console.log(data);
         }
       });
 
@@ -139,6 +139,29 @@
           case "search_global_research":
             $(viewID, context).each(function () {
               _checkboxes_to_data($("[id^=edit-topic]", this), 'researchTopic');
+              _checkboxes_to_data($("[id^=edit-region]", this), 'nation');
+            });
+            break;
+
+          case "search_news_alerts_alerts":
+            $(viewID, context).each(function () {
+              _checkboxes_to_data($("[id^=edit-type]", this), 'alertType');
+              _checkboxes_to_data($("[id^=edit-region]", this), 'nation');
+            });
+            break;
+
+          case "search_news_alerts_news":
+            $(viewID, context).each(function () {
+              _checkboxes_to_data($("[id^=edit-region]", this), 'nation');
+            });
+            break;
+
+          case "search_news_alerts_consultations":
+            $(viewID, context).each(function () {
+              _checkboxes_to_data($("[id^=edit-type]", this), 'consultationType');
+              _checkboxes_to_data($("[id^=edit-status]", this), 'consultationStatus');
+              _checkboxes_to_data($("[id^=edit-responses]", this), 'consultationResponses');
+              _checkboxes_to_data($("[id^=edit-year]", this), 'consultationYear');
               _checkboxes_to_data($("[id^=edit-region]", this), 'nation');
             });
             break;
