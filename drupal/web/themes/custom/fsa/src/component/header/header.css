@@ -168,6 +168,17 @@
           }
         }
       }
+
+      .language-link.language-link--disabled {
+        font-weight: 400;
+        opacity: .5;
+        cursor: default;
+
+        &:hover,
+        &:focus {
+          text-decoration: none;
+        }
+      }
     }
   }
 }
