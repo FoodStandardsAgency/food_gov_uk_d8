@@ -100,12 +100,12 @@ class FsaNotifyStorageDBConnection extends FsaNotifyStorage {
         [':uid' => $uid],
         $options
       )->fetchCol('preferred_langcode');
+      $user_language = isset($user_language[0]) ? $user_language[0] : 'en';
 
       $delivery_methods = $connection->query('SELECT field_delivery_method_value FROM {user__field_delivery_method} WHERE entity_id = :entity_id',
         [':entity_id' => $uid],
         $options
       )->fetchAll();
-      $user_language = $user_language[0];
 
       foreach ($delivery_methods as $delivery_method) {
         if ($delivery_method->field_delivery_method_value == 'sms' && $node_type == 'alert') {
