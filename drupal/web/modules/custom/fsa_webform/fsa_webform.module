@@ -56,7 +56,7 @@ function fsa_webform_form_alter(&$form, FormStateInterface $form_state, $form_id
           ],
           '#weight' => 15,
           '#validate' => $form['actions']['submit']['#validate'],
-          '#submit' => array_merge($form['actions']['submit']['#submit'], [[$message_handler, 'sendWebformSubmission']])
+          '#submit' => array_merge($form['actions']['submit']['#submit'], [[$message_handler, 'sendWebformSubmission']]),
         ];
 
         // Remove preview/wizard prev/next buttons when in edit context.

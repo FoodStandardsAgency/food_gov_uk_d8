@@ -1,0 +1,5 @@
+name: FSA Content reminder
+type: module
+description: Sends content reminders to authors
+core: 8.x
+package: FSA

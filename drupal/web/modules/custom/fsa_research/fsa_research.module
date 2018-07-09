@@ -68,7 +68,7 @@ function fsa_research_views_pre_view(ViewExecutable $view, $display_id, array &$
       }
 
       // Append title of listing to the views header.
-      $options = array(
+      $options = [
         'id' => 'area_text_custom',
         'table' => 'views',
         'field' => 'area_text_custom',
@@ -79,7 +79,7 @@ function fsa_research_views_pre_view(ViewExecutable $view, $display_id, array &$
         'tokenize' => FALSE,
         'content' => '<h3>' . $title . '</h3>',
         'plugin_id' => 'text_custom',
-      );
+      ];
       $view->setHandler('page', 'header', 'area_text_custom', $options);
     }
   }

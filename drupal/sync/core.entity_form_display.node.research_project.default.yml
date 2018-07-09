@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.research_project.body
     - field.field.node.research_project.field_conducted_by
+    - field.field.node.research_project.field_content_reminder
     - field.field.node.research_project.field_date_range
     - field.field.node.research_project.field_document
     - field.field.node.research_project.field_intro
@@ -28,6 +29,7 @@ dependencies:
     - inline_entity_form
     - paragraphs
     - path
+    - scheduler
     - text
 third_party_settings:
   field_group:
@@ -103,6 +105,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_content_reminder:
+    weight: 102
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
     region: content
   field_date_range:
     weight: 38

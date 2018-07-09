@@ -1,8 +1,9 @@
 <?php
 
-namespace Drupal\fsa_custom\Plugin\views\area;
+namespace Drupal\fsa_topic_listing\Plugin\views\area;
 
 use Drupal\Core\Link;
+use Drupal\taxonomy\Entity\Term;
 use Drupal\views\Plugin\views\area\AreaPluginBase;
 use Drupal\Core\Url;
 
@@ -21,13 +22,23 @@ class Letters extends AreaPluginBase {
   public function render($empty = FALSE) {
     if (!$empty || !empty($this->options['empty'])) {
 
-      $vocab = \Drupal::entityTypeManager()
-        ->getStorage('taxonomy_term')
-        ->loadTree('topic', 0, 3);
+      $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
+      // Query the topic terms.
+      $query = \Drupal::entityQuery('taxonomy_term');
+      $query->condition('vid', 'topic');
+      $terms = Term::loadMultiple($query->execute());
+
+      // Loop through (translated) term names and prepare alphabet listing.
       $name_first_chars = [];
-      foreach ($vocab as $term) {
-        $name_first_chars[] = strtoupper(substr($term->name, 0, 1));
+      foreach ($terms as $term) {
+        if ($term->hasTranslation($language)) {
+          $translated_term = \Drupal::service('entity.repository')->getTranslationFromContext($term, $language);
+          $name_first_chars[$term->id()] = strtoupper(substr($translated_term->getName(), 0, 1));
+        }
       }
+
+      // Sort the first letters.
       $chars = array_unique($name_first_chars);
       sort($chars);
 

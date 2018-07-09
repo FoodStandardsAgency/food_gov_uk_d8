@@ -3,6 +3,8 @@
 namespace Drupal\fsa_notify;
 
 use Alphagov\Notifications\Exception\ApiException;
+use Alphagov\Notifications\Client as AlphaGovClient;
+use Http\Adapter\Guzzle6\Client as GuzzleClient;
 use Drupal\user\Entity\User;
 
 /**
@@ -13,7 +15,7 @@ use Drupal\user\Entity\User;
 abstract class FsaNotifyAPI {
 
   protected $api = NULL;
-  protected $template_id = NULL;
+  protected $templateId = NULL;
 
   /**
    * {@inheritdoc}
@@ -29,9 +31,9 @@ abstract class FsaNotifyAPI {
 
     try {
       $msg = sprintf('Notify API: new \Alphagov\Notifications\Client(%s)', $api_key);
-      $this->api = new \Alphagov\Notifications\Client([
+      $this->api = new AlphaGovClient([
         'apiKey' => $api_key,
-        'httpClient' => new \Http\Adapter\Guzzle6\Client,
+        'httpClient' => new GuzzleClient(),
       ]);
     }
     catch (ApiException $e) {
@@ -44,8 +46,8 @@ abstract class FsaNotifyAPI {
     }
 
     $state_key = $template_state_key;
-    $this->template_id = \Drupal::state()->get($state_key);
-    if (empty($this->template_id)) {
+    $this->templateId = \Drupal::state()->get($state_key);
+    if (empty($this->templateId)) {
       $msg = sprintf('Notify API Template ID not specified in state "%s".', $state_key);
       $this->logAndException($msg);
     }

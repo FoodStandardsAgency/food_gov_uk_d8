@@ -28,10 +28,13 @@ class RatingsSearch extends ControllerBase {
   /**
    * {@inheritdoc}
    *
-   * @var \Drupal\fsa_es\SearchService */
+   * @var \Drupal\fsa_es\SearchService
+   */
   protected $searchService;
 
-  /** @var \Drupal\Core\Language\LanguageManagerInterface $languageManager */
+  /**
+   * @var \Drupal\Core\Language\LanguageManagerInterface
+   */
   protected $languageManager;
 
   /**
@@ -48,7 +51,9 @@ class RatingsSearch extends ControllerBase {
    * RatingsSearch constructor.
    *
    * @param \Drupal\fsa_es\SearchService $searchService
+   *   Search Service object.
    * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
+   *   Language manager interface.
    */
   public function __construct(SearchService $searchService, LanguageManagerInterface $language_manager) {
     $this->searchService = $searchService;
@@ -172,23 +177,23 @@ class RatingsSearch extends ControllerBase {
       '#form' => \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchForm'),
       '#sort_form' => $sort_form,
       '#ratings_info_content' => $ratings_info,
-    // Actual result items.
+      // Actual result items.
       '#items' => $items,
-    // Aggregation results, list of categories of the result items.
+      // Aggregation results, list of categories of the result items.
       '#categories' => $categories,
-    // Keywords given in the URL.
+      // Keywords given in the URL.
       '#keywords' => $keywords,
-    // Meaningful params (which have content associated)
+      // Meaningful params (which have content associated)
       '#available_filters' => $available_filters,
-    // Filters given by the user and used for the querying.
+      // Filters given by the user and used for the querying.
       '#applied_filters' => $filters,
-    // Pager information.
+      // Pager information.
       '#pager_info' => $pager_info,
-    // Total count of the results.
+      // Total count of the results.
       '#hits_total' => $hits_total,
-    // Item count to be shown now.
+      // Item count to be shown now.
       '#hits_shown' => count($items),
-      //'#load_more' => \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchLoadMore'),
+      // '#load_more' => \Drupal::formBuilder()->getForm('Drupal\fsa_ratings\Form\FsaRatingsSearchLoadMore').
     ];
 
     // Append the pager.

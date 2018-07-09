@@ -4,3 +4,11 @@ result_totals:
     js/result-totals.js: {}
   dependencies:
     - core/drupal
+
+result_copy_link:
+  version: 1.x
+  js:
+    js/result-copy-link.js: {}
+  dependencies:
+    - core/drupal
+    - fsa/clipboard

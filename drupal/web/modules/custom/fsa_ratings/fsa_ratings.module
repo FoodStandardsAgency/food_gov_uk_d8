@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * FSA ratings custom module.
+ */
+
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Component\Utility\Html;
 use Drupal\fsa_ratings\Controller\RatingsHelper;
