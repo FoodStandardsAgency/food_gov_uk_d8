@@ -96,21 +96,21 @@ class FsaNotifyStorageDBConnection extends FsaNotifyStorage {
     foreach ($uids as $uid) {
 
       // Get user language to store on the cache tables.
-      $user_language = $connection->query('SELECT preferred_langcode FROM users_field_data WHERE uid = :uid',
+      $user_language = $connection->query('SELECT preferred_langcode FROM {users_field_data} WHERE uid = :uid',
         [':uid' => $uid],
         $options
       )->fetchCol('preferred_langcode');
+      $user_language = isset($user_language[0]) ? $user_language[0] : 'en';
 
-      $delivery_methods = $connection->query('SELECT field_delivery_method_value FROM user__field_delivery_method WHERE entity_id = :entity_id',
+      $delivery_methods = $connection->query('SELECT field_delivery_method_value FROM {user__field_delivery_method} WHERE entity_id = :entity_id',
         [':entity_id' => $uid],
         $options
       )->fetchAll();
-      $user_language = $user_language[0];
 
       foreach ($delivery_methods as $delivery_method) {
         if ($delivery_method->field_delivery_method_value == 'sms' && $node_type == 'alert') {
 
-          $delta = $connection->query('select max(delta) as max_delta from user__field_notification_cache_sms where entity_id = :entity_id AND langcode = :langcode',
+          $delta = $connection->query('select max(delta) as max_delta from {user__field_notification_cache_sms} where entity_id = :entity_id AND langcode = :langcode',
             [
               ':entity_id' => $uid,
               ':langcode' => $user_language,
@@ -125,7 +125,7 @@ class FsaNotifyStorageDBConnection extends FsaNotifyStorage {
             $delta++;
           }
 
-          $connection->query("INSERT INTO user__field_notification_cache_sms (bundle, deleted, entity_id, revision_id, langcode, delta, field_notification_cache_sms_target_id) values ('user', 0, :entity_id, :entity_id, :langcode, :delta, :nid)",
+          $connection->query("INSERT INTO {user__field_notification_cache_sms} (bundle, deleted, entity_id, revision_id, langcode, delta, field_notification_cache_sms_target_id) values ('user', 0, :entity_id, :entity_id, :langcode, :delta, :nid)",
             [
               ':delta' => $delta,
               ':entity_id' => $uid,
@@ -136,7 +136,7 @@ class FsaNotifyStorageDBConnection extends FsaNotifyStorage {
           );
         }
         elseif ($delivery_method->field_delivery_method_value == 'email') {
-          $delta = $connection->query('select max(delta) as max_delta from user__field_notification_cache where entity_id = :entity_id',
+          $delta = $connection->query('select max(delta) as max_delta from {user__field_notification_cache} where entity_id = :entity_id',
             [':entity_id' => $uid],
             $options
           )->fetchColumn();
@@ -148,7 +148,7 @@ class FsaNotifyStorageDBConnection extends FsaNotifyStorage {
             $delta++;
           }
 
-          $connection->query("INSERT INTO user__field_notification_cache (bundle, deleted, entity_id, revision_id, langcode, delta, field_notification_cache_target_id) values ('user', 0, :entity_id, :entity_id, :langcode, :delta, :nid)",
+          $connection->query("INSERT INTO {user__field_notification_cache} (bundle, deleted, entity_id, revision_id, langcode, delta, field_notification_cache_target_id) values ('user', 0, :entity_id, :entity_id, :langcode, :delta, :nid)",
             [
               ':delta' => $delta,
               ':entity_id' => $uid,

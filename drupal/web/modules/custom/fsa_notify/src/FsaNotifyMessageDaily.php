@@ -47,7 +47,7 @@ class FsaNotifyMessageDaily extends FsaNotifyMessage {
     $line2 = $item->getTitle();
 
     $link = $this->urlAlias($item, $lang);
-    $more = t('Read more');
+    $more = FsaNotifyMessage::ST_READMORE;
     $line3 = sprintf('%s: %s', $more, $link);
 
     $item = "$line1\n$line2\n$line3\n";

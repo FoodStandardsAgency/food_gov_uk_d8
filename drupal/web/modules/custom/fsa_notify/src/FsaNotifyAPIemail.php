@@ -42,6 +42,10 @@ class FsaNotifyAPIemail extends FsaNotifyAPI {
 
     $email = $user->getEmail();
 
+    // Convert placeholder strings to respective translations as per language.
+    $personalisation['subject'] = FsaNotifyMessage::translatePlaceholders($personalisation['subject'], $user_lang);
+    $personalisation['alert_items'] = FsaNotifyMessage::translatePlaceholders($personalisation['alert_items'], $user_lang);
+
     // Get email subject based on if immediate or digest emails.
     switch ($reference) {
       case 'immediate':

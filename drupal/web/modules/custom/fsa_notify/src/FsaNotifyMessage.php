@@ -10,10 +10,18 @@ use Drupal\node\Entity\Node;
  */
 abstract class FsaNotifyMessage {
 
-  const NOTIFY_TEMPLATE_MESSAGE_STYLE_PREFIX = '^ ';
-
   protected static $cache = [];
   protected static $date;
+
+  const NOTIFY_TEMPLATE_MESSAGE_STYLE_PREFIX = '^ ';
+
+  // Define plaheholder names for custom strings in alert_items content that
+  // should be converted into translated strings for user language.
+  const ST_READMORE = '[READMORE]';
+  const ST_ALL_CAT_AA = '[CAT_AA]';
+  const ST_ALL_CAT_FA = '[CAT_FA]';
+  const ST_TYPE_CAT_NU = '[CAT_NU]';
+  const ST_TYPE_CAT_CU = '[CAT_CU]';
 
   /**
    * Construct the object.
@@ -183,21 +191,21 @@ abstract class FsaNotifyMessage {
     if ($node->hasField('field_alert_type')) {
       switch ($node->field_alert_type->value) {
         case 'AA':
-          $category = t('Allergy alert', [], ['langcode' => $lang]);
+          $category = self::ST_ALL_CAT_AA;
           break;
 
         default:
-          $category = t('Food alert', [], ['langcode' => $lang]);
+          $category = self::ST_ALL_CAT_FA;
       }
     }
     else {
       switch ($node->getType()) {
         case 'news':
-          $category = t('News update', [], ['langcode' => $lang]);
+          $category = self::ST_TYPE_CAT_NU;
           break;
 
         case 'consultation':
-          $category = t('Consultation update', [], ['langcode' => $lang]);
+          $category = self::ST_TYPE_CAT_CU;
           break;
 
         default:
@@ -208,6 +216,75 @@ abstract class FsaNotifyMessage {
     }
 
     return $category;
+  }
+
+  /**
+   * Converts placeholder string to a translated text.
+   *
+   * @param string $string
+   *   The string to replace and translate.
+   * @param string $lang
+   *   Language code to translate the string to.
+   *
+   * @return \Drupal\Core\StringTranslation\TranslatableMarkup
+   *   The replaced string in users preferred language.
+   */
+  public static function convertPlaceholder($string, $lang) {
+
+    switch ($string) {
+      case self::ST_READMORE:
+        $string = t('Read more', [], ['langcode' => $lang]);
+        break;
+
+      case self::ST_ALL_CAT_AA:
+        $string = t('Allergy alert', [], ['langcode' => $lang]);
+        break;
+
+      case self::ST_ALL_CAT_FA:
+        $string = t('Food alert', [], ['langcode' => $lang]);
+        break;
+
+      case self::ST_TYPE_CAT_NU:
+        $string = t('News update', [], ['langcode' => $lang]);
+        break;
+
+      case self::ST_TYPE_CAT_CU:
+        $string = t('Consultation update', [], ['langcode' => $lang]);
+        break;
+    }
+
+    return $string;
+
+  }
+
+  /**
+   * Translates placeholder strings from a text.
+   *
+   * @param string $text
+   *   Text to replace the placeholders from.
+   * @param string $lang
+   *   Language to return the replaced strings in.
+   *
+   * @return mixed
+   *   Translated text.
+   */
+  public static function translatePlaceholders($text, $lang) {
+
+    $st_search = [
+      self::ST_READMORE,
+      self::ST_ALL_CAT_AA,
+      self::ST_ALL_CAT_FA,
+      self::ST_TYPE_CAT_NU,
+      self::ST_TYPE_CAT_CU,
+    ];
+    $st_replace = [
+      self::convertPlaceholder(self::ST_READMORE, $lang),
+      self::convertPlaceholder(self::ST_ALL_CAT_AA, $lang),
+      self::convertPlaceholder(self::ST_ALL_CAT_FA, $lang),
+      self::convertPlaceholder(self::ST_TYPE_CAT_NU, $lang),
+      self::convertPlaceholder(self::ST_TYPE_CAT_CU, $lang),
+    ];
+    return str_replace($st_search, $st_replace, $text);
   }
 
 }
