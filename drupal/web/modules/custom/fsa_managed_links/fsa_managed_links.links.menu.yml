@@ -1,11 +1,10 @@
 
 # FSA Managed Link menu items definition
 entity.fsa_managed_link.collection:
-  title: 'FSA Managed Link list'
+  title: 'FSA Managed Links'
   route_name: entity.fsa_managed_link.collection
   description: 'List FSA Managed Links'
-  parent: system.admin_structure
-  weight: 100
+  parent: system.admin_content
 
 fsa_managed_link.admin.structure.settings:
   title: 'FSA Managed Link settings'
