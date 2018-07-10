@@ -81,17 +81,11 @@ class FsaManagedLinkLinkitFilter extends FilterBase implements ContainerFactoryP
       $dom = Html::load($text);
       $xpath = new \DOMXPath($dom);
 
-      // TODO: enhance query to target *only* managed_link types.
-      foreach ($xpath->query('//a[@data-entity-type and @data-entity-uuid]') as $element) {
+      foreach ($xpath->query('//a[@data-entity-type="fsa_managed_link" and @data-entity-uuid]') as $element) {
         /** @var \DOMElement $element */
         try {
           // Load the appropriate translation of the linked entity.
           $entity_type = $element->getAttribute('data-entity-type');
-
-          if ($entity_type != 'fsa_managed_link') {
-            continue;
-          }
-
           $uuid = $element->getAttribute('data-entity-uuid');
 
           $entity = $this->entityRepository->loadEntityByUuid($entity_type, $uuid);
@@ -99,13 +93,7 @@ class FsaManagedLinkLinkitFilter extends FilterBase implements ContainerFactoryP
 
             $entity = $this->entityRepository->getTranslationFromContext($entity, $langcode);
             $link_url = $entity->field_managed_link_url->uri;
-
-            // Parse link href as url, extract query and fragment from it.
-            $href_url = parse_url($element->getAttribute('href'));
-            $anchor = empty($href_url["fragment"]) ? '' : '#' . $href_url["fragment"];
-            $query = empty($href_url["query"]) ? '' : '?' . $href_url["query"];
-
-            $element->setAttribute('href', $link_url . $query . $anchor);
+            $element->setAttribute('href', $link_url);
             $access = $entity->access('view', NULL, TRUE);
 
             // Set the appropriate title attribute.
