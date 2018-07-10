@@ -40,33 +40,6 @@ function fsa_notify_preprocess_page(&$variables) {
 }
 
 /**
- * Implements hook_form_user_form_alter().
- */
-function fsa_notify_form_user_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  $form['field_notification_sms']['#element_validate'][] = 'fsa_notify_validate';
-}
-
-/**
- * Data integrity: require phone number if user chooses sms method.
- */
-function fsa_notify_validate(&$form, FormStateInterface $form_state) {
-
-  $field = 'field_notification_method';
-  $method = $form_state->getValue($field);
-  if (empty($method[0]['value']) || $method[0]['value'] != 'sms') {
-    return;
-  }
-
-  $field = 'field_notification_sms';
-  $sms = $form_state->getValue($field);
-  if (!empty($sms[0]['value'])) {
-    return;
-  }
-
-  $form_state->setErrorByName($field, t('If "Notification method" is SMS then "Notification SMS" is required.'));
-}
-
-/**
  * Collect inserted alerts.
  */
 function fsa_notify_entity_insert(EntityInterface $entity) {
