@@ -62,14 +62,14 @@ dom_id ? 'js-view-dom-id-' ~ dom_id,
   </div>
 
   {{ empty }}
+  {{ pager }}
 
   {{ attachment_after }}
   {{ more }}
 
   {% if footer %}
-    <footer class="ratings__footer">
-      <p>{{ footer }}</p>
-      {{ pager }}
+    <footer>
+      {{ footer }}
     </footer>
   {% endif %}
 
