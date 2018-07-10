@@ -7,8 +7,10 @@
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\fsa_notify\FsaNotifyAPI;
 use Drupal\fsa_notify\FsaNotifyAPIemail;
 use Drupal\fsa_notify\FsaNotifyAPIsms;
+use Drupal\fsa_notify\FsaNotifyMessage;
 use Drupal\fsa_notify\FsaNotifyMessageDaily;
 use Drupal\fsa_notify\FsaNotifyMessageImmediate;
 use Drupal\fsa_notify\FsaNotifyMessageSms;
@@ -360,14 +362,15 @@ function fsa_notify_queue_process() {
  *
  * @param \Drupal\fsa_notify\FsaNotifyStorage $storage
  *   FsaNotifyStorage object.
- * @param object $notifier
+ * @param \Drupal\fsa_notify\FsaNotifyAPI $notifier
  *   Notifier object.
- * @param object $formatter
+ * @param \Drupal\fsa_notify\FsaNotifyMessage $formatter
  *   Notifymessage formatter object.
  * @param string $type
- *   Type of send (SMS/immediate/digest).
+ *   Type of send (sms|immediate|daily|weekly).
  */
-function fsa_notify_send(FsaNotifyStorage $storage, $notifier, $formatter, $type) {
+function fsa_notify_send(FsaNotifyStorage $storage, FsaNotifyAPI $notifier, FsaNotifyMessage $formatter, $type) {
+  drush_print('Sending: ' . $type);
   fsa_notify_timer('start', $type);
   $batch = $storage->getAllType($type);
   foreach ($batch as $uid => $messages) {
@@ -396,7 +399,7 @@ function fsa_notify_send(FsaNotifyStorage $storage, $notifier, $formatter, $type
  * @param string $event
  *   Type of the event (start|count|stop).
  * @param string $type
- *   The type (SMS/immediate/digest).
+ *   Type of send (queue|sms|immediate|daily|weekly).
  */
 function fsa_notify_timer($event, $type) {
 
