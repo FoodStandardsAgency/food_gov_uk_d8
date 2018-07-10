@@ -3,7 +3,7 @@
 entity.fsa_managed_link.collection:
   title: 'FSA Managed Link list'
   route_name: entity.fsa_managed_link.collection
-  description: 'List FSA Managed Link entities'
+  description: 'List FSA Managed Links'
   parent: system.admin_structure
   weight: 100
 
