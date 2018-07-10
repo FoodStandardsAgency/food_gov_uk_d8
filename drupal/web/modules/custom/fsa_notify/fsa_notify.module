@@ -370,7 +370,6 @@ function fsa_notify_queue_process() {
  *   Type of send (sms|immediate|daily|weekly).
  */
 function fsa_notify_send(FsaNotifyStorage $storage, FsaNotifyAPI $notifier, FsaNotifyMessage $formatter, $type) {
-  drush_print('Sending: ' . $type);
   fsa_notify_timer('start', $type);
   $batch = $storage->getAllType($type);
   foreach ($batch as $uid => $messages) {
