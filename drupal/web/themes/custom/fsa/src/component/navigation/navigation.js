@@ -141,14 +141,20 @@ function navigation () {
     },
 
     siblings: {
-      prev: function(item, selector) {
+      prev: function(item, selector, recursive) {
         if (item && item.previousElementSibling && item.previousElementSibling.matches(selector)) {
           return item.previousElementSibling
         }
+        else if (recursive && item && item.previousElementSibling) {
+          return traversing.siblings.prev(item.previousElementSibling, selector, recursive)
+        }
       },
-      next: function (item, selector) {
+      next: function (item, selector, recursive) {
         if (item && item.nextElementSibling && item.nextElementSibling.matches(selector)) {
           return item.nextElementSibling
+        }
+        else if (recursive && item && item.nextElementSibling) {
+          return traversing.siblings.next(item.nextElementSibling, selector, recursive)
         }
       }
     }
@@ -399,7 +405,10 @@ function navigation () {
     // Items with children
     navigationParentItemsArray.forEach((element) => {
       // Content element
-      const content = element.nextElementSibling
+      const content = traversing.siblings.next(element, '.navigation__menu', true)
+
+      // Keyboard support?
+      const assistiveButton = [...element.classList].indexOf('js-nav-item-with-child--assistive') !== -1
 
       // Add click listener
       element.addEventListener('click', function (e) {
@@ -409,6 +418,9 @@ function navigation () {
           state.on({element: content, type: 'content'}, 'is-open')
           content.children[0].children[0].focus()
           navigationElementArray[0].classList.add('has-open-submenu')
+        }
+        else if (assistiveButton) {
+          state.toggle(element, content, 'is-open')
         }
       })
 
@@ -565,12 +577,17 @@ function navigation () {
 
       // Set state off from link items with children
       navigationParentItemsArray.forEach((element) => {
-        // Add tabindex
-        element.setAttribute('tabindex', '0')
+        // Keyboard support?
+        const assistiveButton = [...element.classList].indexOf('js-nav-item-with-child--assistive') !== -1
+
+        if (!assistiveButton) {
+          // Add tabindex
+          element.setAttribute('tabindex', '0')
+        }
 
         state.off({element: element, type: 'button'}, 'is-open')
 
-        if ([...element.classList].indexOf('navigation__link--level-2') !== -1) {
+        if (!assistiveButton && [...element.classList].indexOf('navigation__link--level-2') !== -1) {
           element.setAttribute('tabindex', '0')
         }
       })
@@ -591,12 +608,17 @@ function navigation () {
 
       // Set state off from link items with children
       navigationParentItemsArray.forEach((element) => {
-        // Add tabindex
-        element.setAttribute('tabindex', '0')
+        // Keyboard support?
+        const assistiveButton = [...element.classList].indexOf('js-nav-item-with-child--assistive') !== -1
+
+        if (!assistiveButton) {
+          // Add tabindex
+          element.setAttribute('tabindex', '0')
+        }
 
         state.off({element: element, type: 'button'}, 'is-open')
 
-        if ([...element.classList].indexOf('navigation__link--level-2') !== -1) {
+        if (!assistiveButton && [...element.classList].indexOf('navigation__link--level-2') !== -1) {
           element.setAttribute('tabindex', '-1')
         }
       })
