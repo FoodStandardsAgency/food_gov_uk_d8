@@ -10,17 +10,18 @@ use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\user\UserInterface;
 
 /**
- * Defines the FSA managed link entity.
+ * Defines the FSA Managed Link entity.
  *
  * @ingroup fsa_managed_links
  *
  * @ContentEntityType(
  *   id = "fsa_managed_link",
- *   label = @Translation("FSA managed link"),
+ *   label = @Translation("FSA Managed Link"),
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "list_builder" = "Drupal\fsa_managed_links\FsaManagedLinkListBuilder",
  *     "views_data" = "Drupal\fsa_managed_links\Entity\FsaManagedLinkViewsData",
+ *     "translation" = "Drupal\fsa_managed_links\FsaManagedLinkTranslationHandler",
  *
  *     "form" = {
  *       "default" = "Drupal\fsa_managed_links\Form\FsaManagedLinkForm",
@@ -34,6 +35,8 @@ use Drupal\user\UserInterface;
  *     },
  *   },
  *   base_table = "fsa_managed_link",
+ *   data_table = "fsa_managed_link_field_data",
+ *   translatable = TRUE,
  *   admin_permission = "administer fsa managed link entities",
  *   entity_keys = {
  *     "id" = "id",
@@ -44,11 +47,11 @@ use Drupal\user\UserInterface;
  *     "status" = "status",
  *   },
  *   links = {
- *     "canonical" = "/admin/structure/fsa_managed_link/{fsa_managed_link}",
- *     "add-form" = "/admin/structure/fsa_managed_link/add",
- *     "edit-form" = "/admin/structure/fsa_managed_link/{fsa_managed_link}/edit",
- *     "delete-form" = "/admin/structure/fsa_managed_link/{fsa_managed_link}/delete",
- *     "collection" = "/admin/structure/fsa_managed_link",
+ *     "canonical" = "/admin/content/fsa_managed_link/{fsa_managed_link}",
+ *     "add-form" = "/admin/content/fsa_managed_link/add",
+ *     "edit-form" = "/admin/content/fsa_managed_link/{fsa_managed_link}/edit",
+ *     "delete-form" = "/admin/content/fsa_managed_link/{fsa_managed_link}/delete",
+ *     "collection" = "/admin/content/fsa_managed_link",
  *   },
  *   field_ui_base_route = "fsa_managed_link.settings"
  * )
@@ -130,12 +133,27 @@ class FsaManagedLink extends ContentEntityBase implements FsaManagedLinkInterfac
   /**
    * {@inheritdoc}
    */
+  public function isPublished() {
+    return (bool) $this->getEntityKey('status');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setPublished($published) {
+    $this->set('status', $published ? TRUE : FALSE);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = parent::baseFieldDefinitions($entity_type);
 
     $fields['user_id'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Authored by'))
-      ->setDescription(t('The user ID of author of the FSA managed link entity.'))
+      ->setDescription(t('The user ID of author of the FSA Managed Link entity.'))
       ->setRevisionable(TRUE)
       ->setSetting('target_type', 'user')
       ->setSetting('handler', 'default')
@@ -160,7 +178,7 @@ class FsaManagedLink extends ContentEntityBase implements FsaManagedLinkInterfac
 
     $fields['name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Name'))
-      ->setDescription(t('A unique name to identify this link.'))
+      ->setDescription(t('The name of the FSA Managed Link entity.'))
       ->setSettings([
         'max_length' => 50,
         'text_processing' => 0,
@@ -178,6 +196,15 @@ class FsaManagedLink extends ContentEntityBase implements FsaManagedLinkInterfac
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE)
       ->setRequired(TRUE);
+
+    $fields['status'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Publishing status'))
+      ->setDescription(t('A boolean indicating whether the FSA Managed Link is published.'))
+      ->setDefaultValue(TRUE)
+      ->setDisplayOptions('form', [
+        'type' => 'boolean_checkbox',
+        'weight' => -3,
+      ]);
 
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Created'))

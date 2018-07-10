@@ -7,7 +7,7 @@ use Drupal\Core\Entity\EntityListBuilder;
 use Drupal\Core\Link;
 
 /**
- * Defines a class to build a listing of FSA managed link entities.
+ * Defines a class to build a listing of FSA Managed Link entities.
  *
  * @ingroup fsa_managed_links
  */
@@ -18,7 +18,7 @@ class FsaManagedLinkListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildHeader() {
-    $header['id'] = $this->t('FSA managed link ID');
+    $header['id'] = $this->t('FSA Managed Link ID');
     $header['name'] = $this->t('Name');
     return $header + parent::buildHeader();
   }

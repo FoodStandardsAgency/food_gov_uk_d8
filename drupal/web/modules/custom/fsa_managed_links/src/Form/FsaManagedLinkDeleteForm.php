@@ -5,7 +5,7 @@ namespace Drupal\fsa_managed_links\Form;
 use Drupal\Core\Entity\ContentEntityDeleteForm;
 
 /**
- * Provides a form for deleting FSA managed link entities.
+ * Provides a form for deleting FSA Managed Link entities.
  *
  * @ingroup fsa_managed_links
  */

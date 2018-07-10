@@ -1,16 +1,19 @@
 add fsa managed link entities:
-  title: 'Create new FSA managed link entities'
+  title: 'Create new FSA Managed Link entities'
 
 administer fsa managed link entities:
-  title: 'Administer FSA managed link entities'
-  description: 'Allow to access the administration form to configure FSA managed link entities.'
+  title: 'Administer FSA Managed Link entities'
+  description: 'Allow to access the administration form to configure FSA Managed Link entities.'
   restrict access: true
 
 delete fsa managed link entities:
-  title: 'Delete FSA managed link entities'
+  title: 'Delete FSA Managed Link entities'
 
 edit fsa managed link entities:
-  title: 'Edit FSA managed link entities'
+  title: 'Edit FSA Managed Link entities'
 
-view fsa managed link entities:
-  title: 'View FSA managed link entities'
+view published fsa managed link entities:
+  title: 'View published FSA Managed Link entities'
+
+view unpublished fsa managed link entities:
+  title: 'View unpublished FSA Managed Link entities'

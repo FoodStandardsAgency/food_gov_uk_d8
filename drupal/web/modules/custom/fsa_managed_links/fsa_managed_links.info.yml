@@ -1,5 +1,5 @@
-name: FSA managed links
-description: Enables links to be referenced from a single managed source.
-package: FSA
+name: 'FSA Managed Links'
 type: module
+description: 'Provides centrally managed link library'
 core: 8.x
+package: 'Custom'

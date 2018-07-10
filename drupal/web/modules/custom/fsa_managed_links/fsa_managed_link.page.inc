@@ -4,13 +4,13 @@
  * @file
  * Contains fsa_managed_link.page.inc.
  *
- * Page callback for FSA managed link entities.
+ * Page callback for FSA Managed Link entities.
  */
 
 use Drupal\Core\Render\Element;
 
 /**
- * Prepares variables for FSA managed link templates.
+ * Prepares variables for FSA Managed Link templates.
  *
  * Default template: fsa_managed_link.html.twig.
  *

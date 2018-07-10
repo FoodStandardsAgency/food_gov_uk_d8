@@ -6,7 +6,7 @@ use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Form controller for FSA managed link edit forms.
+ * Form controller for FSA Managed Link edit forms.
  *
  * @ingroup fsa_managed_links
  */
@@ -34,13 +34,13 @@ class FsaManagedLinkForm extends ContentEntityForm {
 
     switch ($status) {
       case SAVED_NEW:
-        drupal_set_message($this->t('Created the %label managed link.', [
+        drupal_set_message($this->t('Created the %label FSA Managed Link.', [
           '%label' => $entity->label(),
         ]));
         break;
 
       default:
-        drupal_set_message($this->t('Saved the %label managed link.', [
+        drupal_set_message($this->t('Saved the %label FSA Managed Link.', [
           '%label' => $entity->label(),
         ]));
     }

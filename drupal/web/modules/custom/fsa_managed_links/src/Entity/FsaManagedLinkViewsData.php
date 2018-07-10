@@ -5,7 +5,7 @@ namespace Drupal\fsa_managed_links\Entity;
 use Drupal\views\EntityViewsData;
 
 /**
- * Provides Views data for FSA managed link entities.
+ * Provides Views data for FSA Managed Link entities.
  */
 class FsaManagedLinkViewsData extends EntityViewsData {
 
