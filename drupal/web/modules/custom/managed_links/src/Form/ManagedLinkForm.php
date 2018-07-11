@@ -1,26 +1,23 @@
 <?php
 
-namespace Drupal\fsa_managed_links\Form;
+namespace Drupal\managed_links\Form;
 
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Form controller for FSA managed link edit forms.
+ * Form controller for Managed Link edit forms.
  *
- * @ingroup fsa_managed_links
+ * @ingroup managed_links
  */
-class FsaManagedLinkForm extends ContentEntityForm {
+class ManagedLinkForm extends ContentEntityForm {
 
   /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    /* @var $entity \Drupal\fsa_managed_links\Entity\FsaManagedLink */
+    /* @var $entity \Drupal\managed_links\Entity\ManagedLink */
     $form = parent::buildForm($form, $form_state);
-
-    $entity = $this->entity;
-
     return $form;
   }
 
@@ -34,17 +31,17 @@ class FsaManagedLinkForm extends ContentEntityForm {
 
     switch ($status) {
       case SAVED_NEW:
-        drupal_set_message($this->t('Created the %label managed link.', [
+        drupal_set_message($this->t('Created the %label Managed Link.', [
           '%label' => $entity->label(),
         ]));
         break;
 
       default:
-        drupal_set_message($this->t('Saved the %label managed link.', [
+        drupal_set_message($this->t('Saved the %label Managed Link.', [
           '%label' => $entity->label(),
         ]));
     }
-    $form_state->setRedirect('entity.fsa_managed_link.canonical', ['fsa_managed_link' => $entity->id()]);
+    $form_state->setRedirect('entity.managed_link.canonical', ['managed_link' => $entity->id()]);
   }
 
 }

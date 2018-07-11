@@ -1,13 +1,13 @@
 <?php
 
-namespace Drupal\fsa_managed_links\Entity;
+namespace Drupal\managed_links\Entity;
 
 use Drupal\views\EntityViewsData;
 
 /**
- * Provides Views data for FSA managed link entities.
+ * Provides Views data for Managed Link entities.
  */
-class FsaManagedLinkViewsData extends EntityViewsData {
+class ManagedLinkViewsData extends EntityViewsData {
 
   /**
    * {@inheritdoc}

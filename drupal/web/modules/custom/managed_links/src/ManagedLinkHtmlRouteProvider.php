@@ -1,18 +1,18 @@
 <?php
 
-namespace Drupal\fsa_managed_links;
+namespace Drupal\managed_links;
 
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\Routing\AdminHtmlRouteProvider;
 use Symfony\Component\Routing\Route;
 
 /**
- * Provides routes for FSA managed link entities.
+ * Provides routes for Managed Link entities.
  *
  * @see \Drupal\Core\Entity\Routing\AdminHtmlRouteProvider
  * @see \Drupal\Core\Entity\Routing\DefaultHtmlRouteProvider
  */
-class FsaManagedLinkHtmlRouteProvider extends AdminHtmlRouteProvider {
+class ManagedLinkHtmlRouteProvider extends AdminHtmlRouteProvider {
 
   /**
    * {@inheritdoc}
@@ -43,7 +43,7 @@ class FsaManagedLinkHtmlRouteProvider extends AdminHtmlRouteProvider {
       $route = new Route("/admin/structure/{$entity_type->id()}/settings");
       $route
         ->setDefaults([
-          '_form' => 'Drupal\fsa_managed_links\Form\FsaManagedLinkSettingsForm',
+          '_form' => 'Drupal\managed_links\Form\ManagedLinkSettingsForm',
           '_title' => "{$entity_type->getLabel()} settings",
         ])
         ->setRequirement('_permission', $entity_type->getAdminPermission())

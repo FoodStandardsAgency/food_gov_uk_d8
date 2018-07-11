@@ -1,0 +1,19 @@
+add managed link entities:
+  title: 'Create new Managed Link entities'
+
+administer managed link entities:
+  title: 'Administer Managed Link entities'
+  description: 'Allow to access the administration form to configure Managed Link entities.'
+  restrict access: true
+
+delete managed link entities:
+  title: 'Delete Managed Link entities'
+
+edit managed link entities:
+  title: 'Edit Managed Link entities'
+
+view published managed link entities:
+  title: 'View published Managed Link entities'
+
+view unpublished managed link entities:
+  title: 'View unpublished Managed Link entities'

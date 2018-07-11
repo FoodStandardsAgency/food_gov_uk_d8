@@ -1,5 +1,0 @@
-name: FSA managed links
-description: Enables links to be referenced from a single managed source.
-package: FSA
-type: module
-core: 8.x

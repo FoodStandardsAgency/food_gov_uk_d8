@@ -3,11 +3,11 @@ langcode: en
 status: true
 dependencies:
   module:
-    - fsa_managed_links
+    - managed_links
     - link
-id: fsa_managed_link.field_managed_link_url
+id: managed_link.field_managed_link_url
 field_name: field_managed_link_url
-entity_type: fsa_managed_link
+entity_type: managed_link
 type: link
 settings: {  }
 module: link

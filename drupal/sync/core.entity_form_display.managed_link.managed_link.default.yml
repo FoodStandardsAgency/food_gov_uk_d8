@@ -3,18 +3,18 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.fsa_managed_link.fsa_managed_link.field_managed_link_text
-    - field.field.fsa_managed_link.fsa_managed_link.field_managed_link_url
+    - field.field.managed_link.managed_link.field_managed_link_text
+    - field.field.managed_link.managed_link.field_managed_link_url
   module:
-    - fsa_managed_links
+    - managed_links
     - link
-id: fsa_managed_link.fsa_managed_link.default
-targetEntityType: fsa_managed_link
-bundle: fsa_managed_link
+id: managed_link.managed_link.default
+targetEntityType: managed_link
+bundle: managed_link
 mode: default
 content:
   field_managed_link_text:
-    weight: 1
+    weight: -4
     settings:
       size: 60
       placeholder: ''
@@ -22,21 +22,32 @@ content:
     type: string_textfield
     region: content
   field_managed_link_url:
-    weight: 2
+    weight: -3
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
     type: link_default
     region: content
+  langcode:
+    type: language_select
+    weight: -6
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
   name:
     type: string_textfield
-    weight: 0
+    weight: -5
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  translation:
+    weight: -2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
-  langcode: true
   user_id: true

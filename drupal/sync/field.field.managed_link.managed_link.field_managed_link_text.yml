@@ -3,17 +3,17 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.fsa_managed_link.field_managed_link_text
+    - field.storage.managed_link.field_managed_link_text
   module:
-    - fsa_managed_links
-id: fsa_managed_link.fsa_managed_link.field_managed_link_text
+    - managed_links
+id: managed_link.managed_link.field_managed_link_text
 field_name: field_managed_link_text
-entity_type: fsa_managed_link
-bundle: fsa_managed_link
+entity_type: managed_link
+bundle: managed_link
 label: Text
 description: 'This will be the link text.'
 required: true
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }
