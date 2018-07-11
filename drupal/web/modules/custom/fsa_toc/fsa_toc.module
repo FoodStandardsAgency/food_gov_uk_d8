@@ -50,7 +50,7 @@ function fsa_toc_entity_presave(EntityInterface $entity) {
 
           $newId = $toc_formatter->convertStringToId($element->nodeValue);
           // Prevent ridiculously long anchor names.
-          $newId = substr($newId, 0, 96);
+          $newId = substr($newId, 0, 120);
 
           $element->setAttribute('id', $newId);
         }
