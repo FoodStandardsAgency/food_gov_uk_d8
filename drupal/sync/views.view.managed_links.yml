@@ -3,17 +3,17 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.fsa_managed_link.field_managed_link_url
+    - field.storage.managed_link.field_managed_link_url
   module:
-    - fsa_managed_links
+    - managed_links
     - link
     - user
-id: fsa_managed_links
-label: 'FSA Managed Links'
+id: managed_links
+label: 'Managed Links'
 module: views
 description: ''
 tag: ''
-base_table: fsa_managed_link_field_data
+base_table: managed_link_field_data
 base_field: id
 core: 8.x
 display:
@@ -26,7 +26,7 @@ display:
       access:
         type: perm
         options:
-          perm: 'view published fsa managed link entities'
+          perm: 'view published managed link entities'
       cache:
         type: tag
         options: {  }
@@ -146,7 +146,7 @@ display:
       fields:
         id:
           id: id
-          table: fsa_managed_link_field_data
+          table: managed_link_field_data
           field: id
           relationship: none
           group_type: group
@@ -207,11 +207,11 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: fsa_managed_link
+          entity_type: managed_link
           entity_field: id
           plugin_id: field
         name:
-          table: fsa_managed_link_field_data
+          table: managed_link_field_data
           field: name
           id: name
           entity_type: null
@@ -276,7 +276,7 @@ display:
           field_api_classes: false
         field_managed_link_url:
           id: field_managed_link_url
-          table: fsa_managed_link__field_managed_link_url
+          table: managed_link__field_managed_link_url
           field: field_managed_link_url
           relationship: none
           group_type: group
@@ -343,7 +343,7 @@ display:
           plugin_id: field
         status:
           id: status
-          table: fsa_managed_link_field_data
+          table: managed_link_field_data
           field: status
           relationship: none
           group_type: group
@@ -405,12 +405,12 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: fsa_managed_link
+          entity_type: managed_link
           entity_field: status
           plugin_id: field
         langcode:
           id: langcode
-          table: fsa_managed_link_field_data
+          table: managed_link_field_data
           field: langcode
           relationship: none
           group_type: group
@@ -471,12 +471,12 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: fsa_managed_link
+          entity_type: managed_link
           entity_field: langcode
           plugin_id: field
         user_id:
           id: user_id
-          table: fsa_managed_link_field_data
+          table: managed_link_field_data
           field: user_id
           relationship: none
           group_type: group
@@ -536,12 +536,12 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: fsa_managed_link
+          entity_type: managed_link
           entity_field: user_id
           plugin_id: field
         created:
           id: created
-          table: fsa_managed_link_field_data
+          table: managed_link_field_data
           field: created
           relationship: none
           group_type: group
@@ -603,12 +603,12 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: fsa_managed_link
+          entity_type: managed_link
           entity_field: created
           plugin_id: field
         operations:
           id: operations
-          table: fsa_managed_link
+          table: managed_link
           field: operations
           relationship: none
           group_type: group
@@ -655,12 +655,12 @@ display:
           empty_zero: false
           hide_alter_empty: true
           destination: false
-          entity_type: fsa_managed_link
+          entity_type: managed_link
           plugin_id: entity_operations
       filters:
         name:
           id: name
-          table: fsa_managed_link_field_data
+          table: managed_link_field_data
           field: name
           relationship: none
           group_type: group
@@ -700,12 +700,12 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: fsa_managed_link
+          entity_type: managed_link
           entity_field: name
           plugin_id: string
         status:
           id: status
-          table: fsa_managed_link_field_data
+          table: managed_link_field_data
           field: status
           relationship: none
           group_type: group
@@ -744,13 +744,13 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: fsa_managed_link
+          entity_type: managed_link
           entity_field: status
           plugin_id: boolean
       sorts:
         id:
           id: id
-          table: fsa_managed_link_field_data
+          table: managed_link_field_data
           field: id
           relationship: none
           group_type: group
@@ -759,10 +759,10 @@ display:
           exposed: false
           expose:
             label: ''
-          entity_type: fsa_managed_link
+          entity_type: managed_link
           entity_field: id
           plugin_id: standard
-      title: 'FSA Managed Links'
+      title: 'Managed Links'
       header: {  }
       footer: {  }
       empty: {  }
@@ -782,7 +782,7 @@ display:
         - url.query_args
         - user.permissions
       tags:
-        - 'config:field.storage.fsa_managed_link.field_managed_link_url'
+        - 'config:field.storage.managed_link.field_managed_link_url'
   page_1:
     display_plugin: page
     id: page_1
@@ -790,10 +790,10 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: admin/content/fsa-managed-links
+      path: admin/content/managed-links
       menu:
         type: tab
-        title: 'FSA Managed Links'
+        title: 'Managed Links'
         description: ''
         expanded: false
         parent: system.admin_content
@@ -810,4 +810,4 @@ display:
         - url.query_args
         - user.permissions
       tags:
-        - 'config:field.storage.fsa_managed_link.field_managed_link_url'
+        - 'config:field.storage.managed_link.field_managed_link_url'

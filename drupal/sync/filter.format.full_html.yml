@@ -5,7 +5,7 @@ dependencies:
   module:
     - editor
     - entity_embed
-    - fsa_managed_links
+    - managed_links
     - linkit
     - toc_filter
     - video_embed_wysiwyg
@@ -101,9 +101,9 @@ filters:
     status: false
     weight: -40
     settings: {  }
-  fsa_managed_link_linkit:
-    id: fsa_managed_link_linkit
-    provider: fsa_managed_links
+  managed_link_linkit:
+    id: managed_link_linkit
+    provider: managed_links
     status: true
     weight: -49
     settings:

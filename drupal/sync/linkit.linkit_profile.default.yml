@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   module:
-    - fsa_managed_links
+    - managed_links
     - node
 _core:
   default_config_hash: Tt8DtxZ3Nooo0PoWPpJvszA3R_5d8MmpUW7LM_R-BzY
@@ -33,10 +33,10 @@ matchers:
       substitution_type: canonical
   de8cc571-bff9-40b0-8d02-400c3bf2c7d2:
     uuid: de8cc571-bff9-40b0-8d02-400c3bf2c7d2
-    id: 'entity:fsa_managed_link'
+    id: 'entity:managed_link'
     weight: 0
     settings:
-      metadata: '[fsa_managed_link:name] -- [fsa_managed_link:field_managed_link_url:uri]'
+      metadata: '[managed_link:name] -- [managed_link:field_managed_link_url:uri]'
       bundles: null
       group_by_bundle: null
       substitution_type: canonical

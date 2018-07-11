@@ -3,14 +3,14 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.fsa_managed_link.field_managed_link_url
+    - field.storage.managed_link.field_managed_link_url
   module:
-    - fsa_managed_links
+    - managed_links
     - link
-id: fsa_managed_link.fsa_managed_link.field_managed_link_url
+id: managed_link.managed_link.field_managed_link_url
 field_name: field_managed_link_url
-entity_type: fsa_managed_link
-bundle: fsa_managed_link
+entity_type: managed_link
+bundle: managed_link
 label: URL
 description: ''
 required: true
