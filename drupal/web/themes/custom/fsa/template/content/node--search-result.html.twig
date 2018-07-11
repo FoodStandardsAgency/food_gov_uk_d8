@@ -94,12 +94,12 @@
 
     {{ title_prefix }}
     {% if not page %}
-      <h2{{ title_attributes }}>
+      <h3{{ title_attributes }}>
         <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-      </h2>
+      </h3>
     {% endif %}
     {{ title_suffix }}
-    
+
     <div{{ content_attributes }}>
       {{ content|without('field_alert_modified') }}
     </div>
