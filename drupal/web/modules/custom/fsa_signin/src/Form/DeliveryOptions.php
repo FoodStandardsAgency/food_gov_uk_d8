@@ -147,6 +147,18 @@ class DeliveryOptions extends FormBase {
     ];
     // Attach js for the "select all" feature.
     $form['#attached']['library'][] = 'fsa_signin/subscription_alerts';
+
+    // Fetch session values for data layer work.
+    $session = \Drupal::service('user.private_tempstore')->get('fsa_signin');
+    $session_proceed = $session->get('deliverySubmitted');
+    $session_val = $session->get('deliveryEdit');
+    if ($session_proceed && $session_val) {
+      // Push event info to data layer based on session values.
+      datalayer_add($session_val);
+      // Delete the form submission session data.
+      $session->delete('deliverySubmitted');
+    }
+
     return $form;
   }
 
@@ -213,12 +225,43 @@ class DeliveryOptions extends FormBase {
     $language = $form_state->getValue('language');
     $account->set('preferred_langcode', $language);
 
+    // Create a variable for the event session.
+    $delivery_field = $account->get('field_initial_delivery_settings')->value;
+    if ($delivery_field == 1) {
+      $delivery_edit = $this->deliveryDataLayer('Edit');
+    }
+    else {
+      $delivery_edit = $this->deliveryDataLayer('Set');
+    }
+    // Set the user value to TRUE.
+    $account->set('field_initial_delivery_settings', 1);
+
     if ($account->save()) {
       drupal_set_message($this->t('Your preferences are updated.'));
+
+      // Set a session variable based on the current user value.
+      $session = \Drupal::service('user.private_tempstore')->get('fsa_signin');
+      $session->set('deliveryEdit', $delivery_edit);
+      // Set a session variable to confirm submission.
+      $session->set('deliverySubmitted', TRUE);
     }
     else {
       drupal_set_message($this->t('There was an error updating your preferences. Please try again.'));
     }
+  }
+
+  function deliveryDataLayer($form_process) {
+    $delivery_edit = array();
+    if (in_array($form_process, array('Set', 'Edit'))) {
+      $delivery_edit = array(
+        'event' => 'Subscription Saved',
+        'eventCategory' => 'Subscription',
+        'eventAction' => $form_process,
+        //'eventLabel' => array(),
+        'eventValue' => 0,
+      );
+    }
+    return $delivery_edit;
   }
 
 }
