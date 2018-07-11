@@ -181,16 +181,18 @@ function fsa_notify_cron() {
   $state_key = 'fsa_notify.last_daily';
   $formatter = new FsaNotifyMessageDaily();
   if (fsa_notify_daily_is_ready_to_send($state_key)) {
-    fsa_notify_send($storage, $notifier_email, $formatter, 'daily');
-    fsa_notify_sent($state_key);
+    if (fsa_notify_send($storage, $notifier_email, $formatter, 'daily')) {
+      fsa_notify_sent($state_key);
+    }
   }
 
   // Weekly.
   $state_key = 'fsa_notify.last_weekly';
   $formatter = new FsaNotifyMessageWeekly();
   if (fsa_notify_weekly_is_ready_to_send($state_key)) {
-    fsa_notify_send($storage, $notifier_email, $formatter, 'weekly');
-    fsa_notify_sent($state_key);
+    if (fsa_notify_send($storage, $notifier_email, $formatter, 'weekly')) {
+      fsa_notify_sent($state_key);
+    }
   }
 }
 
@@ -222,7 +224,7 @@ function fsa_notify_daily_is_ready_to_send($state_key, $now = NULL) {
     $now = time();
   }
   $window = 3 * 60 * 60;
-  $interval = 24 * 60 * 60;
+  $interval = 24 * 60 * 60 - $window;
   // Calculation base: seconds since 00:00:00.
   $start = 7 * 60 * 60;
   $current = date('G', $now) * 60 * 60 + date('i', $now) * 60 + date('s', $now);
@@ -247,7 +249,7 @@ function fsa_notify_weekly_is_ready_to_send($state_key, $now = NULL) {
     $now = time();
   }
   $window = 5 * 60 * 60;
-  $interval = 7 * 24 * 60 * 60;
+  $interval = 7 * 24 * 60 * 60 - $window;
   // Calculation base: 1 (for Monday) through 7 (for Sunday)
   $start = 1 * 24 * 60 * 60 + 7 * 60 * 60;
   $current = date('N', $now) * 24 * 60 * 60 + date('G', $now) * 60 * 60 + date('i', $now) * 60 + date('s', $now);
@@ -341,6 +343,10 @@ function fsa_notify_queue_process() {
  *   Notifymessage formatter object.
  * @param string $type
  *   Type of send (sms|immediate|daily|weekly).
+ *
+ * @return bool
+ *   True of false for if the whole batch of type was processed so daily/weekly
+ *    knows to pause until next digest.
  */
 function fsa_notify_send(FsaNotifyStorage $storage, FsaNotifyAPI $notifier, FsaNotifyMessage $formatter, $type) {
   fsa_notify_timer('start', $type);
@@ -363,6 +369,8 @@ function fsa_notify_send(FsaNotifyStorage $storage, FsaNotifyAPI $notifier, FsaN
   \Drupal::entityManager()->getStorage('node')->resetCache();
   \Drupal::entityManager()->getStorage('user')->resetCache();
   fsa_notify_timer('stop', $type);
+
+  return !count($batch);
 }
 
 /**
