@@ -66,7 +66,6 @@ module:
   fsa_establishment_lookup: 0
   fsa_gtm: 0
   fsa_lander: 0
-  managed_links: 0
   fsa_notify: 0
   fsa_page_feedback: 0
   fsa_ratings: 0
@@ -96,6 +95,7 @@ module:
   linkit: 0
   linkit_content: 0
   locale: 0
+  managed_links: 0
   media_entity: 0
   media_entity_browser: 0
   media_entity_document: 0
