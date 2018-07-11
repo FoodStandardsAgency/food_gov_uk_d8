@@ -114,6 +114,12 @@ class UserRegistrationForm extends FormBase {
     try {
       // Save user account.
       $user->save();
+
+      // Save the new UID to the session to use on the data layer.
+      // See thankYouPage() in DefaultController.php.
+      $session = \Drupal::service('user.private_tempstore')->get('fsa_signin');
+      $session->set('regUid', $user->get('uid')->value);
+
       _user_mail_notify('register_no_approval_required', $user);
     }
     catch (\Exception $e) {

@@ -191,6 +191,19 @@ class DefaultController extends ControllerBase {
     $markup .= '<p>' . $this->t('<p>To complete you subcription please follow the instructions within the email.</p><p>If you do not see the email, please check your spam folder.</p>') . '</p>';
     $markup .= '<p>' . self::betaSigninDescription() . '</p>';
 
+    // Fetch the newly-created UID from the session.
+    // See submitForm() in UserRegistrationForm.php.
+    $session = \Drupal::service('user.private_tempstore')->get('fsa_signin');
+    $reg_uid = $session->get('regUid');
+    if ($reg_uid) {
+      // Add the UID to the data layer, replacing the 0 default.
+      datalayer_add(array(
+        'userUid' => $reg_uid,
+      ));
+      // Delete the session value for when the user navigates away.
+      $session->delete('regUid');
+    }
+
     return [
       '#markup' => $markup,
     ];
