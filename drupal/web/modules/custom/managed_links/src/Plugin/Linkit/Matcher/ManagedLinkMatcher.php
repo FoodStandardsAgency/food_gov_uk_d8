@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\fsa_managed_links\Plugin\Linkit\Matcher;
+namespace Drupal\managed_links\Plugin\Linkit\Matcher;
 
 /**
  * @file
@@ -17,16 +17,16 @@ use Drupal\linkit\Suggestion\EntitySuggestion;
 use Drupal\linkit\Suggestion\SuggestionCollection;
 
 /**
- * Provides specific LinkIt matchers for FSA Managed Links.
+ * Provides specific LinkIt matchers for Managed Links.
  *
  * @Matcher(
- *   id = "entity:fsa_managed_link",
- *   label = @Translation("FSA Managed Link entities"),
- *   target_entity = "fsa_managed_link",
- *   provider = "fsa_managed_links"
+ *   id = "entity:managed_link",
+ *   label = @Translation("Managed Link entities"),
+ *   target_entity = "managed_link",
+ *   provider = "managed_links"
  * )
  */
-class FsaManagedLinkMatcher extends EntityMatcher {
+class ManagedLinkMatcher extends EntityMatcher {
 
   /**
    * {@inheritdoc}

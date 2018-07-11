@@ -1,16 +1,16 @@
 <?php
 
-namespace Drupal\fsa_managed_links\Form;
+namespace Drupal\managed_links\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Class FsaManagedLinkSettingsForm.
+ * Class ManagedLinkSettingsForm.
  *
- * @ingroup fsa_managed_links
+ * @ingroup managed_links
  */
-class FsaManagedLinkSettingsForm extends FormBase {
+class ManagedLinkSettingsForm extends FormBase {
 
   /**
    * Returns a unique string identifying the form.
@@ -19,7 +19,7 @@ class FsaManagedLinkSettingsForm extends FormBase {
    *   The unique string identifying the form.
    */
   public function getFormId() {
-    return 'fsamanagedlink_settings';
+    return 'managedlink_settings';
   }
 
   /**
@@ -35,7 +35,7 @@ class FsaManagedLinkSettingsForm extends FormBase {
   }
 
   /**
-   * Defines the settings form for FSA Managed Link entities.
+   * Defines the settings form for Managed Link entities.
    *
    * @param array $form
    *   An associative array containing the structure of the form.
@@ -46,7 +46,7 @@ class FsaManagedLinkSettingsForm extends FormBase {
    *   Form definition array.
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $form['fsamanagedlink_settings']['#markup'] = 'Settings form for FSA Managed Link entities. Manage field settings here.';
+    $form['managedlink_settings']['#markup'] = 'Settings form for Managed Link entities. Manage field settings here.';
     return $form;
   }
 

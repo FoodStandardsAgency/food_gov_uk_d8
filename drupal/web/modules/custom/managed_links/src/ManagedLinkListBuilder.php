@@ -1,23 +1,23 @@
 <?php
 
-namespace Drupal\fsa_managed_links;
+namespace Drupal\managed_links;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
 use Drupal\Core\Link;
 
 /**
- * Defines a class to build a listing of FSA Managed Link entities.
+ * Defines a class to build a listing of Managed Link entities.
  *
- * @ingroup fsa_managed_links
+ * @ingroup managed_links
  */
-class FsaManagedLinkListBuilder extends EntityListBuilder {
+class ManagedLinkListBuilder extends EntityListBuilder {
 
   /**
    * {@inheritdoc}
    */
   public function buildHeader() {
-    $header['id'] = $this->t('FSA Managed Link ID');
+    $header['id'] = $this->t('Managed Link ID');
     $header['name'] = $this->t('Name');
     return $header + parent::buildHeader();
   }
@@ -26,12 +26,12 @@ class FsaManagedLinkListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    /* @var $entity \Drupal\fsa_managed_links\Entity\FsaManagedLink */
+    /* @var $entity \Drupal\managed_links\Entity\ManagedLink */
     $row['id'] = $entity->id();
     $row['name'] = Link::createFromRoute(
       $entity->label(),
-      'entity.fsa_managed_link.edit_form',
-      ['fsa_managed_link' => $entity->id()]
+      'entity.managed_link.edit_form',
+      ['managed_link' => $entity->id()]
     );
     return $row + parent::buildRow($entity);
   }

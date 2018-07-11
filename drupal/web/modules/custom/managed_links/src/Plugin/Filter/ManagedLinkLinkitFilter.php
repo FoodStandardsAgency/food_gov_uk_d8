@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\fsa_managed_links\Plugin\Filter;
+namespace Drupal\managed_links\Plugin\Filter;
 
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Entity\EntityRepositoryInterface;
@@ -12,16 +12,16 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Provides a Linkit filter for FSA Managed Link entities.
+ * Provides a Linkit filter for Managed Link entities.
  *
  * @Filter(
- *   id = "fsa_managed_link_linkit",
- *   title = @Translation("FSA Managed Links URL converter"),
+ *   id = "managed_link_linkit",
+ *   title = @Translation("Managed Link entity URL converter"),
  *   description = @Translation("Updates links inserted by Linkit to point the underlying link field URI."),
  *   type = Drupal\filter\Plugin\FilterInterface::TYPE_TRANSFORM_REVERSIBLE
  * )
  */
-class FsaManagedLinkLinkitFilter extends FilterBase implements ContainerFactoryPluginInterface {
+class ManagedLinkLinkitFilter extends FilterBase implements ContainerFactoryPluginInterface {
 
   /**
    * The entity repository.
@@ -38,7 +38,7 @@ class FsaManagedLinkLinkitFilter extends FilterBase implements ContainerFactoryP
   protected $substitutionManager;
 
   /**
-   * Constructs a FsaManagedLinkLinkitFilter object.
+   * Constructs a ManagedLinkLinkitFilter object.
    *
    * @param array $configuration
    *   A configuration array containing information about the plugin instance.
@@ -77,11 +77,11 @@ class FsaManagedLinkLinkitFilter extends FilterBase implements ContainerFactoryP
   public function process($text, $langcode) {
     $result = new FilterProcessResult($text);
 
-    if (strpos($text, 'data-entity-type="fsa_managed_link"') !== FALSE && strpos($text, 'data-entity-uuid') !== FALSE) {
+    if (strpos($text, 'data-entity-type="managed_link"') !== FALSE && strpos($text, 'data-entity-uuid') !== FALSE) {
       $dom = Html::load($text);
       $xpath = new \DOMXPath($dom);
 
-      foreach ($xpath->query('//a[@data-entity-type="fsa_managed_link" and @data-entity-uuid]') as $element) {
+      foreach ($xpath->query('//a[@data-entity-type="managed_link" and @data-entity-uuid]') as $element) {
         /** @var \DOMElement $element */
         try {
           // Load the appropriate translation of the linked entity.
@@ -113,7 +113,7 @@ class FsaManagedLinkLinkitFilter extends FilterBase implements ContainerFactoryP
           }
         }
         catch (\Exception $e) {
-          watchdog_exception('fsa_managed_link_linkit_filter', $e);
+          watchdog_exception('managed_link_linkit_filter', $e);
         }
       }
 

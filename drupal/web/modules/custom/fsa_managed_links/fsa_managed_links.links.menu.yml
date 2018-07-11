@@ -1,5 +1,0 @@
-fsa_managed_link.admin.structure.settings:
-  title: 'FSA Managed Link settings'
-  description: 'Configure FSA Managed Link entities'
-  route_name: fsa_managed_link.settings
-  parent: system.admin_structure
