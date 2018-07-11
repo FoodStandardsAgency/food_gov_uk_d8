@@ -170,6 +170,9 @@ function navigation () {
   // Query nav items with child
   const navigationParentItemsArray = [...document.querySelectorAll('.js-nav-item-with-child')]
 
+  // Query nav item togglers
+  const navigationItemTogglersArray = [...document.querySelectorAll('.js-nav-item-toggler')]
+
   // Query back links
   const navigationBackLinksArray = [...document.querySelectorAll('.js-nav-back-link')]
 
@@ -313,8 +316,8 @@ function navigation () {
           if (innerItem) {
             // Open megamenu first.
             if (itemLevel == 1) {
-              let linkElement = listItem.querySelector(settings.menuItemActionSelector)
-              let openEvent = new Event('navigation:open');
+              var linkElement = listItem.querySelector(settings.menuItemActionSelector)
+              var openEvent = new Event('navigation:open');
               linkElement.dispatchEvent(openEvent);
             }
 
@@ -339,7 +342,29 @@ function navigation () {
             break
           }
 
-          break
+          // Logic for key SPACE:
+          // Toggle (open if closed, close if opened) first level items.
+          case keyboard.SPACE:
+            listItem = queryParents(item, settings.listItemSelector)
+
+            if (traversing.getLevel(listItem) == 1) {
+              var linkElement = listItem.querySelector(settings.menuItemActionSelector)
+              var toggleEvent = null
+
+              if ([...linkElement.classList].indexOf('is-open') !== -1) {
+                toggleEvent = new Event('navigation:close')
+              }
+              else {
+                toggleEvent = new Event('navigation:open')
+              }
+
+              linkElement.dispatchEvent(toggleEvent)
+            }
+
+            event.preventDefault()
+            break;
+
+          break;
       };
     }
 
@@ -402,43 +427,70 @@ function navigation () {
       menuButtonOpenElement.focus()
     })
 
-    // Items with children
+    // Item togglers for screen readers.
+    navigationItemTogglersArray.forEach((element) => {
+      // Content element
+      const content = traversing.siblings.next(element, '.navigation__menu', true)
+      const linkElement = traversing.siblings.next(element, '.js-nav-item-with-child', true)
+
+      // Handle toggler button click as a proxy element for the actual
+      // menu link item. Only expand/collapse via custom events.
+      element.addEventListener('click', function (e) {
+        var toggleEvent = null
+
+        if ([...linkElement.classList].indexOf('is-open') !== -1) {
+          toggleEvent = new Event('navigation:close')
+        }
+        else {
+          toggleEvent = new Event('navigation:open')
+        }
+
+        linkElement.dispatchEvent(toggleEvent)
+      })
+    })
+
+    // Items with children. Multipurpose link elements.
     navigationParentItemsArray.forEach((element) => {
       // Content element
       const content = traversing.siblings.next(element, '.navigation__menu', true)
 
-      // Keyboard support?
-      const assistiveButton = [...element.classList].indexOf('js-nav-item-with-child--assistive') !== -1
+      // Toggler button
+      const togglerElement = traversing.siblings.prev(element, '.js-nav-item-toggler', true)
+
+      // Add custom event listener for closing
+      element.addEventListener('navigation:close', function (e) {
+        state.toggle(element, content, 'is-open', false)
+        if (togglerElement) {
+          state.match(togglerElement, element, 'is-open')
+        }
+      })
+
+      // Add custom event listener for opening
+      element.addEventListener('navigation:open', function (e) {
+        // Set all first level items as closed.
+        firstLevelLinkArray.forEach((element) => {
+          var toggleEvent = new Event('navigation:close')
+          element.dispatchEvent(toggleEvent);
+        })
+
+        state.toggle(element, content, 'is-open', true)
+
+        if (togglerElement) {
+          state.match(togglerElement, element, 'is-open')
+        }
+      })
 
       // Add click listener
       element.addEventListener('click', function (e) {
         if (checkMediaQuery() === breakpoints.xsmall) {
           e.preventDefault()
-          state.on({element: element, type: 'button'}, 'is-open')
-          state.on({element: content, type: 'content'}, 'is-open')
+
+          var openEvent = new Event('navigation:open')
+          element.dispatchEvent(openEvent)
+
           content.children[0].children[0].focus()
           navigationElementArray[0].classList.add('has-open-submenu')
         }
-        else if (assistiveButton) {
-          state.toggle(element, content, 'is-open')
-        }
-      })
-
-      // Add a keypress listener
-      element.addEventListener('keypress', function (e) {
-        if (e.which === keyboard.SPACE) {
-          e.preventDefault()
-          state.toggle(element, content, 'is-open')
-        }
-        if (e.which === keyboard.ENTER) {
-          state.toggle(element, content, 'is-open')
-        }
-      })
-
-      // Add custom event listener
-      element.addEventListener('navigation:open', function(e) {
-        e.preventDefault()
-        state.toggle(element, content, 'is-open', true)
       })
 
       // Add a focus listener
@@ -460,16 +512,6 @@ function navigation () {
             })
 
             thirdLevelMenuArray.forEach((element) => {
-              state.off({element, type: 'content'}, 'is-open')
-            })
-          }
-        } else {
-          if ([...element.classList].indexOf('navigation__link--level-1') !== -1) {
-            firstLevelLinkArray.forEach((element) => {
-              state.off({element: element, type: 'button'}, 'is-open')
-            })
-
-            secondLevelMenuArray.forEach((element) => {
               state.off({element, type: 'content'}, 'is-open')
             })
           }
@@ -550,11 +592,13 @@ function navigation () {
           } else {
             if (tabbableNavigationItems.indexOf(e.relatedTarget) === -1) {
               firstLevelLinkArray.forEach((element) => {
-                state.off({ element: element, type: 'button' }, 'is-open')
+                var toggleEvent = new Event('navigation:close')
+                element.dispatchEvent(toggleEvent)
               })
 
               secondLevelMenuArray.forEach((element) => {
-                state.off({ element, type: 'content' }, 'is-open')
+                var toggleEvent = new Event('navigation:close')
+                element.dispatchEvent(toggleEvent)
               })
             }
           }
@@ -577,18 +621,14 @@ function navigation () {
 
       // Set state off from link items with children
       navigationParentItemsArray.forEach((element) => {
-        // Keyboard support?
-        const assistiveButton = [...element.classList].indexOf('js-nav-item-with-child--assistive') !== -1
-
-        if (!assistiveButton) {
-          // Add tabindex
-          element.setAttribute('tabindex', '0')
-        }
+        // Add tabindex
+        element.setAttribute('tabindex', '0')
 
         state.off({element: element, type: 'button'}, 'is-open')
 
-        if (!assistiveButton && [...element.classList].indexOf('navigation__link--level-2') !== -1) {
+        if ([...element.classList].indexOf('navigation__link--level-2') !== -1) {
           element.setAttribute('tabindex', '0')
+          element.removeAttribute('role');
         }
       })
 
@@ -608,24 +648,22 @@ function navigation () {
 
       // Set state off from link items with children
       navigationParentItemsArray.forEach((element) => {
-        // Keyboard support?
-        const assistiveButton = [...element.classList].indexOf('js-nav-item-with-child--assistive') !== -1
+        // Add tabindex
+        element.setAttribute('tabindex', '0')
 
-        if (!assistiveButton) {
-          // Add tabindex
-          element.setAttribute('tabindex', '0')
-        }
+        var closeEvent = new Event('navigation:close')
+        element.dispatchEvent(closeEvent)
 
-        state.off({element: element, type: 'button'}, 'is-open')
-
-        if (!assistiveButton && [...element.classList].indexOf('navigation__link--level-2') !== -1) {
+        if ([...element.classList].indexOf('navigation__link--level-2') !== -1) {
           element.setAttribute('tabindex', '-1')
+          element.setAttribute('role', 'presentation')
         }
       })
 
       // Set state off from second subnavigation
       secondLevelMenuArray.forEach((element) => {
-        state.off({element: element, type: 'content'}, 'is-open')
+        var closeEvent = new Event('navigation:close')
+        element.dispatchEvent(closeEvent)
       })
 
       // Set state off from third subnavigation
