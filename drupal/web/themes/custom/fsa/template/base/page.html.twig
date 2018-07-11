@@ -177,6 +177,10 @@
     <div class="layout__container">
       <div class="layout__content hero-wrapper__content">
           <section class="hero{% if page.hero is defined and page.hero|render|striptags|trim %} hero--with-content{% endif %}">
+            {% if page.secondary_menu %}
+              {{ page.secondary_menu }}
+            {% endif %}
+
             {% if page.hero is defined and page.hero|render|striptags|trim %}
               {% if hero_image_url %}
                 <div class="hero__background hero__background--image" style="background-image: url({{ hero_image_url }});">
@@ -186,10 +190,6 @@
                 </div>
               {% endif %}
               {{ page.hero }}
-            {% endif %}
-
-            {% if page.secondary_menu %}
-              {{ page.secondary_menu }}
             {% endif %}
           </section>
       </div>
