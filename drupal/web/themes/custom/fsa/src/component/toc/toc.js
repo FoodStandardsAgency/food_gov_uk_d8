@@ -1,6 +1,12 @@
 import doScrolling from '../../helper/scrollToElement'
 
 function toc () {
+  // Set 'tabindex' attribute to all scroll targets so that currentHeading.focus() works properly
+  document
+      .querySelector('.field__body')
+      .querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]')
+      .forEach(x => x.setAttribute('tabindex', '-1'))
+
   // Table of contents
   const tableOfContentsElements = [...document.querySelectorAll('.js-toc-list')]
 
@@ -24,6 +30,7 @@ function toc () {
 
       // Scroll
       doScrolling(currentHeading, 1000, -20)
+      currentHeading.focus()
     })
   }
 }
