@@ -45,6 +45,7 @@ function fsa_preprocess_node(&$variables) {
       case 'alert':
         if ($node->hasField('field_alert_type')) {
           $tag = $node->field_alert_type->view([
+            'label' => 'hidden',
             'type' => 'fsa_alert_type_formatter',
           ]);
         }
