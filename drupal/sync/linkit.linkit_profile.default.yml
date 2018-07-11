@@ -36,7 +36,7 @@ matchers:
     id: 'entity:managed_link'
     weight: 0
     settings:
-      metadata: '[managed_link:name] -- [managed_link:field_managed_link_url:uri]'
+      metadata: "[managed_link:field_managed_link_text:value]\t-- [managed_link:field_managed_link_url:uri]"
       bundles: null
       group_by_bundle: null
       substitution_type: canonical
