@@ -10,7 +10,6 @@
       // Get view identifier.
       var viewName = drupalSettings.fsa_ratings.data_layer.view_id;
       var viewID = '#views-exposed-form-' + viewName.replace(/_/g, "-") + '-page-1';
-      console.log(viewName);
 
       // Define one of two data objects: simple and full (with tags property).
       var data = {
@@ -52,7 +51,6 @@
         getDataPages();
         getDataFilters();
         dataLayer.push(data);
-        console.log(data);
       });
 
       // Push updated dataLayer on ajax success.
@@ -63,7 +61,6 @@
           getDataPages();
           getDataFilters();
           dataLayer.push(data);
-          console.log(data);
         }
       });
 

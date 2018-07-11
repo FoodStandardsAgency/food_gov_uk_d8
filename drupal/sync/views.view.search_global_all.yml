@@ -224,7 +224,17 @@ display:
           plugin_id: fsa_keyword
       sorts: {  }
       title: Search
-      header: {  }
+      header:
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          content: "<h2 class=\"visually-hidden\">Search results</h2>\n<div class=\"visually-hidden\" aria-live=\"polite\">Showing @start-@end of @total</div>"
+          plugin_id: result
       footer:
         result:
           id: result
