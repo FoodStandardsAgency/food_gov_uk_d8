@@ -29,7 +29,7 @@ class FsaNotifyAPIemail extends FsaNotifyAPI {
    */
   public function send(User $user, string $reference, array $personalisation) {
 
-    $user_lang = $user->getPreferredLangcode();
+    $user_lang = $user->getPreferredLangcode(TRUE);
     $base_url = FsaNotifyMessage::baseUrl();
 
     if ($user_lang == 'cy') {
