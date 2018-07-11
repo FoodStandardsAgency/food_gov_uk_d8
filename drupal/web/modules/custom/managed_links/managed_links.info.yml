@@ -4,4 +4,4 @@ description: 'Provides a centrally managed link library with LinkIt integration 
 core: 8.x
 package: 'Custom'
 dependencies:
-  - drupal:linkit
+  - linkit
