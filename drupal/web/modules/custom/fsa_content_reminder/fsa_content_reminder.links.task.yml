@@ -1,0 +1,5 @@
+fsa_content_reminder.view_listing:
+  title: 'Content reminders'
+  route_name: view.content_reminders.page_1
+  parent_id: system.admin_content
+  weight: 2

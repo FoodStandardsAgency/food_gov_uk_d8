@@ -1061,7 +1061,7 @@ display:
       display_extenders: {  }
       path: admin/content/pending-translations
       menu:
-        type: tab
+        type: none
         title: 'Pending translations'
         description: 'See which unpublished translations have been started'
         expanded: false
