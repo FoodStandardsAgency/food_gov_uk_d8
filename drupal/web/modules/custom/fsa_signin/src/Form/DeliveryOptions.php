@@ -226,38 +226,42 @@ class DeliveryOptions extends FormBase {
     $account->set('preferred_langcode', $language);
 
     // Gather user data to put into arrays - text lists.
-    // field_delivery_method
+    // field_delivery_method.
     $field_delivery_method = ['email' => FALSE, 'sms' => FALSE];
     $field_delivery_method = $this->createTextListArray($field_delivery_method, $delivery_method);
-    // field_delivery_method_news
+    // field_delivery_method_news.
     $field_delivery_method_news = ['email' => FALSE];
     $field_delivery_method_news = $this->createTextListArray($field_delivery_method_news, $delivery_method_news);
-    // field_subscribed_food_alerts
+    // field_subscribed_food_alerts.
     $food_alerts = array_column($account->get('field_subscribed_food_alerts')->getValue(), 'value');
     $field_subscribed_food_alerts = ['all' => FALSE];
     $field_subscribed_food_alerts = $this->createTextListArray($field_subscribed_food_alerts, $food_alerts);
-    // field_email_frequency
-    $field_email_frequency = ['immediate' => FALSE, 'daily' => FALSE, 'weekly' => FALSE];
+    // field_email_frequency.
+    $field_email_frequency = [
+      'immediate' => FALSE,
+      'daily' => FALSE,
+      'weekly' => FALSE
+    ];
     if (array_key_exists($email_frequency, $field_email_frequency)) {
       $field_email_frequency[$email_frequency] = TRUE;
     }
-    
+
     // Gather user data to put into arrays - taxonomies.
-    // field_subscribed_news
-    $news_terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('news_type');
+    // field_subscribed_news.
+    $news_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('news_type');
     $user_sub_news = $account->get('field_subscribed_news')->getValue();
     $field_subscribed_news = $this->createVocabArray($news_terms, $user_sub_news);
-    // field_subscribed_notifications
-    $allergy_terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('alerts_allergen');
+    // field_subscribed_notifications.
+    $allergy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('alerts_allergen');
     $user_sub_allergy = $account->get('field_subscribed_notifications')->getValue();
     $field_subscribed_notifications = $this->createVocabArray($allergy_terms, $user_sub_allergy);
-    // field_subscribed_cons
-    $cons_terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('consultations_type_alerts');
+    // field_subscribed_cons.
+    $cons_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('consultations_type_alerts');
     $user_sub_cons = $account->get('field_subscribed_cons')->getValue();
     $field_subscribed_cons = $this->createVocabArray($cons_terms, $user_sub_cons);
 
     // Fetch the profile field values to include in the data layer.
-    $event_label = array(
+    $event_label = [
       'field_subscribed_food_alerts' => $field_subscribed_food_alerts,
       'field_subscribed_notifications' => $field_subscribed_notifications,
       'field_subscribed_news' => $field_subscribed_news,
@@ -267,7 +271,7 @@ class DeliveryOptions extends FormBase {
       'field_delivery_method_news' => $field_delivery_method_news,
       'field_email_frequency' => $field_email_frequency,
       'preferred_langcode' => $language,
-    );
+    ];
 
     // Create a variable for the event session.
     $delivery_field = $account->get('field_initial_delivery_settings')->value;
@@ -295,29 +299,35 @@ class DeliveryOptions extends FormBase {
     }
   }
 
-  // Creates an array of user info for use in the data layer.
+  /*
+   * Creates an array of user info for use in the data layer.
+   */
   function deliveryDataLayer($form_process, $event_label) {
-    $delivery_edit = array();
+    $delivery_edit = [];
     if (in_array($form_process, array('Set', 'Edit'))) {
-      $delivery_edit = array(
+      $delivery_edit = [
         'event' => 'Subscription Saved',
         'eventCategory' => 'Subscription',
         'eventAction' => $form_process,
         'eventLabel' => $event_label,
         'eventValue' => 0,
-      );
+      ];
     }
     return $delivery_edit;
   }
 
-  // Converts a string to a machine name style format.
+  /*
+   * Converts a string to a machine name style format.
+   */
   function termNameTransform($string) {
     $new_string = strtolower($string);
     $new_string = preg_replace('/[^a-z0-9_]+/', '_', $new_string);
     return preg_replace('/_+/', '_', $new_string);
   }
 
-  // Create an array containing a user's collection of items from a text list.
+  /*
+   * Create an array containing a user's collection of items from a text list.
+   */
   function createTextListArray($all_items, $user_items) {
     foreach ($user_items as $key => $user_item) {
       if (array_key_exists($user_item, $all_items)) {
@@ -327,9 +337,11 @@ class DeliveryOptions extends FormBase {
     return $all_items;
   }
 
-  // Create an array containing a user's collection of terms.
+  /*
+   * Create an array containing a user's collection of terms.
+   */
   function createVocabArray($all_terms, $user_terms) {
-    $vocab_array = array();
+    $vocab_array = [];
     if (is_array($all_terms) && is_array($user_terms)) {
       // Tidy the format of the user terms array.
       $user_terms_filtered = array();
