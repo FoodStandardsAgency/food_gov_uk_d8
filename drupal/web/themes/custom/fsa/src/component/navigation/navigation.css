@@ -708,6 +708,10 @@
     }
   }
 
+  :--not-touch button&[role="heading"]:--enter {
+    outline: none;
+  }
+
   .navigation__header & {
     :--not-touch &:--enter {
       color: var(--darker-primary-color);
