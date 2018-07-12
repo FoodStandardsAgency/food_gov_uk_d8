@@ -147,6 +147,18 @@ class DeliveryOptions extends FormBase {
     ];
     // Attach js for the "select all" feature.
     $form['#attached']['library'][] = 'fsa_signin/subscription_alerts';
+
+    // Fetch session values for data layer work.
+    $session = \Drupal::service('user.private_tempstore')->get('fsa_signin');
+    $session_proceed = $session->get('deliverySubmitted');
+    $session_val = $session->get('deliveryEdit');
+    if ($session_proceed && $session_val) {
+      // Push event info to data layer based on session values.
+      datalayer_add($session_val);
+      // Delete the form submission session data.
+      $session->delete('deliverySubmitted');
+    }
+
     return $form;
   }
 
@@ -214,12 +226,127 @@ class DeliveryOptions extends FormBase {
     $account->set('langcode', $language);
     $account->set('preferred_langcode', $language);
 
+    // Gather user data to put into arrays - text lists.
+    // field_delivery_method
+    $field_delivery_method = ['email' => FALSE, 'sms' => FALSE];
+    $field_delivery_method = $this->createTextListArray($field_delivery_method, $delivery_method);
+    // field_delivery_method_news
+    $field_delivery_method_news = ['email' => FALSE];
+    $field_delivery_method_news = $this->createTextListArray($field_delivery_method_news, $delivery_method_news);
+    // field_subscribed_food_alerts
+    $food_alerts = array_column($account->get('field_subscribed_food_alerts')->getValue(), 'value');
+    $field_subscribed_food_alerts = ['all' => FALSE];
+    $field_subscribed_food_alerts = $this->createTextListArray($field_subscribed_food_alerts, $food_alerts);
+    // field_email_frequency
+    $field_email_frequency = ['immediate' => FALSE, 'daily' => FALSE, 'weekly' => FALSE];
+    if (array_key_exists($email_frequency, $field_email_frequency)) {
+      $field_email_frequency[$email_frequency] = TRUE;
+    }
+    
+    // Gather user data to put into arrays - taxonomies.
+    // field_subscribed_news
+    $news_terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('news_type');
+    $user_sub_news = $account->get('field_subscribed_news')->getValue();
+    $field_subscribed_news = $this->createVocabArray($news_terms, $user_sub_news);
+    // field_subscribed_notifications
+    $allergy_terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('alerts_allergen');
+    $user_sub_allergy = $account->get('field_subscribed_notifications')->getValue();
+    $field_subscribed_notifications = $this->createVocabArray($allergy_terms, $user_sub_allergy);
+    // field_subscribed_cons
+    $cons_terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('consultations_type_alerts');
+    $user_sub_cons = $account->get('field_subscribed_cons')->getValue();
+    $field_subscribed_cons = $this->createVocabArray($cons_terms, $user_sub_cons);
+
+    // Fetch the profile field values to include in the data layer.
+    $event_label = array(
+      'field_subscribed_food_alerts' => $field_subscribed_food_alerts,
+      'field_subscribed_notifications' => $field_subscribed_notifications,
+      'field_subscribed_news' => $field_subscribed_news,
+      'field_subscribed_cons' => $field_subscribed_cons,
+      'field_delivery_method' => $field_delivery_method,
+      'field_notification_sms' => $phone,
+      'field_delivery_method_news' => $field_delivery_method_news,
+      'field_email_frequency' => $field_email_frequency,
+      'preferred_langcode' => $language,
+    );
+
+    // Create a variable for the event session.
+    $delivery_field = $account->get('field_initial_delivery_settings')->value;
+    if ($delivery_field == 1) {
+      $delivery_edit = $this->deliveryDataLayer('Edit', $event_label);
+    }
+    else {
+      $delivery_edit = $this->deliveryDataLayer('Set', $event_label);
+    }
+
+    // Set the user value to TRUE.
+    $account->set('field_initial_delivery_settings', 1);
+
     if ($account->save()) {
       drupal_set_message($this->t('Your preferences are updated.'));
+
+      // Set a session variable based on the current user value.
+      $session = \Drupal::service('user.private_tempstore')->get('fsa_signin');
+      $session->set('deliveryEdit', $delivery_edit);
+      // Set a session variable to confirm submission.
+      $session->set('deliverySubmitted', TRUE);
     }
     else {
       drupal_set_message($this->t('There was an error updating your preferences. Please try again.'));
     }
+  }
+
+  // Creates an array of user info for use in the data layer.
+  function deliveryDataLayer($form_process, $event_label) {
+    $delivery_edit = array();
+    if (in_array($form_process, array('Set', 'Edit'))) {
+      $delivery_edit = array(
+        'event' => 'Subscription Saved',
+        'eventCategory' => 'Subscription',
+        'eventAction' => $form_process,
+        'eventLabel' => $event_label,
+        'eventValue' => 0,
+      );
+    }
+    return $delivery_edit;
+  }
+
+  // Converts a string to a machine name style format.
+  function termNameTransform($string) {
+    $new_string = strtolower($string);
+    $new_string = preg_replace('/[^a-z0-9_]+/', '_', $new_string);
+    return preg_replace('/_+/', '_', $new_string);
+  }
+
+  // Create an array containing a user's collection of items from a text list.
+  function createTextListArray($all_items, $user_items) {
+    foreach ($user_items as $key => $user_item) {
+      if (array_key_exists($user_item, $all_items)) {
+        $all_items[$user_item] = TRUE;
+      }
+    }
+    return $all_items;
+  }
+
+  // Create an array containing a user's collection of terms.
+  function createVocabArray($all_terms, $user_terms) {
+    $vocab_array = array();
+    if (is_array($all_terms) && is_array($user_terms)) {
+      // Tidy the format of the user terms array.
+      $user_terms_filtered = array();
+      foreach ($user_terms as $user_term) {
+        $user_terms_filtered[] = $user_term['target_id'];
+      }
+      // Create the vocab array, mark to true if also in user's array.
+      foreach ($all_terms as $this_term) {
+        $term_name = $this->termNameTransform($this_term->name);
+        $vocab_array[$term_name] = FALSE;
+        if (in_array($this_term->tid, $user_terms_filtered)) {
+          $vocab_array[$term_name] = TRUE;
+        }
+      }
+    }
+    return $vocab_array;
   }
 
 }
