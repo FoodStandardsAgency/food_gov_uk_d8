@@ -30,7 +30,7 @@ class FsaNotifyAPIsms extends FsaNotifyAPI {
     $phoneNumber = $user->field_notification_sms->getString();
     // Phone number is optional field!
     if (empty($phoneNumber)) {
-      return;
+      return FALSE;
     }
 
     // Add the country code if missing.
@@ -40,6 +40,10 @@ class FsaNotifyAPIsms extends FsaNotifyAPI {
 
     // And the plus is required by notify.
     $phoneNumber = '+' . $phoneNumber;
+
+    // Add optout.
+    $lang = $user->getPreferredLangcode(TRUE);
+    $personalisation['optout'] = t('Reply STOP to opt out', [], ['langcode' => $lang])->render();
 
     // Debugging mode, just log the Notify template variables.
     if (\Drupal::state()->get('fsa_notify.collect_send_log_only')) {
