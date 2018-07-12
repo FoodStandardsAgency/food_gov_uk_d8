@@ -25,6 +25,7 @@ class FsaSettings extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
 
     $weight = 0;
+    $date_formatter = \Drupal::service('date.formatter');
 
     $form['note'] = [
       '#type' => 'item',
@@ -33,10 +34,11 @@ class FsaSettings extends FormBase {
     ];
 
     $keys = [
-      'fsa_notify.bearer_token' => t('Notify: Bearer token'),
-      'fsa_notify.api' => t('Notify API: API key'),
-      'fsa_notify.template_email' => t('Notify API: Template ID: Email'),
-      'fsa_notify.template_sms' => t('Notify API: Template ID: Sms'),
+      'fsa_notify.bearer_token' => t('Notify Bearer token'),
+      'fsa_notify.api' => t('Notify API key'),
+      'fsa_notify.template_email' => t('Notify Email template ID (English)'),
+      'fsa_notify.template_email_cy' => t('Notify Email template ID (Welsh)'),
+      'fsa_notify.template_sms' => t('Notify SMS template ID'),
     ];
 
     foreach ($keys as $key => $title) {
@@ -102,7 +104,30 @@ class FsaSettings extends FormBase {
     ];
 
     $form['stats_heading'] = [
-      '#markup' => '<h2>' . t('User statistics') . '</h2>',
+      '#markup' => '<h2>' . t('Statistics') . '</h2>',
+      '#weight' => $weight++,
+    ];
+
+    $form['last_sent'] = [
+      '#type' => 'details',
+      '#open' => TRUE,
+      '#title' => t('Last sent digests'),
+      '#weight' => $weight++,
+    ];
+
+    $form['last_sent']['daily'] = [
+      '#type' => 'item',
+      '#title' => $this->t('Last daily: @date', [
+        '@date' => $date_formatter->format(\Drupal::state()->get('fsa_notify.last_daily'), 'custom', 'l, d.m.Y - g:ia'),
+      ]),
+      '#weight' => $weight++,
+    ];
+
+    $form['last_sent']['weekly'] = [
+      '#type' => 'item',
+      '#title' => $this->t('Last weekly: @date', [
+        '@date' => $date_formatter->format(\Drupal::state()->get('fsa_notify.last_weekly'), 'custom', 'l, d.m.Y - g:ia'),
+      ]),
       '#weight' => $weight++,
     ];
 
@@ -208,6 +233,7 @@ class FsaSettings extends FormBase {
       'fsa_notify.bearer_token',
       'fsa_notify.api',
       'fsa_notify.template_email',
+      'fsa_notify.template_email_cy',
       'fsa_notify.template_sms',
     ];
 

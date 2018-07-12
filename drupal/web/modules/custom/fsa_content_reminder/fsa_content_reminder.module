@@ -103,8 +103,8 @@ function fsa_content_reminder_cron() {
 
   if (\Drupal::service('email.validator')->isValid($to) && ($next_dispatch == '' || $next_dispatch < time())) {
 
-    // Define base_url. drupal/fsa_notify/src/FsaNotifyMessage.php duplicates
-    // this same funcitonality.
+    // Define base_url. drupal/fsa_notify/src/FsaNotifyMessage::baseUrl() has
+    // this same functionality.
     // @todo: consider moving this logic into a service.
     switch (getenv("WKV_SITE_ENV")) {
       case 'local':

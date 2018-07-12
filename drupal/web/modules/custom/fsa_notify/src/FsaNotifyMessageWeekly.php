@@ -7,14 +7,11 @@ namespace Drupal\fsa_notify;
  */
 class FsaNotifyMessageWeekly extends FsaNotifyMessage {
 
-  private $subject;
-
   /**
    * {@inheritdoc}
    */
   public function __construct() {
     parent::__construct();
-    $this->subject = t('FSA weekly digest update');
   }
 
   /**
@@ -24,14 +21,11 @@ class FsaNotifyMessageWeekly extends FsaNotifyMessage {
 
     $items = implode("\n", $items);
 
-    // Variables for the Notify template.
+    // Gather alert content for the Notify template.
     $items = [
       [
-        'subject' => $this->subject->render(),
         'date' => $this->date,
         'alert_items' => preg_replace('/^/m', self::NOTIFY_TEMPLATE_MESSAGE_STYLE_PREFIX, $items),
-        'login' => $this->loginUrl,
-        'unsubscribe' => $this->unsubscribeUrl,
       ],
     ];
 
@@ -42,7 +36,7 @@ class FsaNotifyMessageWeekly extends FsaNotifyMessage {
    * {@inheritdoc}
    */
   protected function theme($item, $lang) {
-    if ($item->hasTranslation($lang)) {
+    if ($item->getType() != 'alert' && $item->hasTranslation($lang)) {
       $item = $item->getTranslation($lang);
     }
 
@@ -53,7 +47,7 @@ class FsaNotifyMessageWeekly extends FsaNotifyMessage {
     $line2 = $item->getTitle();
 
     $link = $this->urlAlias($item, $lang);
-    $more = t('Read more');
+    $more = FsaNotifyMessage::ST_READMORE;
     $line3 = sprintf('%s: %s', $more, $link);
 
     $item = "$line1\n$line2\n$line3\n";
