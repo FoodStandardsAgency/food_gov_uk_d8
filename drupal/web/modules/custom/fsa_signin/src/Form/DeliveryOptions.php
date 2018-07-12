@@ -211,6 +211,7 @@ class DeliveryOptions extends FormBase {
     $account->set('field_email_frequency', $email_frequency);
 
     $language = $form_state->getValue('language');
+    $account->set('langcode', $language);
     $account->set('preferred_langcode', $language);
 
     if ($account->save()) {

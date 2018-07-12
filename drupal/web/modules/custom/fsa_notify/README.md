@@ -69,11 +69,26 @@ Consult LastPass, Luke or Sally for access. We have a shared team.
 
 2) Other set is Template IDs which specify different kind of templates to use.
 
+##### Email templates
+
+Emails are sent with language specific templates as of FSA-980. The email 
+templates are named as *Alerts email template (English)* and *Alerts email 
+template (Welsh)* in [Notify UI](https://www.notifications.service.gov.uk/services/6f00837a-4b8f-4ddd-ae96-ca2d3035fe57/templates).
+
+##### SMS templates
+Text message template is named *Alerts SMS template v2* as of FSA-980. The SMS 
+template only takes two variables, the alert sms text `message`and opt-out text 
+`optout` and is translated as per user language preference. 
+
 ## Fields used
 
 ### user.field_notification_method DEPRECATED in favor of field_email_frequency
 
 User can choose the email frequency for getting updates from the site.
+
+### user.field_email_frequency
+
+The user email frequency preference.
 
 ### user.field_notification_sms
 
@@ -83,12 +98,12 @@ This field has additional check by `Field validation` module for data integrity:
 * prevent spaces
 * require the number begin with plus sign followed by numbers
 
-### user.field_notification_cache
+### user.field_notification_cache and user.field_notification_cache_sms
 
-This field is not visible for user, but here we collect alerts per user to be 
-sent.
+These fields are not visible for user but here we collect alerts per user to be 
+sent, separately for emails and sms.
 
-When alerts are sent out, this field is emptied.
+When alerts are sent out the fields are emptied.
 
 ### user.field_subscribed_notifications
 
