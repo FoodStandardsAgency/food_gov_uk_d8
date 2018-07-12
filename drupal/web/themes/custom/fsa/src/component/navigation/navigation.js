@@ -206,12 +206,41 @@ function navigation () {
     }
   }
 
+  const navigationMode = {
+    isMobile: null,
+    windowWidth: null,
+    setMode: (isMobile) => {
+      var currentState = navigationMode.isMobile
+      navigationMode.isMobile = isMobile
+
+      // Only initialize nav if mode has changed.
+      if (currentState !== navigationMode.isMobile) {
+        initializeNav()
+      }
+    },
+    getMode: () => {
+      return navigationMode.isMobile
+    },
+    updateMode: () => {
+      // Refresh
+      navigationMode.windowWidth = window.innerWidth
+      navigationMode.setMode(checkMediaQuery() === breakpoints.xsmall)
+
+      return navigationMode.getMode()
+    }
+  }
+
   // Add keyboard navigation so the megamenu is easy to use with a keyboard.
   const menuItemActionArray = [...navigationElementArray[0].querySelectorAll(settings.menuItemActionSelector)]
   menuItemActionArray.forEach((element) => {
     const menuItemAction = element
 
     const keyDownHandler = (event) => {
+      // No arrow navigation in mobile mode.
+      if (navigationMode.getMode()) {
+        return;
+      }
+
       const item = event.target
       const keycode = event.keyCode
 
@@ -457,24 +486,29 @@ function navigation () {
       // Toggler button
       const togglerElement = traversing.siblings.prev(element, '.js-nav-item-toggler', true)
 
-      // Add custom event listener for closing
+      // Add custom event listener for closing.
       element.addEventListener('navigation:close', function (e) {
         state.toggle(element, content, 'is-open', false)
+
+        // Match toggler element state if exists.
         if (togglerElement) {
           state.match(togglerElement, element, 'is-open')
         }
       })
 
-      // Add custom event listener for opening
+      // Add custom event listener for opening.
       element.addEventListener('navigation:open', function (e) {
-        // Set all first level items as closed.
-        firstLevelLinkArray.forEach((element) => {
-          var toggleEvent = new Event('navigation:close')
-          element.dispatchEvent(toggleEvent);
-        })
+        if (!navigationMode.getMode()) {
+          // Set all first level items as closed.
+          firstLevelLinkArray.forEach((element) => {
+            var toggleEvent = new Event('navigation:close')
+            element.dispatchEvent(toggleEvent);
+          })
+        }
 
         state.toggle(element, content, 'is-open', true)
 
+        // Match toggler element state if exists.
         if (togglerElement) {
           state.match(togglerElement, element, 'is-open')
         }
@@ -482,78 +516,78 @@ function navigation () {
 
       // Add click listener
       element.addEventListener('click', function (e) {
-        if (checkMediaQuery() === breakpoints.xsmall) {
+        if (navigationMode.getMode()) {
           e.preventDefault()
 
           var openEvent = new Event('navigation:open')
           element.dispatchEvent(openEvent)
 
+          // Focus on first child item and add class for styling reasons.
           content.children[0].children[0].focus()
           navigationElementArray[0].classList.add('has-open-submenu')
+        }
+        else {
+          // If first level item isn't open when clicked, prevent default
+          // and open instead. This is a common hover workaround for touch.
+          if ([...element.classList].indexOf('navigation__link--level-1') !== -1 && [...content.classList].indexOf('is-open') === -1) {
+            e.preventDefault()
+
+            var toggleEvent = new Event('navigation:open')
+            element.dispatchEvent(toggleEvent);
+          }
         }
       })
 
       // Add a focus listener
       element.addEventListener('focus', function (e) {
-        if (checkMediaQuery() === breakpoints.xsmall) {
+        // Special focus handling in mobile navigation mode.
+        if (navigationMode.getMode()) {
+          // Close all tree if focused on first level item.
           if ([...element.classList].indexOf('navigation__link--level-1') !== -1) {
             firstLevelLinkArray.forEach((element) => {
-              state.off({element: element, type: 'button'}, 'is-open')
-            })
-
-            secondLevelMenuArray.forEach((element) => {
-              state.off({element, type: 'content'}, 'is-open')
+              var toggleEvent = new Event('navigation:close')
+              element.dispatchEvent(toggleEvent);
             })
           }
 
+          // Close all second level trees if focused on second level item.
           if ([...element.classList].indexOf('navigation__link--level-2') !== -1) {
             secondLevelLinkArray.forEach((element) => {
-              state.off({element: element, type: 'button'}, 'is-open')
-            })
-
-            thirdLevelMenuArray.forEach((element) => {
-              state.off({element, type: 'content'}, 'is-open')
+              var toggleEvent = new Event('navigation:close')
+              element.dispatchEvent(toggleEvent);
             })
           }
         }
       }, true)
 
-      // Add a mouseenter listener
+      // Add a mouseenter listener (hover).
+      // Hover has to be handled in JS, because inert messes with CSS hover.
       element.addEventListener('mouseenter', function (e) {
-        if (checkMediaQuery() === breakpoints.xsmall) {
-
-        } else {
-          firstLevelLinkArray.forEach((element) => {
-            state.remove({element: element, type: 'button'}, 'is-open')
-          })
-
-          secondLevelMenuArray.forEach((element) => {
-            state.remove({element: element, type: 'content'}, 'is-open')
-          })
-        }
-      }, true)
-
-      // If touch device
-      element.addEventListener('touchstart', function addtouchclass (e) {
-        if (checkMediaQuery() !== breakpoints.xsmall) {
-          if ([...content.classList].indexOf('is-open') !== -1) {
-            state.off({ element: content, type: 'content' }, 'is-open')
-          } else {
-            e.preventDefault()
-
-            firstLevelLinkArray.forEach((element) => {
-              state.off({ element: element, type: 'button' }, 'is-open')
-            })
-
-            secondLevelMenuArray.forEach((element) => {
-              state.off({ element, type: 'content' }, 'is-open')
-            })
-
-            state.on({ element, type: 'button' }, 'is-open')
-            state.on({ element: content, type: 'content' }, 'is-open')
+        if (!navigationMode.getMode()) {
+          if ([...element.classList].indexOf('navigation__link--level-1') !== -1) {
+            var toggleEvent = new Event('navigation:open')
+            element.dispatchEvent(toggleEvent)
           }
         }
-      }, false)
+      }, true)
+    })
+
+    // Close nav element when mouse leaves navigation element
+    // or enters another first level element (relatedTarget).
+    // This includes items without children!
+    navigationElementArray.forEach((element) => {
+      element.addEventListener('mouseout', function (e) {
+        if (!navigationMode.getMode()) {
+          if (!element.contains(e.relatedTarget) || [...e.relatedTarget.classList].indexOf('navigation__link--level-1') !== -1) {
+            firstLevelLinkArray.forEach((element) => {
+              if (e.relatedTarget != element) {
+                var toggleEvent = new Event('navigation:close')
+                element.dispatchEvent(toggleEvent)
+              }
+            })
+          }
+        }
+      }, true)
     })
 
     // Back link
@@ -577,31 +611,11 @@ function navigation () {
     // Close navigation/subnavigation when focused outside of navigation
     tabbableNavigationItems.forEach((element) => {
       element.addEventListener('blur', function (e) {
-        if (e.relatedTarget !== null) {
-          if (checkMediaQuery() === breakpoints.xsmall) {
-            if (tabbableNavigationItems.indexOf(e.relatedTarget) === -1) {
-              mobileNavigation.off()
-            } else if (e.relatedTarget.classList.contains('language-link')) {
-              firstLevelLinkArray.forEach((element) => {
-                state.off({ element: element, type: 'button' }, 'is-open')
-              })
-              secondLevelMenuArray.forEach((element) => {
-                state.off({ element, type: 'content' }, 'is-open')
-              })
-            }
-          } else {
-            if (tabbableNavigationItems.indexOf(e.relatedTarget) === -1) {
-              firstLevelLinkArray.forEach((element) => {
-                var toggleEvent = new Event('navigation:close')
-                element.dispatchEvent(toggleEvent)
-              })
-
-              secondLevelMenuArray.forEach((element) => {
-                var toggleEvent = new Event('navigation:close')
-                element.dispatchEvent(toggleEvent)
-              })
-            }
-          }
+        if (e.relatedTarget === null || queryParents(e.relatedTarget, settings.menuSelector) === null) {
+          firstLevelLinkArray.forEach((element) => {
+            var toggleEvent = new Event('navigation:close')
+            element.dispatchEvent(toggleEvent)
+          })
         }
       })
     })
@@ -614,7 +628,7 @@ function navigation () {
     navigationElementArray[0].classList.remove('has-open-submenu')
 
     // Set initial states
-    if (checkMediaQuery() === breakpoints.xsmall) {
+    if (navigationMode.getMode()) {
       state.off({element: menuButtonOpenElement, type: 'button'}, 'is-open')
       state.off({element: menuButtonCloseElement, type: 'button'}, 'is-open')
       state.off({element: navigationElementArray[0], type: 'content'}, 'is-open')
@@ -678,24 +692,18 @@ function navigation () {
     })
   }
 
-  // Current window width
-  let windowWidth = window.innerWidth
-
   const resizeHandler = debounce(function () {
     // Check if vertical resizing
-    if (window.innerWidth === windowWidth) {
+    if (window.innerWidth === navigationMode.windowWidth) {
       return false
     }
 
-    windowWidth = window.innerWidth
-
-    initializeNav()
+    navigationMode.updateMode()
   }, 250)
-
   window.addEventListener('resize', resizeHandler)
 
   initializeListeners()
-  initializeNav()
+  navigationMode.updateMode()
 }
 
 module.exports = navigation
