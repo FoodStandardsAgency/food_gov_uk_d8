@@ -40,3 +40,11 @@ function fsa_notify_update_8002(&$sandbox) {
     $connection->truncate($table)->execute();
   }
 }
+
+/**
+ * Update user langcode to preferred_langcode.
+ */
+function fsa_notify_update_8003(&$sandbox) {
+  $connection = Database::getConnection();
+  $connection->query("UPDATE {users_field_data} SET langcode = preferred_langcode WHERE langcode != preferred_langcode");
+}
