@@ -172,107 +172,111 @@
   {% endif %}
 
   <a id="main-content" tabindex="-1"></a>
-  {% if (page.hero is defined and page.hero|render|striptags|trim) or (page.secondary_menu) %}
-  <div class="layout hero-wrapper">
-    <div class="layout__container">
-      <div class="layout__content hero-wrapper__content">
-          <section class="hero{% if page.hero is defined and page.hero|render|striptags|trim %} hero--with-content{% endif %}">
-            {% if page.hero is defined and page.hero|render|striptags|trim %}
-              {% if hero_image_url %}
-                <div class="hero__background hero__background--image" style="background-image: url({{ hero_image_url }});">
-                </div>
-              {% else %}
-                <div class="hero__background hero__background--pattern">
-                </div>
-              {% endif %}
-              {{ page.hero }}
-            {% endif %}
+  <main  role="main">
 
-            {% if page.secondary_menu %}
-              {{ page.secondary_menu }}
-            {% endif %}
-          </section>
+    {% if (page.hero is defined and page.hero|render|striptags|trim) or (page.secondary_menu) %}
+    <div class="layout hero-wrapper">
+      <div class="layout__container">
+        <div class="layout__content hero-wrapper__content">
+            <section class="hero{% if page.hero is defined and page.hero|render|striptags|trim %} hero--with-content{% endif %}">
+              {% if page.hero is defined and page.hero|render|striptags|trim %}
+                {% if hero_image_url %}
+                  <div class="hero__background hero__background--image" style="background-image: url({{ hero_image_url }});">
+                  </div>
+                {% else %}
+                  <div class="hero__background hero__background--pattern">
+                  </div>
+                {% endif %}
+                {{ page.hero }}
+              {% endif %}
+
+              {% if page.secondary_menu %}
+                {{ page.secondary_menu }}
+              {% endif %}
+            </section>
+        </div>
       </div>
     </div>
-  </div>
-  {% endif %}
+    {% endif %}
 
-  {% if page.highlighted %}
-    <div class="site-highlighted">
-      {{ page.highlighted }}
-    </div>
-  {% endif %}
+    {% if page.highlighted %}
+      <div class="site-highlighted">
+        {{ page.highlighted }}
+      </div>
+    {% endif %}
 
-  {% if page.help %}
-    <div class="site-highlighted">
-      {{ page.help }}
-    </div>
-  {% endif %}
+    {% if page.help %}
+      <div class="site-highlighted">
+        {{ page.help }}
+      </div>
+    {% endif %}
 
-  {% if page.content_top %}
-    <div class="layout layout--content-top">
+    {% if page.content_top %}
+      <div class="layout layout--content-top">
+        <div class="layout__container">
+          <div class="layout__content">
+            {{ page.content_top }}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+      <div class="layout layout--main {% if page.sidebar_first or page.sidebar_second %} layout--with-sidebar js-sticky-container{% else %} layout--with-no-sidebar{% endif %}{% if page.sidebar_second %} layout--with-secondary-sidebar{% endif %}">
+        <div class="layout__container layout__container--main">
+          {% if page.sidebar_first %}
+            <aside class="layout__sidebar js-sticky-element" role="complementary">
+              <div class="sidebar">
+                <nav role="navigation" class="navigation-side">
+
+                  {% if page.sidebar_first %}
+                    {{ page.sidebar_first }}
+                  {% endif %}
+
+                </nav>
+              </div>
+            </aside>
+          {% endif %}
+
+          <div class="layout__content layout__content--main {% if page.sidebar_first or page.sidebar_second %}layout__content--with-sidebar{% endif %} js-content">
+            {{ page.content }}
+            {{ satisfaction_form }} {# satisfaction_form is the "Give us feedback" form attached to the end of selected pages #}
+          </div>
+
+          {% if page.sidebar_second %}
+            <aside class="layout__sidebar layout__sidebar--secondary js-sticky-element" role="complementary">
+              <div class="sidebar">
+                <div role="navigation" class="navigation-side">
+
+                  {% if page.sidebar_second %}
+                    {{ page.sidebar_second }}
+                  {% endif %}
+
+                </div>
+              </div>
+            </aside>
+          {% endif %}
+        </div>
+      </div>
+
+    <div class="layout">
       <div class="layout__container">
         <div class="layout__content">
-          {{ page.content_top }}
+          {{ page.content_bottom }}
         </div>
       </div>
     </div>
-  {% endif %}
 
-    <main role="main" class="layout layout--main {% if page.sidebar_first or page.sidebar_second %} layout--with-sidebar js-sticky-container{% else %} layout--with-no-sidebar{% endif %}{% if page.sidebar_second %} layout--with-secondary-sidebar{% endif %}">
-      <div class="layout__container layout__container--main">
-        {% if page.sidebar_first %}
-          <aside class="layout__sidebar js-sticky-element" role="complementary">
-            <div class="sidebar">
-              <nav role="navigation" class="navigation-side">
-
-                {% if page.sidebar_first %}
-                  {{ page.sidebar_first }}
-                {% endif %}
-
-              </nav>
-            </div>
-          </aside>
-        {% endif %}
-
-        <div class="layout__content layout__content--main {% if page.sidebar_first or page.sidebar_second %}layout__content--with-sidebar{% endif %} js-content">
-          {{ page.content }}
-          {{ satisfaction_form }} {# satisfaction_form is the "Give us feedback" form attached to the end of selected pages #}
-        </div>
-
-        {% if page.sidebar_second %}
-          <aside class="layout__sidebar layout__sidebar--secondary js-sticky-element" role="complementary">
-            <div class="sidebar">
-              <div role="navigation" class="navigation-side">
-
-                {% if page.sidebar_second %}
-                  {{ page.sidebar_second }}
-                {% endif %}
-
-              </div>
-            </div>
-          </aside>
-        {% endif %}
-      </div>
-    </main>
-
-  <div class="layout">
-    <div class="layout__container">
-      <div class="layout__content">
-        {{ page.content_bottom }}
-      </div>
-    </div>
-  </div>
-
-  <div class="layout footer-top-wrapper">
-    <div class="layout__container footer-top-wrapper__container">
-      <div class="layout__content footer-top-wrapper__content">
-        <div class="footer-top">
-          {{ page.footer_top }}
+    <div class="layout footer-top-wrapper">
+      <div class="layout__container footer-top-wrapper__container">
+        <div class="layout__content footer-top-wrapper__content">
+          <div class="footer-top">
+            {{ page.footer_top }}
+          </div>
         </div>
       </div>
     </div>
-  </div>
+
+  </main>
 
   <footer class="layout footer-wrapper" role="contentinfo">
 
