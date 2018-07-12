@@ -21,9 +21,12 @@ display:
         nation:
           expose:
             label: Rhanbarth
+      header:
+        result:
+          content: '<h2 class="visually-hidden">Search results</h2><div class="visually-hidden" aria-live="polite">Yn dangos @start-@end o @total</div>'
       footer:
         result:
-          content: '<span class="search-result-page-count" aria-live="polite">Yn dangos @start-@end o @total</span>'
+          content: '<span class="search-result-page-count">Yn dangos @start-@end o @total</span>'
         area_text_custom:
           content: "<div class=\"link-to-archieve\">\r\n<span>Ymgynghoriadau blaenorol</span> <a href=\"http://webarchive.nationalarchives.gov.uk/20171207145535/https://www.food.gov.uk/news-updates/consultations/search\">Archifau Cenedlaethol</a>\r\n</div>"
       exposed_form:
