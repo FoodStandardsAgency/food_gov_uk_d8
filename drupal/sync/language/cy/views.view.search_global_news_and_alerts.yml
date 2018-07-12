@@ -10,7 +10,7 @@ display:
             last: 'Diwethaf »'
       footer:
         result:
-          content: 'Yn dangos @start-@end o @total'
+          content: '<span class="search-result-page-count" aria-live="polite">Yn dangos @start-@end o @total</span>'
       filters:
         news_type:
           expose:
