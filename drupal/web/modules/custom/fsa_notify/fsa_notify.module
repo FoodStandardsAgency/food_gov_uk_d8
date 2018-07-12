@@ -7,8 +7,10 @@
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\fsa_notify\FsaNotifyAPI;
 use Drupal\fsa_notify\FsaNotifyAPIemail;
 use Drupal\fsa_notify\FsaNotifyAPIsms;
+use Drupal\fsa_notify\FsaNotifyMessage;
 use Drupal\fsa_notify\FsaNotifyMessageDaily;
 use Drupal\fsa_notify\FsaNotifyMessageImmediate;
 use Drupal\fsa_notify\FsaNotifyMessageSms;
@@ -35,33 +37,6 @@ function fsa_notify_preprocess_page(&$variables) {
       drupal_set_message(t('<strong>NB!</strong> Notify sending is enabled with the live key and next cron run could potentially send notifications to subscribers of this environment database.<br /><br />Unless you know what you are doing immediately go to <a href="/admin/config/fsa/notify">Notify settings</a> and set sending in debug mode, use test-key or disable completely.'), 'warning');
     }
   }
-}
-
-/**
- * Implements hook_form_user_form_alter().
- */
-function fsa_notify_form_user_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  $form['field_notification_sms']['#element_validate'][] = 'fsa_notify_validate';
-}
-
-/**
- * Data integrity: require phone number if user chooses sms method.
- */
-function fsa_notify_validate(&$form, FormStateInterface $form_state) {
-
-  $field = 'field_notification_method';
-  $method = $form_state->getValue($field);
-  if (empty($method[0]['value']) || $method[0]['value'] != 'sms') {
-    return;
-  }
-
-  $field = 'field_notification_sms';
-  $sms = $form_state->getValue($field);
-  if (!empty($sms[0]['value'])) {
-    return;
-  }
-
-  $form_state->setErrorByName($field, t('If "Notification method" is SMS then "Notification SMS" is required.'));
 }
 
 /**
@@ -206,16 +181,18 @@ function fsa_notify_cron() {
   $state_key = 'fsa_notify.last_daily';
   $formatter = new FsaNotifyMessageDaily();
   if (fsa_notify_daily_is_ready_to_send($state_key)) {
-    fsa_notify_send($storage, $notifier_email, $formatter, 'daily');
-    fsa_notify_sent($state_key);
+    if (fsa_notify_send($storage, $notifier_email, $formatter, 'daily')) {
+      fsa_notify_sent($state_key);
+    }
   }
 
   // Weekly.
   $state_key = 'fsa_notify.last_weekly';
   $formatter = new FsaNotifyMessageWeekly();
   if (fsa_notify_weekly_is_ready_to_send($state_key)) {
-    fsa_notify_send($storage, $notifier_email, $formatter, 'weekly');
-    fsa_notify_sent($state_key);
+    if (fsa_notify_send($storage, $notifier_email, $formatter, 'weekly')) {
+      fsa_notify_sent($state_key);
+    }
   }
 }
 
@@ -247,7 +224,7 @@ function fsa_notify_daily_is_ready_to_send($state_key, $now = NULL) {
     $now = time();
   }
   $window = 3 * 60 * 60;
-  $interval = 24 * 60 * 60;
+  $interval = 24 * 60 * 60 - $window;
   // Calculation base: seconds since 00:00:00.
   $start = 7 * 60 * 60;
   $current = date('G', $now) * 60 * 60 + date('i', $now) * 60 + date('s', $now);
@@ -272,7 +249,7 @@ function fsa_notify_weekly_is_ready_to_send($state_key, $now = NULL) {
     $now = time();
   }
   $window = 5 * 60 * 60;
-  $interval = 7 * 24 * 60 * 60;
+  $interval = 7 * 24 * 60 * 60 - $window;
   // Calculation base: 1 (for Monday) through 7 (for Sunday)
   $start = 1 * 24 * 60 * 60 + 7 * 60 * 60;
   $current = date('N', $now) * 24 * 60 * 60 + date('G', $now) * 60 * 60 + date('i', $now) * 60 + date('s', $now);
@@ -360,19 +337,23 @@ function fsa_notify_queue_process() {
  *
  * @param \Drupal\fsa_notify\FsaNotifyStorage $storage
  *   FsaNotifyStorage object.
- * @param object $notifier
+ * @param \Drupal\fsa_notify\FsaNotifyAPI $notifier
  *   Notifier object.
- * @param object $formatter
+ * @param \Drupal\fsa_notify\FsaNotifyMessage $formatter
  *   Notifymessage formatter object.
  * @param string $type
- *   Type of send (SMS/immediate/digest).
+ *   Type of send (sms|immediate|daily|weekly).
+ *
+ * @return bool
+ *   True of false for if the whole batch of type was processed so daily/weekly
+ *    knows to pause until next digest.
  */
-function fsa_notify_send(FsaNotifyStorage $storage, $notifier, $formatter, $type) {
+function fsa_notify_send(FsaNotifyStorage $storage, FsaNotifyAPI $notifier, FsaNotifyMessage $formatter, $type) {
   fsa_notify_timer('start', $type);
   $batch = $storage->getAllType($type);
   foreach ($batch as $uid => $messages) {
     $user = User::load($uid);
-    $lang = $user->getPreferredLangcode();
+    $lang = $user->getPreferredLangcode(TRUE);
     $messages = $formatter->format($messages, $lang);
     foreach ($messages as $personalisation) {
       try {
@@ -388,6 +369,8 @@ function fsa_notify_send(FsaNotifyStorage $storage, $notifier, $formatter, $type
   \Drupal::entityManager()->getStorage('node')->resetCache();
   \Drupal::entityManager()->getStorage('user')->resetCache();
   fsa_notify_timer('stop', $type);
+
+  return !count($batch);
 }
 
 /**
@@ -396,7 +379,7 @@ function fsa_notify_send(FsaNotifyStorage $storage, $notifier, $formatter, $type
  * @param string $event
  *   Type of the event (start|count|stop).
  * @param string $type
- *   The type (SMS/immediate/digest).
+ *   Type of send (queue|sms|immediate|daily|weekly).
  */
 function fsa_notify_timer($event, $type) {
 
