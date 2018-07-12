@@ -11,6 +11,7 @@ function navigation () {
     menuSelector: 'ul.navigation__menu',
     groupSelector: 'li.navigation__item.navigation__item--level-2',
     listItemSelector: 'li.navigation__item--level-1, li.navigation__item--level-3',
+    linkElementSelector: '.navigation__link',
     menuItemActionSelector: 'li.navigation__item--level-1 .navigation__link--level-1, li.navigation__item--level-3 .navigation__link--level-3'
   }
 
@@ -47,14 +48,14 @@ function navigation () {
     prev: function (item) {
       let currentItem = queryParents(item, settings.listItemSelector)
 
-      if (currentItem && currentItem.previousElementSibling.matches(settings.listItemSelector)) {
+      if (currentItem && currentItem.previousElementSibling && currentItem.previousElementSibling.matches(settings.listItemSelector)) {
         return currentItem.previousElementSibling
       }
     },
     next: function (item) {
       let currentItem = queryParents(item, settings.listItemSelector)
 
-      if (currentItem && currentItem.nextElementSibling.matches(settings.listItemSelector)) {
+      if (currentItem && currentItem.nextElementSibling && currentItem.nextElementSibling.matches(settings.listItemSelector)) {
         return currentItem.nextElementSibling
       }
     },
@@ -271,6 +272,10 @@ function navigation () {
           // 2. Traverse to the previous top item.
           prevTopLevelItem = traversing.top.prev(listItem)
           if (prevTopLevelItem) {
+            linkElement = prevTopLevelItem.querySelector(settings.linkElementSelector)
+            var toggleEvent = new Event('navigation:open')
+            linkElement.dispatchEvent(toggleEvent)
+
             traversing.focus(prevTopLevelItem)
             event.preventDefault()
             break
@@ -302,6 +307,14 @@ function navigation () {
             event.preventDefault()
           }
 
+          // 3. If item is already top level, close submenu.
+          if (itemLevel == 1) {
+            var linkElement = listItem.querySelector(settings.menuItemActionSelector)
+            var toggleEvent = new Event('navigation:close')
+
+            linkElement.dispatchEvent(toggleEvent)
+          }
+
           break
 
         // Logic for key RIGHT:
@@ -323,6 +336,10 @@ function navigation () {
           // 2. Traverse to the next top item.
           nextTopLevelItem = traversing.top.next(listItem)
           if (nextTopLevelItem) {
+            linkElement = nextTopLevelItem.querySelector(settings.linkElementSelector)
+            var toggleEvent = new Event('navigation:open')
+            linkElement.dispatchEvent(toggleEvent)
+
             traversing.focus(nextTopLevelItem)
             event.preventDefault()
             break
@@ -611,7 +628,7 @@ function navigation () {
     // Close navigation/subnavigation when focused outside of navigation
     tabbableNavigationItems.forEach((element) => {
       element.addEventListener('blur', function (e) {
-        if (e.relatedTarget === null || queryParents(e.relatedTarget, settings.menuSelector) === null) {
+        if (e.relatedTarget === null || (!e.relatedTarget.classList.contains('js-nav-item-with-child') && e.relatedTarget.classList.contains('navigation__link--level-1')) || queryParents(e.relatedTarget, settings.menuSelector) === null) {
           firstLevelLinkArray.forEach((element) => {
             var toggleEvent = new Event('navigation:close')
             element.dispatchEvent(toggleEvent)
