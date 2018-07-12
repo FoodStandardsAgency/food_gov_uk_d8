@@ -299,12 +299,12 @@ class DeliveryOptions extends FormBase {
     }
   }
 
-  /*
+  /**
    * Creates an array of user info for use in the data layer.
    */
-  function deliveryDataLayer($form_process, $event_label) {
+  private function deliveryDataLayer($form_process, $event_label) {
     $delivery_edit = [];
-    if (in_array($form_process, array('Set', 'Edit'))) {
+    if (in_array($form_process, ['Set', 'Edit'])) {
       $delivery_edit = [
         'event' => 'Subscription Saved',
         'eventCategory' => 'Subscription',
@@ -316,19 +316,19 @@ class DeliveryOptions extends FormBase {
     return $delivery_edit;
   }
 
-  /*
+  /**
    * Converts a string to a machine name style format.
    */
-  function termNameTransform($string) {
+  private function termNameTransform($string) {
     $new_string = strtolower($string);
     $new_string = preg_replace('/[^a-z0-9_]+/', '_', $new_string);
     return preg_replace('/_+/', '_', $new_string);
   }
 
-  /*
+  /**
    * Create an array containing a user's collection of items from a text list.
    */
-  function createTextListArray($all_items, $user_items) {
+  private function createTextListArray($all_items, $user_items) {
     foreach ($user_items as $key => $user_item) {
       if (array_key_exists($user_item, $all_items)) {
         $all_items[$user_item] = TRUE;
@@ -337,14 +337,14 @@ class DeliveryOptions extends FormBase {
     return $all_items;
   }
 
-  /*
+  /**
    * Create an array containing a user's collection of terms.
    */
-  function createVocabArray($all_terms, $user_terms) {
+  private function createVocabArray($all_terms, $user_terms) {
     $vocab_array = [];
     if (is_array($all_terms) && is_array($user_terms)) {
       // Tidy the format of the user terms array.
-      $user_terms_filtered = array();
+      $user_terms_filtered = [];
       foreach ($user_terms as $user_term) {
         $user_terms_filtered[] = $user_term['target_id'];
       }
