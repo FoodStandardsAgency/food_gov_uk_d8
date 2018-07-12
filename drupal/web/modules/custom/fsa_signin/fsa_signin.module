@@ -75,9 +75,7 @@ function fsa_signin_form_alter(&$form, FormStateInterface $form_state, $form_id)
     $path_args = explode('/', $current_path);
     // If we have the expected URL, assign the UID to the data layer.
     if ($path_args[1] == 'user' && $path_args[2] == 'reset' && is_numeric($path_args[3])) {
-      datalayer_add(array(
-        'userUid' => $path_args[3],
-      ));
+      datalayer_add(['userUid' => $path_args[3]]);
     }
   }
 }

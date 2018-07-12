@@ -197,9 +197,7 @@ class DefaultController extends ControllerBase {
     $reg_uid = $session->get('regUid');
     if ($reg_uid) {
       // Add the UID to the data layer, replacing the 0 default.
-      datalayer_add(array(
-        'userUid' => $reg_uid,
-      ));
+      datalayer_add(['userUid' => $reg_uid]);
       // Delete the session value for when the user navigates away.
       $session->delete('regUid');
     }
