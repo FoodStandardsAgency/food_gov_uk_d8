@@ -259,13 +259,14 @@ function navigation () {
         // 2. If one doesn't exist (on first group),
         // traverse to the previous top item.
         case keyboard.LEFT:
+          event.preventDefault()
+
           listItem = queryParents(item, settings.listItemSelector)
           group = traversing.group.prev(listItem)
 
           // 1. Traverse to the previous group.
           if (group) {
             traversing.focus(group)
-            event.preventDefault()
             break
           }
 
@@ -277,7 +278,7 @@ function navigation () {
             linkElement.dispatchEvent(toggleEvent)
 
             traversing.focus(prevTopLevelItem)
-            event.preventDefault()
+
             break
           }
 
@@ -289,6 +290,8 @@ function navigation () {
         // OR:
         // 2. If no sibling, try and traverse to the outer level.
         case keyboard.UP:
+          event.preventDefault()
+
           listItem = queryParents(item, settings.listItemSelector)
           itemLevel = traversing.getLevel(listItem)
           let upperItem
@@ -296,7 +299,6 @@ function navigation () {
           // 1. If item level is over 2, traverse between siblings first.
           if (itemLevel > 2 && (siblingItem = traversing.prev(item))) {
             traversing.focus(siblingItem)
-            event.preventDefault()
             break
           }
 
@@ -304,7 +306,6 @@ function navigation () {
           upperItem = traversing.out(listItem)
           if (upperItem) {
             traversing.focus(upperItem)
-            event.preventDefault()
           }
 
           // 3. If item is already top level, close submenu.
@@ -323,13 +324,14 @@ function navigation () {
         // 2. If one doesn't exist (on last group),
         // traverse to next top item.
         case keyboard.RIGHT:
+          event.preventDefault()
+
           listItem = queryParents(item, settings.listItemSelector)
 
           // 1. Traverse to the next group.
           group = traversing.group.next(listItem)
           if (group) {
             traversing.focus(group)
-            event.preventDefault()
             break
           }
 
@@ -341,7 +343,6 @@ function navigation () {
             linkElement.dispatchEvent(toggleEvent)
 
             traversing.focus(nextTopLevelItem)
-            event.preventDefault()
             break
           }
 
@@ -354,6 +355,8 @@ function navigation () {
         // OR:
         // 3. If there's no sibling, traverse to next group.
         case keyboard.DOWN:
+          event.preventDefault()
+
           listItem = queryParents(item, settings.listItemSelector)
           itemLevel = traversing.getLevel(listItem)
           let innerItem = traversing.in(listItem)
@@ -368,7 +371,6 @@ function navigation () {
             }
 
             traversing.focus(innerItem)
-            event.preventDefault()
             break
           }
 
@@ -376,7 +378,6 @@ function navigation () {
           siblingItem = traversing.next(item)
           if (siblingItem) {
             traversing.focus(siblingItem)
-            event.preventDefault()
             break
           }
 
@@ -384,9 +385,10 @@ function navigation () {
           group = traversing.group.next(listItem)
           if (group) {
             traversing.focus(group)
-            event.preventDefault()
             break
           }
+
+          break
 
           // Logic for key SPACE:
           // Toggle (open if closed, close if opened) first level items.
@@ -405,9 +407,8 @@ function navigation () {
               }
 
               linkElement.dispatchEvent(toggleEvent)
+              event.preventDefault()
             }
-
-            event.preventDefault()
             break;
 
           break;
