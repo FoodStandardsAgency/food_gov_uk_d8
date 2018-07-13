@@ -8,6 +8,7 @@ use Drupal\fsa_custom\FsaCustomHelper;
 use Drupal\fsa_signin\Controller\DefaultController;
 use Drupal\user\Entity\User;
 use Drupal\fsa_signin\SignInService;
+use Drupal\Component\Utility\Html;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -240,7 +241,7 @@ class DeliveryOptions extends FormBase {
     $field_email_frequency = [
       'immediate' => FALSE,
       'daily' => FALSE,
-      'weekly' => FALSE
+      'weekly' => FALSE,
     ];
     if (array_key_exists($email_frequency, $field_email_frequency)) {
       $field_email_frequency[$email_frequency] = TRUE;
@@ -301,6 +302,14 @@ class DeliveryOptions extends FormBase {
 
   /**
    * Creates an array of user info for use in the data layer.
+   *
+   * @param string $form_process
+   *   A data layer action, should be either 'Set' or 'Edit'.
+   * @param array $event_label
+   *   An collection of user profile field information.
+   *
+   * @return array
+   *   Information to be added to the data layer.
    */
   private function deliveryDataLayer($form_process, $event_label) {
     $delivery_edit = [];
@@ -318,15 +327,29 @@ class DeliveryOptions extends FormBase {
 
   /**
    * Converts a string to a machine name style format.
+   *
+   * @param string $string
+   *   A term name.
+   *
+   * @return string
+   *   An updated string formatted for the data layer.
    */
   private function termNameTransform($string) {
     $new_string = strtolower($string);
-    $new_string = preg_replace('/[^a-z0-9_]+/', '_', $new_string);
-    return preg_replace('/_+/', '_', $new_string);
+    $new_string = Html::cleanCssIdentifier($new_string);
+    return preg_replace('/-+/', '_', $new_string);
   }
 
   /**
    * Create an array containing a user's collection of items from a text list.
+   *
+   * @param array $all_items
+   *   All options from the original text list field.
+   * @param array $user_items
+   *   The user's chosen options from the same field.
+   *
+   * @return array
+   *   An updated $all_items with matching user options marked as true.
    */
   private function createTextListArray($all_items, $user_items) {
     foreach ($user_items as $key => $user_item) {
@@ -339,6 +362,14 @@ class DeliveryOptions extends FormBase {
 
   /**
    * Create an array containing a user's collection of terms.
+   *
+   * @param array $all_terms
+   *   All terms from a vocabulary.
+   * @param array $user_terms
+   *   The user's chosen terms from the same vocabulary.
+   *
+   * @return array
+   *   The user's terms formatted for the data layer.
    */
   private function createVocabArray($all_terms, $user_terms) {
     $vocab_array = [];
