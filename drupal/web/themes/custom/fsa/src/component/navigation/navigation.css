@@ -748,6 +748,15 @@
   }
 }
 
+/* Assistive heading, hide completely in mobile. */
+.navigation__heading.navigation__heading--level-2 {
+  display: none;
+
+  @media (--breakpoint-sm) {
+    display: inline;
+  }
+}
+
 /* Third level menu */
 .navigation__menu.navigation__menu--level-3 {
   padding: 0;

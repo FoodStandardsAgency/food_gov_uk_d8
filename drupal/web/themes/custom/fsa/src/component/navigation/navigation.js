@@ -662,16 +662,17 @@ function navigation () {
           element.setAttribute('tabindex', '0')
           element.removeAttribute('role');
         }
-      })
 
       // Set state off from second subnavigation
       secondLevelMenuArray.forEach((element) => {
         state.off({element: element, type: 'content'}, 'is-open')
       })
 
-      // Set state off from third subnavigation
-      thirdLevelMenuArray.forEach((element) => {
-        state.off({element: element, type: 'content'}, 'is-open')
+        // Enable second level buttons, because they function in
+        // mobile mode.
+        if (element.classList.contains('navigation__link--level-2')) {
+          element.inert = false
+        }
       })
     } else {
       // Remove mobile navigation states
@@ -689,11 +690,8 @@ function navigation () {
 
         // Disable second level buttons which have a function in mobile mode,
         // but not in full mode. This fixes semantics for assistive tech.
-        if ([...element.classList].indexOf('navigation__link--level-2') !== -1) {
-          element.setAttribute('tabindex', '-1')
-          element.setAttribute('role', 'heading')
-          element.setAttribute('aria-level', '3')
-          element.removeAttribute('aria-expanded')
+        if (element.classList.contains('navigation__link--level-2')) {
+          element.inert = true
         }
       })
 

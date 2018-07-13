@@ -114,6 +114,10 @@
               aria-controls="collapsible-{{ randomID }}"
             {% endif %}
           >{{ item.title }}</button>
+
+          <span
+            class="{{ 'navigation__heading navigation__heading--level-' ~ (menu_level + 1) }} visually-hidden"
+          >{{ item.title }}</span>
         {% endif %}
 
           {% if item.below %}
