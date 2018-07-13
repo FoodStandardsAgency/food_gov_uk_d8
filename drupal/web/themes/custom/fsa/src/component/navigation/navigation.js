@@ -8,6 +8,7 @@ import state from '../../helper/toggleHelpers'
 function navigation () {
   const settings = {
     hoverClass: 'is-open',
+    mobileDrawerSelector: '.navigation-wrapper__content',
     menuSelector: 'ul.navigation__menu',
     groupSelector: 'li.navigation__item.navigation__item--level-2',
     listItemSelector: 'li.navigation__item--level-1, li.navigation__item--level-3',
@@ -504,7 +505,7 @@ function navigation () {
       // Toggler button
       const togglerElement = traversing.siblings.prev(element, '.js-nav-item-toggler', true)
 
-      // Add custom event listener for closing.
+      // Add custom event listener for closing a navigation tree.
       element.addEventListener('navigation:close', function (e) {
         state.toggle(element, content, 'is-open', false)
 
@@ -514,7 +515,7 @@ function navigation () {
         }
       })
 
-      // Add custom event listener for opening.
+      // Add custom event listener for opening a navigation tree.
       element.addEventListener('navigation:open', function (e) {
         if (!navigationMode.getMode()) {
           // Set all first level items as closed.
@@ -530,6 +531,13 @@ function navigation () {
         if (togglerElement) {
           state.match(togglerElement, element, 'is-open')
         }
+
+        // Mobile mode specifics when opening a navigation tree.
+        if (navigationMode.getMode()) {
+          // Focus on first child item and add class for styling reasons.
+          content.children[0].children[0].focus()
+          navigationElementArray[0].classList.add('has-open-submenu')
+        }
       })
 
       // Add click listener
@@ -539,10 +547,6 @@ function navigation () {
 
           var openEvent = new Event('navigation:open')
           element.dispatchEvent(openEvent)
-
-          // Focus on first child item and add class for styling reasons.
-          content.children[0].children[0].focus()
-          navigationElementArray[0].classList.add('has-open-submenu')
         }
         else {
           // If first level item isn't open when clicked, prevent default
@@ -629,11 +633,20 @@ function navigation () {
     // Close navigation/subnavigation when focused outside of navigation
     tabbableNavigationItems.forEach((element) => {
       element.addEventListener('blur', function (e) {
+        // Close first level items when focusing outside them.
         if (e.relatedTarget === null || (!e.relatedTarget.classList.contains('js-nav-item-with-child') && e.relatedTarget.classList.contains('navigation__link--level-1')) || queryParents(e.relatedTarget, settings.menuSelector) === null) {
           firstLevelLinkArray.forEach((element) => {
             var toggleEvent = new Event('navigation:close')
             element.dispatchEvent(toggleEvent)
           })
+        }
+
+        // Close mobile navigation when focusing outside it.
+        if (e.relatedTarget === null || queryParents(e.relatedTarget, settings.mobileDrawerSelector) === null) {
+          // Close mobile nav if in mobile mode.
+          if (navigationMode.getMode()) {
+            mobileNavigation.off()
+          }
         }
       })
     })
@@ -651,27 +664,28 @@ function navigation () {
       state.off({element: menuButtonCloseElement, type: 'button'}, 'is-open')
       state.off({element: navigationElementArray[0], type: 'content'}, 'is-open')
 
-      // Set state off from link items with children
+      thirdLevelMenuArray.forEach((element) => {
+        element.querySelectorAll('.navigation__link').forEach((element) => {
+          // Add tabindex
+          element.setAttribute('tabindex', '0')
+        })
+      })
+
       navigationParentItemsArray.forEach((element) => {
         // Add tabindex
         element.setAttribute('tabindex', '0')
 
-        state.off({element: element, type: 'button'}, 'is-open')
-
-        if ([...element.classList].indexOf('navigation__link--level-2') !== -1) {
-          element.setAttribute('tabindex', '0')
-          element.removeAttribute('role');
+        // Close all first level items.
+        if (element.classList.contains('navigation__link--level-1')) {
+          var closeEvent = new Event('navigation:close')
+          element.dispatchEvent(closeEvent)
         }
-      })
 
-      // Set state off from second subnavigation
-      secondLevelMenuArray.forEach((element) => {
-        state.off({element: element, type: 'content'}, 'is-open')
-      })
-
-      // Set state off from third subnavigation
-      thirdLevelMenuArray.forEach((element) => {
-        state.off({element: element, type: 'content'}, 'is-open')
+        // Enable second level buttons, because they function in
+        // mobile mode.
+        if (element.classList.contains('navigation__link--level-2')) {
+          element.inert = false
+        }
       })
     } else {
       // Remove mobile navigation states
@@ -684,23 +698,22 @@ function navigation () {
         // Add tabindex
         element.setAttribute('tabindex', '0')
 
-        var closeEvent = new Event('navigation:close')
-        element.dispatchEvent(closeEvent)
+        // Close all first level items.
+        if (element.classList.contains('navigation__link--level-1')) {
+          var closeEvent = new Event('navigation:close')
+          element.dispatchEvent(closeEvent)
+        }
 
         // Disable second level buttons which have a function in mobile mode,
         // but not in full mode. This fixes semantics for assistive tech.
-        if ([...element.classList].indexOf('navigation__link--level-2') !== -1) {
-          element.setAttribute('tabindex', '-1')
-          element.setAttribute('role', 'heading')
-          element.setAttribute('aria-level', '3')
-          element.removeAttribute('aria-expanded')
+        if (element.classList.contains('navigation__link--level-2')) {
+          element.inert = true
         }
       })
 
       // Set state off from second subnavigation
       secondLevelMenuArray.forEach((element) => {
-        var closeEvent = new Event('navigation:close')
-        element.dispatchEvent(closeEvent)
+        state.remove({ element: element, type: 'content' }, 'is-open')
       })
 
       // Set state off from third subnavigation
