@@ -716,6 +716,16 @@ blockquote {
   }
 }
 
+/* Page title with content label */
+.block-page-title {
+  display: flex;
+  flex-flow: column;
+
+  .content-label {
+    order: -1;
+  }
+}
+
 /* Content label */
 .content-label {
   text-transform: uppercase;
