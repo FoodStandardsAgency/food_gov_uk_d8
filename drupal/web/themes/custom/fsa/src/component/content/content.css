@@ -737,6 +737,16 @@ but they are inserted in DOM outside container and with inline styles.
   }
 }
 
+/* Page title with content label */
+.block-page-title {
+  display: flex;
+  flex-flow: column;
+
+  .content-label {
+    order: -1;
+  }
+}
+
 /* Content label */
 .content-label {
   text-transform: uppercase;
