@@ -58,7 +58,7 @@
     "to-camel-case": "^1.0.0",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.11",
-    "wicg-inert": "^1.1.6"
+    "wicg-inert": "^2.0"
   },
   "devDependencies": {
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
