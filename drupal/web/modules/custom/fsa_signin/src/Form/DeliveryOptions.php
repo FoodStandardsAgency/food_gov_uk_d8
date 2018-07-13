@@ -311,7 +311,7 @@ class DeliveryOptions extends FormBase {
    * @return array
    *   Information to be added to the data layer.
    */
-  private function deliveryDataLayer($form_process, $event_label) {
+  private function deliveryDataLayer($form_process, array $event_label) {
     $delivery_edit = [];
     if (in_array($form_process, ['Set', 'Edit'])) {
       $delivery_edit = [
@@ -351,7 +351,7 @@ class DeliveryOptions extends FormBase {
    * @return array
    *   An updated $all_items with matching user options marked as true.
    */
-  private function createTextListArray($all_items, $user_items) {
+  private function createTextListArray(array $all_items, array $user_items) {
     foreach ($user_items as $key => $user_item) {
       if (array_key_exists($user_item, $all_items)) {
         $all_items[$user_item] = TRUE;
@@ -371,7 +371,7 @@ class DeliveryOptions extends FormBase {
    * @return array
    *   The user's terms formatted for the data layer.
    */
-  private function createVocabArray($all_terms, $user_terms) {
+  private function createVocabArray(array $all_terms, array $user_terms) {
     $vocab_array = [];
     if (is_array($all_terms) && is_array($user_terms)) {
       // Tidy the format of the user terms array.
