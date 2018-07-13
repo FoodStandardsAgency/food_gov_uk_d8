@@ -23,11 +23,11 @@ class FsaNotifyStorageQueue extends QueueWorkerBase implements ContainerFactoryP
   protected $notifyStorage;
 
   /**
-   * Todo: document.
+   * {@inheritdoc}
    */
   public function __construct(
     EntityStorageInterface $node_storage,
-    FsaNotifyStorage $notify_storage
+    FsaNotifyStorageDBConnection $notify_storage
   ) {
     $this->nodeStorage = $node_storage;
     $this->notifyStorage = $notify_storage;

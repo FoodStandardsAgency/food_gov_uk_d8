@@ -4,6 +4,7 @@ namespace Drupal\fsa_notify;
 
 use Alphagov\Notifications\Exception\ApiException;
 use Alphagov\Notifications\Exception\NotifyException;
+use Drupal\Core\Url;
 use Drupal\user\Entity\User;
 use Drupal\Component\Utility\UrlHelper;
 
@@ -19,7 +20,8 @@ class FsaNotifyAPIemail extends FsaNotifyAPI {
    */
   public function __construct() {
     $state_key = "fsa_notify.template_email";
-    parent::__construct($state_key);
+    $state_key_cy = "fsa_notify.template_email_cy";
+    parent::__construct($state_key, $state_key_cy);
   }
 
   /**
@@ -27,16 +29,54 @@ class FsaNotifyAPIemail extends FsaNotifyAPI {
    */
   public function send(User $user, string $reference, array $personalisation) {
 
+    $user_lang = $user->getPreferredLangcode(TRUE);
+    $base_url = FsaNotifyMessage::baseUrl();
+
+    if ($user_lang == 'cy') {
+      $template_id = $this->templateIdCy;
+      $base_url .= '/cy';
+    }
+    else {
+      $template_id = $this->templateId;
+    }
+
     $email = $user->getEmail();
 
-    // Add the user parameters to the unsubscribe URL.
-    $personalisation['unsubscribe'] = $personalisation['unsubscribe'] . '?' . UrlHelper::buildQuery(['id' => $user->id(), 'email' => $email]);
+    // Convert placeholder strings to respective translations as per language.
+    $personalisation['subject'] = FsaNotifyMessage::translatePlaceholders($personalisation['subject'], $user_lang);
+    $personalisation['alert_items'] = FsaNotifyMessage::translatePlaceholders($personalisation['alert_items'], $user_lang);
+
+    // Get email subject based on if immediate or digest emails.
+    switch ($reference) {
+      case 'immediate':
+        $subject = t('FSA update: @title', ['@title' => $personalisation['subject']], ['langcode' => $user_lang])->render();
+        break;
+
+      case 'daily':
+        $subject = t('FSA daily digest update', ['langcode' => $user_lang])->render();
+        break;
+
+      case 'weekly':
+        $subject = t('FSA weekly digest update', ['langcode' => $user_lang])->render();
+        break;
+
+      default:
+        $subject = t('FSA update', [], ['langcode' => $user_lang])->render();
+    }
+    $personalisation['subject'] = $subject;
+
+    // Craft the login url.
+    $personalisation['login'] = $base_url . Url::fromRoute('fsa_signin.default_controller_signInPage', [])->toString();
+
+    // Craft the unsubscribe url and add user parameters.
+    $unsubscribe = $base_url . Url::fromRoute('fsa_signin.default_controller_unsubscribe', [])->toString();
+    $personalisation['unsubscribe'] = $unsubscribe . '?' . UrlHelper::buildQuery(['id' => $user->id(), 'email' => $email]);
 
     // Debugging mode, just log the Notify template variables.
     if (\Drupal::state()->get('fsa_notify.collect_send_log_only')) {
       \Drupal::logger('fsa_notify')->debug('Notify email: <ul><li>To: %email</li><li>template_id %template_id</li><li>personalization: <pre>%personalization</pre></li><li>reference: %reference</li></ul>', [
         '%email' => $email,
-        '%template_id' => $this->templateId,
+        '%template_id' => $template_id,
         '%personalization' => print_r($personalisation, 1),
         '%reference' => $reference,
       ]);
@@ -48,7 +88,7 @@ class FsaNotifyAPIemail extends FsaNotifyAPI {
     try {
       $this->api->sendEmail(
         $email,
-        $this->templateId,
+        $template_id,
         $personalisation,
         $reference
       );

@@ -1,15 +1,12 @@
 (function ($) {
   'use strict';
+  Drupal.behaviors.fsaAddToAny = {
+    attach: function (context, settings) {
 
-  function my_addtoany_onready() {
-    $('a.addtoany_share_save').html(Drupal.t('Share'));
-    $('a.addtoany_share_save').removeClass('ext');
-  }
+      $('a.addtoany_share_save', context).html(Drupal.t('Share')).removeClass('ext');
 
-  // Setup AddToAny "onReady" callback function
-  a2a_config.callbacks = a2a_config.callbacks || [];
-  a2a_config.callbacks.push({
-      ready: my_addtoany_onready
-  });
+    }
+  };
+
 
 }(jQuery));
