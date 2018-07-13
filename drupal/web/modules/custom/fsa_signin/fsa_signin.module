@@ -71,11 +71,11 @@ function fsa_signin_form_alter(&$form, FormStateInterface $form_state, $form_id)
     $form['actions']['submit']['#value'] = t('Log in and set password');
 
     // Fetch the reset URL path to get the UID.
-    $current_path = \Drupal::service('path.current')->getPath();
-    $path_args = explode('/', $current_path);
+    $route_path = \Drupal::routeMatch()->getRawParameters('user');
+    $new_uid = $route_path->get('uid');
     // If we have the expected URL, assign the UID to the data layer.
-    if ($path_args[1] == 'user' && $path_args[2] == 'reset' && is_numeric($path_args[3])) {
-      datalayer_add(['userUid' => $path_args[3]]);
+    if (is_numeric($new_uid)) {
+      datalayer_add(['userUid' => $new_uid]);
     }
   }
 }
