@@ -1,0 +1,119 @@
+<?php
+
+/**
+ * @file
+ * Content form alter hooks and mail handlers to support notifications.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\NodeInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_node_presave().
+ */
+function fsa_translation_notify_node_presave(NodeInterface $node) {
+  // Always trigger a translation notification for new node content.
+  // TODO: limit by type?
+  $mail_key = 'new_content';
+
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ *
+ * Covers both node add/edit forms, we're only interested in the edit form.
+ */
+function fsa_translation_notify_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Add a notification checkbox if it's an edit form.
+  if (preg_match('/node_\w+_edit_form/', $form_id)) {
+    $form['notify_language_team'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Notify language team of this change'),
+      // Set at the bottom of the group.
+      '#weight' => 100,
+      '#group' => 'footer',
+    ];
+
+    // Define submit handler for this form.
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'fsa_translation_notify_node_page_edit_submit';
+      }
+    }
+  }
+}
+
+/**
+ * Submit handler for node edit form.
+ */
+function fsa_translation_notify_node_page_edit_submit(array $form, FormStateInterface $form_state) {
+  $mail_key = 'updated_content';
+  $update_with_notification = !empty($form_state->getValue('notify_language_team'));
+
+  // If 'Notify language team of this change' box is checked when editing
+  // content then trigger a notification email.
+  if ($update_with_notification) {
+    $node_id = $form_state->getValue('nid');
+    fsa_translation_notify_trigger_notification($mail_key, $node_id);
+  }
+}
+
+/**
+ * Triggers a notification email send operation.
+ *
+ * @param $mail_key
+ * @param $params
+ */
+function fsa_translation_notify_trigger_notification(string $mail_key, int $node_id) {
+  $node = \Drupal::entityTypeManager()->getStorage('node')->load($node_id);
+  $mailManager = \Drupal::service('plugin.manager.mail');
+  $langcode = \Drupal::languageManager()->getDefaultLanguage()->getId();
+
+  $module = 'fsa_translation_notify';
+  $node_title = $node->label();
+  $node_language = $node->language();
+  $author_username = $node->getRevisionAuthor()->getAccountName();
+  $node_created_timestamp = \Drupal::service('date.formatter')->format($node->getCreatedTime(), 'long');
+  $translation_url = Url::fromUserInput('/node/' . $node->id() . '/edit', [
+    'absolute' => TRUE,
+    'language' => \Drupal::languageManager()->getLanguage('cy'),
+  ]);
+  $translation_url = $translation_url->toString();
+
+  // Build mail message parameters.
+  $params['message'] = "The page \"$node_title\" was created by $author_username at $node_created_timestamp
+
+To translate this page, please visit $translation_url.  
+";
+
+  $params['node_lang'] = $node_language;
+  $params['node_title'] = $node_title;
+  $result = $mailManager->mail($module, $mail_key, $to, $langcode, $params, NULL, TRUE);
+
+  if ($result['result'] !== TRUE) {
+    // Log an error if something goes wrong sending the message.
+    \Drupal::logger('fsa_translation_notify')
+      ->error(t("There was a problem sending the email to the translation team for node/@nid.", ['@nid' => $node_id]));
+  }
+}
+
+/**
+ * Implements hook_mail().
+ */
+function fsa_translation_notify_mail($key, &$message, $params) {
+  $message['to'] = 'johan.gant+langteamfsa@wunder.io';
+  // $message['to'] = \Drupal::config('fsa_content_reminder.settings')->get('language_team_email');
+  $message['subject'] = t('A new page "@title" has been created', [
+    '@title' => $params['node_title'],
+  ]);
+  $message['body'][] = $params['message'];
+
+  switch ($key) {
+    case 'new_content':
+      break;
+
+    case 'updated_content':
+      break;
+  }
+}
