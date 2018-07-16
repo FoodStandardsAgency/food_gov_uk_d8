@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\webform\WebformSubmissionInterface;
 
 /**
  * Implements hook_form_alter().
@@ -68,4 +69,13 @@ function fsa_webform_form_alter(&$form, FormStateInterface $form_state, $form_id
       }
     }
   }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ *
+ * Stops webform from saving the IP address of the submitting user.
+ */
+function fsa_webform_webform_submission_presave(WebformSubmissionInterface $entity) {
+  $entity->remote_addr->value = NULL;
 }
