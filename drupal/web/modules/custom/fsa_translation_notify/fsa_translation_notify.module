@@ -7,16 +7,23 @@
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\NodeInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Url;
 
 /**
- * Implements hook_node_presave().
+ * Implements hook_entity_insert().
  */
-function fsa_translation_notify_node_presave(NodeInterface $node) {
+function fsa_translation_notify_entity_insert(EntityInterface $entity) {
   // Always trigger a translation notification for new node content.
   // TODO: limit by type?
-  $mail_key = 'new_content';
+  if (!$entity instanceof NodeInterface) {
+    return;
+  }
 
+  $mail_key = 'new_content';
+  $node_id = $entity->id();
+
+  fsa_translation_notify_trigger_notification($mail_key, $node_id);
 }
 
 /**
@@ -62,8 +69,10 @@ function fsa_translation_notify_node_page_edit_submit(array $form, FormStateInte
 /**
  * Triggers a notification email send operation.
  *
- * @param $mail_key
- * @param $params
+ * @param string $mail_key
+ *   Message key: new_content|updated_content.
+ * @param int $node_id
+ *   Node id.
  */
 function fsa_translation_notify_trigger_notification(string $mail_key, int $node_id) {
   $node = \Drupal::entityTypeManager()->getStorage('node')->load($node_id);
@@ -71,25 +80,9 @@ function fsa_translation_notify_trigger_notification(string $mail_key, int $node
   $langcode = \Drupal::languageManager()->getDefaultLanguage()->getId();
 
   $module = 'fsa_translation_notify';
-  $node_title = $node->label();
-  $node_language = $node->language();
-  $author_username = $node->getRevisionAuthor()->getAccountName();
-  $node_created_timestamp = \Drupal::service('date.formatter')->format($node->getCreatedTime(), 'long');
-  $translation_url = Url::fromUserInput('/node/' . $node->id() . '/edit', [
-    'absolute' => TRUE,
-    'language' => \Drupal::languageManager()->getLanguage('cy'),
-  ]);
-  $translation_url = $translation_url->toString();
-
-  // Build mail message parameters.
-  $params['message'] = "The page \"$node_title\" was created by $author_username at $node_created_timestamp
-
-To translate this page, please visit $translation_url.  
-";
-
-  $params['node_lang'] = $node_language;
-  $params['node_title'] = $node_title;
-  $result = $mailManager->mail($module, $mail_key, $to, $langcode, $params, NULL, TRUE);
+  $params['node'] = $node;
+  $params['to'] = 'johan.gant+langteamfsa@wunder.io';
+  $result = $mailManager->mail($module, $mail_key, $params['to'], $langcode, $params, NULL, TRUE);
 
   if ($result['result'] !== TRUE) {
     // Log an error if something goes wrong sending the message.
@@ -102,18 +95,62 @@ To translate this page, please visit $translation_url.
  * Implements hook_mail().
  */
 function fsa_translation_notify_mail($key, &$message, $params) {
-  $message['to'] = 'johan.gant+langteamfsa@wunder.io';
-  // $message['to'] = \Drupal::config('fsa_content_reminder.settings')->get('language_team_email');
-  $message['subject'] = t('A new page "@title" has been created', [
-    '@title' => $params['node_title'],
-  ]);
-  $message['body'][] = $params['message'];
+  $node = &$params['node'];
+  $node_title = $node->label();
+  $author_username = $node->getRevisionAuthor()->getAccountName();
+  $node_created_timestamp = \Drupal::service('date.formatter')->format($node->getCreatedTime(), 'long');
+  $node_update_timestamp = \Drupal::service('date.formatter')->format($node->getRevisionCreationTime(), 'long');
+  // Default to created subject line.
+  $subject = t('A new page "@title" has been created', ['@title' => $node_title]);
 
   switch ($key) {
     case 'new_content':
+
+      $translation_url = Url::fromUserInput('/node/' . $node->id() . '/translations/add/en/cy', [
+        'absolute' => TRUE,
+        'language' => \Drupal::languageManager()->getLanguage('cy'),
+      ]);
+      $translation_url = $translation_url->toString();
+
+      // Build mail message parameters.
+      $body = "The page \"$node_title\" was created by $author_username at $node_created_timestamp
+
+To translate this page, please visit $translation_url  
+";
       break;
 
     case 'updated_content':
+      $subject = t('The page "@title" has been updated', ['@title' => $node_title]);
+
+      $translation_url = Url::fromUserInput('/node/' . $node->id() . '/edit', [
+        'absolute' => TRUE,
+        'language' => \Drupal::languageManager()->getLanguage('cy'),
+      ]);
+      $translation_url = $translation_url->toString();
+      $revisions = \Drupal::entityTypeManager()->getStorage('node')->revisionIds($node);
+
+      if (count($revisions) < 2) {
+        return;
+      }
+
+      $revisions = array_slice($revisions, -2, 2);
+      $diff_url = Url::fromUserInput('/node/' . $node->id() . '/revisions/view/' . $revisions[0] . '/' . $revisions[1] . '/split_fields', [
+        'absolute' => TRUE,
+        'language' => \Drupal::languageManager()->getDefaultLanguage(),
+      ]);
+      $diff_url = $diff_url->toString();
+
+      // Build mail message parameters.
+      $body = "The page \"$node_title\" was updated by $author_username at $node_update_timestamp
+
+To translate this page, please visit $translation_url  
+
+To see recent changes between the last revisions visit $diff_url
+";
       break;
   }
+
+  $message['to'] = $params['to'];
+  $message['subject'] = $subject;
+  $message['body'][] = $body;
 }
