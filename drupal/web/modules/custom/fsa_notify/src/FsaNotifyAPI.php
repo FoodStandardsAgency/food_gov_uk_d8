@@ -16,11 +16,12 @@ abstract class FsaNotifyAPI {
 
   protected $api = NULL;
   protected $templateId = NULL;
+  protected $templateIdCy = NULL;
 
   /**
    * {@inheritdoc}
    */
-  public function __construct($template_state_key) {
+  public function __construct($template_state_key, $template_state_key_email_cy = FALSE) {
 
     $state_key = 'fsa_notify.api';
     $api_key = \Drupal::state()->get($state_key);
@@ -45,10 +46,15 @@ abstract class FsaNotifyAPI {
       $this->logAndException($msg, $e);
     }
 
-    $state_key = $template_state_key;
-    $this->templateId = \Drupal::state()->get($state_key);
-    if (empty($this->templateId)) {
-      $msg = sprintf('Notify API Template ID not specified in state "%s".', $state_key);
+    // Get template id's we want to use. The Welsh template (cy) may be empty
+    // since SMS does not use template translation.
+    $this->templateId = \Drupal::state()->get($template_state_key);
+    // If Welsh template id is not set use the default.
+    $this->templateIdCy = $template_state_key_email_cy ? \Drupal::state()->get($template_state_key_email_cy) : FALSE;
+
+    // Make sure we have a templateId.
+    if (empty($this->templateId) && empty($this->templateIdCy)) {
+      $msg = sprintf('Notify API Template ID not specified');
       $this->logAndException($msg);
     }
   }

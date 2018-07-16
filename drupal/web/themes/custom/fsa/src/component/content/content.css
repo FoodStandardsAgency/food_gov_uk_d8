@@ -616,9 +616,16 @@ blockquote {
       content: ':';
     }
   }
+}
 
-  a,
-  button {
+.content-toolbar__item {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  font-size: 0.8889em;
+
+  & > a,
+  & > button,
+  .addtoany_share_save {
     position: relative;
     display: block;
     font-family: var(--font-family-content);
@@ -650,12 +657,6 @@ blockquote {
       text-decoration: underline;
     }
   }
-}
-
-.content-toolbar__item {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-  font-size: 0.8889em;
 
   &.content-toolbar__item--date {
     margin-right: auto;
@@ -698,21 +699,51 @@ blockquote {
   }
 
   &.content-toolbar__item--share {
-    a,
-    button {
+
+    .addtoany_share_save {
+
       &:before {
         background-image: var(--icon-share-primary);
       }
 
-      img {
+      img, span {
         position: absolute !important;
         clip: rect(1px, 1px, 1px, 1px);
         overflow: hidden;
-        height: 1px;
-        width: 1px;
+        height: 1px !important;
+        width: 1px !important;
         word-wrap: normal;
       }
     }
+  }
+}
+
+/*
+.content-toolbar__item contains AddToAny (https://www.addtoany.com/) drop-down menu and modal,
+but they are inserted in DOM outside container and with inline styles.
+*/
+.a2a_menu {
+  a {
+    font-weight: 600;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline !important;
+    }
+  }
+
+  .a2a_wide a {
+    border-style: solid;
+  }
+}
+
+/* Page title with content label */
+.block-page-title {
+  display: flex;
+  flex-flow: column;
+
+  .content-label {
+    order: -1;
   }
 }
 
