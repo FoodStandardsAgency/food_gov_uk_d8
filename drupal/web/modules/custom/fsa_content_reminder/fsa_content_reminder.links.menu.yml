@@ -3,4 +3,3 @@ fsa_content_reminder.settings:
   route_name: fsa_content_reminder.settings
   description: 'FSA content reminder settings'
   parent: system.admin_config_fsa
-  weight: 99
