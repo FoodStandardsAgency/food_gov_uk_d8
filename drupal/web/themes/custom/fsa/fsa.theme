@@ -102,6 +102,8 @@ function fsa_page_attachments_alter(&$variables) {
  */
 function fsa_preprocess_breadcrumb(&$variables) {
   // Treat final breadcrumb entry as the current page, and add aria-current attribute.
-  $last_item_index = count($variables['breadcrumb']) -1;
+  $last_item_index = count($variables['breadcrumb']);
+  // Decrement count value separately to keep PHPCS happy.
+  $last_item_index--;
   $variables['breadcrumb'][$last_item_index]['attributes']['aria-current'] = 'page';
 }
