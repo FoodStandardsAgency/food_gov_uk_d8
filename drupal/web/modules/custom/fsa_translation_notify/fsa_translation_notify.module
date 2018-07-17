@@ -15,7 +15,6 @@ use Drupal\Core\Url;
  */
 function fsa_translation_notify_entity_insert(EntityInterface $entity) {
   // Always trigger a translation notification for new node content.
-  // TODO: limit by type?
   if (!$entity instanceof NodeInterface) {
     return;
   }
@@ -81,7 +80,8 @@ function fsa_translation_notify_trigger_notification(string $mail_key, int $node
 
   $module = 'fsa_translation_notify';
   $params['node'] = $node;
-  $params['to'] = 'johan.gant+langteamfsa@wunder.io';
+  $config = \Drupal::config('fsa_translation_notify.settings');
+  $params['to'] = $config->get('email');
   $result = $mailManager->mail($module, $mail_key, $params['to'], $langcode, $params, NULL, TRUE);
 
   if ($result['result'] !== TRUE) {
