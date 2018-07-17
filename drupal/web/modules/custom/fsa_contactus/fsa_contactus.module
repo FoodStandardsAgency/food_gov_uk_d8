@@ -162,10 +162,6 @@ function fsa_contactus_preprocess_page(array &$variables) {
 function fsa_attach_satisfaction_form(array &$variables, $block_id = 'user_satisfaction_form') {
 
   if (is_object($block = Block::load($block_id))) {
-
-    // Add js to accordion the feedback form.
-    $variables['#attached']['library'][] = 'fsa_contactus/user_satisfaction';
-
     $block = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block);
 
     // Introduce a variable to display the form via twig template.
