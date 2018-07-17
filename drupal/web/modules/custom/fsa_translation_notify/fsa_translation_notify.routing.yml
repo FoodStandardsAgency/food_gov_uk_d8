@@ -1,0 +1,9 @@
+fsa_translation_notify.settings:
+  path: '/admin/config/fsa/translation_notify'
+  defaults:
+    _form: '\Drupal\fsa_translation_notify\Form\FsaTranslationNotifySettings'
+    _title: 'Translation notifications'
+  requirements:
+    _permission: 'administer fsa translation notify settings'
+  options:
+    _admin_route: TRUE
