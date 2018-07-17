@@ -317,10 +317,12 @@ class DeliveryOptions extends FormBase {
     if (in_array($form_process, ['Set', 'Edit'])) {
       $delivery_edit = [
         'event' => 'Subscription Saved',
-        'eventCategory' => 'Subscription',
-        'eventAction' => $form_process,
-        'eventLabel' => $event_label,
-        'eventValue' => 0,
+        'eventDetails' => [
+          'category' => 'Subscription',
+          'action' => $form_process,
+          'label' => $event_label,
+          'value' => 0,
+        ],
       ];
     }
     return $delivery_edit;
