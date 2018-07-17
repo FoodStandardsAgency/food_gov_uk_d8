@@ -75,6 +75,11 @@ function fsa_translation_notify_node_page_edit_submit(array $form, FormStateInte
  */
 function fsa_translation_notify_trigger_notification(string $mail_key, int $node_id) {
   $node = \Drupal::entityTypeManager()->getStorage('node')->load($node_id);
+
+  if (empty($node)) {
+    return;
+  }
+
   $mailManager = \Drupal::service('plugin.manager.mail');
   $langcode = \Drupal::languageManager()->getDefaultLanguage()->getId();
 
@@ -82,6 +87,14 @@ function fsa_translation_notify_trigger_notification(string $mail_key, int $node
   $params['node'] = $node;
   $config = \Drupal::config('fsa_translation_notify.settings');
   $params['to'] = $config->get('email');
+
+  if (empty($params['to'])) {
+    \Drupal::logger('fsa_translation_notify')
+      ->error(t("No message can be sent because there is no defined delivery address. Visit 
+      /admin/config/fsa/translation_notify to set one."));
+  }
+
+  // Attempt to assemble and queue a new mail message.
   $result = $mailManager->mail($module, $mail_key, $params['to'], $langcode, $params, NULL, TRUE);
 
   if ($result['result'] !== TRUE) {
@@ -97,15 +110,19 @@ function fsa_translation_notify_trigger_notification(string $mail_key, int $node
 function fsa_translation_notify_mail($key, &$message, $params) {
   $node = &$params['node'];
   $node_title = $node->label();
+  $content_type = $node->getType();
   $author_username = $node->getRevisionAuthor()->getAccountName();
-  $node_created_timestamp = \Drupal::service('date.formatter')->format($node->getCreatedTime(), 'long');
-  $node_update_timestamp = \Drupal::service('date.formatter')->format($node->getRevisionCreationTime(), 'long');
-  // Default to created subject line.
-  $subject = t('A new page "@title" has been created', ['@title' => $node_title]);
+  $node_created_timestamp = \Drupal::service('date.formatter')
+    ->format($node->getCreatedTime(), 'long');
+  $node_update_timestamp = \Drupal::service('date.formatter')
+    ->format($node->getRevisionCreationTime(), 'long');
 
   switch ($key) {
     case 'new_content':
-
+      $subject = t('A new @type page "@title" has been created', [
+        '@title' => $node_title,
+        '@type' => $content_type,
+      ]);
       $translation_url = Url::fromUserInput('/node/' . $node->id() . '/translations/add/en/cy', [
         'absolute' => TRUE,
         'language' => \Drupal::languageManager()->getLanguage('cy'),
@@ -113,22 +130,26 @@ function fsa_translation_notify_mail($key, &$message, $params) {
       $translation_url = $translation_url->toString();
 
       // Build mail message parameters.
-      $body = "The page \"$node_title\" was created by $author_username at $node_created_timestamp
+      $body = "The $content_type page \"$node_title\" was created by $author_username at $node_created_timestamp
 
-To translate this page, please visit $translation_url  
+To create a translation of this page, please visit $translation_url  
 ";
       break;
 
     case 'updated_content':
-      $subject = t('The page "@title" has been updated', ['@title' => $node_title]);
-
+      $subject = t('The @type page "@title" has been updated', [
+        '@title' => $node_title,
+        '@type' => $content_type,
+      ]);
       $translation_url = Url::fromUserInput('/node/' . $node->id() . '/edit', [
         'absolute' => TRUE,
         'language' => \Drupal::languageManager()->getLanguage('cy'),
       ]);
       $translation_url = $translation_url->toString();
-      $revisions = \Drupal::entityTypeManager()->getStorage('node')->revisionIds($node);
+      $revisions = \Drupal::entityTypeManager()
+        ->getStorage('node')->revisionIds($node);
 
+      // Don't produce a diff link if there are less than 2 revisions.
       if (count($revisions) < 2) {
         return;
       }
@@ -141,15 +162,16 @@ To translate this page, please visit $translation_url
       $diff_url = $diff_url->toString();
 
       // Build mail message parameters.
-      $body = "The page \"$node_title\" was updated by $author_username at $node_update_timestamp
+      $body = "The $content_type page \"$node_title\" was updated by $author_username at $node_update_timestamp
 
-To translate this page, please visit $translation_url  
+To update any translations for this page, please visit $translation_url  
 
-To see recent changes between the last revisions visit $diff_url
+To see the changes between the last revisions please visit $diff_url
 ";
       break;
   }
 
+  // Finish assembling the message array.
   $message['to'] = $params['to'];
   $message['subject'] = $subject;
   $message['body'][] = $body;

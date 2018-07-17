@@ -156,6 +156,7 @@ module:
   workflows: 0
   extlink: 1
   fsa_40x: 1
+  fsa_translation_notify: 0
   menu_link_content: 1
   pathauto: 1
   content_translation: 10
