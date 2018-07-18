@@ -385,7 +385,7 @@ function fsa_custom_preprocess_views_view_field(&$variables) {
     return;
   }
 
-  // What it the language of the current row? We only want to show
+  // What is the language of the current row? We only want to show
   // for lang-default to help identify the changes.
   if ($variables['row']->node_field_data_langcode == 'cy') {
     return;
