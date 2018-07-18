@@ -1,5 +1,22 @@
 import state from '../../helper/toggleHelpers'
 
+function changeAriaRoleOnToggle () {
+
+  // All the toggle buttons inside toggle legends
+  const toggleButtons = [...document.querySelectorAll('.toggle-fieldset__button .fieldset-legend')]
+
+  toggleButtons.forEach((toggleButton) => {
+    toggleButton.addEventListener('click', function () {
+      const legendCurrent = element.closest('.toggle-fieldset__button')
+      if (legendCurrent.getAttribute('aria-expanded') === 'false') {
+        legendCurrent.setAttribute('aria-expanded', 'true')
+      } else {
+        legendCurrent.setAttribute('aria-expanded', 'false')
+      }
+    }, true)
+  })
+}
+
 function autoOpenFormError () {
   // If there's an error, open the content where the error is
   const profileManager = document.querySelector('#profile-manager')
@@ -35,4 +52,4 @@ function scrollToMultiStepForm () {
   }
 }
 
-module.exports = { autoOpenFormError, scrollToMultiStepForm }
+module.exports = { changeAriaRoleOnToggle, autoOpenFormError, scrollToMultiStepForm }
