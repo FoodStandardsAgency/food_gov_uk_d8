@@ -87,6 +87,9 @@ class FsaNotifyStorage {
    *   The alert node.
    * @param string $lang
    *   Language code.
+   *
+   * @deprecated use Drupal\fsa_notify\FsaNotifyStorage::store() instead,
+   * it does direct database queries instead of user loading.
    */
   public function store(Node $node, $lang) {
 

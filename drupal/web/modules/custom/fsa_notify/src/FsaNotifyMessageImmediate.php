@@ -7,14 +7,11 @@ namespace Drupal\fsa_notify;
  */
 class FsaNotifyMessageImmediate extends FsaNotifyMessage {
 
-  private $subject;
-
   /**
    * {@inheritdoc}
    */
   public function __construct() {
     parent::__construct();
-    $this->subject = t('FSA Update');
   }
 
   /**
@@ -29,13 +26,11 @@ class FsaNotifyMessageImmediate extends FsaNotifyMessage {
       $title = explode(PHP_EOL, $item);
       $title = $title[0];
 
-      // Variables for the Notify template.
+      // Gather alert content for the Notify template.
       $item = [
-        'subject' => $this->subject->render() . ': ' . $title,
+        'subject' => $title,
         'date' => $this->date,
         'alert_items' => preg_replace('/^/m', self::NOTIFY_TEMPLATE_MESSAGE_STYLE_PREFIX, $item),
-        'login' => $this->loginUrl,
-        'unsubscribe' => $this->unsubscribeUrl,
       ];
     }
 
@@ -46,7 +41,7 @@ class FsaNotifyMessageImmediate extends FsaNotifyMessage {
    * {@inheritdoc}
    */
   protected function theme($item, $lang) {
-    if ($item->hasTranslation($lang)) {
+    if ($item->getType() != 'alert' && $item->hasTranslation($lang)) {
       $item = $item->getTranslation($lang);
     }
 
@@ -57,7 +52,7 @@ class FsaNotifyMessageImmediate extends FsaNotifyMessage {
     $line2 = $item->getTitle();
 
     $link = $this->urlAlias($item, $lang);
-    $more = t('Read more');
+    $more = FsaNotifyMessage::ST_READMORE;
     $line3 = sprintf('%s: %s', $more, $link);
 
     $item = "$line1\n$line2\n$line3";
