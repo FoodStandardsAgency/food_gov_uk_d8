@@ -57,6 +57,23 @@ function fsa_signin_form_alter(&$form, FormStateInterface $form_state, $form_id)
       $arguments = $form['message']['#markup']->getArguments();
       $form['#title'] = t('Thanks for verifying your email %user_name', ['%user_name' => $arguments['%user_name']]);
       $form['message']['#markup'] = t('To complete your alerts subscription you must set a password for your account and select your subscription preferences.');
+
+      // Fetch the reset URL path to get the UID.
+      $route_path = \Drupal::routeMatch()->getRawParameters('user');
+      $new_uid = $route_path->get('uid');
+      // If we have the expected URL, assign the UID to the data layer.
+      if (is_numeric($new_uid)) {
+        datalayer_add([
+          'userUid' => $new_uid,
+          'event' => 'Subscription Set Password',
+          'eventDetails' => [
+            'category' => 'Subscription',
+            'action' => 'Set Password',
+            'label' => 'en',
+            'value' => 0,
+          ],
+        ]);
+      }
     }
 
     if ($form_title == 'Reset password') {
@@ -69,14 +86,6 @@ function fsa_signin_form_alter(&$form, FormStateInterface $form_state, $form_id)
 
     // Change the "Log in" button text.
     $form['actions']['submit']['#value'] = t('Log in and set password');
-
-    // Fetch the reset URL path to get the UID.
-    $route_path = \Drupal::routeMatch()->getRawParameters('user');
-    $new_uid = $route_path->get('uid');
-    // If we have the expected URL, assign the UID to the data layer.
-    if (is_numeric($new_uid)) {
-      datalayer_add(['userUid' => $new_uid]);
-    }
   }
 }
 
