@@ -873,7 +873,7 @@ input[type="password"] {
   }
 
   input[type="radio"] + label {
-    color: var(--primary-color);
+    color: var(--darker-primary-color);
     text-decoration: underline;
     padding: 0em;
     padding-top: 0.5em;
@@ -901,7 +901,7 @@ input[type="password"] {
   button {
     &.close-feedback,
     &.open-feedback {
-      color: var(--primary-color);
+      color: var(--darker-primary-color);
       text-decoration: underline;
       cursor: pointer;
 
