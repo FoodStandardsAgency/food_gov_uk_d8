@@ -236,6 +236,9 @@ fieldset {
 
   .fieldset-legend {
     font-weight: 400;
+    text-align: left;
+    padding-right: 0;
+    padding-left: 0;
     color: var(--dark-primary-color);
     cursor: pointer;
     transition:
