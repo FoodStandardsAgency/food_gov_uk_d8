@@ -512,6 +512,12 @@ blockquote {
     margin-top: 0;
   }
 
+  .field__field_nation {
+    padding-bottom: 0;
+    font-size: 1em;
+    font-weight: 500;
+  }
+
   &:after {
     content: '';
     position: absolute;
