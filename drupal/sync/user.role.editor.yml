@@ -113,6 +113,8 @@ permissions:
   - 'view news revisions'
   - 'view own unpublished content'
   - 'view page revisions'
+  - 'view published managed link entities'
   - 'view research_project revisions'
   - 'view team_contacts revisions'
   - 'view the administration theme'
+  - 'view unpublished managed link entities'

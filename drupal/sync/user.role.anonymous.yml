@@ -27,3 +27,4 @@ permissions:
   - 'view media'
   - 'view published fsa authority entities'
   - 'view published fsa establishment entities'
+  - 'view published managed link entities'

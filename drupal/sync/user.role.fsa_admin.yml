@@ -120,6 +120,7 @@ permissions:
   - 'view lander revisions'
   - 'view latest version'
   - 'view own webform submission'
+  - 'view published managed link entities'
   - 'view the administration theme'
   - 'view unpublished fsa authority entities'
   - 'view unpublished fsa establishment entities'
