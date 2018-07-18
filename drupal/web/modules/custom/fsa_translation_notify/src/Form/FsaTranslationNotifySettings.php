@@ -36,7 +36,7 @@ class FsaTranslationNotifySettings extends ConfigFormBase {
       '#markup' => '<p>' . $this->t('Content translation notifications are 
         sent to the email address below. A notification is always sent for any 
         new content pages created, or when the \'Notify language team of this change\'
-        checkbox is checked when saving new changes.'),
+        checkbox is checked when saving new changes.') . '</p>',
     ];
     $form['email'] = [
       '#type' => 'email',
