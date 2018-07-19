@@ -6,4 +6,5 @@ package: FSA
 dependencies:
   - drupal:user
   - drupal:email_registration
+  - drupal:datalayer
   - fsa_custom
