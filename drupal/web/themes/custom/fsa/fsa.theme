@@ -101,6 +101,11 @@ function fsa_page_attachments_alter(&$variables) {
  * Implements hook_preprocess_breadcrumb().
  */
 function fsa_preprocess_breadcrumb(&$variables) {
+  // Skip any pages that have an empty breadcrumb trail.
+  if (empty($variables['breadcrumb'])) {
+    return;
+  }
+
   // Treat final breadcrumb entry as the current page, and add aria-current attribute.
   $last_item_index = count($variables['breadcrumb']);
   // Decrement count value separately to keep PHPCS happy.
