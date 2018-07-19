@@ -353,3 +353,7 @@
   .link-to-archieve a {
     display: inline-block; }
 }
+
+.search-result-page-count {
+  color: var(--color-gray);
+}

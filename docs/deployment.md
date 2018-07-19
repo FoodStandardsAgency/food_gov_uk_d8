@@ -3,25 +3,22 @@ Deployment
 
 #### Scheduling a production deployment
 
-Before deployment it is worth checking from client that no alerts are scheduled to publish and the weekly or daily alert Notification digest is not about to be triggered during the deployment.
+Before deploying to production check from client (FSA/Wunder or FSA/Epimorphics Slack channel) that no alerts are scheduled to be published soon and that the daily/weekly alert Notification digest is not about to be triggered since they could potentially fail if deployment hits at the same time.
 
-The digest "last sent" timestamps can be requested with 
-```
-drush @fsa.prod sget fsa_notify.last_daily
-drush @fsa.prod sget fsa_notify.last_weekly
-```
+The last sent digest timestamps are stored to Drupal states `fsa_notify.last_daily` and `fsa_notify.last_weekly` but are displayed on the [Notify settings page](https://www.food.gov.uk/admin/config/fsa/notify) for conveniency.
+
 #### Production deployment
 
 1. See `git tag` to figure out the next tag number
-2. Push `master` to `production` as described in [Wunderflow examples](http://wunderflow.wunder.io/#examples)
-3. Compose release notes from git commits. This is good also to understand what goes out with the deployment
+2. Merge `master` to `production` as described in [Wunderflow examples](http://wunderflow.wunder.io/#examples)
+3. Compose release notes from git commits.
     * A good tool for release notes generation is [git-release-notes](https://www.npmjs.com/package/git-release-notes) npm package
-        * Run as `git-release-notes production...master markdown > [TAGNAME].md`. Some moderation is required unless all git commit messages make perfect sense.
-4. `drush @fsa.prod ssh` and create a backup dump for the last (currently active) tag `drush cr; drush sql-dump > ~/[TAGNAME].sql`
-    * Only few last dumps are worth storing, feel free to delete oldies from `/home/www-admin`
+        * Run as `git-release-notes production...master markdown > [TAGNAME].md`. Moderation is usually required unless all git commit messages make perfect sense.
+4. `drush @fsa.prod ssh` and create a backup dump against last (currently active) tag `drush cr; drush sql-dump > ~/[CURRENT-TAGNAME].sql`
+    * Old dumps can be deleted from `/home/www-admin`
 5. Use [Deploybot](https://wunder.deploybot.com/111465/environments/120921) to deploy
-    * Paste the release notes along with version number (git tag) to deployment note
-6. Once all good with deployment post notification about the new version to the [FSA/Wunder Slack CMS channel](https://wunder-fsa.slack.com/messages/C862GVAF8) along with the release notes.
+    * Paste release notes along with version number (git tag) to deployment note
+6. Once deployed succesfully post notification about the new release to the [FSA/Wunder Slack CMS channel](https://wunder-fsa.slack.com/messages/C862GVAF8) along with the release notes.
 
 #### Dev/staging deployments
 

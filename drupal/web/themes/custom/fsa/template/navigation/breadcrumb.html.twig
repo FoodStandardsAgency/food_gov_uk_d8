@@ -12,7 +12,13 @@
   {% for item in breadcrumb %}
     <div class="breadcrumb__item">
       {% if item.url %}
-        <a href="{{ item.url }}" class="breadcrumb__link">{{ item.text }}</a>
+        {% spaceless %}
+        <a href="{{ item.url }}" class="breadcrumb__link"
+          {% if item.attributes %}{% for key,value in item.attributes %}
+            {{ key }}="{{ value }}"
+          {% endfor %}{% endif %}
+            >{{ item.text }}</a>
+        {% endspaceless %}
       {% else %}
         {{ item.text }}
       {% endif %}
