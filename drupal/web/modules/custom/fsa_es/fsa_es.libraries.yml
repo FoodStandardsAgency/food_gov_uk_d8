@@ -1,3 +1,10 @@
+accessibility:
+  version: 1.x
+  js:
+    js/accessibility.js: {}
+  dependencies:
+    - core/drupal
+
 result_totals:
   version: 1.x
   js:

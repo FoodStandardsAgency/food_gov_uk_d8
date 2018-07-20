@@ -6,10 +6,13 @@ dependencies:
     - field.field.user.user.field_delivery_method
     - field.field.user.user.field_delivery_method_news
     - field.field.user.user.field_email_frequency
+    - field.field.user.user.field_initial_delivery_settings
+    - field.field.user.user.field_last_password_reset
     - field.field.user.user.field_notification_cache
     - field.field.user.user.field_notification_cache_sms
     - field.field.user.user.field_notification_method
     - field.field.user.user.field_notification_sms
+    - field.field.user.user.field_password_expiration
     - field.field.user.user.field_subscribed_cons
     - field.field.user.user.field_subscribed_food_alerts
     - field.field.user.user.field_subscribed_news
@@ -46,8 +49,15 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
-  field_notification_method:
+  field_initial_delivery_settings:
     weight: 9
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_notification_method:
+    weight: 10
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -85,13 +95,15 @@ content:
     type: options_buttons
     region: content
   language:
-    weight: 10
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
   contact: true
+  field_last_password_reset: true
   field_notification_cache: true
   field_notification_cache_sms: true
+  field_password_expiration: true
   langcode: true
   timezone: true

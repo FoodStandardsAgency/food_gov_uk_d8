@@ -444,7 +444,7 @@ display:
           group_type: group
           admin_label: ''
           empty: true
-          content: "<h2 class=\"visually-hidden\">Search results</h2>\n<div class=\"visually-hidden\" aria-live=\"polite\">Showing @start-@end of @total with current search filters.</div>"
+          content: '<h2 class="visually-hidden">Search results</h2><div class="visually-hidden" aria-live="polite">Showing @start-@end of @total with current search filters</div>'
           plugin_id: result
       footer:
         result:
@@ -455,7 +455,7 @@ display:
           group_type: group
           admin_label: ''
           empty: false
-          content: '<span class="search-result-page-count" aria-live="polite">Showing @start-@end of @total</span>'
+          content: '<span class="search-result-page-count">Showing @start-@end of @total</span>'
           plugin_id: result
       empty: {  }
       relationships: {  }

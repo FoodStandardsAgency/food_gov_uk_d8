@@ -669,6 +669,7 @@ function fsa_custom_theme() {
       'variables' => [
         'attributes' => NULL,
         'title' => NULL,
+        'heading' => NULL,
         'copy' => NULL,
       ],
     ],

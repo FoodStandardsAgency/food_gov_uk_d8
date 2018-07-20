@@ -1,6 +1,9 @@
 display:
   default:
     display_options:
+      header:
+        result:
+          content: '<h2 class="visually-hidden">Canlyniadau chwilio</h2><div class="visually-hidden" aria-live="polite">Dangos @start-@end o @total gyda’r dewisiadau hidlo presennol</div>'
       footer:
         result:
-          content: '<span class="search-result-page-count" aria-live="polite">Yn dangos @start-@end o @total</span>'
+          content: '<span class="search-result-page-count">Yn dangos @start-@end o @total</span>'

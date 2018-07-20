@@ -42,6 +42,7 @@ class FsaHero extends BlockBase {
           $build['fsa_hero'] = [
             '#theme' => $theme,
             '#title' => $this->t('Contact us'),
+            '#heading' => $node->getTitle(),
             '#copy' => ['#markup' => $this->t('Report a food problem, give us feedback or find our contact details.')],
           ];
         }

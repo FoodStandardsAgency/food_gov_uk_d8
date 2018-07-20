@@ -1,9 +1,6 @@
 @import "../../helper/helper";
 @import "../../helper/custom-property";
 
-@import "../../helper/helper";
-@import "../../helper/custom-property";
-
 /* Button */
 .field__field_link a,
 .button {
@@ -209,6 +206,10 @@ fieldset {
     width: 100%;
     /*color: var(--primary-color);*/
     overflow: auto;
+
+    button {
+
+    }
   }
 }
 
@@ -230,26 +231,31 @@ fieldset {
   background-repeat: no-repeat;
   background-size: 0.5em auto;
   padding-right: 2.5em;
-  color: var(--dark-primary-color);
   transition:
-    color var(--transition-enter-fast),
     border-color var(--transition-enter-fast) 0.2s;
 
   .fieldset-legend {
     font-weight: 400;
+    text-align: left;
+    padding-right: 0;
+    padding-left: 0;
+    color: var(--dark-primary-color);
+    cursor: pointer;
+    transition:
+      color var(--transition-enter-fast),
   }
 
   &.is-open {
     background-image: var(--icon-dropdown-top-black);
     border-bottom: 1px solid transparent;
-    color: var(--color-black);
-    font-weight: 700;
     transition:
-      color var(--transition-enter-fast),
       border-color var(--transition-enter-fast);
 
     .fieldset-legend {
       font-weight: 700;
+      color: var(--color-black);
+      transition:
+        color var(--transition-enter-fast),
     }
   }
 }
@@ -867,7 +873,7 @@ input[type="password"] {
   }
 
   input[type="radio"] + label {
-    color: var(--primary-color);
+    color: var(--darker-primary-color);
     text-decoration: underline;
     padding: 0em;
     padding-top: 0.5em;
@@ -895,7 +901,7 @@ input[type="password"] {
   button {
     &.close-feedback,
     &.open-feedback {
-      color: var(--primary-color);
+      color: var(--darker-primary-color);
       text-decoration: underline;
       cursor: pointer;
 
