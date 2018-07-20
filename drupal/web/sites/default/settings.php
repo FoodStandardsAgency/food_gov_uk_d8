@@ -73,6 +73,7 @@ $settings['config_readonly_whitelist_patterns'] = [
   'key.*',
   'encrypt.*',
   'tfa.*',
+  'fsa_translation_notify.settings',
 ];
 
 // Allow configuration changes via drush (command line).

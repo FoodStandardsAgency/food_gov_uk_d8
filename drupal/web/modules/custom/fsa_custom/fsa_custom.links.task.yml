@@ -1,0 +1,5 @@
+fsa_custom.pending_translations:
+  title: 'Pending translations'
+  route_name: view.pending_translations.page_1
+  parent_id: system.admin_content
+  weight: 1

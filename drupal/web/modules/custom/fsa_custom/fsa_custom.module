@@ -377,6 +377,32 @@ function fsa_custom_form_alter(&$form, $form_state, $form_id) {
 }
 
 /**
+ * Implements hook_preprocess_views_view_field().
+ */
+function fsa_custom_preprocess_views_view_field(&$variables) {
+  if ($variables['view']->storage->id() != 'content' || $variables['field']->field != 'nothing') {
+    return;
+  }
+
+  $revisions = \Drupal::entityTypeManager()->getStorage('node')->revisionIds($variables['row']->_entity);
+  if (count($revisions) < 2) {
+    return;
+  }
+
+  // What is the language of the current row? We only want to show
+  // for lang-default to help identify the changes.
+  if ($variables['row']->node_field_data_langcode == 'cy') {
+    return;
+  }
+
+  $revisions = array_slice($revisions, -2, 2);
+
+  // TODO: convert to route name with parameters.
+  $diff_path = '/node/' . $variables['row']->nid . '/revisions/view/' . $revisions[0] . '/' . $revisions[1] . '/split_fields';
+  $variables['output'] = Link::fromTextAndUrl(t('View diff'), Url::fromUserInput($diff_path));
+}
+
+/**
  * Implements hook_views_pre_view().
  */
 function fsa_custom_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
