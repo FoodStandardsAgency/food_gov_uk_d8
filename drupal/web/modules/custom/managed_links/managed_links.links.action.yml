@@ -1,0 +1,5 @@
+entity.managed_link.add_form:
+  route_name: entity.managed_link.add_form
+  title: 'Add Managed Link'
+  appears_on:
+    - view.managed_links.managed_links_page_list

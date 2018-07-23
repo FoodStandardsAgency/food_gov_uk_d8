@@ -1,0 +1,23 @@
+uuid: 45fcf15c-12ff-45ee-a2ed-e78b4e717b94
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.managed_link.field_managed_link_url
+  module:
+    - managed_links
+    - link
+id: managed_link.managed_link.field_managed_link_url
+field_name: field_managed_link_url
+entity_type: managed_link
+bundle: managed_link
+label: URL
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

@@ -54,3 +54,9 @@ Details of local authorities are stored in the database, so the relevant entity 
 Small module to add anchors to h1-h6 tags of body fields.
 
 See [README.md](../drupal/web/modules/custom/fsa_toc/README.md) for more information.
+
+## Managed Links (`managed_links`)
+
+This module provides centrally managed entities that allow a library of common Links to be curated by FSA editors.
+
+See [README.md](../drupal/web/modules/custom/managed_links/README.md) for further information.
