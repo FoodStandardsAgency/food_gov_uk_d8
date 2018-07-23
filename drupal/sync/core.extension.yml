@@ -95,6 +95,7 @@ module:
   linkit: 0
   linkit_content: 0
   locale: 0
+  managed_links: 0
   media_entity: 0
   media_entity_browser: 0
   media_entity_document: 0
