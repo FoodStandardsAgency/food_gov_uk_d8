@@ -1,0 +1,19 @@
+uuid: ed88b295-597c-4078-8caf-015a164750a7
+langcode: en
+status: true
+dependencies:
+  module:
+    - managed_links
+    - link
+id: managed_link.field_managed_link_url
+field_name: field_managed_link_url
+entity_type: managed_link
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
