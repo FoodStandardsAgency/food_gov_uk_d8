@@ -414,7 +414,7 @@
       }
     }
 
-    &:--enter {
+    html:not(.js) &:--enter {
       &:after {
         @media (--breakpoint-sm) {
           top: 100%;
@@ -593,6 +593,23 @@
     width: 100%;
   }
 
+  &:after {
+      @media (--breakpoint-sm) {
+        background: var(--color-black);
+        content: '';
+        height: 300vh;
+        left: 0;
+        opacity: 0;
+        position: absolute;
+        top: 100%;
+        transition:
+          opacity var(--transition-enter),
+          top 0s step-end 0.2s;
+        width: 100%;
+        z-index: var(--z-under);
+      }
+    }
+
   &.is-open {
     background-color: var(--color-white);
     z-index: var(--z-middle);
@@ -611,6 +628,15 @@
       bottom: auto;
       height: auto;
       overflow: visible;
+    }
+
+    &:after {
+      @media (--breakpoint-sm) {
+        opacity: 0.4;
+        transition:
+          opacity var(--transition-enter) 0.05s,
+          top 0s step-end 0.05s;
+      }
     }
   }
 
@@ -708,6 +734,10 @@
     }
   }
 
+  :--not-touch button&[role="heading"]:--enter {
+    outline: none;
+  }
+
   .navigation__header & {
     :--not-touch &:--enter {
       color: var(--darker-primary-color);
@@ -715,6 +745,15 @@
       box-shadow: none;
       text-decoration: underline;
     }
+  }
+}
+
+/* Assistive heading, hide completely in mobile. */
+.navigation__heading.navigation__heading--level-2 {
+  display: none;
+
+  @media (--breakpoint-sm) {
+    display: inline;
   }
 }
 
