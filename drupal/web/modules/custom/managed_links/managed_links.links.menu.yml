@@ -1,0 +1,11 @@
+managed_link.admin.structure.settings:
+  title: 'Managed Link settings'
+  parent: system.admin_structure
+  description: 'Configure Managed Link entities'
+  route_name: managed_link.settings
+
+managed_link.admin.content.collection:
+  title: 'Managed Links'
+  parent: system.admin_content
+  description: 'Find and manage Managed Links.'
+  route_name: view.managed_links.managed_links_page_list

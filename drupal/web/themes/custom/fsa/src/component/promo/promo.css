@@ -694,10 +694,10 @@ a.field__field_content_promo__item {
   .field__field_large_promo__item--even & {
     a {
       background-color: var(--color-white);
-      color: var(--primary-color);
+      color: var(--dark-primary-color);
 
       :--not-touch &:--enter {
-        background-color: var(--primary-color);
+        background-color: var(--dark-primary-color);
         color: var(--color-white);
       }
     }

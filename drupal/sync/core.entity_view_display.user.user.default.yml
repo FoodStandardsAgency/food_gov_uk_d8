@@ -6,10 +6,13 @@ dependencies:
     - field.field.user.user.field_delivery_method
     - field.field.user.user.field_delivery_method_news
     - field.field.user.user.field_email_frequency
+    - field.field.user.user.field_initial_delivery_settings
+    - field.field.user.user.field_last_password_reset
     - field.field.user.user.field_notification_cache
     - field.field.user.user.field_notification_cache_sms
     - field.field.user.user.field_notification_method
     - field.field.user.user.field_notification_sms
+    - field.field.user.user.field_password_expiration
     - field.field.user.user.field_subscribed_cons
     - field.field.user.user.field_subscribed_food_alerts
     - field.field.user.user.field_subscribed_news
@@ -85,8 +88,11 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_initial_delivery_settings: true
+  field_last_password_reset: true
   field_notification_cache: true
   field_notification_cache_sms: true
   field_notification_method: true
   field_notification_sms: true
+  field_password_expiration: true
   langcode: true

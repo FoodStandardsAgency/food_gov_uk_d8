@@ -18,7 +18,7 @@ import toggle from './component/toggle/toggle'
 import peek from './component/peek/peek'
 import fhrs from './component/fhrs/fhrs'
 import toc from './component/toc/toc'
-import { autoOpenFormError, scrollToMultiStepForm } from './component/form/form'
+import { changeAriaRoleOnToggle, autoOpenFormError, scrollToMultiStepForm } from './component/form/form'
 import autoOpenFirstSearchFilter from './component/search/search'
 
 // Require every image asset inside of img folder
@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
   responsiveTables()
 
   // Forms
+  changeAriaRoleOnToggle()
   autoOpenFormError()
   scrollToMultiStepForm()
 

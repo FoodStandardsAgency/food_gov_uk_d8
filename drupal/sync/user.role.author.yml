@@ -54,5 +54,6 @@ permissions:
   - 'view latest version'
   - 'view own unpublished content'
   - 'view page revisions'
+  - 'view published managed link entities'
   - 'view research_project revisions'
   - 'view the administration theme'

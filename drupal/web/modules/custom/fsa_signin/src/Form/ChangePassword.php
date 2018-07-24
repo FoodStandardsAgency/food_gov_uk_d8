@@ -62,6 +62,17 @@ class ChangePassword extends FormBase {
       '#value' => $this->t('Change password'),
     ];
 
+    // Add event information to the data layer.
+    datalayer_add([
+      'event' => 'Subscription Set Password',
+      'eventDetails' => [
+        'category' => 'Subscription',
+        'action' => 'Set Password',
+        'label' => 'Set',
+        'value' => 0,
+      ],
+    ]);
+
     return $form;
   }
 

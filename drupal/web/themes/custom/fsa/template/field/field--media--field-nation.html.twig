@@ -1,0 +1,9 @@
+{#
+/**
+ * @file
+ * Theme override for a nation field in media document (section) to be heading.
+ */
+#}
+{% for item in items %}
+    <h6{{ attributes }}>{{ item.content }}</h6>
+{% endfor %}

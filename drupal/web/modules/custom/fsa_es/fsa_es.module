@@ -80,9 +80,12 @@ function fsa_es_preprocess_views_view(&$variables) {
   /** @var \Drupal\views\ViewExecutable $view */
   $view = $variables['view'];
 
-  // Sends Ajax-enabled views results total so that this could be displayed
-  // in a separate block.
+  // Sends Ajax-enabled views...
   if ($view->ajaxEnabled() && empty($view->live_preview)) {
+    // Sends Ajax-enabled views js to improve accessibility.
+    $view->element['#attached']['library'][] = 'fsa_es/accessibility';
+
+    // Sends Ajax-enabled views results total for display in a separate block.
     $view->element['#attached']['library'][] = 'fsa_es/result_totals';
     $view->element['#attached']['drupalSettings']['fsa_es']['result_totals'] = [
       'keywords' => isset($view->filter['keyword']) ? $view->filter['keyword']->value : NULL,

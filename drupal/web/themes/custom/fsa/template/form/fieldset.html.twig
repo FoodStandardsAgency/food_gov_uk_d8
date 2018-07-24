@@ -50,14 +50,19 @@
       required ? 'form-required',
     ]
   %}
-  {#  Always wrap fieldset legends in a SPAN for CSS positioning. #}
-  <legend{{ legend.attributes }}>
-    <span{{ legend_span.attributes.addClass(legend_span_classes) }}>{{ legend.title }}</span>
-  </legend>
+
 
   {% if toggle_fieldset %}
-    <div id="{{ fieldset_wrapper_id }}" class="fieldset-wrapper toggle-fieldset__content toggle-content">
+    <legend{{ legend.attributes }}>
+      <button{{ legend_span.attributes.addClass(legend_span_classes) }} id="button-for-{{ fieldset_wrapper_id }}" aria-expanded="false" aria-controls="{{ fieldset_wrapper_id }}" aria-disabled="true">
+        {{ legend.title }}
+      </button>
+    </legend>
+    <div id="{{ fieldset_wrapper_id }}" class="fieldset-wrapper toggle-fieldset__content toggle-content" aria-labelledby="button-for-{{ fieldset_wrapper_id }}" role="region">
   {% else %}
+    <legend{{ legend.attributes }}>
+      <span{{ legend_span.attributes.addClass(legend_span_classes) }}>{{ legend.title }}</span>
+    </legend>
     <div class="fieldset-wrapper">
   {% endif %}
 

@@ -400,13 +400,13 @@
 
 .breadcrumb__link {
   text-decoration: underline;
-  color: var(--primary-color);
+  color: var(--dark-primary-color);
 
   .hero.hero--with-content & {
     color: var(--color-white);
 
     .theme--term & {
-      color: var(--primary-color);
+      color: var(--dark-primary-color);
     }
   }
 
