@@ -120,7 +120,7 @@ class AlertsForRegistrationForm extends FormBase {
       $selected_tids = array_keys($form['alert_tids_for_registration']['#options']);
 
       // 'All' will be index 0.
-      unset($selected_tids [0]);
+      unset($selected_tids[0]);
     }
 
     $user->set('field_subscribed_food_alerts', $food_alert_registration);
