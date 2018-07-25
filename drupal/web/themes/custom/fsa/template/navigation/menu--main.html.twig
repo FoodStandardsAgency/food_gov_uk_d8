@@ -40,7 +40,7 @@
       {{ attributes.setAttribute('data-menu-level', (menu_level + 1)) }}>
 
     {% if menu_level != 0 %}
-      <header class="navigation__header">
+      <li class="navigation__header">
         <button
           class="navigation__back-link js-nav-back-link"
           aria-expanded="false"
@@ -54,7 +54,16 @@
             <span title="{{ firstItem.title }}" class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}">{{ firstItem.title }}</span>
           {% endif %}
         </h2>
-      </header>
+      </li>
+    {% endif %}
+
+    {% if menu_level == 1 %}
+      <a
+        href="{{ firstItem.url }}"
+        title="{{ firstItem.title }}"
+        class="{{ 'navigation__assistive-link navigation__assistive-link--level-1' }} visually-hidden"
+        tabindex="-1"
+        >{{ firstItem.title }}</a>
     {% endif %}
 
     {% for item in items %}
@@ -79,14 +88,24 @@
 
       <li{{ item.attributes.addClass(item_classes, 'navigation__item navigation__item--level-' ~ (menu_level + 1)).setAttribute('data-menu-level', (menu_level + 1)) }}>
         {% if item.url|render|striptags|trim %}
+
+          {% if menu_level == 0 and item.is_expanded %}
+            <button
+              class="{{ 'navigation__toggle navigation__toggle--level-' ~ (menu_level + 1) }}{% if (item.is_expanded) %} js-nav-item-toggler{% endif %} visually-hidden"
+              {% if (item.is_expanded) %}
+                aria-controls="collapsible-{{ randomID }}"
+                tabindex="-1"
+              {% endif %}
+            >{{ item.title }}</button>
+          {% endif %}
+
           <a
             href="{{ item.url }}"
             title="{{ item.title }}"
             class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}{% if (item.is_expanded) %} js-nav-item-with-child{% endif %}"
-            {% if (item.is_expanded) %}
-              aria-controls="collapsible-{{ randomID }}"
-            {% endif %}
+            {% if menu_level == 0 and item.is_expanded %}aria-hidden="true"{% endif %}
             >{{ item.title }}</a>
+
         {% else %}
           <button
             title="{{ item.title }}"
@@ -95,6 +114,10 @@
               aria-controls="collapsible-{{ randomID }}"
             {% endif %}
           >{{ item.title }}</button>
+
+          <span
+            class="{{ 'navigation__heading navigation__heading--level-' ~ (menu_level + 1) }} visually-hidden"
+          >{{ item.title }}</span>
         {% endif %}
 
           {% if item.below %}
