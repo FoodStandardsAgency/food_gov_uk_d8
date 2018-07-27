@@ -275,7 +275,7 @@ function navigation () {
           prevTopLevelItem = traversing.top.prev(listItem)
           if (prevTopLevelItem) {
             linkElement = prevTopLevelItem.querySelector(settings.linkElementSelector)
-            var toggleEvent = new Event('navigation:open')
+            var toggleEvent = new CustomEvent('navigation:open')
             linkElement.dispatchEvent(toggleEvent)
 
             traversing.focus(prevTopLevelItem)
@@ -312,7 +312,7 @@ function navigation () {
           // 3. If item is already top level, close submenu.
           if (itemLevel == 1) {
             var linkElement = listItem.querySelector(settings.menuItemActionSelector)
-            var toggleEvent = new Event('navigation:close')
+            var toggleEvent = new CustomEvent('navigation:close')
 
             linkElement.dispatchEvent(toggleEvent)
           }
@@ -340,7 +340,7 @@ function navigation () {
           nextTopLevelItem = traversing.top.next(listItem)
           if (nextTopLevelItem) {
             linkElement = nextTopLevelItem.querySelector(settings.linkElementSelector)
-            var toggleEvent = new Event('navigation:open')
+            var toggleEvent = new CustomEvent('navigation:open')
             linkElement.dispatchEvent(toggleEvent)
 
             traversing.focus(nextTopLevelItem)
@@ -367,7 +367,7 @@ function navigation () {
             // Open megamenu first.
             if (itemLevel == 1) {
               var linkElement = listItem.querySelector(settings.menuItemActionSelector)
-              var openEvent = new Event('navigation:open');
+              var openEvent = new CustomEvent('navigation:open');
               linkElement.dispatchEvent(openEvent);
             }
 
@@ -401,10 +401,10 @@ function navigation () {
               var toggleEvent = null
 
               if ([...linkElement.classList].indexOf('is-open') !== -1) {
-                toggleEvent = new Event('navigation:close')
+                toggleEvent = new CustomEvent('navigation:close')
               }
               else {
-                toggleEvent = new Event('navigation:open')
+                toggleEvent = new CustomEvent('navigation:open')
               }
 
               linkElement.dispatchEvent(toggleEvent)
@@ -487,10 +487,10 @@ function navigation () {
         var toggleEvent = null
 
         if ([...linkElement.classList].indexOf('is-open') !== -1) {
-          toggleEvent = new Event('navigation:close')
+          toggleEvent = new CustomEvent('navigation:close')
         }
         else {
-          toggleEvent = new Event('navigation:open')
+          toggleEvent = new CustomEvent('navigation:open')
         }
 
         linkElement.dispatchEvent(toggleEvent)
@@ -520,7 +520,7 @@ function navigation () {
         if (!navigationMode.getMode()) {
           // Set all first level items as closed.
           firstLevelLinkArray.forEach((element) => {
-            var toggleEvent = new Event('navigation:close')
+            var toggleEvent = new CustomEvent('navigation:close')
             element.dispatchEvent(toggleEvent);
           })
         }
@@ -545,7 +545,7 @@ function navigation () {
         if (navigationMode.getMode()) {
           e.preventDefault()
 
-          var openEvent = new Event('navigation:open')
+          var openEvent = new CustomEvent('navigation:open')
           element.dispatchEvent(openEvent)
         }
         else {
@@ -554,7 +554,7 @@ function navigation () {
           if ([...element.classList].indexOf('navigation__link--level-1') !== -1 && [...content.classList].indexOf('is-open') === -1) {
             e.preventDefault()
 
-            var toggleEvent = new Event('navigation:open')
+            var toggleEvent = new CustomEvent('navigation:open')
             element.dispatchEvent(toggleEvent);
           }
         }
@@ -567,7 +567,7 @@ function navigation () {
           // Close all tree if focused on first level item.
           if ([...element.classList].indexOf('navigation__link--level-1') !== -1) {
             firstLevelLinkArray.forEach((element) => {
-              var toggleEvent = new Event('navigation:close')
+              var toggleEvent = new CustomEvent('navigation:close')
               element.dispatchEvent(toggleEvent);
             })
           }
@@ -575,7 +575,7 @@ function navigation () {
           // Close all second level trees if focused on second level item.
           if ([...element.classList].indexOf('navigation__link--level-2') !== -1) {
             secondLevelLinkArray.forEach((element) => {
-              var toggleEvent = new Event('navigation:close')
+              var toggleEvent = new CustomEvent('navigation:close')
               element.dispatchEvent(toggleEvent);
             })
           }
@@ -587,7 +587,7 @@ function navigation () {
       element.addEventListener('mouseenter', function (e) {
         if (!navigationMode.getMode()) {
           if ([...element.classList].indexOf('navigation__link--level-1') !== -1) {
-            var toggleEvent = new Event('navigation:open')
+            var toggleEvent = new CustomEvent('navigation:open')
             element.dispatchEvent(toggleEvent)
           }
         }
@@ -603,7 +603,7 @@ function navigation () {
           if (!element.contains(e.relatedTarget) || [...e.relatedTarget.classList].indexOf('navigation__link--level-1') !== -1) {
             firstLevelLinkArray.forEach((element) => {
               if (e.relatedTarget != element) {
-                var toggleEvent = new Event('navigation:close')
+                var toggleEvent = new CustomEvent('navigation:close')
                 element.dispatchEvent(toggleEvent)
               }
             })
@@ -636,7 +636,7 @@ function navigation () {
         // Close first level items when focusing outside them.
         if (e.relatedTarget === null || (!e.relatedTarget.classList.contains('js-nav-item-with-child') && e.relatedTarget.classList.contains('navigation__link--level-1')) || queryParents(e.relatedTarget, settings.menuSelector) === null) {
           firstLevelLinkArray.forEach((element) => {
-            var toggleEvent = new Event('navigation:close')
+            var toggleEvent = new CustomEvent('navigation:close')
             element.dispatchEvent(toggleEvent)
           })
         }
@@ -677,7 +677,7 @@ function navigation () {
 
         // Close all first level items.
         if (element.classList.contains('navigation__link--level-1')) {
-          var closeEvent = new Event('navigation:close')
+          var closeEvent = new CustomEvent('navigation:close')
           element.dispatchEvent(closeEvent)
         }
 
@@ -700,7 +700,7 @@ function navigation () {
 
         // Close all first level items.
         if (element.classList.contains('navigation__link--level-1')) {
-          var closeEvent = new Event('navigation:close')
+          var closeEvent = new CustomEvent('navigation:close')
           element.dispatchEvent(closeEvent)
         }
 
