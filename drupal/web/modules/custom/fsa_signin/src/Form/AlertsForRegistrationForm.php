@@ -103,9 +103,25 @@ class AlertsForRegistrationForm extends FormBase {
     $food_alert_registration = array_filter(array_values($food_alert_registration));
 
     $alert_tids = $form_state->getValue('alert_tids_for_registration');
+    // If 'all' is the only selection item, the user may have left this item
+    // checked but not have anything else selected. In that case, we should
+    // interpret this selection as a desire to receive from all categories
+    // so we need to fill the $alert_tids with all term ids from that vocabulary.
+    $has_selected_all = !empty($alert_tids['all']);
+
     unset($alert_tids['all']);
     // Filter only those user has selected:
     $selected_tids = array_filter(array_values($alert_tids));
+
+    if ($has_selected_all) {
+      // Fill the $selected_tids array with values (use from the original
+      // form element values to avoid reloading taxonomy data) because the
+      // user has indicated they want to receive 'All' things.
+      $selected_tids = array_keys($form['alert_tids_for_registration']['#options']);
+
+      // 'All' will be index 0.
+      unset($selected_tids[0]);
+    }
 
     $user->set('field_subscribed_food_alerts', $food_alert_registration);
     $user->set('field_subscribed_notifications', $selected_tids);
