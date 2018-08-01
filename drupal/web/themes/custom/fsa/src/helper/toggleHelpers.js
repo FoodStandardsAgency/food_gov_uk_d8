@@ -45,16 +45,6 @@ const state = {
     }
   },
 
-  match: (elem, stateRefItem, elemState) => {
-    var newState = stateRefItem.classList.contains(elemState)
-
-    if (!newState) {
-      state.off({ element: elem, type: 'button' }, elemState)
-    } else {
-      state.on({ element: elem, type: 'button' }, elemState)
-    }
-  },
-
   remove: (options, elemState) => {
     switch (options.type) {
       case 'button':
