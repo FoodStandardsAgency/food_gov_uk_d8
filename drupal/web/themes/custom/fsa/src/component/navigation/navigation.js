@@ -8,11 +8,9 @@ import state from '../../helper/toggleHelpers'
 function navigation () {
   const settings = {
     hoverClass: 'is-open',
-    mobileDrawerSelector: '.navigation-wrapper__content',
     menuSelector: 'ul.navigation__menu',
     groupSelector: 'li.navigation__item.navigation__item--level-2',
     listItemSelector: 'li.navigation__item--level-1, li.navigation__item--level-3',
-    linkElementSelector: '.navigation__link',
     menuItemActionSelector: 'li.navigation__item--level-1 .navigation__link--level-1, li.navigation__item--level-3 .navigation__link--level-3'
   }
 
@@ -49,14 +47,14 @@ function navigation () {
     prev: function (item) {
       let currentItem = queryParents(item, settings.listItemSelector)
 
-      if (currentItem && currentItem.previousElementSibling && currentItem.previousElementSibling.matches(settings.listItemSelector)) {
+      if (currentItem && currentItem.previousElementSibling.matches(settings.listItemSelector)) {
         return currentItem.previousElementSibling
       }
     },
     next: function (item) {
       let currentItem = queryParents(item, settings.listItemSelector)
 
-      if (currentItem && currentItem.nextElementSibling && currentItem.nextElementSibling.matches(settings.listItemSelector)) {
+      if (currentItem && currentItem.nextElementSibling.matches(settings.listItemSelector)) {
         return currentItem.nextElementSibling
       }
     },
@@ -143,20 +141,14 @@ function navigation () {
     },
 
     siblings: {
-      prev: function(item, selector, recursive) {
+      prev: function(item, selector) {
         if (item && item.previousElementSibling && item.previousElementSibling.matches(selector)) {
           return item.previousElementSibling
         }
-        else if (recursive && item && item.previousElementSibling) {
-          return traversing.siblings.prev(item.previousElementSibling, selector, recursive)
-        }
       },
-      next: function (item, selector, recursive) {
+      next: function (item, selector) {
         if (item && item.nextElementSibling && item.nextElementSibling.matches(selector)) {
           return item.nextElementSibling
-        }
-        else if (recursive && item && item.nextElementSibling) {
-          return traversing.siblings.next(item.nextElementSibling, selector, recursive)
         }
       }
     }
@@ -171,9 +163,6 @@ function navigation () {
 
   // Query nav items with child
   const navigationParentItemsArray = [...document.querySelectorAll('.js-nav-item-with-child')]
-
-  // Query nav item togglers
-  const navigationItemTogglersArray = [...document.querySelectorAll('.js-nav-item-toggler')]
 
   // Query back links
   const navigationBackLinksArray = [...document.querySelectorAll('.js-nav-back-link')]
@@ -208,41 +197,12 @@ function navigation () {
     }
   }
 
-  const navigationMode = {
-    isMobile: null,
-    windowWidth: null,
-    setMode: (isMobile) => {
-      var currentState = navigationMode.isMobile
-      navigationMode.isMobile = isMobile
-
-      // Only initialize nav if mode has changed.
-      if (currentState !== navigationMode.isMobile) {
-        initializeNav()
-      }
-    },
-    getMode: () => {
-      return navigationMode.isMobile
-    },
-    updateMode: () => {
-      // Refresh
-      navigationMode.windowWidth = window.innerWidth
-      navigationMode.setMode(checkMediaQuery() === breakpoints.xsmall)
-
-      return navigationMode.getMode()
-    }
-  }
-
   // Add keyboard navigation so the megamenu is easy to use with a keyboard.
   const menuItemActionArray = [...navigationElementArray[0].querySelectorAll(settings.menuItemActionSelector)]
   menuItemActionArray.forEach((element) => {
     const menuItemAction = element
 
     const keyDownHandler = (event) => {
-      // No arrow navigation in mobile mode.
-      if (navigationMode.getMode()) {
-        return;
-      }
-
       const item = event.target
       const keycode = event.keyCode
 
@@ -260,26 +220,21 @@ function navigation () {
         // 2. If one doesn't exist (on first group),
         // traverse to the previous top item.
         case keyboard.LEFT:
-          event.preventDefault()
-
           listItem = queryParents(item, settings.listItemSelector)
           group = traversing.group.prev(listItem)
 
           // 1. Traverse to the previous group.
           if (group) {
             traversing.focus(group)
+            event.preventDefault()
             break
           }
 
           // 2. Traverse to the previous top item.
           prevTopLevelItem = traversing.top.prev(listItem)
           if (prevTopLevelItem) {
-            linkElement = prevTopLevelItem.querySelector(settings.linkElementSelector)
-            var toggleEvent = new CustomEvent('navigation:open')
-            linkElement.dispatchEvent(toggleEvent)
-
             traversing.focus(prevTopLevelItem)
-
+            event.preventDefault()
             break
           }
 
@@ -291,8 +246,6 @@ function navigation () {
         // OR:
         // 2. If no sibling, try and traverse to the outer level.
         case keyboard.UP:
-          event.preventDefault()
-
           listItem = queryParents(item, settings.listItemSelector)
           itemLevel = traversing.getLevel(listItem)
           let upperItem
@@ -300,6 +253,7 @@ function navigation () {
           // 1. If item level is over 2, traverse between siblings first.
           if (itemLevel > 2 && (siblingItem = traversing.prev(item))) {
             traversing.focus(siblingItem)
+            event.preventDefault()
             break
           }
 
@@ -307,14 +261,7 @@ function navigation () {
           upperItem = traversing.out(listItem)
           if (upperItem) {
             traversing.focus(upperItem)
-          }
-
-          // 3. If item is already top level, close submenu.
-          if (itemLevel == 1) {
-            var linkElement = listItem.querySelector(settings.menuItemActionSelector)
-            var toggleEvent = new CustomEvent('navigation:close')
-
-            linkElement.dispatchEvent(toggleEvent)
+            event.preventDefault()
           }
 
           break
@@ -325,25 +272,21 @@ function navigation () {
         // 2. If one doesn't exist (on last group),
         // traverse to next top item.
         case keyboard.RIGHT:
-          event.preventDefault()
-
           listItem = queryParents(item, settings.listItemSelector)
 
           // 1. Traverse to the next group.
           group = traversing.group.next(listItem)
           if (group) {
             traversing.focus(group)
+            event.preventDefault()
             break
           }
 
           // 2. Traverse to the next top item.
           nextTopLevelItem = traversing.top.next(listItem)
           if (nextTopLevelItem) {
-            linkElement = nextTopLevelItem.querySelector(settings.linkElementSelector)
-            var toggleEvent = new CustomEvent('navigation:open')
-            linkElement.dispatchEvent(toggleEvent)
-
             traversing.focus(nextTopLevelItem)
+            event.preventDefault()
             break
           }
 
@@ -356,8 +299,6 @@ function navigation () {
         // OR:
         // 3. If there's no sibling, traverse to next group.
         case keyboard.DOWN:
-          event.preventDefault()
-
           listItem = queryParents(item, settings.listItemSelector)
           itemLevel = traversing.getLevel(listItem)
           let innerItem = traversing.in(listItem)
@@ -366,12 +307,13 @@ function navigation () {
           if (innerItem) {
             // Open megamenu first.
             if (itemLevel == 1) {
-              var linkElement = listItem.querySelector(settings.menuItemActionSelector)
-              var openEvent = new CustomEvent('navigation:open');
+              let linkElement = listItem.querySelector(settings.menuItemActionSelector)
+              let openEvent = new Event('navigation:open');
               linkElement.dispatchEvent(openEvent);
             }
 
             traversing.focus(innerItem)
+            event.preventDefault()
             break
           }
 
@@ -379,6 +321,7 @@ function navigation () {
           siblingItem = traversing.next(item)
           if (siblingItem) {
             traversing.focus(siblingItem)
+            event.preventDefault()
             break
           }
 
@@ -386,33 +329,11 @@ function navigation () {
           group = traversing.group.next(listItem)
           if (group) {
             traversing.focus(group)
+            event.preventDefault()
             break
           }
 
           break
-
-          // Logic for key SPACE:
-          // Toggle (open if closed, close if opened) first level items.
-          case keyboard.SPACE:
-            listItem = queryParents(item, settings.listItemSelector)
-
-            if (traversing.getLevel(listItem) == 1) {
-              var linkElement = listItem.querySelector(settings.menuItemActionSelector)
-              var toggleEvent = null
-
-              if ([...linkElement.classList].indexOf('is-open') !== -1) {
-                toggleEvent = new CustomEvent('navigation:close')
-              }
-              else {
-                toggleEvent = new CustomEvent('navigation:open')
-              }
-
-              linkElement.dispatchEvent(toggleEvent)
-              event.preventDefault()
-            }
-            break;
-
-          break;
       };
     }
 
@@ -475,141 +396,110 @@ function navigation () {
       menuButtonOpenElement.focus()
     })
 
-    // Item togglers for screen readers.
-    navigationItemTogglersArray.forEach((element) => {
-      // Content element
-      const content = traversing.siblings.next(element, '.navigation__menu', true)
-      const linkElement = traversing.siblings.next(element, '.js-nav-item-with-child', true)
-
-      // Handle toggler button click as a proxy element for the actual
-      // menu link item. Only expand/collapse via custom events.
-      element.addEventListener('click', function (e) {
-        var toggleEvent = null
-
-        if ([...linkElement.classList].indexOf('is-open') !== -1) {
-          toggleEvent = new CustomEvent('navigation:close')
-        }
-        else {
-          toggleEvent = new CustomEvent('navigation:open')
-        }
-
-        linkElement.dispatchEvent(toggleEvent)
-      })
-    })
-
-    // Items with children. Multipurpose link elements.
+    // Items with children
     navigationParentItemsArray.forEach((element) => {
       // Content element
-      const content = traversing.siblings.next(element, '.navigation__menu', true)
+      const content = element.nextElementSibling
 
-      // Toggler button
-      const togglerElement = traversing.siblings.prev(element, '.js-nav-item-toggler', true)
-
-      // Add custom event listener for closing a navigation tree.
-      element.addEventListener('navigation:close', function (e) {
-        state.toggle(element, content, 'is-open', false)
-
-        // Match toggler element state if exists.
-        if (togglerElement) {
-          state.match(togglerElement, element, 'is-open')
-        }
-      })
-
-      // Add custom event listener for opening a navigation tree.
-      element.addEventListener('navigation:open', function (e) {
-        if (!navigationMode.getMode()) {
-          // Set all first level items as closed.
-          firstLevelLinkArray.forEach((element) => {
-            var toggleEvent = new CustomEvent('navigation:close')
-            element.dispatchEvent(toggleEvent);
-          })
-        }
-
-        state.toggle(element, content, 'is-open', true)
-
-        // Match toggler element state if exists.
-        if (togglerElement) {
-          state.match(togglerElement, element, 'is-open')
-        }
-
-        // Mobile mode specifics when opening a navigation tree.
-        if (navigationMode.getMode()) {
-          // Focus on first child item and add class for styling reasons.
+      // Add click listener
+      element.addEventListener('click', function (e) {
+        if (checkMediaQuery() === breakpoints.xsmall) {
+          e.preventDefault()
+          state.on({element: element, type: 'button'}, 'is-open')
+          state.on({element: content, type: 'content'}, 'is-open')
           content.children[0].children[0].focus()
           navigationElementArray[0].classList.add('has-open-submenu')
         }
       })
 
-      // Add click listener
-      element.addEventListener('click', function (e) {
-        if (navigationMode.getMode()) {
+      // Add a keypress listener
+      element.addEventListener('keypress', function (e) {
+        if (e.which === keyboard.SPACE) {
           e.preventDefault()
-
-          var openEvent = new CustomEvent('navigation:open')
-          element.dispatchEvent(openEvent)
+          state.toggle(element, content, 'is-open')
         }
-        else {
-          // If first level item isn't open when clicked, prevent default
-          // and open instead. This is a common hover workaround for touch.
-          if ([...element.classList].indexOf('navigation__link--level-1') !== -1 && [...content.classList].indexOf('is-open') === -1) {
-            e.preventDefault()
-
-            var toggleEvent = new CustomEvent('navigation:open')
-            element.dispatchEvent(toggleEvent);
-          }
+        if (e.which === keyboard.ENTER) {
+          state.toggle(element, content, 'is-open')
         }
+      })
+
+      // Add custom event listener
+      element.addEventListener('navigation:open', function(e) {
+        e.preventDefault()
+        state.toggle(element, content, 'is-open', true)
       })
 
       // Add a focus listener
       element.addEventListener('focus', function (e) {
-        // Special focus handling in mobile navigation mode.
-        if (navigationMode.getMode()) {
-          // Close all tree if focused on first level item.
+        if (checkMediaQuery() === breakpoints.xsmall) {
           if ([...element.classList].indexOf('navigation__link--level-1') !== -1) {
             firstLevelLinkArray.forEach((element) => {
-              var toggleEvent = new CustomEvent('navigation:close')
-              element.dispatchEvent(toggleEvent);
+              state.off({element: element, type: 'button'}, 'is-open')
+            })
+
+            secondLevelMenuArray.forEach((element) => {
+              state.off({element, type: 'content'}, 'is-open')
             })
           }
 
-          // Close all second level trees if focused on second level item.
           if ([...element.classList].indexOf('navigation__link--level-2') !== -1) {
             secondLevelLinkArray.forEach((element) => {
-              var toggleEvent = new CustomEvent('navigation:close')
-              element.dispatchEvent(toggleEvent);
+              state.off({element: element, type: 'button'}, 'is-open')
+            })
+
+            thirdLevelMenuArray.forEach((element) => {
+              state.off({element, type: 'content'}, 'is-open')
             })
           }
-        }
-      }, true)
-
-      // Add a mouseenter listener (hover).
-      // Hover has to be handled in JS, because inert messes with CSS hover.
-      element.addEventListener('mouseenter', function (e) {
-        if (!navigationMode.getMode()) {
+        } else {
           if ([...element.classList].indexOf('navigation__link--level-1') !== -1) {
-            var toggleEvent = new CustomEvent('navigation:open')
-            element.dispatchEvent(toggleEvent)
-          }
-        }
-      }, true)
-    })
-
-    // Close nav element when mouse leaves navigation element
-    // or enters another first level element (relatedTarget).
-    // This includes items without children!
-    navigationElementArray.forEach((element) => {
-      element.addEventListener('mouseout', function (e) {
-        if (!navigationMode.getMode()) {
-          if (!element.contains(e.relatedTarget) || [...e.relatedTarget.classList].indexOf('navigation__link--level-1') !== -1) {
             firstLevelLinkArray.forEach((element) => {
-              if (e.relatedTarget != element) {
-                var toggleEvent = new CustomEvent('navigation:close')
-                element.dispatchEvent(toggleEvent)
-              }
+              state.off({element: element, type: 'button'}, 'is-open')
+            })
+
+            secondLevelMenuArray.forEach((element) => {
+              state.off({element, type: 'content'}, 'is-open')
             })
           }
         }
       }, true)
+
+      // Add a mouseenter listener
+      element.addEventListener('mouseenter', function (e) {
+        if (checkMediaQuery() === breakpoints.xsmall) {
+
+        } else {
+          firstLevelLinkArray.forEach((element) => {
+            state.remove({element: element, type: 'button'}, 'is-open')
+          })
+
+          secondLevelMenuArray.forEach((element) => {
+            state.remove({element: element, type: 'content'}, 'is-open')
+          })
+        }
+      }, true)
+
+      // If touch device
+      element.addEventListener('touchstart', function addtouchclass (e) {
+        if (checkMediaQuery() !== breakpoints.xsmall) {
+          if ([...content.classList].indexOf('is-open') !== -1) {
+            state.off({ element: content, type: 'content' }, 'is-open')
+          } else {
+            e.preventDefault()
+
+            firstLevelLinkArray.forEach((element) => {
+              state.off({ element: element, type: 'button' }, 'is-open')
+            })
+
+            secondLevelMenuArray.forEach((element) => {
+              state.off({ element, type: 'content' }, 'is-open')
+            })
+
+            state.on({ element, type: 'button' }, 'is-open')
+            state.on({ element: content, type: 'content' }, 'is-open')
+          }
+        }
+      }, false)
     })
 
     // Back link
@@ -633,19 +523,28 @@ function navigation () {
     // Close navigation/subnavigation when focused outside of navigation
     tabbableNavigationItems.forEach((element) => {
       element.addEventListener('blur', function (e) {
-        // Close first level items when focusing outside them.
-        if (e.relatedTarget === null || (!e.relatedTarget.classList.contains('js-nav-item-with-child') && e.relatedTarget.classList.contains('navigation__link--level-1')) || queryParents(e.relatedTarget, settings.menuSelector) === null) {
-          firstLevelLinkArray.forEach((element) => {
-            var toggleEvent = new CustomEvent('navigation:close')
-            element.dispatchEvent(toggleEvent)
-          })
-        }
+        if (e.relatedTarget !== null) {
+          if (checkMediaQuery() === breakpoints.xsmall) {
+            if (tabbableNavigationItems.indexOf(e.relatedTarget) === -1) {
+              mobileNavigation.off()
+            } else if (e.relatedTarget.classList.contains('language-link')) {
+              firstLevelLinkArray.forEach((element) => {
+                state.off({ element: element, type: 'button' }, 'is-open')
+              })
+              secondLevelMenuArray.forEach((element) => {
+                state.off({ element, type: 'content' }, 'is-open')
+              })
+            }
+          } else {
+            if (tabbableNavigationItems.indexOf(e.relatedTarget) === -1) {
+              firstLevelLinkArray.forEach((element) => {
+                state.off({ element: element, type: 'button' }, 'is-open')
+              })
 
-        // Close mobile navigation when focusing outside it.
-        if (e.relatedTarget === null || queryParents(e.relatedTarget, settings.mobileDrawerSelector) === null) {
-          // Close mobile nav if in mobile mode.
-          if (navigationMode.getMode()) {
-            mobileNavigation.off()
+              secondLevelMenuArray.forEach((element) => {
+                state.off({ element, type: 'content' }, 'is-open')
+              })
+            }
           }
         }
       })
@@ -659,61 +558,52 @@ function navigation () {
     navigationElementArray[0].classList.remove('has-open-submenu')
 
     // Set initial states
-    if (navigationMode.getMode()) {
+    if (checkMediaQuery() === breakpoints.xsmall) {
       state.off({element: menuButtonOpenElement, type: 'button'}, 'is-open')
       state.off({element: menuButtonCloseElement, type: 'button'}, 'is-open')
       state.off({element: navigationElementArray[0], type: 'content'}, 'is-open')
 
-      thirdLevelMenuArray.forEach((element) => {
-        element.querySelectorAll('.navigation__link').forEach((element) => {
-          // Add tabindex
+      // Set state off from link items with children
+      navigationParentItemsArray.forEach((element) => {
+        // Add tabindex
+        element.setAttribute('tabindex', '0')
+
+        state.off({element: element, type: 'button'}, 'is-open')
+
+        if ([...element.classList].indexOf('navigation__link--level-2') !== -1) {
           element.setAttribute('tabindex', '0')
-        })
-      })
-
-      navigationParentItemsArray.forEach((element) => {
-        // Add tabindex
-        element.setAttribute('tabindex', '0')
-
-        // Close all first level items.
-        if (element.classList.contains('navigation__link--level-1')) {
-          var closeEvent = new CustomEvent('navigation:close')
-          element.dispatchEvent(closeEvent)
-        }
-
-        // Enable second level buttons, because they function in
-        // mobile mode.
-        if (element.classList.contains('navigation__link--level-2')) {
-          element.inert = false
-        }
-      })
-    } else {
-      // Remove mobile navigation states
-      state.remove({element: menuButtonOpenElement, type: 'button'}, 'is-open')
-      state.remove({element: menuButtonCloseElement, type: 'button'}, 'is-open')
-      state.remove({element: navigationElementArray[0], type: 'content'}, 'is-open')
-
-      // Close link items with children
-      navigationParentItemsArray.forEach((element) => {
-        // Add tabindex
-        element.setAttribute('tabindex', '0')
-
-        // Close all first level items.
-        if (element.classList.contains('navigation__link--level-1')) {
-          var closeEvent = new CustomEvent('navigation:close')
-          element.dispatchEvent(closeEvent)
-        }
-
-        // Disable second level buttons which have a function in mobile mode,
-        // but not in full mode. This fixes semantics for assistive tech.
-        if (element.classList.contains('navigation__link--level-2')) {
-          element.inert = true
         }
       })
 
       // Set state off from second subnavigation
       secondLevelMenuArray.forEach((element) => {
-        state.remove({ element: element, type: 'content' }, 'is-open')
+        state.off({element: element, type: 'content'}, 'is-open')
+      })
+
+      // Set state off from third subnavigation
+      thirdLevelMenuArray.forEach((element) => {
+        state.off({element: element, type: 'content'}, 'is-open')
+      })
+    } else {
+      state.remove({element: menuButtonOpenElement, type: 'button'}, 'is-open')
+      state.remove({element: menuButtonCloseElement, type: 'button'}, 'is-open')
+      state.remove({element: navigationElementArray[0], type: 'content'}, 'is-open')
+
+      // Set state off from link items with children
+      navigationParentItemsArray.forEach((element) => {
+        // Add tabindex
+        element.setAttribute('tabindex', '0')
+
+        state.off({element: element, type: 'button'}, 'is-open')
+
+        if ([...element.classList].indexOf('navigation__link--level-2') !== -1) {
+          element.setAttribute('tabindex', '-1')
+        }
+      })
+
+      // Set state off from second subnavigation
+      secondLevelMenuArray.forEach((element) => {
+        state.off({element: element, type: 'content'}, 'is-open')
       })
 
       // Set state off from third subnavigation
@@ -728,18 +618,24 @@ function navigation () {
     })
   }
 
+  // Current window width
+  let windowWidth = window.innerWidth
+
   const resizeHandler = debounce(function () {
     // Check if vertical resizing
-    if (window.innerWidth === navigationMode.windowWidth) {
+    if (window.innerWidth === windowWidth) {
       return false
     }
 
-    navigationMode.updateMode()
+    windowWidth = window.innerWidth
+
+    initializeNav()
   }, 250)
+
   window.addEventListener('resize', resizeHandler)
 
   initializeListeners()
-  navigationMode.updateMode()
+  initializeNav()
 }
 
 module.exports = navigation
