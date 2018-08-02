@@ -48,6 +48,9 @@ function navigation () {
   // Navigation items that have an action.
   const menuItemActionArray = [...navigationElementArray[0].querySelectorAll(settings.menuItemActionSelector)]
 
+  // Mobile navigation object with on/off state functions.
+  // Toggles whether mobile navigation wrapper is visible and active or not.
+  // Note: this does NOT switch between mobile and full navigation modes.
   const mobileNavigation = {
     on: () => {
       state.on({ element: menuButtonOpenElement, type: 'button' }, 'is-open')
@@ -71,6 +74,8 @@ function navigation () {
     }
   }
 
+  // Navigation mode object which switches between mobile and full navigation.
+  // Abstracts breakpoint checking and current mode.
   const navigationMode = {
     isMobile: null,
     windowWidth: null,
@@ -394,6 +399,7 @@ function navigation () {
     })
   }
 
+  // Debounce switching between mobile and full navigation modes when resizing.
   const resizeHandler = debounce(function () {
     // Check if vertical resizing
     if (window.innerWidth === navigationMode.windowWidth) {
@@ -404,6 +410,7 @@ function navigation () {
   }, 250)
   window.addEventListener('resize', resizeHandler)
 
+  // Initialize listeners and set initial navigation mode.
   initializeListeners()
   navigationMode.updateMode()
 }
