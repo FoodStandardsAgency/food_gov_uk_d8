@@ -588,6 +588,8 @@ function navigation () {
               var toggleEvent = new CustomEvent('navigation:close')
               element.dispatchEvent(toggleEvent);
             })
+
+            navigationElementArray[0].classList.remove('has-open-submenu')
           }
 
           // Close all second level trees if focused on second level item.
@@ -657,7 +659,7 @@ function navigation () {
         }
         else {
           // Close first level items when focusing outside them in full mode.
-          if (e.relatedTarget !== null && ((!e.relatedTarget.classList.contains('js-nav-item-with-child') && e.relatedTarget.classList.contains('navigation__link--level-1')) || queryParents(e.relatedTarget, settings.menuSelector) === null)) {
+          if (e.relatedTarget === null || (!e.relatedTarget.classList.contains('js-nav-item-with-child') && e.relatedTarget.classList.contains('navigation__link--level-1')) || queryParents(e.relatedTarget, settings.menuSelector) === null) {
             firstLevelLinkArray.forEach((element) => {
               var toggleEvent = new CustomEvent('navigation:close')
               element.dispatchEvent(toggleEvent)
