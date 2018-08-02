@@ -630,20 +630,18 @@ function navigation () {
       }, true)
     })
 
-    // Back link
+    // Back link in mobile mode.
     navigationBackLinksArray.forEach((element) => {
       // Add click listener
       element.addEventListener('click', function (e) {
-        if (checkMediaQuery() === breakpoints.xsmall) {
+        if (navigationMode.getMode()) {
           e.preventDefault()
-          state.off({element: element, type: 'button'}, 'is-open')
-          state.off({element: closestParent(element, 'js-nav-menu'), type: 'content'}, 'is-open')
-          state.off({element: closestParent(element, 'js-nav-menu').previousElementSibling, type: 'button'}, 'is-open')
-          closestParent(element, 'js-nav-menu').previousElementSibling.focus()
+          const parentItem = closestParent(element, 'navigation__item')
+          const parentLink = parentItem.querySelector('.navigation__link')
 
-          if ([...closestParent(element, 'js-nav-menu').classList].indexOf('navigation__menu--level-2') !== -1) {
-            navigationElementArray[0].classList.remove('has-open-submenu')
-          }
+          // Focus on the parent link of this nav tree branch.
+          // Blur event handling will close the branch.
+          parentLink.focus()
         }
       })
     })
@@ -660,9 +658,8 @@ function navigation () {
         }
 
         // Close mobile navigation when focusing outside it.
-        if (e.relatedTarget === null || queryParents(e.relatedTarget, settings.mobileDrawerSelector) === null) {
-          // Close mobile nav if in mobile mode.
-          if (navigationMode.getMode()) {
+        if (navigationMode.getMode()) {
+          if (e.relatedTarget !== null && queryParents(e.relatedTarget, settings.mobileDrawerSelector) === null) {
             mobileNavigation.off()
           }
         }
