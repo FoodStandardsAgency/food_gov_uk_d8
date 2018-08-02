@@ -195,14 +195,20 @@ function navigation () {
     on: () => {
       state.on({ element: menuButtonOpenElement, type: 'button' }, 'is-open')
       state.on({ element: menuButtonCloseElement, type: 'button' }, 'is-open')
-      state.on({ element: navigationElementArray[0], type: 'content' }, 'is-open')
+      state.on({ element: navigationElementArray[0], type: 'content' }, 'is-open', true)
+
+      firstLevelLinkArray.forEach((element) => {
+        var closeEvent = new CustomEvent('navigation:close')
+        element.dispatchEvent(closeEvent)
+      })
+
       siteElementArray[0].classList.add('is-moved')
       root.classList.add('is-fixed')
     },
     off: () => {
       state.off({ element: menuButtonOpenElement, type: 'button' }, 'is-open')
       state.off({ element: menuButtonCloseElement, type: 'button' }, 'is-open')
-      state.off({ element: navigationElementArray[0], type: 'content' }, 'is-open')
+      state.off({ element: navigationElementArray[0], type: 'content' }, 'is-open', true)
       siteElementArray[0].classList.remove('is-moved')
       root.classList.remove('is-fixed')
     }
@@ -507,7 +513,7 @@ function navigation () {
 
       // Add custom event listener for closing a navigation tree.
       element.addEventListener('navigation:close', function (e) {
-        state.toggle(element, content, 'is-open', false)
+        state.toggle(element, content, 'is-open', false, true)
 
         // Match toggler element state if exists.
         if (togglerElement) {
@@ -525,7 +531,7 @@ function navigation () {
           })
         }
 
-        state.toggle(element, content, 'is-open', true)
+        state.toggle(element, content, 'is-open', true, true)
 
         // Match toggler element state if exists.
         if (togglerElement) {
@@ -534,9 +540,21 @@ function navigation () {
 
         // Mobile mode specifics when opening a navigation tree.
         if (navigationMode.getMode()) {
+          // Close inner items to inert them.
+          content.querySelectorAll('.navigation__link').forEach((element) => {
+            var toggleEvent = new CustomEvent('navigation:close')
+            element.dispatchEvent(toggleEvent);
+          })
+
           // Focus on first child item and add class for styling reasons.
           content.children[0].children[0].focus()
           navigationElementArray[0].classList.add('has-open-submenu')
+        }
+        else {
+          // Make any toggle buttons inert.
+          content.querySelectorAll('button.navigation__link').forEach((element) => {
+            element.inert = true
+          })
         }
       })
 
