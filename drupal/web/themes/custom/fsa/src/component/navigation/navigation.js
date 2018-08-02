@@ -649,18 +649,19 @@ function navigation () {
     // Close navigation/subnavigation when focused outside of navigation
     tabbableNavigationItems.forEach((element) => {
       element.addEventListener('blur', function (e) {
-        // Close first level items when focusing outside them.
-        if (e.relatedTarget === null || (!e.relatedTarget.classList.contains('js-nav-item-with-child') && e.relatedTarget.classList.contains('navigation__link--level-1')) || queryParents(e.relatedTarget, settings.menuSelector) === null) {
-          firstLevelLinkArray.forEach((element) => {
-            var toggleEvent = new CustomEvent('navigation:close')
-            element.dispatchEvent(toggleEvent)
-          })
-        }
-
         // Close mobile navigation when focusing outside it.
         if (navigationMode.getMode()) {
           if (e.relatedTarget !== null && queryParents(e.relatedTarget, settings.mobileDrawerSelector) === null) {
             mobileNavigation.off()
+          }
+        }
+        else {
+          // Close first level items when focusing outside them in full mode.
+          if (e.relatedTarget !== null && ((!e.relatedTarget.classList.contains('js-nav-item-with-child') && e.relatedTarget.classList.contains('navigation__link--level-1')) || queryParents(e.relatedTarget, settings.menuSelector) === null)) {
+            firstLevelLinkArray.forEach((element) => {
+              var toggleEvent = new CustomEvent('navigation:close')
+              element.dispatchEvent(toggleEvent)
+            })
           }
         }
       })
@@ -686,11 +687,9 @@ function navigation () {
       state.on({element: navigationElementArray[0].querySelector('.navigation__menu--level-1'), type: 'content'}, 'is-open', true)
 
       navigationParentItemsArray.forEach((element) => {
-        // Close all first level items which also makes submenu links inert.
-        if (element.classList.contains('navigation__link--level-1')) {
-          var closeEvent = new CustomEvent('navigation:close')
-          element.dispatchEvent(closeEvent)
-        }
+        // Close all levels.
+        var closeEvent = new CustomEvent('navigation:close')
+        element.dispatchEvent(closeEvent)
 
         // Disable second level buttons which have a function in mobile mode,
         // but not in full mode. This fixes semantics for assistive tech.
