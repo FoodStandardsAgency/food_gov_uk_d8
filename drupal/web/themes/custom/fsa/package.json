@@ -34,10 +34,10 @@
     "babel-preset-env": "^1.5.1",
     "clipboard": "^2.0.1",
     "css-loader": "^0.28.4",
-    "custom-event-polyfill": "^0.3.0",
     "file-loader": "^1.1.6",
     "html-loader": "^0.5.1",
     "image-webpack-loader": "^4.0.0",
+    "inert-polyfill": "^0.2.5",
     "lodash": "^4.17.4",
     "markdown-loader": "^2.0.1",
     "mutationobserver-shim": "^0.3.2",
@@ -58,7 +58,7 @@
     "to-camel-case": "^1.0.0",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.11",
-    "wicg-inert": "^2.0"
+    "wicg-inert": "^1.1.6"
   },
   "devDependencies": {
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
