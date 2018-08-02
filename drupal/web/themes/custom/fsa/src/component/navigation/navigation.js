@@ -324,7 +324,7 @@ function navigation () {
           const parentLink = parentItem.querySelector('.navigation__link')
 
           // Focus on the parent link of this nav tree branch.
-          // Blur event handling will close the branch.
+          // Focus event handling will close the branch.
           parentLink.focus()
         }
       })
