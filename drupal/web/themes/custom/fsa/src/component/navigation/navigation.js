@@ -513,6 +513,8 @@ function navigation () {
 
       // Add custom event listener for closing a navigation tree.
       element.addEventListener('navigation:close', function (e) {
+        // Close link and its menu content.
+        // Also inert submenu links recursively.
         state.toggle(element, content, 'is-open', false, true)
 
         // Match toggler element state if exists.
@@ -524,13 +526,15 @@ function navigation () {
       // Add custom event listener for opening a navigation tree.
       element.addEventListener('navigation:open', function (e) {
         if (!navigationMode.getMode()) {
-          // Set all first level items as closed.
+          // Close all first level items in full mode before opening.
           firstLevelLinkArray.forEach((element) => {
             var toggleEvent = new CustomEvent('navigation:close')
             element.dispatchEvent(toggleEvent);
           })
         }
 
+        // Open this link and its menu content.
+        // Also remove submenu links' inert state recursively.
         state.toggle(element, content, 'is-open', true, true)
 
         // Match toggler element state if exists.
@@ -540,18 +544,18 @@ function navigation () {
 
         // Mobile mode specifics when opening a navigation tree.
         if (navigationMode.getMode()) {
-          // Close inner items to inert them.
+          // Close inner items to re-inert them.
           content.querySelectorAll('.navigation__link').forEach((element) => {
             var toggleEvent = new CustomEvent('navigation:close')
             element.dispatchEvent(toggleEvent);
           })
 
-          // Focus on first child item and add class for styling reasons.
+          // Focus on first child item and add state class to root element.
           content.children[0].children[0].focus()
           navigationElementArray[0].classList.add('has-open-submenu')
         }
         else {
-          // Make any toggle buttons inert.
+          // Make inner buttons inert as they are not needed in full mode.
           content.querySelectorAll('button.navigation__link').forEach((element) => {
             element.inert = true
           })
