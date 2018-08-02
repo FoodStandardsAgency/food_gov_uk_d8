@@ -675,45 +675,18 @@ function navigation () {
 
     // Set initial states
     if (navigationMode.getMode()) {
-      state.off({element: menuButtonOpenElement, type: 'button'}, 'is-open')
-      state.off({element: menuButtonCloseElement, type: 'button'}, 'is-open')
-      state.off({element: navigationElementArray[0], type: 'content'}, 'is-open')
-
-      thirdLevelMenuArray.forEach((element) => {
-        element.querySelectorAll('.navigation__link').forEach((element) => {
-          // Add tabindex
-          element.setAttribute('tabindex', '0')
-        })
-      })
-
-      navigationParentItemsArray.forEach((element) => {
-        // Add tabindex
-        element.setAttribute('tabindex', '0')
-
-        // Close all first level items.
-        if (element.classList.contains('navigation__link--level-1')) {
-          var closeEvent = new CustomEvent('navigation:close')
-          element.dispatchEvent(closeEvent)
-        }
-
-        // Enable second level buttons, because they function in
-        // mobile mode.
-        if (element.classList.contains('navigation__link--level-2')) {
-          element.inert = false
-        }
-      })
+      mobileNavigation.off()
     } else {
       // Remove mobile navigation states
       state.remove({element: menuButtonOpenElement, type: 'button'}, 'is-open')
       state.remove({element: menuButtonCloseElement, type: 'button'}, 'is-open')
       state.remove({element: navigationElementArray[0], type: 'content'}, 'is-open')
 
-      // Close link items with children
-      navigationParentItemsArray.forEach((element) => {
-        // Add tabindex
-        element.setAttribute('tabindex', '0')
+      // First open all levels recursively to remove all inert state.
+      state.on({element: navigationElementArray[0].querySelector('.navigation__menu--level-1'), type: 'content'}, 'is-open', true)
 
-        // Close all first level items.
+      navigationParentItemsArray.forEach((element) => {
+        // Close all first level items which also makes submenu links inert.
         if (element.classList.contains('navigation__link--level-1')) {
           var closeEvent = new CustomEvent('navigation:close')
           element.dispatchEvent(closeEvent)
