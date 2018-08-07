@@ -330,8 +330,10 @@
 
 /* Navigation link */
 .navigation__link {
+  appearance: none; // Remove button appearance.
   background-color: var(--color-white);
   display: block;
+  font-family: var(--font-family-content);
   width: 100%;
   text-align: left;
 
