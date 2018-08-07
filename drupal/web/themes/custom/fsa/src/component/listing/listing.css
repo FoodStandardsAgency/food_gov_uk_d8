@@ -144,6 +144,7 @@
 /* Item meta info */
 .item__meta {
   flex: 0 0 10em;
+  order: -1;
   font-size: 0.8889em;
 
   .listing & {
@@ -212,6 +213,11 @@
       display: none;
     }
 
+    .field__title {
+      display: block;
+      margin-bottom: .5em;
+    }
+
     .field__field_alert_description,
     .field__field_intro,
     .field__body {
@@ -223,7 +229,7 @@
     }
   }
 
-  .listing .item__meta + & {
+  .listing .item--has-meta & {
     @media (--breakpoint-md) {
       padding-left: 2em;
     }
