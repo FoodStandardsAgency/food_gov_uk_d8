@@ -1,0 +1,5 @@
+services:
+  fsa_alerts_monitor.user.subscribe:
+    class: Drupal\fsa_alerts_monitor\EventSubscriber\UserSubscriptionSubscriber
+    tags:
+      - { name: event_subscriber }
