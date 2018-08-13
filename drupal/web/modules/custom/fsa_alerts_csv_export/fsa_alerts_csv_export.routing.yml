@@ -1,0 +1,7 @@
+fsa_alerts_csv_export.test:
+ path: '/admin/config/fsa/alerts/export/csv'
+ defaults:
+    _controller: 'Drupal\fsa_alerts_csv_export\Controller\FsaAlertsCsvExportController:generateCsv'
+ requirements:
+#   _permission: 'export alerts csv'
+  _access: 'TRUE'
