@@ -18,6 +18,7 @@ class UserSubscriptionEvent extends Event {
    * Constructs an user event object.
    *
    * @param \Drupal\user\UserInterface $user
+   *   Object that implements this interface.
    */
   public function __construct(UserInterface $user) {
     $this->user = $user;
@@ -27,8 +28,10 @@ class UserSubscriptionEvent extends Event {
    * Get the inserted user.
    *
    * @return \Drupal\user\UserInterface
+   *   Returns user object.
    */
   public function getUser() {
     return $this->user;
   }
+
 }

@@ -78,7 +78,7 @@ class SignInService {
    *   User account.
    *
    * @return array
-   *    News alerts the user has subscribed to.
+   *   News alerts the user has subscribed to.
    */
   public function subscribedNewsAlerts(User $account) {
     $subscriptions = $account->get('field_subscribed_news')
@@ -99,7 +99,7 @@ class SignInService {
    *   User account.
    *
    * @return array
-   *    Consultations alerts the user has subscribed to.
+   *   Consultations alerts the user has subscribed to.
    */
   public function subscribedConsultationsAlerts(User $account) {
     $subscriptions = $account->get('field_subscribed_cons')
