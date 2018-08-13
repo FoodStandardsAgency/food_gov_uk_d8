@@ -5,6 +5,7 @@ namespace Drupal\fsa_signin;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\user\Entity\User;
+use Drupal\user\UserInterface;
 
 /**
  * Class SignInService.
@@ -20,6 +21,13 @@ class SignInService {
    */
   public function __construct() {
 
+  }
+
+  /**
+   * Get alert delivery method.
+   */
+  public function alertDeliveryMethod(User $account) {
+    return $account->get('field_delivery_method')->getValue();
   }
 
   /**
@@ -61,6 +69,48 @@ class SignInService {
       $subscribed_food_alerts[] = $s['value'];
     }
     return $subscribed_food_alerts;
+  }
+
+  /**
+   * Get the user's subscribed news alerts.
+   *
+   * @param \Drupal\user\Entity\User $account
+   *   User account.
+   *
+   * @return array
+   *    News alerts the user has subscribed to.
+   */
+  public function subscribedNewsAlerts(User $account) {
+    $subscriptions = $account->get('field_subscribed_news')
+      ->getValue();
+    $subscribed_news_alerts = [];
+
+    foreach ($subscriptions as $s) {
+      $subscribed_news_alerts[] = $s['value'];
+    }
+
+    return $subscribed_news_alerts;
+  }
+
+  /**
+   * Get the user's subscribed consultations alerts.
+   *
+   * @param \Drupal\user\Entity\User $account
+   *   User account.
+   *
+   * @return array
+   *    Consultations alerts the user has subscribed to.
+   */
+  public function subscribedConsultationsAlerts(User $account) {
+    $subscriptions = $account->get('field_subscribed_cons')
+      ->getValue();
+    $subscribed_cons_alerts = [];
+
+    foreach ($subscriptions as $s) {
+      $subscribed_cons_alerts[] = $s['value'];
+    }
+
+    return $subscribed_cons_alerts;
   }
 
   /**
