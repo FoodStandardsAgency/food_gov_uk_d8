@@ -1,0 +1,110 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the user module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function fsa_alerts_monitor_schema() {
+  $schema['fsa_alerts_monitor'] = [
+    'description' => 'Stores all monitored subscription activity data.',
+    'fields' => [
+      'event_id' => [
+        'description' => 'The unique id of the subscription event',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'uid' => [
+        'description' => 'The UID of the user',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'activity' => [
+        'description' => 'The event activity',
+        'type' => 'varchar_ascii',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'created' => [
+        'description' => 'The time the event occurred',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'food_alerts' => [
+        'description' => 'Comma separated alerts taxonomy tids for subscribed food alerts at the time of the event',
+        'type' => 'varchar_ascii',
+        'length' => 256,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'food_alert_medium' => [
+        'description' => 'What format the user requests their alert to be delivered in (email|sms|both)',
+        'type' => 'varchar_ascii',
+        'length' => 6,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'allergy_alerts' => [
+        'description' => 'Comma separated alerts taxonomy tids for subscribed allergy alerts at the time of the event',
+        'type' => 'varchar_ascii',
+        'length' => 256,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'allergy_alert_medium' => [
+        'description' => 'What format the user requests their alert to be delivered in (email|sms|both)',
+        'type' => 'varchar_ascii',
+        'length' => 6,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'news_alerts' => [
+        'description' => 'Comma separated alerts taxonomy tids for subscribed news alerts at the time of the event',
+        'type' => 'varchar_ascii',
+        'length' => 256,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'news_alert_medium' => [
+        'description' => 'What format the user requests their alert to be delivered in (email|sms|both)',
+        'type' => 'varchar_ascii',
+        'length' => 6,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'consultation_alerts' => [
+        'description' => 'Comma separated alerts taxonomy tids for subscribed consultation alerts at the time of the event',
+        'type' => 'varchar_ascii',
+        'length' => 256,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'consultation_alert_medium' => [
+        'description' => 'What format the user requests their alert to be delivered in (email|sms|both)',
+        'type' => 'varchar_ascii',
+        'length' => 6,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+    ],
+    'primary key' => ['event_id'],
+    'indexes' => [
+      'uid' => ['uid'],
+      'created' => ['created'],
+    ],
+    'foreign keys' => [
+      'uid' => ['users' => 'uid'],
+    ]
+  ];
+  return $schema;
+}
