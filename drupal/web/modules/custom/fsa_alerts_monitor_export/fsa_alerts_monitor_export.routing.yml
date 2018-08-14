@@ -1,7 +1,16 @@
 fsa_alerts_monitor_export.test:
- path: '/admin/config/fsa/alerts/export/csv'
- defaults:
-    _controller: 'Drupal\fsa_alerts_monitor_export\Controller\FsaAlertsMonitorExportController:generateCsv'
- requirements:
-#   _permission: 'export alerts csv'
-  _access: 'TRUE'
+  path: '/admin/config/fsa/alerts/export/{response_format}/{date_from}/{date_to}'
+  defaults:
+    _controller: 'Drupal\fsa_alerts_monitor_export\Controller\FsaAlertsMonitorExportController:handleExportRequest'
+    date_from: ''
+    date_to: ''
+  options:
+    response_format:
+      type: string
+    date_from:
+      type: date
+    date_to:
+      type: date
+  requirements:
+    #   _permission: 'export alerts csv'
+    _access: 'TRUE'
