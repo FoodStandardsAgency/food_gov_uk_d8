@@ -1,7 +1,0 @@
-name: FSA Alerts CSV export
-type: module
-description: "CSV report of alert subscribers"
-core: 8.x
-package: FSA
-dependencies:
-  - fsa_alerts
