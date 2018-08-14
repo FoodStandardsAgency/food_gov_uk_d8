@@ -60,7 +60,7 @@ class FsaAlertsMonitorExportController extends ControllerBase {
       ];
     }
 
-     // Create a new file stream to allow us to build up the CSV output.
+    // Create a new file stream to allow us to build up the CSV output.
     $writer = Writer::createFromStream(tmpfile());
     $writer->insertOne($headers);
     $writer->insertAll($rows);
