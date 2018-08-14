@@ -10,31 +10,48 @@ use League\Csv\Writer;
 class FsaAlertsMonitorExportController extends ControllerBase {
 
   /**
-   * @var $response_format
+   * @var string
    */
-  private $response_format;
+  private $responseFormat;
 
   /**
-   * @var $date_from
+   * @var string
    */
-  private $date_from;
+  private $dateFrom;
 
   /**
-   * @var $date_to
+   * @var string
    */
-  private $date_to;
+  private $dateTo;
 
+  /**
+   * Initial handler of export requests.
+   *
+   * @param \Drupal\fsa_alerts_monitor_export\Controller\string $response_format
+   *   String: for now just 'csv'. Could be JSON too if required.
+   * @param \Drupal\fsa_alerts_monitor_export\Controller\string $date_from
+   *   String: takes YYYYMMDD format.
+   * @param \Drupal\fsa_alerts_monitor_export\Controller\string $date_to
+   *   String: takes YYYYMMDD format.
+   *
+   * @return \Drupal\Core\Cache\CacheableResponse
+   *   Cacheable Drupal response object.
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * @throws \League\Csv\CannotInsertRecord
+   */
   public function handleExportRequest(string $response_format, string $date_from, string $date_to) {
     // TODO: move to constructor.
-    $this->response_format = $response_format;
-    $this->date_from = empty($date_from) ? strtotime('-1 week') : strtotime($date_from);
-    $this->date_to = empty($date_to) ? \Drupal::time()->getCurrentTime() : strtotime($date_to);
+    $this->responseFormat = $response_format;
+    $this->dateFrom = empty($date_from) ? strtotime('-1 week') : strtotime($date_from);
+    $this->dateTo = empty($date_to) ? \Drupal::time()->getCurrentTime() : strtotime($date_to);
 
     // Can switch response formats; could use to wire up to JSON encoding too.
     switch ($response_format) {
       case 'csv':
         return $this->generateCsvResponse();
-        break;
+
+      break;
 
       default:
         return new CacheableResponse('Unspecified or unrecognised response format', 400);
@@ -69,8 +86,8 @@ class FsaAlertsMonitorExportController extends ControllerBase {
     // Where default = last 7 days.
 
     $data = \Drupal::database()->query('SELECT * FROM {fsa_alerts_monitor} WHERE created BETWEEN :datefrom AND :dateto', [
-      ':datefrom' => $this->date_from,
-      ':dateto' => $this->date_to,
+      ':datefrom' => $this->dateFrom,
+      ':dateto' => $this->dateTo,
     ]);
 
     $rows = [];
@@ -96,10 +113,9 @@ class FsaAlertsMonitorExportController extends ControllerBase {
     $writer->insertOne($headers);
     $writer->insertAll($rows);
 
-
     $filename = sprintf('%s_%s__alerts_monitor_export.csv',
-      \Drupal::service('date.formatter')->format($this->date_from, 'custom', 'Ymd'),
-      \Drupal::service('date.formatter')->format($this->date_to, 'custom', 'Ymd')
+      \Drupal::service('date.formatter')->format($this->dateFrom, 'custom', 'Ymd'),
+      \Drupal::service('date.formatter')->format($this->dateTo, 'custom', 'Ymd')
     );
 
     // Return the response.
