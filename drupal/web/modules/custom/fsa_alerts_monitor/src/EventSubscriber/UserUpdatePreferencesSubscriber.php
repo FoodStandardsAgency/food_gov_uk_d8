@@ -10,7 +10,7 @@ class UserUpdatePreferencesSubscriber implements EventSubscriberInterface {
   /**
    * Callback for this event to register an preferences update event.
    *
-   * @param \Drupal\fsa_signin\Event\UserSubscriptionEvent $event
+   * @param \Drupal\fsa_signin\Event\UserUpdatePreferencesEvent $event
    *   Event object containing our data.
    * @throws \Exception
    */

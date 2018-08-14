@@ -10,7 +10,7 @@ class UserUnsubscribeSubscriber implements EventSubscriberInterface {
   /**
    * Callback for this event to register an unsubscribe event.
    *
-   * @param \Drupal\fsa_signin\Event\UserSubscriptionEvent $event
+   * @param \Drupal\fsa_signin\Event\UserUnsubscribeEvent $event
    *   Event object containing our data.
    * @throws \Exception
    */
