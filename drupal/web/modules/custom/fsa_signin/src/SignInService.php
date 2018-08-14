@@ -27,7 +27,7 @@ class SignInService {
    * Get alert delivery method.
    */
   public function alertDeliveryMethod(User $account) {
-    return $account->get('field_delivery_method')->getValue();
+    return $account->get('field_delivery_method')->value;
   }
 
   /**
@@ -86,7 +86,7 @@ class SignInService {
     $subscribed_news_alerts = [];
 
     foreach ($subscriptions as $s) {
-      $subscribed_news_alerts[] = $s['value'];
+      $subscribed_news_alerts[] = intval($s['target_id']);
     }
 
     return $subscribed_news_alerts;
@@ -107,7 +107,7 @@ class SignInService {
     $subscribed_cons_alerts = [];
 
     foreach ($subscriptions as $s) {
-      $subscribed_cons_alerts[] = $s['value'];
+      $subscribed_cons_alerts[] = intval($s['target_id']);
     }
 
     return $subscribed_cons_alerts;
