@@ -48,9 +48,9 @@ function fsa_alerts_monitor_schema() {
         'default' => '',
       ],
       'food_alert_medium' => [
-        'description' => 'What format the user requests their alert to be delivered in (email|sms|both)',
+        'description' => 'What format the user requests their alert to be delivered in',
         'type' => 'varchar_ascii',
-        'length' => 6,
+        'length' => 12,
         'not null' => TRUE,
         'default' => '',
       ],
@@ -64,7 +64,7 @@ function fsa_alerts_monitor_schema() {
       'allergy_alert_medium' => [
         'description' => 'What format the user requests their alert to be delivered in (email|sms|both)',
         'type' => 'varchar_ascii',
-        'length' => 6,
+        'length' => 12,
         'not null' => TRUE,
         'default' => '',
       ],
@@ -78,7 +78,7 @@ function fsa_alerts_monitor_schema() {
       'news_alert_medium' => [
         'description' => 'What format the user requests their alert to be delivered in (email|sms|both)',
         'type' => 'varchar_ascii',
-        'length' => 6,
+        'length' => 12,
         'not null' => TRUE,
         'default' => '',
       ],
@@ -92,7 +92,7 @@ function fsa_alerts_monitor_schema() {
       'consultation_alert_medium' => [
         'description' => 'What format the user requests their alert to be delivered in (email|sms|both)',
         'type' => 'varchar_ascii',
-        'length' => 6,
+        'length' => 12,
         'not null' => TRUE,
         'default' => '',
       ],
@@ -129,13 +129,17 @@ function fsa_alerts_monitor_update_8001(&$sandbox) {
   }
 
   $result = \Drupal::database()->query('SELECT uid FROM {users} WHERE NOT uid IN (SELECT uid FROM {fsa_alerts_monitor}) LIMIT 250')->fetchAll();
+  if (empty($result)) {
+    $sandbox['#finished'] = TRUE;
+    return;
+  }
 
   foreach ($result as $row) {
     $user = User::load($row->uid);
 
     // Delivery method is the same for all alerts.
-    $delivery_method = $signin_service->alertDeliveryMethod($user);
-
+    $delivery_method = implode(',', array_filter($signin_service->alertDeliveryMethods($user)));
+    $news_delivery_method = $signin_service->newsDeliveryMethod($user);
     $food_alerts = implode(',', array_filter($signin_service->subscribedFoodAlerts($user)));
     $allergy_alerts = implode(',', array_filter($signin_service->subscribedTermIds($user)));
     $news_alerts = implode(',', array_filter($signin_service->subscribedNewsAlerts($user)));
@@ -144,10 +148,11 @@ function fsa_alerts_monitor_update_8001(&$sandbox) {
     // Screen for any null values.
     $fields = [
       'delivery_method',
+      'news_delivery_method',
       'food_alerts',
       'allergy_alerts',
       'news_alerts',
-      'consultation_alerts'
+      'consultation_alerts',
      ];
 
     foreach ($fields as $field) {
@@ -165,7 +170,7 @@ function fsa_alerts_monitor_update_8001(&$sandbox) {
       'allergy_alerts' => $allergy_alerts,
       'allergy_alert_medium' => $delivery_method,
       'news_alerts' => $news_alerts,
-      'news_alert_medium' => $delivery_method,
+      'news_alert_medium' => $news_delivery_method,
       'consultation_alerts' => $consultation_alerts,
       'consultation_alert_medium' => $delivery_method,
     ];
@@ -178,7 +183,6 @@ function fsa_alerts_monitor_update_8001(&$sandbox) {
     $sandbox['progress']++;
   }
 
-  $sandbox['messages'][] = $sandbox['progress'] . ' users processed';
   $sandbox['#finished'] = $sandbox['progress'] >= $sandbox['max'] ? TRUE : $sandbox['progress'] / $sandbox['max'];
 
 }

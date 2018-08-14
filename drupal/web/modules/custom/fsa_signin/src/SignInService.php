@@ -26,8 +26,22 @@ class SignInService {
   /**
    * Get alert delivery method.
    */
-  public function alertDeliveryMethod(User $account) {
-    return $account->get('field_delivery_method')->value;
+  public function alertDeliveryMethods(User $account) {
+    $field_value = $account->get('field_delivery_method')->getValue();
+    $delivery_methods = [];
+
+    foreach ($field_value as $value_item) {
+      $delivery_methods[] = $value_item['value'];
+    }
+
+    return $delivery_methods;
+  }
+
+  /**
+   * Get news delivery method preference.
+   */
+  public function newsDeliveryMethod(User $account) {
+    return $account->get('field_delivery_method_news')->value;
   }
 
   /**
