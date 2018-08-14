@@ -2,31 +2,31 @@
 
 namespace Drupal\fsa_alerts_monitor\EventSubscriber;
 
-use Drupal\fsa_signin\Event\UserSubscriptionEvent;
+use Drupal\fsa_signin\Event\UserUpdatePreferencesEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class UserSubscriptionSubscriber implements EventSubscriberInterface {
+class UserUpdatePreferencesSubscriber implements EventSubscriberInterface {
 
   /**
-   * Callback for this event to register a new subscription.
+   * Callback for this event to register an preferences update event.
    *
    * @param \Drupal\fsa_signin\Event\UserSubscriptionEvent $event
    *   Event object containing our data.
    * @throws \Exception
    */
-  public function logNewSubscriber(UserSubscriptionEvent $event) {
+  public function logUpdatePreferences(UserUpdatePreferencesEvent $event) {
     // Unwrap the user object from the event.
     $user = $event->getUser();
 
     $alert_monitor = \Drupal::service('fsa_alerts_monitor.service');
-    $alert_monitor->trackEvent($user, 'Subscription', \Drupal::time()->getCurrentTime());
+    $alert_monitor->trackEvent($user, 'Update preferences', \Drupal::time()->getCurrentTime());
   }
 
   /**
    * {@inheritdoc}
    */
   public static function getSubscribedEvents() {
-    $events['fsa_alerts_monitor.user.subscribe'][] = ['logNewSubscriber'];
+    $events['fsa_alerts_monitor.user.update_preferences'][] = ['logUpdatePreferences'];
     return $events;
   }
 

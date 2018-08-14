@@ -3,3 +3,17 @@ services:
     class: Drupal\fsa_alerts_monitor\EventSubscriber\UserSubscriptionSubscriber
     tags:
       - { name: event_subscriber }
+
+  fsa_alerts_monitor.user.update_preferences:
+      class: Drupal\fsa_alerts_monitor\EventSubscriber\UserUpdatePreferencesSubscriber
+      tags:
+        - { name: event_subscriber }
+
+  fsa_alerts_monitor.user.unsubscribe:
+        class: Drupal\fsa_alerts_monitor\EventSubscriber\UserUnsubscribeSubscriber
+        tags:
+          - { name: event_subscriber }
+
+  fsa_alerts_monitor.service:
+      class: Drupal\fsa_alerts_monitor\FsaAlertsMonitorService
+      arguments: []

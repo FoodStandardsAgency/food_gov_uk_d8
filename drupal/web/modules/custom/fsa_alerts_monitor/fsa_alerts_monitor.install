@@ -115,13 +115,8 @@ function fsa_alerts_monitor_schema() {
  * to form our initial baseline.
  */
 function fsa_alerts_monitor_update_8001(&$sandbox) {
-
-  // Set up new signin service class to make it easier to get and
-  // manipulate user entity field values.
-  $signin_service = \Drupal::service('fsa_signin.service');
-
   // Set up sandbox parameters - we need it to get through
-  // 24k users without timing out.
+  // > 24k users without timing out.
   if (!isset($sandbox['progress'])) {
     $sandbox['progress'] = 0;
     $user_count = \Drupal::database()->query('SELECT COUNT(uid) AS user_count FROM {users} WHERE NOT uid IN (SELECT uid FROM {fsa_alerts_monitor})')->fetchAssoc();
@@ -134,51 +129,11 @@ function fsa_alerts_monitor_update_8001(&$sandbox) {
     return;
   }
 
+  $alert_monitor = \Drupal::service('fsa_alerts_monitor.service');
+
   foreach ($result as $row) {
     $user = User::load($row->uid);
-
-    // Delivery method is the same for all alerts.
-    $delivery_method = implode(',', array_filter($signin_service->alertDeliveryMethods($user)));
-    $news_delivery_method = $signin_service->newsDeliveryMethod($user);
-    $food_alerts = implode(',', array_filter($signin_service->subscribedFoodAlerts($user)));
-    $allergy_alerts = implode(',', array_filter($signin_service->subscribedTermIds($user)));
-    $news_alerts = implode(',', array_filter($signin_service->subscribedNewsAlerts($user)));
-    $consultation_alerts = implode(',', array_filter($signin_service->subscribedConsultationsAlerts($user)));
-
-    // Screen for any null values.
-    $fields = [
-      'delivery_method',
-      'news_delivery_method',
-      'food_alerts',
-      'allergy_alerts',
-      'news_alerts',
-      'consultation_alerts',
-    ];
-
-    foreach ($fields as $field) {
-      if (empty(${$field})) {
-        ${$field} = '';
-      }
-    }
-
-    $fields = [
-      'uid' => $user->id(),
-      'activity' => 'Subscription',
-      'created' => $user->getCreatedTime(),
-      'food_alerts' => $food_alerts,
-      'food_alert_medium' => $delivery_method,
-      'allergy_alerts' => $allergy_alerts,
-      'allergy_alert_medium' => $delivery_method,
-      'news_alerts' => $news_alerts,
-      'news_alert_medium' => $news_delivery_method,
-      'consultation_alerts' => $consultation_alerts,
-      'consultation_alert_medium' => $delivery_method,
-    ];
-
-    \Drupal::database()
-      ->insert('fsa_alerts_monitor')
-      ->fields($fields)
-      ->execute();
+    $alert_monitor->trackEvent($user, 'Subscription', $user->getCreatedTime());
 
     $sandbox['progress']++;
   }
