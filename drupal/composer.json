@@ -99,7 +99,9 @@
         "drupal/encrypt": "^3.0@alpha",
         "drupal/lockr": "^2.3",
         "drupal/real_aes": "^2.1",
-        "zaporylie/composer-drupal-optimizations": "^1.0"
+        "zaporylie/composer-drupal-optimizations": "^1.0",
+        "league/csv": "^9.0",
+        "drupal/permissions_filter": "^1.0"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",

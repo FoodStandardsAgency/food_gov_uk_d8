@@ -1,0 +1,7 @@
+name: FSA Alerts Monitor Export
+type: module
+description: "Export data from monitored alerts usage data."
+core: 8.x
+package: FSA
+dependencies:
+  - fsa_alerts_monitor

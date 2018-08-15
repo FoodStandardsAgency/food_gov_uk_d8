@@ -1,0 +1,8 @@
+name: FSA Alerts Monitor
+type: module
+description: "Monitors user alerts subscription usage and trends"
+core: 8.x
+package: FSA
+dependencies:
+  - fsa_alerts
+  - fsa_signin
