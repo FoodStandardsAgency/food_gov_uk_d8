@@ -21,6 +21,7 @@ permissions:
   - 'administer fsa consultation configurations'
   - 'administer fsa content reminder settings'
   - 'administer fsa rating landing content'
+  - 'administer fsa translation notify settings'
   - 'administer menu'
   - 'administer nodes'
   - 'administer redirects'
