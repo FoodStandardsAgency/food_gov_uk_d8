@@ -138,8 +138,11 @@ function fsa_alerts_monitor_update_8001(&$sandbox) {
     $sandbox['progress']++;
   }
 
-  $sandbox['#finished'] = $sandbox['progress'] >= $sandbox['max'] ? TRUE : $sandbox['progress'] / $sandbox['max'];
+  $sandbox['#finished'] = ($sandbox['progress'] >= $sandbox['max']) ? TRUE : ($sandbox['progress'] / $sandbox['max']);
 
+  if ($sandbox['#finished']) {
+    return t('@user_count users were added to the monitoring table.', ['@user_count' => $sandbox['progress']]);
+  }
 }
 
 /**
