@@ -130,6 +130,7 @@ module:
   password_policy_length: 0
   path: 0
   path_redirect_import: 0
+  permissions_filter: 0
   quickedit: 0
   rdf: 0
   real_aes: 0

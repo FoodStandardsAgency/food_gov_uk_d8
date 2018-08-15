@@ -65,6 +65,7 @@ permissions:
   - 'edit own webform'
   - 'edit own webform content'
   - 'edit own webform submission'
+  - 'export alerts monitor data'
   - 'link to any page'
   - 'notify of path changes'
   - 'revert help revisions'
