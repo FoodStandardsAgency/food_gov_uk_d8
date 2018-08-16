@@ -53,7 +53,7 @@ class UnsubscribeForm extends FormBase {
     // Format of link to unsubscribe: ?email=foo@bar.com&id=123
     // where uid must match with respective email in db.
     $email = (isset($query['email'])) ? $query['email'] : FALSE;
-    $uid = (isset($query['email'])) ? $query['id'] : FALSE;
+    $uid = (isset($query['id'])) ? $query['id'] : FALSE;
 
     $user = user_load_by_mail($email);
 
