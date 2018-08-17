@@ -55,7 +55,6 @@ settings:
     - element__fsa_establishment_postal_code
     - element__fsa_establishment_la_email
     - element__when_purchased
-    - element__where_item_stored
     - element__premises_contacted_action_taken
     - element__name
     - element__email
@@ -112,8 +111,8 @@ settings:
   entity_limit_total_interval: null
   entity_limit_user: null
   entity_limit_user_interval: null
-  purge: none
-  purge_days: null
+  purge: all
+  purge_days: 6
   results_disabled: false
   results_disabled_ignore: false
   token_update: false

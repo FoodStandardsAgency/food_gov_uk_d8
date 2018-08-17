@@ -70,6 +70,10 @@ $settings['config_readonly_whitelist_patterns'] = [
   'config.fsa_consultations',
   'force_password_change.settings',
   'fsa_content_reminder.settings',
+  'webform.webform.food_fraud_crime',
+  'webform.webform.food_poisoning',
+  'webform.webform.foreign_object',
+  'webform.webform.poor_hygiene_practices',
 ];
 
 // Allow configuration changes via drush (command line).

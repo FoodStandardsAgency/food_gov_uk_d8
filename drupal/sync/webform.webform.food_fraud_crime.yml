@@ -47,13 +47,7 @@ settings:
   submission_log: false
   submission_user_columns:
     - element__details_of_problem
-    - element__people_businesses_involved
     - element__where_lookup
-    - element__when_and_how_often
-    - element__why_involved_and_how
-    - element__explain_how_you_know
-    - element__how_many_aware
-    - element__reported_to_anyone_else
     - element__name
     - element__email
   submission_login: false
@@ -103,8 +97,8 @@ settings:
   entity_limit_total_interval: null
   entity_limit_user: null
   entity_limit_user_interval: null
-  purge: none
-  purge_days: null
+  purge: all
+  purge_days: 1
   results_disabled: false
   results_disabled_ignore: false
   token_update: false
