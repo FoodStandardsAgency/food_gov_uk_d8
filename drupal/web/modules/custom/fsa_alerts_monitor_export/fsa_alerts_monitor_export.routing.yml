@@ -1,4 +1,4 @@
-fsa_alerts_monitor_export.test:
+fsa_alerts_monitor_export.export_path:
   path: '/admin/config/fsa/alerts/export/{response_format}/{date_from}/{date_to}'
   defaults:
     _controller: 'Drupal\fsa_alerts_monitor_export\Controller\FsaAlertsMonitorExportController:handleExportRequest'
