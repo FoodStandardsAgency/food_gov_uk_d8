@@ -7,6 +7,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\fsa_signin\Controller\DefaultController;
 use Drupal\user\Entity\User;
+use Drupal\fsa_signin\Event\UserCancelEvent;
 
 /**
  * Defines a confirmation form for deleting mymodule data.
@@ -125,6 +126,13 @@ class DeleteAccountConfirmation extends ConfirmFormBase {
     $account = $form_state->getValue('account');
     $uid = $account->id();
     $email = $account->getEmail();
+
+    // Emit a new event to capture this activity. Could tie in with
+    // hook_user_cancel() but we're only interested in activity on this very
+    // specific form/interaction point and an event fits with
+    // the wider approach in fsa_alerts_monitor.
+    $user = User::load($uid);
+    \Drupal::service('event_dispatcher')->dispatch('fsa_alerts_monitor.user.cancel', new UserCancelEvent($user));
 
     // "Anonymise the email.
     $email = '***' . strstr($email, '@');
