@@ -54,6 +54,8 @@ module:
   force_password_change: 0
   fsa_alerts: 0
   fsa_alerts_import: 0
+  fsa_alerts_monitor: 0
+  fsa_alerts_monitor_export: 0
   fsa_authorities_exp_filter: 0
   fsa_consultations: 0
   fsa_contact_path: 0
@@ -121,6 +123,7 @@ module:
   password_policy_length: 0
   path: 0
   path_redirect_import: 0
+  permissions_filter: 0
   quickedit: 0
   rdf: 0
   recaptcha: 0

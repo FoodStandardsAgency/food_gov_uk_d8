@@ -1,0 +1,153 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the user module.
+ */
+
+use Drupal\user\Entity\User;
+
+/**
+ * Implements hook_schema().
+ */
+function fsa_alerts_monitor_schema() {
+  $schema['fsa_alerts_monitor'] = [
+    'description' => 'Stores all monitored subscription activity data.',
+    'fields' => [
+      'event_id' => [
+        'description' => 'The unique id of the subscription event',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ],
+      'uid' => [
+        'description' => 'The UID of the user',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'activity' => [
+        'description' => 'The event activity',
+        'type' => 'varchar_ascii',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'created' => [
+        'description' => 'The time the event occurred',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'food_alerts' => [
+        'description' => 'Comma separated alerts taxonomy tids for subscribed food alerts at the time of the event',
+        'type' => 'varchar_ascii',
+        'length' => 256,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'food_alert_medium' => [
+        'description' => 'What format the user requests their alert to be delivered in',
+        'type' => 'varchar_ascii',
+        'length' => 12,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'allergy_alerts' => [
+        'description' => 'Comma separated alerts taxonomy tids for subscribed allergy alerts at the time of the event',
+        'type' => 'varchar_ascii',
+        'length' => 256,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'allergy_alert_medium' => [
+        'description' => 'What format the user requests their alert to be delivered in (email|sms|both)',
+        'type' => 'varchar_ascii',
+        'length' => 12,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'news_alerts' => [
+        'description' => 'Comma separated alerts taxonomy tids for subscribed news alerts at the time of the event',
+        'type' => 'varchar_ascii',
+        'length' => 256,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'news_alert_medium' => [
+        'description' => 'What format the user requests their alert to be delivered in (email|sms|both)',
+        'type' => 'varchar_ascii',
+        'length' => 12,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'consultation_alerts' => [
+        'description' => 'Comma separated alerts taxonomy tids for subscribed consultation alerts at the time of the event',
+        'type' => 'varchar_ascii',
+        'length' => 256,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'consultation_alert_medium' => [
+        'description' => 'What format the user requests their alert to be delivered in (email|sms|both)',
+        'type' => 'varchar_ascii',
+        'length' => 12,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+    ],
+    'primary key' => ['event_id'],
+    'indexes' => [
+      'uid' => ['uid'],
+      'created' => ['created'],
+    ],
+    'foreign keys' => [
+      'uid' => ['users' => 'uid'],
+    ]
+  ];
+  return $schema;
+}
+
+/**
+ * Pre-fill the alerts monitoring table with Subscribe events for existing users
+ * using their created date as the timestamp and their current preferences
+ * to form our initial baseline.
+ */
+function fsa_alerts_monitor_update_8001(&$sandbox) {
+  // Set up sandbox parameters - we need it to get through
+  // > 24k users without timing out.
+  if (!isset($sandbox['progress'])) {
+    $sandbox['progress'] = 0;
+    $user_count = \Drupal::database()->query('SELECT COUNT(uid) AS user_count FROM {users} WHERE NOT uid IN (SELECT uid FROM {fsa_alerts_monitor})')->fetchAssoc();
+    $sandbox['max'] = $user_count['user_count'];
+  }
+
+  $result = \Drupal::database()->query('SELECT uid FROM {users} WHERE NOT uid IN (SELECT uid FROM {fsa_alerts_monitor}) LIMIT 250')->fetchAll();
+  if (empty($result)) {
+    $sandbox['#finished'] = TRUE;
+    return;
+  }
+
+  $alert_monitor = \Drupal::service('fsa_alerts_monitor.service');
+
+  foreach ($result as $row) {
+    $user = User::load($row->uid);
+    $alert_monitor->trackEvent($user, 'Subscription', $user->getCreatedTime());
+
+    $sandbox['progress']++;
+  }
+
+  $sandbox['#finished'] = ($sandbox['progress'] >= $sandbox['max']) ? TRUE : ($sandbox['progress'] / $sandbox['max']);
+
+  if ($sandbox['#finished']) {
+    return t('@user_count users were added to the monitoring table.', ['@user_count' => $sandbox['progress']]);
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function fsa_alerts_monitor_uninstall_schema() {
+  drupal_uninstall_schema('fsa_alerts_monitor');
+}

@@ -4,6 +4,8 @@ namespace Drupal\fsa_signin\Controller;
 
 use Drupal\Core\Link;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\fsa_alerts_monitor\EventSubscriber\UserSubscriptionSubscriber;
+use Drupal\fsa_signin\Event\UserSubscriptionEvent;
 use Drupal\fsa_signin\Form\ChangePassword;
 use Drupal\fsa_signin\Form\DeliveryOptions;
 use Drupal\fsa_signin\Form\SendPasswordEmailForm;
@@ -195,7 +197,12 @@ class DefaultController extends ControllerBase {
     // See submitForm() in UserRegistrationForm.php.
     $session = \Drupal::service('user.private_tempstore')->get('fsa_signin');
     $reg_uid = $session->get('regUid');
+
     if ($reg_uid) {
+      // Emit an event to say this user has subscribed.
+      $user = User::load($reg_uid);
+      \Drupal::service('event_dispatcher')->dispatch('fsa_alerts_monitor.user.subscribe', new UserSubscriptionEvent($user));
+
       // Add the UID to the data layer, replacing the 0 default.
       datalayer_add(['userUid' => $reg_uid]);
       // Delete the session value for when the user navigates away.

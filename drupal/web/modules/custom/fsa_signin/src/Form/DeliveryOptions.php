@@ -6,6 +6,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\fsa_custom\FsaCustomHelper;
 use Drupal\fsa_signin\Controller\DefaultController;
+use Drupal\fsa_signin\Event\UserUpdatePreferencesEvent;
 use Drupal\user\Entity\User;
 use Drupal\fsa_signin\SignInService;
 use Drupal\Component\Utility\Html;
@@ -295,6 +296,9 @@ class DeliveryOptions extends FormBase {
       $session->set('deliveryEdit', $delivery_edit);
       // Set a session variable to confirm submission.
       $session->set('deliverySubmitted', TRUE);
+
+      // Emit an preferences update event.
+      \Drupal::service('event_dispatcher')->dispatch('fsa_alerts_monitor.user.update_preferences', new UserUpdatePreferencesEvent($account));
     }
     else {
       drupal_set_message($this->t('There was an error updating your preferences. Please try again.'));
