@@ -11,5 +11,9 @@ ignored_config_entities:
   18: 'embed.button.image:dependencies.content'
   20: 'embed.button.node:icon_uuid'
   22: 'embed.button.node:dependencies.content'
+  24: webform.webform.food_fraud_crime
+  26: webform.webform.food_poisoning
+  28: webform.webform.foreign_object
+  30: webform.webform.poor_hygiene_practices
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
