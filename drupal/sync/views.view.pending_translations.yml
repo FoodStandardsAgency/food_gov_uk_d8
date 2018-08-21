@@ -1066,7 +1066,7 @@ display:
         description: 'See which unpublished translations have been started'
         expanded: false
         parent: system.admin_content
-        weight: 0
+        weight: 12
         context: '0'
         menu_name: admin
     cache_metadata:

@@ -1,0 +1,17 @@
+uuid: 289f4cfe-de13-4eda-bd23-11a0faa3cf5f
+langcode: en
+status: true
+dependencies:
+  module:
+    - content_translation
+    - managed_links
+third_party_settings:
+  content_translation:
+    enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: managed_link.managed_link
+target_entity_type_id: managed_link
+target_bundle: managed_link
+default_langcode: site_default
+language_alterable: true

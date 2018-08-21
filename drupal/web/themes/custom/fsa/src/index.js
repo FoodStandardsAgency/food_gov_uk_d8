@@ -1,6 +1,7 @@
 import 'babel-polyfill'
 import 'mutationobserver-shim'
-import 'inert-polyfill'
+import 'wicg-inert'
+import 'custom-event-polyfill'
 
 import './helper/polyfill/classList'
 import './helper/polyfill/closest'

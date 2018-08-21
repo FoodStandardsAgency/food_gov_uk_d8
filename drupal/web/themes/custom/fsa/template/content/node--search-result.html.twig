@@ -71,7 +71,21 @@
  */
 #}
 <article{{ attributes.addClass(['item', 'item--has-meta']) }}>
-  <div class="item__meta">
+  <div class="item__content">
+
+    {{ title_prefix }}
+    {% if not page %}
+      <h3{{ title_attributes }}>
+        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+      </h3>
+    {% endif %}
+    {{ title_suffix }}
+
+    <div{{ content_attributes }}>
+      {{ content|without('field_alert_modified') }}
+    </div>
+  </div>
+  <footer class="item__meta">
     <div class="item__tag">
       {{ tag }}
     </div>
@@ -88,21 +102,5 @@
       </div>
       {#{{ metadata }}#}
     {% endif %}
-  </div>
-
-  <div class="item__content">
-
-    {{ title_prefix }}
-    {% if not page %}
-      <h3{{ title_attributes }}>
-        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-      </h3>
-    {% endif %}
-    {{ title_suffix }}
-
-    <div{{ content_attributes }}>
-      {{ content|without('field_alert_modified') }}
-    </div>
-  </div>
-
+  </footer>
 </article>

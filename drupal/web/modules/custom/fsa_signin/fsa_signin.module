@@ -60,10 +60,10 @@ function fsa_signin_form_alter(&$form, FormStateInterface $form_state, $form_id)
 
       // Add event information to the data layer.
       datalayer_add([
-        'event' => 'Subscription Set Password',
+        'event' => 'Subscription Login To Set Password',
         'eventDetails' => [
           'category' => 'Subscription',
-          'action' => 'Set Password',
+          'action' => 'Email Verified',
           'label' => 'en',
           'value' => 0,
         ],

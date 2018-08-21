@@ -1,0 +1,21 @@
+# Managed Link routing definition
+managed_link.settings_tab:
+  route_name: managed_link.settings
+  title: 'Settings'
+  base_route: managed_link.settings
+
+entity.managed_link.canonical:
+  route_name: entity.managed_link.canonical
+  base_route: entity.managed_link.canonical
+  title: 'View'
+
+entity.managed_link.edit_form:
+  route_name: entity.managed_link.edit_form
+  base_route: entity.managed_link.canonical
+  title: 'Edit'
+
+entity.managed_link.delete_form:
+  route_name:  entity.managed_link.delete_form
+  base_route:  entity.managed_link.canonical
+  title: Delete
+  weight: 10

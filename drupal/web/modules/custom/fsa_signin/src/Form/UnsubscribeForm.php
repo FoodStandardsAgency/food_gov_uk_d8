@@ -5,7 +5,9 @@ namespace Drupal\fsa_signin\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Drupal\fsa_signin\Event\UserUnsubscribeEvent;
 use Drupal\fsa_signin\SignInService;
+use Drupal\user\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -53,7 +55,7 @@ class UnsubscribeForm extends FormBase {
     // Format of link to unsubscribe: ?email=foo@bar.com&id=123
     // where uid must match with respective email in db.
     $email = (isset($query['email'])) ? $query['email'] : FALSE;
-    $uid = (isset($query['email'])) ? $query['id'] : FALSE;
+    $uid = (isset($query['id'])) ? $query['id'] : FALSE;
 
     $user = user_load_by_mail($email);
 
@@ -122,6 +124,10 @@ class UnsubscribeForm extends FormBase {
 
     $email = $form_state->getValue('email');
     $t_options = ['@email' => $email];
+
+    // Emit an event to track this activity.
+    $user = user_load_by_mail($email);
+    \Drupal::service('event_dispatcher')->dispatch('fsa_alerts_monitor.user.unsubscribe', new UserUnsubscribeEvent($user));
 
     // For now just unsubscribe from all.
     // @todo: unsubscribeFromAlerts needs to allow unsubscribing specific terms.

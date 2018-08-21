@@ -1,0 +1,20 @@
+uuid: 581013c5-ecbd-48f8-815d-acf3bd06809b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.managed_link.field_managed_link_text
+  module:
+    - managed_links
+id: managed_link.managed_link.field_managed_link_text
+field_name: field_managed_link_text
+entity_type: managed_link
+bundle: managed_link
+label: Text
+description: 'This will be the link text.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
