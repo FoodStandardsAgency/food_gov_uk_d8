@@ -47,7 +47,13 @@ settings:
   submission_log: false
   submission_user_columns:
     - element__details_of_problem
+    - element__people_businesses_involved
     - element__where_lookup
+    - element__when_and_how_often
+    - element__why_involved_and_how
+    - element__explain_how_you_know
+    - element__how_many_aware
+    - element__reported_to_anyone_else
     - element__name
     - element__email
   submission_login: false

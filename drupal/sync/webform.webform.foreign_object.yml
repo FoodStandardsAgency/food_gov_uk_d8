@@ -55,6 +55,7 @@ settings:
     - element__fsa_establishment_postal_code
     - element__fsa_establishment_la_email
     - element__when_purchased
+    - element__where_item_stored
     - element__premises_contacted_action_taken
     - element__name
     - element__email

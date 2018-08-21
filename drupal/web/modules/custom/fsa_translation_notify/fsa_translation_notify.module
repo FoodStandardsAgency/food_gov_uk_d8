@@ -34,7 +34,12 @@ function fsa_translation_notify_form_node_form_alter(&$form, FormStateInterface 
   // Add a notification checkbox if it's an edit form.
   if (preg_match('/node_\w+_edit_form/', $form_id)) {
     $form['notify_language_team'] = [
-      '#type' => 'checkbox',
+      '#type' => 'radios',
+      '#required' => TRUE,
+      '#options' => [
+        0 => t('No'),
+        1 => t('Yes'),
+      ],
       '#title' => t('Notify language team of this change'),
       // Set at the bottom of the group.
       '#weight' => 100,

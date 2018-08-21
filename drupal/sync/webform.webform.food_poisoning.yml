@@ -51,6 +51,7 @@ settings:
     - element__fsa_establishment_postal_code
     - element__fsa_establishment_la_name
     - element__fsa_establishment_la_email
+    - element__people_affected
     - element__symptoms_details
     - element__when_did_you_illness_start_and_end_
     - element__has_visited_gp
