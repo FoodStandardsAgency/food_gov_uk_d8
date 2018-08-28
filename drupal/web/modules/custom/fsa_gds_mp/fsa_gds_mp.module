@@ -1,0 +1,77 @@
+<?php
+
+/**
+ * @file
+ */
+
+use GuzzleHttp\Client as HttpClient;
+
+/**
+ * Implements hook_cron().
+ */
+function fsa_gds_mp_cron() {
+  $request_time = \Drupal::time()->getRequestTime();
+
+  // Get state setting to fetch last run time.
+  $last_run = 0;
+  // $last_run = \Drupal::state()->get('fsa_gsa_mp.last_run', 0);.
+
+  // If time to run is < 24hrs, exit early.
+  if ($request_time <= strtotime('+1 day', $last_run)) {
+    var_dump($request_time <= strtotime('+1 day', $last_run));
+    return;
+  }
+
+  // Otherwise, gather daily metrics...
+  $payload = fsa_gds_mp_gather_daily_metrics();
+
+  // And transmit to GDS endpoint.
+  fsa_gsp_mp_send($payload);
+
+  // Then set the next run timestamp to +24hrs.
+  \Drupal::state()->set('fsa_gsa_mp.last_run', $request_time);
+}
+
+/**
+ * Callback to gather the alerts metrics we want to share with GDS.
+ *
+ * @return array
+ *   Key/value array of daily metrics to submit.
+ */
+function fsa_gds_mp_gather_daily_metrics() {
+  return [
+    'subscribe' => 12345,
+    'unsubscribe' => 100,
+  ];
+}
+
+/**
+ * Callback to make HTTP requests to measurement protocol endpoint.
+ *
+ * @param array $payload
+ *   Contains metrics data for us to send to GDS.
+ * @throws \GuzzleHttp\Exception\GuzzleException
+ */
+function fsa_gsp_mp_send(array $payload) {
+  // Debugging with netcat.
+  $uri = 'http://localhost:6666';
+  // $uri = 'https://www.google-analytics.com/collect';
+  // Measurement protocol API docs here: https://developers.google.com/analytics/devguides/collection/protocol/v1/devguide#event.
+  $options = [
+    'headers' => [
+      'Cache' => 'no-cache',
+    ],
+    'query' => [
+      'v' => 1,
+      't' => 'event',
+      'tid' => 'UA-54078849-3',
+      // 'cid' => '',.
+      'ec' => 'Alerts%20Usage',
+      'ea' => 'Subscribed%20Users',
+      'ev' => 12345,
+    ]
+  ];
+
+  $client = new HttpClient();
+  $response = $client->request('POST', $uri, $options);
+}
