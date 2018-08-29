@@ -4,7 +4,6 @@
  * @file
  */
 
-use GuzzleHttp\Client as HttpClient;
 use Drupal\taxonomy\Entity\Term;
 
 /**
@@ -42,15 +41,15 @@ function fsa_gds_mp_cron() {
 function fsa_gds_mp_gather_daily_metrics() {
   return [
     // Number of users subscribed in total.
-    'subscribed_users' => fsa_gds_mp_count_subscribed_users(),
+    'Subscribed Users' => fsa_gds_mp_count_subscribed_users(),
     // Amount of active subscriptions that receive message.
-    'active_subscribers' => fsa_gds_mp_count_active_subscribers(),
+    'Active Users' => fsa_gds_mp_count_active_subscribers(),
     // Amount of active SMS subscriptions.
-    'active_sms_subscription' => fsa_gds_mp_count_active_sms_subscriptions(),
+    'Alert SMS' => fsa_gds_mp_count_active_sms_subscriptions(),
     // Amount of active email subscriptions.
-    'active_email_subscription' => fsa_gds_mp_count_active_email_subscriptions(),
+    'Alert Email' => fsa_gds_mp_count_active_email_subscriptions(),
     // Encoded JSON object containing subscriptions categories and how many subscribed per category.
-    'alert_categories' => fsa_gds_mp_count_by_alert_categories(),
+    'Alert Categories' => fsa_gds_mp_count_by_alert_categories(),
   ];
 }
 
@@ -251,13 +250,20 @@ function fsa_gsp_mp_send(array $payload) {
       'v' => 1,
       't' => 'event',
       'tid' => 'UA-54078849-3',
-      // 'cid' => '',.
       'ec' => 'Alerts%20Usage',
-      'ea' => 'Subscribed%20Users',
-      'ev' => 12345,
-    ]
+    ],
   ];
 
-  $client = new HttpClient();
-  $response = $client->request('POST', $uri, $options);
+  foreach ($payload as $event_id => $event_value) {
+    $event_id = urlencode($event_id);
+
+    if (is_array($event_value)) {
+      $event_value = json_encode($event_value);
+    }
+
+    $options['query']['ea'] = $event_id;
+    $options['query']['ev'] = $event_value;
+
+    \Drupal::httpClient()->post($uri, $options);
+  }
 }
