@@ -5,6 +5,7 @@
  */
 
 use GuzzleHttp\Client as HttpClient;
+use Drupal\taxonomy\Entity\Term;
 
 /**
  * Implements hook_cron().
@@ -193,7 +194,42 @@ EOT;
 function fsa_gds_mp_count_by_alert_categories() {
   $category_counts = [];
 
+  // Get terms from the 'Alerts: Allergen' vocabulary.
+  $vocabulary = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_vocabulary')->load('alerts_allergen');
+  $allergy_terms = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term')
+    ->loadTree($vocabulary->id());
+
+  foreach ($allergy_terms as $term) {
+    $term_entity = Term::load($term->tid);
+    $category_counts[$term_entity->field_alert_notation->value] = fsa_gds_mp_count_by_category($term->tid);
+  }
+
+
   return $category_counts;
+}
+
+/**
+ * Count query for users subscribed to a given allergy alert term id.
+ *
+ * @param int $term_id
+ *   Term ID of the allergy alert.
+ * @return int
+ *   The total number of matching users from the query.
+ */
+function fsa_gds_mp_count_by_category(int $term_id) {
+  if (empty($term_id)) {
+    return 0;
+  }
+
+  $user_count = \Drupal::entityQuery('user')
+    ->condition('field_subscribed_notifications', $term_id)
+    ->condition('status', 1)
+    ->count()
+    ->execute();
+
+  return (int) $user_count;
 }
 
 /**
