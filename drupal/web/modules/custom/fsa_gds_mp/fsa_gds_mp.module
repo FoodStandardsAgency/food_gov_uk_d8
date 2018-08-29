@@ -78,7 +78,7 @@ EOT;
 
   $query = $connection->query($sql);
 
-  return (int) $query->fetchAll();
+  return (int) array_pop($query->fetchAssoc());
 }
 
 /**
@@ -129,7 +129,7 @@ EOT;
 
   $query = $connection->query($sql);
 
-  return (int) $query->fetchAll();
+  return (int) array_pop($query->fetchAssoc());
 }
 
 /**
@@ -155,7 +155,7 @@ EOT;
 
   $query = $connection->query($sql);
 
-  return (int) $query->fetchAll();
+  return (int) array_pop($query->fetchAssoc());
 }
 
 /**
@@ -181,7 +181,7 @@ EOT;
 
   $query = $connection->query($sql);
 
-  return (int) $query->fetchAll();
+  return (int) array_pop($query->fetchAssoc());
 }
 
 /**
