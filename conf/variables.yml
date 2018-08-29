@@ -39,6 +39,10 @@ nginx_drupal_override_locations:
     condition: "^/admin/structure/webform/manage/(.*)/results/download/file/(.*).+\\.(?:csv?)$"
     action: |
       try_files $uri @drupal;
+  - operator: "~*"
+    condition: "^/sites/.*/files/(?:.+\\.(?:csv))$"
+    action: |
+      try_files $uri @drupal;
 
 firewall_web_whitelist_enabled: true
 
