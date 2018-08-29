@@ -205,7 +205,7 @@ function fsa_gds_mp_count_by_alert_categories() {
     $term_entity = Term::load($term->tid);
     $category_counts[$term_entity->field_alert_notation->value] = fsa_gds_mp_count_by_category($term->tid);
   }
-  
+
   return $category_counts;
 }
 
