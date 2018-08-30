@@ -252,7 +252,7 @@ function fsa_gsp_mp_send(array $payload) {
       'ds' => 'drupal',
       'dh' => \Drupal::request()->getHost(),
       'dt' => urlencode('Statistics reporting'),
-      'ec' => 'Alerts%20Usage',
+      'ec' => 'Alerts Usage',
       'ev' => 0,
     ],
   ];
