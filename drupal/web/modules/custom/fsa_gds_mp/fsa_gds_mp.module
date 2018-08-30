@@ -6,6 +6,8 @@
 
 use Drupal\taxonomy\Entity\Term;
 
+const FSA_GDS_MP_UUID = '4072b6b3-1f23-481b-8269-69d801a74224';
+
 /**
  * Implements hook_cron().
  */
@@ -245,7 +247,7 @@ function fsa_gsp_mp_send(array $payload) {
       'v' => 1,
       't' => 'event',
       'tid' => \Drupal::config('fsa_gds_mp')->get('ga_tracking_id'),
-      'cid' => \Drupal::service('uuid')->generate(),
+      'cid' => FSA_GDS_MP_UUID,
       'cd1' => urldecode('FSA%20-%20MP%20-%20Statistics%20Reporting%20-%20food.gov.uk'),
       'ds' => 'drupal',
       'dh' => \Drupal::request()->getHost(),
