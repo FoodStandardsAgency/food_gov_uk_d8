@@ -13,12 +13,10 @@ function fsa_gds_mp_cron() {
   $request_time = \Drupal::time()->getRequestTime();
 
   // Get state setting to fetch last run time.
-  $last_run = 0;
-  // $last_run = \Drupal::state()->get('fsa_gsa_mp.last_run', 0);.
+  $last_run = \Drupal::state()->get('fsa_gsa_mp.last_run', 0);
 
   // If time to run is < 24hrs, exit early.
   if ($request_time <= strtotime('+1 day', $last_run)) {
-    var_dump($request_time <= strtotime('+1 day', $last_run));
     return;
   }
 
@@ -235,7 +233,6 @@ function fsa_gds_mp_count_by_category(int $term_id) {
  *
  * @param array $payload
  *   Contains metrics data for us to send to GDS.
- * @throws \GuzzleHttp\Exception\GuzzleException
  */
 function fsa_gsp_mp_send(array $payload) {
   $uri = 'https://www.google-analytics.com/collect';
@@ -249,6 +246,7 @@ function fsa_gsp_mp_send(array $payload) {
       't' => 'event',
       'tid' => \Drupal::config('fsa_gds_mp')->get('ga_tracking_id'),
       'cid' => \Drupal::service('uuid')->generate(),
+      'cd1' => urldecode('FSA%20-%20MP%20-%20Statistics%20Reporting%20-%20food.gov.uk'),
       'ds' => 'drupal',
       'dh' => \Drupal::request()->getHost(),
       'dt' => urlencode('Statistics reporting'),
@@ -258,8 +256,6 @@ function fsa_gsp_mp_send(array $payload) {
   ];
 
   foreach ($payload as $event_id => $event_value) {
-    $event_id = urlencode($event_id);
-
     if (is_array($event_value)) {
       $event_value = json_encode($event_value);
     }
