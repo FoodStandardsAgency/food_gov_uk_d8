@@ -238,9 +238,7 @@ function fsa_gds_mp_count_by_category(int $term_id) {
  * @throws \GuzzleHttp\Exception\GuzzleException
  */
 function fsa_gsp_mp_send(array $payload) {
-  // Debugging with netcat.
-  $uri = 'http://localhost:6666';
-  // $uri = 'https://www.google-analytics.com/collect';
+  $uri = 'https://www.google-analytics.com/collect';
   // Measurement protocol API docs here: https://developers.google.com/analytics/devguides/collection/protocol/v1/devguide#event.
   $options = [
     'headers' => [
@@ -249,8 +247,13 @@ function fsa_gsp_mp_send(array $payload) {
     'query' => [
       'v' => 1,
       't' => 'event',
-      'tid' => 'UA-54078849-3',
+      'tid' => \Drupal::config('fsa_gds_mp')->get('ga_tracking_id'),
+      'cid' => \Drupal::service('uuid')->generate(),
+      'ds' => 'drupal',
+      'dh' => \Drupal::request()->getHost(),
+      'dt' => urlencode('Statistics reporting'),
       'ec' => 'Alerts%20Usage',
+      'ev' => 0,
     ],
   ];
 
@@ -262,7 +265,7 @@ function fsa_gsp_mp_send(array $payload) {
     }
 
     $options['query']['ea'] = $event_id;
-    $options['query']['ev'] = $event_value;
+    $options['query']['el'] = $event_value;
 
     \Drupal::httpClient()->post($uri, $options);
   }
