@@ -158,6 +158,9 @@ switch ($env) {
       '10.2.3.18:11211' => 'default'
     );
 
+    // FSA Data Studio Measurement Protocol: switch UA- code to correct ID.
+    $config['fsa_gds_mp']['ga_tracking_id'] = 'UA-54078849-1';
+
     break;
 
   case 'develop':
@@ -167,6 +170,8 @@ switch ($env) {
     $config['google_tag.settings']['environment_id'] = 'env-6';
     $config['google_tag.settings']['environment_token'] = '4d3H88TmNOCwXVDx0PK8bg';
 
+    $config['fsa_gds_mp']['ga_tracking_id'] = 'UA-54078849-3';
+
     break;
 
   case 'stage':
@@ -175,6 +180,8 @@ switch ($env) {
     // GTM Environment overrides.
     $config['google_tag.settings']['environment_id'] = 'env-5';
     $config['google_tag.settings']['environment_token'] = 'nNEwJ_lItnO48_pabdUErg';
+
+    $config['fsa_gds_mp']['ga_tracking_id'] = 'UA-54078849-3';
 
     break;
 
@@ -187,6 +194,8 @@ switch ($env) {
     // GTM Environment (below values should be as default configurations).
     $config['google_tag.settings']['environment_id'] = 'env-7';
     $config['google_tag.settings']['environment_token'] = 'a4fGxt3oZ4lNeD1SjVDqdA';
+
+    $config['fsa_gds_mp']['ga_tracking_id'] = 'UA-54078849-3';
 
     break;
 }
