@@ -38,9 +38,9 @@ function fsa_translation_notify_form_node_form_alter(&$form, FormStateInterface 
       '#required' => TRUE,
       '#options' => [
         0 => t('No'),
-        1 => t('Yes'),
+        1 => t('Yes (notify Welsh language team)'),
       ],
-      '#title' => t('Notify language team of this change'),
+      '#title' => t('Is this page ready to be translated?'),
       // Set at the bottom of the group.
       '#weight' => 100,
       '#group' => 'footer',
