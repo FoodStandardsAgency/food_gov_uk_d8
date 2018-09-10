@@ -94,7 +94,8 @@
         "drupal/password_policy": "^3.0@alpha",
         "zaporylie/composer-drupal-optimizations": "^1.0",
         "league/csv": "^9.0",
-        "drupal/permissions_filter": "^1.0"
+        "drupal/permissions_filter": "^1.0",
+        "drupal/memcache": "^2.0@alpha"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
