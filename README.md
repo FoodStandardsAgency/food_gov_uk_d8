@@ -17,9 +17,9 @@ This project deploys using [Deploybot](https://wunder.deploybot.com/111465) and 
 
 #### Requirements
 
-- [Composer]()
-- [Docker]()
-- [DDEV]()
+- [Composer](https://getcomposer.org/)
+- [Docker](https://www.docker.com/get-started)
+- [DDEV](https://ddev.readthedocs.io/en/latest/)
 
 > NB: You'll need a database from somewhere.
 
