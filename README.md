@@ -1,9 +1,13 @@
 # Food Standards Agency
-[![Build Status](https://travis-ci.com/wunderio/client-UK-FSA-beta.svg?branch=master)](https://travis-ci.com/wunderio/client-UK-FSA-beta) 
+
+[![Build Status](https://travis-ci.com/wunderio/client-UK-FSA-beta.svg?branch=master)](https://travis-ci.com/wunderio/client-UK-FSA-beta)
 
 Food Standards Agency (FSA) Drupal 8 site code repository.
 
 ### Continuous integration
+
+> NB: Subject to change - check with team.
+
 This project deploys using [Deploybot](https://wunder.deploybot.com/111465) and uses [Travis](https://travis-ci.com/wunderio/client-UK-FSA-beta) for tests.
 * Production [www.food.gov.uk](https://www.food.gov.uk)
 * Development: [fsa.dev.wunder.io](https://fsa.dev.wunder.io)
@@ -12,40 +16,39 @@ This project deploys using [Deploybot](https://wunder.deploybot.com/111465) and 
 ### Getting started
 
 #### Requirements
-- [Vagrant](https://www.vagrantup.com/downloads.html) 1.9.2 or greater
-- [vagrant-cachier](https://github.com/fgrehm/vagrant-cachier)
- `vagrant plugin install vagrant-cachier`
-- Ansible version 2.1.2 or greater in host machine. For OS X:
- `brew install ansible`
-- [Virtualbox](https://www.virtualbox.org/wiki/Downloads) 5.1 or greater 
 
-#### 1. Setup local environment
+- [Composer]()
+- [Docker]()
+- [DDEV]()
 
-```$ git clone git@github.com:wunderio/client-UK-FSA-beta.git```
+> NB: You'll need a database from somewhere.
 
-```$ vagrant up``` 
+```
+# Install project dependencies
+cd drupal && composer install
+# Start ddev containers
+ddev start
+# Wait for docker images to pull/expand/start - could take up to 30 mins on first start dependent on bandwidth and system resources.
+# Don't worry, it's really fast after you've got the images.
+ddev import-db --src path-to-your-sql-file
+```
 
-Add to your host machine `/etc/hosts` file the following line  
-```192.168.100.178	local.food.gov.uk```
-
-#### 2. First time setup
-
-```$ vagrant ssh```
-
-```$ cd /vagrant/drupal/ && ./build.sh reset```
-
-Access your local environment at https://local.food.gov.uk
+See [docs/development.md](docs/development.md) for details of XDebug, Drush tooling as well as DDEV docs at https://ddev.readthedocs.io.
 
 ## Project management
+
+> TBC
 
 Jira: https://wunder.atlassian.net/projects/FSA
 
 ## Development workflow
 
-Refer WunderFlow for branching: http://wunderflow.wunder.io
+Simple branching model as per Wunderflow: http://wunderflow.wunder.io
 
 ## Server Provisioning/Deployment
-See [docs/provisioning.md](docs/provisioning.md).
 
+> NB: Legacy material.
+
+See [docs/provisioning.md](docs/provisioning.md).
 
 More detailed documentation at [docs/development.md](docs/development.md)
