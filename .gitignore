@@ -13,6 +13,7 @@ test/vendor
 test/bin
 VERSION
 *.sql
+.vscode
 
 # Ignore ansible retry files
 conf/*.retry
