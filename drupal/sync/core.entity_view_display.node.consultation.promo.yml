@@ -5,12 +5,17 @@ dependencies:
   config:
     - core.entity_view_mode.node.promo
     - field.field.node.consultation.body
+    - field.field.node.consultation.field_alert_send
+    - field.field.node.consultation.field_alert_send_timestamp
     - field.field.node.consultation.field_consultation_closing_date
     - field.field.node.consultation.field_consultation_launch_date
     - field.field.node.consultation.field_consultation_summary
     - field.field.node.consultation.field_consultations_type
+    - field.field.node.consultation.field_consultations_type_alert
+    - field.field.node.consultation.field_content_reminder
     - field.field.node.consultation.field_intro
     - field.field.node.consultation.field_nation
+    - field.field.node.consultation.field_search_exclude
     - field.field.node.consultation.field_status
     - node.type.consultation
   module:
@@ -24,6 +29,11 @@ targetEntityType: node
 bundle: consultation
 mode: promo
 content:
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   field_consultations_type:
     type: entity_reference_label
     weight: 0
@@ -38,11 +48,16 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_alert_send: true
+  field_alert_send_timestamp: true
   field_consultation_closing_date: true
   field_consultation_launch_date: true
   field_consultation_summary: true
+  field_consultations_type_alert: true
+  field_content_reminder: true
   field_intro: true
   field_nation: true
+  field_search_exclude: true
   field_status: true
   langcode: true
   links: true

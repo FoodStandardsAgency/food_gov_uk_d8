@@ -17,6 +17,7 @@ dependencies:
     - datetime
     - field_group
     - path
+    - scheduler
     - shs
     - text
 third_party_settings:
@@ -166,6 +167,8 @@ content:
   scheduler_settings:
     weight: 20
     region: content
+    settings: {  }
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:

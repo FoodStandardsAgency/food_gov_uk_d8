@@ -23,6 +23,7 @@ dependencies:
     - datetime
     - fsa_ratings
     - geolocation
+    - path
 _core:
   default_config_hash: E7X-WEwfh0HsOM4EO2Xy94MuO5J3RM1DoG763_4ybnk
 id: fsa_establishment.fsa_establishment.default
@@ -160,6 +161,12 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
     third_party_settings: {  }
   translation:
     weight: 14
