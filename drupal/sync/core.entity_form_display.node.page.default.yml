@@ -28,6 +28,7 @@ dependencies:
     - inline_entity_form
     - paragraphs
     - path
+    - scheduler
     - shs
     - text
 third_party_settings:

@@ -76,6 +76,18 @@ filters:
     status: true
     weight: -46
     settings: {  }
+  filter_autop:
+    id: filter_autop
+    provider: filter
+    status: false
+    weight: -39
+    settings: {  }
+  filter_html_escape:
+    id: filter_html_escape
+    provider: filter
+    status: false
+    weight: -40
+    settings: {  }
   filter_html_image_secure:
     id: filter_html_image_secure
     provider: filter
@@ -89,18 +101,6 @@ filters:
     weight: -38
     settings:
       filter_url_length: 72
-  filter_autop:
-    id: filter_autop
-    provider: filter
-    status: false
-    weight: -39
-    settings: {  }
-  filter_html_escape:
-    id: filter_html_escape
-    provider: filter
-    status: false
-    weight: -40
-    settings: {  }
   managed_link_linkit:
     id: managed_link_linkit
     provider: managed_links

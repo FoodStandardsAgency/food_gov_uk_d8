@@ -6,8 +6,8 @@ dependencies:
     - field.field.managed_link.managed_link.field_managed_link_text
     - field.field.managed_link.managed_link.field_managed_link_url
   module:
-    - managed_links
     - link
+    - managed_links
 id: managed_link.managed_link.default
 targetEntityType: managed_link
 bundle: managed_link

@@ -5,6 +5,21 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.research_project.body
+    - field.field.node.research_project.field_conducted_by
+    - field.field.node.research_project.field_content_reminder
+    - field.field.node.research_project.field_date_range
+    - field.field.node.research_project.field_document
+    - field.field.node.research_project.field_intro
+    - field.field.node.research_project.field_nation
+    - field.field.node.research_project.field_planned_completion_date
+    - field.field.node.research_project.field_related
+    - field.field.node.research_project.field_research_programme
+    - field.field.node.research_project.field_research_project_code
+    - field.field.node.research_project.field_research_topics
+    - field.field.node.research_project.field_results_available
+    - field.field.node.research_project.field_search_exclude
+    - field.field.node.research_project.field_team_contacts
+    - field.field.node.research_project.field_update_date
     - node.type.research_project
   module:
     - text
@@ -22,22 +37,34 @@ content:
       trim_length: 600
     third_party_settings: {  }
     region: content
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   links:
     weight: 100
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
+  addtoany: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_conducted_by: true
+  field_content_reminder: true
   field_date_range: true
   field_document: true
   field_intro: true
+  field_nation: true
   field_planned_completion_date: true
+  field_related: true
   field_research_programme: true
   field_research_project_code: true
   field_research_topics: true
   field_results_available: true
+  field_search_exclude: true
   field_team_contacts: true
   field_update_date: true
   langcode: true

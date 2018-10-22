@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.page.body
     - field.field.node.page.field_audience
+    - field.field.node.page.field_content_reminder
     - field.field.node.page.field_content_type
     - field.field.node.page.field_document
     - field.field.node.page.field_fsa_toc
@@ -15,6 +16,7 @@ dependencies:
     - field.field.node.page.field_media_library_liftup_image
     - field.field.node.page.field_nation
     - field.field.node.page.field_related
+    - field.field.node.page.field_search_exclude
     - field.field.node.page.field_team_contacts
     - field.field.node.page.field_topic
     - field.field.node.page.field_update_date
@@ -49,6 +51,11 @@ targetEntityType: node
 bundle: page
 mode: teaser
 content:
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   field_liftup_summary:
     type: basic_string
     weight: 1
@@ -72,6 +79,7 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_audience: true
+  field_content_reminder: true
   field_content_type: true
   field_document: true
   field_fsa_toc: true
@@ -79,6 +87,7 @@ hidden:
   field_liftup_title: true
   field_nation: true
   field_related: true
+  field_search_exclude: true
   field_team_contacts: true
   field_topic: true
   field_update_date: true

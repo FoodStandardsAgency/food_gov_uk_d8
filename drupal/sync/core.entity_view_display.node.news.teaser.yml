@@ -5,6 +5,14 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.news.body
+    - field.field.node.news.field_alert_send
+    - field.field.node.news.field_alert_send_timestamp
+    - field.field.node.news.field_intro
+    - field.field.node.news.field_nation
+    - field.field.node.news.field_news_type
+    - field.field.node.news.field_search_exclude
+    - field.field.node.news.field_team_contacts
+    - field.field.node.news.field_topic
     - node.type.news
   module:
     - text
@@ -25,8 +33,19 @@ content:
   links:
     weight: 100
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
+  addtoany: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_alert_send: true
+  field_alert_send_timestamp: true
+  field_intro: true
+  field_nation: true
+  field_news_type: true
+  field_search_exclude: true
+  field_team_contacts: true
+  field_topic: true
   langcode: true
