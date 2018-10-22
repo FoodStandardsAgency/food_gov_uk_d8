@@ -5,13 +5,21 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.alert.field_alert_actiontaken
+    - field.field.node.alert.field_alert_allergen
+    - field.field.node.alert.field_alert_consumeradvice
     - field.field.node.alert.field_alert_description
+    - field.field.node.alert.field_alert_modified
     - field.field.node.alert.field_alert_notation
     - field.field.node.alert.field_alert_otherbusiness
+    - field.field.node.alert.field_alert_previous
     - field.field.node.alert.field_alert_productdetails_raw
     - field.field.node.alert.field_alert_relatedmedia
     - field.field.node.alert.field_alert_reportingbusiness
+    - field.field.node.alert.field_alert_riskstatement
     - field.field.node.alert.field_alert_smstext
+    - field.field.node.alert.field_alert_type
+    - field.field.node.alert.field_nation
+    - field.field.node.alert.field_short_title
     - node.type.alert
   module:
     - user
@@ -23,7 +31,10 @@ content:
   links:
     weight: 100
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
+  addtoany: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
@@ -34,9 +45,13 @@ hidden:
   field_alert_modified: true
   field_alert_notation: true
   field_alert_otherbusiness: true
+  field_alert_previous: true
   field_alert_productdetails_raw: true
   field_alert_relatedmedia: true
   field_alert_reportingbusiness: true
+  field_alert_riskstatement: true
   field_alert_smstext: true
   field_alert_type: true
+  field_nation: true
+  field_short_title: true
   langcode: true

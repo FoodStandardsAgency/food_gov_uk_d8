@@ -465,7 +465,7 @@ display:
         operator: AND
         groups:
           1: AND
-      use_ajax: false
+      use_ajax: true
       css_class: listing
     cache_metadata:
       max-age: -1

@@ -17,6 +17,7 @@ dependencies:
     - field_group
     - icon_select
     - path
+    - scheduler
     - shs
     - text
     - webform
@@ -139,6 +140,12 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
@@ -168,9 +175,17 @@ content:
       placeholder: ''
     third_party_settings: {  }
     region: content
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   url_redirects:
     weight: 50
     region: content
+    settings: {  }
+    third_party_settings: {  }
   webform:
     weight: 6
     settings:
