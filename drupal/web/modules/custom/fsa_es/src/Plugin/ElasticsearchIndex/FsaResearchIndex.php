@@ -55,8 +55,10 @@ class FsaResearchIndex extends FsaIndexBase {
               'project_code' => [
                 'type' => 'keyword',
               ],
-              // Intro is included in the body cause there's no need to
-              // separate them.
+              'intro' => [
+                'type' => 'text',
+                'analyzer' => $text_analyzer,
+              ],
               'body' => [
                 'type' => 'text',
                 'analyzer' => $text_analyzer,

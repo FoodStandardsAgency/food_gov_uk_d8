@@ -39,7 +39,7 @@ class SitewideSearchResearch extends SitewideSearchBase {
       $query_must_filters[] = [
         'multi_match' => [
           'query' => $values['keyword'],
-          'fields' => ['name^3', 'body', 'project_code'],
+          'fields' => ['name^5', 'intro^3', 'body'],
           'type' => 'cross_fields',
           'operator' => 'and',
         ],
