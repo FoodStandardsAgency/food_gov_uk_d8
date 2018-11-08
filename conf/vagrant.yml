@@ -111,7 +111,7 @@
     sslterminators:
       - server_name: "{{ domain_name }}"
         server_forwards: example.com
-        ssl_certificate: certificate.crt
+        ssl_certificate: ssl/certificate.crt
         ssl_certificate_key: ssl/certificate.key
         backends:
           - 127.0.0.1:8081
