@@ -1,32 +1,12 @@
 # Generic ones
 .DS_Store
-.vagrant
-drupal/current
-drupal/builds
-drupal/.make_cache
-drupal/drupal.sqlite
 .idea
-ansible
 local.*
-test/composer.lock
-test/vendor
-test/bin
-VERSION
 *.sql
 
-# Ignore ansible retry files
-conf/*.retry
-
-# Ignore secrets folder
-secrets
-
-# Ignore python virtualenv created by provision.sh
-.virtualenv
-
 # Ignore Drupal's local setting overrides
-drupal/conf/settings.local.php
-drupal/conf/settings.private.php
+webroot/sites/default/settings.local.php
 
 # Ignore local development services
-drupal/web/sites/development.services.yml
-/drupal/web/sites/default/settings.private.php
+webroot/sites/sites/development.services.yml
+webroot/sites/sites/default/settings.private.php
