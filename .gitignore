@@ -3,6 +3,7 @@
 .idea
 local.*
 *.sql
+.swp
 
 # Ignore Drupal's local setting overrides
 webroot/sites/default/settings.local.php
@@ -10,3 +11,8 @@ webroot/sites/default/settings.local.php
 # Ignore local development services
 webroot/sites/sites/development.services.yml
 webroot/sites/sites/default/settings.private.php
+
+# Ignore paths that contain user-generated content.
+docroot/files
+docroot/sites/*/files
+docroot/sites/*/private
