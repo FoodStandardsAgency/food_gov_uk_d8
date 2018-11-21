@@ -1,10 +1,11 @@
 # Food Standards Agency
-[![Build Status](https://travis-ci.com/wunderio/client-UK-FSA-beta.svg?branch=master)](https://travis-ci.com/wunderio/client-UK-FSA-beta) 
+[![Build Status](https://travis-ci.com/FoodStandardsAgency/food_gov_uk_d8.svg?branch=master)](https://travis-ci.com/FoodStandardsAgency/food_gov_uk_d8)
 
 Food Standards Agency (FSA) Drupal 8 site code repository.
 
 ### Continuous integration
-This project deploys using [Deploybot](https://wunder.deploybot.com/111465) and uses [Travis](https://travis-ci.com/wunderio/client-UK-FSA-beta) for tests.
+This project tests and deploys using [Travis](https://travis-ci.com/FoodStandardsAgency/food_gov_uk_d8).
+
 * Production [www.food.gov.uk](https://www.food.gov.uk)
 * Development: [fsa.dev.wunder.io](https://fsa.dev.wunder.io)
 * Staging [fsa.stage.wunder.io](https://fsa.stage.wunder.io)
@@ -17,15 +18,15 @@ This project deploys using [Deploybot](https://wunder.deploybot.com/111465) and 
  `vagrant plugin install vagrant-cachier`
 - Ansible version 2.1.2 or greater in host machine. For OS X:
  `brew install ansible`
-- [Virtualbox](https://www.virtualbox.org/wiki/Downloads) 5.1 or greater 
+- [Virtualbox](https://www.virtualbox.org/wiki/Downloads) 5.1 or greater
 
 #### 1. Setup local environment
 
-```$ git clone git@github.com:wunderio/client-UK-FSA-beta.git```
+```$ git clone git@github.com:FoodStandardsAgency/food_gov_uk_d8.git```
 
-```$ vagrant up``` 
+```$ vagrant up```
 
-Add to your host machine `/etc/hosts` file the following line  
+Add to your host machine `/etc/hosts` file the following line
 ```192.168.100.178	local.food.gov.uk```
 
 #### 2. First time setup
