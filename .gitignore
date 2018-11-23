@@ -6,6 +6,9 @@ local.*
 .swp
 .vscode
 
+# Ignore vendor code folder.
+vendor
+
 # Ignore Drupal's local setting overrides
 webroot/sites/default/settings.local.php
 
