@@ -1,0 +1,16 @@
+# See https://docs.acquia.com/acquia-cloud/develop/pipelines/yaml/ for docs.
+version: 1.1.0
+services:
+  - php:
+      version: 7.1
+variables:
+  global:
+    ENV: pipelines
+events:
+  build:
+    steps:
+      type: script
+      script:
+        # Fetch all dependencies.
+        - composer install
+        # No front-end build step needed; run/compiled/committed by devs so should be present already in the themes dist folder.
