@@ -1,0 +1,7 @@
+version: '3.6'
+
+services:
+  web:
+    environment:
+      # No more use of terminal export command to set this in advance.
+      WKV_SITE_ENV: "local"

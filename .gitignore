@@ -4,6 +4,7 @@
 local.*
 *.sql
 .swp
+.vscode
 
 # Ignore Drupal's local setting overrides
 webroot/sites/default/settings.local.php
