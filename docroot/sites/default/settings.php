@@ -7,7 +7,7 @@
 
 // Acquia Cloud requires this file to allow access to environment variables.
 if (file_exists('/var/www/site-php')) {
-  require '/var/www/site-php/sitename/sitename-settings.inc';
+  require '/var/www/site-php/foodgovuk/foodgovuk-settings.inc';
 }
 
 /**
