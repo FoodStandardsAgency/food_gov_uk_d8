@@ -10,8 +10,6 @@ events:
   build:
     steps:
       - build:
-        type: script
-        script:
-          # Fetch all dependencies.
-          - composer install
-          # No front-end build step needed; run/compiled/committed by devs so should be present already in the themes dist folder.
+          type: script
+          script:
+            - composer install
