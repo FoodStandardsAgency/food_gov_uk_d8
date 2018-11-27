@@ -137,7 +137,6 @@ else {
 switch ($env) {
   case 'prod':
     $settings['simple_environment_indicator'] = '#d4000f Production';
-    $settings['file_private_path'] = '/var/www/fsa.prod.wunder.io/private-files';
 
     // GTM Environment overrides.
     $config['google_tag.settings']['environment_id'] = 'env-2';
