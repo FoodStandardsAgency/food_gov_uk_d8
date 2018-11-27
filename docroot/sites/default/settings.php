@@ -202,7 +202,7 @@ switch ($env) {
  * Location of the site configuration files.
  */
 $config_directories = array(
-  CONFIG_SYNC_DIRECTORY => '../sync',
+  CONFIG_SYNC_DIRECTORY => '../config/default',
 );
 
 /**
