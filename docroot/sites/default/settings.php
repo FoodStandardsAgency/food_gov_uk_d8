@@ -5,6 +5,10 @@
  * You could use this to add general settings to be used for all environments.
  */
 
+// Acquia Cloud requires this file to allow access to environment variables.
+if (file_exists('/var/www/site-php')) {
+  require '/var/www/site-php/sitename/sitename-settings.inc';
+}
 
 /**
  * Database settings (overridden per environment)
@@ -86,38 +90,45 @@ $config['config_split.config_split.dev']['status'] = FALSE;
 
 $config['elasticsearch_helper.settings']['elasticsearch_helper']['host'] = getenv('DB_HOST_DRUPAL');
 
-$env = getenv('WKV_SITE_ENV');
+if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
+  // Either 'dev', 'test', 'prod' or 'ra'.
+  $env = $_ENV['AH_SITE_ENVIRONMENT'];
+}
+else {
+  // WKV_ENV_SITE is a legacy environment indicator from WunderTools
+  $env = getenv('WKV_SITE_ENV');
+}
 
 // Memcache.
-$settings['memcache']['servers'] = ['127.0.0.1:11211' => 'default'];
-if (class_exists('Memcached')) {
-  /**
-   * Memcache configuration.
-   */
-  $settings['memcache']['extension'] = 'Memcached';
-  $settings['memcache']['bins'] = ['default' => 'default'];
-  $settings['memcache']['key_prefix'] = 'fsa_' . $env;
-  $settings['cache']['default'] = 'cache.backend.memcache';
-  $settings['cache']['bins']['render'] = 'cache.backend.memcache';
-  $settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.memcache';
-  $settings['cache']['bins']['bootstrap'] = 'cache.backend.memcache';
-  $settings['cache']['bins']['config'] = 'cache.backend.memcache';
-  $settings['cache']['bins']['discovery'] = 'cache.backend.memcache';
-  // Enable stampede protection.
-  $settings['memcache']['stampede_protection'] = TRUE;
-  // High performance - no hook_boot(), no hook_exit(), ignores Drupal IP
-  // blacklists.
-  $conf['page_cache_invoke_hooks'] = FALSE;
-  $conf['page_cache_without_database'] = TRUE;
-  // Memcached PECL Extension Support.
-  // Adds Memcache binary protocol and no-delay features (experimental).
-  $settings['memcache']['options'] = [
-    \Memcached::OPT_COMPRESSION => FALSE,
-    \Memcached::OPT_DISTRIBUTION => \Memcached::DISTRIBUTION_CONSISTENT,
-    \Memcached::OPT_BINARY_PROTOCOL => TRUE,
-    \Memcached::OPT_TCP_NODELAY => TRUE,
-  ];
-}
+// $settings['memcache']['servers'] = ['127.0.0.1:11211' => 'default'];
+// if (class_exists('Memcached')) {
+//   /**
+//    * Memcache configuration.
+//    */
+//   $settings['memcache']['extension'] = 'Memcached';
+//   $settings['memcache']['bins'] = ['default' => 'default'];
+//   $settings['memcache']['key_prefix'] = 'fsa_' . $env;
+//   $settings['cache']['default'] = 'cache.backend.memcache';
+//   $settings['cache']['bins']['render'] = 'cache.backend.memcache';
+//   $settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.memcache';
+//   $settings['cache']['bins']['bootstrap'] = 'cache.backend.memcache';
+//   $settings['cache']['bins']['config'] = 'cache.backend.memcache';
+//   $settings['cache']['bins']['discovery'] = 'cache.backend.memcache';
+//   // Enable stampede protection.
+//   $settings['memcache']['stampede_protection'] = TRUE;
+//   // High performance - no hook_boot(), no hook_exit(), ignores Drupal IP
+//   // blacklists.
+//   $conf['page_cache_invoke_hooks'] = FALSE;
+//   $conf['page_cache_without_database'] = TRUE;
+//   // Memcached PECL Extension Support.
+//   // Adds Memcache binary protocol and no-delay features (experimental).
+//   $settings['memcache']['options'] = [
+//     \Memcached::OPT_COMPRESSION => FALSE,
+//     \Memcached::OPT_DISTRIBUTION => \Memcached::DISTRIBUTION_CONSISTENT,
+//     \Memcached::OPT_BINARY_PROTOCOL => TRUE,
+//     \Memcached::OPT_TCP_NODELAY => TRUE,
+//   ];
+// }
 
 switch ($env) {
   case 'prod':
