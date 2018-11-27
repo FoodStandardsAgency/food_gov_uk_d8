@@ -25,6 +25,10 @@ $databases['default']['default'] = array (
   'driver' => 'mysql',
 );
 
+/**
+ * Load services definition file - can be overridden below.
+ */
+$settings['container_yamls'][] = __DIR__ . '/services.yml';
 
 /**
  * Drupal core string overrides for FSA setup.
@@ -137,6 +141,8 @@ if (class_exists('Memcached')) {
 
 switch ($env) {
   case 'prod':
+    $settings['container_yamls'][] = __DIR__ . '/default/prod.services.yml';
+
     $settings['simple_environment_indicator'] = '#d4000f Production';
 
     // Disable Shield on prod by setting the shield user variable to NULL
@@ -173,7 +179,7 @@ switch ($env) {
 
     break;
 
-  case 'develop':
+  case 'dev':
     $settings['simple_environment_indicator'] = '#004984 Development';
 
     // GTM Environment overrides.
@@ -182,7 +188,8 @@ switch ($env) {
 
     break;
 
-  case 'stage':
+  case 'test':
+    // Now known as stage on Acquia Cloud platform, but machine key is 'test'.
     $settings['simple_environment_indicator'] = '#e56716 Stage';
 
     // GTM Environment overrides.
@@ -232,11 +239,6 @@ $settings['trusted_host_patterns'] = [
  * Access control for update.php script.
  */
 $settings['update_free_access'] = FALSE;
-
-/**
- * Load services definition file.
- */
-$settings['container_yamls'][] = __DIR__ . '/services.yml';
 
 /**
  * Environment specific override configuration, if available.
