@@ -165,8 +165,7 @@ switch ($env) {
 
     // Memcache servers.
     $settings['memcache']['servers'] = array(
-      '10.2.5.163:11211' => 'default',
-      '10.2.3.18:11211' => 'default'
+      'localhost:11211' => 'default',
     );
 
     break;
