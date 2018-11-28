@@ -6,14 +6,42 @@ services:
 variables:
   global:
     ENV: pipelines
+    BUILD_ROOT: "./"
 events:
   build:
     steps:
-      - build:
+      # By default, the pipelines feature prepends scripts with set -e, which causes the script to exit immediately if any command has a non-zero exit code. You can override this behavior by including set +e in your build script. Be aware that if you use set +e, the script does not fail when a command fails, and so it is the responsibility of the script to manage its own exit strategy and exit codes.
+      - composer:
           type: script
           script:
             - composer install --no-interaction --no-dev --optimize-autoloader
+      - test_staticanalysis:
+          type: script
+          script:
+            - "${BUILD_ROOT}/phpcs.sh "${BUILD_ROOT}" "${BUILD_ROOT}/docroot/modules/custom ${BUILD_ROOT}/docroot/themes/custom/fsa""
+      # Deploy the build artifact to a Cloud on-demand environment.
+      - deploy:
+          script:
+            - pipelines-deploy
       - notify:
           type: script
           script:
             - "curl -X POST -H 'Content-type: application/json' --data '{\"text\":\"Acquia Pipelines built git-ref ${SOURCE_VCS_PATH} for site ${PIPELINE_CLOUD_SITE} on ${PIPELINE_CLOUD_REALM} environment\"}' https://hooks.slack.com/services/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"
+  # When a GitHub pull request is merged, this deletes the coresponding On Demand Environment.
+  pr-merged:
+    steps:
+      - deploy:
+          script:
+            - pipelines-deploy
+  # When a GitHub pull request is closed, this deletes the coresponding On Demand Environment.
+  pr-closed:
+    steps:
+      - deploy:
+          script:
+            - pipelines-deploy
+  fail-on-build:
+    steps:
+      - notify_failure:
+          type: script
+          script:
+            - "echo 'This is simple echo from fail-on-build event'"
