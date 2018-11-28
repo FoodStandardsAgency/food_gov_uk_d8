@@ -12,12 +12,12 @@ events:
       - build:
           type: script
           script:
-            - composer install
+            - composer install --no-interaction --no-dev --optimize-autoloader
   post-deploy:
     steps:
       - build:
           type: script
           script:
-            - drush @foodgovuk.prod updb
-            - drush @foodgovuk.prod cim -y
-            - drush @foodgovuk.prod cr
+            - drush updb
+            - drush cim -y
+            - drush cr
