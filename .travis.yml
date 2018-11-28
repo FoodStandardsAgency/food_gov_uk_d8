@@ -24,7 +24,7 @@ install:
 
   # Install project specific dependencies with composer.
   - cd ${TRAVIS_BUILD_DIR}
-  - composer install --no-interaction --optimize-autoloader
+  - composer install --optimize-autoloader
 
 script:
   # Static analysis of custom PHP code with PHPCS/PHPCBF.
