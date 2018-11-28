@@ -4,8 +4,8 @@ DRUPAL_DEPLOY_PATH=$1
 # We only care about our custom code folder and custom theme folder.
 PHPCS_CHECK_DIR=$2
 # Dependencies are added with composer. Shouldn't be using a global install even if available.
-PHPCS_PATH="../vendor/bin/phpcs"
-PHPCBF_PATH="../vendor/bin/phpcbf"
+PHPCS_PATH="vendor/bin/phpcs"
+PHPCBF_PATH="vendor/bin/phpcbf"
 # Define extensions we're interested in checking.
 PHPCS_EXTENSIONS="php,inc,module,theme"
 # Exclude some fussier/less valuable sniffs.
