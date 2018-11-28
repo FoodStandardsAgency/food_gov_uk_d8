@@ -18,7 +18,7 @@ events:
       - test_staticanalysis:
           type: script
           script:
-            - "${BUILD_ROOT}/phpcs.sh "${BUILD_ROOT}" "${BUILD_ROOT}/docroot/modules/custom ${BUILD_ROOT}/docroot/themes/custom/fsa""
+            - '${BUILD_ROOT}/phpcs.sh "${BUILD_ROOT}" "${BUILD_ROOT}/docroot/modules/custom ${BUILD_ROOT}/docroot/themes/custom/fsa"'
       # Deploy the build artifact to a Cloud on-demand environment.
       - deploy:
           script:
