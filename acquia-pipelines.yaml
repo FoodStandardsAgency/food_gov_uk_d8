@@ -16,4 +16,4 @@ events:
       - notify:
           type: script
           script:
-            - curl -X POST -H 'Content-type: application/json' --data '{"text":"Acquia Pipelines built git-ref `${SOURCE_VCS_PATH}` for site `${PIPELINE_CLOUD_SITE}` on `${PIPELINE_CLOUD_REALM}` environment"}' https://hooks.slack.com/services/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
+            - curl -X POST -H 'Content-type: application/json' --data '{"text":"Acquia Pipelines built git-ref ${SOURCE_VCS_PATH} for site ${PIPELINE_CLOUD_SITE} on ${PIPELINE_CLOUD_REALM} environment"}' https://hooks.slack.com/services/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
