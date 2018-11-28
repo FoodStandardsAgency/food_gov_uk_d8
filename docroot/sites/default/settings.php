@@ -180,6 +180,7 @@ switch ($env) {
     break;
 
   case 'dev':
+    $settings['container_yamls'][] = $app_root . '/' . $site_path . '/dev.services.yml';
     $settings['simple_environment_indicator'] = '#004984 Development';
 
     // GTM Environment overrides.
@@ -190,6 +191,7 @@ switch ($env) {
 
   case 'test':
     // Now known as stage on Acquia Cloud platform, but machine key is 'test'.
+    $settings['container_yamls'][] = $app_root . '/' . $site_path . '/stage.services.yml';
     $settings['simple_environment_indicator'] = '#e56716 Stage';
 
     // GTM Environment overrides.
