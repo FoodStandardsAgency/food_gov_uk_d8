@@ -6,7 +6,6 @@ services:
 variables:
   global:
     ENV: pipelines
-    BUILD_ROOT: "./"
 events:
   build:
     steps:
@@ -18,7 +17,7 @@ events:
       - test_staticanalysis:
           type: script
           script:
-            - '${BUILD_ROOT}/phpcs.sh "${BUILD_ROOT}" "${BUILD_ROOT}/docroot/modules/custom ${BUILD_ROOT}/docroot/themes/custom/fsa"'
+            - '${SOURCE_DIR}/phpcs.sh "${SOURCE_DIR}" "${SOURCE_DIR}/docroot/modules/custom ${SOURCE_DIR}/docroot/themes/custom/fsa"'
       # Deploy the build artifact to a Cloud on-demand environment.
       - deploy:
           script:
