@@ -13,11 +13,7 @@ events:
           type: script
           script:
             - composer install --no-interaction --no-dev --optimize-autoloader
-  post-deploy:
-    steps:
-      - build:
+      - notify:
           type: script
           script:
-            - drush updb
-            - drush cim -y
-            - drush cr
+            - curl -X POST -H 'Content-type: application/json' --data '{"text":"Acquia Pipelines built git-ref `${SOURCE_VCS_PATH}` for site `${PIPELINE_CLOUD_SITE}` on `${PIPELINE_CLOUD_REALM}` environment"}' https://hooks.slack.com/services/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
