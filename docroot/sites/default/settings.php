@@ -236,9 +236,6 @@ $config_directories = array(
  */
 $settings['trusted_host_patterns'] = [
   'food\.gov\.uk$',
-  'fsa\.dev\.wunder\.io$',
-  'fsa\.stage\.wunder\.io$',
-  'fsa\.prod\.wunder\.io$',
   'foodgovuk\.prod\.acquia-sites\.com',
   'foodgovukstg\.prod\.acquia-sites\.com',
   'foodgovukdev\.prod\.acquia-sites\.com',
