@@ -1,0 +1,95 @@
+uuid: 2b7843ee-43db-4473-99ca-5a06850052b1
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.page.body
+    - field.field.node.page.field_audience
+    - field.field.node.page.field_content_reminder
+    - field.field.node.page.field_content_type
+    - field.field.node.page.field_document
+    - field.field.node.page.field_fsa_toc
+    - field.field.node.page.field_intro
+    - field.field.node.page.field_liftup_summary
+    - field.field.node.page.field_liftup_title
+    - field.field.node.page.field_media_library_liftup_image
+    - field.field.node.page.field_nation
+    - field.field.node.page.field_related
+    - field.field.node.page.field_search_exclude
+    - field.field.node.page.field_team_contacts
+    - field.field.node.page.field_topic
+    - field.field.node.page.field_update_date
+    - node.type.page
+  module:
+    - field_group
+    - user
+third_party_settings:
+  field_group:
+    group_teaser_image:
+      children:
+        - field_icon
+        - field_liftup_image
+        - field_media_library_liftup_image
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: teaser__content
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Teaser image'
+_core:
+  default_config_hash: cSv5lDnbIgDug475Hdz3woED2XMqYv3awI-J9u1JLbY
+id: node.page.teaser
+targetEntityType: node
+bundle: page
+mode: teaser
+content:
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_liftup_summary:
+    type: basic_string
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_media_library_liftup_image:
+    type: entity_reference_entity_view
+    weight: 3
+    region: content
+    label: hidden
+    settings:
+      view_mode: promo_image
+      link: false
+    third_party_settings: {  }
+hidden:
+  addtoany: true
+  body: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_audience: true
+  field_content_reminder: true
+  field_content_type: true
+  field_document: true
+  field_fsa_toc: true
+  field_intro: true
+  field_liftup_title: true
+  field_nation: true
+  field_related: true
+  field_search_exclude: true
+  field_team_contacts: true
+  field_topic: true
+  field_update_date: true
+  langcode: true
+  links: true

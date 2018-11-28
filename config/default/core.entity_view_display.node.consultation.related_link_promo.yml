@@ -1,0 +1,62 @@
+uuid: 6695ec7e-4f8c-44d9-ba5d-7a951a993923
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.related_link_promo
+    - field.field.node.consultation.body
+    - field.field.node.consultation.field_alert_send
+    - field.field.node.consultation.field_alert_send_timestamp
+    - field.field.node.consultation.field_consultation_closing_date
+    - field.field.node.consultation.field_consultation_launch_date
+    - field.field.node.consultation.field_consultation_summary
+    - field.field.node.consultation.field_consultations_type
+    - field.field.node.consultation.field_consultations_type_alert
+    - field.field.node.consultation.field_content_reminder
+    - field.field.node.consultation.field_intro
+    - field.field.node.consultation.field_nation
+    - field.field.node.consultation.field_search_exclude
+    - field.field.node.consultation.field_status
+    - node.type.consultation
+  module:
+    - entity_print
+    - user
+third_party_settings:
+  entity_print:
+    pdf_label: 'View PDF'
+id: node.consultation.related_link_promo
+targetEntityType: node
+bundle: consultation
+mode: related_link_promo
+content:
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_intro:
+    type: basic_string
+    weight: 0
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  addtoany: true
+  body: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_alert_send: true
+  field_alert_send_timestamp: true
+  field_consultation_closing_date: true
+  field_consultation_launch_date: true
+  field_consultation_summary: true
+  field_consultations_type: true
+  field_consultations_type_alert: true
+  field_content_reminder: true
+  field_nation: true
+  field_search_exclude: true
+  field_status: true
+  langcode: true
+  links: true

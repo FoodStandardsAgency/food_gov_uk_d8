@@ -1,0 +1,23 @@
+uuid: 09ad6dc8-89d6-4b21-a528-9a79414bec2f
+langcode: en
+status: true
+dependencies:
+  module:
+    - crop
+name: header
+label: 'Header (1440×420)'
+effects:
+  404fee25-5187-4a5e-b75d-464d38971a7c:
+    uuid: 404fee25-5187-4a5e-b75d-464d38971a7c
+    id: image_scale_and_crop
+    weight: -9
+    data:
+      width: 1440
+      height: 420
+      anchor: center-center
+  63ba0348-3469-4b3d-bb8f-3269cceb1f98:
+    uuid: 63ba0348-3469-4b3d-bb8f-3269cceb1f98
+    id: crop_crop
+    weight: -10
+    data:
+      crop_type: image

@@ -1,0 +1,35 @@
+uuid: ffd08001-4dc2-4866-b228-0ac40856fcfd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.team_contacts.field_team_contact
+    - node.type.team_contacts
+  module:
+    - entity_reference_revisions
+    - user
+id: node.team_contacts.default
+targetEntityType: node
+bundle: team_contacts
+mode: default
+content:
+  field_team_contact:
+    type: entity_reference_revisions_entity_view
+    weight: 102
+    label: visually_hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  addtoany: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true
