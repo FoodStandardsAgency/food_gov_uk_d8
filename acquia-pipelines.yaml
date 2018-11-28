@@ -13,7 +13,7 @@ events:
       - composer:
           type: script
           script:
-            - composer install --no-interaction --no-dev --optimize-autoloader
+            - composer install --no-interaction --optimize-autoloader
       - test_staticanalysis:
           type: script
           script:
@@ -43,4 +43,4 @@ events:
       - notify_failure:
           type: script
           script:
-            - "echo 'This is simple echo from fail-on-build event'"
+            - "curl -X POST -H 'Content-type: application/json' --data '{\"text\":\"[FAILED] Acquia Pipelines job id ${PIPELINE_JOB_ID}\"}' https://hooks.slack.com/services/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"
