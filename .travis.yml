@@ -13,12 +13,12 @@ env:
     - DEPLOY_VERSION=$(date +"%Y-%m-%d-%H-%M-%S")
     - DEPLOY_USER=www-admin
 
-    # Install imagick extensions
-    - printf "\n" | pecl install imagick
-
     # Use composer installed packages
     - PATH="$HOME/.composer/vendor/bin:$PATH"
 install:
+  # Install imagick extensions
+  - printf "\n" | pecl install imagick
+
   # Do not use PasswordAuthentication anywhere
   - echo -e "Host *\n  PasswordAuthentication=no" >> ~/.ssh/config
 
