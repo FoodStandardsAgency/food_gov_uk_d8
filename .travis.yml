@@ -31,7 +31,7 @@ install:
 
 script:
   # Static analysis of custom PHP code with PHPCS/PHPCBF.
-  - ${TRAVIS_BUILD_DIR}/phpcs.sh "${TRAVIS_BUILD_DIR}" "${TRAVIS_BUILD_DIR}/docroot/modules/custom ${DEPLOY_SRC}/docroot/themes/custom/fsa"
+  - ${TRAVIS_BUILD_DIR}/phpcs.sh "${TRAVIS_BUILD_DIR}" "${TRAVIS_BUILD_DIR}/docroot/modules/custom ${TRAVIS_BUILD_DIR}/docroot/themes/custom/fsa"
 
 # Disable email notifications
 notifications:
