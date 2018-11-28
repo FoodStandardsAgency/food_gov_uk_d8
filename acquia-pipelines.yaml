@@ -13,3 +13,11 @@ events:
           type: script
           script:
             - composer install
+  post-deploy:
+    steps:
+      - build:
+          type: script
+          script:
+            - drush @foodgovuk.prod updb
+            - drush @foodgovuk.prod cim -y
+            - drush @foodgovuk.prod cr
