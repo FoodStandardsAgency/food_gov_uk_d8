@@ -6,6 +6,8 @@ services:
 variables:
   global:
     ENV: pipelines
+    SUCCESS_PAYLOAD: "{\"text\":\"[SUCCESS] Acquia Pipelines built git-ref $SOURCE_VCS_PATH for site $PIPELINE_CLOUD_SITE on $PIPELINE_CLOUD_REALM environment\"}"
+    FAIL_PAYLOAD: "{\"text\":\"[FAILED] Acquia Pipelines job id ${PIPELINE_JOB_ID}\"}"
 events:
   build:
     steps:
@@ -25,7 +27,7 @@ events:
       - notify:
           type: script
           script:
-            - "curl -X POST -H 'Content-type: application/json' --data '{\"text\":\"Acquia Pipelines built git-ref ${SOURCE_VCS_PATH} for site ${PIPELINE_CLOUD_SITE} on ${PIPELINE_CLOUD_REALM} environment\"}' https://hooks.slack.com/services/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"
+            - "curl -X POST -H 'Content-type: application/json' --data "$SUCCESS_PAYLOAD" https://hooks.slack.com/services/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"
   # When a GitHub pull request is merged, this deletes the coresponding On Demand Environment.
   pr-merged:
     steps:
@@ -43,4 +45,4 @@ events:
       - notify_failure:
           type: script
           script:
-            - "curl -X POST -H 'Content-type: application/json' --data '{\"text\":\"[FAILED] Acquia Pipelines job id ${PIPELINE_JOB_ID}\"}' https://hooks.slack.com/services/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"
+            - "curl -X POST -H 'Content-type: application/json' --data "$FAIL_PAYLOAD" https://hooks.slack.com/services/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"
