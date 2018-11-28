@@ -141,7 +141,7 @@ if (class_exists('Memcached')) {
 
 switch ($env) {
   case 'prod':
-    $settings['container_yamls'][] = __DIR__ . '/default/prod.services.yml';
+    $settings['container_yamls'][] = $app_root . '/' . $site_path . '/prod.services.yml';
 
     $settings['simple_environment_indicator'] = '#d4000f Production';
 
@@ -210,6 +210,14 @@ switch ($env) {
     // GTM Environment (below values should be as default configurations).
     $config['google_tag.settings']['environment_id'] = 'env-7';
     $config['google_tag.settings']['environment_token'] = 'a4fGxt3oZ4lNeD1SjVDqdA';
+
+    $config['elasticsearch_helper.settings']['elasticsearch_helper']['host'] = 'elasticsearch';
+
+    // Disable Acquia module config.
+    $config['acquia_connector.settings']['subscription_data']['active'] = FALSE;
+    $config['acquia_connector.settings']['subscription_data']['href'] = NULL;
+    $config['acquia_connector.settings']['subscription_data']['uuid'] = NULL;
+    $config['purge.plugins']['purgers'] = [];
 
     break;
 }
