@@ -6,8 +6,8 @@ services:
 variables:
   global:
     ENV: pipelines
-    SUCCESS_PAYLOAD: "{\"text\":\"[SUCCESS] Acquia Pipelines built git-ref $SOURCE_VCS_PATH for site $PIPELINE_CLOUD_SITE on $PIPELINE_CLOUD_REALM environment\"}"
-    FAIL_PAYLOAD: "{\"text\":\"[FAILED] Acquia Pipelines job id ${PIPELINE_JOB_ID}\"}"
+    SUCCESS_PAYLOAD: '{\"text\":\"[SUCCESS] Acquia Pipelines built git-ref $SOURCE_VCS_PATH for site $PIPELINE_CLOUD_SITE on $PIPELINE_CLOUD_REALM environment\"}'
+    FAIL_PAYLOAD: '{\"text\":\"[FAILED] Acquia Pipelines job id ${PIPELINE_JOB_ID}\"}'
 events:
   build:
     steps:
