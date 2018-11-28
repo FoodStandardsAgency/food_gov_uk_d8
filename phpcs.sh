@@ -4,8 +4,8 @@ DRUPAL_DEPLOY_PATH=$1
 # We only care about our custom code folder and custom theme folder.
 PHPCS_CHECK_DIR=$2
 # Dependencies are added with composer. Shouldn't be using a global install even if available.
-PHPCS_PATH="${DRUPAL_DEPLOY_PATH}/vendor/bin/phpcs"
-PHPCBF_PATH="${DRUPAL_DEPLOY_PATH}/vendor/bin/phpcbf"
+PHPCS_PATH="../vendor/bin/phpcs"
+PHPCBF_PATH="../vendor/bin/phpcbf"
 # Define extensions we're interested in checking.
 PHPCS_EXTENSIONS="php,inc,module,theme"
 # Exclude some fussier/less valuable sniffs.
@@ -21,7 +21,7 @@ IGNORE="$IGNORE,${DRUPAL_DEPLOY_PATH}/web/themes/custom/fsa/node_modules"
 echo "Running coding standard checks in ${PHPCS_CHECK_DIR}"
 
 # Configure PHPCS.
-${PHPCS_PATH} --config-set installed_paths ${DRUPAL_DEPLOY_PATH}/vendor/drupal/coder/coder_sniffer
+${PHPCS_PATH} --config-set installed_paths vendor/drupal/coder/coder_sniffer
 
 EXCLUDE=$(IFS=, ; echo "${DRUPAL_EXCLUDED_SNIFFS[*]}")
 ${PHPCS_PATH} -nq --standard=Drupal --extensions=${PHPCS_EXTENSIONS} --exclude=${EXCLUDE} --ignore=${IGNORE} ${PHPCS_CHECK_DIR}
