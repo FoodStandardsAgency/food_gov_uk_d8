@@ -238,9 +238,9 @@ $settings['trusted_host_patterns'] = [
   'fsa\.stage\.wunder\.io$',
   'fsa\.prod\.wunder\.io$',
   'foodgovuk\.prod\.acquia-sites\.com',
-  'foodgovuk\.test\.acquia-sites\.com',
-  'foodgovuk\.dev\.acquia-sites\.com',
-  'foodgovuk\.ra\.acquia-sites\.com',
+  'foodgovukstg\.prod\.acquia-sites\.com',
+  'foodgovukdev\.prod\.acquia-sites\.com',
+  'foodgovukra\.prod\.acquia-sites\.com',
 ];
 
 /**
