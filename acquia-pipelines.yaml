@@ -16,7 +16,7 @@ events:
           type: script
           script:
             - composer install --no-interaction --optimize-autoloader
-      - test_staticanalysis:
+      - test-static-analysis:
           type: script
           script:
             - '${SOURCE_DIR}/phpcs.sh "${SOURCE_DIR}" "${SOURCE_DIR}/docroot/modules/custom ${SOURCE_DIR}/docroot/themes/custom/fsa"'
