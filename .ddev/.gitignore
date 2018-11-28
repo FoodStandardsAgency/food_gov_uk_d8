@@ -1,0 +1,6 @@
+#ddev-generated: Automatically generated ddev .gitignore.
+
+/import.yaml
+/docker-compose.yaml
+/db_snapshots
+/sequelpro.spf

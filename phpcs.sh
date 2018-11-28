@@ -14,14 +14,14 @@ DRUPAL_EXCLUDED_SNIFFS=(
     Drupal.Commenting.ClassComment
 )
 # Ignore some npm or non-PHP related FE toolchain directories.
-IGNORE="${DRUPAL_DEPLOY_PATH}/web/themes/custom/fsa/dist"
-IGNORE="$IGNORE,${DRUPAL_DEPLOY_PATH}/web/themes/custom/fsa/src"
-IGNORE="$IGNORE,${DRUPAL_DEPLOY_PATH}/web/themes/custom/fsa/node_modules"
+IGNORE="${DRUPAL_DEPLOY_PATH}/docroot/themes/custom/fsa/dist"
+IGNORE="$IGNORE,${DRUPAL_DEPLOY_PATH}/docroot/themes/custom/fsa/src"
+IGNORE="$IGNORE,${DRUPAL_DEPLOY_PATH}/docroot/themes/custom/fsa/node_modules"
 
 echo "Running coding standard checks in ${PHPCS_CHECK_DIR}"
 
 # Configure PHPCS.
-${PHPCS_PATH} --config-set installed_paths ${DRUPAL_DEPLOY_PATH}/vendor/drupal/coder/coder_sniffer
+${PHPCS_PATH} --config-set installed_paths vendor/drupal/coder/coder_sniffer
 
 EXCLUDE=$(IFS=, ; echo "${DRUPAL_EXCLUDED_SNIFFS[*]}")
 ${PHPCS_PATH} -nq --standard=Drupal --extensions=${PHPCS_EXTENSIONS} --exclude=${EXCLUDE} --ignore=${IGNORE} ${PHPCS_CHECK_DIR}
