@@ -14,9 +14,9 @@ DRUPAL_EXCLUDED_SNIFFS=(
     Drupal.Commenting.ClassComment
 )
 # Ignore some npm or non-PHP related FE toolchain directories.
-IGNORE="${DRUPAL_DEPLOY_PATH}/web/themes/custom/fsa/dist"
-IGNORE="$IGNORE,${DRUPAL_DEPLOY_PATH}/web/themes/custom/fsa/src"
-IGNORE="$IGNORE,${DRUPAL_DEPLOY_PATH}/web/themes/custom/fsa/node_modules"
+IGNORE="${DRUPAL_DEPLOY_PATH}/themes/custom/fsa/dist"
+IGNORE="$IGNORE,${DRUPAL_DEPLOY_PATH}/themes/custom/fsa/src"
+IGNORE="$IGNORE,${DRUPAL_DEPLOY_PATH}/themes/custom/fsa/node_modules"
 
 echo "Running coding standard checks in ${PHPCS_CHECK_DIR}"
 
