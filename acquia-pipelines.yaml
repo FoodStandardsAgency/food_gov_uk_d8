@@ -24,10 +24,10 @@ events:
       - deploy:
           script:
             - pipelines-deploy
-      - notify:
-          type: script
-          script:
-            - "curl -X POST -H 'Content-type: application/json' --data \"$SUCCESS_PAYLOAD\" https://hooks.slack.com/services/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"
+      # - notify:
+      #     type: script
+      #     script:
+      #       - "curl -X POST -H 'Content-type: application/json' --data \"$SUCCESS_PAYLOAD\" https://hooks.slack.com/services/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"
   # When a GitHub pull request is merged, this deletes the coresponding On Demand Environment.
   pr-merged:
     steps:
@@ -40,9 +40,9 @@ events:
       - deploy:
           script:
             - pipelines-deploy
-  fail-on-build:
-    steps:
-      - notify_failure:
-          type: script
-          script:
-            - "curl -X POST -H 'Content-type: application/json' --data \"$FAIL_PAYLOAD\" https://hooks.slack.com/services/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"
+  # fail-on-build:
+  #   steps:
+  #     - notify_failure:
+  #         type: script
+  #         script:
+  #           - "curl -X POST -H 'Content-type: application/json' --data \"$FAIL_PAYLOAD\" https://hooks.slack.com/services/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"
