@@ -21,4 +21,4 @@ Site frontpage `node/id` is set in Basic site settings `/admin/config/system/sit
 Further details
 ---------------
 
-Refer to the theme [README.md](../drupal/web/themes/custom/fsa/README.md) for more information and developer notes.
+Refer to the theme [README.md](../docroot/themes/custom/fsa/README.md) for more information and developer notes.
