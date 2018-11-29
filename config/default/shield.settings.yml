@@ -1,0 +1,9 @@
+credential_provider: shield
+credentials:
+  shield:
+    user: fsauser
+    pass: 'FCeDh4u&7n2p'
+print: 'FSA website, please authenticate with HTTP Basic credentials. This is not your Drupal user account'
+allow_cli: true
+_core:
+  default_config_hash: c1dcnGFDXTeMq2-Z8e7H6Qxp6TTJe-ZhSA126E3bQJ4

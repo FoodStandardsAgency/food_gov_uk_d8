@@ -1,0 +1,54 @@
+uuid: 51d25b97-2032-4d91-89b1-d842d1d84915
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.lander.field_audience
+    - field.field.node.lander.field_block
+    - field.field.node.lander.field_block_reference
+    - field.field.node.lander.field_content_type
+    - field.field.node.lander.field_header_image
+    - field.field.node.lander.field_hero_copy
+    - field.field.node.lander.field_hero_title
+    - field.field.node.lander.field_intro
+    - field.field.node.lander.field_lander_row
+    - field.field.node.lander.field_nation
+    - field.field.node.lander.field_promo_block
+    - field.field.node.lander.field_related_content
+    - field.field.node.lander.field_topic
+    - field.field.node.lander.field_topic_cloud
+    - node.type.lander
+  module:
+    - user
+id: node.lander.teaser
+targetEntityType: node
+bundle: lander
+mode: teaser
+content:
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  addtoany: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_audience: true
+  field_block: true
+  field_block_reference: true
+  field_content_type: true
+  field_header_image: true
+  field_hero_copy: true
+  field_hero_title: true
+  field_intro: true
+  field_lander_row: true
+  field_nation: true
+  field_promo_block: true
+  field_related_content: true
+  field_subject: true
+  field_topic: true
+  field_topic_cloud: true
+  langcode: true

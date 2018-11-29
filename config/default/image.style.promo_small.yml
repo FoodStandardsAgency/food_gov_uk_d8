@@ -1,0 +1,15 @@
+uuid: 24bc16b9-52a7-4939-9762-2ab41f2fbf6d
+langcode: en
+status: true
+dependencies: {  }
+name: promo_small
+label: 'Promo small (200×120)'
+effects:
+  63f85d3c-14aa-419c-a57c-8f1d38757a76:
+    uuid: 63f85d3c-14aa-419c-a57c-8f1d38757a76
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 200
+      height: 120
+      anchor: center-center

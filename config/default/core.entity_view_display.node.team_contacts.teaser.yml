@@ -1,0 +1,27 @@
+uuid: c6debc1a-ec69-4097-8649-5f5adeeca3b7
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.team_contacts.field_team_contact
+    - node.type.team_contacts
+  module:
+    - user
+id: node.team_contacts.teaser
+targetEntityType: node
+bundle: team_contacts
+mode: teaser
+content:
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  addtoany: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_team_contact: true
+  langcode: true
