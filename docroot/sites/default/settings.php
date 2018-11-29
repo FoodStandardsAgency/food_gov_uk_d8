@@ -240,7 +240,7 @@ $settings['trusted_host_patterns'] = [
   'foodgovukstg\.prod\.acquia-sites\.com',
   'foodgovukdev\.prod\.acquia-sites\.com',
   'foodgovukra\.prod\.acquia-sites\.com',
-  'foodgovukode[1-5]\.prod\.acquia-sites\.com',
+  'foodgovukode\d+\.prod\.acquia-sites\.com',
 ];
 
 /**
