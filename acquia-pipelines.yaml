@@ -21,14 +21,14 @@ events:
       # Deploy the build artifact to a Cloud on-demand environment.
       - deploy:
           script:
-            - pipelines-deploy
+            # Only create ODE for feature branches.
+            - if [[ "$SOURCE_VCS_PATH" =~ ^feature\/.+$ ]]; then pipelines-deploy ;fi
   # When a GitHub pull request is merged, this deletes the coresponding On Demand Environment.
   pr-merged:
     steps:
       - deploy:
           script:
-            # Only create ODE for feature branches.
-            -  if [[ "$SOURCE_VCS_PATH" =~ ^feature\/.+$ ]]; then pipelines-deploy ;fi
+            -  pipelines-deploy
   # When a GitHub pull request is closed, this deletes the coresponding On Demand Environment.
   pr-closed:
     steps:
