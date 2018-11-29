@@ -9,7 +9,7 @@
 #
 # Usage: post-code-deploy site target-env source-branch deployed-tag repo-url
 #                         repo-type
-
+# set -x
 site="$1"
 target_env="$2"
 source_branch="$3"
@@ -21,13 +21,13 @@ repo_type="$6"
 . $HOME/webhook_notify_settings
 
 # Post deployment notice to webhook endpoint.
+message=''
 
 if [ "$source_branch" != "$deployed_tag" ]; then
-  curl -X POST -H 'Content-type: application/json' \
-      -d "'{\"text\":\"[DEPLOYMENT] $source_branch deployed to $site -- $target_env\"}'" $WEBHOOK_URL
+  message="[DEPLOYMENT] ${source_branch} deployed to ${site} -- ${target_env}"
 else
-  curl -X POST -H 'Content-type: application/json' \
-      -d "'{\"text\":\"[DEPLOYMENT] $deployed_tag deployed to $site -- $target_env\"}'" $WEBHOOK_URL
+  message="[DEPLOYMENT] ${deployed_tag} deployed to ${site} -- ${target_env}"
 fi
 
-
+# Take care with variable expansion in Bash; must be in double quotes and sometimes curly braces too.
+curl -X POST -H 'Content-type: application/json' -d "{\"text\": \"${message}\"}" $WEBHOOK_URL
