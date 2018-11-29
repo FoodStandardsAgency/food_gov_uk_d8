@@ -17,7 +17,7 @@ deployed_tag="$4"
 repo_url="$5"
 repo_type="$6"
 
-$WEBHOOK_URL="https://hooks.slack.com/services/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"
+WEBHOOK_URL="https://hooks.slack.com/services/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"
 
 # Post deployment notice to webhook endpoint.
 message=''
