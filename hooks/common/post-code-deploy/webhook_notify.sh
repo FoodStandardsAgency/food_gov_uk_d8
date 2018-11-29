@@ -9,7 +9,7 @@
 #
 # Usage: post-code-deploy site target-env source-branch deployed-tag repo-url
 #                         repo-type
-# set -x
+set -x
 site="$1"
 target_env="$2"
 source_branch="$3"
