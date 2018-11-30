@@ -20,44 +20,69 @@ class FhrsApiFetcher {
   /** Defines finished state. */
   const STATUS_FINISHED = 1;
 
-  /** @var \Drupal\fsa_ratings_import\Controller\FhrsApiController $apiController */
+  /**
+   * @var object
+   */
   protected $apiController;
 
-  /** @var \Drupal\Core\File\FileSystemInterface $fileSystem */
+  /**
+   * @var \Drupal\Core\File\FileSystemInterface
+   */
   protected $fileSystem;
 
-  /** @var \Drupal\Core\Datetime\DateFormatterInterface $dateFormatter */
+  /**
+   * @var \Drupal\Core\Datetime\DateFormatterInterface
+   */
   protected $dateFormatter;
 
-  /** @var \Drupal\Core\KeyValueStore\KeyValueStoreInterface $keyValueStorage */
+  /**
+   * @var \Drupal\Core\KeyValueStore\KeyValueStoreInterface
+   */
   protected $keyValueStorage;
 
-  /** @var \Psr\Log\LoggerInterface $logger */
+  /**
+   * @var \Psr\Log\LoggerInterface
+   */
   protected $logger;
 
-  /** @var string $apiControllerClass */
+  /**
+   * @var string
+   */
   protected $apiControllerClass = '\Drupal\fsa_ratings_import\Controller\FhrsApiController';
 
-  /** @var string $path */
+  /**
+   * @var string
+   */
   protected $path = 'public://api';
 
-  /** @var string $fileFormat */
+  /**
+   * @var string
+   */
   protected $fileFormat = 'fhrs_results_@page.json';
 
-  /** @var null|int $pagesTotal */
+  /**
+   * @var null
+   */
   protected $pagesTotal = NULL;
 
-  /** @var null|array $savedFilesMatches */
+  /**
+   * @var null
+   */
   protected $savedFilesMatches = NULL;
 
   /**
    * FhrsApiFetcher constructor.
    *
    * @param \Drupal\Core\DependencyInjection\ClassResolverInterface $class_resolver
+   *   Class resolver.
    * @param \Drupal\Core\File\FileSystemInterface $file_system
+   *   File system interface.
    * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
+   *   Date formatter.
    * @param \Drupal\Core\KeyValueStore\KeyValueFactoryInterface $key_value_factory
+   *   Key value store.
    * @param \Psr\Log\LoggerInterface $logger
+   *   Logger.
    */
   public function __construct(ClassResolverInterface $class_resolver, FileSystemInterface $file_system, DateFormatterInterface $date_formatter, KeyValueFactoryInterface $key_value_factory, LoggerInterface $logger) {
     $this->apiController = $class_resolver->getInstanceFromDefinition($this->apiControllerClass);
@@ -70,12 +95,15 @@ class FhrsApiFetcher {
   /**
    * Returns date value suitable for use in "date" column in the map table.
    *
-   * @param $pattern
-   * @param null $timestamp
+   * @param string $pattern
+   *   Date pattern.
+   * @param int $timestamp
+   *   UNIX timestamp.
    *
    * @return string
+   *   Formatted date string.
    */
-  public function getDateValue($pattern = 'Ymd', $timestamp = NULL) {
+  public function getDateValue($pattern = 'Ymd', int $timestamp = NULL) {
     $timestamp = $timestamp ? $timestamp : time();
 
     return $this->dateFormatter->format($timestamp, 'custom', $pattern);
@@ -85,6 +113,7 @@ class FhrsApiFetcher {
    * Returns total number of pages.
    *
    * @return int|null
+   *   Total pages.
    */
   public function getPagesTotal() {
     if (is_null($this->pagesTotal)) {
@@ -97,9 +126,11 @@ class FhrsApiFetcher {
   /**
    * Returns path to saved files.
    *
-   * @param null $date
+   * @param mixed $date
+   *   Date object.
    *
    * @return string
+   *   Path to files.
    */
   public function getPath($date = NULL) {
     $date = $date ? $date : $this->getDateValue('Y-m-d');
@@ -110,9 +141,11 @@ class FhrsApiFetcher {
   /**
    * Returns formatted filename from the file pattern.
    *
-   * @param $page
+   * @param mixed $page
+   *   Page indicator.
    *
    * @return \Drupal\Component\Render\FormattableMarkup
+   *   Markup for filename.
    */
   public function getFilename($page) {
     return new FormattableMarkup($this->fileFormat, [
@@ -124,6 +157,7 @@ class FhrsApiFetcher {
    * Marks the finish of fetching for the day.
    *
    * @return mixed
+   *   Placeholder comment - unclear exactly what this returns on all paths.
    */
   public function finish() {
     return $this->keyValueStorage->set('api_fetch_finish_last_date', $this->getDateValue('Y-m-d'));
@@ -151,7 +185,7 @@ class FhrsApiFetcher {
     $removed_folders = [];
 
     // Recursively remove folders.
-    array_map(function($dir) use (&$removed_folders) {
+    array_map(function ($dir) use (&$removed_folders) {
       if (file_unmanaged_delete_recursive($dir)) {
         $removed_folders[] = $dir;
       }
@@ -167,6 +201,7 @@ class FhrsApiFetcher {
    * Returns TRUE if fetching is finished for the day.
    *
    * @return bool
+   *   Returns TRUE if fetching is finished for the day.
    */
   public function isFinished() {
     $finished_last_day = $this->keyValueStorage->get('api_fetch_finish_last_date');
@@ -192,8 +227,10 @@ class FhrsApiFetcher {
    * ]
    *
    * @param null|string $date
+   *   Date string.
    *
    * @return array
+   *   File matches.
    */
   public function getSavedFilesMatches($date = NULL) {
     if (is_null($this->savedFilesMatches)) {
@@ -226,13 +263,15 @@ class FhrsApiFetcher {
    * Returns an array of filename that are saved on the system.
    *
    * @param null|string $date
+   *   Date string.
    *
    * @return array
+   *   Array of filenames.
    */
   public function getSavedFiles($date = NULL) {
     $saved_files_matches = $this->getSavedFilesMatches($date);
 
-    return array_map(function($item) {
+    return array_map(function ($item) {
       return $item['filename'];
     }, $saved_files_matches);
   }
@@ -244,13 +283,15 @@ class FhrsApiFetcher {
    * "[filename_pattern]_028.json", then [25, 28] is returned.
    *
    * @param null|string $date
+   *   Date string.
    *
    * @return array
+   *   Array of page numbers that are saved on the system.
    */
   public function getSavedPages($date = NULL) {
     $saved_files_matches = $this->getSavedFilesMatches($date);
 
-    return array_map(function($item) {
+    return array_map(function ($item) {
       return (int) $item['page'];
     }, $saved_files_matches);
   }
@@ -259,6 +300,7 @@ class FhrsApiFetcher {
    * Returns the next page that needs to be fetched.
    *
    * @return int|bool
+   *   Next page number or FALSE.
    */
   public function getNextPageNumber() {
     $saved_pages = $this->getSavedPages();
@@ -282,7 +324,7 @@ class FhrsApiFetcher {
         }
       }
 
-      // Return the first page
+      // Return the first page.
       return self::FIRST_PAGE;
     }
 
@@ -292,7 +334,8 @@ class FhrsApiFetcher {
   /**
    * Fetches the results from API and stores on the disk.
    *
-   * @return bool|string Path to the filename or FALSE is returned.
+   * @return bool|string
+   *   Path to the filename or FALSE is returned.
    */
   public function fetchAndSave() {
     $result = FALSE;

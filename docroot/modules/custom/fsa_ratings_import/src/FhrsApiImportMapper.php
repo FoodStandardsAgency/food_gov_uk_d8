@@ -8,7 +8,6 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\KeyValueStore\KeyValueFactoryInterface;
 use Drupal\Core\Queue\QueueFactory;
-use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\Plugin\MigrationPluginManagerInterface;
 use Psr\Log\LoggerInterface;
 
@@ -23,43 +22,70 @@ class FhrsApiImportMapper {
   /** Defines migrations which imported result-set should be compared against.  */
   const FHRS_MIGRATIONS = ['fsa_establishment', 'fsa_establishment_cy'];
 
-  /** @var string $establishmentEntityType */
+  /**
+   * @var string
+   */
   protected $establishmentEntityType = 'fsa_establishment';
 
-  /** @var int $batchSize */
+  /**
+   * @var int
+   */
   protected $batchSize = 30;
 
-  /** @var \Drupal\Core\Database\Connection $database */
+  /**
+   * @var \Drupal\Core\Database\Connection
+   */
   protected $database;
 
-  /** @var \Drupal\Core\File\FileSystemInterface $fileSystem */
+  /**
+   * @var \Drupal\Core\File\FileSystemInterface
+   */
   protected $fileSystem;
 
-  /** @var \Drupal\Core\Datetime\DateFormatterInterface $dateFormatter */
+  /**
+   * @var \Drupal\Core\Datetime\DateFormatterInterface
+   */
   protected $dateFormatter;
 
-  /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager */
+  /**
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
   protected $entityTypeManager;
 
-  /** @var \Drupal\migrate\Plugin\MigrationPluginManagerInterface $migrationPluginManager */
+  /**
+   * @var \Drupal\migrate\Plugin\MigrationPluginManagerInterface
+   */
   protected $migrationPluginManager;
 
-  /** @var \Drupal\Core\Queue\QueueInterface $obsoleteEntityPurgerQueue */
+  /**
+   * @var \Drupal\Core\Queue\QueueInterface
+   */
   protected $obsoleteEntityPurgerQueue;
 
-  /** @var \Psr\Log\LoggerInterface $logger */
+  /**
+   * @var \Psr\Log\LoggerInterface
+   */
   protected $logger;
 
   /**
    * FhrsApiImportMapper constructor.
    *
    * @param \Drupal\Core\Database\Connection $database
+   *   Db connection object.
    * @param \Drupal\Core\File\FileSystemInterface $file_system
+   *   File system object.
    * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
+   *   Date formatter.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   Entity type manager.
    * @param \Drupal\migrate\Plugin\MigrationPluginManagerInterface $migration_plugin_manager
+   *   Migration plugin manager.
    * @param \Drupal\Core\Queue\QueueFactory $queue_factory
+   *   Queue factory.
+   * @param Drupal\Core\KeyValueStore\KeyValueFactoryInterface $key_value_factory
+   *   Key value factory.
    * @param \Psr\Log\LoggerInterface $logger
+   *   Logger.
    */
   public function __construct(Connection $database, FileSystemInterface $file_system, DateFormatterInterface $date_formatter, EntityTypeManagerInterface $entity_type_manager, MigrationPluginManagerInterface $migration_plugin_manager, QueueFactory $queue_factory, KeyValueFactoryInterface $key_value_factory, LoggerInterface $logger) {
     $this->database = $database;
@@ -76,6 +102,7 @@ class FhrsApiImportMapper {
    * Returns mapping table name.
    *
    * @return string
+   *   Table name
    */
   public function getTablename() {
     return self::MAP_TABLE;
@@ -85,6 +112,7 @@ class FhrsApiImportMapper {
    * Marks the finish of entity purging for the day.
    *
    * @return mixed
+   *   Last finish date or null.
    */
   public function finish() {
     return $this->keyValueStorage->set('entity_purge_finish_last_date', $this->getDateValue('Y-m-d'));
@@ -94,6 +122,7 @@ class FhrsApiImportMapper {
    * Returns TRUE if entity purging is finished for the day.
    *
    * @return bool
+   *   Whether finished or not.
    */
   public function isFinished() {
     $finished_last_day = $this->keyValueStorage->get('entity_purge_finish_last_date');
@@ -115,12 +144,15 @@ class FhrsApiImportMapper {
   /**
    * Returns date value suitable for use in "date" column in the map table.
    *
-   * @param $pattern
-   * @param null $timestamp
+   * @param string $pattern
+   *   Date pattern.
+   * @param int $timestamp
+   *   UNIX timestamp.
    *
    * @return string
+   *   Formatted date string.
    */
-  public function getDateValue($pattern = 'Y-m-d', $timestamp = NULL) {
+  public function getDateValue($pattern = 'Y-m-d', int $timestamp = NULL) {
     $timestamp = $timestamp ? $timestamp : time();
 
     return $this->dateFormatter->format($timestamp, 'custom', $pattern);
@@ -129,7 +161,8 @@ class FhrsApiImportMapper {
   /**
    * Saves establishment ID
    *
-   * @param $filename
+   * @param string $filename
+   *   Filename.
    *
    * @throws \Exception
    */
@@ -158,7 +191,7 @@ class FhrsApiImportMapper {
         $this->logger->info('Establishments added/updated in table {table}: {count}/{omitted_count}.', [
           'count' => count(array_filter($results)),
           'table' => $this->getTablename(),
-          'omitted_count' => count(array_filter($results, function($item) {
+          'omitted_count' => count(array_filter($results, function ($item) {
             return is_null($item);
           })),
         ]);
@@ -179,11 +212,11 @@ class FhrsApiImportMapper {
     $this->purge();
   }
 
-
   /**
    * Returns migrations.
    *
    * @return \Drupal\migrate\Plugin\MigrationInterface[]
+   *   Migration interface(s).
    */
   public function getMigrations() {
     static $tables = NULL;

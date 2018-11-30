@@ -36,11 +36,11 @@ function fsa_translate_form_node_form_alter(&$form, FormStateInterface $form_sta
     'notify' => [
       '#type' => 'checkbox',
       '#title' => t('Notify translation team'),
-      '#states' => array(
-        'visible' => array(
-          ':input[name="translation_required"]' => array('checked' => TRUE),
-        ),
-      ),
+      '#states' => [
+        'visible' => [
+          ':input[name="translation_required"]' => ['checked' => TRUE],
+        ],
+      ],
     ],
   ];
 

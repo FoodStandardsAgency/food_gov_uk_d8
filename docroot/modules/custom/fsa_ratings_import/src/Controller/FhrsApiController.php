@@ -169,6 +169,7 @@ class FhrsApiController extends ControllerBase {
    * Returns max page size.
    *
    * @return int
+   *   Max page size value.
    */
   public function getMaxPageSize() {
     return self::RATINGS_API_MAX_PAGE_SIZE;
@@ -178,8 +179,10 @@ class FhrsApiController extends ControllerBase {
    * Returns total number of pages.
    *
    * @param array $filters
+   *   Existing filters.
    *
    * @return int
+   *   Rounded to int value for total pages.
    */
   public function pagesTotal(array $filters = []) {
     $result = self::totalCount($filters) / self::RATINGS_API_MAX_PAGE_SIZE;
@@ -191,12 +194,16 @@ class FhrsApiController extends ControllerBase {
    * Prepares fetch URL.
    *
    * @param int $page_number
+   *   Page number.
    * @param int $page_size
+   *   Page size.
    * @param array $options
+   *   Options array.
    *
    * @return string
+   *   URI for fetch URL.
    */
-  public function getFetchUrl($page_number = 1, $page_size = 5000, $options = []) {
+  public function getFetchUrl($page_number = 1, $page_size = 5000, array $options = []) {
     return Url::fromUri(sprintf('%s/Establishments/basic/%d/%d', $this->baseUrl(), $page_number, $page_size), $options)->toString();
   }
 
@@ -204,12 +211,16 @@ class FhrsApiController extends ControllerBase {
    * Fetches the results from API.
    *
    * @param int $page_number
+   *   Page number.
    * @param int $page_size
+   *   Page size.
    * @param array $options
+   *   Options array.
    *
    * @return bool|\Psr\Http\Message\ResponseInterface
+   *   Results from the API or FALSE if a problem.
    */
-  public function fetch($page_number = 1, $page_size = 5000, $options = []) {
+  public function fetch($page_number = 1, $page_size = 5000, array $options = []) {
     // Get URL.
     $url = $this->getFetchUrl($page_number, $page_size, $options);
 

@@ -20,24 +20,36 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class FsaEstablishmentEntityPurger extends QueueWorkerBase implements ContainerFactoryPluginInterface {
 
-  /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager */
+  /**
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
   protected $entityTypeManager;
 
-  /** @var \Drupal\migrate\Plugin\MigrationPluginManagerInterface $migrationPluginManager */
+  /**
+   * @var \Drupal\migrate\Plugin\MigrationPluginManagerInterface
+   */
   protected $migrationPluginManager;
 
-  /** @var \Drupal\Core\Database\Connection $database */
+  /**
+   * @var Drupal\Core\Database\Connection
+   */
   protected $database;
 
   /**
    * FsaEstablishmentEntityPurger constructor.
    *
    * @param array $configuration
+   *   Configuration.
    * @param string $plugin_id
+   *   Plugin ID.
    * @param mixed $plugin_definition
+   *   Plugin definition.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   Entity type manager.
    * @param \Drupal\migrate\Plugin\MigrationPluginManagerInterface $migration_plugin_manager
+   *   Migration plugin manager.
    * @param \Drupal\Core\Database\Connection $database
+   *   Database connection.
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, MigrationPluginManagerInterface $migration_plugin_manager, Connection $database) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
@@ -47,7 +59,17 @@ class FsaEstablishmentEntityPurger extends QueueWorkerBase implements ContainerF
   }
 
   /**
-   * Todo: document.
+   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+   *   DI container.
+   * @param array $configuration
+   *   Config.
+   * @param string $plugin_id
+   *   Plugin ID.
+   * @param mixed $plugin_definition
+   *   Plguin definition.
+   *
+   * @return \Drupal\Core\Plugin\ContainerFactoryPluginInterface|\Drupal\fsa_ratings_import\Plugin\QueueWorker\FsaEstablishmentEntityPurger
+   *   DI runtime values for class constructor to use.
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
@@ -60,6 +82,13 @@ class FsaEstablishmentEntityPurger extends QueueWorkerBase implements ContainerF
     );
   }
 
+  /**
+   * @param string $migration_plugin_id
+   *   Migration plugin machine name.
+   *
+   * @return array
+   *   Migration table map.
+   */
   protected function getMigrationTables($migration_plugin_id) {
     return [
       'map' => 'migrate_map_' . $migration_plugin_id,
@@ -70,7 +99,8 @@ class FsaEstablishmentEntityPurger extends QueueWorkerBase implements ContainerF
   /**
    * Purges obsolete entities.
    *
-   * @param \stdClass $data
+   * @param mixed $data
+   *   Data to process.
    */
   public function processItem($data) {
     /** @var \Drupal\Core\Entity\ContentEntityStorageInterface $storage */

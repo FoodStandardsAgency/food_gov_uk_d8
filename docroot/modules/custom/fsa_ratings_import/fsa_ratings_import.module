@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file
+ */
+
 use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
@@ -29,27 +33,4 @@ function fsa_ratings_import_help($route_name, RouteMatchInterface $route_match) 
 
     default:
   }
-}
-
-/**
- * Implements hook_cron().
- */
-function fsa_ratings_import_cron() {
-//  /** @var \Drupal\fsa_ratings_import\FhrsApiFetcher $api_fetcher */
-//  $api_fetcher = \Drupal::service('fsa_ratings_import.fetcher');
-//  /** @var \Drupal\fsa_ratings_import\FhrsApiImportMapper $api_import_mapper */
-//  $api_import_mapper = \Drupal::service('fsa_ratings_import.import_mapper');
-//
-//  // Fetch the results from API.
-//  $fetch_result = $api_fetcher->fetchAndSave();
-//
-//  if (is_string($fetch_result)) {
-//    // Save results into import map table (for later cross-referencing with
-//    // imported establishments).
-//    $api_import_mapper->saveMap($fetch_result);
-//  }
-//  elseif ($fetch_result == $api_fetcher::STATUS_FINISHED) {
-//    // Rollback non-existing entities.
-//    $api_import_mapper->rollback();
-//  }
 }
