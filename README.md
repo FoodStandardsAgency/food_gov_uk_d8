@@ -30,8 +30,6 @@ This project uses Acquia Pipelines to:
 > NB: You'll need a database from the Acquia Cloud platform.
 
 ```
-# Install project dependencies
-composer install
 # Start ddev containers
 ddev start
 # Wait for docker images to pull/expand/start - could take up to 30 mins on first start dependent on bandwidth and system resources.
