@@ -11,12 +11,16 @@ additional_hostnames: []
 additional_fqdns: []
 provider: default
 hooks:
+  pre-start:
+    - exec-host: "composer install"
   post-import-db:
+    - exec: drush updb
+    - exec: drush cim -y
+    - exec: drush cr
+    - exec: drush en -y stage_file_proxy views_ui
     # Set notify API to debug mode to avoid any bad things happening on live service.
     - exec: drush sset fsa_notify.collect_send_log_only TRUE
     - exec: drush sset fsa_notify.api test_key-6f00837a-4b8f-4ddd-ae96-ca2d3035fe57-cf19add9-e802-4fbf-8f92-dfb941ec8813
-    - exec: drush cr
-    - exec: drush updb
 
 # This config.yaml was created with ddev version v1.2.0
 # webimage: drud/ddev-webserver:v1.2.0

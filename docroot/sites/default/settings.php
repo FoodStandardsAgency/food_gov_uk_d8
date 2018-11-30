@@ -221,6 +221,9 @@ switch ($env) {
     $config['acquia_connector.settings']['subscription_data']['uuid'] = NULL;
     $config['purge.plugins']['purgers'] = [];
 
+    // Stage file proxy origin.
+    $config['stage_file_proxy.settings']['origin'] = 'https://www.food.gov.uk';
+
     break;
 }
 
