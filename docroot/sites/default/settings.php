@@ -75,7 +75,7 @@ $settings['config_readonly'] = TRUE;
 
 // The config names that are allowed to be changed in readonly environments.
 $settings['config_readonly_whitelist_patterns'] = [
-  'acquia_connector.settings.*',
+  'acquia_connector.*',
   'system.site',
   'system.menu.*',
   'system.performance',
