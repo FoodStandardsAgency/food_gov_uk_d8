@@ -75,6 +75,7 @@ $settings['config_readonly'] = TRUE;
 
 // The config names that are allowed to be changed in readonly environments.
 $settings['config_readonly_whitelist_patterns'] = [
+  'acquia_connector.*',
   'system.site',
   'system.menu.*',
   'system.performance',
@@ -233,6 +234,9 @@ switch ($env) {
     $config['acquia_connector.settings']['subscription_data']['uuid'] = NULL;
     $config['purge.plugins']['purgers'] = [];
 
+    // Stage file proxy origin.
+    $config['stage_file_proxy.settings']['origin'] = 'https://www.food.gov.uk';
+
     break;
 }
 
@@ -252,7 +256,7 @@ $settings['trusted_host_patterns'] = [
   'foodgovukstg\.prod\.acquia-sites\.com',
   'foodgovukdev\.prod\.acquia-sites\.com',
   'foodgovukra\.prod\.acquia-sites\.com',
-  'foodgovukode[1-5]\.prod\.acquia-sites\.com',
+  'foodgovukode\d+\.prod\.acquia-sites\.com',
 ];
 
 /**

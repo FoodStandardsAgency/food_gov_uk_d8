@@ -42,10 +42,12 @@ spi:
     variables: {  }
     time: 0
   cron_interval: 28800
-  site_name: food.gov.uk
-  site_machine_name: food_gov_uk
+  site_name: foodgovuk
+  site_machine_name: foodgovuk
   env_detection_enabled: true
   site_uuid: 654cac42-08a4-4a86-881f-63698057cb5e
+  environment_changes:
+    machine_name: 'Your site machine name changed from food_gov_uk to foodgovuk.'
 mapping:
   acquia_spi_send_node_user:
     - acquia_connector.settings
