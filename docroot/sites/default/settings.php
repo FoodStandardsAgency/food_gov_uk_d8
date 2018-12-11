@@ -153,7 +153,10 @@ switch ($env) {
     $config['google_tag.settings']['environment_id'] = 'env-2';
     $config['google_tag.settings']['environment_token'] = 'qiSnyllzn5flpcJTEzjYGA';
 
-    $config['elasticsearch_helper.settings']['elasticsearch_helper']['host'] = '10.2.3.85';
+    // Elasticsearch.
+    $config['elasticsearch_helper.settings']['elasticsearch_helper']['scheme'] = 'https';
+    $config['elasticsearch_helper.settings']['elasticsearch_helper']['host'] = 'search-food-gov-uk-website-a4nksv2ajieqlock7l4p6wpasy.eu-west-2.es.amazonaws.com';
+    $config['elasticsearch_helper.settings']['elasticsearch_helper']['port'] = '443';
 
     // Warden settings.
     // Shared secret between the site and Warden server.
