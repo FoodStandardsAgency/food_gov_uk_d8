@@ -17,5 +17,10 @@ drush @$drush_alias updb -y
 # Config import.
 drush @$drush_alias cim -y
 
+if [ $target_env != "prod" ]; then
+  # Enable some environment specific overrides; consider using config_split in future.
+  drush @$drush_alias en -y shield
+fi
+
 # Clear all caches.
 drush @$drush_alias cr
