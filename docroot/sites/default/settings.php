@@ -136,6 +136,8 @@ switch ($env) {
     $config['shield.settings']['user'] = 'fsauser';
     $config['shield.settings']['pass'] = 'FCeDh4u&7n2p';
 
+    $settings['cache']['default'] = 'cache.backend.memcache';
+
     break;
 
   case 'local':
