@@ -145,7 +145,8 @@
                 "Reset media thumbnails while changing media entity. Required by inline images.": "https://www.drupal.org/files/issues/2749695_14_media_entity_image.patch"
             },
             "drupal/term_reference_tree": {
-                "Undefined index: #select_parents": "https://www.drupal.org/files/issues/term_reference_tree-2837754-2.patch"
+                "Undefined index: #select_parents": "https://www.drupal.org/files/issues/term_reference_tree-2837754-2.patch",
+                "Taxonomy term hierarchy table error": "https://www.drupal.org/files/issues/2018-10-25/term_reference_tree-taxonomy_term_hierarchy_table_error-2996263-20.patch"
             },
             "drupal/linkit": {
                 "Linkit filter should honour the URL query and fragment": "https://www.drupal.org/files/issues/linkit_substitution_query_fragment-2895153-10.patch"
