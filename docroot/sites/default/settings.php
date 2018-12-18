@@ -107,6 +107,9 @@ switch ($env) {
     $config['warden.settings']['warden_preg_match_custom'] = '{^modules\/custom\/*}';
     $config['warden.settings']['warden_preg_match_contrib'] = '{^modules\/contrib\/*}';
 
+    // Memcache.
+    $settings['cache']['default'] = 'cache.backend.memcache';
+
     break;
 
   case 'dev':
@@ -120,6 +123,9 @@ switch ($env) {
     // Shield config.
     $config['shield.settings']['user'] = 'fsauser';
     $config['shield.settings']['pass'] = 'FCeDh4u&7n2p';
+
+    // Memcache.
+    $settings['cache']['default'] = 'cache.backend.memcache';
 
     break;
 
@@ -162,6 +168,8 @@ switch ($env) {
     // Stage file proxy origin.
     $config['stage_file_proxy.settings']['origin'] = 'https://www.food.gov.uk';
 
+    // Memcache.
+    $settings['cache']['default'] = 'cache.backend.memcache';
     $settings['memcache']['servers'] = ['memcached:11211' => 'default'];
 
     break;
