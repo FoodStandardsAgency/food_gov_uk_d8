@@ -191,6 +191,10 @@ switch ($env) {
     $config['google_tag.settings']['environment_id'] = 'env-6';
     $config['google_tag.settings']['environment_token'] = '4d3H88TmNOCwXVDx0PK8bg';
 
+    // Shield config.
+    $config['shield.settings']['user'] = 'fsauser';
+    $config['shield.settings']['pass'] = 'FCeDh4u&7n2p';
+
     break;
 
   case 'test':
@@ -202,13 +206,14 @@ switch ($env) {
     $config['google_tag.settings']['environment_id'] = 'env-5';
     $config['google_tag.settings']['environment_token'] = 'nNEwJ_lItnO48_pabdUErg';
 
+    // Shield config.
+    $config['shield.settings']['user'] = 'fsauser';
+    $config['shield.settings']['pass'] = 'FCeDh4u&7n2p';
+
     break;
 
   case 'local':
     $settings['simple_environment_indicator'] = '#88b700 Local';
-
-    // Disable Shield on prod by setting the shield user variable to NULL
-    $config['shield.settings']['credentials']['shield']['user'] = NULL;
 
     $config['config_split.config_split.dev']['status'] = TRUE;
     $settings['config_readonly'] = FALSE;
