@@ -200,6 +200,11 @@ switch ($env) {
   case 'test':
     // Now known as stage on Acquia Cloud platform, but machine key is 'test'.
     $settings['container_yamls'][] = $app_root . '/' . $site_path . '/stage.services.yml';
+    // Dynamic render + render and page caches: options to disable by setting null backends, if needed.
+    $settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.null';
+    // $settings['cache']['bins']['page'] = 'cache.backend.null';
+    // $settings['cache']['bins']['render'] = 'cache.backend.null';
+
     $settings['simple_environment_indicator'] = '#e56716 Stage';
 
     // GTM Environment overrides.
@@ -213,6 +218,12 @@ switch ($env) {
     break;
 
   case 'local':
+    $settings['container_yamls'][] = DRUPAL_ROOT . '/sites/development.services.yml';
+    // Dynamic render + render and page caches: options to disable by setting null backends, if needed.
+    $settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.null';
+    // $settings['cache']['bins']['page'] = 'cache.backend.null';
+    // $settings['cache']['bins']['render'] = 'cache.backend.null';
+
     $settings['simple_environment_indicator'] = '#88b700 Local';
 
     $config['config_split.config_split.dev']['status'] = TRUE;

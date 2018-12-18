@@ -1,4 +1,6 @@
 parameters:
+  cache.backend.null:
+    class: Drupal\Core\Cache\NullBackendFactory
   session.storage.options:
     # Default ini options for sessions.
     #
