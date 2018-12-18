@@ -65,8 +65,6 @@ if (PHP_SAPI === 'cli') {
 // Be sure to have config_split.dev disabled by default.
 $config['config_split.config_split.dev']['status'] = FALSE;
 
-$config['elasticsearch_helper.settings']['elasticsearch_helper']['host'] = getenv('DB_HOST_DRUPAL');
-
 if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
   // Either 'dev', 'test', 'prod' or 'ra'.
   $env = $_ENV['AH_SITE_ENVIRONMENT'];
@@ -161,7 +159,7 @@ switch ($env) {
     // Stage file proxy origin.
     $config['stage_file_proxy.settings']['origin'] = 'https://www.food.gov.uk';
 
-    $settings['memcache']['servers'] = ['memcache:11211' => 'default'];
+    $settings['memcache']['servers'] = ['memcached:11211' => 'default'];
 
     break;
 }
