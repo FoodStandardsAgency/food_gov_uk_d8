@@ -1,6 +1,5 @@
 module:
   acquia_connector: 0
-  acquia_purge: 0
   addtoany: 0
   admin_toolbar: 0
   admin_toolbar_links_access_filter: 0
@@ -34,7 +33,6 @@ module:
   datetime: 0
   datetime_range: 0
   diff: 0
-  dynamic_page_cache: 0
   editor: 0
   elasticsearch_helper: 0
   elasticsearch_helper_views: 0
