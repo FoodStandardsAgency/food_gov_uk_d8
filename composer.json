@@ -95,7 +95,7 @@
         "zaporylie/composer-drupal-optimizations": "^1.0",
         "league/csv": "^9.0",
         "drupal/permissions_filter": "^1.0",
-        "drupal/memcache": "^2.0@alpha",
+        "drupal/memcache": "^2.0",
         "wunderio/drupal-ping": "^1.0",
         "drupal/acquia_purge": "^1.0@beta",
         "drupal/shield": "^1.2",

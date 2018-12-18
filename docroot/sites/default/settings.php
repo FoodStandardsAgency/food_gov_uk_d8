@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * Load services definition file - can be overridden below.
+ */
+$settings['container_yamls'][] = __DIR__ . '/services.yml';
+
+/**
  * General settings.php for all environments.
  * You could use this to add general settings to be used for all environments.
  */
@@ -9,49 +14,9 @@
 if (file_exists('/var/www/site-php')) {
   require '/var/www/site-php/foodgovuk/foodgovuk-settings.inc';
 }
-
-/**
- * Database settings (overridden per environment)
- */
-$databases = array();
-$databases['default']['default'] = array (
-  'database' => 'drupal',
-  'username' => getenv('DB_USER_DRUPAL'),
-  'password' => getenv('DB_PASS_DRUPAL'),
-  'prefix' => '',
-  'host' => getenv('DB_HOST_DRUPAL'),
-  'port' => '3306',
-  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
-  'driver' => 'mysql',
-);
-
-/**
- * Load services definition file - can be overridden below.
- */
-$settings['container_yamls'][] = __DIR__ . '/services.yml';
-
-/**
- * Drupal core string overrides for FSA setup.
- */
-$settings['locale_custom_strings_en'][''] = [
-  'You have just used your one-time login link. It is no longer necessary to use this link to log in. Please change your password.' => 'You have just used your one-time login link. Please set yourself a password that you can use to log in again.',
-];
-
-$settings['hash_salt'] = 'B081u6MDeLm3bRi5niieR-797DOulNMA-SGCoprrcy5Gjn-hDNAkiy1k8Pnb9y8n1zSXWu4aQQ';
-
-if ( (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) == "on")
-  || (isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) && $_SERVER["HTTP_X_FORWARDED_PROTO"] == "https")
-  || (isset($_SERVER["HTTP_HTTPS"]) && $_SERVER["HTTP_HTTPS"] == "on")
-) {
-  $_SERVER["HTTPS"] = "on";
-
-  // Tell Drupal we're using HTTPS (url() for one depends on this).
-  $settings['https'] = TRUE;
-}
-
-if (isset($_SERVER['REMOTE_ADDR'])) {
-  $settings['reverse_proxy'] = TRUE;
-  $settings['reverse_proxy_addresses'] = array($_SERVER['REMOTE_ADDR']);
+// Acquia Memcache settings.
+if ($_ENV['AH_SITE_ENVIRONMENT'] && file_exists($app_root . '/' . $site_path . '/cloud-memcache-d8.php')) {
+  require $app_root . '/' . $site_path . '/cloud-memcache-d8.php';
 }
 
 # Private filesystem
@@ -63,12 +28,14 @@ else {
   $settings['file_private_path'] = '{PATH}';
 }
 
-if(!empty($_SERVER['SERVER_ADDR'])){
-  // This should return last section of IP, such as "198". (dont want/need to expose more info).
-  //drupal_add_http_header('X-Webserver', end(explode('.', $_SERVER['SERVER_ADDR'])));
-  $pcs = explode('.', $_SERVER['SERVER_ADDR']);
-  header('X-Webserver: '. end($pcs));
-}
+/**
+ * Drupal core string overrides for FSA setup.
+ */
+$settings['locale_custom_strings_en'][''] = [
+  'You have just used your one-time login link. It is no longer necessary to use this link to log in. Please change your password.' => 'You have just used your one-time login link. Please set yourself a password that you can use to log in again.',
+];
+
+$settings['hash_salt'] = 'B081u6MDeLm3bRi5niieR-797DOulNMA-SGCoprrcy5Gjn-hDNAkiy1k8Pnb9y8n1zSXWu4aQQ';
 
 // Disallow configuration changes by default.
 $settings['config_readonly'] = TRUE;
@@ -108,37 +75,6 @@ else {
   // WKV_ENV_SITE is a legacy environment indicator from WunderTools
   $env = getenv('WKV_SITE_ENV');
 }
-
-// Memcache.
-$settings['memcache']['servers'] = ['127.0.0.1:11211' => 'default'];
-// if (class_exists('Memcached')) {
-//   /**
-//    * Memcache configuration.
-//    */
-//   $settings['memcache']['extension'] = 'Memcached';
-//   $settings['memcache']['bins'] = ['default' => 'default'];
-//   $settings['memcache']['key_prefix'] = 'fsa_' . $env;
-//   $settings['cache']['default'] = 'cache.backend.memcache';
-//   $settings['cache']['bins']['render'] = 'cache.backend.memcache';
-//   $settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.memcache';
-//   $settings['cache']['bins']['bootstrap'] = 'cache.backend.memcache';
-//   $settings['cache']['bins']['config'] = 'cache.backend.memcache';
-//   $settings['cache']['bins']['discovery'] = 'cache.backend.memcache';
-//   // Enable stampede protection.
-//   $settings['memcache']['stampede_protection'] = TRUE;
-//   // High performance - no hook_boot(), no hook_exit(), ignores Drupal IP
-//   // blacklists.
-//   $conf['page_cache_invoke_hooks'] = FALSE;
-//   $conf['page_cache_without_database'] = TRUE;
-//   // Memcached PECL Extension Support.
-//   // Adds Memcache binary protocol and no-delay features (experimental).
-//   $settings['memcache']['options'] = [
-//     \Memcached::OPT_COMPRESSION => FALSE,
-//     \Memcached::OPT_DISTRIBUTION => \Memcached::DISTRIBUTION_CONSISTENT,
-//     \Memcached::OPT_BINARY_PROTOCOL => TRUE,
-//     \Memcached::OPT_TCP_NODELAY => TRUE,
-//   ];
-// }
 
 switch ($env) {
   case 'prod':
@@ -225,6 +161,8 @@ switch ($env) {
     // Stage file proxy origin.
     $config['stage_file_proxy.settings']['origin'] = 'https://www.food.gov.uk';
 
+    $settings['memcache']['servers'] = ['memcache:11211' => 'default'];
+
     break;
 }
 
@@ -251,13 +189,6 @@ $settings['trusted_host_patterns'] = [
  * Access control for update.php script.
  */
 $settings['update_free_access'] = FALSE;
-
-/**
- * Environment specific override configuration, if available.
- */
-if (file_exists(__DIR__ . '/settings.local.php')) {
-   include __DIR__ . '/settings.local.php';
-}
 $settings['install_profile'] = 'standard';
 
 // Automatically generated include for settings managed by ddev.
