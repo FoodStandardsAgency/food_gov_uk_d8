@@ -204,3 +204,10 @@ $settings['install_profile'] = 'standard';
 if (file_exists($app_root . '/' . $site_path . '/settings.ddev.php')) {
   include $app_root . '/' . $site_path . '/settings.ddev.php';
 }
+
+/**
+ * Allow local settings override.
+ */
+if (file_exists(__DIR__ . '/settings.local.php')) {
+  include __DIR__ . '/settings.local.php';
+}
