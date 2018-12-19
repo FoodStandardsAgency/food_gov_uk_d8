@@ -81,7 +81,7 @@ class SubpagesBlock extends BlockBase {
           "node:$nid",
         ],
         'contexts' => [
-          'url.query_args',
+          'url',
         ],
       ],
     ];
