@@ -15,9 +15,9 @@ if (file_exists('/var/www/site-php')) {
   require '/var/www/site-php/foodgovuk/foodgovuk-settings.inc';
 }
 // Acquia Memcache settings.
-// if ($_ENV['AH_SITE_ENVIRONMENT'] && file_exists($app_root . '/' . $site_path . '/cloud-memcache-d8.php')) {
-//   require $app_root . '/' . $site_path . '/cloud-memcache-d8.php';
-// }
+if ($_ENV['AH_SITE_ENVIRONMENT'] && file_exists($app_root . '/' . $site_path . '/cloud-memcache-d8.php')) {
+  require $app_root . '/' . $site_path . '/cloud-memcache-d8.php';
+}
 
 # Private filesystem
 if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
@@ -108,7 +108,7 @@ switch ($env) {
     $config['warden.settings']['warden_preg_match_contrib'] = '{^modules\/contrib\/*}';
 
     // Memcache.
-    // $settings['cache']['default'] = 'cache.backend.memcache';
+    $settings['cache']['default'] = 'cache.backend.memcache';
 
     break;
 
@@ -125,7 +125,7 @@ switch ($env) {
     $config['shield.settings']['pass'] = 'FCeDh4u&7n2p';
 
     // Memcache.
-    $settings['cache']['default'] = 'cache.backend.memcache';
+    // $settings['cache']['default'] = 'cache.backend.memcache';
 
     break;
 
