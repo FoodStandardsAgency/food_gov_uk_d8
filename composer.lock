@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "392a11657403bd6d166774185f5fd8a7",
+    "content-hash": "374b854a2f586bae1544677fb1598b42",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -7013,68 +7013,6 @@
             }
         },
         {
-            "name": "drupal/warden",
-            "version": "1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupal.org/project/warden",
-                "reference": "8.x-1.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/warden-8.x-1.1.zip",
-                "reference": "8.x-1.1",
-                "shasum": "3c907a5b282920b6da7495f5e5f72516088cae8e"
-            },
-            "require": {
-                "drupal/core": "~8.0",
-                "teamdeeson/wardenapi": "dev-master"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-1.1",
-                    "datestamp": "1498079942",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Drupal\\warden\\": "src/"
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "johnennew",
-                    "homepage": "https://www.drupal.org/user/1150042"
-                },
-                {
-                    "name": "mike.davis",
-                    "homepage": "https://www.drupal.org/user/2660157"
-                }
-            ],
-            "description": "A module to link Drupal website with Warden dashboard.",
-            "homepage": "https://www.drupal.org/project/warden",
-            "keywords": [
-                "Drupal",
-                "Warden"
-            ],
-            "support": {
-                "source": "https://drupal.org/project/warden",
-                "issues": "https://drupal.org/project/issues/warden"
-            }
-        },
-        {
             "name": "drupal/webform",
             "version": "5.0.0-rc12",
             "source": {
@@ -7757,32 +7695,33 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.4.2",
+            "version": "1.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c"
+                "reference": "9f83dded91781a01c63574e387eaa769be769115"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
-                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/9f83dded91781a01c63574e387eaa769be769115",
+                "reference": "9f83dded91781a01c63574e387eaa769be769115",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0",
-                "psr/http-message": "~1.0"
+                "psr/http-message": "~1.0",
+                "ralouphie/getallheaders": "^2.0.5"
             },
             "provide": {
                 "psr/http-message-implementation": "1.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.8"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4-dev"
+                    "dev-master": "1.5-dev"
                 }
             },
             "autoload": {
@@ -7812,13 +7751,14 @@
             "keywords": [
                 "http",
                 "message",
+                "psr-7",
                 "request",
                 "response",
                 "stream",
                 "uri",
                 "url"
             ],
-            "time": "2017-03-20T17:10:46+00:00"
+            "time": "2018-12-04T20:46:45+00:00"
         },
         {
             "name": "guzzlehttp/ringphp",
@@ -9132,6 +9072,46 @@
                 "shell"
             ],
             "time": "2017-11-16T14:29:51+00:00"
+        },
+        {
+            "name": "ralouphie/getallheaders",
+            "version": "2.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ralouphie/getallheaders.git",
+                "reference": "5601c8a83fbba7ef674a7369456d12f1e0d0eafa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ralouphie/getallheaders/zipball/5601c8a83fbba7ef674a7369456d12f1e0d0eafa",
+                "reference": "5601c8a83fbba7ef674a7369456d12f1e0d0eafa",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~3.7.0",
+                "satooshi/php-coveralls": ">=1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/getallheaders.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ralph Khattar",
+                    "email": "ralph.khattar@gmail.com"
+                }
+            ],
+            "description": "A polyfill for getallheaders.",
+            "time": "2016-02-11T07:05:27+00:00"
         },
         {
             "name": "react/promise",
@@ -11107,55 +11087,6 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2018-10-02T16:33:53+00:00"
-        },
-        {
-            "name": "teamdeeson/wardenapi",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/teamdeeson/wardenapi.git",
-                "reference": "d93f30b3c482f27696c1371b163e9260b33a80d8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/teamdeeson/wardenapi/zipball/d93f30b3c482f27696c1371b163e9260b33a80d8",
-                "reference": "d93f30b3c482f27696c1371b163e9260b33a80d8",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^6.1",
-                "php": ">=5.5.9"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.2.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "WardenApi\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0-only"
-            ],
-            "authors": [
-                {
-                    "name": "John Ennew",
-                    "email": "johne@deeson.co.uk"
-                },
-                {
-                    "name": "Mike Davis",
-                    "email": "miked@deeson.co.uk"
-                }
-            ],
-            "description": "Warden API utility",
-            "homepage": "https://www.deeson.co.uk/labs",
-            "keywords": [
-                "drupal",
-                "warden"
-            ],
-            "time": "2018-02-02T09:16:39+00:00"
         },
         {
             "name": "twig/twig",
