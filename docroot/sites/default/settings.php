@@ -74,6 +74,13 @@ else {
   $env = getenv('WKV_SITE_ENV');
 }
 
+// Shield config.
+$config['shield.settings']['credentials']['user'] = getenv('HTTP_AUTH_USER');
+$config['shield.settings']['credentials']['pass'] = getenv('HTTP_AUTH_PWD');
+
+// Stage file proxy origin.
+$config['stage_file_proxy.settings']['origin'] = 'http://foodgovuk.prod.acquia-sites.com';
+
 switch ($env) {
   case 'prod':
     $settings['container_yamls'][] = $app_root . '/' . $site_path . '/prod.services.yml';
@@ -104,10 +111,6 @@ switch ($env) {
     // GTM Environment overrides.
     $config['google_tag.settings']['environment_id'] = 'env-6';
     $config['google_tag.settings']['environment_token'] = '4d3H88TmNOCwXVDx0PK8bg';
-
-    // Shield config.
-    $config['shield.settings']['user'] = 'fsauser';
-    $config['shield.settings']['pass'] = 'FCeDh4u&7n2p';
 
     // Memcache.
     $settings['cache']['default'] = 'cache.backend.memcache';
@@ -150,8 +153,8 @@ switch ($env) {
     $config['acquia_connector.settings']['subscription_data']['uuid'] = NULL;
     $config['purge.plugins']['purgers'] = [];
 
-    // Stage file proxy origin.
-    $config['stage_file_proxy.settings']['origin'] = 'https://www.food.gov.uk';
+    // Disable Shield by setting the shield user variable to NULL
+    $config['shield.settings']['credentials']['shield']['user'] = NULL;
 
     // Memcache.
     $settings['cache']['default'] = 'cache.backend.memcache';
