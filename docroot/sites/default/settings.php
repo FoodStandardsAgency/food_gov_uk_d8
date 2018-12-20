@@ -92,6 +92,9 @@ switch ($env) {
     // Memcache.
     $settings['cache']['default'] = 'cache.backend.memcache';
 
+    // Disable Shield on prod by setting the shield user variable to NULL
+    $config['shield.settings']['credentials']['shield']['user'] = NULL;
+
     break;
 
   case 'dev':
