@@ -125,7 +125,7 @@ switch ($env) {
     $config['shield.settings']['pass'] = 'FCeDh4u&7n2p';
 
     // Memcache.
-    // $settings['cache']['default'] = 'cache.backend.memcache';
+    $settings['cache']['default'] = 'cache.backend.memcache';
 
     break;
 

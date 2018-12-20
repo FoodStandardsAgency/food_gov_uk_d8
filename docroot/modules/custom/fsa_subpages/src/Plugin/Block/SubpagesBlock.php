@@ -76,7 +76,14 @@ class SubpagesBlock extends BlockBase {
       '#list_type' => 'ul',
       '#items' => $subpages,
       '#attributes' => ['class' => ['subpages']],
-      '#cache' => ['max-age' => 0],
+      '#cache' => [
+        'tags' => [
+          "node:$nid",
+        ],
+        'contexts' => [
+          'url.query_args',
+        ],
+      ],
     ];
 
   }
