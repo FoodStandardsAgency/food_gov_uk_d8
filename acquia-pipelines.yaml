@@ -13,6 +13,7 @@ events:
       - composer:
           type: script
           script:
+            #  https://getcomposer.org/doc/articles/autoloader-optimization.md#autoloader-optimization
             - composer install --no-interaction --optimize-autoloader
       - test-static-analysis:
           type: script
