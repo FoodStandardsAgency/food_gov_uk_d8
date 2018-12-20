@@ -75,8 +75,8 @@ else {
 }
 
 // Shield config.
-$config['shield.settings']['credentials']['user'] = getenv('HTTP_AUTH_USER');
-$config['shield.settings']['credentials']['pass'] = getenv('HTTP_AUTH_PWD');
+$config['shield.settings']['credentials']['shield']['user'] = getenv('HTTP_AUTH_USER');
+$config['shield.settings']['credentials']['shield']['pass'] = getenv('HTTP_AUTH_PWD');
 
 // Stage file proxy origin.
 $config['stage_file_proxy.settings']['origin'] = 'http://foodgovuk.prod.acquia-sites.com';
