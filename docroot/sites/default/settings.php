@@ -74,6 +74,13 @@ else {
   $env = getenv('WKV_SITE_ENV');
 }
 
+// SMTP settings: from environment variables.
+$config['smtp.settings']['smtp_host']     = getenv('SMTP_HOST');
+$config['smtp.settings']['smtp_port']     = getenv('SMTP_PORT');
+$config['smtp.settings']['smtp_username'] = getenv('SMTP_USERNAME');
+$config['smtp.settings']['smtp_password'] = getenv('SMTP_PASSWORD');
+$config['smtp.settings']['smtp_from']     = getenv('SMTP_FROM');
+
 switch ($env) {
   case 'prod':
     $settings['container_yamls'][] = $app_root . '/' . $site_path . '/prod.services.yml';
@@ -146,6 +153,9 @@ switch ($env) {
     $config['acquia_connector.settings']['subscription_data']['href'] = NULL;
     $config['acquia_connector.settings']['subscription_data']['uuid'] = NULL;
     $config['purge.plugins']['purgers'] = [];
+
+    // Disable SMTP.
+    $config['smtp.settings']['smtp_on'] = FALSE;
 
     // Stage file proxy origin.
     $config['stage_file_proxy.settings']['origin'] = 'https://www.food.gov.uk';
