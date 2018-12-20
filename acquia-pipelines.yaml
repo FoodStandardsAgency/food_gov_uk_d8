@@ -18,20 +18,3 @@ events:
           type: script
           script:
             - '${SOURCE_DIR}/phpcs.sh "${SOURCE_DIR}" "${SOURCE_DIR}/docroot/modules/custom ${SOURCE_DIR}/docroot/themes/custom/fsa"'
-      # Deploy the build artifact to a Cloud on-demand environment.
-      - deploy:
-          script:
-            # Only create ODE for feature branches.
-            - if [[ "$SOURCE_VCS_PATH" =~ ^feature\/.+$ ]]; then pipelines-deploy ;fi
-  # When a GitHub pull request is merged, this deletes the coresponding On Demand Environment.
-  pr-merged:
-    steps:
-      - deploy:
-          script:
-            -  pipelines-deploy
-  # When a GitHub pull request is closed, this deletes the coresponding On Demand Environment.
-  pr-closed:
-    steps:
-      - deploy:
-          script:
-            - pipelines-deploy
