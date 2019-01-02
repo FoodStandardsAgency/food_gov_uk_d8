@@ -81,6 +81,13 @@ $config['shield.settings']['credentials']['shield']['pass'] = getenv('HTTP_AUTH_
 // Stage file proxy origin.
 $config['stage_file_proxy.settings']['origin'] = 'http://foodgovuk.prod.acquia-sites.com';
 
+// SMTP settings: from environment variables.
+$config['smtp.settings']['smtp_host']     = getenv('SMTP_HOST');
+$config['smtp.settings']['smtp_port']     = getenv('SMTP_PORT');
+$config['smtp.settings']['smtp_username'] = getenv('SMTP_USERNAME');
+$config['smtp.settings']['smtp_password'] = getenv('SMTP_PASSWORD');
+$config['smtp.settings']['smtp_from']     = getenv('SMTP_FROM');
+
 switch ($env) {
   case 'prod':
     $settings['container_yamls'][] = $app_root . '/' . $site_path . '/prod.services.yml';
@@ -153,8 +160,10 @@ switch ($env) {
     $config['acquia_connector.settings']['subscription_data']['uuid'] = NULL;
     $config['purge.plugins']['purgers'] = [];
 
-    // Disable Shield by setting the shield user variable to NULL
+    // Disable Shield by setting the shield user variable to NULL.
     $config['shield.settings']['credentials']['shield']['user'] = NULL;
+    // Disable SMTP.
+    $config['smtp.settings']['smtp_on'] = FALSE;
 
     // Memcache.
     $settings['cache']['default'] = 'cache.backend.memcache';
