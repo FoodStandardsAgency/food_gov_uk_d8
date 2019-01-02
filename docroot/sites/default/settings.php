@@ -87,7 +87,6 @@ $config['smtp.settings']['smtp_port']     = getenv('SMTP_PORT');
 $config['smtp.settings']['smtp_username'] = getenv('SMTP_USERNAME');
 $config['smtp.settings']['smtp_password'] = getenv('SMTP_PASSWORD');
 $config['smtp.settings']['smtp_from']     = getenv('SMTP_FROM');
-$config['smtp.settings']['smtp_debugging'] = TRUE;
 
 switch ($env) {
   case 'prod':
