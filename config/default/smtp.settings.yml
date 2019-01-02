@@ -2,7 +2,7 @@ smtp_on: true
 smtp_host: smtp.example.com
 smtp_hostbackup: smtp1.example.com
 smtp_port: '25'
-smtp_protocol: standard
+smtp_protocol: tls
 smtp_username: placeholder
 smtp_password: placeholder
 smtp_from: user@hostname.com
