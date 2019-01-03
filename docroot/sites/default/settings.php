@@ -74,6 +74,20 @@ else {
   $env = getenv('WKV_SITE_ENV');
 }
 
+// Shield config.
+$config['shield.settings']['credentials']['shield']['user'] = getenv('HTTP_AUTH_USER');
+$config['shield.settings']['credentials']['shield']['pass'] = getenv('HTTP_AUTH_PWD');
+
+// Stage file proxy origin.
+$config['stage_file_proxy.settings']['origin'] = 'http://foodgovuk.prod.acquia-sites.com';
+
+// SMTP settings: from environment variables.
+$config['smtp.settings']['smtp_host']     = getenv('SMTP_HOST');
+$config['smtp.settings']['smtp_port']     = getenv('SMTP_PORT');
+$config['smtp.settings']['smtp_username'] = getenv('SMTP_USERNAME');
+$config['smtp.settings']['smtp_password'] = getenv('SMTP_PASSWORD');
+$config['smtp.settings']['smtp_from']     = getenv('SMTP_FROM');
+
 switch ($env) {
   case 'prod':
     $settings['container_yamls'][] = $app_root . '/' . $site_path . '/prod.services.yml';
@@ -92,6 +106,9 @@ switch ($env) {
     // Memcache.
     $settings['cache']['default'] = 'cache.backend.memcache';
 
+    // Disable Shield on prod by setting the shield user variable to NULL
+    $config['shield.settings']['credentials']['shield']['user'] = NULL;
+
     break;
 
   case 'dev':
@@ -101,10 +118,6 @@ switch ($env) {
     // GTM Environment overrides.
     $config['google_tag.settings']['environment_id'] = 'env-6';
     $config['google_tag.settings']['environment_token'] = '4d3H88TmNOCwXVDx0PK8bg';
-
-    // Shield config.
-    $config['shield.settings']['user'] = 'fsauser';
-    $config['shield.settings']['pass'] = 'FCeDh4u&7n2p';
 
     // Memcache.
     $settings['cache']['default'] = 'cache.backend.memcache';
@@ -147,8 +160,10 @@ switch ($env) {
     $config['acquia_connector.settings']['subscription_data']['uuid'] = NULL;
     $config['purge.plugins']['purgers'] = [];
 
-    // Stage file proxy origin.
-    $config['stage_file_proxy.settings']['origin'] = 'https://www.food.gov.uk';
+    // Disable Shield by setting the shield user variable to NULL.
+    $config['shield.settings']['credentials']['shield']['user'] = NULL;
+    // Disable SMTP.
+    $config['smtp.settings']['smtp_on'] = FALSE;
 
     // Memcache.
     $settings['cache']['default'] = 'cache.backend.memcache';

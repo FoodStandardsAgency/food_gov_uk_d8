@@ -97,7 +97,8 @@
         "wunderio/drupal-ping": "^1.0",
         "drupal/acquia_purge": "^1.0@beta",
         "drupal/shield": "^1.2",
-        "drupal/acquia_connector": "^1.14"
+        "drupal/acquia_connector": "^1.14",
+        "drupal/smtp": "^1.0@beta"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
