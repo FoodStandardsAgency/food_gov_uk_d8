@@ -151,7 +151,7 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: paul@wearesort.co.uk
+      to_mail: regulatedfood@food.gov.uk
       to_options: {  }
       cc_mail: ''
       cc_options: {  }
@@ -161,11 +161,11 @@ handlers:
       from_options: {  }
       from_name: default
       subject: default
-      body: default
+      body: '<FirstName>[webform_submission:values:reg_products_first_name:raw]<FirstName><LastName>[webform_submission:values:reg_products_last_name:raw]<LastName><Email>[webform_submission:values:reg_products_emails:raw]<Email><ProductType>[webform_submission:values:reg_products_product_type:raw]<ProductType><ProductName>[webform_submission:values:reg_products_product_name:raw]<ProductName><SummaryText>[webform_submission:values:reg_products_product_summary:raw]<SummaryText><OrganisationName>[webform_submission:values:reg_products_organisation_name:raw]<OrganisationName>'
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
-      html: true
+      html: false
       attachments: false
       twig: false
       debug: false
