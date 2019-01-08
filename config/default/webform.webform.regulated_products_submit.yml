@@ -155,7 +155,7 @@ handlers:
       to_options: {  }
       cc_mail: ''
       cc_options: {  }
-      bcc_mail: ''
+      bcc_mail: paul@wearesort.co.uk
       bcc_options: {  }
       from_mail: default
       from_options: {  }
