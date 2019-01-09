@@ -1,5 +1,12 @@
 <?php
 
+// Redirect food.gov.uk to www.food.gov.uk.
+if ((php_sapi_name() != "cli") && in_array($_SERVER['HTTP_HOST'], ['food.gov.uk'])) {
+  header('HTTP/1.0 301 Moved Permanently');
+  header('Location: https://www.food.gov.uk' . $_SERVER['REQUEST_URI']);
+  exit();
+}
+
 /**
  * Load services definition file - can be overridden below.
  */
