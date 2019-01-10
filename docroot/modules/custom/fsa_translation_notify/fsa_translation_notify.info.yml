@@ -1,0 +1,7 @@
+name: FSA Translation Notify
+description: Notify the FSA language team when content is created or updated.
+type: module
+core: 8.x
+package: FSA
+dependencies:
+  - content_translation
