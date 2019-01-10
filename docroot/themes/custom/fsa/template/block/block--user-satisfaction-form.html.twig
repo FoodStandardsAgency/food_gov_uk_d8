@@ -1,0 +1,20 @@
+{#
+/**
+ * @file
+ * Theme override to display the user satisfaction form block.
+ *
+ * Template was created to put the title inside a button for opening the accordion.
+ *
+ * @see template_preprocess_block()
+ */
+#}
+<div{{ attributes }}>
+  {{ title_prefix }}
+  {% if label %}
+    <h3>{{ label }}</h3>
+  {% endif %}
+  {{ title_suffix }}
+  {% block content %}
+    {{ content }}
+  {% endblock %}
+</div>

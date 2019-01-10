@@ -1,0 +1,33 @@
+display:
+  default:
+    display_options:
+      pager:
+        options:
+          tags:
+            previous: '‹ Blaenorol'
+            next: 'Nesaf ›'
+            first: '« Gyntaf'
+            last: 'Diwethaf »'
+      header:
+        result:
+          content: '<h2 class="visually-hidden">Canlyniadau chwilio</h2><div class="visually-hidden" aria-live="polite">Dangos @start-@end o @total gyda’r dewisiadau hidlo presennol</div>'
+      footer:
+        result:
+          content: '<span class="search-result-page-count">Yn dangos @start-@end o @total</span>'
+      filters:
+        news_type:
+          expose:
+            label: 'Math o archwiliad'
+        consultation_status:
+          expose:
+            label: 'Statws yr ymgynghoriad'
+        consultation_responses_published:
+          expose:
+            label: 'Ymatebion i''r ymgynghoriad'
+        consultation_year:
+          expose:
+            label: 'Blwyddyn yr ymgynghoriad'
+        nation:
+          expose:
+            label: Rhanbarth
+            description: 'Mae''r rhanbarth yn berthnasol i newyddion a rhybuddion yn unig'

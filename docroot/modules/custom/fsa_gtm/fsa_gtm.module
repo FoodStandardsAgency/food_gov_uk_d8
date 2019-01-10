@@ -1,0 +1,183 @@
+<?php
+
+/**
+ * @file
+ * Expose navrefs, and data to page layer, for GTM.
+ */
+
+use Drupal\views\ViewExecutable;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\Core\Breadcrumb\Breadcrumb;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+use Drupal\Core\Link;
+use Drupal\Component\Utility\Html;
+
+/**
+ * Implements hook_datalayer_alter().
+ */
+function fsa_gtm_datalayer_alter(&$data_layer) {
+  // Unset user email and name from datalayer.
+  unset($data_layer['userName']);
+  unset($data_layer['userMail']);
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function fsa_gtm_views_pre_render(ViewExecutable $view) {
+  // Target all search views.
+  $view_id = $view->storage->id();
+  if (isset($view) && substr($view_id, 0, 7) === 'search_') {
+    // Attach data layer library and settings to view.
+    $view->element = [
+      '#attached' => [
+        'library' => [
+          'fsa_gtm/data_layer.search',
+          'fsa_gtm/data_layer.navref',
+        ],
+        'drupalSettings' => [
+          'fsa_ratings' => [
+            'data_layer' => [
+              'view_id' => $view_id,
+            ],
+          ],
+        ],
+      ],
+    ];
+  }
+}
+
+/**
+ * Implements hook_preprocess_menu().
+ */
+function fsa_gtm_preprocess_menu(&$variables) {
+  if ($variables['menu_name'] != 'admin') {
+
+    // Append navrefs to menu items, using helper function, below.
+    foreach ($variables['items'] as $key => &$item) {
+      _fsa_gtm_set_navref($item, $variables['menu_name']);
+    }
+  }
+}
+
+/**
+ * Set navref for item and its children.
+ */
+function _fsa_gtm_set_navref(&$item, $navref) {
+  if (!$item['url']->isExternal() && !empty($item['url']->toString())) {
+    $item['url']->setOption('query', ['navref' => $navref]);
+  }
+  if (isset($item['below'])) {
+    foreach ($item['below'] as $key => &$child_item) {
+      _fsa_gtm_set_navref($child_item, $navref);
+    }
+  }
+}
+
+/**
+ * Implements of template_preprocess_page().
+ */
+function fsa_gtm_preprocess_page(&$variables) {
+
+  // Append navrefs to hardcoded utility menu links.
+  if (isset($variables['utility_menu']['#items'])) {
+    $items = $variables['utility_menu']['#items'];
+    foreach ($items as $item) {
+      if (isset($item['#markup'])) {
+        $generated_link = $item['#markup']->getGeneratedLink();
+        if ($generated_link) {
+          $link = new SimpleXMLElement($generated_link);
+          if (isset($link[0]) && isset($link['href'])) {
+            $url = Url::fromUserInput($link['href']);
+            $url->setOptions(['query' => ['navref' => 'quicklink']]);
+            $item['#markup']->setGeneratedLink(Link::fromTextAndUrl($link[0], $url)->toString());
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function fsa_gtm_preprocess_node(&$variables) {
+
+  // Append navrefs to search items.
+  if ($variables['view_mode'] == 'search_result') {
+
+    // Maintain static variable to keep row count.
+    static $counter = 0;
+    $counter++;
+
+    $variables['attributes']['data-search-result-counter'] = $counter;
+  }
+
+  // Append navrefs to related link promos.
+  if ($variables['view_mode'] == 'related_link_promo') {
+    $variables['url'] .= '?navref=related';
+  }
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function fsa_gtm_preprocess_field(&$variables) {
+
+  // Append navrefs to related content block field links.
+  if ($variables['field_name'] == 'field_related_content_block') {
+    if (isset($variables['items'][0]['content']['field_link'][0]['#plain_text'])) {
+      $variables['items'][0]['content']['field_link'][0]['#plain_text'] .= '?navref=related';
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_fsa_establishment().
+ */
+function fsa_gtm_preprocess_fsa_establishment(&$variables) {
+
+  // Append navrefs to food hygiene ratings search items.
+  if ($variables['view_mode'] == 'search_result') {
+
+    // Maintain static variable to keep row count.
+    static $counter = 0;
+    $counter++;
+
+    // Set query parameter.
+    $query = 'search-rating-' . $counter;
+
+    // Append query parameter to url.
+    $variables['url']->setOption('query', ['navref' => $query]);
+  }
+}
+
+/**
+ * Implements hook_system_breadcrumb_alter().
+ */
+function fsa_gtm_system_breadcrumb_alter(Breadcrumb &$breadcrumb, RouteMatchInterface $route_match, array $context) {
+
+  // Append navrefs to breadcrumbs.
+  $links = $breadcrumb->getLinks();
+  foreach ($links as $link) {
+    $url = $link->getUrl();
+    $url->setOption('query', ['navref' => 'breadcrumb']);
+    $link->setUrl($url);
+  }
+}
+
+/**
+ * Implements hook_language_switch_links_alter().
+ */
+function fsa_gtm_language_switch_links_alter(array &$links, $type, $path) {
+  foreach ($links as $lang => $link) {
+    $links[$lang]['query']['navref'] = 'quicklink';
+
+    // Make sure the is-active class is preserved.
+    if (\Drupal::languageManager()->getCurrentLanguage()->getId() == $lang) {
+      $links[$lang]['attributes']['class'][] = 'is-active';
+    }
+  }
+  return $links;
+}

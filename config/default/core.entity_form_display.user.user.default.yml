@@ -1,0 +1,109 @@
+uuid: 9d01b1d8-3d97-4fc8-b1a1-9ac6ab5f4a05
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.user.user.field_delivery_method
+    - field.field.user.user.field_delivery_method_news
+    - field.field.user.user.field_email_frequency
+    - field.field.user.user.field_initial_delivery_settings
+    - field.field.user.user.field_last_password_reset
+    - field.field.user.user.field_notification_cache
+    - field.field.user.user.field_notification_cache_sms
+    - field.field.user.user.field_notification_method
+    - field.field.user.user.field_notification_sms
+    - field.field.user.user.field_password_expiration
+    - field.field.user.user.field_subscribed_cons
+    - field.field.user.user.field_subscribed_food_alerts
+    - field.field.user.user.field_subscribed_news
+    - field.field.user.user.field_subscribed_notifications
+  module:
+    - user
+_core:
+  default_config_hash: K-1rBM8mTIkFp9RqOC2tMRUukOQ1xbRCfSKK8dEddnA
+id: user.user.default
+targetEntityType: user
+bundle: user
+mode: default
+content:
+  account:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_delivery_method:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_delivery_method_news:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_email_frequency:
+    weight: 8
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_initial_delivery_settings:
+    weight: 9
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_notification_method:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_notification_sms:
+    weight: 1
+    settings:
+      size: 20
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_subscribed_cons:
+    weight: 7
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_subscribed_food_alerts:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_subscribed_news:
+    weight: 6
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_subscribed_notifications:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  language:
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  contact: true
+  field_last_password_reset: true
+  field_notification_cache: true
+  field_notification_cache_sms: true
+  field_password_expiration: true
+  langcode: true
+  timezone: true

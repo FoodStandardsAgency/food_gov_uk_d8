@@ -1,0 +1,141 @@
+<?php
+
+/**
+ * @file
+ * fsa_signin.module
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\fsa_signin\Controller\DefaultController;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\Core\Url;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+/**
+ * Implements hook_user_login().
+ */
+function fsa_signin_user_login($account) {
+
+  // Get the current route name.
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if ($route_name == 'user.reset.login') {
+    // Redirect the user with login reset link to change their password.
+    $url = Url::fromRoute('fsa_signin.default_controller_changePasswordPage');
+    $response = new RedirectResponse($url->toString());
+    $response->send();
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function fsa_signin_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  if ($form_id == 'user_form') {
+    // Loop through allergy subscriptions and unset second-level options.
+    foreach ($form['field_subscribed_notifications']['widget']['#options'] as $key => $value) {
+      if (substr($value->__toString(), 0, 1) === '-') {
+        unset($form['field_subscribed_notifications']['widget']['#options'][$key]);
+      }
+    }
+  }
+
+  if ($form_id == 'user_login_form') {
+    $form['forgot_link'] = [
+      '#markup' => DefaultController::linkMarkup(
+          'fsa_signin.default_controller_resetPassword',
+          t('Forgot or do not have a password?')
+      ),
+    ];
+  }
+
+  if ($form_id == 'user_pass_reset') {
+    // Override core provided password reset form texts.
+    // See core/modules/user/src/Form/UserPasswordResetForm.php.
+    $form_title = $form['#title']->getUntranslatedString();
+    if ($form_title == 'Set password') {
+      $arguments = $form['message']['#markup']->getArguments();
+      $form['#title'] = t('Thanks for verifying your email %user_name', ['%user_name' => $arguments['%user_name']]);
+      $form['message']['#markup'] = t('To complete your alerts subscription you must set a password for your account and select your subscription preferences.');
+
+      // Add event information to the data layer.
+      datalayer_add([
+        'event' => 'Subscription Login To Set Password',
+        'eventDetails' => [
+          'category' => 'Subscription',
+          'action' => 'Email Verified',
+          'label' => 'en',
+          'value' => 0,
+        ],
+      ]);
+    }
+
+    if ($form_title == 'Reset password') {
+      $form['#title'] = t('Reset your password');
+      $form['message']['#markup'] = t('Click the button below to log in to the site and change your password');
+    }
+
+    // Fetch the reset URL path to get the UID.
+    $route_path = \Drupal::routeMatch()->getRawParameters('user');
+    $new_uid = $route_path->get('uid');
+    // If we have the expected URL, assign the UID to the data layer.
+    if (is_numeric($new_uid)) {
+      datalayer_add(['userUid' => $new_uid]);
+    }
+
+    // Unset the "This login can be used only once." text.
+    unset($form['help']);
+
+    // Change the "Log in" button text.
+    $form['actions']['submit']['#value'] = t('Log in and set password');
+  }
+}
+
+/**
+ * Implements hook_mail().
+ */
+function fsa_signin_mail($key, &$message, $params) {
+
+  $options = ['langcode' => $message['langcode']];
+
+  switch ($key) {
+    case 'unsubscribed':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('Alerts unsubscribe notification', [], $options);
+      $message['body'][] = $params['message'];
+      break;
+  }
+}
+
+/**
+ * Create consultation subscription categories.
+ */
+function fsa_signin_update_8001() {
+  // Add terms to consultation type alert subscriptions (if vocab is empty).
+  $vid = 'consultations_type_alerts';
+  $vocab = \Drupal::service('entity_type.manager')
+    ->getStorage('taxonomy_term')
+    ->loadTree($vid);
+
+  if (empty($vocab)) {
+    $items = [
+      'UK-wide consultations',
+      'England consultations',
+      'Wales Consultations',
+      'Northern Ireland consultations',
+      'Ymgynghoridau - Consultations in Welsh',
+    ];
+
+    foreach ($items as $item) {
+      $term = Term::create([
+        'parent' => [],
+        'name' => $item,
+        'vid' => $vid,
+      ])->save();
+
+      if ($term) {
+        drupal_set_message('Created term ' . $item);
+      }
+    }
+  }
+}

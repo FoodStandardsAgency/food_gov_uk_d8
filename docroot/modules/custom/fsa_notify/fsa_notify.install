@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @file
+ * Contains fsa_notify.install code.
+ */
+
+use Drupal\user\Entity\User;
+use Drupal\fsa_signin\SignInService;
+use Drupal\Core\Database\Database;
+
+/**
+ * Update all user telephone numbers to the new format (without countrycode)
+ */
+function fsa_notify_update_8001(&$sandbox) {
+  $users = User::loadMultiple();
+  $cc = SignInService::DEFAULT_COUNTRY_CODE;
+  foreach ($users as $user) {
+    $phone = $user->get('field_notification_sms')->getString();
+    if ($phone != '') {
+      // Remove plus and the countrycode.
+      $phone = ltrim(str_replace('+', '', $phone), $cc);
+      $user->field_notification_sms->setValue([$phone]);
+      $user->save();
+      drupal_set_message('user/' . $user->id() . ' phone number updated.');
+    }
+  }
+}
+
+/**
+ * Clear bloated notification cache tables to start from fresh.
+ */
+function fsa_notify_update_8002(&$sandbox) {
+  $tables = [
+    'user__field_notification_cache_sms',
+    'user__field_notification_cache',
+  ];
+  $connection = Database::getConnection();
+  foreach ($tables as $table) {
+    $connection->truncate($table)->execute();
+  }
+}
+
+/**
+ * Update user langcode to preferred_langcode.
+ */
+function fsa_notify_update_8003(&$sandbox) {
+  $connection = Database::getConnection();
+  $connection->query("UPDATE {users_field_data} SET langcode = preferred_langcode WHERE langcode != preferred_langcode");
+}

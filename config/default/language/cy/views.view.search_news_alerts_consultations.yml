@@ -1,0 +1,41 @@
+display:
+  default:
+    display_options:
+      title: 'Ymgynghoriadau '
+      filters:
+        keyword:
+          expose:
+            label: Chwilio
+        news_type:
+          expose:
+            label: 'Math o archwiliad'
+        consultation_status:
+          expose:
+            label: Statws
+        consultation_responses_published:
+          expose:
+            label: Ymatebion
+        consultation_year:
+          expose:
+            label: Blwyddyn
+        nation:
+          expose:
+            label: Rhanbarth
+      header:
+        result:
+          content: '<h2 class="visually-hidden">Canlyniadau chwilio</h2><div class="visually-hidden" aria-live="polite">Dangos @start-@end o @total gyda’r dewisiadau hidlo presennol</div>'
+      footer:
+        result:
+          content: '<span class="search-result-page-count">Yn dangos @start-@end o @total</span>'
+        area_text_custom:
+          content: "<div class=\"link-to-archieve\">\r\n<span>Ymgynghoriadau blaenorol</span> <a href=\"http://webarchive.nationalarchives.gov.uk/20171207145535/https://www.food.gov.uk/news-updates/consultations/search\">Archifau Cenedlaethol</a>\r\n</div>"
+      exposed_form:
+        options:
+          submit_button: Chwilio
+      pager:
+        options:
+          tags:
+            previous: '‹ Blaenorol'
+            next: 'Nesaf ›'
+            first: '« Gyntaf'
+            last: 'Diwethaf »'

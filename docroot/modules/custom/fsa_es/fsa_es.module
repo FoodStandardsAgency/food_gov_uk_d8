@@ -1,0 +1,172 @@
+<?php
+
+/**
+ * @file
+ * FSA ES module file.
+ */
+
+use Drupal\views\Views;
+
+/**
+ * Implements hook_block_alter().
+ *
+ * Changes the view's exposed form block definition and
+ * hands that to a custom block plugin which will only show relevant elements
+ * on the search form.
+ *
+ * @see Drupal\fsa_es\Plugin\Block\ViewsExposedFilterSearchBlock
+ */
+function fsa_es_block_alter(array &$info) {
+  foreach ($info as $delta => $block) {
+    if (stripos($delta, 'views_exposed_filter_block:') === 0) {
+      $info[$delta]['class'] = 'Drupal\fsa_es\Plugin\Block\ViewsExposedFilterSearchBlock';
+    }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_alter().
+ *
+ * Suggests a separate "block" template for views exposed filter blocks that
+ * relate to search filters.
+ *
+ * Suggests a separate "views-view" template for global ratings search view.
+ */
+function fsa_es_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+  switch ($hook) {
+    case 'block':
+      // @todo Add block IDs that relate to global search filters.
+      $block_ids = [
+        'search_global_ratings_filters',
+        'search_global_guidance_filters',
+      ];
+
+      if (in_array($variables['elements']['#id'], $block_ids, TRUE)) {
+        $suggestions[] = 'block__' . $variables['elements']['#base_plugin_id'] . '__search_global_filters';
+      }
+      break;
+
+    case 'views_view':
+      $view = $variables['view'];
+
+      if ($view->storage->id() == 'search_global_ratings') {
+        $suggestions[] = 'views_view__' . $view->storage->id();
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_form_HOOK_alter().
+ *
+ * Adds "Copy results URL" link to search view exposed filters.
+ */
+function fsa_es_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  if (!\Drupal::currentUser()->isAnonymous()) {
+    // Target all search views exposed forms.
+    $view_name_part = 'views-exposed-form-search-';
+    if (substr($form['#id'], 0, strlen($view_name_part)) === $view_name_part) {
+      $form['#attached']['library'][] = 'fsa_es/result_copy_link';
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ *
+ * Embeds ratings into global search page (/search).
+ */
+function fsa_es_preprocess_views_view(&$variables) {
+  /** @var \Drupal\views\ViewExecutable $view */
+  $view = $variables['view'];
+
+  // Sends Ajax-enabled views...
+  if ($view->ajaxEnabled() && empty($view->live_preview)) {
+    // Sends Ajax-enabled views js to improve accessibility.
+    $view->element['#attached']['library'][] = 'fsa_es/accessibility';
+
+    // Sends Ajax-enabled views results total for display in a separate block.
+    $view->element['#attached']['library'][] = 'fsa_es/result_totals';
+    $view->element['#attached']['drupalSettings']['fsa_es']['result_totals'] = [
+      'keywords' => isset($view->filter['keyword']) ? $view->filter['keyword']->value : NULL,
+      'total' => [
+        // Result totals can show results from the main view and from
+        // embedded ratings view.
+        'main_view' => $view->total_rows,
+      ],
+    ];
+  }
+
+  // empty($view->pager->current_page) = either not set or first page (current page = 0).
+  if ($view->storage->id() == 'search_global_all' && empty($view->pager->current_page)) {
+    $embed_view_id = 'search_global_ratings_embed';
+    $embed_view_display = 'embed_1';
+    $decoupled = FALSE;
+
+    if (\Drupal::state()->get('fsa_ratings.decoupled')) {
+      $current_user = \Drupal::currentUser();
+      $roles = $current_user->getRoles();
+      if (in_array('administrator', $roles)) {
+        drupal_set_message(t("Ratings content is decoupled, visitors will not see the Food hygiene ratings results."), 'warning');
+      }
+      else {
+        $decoupled = TRUE;
+      }
+    }
+
+    // Get embed view (if not in decoupled mode).
+    if (!$decoupled && $ratings_embed_view = Views::getView($embed_view_id)) {
+      // Get keywords filter value from the parent view.
+      // It's important that keyword is either a value or NULL (no empty
+      // stings) since ViewExecutable::_buildArguments() will produce a failed
+      // state.
+      $keywords = isset($view->filter['keyword']->value) && $view->filter['keyword']->value != '' ? $view->filter['keyword']->value : NULL;
+
+      // Get embed build.
+      $ratings_embed_build = $ratings_embed_view->preview($embed_view_display, [$keywords]);
+      $ratings_embed_build['#access'] = !empty($ratings_embed_view->result) && $ratings_embed_view->access($embed_view_display);
+
+      // If there are more than 3 values, inject the ratings embed after 3rd element.
+      if ($ratings_embed_build['#access']) {
+        // Result totals can show results from the main view and from
+        // embedded ratings view.
+        $variables['#attached']['drupalSettings']['fsa_es']['result_totals']['total']['ratings'] = $ratings_embed_view->total_rows;
+
+        // If there are results in "search_global_all", inject or append the
+        // embedded ratings view.
+        if (!empty($variables['rows'])) {
+          if (isset($variables['rows'][0]['#rows']) && count($variables['rows'][0]['#rows']) > 3) {
+            array_splice($variables['rows'][0]['#rows'], 3, 0, [$ratings_embed_build]);
+          }
+          // If there are less than 3 values, just append at the end.
+          else {
+            $variables['rows'][0]['#rows'][] = $ratings_embed_build;
+          }
+        }
+        // If there are no results in "search_global_all", add directly to "rows" element.
+        else {
+          $variables['rows'][] = $ratings_embed_build;
+        }
+      }
+    }
+  }
+  elseif ($view->storage->id() == 'search_global_ratings_embed') {
+    // This changes the view more link to include the search keyword and
+    // anchor. Unfortunately this is not possible with Views UI.
+    if ($params = \Drupal::service('request_stack')->getCurrentRequest()->query->all()) {
+      // The "keywords" query parameter name for keywords is supposed to be the
+      // same for global search and ratings search for consistency.
+      $keyword_param_key = 'keywords';
+
+      if (isset($params[$keyword_param_key])) {
+        /** @var \Drupal\Core\Url $more_url */
+        $more_url = $variables['more']['#url'];
+        // Get existing query (if available).
+        $more_query = $more_url->getOption('query') ? $more_url->getOption('query') : [];
+        // Set options.
+        $more_url->setOption('query', array_merge($more_query, [$keyword_param_key => $params[$keyword_param_key]]));
+        $more_url->setOption('fragment', 'results');
+      }
+    }
+  }
+}

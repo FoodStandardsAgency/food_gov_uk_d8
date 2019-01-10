@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ * FSA theme override for a breadcrumb trail.
+ *
+ * Available variables:
+ * - breadcrumb: Breadcrumb trail items.
+ */
+#}
+{% if breadcrumb %}
+  <h2 class="visually-hidden">{{ 'Breadcrumb'|t }}</h2>
+  {% for item in breadcrumb %}
+    <div class="breadcrumb__item">
+      {% if item.url %}
+        {% spaceless %}
+        <a href="{{ item.url }}" class="breadcrumb__link"
+          {% if item.attributes %}{% for key,value in item.attributes %}
+            {{ key }}="{{ value }}"
+          {% endfor %}{% endif %}
+            >{{ item.text }}</a>
+        {% endspaceless %}
+      {% else %}
+        {{ item.text }}
+      {% endif %}
+    </div>
+  {% endfor %}
+{% endif %}

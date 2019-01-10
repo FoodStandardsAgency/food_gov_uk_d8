@@ -1,0 +1,26 @@
+data_layer.hygiene_ratings:
+  js:
+    js/hygiene-ratings.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
+    - core/drupalSettings
+
+data_layer.search:
+  js:
+    js/search.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
+    - core/drupalSettings
+
+data_layer.navref:
+  js:
+    js/navref.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
+    - core/drupalSettings

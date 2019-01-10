@@ -9,32 +9,32 @@ Small module to force noindex robot metatag on all pages in order to avoid site 
 The module should be uninstalled and removed once site is launched to public.
 
 ## FSA Content reminder (`fsa_content_reminder`)
-Sends reminders and displays a list of content that may require attention from 
-editorial team. 
+Sends reminders and displays a list of content that may require attention from
+editorial team.
 
-See [README.md](../drupal/web/modules/custom/fsa_content_reminder/README.md) for
+See [README.md](../docroot/modules/custom/fsa_content_reminder/README.md) for
 more information.
 
 ## FSA Custom (`fsa_custom`)
-FSA site small customizations and configuration pages. 
+FSA site small customizations and configuration pages.
 
-See [README.md](../drupal/web/modules/custom/fsa_custom/README.md) for more information.
+See [README.md](../docroot/modules/custom/fsa_custom/README.md) for more information.
 
 ## FSA ES (`fsa_es`)
-Index FSA Ratings module-created entities to Elasticsearch for. 
+Index FSA Ratings module-created entities to Elasticsearch for.
 
-See [README.md](../drupal/web/modules/custom/fsa_es/README.md) for more information.
+See [README.md](../docroot/modules/custom/fsa_es/README.md) for more information.
 
 ## Linkit content (`linkit_content`)
 
 Adds internal link/anchor search to WYSIWYG.
 
-See [README.md](../drupal/web/modules/custom/linkit_content/README.md) for more information.
+See [README.md](../docroot/modules/custom/linkit_content/README.md) for more information.
 
 ## FSA Notify (`fsa_notify`)
-Send notifications to subscribed users using GOV.UK notify service. 
+Send notifications to subscribed users using GOV.UK notify service.
 
-See [README.md](../drupal/web/modules/custom/fsa_notify/README.md) for more information.
+See [README.md](../docroot/modules/custom/fsa_notify/README.md) for more information.
 
 ## FSA Ratings (`fsa_ratings`)
 Creates custom entities for FHRS Rating data.
@@ -53,4 +53,10 @@ Details of local authorities are stored in the database, so the relevant entity 
 
 Small module to add anchors to h1-h6 tags of body fields.
 
-See [README.md](../drupal/web/modules/custom/fsa_toc/README.md) for more information.
+See [README.md](../docroot/modules/custom/fsa_toc/README.md) for more information.
+
+## Managed Links (`managed_links`)
+
+This module provides centrally managed entities that allow a library of common Links to be curated by FSA editors.
+
+See [README.md](../docroot/modules/custom/managed_links/README.md) for further information.
