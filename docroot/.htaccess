@@ -97,6 +97,8 @@ AddEncoding gzip svgz
 
   # Exclude Acquia domains.
   RewriteCond %{HTTP_HOST} !\.acquia-sites\.com [NC]
+  # Exclude DDEV hostnames.
+  RewriteCond %{HTTP_HOST} !\.ddev\.local [NC]
 
   # If your site can be accessed both with and without the 'www.' prefix, you
   # can use one of the following settings to redirect users to your preferred
