@@ -79,7 +79,7 @@ $config['shield.settings']['credentials']['shield']['user'] = getenv('HTTP_AUTH_
 $config['shield.settings']['credentials']['shield']['pass'] = getenv('HTTP_AUTH_PWD');
 
 // Stage file proxy origin.
-$config['stage_file_proxy.settings']['origin'] = 'http://foodgovuk.prod.acquia-sites.com';
+$config['stage_file_proxy.settings']['origin'] = 'https://www.food.gov.uk';
 
 // SMTP settings: from environment variables.
 $config['smtp.settings']['smtp_host']     = getenv('SMTP_HOST');
