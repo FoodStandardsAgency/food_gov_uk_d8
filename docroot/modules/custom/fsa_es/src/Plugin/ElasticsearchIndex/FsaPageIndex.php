@@ -52,8 +52,10 @@ class FsaPageIndex extends FsaIndexBase {
                 'type' => 'text',
                 'analyzer' => $text_analyzer,
               ],
-              // Intro is included in the body cause there's no need to
-              // separate them.
+              'intro' => [
+                'type' => 'text',
+                'analyzer' => $text_analyzer,
+              ],
               'body' => [
                 'type' => 'text',
                 'analyzer' => $text_analyzer,

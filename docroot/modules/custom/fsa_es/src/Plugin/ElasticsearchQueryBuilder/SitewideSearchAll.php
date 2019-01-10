@@ -81,47 +81,10 @@ class SitewideSearchAll extends SitewideSearchBase {
       $query_must_filters[] = [
         'multi_match' => [
           'query' => $values['keyword'],
-          'fields' => ['name^3', 'body'],
+          'fields' => ['name^5', 'intro^3', 'body'],
           'fuzziness' => 1,
           'operator' => 'and',
         ],
-      ];
-      // Sort the result by priority list and date created params.content_type.get(doc[\'_type\'].value)
-      $query['body']['sort'] = [
-        // If the index `type` is `page`, then sort by page taxonomy `content_type`,
-        // Else, sort by index `type`.
-        '_script' => [
-          'type' => 'number',
-          'script' => [
-            'lang' => 'painless',
-            'inline' => '
-                if (doc._type.value == "page") {
-                  params.page_taxonomy.get(params._source.content_type[0].label)
-                } else {
-                  params.content_type.get(doc._type.value)
-                }
-            ',
-            'params' => [
-              'content_type' => [
-                'page' => 0,
-                'news' => 10,
-                'alert' => 20,
-                'consultation' => 30,
-                'research' => 40,
-              ],
-              'page_taxonomy' => [
-                'Business guidance' => 1,
-                'Consumer guidance' => 2,
-                'About us' => 3,
-                'Help' => 4,
-                'News & alerts' => 5,
-                'Other' => 6,
-              ],
-            ],
-          ],
-          'order' => 'asc',
-        ],
-        'created' => 'desc',
       ];
     }
     else {
