@@ -122,6 +122,11 @@
             "docroot/themes/contrib/{$name}": ["type:drupal-theme"],
             "docroot/drush/commands/{$name}": ["type:drupal-drush"]
         },
+        "drupal-scaffold": {
+            "excludes": [
+                ".htaccess"
+            ]
+        },
         "patches": {
             "drupal/core": {
                 "RSS view with fields give wrong URL from path field": "https://www.drupal.org/files/issues/2018-04-20/2673980-36.patch",
