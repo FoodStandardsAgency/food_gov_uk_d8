@@ -91,7 +91,6 @@ $config['smtp.settings']['smtp_from']     = getenv('SMTP_FROM');
 switch ($env) {
   case 'prod':
     $settings['container_yamls'][] = $app_root . '/' . $site_path . '/prod.services.yml';
-
     $settings['simple_environment_indicator'] = '#d4000f Production';
 
     // GTM Environment overrides.
@@ -133,10 +132,6 @@ switch ($env) {
     $config['google_tag.settings']['environment_id'] = 'env-5';
     $config['google_tag.settings']['environment_token'] = 'nNEwJ_lItnO48_pabdUErg';
 
-    // Shield config.
-    $config['shield.settings']['user'] = 'fsauser';
-    $config['shield.settings']['pass'] = 'FCeDh4u&7n2p';
-
     // Memcache.
     $settings['cache']['default'] = 'cache.backend.memcache';
 
@@ -170,6 +165,14 @@ switch ($env) {
     $settings['memcache']['servers'] = ['memcached:11211' => 'default'];
 
     break;
+}
+
+// CD / On-Demand environments.
+if (preg_match('/(ode\d+)/', $env)) {
+  $settings['container_yamls'][] = $app_root . '/' . $site_path . '/stage.services.yml';
+
+  // Memcache.
+  $settings['cache']['default'] = 'cache.backend.memcache';
 }
 
 /**
