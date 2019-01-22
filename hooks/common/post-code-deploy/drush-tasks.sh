@@ -11,6 +11,9 @@ site=$1
 target_env=$2
 drush_alias=$site'.'$target_env
 
+# Clear any stale drush caches.
+drush @$drush_alias cc drush -y
+
 # Update database schema.
 drush @$drush_alias updb -y
 
