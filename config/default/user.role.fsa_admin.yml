@@ -71,6 +71,7 @@ permissions:
   - 'revert help revisions'
   - 'revert lander revisions'
   - 'revert webform revisions'
+  - 'setup own tfa'
   - 'switch shortcut sets'
   - 'translate any entity'
   - 'translate audience taxonomy_term'

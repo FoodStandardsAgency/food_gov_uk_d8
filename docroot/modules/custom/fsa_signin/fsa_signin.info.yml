@@ -8,3 +8,4 @@ dependencies:
   - drupal:email_registration
   - drupal:datalayer
   - fsa_custom
+  - tfa
