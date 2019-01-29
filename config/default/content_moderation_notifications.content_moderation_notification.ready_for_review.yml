@@ -8,7 +8,7 @@ transitions:
   submit_draft: submit_draft
 roles: {  }
 author: false
-emails: fsa.communications@food.gov.uk
+emails: paul@wearesort.co.uk
 subject: 'Content ready for review at [site:url-brief]'
 body:
   value: "<p>Draft content \"<strong>[node:title]</strong>\" has been submitted for review at [site:url-brief].</p>\r\n\r\n<ul>\r\n\t<li>Updated: [node:changed:long]</li>\r\n\t<li>Updated by: [current-user:mail]</li>\r\n\t<li>Log message: [node:log]</li>\r\n\t<li>View: [node:url:unaliased]/latest</li>\r\n\t<li>Edit: [node:edit-url]</li>\r\n</ul>\r\n"
