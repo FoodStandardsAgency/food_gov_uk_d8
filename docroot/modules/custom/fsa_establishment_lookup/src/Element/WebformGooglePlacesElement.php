@@ -93,6 +93,10 @@ class WebformGooglePlacesElement extends FormElement {
         // Lookup the local authority for the establishment by using the postcode value supplied.
         $mapit_service_data = \Drupal::service('fsa_team_finder.get_local_authority')->get($postcode);
 
+        if (empty($mapit_service_data)) {
+          return;
+        }
+
         // Entity query fsa local authority.
         $fsa_authority = \Drupal::entityTypeManager()
           ->getStorage('fsa_authority')
