@@ -36,6 +36,7 @@ permissions:
   - 'notify of path changes'
   - 'revert page revisions'
   - 'revert research_project revisions'
+  - 'setup own tfa'
   - 'revert team_contacts revisions'
   - 'translate block_content'
   - 'translate consultation node'
