@@ -124,6 +124,9 @@ switch ($env) {
     // Memcache.
     $settings['cache']['default'] = 'cache.backend.memcache';
 
+    // TFA.
+    $config['tfa.settings']['enabled'] = FALSE;
+
     break;
 
   case 'test':
