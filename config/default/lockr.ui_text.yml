@@ -1,0 +1,21 @@
+admin_page:
+  header:
+    not_registered: "Welcome to Lockr! You're just a few steps away from storing your\nkeys safe and secure. To make things simple we've laid out a few\nkey elements (pun intended) that the system requires in order to \nrun. Fill out the forms below and once all rows on the table are\ngreen, you're good to go! It's that simple! If you'd like\nassistance in getting up and running be sure to\n<a href=\"mailto:support@lockr.io\">email us</a> or connect with us\non <a href=\"http://slack.lockr.io\">Slack</a>.\n"
+    registered: "All systems are a go! Your site is registered, your certificate\nis valid and everything seems good on our end. The table below\nwill give you the status of all elements. Should anything look\nout of the ordinary just let us know on the Slack channel and\nwe'd be happy to help. Happy Keying!\n"
+  status:
+    cert:
+      valid: "You're a certified Lockr user! We've found your certificate and\nit validates with our system.\n"
+      not_valid: "Oops! Looks like we need to know who you are before we give you\nthe keys to the castle. Your certificate is not valid, please\nregister for one. If you've already gotten a certificate, we are\nunable to find it. Please check the advanced settings to ensure\nyour path is correct (or if you're on a hosting partner contact\ntheir support).\n"
+    path:
+      exists: "We've found your private directory and are stashing the\ncertificates there for now. We HIGHLY recommend moving the\ncertificates to a directory OUTSIDE the webroot that is not\npublicly available.\n"
+      invalid: "We cannot find your private directory to temporarily store the\ncertificates that are generated. Please ensure you have a private\ndirectory and reload the page.\n"
+      unknown: "We cannot find your private directory to temporarily store the\ncertificates that are generated. Please ensure you have a private\ndirectory and reload the page.\n"
+    registered: "You're one of the family. We've got your site registered and\nyou're all good to go!\n"
+    not_registered: "Who are you again? We don't have your site registered with Lockr.\nPlease use the form below to register your site.\n"
+    cc:
+      has: "We've got your credit card safely on file and you'll be recieving\nregular invoices for your key usage.\n"
+      missing:
+        required: "Uh oh! Without a credit card we cannot issue a production\ncertificate. Please add one before migrating to production.\n"
+        not_required: "You're all set, no credit card needed for your account.\n"
+_core:
+  default_config_hash: k13BOqCaBdZKyJkxpNXNpTK_1_GFUZjoni_TLw1KOsU

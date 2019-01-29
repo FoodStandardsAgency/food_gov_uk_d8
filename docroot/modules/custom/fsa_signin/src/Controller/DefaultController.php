@@ -9,7 +9,7 @@ use Drupal\fsa_signin\Event\UserSubscriptionEvent;
 use Drupal\fsa_signin\Form\ChangePassword;
 use Drupal\fsa_signin\Form\DeliveryOptions;
 use Drupal\fsa_signin\Form\SendPasswordEmailForm;
-use Drupal\user\Form\UserLoginForm;
+use Drupal\tfa\Form\TfaLoginForm;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\fsa_signin\SignInService;
 use Drupal\user\Entity\User;
@@ -60,8 +60,7 @@ class DefaultController extends ControllerBase {
     }
 
     $content = ['#markup' => $title . $body];
-
-    $login_form = \Drupal::formBuilder()->getForm(UserLoginForm::class);
+    $login_form = \Drupal::formBuilder()->getForm(TfaLoginForm::class);
 
     return [
       $content,

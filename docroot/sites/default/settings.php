@@ -51,6 +51,9 @@ $settings['config_readonly_whitelist_patterns'] = [
   'config.fsa_consultations',
   'force_password_change.settings',
   'fsa_content_reminder.settings',
+  'key.*',
+  'encrypt.*',
+  'tfa.*',
   'webform.webform.food_fraud_crime',
   'webform.webform.food_poisoning',
   'webform.webform.foreign_object',
@@ -79,7 +82,7 @@ $config['shield.settings']['credentials']['shield']['user'] = getenv('HTTP_AUTH_
 $config['shield.settings']['credentials']['shield']['pass'] = getenv('HTTP_AUTH_PWD');
 
 // Stage file proxy origin.
-$config['stage_file_proxy.settings']['origin'] = 'http://foodgovuk.prod.acquia-sites.com';
+$config['stage_file_proxy.settings']['origin'] = 'https://www.food.gov.uk';
 
 // SMTP settings: from environment variables.
 $config['smtp.settings']['smtp_host']     = getenv('SMTP_HOST');
@@ -91,7 +94,6 @@ $config['smtp.settings']['smtp_from']     = getenv('SMTP_FROM');
 switch ($env) {
   case 'prod':
     $settings['container_yamls'][] = $app_root . '/' . $site_path . '/prod.services.yml';
-
     $settings['simple_environment_indicator'] = '#d4000f Production';
 
     // GTM Environment overrides.
@@ -133,10 +135,6 @@ switch ($env) {
     $config['google_tag.settings']['environment_id'] = 'env-5';
     $config['google_tag.settings']['environment_token'] = 'nNEwJ_lItnO48_pabdUErg';
 
-    // Shield config.
-    $config['shield.settings']['user'] = 'fsauser';
-    $config['shield.settings']['pass'] = 'FCeDh4u&7n2p';
-
     // Memcache.
     $settings['cache']['default'] = 'cache.backend.memcache';
 
@@ -170,6 +168,14 @@ switch ($env) {
     $settings['memcache']['servers'] = ['memcached:11211' => 'default'];
 
     break;
+}
+
+// CD / On-Demand environments.
+if (preg_match('/(ode\d+)/', $env)) {
+  $settings['container_yamls'][] = $app_root . '/' . $site_path . '/stage.services.yml';
+
+  // Memcache.
+  $settings['cache']['default'] = 'cache.backend.memcache';
 }
 
 /**
