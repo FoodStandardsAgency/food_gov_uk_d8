@@ -91,6 +91,9 @@ $config['smtp.settings']['smtp_username'] = getenv('SMTP_USERNAME');
 $config['smtp.settings']['smtp_password'] = getenv('SMTP_PASSWORD');
 $config['smtp.settings']['smtp_from']     = getenv('SMTP_FROM');
 
+// TFA - enable on environments required.
+$config['tfa.settings']['enabled'] = FALSE;
+
 switch ($env) {
   case 'prod':
     $settings['container_yamls'][] = $app_root . '/' . $site_path . '/prod.services.yml';
@@ -110,6 +113,9 @@ switch ($env) {
 
     // Disable Shield on prod by setting the shield user variable to NULL
     $config['shield.settings']['credentials']['shield']['user'] = NULL;
+
+    // Enable TFA.
+    $config['tfa.settings']['enabled'] = TRUE;
 
     break;
 
