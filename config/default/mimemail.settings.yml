@@ -1,0 +1,14 @@
+format: full_html
+name: 'Food Standards Agency'
+mail: no-reply@food.gov.uk
+linkonly: false
+textonly: false
+sitestyle: false
+simple_address: false
+engine: mimemail
+preserve_class: false
+advanced:
+  incoming: false
+  key: YXoC_TsJCScP5LyF49cZ5kriFQAPi_4lwyp-Vk8nADE
+_core:
+  default_config_hash: 7mRdLbI-Rda0ePrw4IkNSJd8m_lTx7nLZnVfbNbyfwA
