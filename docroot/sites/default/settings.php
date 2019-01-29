@@ -119,19 +119,6 @@ switch ($env) {
 
     break;
 
-  case 'dev':
-    $settings['container_yamls'][] = $app_root . '/' . $site_path . '/dev.services.yml';
-    $settings['simple_environment_indicator'] = '#004984 Development';
-
-    // GTM Environment overrides.
-    $config['google_tag.settings']['environment_id'] = 'env-6';
-    $config['google_tag.settings']['environment_token'] = '4d3H88TmNOCwXVDx0PK8bg';
-
-    // Memcache.
-    $settings['cache']['default'] = 'cache.backend.memcache';
-
-    break;
-
   case 'test':
     // Now known as stage on Acquia Cloud platform, but machine key is 'test'.
     $settings['container_yamls'][] = $app_root . '/' . $site_path . '/stage.services.yml';
@@ -146,6 +133,19 @@ switch ($env) {
 
     // Enable TFA.
     $config['tfa.settings']['enabled'] = TRUE;
+
+    break;
+
+  case 'dev':
+    $settings['container_yamls'][] = $app_root . '/' . $site_path . '/dev.services.yml';
+    $settings['simple_environment_indicator'] = '#004984 Development';
+
+    // GTM Environment overrides.
+    $config['google_tag.settings']['environment_id'] = 'env-6';
+    $config['google_tag.settings']['environment_token'] = '4d3H88TmNOCwXVDx0PK8bg';
+
+    // Memcache.
+    $settings['cache']['default'] = 'cache.backend.memcache';
 
     break;
 
