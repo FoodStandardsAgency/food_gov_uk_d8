@@ -91,6 +91,9 @@ $config['smtp.settings']['smtp_username'] = getenv('SMTP_USERNAME');
 $config['smtp.settings']['smtp_password'] = getenv('SMTP_PASSWORD');
 $config['smtp.settings']['smtp_from']     = getenv('SMTP_FROM');
 
+// TFA - enable on environments required.
+$config['tfa.settings']['enabled'] = FALSE;
+
 switch ($env) {
   case 'prod':
     $settings['container_yamls'][] = $app_root . '/' . $site_path . '/prod.services.yml';
@@ -111,18 +114,8 @@ switch ($env) {
     // Disable Shield on prod by setting the shield user variable to NULL
     $config['shield.settings']['credentials']['shield']['user'] = NULL;
 
-    break;
-
-  case 'dev':
-    $settings['container_yamls'][] = $app_root . '/' . $site_path . '/dev.services.yml';
-    $settings['simple_environment_indicator'] = '#004984 Development';
-
-    // GTM Environment overrides.
-    $config['google_tag.settings']['environment_id'] = 'env-6';
-    $config['google_tag.settings']['environment_token'] = '4d3H88TmNOCwXVDx0PK8bg';
-
-    // Memcache.
-    $settings['cache']['default'] = 'cache.backend.memcache';
+    // Enable TFA.
+    $config['tfa.settings']['enabled'] = TRUE;
 
     break;
 
@@ -134,6 +127,22 @@ switch ($env) {
     // GTM Environment overrides.
     $config['google_tag.settings']['environment_id'] = 'env-5';
     $config['google_tag.settings']['environment_token'] = 'nNEwJ_lItnO48_pabdUErg';
+
+    // Memcache.
+    $settings['cache']['default'] = 'cache.backend.memcache';
+
+    // Enable TFA.
+    $config['tfa.settings']['enabled'] = TRUE;
+
+    break;
+
+  case 'dev':
+    $settings['container_yamls'][] = $app_root . '/' . $site_path . '/dev.services.yml';
+    $settings['simple_environment_indicator'] = '#004984 Development';
+
+    // GTM Environment overrides.
+    $config['google_tag.settings']['environment_id'] = 'env-6';
+    $config['google_tag.settings']['environment_token'] = '4d3H88TmNOCwXVDx0PK8bg';
 
     // Memcache.
     $settings['cache']['default'] = 'cache.backend.memcache';
