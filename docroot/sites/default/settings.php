@@ -111,6 +111,11 @@ switch ($env) {
     // Disable Shield on prod by setting the shield user variable to NULL
     $config['shield.settings']['credentials']['shield']['user'] = NULL;
 
+    // Enable SMTP through Main System.
+    $config['mailsystem.settings']['defaults']['sender'] = 'SMTPMailSystem';
+    $config['mailsystem.settings']['modules']['content_moderation_notifications']['none']['sender'] = 'SMTPMailSystem';
+    $config['mailsystem.settings']['modules']['webform']['none']['sender'] = 'SMTPMailSystem';
+
     break;
 
   case 'dev':
@@ -137,6 +142,11 @@ switch ($env) {
 
     // Memcache.
     $settings['cache']['default'] = 'cache.backend.memcache';
+
+    // Enable SMTP through Main System.
+    $config['mailsystem.settings']['defaults']['sender'] = 'SMTPMailSystem';
+    $config['mailsystem.settings']['modules']['content_moderation_notifications']['none']['sender'] = 'SMTPMailSystem';
+    $config['mailsystem.settings']['modules']['webform']['none']['sender'] = 'SMTPMailSystem';
 
     break;
 
