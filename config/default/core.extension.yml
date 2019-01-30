@@ -99,6 +99,7 @@ module:
   linkit_content: 0
   locale: 0
   lockr: 0
+  mailsystem: 0
   managed_links: 0
   media_entity: 0
   media_entity_browser: 0
@@ -118,6 +119,7 @@ module:
   migrate: 0
   migrate_plus: 0
   migrate_tools: 0
+  mimemail: 0
   node: 0
   options: 0
   page_cache: 0
