@@ -91,6 +91,9 @@ $config['smtp.settings']['smtp_username'] = getenv('SMTP_USERNAME');
 $config['smtp.settings']['smtp_password'] = getenv('SMTP_PASSWORD');
 $config['smtp.settings']['smtp_from']     = getenv('SMTP_FROM');
 
+// TFA - enable on environments required.
+$config['tfa.settings']['enabled'] = FALSE;
+
 switch ($env) {
   case 'prod':
     $settings['container_yamls'][] = $app_root . '/' . $site_path . '/prod.services.yml';
@@ -111,7 +114,32 @@ switch ($env) {
     // Disable Shield on prod by setting the shield user variable to NULL
     $config['shield.settings']['credentials']['shield']['user'] = NULL;
 
-    // Enable SMTP through Main System.
+    // Enable TFA.
+    $config['tfa.settings']['enabled'] = TRUE;
+
+    // Enable SMTP through Mail System.
+    $config['mailsystem.settings']['defaults']['sender'] = 'SMTPMailSystem';
+    $config['mailsystem.settings']['modules']['content_moderation_notifications']['none']['sender'] = 'SMTPMailSystem';
+    $config['mailsystem.settings']['modules']['webform']['none']['sender'] = 'SMTPMailSystem';
+
+    break;
+
+  case 'test':
+    // Now known as stage on Acquia Cloud platform, but machine key is 'test'.
+    $settings['container_yamls'][] = $app_root . '/' . $site_path . '/stage.services.yml';
+    $settings['simple_environment_indicator'] = '#e56716 Stage';
+
+    // GTM Environment overrides.
+    $config['google_tag.settings']['environment_id'] = 'env-5';
+    $config['google_tag.settings']['environment_token'] = 'nNEwJ_lItnO48_pabdUErg';
+
+    // Memcache.
+    $settings['cache']['default'] = 'cache.backend.memcache';
+
+    // Enable TFA.
+    $config['tfa.settings']['enabled'] = TRUE;
+
+    // Enable SMTP through Mail System.
     $config['mailsystem.settings']['defaults']['sender'] = 'SMTPMailSystem';
     $config['mailsystem.settings']['modules']['content_moderation_notifications']['none']['sender'] = 'SMTPMailSystem';
     $config['mailsystem.settings']['modules']['webform']['none']['sender'] = 'SMTPMailSystem';
@@ -128,25 +156,6 @@ switch ($env) {
 
     // Memcache.
     $settings['cache']['default'] = 'cache.backend.memcache';
-
-    break;
-
-  case 'test':
-    // Now known as stage on Acquia Cloud platform, but machine key is 'test'.
-    $settings['container_yamls'][] = $app_root . '/' . $site_path . '/stage.services.yml';
-    $settings['simple_environment_indicator'] = '#e56716 Stage';
-
-    // GTM Environment overrides.
-    $config['google_tag.settings']['environment_id'] = 'env-5';
-    $config['google_tag.settings']['environment_token'] = 'nNEwJ_lItnO48_pabdUErg';
-
-    // Memcache.
-    $settings['cache']['default'] = 'cache.backend.memcache';
-
-    // Enable SMTP through Main System.
-    $config['mailsystem.settings']['defaults']['sender'] = 'SMTPMailSystem';
-    $config['mailsystem.settings']['modules']['content_moderation_notifications']['none']['sender'] = 'SMTPMailSystem';
-    $config['mailsystem.settings']['modules']['webform']['none']['sender'] = 'SMTPMailSystem';
 
     break;
 
