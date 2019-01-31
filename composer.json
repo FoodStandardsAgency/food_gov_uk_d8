@@ -94,7 +94,17 @@
         "drupal/ga_login": "^1.0@alpha",
         "drupal/encrypt": "^3.0@alpha",
         "drupal/lockr": "^2.3",
-        "drupal/real_aes": "^2.1"
+        "drupal/real_aes": "^2.1",
+        "zaporylie/composer-drupal-optimizations": "^1.0",
+        "league/csv": "^9.0",
+        "drupal/permissions_filter": "^1.0",
+        "drupal/memcache": "2.0-alpha7",
+        "wunderio/drupal-ping": "^1.0",
+        "drupal/acquia_purge": "^1.0@beta",
+        "drupal/shield": "^1.2",
+        "drupal/acquia_connector": "^1.14",
+        "drupal/smtp": "^1.0@beta",
+        "drupal/mimemail": "1.x-dev"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
@@ -162,6 +172,9 @@
             },
             "drupal/force_password_change": {
                 "A role with an expiration of 0 requires a password change on every login": "https://www.drupal.org/files/issues/force_password_change-2884243-2_0.patch"
+            },
+            "drupal/field_validation": {
+                "Declaration of (...)FieldValidationRuleAddForm::buildForm must be compatible with (...)FieldValidationRuleFormBase::buildForm": "https://www.drupal.org/files/issues/2941006-php-incompatible-buildform-signature.patch"
             }
         },
         "dropin-paths": {

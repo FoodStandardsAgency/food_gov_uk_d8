@@ -67,45 +67,68 @@ class WebformGooglePlacesElement extends FormElement {
 
     if ($element['#type'] == 'webform_googleplace') {
 
-      $notfound = 'N/A';
+      $fsa_authority = NULL;
+      $fsa_authority_id = 0;
+
+      // Postcode value is sourced from Google Places, populated into the form element via JS.
+      $postcode = $form_state->getValue('fsa_establishment_postal_code');
+
+      // If for any reason the postcode is empty try matching on raw input values with regex to extract from there.
+      if (empty($postcode)) {
+        // Normalise to uppercase for regex comparison.
+        $location_text = strtoupper($form_state->getValue('where_lookup'));
+
+        // Regex sourced from https://andrewwburns.com/2018/04/10/uk-postcode-validation-regex/.
+        $uk_postcode_regex = '(([A-Z][0-9]{1,2})|(([A-Z][A-HJ-Y][0-9]{1,2})|(([A-Z][0-9][A-Z])|([A-Z][A-HJ-Y][0-9]?[A-Z])))) [0-9][A-Z]{2}';
+
+        $matches = [];
+        preg_match_all("/$uk_postcode_regex/", $location_text, $matches);
+
+        if (!empty($matches[0])) {
+          $postcode = reset($matches[0]);
+        }
+      }
+
       // Add the local authority on validate.
-      if ($form_state->getValue('fsa_establishment_postal_code') != '') {
-        $postcode = $form_state->getValue('fsa_establishment_postal_code');
-        // Get first match of establishment with the postcode.
-        $query = \Drupal::entityQuery('fsa_establishment')
-          ->condition('field_postcode', $postcode)
-          ->range(0, 1);
-        $establishment = $query->execute();
-        $id = key($establishment);
-        if (is_numeric($id)) {
-          $establishment = \Drupal::entityTypeManager()->getStorage('fsa_establishment')->load($id);
-          // The authority as matched by establishment postal code.
-          $la = $establishment->get('field_localauthoritycode')->getValue()[0]['target_id'];
-        }
-        else {
-          $la = $notfound;
+      if (!empty($postcode)) {
+        // Lookup the local authority for the establishment by using the postcode value supplied.
+        $mapit_service_data = \Drupal::service('fsa_team_finder.get_local_authority')->get($postcode);
+
+        if (empty($mapit_service_data)) {
+          return;
         }
 
-      }
-      else {
-        $la = $notfound;
-      }
+        // Entity query fsa local authority.
+        $fsa_authority = \Drupal::entityTypeManager()
+          ->getStorage('fsa_authority')
+          ->loadByProperties([
+            'field_mapit_area' => $mapit_service_data['mapit_area'],
+          ]);
 
-      if (isset($la)) {
-        $form_state->setValue('fsa_establishment_la', $la);
-        $form_state->setValue('fsa_establishment_la_name', RatingsHelper::getEntityDetail('fsa_authority', $la, 'name'));
-
-        // Ensure admins can save local authority emails after submission.
-        $route = \Drupal::routeMatch()->getRouteName();
-        $routes = [
-          'entity.webform_submission.edit_form',
-          'entity.webform_submission.edit_form.all',
-        ];
-        if (!in_array($route, $routes)) {
-          $form_state->setValue('fsa_establishment_la_email', RatingsHelper::getEntityDetail('fsa_authority', $la, 'field_email'));
+        if (!empty($fsa_authority)) {
+          // Take first result only, just in case there is > 1 authority with that MapIt area.
+          $fsa_authority = reset($fsa_authority);
+          $fsa_authority_id = $fsa_authority->id();
         }
-        $form_state->setValue('fsa_establishment_la_email_overridden', RatingsHelper::getEntityDetail('fsa_authority', $la, 'field_email_overridden'));
-        $form_state->setValue('fsa_establishment_la_email_alt', RatingsHelper::getEntityDetail('fsa_authority', $la, 'field_email_alt'));
+
+        if (!empty($fsa_authority_id)) {
+          $form_state->setValue('fsa_establishment_la', $fsa_authority_id);
+          $form_state->setValue('fsa_establishment_la_name', RatingsHelper::getEntityDetail('fsa_authority', $fsa_authority_id, 'name'));
+
+          // Ensure admins can save local authority emails after submission.
+          $route = \Drupal::routeMatch()->getRouteName();
+          $routes = [
+            'entity.webform_submission.edit_form',
+            'entity.webform_submission.edit_form.all',
+          ];
+
+          if (!in_array($route, $routes)) {
+            $form_state->setValue('fsa_establishment_la_email', RatingsHelper::getEntityDetail('fsa_authority', $fsa_authority_id, 'field_email'));
+          }
+
+          $form_state->setValue('fsa_establishment_la_email_overridden', RatingsHelper::getEntityDetail('fsa_authority', $fsa_authority_id, 'field_email_overridden'));
+          $form_state->setValue('fsa_establishment_la_email_alt', RatingsHelper::getEntityDetail('fsa_authority', $fsa_authority_id, 'field_email_alt'));
+        }
       }
 
     }

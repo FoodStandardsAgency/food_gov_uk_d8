@@ -91,6 +91,9 @@ $config['smtp.settings']['smtp_username'] = getenv('SMTP_USERNAME');
 $config['smtp.settings']['smtp_password'] = getenv('SMTP_PASSWORD');
 $config['smtp.settings']['smtp_from']     = getenv('SMTP_FROM');
 
+// TFA - enable on environments required.
+$config['tfa.settings']['enabled'] = FALSE;
+
 switch ($env) {
   case 'prod':
     $settings['container_yamls'][] = $app_root . '/' . $site_path . '/prod.services.yml';
@@ -111,18 +114,13 @@ switch ($env) {
     // Disable Shield on prod by setting the shield user variable to NULL
     $config['shield.settings']['credentials']['shield']['user'] = NULL;
 
-    break;
+    // Enable TFA.
+    $config['tfa.settings']['enabled'] = TRUE;
 
-  case 'dev':
-    $settings['container_yamls'][] = $app_root . '/' . $site_path . '/dev.services.yml';
-    $settings['simple_environment_indicator'] = '#004984 Development';
-
-    // GTM Environment overrides.
-    $config['google_tag.settings']['environment_id'] = 'env-6';
-    $config['google_tag.settings']['environment_token'] = '4d3H88TmNOCwXVDx0PK8bg';
-
-    // Memcache.
-    $settings['cache']['default'] = 'cache.backend.memcache';
+    // Enable SMTP through Mail System.
+    $config['mailsystem.settings']['defaults']['sender'] = 'SMTPMailSystem';
+    $config['mailsystem.settings']['modules']['content_moderation_notifications']['none']['sender'] = 'SMTPMailSystem';
+    $config['mailsystem.settings']['modules']['webform']['none']['sender'] = 'SMTPMailSystem';
 
     // TFA.
     $config['tfa.settings']['enabled'] = FALSE;
@@ -137,6 +135,37 @@ switch ($env) {
     // GTM Environment overrides.
     $config['google_tag.settings']['environment_id'] = 'env-5';
     $config['google_tag.settings']['environment_token'] = 'nNEwJ_lItnO48_pabdUErg';
+
+    // Elasticsearch.
+    $config['elasticsearch_helper.settings']['elasticsearch_helper']['scheme'] = 'https';
+    $config['elasticsearch_helper.settings']['elasticsearch_helper']['host'] = 'https://search-food-gov-uk-website-dev-f33m6htrjv6wmka5kzjv3tc62q.eu-west-2.es.amazonaws.com';
+    $config['elasticsearch_helper.settings']['elasticsearch_helper']['port'] = '443';
+
+    // Memcache.
+    $settings['cache']['default'] = 'cache.backend.memcache';
+
+    // Enable TFA.
+    $config['tfa.settings']['enabled'] = TRUE;
+
+    // Enable SMTP through Mail System.
+    $config['mailsystem.settings']['defaults']['sender'] = 'SMTPMailSystem';
+    $config['mailsystem.settings']['modules']['content_moderation_notifications']['none']['sender'] = 'SMTPMailSystem';
+    $config['mailsystem.settings']['modules']['webform']['none']['sender'] = 'SMTPMailSystem';
+
+    break;
+
+  case 'dev':
+    $settings['container_yamls'][] = $app_root . '/' . $site_path . '/dev.services.yml';
+    $settings['simple_environment_indicator'] = '#004984 Development';
+
+    // GTM Environment overrides.
+    $config['google_tag.settings']['environment_id'] = 'env-6';
+    $config['google_tag.settings']['environment_token'] = '4d3H88TmNOCwXVDx0PK8bg';
+
+    // Elasticsearch.
+    $config['elasticsearch_helper.settings']['elasticsearch_helper']['scheme'] = 'https';
+    $config['elasticsearch_helper.settings']['elasticsearch_helper']['host'] = 'https://search-food-gov-uk-website-dev-f33m6htrjv6wmka5kzjv3tc62q.eu-west-2.es.amazonaws.com';
+    $config['elasticsearch_helper.settings']['elasticsearch_helper']['port'] = '443';
 
     // Memcache.
     $settings['cache']['default'] = 'cache.backend.memcache';
