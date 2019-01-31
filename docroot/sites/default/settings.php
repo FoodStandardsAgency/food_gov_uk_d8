@@ -133,6 +133,11 @@ switch ($env) {
     $config['google_tag.settings']['environment_id'] = 'env-5';
     $config['google_tag.settings']['environment_token'] = 'nNEwJ_lItnO48_pabdUErg';
 
+    // Elasticsearch.
+    $config['elasticsearch_helper.settings']['elasticsearch_helper']['scheme'] = 'https';
+    $config['elasticsearch_helper.settings']['elasticsearch_helper']['host'] = 'https://search-food-gov-uk-website-dev-f33m6htrjv6wmka5kzjv3tc62q.eu-west-2.es.amazonaws.com';
+    $config['elasticsearch_helper.settings']['elasticsearch_helper']['port'] = '443';
+
     // Memcache.
     $settings['cache']['default'] = 'cache.backend.memcache';
 
@@ -153,6 +158,11 @@ switch ($env) {
     // GTM Environment overrides.
     $config['google_tag.settings']['environment_id'] = 'env-6';
     $config['google_tag.settings']['environment_token'] = '4d3H88TmNOCwXVDx0PK8bg';
+
+    // Elasticsearch.
+    $config['elasticsearch_helper.settings']['elasticsearch_helper']['scheme'] = 'https';
+    $config['elasticsearch_helper.settings']['elasticsearch_helper']['host'] = 'https://search-food-gov-uk-website-dev-f33m6htrjv6wmka5kzjv3tc62q.eu-west-2.es.amazonaws.com';
+    $config['elasticsearch_helper.settings']['elasticsearch_helper']['port'] = '443';
 
     // Memcache.
     $settings['cache']['default'] = 'cache.backend.memcache';
