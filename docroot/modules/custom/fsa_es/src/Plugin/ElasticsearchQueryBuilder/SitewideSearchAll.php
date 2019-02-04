@@ -83,7 +83,7 @@ class SitewideSearchAll extends SitewideSearchBase {
           'query' => $values['keyword'],
           'fields' => ['name^5', 'intro^3', 'body'],
           'fuzziness' => 1,
-          'operator' => 'and',
+          'operator' => 'or',
         ],
       ];
     }
