@@ -1,0 +1,15 @@
+uuid: 933aec73-50e5-4b6e-be33-e09e75bf74be
+langcode: en
+status: true
+dependencies: {  }
+id: dompdf
+settings:
+  orientation: portrait
+  default_paper_size: a4
+  username: ''
+  password: ''
+  enable_html5_parser: true
+  enable_remote: true
+  cafile: /etc/ssl/certs/ca-certificates.crt
+  verify_peer: true
+  verify_peer_name: true

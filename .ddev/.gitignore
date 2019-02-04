@@ -4,3 +4,5 @@
 /docker-compose.yaml
 /db_snapshots
 /sequelpro.spf
+/import-db
+/.bgsync*
