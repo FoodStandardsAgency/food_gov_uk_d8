@@ -94,6 +94,9 @@ $config['smtp.settings']['smtp_from']     = getenv('SMTP_FROM');
 // TFA - enable on environments required.
 $config['tfa.settings']['enabled'] = FALSE;
 
+// Fixed 404 TTL.
+$settings['cache_ttl_4xx'] = 60;
+
 switch ($env) {
   case 'prod':
     $settings['container_yamls'][] = $app_root . '/' . $site_path . '/prod.services.yml';
