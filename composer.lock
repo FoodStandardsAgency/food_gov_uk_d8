@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bada739505d6be7620e560d32ea7b908",
+    "content-hash": "ca59b697b0e04d989b75712946ef3c90",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -3278,7 +3278,8 @@
                     "RSS view with fields give wrong URL from path field": "https://www.drupal.org/files/issues/2018-11-22/rss_view_with_fields-2673980-81.patch",
                     "InvalidArgumentException when trying to save programatically created node translation with workflow enabled": "https://www.drupal.org/files/issues/2018-04-16/drupal_workflow-initial-state-fix-2901459-16.patch",
                     "Make the Date Time input format and descriptive text consistent": "https://www.drupal.org/files/issues/2791693-23.patch",
-                    "Use new Transliteration functionality in core for file names": "https://www.drupal.org/files/issues/2018-12-05/2492171-128.patch"
+                    "Use new Transliteration functionality in core for file names": "https://www.drupal.org/files/issues/2018-12-05/2492171-128.patch",
+                    "A translation already exists for the specified language": "https://www.drupal.org/files/issues/2019-01-07/3020448-revert-issue-2946402-6.patch"
                 }
             },
             "autoload": {
@@ -4473,6 +4474,9 @@
                         "status": "not-covered",
                         "message": "Alpha releases are not covered by Drupal security advisories."
                     }
+                },
+                "patches_applied": {
+                    "Declaration of (...)FieldValidationRuleAddForm::buildForm must be compatible with (...)FieldValidationRuleFormBase::buildForm": "https://www.drupal.org/files/issues/2941006-php-incompatible-buildform-signature.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
