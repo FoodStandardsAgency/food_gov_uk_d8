@@ -55,6 +55,7 @@ $settings['config_readonly_whitelist_patterns'] = [
   'webform.webform.food_poisoning',
   'webform.webform.foreign_object',
   'webform.webform.poor_hygiene_practices',
+  'webform.webform.regulated_products_submit',
 ];
 
 // Allow configuration changes via drush (command line).
