@@ -78,10 +78,8 @@ class FsaPageNormalizer extends NormalizerBase {
 
     $data = [
       'name' => $object->label(),
-      'body' => implode(' ', [
-        $this->prepareTextualField($object->get('field_intro')->getString()),
-        $this->prepareTextualField($object->get('body')->getString()),
-      ]),
+      'intro' => $this->prepareTextualField($object->get('field_intro')->getString()),
+      'body' => $this->prepareTextualField($object->get('body')->getString()),
       'content_type' => array_map(function ($item) {
         return [
           'id' => $item->id(),
