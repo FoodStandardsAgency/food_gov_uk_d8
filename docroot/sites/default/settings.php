@@ -206,6 +206,11 @@ switch ($env) {
 if (preg_match('/(ode\d+)/', $env)) {
   $settings['container_yamls'][] = $app_root . '/' . $site_path . '/stage.services.yml';
 
+  // Elasticsearch.
+  $config['elasticsearch_helper.settings']['elasticsearch_helper']['scheme'] = 'https';
+  $config['elasticsearch_helper.settings']['elasticsearch_helper']['host'] = 'search-food-gov-uk-website-dev-f33m6htrjv6wmka5kzjv3tc62q.eu-west-2.es.amazonaws.com';
+  $config['elasticsearch_helper.settings']['elasticsearch_helper']['port'] = '443';
+
   // Memcache.
   $settings['cache']['default'] = 'cache.backend.memcache';
 }
