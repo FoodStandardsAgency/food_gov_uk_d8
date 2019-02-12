@@ -1,6 +1,6 @@
 uuid: eb8985b4-3ae0-42c8-aaa1-ad44a6b8b4cd
 langcode: en
-status: true
+status: false
 dependencies: {  }
 _core:
   default_config_hash: sy6QztR3HHzDrk9lVJuncSNBVft-Y2sktG6fWmZ3bgM
@@ -14,15 +14,33 @@ migration_tags:
 migration_group: fsa_rating
 label: 'FSA Establishments import'
 source:
-  plugin: establishment_api_url
+  plugin: url
   data_fetcher_plugin: http
-  data_parser_plugin: json
-  base_url: 'http://api.ratings.food.gov.uk/Establishments'
-  headers:
-    accept: application/json
-    x-api-version: '2'
-    accept-language: cy-GB
-  item_selector: establishments
+  data_parser_plugin: xml
+  urls:
+    - 'http://ratings.food.gov.uk/OpenDataFiles/FHRS551cy-GB.xml'
+    - 'http://ratings.food.gov.uk/OpenDataFiles/FHRS552cy-GB.xml'
+    - 'http://ratings.food.gov.uk/OpenDataFiles/FHRS553cy-GB.xml'
+    - 'http://ratings.food.gov.uk/OpenDataFiles/FHRS555cy-GB.xml'
+    - 'http://ratings.food.gov.uk/OpenDataFiles/FHRS556cy-GB.xml'
+    - 'http://ratings.food.gov.uk/OpenDataFiles/FHRS558cy-GB.xml'
+    - 'http://ratings.food.gov.uk/OpenDataFiles/FHRS557cy-GB.xml'
+    - 'http://ratings.food.gov.uk/OpenDataFiles/FHRS550cy-GB.xml'
+    - 'http://ratings.food.gov.uk/OpenDataFiles/FHRS559cy-GB.xml'
+    - 'http://ratings.food.gov.uk/OpenDataFiles/FHRS560cy-GB.xml'
+    - 'http://ratings.food.gov.uk/OpenDataFiles/FHRS554cy-GB.xml'
+    - 'http://ratings.food.gov.uk/OpenDataFiles/FHRS561cy-GB.xml'
+    - 'http://ratings.food.gov.uk/OpenDataFiles/FHRS562cy-GB.xml'
+    - 'http://ratings.food.gov.uk/OpenDataFiles/FHRS563cy-GB.xml'
+    - 'http://ratings.food.gov.uk/OpenDataFiles/FHRS564cy-GB.xml'
+    - 'http://ratings.food.gov.uk/OpenDataFiles/FHRS565cy-GB.xml'
+    - 'http://ratings.food.gov.uk/OpenDataFiles/FHRS566cy-GB.xml'
+    - 'http://ratings.food.gov.uk/OpenDataFiles/FHRS567cy-GB.xml'
+    - 'http://ratings.food.gov.uk/OpenDataFiles/FHRS568cy-GB.xml'
+    - 'http://ratings.food.gov.uk/OpenDataFiles/FHRS569cy-GB.xml'
+    - 'http://ratings.food.gov.uk/OpenDataFiles/FHRS570cy-GB.xml'
+    - 'http://ratings.food.gov.uk/OpenDataFiles/FHRS571cy-GB.xml'
+  item_selector: /FHRSEstablishment/EstablishmentCollection/EstablishmentDetail
   track_changes: true
   fields:
     -
