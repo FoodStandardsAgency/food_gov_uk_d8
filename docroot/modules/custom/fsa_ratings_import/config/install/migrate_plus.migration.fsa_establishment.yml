@@ -484,7 +484,10 @@ process:
     bundle_key: vid
     bundle: fhrs_businesstype
     value_key: name
-  field_ratingdate: RatingDate
+  field_ratingdate:
+    source: RatingDate
+    plugin: default_value
+    default_value: ""
   field_address:
     plugin: concat
     source:
