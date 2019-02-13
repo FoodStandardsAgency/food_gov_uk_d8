@@ -1,6 +1,6 @@
 uuid: eb8985b4-3ae0-42c8-aaa1-ad44a6b8b4cd
 langcode: en
-status: false
+status: true
 dependencies: {  }
 _core:
   default_config_hash: sy6QztR3HHzDrk9lVJuncSNBVft-Y2sktG6fWmZ3bgM
@@ -147,8 +147,12 @@ process:
   field_score_hygiene: scoreHygiene
   field_score_structural: scoreStructural
   field_schemetype: SchemeType
-  field_geocode/lng: longitude
-  field_geocode/lat: latitude
+  field_geocode/lng:
+    plugin: geocode
+    source: longitude
+  field_geocode/lat:
+    plugin: geocode
+    source: latitude
   field_righttoreply: RightToReply
   uid:
     plugin: default_value
