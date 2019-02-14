@@ -75,14 +75,13 @@ class WebformGooglePlacesElement extends FormElement {
 
       // If for any reason the postcode is empty try matching on raw input values with regex to extract from there.
       if (empty($postcode)) {
-        // Normalise to uppercase for regex comparison.
-        $location_text = strtoupper($form_state->getValue('where_lookup'));
+        $location_text = $form_state->getValue('where_lookup');
 
         // Regex sourced from https://andrewwburns.com/2018/04/10/uk-postcode-validation-regex/.
-        $uk_postcode_regex = '(([A-Z][0-9]{1,2})|(([A-Z][A-HJ-Y][0-9]{1,2})|(([A-Z][0-9][A-Z])|([A-Z][A-HJ-Y][0-9]?[A-Z])))) [0-9][A-Z]{2}';
+        $uk_postcode_regex = '(([A-Z][0-9]{1,2})|(([A-Z][A-HJ-Y][0-9]{1,2})|(([A-Z][0-9][A-Z])|([A-Z][A-HJ-Y][0-9]?[A-Z]))))(| )[0-9][A-Z]{2}';
 
         $matches = [];
-        preg_match_all("/$uk_postcode_regex/", $location_text, $matches);
+        preg_match_all("/$uk_postcode_regex/i", $location_text, $matches);
 
         if (!empty($matches[0])) {
           $postcode = reset($matches[0]);
