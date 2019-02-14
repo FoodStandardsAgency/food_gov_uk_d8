@@ -495,7 +495,7 @@ process:
   field_ratingdate:
     source: RatingDate
     plugin: default_value
-    default_value: ""
+    default_value: "1970-01-01"
   field_address:
     plugin: concat
     source:
