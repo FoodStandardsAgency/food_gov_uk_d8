@@ -1,0 +1,5 @@
+services:
+  fsa_custom_max_age_event_subscriber:
+    class: Drupal\fsa_custom\EventSubscriber\CacheControlEventSubscriber
+    tags:
+      - {name: event_subscriber}
