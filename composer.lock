@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "66233569cfdd5a68ca2abb8043be4d56",
+    "content-hash": "79bf24ada61b0931ae7c16eae3b63e65",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -4820,6 +4820,53 @@
             "homepage": "https://www.drupal.org/project/hook_post_action",
             "support": {
                 "source": "http://cgit.drupalcode.org/hook_post_action"
+            }
+        },
+        {
+            "name": "drupal/http_cache_control",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/http_cache_control",
+                "reference": "8.x-1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/http_cache_control-8.x-1.0.zip",
+                "reference": "8.x-1.0",
+                "shasum": "91e160fd1f944f9058d8bf27b092e29b169b88e0"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0",
+                    "datestamp": "1536274980",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Josh Waihi",
+                    "homepage": "https://www.drupal.org/user/188162"
+                }
+            ],
+            "description": "Module for implementing s-max-age",
+            "homepage": "https://www.drupal.org/project/http_cache_control",
+            "support": {
+                "source": "http://cgit.drupalcode.org/http_cache_control"
             }
         },
         {
@@ -13751,6 +13798,7 @@
                 "mock",
                 "xunit"
             ],
+            "abandoned": true,
             "time": "2017-08-03T14:08:16+00:00"
         },
         {

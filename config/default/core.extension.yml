@@ -87,6 +87,7 @@ module:
   help: 0
   hierarchical_term_formatter: 0
   hook_post_action: 0
+  http_cache_control: 0
   icon_select: 0
   image: 0
   image_widget_crop: 0
