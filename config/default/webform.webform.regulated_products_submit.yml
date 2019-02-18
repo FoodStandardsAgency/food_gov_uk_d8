@@ -10,7 +10,7 @@ id: regulated_products_submit
 title: 'Regulated products'
 description: 'Submissions for regulated products.'
 category: ''
-elements: "reg_products_first_name:\n  '#type': textfield\n  '#title': 'First name'\n  '#required': true\nreg_products_last_name:\n  '#type': textfield\n  '#title': 'Last name'\n  '#required': true\nreg_products_emails:\n  '#type': email\n  '#title': Email\n  '#required': true\nreg_products_product_type:\n  '#type': select\n  '#title': 'Product type'\n  '#options':\n    contaminants: Contaminants\n    animal_feed: 'Animal feed additives'\n    food_additives: 'Additives, flavourings and enzymes'\n    packaging: 'Food contact materials'\n    genetically_modified_foods: 'Genetically modified organisms for food and feed'\n    novel_foods: 'Novel foods and novel food processes'\n  '#required': true\nreg_products_product_name:\n  '#type': textfield\n  '#title': 'Product name'\n  '#required': true\nreg_products_product_summary:\n  '#type': textarea\n  '#title': 'Product summary'\n  '#required': true\nreg_products_organisation_name:\n  '#type': textfield\n  '#title': 'Organisation name'\n  '#required': true\ncaptcha:\n  '#type': captcha\n"
+elements: "markup:\n  '#type': webform_markup\n  '#markup': \"<h2>Contact details</h2>\\r\\n\\r\\n<p>Enter the contact details for the person or organisation who is the main point of contact for this application.</p>\"\nreg_products_first_name:\n  '#type': textfield\n  '#title': 'First name'\n  '#required': true\nreg_products_last_name:\n  '#type': textfield\n  '#title': 'Last name'\n  '#required': true\nreg_products_emails:\n  '#type': email\n  '#title': 'Email address'\n  '#description': 'We''ll only use this to contact you about your application.'\n  '#required': true\nmarkup_01:\n  '#type': webform_markup\n  '#markup': \"<h2>Product details</h2>\\r\\n\\r\\n<p>Tell us a little bit more about the product or process you are submitting.</p>\"\nreg_products_organisation_name:\n  '#type': textfield\n  '#title': Manufacturer\n  '#required': true\nreg_products_product_type:\n  '#type': select\n  '#title': 'Product type'\n  '#options':\n    'Extraction solvents': 'Extraction solvents'\n    'Feed additives': 'Feed additives'\n    'Feed for particular nutritional uses (PARNUTS)': 'Feed for particular nutritional uses (PARNUTS)'\n    'Feed (detoxification processes)': 'Feed (detoxification processes)'\n    Flavourings: Flavourings\n    'Food contact materials (active/intelligent materials)': 'Food contact materials (active/intelligent materials)'\n    'Food contact materials (plastic additives)': 'Food contact materials (plastic additives)'\n    'Food contact materials (recycled processes)': 'Food contact materials (recycled processes)'\n    'Food additives': 'Food additives'\n    'Food enzymes': 'Food enzymes'\n    'Genetically modified organisms as food and feed': 'Genetically modified organisms as food and feed'\n    'Irradiated food': 'Irradiated food'\n    'Novel foods (full application)': 'Novel foods (full application)'\n    'Novel foods (traditional food notification)': 'Novel foods (traditional food notification)'\n    'Smoke flavourings': 'Smoke flavourings'\n    Other: Other\n  '#required': true\nreg_products_product_name:\n  '#type': textfield\n  '#title': 'Product for authorisation'\n  '#description': '<p>This can be an internal name you are using or the final product name.</p>'\n  '#required': true\nreg_products_product_summary:\n  '#type': textarea\n  '#title': 'Product summary'\n  '#description': '<p>Tell us a bit more about the product or process you are requesting authorisation for.</p>'\n  '#required': true\ncaptcha:\n  '#type': captcha\n"
 css: ''
 javascript: ''
 settings:
@@ -72,12 +72,12 @@ settings:
   draft_auto_save: false
   draft_saved_message: ''
   draft_loaded_message: ''
-  confirmation_type: message
-  confirmation_title: ''
-  confirmation_message: "Submission complete<br />\r\n<br />\r\nThank you for completing your regulated product application. You will receive an email from the FSA describing the next steps in this process."
+  confirmation_type: page
+  confirmation_title: 'Thanks for submitting your application'
+  confirmation_message: "<h2>What happens next</h2>\r\n\r\n<p>We&#39;ll email you with your application number as well as a secure link where you can upload your supporting documents.</p>\r\n\r\n<p>Make sure you upload your documents as soon as possible so we can start processing your application.</p>"
   confirmation_url: ''
   confirmation_attributes: {  }
-  confirmation_back: true
+  confirmation_back: false
   confirmation_back_label: ''
   confirmation_back_attributes: {  }
   confirmation_exclude_query: false
@@ -155,7 +155,7 @@ handlers:
       to_options: {  }
       cc_mail: ''
       cc_options: {  }
-      bcc_mail: paul@wearesort.co.uk
+      bcc_mail: 'paul@wearesort.co.uk, karl@wearesort.co.uk'
       bcc_options: {  }
       from_mail: default
       from_options: {  }
