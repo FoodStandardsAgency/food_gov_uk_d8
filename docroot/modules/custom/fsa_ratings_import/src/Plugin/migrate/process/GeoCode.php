@@ -38,6 +38,11 @@ class GeoCode extends ProcessPluginBase {
       $geocode_wkt = $postcode;
     }
 
+    // Abort if we have no WKT to geocode.
+    if (empty($geocode_wkt)) {
+      return $value;
+    }
+
     $geocoder_id = 'google_geocoding_api';
     $geocode_result = \Drupal::service('plugin.manager.geolocation.geocoder')
       ->getGeoCoder($geocoder_id)
