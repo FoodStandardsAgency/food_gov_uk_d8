@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.fsa_establishment.field_businesstype
+    - field.storage.fsa_establishment.field_localauthoritycode
     - field.storage.fsa_establishment.field_schemetype
     - taxonomy.vocabulary.fhrs_businesstype
     - user.role.administrator
@@ -78,6 +79,65 @@ display:
           quantity: 9
       style:
         type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          override: true
+          sticky: false
+          caption: ''
+          summary: ''
+          description: ''
+          columns:
+            name: name
+            field_businesstype: field_businesstype
+            field_schemetype: field_schemetype
+            operations: operations
+            field_localauthoritycode: field_localauthoritycode
+            changed: changed
+          info:
+            name:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_businesstype:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_schemetype:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            operations:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_localauthoritycode:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            changed:
+              sortable: true
+              default_sort_order: desc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          default: name
+          empty_table: false
       row:
         type: fields
       fields:
@@ -322,6 +382,136 @@ display:
           destination: true
           entity_type: fsa_establishment
           plugin_id: entity_operations
+        field_localauthoritycode:
+          id: field_localauthoritycode
+          table: fsa_establishment__field_localauthoritycode
+          field: field_localauthoritycode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Inspecting council'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        changed:
+          id: changed
+          table: fsa_establishment_field_data
+          field: changed
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Changed
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: timestamp
+          settings:
+            date_format: custom
+            custom_date_format: 'd-m-Y H:i:s'
+            timezone: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          entity_type: fsa_establishment
+          entity_field: changed
+          plugin_id: field
       filters:
         name:
           id: name
@@ -503,7 +693,21 @@ display:
             group_items: {  }
           reduce_duplicates: false
           plugin_id: list_field
-      sorts: {  }
+      sorts:
+        name:
+          id: name
+          table: fsa_establishment_field_data
+          field: name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          entity_type: fsa_establishment
+          entity_field: name
+          plugin_id: standard
       title: 'FSA establishments'
       header: {  }
       footer: {  }
@@ -516,7 +720,7 @@ display:
         groups:
           1: AND
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -526,7 +730,9 @@ display:
         - user.roles
       tags:
         - 'config:field.storage.fsa_establishment.field_businesstype'
+        - 'config:field.storage.fsa_establishment.field_localauthoritycode'
         - 'config:field.storage.fsa_establishment.field_schemetype'
+        - extensions
   page_1:
     display_plugin: page
     id: page_1
@@ -545,7 +751,7 @@ display:
         context: '0'
         menu_name: admin
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -555,4 +761,6 @@ display:
         - user.roles
       tags:
         - 'config:field.storage.fsa_establishment.field_businesstype'
+        - 'config:field.storage.fsa_establishment.field_localauthoritycode'
         - 'config:field.storage.fsa_establishment.field_schemetype'
+        - extensions
