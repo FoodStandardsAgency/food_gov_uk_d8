@@ -466,10 +466,10 @@ source:
       selector: scores/ConfidenceInManagement
     -
       name: longitude
-      selector: geocode/longitude
+      selector: Geocode/Longitude
     -
       name: latitude
-      selector: geocode/latitude
+      selector: Geocode/Latitude
     -
       name: RightToReply
       selector: RightToReply
@@ -517,9 +517,7 @@ process:
   field_score_hygiene: scoreHygiene
   field_score_structural: scoreStructural
   field_schemetype: SchemeType
-  field_geocode/lng:
-    plugin: geocode
-    source: longitude
+  field_geocode/lng: longitude
   field_geocode/lat:
     plugin: geocode
     source: latitude
