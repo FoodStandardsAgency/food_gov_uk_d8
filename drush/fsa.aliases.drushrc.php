@@ -1,6 +1,14 @@
 <?php
 
-// LOCAL DDEV: use ddev exec drush <command>; alias support is a bit flaky ATM.
+// Docker local.
+$aliases['docker'] = array(
+  'env' => 'docker',
+  'uri' => 'https://' . getenv('D4D_HOSTNAME'),
+  'root' => '/var/www/html/docroot',
+  'path-aliases' => array(
+    '%drush-script' => '/var/www/html/vendor/bin/drush',
+  ),
+);
 
 // Application 'foodgovuk', environment 'dev'.
 $aliases['dev'] = array (
@@ -28,7 +36,7 @@ $aliases['prod'] = array (
   'ac-site' => 'foodgovuk',
   'ac-env' => 'prod',
   'ac-realm' => 'prod',
-  'uri' => 'foodgovuk.prod.acquia-sites.com',
+  'uri' => 'https://www.food.gov.uk',
   'path-aliases' =>
   array (
     '%drush-script' => 'drush8',

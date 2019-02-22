@@ -102,11 +102,15 @@
         "zaporylie/composer-drupal-optimizations": "^1.0",
         "league/csv": "^9.0",
         "drupal/permissions_filter": "^1.0",
-        "drupal/memcache": "^2.0@alpha",
+        "drupal/memcache": "2.0",
         "wunderio/drupal-ping": "^1.0",
         "drupal/acquia_purge": "^1.0@beta",
         "drupal/shield": "^1.2",
-        "drupal/acquia_connector": "^1.14"
+        "drupal/acquia_connector": "^1.14",
+        "drupal/mailsystem": "^4.1",
+        "drupal/http_cache_control": "^1.0",
+        "drupal/mimemail": "^1.0@alpha",
+        "drupal/smtp": "^1.0@beta"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
@@ -169,6 +173,9 @@
             },
             "drupal/force_password_change": {
                 "A role with an expiration of 0 requires a password change on every login": "https://www.drupal.org/files/issues/force_password_change-2884243-2_0.patch"
+            },
+            "drupal/field_validation": {
+                "Make the implementation work in PHP 7.2": "https://www.drupal.org/files/issues/2941006-php-incompatible-buildform-signature.patch"
             }
         },
         "dropin-paths": {

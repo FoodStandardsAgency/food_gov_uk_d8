@@ -26,3 +26,7 @@ webroot/sites/sites/default/settings.private.php
 docroot/files
 docroot/sites/*/files
 docroot/sites/*/private
+
+# Docker
+.persist
+web
