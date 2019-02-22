@@ -7,14 +7,14 @@ We use (DDEV)[https://ddev.readthedocs.io] for this project, and although any co
 > NB: You'll need a database before this step :)
 
 ```
-# Install dependencies
-composer install
 # Start ddev containers
 ddev start
 # Wait for docker images to pull/expand/start - could take up to 30 mins on first start dependent on bandwidth and system resources.
 # Don't worry, it's really fast after you've got the images.
 ddev import-db --src path-to-your-sql-file
 ```
+
+`.ddev/config.yaml` shows a number of tasks that will execute before the services start and after a database import.
 
 ## XDebug
 

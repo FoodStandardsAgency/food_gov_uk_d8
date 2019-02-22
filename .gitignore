@@ -16,11 +16,11 @@ local.*
 /docroot/libraries/
 
 # Ignore Drupal's local setting overrides
-webroot/sites/default/settings.local.php
+docroot/sites/default/settings.local.php
 
 # Ignore local development services
-webroot/sites/sites/development.services.yml
-webroot/sites/sites/default/settings.private.php
+docroot/sites/sites/development.services.yml
+docroot/sites/sites/default/settings.private.php
 
 # Ignore paths that contain user-generated content.
 docroot/files

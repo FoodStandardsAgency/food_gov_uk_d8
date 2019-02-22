@@ -30,8 +30,8 @@
         "drupal/config_installer": "~1.0",
         "drupal/simplei": "^1.0",
         "drupal/geolocation": "^1.10",
-        "drupal/migrate_plus": "4.0-beta3",
-        "drupal/migrate_tools": "4.0-beta3",
+        "drupal/migrate_plus": "^4",
+        "drupal/migrate_tools": "^4",
         "drupal/elasticsearch_helper": "5.x-dev",
         "drupal/admin_toolbar": "^1.19",
         "drupal/pathauto": "^1.0",
@@ -53,7 +53,6 @@
         "drupal/entity_embed": "^1.0@beta",
         "drupal/embed": "^1.0",
         "drupal/entity_print": "^2.0",
-        "mikehaertl/phpwkhtmltopdf": "^2.2",
         "drupal/block_class": "^1.0@alpha",
         "drupal/menu_breadcrumb": "^1.4",
         "drupal/media_entity_document": "^1.1",
@@ -72,7 +71,6 @@
         "drupal/webform_views": "^5.0@alpha",
         "drupal/menu_block": "^1.4",
         "drupal/diff": "^1.0@RC",
-        "drupal/warden": "^1.1",
         "drupal/media_entity_browser": "~1.4",
         "drupal/term_reference_tree": "^1.0",
         "drupal/icon_select": "^1.0@beta",
@@ -85,13 +83,11 @@
         "drupal/cookieconsent": "^1.3",
         "drupal/recaptcha": "^2.2",
         "drupal/view_unpublished": "1.0-alpha1",
-        "drupal/ip_anon": "1.2",
         "drupal/path_redirect_import": "^1.0@beta",
         "drupal/content_moderation_notifications": "^3.0@RC",
         "drupal/role_delegation": "1.x-dev",
-        "drupal/administration_language_negotiation": "^1.5",
-        "drupal/bundle_redirect": "^1.0",
         "drupal/scheduler": "^1.0",
+        "drupal/administration_language_negotiation": "^1.5",
         "drupal/force_password_change": "^1.3",
         "drupal/password_policy": "^3.0@alpha",
         "drupal/tfa": "^1.0@alpha",
@@ -102,15 +98,14 @@
         "zaporylie/composer-drupal-optimizations": "^1.0",
         "league/csv": "^9.0",
         "drupal/permissions_filter": "^1.0",
-        "drupal/memcache": "2.0",
+        "drupal/memcache": "2.0-alpha7",
         "wunderio/drupal-ping": "^1.0",
         "drupal/acquia_purge": "^1.0@beta",
         "drupal/shield": "^1.2",
         "drupal/acquia_connector": "^1.14",
-        "drupal/mailsystem": "^4.1",
-        "drupal/http_cache_control": "^1.0",
-        "drupal/mimemail": "^1.0@alpha",
-        "drupal/smtp": "^1.0@beta"
+        "drupal/smtp": "^1.0@beta",
+        "drupal/mimemail": "1.x-dev",
+        "drupal/http_cache_control": "^1.0"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
@@ -134,13 +129,18 @@
             "docroot/themes/contrib/{$name}": ["type:drupal-theme"],
             "docroot/drush/commands/{$name}": ["type:drupal-drush"]
         },
+        "drupal-scaffold": {
+            "excludes": [
+                ".htaccess"
+            ]
+        },
         "patches": {
             "drupal/core": {
-                "RSS view with fields give wrong URL from path field": "https://www.drupal.org/files/issues/2018-04-20/2673980-36.patch",
+                "RSS view with fields give wrong URL from path field": "https://www.drupal.org/files/issues/2018-11-22/rss_view_with_fields-2673980-81.patch",
                 "InvalidArgumentException when trying to save programatically created node translation with workflow enabled": "https://www.drupal.org/files/issues/2018-04-16/drupal_workflow-initial-state-fix-2901459-16.patch",
                 "Make the Date Time input format and descriptive text consistent": "https://www.drupal.org/files/issues/2791693-23.patch",
-                "Empty alias check on translated pages": "https://www.drupal.org/files/issues/2018-05-02/empty-alias-check-2930599.patch",
-                "Use new Transliteration functionality in core for file names": "https://www.drupal.org/files/issues/2018-06-29/transliterate-file-uploads-2492171-104.patch"
+                "Use new Transliteration functionality in core for file names": "https://www.drupal.org/files/issues/2018-12-05/2492171-128.patch",
+                "A translation already exists for the specified language": "https://www.drupal.org/files/issues/2019-01-07/3020448-revert-issue-2946402-6.patch"
             },
             "drupal/administration_language_negotiation": {
                 "Fix admin_routes": "https://www.drupal.org/files/issues/2018-06-06/admin-routes-config-2972446-2.patch",
@@ -156,7 +156,8 @@
                 "Reset media thumbnails while changing media entity. Required by inline images.": "https://www.drupal.org/files/issues/2749695_14_media_entity_image.patch"
             },
             "drupal/term_reference_tree": {
-                "Undefined index: #select_parents": "https://www.drupal.org/files/issues/term_reference_tree-2837754-2.patch"
+                "Undefined index: #select_parents": "https://www.drupal.org/files/issues/term_reference_tree-2837754-2.patch",
+                "Taxonomy term hierarchy table error": "https://www.drupal.org/files/issues/2018-10-25/term_reference_tree-taxonomy_term_hierarchy_table_error-2996263-20.patch"
             },
             "drupal/linkit": {
                 "Linkit filter should honour the URL query and fragment": "https://www.drupal.org/files/issues/linkit_substitution_query_fragment-2895153-10.patch"
@@ -175,7 +176,7 @@
                 "A role with an expiration of 0 requires a password change on every login": "https://www.drupal.org/files/issues/force_password_change-2884243-2_0.patch"
             },
             "drupal/field_validation": {
-                "Make the implementation work in PHP 7.2": "https://www.drupal.org/files/issues/2941006-php-incompatible-buildform-signature.patch"
+                "Declaration of (...)FieldValidationRuleAddForm::buildForm must be compatible with (...)FieldValidationRuleFormBase::buildForm": "https://www.drupal.org/files/issues/2941006-php-incompatible-buildform-signature.patch"
             }
         },
         "dropin-paths": {

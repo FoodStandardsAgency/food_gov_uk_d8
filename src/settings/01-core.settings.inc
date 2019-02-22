@@ -64,23 +64,22 @@ $settings['config_readonly_whitelist_patterns'] = [
   'key.*',
   'encrypt.*',
   'tfa.*',
-  'fsa_translation_notify.settings',
   'webform.webform.food_fraud_crime',
   'webform.webform.food_poisoning',
   'webform.webform.foreign_object',
   'webform.webform.poor_hygiene_practices',
 ];
 
-// Allow configuration changes via drush (command line).
-if (PHP_SAPI === 'cli') {
-  $settings['config_readonly'] = FALSE;
-}
-
 // Be sure to have config_split.dev disabled by default.
 $config['config_split.config_split.dev']['status'] = FALSE;
 
 // Disallow configuration changes by default.
 $settings['config_readonly'] = TRUE;
+
+// Allow configuration changes via drush (command line).
+if (PHP_SAPI === 'cli') {
+  $settings['config_readonly'] = FALSE;
+}
 
 /**
  * Local env can make these changes.
@@ -102,7 +101,7 @@ $config_directories = array(
  */
 $settings['trusted_host_patterns'] = [
   'food\.gov\.uk$',
-  'fsa\.localhost',
+  'fsa\.localhost$',
   'foodgovuk\.prod\.acquia-sites\.com',
   'foodgovukstg\.prod\.acquia-sites\.com',
   'foodgovukdev\.prod\.acquia-sites\.com',

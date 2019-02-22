@@ -35,6 +35,11 @@ services:
       PHP_XDEBUG_REMOTE_CONNECT_BACK: 0         # This is needed to respect remote.host setting bellow
       PHP_XDEBUG_REMOTE_HOST: "10.254.254.254"  # You will also need to 'sudo ifconfig lo0 alias 10.254.254.254'
       PHP_IDE_CONFIG: "serverName=drupal"       # Needed for xdebug for drush commands.
+      SMTP_HOST: "mailhog"
+      SMTP_PORT: 1025
+      SMTP_USERNAME: ""
+      SMTP_PASSWORD: ""
+      SMTP_FROM: "jenkins@deeson.co.uk"
     volumes:
       - ./:/var/www/html:cached
       - ./.persist/public:/var/www/html/docroot/sites/default/files:delegated

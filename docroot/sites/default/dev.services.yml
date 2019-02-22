@@ -83,7 +83,7 @@ parameters:
     # render array, hence varying every render array by these cache contexts.
     #
     # @default ['languages:language_interface', 'theme', 'user.permissions']
-    required_cache_contexts: ['languages:language_interface', 'theme', 'user.permissions']
+    required_cache_contexts: ['url.path', 'languages:language_interface', 'theme', 'user.permissions']
     # Renderer automatic placeholdering conditions:
     #
     # Drupal allows portions of the page to be automatically deferred when
@@ -125,7 +125,7 @@ parameters:
   #
   # Not recommended in production environments
   # @default false
-  http.response.debug_cacheability_headers: false
+  http.response.debug_cacheability_headers: true
   factory.keyvalue:
     {}
     # Default key/value storage service to use.
