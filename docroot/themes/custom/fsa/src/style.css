@@ -26,6 +26,11 @@
 @import "component/form/form.css";
 @import "component/header/header.css";
 @import "component/navigation/navigation.css";
+
+@import "component/next-previous/next-previous.css";
+@import "component/back-to-top/back-to-top.css";
+@import "component/document-menu/document-menu.css";
+
 @import "component/fhrs/fhrs.css";
 @import "component/hero/hero.css";
 @import "component/peek/peek.css";
@@ -39,6 +44,7 @@
 @import "component/search/search.css";
 @import "component/topics/topics.css";
 @import "component/toc/toc.css";
+
 
 
 * {
@@ -89,7 +95,7 @@ body {
     @media (--breakpoint-sm) {
       content: "sm";
     }
-  
+
     @media (--breakpoint-md) {
       content: "md";
     }
@@ -102,7 +108,7 @@ body {
   display: flex;
   flex-flow: column nowrap;
   min-height: 100vh;
-  
+
   @media (--breakpoint-sm) {
     overflow: hidden;
     transition: none;
