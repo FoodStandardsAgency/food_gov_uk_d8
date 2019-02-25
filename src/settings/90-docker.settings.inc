@@ -16,8 +16,6 @@ if (SETTINGS_ENVIRONMENT == D_ENVIRONMENT_LOCAL && SETTINGS_PLATFORM == D_PLATFO
     'driver' => getenv('DB_DRIVER'),
   ];
 
-  $https = TRUE;
-
   if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != 'on') {
     $https = isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https';
     $_SERVER['HTTPS'] = $https ? 'on' : 'off';

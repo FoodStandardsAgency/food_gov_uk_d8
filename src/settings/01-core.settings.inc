@@ -32,7 +32,7 @@ if ( (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) == "on")
   $settings['https'] = TRUE;
 }
 
-if (isset($_SERVER['REMOTE_ADDR'])) {
+if (SETTINGS_PLATFORM === D_PLATFORM_ACQUIA && isset($_SERVER['REMOTE_ADDR'])) {
   $settings['reverse_proxy'] = TRUE;
   $settings['reverse_proxy_addresses'] = array($_SERVER['REMOTE_ADDR']);
 }

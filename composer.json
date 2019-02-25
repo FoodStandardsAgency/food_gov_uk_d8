@@ -105,7 +105,8 @@
         "drupal/acquia_connector": "^1.14",
         "drupal/smtp": "^1.0@beta",
         "drupal/mimemail": "1.x-dev",
-        "drupal/http_cache_control": "^1.0"
+        "drupal/http_cache_control": "^1.0",
+        "drupal/entityqueue": "^1.0@alpha"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
