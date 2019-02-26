@@ -16,6 +16,10 @@ if (class_exists('Memcached')) {
     require $app_root . '/' . $site_path . '/cloud-memcache-d8.php';
   }
 
+  if (SETTINGS_ENVIRONMENT === D_ENVIRONMENT_LOCAL) {
+    $settings['memcache']['servers'] = ['memcached:11211' => 'default'];
+  }
+
 }
 
 if (in_array(SETTINGS_ENVIRONMENT, [D_ENVIRONMENT_TEST, D_ENVIRONMENT_PROD])) {

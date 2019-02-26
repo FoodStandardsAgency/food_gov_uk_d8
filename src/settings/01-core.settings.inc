@@ -70,32 +70,6 @@ $settings['config_readonly_whitelist_patterns'] = [
   'webform.webform.poor_hygiene_practices',
 ];
 
-// Be sure to have config_split.dev disabled by default.
-$config['config_split.config_split.dev']['status'] = FALSE;
-
-// Disallow configuration changes by default.
-$settings['config_readonly'] = TRUE;
-
-// Allow configuration changes via drush (command line).
-if (PHP_SAPI === 'cli') {
-  $settings['config_readonly'] = FALSE;
-}
-
-/**
- * Local env can make these changes.
- */
-if (SETTINGS_ENVIRONMENT === D_ENVIRONMENT_LOCAL) {
-  $config['config_split.config_split.dev']['status'] = TRUE;
-  $settings['config_readonly'] = FALSE;
-}
-
-/**
- * Location of the site configuration files.
- */
-$config_directories = array(
-  CONFIG_SYNC_DIRECTORY => dirname(DRUPAL_ROOT) . '/config/default',
-);
-
 /**
  * Trusted hosts patterns.
  */
