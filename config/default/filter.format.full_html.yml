@@ -5,8 +5,8 @@ dependencies:
   module:
     - editor
     - entity_embed
-    - managed_links
     - linkit
+    - managed_links
     - toc_filter
     - video_embed_wysiwyg
 _core:
@@ -97,7 +97,7 @@ filters:
   filter_url:
     id: filter_url
     provider: filter
-    status: false
+    status: true
     weight: -38
     settings:
       filter_url_length: 72

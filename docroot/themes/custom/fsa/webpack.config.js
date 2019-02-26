@@ -163,9 +163,9 @@ module.exports = (env, argv) => {
       filename: '[name].css'
     }),
 
-    new OptimizeCssAssetsPlugin({
-      cssProcessorOptions: { discardComments: { removeAll: true } }
-    }),
+    // new OptimizeCssAssetsPlugin({
+    //   cssProcessorOptions: { discardComments: { removeAll: true } }
+    // }),
 
     // Create SVG sprite
     new SpritePlugin(),

@@ -29,3 +29,6 @@ libraries-extend:
   # even if URL has query parameters.
   core/drupal.active-link:
     - fsa/active-link-incl-query
+entity_print:
+ node:
+   all: 'fsa/print-styling'

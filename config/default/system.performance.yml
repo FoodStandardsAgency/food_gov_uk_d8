@@ -1,6 +1,11 @@
 cache:
   page:
-    max_age: 86400
+    max_age: 60
+  http:
+    max_age: '60'
+    404_max_age: '60'
+    302_max_age: '0'
+    301_max_age: '86400'
 css:
   preprocess: true
   gzip: true

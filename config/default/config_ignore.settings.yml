@@ -2,8 +2,8 @@ ignored_config_entities:
   0: system.site
   2: config.fsa_ratings
   4: config.fsa_consultations
-  6: 'encrypt.*'
-  8: fsa_content_reminder.settings
+  6: fsa_content_reminder.settings
+  8: 'encrypt.*'
   10: 'embed.button.document:icon_uuid'
   12: 'embed.button.document:dependencies.content'
   14: 'embed.button.media_entity_embed:icon_uuid'

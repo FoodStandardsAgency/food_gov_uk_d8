@@ -13,3 +13,8 @@ active-link-incl-query:
 clipboard:
   js:
     dist/clipboard.min.js: { minified: true }
+
+print-styling:
+  css:
+    theme:
+      src/component/print/print-style.css: {}

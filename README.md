@@ -30,8 +30,6 @@ This project uses Acquia Pipelines to:
 > NB: You'll need a database from the Acquia Cloud platform.
 
 ```
-# Install project dependencies
-composer install
 # Start ddev containers
 ddev start
 # Wait for docker images to pull/expand/start - could take up to 30 mins on first start dependent on bandwidth and system resources.
@@ -91,3 +89,15 @@ Alert API data is imported to Drupal `alerts_allergen` taxonomy and `alert` node
 - Ratings search is located at `/ratings/search`.
 - The rating search is implemented with `fsa_ratings` module.
 - FSA Establishments are indexed to Elasticsearch with FSA Elasticsearch integration (`fsa_es`) module, refer to [README.md](/drupal/web/modules/custom/fsa_es/README.md) for documentation.
+
+## SMTP services
+
+The site uses Office 365 SMTP services on the production environment. The smtp Drupal contrib module provides the interception/rerouting of messages from the applictation.
+
+Dummy configuration is stored in the `config/default` folder to avoid storing SMTP credentials in VCS.
+
+The specific variable values for host, username, password etc are managed through environmental variables. These are defined as key/pair values in the Acquia control panel (specific per environment) or can be defined in the `.ddev/docker-compose.override.yaml` file for local debugging.
+
+**Values that contain a `$` character need a preceeding `\` escape character in Acquia, and docker-composer expects double-dollar `$$` to prevent variable substitution taking place.**
+
+> **Never store these - or other sensitive - values in the repository in a .env file, config export or otherwise. They could result in the SMTP service being used to handle or deliver spam**
