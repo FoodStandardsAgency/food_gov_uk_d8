@@ -673,7 +673,7 @@ display:
       display_extenders: {  }
       path: admin/content/content-reminders
       menu:
-        type: none
+        type: tab
         title: 'Content reminders'
         description: 'Pages that have gone past the content reminder date'
         expanded: false

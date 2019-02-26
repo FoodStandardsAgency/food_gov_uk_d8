@@ -59,7 +59,7 @@ display:
               more_options:
                 is_secondary: false
                 placeholder_text: ''
-            ratings_business_type:
+            news_type:
               bef_format: default
               more_options:
                 bef_select_all_none: false
@@ -67,7 +67,7 @@ display:
                 is_secondary: false
                 rewrite:
                   filter_rewrite_values: ''
-            ratings_local_authority:
+            consultation_status:
               bef_format: default
               more_options:
                 bef_select_all_none: false
@@ -75,7 +75,7 @@ display:
                 is_secondary: false
                 rewrite:
                   filter_rewrite_values: ''
-            ratings_fhrs_rating_value:
+            consultation_responses_published:
               bef_format: default
               more_options:
                 bef_select_all_none: false
@@ -83,7 +83,15 @@ display:
                 is_secondary: false
                 rewrite:
                   filter_rewrite_values: ''
-            ratings_fhis_rating_value:
+            consultation_year:
+              bef_format: bef
+              more_options:
+                bef_select_all_none: false
+                bef_collapsible: false
+                is_secondary: false
+                rewrite:
+                  filter_rewrite_values: ''
+            nation:
               bef_format: default
               more_options:
                 bef_select_all_none: false
@@ -361,7 +369,7 @@ display:
             identifier: consultation_year
             required: false
             remember: false
-            multiple: false
+            multiple: true
             remember_roles:
               authenticated: authenticated
               anonymous: '0'

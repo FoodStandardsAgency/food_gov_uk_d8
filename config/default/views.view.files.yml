@@ -738,14 +738,12 @@ display:
     display_options:
       path: admin/content/files
       menu:
-        type: none
+        type: tab
         title: Files
         description: ''
-        expanded: false
-        parent: ''
-        weight: 0
-        context: '0'
         menu_name: admin
+        weight: 0
+        context: ''
       display_description: ''
       defaults:
         pager: true
