@@ -32,13 +32,14 @@ $instance = $_SERVER['HTTP_HOST'];
 if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
   $platform = D_PLATFORM_ACQUIA;
 
-  // Live environment.
   if (!empty($_ENV['AH_PRODUCTION'])) {
     $env = D_ENVIRONMENT_PROD;
   }
-  // Other Acquia environment.
+  elseif ($_ENV['AH_SITE_ENVIRONMENT'] === D_ENVIRONMENT_DEV) {
+    $env = D_ENVIRONMENT_DEV;
+  }
   else {
-    $env = $_ENV['AH_SITE_ENVIRONMENT'];
+    $env = D_ENVIRONMENT_TEST;
   }
 }
 elseif (getenv('DOCKER_LOCAL')) {
