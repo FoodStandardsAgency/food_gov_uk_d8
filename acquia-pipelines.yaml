@@ -1,0 +1,8 @@
+# See https://docs.acquia.com/acquia-cloud/develop/pipelines/yaml/ for docs.
+version: 1.1.0
+services:
+  - php:
+      version: 7.2
+variables:
+  global:
+    ENV: pipelines
