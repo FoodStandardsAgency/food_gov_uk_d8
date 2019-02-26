@@ -1,0 +1,13 @@
+uuid: b16505c3-5e2a-44a6-abca-7b5fc0d9de69
+langcode: en
+status: true
+dependencies:
+  config:
+    - key.key.fsa_2fa_key
+  module:
+    - real_aes
+id: 2fa_profile
+label: '2FA Profile'
+encryption_method: real_aes
+encryption_key: fsa_2fa_key
+encryption_method_configuration: {  }

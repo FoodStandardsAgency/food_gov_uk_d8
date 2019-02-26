@@ -20,3 +20,7 @@ if (empty($config['smtp.settings']['smtp_host'])) {
   // If we can't work out the SMTP server then don't send any emails.
   $config['smtp.settings']['smtp_on'] = FALSE;
 }
+
+if (SETTINGS_ENVIRONMENT === D_ENVIRONMENT_LOCAL) {
+  $config['smtp.settings']['smtp_protocol'] = 'standard';
+}

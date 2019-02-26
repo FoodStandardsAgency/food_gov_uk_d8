@@ -2,7 +2,7 @@ credential_provider: shield
 credentials:
   shield:
     user: env-var
-    pass: 'env-var'
+    pass: env-var
 print: Hello!
 allow_cli: true
 _core:
