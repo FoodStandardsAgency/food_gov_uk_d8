@@ -1,0 +1,4 @@
+manage multipage guides:
+  title: 'Manage multipage guides'
+  description: 'Manage multipage guides on the FSA site.'
+  restrict access: TRUE

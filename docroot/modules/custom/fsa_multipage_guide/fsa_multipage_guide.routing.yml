@@ -1,0 +1,8 @@
+fsa_multipage_guide.manage:
+  path: '/node/{node}/manage-guide'
+  defaults:
+    _controller: '\Drupal\fsa_multipage_guide\Controller\FSAMultiPageGuideController::manage'
+    _title: 'Manage guide'
+  requirements:
+    _permission: 'manage multipage guides'
+    _custom_access: '\Drupal\fsa_multipage_guide\Controller\FSAMultiPageGuideController::manageAccess'

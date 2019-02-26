@@ -1,0 +1,5 @@
+fsa_multipage_guide.manage:
+  route_name: fsa_multipage_guide.manage
+  title: 'Manage guide'
+  base_route: entity.node.canonical
+  weight: 100
