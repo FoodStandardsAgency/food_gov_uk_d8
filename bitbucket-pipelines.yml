@@ -27,7 +27,7 @@ pipelines:
             - make pipelines-build-frontend
           artifacts:
             - 'docroot/themes/custom/fsa/dist/**'
-            - 'docroot/themes/custom/fsa/node_modules/**'
+         #   - 'docroot/themes/custom/fsa/node_modules/**'
       - step:
           name: Relay
           image: deeson/deployer
@@ -57,7 +57,7 @@ pipelines:
             - make pipelines-build-frontend
           artifacts:
             - 'docroot/themes/custom/fsa/dist/**'
-            - 'docroot/themes/custom/fsa/node_modules/**'
+           # - 'docroot/themes/custom/fsa/node_modules/**'
       - step:
           name: Relay
           image: deeson/deployer
@@ -87,7 +87,7 @@ pipelines:
             - make pipelines-build-frontend
           artifacts:
             - 'docroot/themes/custom/fsa/dist/**'
-            - 'docroot/themes/custom/fsa/node_modules/**'
+            #- 'docroot/themes/custom/fsa/node_modules/**'
       - step:
           name: Relay
           image: deeson/deployer
@@ -118,7 +118,7 @@ pipelines:
             - make pipelines-build-frontend
           artifacts:
             - 'docroot/themes/custom/fsa/dist/**'
-            - 'docroot/themes/custom/fsa/node_modules/**'
+            #- 'docroot/themes/custom/fsa/node_modules/**'
       - step:
           name: Relay
           image: deeson/deployer
