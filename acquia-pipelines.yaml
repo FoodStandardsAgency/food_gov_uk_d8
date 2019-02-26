@@ -6,3 +6,11 @@ services:
 variables:
   global:
     ENV: pipelines
+events:
+  build:
+    steps:
+      # Deploy the build artifact to a Cloud on-demand environment.
+      - deploy:
+          script:
+            # Being careful, just do a deployment for develop for now...
+            - if [[ "$SOURCE_VCS_PATH" =~ ^develop$ ]]; then pipelines-deploy ;fi
