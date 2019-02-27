@@ -45,7 +45,7 @@ class FSAMultiPageGuide {
    * @return \Drupal\fsa_multipage_guide\FSAMultiPageGuide
    */
   public static function Get($guide) {
-    if (self::isGuide($guide)) {
+    if (self::IsGuide($guide)) {
       return new FSAMultiPageGuide($guide);
     }
   }
@@ -53,14 +53,27 @@ class FSAMultiPageGuide {
   /**
    * FSAMultipageGuide constructor.
    *
+   * Don't call directly, use the factory function
+   * $guide = FSAMultiPageGuide::Get($node);
+   *
    * @param \Drupal\node\NodeInterface $guide
    */
   public function __construct(NodeInterface $guide) {
     $this->guide = $guide;
   }
 
+  /**
+   * @return int
+   */
   public function getId() {
     return $this->guide->id();
+  }
+
+  /**
+   * @return string
+   */
+  public function getTitle() {
+    return $this->guide->getTitle();
   }
 
   /**

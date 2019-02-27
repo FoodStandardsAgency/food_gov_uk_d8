@@ -13,7 +13,7 @@ third_party_settings:
 id: mainpagecontent
 theme: fsa
 region: content
-weight: -22
+weight: -21
 provider: null
 plugin: system_main_block
 settings:

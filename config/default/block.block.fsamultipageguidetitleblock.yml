@@ -1,4 +1,4 @@
-uuid: d5d3cad2-e443-4fe2-888d-47a46c9608ca
+uuid: b2fa4832-0caa-4886-910e-1f92912d1188
 langcode: en
 status: true
 dependencies:
@@ -11,15 +11,15 @@ dependencies:
 third_party_settings:
   block_class:
     classes: ''
-id: fsamultipageguidefooterblock
+id: fsamultipageguidetitleblock
 theme: fsa
 region: content
-weight: -20
+weight: -24
 provider: null
-plugin: fsa_multipage_guide_footer_block
+plugin: fsa_multipage_guide_title_block
 settings:
-  id: fsa_multipage_guide_footer_block
-  label: 'Multi-page guide footer block'
+  id: fsa_multipage_guide_title_block
+  label: 'FSA multi page guide title block'
   provider: fsa_multipage_guide
   label_display: '0'
 visibility:
