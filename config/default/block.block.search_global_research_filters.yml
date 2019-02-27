@@ -16,7 +16,7 @@ third_party_settings:
 id: search_global_research_filters
 theme: fsa
 region: sidebar_first
-weight: -13
+weight: -20
 provider: null
 plugin: 'views_exposed_filter_block:search_global_research-page_1'
 settings:

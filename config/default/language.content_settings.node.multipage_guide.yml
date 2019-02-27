@@ -1,0 +1,16 @@
+uuid: 87293038-d8f0-4e62-a2cc-0a1606a8e94e
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.multipage_guide
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: node.multipage_guide
+target_entity_type_id: node
+target_bundle: multipage_guide
+default_langcode: site_default
+language_alterable: false

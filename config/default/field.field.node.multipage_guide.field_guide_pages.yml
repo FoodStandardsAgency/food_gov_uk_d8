@@ -1,0 +1,28 @@
+uuid: 966db603-d32c-4ff2-968d-1624af71ee45
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_guide_pages
+    - node.type.multipage_guide
+    - node.type.page
+id: node.multipage_guide.field_guide_pages
+field_name: field_guide_pages
+entity_type: node
+bundle: multipage_guide
+label: 'Guide pages'
+description: 'You need to create the pages of the guide and then come here to arrange those pages into a guide.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      page: page
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,32 +1,32 @@
-uuid: b119a899-c086-4cc4-91dc-9b0fd9d8a515
+uuid: f79d3ffc-7cef-46e2-9ab2-4255c7470f40
 langcode: en
 status: true
 dependencies:
   module:
     - block_class
     - ctools
-    - fsa_topic_listing
+    - fsa_multipage_guide
   theme:
     - fsa
 third_party_settings:
   block_class:
     classes: ''
-id: subject_listing_anchor_nav
+id: fsamultipageguidelefthandmenublock
 theme: fsa
 region: sidebar_first
-weight: -10
+weight: -16
 provider: null
-plugin: subject_listing_anchor_nav
+plugin: fsa_multipage_guide_left_hand_menu_block
 settings:
-  id: subject_listing_anchor_nav
-  label: 'Subject listing anchor nav'
-  provider: fsa_topic_listing
-  label_display: '0'
+  id: fsa_multipage_guide_left_hand_menu_block
+  label: 'In this guide'
+  provider: fsa_multipage_guide
+  label_display: visible
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
     bundles:
-      lander: lander
+      page: page
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'

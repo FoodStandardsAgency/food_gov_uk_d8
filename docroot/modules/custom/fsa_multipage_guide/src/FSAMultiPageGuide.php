@@ -32,8 +32,10 @@ class FSAMultiPageGuide {
         ->condition('field_guide_pages.target_id', $page->id())
         ->execute();
 
-      $nid = reset($nids);
-      return !empty($nid) ? self::Get(\Drupal\node\Entity\Node::load($nid)) : NULL;
+      if (is_array($nids)) {
+        $nid = reset($nids);
+        return !empty($nid) ? self::Get(\Drupal\node\Entity\Node::load($nid)) : NULL;
+      }
     }
   }
 
@@ -61,6 +63,9 @@ class FSAMultiPageGuide {
     return $this->guide->id();
   }
 
+  /**
+   * @return \Drupal\node\NodeInterface[]
+   */
   public function getPages() {
     return $this->guide->field_guide_pages->referencedEntities();
   }

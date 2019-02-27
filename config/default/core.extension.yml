@@ -68,6 +68,7 @@ module:
   fsa_establishment_lookup: 0
   fsa_gtm: 0
   fsa_lander: 0
+  fsa_multipage_guide: 0
   fsa_notify: 0
   fsa_page_feedback: 0
   fsa_ratings: 0
@@ -108,6 +109,7 @@ module:
   media_entity_document: 0
   media_entity_image: 0
   memcache: 0
+  memcache_admin: 0
   menu_block: 0
   menu_breadcrumb: 0
   menu_trail_by_path: 0

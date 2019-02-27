@@ -15,7 +15,7 @@ third_party_settings:
 id: subpagesblock
 theme: fsa
 region: sidebar_first
-weight: -11
+weight: -14
 provider: null
 plugin: subpages_block
 settings:

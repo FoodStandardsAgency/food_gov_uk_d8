@@ -1,0 +1,18 @@
+uuid: 1b34176d-c9bd-4de2-9bed-3c3de992fe3c
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.multipage_guide
+id: node.multipage_guide.title
+field_name: title
+entity_type: node
+bundle: multipage_guide
+label: 'Guide title'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
