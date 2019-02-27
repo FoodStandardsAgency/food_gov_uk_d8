@@ -32,13 +32,13 @@ class FSAMultipageGuideLeftMenuBlock extends BlockBase {
 
     $markup = '<nav class="document__menu"><ol class="document__menu__list">';
 
-    foreach ($guide->getPages() as $page) {
+    foreach ($guide->getPages() as $count => $page) {
       $options = ['absolute' => TRUE];
       $url = \Drupal\Core\Url::fromRoute('entity.node.canonical', ['node' => $page->id()], $options);
       $url = $url->toString();
 
       $markup .= '<li>';
-      $markup .= '<a href="' . $url . '">' . $page->getTitle() . '</a>';
+      $markup .= '<a href="' . $url . '">' . ++$count . '. ' . $page->getTitle() . '</a>';
       $markup .= '</li>';
     }
 

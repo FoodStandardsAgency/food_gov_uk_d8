@@ -78,4 +78,42 @@ class FSAMultiPageGuide {
     return !empty($pages) ? $pages[0] : NULL;
   }
 
+  /**
+   * @param \Drupal\node\NodeInterface $page
+   *
+   * @return \Drupal\node\NodeInterface
+   */
+  public function getNextPage(NodeInterface $page) {
+    $pages = $this->getPages();
+    $position = $this->getPagePosition($page);
+
+    if ($position !== FALSE && count($pages) > $position + 1) {
+      return $pages[$position + 1];
+    }
+  }
+
+  /**
+   * @param \Drupal\node\NodeInterface $page
+   *
+   * @return \Drupal\node\NodeInterface
+   */
+  public function getPrevPage(NodeInterface $page) {
+    $position = $this->getPagePosition($page);
+
+    if (!empty($position)) {
+      $pages = $this->getPages();
+      return $pages[$position - 1];
+    }
+  }
+
+  /**
+   * @param \Drupal\node\NodeInterface $page
+   *
+   * @return \Drupal\node\NodeInterface|FALSE
+   *   A numeric position in the list starting at 0 or FALSE if not in the guide.
+   */
+  public function getPagePosition(NodeInterface $page) {
+    return array_search($page, $this->getPages());
+  }
+
 }

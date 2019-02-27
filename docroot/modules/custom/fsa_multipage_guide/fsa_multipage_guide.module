@@ -10,6 +10,8 @@ use \Drupal\fsa_multipage_guide\FSAMultiPageGuide;
 
 /**
  * Implements hook_entity_view().
+ *
+ * If you try and look at a multi page guide you get redirected to its first page.
  */
 function fsa_multipage_guide_entity_view(array &$build, \Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
   if ($view_mode === 'full' && FSAMultiPageGuide::IsGuide($entity)) {
