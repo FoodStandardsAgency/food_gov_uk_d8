@@ -1,7 +1,7 @@
 @import "../../helper/helper";
 @import "../../helper/custom-property";
 
-[class="document__menu__heading"]{
+.document__menu__heading {
   @mixin reset-font-style;
 
   font-weight: 600;
@@ -9,7 +9,7 @@
   text-transform: uppercase;
 }
 
-[class="document__menu__list"]{
+.document__menu__list {
   list-style: none;
   padding: 0;
   @media (--breakpoint-md) {
