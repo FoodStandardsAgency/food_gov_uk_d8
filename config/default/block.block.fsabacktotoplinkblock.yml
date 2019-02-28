@@ -1,26 +1,26 @@
-uuid: b2fa4832-0caa-4886-910e-1f92912d1188
+uuid: 9df10ede-0e30-43de-a187-0e9b868e0ede
 langcode: en
 status: true
 dependencies:
   module:
     - block_class
     - ctools
-    - fsa_multipage_guide
+    - fsa_custom
   theme:
     - fsa
 third_party_settings:
   block_class:
     classes: ''
-id: fsamultipageguidetitleblock
+id: fsabacktotoplinkblock
 theme: fsa
 region: content
-weight: -25
+weight: -21
 provider: null
-plugin: fsa_multipage_guide_title_block
+plugin: fsa_back_to_top_block
 settings:
-  id: fsa_multipage_guide_title_block
-  label: 'FSA multi page guide title block'
-  provider: fsa_multipage_guide
+  id: fsa_back_to_top_block
+  label: 'FSA back to top link block'
+  provider: fsa_custom
   label_display: '0'
 visibility:
   'entity_bundle:node':
