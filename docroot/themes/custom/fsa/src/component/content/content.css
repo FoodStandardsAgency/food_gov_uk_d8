@@ -428,7 +428,7 @@ blockquote {
   margin-right: -1em !important;
   margin-right: calc(-1em - 1px) !important;
   background-color: var(--primary-color);
-  border-bottom: 4px solid var(--color-green);
+  border-bottom: 4px solid var(--fsa-primary_dark-green);
   color: var(--color-white);
   padding-top: 1em;
   padding-bottom: 1em;
@@ -471,6 +471,26 @@ blockquote {
     margin-right: -2em !important;
     margin-right: calc(-2em - 1px) !important;
   }
+}
+
+.explanation__title--purple {
+  background-color: var(--fsa-secondary_light-purple);
+  border-bottom: 4px solid var(--fsa-tertiary_dark-purple);
+}
+
+.explanation__title--blue {
+  background-color: var(--fsa-secondary_mid-blue);
+  border-bottom: 4px solid var(--color-dark-blue);
+}
+
+.explanation__title--green {
+  background-color: var(--fsa-primary_dark-green);
+  border-bottom: 4px solid var(--fsa-primary_dark-green);
+}
+
+.explanation__title--red {
+  background-color: var(--color-red);
+  border-bottom: 4px solid var(--color-dark-red);
 }
 
 .explanation__content {
