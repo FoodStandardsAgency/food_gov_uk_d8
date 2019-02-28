@@ -309,8 +309,8 @@ table {
   }
 
   h3 {
-    @mixin responsive-declaration font-size, 1.125em, 1.33em;
-    @mixin responsive-declaration line-height, 1.2, 1.17;
+    /*@mixin responsive-declaration font-size, 1.125em, 1.33em;
+    @mixin responsive-declaration line-height, 1.2, 1.17;*/
 
     margin-bottom: 0;
   }
