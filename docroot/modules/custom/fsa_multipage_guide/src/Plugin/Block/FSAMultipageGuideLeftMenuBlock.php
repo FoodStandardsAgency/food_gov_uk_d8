@@ -30,7 +30,9 @@ class FSAMultipageGuideLeftMenuBlock extends BlockBase {
       return array();
     }
 
-    $markup = '<nav class="document__menu"><ol class="document__menu__list">';
+    $markup = '<nav class="document__menu">
+      <a href="#after-guide-side-menu" class="skip-to-content off-canvas off-canvas--focusable">' . t('Skip this menu') . '</a>
+      <ol class="document__menu__list">';
 
     foreach ($guide->getPages() as $count => $page) {
       $options = ['absolute' => TRUE];
@@ -42,7 +44,7 @@ class FSAMultipageGuideLeftMenuBlock extends BlockBase {
       $markup .= '</li>';
     }
 
-    $markup .= '</ol></nav>';
+    $markup .= '</ol></nav><a id="after-guide-side-menu"></a>';
 
     return [
       '#markup' => $markup,

@@ -60,6 +60,7 @@ class FSAMultiPageGuideFooterBlock extends BlockBase {
     if ($guide->hasPages()) {
       $markup .= '<nav class="document__menu">
         <h3 class="document__menu__heading">' . t('In this Guide') . '</h3>
+        <a href="#after-guide-footer-menu" class="skip-to-content off-canvas off-canvas--focusable">' . t('Skip this menu') . '</a>
         <ol class="document__menu__list">';
 
         foreach ($guide->getPages() as $count => $page) {
@@ -72,7 +73,7 @@ class FSAMultiPageGuideFooterBlock extends BlockBase {
           $markup .= '</li>';
         }
 
-      $markup .= '</ol></nav>';
+      $markup .= '</ol></nav><a id="after-guide-footer-menu"></a>';
     }
 
     return [
