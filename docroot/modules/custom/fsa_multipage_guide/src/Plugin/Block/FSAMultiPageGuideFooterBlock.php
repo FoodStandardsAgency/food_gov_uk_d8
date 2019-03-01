@@ -36,7 +36,7 @@ class FSAMultiPageGuideFooterBlock extends BlockBase {
     $markup = '';
 
     if (!empty($next_page) || !empty($prev_page)) {
-      $markup .= '<nav class="next-previous"><ul class="next-previous__nav"><li class="next-previous__nav__item">';
+      $markup .= '<nav class="next-previous"><ul class="next-previous__nav"><li class="next-previous__nav__item next-previous__nav--previous">';
 
       if (!empty($prev_page)) {
         $options = ['absolute' => TRUE];
@@ -45,7 +45,7 @@ class FSAMultiPageGuideFooterBlock extends BlockBase {
         $markup .= '<a href="' . $url . '"><span class="next-previous__previous">' . t('Previous') . '</span><p class="next-previous__type">' . ($position - 1) . '. ' . $prev_page->getTitle() . '</p></a>';
       }
 
-      $markup .= ' </li><li class="next-previous__nav__item">';
+      $markup .= ' </li><li class="next-previous__nav__item next-previous__nav--next">';
 
       if (!empty($next_page)) {
         $options = ['absolute' => TRUE];
