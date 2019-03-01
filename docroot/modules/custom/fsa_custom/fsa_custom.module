@@ -261,6 +261,13 @@ function fsa_custom_preprocess_page_title(&$variables) {
     }
   }
 
+  if ($entity) {
+    $guide = \Drupal\fsa_multipage_guide\FSAMultiPageGuide::GetGuideForPage($entity);
+    if (!empty($guide)) {
+      $variables['guide_title'] = $guide->getTitle();
+    }
+  }
+
 }
 
 /**

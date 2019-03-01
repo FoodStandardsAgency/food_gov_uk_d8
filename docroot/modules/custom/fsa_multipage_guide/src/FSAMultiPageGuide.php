@@ -40,13 +40,17 @@ class FSAMultiPageGuide {
   }
 
   /**
-   * @param $guide
+   * @param \Drupal\node\NodeInterface $guide
    *
    * @return \Drupal\fsa_multipage_guide\FSAMultiPageGuide
    */
   public static function Get($guide) {
+    $guides = [];
     if (self::IsGuide($guide)) {
-      return new FSAMultiPageGuide($guide);
+      if (empty($guides[$guide->id()])) {
+        $guides[$guide->id()] = new FSAMultiPageGuide($guide);
+      }
+      return $guides[$guide->id()];
     }
   }
 
