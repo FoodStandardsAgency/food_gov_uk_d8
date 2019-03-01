@@ -57,6 +57,24 @@ class FSAMultiPageGuideFooterBlock extends BlockBase {
       $markup .= '</li></ul></nav>';
     }
 
+    if ($guide->hasPages()) {
+      $markup .= '<nav class="document__menu">
+        <h3 class="document__menu__heading">' . t('In this Guide') . '</h3>
+        <ol class="document__menu__list">';
+
+        foreach ($guide->getPages() as $count => $page) {
+          $options = ['absolute' => TRUE];
+          $url = \Drupal\Core\Url::fromRoute('entity.node.canonical', ['node' => $page->id()], $options);
+          $url = $url->toString();
+
+          $markup .= '<li>';
+          $markup .= '<a href="' . $url . '">' . ++$count . '. ' . $page->getTitle() . '</a>';
+          $markup .= '</li>';
+        }
+
+      $markup .= '</ol></nav>';
+    }
+
     return [
       '#markup' => $markup,
     ];

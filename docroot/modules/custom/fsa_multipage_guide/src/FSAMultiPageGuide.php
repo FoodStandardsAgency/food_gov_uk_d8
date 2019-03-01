@@ -84,6 +84,13 @@ class FSAMultiPageGuide {
   }
 
   /**
+   * @return bool
+   */
+  public function hasPages() {
+    return count($this->getPages()) > 0;
+  }
+
+  /**
    * @return \Drupal\node\NodeInterface|null
    */
   public function getFirstPage() {
