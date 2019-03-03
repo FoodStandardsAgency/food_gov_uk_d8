@@ -39,7 +39,9 @@ class FSAMultiPageGuideController extends ControllerBase {
     $redirect_url = '/node/add/multipage_guide';
 
     if (empty($guide)) {
-      \Drupal::messenger()->addMessage(t('This page is not currently part of a guide, you will need to create one and add it too it.'));
+      \Drupal::messenger()->addMessage(t('%page is not currently part of a guide, you will need to create one using the form below and add it too it.', [
+        '%page' => $page->getTitle(),
+      ]));
     }
     else {
       $redirect_url = '/node/' . $guide->getId() . '/edit';
