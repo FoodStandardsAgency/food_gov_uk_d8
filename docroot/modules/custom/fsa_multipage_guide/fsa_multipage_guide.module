@@ -7,6 +7,7 @@
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use \Drupal\fsa_multipage_guide\FSAMultiPageGuide;
+use Drupal\Core\Entity\EntityTypeInterface;
 
 /**
  * Implements hook_entity_view().
@@ -42,5 +43,15 @@ function fsa_multipage_guide_preprocess_field__node__title(&$variables) {
       // Give the node title an extra class if its in a guide.
       $variables['attributes']['class'][] = 'guide__page__title';
     }
+  }
+}
+
+
+/**
+ * Implements hook_entity_bundle_field_info_alter().
+ */
+function fsa_multipage_guide_entity_bundle_field_info_alter(&$fields, EntityTypeInterface $entity_type, $bundle) {
+  if ($entity_type->id() == 'node'  && !empty($fields['field_guide_pages'])) {
+    $fields['field_guide_pages']->addConstraint('FSAPagesInGuide', []);
   }
 }
