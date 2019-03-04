@@ -32,7 +32,9 @@
       &:hover {
          color: var(--color-darker-teal);
        }
-
+      &.active {
+        font-weight: 700;
+       }
     }
   }
 
