@@ -6,7 +6,8 @@
   background-repeat: no-repeat;
   padding-left: 1em;
   float: none;
-
+  margin-bottom: 1em;
+  display: block;
   &:hover {
      color: var(--color-darker-teal);
    }
