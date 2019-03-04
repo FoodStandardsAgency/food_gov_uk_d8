@@ -671,20 +671,3 @@ function fsa_custom_theme() {
     ],
   ];
 }
-
-/**
- * Implements hook_element_info_alter().
- */
-function fsa_custom_element_info_alter(&$type) {
-  if (isset($type['captcha'])) {
-    $type['captcha']['#after_build'][] = 'fsa_custom_after_build_process';
-  }
-}
-
-/**
- * Add a label to the reCAPTCHA form for accessibility.
- */
-function fsa_custom_after_build_process($element, $form_state) {
-  $element['captcha_widgets']['recaptcha_widget']['#suffix'] = '<div><label class="hide" for="g-recaptcha-response">Recaptcha response</label></div>';
-  return $element;
-}
