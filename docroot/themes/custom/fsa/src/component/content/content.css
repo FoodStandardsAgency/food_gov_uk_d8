@@ -542,13 +542,13 @@ blockquote {
 }
 
 .explanation__title--blue {
-  background-color: var(--fsa-secondary_mid-blue);
+  background-color: #165C7D;
   border-bottom: 4px solid var(--color-dark-blue);
 }
 
 .explanation__title--green {
-  background-color: var(--fsa-primary_dark-green);
-  border-bottom: 4px solid var(--fsa-primary_dark-green);
+  background-color: #4d802d;
+  border-bottom: 4px solid #2e4d1b;
 }
 
 .explanation__title--red {
