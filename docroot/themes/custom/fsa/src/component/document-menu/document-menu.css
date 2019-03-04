@@ -1,14 +1,7 @@
 @import "../../helper/helper";
 @import "../../helper/custom-property";
 
-.document__menu__side-menu {
-  display: none;
-  @media (--breakpoint-sm) {
-    display: block;
-  }
-}
-
-.document__menu__heading {
+.document-menu__heading {
   @mixin reset-font-style;
 
   font-weight: 600;
@@ -16,11 +9,10 @@
   text-transform: uppercase;
 }
 
-.document__menu__list {
+.document-menu__list {
   list-style: none;
   padding: 0;
   @media (--breakpoint-md) {
-    display: block;
     padding-top: 1em;
   }
   li {
