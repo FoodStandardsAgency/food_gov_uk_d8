@@ -5,6 +5,6 @@ widget:
   type: image
   size: ''
   tabindex: 0
-  noscript: false
+  noscript: true
 _core:
   default_config_hash: ZKQ03ePk4sH2zESRw4tdZYw__nG2YN4Ru5roPL23g3A
