@@ -30,9 +30,11 @@ class FSAMultipageGuideLeftMenuBlock extends BlockBase {
       return array();
     }
 
-    $markup = '<nav class="document__menu">
-      <a href="#after-guide-side-menu" class="skip-to-content off-canvas off-canvas--focusable">' . t('Skip this menu') . '</a>
-      <ol class="document__menu__list">';
+    $markup = '<div class="document-menu-wrapper document-menu-side-menu">
+      <h2 class="sidebar-title">' . t('In this guide') . '</h2>
+      <a href="#after-guide-side-menu2" class="skip-to-content off-canvas off-canvas--focusable">' . t('Skip this menu') . '</a>
+      <nav class="document-menu">
+        <ol class="document-menu__list">';
 
     foreach ($guide->getPages() as $count => $page) {
       $options = ['absolute' => TRUE];
@@ -40,15 +42,20 @@ class FSAMultipageGuideLeftMenuBlock extends BlockBase {
       $url = $url->toString();
 
       $markup .= '<li>';
-      $markup .= '<a href="' . $url . '">' . ++$count . '. ' . $page->getTitle() . '</a>';
+      $markup .= '<a href="' . $url . '"';
+
+      if ($this_page === $page) {
+        $markup .= ' class="active"';
+      }
+
+      $markup .= '>' . ++$count . '. ' . $page->getTitle() . '</a>';
       $markup .= '</li>';
     }
 
-    $markup .= '</ol></nav><a id="after-guide-side-menu"></a>';
+    $markup .= '</ol></nav></div><a id="after-guide-side-menu2"></a>';
 
     return [
       '#markup' => $markup,
-      //'#attributes' => ['class' => 'document__menu'],
     ];
   }
 

@@ -3,11 +3,11 @@
 
 .document-menu-side-menu {
   display: block;
-  @media (--breakpoint-sm) {
-    display: none;
-  }
   .document-menu {
     display: none;
+    @media (--breakpoint-sm) {
+      display: block;
+    }
     &.document-menu__open {
       display: block;
      }
@@ -24,10 +24,16 @@
   background-size: 24px;
   background-repeat: no-repeat;
   padding-right: 1em;
+  @media (--breakpoint-sm) {
+    background-image: none;
+  }
 }
 
 .sidebar-title.sidebar-title__open {
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4gICAgPHBhdGggZmlsbD0iIzAwMCIgZmlsbC1ydWxlPSJub256ZXJvIiBkPSJNMTIgMEM1LjM3MyAwIDAgNS4zNzMgMCAxMnM1LjM3MyAxMiAxMiAxMiAxMi01LjM3MyAxMi0xMkExMiAxMiAwIDAgMCAxMiAwem0wIDIxLjZhOS42IDkuNiAwIDEgMSAwLTE5LjIgOS42IDkuNiAwIDAgMSAwIDE5LjJ6bTQuOC0xMC44SDcuMmExLjIgMS4yIDAgMSAwIDAgMi40aDkuNmExLjIgMS4yIDAgMSAwIDAtMi40eiIvPjwvc3ZnPg==");
+  @media (--breakpoint-sm) {
+    background-image: none;
+  }
 }
 
 .document-menu__heading {
