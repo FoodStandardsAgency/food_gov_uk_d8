@@ -19,3 +19,10 @@ add_to_any:
   dependencies:
     - core/drupal
     - core/jquery.once
+recaptcha_accessibility:
+  version: 1.x
+  js:
+    js/recaptcha-accessibility.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery.once
