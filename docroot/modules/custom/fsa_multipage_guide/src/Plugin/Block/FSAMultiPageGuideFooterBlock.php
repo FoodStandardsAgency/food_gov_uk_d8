@@ -58,10 +58,10 @@ class FSAMultiPageGuideFooterBlock extends BlockBase {
     }
 
     if ($guide->hasPages()) {
-      $markup .= '<nav class="document__menu">
-        <h3 class="document__menu__heading">' . t('In this Guide') . '</h3>
+      $markup .= '<div class="document-menu-wrapper"><nav class="document-menu">
+        <h3 class="document-menu__heading">' . t('In this Guide') . '</h3>
         <a href="#after-guide-footer-menu" class="skip-to-content off-canvas off-canvas--focusable">' . t('Skip this menu') . '</a>
-        <ol class="document__menu__list">';
+        <ol class="document-menu__list">';
 
         foreach ($guide->getPages() as $count => $page) {
           $options = ['absolute' => TRUE];
@@ -69,11 +69,17 @@ class FSAMultiPageGuideFooterBlock extends BlockBase {
           $url = $url->toString();
 
           $markup .= '<li>';
-          $markup .= '<a href="' . $url . '">' . ++$count . '. ' . $page->getTitle() . '</a>';
+          $markup .= '<a href="' . $url . '"';
+
+          if ($this_page === $page) {
+            $markup .= ' class="active"';
+          }
+
+          $markup .= '>' . ++$count . '. ' . $page->getTitle() . '</a>';
           $markup .= '</li>';
         }
 
-      $markup .= '</ol></nav><a id="after-guide-footer-menu"></a>';
+      $markup .= '</ol></nav><a id="after-guide-footer-menu"></a></div>';
     }
 
     return [
