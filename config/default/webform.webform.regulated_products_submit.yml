@@ -153,9 +153,9 @@ handlers:
         - completed
       to_mail: FSAregulatedfoods@food.gov.uk
       to_options: {  }
-      cc_mail: ''
+      cc_mail: regulatedproducts@food.gov.uk
       cc_options: {  }
-      bcc_mail: 'paul@wearesort.co.uk, karl@wearesort.co.uk'
+      bcc_mail: paul@wearesort.co.uk
       bcc_options: {  }
       from_mail: default
       from_options: {  }
