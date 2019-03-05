@@ -21,7 +21,7 @@ settings:
   id: fsa_multipage_guide_left_hand_menu_block
   label: 'In this guide'
   provider: fsa_multipage_guide
-  label_display: visible
+  label_display: '0'
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
