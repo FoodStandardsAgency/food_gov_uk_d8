@@ -67,6 +67,22 @@ class FSAMultiPageGuide {
   }
 
   /**
+   * Get the current guide object in the right language.
+   *
+   * @param string $lang_code
+   *   Optional, specify the language to return the guide in, otherwise select
+   *   the user's current language.
+   *
+   * @return \Drupal\node\NodeInterface
+   */
+  public function getGuide($lang_code = '') {
+    if (empty($lang_code)) {
+      $lang_code = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    }
+    return $this->guide->getTranslation($lang_code);
+  }
+
+  /**
    * @return int
    */
   public function getId() {
@@ -77,14 +93,18 @@ class FSAMultiPageGuide {
    * @return string
    */
   public function getTitle() {
-    return $this->guide->getTitle();
+    return $this->getGuide()->getTitle();
   }
 
   /**
    * @return \Drupal\node\NodeInterface[]
    */
   public function getPages() {
-    return $this->guide->field_guide_pages->referencedEntities();
+    $pages = $this->getGuide()->field_guide_pages->referencedEntities();
+    $lang_code = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    return array_map(function($page) use ($lang_code) {
+      return $page->getTranslation($lang_code);
+    }, $pages);
   }
 
   /**

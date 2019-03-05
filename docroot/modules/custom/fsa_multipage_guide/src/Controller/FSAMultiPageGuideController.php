@@ -31,6 +31,7 @@ class FSAMultiPageGuideController extends ControllerBase {
    * Send the user off to make a new guide or edit the existing one for the page.
    */
   public function manage() {
+    $lang_code = \Drupal::languageManager()->getCurrentLanguage()->getId();
     $node_id = \Drupal::routeMatch()->getParameter('node');
 
     $page = \Drupal\node\Entity\Node::load($node_id);
@@ -44,7 +45,7 @@ class FSAMultiPageGuideController extends ControllerBase {
       ]));
     }
     else {
-      $redirect_url = '/node/' . $guide->getId() . '/edit';
+      $redirect_url = '/' . $lang_code . '/node/' . $guide->getId() . '/edit';
     }
 
     return new RedirectResponse($redirect_url);
