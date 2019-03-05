@@ -52,9 +52,6 @@ function fsa_custom_preprocess_page(&$variables) {
   // Attach addToAny js(workaround to set main share button label transalted)
   $variables['#attached']['library'][] = 'fsa_custom/add_to_any';
 
-  // Attach recaptchaAccessibility js (force label to captcha for accessibility)
-  $variables['#attached']['library'][] = 'fsa_custom/recaptcha_accessibility';
-
   // Hardcoded "utility menu" links.
   // Get the contact link from settings. Default to 58 which happened to be the
   // first version contact lander.
