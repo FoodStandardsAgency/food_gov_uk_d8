@@ -36,6 +36,10 @@
   }
 }
 
+.document-menu__open {
+  margin-bottom: 2em;
+}
+
 .document-menu__heading {
   @mixin reset-font-style;
 
@@ -49,7 +53,7 @@
   padding: 0;
   @media (--breakpoint-md) {
     display: block;
-    padding-top: 1em;
+    margin-bottom: 2em;
   }
   li {
     margin-bottom: 1em;
