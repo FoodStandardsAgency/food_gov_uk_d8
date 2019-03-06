@@ -99,12 +99,26 @@ class FSAMultiPageGuide {
   /**
    * @return \Drupal\node\NodeInterface[]
    */
-  public function getPages() {
+  public function getPages($access_check = TRUE) {
     $pages = $this->getGuide()->field_guide_pages->referencedEntities();
     $lang_code = \Drupal::languageManager()->getCurrentLanguage()->getId();
-    return array_map(function($page) use ($lang_code) {
+    $translated_pages = array_map(function($page) use ($lang_code) {
       return $page->getTranslation($lang_code);
     }, $pages);
+
+    if (!$access_check) {
+      return $translated_pages;
+    }
+
+    $access_pages = [];
+
+    foreach ($translated_pages as $page) {
+      if ($page->access('view') === TRUE) {
+        $access_pages[] = $page;
+      }
+    }
+
+    return $access_pages;
   }
 
   /**
