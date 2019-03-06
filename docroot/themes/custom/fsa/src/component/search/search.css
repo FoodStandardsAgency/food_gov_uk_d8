@@ -184,6 +184,8 @@
       @media (--breakpoint-sm) {
         padding-right: 1.5em;
         padding-left: 1.5em;
+        padding-top: 0;
+        padding-bottom: 0;
         color: transparent;
         width: 3em;
         height: 3em;
