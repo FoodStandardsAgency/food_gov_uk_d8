@@ -56,6 +56,9 @@ class FSAMultipageGuideLeftMenuBlock extends BlockBase {
 
     return [
       '#markup' => $markup,
+      '#cache' => [
+        'max-age' => 0,
+      ],
     ];
   }
 
