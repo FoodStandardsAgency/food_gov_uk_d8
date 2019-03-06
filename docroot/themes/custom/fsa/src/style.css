@@ -58,7 +58,7 @@ html {
   letter-spacing: 0.015em;
   @mixin responsive-declaration font-size, 100%, 112.5%;
   @mixin responsive-declaration line-height, 1.7, 1.6;
-  
+  scroll-behavior: smooth;
 }
 
 html.is-fixed {
