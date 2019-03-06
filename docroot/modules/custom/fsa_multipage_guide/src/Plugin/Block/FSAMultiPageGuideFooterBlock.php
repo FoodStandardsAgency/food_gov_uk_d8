@@ -63,7 +63,7 @@ class FSAMultiPageGuideFooterBlock extends BlockBase {
         <a href="#after-guide-footer-menu" class="skip-to-content off-canvas off-canvas--focusable">' . t('Skip this menu') . '</a>
         <ol class="document-menu__list">';
 
-        foreach ($guide->getPages() as $count => $page) {
+        foreach ($guide->getPages() as $page) {
           $options = ['absolute' => TRUE];
           $url = \Drupal\Core\Url::fromRoute('entity.node.canonical', ['node' => $page->id()], $options);
           $url = $url->toString();
@@ -75,7 +75,7 @@ class FSAMultiPageGuideFooterBlock extends BlockBase {
             $markup .= ' class="active"';
           }
 
-          $markup .= '>' . ++$count . '. ' . $page->getTitle() . '</a>';
+          $markup .= '>' . $page->getTitle() . '</a>';
           $markup .= '</li>';
         }
 
