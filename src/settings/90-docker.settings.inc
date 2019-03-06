@@ -27,7 +27,7 @@ if (SETTINGS_ENVIRONMENT == D_ENVIRONMENT_LOCAL && SETTINGS_PLATFORM == D_PLATFO
   // File paths...
   $conf['file_temporary_path'] = '/tmp';
   $settings['file_public_path'] = 'sites/default/files';
-  $settings['file_private_path'] = '/private';
+  $settings['file_private_path'] = '.persist/private';
 
   // Configure Redis.
 

@@ -45,7 +45,10 @@ class FSAMultiPageGuideController extends ControllerBase {
       ]));
     }
     else {
-      $redirect_url = '/' . $lang_code . '/node/' . $guide->getId() . '/edit';
+      $redirect_url = '/node/' . $guide->getId() . '/edit';
+      if ($lang_code !== 'en') {
+        $redirect_url = '/' . $lang_code . $redirect_url;
+      }
     }
 
     return new RedirectResponse($redirect_url);
