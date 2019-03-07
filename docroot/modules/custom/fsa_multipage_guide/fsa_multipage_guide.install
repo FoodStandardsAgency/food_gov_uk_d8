@@ -1,0 +1,23 @@
+<?php
+
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\field\Entity\FieldConfig;
+
+
+/**
+ * Delete the old field field_image_long_description.
+ */
+function fsa_multipage_guide_update_8101() {
+
+  // Deleting field storage.
+  $storage = FieldStorageConfig::loadByName('media', 'field_image_long_description');
+  if (!empty($storage)) {
+    $storage->delete();
+  }
+
+  // Deleting field.
+  $field = FieldConfig::loadByName('media', 'image', 'field_image_long_description');
+  if (!empty($field)) {
+    $field->delete();
+  }
+}

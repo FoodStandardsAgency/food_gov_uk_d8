@@ -5,14 +5,13 @@ dependencies:
   config:
     - field.field.media.image.field_description
     - field.field.media.image.field_image
-    - field.field.media.image.field_image_long_description
+    - field.field.media.image.field_long_description
     - field.field.media.image.field_topic
     - image.style.crop_thumbnail
     - media_entity.bundle.image
   module:
     - hierarchical_term_formatter
     - image
-    - text
 id: media.image.default
 targetEntityType: media
 bundle: image
@@ -34,12 +33,12 @@ content:
     third_party_settings: {  }
     type: image
     region: content
-  field_image_long_description:
+  field_long_description:
     weight: 5
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    type: basic_string
     region: content
   field_topic:
     weight: 4

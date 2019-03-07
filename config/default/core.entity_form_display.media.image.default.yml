@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.field.media.image.field_description
     - field.field.media.image.field_image
-    - field.field.media.image.field_image_long_description
+    - field.field.media.image.field_long_description
     - field.field.media.image.field_topic
     - image.style.thumbnail
     - media_entity.bundle.image
@@ -15,7 +15,6 @@ dependencies:
     - image_widget_crop
     - path
     - term_reference_tree
-    - text
 third_party_settings:
   field_group:
     group_taxonomies:
@@ -64,13 +63,13 @@ content:
     third_party_settings: {  }
     type: image_widget_crop
     region: content
-  field_image_long_description:
-    weight: 101
+  field_long_description:
+    weight: 8
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
+    type: string_textarea
     region: content
   field_topic:
     weight: 9
@@ -87,7 +86,7 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 100
+    weight: 10
     settings: {  }
     region: content
     third_party_settings: {  }
@@ -101,7 +100,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 30
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }

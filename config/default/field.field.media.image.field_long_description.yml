@@ -1,0 +1,19 @@
+uuid: f4d80b08-ba70-4ae9-a3ce-7c2b6650b890
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_long_description
+    - media_entity.bundle.image
+id: media.image.field_long_description
+field_name: field_long_description
+entity_type: media
+bundle: image
+label: 'Long description for screen readers'
+description: 'There are situations where the composition of an image is important and needs to be provided in the long description. For example, the sequence of colours used and the relative heights of the columns in a bar chart may be relevant information about the structure of the chart, in addition to the actual values and trends that it depicts.  It is also good practice to refer to and summarise more complex images from the accompanying text. For example, a reference such as “The following graph shows that visitors were lost in the first quarter, but the numbers recovered in the second quarter” helps to point out the relevant information that the image is intended to present.  This description is never shown on the website but is read out by people using screen readers.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

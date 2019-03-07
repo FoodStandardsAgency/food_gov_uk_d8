@@ -1,16 +1,16 @@
-uuid: a47492d0-4e16-443f-8cca-79dcf5ce06a6
+uuid: 2594182c-3c06-42b2-9b90-7ae5d9d25e97
 langcode: en
 status: true
 dependencies:
   module:
     - media_entity
-    - text
-id: media.field_image_long_description
-field_name: field_image_long_description
+id: media.field_long_description
+field_name: field_long_description
 entity_type: media
-type: text_long
-settings: {  }
-module: text
+type: string_long
+settings:
+  case_sensitive: false
+module: core
 locked: false
 cardinality: 1
 translatable: true
