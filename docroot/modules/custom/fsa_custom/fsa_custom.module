@@ -750,6 +750,11 @@ function template_preprocess_fsa_custom_media_image_formatter(&$variables) {
 
   /** @var \Drupal\media_entity\Entity\Media $media */
   $media = $variables['media_entity'];
+  $lang_code = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
+  if ($lang_code !== 'en') {
+    $media = $media->getTranslation($lang_code);
+  }
 
   if ($media->hasField('field_long_description')) {
     $description_field = $media->get('field_long_description')->getValue();
