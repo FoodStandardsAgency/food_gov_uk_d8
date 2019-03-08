@@ -42,13 +42,23 @@ class FSAMultipageGuideLeftMenuBlock extends BlockBase {
       $url = $url->toString();
 
       $markup .= '<li>';
-      $markup .= '<a href="' . $url . '"';
 
-      if ($this_page === $page) {
-        $markup .= ' class="active"';
+      if ($this_page !== $page) {
+        $markup .= '<a href="' . $url . '">';
+      }
+      else {
+        $markup .= '<strong>';
       }
 
-      $markup .= '>' . $page->getTitle() . '</a>';
+      $markup .= $page->getTitle();
+
+      if ($this_page !== $page) {
+        $markup .= '</a>';
+      }
+      else {
+        $markup .= '</strong>';
+      }
+
       $markup .= '</li>';
     }
 
