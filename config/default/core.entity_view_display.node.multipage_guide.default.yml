@@ -14,11 +14,12 @@ mode: default
 content:
   field_guide_pages:
     weight: 102
-    label: above
+    label: hidden
     settings:
-      link: true
+      view_mode: pdf
+      link: false
     third_party_settings: {  }
-    type: entity_reference_label
+    type: entity_reference_entity_view
     region: content
   links:
     weight: 100
