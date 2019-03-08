@@ -10,3 +10,20 @@ body {
   max-width: 100%;
   height: auto;
 }
+
+.off-canvas {
+  display: none;
+}
+
+body > div > article > h2:first-of-type {
+  font-size: 2.2em;
+}
+
+div.field__body > h2 {
+  font-size: 1.25em;
+}
+
+h2 > a {
+  color: black;
+  text-decoration: none;
+}

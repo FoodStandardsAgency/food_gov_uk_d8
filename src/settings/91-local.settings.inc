@@ -101,5 +101,4 @@ if (SETTINGS_ENVIRONMENT == 'local') {
    * directory.
    */
   $settings['skip_permissions_hardening'] = TRUE;
-
 }

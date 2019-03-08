@@ -1418,6 +1418,10 @@ but they are inserted in DOM outside container and with inline styles.
   left: -999rem;
   position: absolute;
   top: -999rem;
+
+  @media print {
+    display: none;
+  }
 }
 
 .off-canvas--focusable {

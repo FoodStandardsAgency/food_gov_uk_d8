@@ -21,7 +21,14 @@ function fsa_multipage_guide_entity_view(array &$build, \Drupal\Core\Entity\Enti
     $first_page = $guide->getFirstPage();
 
     if (!empty($first_page)) {
-      $response = new RedirectResponse('/node/' . $first_page->id());
+      $lang_code = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
+      $redirect_url = '/node/' . $first_page->id();
+      if ($lang_code !== 'en') {
+        $redirect_url = '/' . $lang_code . $redirect_url;
+      }
+
+      $response = new RedirectResponse($redirect_url);
       $request = \Drupal::request();
       // Save the session so things like messages get saved.
       $request->getSession()->save();
