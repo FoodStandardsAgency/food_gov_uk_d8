@@ -79,7 +79,14 @@ class FSAMultiPageGuideFooterBlock extends BlockBase {
           $markup .= '</li>';
         }
 
-      $markup .= '</ol></nav><a id="after-guide-footer-menu"></a></div>';
+      $markup .= '</ol></nav><a id="after-guide-footer-menu"></a><div class="content-toolbar">
+            <div class="content-toolbar__item content-toolbar__item--pdf">
+                <a href="' . $guide->getPDFExportUrl() .  '" class="print__link--pdf" target="_blank">' . t('View entire guide as PDF') . '</a>
+            </div>
+            <div class="content-toolbar__item content-toolbar__item--print">
+                <!-- <button class="page-print-trigger">' . t('Print entire guide') . '</button> -->
+            </div>
+            </div></div>';
     }
 
     return [

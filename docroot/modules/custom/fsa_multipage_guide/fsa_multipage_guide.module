@@ -16,6 +16,13 @@ use Drupal\Core\Entity\EntityTypeInterface;
  */
 function fsa_multipage_guide_entity_view(array &$build, \Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
   if ($view_mode === 'full' && FSAMultiPageGuide::IsGuide($entity)) {
+    $parameters = \Drupal::routeMatch()->getParameters();
+
+    if ($parameters->has('export_type')) {
+      // PDF export in progress, do not redirect.
+      return;
+    }
+
     $guide = FSAMultiPageGuide::Get($entity);
 
     $first_page = $guide->getFirstPage();

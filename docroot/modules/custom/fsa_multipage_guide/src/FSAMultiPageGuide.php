@@ -174,4 +174,20 @@ class FSAMultiPageGuide {
     return array_search($page, $this->getPages());
   }
 
+  /**
+   * Get the entity print url for this guide.
+   *
+   * @return string
+   */
+  public function getPDFExportUrl() {
+    $lang_code = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $pdf_export_url = '/print/pdf/node/' . $this->getId();
+
+    if ($lang_code !== 'en') {
+      $pdf_export_url = '/' . $lang_code . $pdf_export_url;
+    }
+
+    return $pdf_export_url;
+  }
+
 }
