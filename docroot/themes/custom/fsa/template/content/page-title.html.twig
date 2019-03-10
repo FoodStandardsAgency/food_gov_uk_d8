@@ -13,10 +13,16 @@
  * - guide_title: The title of the multi page guide the page is a part of
  */
 #}
-{% if guide_title %}
+{% if this_is_guide %}
   <div class="guide__title__wrapper">
     <h1{{ title_attributes }}>
-      <span class="guide__title">{{  guide_title }}</span>
+      <span class="guide__title">{{ title }}</span>
+    </h1>
+  </div>
+{% elseif guide_title %}
+  <div class="guide__title__wrapper">
+    <h1{{ title_attributes }}>
+      <span class="guide__title">{{ guide_title }}</span>
       {{ title }}
     </h1>
   </div>
