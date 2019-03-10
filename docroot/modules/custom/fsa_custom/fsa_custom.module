@@ -263,9 +263,14 @@ function fsa_custom_preprocess_page_title(&$variables) {
   }
 
   if ($entity) {
-    $guide = FSAMultiPageGuide::GetGuideForPage($entity);
-    if (!empty($guide)) {
-      $variables['guide_title'] = $guide->getTitle();
+    if (FSAMultiPageGuide::IsGuide($entity)) {
+      $variables['this_is_guide'] = TRUE;
+    }
+    else {
+      $guide = FSAMultiPageGuide::GetGuideForPage($entity);
+      if (!empty($guide)) {
+        $variables['guide_title'] = $guide->getTitle();
+      }
     }
   }
 
