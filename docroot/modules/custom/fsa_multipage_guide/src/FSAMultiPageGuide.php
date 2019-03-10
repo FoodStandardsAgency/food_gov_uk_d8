@@ -190,4 +190,40 @@ class FSAMultiPageGuide {
     return $pdf_export_url;
   }
 
+  /**
+   * Get the print url for the guide.
+   *
+   * @return string
+   */
+  public function getPrintUrl() {
+    $lang_code = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $print_url = '/node/' . $this->getId() . '?print=1';
+
+    if ($lang_code !== 'en') {
+      $print_url = '/' . $lang_code . $print_url;
+    }
+
+    return $print_url;
+  }
+
+  /**
+   * Get the first page url.
+   *
+   * @return string
+   */
+  public function getFirstPageUrl() {
+    $first_page = $this->getFirstPage();
+
+    if (!empty($first_page)) {
+      $lang_code = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
+      $url = '/node/' . $first_page->id();
+      if ($lang_code !== 'en') {
+        $url = '/' . $lang_code . $url;
+      }
+
+      return $url;
+    }
+  }
+
 }

@@ -23,19 +23,19 @@ function fsa_multipage_guide_entity_view(array &$build, \Drupal\Core\Entity\Enti
       return;
     }
 
+    $print_query = \Drupal::request()->query->get('print');
+
+    if (!empty($print_query)) {
+      // The special print query parameter means we want to print the page.
+      return;
+    }
+
     $guide = FSAMultiPageGuide::Get($entity);
 
-    $first_page = $guide->getFirstPage();
+    $first_page_url = $guide->getFirstPageUrl();
 
-    if (!empty($first_page)) {
-      $lang_code = \Drupal::languageManager()->getCurrentLanguage()->getId();
-
-      $redirect_url = '/node/' . $first_page->id();
-      if ($lang_code !== 'en') {
-        $redirect_url = '/' . $lang_code . $redirect_url;
-      }
-
-      $response = new RedirectResponse($redirect_url);
+    if (!empty($first_page_url)) {
+      $response = new RedirectResponse($first_page_url);
       $request = \Drupal::request();
       // Save the session so things like messages get saved.
       $request->getSession()->save();
@@ -69,3 +69,4 @@ function fsa_multipage_guide_entity_bundle_field_info_alter(&$fields, EntityType
     $fields['field_guide_pages']->addConstraint('FSAPagesInGuide', []);
   }
 }
+
