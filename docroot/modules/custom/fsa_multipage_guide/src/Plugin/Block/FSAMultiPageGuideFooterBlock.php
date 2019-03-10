@@ -88,7 +88,7 @@ class FSAMultiPageGuideFooterBlock extends BlockBase {
                 <a href="' . $guide->getPDFExportUrl() .  '" class="print__link--pdf" target="_blank">' . t('View entire guide as PDF') . '</a>
             </div>
             <div class="content-toolbar__item content-toolbar__item--print">
-                <!-- <button class="page-print-trigger">' . t('Print entire guide') . '</button> -->
+                <a href="' . $guide->getPrintUrl() . '" class="page-print-trigger" target="_blank">' . t('Print guide') . '</a>
             </div>
             </div></div>';
     }
