@@ -15,11 +15,15 @@ use Drupal\Core\Entity\EntityTypeInterface;
  * If you try and look at a multi page guide you get redirected to its first page.
  */
 function fsa_multipage_guide_entity_view(array &$build, \Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
+  \Drupal::logger('fsa_multipage_guide')->notice('In fsa_multipage_guide_entity_view().');
   if ($view_mode === 'full' && FSAMultiPageGuide::IsGuide($entity)) {
+    \Drupal::logger('fsa_multipage_guide')->notice('Found the full view mode and it is a guide.');
+
     $parameters = \Drupal::routeMatch()->getParameters();
 
     if ($parameters->has('export_type')) {
       // PDF export in progress, do not redirect.
+      \Drupal::logger('fsa_multipage_guide')->notice('Not redirecting due to being an export.');
       return;
     }
 
@@ -27,6 +31,7 @@ function fsa_multipage_guide_entity_view(array &$build, \Drupal\Core\Entity\Enti
 
     if (!empty($print_query)) {
       // The special print query parameter means we want to print the page.
+      \Drupal::logger('fsa_multipage_guide')->notice('Not redirecting due print query string.');
       return;
     }
 
@@ -35,6 +40,7 @@ function fsa_multipage_guide_entity_view(array &$build, \Drupal\Core\Entity\Enti
     $first_page_url = $guide->getFirstPageUrl();
 
     if (!empty($first_page_url)) {
+      \Drupal::logger('fsa_multipage_guide')->notice('Planning to send a redirect to ' . $first_page_url);
       $response = new RedirectResponse($first_page_url);
       $request = \Drupal::request();
       // Save the session so things like messages get saved.
@@ -42,8 +48,11 @@ function fsa_multipage_guide_entity_view(array &$build, \Drupal\Core\Entity\Enti
       $response->prepare($request);
       // Make sure to trigger kernel events.
       \Drupal::service('kernel')->terminate($request, $response);
+      \Drupal::logger('fsa_multipage_guide')->notice('Sending the redirect to ' . $first_page_url);
       $response->send();
     }
+
+    \Drupal::logger('fsa_multipage_guide')->notice('Not redirecting as could not find first page.');
   }
 }
 
