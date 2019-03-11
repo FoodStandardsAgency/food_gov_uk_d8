@@ -1,0 +1,39 @@
+uuid: 0d7392e1-77e5-42ea-b096-94d187e154db
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_nation
+    - node.type.multipage_guide
+    - taxonomy.vocabulary.nation
+  content:
+    - 'taxonomy_term:nation:1d45c4ff-3bcf-4300-a94d-3202dd3cd7fa'
+    - 'taxonomy_term:nation:5dee28b7-90d8-42e0-8a22-a98761cfdea3'
+    - 'taxonomy_term:nation:f3a30730-9500-4fd8-8601-702c1a2bf1e6'
+id: node.multipage_guide.field_nation
+field_name: field_nation
+entity_type: node
+bundle: multipage_guide
+label: Nation
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    target_uuid: 1d45c4ff-3bcf-4300-a94d-3202dd3cd7fa
+  -
+    target_uuid: f3a30730-9500-4fd8-8601-702c1a2bf1e6
+  -
+    target_uuid: 5dee28b7-90d8-42e0-8a22-a98761cfdea3
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      nation: nation
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
