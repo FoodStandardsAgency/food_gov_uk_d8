@@ -38,8 +38,15 @@ content:
   body:
     label: hidden
     type: text_default
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_intro:
+    type: basic_string
     weight: 0
     region: content
+    label: hidden
     settings: {  }
     third_party_settings: {  }
 hidden:
@@ -53,7 +60,6 @@ hidden:
   field_content_type: true
   field_document: true
   field_fsa_toc: true
-  field_intro: true
   field_liftup_summary: true
   field_liftup_title: true
   field_media_library_liftup_image: true

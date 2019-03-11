@@ -33,11 +33,12 @@ third_party_settings:
       weight: 2
       format_type: tab
       format_settings:
-        id: ''
-        classes: ''
-        formatter: closed
+        label: 'Guide pages'
+        formatter: open
         description: ''
         required_fields: true
+        id: ''
+        classes: ''
       label: 'Guide pages'
 id: node.multipage_guide.default
 targetEntityType: node
