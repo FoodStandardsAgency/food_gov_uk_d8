@@ -18,11 +18,11 @@ class FSAMultiPageGuide {
   public $guide;
 
   public static function IsGuide(\Drupal\Core\Entity\EntityInterface $entity) {
-    return $entity instanceof \Drupal\node\NodeInterface && $entity->bundle() === self::MULTIPAGE_GUIDE_BUNDLE;
+    return !empty($entity) && $entity instanceof \Drupal\node\NodeInterface && $entity->bundle() === self::MULTIPAGE_GUIDE_BUNDLE;
   }
 
   public static function IsPage(\Drupal\Core\Entity\EntityInterface $entity) {
-    return $entity instanceof \Drupal\node\NodeInterface && $entity->bundle() === self::PAGE_BUNDLE;
+    return !empty($entity) && $entity instanceof \Drupal\node\NodeInterface && $entity->bundle() === self::PAGE_BUNDLE;
   }
 
   public static function GetGuideForPage($page) {
@@ -45,6 +45,10 @@ class FSAMultiPageGuide {
    * @return \Drupal\fsa_multipage_guide\FSAMultiPageGuide
    */
   public static function Get($guide) {
+    if (is_numeric($guide)) {
+      $guide = \Drupal\node\Entity\Node::load($guide);
+    }
+
     $guides = [];
     if (self::IsGuide($guide)) {
       if (empty($guides[$guide->id()])) {
