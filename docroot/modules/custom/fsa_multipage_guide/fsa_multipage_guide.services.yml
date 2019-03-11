@@ -1,0 +1,5 @@
+services:
+  mymodule.event_subscriber:
+    class: Drupal\fsa_multipage_guide\EventSubscriber\FSAMultiPageGuideSubscriber
+    tags:
+      - {name: event_subscriber}
