@@ -10,11 +10,18 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class FSAMultiPageGuideSubscriber implements EventSubscriberInterface {
 
+  /**
+   * Check if the request is for a multi page guide and issue a redirect
+   * to it's first page.
+   *
+   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   */
   public function redirectMultiPageGuideToFirstPage(GetResponseEvent $event) {
-    $parameters = \Drupal::routeMatch()->getParameters();
+    $path = \Drupal::service('path.current')->getPath();
+    $is_node_view = preg_match('/^\/node\/[0-9]+$/', $path) === 1;
 
-    if ($parameters->has('export_type')) {
-      // PDF export in progress, do not redirect.
+    if (!$is_node_view) {
+      // This function is only concerned with the rendered view of a node.
       return;
     }
 
@@ -25,7 +32,10 @@ class FSAMultiPageGuideSubscriber implements EventSubscriberInterface {
       return;
     }
 
+    $parameters = \Drupal::routeMatch()->getParameters();
     if ($parameters->has('node')) {
+      // Finally check that the node is a guide and it has a first page to
+      // redirect to.
       $node = $parameters->get('node');
       $guide = FSAMultiPageGuide::Get($node);
 
