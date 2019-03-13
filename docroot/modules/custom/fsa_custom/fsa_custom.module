@@ -721,6 +721,14 @@ function fsa_custom_theme() {
         'media_entity' => NULL,
       ],
     ],
+    'fsa_custom_call_out_box' => [
+      'variables' => [
+        'wrapper_classes' => [],
+        'title_classes' => [],
+        'title' => NULL,
+        'content' => NULL,
+      ],
+    ],
   ];
 }
 

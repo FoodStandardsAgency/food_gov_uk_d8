@@ -1,0 +1,17 @@
+{#
+/**
+ * @file
+ * FSA Call out box.
+ *
+ * Displays call out boxes like FSA Explains.
+ *
+ * Variables:
+ *    wrapper_classes: array of classes to add to the section
+ *    title_classes: array of classes to add to the H3
+ *    title: title text, e.g "FSA Explains"
+ *    content: html of the body content for the box
+#}
+<section class="{{ wrapper_classes|join(' ') }} fsa-call-out">
+    <h3 class="heading heading--small explanation__title {{ title_classes|join(' ') }}">{{ title }}</h3>
+    <div class="important explanation__content">{{ content }}</div>
+</section>
