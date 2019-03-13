@@ -71,6 +71,12 @@ h2 > a {
   line-height: 1.6;
 }
 
+section.important {
+  border: 0;
+  padding: 2em;
+  background-color: #f0f3f5;
+}
+
 .explanation__title--purple {
   background-color: #9F218B;
   border-bottom: 4px solid #51284F;
