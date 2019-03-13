@@ -26,7 +26,7 @@ class CallOutSectionFilter extends FilterBase {
    * @return \Drupal\filter\FilterProcessResult
    */
   public function process($text, $langcode) {
-    $regex_pattern = '/<section class="([^"]*)">(.*)<\/section>/sU';
+    $regex_pattern = '/<section class="([^"]*)"[^>]*>(.*)<\/section>/sU';
     $results = preg_match_all($regex_pattern , $text, $matches);
 
     if (!empty($results)) {
