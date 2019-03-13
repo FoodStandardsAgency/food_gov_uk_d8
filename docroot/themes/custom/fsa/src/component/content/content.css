@@ -466,8 +466,8 @@ blockquote {
   width: 100%;
 }
 
-/* Explanation */
-.js-callout-style,
+/* fsa-call-out is added to call out boxes. js-explanation is on the section when its in CKEditor */
+.fsa-call-out,
 .js-explanation {
   @mixin responsive-declaration margin-top, 1em, 2em;
   @mixin responsive-declaration margin-bottom, 1em, 2em;
@@ -485,6 +485,40 @@ blockquote {
   .explanation__content {
     margin-top: 0;
   }
+}
+
+.js-explanation:before {
+  display: block;
+  position: relative;
+  top: -27px;
+  padding: 5px;
+  left: -27px;
+  width: 158px;
+}
+
+.js-explanation.explanation:before {
+   content: "FSA Explains";
+   background-color: #6cb33d;
+}
+
+.js-explanation.tips-style:before {
+  content: "Tips";
+  background-color: var(--fsa-secondary_light-purple);
+}
+
+.js-explanation.important-style:before {
+  content: "Important";
+  background-color: var(--color-red);
+}
+
+.js-explanation.legal-advice-style:before {
+  content: "Legal advice";
+  background-color: #165C7D;
+}
+
+.js-explanation.best-practice-style:before {
+  content: "Best practice";
+  background-color: #2e4d1b;
 }
 
 .explanation__title {
@@ -536,7 +570,7 @@ blockquote {
   @media (--breakpoint-lg) {
     margin-top: -2em !important;
     margin-top: calc(-2em - 4px) !important;
-    margin-left: -2 !important;
+    margin-left: -2em !important;
     margin-left: calc(-2em - 1px) !important;
     margin-right: -2em !important;
     margin-right: calc(-2em - 1px) !important;
