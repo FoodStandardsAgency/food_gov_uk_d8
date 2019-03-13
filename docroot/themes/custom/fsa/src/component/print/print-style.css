@@ -28,45 +28,65 @@ h2 > a {
   text-decoration: none;
 }
 
-.js-callout-style,
-.js-explanation {
+.fsa-call-out {
   margin-top: 2em;
   margin-bottom: 2em;
   padding: 2em;
   position: relative;
   background-color: #f0f3f5;
   border: 1px solid #f0f3f5;
-  border-top: 4px solid #6cb33d;
 }
 
-.important {
-  padding: 2em;
-  margin-top: 2em;
-  margin-bottom: 2em;
-  background-color: #f0f3f5;
-  border: 1px solid #f0f3f5;
-}
-
-js-callout-style h3,
-.js-explanation h3 {
+.fsa-call-out h3 {
   margin-bottom: 0 !important;
+}
+
+.heading--small {
+  line-height: 1.4;
+  font-size: 1em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.explanation__title {
+  margin: -30px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  background-color: #00938c;
+  border-bottom: 4px solid #006F51;
+  color: #fff;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 .explanation__content {
   margin-top: 0;
+  margin-left: -2em;
+  margin-bottom: -2em;
+  margin-right: -2em;
+  border: 0;
+  padding: 2em;
+  background-color: #f0f3f5;
+  line-height: 1.6;
 }
 
-.tips-style {
-  border-top: 4px solid #51284F;
-}
-.legal-advice-style {
-  border-top: 4px solid #18262c;
+.explanation__title--purple {
+  background-color: #9F218B;
+  border-bottom: 4px solid #51284F;
 }
 
-.best-practice-style {
-  border-top: 4px solid #2e4d1b;
+.explanation__title--blue {
+  background-color: #165C7D;
+  border-bottom: 4px solid #18262c;
 }
 
-.important-style {
-  border-top: 4px solid #a91f2d;
+.explanation__title--green {
+  background-color: #4d802d;
+  border-bottom: 4px solid #2e4d1b;
+}
+
+.explanation__title--red {
+  background-color: #e31837;
+  border-bottom: 4px solid #a91f2d;
 }
