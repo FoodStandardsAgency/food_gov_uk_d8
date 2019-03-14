@@ -55,9 +55,13 @@ class FsaTocBlock extends BlockBase {
    * {@inheritdoc}
    */
   protected function blockAccess(AccountInterface $account) {
-    $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
-
     $node = \Drupal::routeMatch()->getParameter('node');
+
+    if (empty($node)) {
+      return AccessResult::forbidden();
+    }
+
+    $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
     if ($node->hasTranslation($langcode)) {
       $node = $node->getTranslation($langcode);
