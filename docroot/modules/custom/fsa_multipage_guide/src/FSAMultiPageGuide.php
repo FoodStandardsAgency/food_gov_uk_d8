@@ -83,7 +83,14 @@ class FSAMultiPageGuide {
     if (empty($lang_code)) {
       $lang_code = \Drupal::languageManager()->getCurrentLanguage()->getId();
     }
-    return $this->guide->getTranslation($lang_code);
+
+    try {
+      return $this->guide->getTranslation($lang_code);
+    }
+    catch (\Exception $e) {
+      // Chances are there is not a translation so return the default.
+      return $this->guide;
+    }
   }
 
   /**
