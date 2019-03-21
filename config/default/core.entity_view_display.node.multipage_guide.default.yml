@@ -1,0 +1,37 @@
+uuid: 1fe7997b-81f7-4701-876e-f419226df20f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.multipage_guide.field_guide_pages
+    - field.field.node.multipage_guide.field_nation
+    - node.type.multipage_guide
+  module:
+    - user
+id: node.multipage_guide.default
+targetEntityType: node
+bundle: multipage_guide
+mode: default
+content:
+  field_guide_pages:
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: pdf
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  addtoany: true
+  content_moderation_control: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_nation: true
+  langcode: true

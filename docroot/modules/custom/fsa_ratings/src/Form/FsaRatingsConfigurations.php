@@ -4,6 +4,7 @@ namespace Drupal\fsa_ratings\Form;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\ConfigFormBase;
+use Drupal\fsa_ratings_import\Controller\FhrsApiController;
 
 /**
  * FSA Ratings feature configurations.
@@ -43,6 +44,29 @@ class FsaRatingsConfigurations extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $fsa_ratings = $this->config('config.fsa_ratings');
+
+    if (\Drupal::state()->get('fsa_rating_import.full_import')) {
+      $update_mode = $this->t('Polling for everything form the API');
+    }
+    else {
+      $since = \Drupal::state()->get('fsa_rating_import.updated_since');
+      if (!isset($since) || !is_int(strtotime($since))) {
+        $since = FhrsApiController::FSA_RATING_UPDATE_SINCE;
+      }
+      $update_mode = $this->t('Polling for FHRS Establishment updates since "<code>@since</code>"', ['@since' => $since]);
+    }
+
+    $form['fsa_ratings_settings'] = [
+      '#type' => 'details',
+      '#open' => TRUE,
+      '#title' => $this->t('API update mode information'),
+    ];
+    $form['fsa_ratings_settings']['update_mode'] = [
+      '#markup' => '<p>' . $update_mode . '</p>',
+    ];
+    $form['fsa_ratings_settings']['api_url'] = [
+      '#markup' => '<p>' . $this->t('API base URL: <a href="@url">@url</a>', ['@url' => FhrsApiController::FSA_FHRS_API_URL]) . '</p>',
+    ];
 
     $rating_site = 'http://ratings.food.gov.uk/';
     $rating_decoupled = (bool) \Drupal::state()->get($this->ratingsDecoupled);

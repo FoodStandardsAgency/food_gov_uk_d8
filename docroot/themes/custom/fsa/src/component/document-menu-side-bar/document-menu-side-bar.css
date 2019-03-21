@@ -1,0 +1,73 @@
+@import "../../helper/helper";
+@import "../../helper/custom-property";
+
+.document-menu-side-menu {
+  display: block;
+  .document-menu {
+    display: none;
+    @media (--breakpoint-sm) {
+      display: block;
+    }
+    &.document-menu__open {
+      display: block;
+     }
+  }
+}
+
+/*@media (--breakpoint-sm-max) {*/
+
+/*}*/
+
+.sidebar-title {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4gICAgPHBhdGggZmlsbD0iIzAwMCIgZmlsbC1ydWxlPSJub256ZXJvIiBkPSJNMTIgMEM1LjM3MyAwIDAgNS4zNzMgMCAxMnM1LjM3MyAxMiAxMiAxMiAxMi01LjM3MyAxMi0xMkExMiAxMiAwIDAgMCAxMiAwem0wIDIxLjZhOS42IDkuNiAwIDEgMSAwLTE5LjIgOS42IDkuNiAwIDAgMSAwIDE5LjJ6bTQuOC0xMC44SDcuMmExLjIgMS4yIDAgMSAwIDAgMi40aDkuNmExLjIgMS4yIDAgMSAwIDAtMi40em0tMy42IDZWNy4yYTEuMiAxLjIgMCAxIDAtMi40IDB2OS42YTEuMiAxLjIgMCAxIDAgMi40IDB6Ii8+PC9zdmc+");
+  background-position: right 0 top 50%;
+  background-size: 24px;
+  background-repeat: no-repeat;
+  padding-right: 1em;
+  @media (--breakpoint-sm) {
+    background-image: none;
+  }
+}
+
+.sidebar-title.sidebar-title__open {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4gICAgPHBhdGggZmlsbD0iIzAwMCIgZmlsbC1ydWxlPSJub256ZXJvIiBkPSJNMTIgMEM1LjM3MyAwIDAgNS4zNzMgMCAxMnM1LjM3MyAxMiAxMiAxMiAxMi01LjM3MyAxMi0xMkExMiAxMiAwIDAgMCAxMiAwem0wIDIxLjZhOS42IDkuNiAwIDEgMSAwLTE5LjIgOS42IDkuNiAwIDAgMSAwIDE5LjJ6bTQuOC0xMC44SDcuMmExLjIgMS4yIDAgMSAwIDAgMi40aDkuNmExLjIgMS4yIDAgMSAwIDAtMi40eiIvPjwvc3ZnPg==");
+  @media (--breakpoint-sm) {
+    background-image: none;
+  }
+}
+
+.document-menu__open {
+  margin-bottom: 2em;
+}
+
+.document-menu__heading {
+  @mixin reset-font-style;
+
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.document-menu__list {
+  list-style: none;
+  padding: 0;
+  @media (--breakpoint-md) {
+    display: block;
+    margin-bottom: 2em;
+  }
+  li {
+    margin-bottom: 1em;
+    a {
+      text-decoration: underline;
+      display: block;
+      color: var(--primary-color);
+      &:hover {
+         color: var(--color-darker-teal);
+       }
+      &.active {
+        font-weight: 700;
+       }
+    }
+  }
+
+}

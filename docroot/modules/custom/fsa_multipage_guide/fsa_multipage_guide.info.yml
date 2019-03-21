@@ -1,0 +1,5 @@
+name: FSA Multipage Guide
+type: module
+description: Allow the website to display multipage guides
+core: 8.x
+package: FSA

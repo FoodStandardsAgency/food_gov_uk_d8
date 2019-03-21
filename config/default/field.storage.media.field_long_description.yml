@@ -1,0 +1,19 @@
+uuid: 2594182c-3c06-42b2-9b90-7ae5d9d25e97
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.field_long_description
+field_name: field_long_description
+entity_type: media
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -18,6 +18,7 @@ permissions:
   - 'entity print access bundle generic'
   - 'entity print access bundle help'
   - 'entity print access bundle lander'
+  - 'entity print access bundle multipage_guide'
   - 'entity print access bundle news'
   - 'entity print access bundle page'
   - 'entity print access bundle research_programme'

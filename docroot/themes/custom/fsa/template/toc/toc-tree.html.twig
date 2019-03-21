@@ -24,27 +24,27 @@
 {% import _self as toc_api_tree %}
 {% set classes = ['toc', 'toc-tree'] %}
 
-<div{{ attributes.addClass(classes) }}>
 
   {% if tree.title and not options.block %}
-    <h3 class="toc__heading">{{ tree.title }}</h3>
+    <h2 class="sidebar-title">{{ 'On this page'|trans }}</h2>
   {% endif %}
 
+  <a href="#after-guide-side-menu3" class="skip-to-content off-canvas off-canvas--focusable">Skip this menu</a>
+  <nav class="document-menu">
   {{ toc_api_tree.tree_links(tree) }}
-
-</div>
+  </nav>
 
 {% macro tree_links(item) %}
   {% import _self as toc_api_tree %}
 
   {% if item.below_type %}
-    <ol class="{{ item.below_type }} toc__list js-toc-list">
+    <ol class="document-menu__list">
   {% else %}
     <ul class="toc__list js-toc-list">
   {% endif  %}
 
   {% for child_item in item.below %}
-    <li{{ child_item.attributes.setAttribute('value', child_item.value) }}>
+    <li>
       {{ link(child_item.html, child_item.url) }}
       {% if child_item.below %}
         {{ toc_api_tree.tree_links(child_item) }}

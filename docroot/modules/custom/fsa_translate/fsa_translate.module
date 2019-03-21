@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Alters default translation settings.
+ * Enables content translation management.
  */
 
 use Drupal\Core\Form\FormStateInterface;
@@ -26,14 +26,21 @@ function fsa_translate_form_node_form_alter(&$form, FormStateInterface $form_sta
 
   // Add entity meta details.
   $form['translation'] = [
-    '#type' => 'details',
-    '#title' => t('Translation'),
-    '#open' => $translation_required,
-    '#group' => 'advanced',
+    '#type' => 'container',
+    '#group' => 'footer',
     'translation_required' => [
       '#type' => 'checkbox',
       '#title' => t('Translation required'),
       '#default_value' => $translation_required,
+    ],
+    'notify' => [
+      '#type' => 'checkbox',
+      '#title' => t('Notify translation team'),
+      '#states' => [
+        'visible' => [
+          ':input[name="translation_required"]' => ['checked' => TRUE],
+        ],
+      ],
     ],
   ];
 
@@ -50,8 +57,8 @@ function fsa_translate_form_node_form_alter(&$form, FormStateInterface $form_sta
  */
 function fsa_translate_submit(array $form, FormStateInterface $form_state) {
 
-  // Get node identifier.
-  $nid = $form_state->getFormObject()->getEntity()->id();
+  // Get node.
+  $node = $form_state->getFormObject()->getEntity();
 
   // Get translation required status.
   $translation_required = $form_state->getValue('translation_required');
@@ -59,9 +66,54 @@ function fsa_translate_submit(array $form, FormStateInterface $form_state) {
   // Merge value into tracking table.
   $connection = \Drupal::database();
   $connection->merge('fsa_translation_required')
-    ->key(['nid' => $nid])
+    ->key(['nid' => $node->id()])
     ->fields(['translation_required' => $translation_required])
     ->execute();
+
+  // Notify translation team.
+  if ($form_state->getValue('translation_required') && $form_state->getValue('notify')) {
+    $mailManager = \Drupal::service('plugin.manager.mail');
+    $module = 'fsa_translate';
+    $key = 'translation_required';
+    $config = \Drupal::config('config.fsa_translate');
+    $to = $config->get('translation_required_mail_recipient');
+    $params = $node;
+    $langcode = \Drupal::currentUser()->getPreferredLangcode();
+    $send = TRUE;
+    $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+    if ($result['result'] !== TRUE) {
+      drupal_set_message(t('There was a problem notifying the translation team.'), 'error');
+    }
+    else {
+      drupal_set_message(t('The translation team has been notified.'));
+    }
+  }
+
+}
+
+/**
+ * Implements hook_mail().
+ */
+function fsa_translate_mail($key, &$message, $params) {
+  switch ($key) {
+
+    // Mail template.
+    case 'translation_required':
+
+      // Print sender address.
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+
+      // Print subject.
+      $config = \Drupal::config('config.fsa_translate');
+      $data = ['node' => $params];
+      $text = $config->get('translation_required_mail_subject');
+      $message['subject'] = \Drupal::token()->replace($text, $data);
+
+      // Print body.
+      $text = $config->get('translation_required_mail_body');
+      $message['body'][] = \Drupal::token()->replace($text, $data);
+      break;
+  }
 }
 
 /**

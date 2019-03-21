@@ -6,11 +6,12 @@ id: dev
 label: Dev
 folder: ../config/dev
 module:
-  views_ui: 0
   devel: 0
   kint: 0
+  views_ui: 0
 theme: {  }
-blacklist: {  }
+blacklist:
+  - memcache_admin.settings
 graylist: {  }
 graylist_dependents: true
 graylist_skip_equal: true

@@ -4,6 +4,7 @@ status: true
 dependencies:
   module:
     - block_class
+    - ctools
     - fsa_custom
   theme:
     - fsa
@@ -21,4 +22,11 @@ settings:
   label: 'Page content header (intro, last updated, print, sharing)'
   provider: fsa_custom
   label_display: '0'
-visibility: {  }
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      multipage_guide: multipage_guide
+    negate: true
+    context_mapping:
+      node: '@node.node_route_context:node'

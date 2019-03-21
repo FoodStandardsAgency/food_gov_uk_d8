@@ -1,0 +1,445 @@
+
+{
+  "header": {
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "location": "OnFatalError",
+    "filename": "report.20190225.152251.28.001.json",
+    "dumpEventTime": "2019-02-25T15:22:51Z",
+    "dumpEventTimeStamp": "1551108171891",
+    "processId": 28,
+    "commandLine": [
+      "node",
+      "/app/node_modules/.bin/webpack",
+      "--mode",
+      "development",
+      "--watch",
+      "--devtool",
+      "source-map"
+    ],
+    "nodejsVersion": "v11.10.0",
+    "glibcVersionRuntime": "2.24",
+    "glibcVersionCompiler": "2.12",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "linux",
+    "componentVersions": {
+      "node": "11.10.0",
+      "v8": "7.0.276.38-node.17",
+      "uv": "1.26.0",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "67",
+      "nghttp2": "1.34.0",
+      "napi": "4",
+      "llhttp": "1.1.1",
+      "http_parser": "2.8.0",
+      "openssl": "1.1.1a",
+      "cldr": "34.0",
+      "icu": "63.1",
+      "tz": "2018e",
+      "unicode": "11.0"
+    },
+    "release": {
+      "name": "node",
+      "headersUrl": "https://nodejs.org/download/release/v11.10.0/node-v11.10.0-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v11.10.0/node-v11.10.0.tar.gz"
+    },
+    "osName": "Linux",
+    "osRelease": "4.9.125-linuxkit",
+    "osVersion": "#1 SMP Fri Sep 7 08:20:28 UTC 2018",
+    "osMachine": "x86_64",
+    "host": "d264e1ba05e3"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x0000000000a683e8",
+      "symbol": "report::TriggerNodeReport(v8::Isolate*, node::Environment*, char const*, char const*, std::string, v8::Local<v8::String>) [node]"
+    },
+    {
+      "pc": "0x00000000009548de",
+      "symbol": "node::OnFatalError(char const*, char const*) [node]"
+    },
+    {
+      "pc": "0x0000000000b32bee",
+      "symbol": "v8::Utils::ReportOOMFailure(v8::internal::Isolate*, char const*, bool) [node]"
+    },
+    {
+      "pc": "0x0000000000b32e24",
+      "symbol": "v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, bool) [node]"
+    },
+    {
+      "pc": "0x0000000000f32452",
+      "symbol": " [node]"
+    },
+    {
+      "pc": "0x0000000000f32558",
+      "symbol": "v8::internal::Heap::CheckIneffectiveMarkCompact(unsigned long, double) [node]"
+    },
+    {
+      "pc": "0x0000000000f3ec78",
+      "symbol": "v8::internal::Heap::PerformGarbageCollection(v8::internal::GarbageCollector, v8::GCCallbackFlags) [node]"
+    },
+    {
+      "pc": "0x0000000000f3f78b",
+      "symbol": "v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [node]"
+    },
+    {
+      "pc": "0x0000000000f424c1",
+      "symbol": "v8::internal::Heap::AllocateRawWithRetryOrFail(int, v8::internal::AllocationSpace, v8::internal::AllocationAlignment) [node]"
+    },
+    {
+      "pc": "0x0000000000f0c6f4",
+      "symbol": "v8::internal::Factory::NewFillerObject(int, bool, v8::internal::AllocationSpace) [node]"
+    },
+    {
+      "pc": "0x00000000011c2b3e",
+      "symbol": "v8::internal::Runtime_AllocateInNewSpace(int, v8::internal::Object**, v8::internal::Isolate*) [node]"
+    },
+    {
+      "pc": "0x00000f817ae4fc5d",
+      "symbol": ""
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 1509036032,
+    "totalCommittedMemory": 1508005192,
+    "usedMemory": 1384315448,
+    "availableMemory": 34998248,
+    "memoryLimit": 1526909922,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 524288,
+        "committedMemory": 42224,
+        "capacity": 515584,
+        "used": 33520,
+        "available": 482064
+      },
+      "new_space": {
+        "memorySize": 33554432,
+        "committedMemory": 33554232,
+        "capacity": 16498688,
+        "used": 47168,
+        "available": 16451520
+      },
+      "old_space": {
+        "memorySize": 952307712,
+        "committedMemory": 951979840,
+        "capacity": 893849640,
+        "used": 893466896,
+        "available": 382744
+      },
+      "code_space": {
+        "memorySize": 5767168,
+        "committedMemory": 5549920,
+        "capacity": 5051392,
+        "used": 5051392,
+        "available": 0
+      },
+      "map_space": {
+        "memorySize": 27799552,
+        "committedMemory": 27796096,
+        "capacity": 2286640,
+        "used": 2286640,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 489082880,
+        "committedMemory": 489082880,
+        "capacity": 501111752,
+        "used": 483429832,
+        "available": 17681920
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 0,
+        "used": 0,
+        "available": 0
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 929.78,
+    "kernelCpuSeconds": 929.78,
+    "cpuConsumptionPercent": 0.000119886,
+    "maxRss": 1559703552,
+    "pageFaults": {
+      "IORequired": 130,
+      "IONotRequired": 3075522
+    },
+    "fsActivity": {
+      "reads": 76200,
+      "writes": 320
+    }
+  },
+  "uvthreadResourceUsage": {
+    "userCpuSeconds": 655.8,
+    "kernelCpuSeconds": 655.8,
+    "cpuConsumptionPercent": 8.45589e-05,
+    "fsActivity": {
+      "reads": 68016,
+      "writes": 0
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "npm_package_dependencies_postcss_mixins": "^6.0.0",
+    "npm_config_cache_lock_stale": "60000",
+    "npm_config_ham_it_up": "",
+    "npm_package_dependencies_postcss_normalize": "^4.0.0",
+    "npm_config_legacy_bundling": "",
+    "npm_config_sign_git_tag": "",
+    "npm_config_user_agent": "npm/6.7.0 node/v11.10.0 linux x64",
+    "npm_config_always_auth": "",
+    "NODE_VERSION": "11.10.0",
+    "npm_package_dependencies_postcss_import": "^11.0.0",
+    "npm_package_devDependencies_optimize_css_assets_webpack_plugin": "^4.0.1",
+    "npm_config_bin_links": "true",
+    "npm_config_key": "",
+    "YARN_VERSION": "1.13.0",
+    "HOSTNAME": "d264e1ba05e3",
+    "npm_config_allow_same_version": "",
+    "npm_config_description": "true",
+    "npm_config_fetch_retries": "2",
+    "npm_config_heading": "npm",
+    "npm_config_if_present": "",
+    "npm_config_init_version": "1.0.0",
+    "npm_config_user": "",
+    "npm_node_execpath": "/usr/local/bin/node",
+    "SHLVL": "1",
+    "npm_package_dependencies_svg_sprite_loader": "^3.7.0",
+    "npm_config_prefer_online": "",
+    "npm_config_noproxy": "",
+    "HOME": "/root",
+    "npm_package_dependencies_postcss_loader": "^2.0.6",
+    "npm_config_force": "",
+    "npm_config_only": "",
+    "npm_config_read_only": "",
+    "npm_package_dependencies_babel_polyfill": "^6.26.0",
+    "npm_config_cache_min": "10",
+    "npm_config_init_license": "ISC",
+    "npm_package_standard_ignore_0": "dist/",
+    "npm_config_editor": "vi",
+    "npm_config_rollback": "true",
+    "npm_config_tag_version_prefix": "v",
+    "npm_package_standard_ignore_1": "src/helper/polyfill/",
+    "npm_package_dependencies_webpack": "^4.1.1",
+    "npm_package_devDependencies_stylelint_config_standard": "^18.0.0",
+    "npm_config_cache_max": "Infinity",
+    "npm_config_timing": "",
+    "npm_config_userconfig": "/root/.npmrc",
+    "npm_package_standard_ignore_2": "js/",
+    "npm_package_dependencies_html_loader": "^0.5.1",
+    "npm_package_devDependencies_svgo": "^1.0.4",
+    "npm_config_engine_strict": "",
+    "npm_config_init_author_name": "",
+    "npm_config_init_author_url": "",
+    "npm_config_preid": "",
+    "npm_config_tmp": "/tmp",
+    "npm_package_description": "FSA Theme uses ES6 features, so it is recommended to have a recent version of [Node.js](https://nodejs.org/) installed globally (v5.0 minimum required, for `package-lock.json` support). Node.js is the only global requirement as this project uses [Webpack](https://webpack.js.org/) in lieu of task runners.",
+    "npm_package_dependencies_markdown_loader": "^2.0.1",
+    "npm_package_dependencies_tabbable": "^1.1.1",
+    "npm_config_depth": "Infinity",
+    "npm_config_package_lock_only": "",
+    "npm_config_save_dev": "",
+    "npm_config_usage": "",
+    "npm_package_readmeFilename": "README.md",
+    "npm_config_metrics_registry": "https://registry.npmjs.org/",
+    "npm_config_cafile": "",
+    "npm_config_otp": "",
+    "npm_config_package_lock": "true",
+    "npm_config_progress": "true",
+    "npm_config_https_proxy": "",
+    "npm_config_save_prod": "",
+    "npm_config_audit": "true",
+    "npm_config_cidr": "",
+    "npm_config_onload_script": "",
+    "npm_config_sso_type": "oauth",
+    "npm_config_rebuild_bundle": "true",
+    "npm_config_save_bundle": "",
+    "npm_config_shell": "bash",
+    "_": "/usr/local/bin/npm",
+    "npm_package_private": "true",
+    "npm_config_dry_run": "",
+    "npm_config_prefix": "/usr/local",
+    "npm_package_dependencies_postcss_discard_comments": "^2.0.4",
+    "npm_config_scope": "",
+    "npm_config_browser": "",
+    "npm_config_cache_lock_wait": "10000",
+    "npm_config_ignore_prepublish": "",
+    "npm_config_registry": "https://registry.npmjs.org/",
+    "npm_config_save_optional": "",
+    "npm_config_searchopts": "",
+    "npm_config_versions": "",
+    "npm_package_dependencies_postcss_nested": "^3.0.0",
+    "npm_package_dependencies_style_loader": "^0.20.3",
+    "npm_package_devDependencies_stylelint": "^9.1.1",
+    "npm_config_cache": "/root/.npm",
+    "npm_config_proxy": "",
+    "npm_config_send_metrics": "",
+    "npm_package_devDependencies_html_webpack_plugin": "^3.0.6",
+    "npm_config_global_style": "",
+    "npm_config_ignore_scripts": "",
+    "npm_config_version": "",
+    "npm_package_dependencies_css_loader": "^0.28.4",
+    "npm_package_dependencies_image_webpack_loader": "^4.0.0",
+    "npm_config_local_address": "",
+    "npm_config_viewer": "man",
+    "npm_config_node_gyp": "/usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js",
+    "PATH": "/usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/app/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "npm_package_name": "fsa",
+    "npm_package_dependencies_babel_preset_env": "^1.5.1",
+    "npm_package_dependencies_postcss": "^6.0.1",
+    "npm_package_dependencies_svgo_loader": "^2.1.0",
+    "npm_config_audit_level": "low",
+    "npm_config_prefer_offline": "",
+    "NODE": "/usr/local/bin/node",
+    "npm_package_dependencies_template_string_loader": "0.0.4",
+    "npm_config_color": "true",
+    "npm_config_sign_git_commit": "",
+    "npm_package_devDependencies_standard": "^11.0.0",
+    "npm_config_fetch_retry_mintimeout": "10000",
+    "npm_config_maxsockets": "50",
+    "npm_config_offline": "",
+    "npm_config_sso_poll_frequency": "500",
+    "npm_config_umask": "0022",
+    "npm_package_main": "src/index.js",
+    "npm_package_browserslist_0": "> 1%",
+    "npm_config_fetch_retry_maxtimeout": "60000",
+    "npm_config_loglevel": "notice",
+    "npm_config_logs_max": "10",
+    "npm_config_message": "%s",
+    "npm_lifecycle_script": "webpack --mode development --watch --devtool source-map",
+    "npm_package_browserslist_1": "IE 10",
+    "npm_package_scripts_test": "standard",
+    "npm_package_dependencies_babel_core": "^6.24.1",
+    "npm_package_dependencies_clipboard": "^2.0.1",
+    "npm_package_dependencies_svg4everybody": "^2.1.8",
+    "npm_config_ca": "",
+    "npm_config_cert": "",
+    "npm_config_global": "",
+    "npm_config_link": "",
+    "npm_package_version": "1.0.0",
+    "npm_package_browserslist_2": "IE 9",
+    "npm_package_standard_globals_0": "Drupal",
+    "npm_package_dependencies_webpack_cli": "^2.0.11",
+    "npm_package_devDependencies_filemanager_webpack_plugin": "^1.0.26",
+    "npm_config_access": "",
+    "npm_config_also": "",
+    "npm_config_save": "true",
+    "npm_config_unicode": "",
+    "npm_lifecycle_event": "watch",
+    "npm_package_scripts_build": "webpack --mode production",
+    "npm_config_argv": "{\"remain\":[],\"cooked\":[\"run\",\"watch\"],\"original\":[\"run\",\"watch\"]}",
+    "npm_config_long": "",
+    "npm_config_production": "",
+    "npm_config_searchlimit": "20",
+    "npm_config_unsafe_perm": "",
+    "npm_config_update_notifier": "true",
+    "npm_package_author": "",
+    "npm_package_dependencies_file_loader": "^1.1.6",
+    "npm_package_dependencies_lodash": "^4.17.4",
+    "npm_config_auth_type": "legacy",
+    "npm_config_node_version": "11.10.0",
+    "npm_config_tag": "latest",
+    "npm_config_git_tag_version": "true",
+    "npm_config_commit_hooks": "true",
+    "npm_config_script_shell": "",
+    "npm_config_shrinkwrap": "true",
+    "npm_package_license": "ISC",
+    "npm_config_fetch_retry_factor": "10",
+    "npm_config_save_exact": "",
+    "npm_config_strict_ssl": "true",
+    "npm_package_dependencies_wicg_inert": "^2.0",
+    "npm_config_dev": "",
+    "npm_config_globalconfig": "/usr/local/etc/npmrc",
+    "npm_config_init_module": "/root/.npm-init.js",
+    "npm_config_parseable": "",
+    "PWD": "/app",
+    "npm_config_globalignorefile": "/usr/local/etc/npmignore",
+    "npm_execpath": "/usr/local/lib/node_modules/npm/bin/npm-cli.js",
+    "npm_package_dependencies_custom_event_polyfill": "^0.3.0",
+    "npm_package_dependencies_postcss_cssnext": "^3.0.2",
+    "npm_config_cache_lock_retries": "10",
+    "npm_config_searchstaleness": "900",
+    "npm_package_scripts_watch": "webpack --mode development --watch --devtool source-map",
+    "npm_package_dependencies_to_camel_case": "^1.0.0",
+    "npm_package_devDependencies_extract_text_webpack_plugin": "^4.0.0-beta.0",
+    "npm_package_devDependencies_raw_loader": "^0.5.1",
+    "npm_config_node_options": "",
+    "npm_config_save_prefix": "^",
+    "npm_config_scripts_prepend_node_path": "warn-only",
+    "DOCKER_LOCAL": "1",
+    "npm_config_group": "",
+    "npm_config_init_author_email": "",
+    "npm_config_searchexclude": "",
+    "npm_package_dependencies_babel_loader": "^7.1.4",
+    "npm_package_dependencies_mutationobserver_shim": "^0.3.2",
+    "npm_config_git": "git",
+    "npm_config_optional": "true",
+    "npm_config_json": "",
+    "INIT_CWD": "/app",
+    "NODE_ENV": "development"
+  },
+  "userLimits": {
+    "core_file_size_blocks": {
+      "soft": 0,
+      "hard": "unlimited"
+    },
+    "data_seg_size_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "file_size_blocks": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "max_locked_memory_bytes": {
+      "soft": 83968000,
+      "hard": 83968000
+    },
+    "max_memory_size_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "open_files": {
+      "soft": 1048576,
+      "hard": 1048576
+    },
+    "stack_size_bytes": {
+      "soft": 8388608,
+      "hard": "unlimited"
+    },
+    "cpu_time_seconds": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "max_user_processes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "virtual_memory_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    }
+  },
+  "sharedObjects": [
+    "linux-vdso.so.1",
+    "/lib/x86_64-linux-gnu/libdl.so.2",
+    "/lib/x86_64-linux-gnu/librt.so.1",
+    "/usr/lib/x86_64-linux-gnu/libstdc++.so.6",
+    "/lib/x86_64-linux-gnu/libm.so.6",
+    "/lib/x86_64-linux-gnu/libgcc_s.so.1",
+    "/lib/x86_64-linux-gnu/libpthread.so.0",
+    "/lib/x86_64-linux-gnu/libc.so.6",
+    "/lib64/ld-linux-x86-64.so.2"
+  ]
+}

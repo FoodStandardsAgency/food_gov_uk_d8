@@ -1,0 +1,33 @@
+@import "../../helper/helper";
+@import "../../helper/custom-property";
+
+.document-menu__heading {
+  @mixin reset-font-style;
+
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.document-menu__list {
+  list-style: none;
+  padding: 0;
+  @media (--breakpoint-md) {
+    margin-bottom: 2em;
+  }
+  li {
+    margin-bottom: 1em;
+    a {
+      text-decoration: underline;
+      display: block;
+      color: var(--primary-color);
+      &:hover {
+         color: var(--color-darker-teal);
+       }
+      &.active {
+        font-weight: 700;
+       }
+    }
+  }
+
+}

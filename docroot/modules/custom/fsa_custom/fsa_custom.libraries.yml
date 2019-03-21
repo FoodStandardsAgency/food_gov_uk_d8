@@ -19,3 +19,10 @@ add_to_any:
   dependencies:
     - core/drupal
     - core/jquery.once
+search_filters:
+  version: 1.x
+  js:
+    js/search-filters.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery.once

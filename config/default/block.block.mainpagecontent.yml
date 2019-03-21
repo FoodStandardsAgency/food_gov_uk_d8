@@ -1,0 +1,24 @@
+uuid: 25382886-1b8a-4008-9c64-44c9a7021597
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - system
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: mainpagecontent
+theme: fsa
+region: content
+weight: -22
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  provider: system
+  label_display: '0'
+visibility: {  }

@@ -26,6 +26,12 @@
 @import "component/form/form.css";
 @import "component/header/header.css";
 @import "component/navigation/navigation.css";
+
+@import "component/next-previous/next-previous.css";
+@import "component/back-to-top/back-to-top.css";
+@import "component/document-menu/document-menu.css";
+@import "component/document-menu-side-bar/document-menu-side-bar.css";
+
 @import "component/fhrs/fhrs.css";
 @import "component/hero/hero.css";
 @import "component/peek/peek.css";
@@ -41,6 +47,7 @@
 @import "component/toc/toc.css";
 
 
+
 * {
   box-sizing: border-box;
 }
@@ -51,6 +58,7 @@ html {
   letter-spacing: 0.015em;
   @mixin responsive-declaration font-size, 100%, 112.5%;
   @mixin responsive-declaration line-height, 1.7, 1.6;
+  scroll-behavior: smooth;
 }
 
 html.is-fixed {
@@ -89,7 +97,7 @@ body {
     @media (--breakpoint-sm) {
       content: "sm";
     }
-  
+
     @media (--breakpoint-md) {
       content: "md";
     }
@@ -102,7 +110,7 @@ body {
   display: flex;
   flex-flow: column nowrap;
   min-height: 100vh;
-  
+
   @media (--breakpoint-sm) {
     overflow: hidden;
     transition: none;

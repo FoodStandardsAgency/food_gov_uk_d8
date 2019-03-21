@@ -1,0 +1,30 @@
+uuid: 67a75a67-1e7a-45bc-954f-286e6522cc39
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - scheduler
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+  scheduler:
+    expand_fieldset: when_required
+    fields_display_mode: vertical_tab
+    publish_enable: false
+    publish_past_date: error
+    publish_required: false
+    publish_revision: false
+    publish_touch: false
+    unpublish_enable: false
+    unpublish_required: false
+    unpublish_revision: false
+name: 'Multipage guide'
+type: multipage_guide
+description: 'A multipage guide allows you to connect together several existing Page''s.  Each page inside a multipage guide will get a side menu and there will be the option to download all the pages in a single PDF.'
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false

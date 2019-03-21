@@ -5,6 +5,7 @@ dependencies:
   module:
     - editor
     - entity_embed
+    - fsa_custom
     - linkit
     - managed_links
     - toc_filter
@@ -108,3 +109,9 @@ filters:
     weight: -49
     settings:
       title: '1'
+  filter_fsa_custom_call_out_section:
+    id: filter_fsa_custom_call_out_section
+    provider: fsa_custom
+    status: true
+    weight: 0
+    settings: {  }

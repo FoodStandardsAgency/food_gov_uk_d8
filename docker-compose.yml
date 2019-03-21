@@ -1,0 +1,159 @@
+version: "3"
+
+services:
+  mariadb:
+    image: $MARIADB_TAG
+    container_name: "${PROJECT_NAME}_mariadb"
+    stop_grace_period: 30s
+    environment:
+      MYSQL_ROOT_PASSWORD: $DB_ROOT_PASSWORD
+      MYSQL_DATABASE: $DB_NAME
+      MYSQL_USER: $DB_USER
+      MYSQL_PASSWORD: $DB_PASSWORD
+#    ports:
+#      - "3307:3306"
+    volumes:
+#      - ./mariadb-init:/docker-entrypoint-initdb.d # Place init .sql file(s) here.
+      - ./.persist/mysql:/var/lib/mysql:delegated # I want to manage volumes manually.
+    networks:
+      - default
+
+  php:
+    image: $PHP_TAG
+    container_name: "${PROJECT_NAME}_php"
+    environment:
+      DOCKER_LOCAL: 1
+      D4D_HOSTNAME: ${PROJECT_BASE_URL}
+      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
+      DB_HOST: $DB_HOST
+      DB_USER: $DB_USER
+      DB_PASSWORD: $DB_PASSWORD
+      DB_NAME: $DB_NAME
+      DB_DRIVER: $DB_DRIVER
+      PHP_XDEBUG: 1
+      PHP_XDEBUG_DEFAULT_ENABLE: 1
+      PHP_XDEBUG_REMOTE_CONNECT_BACK: 0         # This is needed to respect remote.host setting bellow
+      PHP_XDEBUG_REMOTE_HOST: "10.254.254.254"  # You will also need to 'sudo ifconfig lo0 alias 10.254.254.254'
+      PHP_IDE_CONFIG: "serverName=drupal"       # Needed for xdebug for drush commands.
+      SMTP_HOST: "mailhog"
+      SMTP_PORT: 1025
+      SMTP_USERNAME: ""
+      SMTP_PASSWORD: ""
+      SMTP_FROM: "jenkins@deeson.co.uk"
+    extra_hosts:
+        - "fsa.localhost:172.18.0.1"
+    volumes:
+      - ./:/var/www/html:cached
+      - ./.persist/public:/var/www/html/docroot/sites/default/files:delegated
+      - ./.persist/private:/private:delegated
+    tmpfs: /tmp
+    networks:
+      - default
+
+  nginx:
+    image: $NGINX_TAG
+    container_name: "${PROJECT_NAME}_nginx"
+    depends_on:
+      - php
+    environment:
+      NGINX_STATIC_CONTENT_OPEN_FILE_CACHE: "off"
+      NGINX_ERROR_LOG_LEVEL: debug
+      NGINX_BACKEND_HOST: php
+      NGINX_SERVER_ROOT: /var/www/html/docroot
+      NGINX_VHOST_PRESET: $NGINX_VHOST_PRESET
+    volumes:
+    #  - ./docker/nginx/drupal8.conf.tmpl:/etc/gotpl/presets/drupal8.conf.tmpl
+      - ./:/var/www/html:cached
+      - ./.persist/public:/var/www/html/docroot/sites/default/files:delegated
+    tmpfs: /tmp
+    networks:
+      - default
+      - proxy
+    labels:
+      - 'traefik.docker.network=proxy'
+      - 'traefik.port=80'
+      - 'traefik.frontend.rule=Host:${PROJECT_BASE_URL}'
+
+  solr:
+    image: $SOLR_TAG
+    container_name: "${PROJECT_NAME}_solr"
+    environment:
+      SOLR_HEAP: 1024m
+    volumes:
+      - ./.persist/solr:/opt/solr/server/solr/core1:delegated
+    networks:
+      - default
+      - proxy
+    labels:
+      - 'traefik.docker.network=proxy'
+      - 'traefik.port=8983'
+      - 'traefik.frontend.rule=Host:solr.${PROJECT_BASE_URL}'
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: "${PROJECT_NAME}_mailhog"
+    networks:
+      - default
+      - proxy
+    labels:
+      - 'traefik.docker.network=proxy'
+      - 'traefik.port=8025'
+      - 'traefik.frontend.rule=Host:mailhog.${PROJECT_BASE_URL}'
+
+  memcached:
+    container_name: "${PROJECT_NAME}_memcached"
+    image: $MEMCACHED_TAG
+    networks:
+      - default
+
+#  redis:
+#    container_name: "${PROJECT_NAME}_redis"
+#    image: $REDIS_TAG
+#    networks:
+#      - default
+
+  fe-node:
+    image: node:11
+    container_name: "${PROJECT_NAME}_fe-node"
+    volumes:
+      - ./docroot/themes/custom/fsa:/app:delegated
+    working_dir: /app
+    environment:
+      DOCKER_LOCAL: 1
+    command: bash -c 'npm install && npm run watch'
+    networks:
+      - default
+      - proxy
+    labels:
+      - 'traefik.docker.network=proxy'
+      - 'traefik.port=80'
+      - 'traefik.frontend.rule=Host:frontend.${PROJECT_BASE_URL}'
+
+#  fe-php:
+#    image: deeson/fe-php
+#    container_name: "${PROJECT_NAME}_fe-php"
+#    volumes:
+#      - ./src/frontend:/app:delegated
+#    working_dir: /app
+#    environment:
+#      DOCKER_LOCAL: 1
+#    command: bash -c 'composer install && node_modules/.bin/deeson-router-start.sh'
+#    networks:
+#      - default
+
+#  varnish:
+#    image: wodby/drupal-varnish:4.1-2.1.0
+#    depends_on:
+#      - nginx
+#    environment:
+#      VARNISH_SECRET: secret
+#      VARNISH_BACKEND_HOST: nginx
+#      VARNISH_BACKEND_PORT: 80
+#    labels:
+#      - 'traefik.backend=varnish'
+#      - 'traefik.port=6081'
+#      - 'traefik.frontend.rule=Host:varnish.localhost'
+
+networks:
+  proxy:
+    external: true

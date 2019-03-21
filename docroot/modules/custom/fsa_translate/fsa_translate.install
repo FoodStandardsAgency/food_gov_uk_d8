@@ -56,6 +56,20 @@ function fsa_translate_update_8001(&$sandbox) {
 }
 
 /**
+ * Implements hook_update_N().
+ */
+function fsa_translate_update_8010() {
+
+  // Default translation required configuration.
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('config.fsa_translate');
+  $config->set('translation_required_mail_recipient', 'welsh.language.translation.unit@food.gov.uk');
+  $config->set('translation_required_mail_subject', 'Content requires translation [site:url-brief]');
+  $config->set('translation_required_mail_body', '<p>Content [node:title] requires translation.</p><ul><li>Edit: [node:edit-url]</li><li>Latest revision: [site:url]node/[node:nid]/revisions/[node:vid]/view</li><li>Revision log message: [node:log]</li></ul>');
+  $config->save(TRUE);
+}
+
+/**
  * Implements hook_uninstall().
  */
 function fsa_translate_uninstall_schema() {

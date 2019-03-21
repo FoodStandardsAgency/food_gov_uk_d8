@@ -7,10 +7,10 @@ close: null
 uid: 1
 template: false
 id: food_fraud_crime
-title: 'Report a food crime'
-description: 'Use this form to report food crime...'
+title: 'Report food fraud crime'
+description: 'Food fraud crime report form'
 category: 'Food problem'
-elements: "about_food_crime:\n  '#type': webform_wizard_page\n  '#title': 'What is food crime'\n  '#open': true\n  '#next_button_label': Start\n  audience:\n    '#type': hidden\n    '#title': Audience\n  processed_text:\n    '#type': processed_text\n    '#text': \"<p style=\\\"margin:0cm 0cm 8pt; font-size:12pt; background:white; line-height:107%; font-family:Arial,sans-serif;\\\">Food crime involves <strong>serious and intentional dishonesty</strong> that makes food unsafe or means food is not what it says it is.&nbsp;</p>\\r\\n\\r\\n<p style=\\\"margin:0cm 0cm 8pt; font-size:12pt; background:white; line-height:107%; font-family:Arial,sans-serif;\\\">The main types of food crime are:</p>\\r\\n\\r\\n<ul>\\r\\n\\t<li style=\\\"margin:0cm 0cm 8pt; font-size:12pt; background:white; line-height:107%; font-family:Arial,sans-serif;\\\"><strong>theft</strong> – stealing food, drink or feed products to profit from using or selling them</li>\\r\\n\\t<li style=\\\"margin:0cm 0cm 8pt; font-size:12pt; background:white; line-height:107%; font-family:Arial,sans-serif;\\\"><strong>unlawful processing </strong>– using unapproved places or techniques for animal slaughter or meat preparation&nbsp;</li>\\r\\n\\t<li style=\\\"margin:0cm 0cm 8pt; font-size:12pt; background:white; line-height:107%; font-family:Arial,sans-serif;\\\"><strong>waste diversion</strong> – putting food, drink or animal feed that should be thrown away back into the supply chain to be reused</li>\\r\\n\\t<li style=\\\"margin:0cm 0cm 8pt; font-size:12pt; background:white; line-height:107%; font-family:Arial,sans-serif;\\\"><strong>adulteration</strong> – reducing food quality by adding a substance that shouldn’t be there, to save money or fake a higher quality product</li>\\r\\n\\t<li style=\\\"margin:0cm 0cm 8pt; font-size:12pt; background:white; line-height:107%; font-family:Arial,sans-serif;\\\"><strong>substitution</strong> - replacing a food or ingredient with another substance that is similar but lower in quality</li>\\r\\n\\t<li style=\\\"margin:0cm 0cm 8pt; font-size:12pt; background:white; line-height:107%; font-family:Arial,sans-serif;\\\"><strong>misrepresentation</strong> - marketing or labelling a product to wrongly advertise its quality, safety, origin or freshness</li>\\r\\n\\t<li style=\\\"margin:0cm 0cm 8pt; font-size:12pt; background:white; line-height:107%; font-family:Arial,sans-serif;\\\"><strong>document fraud</strong> – using, making or having false documents as part of a plan to sell or promote a fake or substandard food product<br />\\r\\n\\t&nbsp;</li>\\r\\n</ul>\\r\\n\"\n    '#format': full_html\nfood_crime:\n  '#type': webform_wizard_page\n  '#title': Overview\n  what_food_crime:\n    '#type': textarea\n    '#title': 'What is the food crime or wrong doing you are reporting?'\n    '#states':\n      required:\n        ':input[name=\"audience\"]':\n          filled: true\n  where_lookup:\n    '#type': webform_googleplace\n    '#title': 'Where is this happening?'\n    '#multiple': false\n    '#help': '<span style=\"font-size:11.0pt\"><span style=\"line-height:107%\"><span style=\"font-family:&quot;Arial&quot;,sans-serif\">Provide the full address of where the wrong doing is taking place, include postcodes if you can</span></span></span>'\n    '#description': '<span style=\"font-size:11.0pt\"><span style=\"line-height:107%\"><span style=\"font-family:&quot;Arial&quot;,sans-serif\">Provide the full address of where the wrong doing is taking place, include postcodes if you can</span></span></span>'\n    '#states':\n      required:\n        ':input[name=\"audience\"]':\n          filled: true\nabout_those_committing_the_crime:\n  '#type': webform_wizard_page\n  '#title': 'About people involved'\n  details_of_problem:\n    '#type': textarea\n    '#title': 'Who is involved in the crime?'\n    '#help': '<span style=\"font-size:11.0pt\"><span style=\"line-height:107%\"><span style=\"font-family:&quot;Arial&quot;,sans-serif\">Provide as much information as you can: names of the people involved, nicknames, ethnicity, age, phone numbers, email addresses, home and business addresses, place of work, any vehicle registration numbers, make, model and colour.</span></span></span>'\n    '#description': '<span style=\"font-size:11.0pt\"><span style=\"line-height:107%\"><span style=\"font-family:&quot;Arial&quot;,sans-serif\">Provide as much information as you can: names of the people involved, nicknames, ethnicity, age, phone numbers, email addresses, home and business addresses, place of work, any vehicle registration numbers, make, model and colour.</span></span></span>'\n    '#states':\n      required:\n        ':input[name=\"audience\"]':\n          filled: true\n  others_aware:\n    '#type': radios\n    '#title': 'Does anyone else know about this?'\n    '#options':\n      'Yes': 'Yes'\n      'No': 'No'\n    '#required': true\n  others_aware_details:\n    '#type': textarea\n    '#title': 'Please tell us as much detail as possible in regard to who else knows about this and how long they have known.'\n    '#states':\n      visible:\n        ':input[name=\"others_aware\"]':\n          value: 'Yes'\n      required:\n        ':input[name=\"others_aware\"]':\n          value: 'Yes'\ncrime_details:\n  '#type': webform_wizard_page\n  '#title': 'About food crime'\n  when:\n    '#type': textarea\n    '#title': 'When are they doing it?'\n    '#help': '<span style=\"font-size:11.0pt\"><span style=\"line-height:107%\"><span style=\"font-family:&quot;Arial&quot;,sans-serif\">Provide days of the week, dates, times if you can</span></span></span>'\n    '#description': '<span style=\"font-size:11.0pt\"><span style=\"line-height:107%\"><span style=\"font-family:&quot;Arial&quot;,sans-serif\">Provide days of the week, dates, times if you can</span></span></span>'\n    '#states':\n      required:\n        ':input[name=\"audience\"]':\n          filled: true\n  how:\n    '#type': textarea\n    '#title': 'How are they doing it?'\n    '#help': '<span style=\"font-size:11.0pt\"><span style=\"line-height:107%\"><span style=\"font-family:&quot;Arial&quot;,sans-serif\">Tell us if you know how they are doing it and if you have any real or forged documents or emails, that relate to the wrong-doing?</span></span></span>'\n    '#description': '<span style=\"font-size:11.0pt\"><span style=\"line-height:107%\"><span style=\"font-family:&quot;Arial&quot;,sans-serif\">Tell us if you know how they are doing it and if you have any real or forged documents or emails, that relate to the wrong-doing?</span></span></span>'\n    '#states':\n      required:\n        ':input[name=\"audience\"]':\n          filled: true\n  why:\n    '#type': textarea\n    '#title': 'Why do you think they are they doing it?'\n    '#more_title': Details\n    '#states':\n      required:\n        ':input[name=\"audience\"]':\n          filled: true\ncontact_details:\n  '#type': webform_wizard_page\n  '#title': 'Contact details'\n  header_contact_info:\n    '#type': webform_markup\n    '#markup': \"<h3>Your contact details</h3>\\r\\nAnonymous reports are acceptable, however <span style=\\\"font-size:11.0pt\\\"><span style=\\\"line-height:107%\\\"><span style=\\\"font-family:&quot;Arial&quot;,sans-serif\\\">we would prefer you to give your full name, we cannot protect you if we don&rsquo;t know who you are. We would also prefer you to give your email address or phone number, so we can contact you to clarify any of the information you have provided and let you know the progress of the investigation.</span></span></span><br />\\r\\n&nbsp;<br />\\r\\nYour contact details will only be used by the food crime unit to contact you about this issue, and to send you a confirmation email about this issue.<br />\\r\\n<br />\\r\\nUnder no circumstances will your details be disclosed to anyone else without your permission or an order of a competent court.<br />\\r\\n&nbsp;\"\n  name:\n    '#type': textfield\n    '#title': 'Full name'\n    '#description': 'We would prefer you to give your full name'\n  email:\n    '#type': email\n    '#title': 'Email address'\n    '#description': 'We would prefer you to give your email address'\n  telephone:\n    '#type': tel\n    '#title': 'Phone number'\n    '#description': 'We would prefer you to give your phone number'\n  fsa_privacy_link_nfcu:\n    '#type': webform_markup\n  captcha:\n    '#type': captcha\n"
+elements: "page_about:\n  '#type': webform_wizard_page\n  '#title': 'What is food crime'\n  '#open': true\n  '#next_button_label': Start\n  audience:\n    '#type': hidden\n    '#title': Audience\n  processed_text:\n    '#type': processed_text\n    '#text': \"<p>Food crime involves&nbsp;<strong>serious and intentional dishonesty</strong>&nbsp;that makes food unsafe or means food is not what it says it is.&nbsp;</p>\\r\\n\\r\\n<p>The main types of food crime are:</p>\\r\\n\\r\\n<ul>\\r\\n\\t<li><strong>theft</strong>&nbsp;– stealing food, drink or feed products to profit from using or selling them</li>\\r\\n\\t<li><strong>unlawful processing&nbsp;</strong>– using unapproved places or techniques for animal slaughter or meat preparation&nbsp;</li>\\r\\n\\t<li><strong>waste diversion</strong>&nbsp;– putting food, drink or animal feed that should be thrown away back into the supply chain to be reused</li>\\r\\n\\t<li><strong>adulteration</strong>&nbsp;– reducing food quality by adding a substance that shouldn’t be there, to save money or fake a higher quality product</li>\\r\\n\\t<li><strong>substitution</strong>&nbsp;- replacing a food or ingredient with another substance that is similar but lower in quality</li>\\r\\n\\t<li><strong>misrepresentation</strong>&nbsp;- marketing or labelling a product to wrongly advertise its quality, safety, origin or freshness</li>\\r\\n\\t<li><strong>document fraud</strong>&nbsp;– using, making or having false documents as part of a plan to sell or promote a fake or substandard food product</li>\\r\\n</ul>\\r\\n\"\n    '#format': full_html\noverview:\n  '#type': webform_wizard_page\n  '#title': Overview\n  what_food_crime:\n    '#type': textarea\n    '#title': 'What is the food crime or wrong doing you are reporting?'\n    '#states':\n      required:\n        ':input[name=\"audience\"]':\n          filled: true\n  where_lookup:\n    '#type': webform_googleplace\n    '#title': 'Where is this happening?'\n    '#multiple': false\n    '#help': 'Provide the full address of where the wrong doing is taking place, include postcodes if you can'\n    '#description': 'Provide the full address of where the wrong doing is taking place, include postcodes if you can'\n    '#states':\n      required:\n        ':input[name=\"audience\"]':\n          filled: true\nabout_people_involved:\n  '#type': webform_wizard_page\n  '#title': 'About people involved'\n  details_of_problem:\n    '#type': textarea\n    '#title': 'Who is involved in the crime?'\n    '#help': 'Provide as much information as you can: names of the people involved, nicknames, ethnicity, age, phone numbers, email addresses, home and business addresses, place of work, any vehicle registration numbers, make, model and colour.'\n    '#description': 'Provide as much information as you can: names of the people involved, nicknames, ethnicity, age, phone numbers, email addresses, home and business addresses, place of work, any vehicle registration numbers, make, model and colour.'\n    '#states':\n      required:\n        ':input[name=\"audience\"]':\n          filled: true\n  others_aware:\n    '#type': radios\n    '#title': 'Does anyone else know about this?'\n    '#options':\n      'Yes': 'Yes'\n      'No': 'No'\n    '#required': true\n  others_aware_details:\n    '#type': textarea\n    '#title': 'Please tell us as much detail as possible in regard to who else knows about this and how long they have known.'\n    '#states':\n      visible:\n        ':input[name=\"others_aware\"]':\n          value: 'Yes'\n      required:\n        ':input[name=\"others_aware\"]':\n          value: 'Yes'\nabout_food_crime:\n  '#type': webform_wizard_page\n  '#title': 'About food crime'\n  when:\n    '#type': textarea\n    '#title': 'When are they doing it?'\n    '#help': 'Provide days of the week, dates, times if you can'\n    '#description': 'Provide days of the week, dates, times if you can'\n    '#states':\n      required:\n        ':input[name=\"audience\"]':\n          filled: true\n  how:\n    '#type': textarea\n    '#title': 'How are they doing it?'\n    '#help': 'Tell us if you know how they are doing it and if you have any real or forged documents or emails, that relate to the wrong-doing?'\n    '#description': 'Tell us if you know how they are doing it and if you have any real or forged documents or emails, that relate to the wrong-doing?'\n    '#states':\n      required:\n        ':input[name=\"audience\"]':\n          filled: true\n  why:\n    '#type': textarea\n    '#title': 'Why do you think they are they doing it?'\n    '#states':\n      required:\n        ':input[name=\"audience\"]':\n          filled: true\ncontact_details:\n  '#type': webform_wizard_page\n  '#title': 'Contact details'\n  header_contact_info:\n    '#type': webform_markup\n    '#markup': \"<h3>Your contact details</h3>\\r\\nAnonymous reports are acceptable, however we would prefer you to give your full name, we cannot protect you if we don&rsquo;t know who you are. We would also prefer you to give your email address or phone number, so we can contact you to clarify any of the information you have provided and let you know the progress of the investigation.<br />\\r\\n&nbsp;<br />\\r\\nYour contact details will only be used by the food crime unit to contact you about this issue, and to send you a confirmation email about this issue.<br />\\r\\n<br />\\r\\nUnder no circumstances will your details be disclosed to anyone else without your permission or an order of a competent court.<br />\\r\\n<br />\\r\\n&nbsp;\"\n  name:\n    '#type': textfield\n    '#title': 'Full name'\n    '#description': 'We would prefer you to give your full name'\n  email:\n    '#type': email\n    '#title': 'Email address'\n    '#description': 'We would prefer you to give your email address'\n  telephone:\n    '#type': tel\n    '#title': 'Phone number'\n    '#description': 'We would prefer you to give your phone number'\n  fsa_privacy_link_nfcu:\n    '#type': webform_markup\n  captcha:\n    '#type': captcha\n"
 css: ''
 javascript: ''
 settings:
@@ -36,10 +36,10 @@ settings:
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
+  form_unsaved: true
   form_disable_back: false
   form_submit_back: false
-  form_autofocus: true
+  form_autofocus: false
   form_details_toggle: false
   form_login: false
   form_login_message: ''
@@ -50,12 +50,15 @@ settings:
     - element__where_lookup
     - element__name
     - element__email
+    - created
+    - element__audience
     - element__what_food_crime
     - element__others_aware
     - element__others_aware_details
     - element__when
     - element__how
     - element__why
+    - element__telephone
   submission_login: false
   submission_login_message: ''
   submission_exception_message: ''
@@ -77,7 +80,6 @@ settings:
   preview_attributes: {  }
   preview_excluded_elements:
     audience: audience
-    source: source
   preview_exclude_empty: false
   draft: none
   draft_multiple: false
@@ -86,7 +88,7 @@ settings:
   draft_loaded_message: ''
   confirmation_type: inline
   confirmation_title: ''
-  confirmation_message: "<h2>Report complete</h2>\r\n\r\n<p>Thank you for your report, which will be forwarded to the <strong>FSA&#39;s National Food Crime Unit (NFCU)</strong>.</p>\r\nIf you need to contact the Food Crime Unit about your report, please email: <a href=\"mailto:foodcrime@foodstandards.gsi.gov.uk\">foodcrime@foodstandards.gsi.gov.uk</a>, or call: <strong>0207 276 8787</strong>.\r\n\r\n<p>A confirmation email has been sent to your inbox.</p>"
+  confirmation_message: "<h2>Report complete</h2>\r\n\r\n<p>Thank you for your report, which will be forwarded to the <strong>FSA&#39;s National Food Crime Unit (NFCU)</strong>.</p>\r\nIf you need to contact the Food Crime Unit about your report, please email: <a href=\"mailto:foodcrime@food.gov.uk\">foodcrime@food.gov.uk</a>, or call: <strong>0207 276 8787</strong>.\r\n\r\n<p>A confirmation email has been sent to your inbox.</p>"
   confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: false
@@ -157,7 +159,7 @@ handlers:
     id: email
     label: 'Copy of report'
     handler_id: copy_of_report
-    status: false
+    status: true
     conditions: {  }
     weight: 0
     settings:
@@ -181,12 +183,13 @@ handlers:
         where_lookup: where_lookup
         why: why
         how: how
-        source: source
+        consumer_message: consumer_message
         others_aware: others_aware
         others_aware_details: others_aware_details
         name: name
         email: email
         telephone: telephone
+        permission_granted: permission_granted
       ignore_access: false
       exclude_empty: false
       html: true
@@ -201,13 +204,13 @@ handlers:
     id: email
     label: 'Copy to National Food Crime Unit'
     handler_id: copy_to_nfcu
-    status: false
+    status: true
     conditions: {  }
     weight: 0
     settings:
       states:
         - completed
-      to_mail: anna.nikiel@food.gov.uk
+      to_mail: foodcrime@food.gov.uk
       to_options: {  }
       cc_mail: ''
       cc_options: {  }
@@ -216,11 +219,10 @@ handlers:
       from_mail: report@food.gov.uk
       from_options: {  }
       from_name: default
-      subject: 'This is a food crime report from a consumer/business via beta.food.gov.uk'
+      subject: 'This is a food crime report via food.gov.uk'
       body: "<p>This is a suspected food crime report from <strong><a href=\"[current-page:url:unaliased:absolute]\">[current-page:title]</a></strong> via beta.food.gov.uk.</p>\r\n\r\n<p>[webform_submission:values]</p>\r\n\r\n<p>Please do not reply to this email.</p>"
-      excluded_elements:
-        audience: audience
-      ignore_access: true
+      excluded_elements: {  }
+      ignore_access: false
       exclude_empty: false
       html: true
       attachments: false
@@ -234,7 +236,7 @@ handlers:
     id: action
     label: 'Remove personal data'
     handler_id: remove_personal_data
-    status: false
+    status: true
     conditions: {  }
     weight: 0
     settings:
@@ -248,11 +250,11 @@ handlers:
       message: ''
       message_type: status
       debug: false
-  email_test:
+  email:
     id: email
-    label: Email_test
-    handler_id: email_test
-    status: true
+    label: 'Email (for testing only)'
+    handler_id: email
+    status: false
     conditions: {  }
     weight: 0
     settings:
@@ -270,7 +272,7 @@ handlers:
       subject: default
       body: default
       excluded_elements: {  }
-      ignore_access: true
+      ignore_access: false
       exclude_empty: true
       html: true
       attachments: false
@@ -280,21 +282,3 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-  remove_personal_data_dup:
-    id: action
-    label: 'Remove personal data'
-    handler_id: remove_personal_data_dup
-    status: true
-    conditions: {  }
-    weight: 4
-    settings:
-      states:
-        - completed
-        - updated
-      notes: 'Personal data was removed automatically on submit'
-      sticky: null
-      locked: null
-      data: "name: ''\r\nemail: ''\r\ntelephone: ''"
-      message: ''
-      message_type: status
-      debug: false

@@ -1,0 +1,7 @@
+name: FSA Google Data Studio Measurement Protocol 
+type: module
+description: "Sends daily alerts activity summary data to Google Data Studio using Measurement Protocol"
+core: 8.x
+package: FSA
+dependencies:
+  - fsa_alerts_monitor

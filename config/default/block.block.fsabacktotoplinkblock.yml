@@ -1,0 +1,32 @@
+uuid: 9df10ede-0e30-43de-a187-0e9b868e0ede
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - ctools
+    - fsa_custom
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: fsabacktotoplinkblock
+theme: fsa
+region: content
+weight: -21
+provider: null
+plugin: fsa_back_to_top_block
+settings:
+  id: fsa_back_to_top_block
+  label: 'FSA back to top link block'
+  provider: fsa_custom
+  label_display: '0'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      page: page
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

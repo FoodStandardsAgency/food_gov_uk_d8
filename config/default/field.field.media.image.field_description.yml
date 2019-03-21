@@ -10,7 +10,7 @@ field_name: field_description
 entity_type: media
 bundle: image
 label: Description
-description: 'Add short description about this image.'
+description: 'Add short internal description about this image.'
 required: false
 translatable: true
 default_value: {  }

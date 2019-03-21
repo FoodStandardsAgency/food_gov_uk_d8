@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - node.type.consultation
+    - node.type.multipage_guide
     - node.type.page
     - node.type.research_project
   module:
@@ -85,5 +86,6 @@ type_settings:
   entity_types:
     node:
       - consultation
+      - multipage_guide
       - page
       - research_project

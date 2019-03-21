@@ -9,6 +9,8 @@ https://github.com/postcss/postcss-custom-media*/
 @custom-media --breakpoint-lg (min-width: 80em);
 @custom-media --breakpoint-xl (min-width: 120em);
 
+@custom-media --breakpoint-sm-max (max-width: 50em - 0.1);
+
 /*Custom selectors
 Using postcss-custom-selectors
 Plugin documentation:

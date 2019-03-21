@@ -1,0 +1,27 @@
+uuid: bf741d9c-ced6-4169-84ae-74c725da6a7e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.multipage_guide.field_guide_pages
+    - node.type.multipage_guide
+  module:
+    - user
+id: node.multipage_guide.teaser
+targetEntityType: node
+bundle: multipage_guide
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  addtoany: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_guide_pages: true
+  langcode: true

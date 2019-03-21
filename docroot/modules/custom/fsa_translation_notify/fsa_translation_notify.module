@@ -1,0 +1,183 @@
+<?php
+
+/**
+ * @file
+ * Content form alter hooks and mail handlers to support notifications.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\NodeInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_entity_insert().
+ */
+function fsa_translation_notify_entity_insert(EntityInterface $entity) {
+  // Always trigger a translation notification for new node content.
+  if (!$entity instanceof NodeInterface) {
+    return;
+  }
+
+  $mail_key = 'new_content';
+  $node_id = $entity->id();
+
+  fsa_translation_notify_trigger_notification($mail_key, $node_id);
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ *
+ * Covers both node add/edit forms, we're only interested in the edit form.
+ */
+function fsa_translation_notify_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Add a notification checkbox if it's an edit form.
+  if (preg_match('/node_\w+_edit_form/', $form_id)) {
+    $form['notify_language_team'] = [
+      '#type' => 'radios',
+      '#required' => TRUE,
+      '#options' => [
+        0 => t('No'),
+        1 => t('Yes (notify Welsh language team)'),
+      ],
+      '#title' => t('Is this page ready to be translated?'),
+      // Set at the bottom of the group.
+      '#weight' => 100,
+      '#group' => 'footer',
+    ];
+
+    // Define submit handler for this form.
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'fsa_translation_notify_node_page_edit_submit';
+      }
+    }
+  }
+}
+
+/**
+ * Submit handler for node edit form.
+ */
+function fsa_translation_notify_node_page_edit_submit(array $form, FormStateInterface $form_state) {
+  $mail_key = 'updated_content';
+  $update_with_notification = !empty($form_state->getValue('notify_language_team'));
+
+  // If 'Notify language team of this change' box is checked when editing
+  // content then trigger a notification email.
+  if ($update_with_notification) {
+    $node_id = $form_state->getValue('nid');
+    fsa_translation_notify_trigger_notification($mail_key, $node_id);
+  }
+}
+
+/**
+ * Triggers a notification email send operation.
+ *
+ * @param string $mail_key
+ *   Message key: new_content|updated_content.
+ * @param int $node_id
+ *   Node id.
+ */
+function fsa_translation_notify_trigger_notification(string $mail_key, int $node_id) {
+  $node = \Drupal::entityTypeManager()->getStorage('node')->load($node_id);
+
+  if (empty($node)) {
+    return;
+  }
+
+  $mailManager = \Drupal::service('plugin.manager.mail');
+  $langcode = \Drupal::languageManager()->getDefaultLanguage()->getId();
+
+  $module = 'fsa_translation_notify';
+  $params['node'] = $node;
+  $config = \Drupal::config('fsa_translation_notify.settings');
+  $params['to'] = $config->get('email');
+
+  if (empty($params['to'])) {
+    \Drupal::logger('fsa_translation_notify')
+      ->error(t("No message can be sent because there is no defined delivery address. Visit 
+      /admin/config/fsa/translation_notify to set one."));
+  }
+
+  // Attempt to assemble and queue a new mail message.
+  $result = $mailManager->mail($module, $mail_key, $params['to'], $langcode, $params, NULL, TRUE);
+
+  if ($result['result'] !== TRUE) {
+    // Log an error if something goes wrong sending the message.
+    \Drupal::logger('fsa_translation_notify')
+      ->error(t("There was a problem sending the email to the translation team for node/@nid.", ['@nid' => $node_id]));
+  }
+}
+
+/**
+ * Implements hook_mail().
+ */
+function fsa_translation_notify_mail($key, &$message, $params) {
+  $node = &$params['node'];
+  $node_title = $node->label();
+  $content_type = $node->getType();
+  $author_username = $node->getRevisionAuthor()->getAccountName();
+  $node_created_timestamp = \Drupal::service('date.formatter')
+    ->format($node->getCreatedTime(), 'long');
+  $node_update_timestamp = \Drupal::service('date.formatter')
+    ->format($node->getRevisionCreationTime(), 'long');
+
+  switch ($key) {
+    case 'new_content':
+      $subject = t('A new @type page "@title" has been created', [
+        '@title' => $node_title,
+        '@type' => $content_type,
+      ]);
+      $translation_url = Url::fromUserInput('/node/' . $node->id() . '/translations/add/en/cy', [
+        'absolute' => TRUE,
+        'language' => \Drupal::languageManager()->getLanguage('cy'),
+      ]);
+      $translation_url = $translation_url->toString();
+
+      // Build mail message parameters.
+      $body = "The $content_type page \"$node_title\" was created by $author_username at $node_created_timestamp
+
+To create a translation of this page, please visit $translation_url  
+";
+      break;
+
+    case 'updated_content':
+      $subject = t('The @type page "@title" has been updated', [
+        '@title' => $node_title,
+        '@type' => $content_type,
+      ]);
+      $translation_url = Url::fromUserInput('/node/' . $node->id() . '/edit', [
+        'absolute' => TRUE,
+        'language' => \Drupal::languageManager()->getLanguage('cy'),
+      ]);
+      $translation_url = $translation_url->toString();
+      $revisions = \Drupal::entityTypeManager()
+        ->getStorage('node')->revisionIds($node);
+
+      // Don't produce a diff link if there are less than 2 revisions.
+      if (count($revisions) < 2) {
+        return;
+      }
+
+      $revisions = array_slice($revisions, -2, 2);
+      $diff_url = Url::fromUserInput('/node/' . $node->id() . '/revisions/view/' . $revisions[0] . '/' . $revisions[1] . '/split_fields', [
+        'absolute' => TRUE,
+        'language' => \Drupal::languageManager()->getDefaultLanguage(),
+      ]);
+      $diff_url = $diff_url->toString();
+
+      // Build mail message parameters.
+      $body = "The $content_type page \"$node_title\" was updated by $author_username at $node_update_timestamp
+
+To update any translations for this page, please visit $translation_url  
+
+To see the changes between the last revisions please visit $diff_url
+";
+      break;
+  }
+
+  // Finish assembling the message array.
+  $message['to'] = $params['to'];
+  $message['subject'] = $subject;
+  $message['body'][] = $body;
+}

@@ -1,0 +1,14 @@
+uuid: 1f1fb6e5-21cf-40bc-8d3d-342c51f8c372
+langcode: en
+status: true
+dependencies: {  }
+id: ignore
+label: Ignore
+folder: ''
+module: {  }
+theme: {  }
+blacklist: {  }
+graylist: {  }
+graylist_dependents: true
+graylist_skip_equal: true
+weight: -10

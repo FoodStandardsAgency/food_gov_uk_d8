@@ -1,6 +1,10 @@
 @import "../../helper/helper";
 @import "../../helper/custom-property";
 
+.apples {
+  border: red 1px solid;
+}
+
 .container {
   margin: 0 auto;
   max-width: var(--max-width);

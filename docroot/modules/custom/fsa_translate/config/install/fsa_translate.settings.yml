@@ -1,0 +1,3 @@
+translation_required_mail_recipient: welsh.language.translation.unit@food.gov.uk
+translation_required_mail_subject: 'Content requires translation [site:url-brief]'
+translation_required_mail_body: '<p>Content [node:title] requires translation.</p><ul><li>Edit: [node:edit-url]</li><li>Latest revision: [site:url]node/[node:nid]/revisions/[node:vid]/view</li><li>Revision log message: [node:log]</li></ul>'

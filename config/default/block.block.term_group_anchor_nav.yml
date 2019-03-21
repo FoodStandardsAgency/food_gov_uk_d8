@@ -13,7 +13,7 @@ third_party_settings:
 id: term_group_anchor_nav
 theme: fsa
 region: sidebar_first
-weight: -9
+weight: -12
 provider: null
 plugin: terms_group_anchor_nav
 settings:

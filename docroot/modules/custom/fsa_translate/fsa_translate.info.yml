@@ -1,5 +1,5 @@
 name: FSA translate
-description: Alters default translation settings. This was deprecated and uninstalled within FSA-997. Left in codebase for if we want to later take in use for translations workflow.
+description: Enables content translation management.
 package: FSA
 type: module
 core: 8.x

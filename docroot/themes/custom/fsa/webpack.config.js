@@ -123,37 +123,39 @@ var config = {
 };
 
 module.exports = (env, argv) => {
-  config.plugins = []
+  config.plugins = [];
+
+  let fileManagerPluginConfig = {
+    onEnd: [
+      {
+        copy: [
+          { source: './dist/editor.css', destination: './dist/styleguide/editor.css' },
+          { source: './dist/app.css', destination: './dist/styleguide/app.css' },
+          { source: './dist/app.js', destination: './dist/styleguide/app.js' },
+          { source: './dist/editor.js', destination: './dist/styleguide/editor.js' },
+          { source: './dist/styleguide.js', destination: './dist/styleguide/styleguide.js' },
+          { source: './node_modules/clipboard/dist/clipboard.min.js', destination: './dist/clipboard.min.js' },
+        ]
+      }
+    ]
+  };
 
   if (argv.mode === 'production') {
-
-    config.plugins = [
-      // Before building clean dist folder. After building copy CSS and JS files
-      // to styleguide directory for standalone serving. We also copy
-      // clipboard.min.js to dist for usage with libraries.yml.
-      new FileManagerPlugin({
-        onStart: [
-          {
-            delete: [
-              "./dist/"
-            ]
-          }
-        ],
-        onEnd: [
-          {
-            copy: [
-              { source: './dist/editor.css', destination: './dist/styleguide/editor.css' },
-              { source: './dist/app.css', destination: './dist/styleguide/app.css' },
-              { source: './dist/app.js', destination: './dist/styleguide/app.js' },
-              { source: './dist/editor.js', destination: './dist/styleguide/editor.js' },
-              { source: './dist/styleguide.js', destination: './dist/styleguide/styleguide.js' },
-              { source: './node_modules/clipboard/dist/clipboard.min.js', destination: './dist/clipboard.min.js' },
-            ]
-          }
+    fileManagerPluginConfig.onStart = [
+      {
+        delete: [
+          "./dist/"
         ]
-      })
-    ]
+      }
+    ];
   }
+
+  config.plugins = [
+    // Before building clean dist folder. After building copy CSS and JS files
+    // to styleguide directory for standalone serving. We also copy
+    // clipboard.min.js to dist for usage with libraries.yml.
+    new FileManagerPlugin(fileManagerPluginConfig)
+  ]
 
   config.plugins = [
       ...config.plugins,
@@ -163,9 +165,9 @@ module.exports = (env, argv) => {
       filename: '[name].css'
     }),
 
-    new OptimizeCssAssetsPlugin({
-      cssProcessorOptions: { discardComments: { removeAll: true } }
-    }),
+    // new OptimizeCssAssetsPlugin({
+    //   cssProcessorOptions: { discardComments: { removeAll: true } }
+    // }),
 
     // Create SVG sprite
     new SpritePlugin(),

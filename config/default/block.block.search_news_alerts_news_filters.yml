@@ -16,7 +16,7 @@ third_party_settings:
 id: search_news_alerts_news_filters
 theme: fsa
 region: sidebar_first
-weight: -13
+weight: -17
 provider: null
 plugin: 'views_exposed_filter_block:search_news_alerts_news-page_1'
 settings:

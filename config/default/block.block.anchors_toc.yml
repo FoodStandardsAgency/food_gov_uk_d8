@@ -13,7 +13,7 @@ third_party_settings:
 id: anchors_toc
 theme: fsa
 region: sidebar_first
-weight: -12
+weight: -15
 provider: null
 plugin: toc_filter
 settings:

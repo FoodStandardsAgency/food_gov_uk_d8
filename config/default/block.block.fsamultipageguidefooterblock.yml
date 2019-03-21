@@ -1,0 +1,32 @@
+uuid: d5d3cad2-e443-4fe2-888d-47a46c9608ca
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - ctools
+    - fsa_multipage_guide
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: fsamultipageguidefooterblock
+theme: fsa
+region: content
+weight: -20
+provider: null
+plugin: fsa_multipage_guide_footer_block
+settings:
+  id: fsa_multipage_guide_footer_block
+  label: 'Multi-page guide footer block'
+  provider: fsa_multipage_guide
+  label_display: '0'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      page: page
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

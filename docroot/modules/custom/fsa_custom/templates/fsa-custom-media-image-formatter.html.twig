@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Theme override to display a formatted image field.
+ *
+ * Available variables:
+ * - image: A collection of image data.
+ * - image_style: An optional image style.
+ * - path: An optional array containing the link 'path' and link 'options'.
+ * - url: An optional URL the image can be linked to.
+ * - description: An optional rich HTML text string containing a long description of the image.
+ * - media_entity_id: string provided if description is provided which should be the id of div surrounding the
+ *                    description.
+ *
+ * @see template_preprocess_fsa_custom_media_image_formatter()
+ */
+#}
+{% if url %}
+    <a href="{{ url }}">{{ image }}</a>
+{% else %}
+    {{ image }}
+{% endif %}
+{% if description %}
+  <p id="{{ media_entity_id }}" class="off-canvas">{{ description }}</p>
+{% endif %}

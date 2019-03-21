@@ -14,7 +14,7 @@ third_party_settings:
 id: subject_listing_anchor_nav
 theme: fsa
 region: sidebar_first
-weight: 0
+weight: -10
 provider: null
 plugin: subject_listing_anchor_nav
 settings:

@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "79bf24ada61b0931ae7c16eae3b63e65",
+    "content-hash": "6b13cfec91bfd5cb9ed9b8d33c75e268",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -4325,6 +4325,69 @@
             "homepage": "https://www.drupal.org/project/entity_reference_revisions",
             "support": {
                 "source": "http://cgit.drupalcode.org/entity_reference_revisions"
+            }
+        },
+        {
+            "name": "drupal/entityqueue",
+            "version": "1.0.0-alpha8",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/entityqueue",
+                "reference": "8.x-1.0-alpha8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/entityqueue-8.x-1.0-alpha8.zip",
+                "reference": "8.x-1.0-alpha8",
+                "shasum": "edb66ae3767b09f1723e3b775dec591641dd67f8"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-alpha8",
+                    "datestamp": "1536140284",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Alpha releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Andrei Mateescu",
+                    "homepage": "https://www.drupal.org/u/amateescu",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Jonathan Jordan",
+                    "homepage": "https://www.drupal.org/u/jojonaloha",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "quicksketch",
+                    "homepage": "https://www.drupal.org/user/35821"
+                },
+                {
+                    "name": "tim.plunkett",
+                    "homepage": "https://www.drupal.org/user/241634"
+                }
+            ],
+            "description": "The Entityqueue module allows users to create queues of any entity type.",
+            "homepage": "https://www.drupal.org/project/entityqueue",
+            "support": {
+                "source": "http://cgit.drupalcode.org/entityqueue",
+                "issues": "https://www.drupal.org/project/issues/entityqueue",
+                "irc": "irc://irc.freenode.org/drupal-contribute"
             }
         },
         {
@@ -14565,6 +14628,7 @@
         "drupal/acquia_purge": 10,
         "drupal/smtp": 10,
         "drupal/mimemail": 20,
+        "drupal/entityqueue": 15,
         "drupal/stage_file_proxy": 15
     },
     "prefer-stable": true,

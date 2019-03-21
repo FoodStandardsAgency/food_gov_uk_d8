@@ -1,0 +1,5 @@
+fsa_translation_notify.settings:
+  title: 'Translation notifications'
+  route_name: fsa_translation_notify.settings
+  description: 'FSA translation notification settings'
+  parent: system.admin_config_fsa

@@ -2,7 +2,6 @@
 
 /**
  * @file
- * Contains fsa_ratings_import.module.
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;

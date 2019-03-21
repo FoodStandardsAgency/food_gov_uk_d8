@@ -26,12 +26,13 @@ class FsaTocBlock extends BlockBase {
     $node = \Drupal::routeMatch()->getParameter('node');
     $node = Node::load($node->id());
 
+    if ($node->hasTranslation($langcode)) {
+      $node = $node->getTranslation($langcode);
+    }
+
     $fsa_toc_enabled = $node->get('field_fsa_toc')->value;
 
     if ($fsa_toc_enabled) {
-      if ($node->hasTranslation($langcode)) {
-        $node = $node->getTranslation($langcode);
-      }
       $body = $node->body;
       $body = $body->view(['label' => 'inline']);
 
@@ -54,8 +55,17 @@ class FsaTocBlock extends BlockBase {
    * {@inheritdoc}
    */
   protected function blockAccess(AccountInterface $account) {
-
     $node = \Drupal::routeMatch()->getParameter('node');
+
+    if (empty($node)) {
+      return AccessResult::forbidden();
+    }
+
+    $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
+    if ($node->hasTranslation($langcode)) {
+      $node = $node->getTranslation($langcode);
+    }
 
     if (!is_object($node) || !$node->hasField('body') || !$node->hasField('field_fsa_toc')) {
       return AccessResult::forbidden();

@@ -1,0 +1,270 @@
+<?php
+
+/**
+ * @file
+ */
+
+use Drupal\taxonomy\Entity\Term;
+
+const FSA_GDS_MP_UUID = '4072b6b3-1f23-481b-8269-69d801a74224';
+
+/**
+ * Implements hook_cron().
+ */
+function fsa_gds_mp_cron() {
+  $request_time = \Drupal::time()->getRequestTime();
+
+  // Get state setting to fetch last run time.
+  $last_run = \Drupal::state()->get('fsa_gsa_mp.last_run', 0);
+
+  // If time to run is < 24hrs, exit early.
+  if ($request_time <= strtotime('+1 day', $last_run)) {
+    return;
+  }
+
+  // Otherwise, gather daily metrics...
+  $payload = fsa_gds_mp_gather_daily_metrics();
+
+  // And transmit to GDS endpoint.
+  fsa_gsp_mp_send($payload);
+
+  // Then set the next run timestamp to +24hrs.
+  \Drupal::state()->set('fsa_gsa_mp.last_run', $request_time);
+}
+
+/**
+ * Callback to gather the alerts metrics we want to share with GDS.
+ *
+ * @return array
+ *   Key/value array of daily metrics to submit.
+ */
+function fsa_gds_mp_gather_daily_metrics() {
+  return [
+    // Number of users subscribed in total.
+    'Subscribed Users' => fsa_gds_mp_count_subscribed_users(),
+    // Amount of active subscriptions that receive message.
+    'Active Users' => fsa_gds_mp_count_active_subscribers(),
+    // Amount of active SMS subscriptions.
+    'Alert SMS' => fsa_gds_mp_count_active_sms_subscriptions(),
+    // Amount of active email subscriptions.
+    'Alert Email' => fsa_gds_mp_count_active_email_subscriptions(),
+    // Encoded JSON object containing subscriptions categories and how many subscribed per category.
+    'Alert Categories' => fsa_gds_mp_count_by_alert_categories(),
+  ];
+}
+
+/**
+ * Count the number of subscribed users, where subscribed means a user who has:
+ * 'Subscribed food alerts' checked
+ * - OR one selection in 'Subscribed news'
+ * - OR one selection in 'Subscribed consultations'
+ *
+ * @return int
+ *   The number of matching users.
+ */
+function fsa_gds_mp_count_subscribed_users() {
+  $connection = \Drupal::database();
+  $sql = <<<EOT
+    SELECT COUNT(DISTINCT u.uid)
+    FROM users u
+    LEFT JOIN user__field_subscribed_food_alerts fsfa ON fsfa.entity_id = u.uid
+    LEFT JOIN user__field_subscribed_news fsn ON fsn.entity_id = u.uid
+    LEFT JOIN user__field_subscribed_cons fsc ON fsc.entity_id = u.uid
+    WHERE 
+      fsfa.field_subscribed_food_alerts_value = 'all'
+    OR fsn.field_subscribed_news_target_id <> NULL 
+    OR fsc.field_subscribed_cons_target_id <> NULL; 
+EOT;
+
+  $query = $connection->query($sql);
+
+  return (int) array_pop($query->fetchAssoc());
+}
+
+/**
+ * Count the number of active subscriptions, meaning a user who has:
+ * - 'Subscribed food alerts' checked and at least one selection in
+ *   'Subscribed notifications' and either ('Email frequency' set to something
+ *   other than 'None and 'Food and allergy alert delivery method' with a
+ *   value including 'Email') or ('Food and allergy alert delivery method'
+ *   with a value including 'SMS' and 'Phone number' not empty)
+ * - OR one selection in 'Subscribed news' and
+ *   'News and consultations delivery method' selected.
+ * - OR one selection in 'Subscribed consultations' and and
+ *   'News and consultations delivery method' selected.
+ *
+ * @return int
+ *   The number of matching users.
+ */
+function fsa_gds_mp_count_active_subscribers() {
+  $connection = \Drupal::database();
+  $sql = <<<EOT
+    SELECT COUNT(DISTINCT u.uid)
+    FROM users u
+    INNER JOIN users_field_data ufd ON ufd.uid = u.uid
+    LEFT JOIN user__field_subscribed_food_alerts fsfa ON fsfa.entity_id = u.uid
+    LEFT JOIN user__field_subscribed_news fsn ON fsn.entity_id = u.uid
+    LEFT JOIN user__field_subscribed_cons fsc ON fsc.entity_id = u.uid
+    LEFT JOIN user__field_subscribed_notifications fsnot ON fsnot.entity_id = u.uid
+    LEFT JOIN user__field_delivery_method fdm ON fdm.entity_id = u.uid
+    LEFT JOIN user__field_delivery_method_news fdmnews ON fdmnews.entity_id = u.uid
+    LEFT JOIN user__field_email_frequency fef ON fef.entity_id = u.uid
+    LEFT JOIN user__field_notification_sms fns ON fns.entity_id = u.uid
+    WHERE
+        ufd.status = 1
+    AND (
+        (fsfa.field_subscribed_food_alerts_value = 'all' AND fsnot.field_subscribed_notifications_target_id IS NOT NULL)
+    )
+    AND (
+        (fdm.field_delivery_method_value LIKE '%email%' AND fef.field_email_frequency_value IS NOT NULL)
+        OR
+        (fdm.field_delivery_method_value LIKE '%sms%' AND fns.field_notification_sms_value IS NOT NULL)
+    )
+    OR (
+        fdmnews.field_delivery_method_news_value IS NOT NULL AND (
+            fsn.field_subscribed_news_target_id IS NOT NULL OR fsc.field_subscribed_cons_target_id IS NOT NULL
+        )
+    ); 
+EOT;
+
+  $query = $connection->query($sql);
+
+  return (int) array_pop($query->fetchAssoc());
+}
+
+/**
+ * Count all users who have an active SMS subscription, meaning:
+ * User has specified a delivery method value of 'sms' and has
+ * a phone number field value.
+ *
+ * @return int
+ *   The number of matching users.
+ */
+function fsa_gds_mp_count_active_sms_subscriptions() {
+  $connection = \Drupal::database();
+  $sql = <<<EOT
+    SELECT COUNT(DISTINCT u.uid)
+    FROM users u
+    INNER JOIN users_field_data ufd ON ufd.uid = u.uid
+    LEFT JOIN user__field_delivery_method fdm ON fdm.entity_id = u.uid
+    LEFT JOIN user__field_notification_sms fns ON fns.entity_id = u.uid
+    WHERE
+        ufd.status = 1
+    AND (fdm.field_delivery_method_value = 'sms' AND fns.field_notification_sms_value IS NOT NULL); 
+EOT;
+
+  $query = $connection->query($sql);
+
+  return (int) array_pop($query->fetchAssoc());
+}
+
+/**
+ * Count all users who have an active email subscription, meaning:
+ * User has specified a delivery method value of 'email' and has
+ * specified a delivery frequency value.
+ *
+ * @return int
+ *   The number of matching users.
+ */
+function fsa_gds_mp_count_active_email_subscriptions() {
+  $connection = \Drupal::database();
+  $sql = <<<EOT
+    SELECT COUNT(DISTINCT u.uid)
+    FROM users u
+    INNER JOIN users_field_data ufd ON ufd.uid = u.uid
+    LEFT JOIN user__field_delivery_method fdm ON fdm.entity_id = u.uid
+    LEFT JOIN user__field_email_frequency fef ON fef.entity_id = u.uid
+    WHERE
+        ufd.status = 1
+    AND (fdm.field_delivery_method_value = 'email' AND fef.field_email_frequency_value IS NOT NULL) 
+EOT;
+
+  $query = $connection->query($sql);
+
+  return (int) array_pop($query->fetchAssoc());
+}
+
+/**
+ * Count of subscribed users per alert category.
+ *
+ * @return array
+ *   [alert_machine_id, user_count]
+ */
+function fsa_gds_mp_count_by_alert_categories() {
+  $category_counts = [];
+
+  // Get terms from the 'Alerts: Allergen' vocabulary.
+  $vocabulary = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_vocabulary')->load('alerts_allergen');
+  $allergy_terms = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term')
+    ->loadTree($vocabulary->id());
+
+  foreach ($allergy_terms as $term) {
+    $term_entity = Term::load($term->tid);
+    $category_counts[$term_entity->field_alert_notation->value] = fsa_gds_mp_count_by_category($term->tid);
+  }
+
+  return $category_counts;
+}
+
+/**
+ * Count query for users subscribed to a given allergy alert term id.
+ *
+ * @param int $term_id
+ *   Term ID of the allergy alert.
+ * @return int
+ *   The total number of matching users from the query.
+ */
+function fsa_gds_mp_count_by_category(int $term_id) {
+  if (empty($term_id)) {
+    return 0;
+  }
+
+  $user_count = \Drupal::entityQuery('user')
+    ->condition('field_subscribed_notifications', $term_id)
+    ->condition('status', 1)
+    ->count()
+    ->execute();
+
+  return (int) $user_count;
+}
+
+/**
+ * Callback to make HTTP requests to measurement protocol endpoint.
+ *
+ * @param array $payload
+ *   Contains metrics data for us to send to GDS.
+ */
+function fsa_gsp_mp_send(array $payload) {
+  $uri = 'https://www.google-analytics.com/collect';
+  // Measurement protocol API docs here: https://developers.google.com/analytics/devguides/collection/protocol/v1/devguide#event.
+  $options = [
+    'headers' => [
+      'Cache' => 'no-cache',
+    ],
+    'query' => [
+      'v' => 1,
+      't' => 'event',
+      'tid' => \Drupal::config('fsa_gds_mp')->get('ga_tracking_id'),
+      'cid' => FSA_GDS_MP_UUID,
+      'cd1' => urldecode('FSA%20-%20MP%20-%20Statistics%20Reporting%20-%20food.gov.uk'),
+      'ds' => 'drupal',
+      'dh' => \Drupal::request()->getHost(),
+      'dt' => urlencode('Statistics reporting'),
+      'ec' => 'Alerts Usage',
+      'ev' => 0,
+    ],
+  ];
+
+  foreach ($payload as $event_id => $event_value) {
+    if (is_array($event_value)) {
+      $event_value = json_encode($event_value);
+    }
+
+    $options['query']['ea'] = $event_id;
+    $options['query']['el'] = $event_value;
+
+    \Drupal::httpClient()->post($uri, $options);
+  }
+}

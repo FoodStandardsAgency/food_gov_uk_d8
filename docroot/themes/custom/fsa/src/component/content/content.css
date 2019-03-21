@@ -20,7 +20,7 @@
   }
 }
 
-h1 {
+h1, .guide__title__wrapper h1 {
   @mixin responsive-declaration font-size, 2.2em, 3em;
   @mixin responsive-declaration line-height, 1.2, 1.1;
 
@@ -86,6 +86,67 @@ h6 {
   }
 }
 
+.guide__title__wrapper {
+  margin-bottom: 1em;
+}
+
+.guide__title {
+  border-bottom: 1px solid var(--color-lighter-gray);
+  padding-bottom: 0.3em;
+  margin-bottom: 0.3em;
+  color: #000;
+  display: block;
+  font-size: 0.9em;
+}
+
+.guide__title__wrapper h1 {
+  font-weight: 700;
+  font-size:1.8em;
+  line-height:1.2;
+  margin-bottom:0;
+  color:#007c75;
+}
+@media (min-width: 30em){
+  .guide__title__wrapper h1 {
+    font-size:1.85em;
+  }
+}
+@media (min-width: 50em){
+  .guide__title__wrapper h1 {
+    font-size:1.9em;
+  }
+}
+@media (min-width: 60em){
+  .guide__title__wrapper h1 {
+    font-size:1.95em;
+  }
+}
+@media (min-width: 80em){
+  .guide__title__wrapper h1 {
+    font-size:2em;
+  }
+}
+@media (min-width: 30em){
+  .guide__title__wrapper h1 {
+    line-height:1.2125;
+  }
+}
+@media (min-width: 50em){
+  .guide__title__wrapper h1 {
+    line-height:1.225;
+  }
+}
+@media (min-width: 60em){
+  .guide__title__wrapper h1 {
+    line-height:1.2375;
+  }
+}
+@media (min-width: 80em){
+  .guide__title__wrapper h1 {
+    line-height:1.25;
+  }
+}
+
 .page-title {
   color: var(--primary-color);
 
@@ -136,7 +197,7 @@ p {
   @mixin responsive-declaration line-height, 1.3, 1.4;
 
   padding-bottom: 0 !important;
-  margin-top: 1em !important;
+  margin-top: 0 /*1em !important*/;
   margin-bottom: 1em !important;
 
   .item & {
@@ -309,8 +370,8 @@ table {
   }
 
   h3 {
-    @mixin responsive-declaration font-size, 1.125em, 1.33em;
-    @mixin responsive-declaration line-height, 1.2, 1.17;
+    /*@mixin responsive-declaration font-size, 1.125em, 1.33em;
+    @mixin responsive-declaration line-height, 1.2, 1.17;*/
 
     margin-bottom: 0;
   }
@@ -405,8 +466,9 @@ blockquote {
   width: 100%;
 }
 
-/* Explanation */
-.explanation {
+/* fsa-call-out is added to call out boxes. js-explanation is on the section when its in CKEditor */
+.fsa-call-out,
+.js-explanation {
   @mixin responsive-declaration margin-top, 1em, 2em;
   @mixin responsive-declaration margin-bottom, 1em, 2em;
   @mixin responsive-declaration padding, 1em, 2em;
@@ -415,6 +477,48 @@ blockquote {
   background-color: var(--color-lighter-gray);
   border: 1px solid var(--color-light-gray);
   border-top: 4px solid var(--color-green);
+
+  h3 {
+    margin-bottom: 0 !important;
+  }
+
+  .explanation__content {
+    margin-top: 0;
+  }
+}
+
+.js-explanation:before {
+  display: block;
+  position: relative;
+  top: -27px;
+  padding: 5px;
+  left: -27px;
+  width: 158px;
+}
+
+.js-explanation.explanation:before {
+   content: "FSA Explains";
+   background-color: #6cb33d;
+}
+
+.js-explanation.tips-style:before {
+  content: "Tips";
+  background-color: var(--fsa-secondary_light-purple);
+}
+
+.js-explanation.important-style:before {
+  content: "Important";
+  background-color: var(--color-red);
+}
+
+.js-explanation.legal-advice-style:before {
+  content: "Legal advice";
+  background-color: #165C7D;
+}
+
+.js-explanation.best-practice-style:before {
+  content: "Best practice";
+  background-color: #2e4d1b;
 }
 
 .explanation__title {
@@ -428,7 +532,7 @@ blockquote {
   margin-right: -1em !important;
   margin-right: calc(-1em - 1px) !important;
   background-color: var(--primary-color);
-  border-bottom: 4px solid var(--color-green);
+  border-bottom: 4px solid var(--fsa-primary_dark-green);
   color: var(--color-white);
   padding-top: 1em;
   padding-bottom: 1em;
@@ -466,11 +570,47 @@ blockquote {
   @media (--breakpoint-lg) {
     margin-top: -2em !important;
     margin-top: calc(-2em - 4px) !important;
-    margin-left: -2 !important;
+    margin-left: -2em !important;
     margin-left: calc(-2em - 1px) !important;
     margin-right: -2em !important;
     margin-right: calc(-2em - 1px) !important;
   }
+}
+
+.explanation__title--purple {
+  background-color: var(--fsa-secondary_light-purple);
+  border-bottom: 4px solid var(--fsa-tertiary_dark-purple);
+}
+
+.tips-style {
+  border-top: 4px solid var(--fsa-tertiary_dark-purple);
+}
+
+.explanation__title--blue {
+  background-color: #165C7D;
+  border-bottom: 4px solid var(--color-dark-blue);
+}
+
+.legal-advice-style {
+  border-top: 4px solid var(--color-dark-blue);
+}
+
+.explanation__title--green {
+  background-color: #4d802d;
+  border-bottom: 4px solid #2e4d1b;
+}
+
+.best-practice-style {
+  border-top: 4px solid #2e4d1b;
+}
+
+.explanation__title--red {
+  background-color: var(--color-red);
+  border-bottom: 4px solid var(--color-dark-red);
+}
+
+.important-style {
+  border-top: 4px solid var(--color-dark-red);
 }
 
 .explanation__content {
@@ -1337,6 +1477,10 @@ but they are inserted in DOM outside container and with inline styles.
   left: -999rem;
   position: absolute;
   top: -999rem;
+
+  @media print {
+    display: none;
+  }
 }
 
 .off-canvas--focusable {

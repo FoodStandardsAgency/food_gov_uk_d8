@@ -10,7 +10,7 @@
     // Drupal's core JS will execute behaviors' attach functions when the DOM is ready.
     attach: function (context, settings) {
 
-      // Form id's to the array to implement "select all" option for checkbox lists.
+      // Form ids to the array to implement "select all" option for checkbox lists.
       // Script expects FAPI to have the "all" option key named "all".
       var forms = [
         "edit-subscribed-news",

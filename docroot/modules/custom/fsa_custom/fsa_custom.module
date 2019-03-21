@@ -16,6 +16,7 @@ use Drupal\Core\Link;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Url;
 use Drupal\views\ViewExecutable;
+use Drupal\fsa_multipage_guide\FSAMultiPageGuide;
 
 /**
  * Implements hook_language_switch_links_alter().
@@ -51,6 +52,10 @@ function fsa_custom_preprocess_page(&$variables) {
 
   // Attach addToAny js(workaround to set main share button label transalted)
   $variables['#attached']['library'][] = 'fsa_custom/add_to_any';
+
+  // Attach search filter js (forces filter settings to be visible when user
+  // visits a URL path with parameters).
+  $variables['#attached']['library'][] = 'fsa_custom/search_filters';
 
   // Hardcoded "utility menu" links.
   // Get the contact link from settings. Default to 58 which happened to be the
@@ -257,6 +262,18 @@ function fsa_custom_preprocess_page_title(&$variables) {
     }
   }
 
+  if ($entity) {
+    if (FSAMultiPageGuide::IsGuide($entity)) {
+      $variables['this_is_guide'] = TRUE;
+    }
+    else {
+      $guide = FSAMultiPageGuide::GetGuideForPage($entity);
+      if (!empty($guide)) {
+        $variables['guide_title'] = $guide->getTitle();
+      }
+    }
+  }
+
 }
 
 /**
@@ -370,6 +387,32 @@ function fsa_custom_form_alter(&$form, $form_state, $form_id) {
       $form['roles_op']['#description'] = t('List only alert subscribers by selecting users who<br />"Only has the \'authenticated user\' role"');
     }
   }
+}
+
+/**
+ * Implements hook_preprocess_views_view_field().
+ */
+function fsa_custom_preprocess_views_view_field(&$variables) {
+  if ($variables['view']->storage->id() != 'content' || $variables['field']->field != 'nothing') {
+    return;
+  }
+
+  $revisions = \Drupal::entityTypeManager()->getStorage('node')->revisionIds($variables['row']->_entity);
+  if (count($revisions) < 2) {
+    return;
+  }
+
+  // What is the language of the current row? We only want to show
+  // for lang-default to help identify the changes.
+  if ($variables['row']->node_field_data_langcode == 'cy') {
+    return;
+  }
+
+  $revisions = array_slice($revisions, -2, 2);
+
+  // TODO: convert to route name with parameters.
+  $diff_path = '/node/' . $variables['row']->nid . '/revisions/view/' . $revisions[0] . '/' . $revisions[1] . '/split_fields';
+  $variables['output'] = Link::fromTextAndUrl(t('View diff'), Url::fromUserInput($diff_path));
 }
 
 /**
@@ -669,5 +712,75 @@ function fsa_custom_theme() {
         'share' => NULL,
       ],
     ],
+    'fsa_custom_media_image_formatter' => [
+      'variables' => [
+        'item' => NULL,
+        'item_attributes' => NULL,
+        'url' => NULL,
+        'image_style' => NULL,
+        'media_entity' => NULL,
+      ],
+    ],
+    'fsa_custom_call_out_box' => [
+      'variables' => [
+        'wrapper_classes' => [],
+        'title_classes' => [],
+        'title' => NULL,
+        'content' => NULL,
+      ],
+    ],
   ];
+}
+
+/**
+ * Implements hook_media_embed_alter().
+ */
+function fsa_custom_media_embed_alter(&$build, $entity, $context) {
+  if (!empty($entity) && !empty($build['entity']['#theme']) && $build['entity']['#theme'] === 'image_formatter') {
+    // Make the full entity available to our custom image_formatter function.
+    $build['entity']['#theme'] = 'fsa_custom_media_image_formatter';
+    $build['entity']['#media_entity'] = $entity;
+  }
+}
+
+/**
+ * Prepares variables for image formatter templates.
+ *
+ * Default template: fsa-custom-media-image-formatter.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - item: An ImageItem object.
+ *   - item_attributes: An optional associative array of html attributes to be
+ *     placed in the img tag.
+ *   - image_style: An optional image style.
+ *   - url: An optional \Drupal\Core\Url object.
+ *   - media_entity: \Drupal\media_entity\Entity\Media image object
+ */
+function template_preprocess_fsa_custom_media_image_formatter(&$variables) {
+  module_load_include('inc', 'image', 'image.field');
+  template_preprocess_image_formatter($variables);
+
+  /** @var \Drupal\media_entity\Entity\Media $media */
+  $media = $variables['media_entity'];
+  $lang_code = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
+  if ($lang_code !== 'en') {
+    $media = $media->getTranslation($lang_code);
+  }
+
+  if ($media->hasField('field_long_description')) {
+    $description_field = $media->get('field_long_description')->getValue();
+
+    if (!empty($description_field[0]['value'])) {
+      // The media entry has a long description so set one and specify
+      // the correct aria tag on the image to point to the description.
+      $variables['image']['#attributes']['aria-describedby'] = 'long-description-media-' . $media->id();
+      $variables['media_entity_id'] = 'long-description-media-' . $media->id();
+
+      $variables['description'] = [
+        '#markup' => $description_field[0]['value'],
+      ];
+    }
+  }
 }
