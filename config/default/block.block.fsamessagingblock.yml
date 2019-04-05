@@ -1,0 +1,24 @@
+uuid: 5c643cc8-2099-4433-bf94-98132548c208
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - fsa_messaging
+  theme:
+    - fsa
+third_party_settings:
+  block_class:
+    classes: ''
+id: fsamessagingblock
+theme: fsa
+region: messaging
+weight: 0
+provider: null
+plugin: fsa_messaging_block
+settings:
+  id: fsa_messaging_block
+  label: 'FSA Messaging Block'
+  provider: fsa_messaging
+  label_display: '0'
+visibility: {  }
