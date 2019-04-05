@@ -1,0 +1,14 @@
+# Add fields for the message and related settings.
+fsa_messaging.settings:
+  type: config_object
+  mapping:
+    fsa_messaging_message:
+      type: text
+      label: 'FSA site message'
+      translatable: true
+    fsa_messaging_active:
+      type: boolean
+      label: 'Display message'
+    fsa_messaging_style:
+      type: string
+      label: 'Message style'

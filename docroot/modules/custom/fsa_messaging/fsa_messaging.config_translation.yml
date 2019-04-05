@@ -1,0 +1,5 @@
+fsa_messaging.config:
+  title: 'FSA messaging'
+  base_route_name: fsa_messaging.config
+  names:
+    - fsa_messaging.settings

@@ -1,0 +1,5 @@
+# Add fields for the message and related settings.
+fsa_messaging_message: ''
+fsa_messaging_active: 0
+fsa_messaging_style: 'default'
+langcode: 'en'

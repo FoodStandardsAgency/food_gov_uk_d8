@@ -1,0 +1,5 @@
+fsa_messaging.config:
+  title: 'FSA messaging configuration'
+  description: 'FSA messaging configuration form'
+  parent: system.admin_config_system
+  route_name: fsa_messaging.config

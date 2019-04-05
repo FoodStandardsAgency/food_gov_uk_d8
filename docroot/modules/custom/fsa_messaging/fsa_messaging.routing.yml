@@ -1,0 +1,15 @@
+fsa_messaging.fsa_messaging_block:
+  path: 'ajax/fsa-messaging'
+  methods: [GET]
+  defaults:
+    _controller: '\Drupal\fsa_messaging\Controller\FsaMessagingController::getContent'
+  requirements:
+    _permission: 'access content'
+
+fsa_messaging.config:
+  path: 'admin/config/system/fsa-messaging'
+  defaults:
+    _form: '\Drupal\fsa_messaging\Form\FsaMessagingConfigForm'
+    _title: 'FSA messaging configuration'
+  requirements:
+    _permission: 'administer site configuration'

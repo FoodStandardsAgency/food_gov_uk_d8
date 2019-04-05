@@ -1,0 +1,14 @@
+<?php
+/**
+ * Implment hook_theme
+ */
+function fsa_messaging_theme($existing, $type, $theme, $path) {
+  return [
+    'fsa_messaging_block' => [
+      'variables' => [
+        'message' => NULL,
+        'style' => ''
+      ],
+    ]
+  ];
+}

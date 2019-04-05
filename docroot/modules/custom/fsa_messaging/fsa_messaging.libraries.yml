@@ -1,0 +1,7 @@
+fsa_messaging:
+  version: 1.x
+  js:
+    fsa_messaging.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings

@@ -1,0 +1,8 @@
+name: FSA Messaging
+description: Show custom messaging on the site
+package: FSA
+type: module
+version: 1.0
+core: 8.x
+dependencies:
+  - block
