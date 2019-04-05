@@ -82,11 +82,17 @@
         </a>
 
         {{ utility_menu }}
-        
+
         {{ page.header_2 }}
       </div>
     </div>
   </header>
+
+  {% if page.messaging %}
+    <div class="layout">
+    {{ page.messaging }}
+    </div>
+  {% endif %}
 
   {% if page.primary_menu %}
   <div class="layout navigation-wrapper js-navigation">
