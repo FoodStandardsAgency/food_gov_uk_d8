@@ -1,4 +1,4 @@
-fsa_rating.settings_tab:
+fsa_messaging.settings_tab:
   route_name: fsa_messaging.config
   title: FSA Messaging
   base_route: fsa_messaging.config
