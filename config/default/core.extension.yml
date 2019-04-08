@@ -68,6 +68,7 @@ module:
   fsa_establishment_lookup: 0
   fsa_gtm: 0
   fsa_lander: 0
+  fsa_messaging: 0
   fsa_multipage_guide: 0
   fsa_notify: 0
   fsa_page_feedback: 0
