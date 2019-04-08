@@ -19,11 +19,15 @@ class FsaMessagingController extends ControllerBase {
 
     if ($config->get('fsa_messaging_active')) {
       $message = $config->get('fsa_messaging_message');
+      $markup = check_markup(
+        $message['value'],
+        $message['format']
+      );
       $style = $config->get('fsa_messaging_style');
 
       $block = [
         '#theme' => 'fsa_messaging_block',
-        '#message' => $message,
+        '#message' => $markup,
         '#cache' => [
           'keys' => ['block', 'fsa_messaging'],
           'contexts' => ['languages'],

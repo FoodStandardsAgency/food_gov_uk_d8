@@ -22,6 +22,7 @@ class FsaMessagingConfigForm extends ConfigFormBase {
   public function buildForm(array $form, FormStateInterface $form_state)  {
 
     $config = \Drupal::config('fsa_messaging.settings');
+    $message = $config->get('fsa_messaging_message');
 
     $form['fsa_messaging'] = [
       '#type' => 'details',
@@ -43,13 +44,13 @@ class FsaMessagingConfigForm extends ConfigFormBase {
         '#default_value' => $config->get('fsa_messaging_style')
       ],
       'fsa_messaging_message' => [
-        '#type' => 'textarea',
+        '#type' => 'text_format',
         '#title' => t('Message'),
-        '#default_value' => $config->get('fsa_messaging_message')
+        '#format' => $message['format'],
+        '#default_value' => $message['value']
       ],
     ];
-
-    return $form;
+    return parent::buildForm($form, $form_state);
   }
 
   /**
