@@ -21,6 +21,7 @@ permissions:
   - 'administer blocks'
   - 'administer fsa consultation configurations'
   - 'administer fsa content reminder settings'
+  - 'administer fsa messaging'
   - 'administer fsa rating landing content'
   - 'administer managed link entities'
   - 'administer menu'

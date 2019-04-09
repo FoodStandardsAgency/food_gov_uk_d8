@@ -12,4 +12,4 @@ fsa_messaging.config:
     _form: '\Drupal\fsa_messaging\Form\FsaMessagingConfigForm'
     _title: 'FSA messaging configuration'
   requirements:
-    _permission: 'administer site configuration'
+    _permission: 'administer fsa messaging'
