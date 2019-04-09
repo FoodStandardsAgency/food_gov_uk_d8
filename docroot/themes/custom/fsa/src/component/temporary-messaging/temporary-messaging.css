@@ -12,7 +12,7 @@
   .temporary-messaging {
     position: relative;
     padding-left: 64px;
-    @media (--breakpoint-md) {
+    @media (min-width: 768px) {
       padding-left: 35px;
     }
   }
@@ -35,7 +35,7 @@
     top: 5px;
     left: 0px;
     padding-right: 30px;
-    @media (max-width: 959px) {
+    @media (max-width: 767px) {
       left: 22px;
     }
   }
@@ -50,9 +50,13 @@
    p {
      margin: 0;
    }
+  @media (--breakpoint-xs) {
+    padding-right: 1.75em;
+    padding-left: 1.75em;
+  }
   @media (--breakpoint-md) {
-    padding-right: 2.5em;
-    padding-left: 2.5em;
+    padding-right: 3.25em;
+    padding-left: 3.25em;
   }
 
   @media (--breakpoint-lg) {
