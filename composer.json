@@ -141,7 +141,8 @@
                 "Make the Date Time input format and descriptive text consistent": "https://www.drupal.org/files/issues/2791693-23.patch",
                 "Use new Transliteration functionality in core for file names": "https://www.drupal.org/files/issues/2018-12-05/2492171-128.patch",
                 "A translation already exists for the specified language": "https://www.drupal.org/files/issues/2019-01-07/3020448-revert-issue-2946402-6.patch",
-                "Cache buster for CKEditors editor.css": "https://www.drupal.org/files/issues/2019-03-13/2888723-12.patch"
+                "Cache buster for CKEditors editor.css": "https://www.drupal.org/files/issues/2019-03-13/2888723-12.patch",
+                "Fatal error on config form with translation enabled when config is missing": "https://www.drupal.org/files/issues/2018-10-17/core-typed_config_handle_missing_config-2925297-7.patch"
             },
             "drupal/administration_language_negotiation": {
                 "Fix admin_routes": "https://www.drupal.org/files/issues/2018-06-06/admin-routes-config-2972446-2.patch",
