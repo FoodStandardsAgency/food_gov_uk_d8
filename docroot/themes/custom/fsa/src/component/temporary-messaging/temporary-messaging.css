@@ -8,12 +8,14 @@
   padding-bottom: 16px;
   padding-right: 1em;
   padding-left: 1em;
+  font-size: 16px;
+  font-weight: 700;
 
   .temporary-messaging {
     position: relative;
     padding-left: 64px;
     @media (min-width: 768px) {
-      padding-left: 35px;
+      padding-left: 45px;
     }
   }
   .temporary-messaging a {
@@ -33,10 +35,13 @@
     display: block;
     position: absolute;
     top: 5px;
-    left: 0px;
+    left: 15px;
     padding-right: 30px;
-    @media (max-width: 767px) {
-      left: 22px;
+    @media (min-width: 768px) {
+      left: 10px;
+    }
+    @media (min-width: 1400px) {
+      left: 2px;
     }
   }
 
