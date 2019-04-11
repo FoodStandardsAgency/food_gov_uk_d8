@@ -21,7 +21,7 @@ $config['config_split.config_split.dev']['status'] = FALSE;
 $settings['config_readonly'] = TRUE;
 
 // Allow configuration changes via drush (command line).
-if (PHP_SAPI === 'cli' || SETTINGS_ENVIRONMENT === 'test') {
+if (PHP_SAPI === 'cli') {
   $settings['config_readonly'] = FALSE;
 }
 
