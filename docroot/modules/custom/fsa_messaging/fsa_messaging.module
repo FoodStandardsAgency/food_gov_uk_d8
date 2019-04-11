@@ -12,3 +12,15 @@ function fsa_messaging_theme($existing, $type, $theme, $path) {
     ]
   ];
 }
+
+/**
+ * Implement hook_config_readonly_whitelist_patterns
+ *
+ * This module implements site wide content rather thn protected site
+ * configuration, so allow the user to save changes.
+ */
+function fsa_messaging_config_readonly_whitelist_patterns() {
+   return [
+     'fsa_messaging.settings'
+   ];
+ }
