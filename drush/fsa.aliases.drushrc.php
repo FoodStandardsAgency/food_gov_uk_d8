@@ -17,75 +17,61 @@ $aliases['dev'] = array (
   'ac-env' => 'dev',
   'ac-realm' => 'prod',
   'uri' => 'foodgovukdev.prod.acquia-sites.com',
-  'path-aliases' =>
-  array (
+  'path-aliases' => array(
     '%drush-script' => 'drush8',
   ),
-  'dev.livedev' =>
-  array (
-    'parent' => '@foodgovuk.dev',
-    'root' => '/mnt/gfs/foodgovuk.dev/livedev/docroot',
-  ),
-  'remote-host' => 'foodgovukdev.ssh.prod.acquia-sites.com',
-  'remote-user' => 'foodgovuk.dev',
 );
 
-// Application 'foodgovuk', environment 'prod'.
-$aliases['prod'] = array (
-  'root' => '/var/www/html/foodgovuk.prod/docroot',
-  'ac-site' => 'foodgovuk',
-  'ac-env' => 'prod',
-  'ac-realm' => 'prod',
-  'uri' => 'https://www.food.gov.uk',
-  'path-aliases' =>
-  array (
-    '%drush-script' => 'drush8',
-  ),
-  'prod.livedev' =>
-  array (
-    'parent' => '@foodgovuk.prod',
-    'root' => '/mnt/gfs/foodgovuk.prod/livedev/docroot',
-  ),
-  'remote-host' => 'foodgovuk.ssh.prod.acquia-sites.com',
-  'remote-user' => 'foodgovuk.prod',
-);
-
-// Application 'foodgovuk', environment 'ra'.
-$aliases['ra'] = array (
-  'root' => '/var/www/html/foodgovuk.ra/docroot',
-  'ac-site' => 'foodgovuk',
-  'ac-env' => 'ra',
-  'ac-realm' => 'prod',
-  'uri' => 'foodgovukra.prod.acquia-sites.com',
-  'path-aliases' =>
-  array (
-    '%drush-script' => 'drush8',
-  ),
-  'ra.livedev' =>
-  array (
-    'parent' => '@foodgovuk.ra',
-    'root' => '/mnt/gfs/foodgovuk.ra/livedev/docroot',
-  ),
-  'remote-host' => 'foodgovukra.ssh.prod.acquia-sites.com',
-  'remote-user' => 'foodgovuk.ra',
-);
+if (!file_exists('/var/www/html/foodgovuk.dev/docroot')) {
+  $aliases['dev']['remote-host'] = 'foodgovukdev.ssh.prod.acquia-sites.com';
+  $aliases['dev']['remote-user'] = 'foodgovuk.dev';
+}
 
 // Application 'foodgovuk', environment 'test'.
-$aliases['test'] = array (
+$aliases['test'] = array(
   'root' => '/var/www/html/foodgovuk.test/docroot',
   'ac-site' => 'foodgovuk',
   'ac-env' => 'test',
   'ac-realm' => 'prod',
   'uri' => 'foodgovukstg.prod.acquia-sites.com',
-  'path-aliases' =>
-  array (
+  'path-aliases' => array(
     '%drush-script' => 'drush8',
   ),
-  'test.livedev' =>
-  array (
-    'parent' => '@foodgovuk.test',
-    'root' => '/mnt/gfs/foodgovuk.test/livedev/docroot',
-  ),
-  'remote-host' => 'foodgovukstg.ssh.prod.acquia-sites.com',
-  'remote-user' => 'foodgovuk.test',
 );
+
+if (!file_exists('/var/www/html/foodgovuk.test/docroot')) {
+  $aliases['test']['remote-host'] = 'foodgovukstg.ssh.prod.acquia-sites.com';
+  $aliases['test']['remote-user'] = 'foodgovuk.test';
+}
+
+$aliases['ode19'] = array(
+  'root' => '/var/www/html/foodgovuk.ode19/docroot',
+  'ac-site' => 'foodgovuk',
+  'ac-env' => 'ode19',
+  'ac-realm' => 'prod',
+  'uri' => 'foodgovukode19.prod.acquia-sites.com',
+  'path-aliases' => array(
+      '%drush-script' => 'drush8',
+    ),
+);
+
+if (!file_exists('/var/www/html/foodgovuk.ode19/docroot')) {
+  $aliases['ode19']['remote-host'] = 'foodgovukode19.ssh.prod.acquia-sites.com';
+  $aliases['ode19']['remote-user'] = 'foodgovuk.ode19';
+}
+
+$aliases['prod'] = array(
+  'root' => '/var/www/html/foodgovuk.prod/docroot',
+  'ac-site' => 'foodgovuk',
+  'ac-env' => 'prod',
+  'ac-realm' => 'prod',
+  'uri' => 'www.food.gov.uk',
+  'path-aliases' => array(
+      '%drush-script' => 'drush8',
+    ),
+);
+
+if (!file_exists('/var/www/html/foodgovuk.prod/docroot')) {
+  $aliases['prod']['remote-host'] = 'foodgovuk.ssh.prod.acquia-sites.com';
+  $aliases['prod']['remote-user'] = 'foodgovuk.prod';
+}
