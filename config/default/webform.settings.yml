@@ -1,4 +1,5 @@
 settings:
+  default_status: open
   default_page_base_path: form
   default_form_open_message: 'This form has not yet been opened to submissions.'
   default_form_close_message: 'Sorry...This form is closed to new submissions.'
@@ -7,7 +8,7 @@ settings:
   default_reset_button_label: Reset
   default_form_submit_once: false
   default_form_confidential_message: 'This form is confidential. You must <a href="[site:login-url]/logout?destination=[current-page:url:relative]">Log out</a> to submit it.'
-  default_form_login_message: 'Please login to access this webform.'
+  default_form_access_denied_message: 'Please login to access this webform.'
   default_form_disable_back: false
   default_form_submit_back: false
   default_form_unsaved: false
@@ -16,6 +17,7 @@ settings:
   default_form_required: false
   default_form_required_label: 'Indicates required field'
   default_form_details_toggle: true
+  default_form_file_limit: ''
   form_classes: "container-inline clearfix\r\nform--inline clearfix\r\nmessages messages--error\r\nmessages messages--warning\r\nmessages messages--status\r\n"
   button_classes: ''
   default_wizard_prev_button_label: Previous
@@ -33,16 +35,43 @@ settings:
   default_confirmation_message: 'New submission added to [webform:title].'
   default_confirmation_back_label: 'Back to form'
   default_submission_label: '[webform_submission:submitted-to]: Submission #[webform_submission:serial]'
-  default_submission_login_message: 'Please login to access this submission.'
+  default_submission_access_denied_message: 'Please login to access this submission.'
   default_submission_exception_message: 'Unable to process this submission. Please contact the site administrator.'
   default_submission_locked_message: 'This submission has been locked.'
   default_submission_log: false
+  default_submission_views: {  }
+  default_submission_views_replace:
+    global_routes:
+      - entity.webform_submission.collection
+      - entity.webform_submission.user
+    webform_routes:
+      - entity.webform.results_submissions
+      - entity.webform.user.drafts
+      - entity.webform.user.submissions
+    node_routes:
+      - entity.node.webform.results_submissions
+      - entity.node.webform.user.drafts
+      - entity.node.webform.user.submissions
+  default_previous_submission_message: 'You have already submitted this webform. <a href="#">View your previous submission</a>.'
+  default_previous_submissions_message: 'You have already submitted this webform. <a href="#">View your previous submissions</a>.'
   default_autofill_message: 'This submission has been autofilled with your previous submission.'
   preview_classes: "messages messages--error\r\nmessages messages--warning\r\nmessages messages--status\r\n"
   confirmation_classes: "messages messages--error\r\nmessages messages--warning\r\nmessages messages--status\r\n"
   confirmation_back_classes: "button\r\n"
   default_limit_total_message: 'No more submissions are permitted.'
   default_limit_user_message: 'No more submissions are permitted.'
+  dialog: false
+  dialog_options:
+    narrow:
+      title: Narrow
+      width: 600
+    normal:
+      title: Normal
+      width: 800
+    wide:
+      title: Wide
+      width: 1000
+  default_submission_login_message: 'Please login to access this submission.'
   default_wizard_complete_label: Complete
 assets:
   css: ''
@@ -50,6 +79,7 @@ assets:
 handler:
   excluded_handlers: {  }
 export:
+  temp_directory: ''
   exporter: delimited
   multiple_delimiter: ;
   header_format: label
@@ -72,6 +102,7 @@ export:
   file_name: 'submission-[webform_submission:serial]'
 batch:
   default_batch_export_size: 500
+  default_batch_import_size: 100
   default_batch_update_size: 500
   default_batch_delete_size: 500
   default_batch_email_size: 500
@@ -91,13 +122,18 @@ element:
   default_empty_option_optional: ''
   default_icheck: ''
   default_google_maps_api_key: ''
+  default_algolia_places_app_id: ''
+  default_algolia_places_api_key: ''
   excluded_elements:
     password: password
     password_confirm: password_confirm
+    webform_location_geocomplete: webform_location_geocomplete
 html_editor:
   disabled: false
-  format: ''
+  element_format: ''
+  mail_format: ''
   tidy: true
+  make_unused_managed_files_temporary: true
 file:
   file_public: false
   file_private_redirect: true
@@ -133,6 +169,7 @@ test:
 ui:
   video_display: dialog
   details_save: true
+  help_disabled: false
   dialog_disabled: true
   offcanvas_disabled: false
   contribute_disabled: true
@@ -142,6 +179,7 @@ ui:
 libraries:
   excluded_libraries:
     - jquery.chosen
+    - jquery.toggles
 requirements:
   cdn: true
   bootstrap: true
@@ -150,6 +188,8 @@ contribute:
   account_type: user
   account_id: null
 langcode: en
-third_party_settings: {  }
+third_party_settings:
+  captcha:
+    replace_administration_mode: true
 _core:
   default_config_hash: 4mBL6Z1Mwl5V-qY50t451iSQQHfOgoKdJjZTz1O7Agg

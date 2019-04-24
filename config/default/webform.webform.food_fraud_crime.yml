@@ -1,11 +1,12 @@
-uuid: 04b09fa3-a0b6-41b5-acc6-475d3d8a1a0a
 langcode: en
 status: open
 dependencies: {  }
 open: null
 close: null
+weight: 0
 uid: 1
 template: false
+archive: false
 id: food_fraud_crime
 title: 'Report food fraud crime'
 description: 'Food fraud crime report form'
@@ -19,6 +20,7 @@ settings:
   page: true
   page_submit_path: help/report-food-problem/food-fraud
   page_confirm_path: help/report-food-problem/food-fraud/summary
+  form_title: both
   form_submit_once: true
   form_exception_message: ''
   form_open_message: ''
@@ -26,6 +28,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
+  form_remote_addr: true
   form_convert_anonymous: false
   form_prepopulate: true
   form_prepopulate_source_entity: false
@@ -41,10 +44,15 @@ settings:
   form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
-  form_login: false
-  form_login_message: ''
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
   submission_label: ''
   submission_log: false
+  submission_views: {  }
+  submission_views_replace: {  }
   submission_user_columns:
     - element__details_of_problem
     - element__where_lookup
@@ -59,17 +67,27 @@ settings:
     - element__how
     - element__why
     - element__telephone
-  submission_login: false
-  submission_login_message: ''
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
   submission_exception_message: ''
   submission_locked_message: ''
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  previous_submission_message: ''
+  previous_submissions_message: ''
   autofill: false
   autofill_message: ''
   autofill_excluded_elements: {  }
   wizard_progress_bar: false
   wizard_progress_pages: true
   wizard_progress_percentage: false
+  wizard_progress_link: false
   wizard_start_label: ''
+  wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
   wizard_track: name
@@ -81,6 +99,7 @@ settings:
   preview_excluded_elements:
     audience: audience
   preview_exclude_empty: false
+  preview_exclude_empty_checkbox: false
   draft: none
   draft_multiple: false
   draft_auto_save: false
@@ -99,9 +118,11 @@ settings:
   limit_total: null
   limit_total_interval: null
   limit_total_message: ''
+  limit_total_unique: false
   limit_user: null
   limit_user_interval: null
   limit_user_message: ''
+  limit_user_unique: false
   entity_limit_total: null
   entity_limit_total_interval: null
   entity_limit_user: null
@@ -154,6 +175,10 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
 handlers:
   copy_of_report:
     id: email
@@ -171,9 +196,9 @@ handlers:
       cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
-      from_mail: default
+      from_mail: _default
       from_options: {  }
-      from_name: default
+      from_name: _default
       subject: 'Thank you for reporting a food problem'
       body: "<p>Thank you for your report which wil be forwarded to the <strong>FSA&#39;s National Food Crime Unit (NFCU)</strong></p>\r\n\r\n<p>If you need to contact the Food Crime Unit about your report, call 0207 276 8787 or email foodcrime@food.gov.uk</p>\r\n\r\n<p>Please do not reply to this email.</p>"
       excluded_elements:
@@ -192,6 +217,7 @@ handlers:
         permission_granted: permission_granted
       ignore_access: false
       exclude_empty: false
+      exclude_empty_checkbox: false
       html: true
       attachments: false
       twig: false
@@ -200,6 +226,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
+      theme_name: ''
   copy_to_nfcu:
     id: email
     label: 'Copy to National Food Crime Unit'
@@ -218,12 +245,13 @@ handlers:
       bcc_options: {  }
       from_mail: report@food.gov.uk
       from_options: {  }
-      from_name: default
+      from_name: _default
       subject: 'This is a food crime report via food.gov.uk'
       body: "<p>This is a suspected food crime report from <strong><a href=\"[current-page:url:unaliased:absolute]\">[current-page:title]</a></strong> via beta.food.gov.uk.</p>\r\n\r\n<p>[webform_submission:values]</p>\r\n\r\n<p>Please do not reply to this email.</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: false
+      exclude_empty_checkbox: false
       html: true
       attachments: false
       twig: false
@@ -232,6 +260,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
+      theme_name: ''
   remove_personal_data:
     id: action
     label: 'Remove personal data'
@@ -266,14 +295,15 @@ handlers:
       cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
-      from_mail: default
+      from_mail: _default
       from_options: {  }
-      from_name: default
-      subject: default
-      body: default
+      from_name: _default
+      subject: _default
+      body: _default
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
+      exclude_empty_checkbox: false
       html: true
       attachments: false
       twig: false
@@ -282,3 +312,5 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
+      theme_name: ''
+uuid: 04b09fa3-a0b6-41b5-acc6-475d3d8a1a0a
