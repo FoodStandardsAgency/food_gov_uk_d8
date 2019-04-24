@@ -7986,26 +7986,35 @@
         },
         {
             "name": "drupal/webform",
-            "version": "5.0.0-rc12",
+            "version": "5.2.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/webform.git",
-                "reference": "8.x-5.0-rc12"
+                "reference": "8.x-5.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/webform-8.x-5.0-rc12.zip",
-                "reference": "8.x-5.0-rc12",
-                "shasum": "d677eb59bf2084267476fa482b5fbccb0dc8afb9"
+                "url": "https://ftp.drupal.org/files/projects/webform-8.x-5.2.zip",
+                "reference": "8.x-5.2",
+                "shasum": "44e67c377e156f7f8d6f26bba43240dfa1885637"
             },
             "require": {
                 "drupal/core": "*"
             },
             "require-dev": {
+                "drupal/address": "~1.4",
+                "drupal/captcha": "~1.0",
+                "drupal/chosen": "~2.6",
                 "drupal/devel": "*",
-                "drupal/token": "*",
+                "drupal/jsonapi": "~2.0",
+                "drupal/mailsystem": "~4.0",
+                "drupal/select2": "~1.1",
+                "drupal/telephone_validation": "^2.2",
+                "drupal/token": "~1.3",
+                "drupal/webform_access": "*",
                 "drupal/webform_node": "*",
-                "drupal/webform_scheduled_email": "*"
+                "drupal/webform_scheduled_email": "*",
+                "drupal/webform_ui": "*"
             },
             "type": "drupal-module",
             "extra": {
@@ -8013,11 +8022,11 @@
                     "dev-5.x": "5.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-5.0-rc12",
-                    "datestamp": "1528137480",
+                    "version": "8.x-5.2",
+                    "datestamp": "1553801966",
                     "security-coverage": {
-                        "status": "not-covered",
-                        "message": "RC releases are not covered by Drupal security advisories."
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
                     }
                 },
                 "drush": {
@@ -8078,6 +8087,7 @@
             "homepage": "https://drupal.org/project/webform",
             "support": {
                 "source": "http://cgit.drupalcode.org/webform",
+                "error": "Invalid dependency: \"telephone_validation/telephone_validation\" is an unknown drupal 8 package name",
                 "issues": "https://www.drupal.org/project/issues/webform?version=8.x",
                 "docs": "https://www.drupal.org/docs/8/modules/webform",
                 "forum": "https://drupal.stackexchange.com/questions/tagged/webform"
@@ -8085,17 +8095,17 @@
         },
         {
             "name": "drupal/webform_views",
-            "version": "5.0.0-alpha2",
+            "version": "5.0.0-alpha6",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/webform_views.git",
-                "reference": "8.x-5.0-alpha2"
+                "reference": "8.x-5.0-alpha6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/webform_views-8.x-5.0-alpha2.zip",
-                "reference": "8.x-5.0-alpha2",
-                "shasum": "288e0efa09423e3c3368d6aff9002ca41292238c"
+                "url": "https://ftp.drupal.org/files/projects/webform_views-8.x-5.0-alpha6.zip",
+                "reference": "8.x-5.0-alpha6",
+                "shasum": "a175d0421c020a7953bacc0c3d93e97efb1b228f"
             },
             "require": {
                 "drupal/core": "*",
@@ -8107,8 +8117,8 @@
                     "dev-5.x": "5.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-5.0-alpha2",
-                    "datestamp": "1512044585",
+                    "version": "8.x-5.0-alpha6",
+                    "datestamp": "1540871280",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Alpha releases are not covered by Drupal security advisories."
@@ -8136,7 +8146,7 @@
             "description": "Webform integration with views.",
             "homepage": "https://www.drupal.org/project/webform_views",
             "support": {
-                "source": "http://cgit.drupalcode.org/webform_views"
+                "source": "https://git.drupalcode.org/project/webform_views"
             }
         },
         {
