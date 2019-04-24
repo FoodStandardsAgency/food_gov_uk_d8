@@ -74,20 +74,40 @@ services:
       - 'traefik.port=80'
       - 'traefik.frontend.rule=Host:${PROJECT_BASE_URL}'
 
-  solr:
-    image: $SOLR_TAG
-    container_name: "${PROJECT_NAME}_solr"
+#  solr:
+#    image: $SOLR_TAG
+#    container_name: "${PROJECT_NAME}_solr"
+#    environment:
+#      SOLR_HEAP: 1024m
+#    volumes:
+#      - ./.persist/solr:/opt/solr/server/solr/core1:delegated
+#    networks:
+#      - default
+#      - proxy
+#    labels:
+#      - 'traefik.docker.network=proxy'
+#      - 'traefik.port=8983'
+#      - 'traefik.frontend.rule=Host:solr.${PROJECT_BASE_URL}'
+
+  elasticsearch:
+    image: wodby/elasticsearch:$ELASTICSEARCH_TAG
+    container_name: "${PROJECT_NAME}_elasticsearch"
     environment:
-      SOLR_HEAP: 1024m
+      ES_JAVA_OPTS: "-Xms500m -Xmx500m"
+      ES_CLUSTER_NAME: page-en
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
     volumes:
-      - ./.persist/solr:/opt/solr/server/solr/core1:delegated
+      - './.persist/esdata:/usr/share/elasticsearch/data'
     networks:
       - default
       - proxy
     labels:
       - 'traefik.docker.network=proxy'
-      - 'traefik.port=8983'
-      - 'traefik.frontend.rule=Host:solr.${PROJECT_BASE_URL}'
+      - 'traefik.port=9200'
+      - 'traefik.frontend.rule=Host:elasticsearch.${PROJECT_BASE_URL}'
 
   mailhog:
     image: mailhog/mailhog
