@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ca7275014b56ca0faec13a700cc67723",
+    "content-hash": "f43b43f3351cbb86b3dcb7fa0ee255a2",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -7985,6 +7985,68 @@
             }
         },
         {
+            "name": "drupal/warden",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/warden.git",
+                "reference": "8.x-1.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/warden-8.x-1.1.zip",
+                "reference": "8.x-1.1",
+                "shasum": "3c907a5b282920b6da7495f5e5f72516088cae8e"
+            },
+            "require": {
+                "drupal/core": "~8.0",
+                "teamdeeson/wardenapi": "dev-master"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.1",
+                    "datestamp": "1498079942",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Drupal\\warden\\": "src/"
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "johnennew",
+                    "homepage": "https://www.drupal.org/user/1150042"
+                },
+                {
+                    "name": "mike.davis",
+                    "homepage": "https://www.drupal.org/user/2660157"
+                }
+            ],
+            "description": "A module to link Drupal website with Warden dashboard.",
+            "homepage": "https://www.drupal.org/project/warden",
+            "keywords": [
+                "Drupal",
+                "Warden"
+            ],
+            "support": {
+                "source": "https://drupal.org/project/warden",
+                "issues": "https://drupal.org/project/issues/warden"
+            }
+        },
+        {
             "name": "drupal/webform",
             "version": "5.2.0",
             "source": {
@@ -12222,6 +12284,55 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2019-03-25T07:48:46+00:00"
+        },
+        {
+            "name": "teamdeeson/wardenapi",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/teamdeeson/wardenapi.git",
+                "reference": "d93f30b3c482f27696c1371b163e9260b33a80d8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/teamdeeson/wardenapi/zipball/d93f30b3c482f27696c1371b163e9260b33a80d8",
+                "reference": "d93f30b3c482f27696c1371b163e9260b33a80d8",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.1",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WardenApi\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "John Ennew",
+                    "email": "johne@deeson.co.uk"
+                },
+                {
+                    "name": "Mike Davis",
+                    "email": "miked@deeson.co.uk"
+                }
+            ],
+            "description": "Warden API utility",
+            "homepage": "https://www.deeson.co.uk/labs",
+            "keywords": [
+                "drupal",
+                "warden"
+            ],
+            "time": "2018-02-02T09:16:39+00:00"
         },
         {
             "name": "twig/twig",
