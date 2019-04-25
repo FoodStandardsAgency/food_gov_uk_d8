@@ -771,7 +771,7 @@ blockquote {
 
   & > a,
   & > button,
-  .addtoany_share_save {
+  .addtoany_share {
     position: relative;
     display: block;
     font-family: var(--font-family-content);
@@ -846,7 +846,7 @@ blockquote {
 
   &.content-toolbar__item--share {
 
-    .addtoany_share_save {
+    .addtoany_share {
 
       &:before {
         background-image: var(--icon-share-primary);
