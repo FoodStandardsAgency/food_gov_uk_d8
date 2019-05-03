@@ -24,7 +24,7 @@
         "composer/installers": "^1.2",
         "drupal-composer/drupal-scaffold": "^2.2",
         "cweagans/composer-patches": "~1.0",
-        "drupal/core": "~8.5",
+        "drupal/core": "^8.6.0",
         "drush/drush": "~8",
         "drupal/console": "~1.0",
         "drupal/config_installer": "~1.0",
@@ -105,7 +105,8 @@
         "drupal/acquia_connector": "^1.14",
         "drupal/smtp": "^1.0@beta",
         "drupal/mimemail": "1.x-dev",
-        "drupal/http_cache_control": "^1.0"
+        "drupal/http_cache_control": "^1.0",
+        "drupal/warden": "^1.1"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
@@ -139,7 +140,7 @@
                 "RSS view with fields give wrong URL from path field": "https://www.drupal.org/files/issues/2018-11-22/rss_view_with_fields-2673980-81.patch",
                 "InvalidArgumentException when trying to save programatically created node translation with workflow enabled": "https://www.drupal.org/files/issues/2018-04-16/drupal_workflow-initial-state-fix-2901459-16.patch",
                 "Make the Date Time input format and descriptive text consistent": "https://www.drupal.org/files/issues/2791693-23.patch",
-                "Use new Transliteration functionality in core for file names": "https://www.drupal.org/files/issues/2018-12-05/2492171-128.patch",
+                "Use new Transliteration functionality in core for file names": "https://www.drupal.org/files/issues/2019-04-04/2492171-283.patch",
                 "A translation already exists for the specified language": "https://www.drupal.org/files/issues/2019-01-07/3020448-revert-issue-2946402-6.patch",
                 "Cache buster for CKEditors editor.css": "https://www.drupal.org/files/issues/2019-03-13/2888723-12.patch",
                 "Fatal error on config form with translation enabled when config is missing": "https://www.drupal.org/files/issues/2018-10-17/core-typed_config_handle_missing_config-2925297-7.patch"

@@ -1,16 +1,17 @@
-uuid: ea6fedd7-947a-4f5c-af85-2fb5b508d584
 langcode: en
 status: open
 dependencies: {  }
 open: null
 close: null
+weight: 0
 uid: 1
 template: false
+archive: false
 id: user_satisfaction
 title: 'User satisfaction form'
 description: 'The form displayed at the end of multi-page contact forms.'
 category: Feedback
-elements: "service:\n  '#type': hidden\n  '#title': Service\n  '#value': Website\npage_url:\n  '#type': hidden\n  '#title': 'Page url'\n  '#value': '[current-page:url:unaliased:absolute]'\nsatisfaction:\n  '#type': radios\n  '#title': 'How did you feel about this service?'\n  '#options':\n    2: 'Very satisfied'\n    1: Satisfied\n    0: 'Neither satisfied or dissatisfied'\n    -1: Dissatisfied\n    -2: 'Very dissatisfied'\n  '#required': true\nmessage:\n  '#type': textarea\n  '#title': 'How could we improve this service?'\n  '#description': 'Please don&#39;t include any personal information.'\n  '#required': true\n"
+elements: "service:\n  '#type': hidden\n  '#title': Service\n  '#default_value': Website\npage_url:\n  '#type': hidden\n  '#title': 'Page url'\n  '#default_value': '[current-page:url:unaliased:absolute]'\nsatisfaction:\n  '#type': radios\n  '#title': 'How did you feel about this service?'\n  '#options':\n    2: 'Very satisfied'\n    1: Satisfied\n    0: 'Neither satisfied or dissatisfied'\n    -1: Dissatisfied\n    -2: 'Very dissatisfied'\n  '#required': true\nmessage:\n  '#type': textarea\n  '#title': 'How could we improve this service?'\n  '#description': 'Please don&#39;t include any personal information.'\n  '#required': true\n"
 css: ''
 javascript: ''
 settings:
@@ -19,6 +20,7 @@ settings:
   page: false
   page_submit_path: ''
   page_confirm_path: ''
+  form_title: both
   form_submit_once: true
   form_exception_message: ''
   form_open_message: ''
@@ -26,6 +28,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
+  form_remote_addr: true
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
@@ -34,23 +37,44 @@ settings:
   form_reset: false
   form_disable_autocomplete: false
   form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
   form_unsaved: false
   form_disable_back: false
   form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
-  form_login: false
-  form_login_message: ''
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
   submission_label: ''
   submission_log: false
+  submission_views: {  }
+  submission_views_replace: {  }
   submission_user_columns: {  }
-  submission_login: false
-  submission_login_message: ''
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
   submission_exception_message: ''
+  submission_locked_message: ''
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
   wizard_progress_bar: true
   wizard_progress_pages: false
   wizard_progress_percentage: false
+  wizard_progress_link: false
   wizard_start_label: ''
+  wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
   wizard_track: ''
@@ -61,6 +85,7 @@ settings:
   preview_attributes: {  }
   preview_excluded_elements: {  }
   preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
   draft: none
   draft_multiple: false
   draft_auto_save: false
@@ -74,12 +99,16 @@ settings:
   confirmation_back: false
   confirmation_back_label: ''
   confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
   limit_total: null
   limit_total_interval: null
   limit_total_message: ''
+  limit_total_unique: false
   limit_user: null
   limit_user_interval: null
   limit_user_message: ''
+  limit_user_unique: false
   entity_limit_total: null
   entity_limit_total_interval: null
   entity_limit_user: null
@@ -89,14 +118,6 @@ settings:
   results_disabled: false
   results_disabled_ignore: false
   token_update: false
-  form_disable_inline_errors: false
-  form_required: false
-  submission_locked_message: ''
-  autofill: false
-  autofill_message: ''
-  autofill_excluded_elements: {  }
-  confirmation_exclude_query: false
-  confirmation_exclude_token: false
 access:
   create:
     roles:
@@ -136,6 +157,14 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
 handlers:
   email:
     id: email
@@ -153,14 +182,15 @@ handlers:
       cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
-      from_mail: default
+      from_mail: _default
       from_options: {  }
-      from_name: default
+      from_name: _default
       subject: 'User satisfaction response from [site:url-brief] [webform_submission:values:service] service'
       body: "<p>This is a user satisfaction form response from <a href=\"{{ webform_token('[site:url]', webform_submission) }}\">{{ webform_token('[site:url-brief]', webform_submission) }}</a></p>\r\n<p>Submitted on {{ webform_token('[webform_submission:created]', webform_submission) }}</p>\r\n{{ webform_token('[webform_submission:values]', webform_submission) }}\r\n"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
+      exclude_empty_checkbox: false
       html: true
       attachments: false
       twig: true
@@ -169,3 +199,5 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
+      theme_name: ''
+uuid: ea6fedd7-947a-4f5c-af85-2fb5b508d584

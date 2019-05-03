@@ -3,7 +3,7 @@
   Drupal.behaviors.fsaAddToAny = {
     attach: function (context, settings) {
 
-      $('a.addtoany_share_save', context).html(Drupal.t('Share')).removeClass('ext');
+      $('a.addtoany_share', context).html(Drupal.t('Share')).removeClass('ext');
 
     }
   };

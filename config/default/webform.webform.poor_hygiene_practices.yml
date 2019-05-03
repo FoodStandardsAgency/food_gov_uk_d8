@@ -1,16 +1,17 @@
-uuid: 44d9cddb-52f5-4816-b2d1-bb99a4f5ea5f
 langcode: en
 status: open
 dependencies: {  }
 open: null
 close: null
+weight: 0
 uid: 1
 template: false
+archive: false
 id: poor_hygiene_practices
 title: 'Report poor hygiene practices'
 description: 'Poor hygiene practices report form'
 category: 'Food problem'
-elements: "business:\n  '#type': webform_wizard_page\n  '#title': Business\n  where_lookup:\n    '#type': webform_googleplace\n    '#title': 'Where did you notice poor hygiene practices?'\n    '#description': '<p>Enter the name and address of the UK business where you noticed poor food hygiene and select from the dropdown list.</p>'\n    '#required': true\n  fsa_establishment_la_name:\n    '#type': hidden\n    '#title': 'Local authority name'\n  fsa_establishment_postal_code:\n    '#type': hidden\n    '#title': 'Postal code'\n  fsa_establishment_la_email:\n    '#type': textfield\n    '#title': 'Local authority email'\n    '#help': 'Use the <em>Find a food safety team</em> lookup, below. Enter a local authority email. Check <em>Manually sent to local authority</em>. Continue and save. Visit the <em>Resend</em> tab, above, to send the data.'\n    '#access_create_roles': {  }\n    '#access_update_roles':\n      - fsa_admin\n      - administrator\n    '#access_view_roles':\n      - fsa_admin\n      - administrator\n  fsa_establishment_la_email_overridden:\n    '#type': hidden\n    '#title': 'Local authority email overridden'\n  fsa_establishment_la_email_alt:\n    '#type': hidden\n    '#title': 'Local authority alternative email'\n  manually_sent:\n    '#type': checkbox\n    '#title': 'Manually sent to local authority'\n    '#access_create_roles': {  }\n    '#access_update_roles':\n      - fsa_admin\n      - administrator\n    '#access_view_roles':\n      - fsa_admin\n      - administrator\nextra_business_info:\n  '#type': webform_wizard_page\n  '#title': extra_business_info\n  '#states':\n    invisible:\n      ':input[name=\"where_lookup\"]':\n        value:\n          pattern: '((\\D[0-9]{1,2})|((\\D\\D[0-9]{1,2})|((\\D[0-9]\\D)|(\\D\\D[0-9]?\\D]))))(| )[0-9]\\D{2}'\n  processed_text:\n    '#type': processed_text\n    '#text': \"<h4><strong>Information about the food business</strong></h4>\\r\\n\\r\\n<p>Please provide extra information about the food business. This will help us send your report to the correct local authority who will investigate further.</p>\\r\\n\\r\\n<ul>\\r\\n\\t<li>If you used an online delivery service such as Just Eat or Deliveroo, please provide the address of the restaurant the food came from.&nbsp;</li>\\r\\n\\t<li>If you bought the food online from a supermarket such as Tesco or Morrisons, please provide the delivery postcode or the address of a branch of the supermarket near to where you live.</li>\\r\\n\\t<li>If you bought the food from a business that only operates online, or on social media, &nbsp;please provide the business name and town or city where they operate, or the delivery postcode.</li>\\r\\n</ul>\\r\\n\\r\\n<p>You can only report businesses based in the UK. If you bought the food in another country (including at an airport outside the UK) or it was sent to you from another country, you should contact the relevant authorities in that country.</p>\\r\\n\"\n    '#format': full_html\n  business_name:\n    '#type': textfield\n    '#title': 'Business name'\n    '#required': true\n  street:\n    '#type': textfield\n    '#title': Street\n  town_or_city:\n    '#type': textfield\n    '#title': 'Town or city'\n    '#required': true\n  postcode:\n    '#type': textfield\n    '#title': Postcode\npage_about:\n  '#type': webform_wizard_page\n  '#title': Description\n  what_noticed:\n    '#type': textarea\n    '#title': 'What have you noticed?'\n    '#description': 'Please give us as much detail as possible to help investigate the issue.'\n    '#required': true\n  when_noticed:\n    '#type': textfield\n    '#title': 'When did you notice this?'\n    '#required': true\ncontact_details:\n  '#type': webform_wizard_page\n  '#title': 'Contact details'\n  header_contact_info:\n    '#type': webform_markup\n    '#markup': \"<h3>Your contact details</h3>\\r\\n\\r\\n<p>This information will only be used by the local authority to contact you about your issue, and to send you a confirmation email about your report. To fully investigate the issue it may be necessary to contact you to seek clarification.</p>\"\n  name:\n    '#type': textfield\n    '#title': 'Full name'\n  email:\n    '#type': email\n    '#title': 'Email address'\n    '#required': true\n  telephone:\n    '#type': tel\n    '#title': 'Phone number'\n  fsa_privacy_link_rafp:\n    '#type': webform_markup\n  captcha:\n    '#type': captcha\n"
+elements: "business:\n  '#type': webform_wizard_page\n  '#title': Business\n  where_lookup:\n    '#type': webform_googleplace\n    '#title': 'Where did you notice poor hygiene practices?'\n    '#description': '<p>Enter the name and address of the UK business where you noticed poor food hygiene and select from the dropdown list.</p>'\n    '#required': true\n  fsa_establishment_la_name:\n    '#type': hidden\n    '#title': 'Local authority name'\n  fsa_establishment_postal_code:\n    '#type': hidden\n    '#title': 'Postal code'\n  fsa_establishment_la_email:\n    '#type': textfield\n    '#title': 'Local authority email'\n    '#help': 'Use the <em>Find a food safety team</em> lookup, below. Enter a local authority email. Check <em>Manually sent to local authority</em>. Continue and save. Visit the <em>Resend</em> tab, above, to send the data.'\n    '#access_create_roles': {  }\n    '#access_update_roles':\n      - fsa_admin\n      - administrator\n    '#access_view_roles':\n      - fsa_admin\n      - administrator\n  fsa_establishment_la_email_overridden:\n    '#type': hidden\n    '#title': 'Local authority email overridden'\n  fsa_establishment_la_email_alt:\n    '#type': hidden\n    '#title': 'Local authority alternative email'\n  manually_sent:\n    '#type': checkbox\n    '#title': 'Manually sent to local authority'\n    '#access_create_roles': {  }\n    '#access_update_roles':\n      - fsa_admin\n      - administrator\n    '#access_view_roles':\n      - fsa_admin\n      - administrator\npage_about:\n  '#type': webform_wizard_page\n  '#title': Description\n  what_noticed:\n    '#type': textarea\n    '#title': 'What have you noticed?'\n    '#description': 'Please give us as much detail as possible to help investigate the issue.'\n    '#required': true\n  when_noticed:\n    '#type': textfield\n    '#title': 'When did you notice this?'\n    '#required': true\ncontact_details:\n  '#type': webform_wizard_page\n  '#title': 'Contact details'\n  header_contact_info:\n    '#type': webform_markup\n    '#markup': \"<h3>Your contact details</h3>\\r\\n\\r\\n<p>This information will only be used by the local authority to contact you about your issue, and to send you a confirmation email about your report. To fully investigate the issue it may be necessary to contact you to seek clarification.</p>\"\n  name:\n    '#type': textfield\n    '#title': 'Full name'\n  email:\n    '#type': email\n    '#title': 'Email address'\n    '#required': true\n  telephone:\n    '#type': tel\n    '#title': 'Phone number'\n  fsa_privacy_link_rafp:\n    '#type': webform_markup\n  captcha:\n    '#type': captcha\n"
 css: ''
 javascript: ''
 settings:
@@ -19,6 +20,7 @@ settings:
   page: true
   page_submit_path: help/report-food-problem/poor-hygiene
   page_confirm_path: help/report-food-problem/poor-hygiene/summary
+  form_title: both
   form_submit_once: true
   form_exception_message: ''
   form_open_message: ''
@@ -26,6 +28,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
+  form_remote_addr: true
   form_convert_anonymous: false
   form_prepopulate: true
   form_prepopulate_source_entity: false
@@ -41,10 +44,15 @@ settings:
   form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
-  form_login: false
-  form_login_message: ''
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
   submission_label: ''
   submission_log: false
+  submission_views: {  }
+  submission_views_replace: {  }
   submission_user_columns:
     - element__what_noticed
     - element__where_lookup
@@ -55,17 +63,27 @@ settings:
     - element__name
     - element__email
     - element__telephone
-  submission_login: false
-  submission_login_message: ''
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
   submission_exception_message: ''
   submission_locked_message: ''
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  previous_submission_message: ''
+  previous_submissions_message: ''
   autofill: false
   autofill_message: ''
   autofill_excluded_elements: {  }
   wizard_progress_bar: false
   wizard_progress_pages: true
   wizard_progress_percentage: false
+  wizard_progress_link: false
   wizard_start_label: ''
+  wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
   wizard_track: name
@@ -82,6 +100,7 @@ settings:
     fsa_establishment_la_email_alt: fsa_establishment_la_email_alt
     manually_sent: manually_sent
   preview_exclude_empty: false
+  preview_exclude_empty_checkbox: false
   draft: none
   draft_multiple: false
   draft_auto_save: false
@@ -100,9 +119,11 @@ settings:
   limit_total: null
   limit_total_interval: null
   limit_total_message: ''
+  limit_total_unique: false
   limit_user: null
   limit_user_interval: null
   limit_user_message: ''
+  limit_user_unique: false
   entity_limit_total: null
   entity_limit_total_interval: null
   entity_limit_user: null
@@ -155,6 +176,10 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
 handlers:
   copy_of_report:
     id: email
@@ -172,14 +197,15 @@ handlers:
       cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
-      from_mail: default
+      from_mail: _default
       from_options: {  }
-      from_name: default
+      from_name: _default
       subject: 'Thank you for reporting a food problem'
       body: "{% if (webform_token('[webform_submission:values:where_lookup:value]', webform_submission) is empty) or (webform_token('[webform_submission:values:fsa_establishment_la_name:value]', webform_submission) is empty) %}\r\n  <p>Thank you for your report. It has been forwarded to the relevant Local Authority.</p>\r\n{% else %}\r\n  <p>Thank you for reporting a food problem at: {{ webform_token('[webform_submission:values:where_lookup:value]', webform_submission) }}</p>\r\n  <p>Your report has been forwarded to {{ webform_token('[webform_submission:values:fsa_establishment_la_name:value]', webform_submission) }} Council</p>\r\n  <p>Please do not reply to this email.</p>\r\n{% endif %}\r\n"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
+      exclude_empty_checkbox: false
       html: true
       attachments: false
       twig: true
@@ -188,6 +214,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
+      theme_name: ''
   copy_to_la:
     id: email
     label: 'Copy to local authority'
@@ -215,7 +242,7 @@ handlers:
       bcc_options: {  }
       from_mail: report@food.gov.uk
       from_options: {  }
-      from_name: default
+      from_name: _default
       subject: 'This is a food problem report from a consumer via beta.food.gov.uk'
       body: "<p>This is a food problem report from <strong><a href=\"[current-page:url:unaliased:absolute]\">[current-page:title]</a></strong> via beta.food.gov.uk.&nbsp;</p>\r\n\r\n<div>[webform_submission:values]</div>\r\n\r\n<p>Please do not reply to this email.</p>\r\n\r\n<p>Protect privacy: make sure you keep the information in this email appropriately secure and only use it for the purpose of investigating the complaint against the food business. If this issue is for another local authority to consider and take appropriate action, please securely share the information in this email with that local authority. Ensure that the personal details of the person who made the complaint are not revealed to the food business.</p>"
       excluded_elements:
@@ -227,6 +254,7 @@ handlers:
         manually_sent: manually_sent
       ignore_access: true
       exclude_empty: true
+      exclude_empty_checkbox: false
       html: true
       attachments: false
       twig: false
@@ -235,6 +263,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
+      theme_name: ''
   remove_personal_data:
     id: action
     label: 'Remove personal data'
@@ -279,7 +308,7 @@ handlers:
       bcc_options: {  }
       from_mail: report@food.gov.uk
       from_options: {  }
-      from_name: default
+      from_name: _default
       subject: 'This is a food problem report from a consumer via beta.food.gov.uk'
       body: "<p>This is a food problem report from <strong><a href=\"[current-page:url:unaliased:absolute]\">[current-page:title]</a></strong> via beta.food.gov.uk.&nbsp;</p>\r\n\r\n<div>[webform_submission:values]</div>\r\n\r\n<p>Please do not reply to this email.</p>\r\n\r\n<p>Protect privacy: make sure you keep the information in this email appropriately secure and only use it for the purpose of investigating the complaint against the food business. If this issue is for another local authority to consider and take appropriate action, please securely share the information in this email with that local authority. Ensure that the personal details of the person who made the complaint are not revealed to the food business.</p>"
       excluded_elements:
@@ -291,6 +320,7 @@ handlers:
         manually_sent: manually_sent
       ignore_access: true
       exclude_empty: true
+      exclude_empty_checkbox: false
       html: true
       attachments: false
       twig: false
@@ -299,3 +329,5 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
+      theme_name: ''
+uuid: 44d9cddb-52f5-4816-b2d1-bb99a4f5ea5f
