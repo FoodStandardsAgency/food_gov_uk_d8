@@ -5,3 +5,37 @@ display:
       footer:
         area_text_custom:
           content: "<div class=\"link-to-archieve\">\r\n<span>Newyddion a rhybuddion blaenorol</span> <a href=\"http://webarchive.nationalarchives.gov.uk/20171207145352/https://www.food.gov.uk/news-updates/news\">Archifau Cenedlaethol</a>\r\n</div>"
+        result:
+          content: '<span class="search-result-page-count"> Yn dangos @start-@end o @total</span>'
+      exposed_form:
+        options:
+          submit_button: Chwilio
+          reset_button_label: 'Ail gychwyn'
+          exposed_sorts_label: 'Didoli yn ôl'
+          sort_asc_label: Esgyn
+          sort_desc_label: Disgyn
+          text_input_required: 'Dewiswch unrhyw hidlydd a chliciwch ar Apply i weld y canlyniadau'
+      pager:
+        options:
+          tags:
+            previous: '‹ Blaenorol'
+            next: 'Nnesaf ›'
+          expose:
+            items_per_page_label: 'Eitemau fesul tudalen'
+            items_per_page_options_all_label: '- I gyd -'
+            offset_label: Gwrthbwyso
+      filters:
+        keyword:
+          expose:
+            label: Chwilio
+        news_type:
+          expose:
+            label: Math
+        nation:
+          expose:
+            label: Rhanbarth
+      header:
+        result:
+          content: '<h2 class="visually-hidden">Canlyniadau chwilio</h2><div class="visually-hidden" aria-live="polite">Dangos @start-@end o @total gyda hidlwyr cyfredol</div>'
+  page_1:
+    display_title: Tudalen
