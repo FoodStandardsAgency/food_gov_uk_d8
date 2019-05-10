@@ -83,13 +83,14 @@ class FsaConsultationNormalizer extends NormalizerBase {
     $consultation_close_date = $object->get('field_consultation_closing_date')->first();
 
     $data = [
-      // See comments on the mapping in the index plugin fore news content type.
-      'news_type' => $type_field->entity ? $type_field->entity->label() : NULL,
+      // See comments on the mapping in the index plugin for news content type.
+      //'news_type' => $this->getTranslatedLabel($type_field->entity),
+      'news_type' => $this->getTranslatedLabel($type_field->entity),
       'status' => (bool) $object->get('field_status')->value,
       'responses_published' => ($object->get('field_consultation_summary')->count() > 0),
       'consultation_start_date' => $consultation_start_date ? $consultation_start_date->date->format(DATETIME_DATETIME_STORAGE_FORMAT) : NULL,
       'consultation_close_date' => $consultation_close_date ? $consultation_close_date->date->format(DATETIME_DATETIME_STORAGE_FORMAT) : NULL,
-      'name' => $object->label(),
+      'name' => $this->getTranslatedLabel($object),
       'body' => implode(' ', [
         $this->prepareTextualField($object->get('field_intro')->value),
         $this->prepareTextualField($object->get('body')->value),
@@ -97,7 +98,7 @@ class FsaConsultationNormalizer extends NormalizerBase {
       'nation' => array_map(function ($item) {
         return [
           'id' => $item->id(),
-          'label' => $item->label(),
+          'label' => $this->getTranslatedLabel($item),
         ];
       }, $object->get('field_nation')->referencedEntities()),
       'created' => $entity_dates['created'],

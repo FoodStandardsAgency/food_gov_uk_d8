@@ -72,7 +72,7 @@ class FsaNewsNormalizer extends NormalizerBase {
     $data = [
       // See comments on the mapping in the index plugin fore news content type.
       'news_type' => $this->t('News'),
-      'name' => $object->label(),
+      'name' => $this->getTranslatedLabel($object),
       'body' => implode(' ', [
         $this->prepareTextualField($object->get('field_intro')->value),
         $this->prepareTextualField($object->get('body')->value),
@@ -80,7 +80,7 @@ class FsaNewsNormalizer extends NormalizerBase {
       'nation' => array_map(function ($item) {
         return [
           'id' => $item->id(),
-          'label' => $item->label(),
+          'label' => $this->getTranslatedLabel($item),
         ];
       }, $object->get('field_nation')->referencedEntities()),
       'created' => $entity_dates['created'],
