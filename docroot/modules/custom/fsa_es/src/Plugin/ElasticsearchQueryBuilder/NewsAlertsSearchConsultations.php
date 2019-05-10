@@ -177,7 +177,7 @@ class NewsAlertsSearchConsultations extends SitewideSearchBase {
           'aggs' => [
             'type' => [
               'terms' => [
-                'field' => 'news_type',
+                'field' => 'news_type.keyword',
                 'order' => ['_term' => 'asc'],
                 'size' => 10000,
               ],
