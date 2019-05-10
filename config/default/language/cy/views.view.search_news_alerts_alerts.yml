@@ -6,23 +6,23 @@ display:
         area_text_custom:
           content: "<div class=\"link-to-archieve\">\r\n<span>Newyddion a rhybuddion blaenorol</span> <a href=\"http://webarchive.nationalarchives.gov.uk/20171207145352/https://www.food.gov.uk/news-updates/news\">Archifau Cenedlaethol</a>\r\n</div>"
         result:
-          content: '<span class="search-result-page-count"> Yn dangos @start-@end o @total</span>'
+          content: '<span class="search-result-page-count">Dangos @start-@end o @total</span>'
       exposed_form:
         options:
           submit_button: Chwilio
-          reset_button_label: 'Ail gychwyn'
-          exposed_sorts_label: 'Didoli yn ôl'
-          sort_asc_label: Esgyn
-          sort_desc_label: Disgyn
-          text_input_required: 'Dewiswch unrhyw hidlydd a chliciwch ar Apply i weld y canlyniadau'
+          reset_button_label: Ailosod
+          exposed_sorts_label: 'Trefnu yn ôl'
+          sort_asc_label: Esgynnol
+          sort_desc_label: Disgynnol
+          text_input_required: 'Dewiswch unrhyw hidlydd a chlicio ar ‘Chwilio’ i weld y canlyniadau'
       pager:
         options:
           tags:
             previous: '‹ Blaenorol'
-            next: 'Nnesaf ›'
+            next: 'Nesaf ›'
           expose:
             items_per_page_label: 'Eitemau fesul tudalen'
-            items_per_page_options_all_label: '- I gyd -'
+            items_per_page_options_all_label: '- Pob un -'
             offset_label: Gwrthbwyso
       filters:
         keyword:
@@ -36,6 +36,6 @@ display:
             label: Rhanbarth
       header:
         result:
-          content: '<h2 class="visually-hidden">Canlyniadau chwilio</h2><div class="visually-hidden" aria-live="polite">Dangos @start-@end o @total gyda hidlwyr cyfredol</div>'
+          content: '<h2 class="visually-hidden">Canlyniadau chwilio</h2><div class="visually-hidden" aria-live="polite">Dangos @start-@end o @total gyda’r hidlyddion chwilio presennol</div>'
   page_1:
     display_title: Tudalen

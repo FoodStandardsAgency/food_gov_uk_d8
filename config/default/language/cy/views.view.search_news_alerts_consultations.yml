@@ -8,7 +8,7 @@ display:
             label: Chwilio
         news_type:
           expose:
-            label: 'Math o archwiliad'
+            label: Math
         consultation_status:
           expose:
             label: Statws
@@ -18,20 +18,28 @@ display:
         consultation_year:
           expose:
             label: Blwyddyn
+          group_info:
+            label: Blwyddyn
+            description: ''
         nation:
           expose:
             label: Rhanbarth
       header:
         result:
-          content: '<h2 class="visually-hidden">Canlyniadau chwilio</h2><div class="visually-hidden" aria-live="polite">Dangos @start-@end o @total gyda’r dewisiadau hidlo presennol</div>'
+          content: '<h2 class="visually-hidden">Canlyniadau chwilio</h2><div class="visually-hidden" aria-live="polite">Dangos @start-@end o @total gyda’r hidlyddion chwilio presennol</div>'
       footer:
         result:
-          content: '<span class="search-result-page-count">Yn dangos @start-@end o @total</span>'
+          content: '<span class="search-result-page-count">Dangos @start-@end o @total</span>'
         area_text_custom:
           content: "<div class=\"link-to-archieve\">\r\n<span>Ymgynghoriadau blaenorol</span> <a href=\"http://webarchive.nationalarchives.gov.uk/20171207145535/https://www.food.gov.uk/news-updates/consultations/search\">Archifau Cenedlaethol</a>\r\n</div>"
       exposed_form:
         options:
           submit_button: Chwilio
+          reset_button_label: Ailosod
+          exposed_sorts_label: 'Trefnu yn ôl'
+          sort_asc_label: Esgynnol
+          sort_desc_label: Disgynnol
+          text_input_required: 'Dewiswch unrhyw hidlydd a chlicio ar ‘Chwilio’ i weld y canlyniadau'
       pager:
         options:
           tags:
@@ -39,3 +47,8 @@ display:
             next: 'Nesaf ›'
             first: '« Gyntaf'
             last: 'Diwethaf »'
+          expose:
+            items_per_page_label: 'Eitemau fesul tudalen'
+            items_per_page_options_all_label: '- Pob un -'
+  page_1:
+    display_title: Tudalen
