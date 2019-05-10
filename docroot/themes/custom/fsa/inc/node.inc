@@ -14,6 +14,7 @@ function fsa_preprocess_node(&$variables) {
 
   // Set vars for easy access.
   $node = $variables['node'];
+  $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
   if ($variables['teaser']) {
     // Override title if it is set on the respective field.
@@ -53,12 +54,10 @@ function fsa_preprocess_node(&$variables) {
 
       case 'consultation':
         if ($node->hasField('field_consultations_type')) {
-          $tag = $node->field_consultations_type->view([
-            'label' => 'hidden',
-            'settings' => [
-              'link' => FALSE,
-            ],
-          ]);
+          $field = $node->get('field_consultations_type')->entity;
+          $tag = $field->hasTranslation($lang)
+            ? $field->getTranslation($lang)->label()
+            : $field->label();
         }
         break;
 
