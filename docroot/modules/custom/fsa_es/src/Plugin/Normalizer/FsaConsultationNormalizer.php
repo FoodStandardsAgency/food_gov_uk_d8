@@ -84,7 +84,6 @@ class FsaConsultationNormalizer extends NormalizerBase {
 
     $data = [
       // See comments on the mapping in the index plugin for news content type.
-      //'news_type' => $this->getTranslatedLabel($type_field->entity),
       'news_type' => $this->getTranslatedLabel($type_field->entity),
       'status' => (bool) $object->get('field_status')->value,
       'responses_published' => ($object->get('field_consultation_summary')->count() > 0),
