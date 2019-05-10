@@ -74,7 +74,7 @@ class FsaResearchNormalizer extends NormalizerBase {
     }
 
     $data = [
-      'name' => $object->label(),
+      'name' => $this->getTranslatedLabel($object),
       'project_code' => $object->get('field_research_project_code')->value,
       'body' => implode(' ', [
         $this->prepareTextualField($object->get('field_intro')->value),
@@ -83,13 +83,13 @@ class FsaResearchNormalizer extends NormalizerBase {
       'topics' => array_map(function ($item) {
         return [
           'id' => $item->id(),
-          'label' => $item->label(),
+          'label' => $this->getTranslatedLabel($item),
         ];
       }, $object->get('field_research_topics')->referencedEntities()),
       'nation' => array_map(function ($item) {
         return [
           'id' => $item->id(),
-          'label' => $item->label(),
+          'label' => $this->getTranslatedLabel($item),
         ];
       }, $object->get('field_nation')->referencedEntities()),
       'created' => $entity_dates['created'],

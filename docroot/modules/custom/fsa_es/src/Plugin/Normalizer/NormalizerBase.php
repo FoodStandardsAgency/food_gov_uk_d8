@@ -9,6 +9,8 @@ use Drupal\serialization\Normalizer\ContentEntityNormalizer;
  */
 class NormalizerBase extends ContentEntityNormalizer {
 
+  protected $lang;
+
   /**
    * Prepares textual field (strips tags, removes newlines).
    *
@@ -29,9 +31,30 @@ class NormalizerBase extends ContentEntityNormalizer {
   }
 
   /**
+   * If there's a translated label for the passed entity, return it.
+   * Assumes $lang is set before hand so should be called in
+   * the normalize() function of sub class.
+   *
+   * @param $entity
+   *   The entity to get the label from.
+   *
+   * @return string || NULL
+   *   The translated string if found.
+   */
+  public function getTranslatedLabel($entity) {
+    if ($entity) {
+      return $entity->hasTranslation($this->lang)
+        ? $entity->getTranslation($this->lang)->label()
+        : $entity->label();
+    }
+    return NULL;
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function normalize($object, $format = NULL, array $context = []) {
+    $this->lang = $object->get('langcode')->value;
     return [
       'entity_type' => $object->getEntityTypeId(),
     ];
