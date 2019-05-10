@@ -17,7 +17,7 @@ bundle: consultation
 label: Nation
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value:
   -
     target_uuid: 1d45c4ff-3bcf-4300-a94d-3202dd3cd7fa
