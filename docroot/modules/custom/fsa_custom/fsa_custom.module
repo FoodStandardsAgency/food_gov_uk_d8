@@ -119,6 +119,7 @@ function fsa_custom_preprocess_page_title(&$variables) {
   $is_admin = \Drupal::service('router.admin_context')->isAdminRoute();
   $route = \Drupal::routeMatch();
   $routename = $route->getParentRouteMatch()->getRouteName();
+  $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
   $entity = FALSE;
   if ($route->getParameter('node')) {
@@ -212,12 +213,10 @@ function fsa_custom_preprocess_page_title(&$variables) {
       }
       elseif ($nodetype == 'consultation' && $entity->field_consultations_type) {
         // Consultations display their consultation type taxonomy label.
-        $label = $entity->field_consultations_type->view([
-          'label' => 'hidden',
-          'settings' => [
-            'link' => FALSE,
-          ],
-        ]);
+        $field = $entity->get('field_consultations_type')->entity;
+        $label = $field->hasTranslation($lang)
+          ? $field->getTranslation($lang)->label()
+          : $field->label();
       }
       else {
         // Rest are fine displaying their content type human readable name.
