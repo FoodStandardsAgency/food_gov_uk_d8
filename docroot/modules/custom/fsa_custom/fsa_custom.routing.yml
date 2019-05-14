@@ -5,10 +5,21 @@ system.admin_config_fsa:
     _title: 'FSA configurations'
   requirements:
     _permission: 'access administration pages'
+
 fsa_custom.settings:
- path: '/admin/config/fsa/custom'
- defaults:
-   _title: 'FSA custom settings'
-   _form: '\Drupal\fsa_custom\Form\FsaSettings'
- requirements:
-   _permission: 'administer site configuration'
+  path: '/admin/config/fsa/custom'
+  defaults:
+    _title: 'FSA custom settings'
+    _form: '\Drupal\fsa_custom\Form\FsaSettings'
+  requirements:
+    _permission: 'administer site configuration'
+
+file.delete:
+  path: '/admin/content/files/delete/{fid}'
+  defaults:
+    _title: 'Confirm Deletion'
+    _form: '\Drupal\fsa_custom\Form\ConfirmDeleteFileForm'
+  requirements:
+    _permission: 'administer site configuration'
+    fid: ^\d+$
+
