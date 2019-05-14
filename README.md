@@ -1,6 +1,94 @@
 # Food Standards Agency
 
-Food Standards Agency (FSA) Drupal 8 site code repository.
+Welcome to the repository of the *FSA* project. Thank you for choosing to work on this project.
+
+## Prerequisites.
+
+You'll need to be running [Docker](https://www.docker.com/) and the [Deeson Docker Proxy](https://github.com/teamdeeson/docker-proxy) to run this project locally.
+
+## Getting started.
+
+1. Clone the repo.
+2. `make install`
+3. `make start`
+4. Add a database dump e.g. 
+
+```
+drush @test sql-dump > test.sql
+pv test.sql | docker-compose exec -T mariadb mysql -udrupal -pdrupal drupal
+```
+
+6. Prepare the database for local usage `make update`
+5. Login for the first time `drush @docker uli`
+
+## Subsequent runs.
+
+1. Start Docker: `make start`
+2. Login: `drush @docker uli`
+
+## When done.
+
+Stop Docker to save resources: `make stop`
+
+## Updating this project.
+
+This project uses [Drush Make](https://docs.drush.org/en/7.x/make/) for pulling in dependencies.
+
+### Updating modules.
+
+Follow the normal advice on `https://www.drupal.org/docs/8/update/update-modules`
+
+i.e. `composer update drupal/modulename --with-dependencies`
+
+### Updating core.
+
+No special considerations for this project.
+
+`composer update drupal/drupal --with-dependencies`
+
+## Patching the project.
+
+Patches should be referenced from Drupal.org where possible. If you must make a patch file store it in the patches directory in the project root.
+
+Patches are then referenced in the `composer.json` file as in the extras -> patches section.
+
+```
+        "patches": {
+            "drupal/core": {
+                "Human readable issue descriptiobn": "https://www.drupal.org/files/uri-of-patch-file.patch",
+                ...
+```
+
+## Branching strategy.
+
+We use [GitFlow](https://www.deeson.co.uk/labs/using-git-flow-drupal-project) branching strategy on this project.
+
+You can merge into the UAT branch without a pull request to deploy your work to the dev site. 
+Don't finish the feature branch when you do this - feature branches are only finished when they have passed inspection
+on UAT and have at least one approved pull request and then merged into develop ready for the next release.
+
+## Hosting.
+
+This project is hosted on **Acquia**.
+
+## Deployment.
+
+The `bitbucket-pipelines.yml` file describes the build process which is execute on commit to specified branches in BitBucket.
+
+You must create a tag release before release.  The production environment should be tracking the latest tag release.
+Tag releases must only be cut from the master branch.
+
+## Environmental configuration management.
+
+This project uses:
+
+* Drupal 8's configuration management for exporting database artifacts to code.
+* An organised approach to [settings.php environmental variables](https://www.deeson.co.uk/labs/site-configuration-strategy-or-how-manage-your-settingsphp-files) via the `src/settings` directory.
+* Secure environment settings should not be in version control and managed via the hosting environment variables.
+
+## Jira project management.
+
+Tickets are managed in this [Jira project](https://deeson.atlassian.net/secure/RapidBoard.jspa?rapidView=332&projectKey=FSA)
 
 ## Site environments
 
@@ -9,71 +97,12 @@ Food Standards Agency (FSA) Drupal 8 site code repository.
 - Staging [http://fsauser:FCeDh4u&7n2p@foodgovukstg.prod.acquia-sites.com](http://foodgovukstg.prod.acquia-sites.com)
 - Dev: [http://fsauser:FCeDh4u&7n2p@foodgovukdev.prod.acquia-sites.com](http://foodgovukdev.prod.acquia-sites.com)
 
-### Continuous integration
-
-This project uses Acquia Pipelines to:
-
-- Monitor GitHub repository for new commits
-- Build the project
-- Run static analysis code checks on all custom code
-- Push to Acquia Cloud repository, but only if the branch is prefixed with `feature/`
-
-### Getting started
-
-#### Requirements
-
-
-- [Composer](https://getcomposer.org/)
-- [Docker](https://www.docker.com/get-started)
-- [DDEV](https://ddev.readthedocs.io/en/latest/)
-
-> NB: You'll need a database from the Acquia Cloud platform.
-
-```
-# Start ddev containers
-ddev start
-# Wait for docker images to pull/expand/start - could take up to 30 mins on first start dependent on bandwidth and system resources.
-# Don't worry, it's really fast after you've got the images.
-ddev import-db --src path-to-your-sql-file
-```
-
-See [docs/development.md](docs/development.md) for details of XDebug, Drush tooling as well as DDEV docs at https://ddev.readthedocs.io.
-
-## Project management
-
-Jira: https://wearesort.atlassian.net/secure/RapidBoard.jspa?rapidView=4&projectKey=FSA
-
-## Development workflow
-
-A simple branching model, summarised as
-
-- branch from `master`, use feature branches with `feature/foo` naming convention. Git push to origin at least once per day and allow CI to catch any errors.
-- PR for any code to be merged back into `master`
-- On code merge, On Demand Environments (ODEs) will be automatically decommissioned.
-
-## QA workflow
-
-- ODE should be created for feature branch. Project team to evaluate content based on this. The entire stack is cloned from prod: db, files but with your feature branch.
-
-## Releasing code
-
-> You need to use the Acquia Cloud CLI or UI
-
-- Prepare features
-  - Merge ODE code branches or candidate features into the staging environment, evaluate for stability.
-- Deploy to production
-  - Ensure that candidate feature branches have all merged into `master`
-  - Create a GitHub release tag (for our own tracking purposes)
-  - Deploy codebase from Acquia staging environment to production via the UI or CLI.
-  - Acquia Cloud will automatically create a new release tag (it uses its own naming convention, independent of the GitHub repo) and deploy code into production environment.
-
 ## FHRS Rating Search
 
 FHRS Establishment and authority data is pulled from [FHRS rating API](http://api.ratings.food.gov.uk) with Drupal Migrate API.
 
 - Refer to [fsa_ratings/README.md](/docroot/modules/custom/fsa_ratings/README.md) for entity documentation.
 - Refer to [fsa_ratings_import/README.md](/docroot/modules/custom/fsa_ratings_import/README.md) for import documentation.
-
 
 ## FSA Alerts API
 
@@ -82,7 +111,6 @@ FHRS Establishment and authority data is pulled from [FHRS rating API](http://ap
 Alert API data is imported to Drupal `alerts_allergen` taxonomy and `alert` nodes.
 
 - Refer to [fsa_alerts/README.md](/docroot/modules/custom/fsa_alerts/README.md) for documentation.
-
 
 ## FSA Ratings search / Elasticsearch
 
