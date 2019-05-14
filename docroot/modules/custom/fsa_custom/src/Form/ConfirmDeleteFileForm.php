@@ -18,8 +18,8 @@ use Drupal\Core\Form\ConfirmFormHelper;
 class ConfirmDeleteFileForm extends ConfirmFormBase {
 
   protected $file_entity;
-  const REDIRECT_ROUTE = 'view.files.page_1';
 
+  const FILE_LIST_VIEW_ROUTE = 'view.files.page_1';
 
   public function buildForm(array $form, FormStateInterface $form_state, $fid = NULL) {
     $this->file_entity = File::load($fid);
@@ -37,7 +37,7 @@ class ConfirmDeleteFileForm extends ConfirmFormBase {
 
     $form['#attributes']['class'][] = 'confirmation';
     $form[$this->getFormName()] = ['#type' => 'hidden', '#value' => 1];
-    $form['description'][ '#markup'] = t("Unable to load data for fid %fid.", ['%fid' => $fid]);
+    $form['description']['#markup'] = t("Unable to load data for fid %fid.", ['%fid' => $fid]);
 
     $form['actions'] = ['#type' => 'actions'];
     $form['actions']['cancel'] = ConfirmFormHelper::buildCancelLink($this, $this->getRequest());
@@ -48,16 +48,19 @@ class ConfirmDeleteFileForm extends ConfirmFormBase {
   }
 
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $form_state->setRedirect(ConfirmDeleteFileForm::REDIRECT_ROUTE);
-    if(isset($this->file_entity)) {
+    $form_state->setRedirect(ConfirmDeleteFileForm::FILE_LIST_VIEW_ROUTE);
+    if (isset($this->file_entity)) {
       if (file_exists($this->file_entity->getFileUri())) {
         $this->file_entity->delete();
       }
       else {
-        \Drupal::logger('file system')->error('Could not delete file "%path", file does not exist', ['%path' => $this->file_entity->getFileUri()]);
+        \Drupal::logger('file system')
+          ->error('Could not delete file "%path", file does not exist', ['%path' => $this->file_entity->getFileUri()]);
       }
-    } else {
-      \Drupal::logger('file system')->error('Could not delete file, unable to load file information from id');
+    }
+    else {
+      \Drupal::logger('file system')
+        ->error('Could not delete file, unable to load file information from id');
     }
 
   }
@@ -67,7 +70,7 @@ class ConfirmDeleteFileForm extends ConfirmFormBase {
   }
 
   public function getCancelUrl() {
-    return Url::fromRoute(ConfirmDeleteFileForm::REDIRECT_ROUTE);
+    return Url::fromRoute(ConfirmDeleteFileForm::FILE_LIST_VIEW_ROUTE);
   }
 
   public function getQuestion() {
@@ -77,18 +80,18 @@ class ConfirmDeleteFileForm extends ConfirmFormBase {
   public function getDescription() {
 
     $usages = \Drupal::service('file.usage')->listUsage($this->file_entity);
-    $usage_count = array_reduce($usages, function($acc, $v) {
-      $acc += array_reduce($v, function($acc, $v) {
-        $acc+= array_sum($v);
+    $usage_count = array_reduce($usages, function ($acc, $v) {
+      $acc += array_reduce($v, function ($acc, $v) {
+        $acc += array_sum($v);
         return $acc;
       });
       return $acc;
-    },0);
+    }, 0);
 
-    return t("You are about to delete file %filename. This file is used in %usage_count places. This action cannot be undone.", [
+    return t('You are about to delete file %filename. This file is used in @usage_count places. This action cannot be undone.', [
       '%filename' => $this->file_entity->getFilename(),
-      '%usage_count' => $usage_count,
-      ]);
+      '@usage_count' => $usage_count,
+    ]);
   }
 
 }
