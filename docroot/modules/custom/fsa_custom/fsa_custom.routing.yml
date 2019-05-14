@@ -20,6 +20,6 @@ file.delete:
     _title: 'Confirm Deletion'
     _form: '\Drupal\fsa_custom\Form\ConfirmDeleteFileForm'
   requirements:
-    _permission: 'administer site configuration'
+    _permission: 'access files overview'
     fid: ^\d+$
 
