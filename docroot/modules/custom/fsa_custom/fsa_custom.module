@@ -152,34 +152,55 @@ function fsa_custom_preprocess_page_title(&$variables) {
         $class = 'regional-variation';
         $nation_label = '';
 
-        if (!isset($nations[1])) {
-          // If only one nation selected.
-          $class .= ' regional-variation--' . strtolower(
-            Html::cleanCssIdentifier($nation1->getName())
-          );
-          $nation_label = t('@nation specific',
-            [
-              '@nation' => \Drupal::service('entity.repository')
-                ->getTranslationFromContext($nation1, $current_langcode)
-                ->name->value,
-            ]
-          );
-        }
+        switch (count($nations)) {
+          case 1:
+            // If only one nation selected.
+            $class .= ' regional-variation--' . strtolower(
+                Html::cleanCssIdentifier($nation1->getName())
+              );
+            $nation_label = t('@nation specific',
+              [
+                '@nation' => \Drupal::service('entity.repository')
+                  ->getTranslationFromContext($nation1, $current_langcode)
+                  ->name->value,
+              ]
+            );
+            break;
 
-        elseif (isset($nations[1]) && !isset($nations[2])) {
-          // If two nations are selected.
-          $class .= ' regional-variation--multi-regional';
+          case 2:
+            // If two nations are selected.
+            $class .= ' regional-variation--multi-regional';
 
-          // Load second nation.
-          $nation2 = Term::load($nations[1]->getValue()['target_id']);
+            // Load second nation.
+            $nation2 = Term::load($nations[1]->getValue()['target_id']);
 
-          $nation_label = t(
-            '@nation_1 and @nation_2 specific',
-            [
-              '@nation_1' => \Drupal::service('entity.repository')->getTranslationFromContext($nation1, $current_langcode)->name->value,
-              '@nation_2' => \Drupal::service('entity.repository')->getTranslationFromContext($nation2, $current_langcode)->name->value,
-            ]
-          );
+            $nation_label = t(
+              '@nation_1 and @nation_2 specific',
+              [
+                '@nation_1' => \Drupal::service('entity.repository')->getTranslationFromContext($nation1, $current_langcode)->name->value,
+                '@nation_2' => \Drupal::service('entity.repository')->getTranslationFromContext($nation2, $current_langcode)->name->value,
+              ]
+            );
+            break;
+
+          case 3:
+            // If two nations are selected.
+            $class .= ' regional-variation--multi-regional';
+
+            // Load second nation.
+            $nation2 = Term::load($nations[1]->getValue()['target_id']);
+            $nation3 = Term::load($nations[2]->getValue()['target_id']);
+
+            $nation_label = t(
+              '@nation_1, @nation_2 and @nation_3 specific',
+              [
+                '@nation_1' => \Drupal::service('entity.repository')->getTranslationFromContext($nation1, $current_langcode)->name->value,
+                '@nation_2' => \Drupal::service('entity.repository')->getTranslationFromContext($nation2, $current_langcode)->name->value,
+                '@nation_3' => \Drupal::service('entity.repository')->getTranslationFromContext($nation3, $current_langcode)->name->value,
+              ]
+            );
+            break;
+
         }
 
         if ($nation_label != '') {

@@ -1,0 +1,34 @@
+<?php
+
+use Drupal\taxonomy\Entity\Term;
+
+/**
+ * Adds Scotland to the Nation vocabulary.
+ */
+function fsa_custom_update_8001() {
+  $name = 'Scotland';
+  $vid = 'nation';
+  $terms = taxonomy_term_load_multiple_by_name($name, $vid);
+  if (!empty($terms)) {
+    $term = current($terms);
+  } else {
+    $term = Term::create([
+      'name' => $name,
+      'vid' => $vid,
+      'langcode' => 'en',
+    ]);
+    $term->save();
+  }
+
+  $langcode_translation = 'cy';
+  if (!$term->hasTranslation($langcode_translation)) {
+    $name = 'Yr Alban';
+    $term_cy = $term->addTranslation($langcode_translation,
+      [
+        'name' => $name,
+        'vid' => $vid,
+        'langcode' => $langcode_translation,
+      ]);
+    $term_cy->save();
+  }
+}
