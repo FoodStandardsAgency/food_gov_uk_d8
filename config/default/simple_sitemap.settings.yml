@@ -9,3 +9,7 @@ enabled_entity_types:
   - node
 _core:
   default_config_hash: vLpNUSWP3_hQSpn8ANG15lTltsrKYSu5khPSbspbWuQ
+default_variant: default
+xsl: false
+excluded_languages: {  }
+generate_duration: 10000
