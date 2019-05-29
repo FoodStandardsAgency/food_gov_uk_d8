@@ -72,3 +72,24 @@ function fsa_preprocess_field(&$variables) {
   }
 
 }
+
+/**
+ * Implements template_preprocess_form_element_label().
+ */
+function fsa_preprocess_form_element_label(&$vars) {
+  // Translate Region options to cy when necessary.
+  $langcode = 'cy';
+  if ((!empty($vars["element"]["#id"]))
+    && (strpos($vars["element"]["#id"], 'edit-region') === 0)
+    && (\Drupal::languageManager()->getCurrentLanguage()->getId() === $langcode)) {
+    $term_name = trim(strip_tags($vars["title"]["#markup"]));
+    if (($terms = \Drupal::entityTypeManager()
+        ->getStorage('taxonomy_term')
+        ->loadByProperties(['name' => $term_name]))
+      && ($term = current($terms))
+      && ($term->hasTranslation($langcode))
+      && ($term_tr = $term->getTranslation($langcode))) {
+      $vars["title"]["#markup"] = $term_tr->label();
+    }
+  }
+}
