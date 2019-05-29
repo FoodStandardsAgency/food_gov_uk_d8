@@ -14,7 +14,7 @@ services:
     class: Drupal\fsa_es\Plugin\Normalizer\FsaPageNormalizer
     tags:
       - { name: normalizer, priority: 50 }
-    arguments: ['@entity.manager', '@date.formatter']
+    arguments: ['@entity_type.manager', '@date.formatter']
 
   fsa_es.normalizer.fsa_news_normalizer:
     class: Drupal\fsa_es\Plugin\Normalizer\FsaNewsNormalizer
@@ -26,7 +26,7 @@ services:
     class: Drupal\fsa_es\Plugin\Normalizer\FsaAlertNormalizer
     tags:
       - { name: normalizer, priority: 50 }
-    arguments: ['@entity.manager', '@date.formatter']
+    arguments: ['@entity_type.manager', '@date.formatter']
 
   fsa_es.normalizer.fsa_consultation_normalizer:
     class: Drupal\fsa_es\Plugin\Normalizer\FsaConsultationNormalizer

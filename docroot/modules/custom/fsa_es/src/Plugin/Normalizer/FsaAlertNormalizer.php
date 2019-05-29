@@ -3,7 +3,7 @@
 namespace Drupal\fsa_es\Plugin\Normalizer;
 
 use Drupal\Core\Datetime\DateFormatterInterface;
-use Drupal\Core\Entity\EntityManagerInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
@@ -40,13 +40,13 @@ class FsaAlertNormalizer extends NormalizerBase {
   /**
    * FsaPageNormalizer constructor.
    *
-   * @param \Drupal\Core\Entity\EntityManagerInterface $entity_manager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   Entity manager interface.
    * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
    *   Date formatter interface.
    */
-  public function __construct(EntityManagerInterface $entity_manager, DateFormatterInterface $date_formatter) {
-    parent::__construct($entity_manager);
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, DateFormatterInterface $date_formatter) {
+    parent::__construct($entity_type_manager);
     $this->dateFormatter = $date_formatter;
   }
 
