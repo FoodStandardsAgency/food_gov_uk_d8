@@ -160,8 +160,8 @@ class FsaSettings extends FormBase {
       '#weight' => $weight++,
     ];
 
-    $entityManager = \Drupal::service('entity_field.manager');
-    $fields = $entityManager->getFieldStorageDefinitions('user', 'user');
+    $entityFieldManager = \Drupal::service('entity_field.manager');
+    $fields = $entityFieldManager->getFieldStorageDefinitions('user', 'user');
 
     $stats_fields = [
       'field_delivery_method' => t('Allergy alert delivery method'),

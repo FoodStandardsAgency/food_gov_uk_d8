@@ -72,7 +72,7 @@ class FsaNotifyStorage {
     }
 
     // Try to kill caches to prevent succumb to pressures of the memory.
-    \Drupal::entityManager()->getStorage('user')->resetCache();
+    \Drupal::entityTypeManager()->getStorage('user')->resetCache();
 
     return $notifications;
   }
@@ -175,7 +175,7 @@ class FsaNotifyStorage {
         $u->save();
       }
       $u = NULL;
-      \Drupal::entityManager()->getStorage('user')->resetCache();
+      \Drupal::entityTypeManager()->getStorage('user')->resetCache();
     }
   }
 

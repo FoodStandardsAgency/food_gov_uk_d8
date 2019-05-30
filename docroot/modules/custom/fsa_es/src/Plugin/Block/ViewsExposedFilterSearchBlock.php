@@ -57,7 +57,7 @@ class ViewsExposedFilterSearchBlock extends ViewsExposedFilterBlock {
     return new static(
       $configuration, $plugin_id, $plugin_definition,
       $container->get('views.executable'),
-      $container->get('entity.manager')->getStorage('view'),
+      $container->get('entity_type.manager')->getStorage('view'),
       $container->get('current_user'),
       $container->get('current_route_match')
     );
