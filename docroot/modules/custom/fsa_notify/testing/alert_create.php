@@ -8,7 +8,7 @@
 use Drupal\node\Entity\Node;
 use Drupal\Component\Utility\Random;
 
-$terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadTree('alerts_allergen', 0, 1);
+$terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('alerts_allergen', 0, 1);
 $terms = array_map(function ($t) {
   return $t->tid;
 }, $terms);

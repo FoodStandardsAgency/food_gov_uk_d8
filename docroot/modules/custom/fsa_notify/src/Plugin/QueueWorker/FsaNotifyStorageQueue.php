@@ -45,7 +45,7 @@ class FsaNotifyStorageQueue extends QueueWorkerBase implements ContainerFactoryP
     $plugin_definition
   ) {
     return new static(
-      $container->get('entity.manager')->getStorage('node'),
+      $container->get('entity_type.manager')->getStorage('node'),
       new FsaNotifyStorageDBConnection()
     );
   }

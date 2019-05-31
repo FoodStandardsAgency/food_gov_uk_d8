@@ -21,7 +21,7 @@ $methods = [
   'weekly',
 ];
 
-$terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadTree('alerts_allergen');
+$terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('alerts_allergen');
 $terms = array_map(function ($t) {
   return $t->tid;
 }, $terms);
