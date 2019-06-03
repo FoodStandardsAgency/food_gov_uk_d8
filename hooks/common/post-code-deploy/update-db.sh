@@ -46,7 +46,7 @@ if [ $target_env != "prod" ]; then
 
   # Force any potentially dangerous variables to update.
   drush @$site.$target_env sset fsa_notify.collect_send_log_only TRUE
-  drush @$site.$target_env fsa_notify.api test_key-6f00837a-4b8f-4ddd-ae96-ca2d3035fe57-cf19add9-e802-4fbf-8f92-dfb941ec8813
+  drush @$site.$target_env sset fsa_notify.api test_key-6f00837a-4b8f-4ddd-ae96-ca2d3035fe57-cf19add9-e802-4fbf-8f92-dfb941ec8813
 fi
 
 # Clear all caches.
