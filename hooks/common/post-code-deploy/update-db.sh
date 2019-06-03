@@ -24,13 +24,9 @@ case $target_env in
     echo "Dev deploy script"
     uri="foodgovukdev.prod.acquia-sites.com"
     ;;
-  "ode12" )
-    echo "ODE12 env"
-    uri="foodgovukode12.prod.acquia-sites.com"
-    ;;
-  "ode19" )
-    echo "ODE19 env"
-    uri="foodgovukode19.prod.acquia-sites.com"
+  "ode[0-9]+" )
+    echo "${target_env} deployment script"
+    uri="foodgovuk${target_env}.prod.acquia-sites.com"
     ;;
 esac
 
