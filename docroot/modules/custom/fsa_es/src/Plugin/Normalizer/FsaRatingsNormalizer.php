@@ -3,7 +3,6 @@
 namespace Drupal\fsa_es\Plugin\Normalizer;
 
 use Drupal\Core\Entity\ContentEntityBase;
-use Drupal\Core\Entity\EntityManager;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
@@ -28,16 +27,6 @@ class FsaRatingsNormalizer extends NormalizerBase {
    * @var array
    */
   protected $format = ['elasticsearch_helper'];
-
-  /**
-   * FsaRatingsNormalizer constructor.
-   *
-   * @param \Drupal\Core\Entity\EntityManager $entityManager
-   *   Entity manager object.
-   */
-  public function __construct(EntityManager $entityManager) {
-    parent::__construct($entityManager);
-  }
 
   /**
    * {@inheritdoc}
