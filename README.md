@@ -38,13 +38,24 @@ This project uses [Drush Make](https://docs.drush.org/en/7.x/make/) for pulling 
 
 Follow the normal advice on `https://www.drupal.org/docs/8/update/update-modules`
 
-i.e. `composer update drupal/modulename --with-dependencies`
+However, we want to run the composer command inside a docker container so use the following Make command. Note that you 
+will be prompted for the module name after running the make command, it does not need to be part of the Make command
+
+`make drupal-update-module`
 
 ### Updating core.
 
-No special considerations for this project.
+No special considerations for this project.  Just do it with the Make command below to make sure it happens 
+inside a docker container.
 
-`composer update drupal/drupal --with-dependencies`
+`make drupal-upgrade`
+
+### Adding a new module.
+
+Modules are added with a Make command. This uses composer inside a docker container for you.  There's no arguments on a 
+Make command, it will prompt you for the module name, e.g. to instal drupal/warden just type `warden` when asked. 
+
+`make drupal-add-module`
 
 ## Patching the project.
 
