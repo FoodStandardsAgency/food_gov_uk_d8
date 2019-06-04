@@ -66,7 +66,7 @@ Patches are then referenced in the `composer.json` file as in the extras -> patc
 ```
         "patches": {
             "drupal/core": {
-                "Human readable issue descriptiobn": "https://www.drupal.org/files/uri-of-patch-file.patch",
+                "Human readable issue description": "https://www.drupal.org/files/uri-of-patch-file.patch",
                 ...
 ```
 
@@ -74,9 +74,35 @@ Patches are then referenced in the `composer.json` file as in the extras -> patc
 
 We use [GitFlow](https://www.deeson.co.uk/labs/using-git-flow-drupal-project) branching strategy on this project.
 
-You can merge into the UAT branch without a pull request to deploy your work to the dev site. 
-Don't finish the feature branch when you do this - feature branches are only finished when they have passed inspection
-on UAT and have at least one approved pull request and then merged into develop ready for the next release.
+The UAT branch is used for work in progress and client demos.
+
+## Development workflow.
+
+1. Create a feature branch, from develop with a name that is lower case and includes the jira ticket number. The format
+   should be `git flow feature start feature/fsa-123--short-description`.
+
+2. You can merge into the UAT branch without a pull request to deploy your work to the dev site for testing.  When you
+   are happy then form a pull request against develop for another team member to review.  Do not merge at this point,
+   the code must not go to develop yet.
+ 
+3. Update the ticket and get the approval from the client testing on dev env (UAT).  Still don't finish the feature branch,
+   it still should not be in develop.  If the client is happy then the ticket moves to CAB approval.  A CAB justification
+   describing the change needs to be written and added to the ticket. A template for this is below in the README.
+   
+4. Feature branches should only be finished when they have passed FSA's CAB approval process.  When we have CAB approval 
+   approved pull request against develop, the feature branch can be merged into develop ready for the next release. This
+   releases the changed code to the test environment for any final review.
+   
+### Large pieces of work.
+
+For large pieces of work formed of several tickets it is better to form a separate release branch to merge tickets
+into and give that branch it's own environment on the Acquia server instead of using UAT on dev.  Pull requests can
+be formed from the difference between individual features and this new branch and can be reviewed and merged without
+CAB approval since they form part of a larger whole which will only be merged into develop once it is all completed.
+
+### UAT environment renewal.
+
+This branch can be destroyed and replaced with code from develop at any time to keep it fresh.
 
 ## Hosting.
 
