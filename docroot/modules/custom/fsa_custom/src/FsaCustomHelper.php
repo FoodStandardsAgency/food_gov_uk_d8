@@ -42,7 +42,8 @@ class FsaCustomHelper extends ControllerBase {
         break;
 
       case 'alerts':
-        $ent_id = 608;
+        $ent_id = 919;
+        $entity_type = 'node';
         break;
 
       default:
@@ -50,10 +51,11 @@ class FsaCustomHelper extends ControllerBase {
     }
 
     if ($ent_id) {
+      $entity_type = !empty($entity_type) ? $entity_type : 'media';
       $link = Link::createFromRoute(
         t('Privacy notice'),
-        'entity.media.canonical',
-        ['media' => $ent_id],
+        "entity.{$entity_type}.canonical",
+        [$entity_type => $ent_id],
         [
           'attributes' => [
             'class' => 'privacy-link ext',
