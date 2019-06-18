@@ -79,7 +79,7 @@ The UAT branch is used for work in progress and client demos.
 ## Development workflow.
 
 1. Create a feature branch, from develop with a name that is lower case and includes the jira ticket number. The format
-   should be `git flow feature start feature/fsa-123--short-description`.
+   should be `git flow feature start fsa-123--short-description` giving a feature branch name of `feature/fsa-123--short-description`
 
 2. You can merge into the UAT branch without a pull request to deploy your work to the dev site for testing.  When you
    are happy then form a pull request against develop for another team member to review.  Do not merge at this point,
@@ -130,7 +130,7 @@ Tickets are managed in this [Jira project](https://deeson.atlassian.net/secure/R
 ## Site environments
 
 - Production [www.food.gov.uk](https://www.food.gov.uk)
-  - Acquia Cloud domain: [http://foodgovuk.prod.acquia-sites.com](http://foodgovuk.prod.acquia-sites.com)
+- Acquia Cloud domain: [http://foodgovuk.prod.acquia-sites.com](http://foodgovuk.prod.acquia-sites.com)
 - Staging [http://fsauser:FCeDh4u&7n2p@foodgovukstg.prod.acquia-sites.com](http://foodgovukstg.prod.acquia-sites.com)
 - Dev: [http://fsauser:FCeDh4u&7n2p@foodgovukdev.prod.acquia-sites.com](http://foodgovukdev.prod.acquia-sites.com)
 
@@ -166,3 +166,45 @@ The specific variable values for host, username, password etc are managed throug
 **Values that contain a `$` character need a preceeding `\` escape character in Acquia, and docker-composer expects double-dollar `$$` to prevent variable substitution taking place.**
 
 > **Never store these - or other sensitive - values in the repository in a .env file, config export or otherwise. They could result in the SMTP service being used to handle or deliver spam**
+
+## CAB release statement.
+
+In order to get approval for a release you will need to provide the following on the Jirs ticket for the release:
+
+### Justification.
+
+The release contains the development work to implement the **Feature name** feature for the old.food.gov.uk website.
+
+*Short description of feature.*
+
+See [Link to Jira ticket] for full details.
+
+### Implementation plan.
+
+1. Merge the completed feature work in the develop branch into the master branch in the Acquia git version control repository
+
+2. Cut a new release tag from the master branch (version number will be **enter next release tag**)
+
+3. Backup the production database through the Acquia interface
+
+4. Trigger the Acquia release process specifying the new tag release number. This process switches the code on the production environment then runs through the post release script that ensures all database updates specified by the release are applied then clears all caches.
+
+### Risk and impact analysis.
+
+Very low risk to existing page content types on the site. The features have been tested on the preproduction environments during development.
+
+### Test plan.
+
+1. *Note any manual testing that may be required post release*
+
+### Back-out plan
+
+1. Roll back tag code release
+
+2. Restore last backup of the database
+
+### Documentation
+
+Description of the features provided by release **enter release version** are described in the Jira project management system for this project. The release notes are provided here (requires access to the project Jira):
+
+*Provide link to Jira release notes*

@@ -1,12 +1,12 @@
 {
-    "name": "Wundertools/Drupal-8",
-    "description": "Wundertools Drupal 8 Composer Project Template",
+    "name": "foodstandardsagency/food_gov_uk_d8",
+    "description": "Drupal 8 website for the UK Food Standards Agency www.food.gov.uk",
     "type": "project",
     "license": "GPL-2.0+",
     "authors": [
         {
-            "name": "",
-            "role": ""
+            "name": "Deeson",
+            "role": "Web Development Agency"
         }
     ],
     "repositories": [
@@ -106,7 +106,9 @@
         "drupal/mimemail": "1.x-dev",
         "drupal/http_cache_control": "^1.0",
         "drupal/warden": "^1.1",
-        "drupal/honeypot": "^1.29"
+        "drupal/honeypot": "^1.29",
+        "drupal/captcha": "^1.0@beta",
+        "drupal/recaptcha": "^2.4"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
