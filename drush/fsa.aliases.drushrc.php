@@ -56,8 +56,8 @@ $aliases['ode12'] = array(
 );
 
 if (!file_exists('/var/www/html/foodgovuk.ode12/docroot')) {
-  $aliases['ode19']['remote-host'] = 'foodgovukode12.ssh.prod.acquia-sites.com';
-  $aliases['ode19']['remote-user'] = 'foodgovuk.ode12';
+  $aliases['ode12']['remote-host'] = 'foodgovukode12.ssh.prod.acquia-sites.com';
+  $aliases['ode12']['remote-user'] = 'foodgovuk.ode12';
 }
 
 $aliases['ode19'] = array(
