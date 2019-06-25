@@ -167,6 +167,30 @@ The specific variable values for host, username, password etc are managed throug
 
 > **Never store these - or other sensitive - values in the repository in a .env file, config export or otherwise. They could result in the SMTP service being used to handle or deliver spam**
 
+## Two factor Authentication (TFA)
+
+The site uses the [TFA module](https://www.drupal.org/project/tfa) along with the [Google authenticator login](https://www.drupal.org/project/ga_login) to provide TFA via services such as Authy.
+The TFA module relies on **encryption profiles** from the [Encrypt module](https://www.drupal.org/project/encrypt) and encryption keys from the [Key module](https://www.drupal.org/project/key) .
+
+FSA goes one step further and stores these keys with a web service called [lockr](http://lockr.io).
+The TFA key is stored in Lockr and retrieved as necessary. The retrieval occurs via a REST API which authenticates requests with certificate.
+
+You can see the location of this certificate by logging into the prod/dev environment and navigating to **/admin/config/system/lockr** and selecting 'advanced'.
+Note that there are **separate certificates** for dev/production.
+
+#### Setup 
+- Enable the TFA in the TFA module settings: **/admin/config/people/tfa**
+Here you must also select an appropriate encryption profile from the available list.
+
+- If one is not available, you'll need to create one: **/admin/config/system/encryption/profiles**
+You'll need to select an Encryption key for the encryption profile to use.
+
+- If you don't have an encryption key, you'll need to create one at **/admin/config/system/keys**
+Ensure the key has type 'Lockr Encryption' and the Key provider is 'Lockr'
+
+Note that TFA is disabled on environments other thant **PROD/TEST** by **src/settings/02-tfa.settings.inc**
+
+
 ## CAB release statement.
 
 In order to get approval for a release you will need to provide the following on the Jirs ticket for the release:
