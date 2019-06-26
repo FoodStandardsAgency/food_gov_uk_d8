@@ -3,7 +3,30 @@ display:
     display_options:
       header:
         result:
-          content: '<h2 class="visually-hidden">Canlyniadau chwilio</h2><div class="visually-hidden" aria-live="polite">Dangos @start-@end o @total gyda’r dewisiadau hidlo presennol</div>'
+          content: '<h2 class="visually-hidden">Canlyniadau chwilio</h2><div class="visually-hidden" aria-live="polite">Dangos @start-@end o @total gyda’r hidlyddion chwilio presennol</div>'
       footer:
         result:
-          content: '<span class="search-result-page-count">Yn dangos @start-@end o @total</span>'
+          content: '<span class="search-result-page-count">Dangos @start-@end o @total</span>'
+      exposed_form:
+        options:
+          submit_button: Chwilio
+          reset_button_label: Ailosod
+          exposed_sorts_label: 'Trefnu yn ôl'
+          sort_asc_label: Esgynnol
+          sort_desc_label: Disgynnol
+          text_input_required: 'Dewiswch unrhyw hidlydd a chlicio ar ‘Chwilio’ i weld y canlyniadau'
+      pager:
+        options:
+          tags:
+            previous: '‹ Blaenorol'
+            next: 'Nesaf ›'
+          expose:
+            items_per_page_label: 'Eitemau fesul tudalen'
+            items_per_page_options_all_label: '- Pob un -'
+      filters:
+        keyword:
+          expose:
+            label: Chwilio
+      title: Chwilio
+  page_1:
+    display_title: Tudalen

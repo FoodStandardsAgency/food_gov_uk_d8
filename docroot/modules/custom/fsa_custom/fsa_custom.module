@@ -119,6 +119,7 @@ function fsa_custom_preprocess_page_title(&$variables) {
   $is_admin = \Drupal::service('router.admin_context')->isAdminRoute();
   $route = \Drupal::routeMatch();
   $routename = $route->getParentRouteMatch()->getRouteName();
+  $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
   $entity = FALSE;
   if ($route->getParameter('node')) {
@@ -151,34 +152,69 @@ function fsa_custom_preprocess_page_title(&$variables) {
         $class = 'regional-variation';
         $nation_label = '';
 
-        if (!isset($nations[1])) {
-          // If only one nation selected.
-          $class .= ' regional-variation--' . strtolower(
-            Html::cleanCssIdentifier($nation1->getName())
-          );
-          $nation_label = t('@nation specific',
-            [
-              '@nation' => \Drupal::service('entity.repository')
-                ->getTranslationFromContext($nation1, $current_langcode)
-                ->name->value,
-            ]
-          );
-        }
+        switch (count($nations)) {
+          case 1:
+            // If only one nation selected.
+            $class .= ' regional-variation--' . strtolower(
+                Html::cleanCssIdentifier($nation1->getName())
+              );
+            $nation_label = t('@nation specific',
+              [
+                '@nation' => \Drupal::service('entity.repository')
+                  ->getTranslationFromContext($nation1, $current_langcode)
+                  ->name->value,
+              ]
+            );
+            break;
 
-        elseif (isset($nations[1]) && !isset($nations[2])) {
-          // If two nations are selected.
-          $class .= ' regional-variation--multi-regional';
+          case 2:
+            // If two nations are selected.
+            $class .= ' regional-variation--multi-regional';
 
-          // Load second nation.
-          $nation2 = Term::load($nations[1]->getValue()['target_id']);
+            // Load second nation.
+            $nation2 = Term::load($nations[1]->getValue()['target_id']);
 
-          $nation_label = t(
-            '@nation_1 and @nation_2 specific',
-            [
-              '@nation_1' => \Drupal::service('entity.repository')->getTranslationFromContext($nation1, $current_langcode)->name->value,
-              '@nation_2' => \Drupal::service('entity.repository')->getTranslationFromContext($nation2, $current_langcode)->name->value,
-            ]
-          );
+            $nation_label = t(
+              '@nation_1 and @nation_2 specific',
+              [
+                '@nation_1' => \Drupal::service('entity.repository')->getTranslationFromContext($nation1, $current_langcode)->name->value,
+                '@nation_2' => \Drupal::service('entity.repository')->getTranslationFromContext($nation2, $current_langcode)->name->value,
+              ]
+            );
+            break;
+
+          case 3:
+            // Present it only if one of the nations is Scotland.
+            $class .= ' regional-variation--multi-regional';
+
+            // Load second nation.
+            $nation2 = Term::load($nations[1]->getValue()['target_id']);
+            $nation3 = Term::load($nations[2]->getValue()['target_id']);
+
+            $name = 'Scotland';
+            $vid = 'nation';
+            $terms = taxonomy_term_load_multiple_by_name($name, $vid);
+            if (!empty($terms)) {
+              $scotland_term = current($terms);
+              if (in_array($scotland_term->label(), [
+                $nation1->label(),
+                $nation2->label(),
+                $nation3->label(),
+              ])) {
+                $nation_label = t(
+                  '@nation_1, @nation_2 and @nation_3 specific',
+                  [
+                    '@nation_1' => \Drupal::service('entity.repository')->getTranslationFromContext($nation1, $current_langcode)->name->value,
+                    '@nation_2' => \Drupal::service('entity.repository')->getTranslationFromContext($nation2, $current_langcode)->name->value,
+                    '@nation_3' => \Drupal::service('entity.repository')->getTranslationFromContext($nation3, $current_langcode)->name->value,
+                  ]
+                );
+
+              }
+
+            }
+
+            break;
         }
 
         if ($nation_label != '') {
@@ -212,12 +248,10 @@ function fsa_custom_preprocess_page_title(&$variables) {
       }
       elseif ($nodetype == 'consultation' && $entity->field_consultations_type) {
         // Consultations display their consultation type taxonomy label.
-        $label = $entity->field_consultations_type->view([
-          'label' => 'hidden',
-          'settings' => [
-            'link' => FALSE,
-          ],
-        ]);
+        $field = $entity->get('field_consultations_type')->entity;
+        $label = $field->hasTranslation($lang)
+          ? $field->getTranslation($lang)->label()
+          : $field->label();
       }
       else {
         // Rest are fine displaying their content type human readable name.
@@ -274,6 +308,38 @@ function fsa_custom_preprocess_page_title(&$variables) {
     }
   }
 
+}
+
+/**
+ * Implements hook_options_list_alter().
+ */
+function fsa_custom_options_list_alter(array &$options, array $context) {
+  // Remove 'Scotland' from field_nation if we're not in an alert.
+  if ($entity = $context['entity']) {
+    if (($entity->getEntityTypeId() === 'node')
+      && ($entity->bundle() !== 'alert')
+    && ($fieldDefinition = $context['fieldDefinition'])
+    && ($fieldDefinition->getName() === 'field_nation')
+    ) {
+
+      $name = 'Scotland';
+      $vid = 'nation';
+      $terms = taxonomy_term_load_multiple_by_name($name, $vid);
+      if (!empty($terms)) {
+        $scotland_term = current($terms);
+
+      }
+      $current_langcode = \Drupal::languageManager()
+        ->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)->getId();
+
+      $scotland_name = \Drupal::service('entity.repository')->getTranslationFromContext($scotland_term, $current_langcode)->name->value;
+
+      if ($pos = array_search($scotland_name, $options)) {
+        unset($options[$pos]);
+      }
+
+    }
+  }
 }
 
 /**

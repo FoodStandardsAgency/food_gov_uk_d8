@@ -162,3 +162,15 @@ test-all:
 #
 # Note: Do not forget to precede the target definition with a comment explaining what it does!
 #
+
+# Add a new Drupal module. This runs in a docker container.
+drupal-add-module:
+	./scripts/make/drupal-add-module.sh
+
+# Update a specific module to latest release, you will be prompted for the module after running the make command.
+drupal-update-module:
+	./scripts/make/drupal-upgrade-module.sh
+
+# Upgrade Drupal to latest stable release.
+drupal-upgrade:
+	./scripts/make/drupal-upgrade.sh

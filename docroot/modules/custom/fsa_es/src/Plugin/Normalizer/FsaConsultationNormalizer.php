@@ -3,7 +3,7 @@
 namespace Drupal\fsa_es\Plugin\Normalizer;
 
 use Drupal\Core\Datetime\DateFormatterInterface;
-use Drupal\Core\Entity\EntityManagerInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
@@ -40,13 +40,13 @@ class FsaConsultationNormalizer extends NormalizerBase {
   /**
    * FsaPageNormalizer constructor.
    *
-   * @param \Drupal\Core\Entity\EntityManagerInterface $entity_manager
-   *   Entity Manager interface.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   Entity Type Manager interface.
    * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
    *   Date Formatter interface.
    */
-  public function __construct(EntityManagerInterface $entity_manager, DateFormatterInterface $date_formatter) {
-    parent::__construct($entity_manager);
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, DateFormatterInterface $date_formatter) {
+    parent::__construct($entity_type_manager);
     $this->dateFormatter = $date_formatter;
   }
 
@@ -83,13 +83,13 @@ class FsaConsultationNormalizer extends NormalizerBase {
     $consultation_close_date = $object->get('field_consultation_closing_date')->first();
 
     $data = [
-      // See comments on the mapping in the index plugin fore news content type.
-      'news_type' => $type_field->entity ? $type_field->entity->label() : NULL,
+      // See comments on the mapping in the index plugin for news content type.
+      'news_type' => $this->getTranslatedLabel($type_field->entity),
       'status' => (bool) $object->get('field_status')->value,
       'responses_published' => ($object->get('field_consultation_summary')->count() > 0),
       'consultation_start_date' => $consultation_start_date ? $consultation_start_date->date->format(DATETIME_DATETIME_STORAGE_FORMAT) : NULL,
       'consultation_close_date' => $consultation_close_date ? $consultation_close_date->date->format(DATETIME_DATETIME_STORAGE_FORMAT) : NULL,
-      'name' => $object->label(),
+      'name' => $this->getTranslatedLabel($object),
       'body' => implode(' ', [
         $this->prepareTextualField($object->get('field_intro')->value),
         $this->prepareTextualField($object->get('body')->value),
@@ -97,7 +97,7 @@ class FsaConsultationNormalizer extends NormalizerBase {
       'nation' => array_map(function ($item) {
         return [
           'id' => $item->id(),
-          'label' => $item->label(),
+          'label' => $this->getTranslatedLabel($item),
         ];
       }, $object->get('field_nation')->referencedEntities()),
       'created' => $entity_dates['created'],

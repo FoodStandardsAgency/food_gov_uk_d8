@@ -108,7 +108,9 @@
         "drupal/warden": "^1.1",
         "drupal/honeypot": "^1.29",
         "drupal/captcha": "^1.0@beta",
-        "drupal/recaptcha": "^2.4"
+        "drupal/recaptcha": "^2.4",
+        "drupal/reroute_email": "^1.1",
+        "drupal/cloudflare": "^1.0@alpha"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",

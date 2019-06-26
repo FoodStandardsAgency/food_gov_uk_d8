@@ -3,7 +3,7 @@
 namespace Drupal\fsa_es\Plugin\Normalizer;
 
 use Drupal\Core\Datetime\DateFormatterInterface;
-use Drupal\Core\Entity\EntityManagerInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
@@ -40,13 +40,13 @@ class FsaNewsNormalizer extends NormalizerBase {
   /**
    * FsaPageNormalizer constructor.
    *
-   * @param \Drupal\Core\Entity\EntityManagerInterface $entity_manager
-   *   Entity manager interface.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   Entity manager type interface.
    * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
    *   Date formatter interface.
    */
-  public function __construct(EntityManagerInterface $entity_manager, DateFormatterInterface $date_formatter) {
-    parent::__construct($entity_manager);
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, DateFormatterInterface $date_formatter) {
+    parent::__construct($entity_type_manager);
     $this->dateFormatter = $date_formatter;
   }
 
@@ -72,7 +72,7 @@ class FsaNewsNormalizer extends NormalizerBase {
     $data = [
       // See comments on the mapping in the index plugin fore news content type.
       'news_type' => $this->t('News'),
-      'name' => $object->label(),
+      'name' => $this->getTranslatedLabel($object),
       'body' => implode(' ', [
         $this->prepareTextualField($object->get('field_intro')->value),
         $this->prepareTextualField($object->get('body')->value),
@@ -80,7 +80,7 @@ class FsaNewsNormalizer extends NormalizerBase {
       'nation' => array_map(function ($item) {
         return [
           'id' => $item->id(),
-          'label' => $item->label(),
+          'label' => $this->getTranslatedLabel($item),
         ];
       }, $object->get('field_nation')->referencedEntities()),
       'created' => $entity_dates['created'],

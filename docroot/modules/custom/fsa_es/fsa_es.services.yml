@@ -8,7 +8,7 @@ services:
     class: Drupal\fsa_es\Plugin\Normalizer\FsaRatingsNormalizer
     tags:
       - { name: normalizer, priority: 50 }
-    arguments: ['@entity.manager']
+    arguments: ['@entity_type.manager']
 
   fsa_es.normalizer.fsa_page_normalizer:
     class: Drupal\fsa_es\Plugin\Normalizer\FsaPageNormalizer
@@ -20,7 +20,7 @@ services:
     class: Drupal\fsa_es\Plugin\Normalizer\FsaNewsNormalizer
     tags:
       - { name: normalizer, priority: 50 }
-    arguments: ['@entity.manager', '@date.formatter']
+    arguments: ['@entity_type.manager', '@date.formatter']
 
   fsa_es.normalizer.fsa_alert_normalizer:
     class: Drupal\fsa_es\Plugin\Normalizer\FsaAlertNormalizer
@@ -32,13 +32,13 @@ services:
     class: Drupal\fsa_es\Plugin\Normalizer\FsaConsultationNormalizer
     tags:
       - { name: normalizer, priority: 50 }
-    arguments: ['@entity.manager', '@date.formatter']
+    arguments: ['@entity_type.manager', '@date.formatter']
 
   fsa_es.normalizer.fsa_research_normalizer:
     class: Drupal\fsa_es\Plugin\Normalizer\FsaResearchNormalizer
     tags:
       - { name: normalizer, priority: 50 }
-    arguments: ['@entity.manager', '@date.formatter']
+    arguments: ['@entity_type.manager', '@date.formatter']
 
   fsa_es.search_service:
     class: Drupal\fsa_es\SearchService

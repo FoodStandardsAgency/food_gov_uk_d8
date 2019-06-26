@@ -77,26 +77,26 @@ class FsaPageNormalizer extends NormalizerBase {
     }
 
     $data = [
-      'name' => $object->label(),
+      'name' => $this->getTranslatedLabel($object),
       'intro' => $this->prepareTextualField($object->get('field_intro')->getString()),
       'body' => $this->prepareTextualField($object->get('body')->getString()),
       'content_type' => array_map(function ($item) {
         return [
           'id' => $item->id(),
-          'label' => $item->label(),
+          'label' => $this->getTranslatedLabel($item),
         ];
       }, $object->get('field_content_type')->referencedEntities()),
       'audience' => array_map(function ($item) use ($audience_term_tree) {
         return [
           'id' => $item->id(),
           'depth' => isset($audience_term_tree[$item->id()]->depth) ? $audience_term_tree[$item->id()]->depth : 0,
-          'label' => $item->label(),
+          'label' => $this->getTranslatedLabel($item),
         ];
       }, $object->get('field_audience')->referencedEntities()),
       'nation' => array_map(function ($item) {
         return [
           'id' => $item->id(),
-          'label' => $item->label(),
+          'label' => $this->getTranslatedLabel($item),
         ];
       }, $object->get('field_nation')->referencedEntities()),
       'created' => $entity_dates['created'],
