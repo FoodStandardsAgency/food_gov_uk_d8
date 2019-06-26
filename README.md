@@ -169,14 +169,12 @@ The specific variable values for host, username, password etc are managed throug
 
 ## Two factor Authentication (TFA)
 
-The site uses the [TFA module](https://www.drupal.org/project/tfa) along with the [Google authenticator login](https://www.drupal.org/project/ga_login) to provide TFA via services such as Authy.
-The TFA module relies on **encryption profiles** from the [Encrypt module](https://www.drupal.org/project/encrypt) and encryption keys from the [Key module](https://www.drupal.org/project/key) .
+The site uses the [TFA module](https://www.drupal.org/project/tfa) along with the [Google authenticator login](https://www.drupal.org/project/ga_login) to provide two factor authentication via third party services such as Authy.
+The TFA module is used to produce seed values for [TOTP](https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm) authentication, which are encrypted with a [Key](https://www.drupal.org/project/key) and stored in the **users_data** table.
+On FSA the key used to encrypt the seed values (seed_key) is stored* with a web service called [lockr](http://lockr.io).
 
-FSA goes one step further and stores these keys with a web service called [lockr](http://lockr.io).
-The TFA key is stored in Lockr and retrieved as necessary. The retrieval occurs via a REST API which authenticates requests with certificate.
-
-You can see the location of this certificate by logging into the prod/dev environment and navigating to **/admin/config/system/lockr** and selecting 'advanced'.
-Note that there are **separate certificates** for dev/production.
+Communication with lockr requires a valid certificate. You can see the location of this certificate by logging into the prod/dev environment, navigating to **/admin/config/system/lockr** and selecting 'advanced'.
+Note that there are **separate certificates** for dev/production/stage.
 
 #### Setup 
 - Enable the TFA in the TFA module settings: **/admin/config/people/tfa**
@@ -186,10 +184,14 @@ Here you must also select an appropriate encryption profile from the available l
 You'll need to select an Encryption key for the encryption profile to use.
 
 - If you don't have an encryption key, you'll need to create one at **/admin/config/system/keys**
-Ensure the key has type 'Lockr Encryption' and the Key provider is 'Lockr'
+Ensure the key has type 'Lockr Encryption' and the Key provider is 'Lockr'. 
+**Note that doing this will overwrite the key currently stored by lockr. If other environments rely on this key, they WILL stop working.** 
+If you need a new lockr key to be available on other enviroments, you should export it (cex), and import it (cim) on the new environment.
 
 Note that TFA is disabled on environments other thant **PROD/TEST** by **src/settings/02-tfa.settings.inc**
 
+\* *Lockr does not actually store the seed key. It stores **encrypt(seed_key, lockr_key)**. On every retrieval seed_key is decrypted with the lockr_key.
+The lockr_key is stored as [override configuration](https://www.drupal.org/docs/8/api/configuration-api/configuration-override-system) in **src/settings/-02-tfa.settings.inc*** 
 
 ## CAB release statement.
 
