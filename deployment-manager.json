@@ -2,6 +2,7 @@
   "whitelist": [
     "master",
     "develop",
-    "UAT"
+    "UAT",
+    "feature/fsa-80-fix-tfs"
   ]
 }

@@ -93,6 +93,36 @@ pipelines:
           image: deeson/deployer
           script:
             - make pipelines-deploy
+    feature/fsa-80-fix-tfs:
+      - step:
+          name: Build Drupal
+          image: wodby/drupal-php:7.2-dev
+          caches:
+            - composer
+            - drush
+          script:
+            - make pipelines-build-drupal
+          artifacts:
+            - 'docroot/**'
+            - 'vendor/**'
+            - 'web'
+      - step:
+          name: Build Front-End
+          image:
+            name: node:11
+            run-as-user: 1000
+          caches:
+            - node
+          script:
+            - make pipelines-build-frontend
+          artifacts:
+            - 'docroot/themes/custom/fsa/dist/**'
+            #- 'docroot/themes/custom/fsa/node_modules/**'
+      - step:
+          name: Relay
+          image: deeson/deployer
+          script:
+            - make pipelines-deploy
   tags:
     '*':
       - step:
