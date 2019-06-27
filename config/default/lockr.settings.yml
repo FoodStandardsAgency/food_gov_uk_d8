@@ -1,0 +1,3 @@
+region: eu
+custom: true
+cert_path: /private/dev/pair.pem
