@@ -16,5 +16,6 @@ ignored_config_entities:
   28: webform.webform.food_poisoning
   30: webform.webform.foreign_object
   32: webform.webform.poor_hygiene_practices
+  34: 'lockr.settings:cert_path'
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
