@@ -154,6 +154,7 @@ Alert API data is imported to Drupal `alerts_allergen` taxonomy and `alert` node
 - Ratings search is located at `/ratings/search`.
 - The rating search is implemented with `fsa_ratings` module.
 - FSA Establishments are indexed to Elasticsearch with FSA Elasticsearch integration (`fsa_es`) module, refer to [README.md](/drupal/web/modules/custom/fsa_es/README.md) for documentation.
+- There are only 2 Elastic Search environments, production and development.  All sites other than prod use the development elastic search. Access to the AWS ElasticSearch is IP restricted. It is possible that ODE environments on Acquia IP addresses change over time, if this happens then contact FSA and ask for the new IP to be added. 
 
 ## SMTP services
 
