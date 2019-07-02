@@ -88,7 +88,12 @@ class FsaIndexBase extends ElasticsearchIndexBase {
     /** @var \Drupal\node\Entity\Node $source */
     foreach ($source->getTranslationLanguages() as $langcode => $language) {
       if ($source->hasTranslation($langcode)) {
-        $translation = $source->getTranslation($langcode);
+        $result = \Drupal::entityQuery("node")
+          ->condition("langcode", $langcode)
+          ->condition("nid", $source->id())
+          ->currentRevision()
+          ->execute();
+        $translation = entity_revision_load('node', key($result));
 
         $exclude = 0;
         if ($translation->hasField('field_search_exclude')) {
