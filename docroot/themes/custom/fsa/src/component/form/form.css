@@ -372,6 +372,14 @@ input[type="checkbox"]:focus + label {
   box-shadow: inset 0em 0em 0em 1px var(--primary-color);
 }
 
+html:not(.is-touch) .webform-submission-page-feedback-form input[type="radio"] + label:focus {
+  text-decoration: underline !important;
+  outline: none;
+  -webkit-box-shadow: 0 0 3px 3px #4D90FE;
+  box-shadow: 0 0 3px 3px #4D90FE;
+}
+
+
 input[type="radio"] + label,
 input[type="checkbox"] + label {
   position: relative;

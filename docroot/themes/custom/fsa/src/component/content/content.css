@@ -83,6 +83,10 @@ h6 {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.02em;
+    @media print {
+      color: #000;
+    }
+
   }
 }
 
@@ -297,6 +301,10 @@ table {
     background-color: var(--dark-secondary-color) !important;
     color: var(--color-white);
 
+    @media print {
+      color:#000;
+    }
+
     td,
     th {
       border: 1px solid var(--dark-secondary-color);
@@ -422,6 +430,7 @@ blockquote {
   padding: 0;
   position: relative;
   margin-right: 1em;
+  padding-left: 20px;
 
   &:after {
     @mixin responsive-declaration left, 0, -2em;
@@ -870,11 +879,16 @@ but they are inserted in DOM outside container and with inline styles.
 */
 .a2a_menu {
   a {
-    font-weight: 600;
+    font-weight: 600 !important;
 
-    &:hover,
-    &:focus {
+    &:hover {
       text-decoration: underline !important;
+    }
+    &:focus {
+       text-decoration: underline !important;
+       outline: none;
+       -webkit-box-shadow: 0 0 3px 3px #4D90FE;
+       box-shadow: 0 0 3px 3px #4D90FE;
     }
   }
 
@@ -1464,9 +1478,10 @@ but they are inserted in DOM outside container and with inline styles.
   background-color: var(--color-white) !important;
   color: var(--dark-primary-color) !important;
   border-radius: 2em !important;
-  padding: 0.35em 2.5em !important;
+  padding: 0.35em 20px !important;
   margin-top: 0.5em !important;
   margin-bottom: 0.5em !important;
+  max-width: 180px !important;
 
   :--not-touch &:--enter {
     color: var(--darker-primary-color) !important;
