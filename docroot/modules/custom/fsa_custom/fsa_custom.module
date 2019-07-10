@@ -5,6 +5,7 @@
  * Contains fsa_custom.module.
  */
 
+use Drupal\Component\Utility\Crypt;
 use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Language\LanguageInterface;
@@ -848,5 +849,21 @@ function template_preprocess_fsa_custom_media_image_formatter(&$variables) {
         '#markup' => $description_field[0]['value'],
       ];
     }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function fsa_custom_preprocess_form(&$variables) {
+  // Avoid duplicated IDs.
+  $ids = [
+    'block-search-keyword',
+    'edit-keywords',
+    'edit-fax',
+    'search-keyword',
+  ];
+  if (in_array($variables["attributes"]["id"], $ids)) {
+    $variables["attributes"]["id"] .= '--' . Crypt::randomBytesBase64(8);
   }
 }
