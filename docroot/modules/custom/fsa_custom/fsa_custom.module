@@ -58,6 +58,10 @@ function fsa_custom_preprocess_page(&$variables) {
   // visits a URL path with parameters).
   $variables['#attached']['library'][] = 'fsa_custom/search_filters';
 
+  // Attach FSA External js (Adds a text description for links when
+  // they'll be open in a new window).
+  $variables['#attached']['library'][] = 'fsa_custom/fsa_external';
+
   // Hardcoded "utility menu" links.
   // Get the contact link from settings. Default to 58 which happened to be the
   // first version contact lander.

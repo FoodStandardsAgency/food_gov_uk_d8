@@ -1,3 +1,10 @@
+fsa_external:
+  version: 1.x
+  js:
+    js/fsa-external.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery.once
 history_back:
   version: 1.x
   js:
