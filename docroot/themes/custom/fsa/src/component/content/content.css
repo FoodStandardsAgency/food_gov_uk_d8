@@ -90,6 +90,26 @@ h6 {
   }
 }
 
+a:focus,
+input:focus,
+button:focus,
+label:focus,
+html:not(.is-touch) .webform-submission-page-feedback-form input[type="radio"] + label:focus,
+.html5-video-player a:focus {
+  outline: none;
+  -webkit-box-shadow: 0 0 3px 3px #0052CC !important;
+  box-shadow: 0 0 3px 3px #0052CC !important;
+}
+
+
+html:not(.is-touch) .webform-submission-page-feedback-form button.close-feedback:focus,
+html:not(.is-touch) .webform-submission-page-feedback-form button.open-feedback:focus {
+  -webkit-box-shadow: inset 0px 0px 3px 3px rgba(0,82,204,1) !important;
+  box-shadow: inset 0px 0px 3px 3px rgba(0,82,204,1) !important;
+
+}
+
+
 .guide__title__wrapper {
   margin-bottom: 1em;
 }
@@ -887,8 +907,12 @@ but they are inserted in DOM outside container and with inline styles.
     &:focus {
        text-decoration: underline !important;
        outline: none;
-       -webkit-box-shadow: 0 0 3px 3px #4D90FE;
-       box-shadow: 0 0 3px 3px #4D90FE;
+       /*
+       -webkit-box-shadow: 0 0 3px 3px #0052CC;
+       box-shadow: 0 0 3px 3px #0052CC;
+       */
+       -webkit-box-shadow: inset 0px 0px 3px 3px rgba(0,82,204,1) !important;
+       box-shadow: inset 0px 0px 3px 3px rgba(0,82,204,1) !important;
     }
   }
 
@@ -1476,7 +1500,7 @@ but they are inserted in DOM outside container and with inline styles.
 .cc_btn {
   order: 100;
   background-color: var(--color-white) !important;
-  color: var(--dark-primary-color) !important;
+  color: var(--color-darker-teal) !important;
   border-radius: 2em !important;
   padding: 0.35em 20px !important;
   margin-top: 0.5em !important;

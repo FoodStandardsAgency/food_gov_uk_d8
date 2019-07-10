@@ -375,8 +375,8 @@ input[type="checkbox"]:focus + label {
 html:not(.is-touch) .webform-submission-page-feedback-form input[type="radio"] + label:focus {
   text-decoration: underline !important;
   outline: none;
-  -webkit-box-shadow: 0 0 3px 3px #4D90FE;
-  box-shadow: 0 0 3px 3px #4D90FE;
+  -webkit-box-shadow: 0 0 3px 3px #0052CC;
+  box-shadow: 0 0 3px 3px #0052CC;
 }
 
 

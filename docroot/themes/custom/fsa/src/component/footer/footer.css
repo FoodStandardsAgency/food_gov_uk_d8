@@ -134,7 +134,9 @@
 
         :--not-touch &:--enter {
           background-color: transparent;
+          /*
           box-shadow: none !important;
+          */
           text-decoration: underline;
         }
       }
