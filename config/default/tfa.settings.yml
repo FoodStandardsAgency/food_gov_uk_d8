@@ -10,26 +10,26 @@ send_plugins: {  }
 login_plugins: {  }
 default_validation_plugin: tfa_totp
 validation_plugin_settings:
-  tfa_hotp:
-    counter_window: 10
+  tfa_totp:
+    time_skew: 30
     site_name_prefix: 0
     name_prefix: TFA
     issuer: Drupal
-  tfa_totp:
-    time_skew: 30
+  tfa_hotp:
+    counter_window: 10
     site_name_prefix: 1
     name_prefix: TFA
     issuer: Drupal
 allowed_validation_plugins:
   tfa_totp: tfa_totp
 fallback_plugins:
-  tfa_hotp:
+  tfa_totp:
     tfa_recovery_code:
       enable: 1
       settings:
         recovery_codes_amount: 9
       weight: -2
-  tfa_totp:
+  tfa_hotp:
     tfa_recovery_code:
       enable: 1
       settings:

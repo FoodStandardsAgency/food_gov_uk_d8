@@ -3,11 +3,11 @@ langcode: en
 status: true
 dependencies:
   config:
-    - key.key.fsa_2fa_key
+    - key.key.fsa_2fa_key_2019
   module:
     - real_aes
 id: 2fa_profile
 label: '2FA Profile'
 encryption_method: real_aes
-encryption_key: fsa_2fa_key
+encryption_key: fsa_2fa_key_2019
 encryption_method_configuration: {  }
