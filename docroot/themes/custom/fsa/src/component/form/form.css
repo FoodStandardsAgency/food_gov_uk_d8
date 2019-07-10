@@ -874,24 +874,9 @@ input[type="password"] {
 
   input[type="radio"] + label {
     color: var(--darker-primary-color);
-    text-decoration: underline;
-    padding: 0em;
     padding-top: 0.5em;
     padding-bottom: 0.25em;
     cursor: pointer;
-
-    @media (--breakpoint-xs) {
-      padding: 0em;
-    }
-
-    @media (--breakpoint-sm) {
-      padding: 0.5em 0em;
-    }
-
-    &:before,
-    &:after {
-      display: none;
-    }
 
     :--not-touch &:--enter {
       color: var(--dark-primary-color);
