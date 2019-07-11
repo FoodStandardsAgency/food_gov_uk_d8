@@ -33,3 +33,10 @@ search_filters:
   dependencies:
     - core/drupal
     - core/jquery.once
+fsa-svgs:
+  version: 1.x
+  js:
+    js/fsa-svgs.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery.once
