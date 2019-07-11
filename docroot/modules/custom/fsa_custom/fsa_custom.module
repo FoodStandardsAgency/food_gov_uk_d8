@@ -62,6 +62,10 @@ function fsa_custom_preprocess_page(&$variables) {
   // they'll be open in a new window).
   $variables['#attached']['library'][] = 'fsa_custom/fsa_external';
 
+  // Attach FSA svgs (Adds an extra attribute for svg items
+  // so they don't get focus.).
+  $variables['#attached']['library'][] = 'fsa_custom/fsa-svgs';
+
   // Hardcoded "utility menu" links.
   // Get the contact link from settings. Default to 58 which happened to be the
   // first version contact lander.
