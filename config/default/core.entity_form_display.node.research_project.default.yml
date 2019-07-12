@@ -21,6 +21,7 @@ dependencies:
     - field.field.node.research_project.field_team_contacts
     - field.field.node.research_project.field_update_date
     - node.type.research_project
+    - workflows.workflow.editorial
   module:
     - content_moderation
     - datetime
@@ -57,7 +58,7 @@ third_party_settings:
       children:
         - field_related
       parent_name: ''
-      weight: 9
+      weight: 10
       format_type: tab
       format_settings:
         id: ''
@@ -95,7 +96,7 @@ content:
     region: content
   created:
     type: datetime_timestamp
-    weight: 12
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -108,7 +109,7 @@ content:
     type: string_textfield
     region: content
   field_content_reminder:
-    weight: 102
+    weight: 22
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
@@ -120,7 +121,7 @@ content:
     type: daterange_default
     region: content
   field_document:
-    weight: 8
+    weight: 9
     settings:
       form_mode: default
       label_singular: ''
@@ -135,7 +136,7 @@ content:
     type: inline_entity_form_complex
     region: content
   field_fsa_toc:
-    weight: 103
+    weight: 8
     settings:
       display_label: true
     third_party_settings: {  }
@@ -172,6 +173,10 @@ content:
       add_mode: dropdown
       form_display_mode: default
       default_paragraph_type: _none
+      closed_mode_threshold: 0
+      features:
+        duplicate: duplicate
+        collapse_edit_all: collapse_edit_all
     third_party_settings: {  }
     type: paragraphs
     region: content
@@ -210,7 +215,7 @@ content:
     type: boolean_checkbox
     region: content
   field_team_contacts:
-    weight: 10
+    weight: 11
     settings:
       match_operator: CONTAINS
       size: 60
@@ -226,26 +231,26 @@ content:
     region: content
   langcode:
     type: language_select
-    weight: 14
+    weight: 15
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 18
+    weight: 19
     settings: {  }
     region: content
     third_party_settings: {  }
   path:
     type: path
-    weight: 13
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 30
+    weight: 21
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -253,7 +258,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 16
+    weight: 17
     region: content
     third_party_settings: {  }
   title:
@@ -265,13 +270,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 15
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 11
+    weight: 12
     settings:
       match_operator: CONTAINS
       size: 60
@@ -280,12 +285,12 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 30
+    weight: 20
     region: content
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 17
+    weight: 18
     region: content
     settings: {  }
     third_party_settings: {  }
