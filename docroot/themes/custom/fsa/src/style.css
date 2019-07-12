@@ -2,6 +2,7 @@
 @import "helper/custom-property.css";
 
 /*Component*/
+@import "component/general/accessibility.css";
 @import "component/general/table.css";
 @import "component/general/modal.css";
 @import "component/general/topic-cloud.css";

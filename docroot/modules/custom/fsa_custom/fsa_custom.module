@@ -5,6 +5,7 @@
  * Contains fsa_custom.module.
  */
 
+use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Component\Utility\Crypt;
 use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Session\AccountInterface;
@@ -873,5 +874,22 @@ function fsa_custom_preprocess_form(&$variables) {
   ];
   if (in_array($variables["attributes"]["id"], $ids)) {
     $variables["attributes"]["id"] .= '--' . Crypt::randomBytesBase64(8);
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function fsa_custom_preprocess_fsa_content_header(&$variables) {
+  if (!empty($variables["intro"]["#object"]) && ($node = $variables["intro"]["#object"])) {
+    $variables["link_pdf"]["#title"] = t('View :title as PDF',
+      [
+
+        ':title' => new FormattableMarkup(
+          '<span class="visuallyhidden">@node_title</span>',
+          [
+          '@node_title' =>  $node->label(),
+      ]),
+    ]);
   }
 }
