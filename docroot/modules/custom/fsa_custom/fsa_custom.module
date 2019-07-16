@@ -105,7 +105,6 @@ function fsa_custom_preprocess_page(&$variables) {
     '#theme' => 'item_list',
     '#prefix' => '<nav class="menu-utility-wrapper">',
     '#suffix' => '</nav>',
-    '#title' => t('Services'),
     '#list_type' => 'ul',
     '#wrapper_attributes' => [
       'class' => [
