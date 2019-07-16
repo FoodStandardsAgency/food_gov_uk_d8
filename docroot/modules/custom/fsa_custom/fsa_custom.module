@@ -737,6 +737,9 @@ function fsa_custom_preprocess_block(&$variables) {
       }
     }
   }
+  if ($variables["plugin_id"] == 'menu_block:main') {
+    $variables['attributes']['aria-label'] = (string) t("Main Navigation");
+  }
 }
 
 /**
