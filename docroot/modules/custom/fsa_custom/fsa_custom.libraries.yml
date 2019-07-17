@@ -40,3 +40,10 @@ fsa-svgs:
   dependencies:
     - core/drupal
     - core/jquery.once
+fsa-removeDuplicatedIDs:
+  version: 1.x
+  js:
+    js/fsa-removeDuplicatedIDs.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery.once

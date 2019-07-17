@@ -67,6 +67,9 @@ function fsa_custom_preprocess_page(&$variables) {
   // so they don't get focus.).
   $variables['#attached']['library'][] = 'fsa_custom/fsa-svgs';
 
+  // Removed duplicate IDs in Search Block.
+  $variables['#attached']['library'][] = 'fsa_custom/fsa-removeDuplicatedIDs';
+
   // Hardcoded "utility menu" links.
   // Get the contact link from settings. Default to 58 which happened to be the
   // first version contact lander.
@@ -858,22 +861,6 @@ function template_preprocess_fsa_custom_media_image_formatter(&$variables) {
         '#markup' => $description_field[0]['value'],
       ];
     }
-  }
-}
-
-/**
- * Implements hook_preprocess_HOOK().
- */
-function fsa_custom_preprocess_form(&$variables) {
-  // Avoid duplicated IDs.
-  $ids = [
-    'block-search-keyword',
-    'edit-keywords',
-    'edit-fax',
-    'search-keyword',
-  ];
-  if (in_array($variables["attributes"]["id"], $ids)) {
-    $variables["attributes"]["id"] .= '--' . Crypt::randomBytesBase64(8);
   }
 }
 
