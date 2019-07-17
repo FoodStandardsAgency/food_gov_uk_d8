@@ -93,19 +93,20 @@ class FsaIndexBase extends ElasticsearchIndexBase {
           ->condition("nid", $source->id())
           ->currentRevision()
           ->execute();
-        $translation = entity_revision_load('node', key($result));
+        if ($translation = entity_revision_load('node', key($result))) {
+          $exclude = 0;
+          if ($translation->hasField('field_search_exclude')) {
+            $exclude = $translation->get('field_search_exclude')->getValue()[0]['value'];
+          }
 
-        $exclude = 0;
-        if ($translation->hasField('field_search_exclude')) {
-          $exclude = $translation->get('field_search_exclude')->getValue()[0]['value'];
+          if ($translation->isPublished() && !$exclude) {
+            parent::index($translation);
+          }
+          else {
+            parent::delete($translation);
+          }
         }
 
-        if ($translation->isPublished() && !$exclude) {
-          parent::index($translation);
-        }
-        else {
-          parent::delete($translation);
-        }
       }
     }
   }
