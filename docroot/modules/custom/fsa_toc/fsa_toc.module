@@ -44,16 +44,12 @@ function fsa_toc_entity_presave(EntityInterface $entity) {
       $toc_formatter = new TocFormatter();
 
       foreach ($elements as $element) {
+        // Add a new id, replacing it if necessary.
+        $newId = $toc_formatter->convertStringToId($element->nodeValue);
+        // Prevent ridiculously long anchor names.
+        $newId = substr($newId, 0, 120);
 
-        // If the element has no id attribute, we want to add it.
-        if (!$element->hasAttribute('id') && !empty($element->nodeValue)) {
-
-          $newId = $toc_formatter->convertStringToId($element->nodeValue);
-          // Prevent ridiculously long anchor names.
-          $newId = substr($newId, 0, 120);
-
-          $element->setAttribute('id', $newId);
-        }
+        $element->setAttribute('id', $newId);
       }
 
       // Convert structure back to html removing doctype, head, meta and body
