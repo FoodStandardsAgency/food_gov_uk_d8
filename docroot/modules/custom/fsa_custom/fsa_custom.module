@@ -888,3 +888,21 @@ function fsa_custom_preprocess_fsa_content_header(&$variables) {
 function fsa_custom_preprocess_toc_back_to_top(&$variables) {
   $variables["attributes"]->setAttribute('aria-hidden', 'true');
 }
+
+/**
+ * Implements hook_preprocess_video_embed_iframe__youtube().
+ */
+function fsa_custom_preprocess_video_embed_iframe__youtube(&$vars) {
+  // Youtube URL.
+  if (($url = $vars['url'])
+    // Extract ID.
+    && (preg_match('/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/', $url, $output_array))
+    && (!empty($output_array[7]))
+    && ($id = $output_array[7])
+    // Request info from Youtube API.
+    && ($info = json_decode(file_get_contents("https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v={$id}&format=json")))
+    && ($title = $info->title)) {
+    $vars['attributes']->setAttribute('title', $title);
+  }
+
+}
