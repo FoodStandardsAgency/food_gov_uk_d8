@@ -58,6 +58,10 @@ function fsa_preprocess_field(&$variables) {
     }
   }
 
+  if ($variables['element']['#field_name'] == 'field_team_contacts') {
+    $variables["attributes"]['id'] = 'contacts';
+  }
+
   if ($variables['element']['#field_name'] == 'field_news_type') {
     foreach ($variables['items'] as $key => $item) {
       if ($key == 0) {
