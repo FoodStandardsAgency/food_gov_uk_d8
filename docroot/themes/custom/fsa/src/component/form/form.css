@@ -716,6 +716,7 @@ input[type="password"] {
   .form-item.js-form-type-radio {
     margin-top: 0em;
     margin-bottom: 0.5em;
+    position: relative;
   }
 
   .intl-tel-input {
@@ -885,6 +886,7 @@ input[type="password"] {
     padding-top: 0.5em;
     padding-bottom: 0.25em;
     cursor: pointer;
+    padding-left: 25px;
 
     :--not-touch &:--enter {
       color: var(--dark-primary-color);
