@@ -93,9 +93,10 @@ h6 {
 a:focus,
 input:focus,
 button:focus,
-label:focus,
-html:not(.is-touch) .webform-submission-page-feedback-form input[type="radio"] + label:focus,
-.html5-video-player a:focus {
+input:focus,
+.html5-video-player a:focus,
+input[type="radio"]:focus + label,
+input[type="checkbox"]:focus + label {
   outline: none;
   -webkit-box-shadow: 0 0 3px 3px #0052CC !important;
   box-shadow: 0 0 3px 3px #0052CC !important;
@@ -103,7 +104,8 @@ html:not(.is-touch) .webform-submission-page-feedback-form input[type="radio"] +
 
 
 html:not(.is-touch) .webform-submission-page-feedback-form button.close-feedback:focus,
-html:not(.is-touch) .webform-submission-page-feedback-form button.open-feedback:focus {
+html:not(.is-touch) .webform-submission-page-feedback-form button.open-feedback:focus,
+.webform-submission-page-feedback-form .fieldgroup > button.open-feedback:focus {
   -webkit-box-shadow: inset 0px 0px 3px 3px rgba(0,82,204,1) !important;
   box-shadow: inset 0px 0px 3px 3px rgba(0,82,204,1) !important;
 
