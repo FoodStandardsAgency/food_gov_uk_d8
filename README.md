@@ -164,6 +164,41 @@ The specific variable values for host, username, password etc are managed throug
 
 > **Never store these - or other sensitive - values in the repository in a .env file, config export or otherwise. They could result in the SMTP service being used to handle or deliver spam**
 
+## Two factor Authentication (TFA)
+
+The site uses the [TFA module](https://www.drupal.org/project/tfa) along with the [Google authenticator login](https://www.drupal.org/project/ga_login) to provide two factor authentication via third party services such as Authy.
+The TFA module is used to produce seed values for [TOTP](https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm) authentication, which are encrypted with a [Key](https://www.drupal.org/project/key) and stored in the **users_data** table.
+On FSA the key used to encrypt the seed values (seed_key) is stored* with a web service called [lockr](http://lockr.io).
+
+Communication with lockr requires a valid certificate. The locations for these certificates are fixed in the **/src/settings/02-tfa.settings.inc**.
+Note that there are **separate certificates** for dev/production. 
+
+
+
+#### Setup 
+- Enable the TFA in the TFA module settings: **/admin/config/people/tfa**
+Here you must also select an appropriate encryption profile from the available list.
+
+- If one is not available, you'll need to create one: **/admin/config/system/encryption/profiles**
+You'll need to select an Encryption key for the encryption profile to use.
+
+- If you don't have an encryption key, you'll need to create one at **/admin/config/system/keys**
+Ensure the key has type 'Lockr Encryption' and the Key provider is 'Lockr'. 
+**Note that doing this will overwrite the key currently stored by lockr. If other environments rely on this key, they WILL stop working.** 
+If you need a new lockr key to be available on other enviroments, you should export it (cex), and import it (cim) on the new environment. 
+Ensure the override configuration (see below) is correct for this key
+
+Note that TFA is disabled on environments other thant **PROD/TEST** by **src/settings/02-tfa.settings.inc**
+
+\* *Lockr does not actually store the seed key. It stores **encrypt(seed_key, wrapping_key)**. On every retrieval seed_key is decrypted with the wrapping_key.
+The wrapping_key is stored as [override configuration](https://www.drupal.org/docs/8/api/configuration-api/configuration-override-system) in **src/settings/-02-tfa.settings.inc**
+
+In order to decrypt a **seed_key** of a user, you must have a matching **lockr_certificate**, **wrapping_key** stored in the configuration, and matching value stored in lockr.
+**If any one of these is incorrect, TFA login and new setups will fail.**
+
+Additionally, if you need to change any of the above, the **seed_keys** stored for users will not be able to be decrypted (as the 3 things above produce the decryption key) and must be invalidated.
+The quickest way to do this is to disable TFA **/admin/config/people/tfa**.*
+
 ## CAB release statement.
 
 In order to get approval for a release you will need to provide the following on the Jirs ticket for the release:
