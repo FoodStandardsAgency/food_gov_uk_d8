@@ -18,7 +18,6 @@
       if ($('.page-feedback .message-list').length === 0) {
         // Hide the feedback form by default as long as no visible errors.
         $(wrapper_fieldset).hide();
-        $(submit).hide();
       }
       else {
         // On errors the form should already be visible, hide the radios fieldset.
@@ -33,19 +32,11 @@
         $(wrapper_fieldset).slideDown();
       });
 
-      // Close the container/hide submit
+      // Close the container.
       $('.toggler.close-feedback').click(function(e) {
         $(radio_no).prop('checked', false);
-        $(submit).hide();
         $(wrapper_fieldset).slideUp();
         $(radios_fieldset).fadeIn();
-      });
-
-      // Auto-trigger a submit on yes.
-      $('.form-autosubmit-on-yes '+radio_yes).once().click(function(e) {
-        var form = $(this).closest('form');
-        form.find(':submit').trigger('click');
-        form.fadeOut('fast');
       });
     }
   };
