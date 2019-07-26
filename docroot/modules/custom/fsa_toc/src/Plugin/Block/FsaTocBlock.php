@@ -3,6 +3,7 @@
 namespace Drupal\fsa_toc\Plugin\Block;
 
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Block\BlockBase;
 use Drupal\node\Entity\Node;
@@ -92,6 +93,25 @@ class FsaTocBlock extends BlockBase {
     }
 
     return parent::blockAccess($account);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  function getCacheTags() {
+    $tags = [];
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if ($node = Node::load($node->id())) {
+     $tags[] = "node:{$node->id()}";
+    }
+    return Cache::mergeTags(parent::getCacheTags(), $tags);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  function getCacheContexts() {
+    return Cache::mergeContexts(parent::getCacheContexts(), ['url', 'languages']);
   }
 
 }
