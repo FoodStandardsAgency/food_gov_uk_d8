@@ -10,7 +10,7 @@ const state = {
         options.element.setAttribute('aria-hidden', 'false')
 
         if (recursiveInert) {
-          options.element.querySelectorAll('a, button').forEach((tabbableChild) => {
+          [...options.element.querySelectorAll('a, button')].forEach((tabbableChild) => {
             tabbableChild.inert = false
           })
         }
@@ -34,7 +34,7 @@ const state = {
         options.element.setAttribute('aria-hidden', 'true')
 
         if (recursiveInert) {
-          options.element.querySelectorAll('a, button').forEach((tabbableChild) => {
+          [...options.element.querySelectorAll('a, button')].forEach((tabbableChild) => {
             tabbableChild.inert = true
           })
         }
