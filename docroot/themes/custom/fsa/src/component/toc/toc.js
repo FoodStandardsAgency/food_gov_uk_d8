@@ -9,7 +9,7 @@ function toc () {
     return
   }
 
-  body.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]')
+  [...body.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]')]
       .forEach(heading => heading.setAttribute('tabindex', '-1'))
 
   // Table of contents
