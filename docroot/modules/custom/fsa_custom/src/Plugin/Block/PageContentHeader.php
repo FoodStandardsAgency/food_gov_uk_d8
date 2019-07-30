@@ -3,8 +3,10 @@
 namespace Drupal\fsa_custom\Plugin\Block;
 
 use Drupal\block\Entity\Block;
+use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Render\Markup;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 
@@ -103,7 +105,12 @@ class PageContentHeader extends BlockBase {
             'class' => 'print__link--pdf',
             'target' => '_blank',
           ],
-          '#title' => $this->t('View PDF'),
+          '#title' => $this->t('View @title as PDF', ['@title' => new FormattableMarkup(
+            '<span class="visuallyhidden"> @node_title</span>',
+            [
+              '@node_title' => str_replace(':', '', $entity->label()),
+            ])
+          ]),
           '#url' => $url,
         ];
       }

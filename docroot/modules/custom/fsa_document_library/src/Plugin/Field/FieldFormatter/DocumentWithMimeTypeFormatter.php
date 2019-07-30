@@ -2,6 +2,7 @@
 
 namespace Drupal\fsa_document_library\Plugin\Field\FieldFormatter;
 
+use Drupal\Core\Render\Markup;
 use Drupal\file\Plugin\Field\FieldFormatter\FileFormatterBase;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Component\Utility\Html;
@@ -44,7 +45,11 @@ class DocumentWithMimeTypeFormatter extends FileFormatterBase {
 
       $filesize = format_size($file->getSize());
 
-      $link = Link::fromTextAndUrl($link_text, $url)->toString();
+      $mime = $file->getMimeType();
+      $cleanMime = strtoupper(preg_replace(':^application/:', '', $mime));
+      $markup = '<span class="visuallyhidden">View </span>' . $link_text . '<span class="visuallyhidden"> as ' . $cleanMime . '</span>';
+
+      $link = Link::fromTextAndUrl(Markup::create($markup), $url)->toString();
 
       $attributes['class'] = 'file__type_' . Html::cleanCssIdentifier($file->getMimeType());
 
