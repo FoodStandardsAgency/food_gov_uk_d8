@@ -99,18 +99,18 @@ class PageContentHeader extends BlockBase {
           'export_type' => 'pdf',
         ];
         $url = Url::fromRoute('entity_print.view', $route_params);
+        $markup = new FormattableMarkup(
+          '<span class="visuallyhidden"> @node_title</span>',
+          [
+            '@node_title' => str_replace(':', '', $entity->label()),
+          ]);
         $link_pdf = [
           '#type' => 'link',
           '#attributes' => [
             'class' => 'print__link--pdf',
             'target' => '_blank',
           ],
-          '#title' => $this->t('View @title as PDF', ['@title' => new FormattableMarkup(
-            '<span class="visuallyhidden"> @node_title</span>',
-            [
-              '@node_title' => str_replace(':', '', $entity->label()),
-            ])
-          ]),
+          '#title' => $this->t('View @title as PDF', ['@title' => $markup]),
           '#url' => $url,
         ];
       }
