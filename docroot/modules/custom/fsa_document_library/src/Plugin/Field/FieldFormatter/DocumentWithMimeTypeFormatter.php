@@ -48,13 +48,13 @@ class DocumentWithMimeTypeFormatter extends FileFormatterBase {
       $mime = $file->getMimeType();
       $cleanMime = strtoupper(preg_replace(':^application/:', '', $mime));
       $cleanMime = strtoupper(preg_replace(':^text/:', '', $cleanMime));
-      if (preg_match('/(ms-?word|wordprocessing)/', $cleanMime)) {
+      if (preg_match('/(ms-?word|wordprocessing)/i', $cleanMime)) {
         $cleanMime = 'Word';
       }
-      if (preg_match('/(ms-?excel|spreadsheet)/', $cleanMime)) {
+      if (preg_match('/(ms-?excel|spreadsheet)/i', $cleanMime)) {
         $cleanMime = 'Excel';
       }
-      if (preg_match('/(powerpoint|presentation)/', $cleanMime)) {
+      if (preg_match('/(powerpoint|presentation)/i', $cleanMime)) {
         $cleanMime = 'PPT';
       }
       $markup = '<span class="visuallyhidden">View </span>' . $link_text . '<span class="visuallyhidden"> as ' . $cleanMime . '</span>';
