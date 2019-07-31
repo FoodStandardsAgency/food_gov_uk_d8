@@ -47,6 +47,16 @@ class DocumentWithMimeTypeFormatter extends FileFormatterBase {
 
       $mime = $file->getMimeType();
       $cleanMime = strtoupper(preg_replace(':^application/:', '', $mime));
+      $cleanMime = strtoupper(preg_replace(':^text/:', '', $cleanMime));
+      if (preg_match('/(ms-?word|wordprocessing)/', $cleanMime)) {
+        $cleanMime = 'Word';
+      }
+      if (preg_match('/(ms-?excel|spreadsheet)/', $cleanMime)) {
+        $cleanMime = 'Excel';
+      }
+      if (preg_match('/(powerpoint|presentation)/', $cleanMime)) {
+        $cleanMime = 'PPT';
+      }
       $markup = '<span class="visuallyhidden">View </span>' . $link_text . '<span class="visuallyhidden"> as ' . $cleanMime . '</span>';
 
       $link = Link::fromTextAndUrl(Markup::create($markup), $url)->toString();

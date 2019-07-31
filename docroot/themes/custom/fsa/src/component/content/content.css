@@ -901,7 +901,7 @@ but they are inserted in DOM outside container and with inline styles.
 */
 .a2a_menu {
   a {
-    font-weight: 600 !important;
+    font-weight: 600;
 
     &:hover {
       text-decoration: underline !important;
