@@ -46,8 +46,8 @@ class DocumentWithMimeTypeFormatter extends FileFormatterBase {
       $filesize = format_size($file->getSize());
 
       $mime = $file->getMimeType();
-      $cleanMime = strtoupper(preg_replace(':^application/:', '', $mime));
-      $cleanMime = strtoupper(preg_replace(':^text/:', '', $cleanMime));
+      $cleanMime = strtoupper(preg_replace(':^application/i:', '', $mime));
+      $cleanMime = strtoupper(preg_replace(':^text/:i', '', $cleanMime));
       if (preg_match('/(ms-?word|wordprocessing)/i', $cleanMime)) {
         $cleanMime = 'Word';
       }
