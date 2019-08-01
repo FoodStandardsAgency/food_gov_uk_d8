@@ -283,3 +283,7 @@
 .search__sidebar-heading {
   text-transform: none;
 }
+
+#block-researchpagebacklink {
+  margin-bottom: 1em;
+}

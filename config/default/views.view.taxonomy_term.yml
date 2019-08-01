@@ -3,13 +3,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.body
     - field.storage.node.field_content_type
     - field.storage.node.field_intro
+    - field.storage.node.field_results_available
   module:
     - node
     - taxonomy
-    - text
     - user
 _core:
   default_config_hash: Gy5PaLdfFhtFSRqJxV-DBTF5AocKgNA2CsCNNEbvx4c
@@ -473,10 +472,10 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        body:
-          id: body
-          table: node__body
-          field: body
+        field_results_available:
+          id: field_results_available
+          table: node__field_results_available
+          field: field_results_available
           relationship: none
           group_type: group
           admin_label: ''
@@ -505,7 +504,7 @@ display:
             more_link: false
             more_link_text: ''
             more_link_path: ''
-            strip_tags: true
+            strip_tags: false
             trim: false
             preserve_tags: ''
             html: false
@@ -518,13 +517,15 @@ display:
           element_wrapper_class: ''
           element_default_classes: true
           empty: ''
-          hide_empty: false
+          hide_empty: true
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: text_summary_or_trimmed
+          type: boolean
           settings:
-            trim_length: 250
+            format: custom
+            format_custom_true: 'Results available'
+            format_custom_false: ''
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -550,9 +551,10 @@ display:
         - user.permissions
       max-age: -1
       tags:
-        - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_content_type'
         - 'config:field.storage.node.field_intro'
+        - 'config:field.storage.node.field_results_available'
+        - extensions
   feed_1:
     id: feed_1
     display_title: Feed
@@ -592,9 +594,10 @@ display:
         - user.permissions
       max-age: -1
       tags:
-        - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_content_type'
         - 'config:field.storage.node.field_intro'
+        - 'config:field.storage.node.field_results_available'
+        - extensions
   page:
     id: page
     display_title: Page
@@ -616,6 +619,7 @@ display:
         - user.permissions
       max-age: -1
       tags:
-        - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_content_type'
         - 'config:field.storage.node.field_intro'
+        - 'config:field.storage.node.field_results_available'
+        - extensions
