@@ -1,5 +1,5 @@
 googleplaces:
   version: 1.x
   js:
-    https://maps.googleapis.com/maps/api/js?key=AIzaSyCkwhpR3qFAR_mBmBjR5BD3ySzcd5xzFxg&libraries=places&region=gb: {type: external, minified: true}
+    https://maps.googleapis.com/maps/api/js?key=AIzaSyDxet9MfZVoiaK-YYdBg2m0UUIdFdc5f1E&libraries=places&region=gb: {type: external, minified: true}
     js/autocomplete.js: {}
