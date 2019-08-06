@@ -447,6 +447,10 @@ function fsa_custom_form_alter(&$form, $form_state, $form_id) {
     $form['actions']['preview']['#access'] = FALSE;
   }
 
+  if ($form['#id'] === 'webform-results-export') {
+    $form['export']['download']['download']['#access'] = TRUE;
+  }
+
   if ($form['#id'] == 'views-exposed-form-user-admin-people-page-1') {
     if (isset($form['roles_op'])) {
       // Helper text for the role operator.
