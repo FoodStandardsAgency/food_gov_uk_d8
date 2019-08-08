@@ -9,12 +9,13 @@
           radio_yes = '#edit-is-useful-yes',
           radio_no = '#edit-is-useful-no',
           open_text = Drupal.t('Is there anything wrong with this page?'),
-          close_text = Drupal.t('Close');
+          close_text = Drupal.t('Close'),
+          close_aria_text = Drupal.t('the feedback form');
         var form = $('.footer-top-wrapper form');
 
       // Supporting buttons to open/close the feedback form.
       $(radios_fieldset).once().append('<button id="open-feedback" type="button" value="open" class="toggler open-feedback">'+open_text+'</button>');
-      $(wrapper_fieldset).once().prepend('<button type="button" value="close" class="toggler close-feedback">'+close_text+'</button>');
+      $(wrapper_fieldset).once().prepend('<button type="button" value="close" class="toggler close-feedback">'+close_text+'<span class="visually-hidden">'+close_aria_text+'</span></button>');
 
       if ($('.page-feedback .message-list').length === 0) {
         // Hide the feedback form by default as long as no visible errors.
