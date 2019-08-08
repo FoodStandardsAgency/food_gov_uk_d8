@@ -27,12 +27,12 @@
 
       // Open the feedback-container and show submit button.
       $('.page-feedback--no, #open-feedback').click(function(e) {
-	e.preventDefault();
-	$('.is_useful').val('No')
+        e.preventDefault();
+        $('.is_useful').val('No')
         $(radios_fieldset).hide();
         $(submit).show();
         $(wrapper_fieldset).slideDown();
-	$('.page-feedback--p').fadeOut('fast');      
+        $('.page-feedback--p').fadeOut('fast');      
       });
 
       // Close the container.
@@ -41,12 +41,14 @@
         $(submit).hide();
       });
 
+      setInterval(function() { console.log(jQuery(':focus')); }, 5000);
+
       $('.page-feedback--yes').once().click(function(e) {
-	e.preventDefault();
-	$('.is_useful').val('Yes')
+        e.preventDefault();
+        $('.is_useful').val('Yes')
         form.find(':submit').trigger('click');
         form.fadeOut('fast');
-	$('.page-feedback--p').fadeOut('fast');      
+        $('.page-feedback--p').fadeOut('fast');      
       });
 
       $('#edit-is-useful--wrapper').hide();

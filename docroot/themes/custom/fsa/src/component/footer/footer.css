@@ -158,11 +158,22 @@
     margin-left: 0.5em;
     margin-right: 0.5em;
   }
-  #open-feedback {
-    float: right;
-    line-height: 1.6;
+  #open-feedback {	   
+    float: none;
+    width: 100%;
+    text-align: left;
+    padding: 0;
+    @media (--breakpoint-sm) {
+      width: auto;
+      float: right;
+      line-height: 1.6;
+    } 
   }
   .page-feedback--p {
     padding: 1em 0;
   }
+}
+/** Fix a weird focus issue in firefix/IE */
+#webform_submission_page_feedback_node_94_add_form-ajax-content {
+  display: none !important;
 }
