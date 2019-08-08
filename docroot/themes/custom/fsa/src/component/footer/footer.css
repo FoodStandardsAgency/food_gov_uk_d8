@@ -143,3 +143,26 @@
     }
   }
 }
+
+.page-feedback {
+  .page-feeback--useful {
+    font-family: fira sans,sans-serif;
+    font-size: 1em;
+    line-height: 1.2;
+    font-weight: 700;
+    color: inherit;
+    margin-bottom: .5em;
+    text-transform: none;
+  }
+  .page-feedback--yes {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+  }
+  #open-feedback {
+    float: right;
+    line-height: 1.6;
+  }
+  .page-feedback--p {
+    padding: 1em 0;
+  }
+}

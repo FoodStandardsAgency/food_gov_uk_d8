@@ -10,6 +10,7 @@
           radio_no = '#edit-is-useful-no',
           open_text = Drupal.t('Is there anything wrong with this page?'),
           close_text = Drupal.t('Close');
+        var form = $('.footer-top-wrapper form');
 
       // Supporting buttons to open/close the feedback form.
       $(radios_fieldset).once().append('<button id="open-feedback" type="button" value="open" class="toggler open-feedback">'+open_text+'</button>');
@@ -25,19 +26,33 @@
       }
 
       // Open the feedback-container and show submit button.
-      $('.toggler.open-feedback, #edit-is-useful-no').click(function(e) {
-        $(radio_no).prop('checked', true);
+      $('.page-feedback--no, #open-feedback').click(function(e) {
+	e.preventDefault();
+	$('.is_useful').val('No')
         $(radios_fieldset).hide();
         $(submit).show();
         $(wrapper_fieldset).slideDown();
+	$('.page-feedback--p').fadeOut('fast');      
       });
 
       // Close the container.
       $('.toggler.close-feedback').click(function(e) {
-        $(radio_no).prop('checked', false);
         $(wrapper_fieldset).slideUp();
-        $(radios_fieldset).fadeIn();
+        $(submit).hide();
       });
+
+      $('.page-feedback--yes').once().click(function(e) {
+	e.preventDefault();
+	$('.is_useful').val('Yes')
+        form.find(':submit').trigger('click');
+        form.fadeOut('fast');
+	$('.page-feedback--p').fadeOut('fast');      
+      });
+
+      $('#edit-is-useful--wrapper').hide();
+      $('#edit-is-useful').remove();
+      form.append('<input class="is_useful" name="is_useful" value="Yes" type="hidden">');    
+      $(submit).hide();
     }
   };
 
