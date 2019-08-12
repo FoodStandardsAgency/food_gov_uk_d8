@@ -172,6 +172,11 @@
   .page-feedback--p {
     padding: 1em 0;
   }
+  a, button {
+    color: #005e59;
+    text-decoration: underline;
+    cursor: pointer;
+  }
 }
 /** Fix a weird focus issue in firefix/IE */
 #webform_submission_page_feedback_node_94_add_form-ajax-content {
