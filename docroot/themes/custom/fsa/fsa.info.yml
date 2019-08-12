@@ -12,6 +12,7 @@ regions:
   secondary_menu: 'Secondary menu'
   hero: 'Hero'
   highlighted: 'Highlighted'
+  content_header: 'Content header'
   content_top: 'Content top'
   content: 'Content'
   content_bottom: 'Content bottom'
