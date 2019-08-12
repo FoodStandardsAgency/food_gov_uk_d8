@@ -42,8 +42,6 @@
         $(submit).hide();
       });
 
-      setInterval(function() { console.log(jQuery(':focus')); }, 5000);
-
       $('.page-feedback--yes').once().click(function(e) {
         e.preventDefault();
         $('.is_useful').val('Yes')
@@ -56,6 +54,14 @@
       $('#edit-is-useful').remove();
       form.append('<input class="is_useful" name="is_useful" value="Yes" type="hidden">');    
       $(submit).hide();
+
+      setTimeout(function() {
+        jQuery('#a2apage_full a').each(function() { 
+          if (["Email", "Facebook", "WhatsApp", "Twitter", "LinkedIn", "Gmail", "Facebook Messenger", "Copy Link", "Pinterest", "Tumblr"].indexOf(jQuery(this).text().trim()) === -1) {
+            jQuery(this).remove();
+          }
+        });
+      }, 500);
     }
   };
 
