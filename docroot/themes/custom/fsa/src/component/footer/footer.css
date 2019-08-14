@@ -134,10 +134,51 @@
 
         :--not-touch &:--enter {
           background-color: transparent;
+          /*
           box-shadow: none !important;
+          */
           text-decoration: underline;
         }
       }
     }
   }
+}
+
+.page-feedback {
+  .page-feeback--useful {
+    font-family: fira sans,sans-serif;
+    font-size: 1em;
+    line-height: 1.2;
+    font-weight: 700;
+    color: inherit;
+    margin-bottom: .5em;
+    text-transform: none;
+  }
+  .page-feedback--yes {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+  }
+  #open-feedback {	   
+    float: none;
+    width: 100%;
+    text-align: left;
+    padding: 0;
+    @media (--breakpoint-sm) {
+      width: auto;
+      float: right;
+      line-height: 1.6;
+    } 
+  }
+  .page-feedback--p {
+    padding: 1em 0;
+  }
+  a, button {
+    color: #005e59;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+/** Fix a weird focus issue in firefix/IE */
+#webform_submission_page_feedback_node_94_add_form-ajax-content {
+  display: none !important;
 }

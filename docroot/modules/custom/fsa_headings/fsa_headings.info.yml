@@ -1,0 +1,6 @@
+name: FSA Headings
+type: module
+description: "Adds tagname to all headings, for debugging purposes."
+core: 8.x
+package: FSA
+dependencies: []

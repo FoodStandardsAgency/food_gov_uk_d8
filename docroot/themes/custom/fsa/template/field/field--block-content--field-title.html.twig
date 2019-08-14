@@ -8,5 +8,5 @@
  */
 #}
 {% for item in items %}
-    <h3{{ attributes.setAttribute('id', 'subject-'~item.content|render|striptags|trim|clean_id) }}>{{ item.content }}</h3>
+    <h2{{ attributes.setAttribute('id', 'subject-'~item.content|render|striptags|trim|clean_id) }}>{{ item.content }}</h2>
 {% endfor %}

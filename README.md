@@ -30,10 +30,6 @@ pv test.sql | docker-compose exec -T mariadb mysql -udrupal -pdrupal drupal
 
 Stop Docker to save resources: `make stop`
 
-## Updating this project.
-
-This project uses [Drush Make](https://docs.drush.org/en/7.x/make/) for pulling in dependencies.
-
 ### Updating modules.
 
 Follow the normal advice on `https://www.drupal.org/docs/8/update/update-modules`
@@ -53,7 +49,7 @@ inside a docker container.
 ### Adding a new module.
 
 Modules are added with a Make command. This uses composer inside a docker container for you.  There's no arguments on a 
-Make command, it will prompt you for the module name, e.g. to instal drupal/warden just type `warden` when asked. 
+Make command, it will prompt you for the module name, e.g. to install drupal/warden just type `warden` when asked. 
 
 `make drupal-add-module`
 

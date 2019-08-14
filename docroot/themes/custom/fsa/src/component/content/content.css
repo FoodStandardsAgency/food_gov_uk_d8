@@ -83,8 +83,34 @@ h6 {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.02em;
+    @media print {
+      color: #000;
+    }
+
   }
 }
+
+a:focus,
+input:focus,
+button:focus,
+input:focus,
+.html5-video-player a:focus,
+input[type="radio"]:focus + label,
+input[type="checkbox"]:focus + label {
+  outline: none;
+  -webkit-box-shadow: 0 0 3px 3px #0052CC !important;
+  box-shadow: 0 0 3px 3px #0052CC !important;
+}
+
+
+html:not(.is-touch) .webform-submission-page-feedback-form button.close-feedback:focus,
+html:not(.is-touch) .webform-submission-page-feedback-form button.open-feedback:focus,
+.webform-submission-page-feedback-form .fieldgroup > button.open-feedback:focus {
+  -webkit-box-shadow: inset 0px 0px 3px 3px rgba(0,82,204,1) !important;
+  box-shadow: inset 0px 0px 3px 3px rgba(0,82,204,1) !important;
+
+}
+
 
 .guide__title__wrapper {
   margin-bottom: 1em;
@@ -297,6 +323,10 @@ table {
     background-color: var(--dark-secondary-color) !important;
     color: var(--color-white);
 
+    @media print {
+      color:#000;
+    }
+
     td,
     th {
       border: 1px solid var(--dark-secondary-color);
@@ -422,6 +452,7 @@ blockquote {
   padding: 0;
   position: relative;
   margin-right: 1em;
+  padding-left: 20px;
 
   &:after {
     @mixin responsive-declaration left, 0, -2em;
@@ -872,9 +903,18 @@ but they are inserted in DOM outside container and with inline styles.
   a {
     font-weight: 600;
 
-    &:hover,
-    &:focus {
+    &:hover {
       text-decoration: underline !important;
+    }
+    &:focus {
+       text-decoration: underline !important;
+       outline: none;
+       /*
+       -webkit-box-shadow: 0 0 3px 3px #0052CC;
+       box-shadow: 0 0 3px 3px #0052CC;
+       */
+       -webkit-box-shadow: inset 0px 0px 3px 3px rgba(0,82,204,1) !important;
+       box-shadow: inset 0px 0px 3px 3px rgba(0,82,204,1) !important;
     }
   }
 
@@ -1462,11 +1502,12 @@ but they are inserted in DOM outside container and with inline styles.
 .cc_btn {
   order: 100;
   background-color: var(--color-white) !important;
-  color: var(--dark-primary-color) !important;
+  color: var(--color-darker-teal) !important;
   border-radius: 2em !important;
-  padding: 0.35em 2.5em !important;
+  padding: 0.35em 20px !important;
   margin-top: 0.5em !important;
   margin-bottom: 0.5em !important;
+  max-width: 180px !important;
 
   :--not-touch &:--enter {
     color: var(--darker-primary-color) !important;

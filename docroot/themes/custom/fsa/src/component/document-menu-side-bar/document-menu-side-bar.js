@@ -1,7 +1,7 @@
 
 function toggleSidebarDocumentMenu() {
 
-  let sidebarDocumentMenus = document.querySelectorAll('div.document-menu-side-menu');
+  let sidebarDocumentMenus = [...document.querySelectorAll('div.document-menu-side-menu')];
 
   let toggleCSSClass = (element, className) => {
 
