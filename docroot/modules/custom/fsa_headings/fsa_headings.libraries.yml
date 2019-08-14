@@ -1,0 +1,7 @@
+fsa-headings:
+  version: 1.x
+  js:
+    js/fsa-headings.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery.once

@@ -264,7 +264,7 @@ function toggle () {
   })
 
   // Grab all elements with required attributes
-  const elems = document.querySelectorAll('[data-state]')
+  const elems = [...document.querySelectorAll('[data-state]')];
 
   // Current window width
   let windowWidth = window.innerWidth

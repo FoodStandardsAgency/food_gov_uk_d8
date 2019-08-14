@@ -76,6 +76,22 @@ if (!file_exists('/var/www/html/foodgovuk.ode19/docroot')) {
   $aliases['ode19']['remote-user'] = 'foodgovuk.ode19';
 }
 
+$aliases['ode20'] = array(
+  'root' => '/var/www/html/foodgovuk.ode20/docroot',
+  'ac-site' => 'foodgovuk',
+  'ac-env' => 'ode20',
+  'ac-realm' => 'prod',
+  'uri' => 'foodgovukode20.prod.acquia-sites.com',
+  'path-aliases' => array(
+    '%drush-script' => 'drush8',
+  ),
+);
+
+if (!file_exists('/var/www/html/foodgovuk.ode20/docroot')) {
+  $aliases['ode20']['remote-host'] = 'foodgovukode20.ssh.prod.acquia-sites.com';
+  $aliases['ode20']['remote-user'] = 'foodgovuk.ode20';
+}
+
 $aliases['prod'] = array(
   'root' => '/var/www/html/foodgovuk.prod/docroot',
   'ac-site' => 'foodgovuk',

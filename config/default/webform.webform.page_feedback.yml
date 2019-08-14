@@ -11,7 +11,7 @@ id: page_feedback
 title: 'Page feedback'
 description: 'Footer-embedded page feedback form.'
 category: Feedback
-elements: "page_url:\n  '#type': hidden\n  '#title': 'Page url'\n  '#default_value': '[current-page:url:unaliased:absolute]'\nis_useful:\n  '#type': radios\n  '#title': 'Is this page useful?'\n  '#options': yes_no\n  '#options_display': two_columns\n  '#required': true\nfeedback_wrapper:\n  '#type': fieldset\n  '#title': 'How should we improve this page?'\n  feedback:\n    '#type': textarea\n    '#title': Feedback\n    '#title_display': invisible\n    '#states':\n      required:\n        ':input[name=\"is_useful\"]':\n          value: 'No'\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__label': 'Send message'\n"
+elements: "page_url:\n  '#type': hidden\n  '#title': 'Page url'\n  '#default_value': '[current-page:url:unaliased:absolute]'\nis_useful:\n  '#type': radios\n  '#title': 'Is this page useful?'\n  '#options': yes_no\n  '#options_display': two_columns\n  '#required': true\nfeedback_wrapper:\n  '#type': fieldset\n  '#title': 'How should we improve this page?'\n  feedback:\n    '#type': textarea\n    '#title': Feedback\n    '#title_display': invisible\n    '#states':\n      required:\n        ':input[name=\"is_useful\"]':\n          value: 'No'\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__label': 'Submit'\n"
 css: ''
 javascript: ''
 settings:

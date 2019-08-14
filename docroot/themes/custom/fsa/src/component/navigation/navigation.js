@@ -223,7 +223,7 @@ function navigation () {
         // Mobile mode specifics when opening a navigation tree.
         if (navigationMode.getMode()) {
           // Close inner items to re-inert them.
-          content.querySelectorAll('.navigation__link').forEach((element) => {
+          [...content.querySelectorAll('.navigation__link')].forEach((element) => {
             var toggleEvent = new CustomEvent('navigation:close')
             element.dispatchEvent(toggleEvent);
           })
@@ -234,7 +234,7 @@ function navigation () {
         }
         else {
           // Make inner buttons inert as they are not needed in full mode.
-          content.querySelectorAll('button.navigation__link').forEach((element) => {
+          [...content.querySelectorAll('button.navigation__link')].forEach((element) => {
             element.inert = true
           })
         }
@@ -332,7 +332,7 @@ function navigation () {
 
     // Close navigation/subnavigation when focused outside of navigation
     tabbableNavigationItems.forEach((element) => {
-      element.addEventListener('blur', function (e) {
+      element.addEventListener('focusOut', function (e) {
         // Close mobile navigation when focusing outside it.
         if (navigationMode.getMode()) {
           if (e.relatedTarget !== null && keyboard.queryParents(e.relatedTarget, settings.mobileDrawerSelector) === null) {

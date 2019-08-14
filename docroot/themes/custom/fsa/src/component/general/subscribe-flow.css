@@ -29,9 +29,10 @@
   flex-direction: column;
 }
 
-.user-registration-form .fieldset-wrapper > *:first-child,
-.profile-manage-form .fieldset-wrapper > *:first-child {
-  order: 100
+.user-registration-form .privacy-link,
+.profile-manage-form .privacy-link {
+  font-weight: 600;
+  padding-bottom: 1em;
 }
 
 .user-registration-form .description,

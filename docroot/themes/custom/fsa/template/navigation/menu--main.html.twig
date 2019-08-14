@@ -47,13 +47,6 @@
           aria-controls="collapsible-{{ randomID }}">
           <span class="visually-hidden">Back</span>
         </button>
-        <h2 class="navigation__item navigation__item--level-{{menu_level + 1}} navigation__item--heading">
-          {% if firstItem.url|render|striptags|trim %}
-            <a href="{{ firstItem.url }}" title="{{ firstItem.title }}" class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}">{{ firstItem.title }}</a>
-          {% else %}
-            <span title="{{ firstItem.title }}" class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}">{{ firstItem.title }}</span>
-          {% endif %}
-        </h2>
       </li>
     {% endif %}
 

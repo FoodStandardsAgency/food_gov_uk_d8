@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Contains fsa-headings.module.
+ */
+
+/**
+ * Implements template_preprocess_page().
+ */
+function fsa_headings_preprocess_page(&$variables) {
+  // Attach tag to every heading, for debugging purposes.
+  $variables['#attached']['library'][] = 'fsa_headings/fsa-headings';
+}

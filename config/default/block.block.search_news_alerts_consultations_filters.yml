@@ -34,7 +34,7 @@ settings:
     keywords: 0
   post_route_name: ''
   location_context: ''
-  disable_ajax: false
+  disable_ajax: true
   hide_submit_button: false
 visibility:
   request_path:

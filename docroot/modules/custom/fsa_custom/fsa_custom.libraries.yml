@@ -1,3 +1,10 @@
+fsa_external:
+  version: 1.x
+  js:
+    js/fsa-external.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery.once
 history_back:
   version: 1.x
   js:
@@ -23,6 +30,27 @@ search_filters:
   version: 1.x
   js:
     js/search-filters.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery.once
+fsa-svgs:
+  version: 1.x
+  js:
+    js/fsa-svgs.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery.once
+fsa-removeDuplicatedIDs:
+  version: 1.x
+  js:
+    js/fsa-removeDuplicatedIDs.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery.once
+fsa-addtoany-accesibility:
+  version: 1.x
+  js:
+    js/fsa-addtoany-accesibility.js: {}
   dependencies:
     - core/drupal
     - core/jquery.once
