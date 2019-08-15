@@ -62,7 +62,7 @@ class UserRegistrationForm extends FormBase {
       '#markup' => FsaCustomHelper::privacyNoticeLink('alerts'),
     ];
 
-    $form['links']['privacy_notice']['accept'] = [
+    $form['links']['privacy_notice']['privacy_notice'] = [
       '#type' => 'checkboxes',
       '#options' => [
         'yes' => $this->t('I accept the terms of this privacy statement'),
