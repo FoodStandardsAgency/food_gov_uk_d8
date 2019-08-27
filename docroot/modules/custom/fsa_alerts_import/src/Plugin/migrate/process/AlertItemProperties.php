@@ -66,17 +66,13 @@ class AlertItemProperties extends ProcessPluginBase {
           case 'GB-NIR':
             $cids[] = '33';
             break;
-
-          case 'GB-SCT':
-            $cids[] = '301';
-            break;
         }
       }
     }
     else {
       // In case API returns no country values set all as that is default for
       // all new content on the site.
-      $cids = ['31', '32', '33', '301'];
+      $cids = ['31', '32', '33'];
     }
     $row->setDestinationProperty('field_nation', $cids);
 

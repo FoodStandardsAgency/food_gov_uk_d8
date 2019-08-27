@@ -305,18 +305,6 @@
     max-width: var(--max-width-small) !important;
     width: 100%;
   }
-
-  @media screen and (min-width: 60rem) /* 960px */ {
-    &.layout__content--header {
-      position: absolute;
-    }
-
-    &.layout__content--with-header {
-      padding-top: 300px;
-    }
-}
-
-
 }
 
 .overflow-x-auto {
