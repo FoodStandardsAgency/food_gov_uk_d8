@@ -12,8 +12,8 @@ third_party_settings:
     classes: block-page-title
 id: pagetitle
 theme: fsa
-region: content_header
-weight: -25
+region: content
+weight: -24
 provider: null
 plugin: page_title_block
 settings:
