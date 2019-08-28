@@ -48,37 +48,8 @@ class AlertItemProperties extends ProcessPluginBase {
       \Drupal::logger('fsa_alerts')->warning(t('Failed to fetch Alert properties: "%error"', ['%error' => $exception->getMessage()]));
     }
 
-    // Loop through the countries and store nation term id's to array.
-    if (isset($item['country'])) {
-      $cids = [];
-      foreach ($item['country'] as $country) {
-        $cid = AlertImportHelpers::getIdFromUri($country['@id']);
-        // @todo: Store external country codes to nation taxonomy and map instead of assumed production term ids.
-        switch ($cid) {
-          case 'GB-ENG':
-            $cids[] = '31';
-            break;
-
-          case 'GB-WLS':
-            $cids[] = '32';
-            break;
-
-          case 'GB-NIR':
-            $cids[] = '33';
-            break;
-
-          case 'GB-SCT':
-            $cids[] = '301';
-            break;
-        }
-      }
-    }
-    else {
-      // In case API returns no country values set all as that is default for
-      // all new content on the site.
-      $cids = ['31', '32', '33', '301'];
-    }
-    $row->setDestinationProperty('field_nation', $cids);
+    $row->setDestinationProperty('field_nation',
+      $this->getNationsCids($item['country']));
 
     // Map previous alert, store only alert ID.
     if (isset($item['previousAlert'])) {
@@ -174,6 +145,56 @@ class AlertItemProperties extends ProcessPluginBase {
 
     // Return the actual notation value.
     return $value;
+  }
+
+  /**
+   * Mapping nations IDs to taxonomy term.
+   * 
+   * @param array $item
+   *
+   * @return array
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
+  private function getNationsCids($countries = NULL) {
+    $nations = [
+      'GB-ENG' => 'England',
+      'GB-WLS' => 'Wales',
+      'GB-NIR' => 'Northern Ireland',
+      'GB-SCT' => 'Scotland',
+    ];
+
+    $properties = [
+      'name' => $nations,
+      'vid' => 'nation',
+    ];
+
+    $terms = \Drupal::entityManager()
+      ->getStorage('taxonomy_term')
+      ->loadByProperties($properties);
+    $nations_tids = [];
+    foreach ($terms as $term) {
+      if ($key = array_search($term->getName(), $nations)) {
+        $nations_tids[$key] = $term->id();
+      }
+    }
+
+    // Loop through the countries and store nation term id's to array.
+    if (isset($countries)) {
+      $cids = [];
+      foreach ($countries as $country) {
+        $cid = AlertImportHelpers::getIdFromUri($country['@id']);
+        if (!empty($nations_tids[$cid])) {
+          $cids[] = $nations_tids[$cid];
+        }
+      }
+    }
+    else {
+      // In case API returns no country values set all as that is default for
+      // all new content on the site.
+      $cids = array_values($nations_tids);
+    }
+    return $cids;
   }
 
 }
