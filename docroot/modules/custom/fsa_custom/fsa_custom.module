@@ -189,6 +189,10 @@ function fsa_custom_preprocess_page_title(&$variables) {
             // Load second nation.
             $nation2 = Term::load($nations[1]->getValue()['target_id']);
 
+            if ($nation1->label() == 'Scotland') {
+              list($nation1, $nation2) = [$nation2, $nation1];
+            }
+
             $nation_label = t(
               '@nation_1 and @nation_2 specific',
               [
@@ -205,6 +209,14 @@ function fsa_custom_preprocess_page_title(&$variables) {
             // Load second nation.
             $nation2 = Term::load($nations[1]->getValue()['target_id']);
             $nation3 = Term::load($nations[2]->getValue()['target_id']);
+
+            if ($nation1->label() == 'Scotland') {
+              list($nation1, $nation3) = [$nation3, $nation1];
+            }
+
+            if ($nation2->label() == 'Scotland') {
+              list($nation2, $nation3) = [$nation3, $nation2];
+            }
 
             $name = 'Scotland';
             $vid = 'nation';
