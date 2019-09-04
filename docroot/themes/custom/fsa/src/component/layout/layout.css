@@ -314,11 +314,15 @@
     &.layout__content--with-header {
       padding-top: 300px;
     }
-}
-
-
+  }
 }
 
 .overflow-x-auto {
   overflow-x: auto;
+}
+
+.sidebar {
+  @media screen and (max-width: 30rem) /* 480px */ {
+    padding-top: 0 !important;
+  }
 }

@@ -70,8 +70,8 @@ function fsa_custom_preprocess_page(&$variables) {
   // Removed duplicate IDs in Search Block.
   $variables['#attached']['library'][] = 'fsa_custom/fsa-removeDuplicatedIDs';
 
-  // Move focus to popup after enabling addtoany popup.
-  $variables['#attached']['library'][] = 'fsa_custom/fsa-addtoany-accesibility';
+  // Accessibility-related behaviour.
+  $variables['#attached']['library'][] = 'fsa_custom/fsa-accesibility';
 
   // Hardcoded "utility menu" links.
   // Get the contact link from settings. Default to 58 which happened to be the
