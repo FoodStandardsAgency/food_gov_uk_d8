@@ -746,7 +746,6 @@ blockquote {
 
 /* Content toolbar */
 .content-toolbar {
-  @mixin responsive-declaration margin-bottom, 1.5em, 3em;
 
   position: relative;
   display: flex;
