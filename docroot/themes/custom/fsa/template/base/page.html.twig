@@ -48,6 +48,8 @@
  * @see html.html.twig
  */
 #}
+{% set sidebarFirstRender = page.sidebar_first|render %}
+
 <div class="site js-site">
 
   <div class="layout topbar-wrapper">
@@ -242,11 +244,11 @@
 
           {% if page.sidebar_first %}
             <aside class="layout__sidebar js-sticky-element" role="complementary">
-              <div class="sidebar">
+              <div class="sidebar" {% if sidebarFirstRender|striptags|trim is empty %} style="display: none" {% endif %}>
                 <nav role="navigation" class="navigation-side">
 
-                  {% if page.sidebar_first %}
-                    {{ page.sidebar_first }}
+                  {% if sidebarFirstRender|striptags %}
+                    {{ sidebarFirstRender }}
                   {% endif %}
 
                 </nav>
