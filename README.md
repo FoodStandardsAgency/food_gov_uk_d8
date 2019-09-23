@@ -123,13 +123,6 @@ This project uses:
 
 Tickets are managed in this [Jira project](https://deeson.atlassian.net/secure/RapidBoard.jspa?rapidView=332&projectKey=FSA)
 
-## Site environments
-
-- Production [www.food.gov.uk](https://www.food.gov.uk)
-- Acquia Cloud domain: [http://foodgovuk.prod.acquia-sites.com](http://foodgovuk.prod.acquia-sites.com)
-- Staging [http://fsauser:FCeDh4u&7n2p@foodgovukstg.prod.acquia-sites.com](http://foodgovukstg.prod.acquia-sites.com)
-- Dev: [http://fsauser:FCeDh4u&7n2p@foodgovukdev.prod.acquia-sites.com](http://foodgovukdev.prod.acquia-sites.com)
-
 ## FHRS Rating Search
 
 FHRS Establishment and authority data is pulled from [FHRS rating API](http://api.ratings.food.gov.uk) with Drupal Migrate API.
@@ -174,8 +167,8 @@ Communication with lockr requires a valid certificate. The locations for these c
 Note that there are **separate certificates** for dev/production. 
 
 
-
 #### Setup 
+
 - Enable the TFA in the TFA module settings: **/admin/config/people/tfa**
 Here you must also select an appropriate encryption profile from the available list.
 
