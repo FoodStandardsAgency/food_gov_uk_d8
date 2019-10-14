@@ -233,6 +233,15 @@
 
       <div class="layout layout--main {% if page.sidebar_first or page.sidebar_second %} layout--with-sidebar js-sticky-container{% else %} layout--with-no-sidebar{% endif %}{% if page.sidebar_second %} layout--with-secondary-sidebar{% endif %}">
         <div class="layout__container layout__container--main">
+
+{#          <div class="layout__content layout__content--main {% if page.sidebar_first or page.sidebar_second %}layout__content--with-sidebar{% endif %} js-content">#}
+          {% if page.content_header %}
+            <div class="layout__content layout__content--main layout__content--header {% if page.sidebar_first or page.sidebar_second %}layout__content--with-sidebar{% endif %} js-content">
+              {{ page.content_header }}
+            </div>
+          {% endif %}
+
+
           {% if page.sidebar_first %}
             <aside class="layout__sidebar js-sticky-element" role="complementary">
               <div class="sidebar" {% if sidebarFirstRender|striptags|trim is empty %} style="display: none" {% endif %}>
@@ -247,7 +256,7 @@
             </aside>
           {% endif %}
 
-          <div class="layout__content layout__content--main {% if page.sidebar_first or page.sidebar_second %}layout__content--with-sidebar{% endif %} js-content">
+          <div class="layout__content layout__content--main {% if page.content_header %}layout__content--with-header {% endif %} {% if page.sidebar_first or page.sidebar_second %}layout__content--with-sidebar{% endif %} js-content">
             {{ page.content }}
             {{ satisfaction_form }} {# satisfaction_form is the "Give us feedback" form attached to the end of selected pages #}
           </div>
