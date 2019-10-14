@@ -87,6 +87,44 @@ class AlertJsonToHtml extends FormatterBase {
           }
         }
 
+        // Loop through allergen data and narrow down to further definitions if
+        // available within JSON.
+        if (isset($value['allergen'])) {
+          $cell_label = t('Allergens');
+          $allergens = [];
+
+          foreach ($value['allergen'] as $allergen) {
+            // Top level allergens which have no associated parents or children.
+            if (!isset($allergen['broader']) && !isset($allergen['narrower'])) {
+              $allergens[] = $allergen['label'];
+            }
+            // Top level allergens which have associated children.
+            elseif (!isset($allergen['broader']) && isset($allergen['narrower'])) {
+              $label = $allergen['label'];
+
+              // Loop through children and check if label is available.
+              $children = [];
+              foreach ($allergen['narrower'] as $child) {
+                if (isset($child['label'])) {
+                  $children[] = strtolower($child['label']);
+                }
+              }
+
+              // Build comma delimited list of child allergens within brackets.
+              if (!empty($children)) {
+                $children = implode(', ', $children);
+                $label .= ' (' . $children . ')';
+              }
+
+              $allergens[] = $label;
+            }
+          }
+
+          // Build comma delimited list of allergens and their children.
+          $allergens = implode(', ', $allergens);
+          $table_rows[] = [$cell_label, $allergens];
+        }
+
         $elements[$key] = [
           '#theme' => 'table',
           '#caption' => $table_caption,
