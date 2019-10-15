@@ -53,7 +53,7 @@ class AlertPlainTextFormatter extends BasicStringFormatter {
         // If there is more then 1 line, first line should contain extra data.
         if ($alert_type == 'AA' && count($lines) > 1 && $i == 0) {
           $label = $this->t('Allergen(s)');
-          $formatted[] = '<p><b>' . $label . ': </b>' . $line . '</p>';
+          $formatted[] = '<p><strong>' . $label . ': </strong>' . $line . '</p>';
           $i++;
         }
         else {
