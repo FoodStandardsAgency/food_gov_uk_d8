@@ -223,10 +223,12 @@
   .theme--search .layout--with-sidebar & {
     @media (--breakpoint-md) {
       margin-left: 20em;
+      width: calc(100% - 20em);
     }
 
     @media (--breakpoint-lg) {
       margin-left: 23em;
+      width: calc(100% - 23em);
     }
   }
 
