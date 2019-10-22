@@ -72,11 +72,11 @@ class AlertJsonToHtml extends FormatterBase {
           $batch_fields = [
             'batchCode' => t('Batch code'),
             'lotNumber' => t('Lot number'),
-            'bestBeforeDate' => t('Best before date'),
+            //'bestBeforeDate' => t('Best before date'),
             'useByDescription' => t('Use by'),
             'bestBeforeDescription' => t('Best before'),
             'batchTextDescription' => t('Batch description'),
-            'useByDate' => t('Use by date'),
+            //'useByDate' => t('Use by date'),
           ];
           foreach ($value['batchDescription'] as $b_key => $b_value) {
             foreach ($batch_fields as $batch_field_key => $batch_field_value) {
