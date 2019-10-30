@@ -10,11 +10,13 @@ dependencies:
     - field.field.node.help.field_liftup_summary
     - field.field.node.help.field_liftup_title
     - field.field.node.help.field_liftups
+    - field.field.node.help.field_meta_tags
     - node.type.help
   module:
     - content_moderation
     - field_group
     - icon_select
+    - metatag
     - paragraphs
     - path
     - scheduler
@@ -132,6 +134,12 @@ content:
       default_paragraph_type: ''
     third_party_settings: {  }
     type: entity_reference_paragraphs
+    region: content
+  field_meta_tags:
+    weight: 102
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_firehose
     region: content
   langcode:
     type: language_select

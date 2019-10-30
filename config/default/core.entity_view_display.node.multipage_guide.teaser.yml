@@ -13,6 +13,11 @@ targetEntityType: node
 bundle: multipage_guide
 mode: teaser
 content:
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   links:
     weight: 100
     settings: {  }
@@ -24,4 +29,5 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_guide_pages: true
+  field_nation: true
   langcode: true
