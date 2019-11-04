@@ -49,7 +49,7 @@ class PreviousAlert extends BasicStringFormatter {
 
       $elements[$delta] = [
         '#type' => 'inline_template',
-        '#template' => '{{ value|nl2br }}',
+        '#template' => '<div class="field">{{ value|nl2br }}</div>',
         '#context' => ['value' => $value],
       ];
 
