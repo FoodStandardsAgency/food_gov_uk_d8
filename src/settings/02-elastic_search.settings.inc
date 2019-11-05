@@ -7,19 +7,9 @@
 
 $config['elasticsearch_helper.settings']['elasticsearch_helper']['host'] = getenv('DB_HOST_DRUPAL');
 
-if (SETTINGS_ENVIRONMENT === D_ENVIRONMENT_PROD) {
+if (SETTINGS_PLATFORM === D_PLATFORM_ACQUIA) {
   $config['elasticsearch_helper.settings']['elasticsearch_helper']['scheme'] = 'https';
-  $config['elasticsearch_helper.settings']['elasticsearch_helper']['host'] = 'search-food-gov-uk-website-a4nksv2ajieqlock7l4p6wpasy.eu-west-2.es.amazonaws.com';
-  $config['elasticsearch_helper.settings']['elasticsearch_helper']['port'] = '443';
-}
-elseif (SETTINGS_ENVIRONMENT === D_ENVIRONMENT_TEST) {
-  $config['elasticsearch_helper.settings']['elasticsearch_helper']['scheme'] = 'https';
-  $config['elasticsearch_helper.settings']['elasticsearch_helper']['host'] = 'search-food-gov-uk-website-dev-f33m6htrjv6wmka5kzjv3tc62q.eu-west-2.es.amazonaws.com';
-  $config['elasticsearch_helper.settings']['elasticsearch_helper']['port'] = '443';
-}
-elseif (SETTINGS_ENVIRONMENT === D_ENVIRONMENT_DEV) {
-  $config['elasticsearch_helper.settings']['elasticsearch_helper']['scheme'] = 'https';
-  $config['elasticsearch_helper.settings']['elasticsearch_helper']['host'] = 'search-food-gov-uk-website-dev-f33m6htrjv6wmka5kzjv3tc62q.eu-west-2.es.amazonaws.com';
+  $config['elasticsearch_helper.settings']['elasticsearch_helper']['host'] = getenv('ELASTIC_SEARCH_HOST');
   $config['elasticsearch_helper.settings']['elasticsearch_helper']['port'] = '443';
 }
 elseif (SETTINGS_ENVIRONMENT === D_ENVIRONMENT_LOCAL) {
