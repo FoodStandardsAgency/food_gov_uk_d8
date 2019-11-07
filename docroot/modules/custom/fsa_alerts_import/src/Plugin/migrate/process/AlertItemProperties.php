@@ -54,7 +54,7 @@ class AlertItemProperties extends ProcessPluginBase {
     // Map previous alert, store only alert ID.
     if (isset($item['previousAlert'])) {
       $prev = AlertImportHelpers::getIdFromUri($item['previousAlert']['@id']);
-      $row->setDestinationProperty('field_alert_previous', $prev);
+      $row->setDestinationProperty('field_alert_previous_multiple', $prev);
     }
 
     // Map single textfield values.
