@@ -25,6 +25,12 @@ class UserRegistrationForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
+    if (\Drupal::state()->get('fsa_signin_subscriptions_offline') === TRUE) {
+      $form['subscribe_description_1'] = [
+        '#markup' => '<p>' . $this->t("We’re experiencing technical issues with this service. We’re working to resolve these as soon as possible. Please check again later.") . '</p>',
+      ];
+      return $form;
+    }
     $form['#attributes']['class'][] = DefaultController::PROFILE_FORM_HTML_CLASS;
 
     $form['subscribe_description_1'] = [
