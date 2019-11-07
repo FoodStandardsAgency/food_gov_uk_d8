@@ -17,5 +17,6 @@ ignored_config_entities:
   30: webform.webform.foreign_object
   32: webform.webform.poor_hygiene_practices
   34: 'lockr.settings:cert_path'
+  36: webform.webform.contact.yml
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
