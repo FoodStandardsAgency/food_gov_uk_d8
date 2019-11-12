@@ -36,7 +36,7 @@ class AlertImportHelpers {
    * Traverses Alert's siblings and retrieves an array of previous alert
    * notations.
    *
-   * @param $nid
+   * @param $previous_alert_notation string
    * @return array
    */
   public static function getNodePreviousAlerts($previous_alert_notation) {
