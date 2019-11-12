@@ -1,0 +1,68 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the fsa_alerts module.
+ */
+
+use Drupal\fsa_alerts_import\AlertImportHelpers;
+
+/**
+ * Populates the new Previous Alerts field.
+ */
+function fsa_alerts_update_8001(&$sandbox) {
+  // Initialise our batch counters.
+  if (!isset($sandbox['total'])) {
+    $nids = \Drupal::entityQuery('node')
+      ->condition('type', 'alert')
+      ->execute();
+    $sandbox['total'] = count($nids);
+    $sandbox['current'] = 0;
+  }
+  $nodes_per_batch = 25;
+
+  // Load parent alert node ids using current range.
+  $batch_nids = \Drupal::entityQuery('node')
+    ->condition('type', 'alert')
+    ->range($sandbox['current'], $sandbox['current'] + $nodes_per_batch)
+    ->execute();
+
+  foreach($batch_nids as $parent_nid) {
+    $previous_notations = [];
+
+    // Get previous alert notation from parent alert node.
+    $parent_alert = \Drupal::entityTypeManager()->getStorage('node')->load($parent_nid);
+    $previous_alert_notation = $parent_alert->field_alert_previous->value;
+
+    // Only continue if the previous alert field has a value.
+    if (isset($previous_alert_notation)) {
+      // Get array of previous alert notations using helper class.
+      $previous_notations = AlertImportHelpers::getNodePreviousAlerts($previous_alert_notation);
+    }
+
+    // Populate new field, reset old field and save.
+    if (!empty($previous_notations)) {
+      array_unshift($previous_notations, $previous_alert_notation);
+
+      try {
+        $parent_alert->field_alert_previous->setValue([]);
+        $parent_alert->field_alert_previous_multiple = $previous_notations;
+        $parent_alert->save();
+      }
+      catch (EntityStorageException $e) {
+        \Drupal::logger('fsa_alerts')->error(
+          t('Error migrating previous alerts for node @nid', ['@nid' => $parent_alert->id()])
+        );
+      }
+    }
+
+    $sandbox['current']++;
+  }
+
+  if ($sandbox['total'] == 0) {
+    $sandbox['#finished'] = 1;
+  }
+  else {
+    $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+  }
+}

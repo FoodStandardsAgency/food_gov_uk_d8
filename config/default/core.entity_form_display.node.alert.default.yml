@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.alert.field_alert_notation
     - field.field.node.alert.field_alert_otherbusiness
     - field.field.node.alert.field_alert_previous
+    - field.field.node.alert.field_alert_previous_multiple
     - field.field.node.alert.field_alert_productdetails_raw
     - field.field.node.alert.field_alert_relatedmedia
     - field.field.node.alert.field_alert_reportingbusiness
@@ -94,8 +95,8 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_alert_previous:
-    weight: 25
+  field_alert_previous_multiple:
+    weight: 27
     settings:
       size: 60
       placeholder: ''
@@ -190,7 +191,7 @@ content:
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 30
+    weight: 26
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -230,7 +231,7 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 30
+    weight: 25
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -239,4 +240,5 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_alert_previous: true

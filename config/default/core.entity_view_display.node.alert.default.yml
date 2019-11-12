@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.alert.field_alert_notation
     - field.field.node.alert.field_alert_otherbusiness
     - field.field.node.alert.field_alert_previous
+    - field.field.node.alert.field_alert_previous_multiple
     - field.field.node.alert.field_alert_productdetails_raw
     - field.field.node.alert.field_alert_relatedmedia
     - field.field.node.alert.field_alert_reportingbusiness
@@ -58,8 +59,8 @@ content:
     third_party_settings: {  }
     type: text_default
     region: content
-  field_alert_previous:
-    weight: 7
+  field_alert_previous_multiple:
+    weight: 6
     label: above
     settings: {  }
     third_party_settings: {  }
@@ -100,6 +101,7 @@ hidden:
   field_alert_modified: true
   field_alert_notation: true
   field_alert_otherbusiness: true
+  field_alert_previous: true
   field_alert_reportingbusiness: true
   field_alert_smstext: true
   field_alert_type: true
