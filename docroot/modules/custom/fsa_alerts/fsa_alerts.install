@@ -5,6 +5,8 @@
  * Install, update and uninstall functions for the fsa_alerts module.
  */
 
+use Drupal\fsa_alerts_import\AlertImportHelpers;
+
 /**
  * Populates the new Previous Alerts field.
  */
@@ -34,39 +36,14 @@ function fsa_alerts_update_8001(&$sandbox) {
 
     // Only continue if the previous alert field has a value.
     if (isset($previous_alert_notation)) {
-      $previous_notations = [$previous_alert_notation];
-      $has_previous_alert = TRUE;
-
-      // Loop to traverse through previous alerts.
-      while ($has_previous_alert) {
-        // Load alert node via notation field.
-        $query = \Drupal::entityQuery('node')
-          ->condition('type', 'alert')
-          ->condition('field_alert_notation', $previous_alert_notation);
-
-        $nid = $query->execute();
-
-        // Exit loop if no alert found.
-        if (empty($nid)) {
-          $has_previous_alert = FALSE;
-        }
-        else {
-          // Load previous alert node.
-          $nid = reset($nid);
-          $previous_alert = \Drupal::entityTypeManager()
-            ->getStorage('node')->load($nid);
-
-          $previous_alert_notation = $previous_alert->field_alert_previous->value;
-
-          if (isset($previous_alert_notation)) {
-            $previous_notations[] = $previous_alert_notation;
-          }
-        }
-      }
+      // Get array of previous alert notations using helper class.
+      $previous_notations = AlertImportHelpers::getNodePreviousAlerts($previous_alert_notation);
     }
 
     // Populate new field, reset old field and save.
     if (!empty($previous_notations)) {
+      array_unshift($previous_notations, $previous_alert_notation);
+
       try {
         $parent_alert->field_alert_previous->setValue([]);
         $parent_alert->field_alert_previous_multiple = $previous_notations;
