@@ -44,6 +44,7 @@ class AlertImportHelpers {
     $has_previous_alert = TRUE;
 
     // Loop to traverse through previous alerts.
+    $i = 0;
     while ($has_previous_alert) {
       // Load alert node via notation field.
       $query = \Drupal::entityQuery('node')
@@ -67,6 +68,12 @@ class AlertImportHelpers {
         if (isset($previous_alert_notation)) {
           $previous_notations[] = $previous_alert_notation;
         }
+      }
+
+      // Protection against alert referencing itself and causing infinite loop.
+      $i++;
+      if ($i === 50) {
+        $has_previous_alert = FALSE;
       }
     }
 
