@@ -45,7 +45,6 @@ function fsa_alerts_update_8001(&$sandbox) {
       array_unshift($previous_notations, $previous_alert_notation);
 
       try {
-        $parent_alert->field_alert_previous->setValue([]);
         $parent_alert->field_alert_previous_multiple = $previous_notations;
         $parent_alert->save();
       }
