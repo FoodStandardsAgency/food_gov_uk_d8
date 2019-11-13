@@ -66,7 +66,7 @@ class AlertImportHelpers {
         $previous_alert_notation = $previous_alert->field_alert_previous->value;
 
         if (isset($previous_alert_notation)) {
-          $previous_notations[] = $previous_alert->field_alert_notation->value;
+          $previous_notations[] = $previous_alert_notation;
         }
       }
 
