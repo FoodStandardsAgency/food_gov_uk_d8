@@ -38,12 +38,11 @@ function fsa_alerts_update_8001(&$sandbox) {
     if (isset($previous_alert_notation)) {
       // Get array of previous alert notations using helper class.
       $previous_notations = AlertImportHelpers::getNodePreviousAlerts($previous_alert_notation);
+      array_unshift($previous_notations, $previous_alert_notation);
     }
 
     // Populate new field, reset old field and save.
     if (!empty($previous_notations)) {
-      array_unshift($previous_notations, $previous_alert_notation);
-
       try {
         $parent_alert->field_alert_previous_multiple = $previous_notations;
         $parent_alert->save();
