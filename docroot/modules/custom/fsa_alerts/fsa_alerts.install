@@ -39,10 +39,11 @@ function fsa_alerts_update_8001(&$sandbox) {
     if (isset($previous_alert_notation)) {
       // Get array of previous alert notations using helper class.
       $previous_notations = AlertImportHelpers::getNodePreviousAlerts($previous_alert_notation);
-      $future_notations = AlertImportHelpers::getNodeFutureAlerts($alert_notation);
       array_unshift($previous_notations, $previous_alert_notation);
-      $notations = array_merge(array_reverse($future_notations), $previous_notations);
     }
+
+    $future_notations = AlertImportHelpers::getNodeFutureAlerts($alert_notation);
+    $notations = array_merge(array_reverse($future_notations), $previous_notations);
 
     // Populate new field, reset old field and save.
     if (!empty($notations)) {
