@@ -63,7 +63,7 @@ class AlertImportHelpers {
         $previous_alert = \Drupal::entityTypeManager()
           ->getStorage('node')->load($nid);
 
-        $previous_alert_notation = $previous_alert->field_alert_previous->value;
+        $previous_alert_notation = $previous_alert->field_alert_notation->value;
 
         if (isset($previous_alert_notation)) {
           $previous_notations[] = $previous_alert_notation;
