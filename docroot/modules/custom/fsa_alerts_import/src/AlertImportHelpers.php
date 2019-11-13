@@ -80,4 +80,54 @@ class AlertImportHelpers {
     return $previous_notations;
   }
 
+  /**
+   * Traverses Alert's siblings and retrieves an array of previous alert
+   * notations.
+   *
+   * @param $alert_notation string
+   * @return array
+   */
+  public static function getNodeFutureAlerts($alert_notation) {
+    $notations = [];
+    $has_future_alert = TRUE;
+
+    // Loop to traverse through previous alerts.
+    $i = 0;
+    while ($has_future_alert) {
+      var_dump($alert_notation);
+      // Load alert node via notation field.
+      $query = \Drupal::entityQuery('node')
+        ->condition('type', 'alert')
+        ->condition('field_alert_previous', $alert_notation);
+
+      $nid = $query->execute();
+
+      // Exit loop if no alert found.
+      if (empty($nid)) {
+        $has_future_alert = FALSE;
+      }
+      else {
+        // Load previous alert node.
+        $nid = reset($nid);
+        var_dump($nid);
+        $previous_alert = \Drupal::entityTypeManager()
+          ->getStorage('node')->load($nid);
+
+        $alert_notation = $previous_alert->field_alert_notation->value;
+
+        if (isset($alert_notation)) {
+          $notations[] = $alert_notation;
+        }
+      }
+
+      // Protection against alert referencing itself and causing infinite loop.
+      $i++;
+      if ($i === 50) {
+        $has_future_alert = FALSE;
+      }
+    }
+
+    return $notations;
+  }
+
 }
