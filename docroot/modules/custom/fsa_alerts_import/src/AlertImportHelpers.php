@@ -94,7 +94,6 @@ class AlertImportHelpers {
     // Loop to traverse through previous alerts.
     $i = 0;
     while ($has_future_alert) {
-      var_dump($alert_notation);
       // Load alert node via notation field.
       $query = \Drupal::entityQuery('node')
         ->condition('type', 'alert')
@@ -109,7 +108,6 @@ class AlertImportHelpers {
       else {
         // Load previous alert node.
         $nid = reset($nid);
-        var_dump($nid);
         $previous_alert = \Drupal::entityTypeManager()
           ->getStorage('node')->load($nid);
 
