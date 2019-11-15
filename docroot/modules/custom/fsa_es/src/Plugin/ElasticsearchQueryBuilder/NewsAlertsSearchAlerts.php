@@ -116,7 +116,7 @@ class NewsAlertsSearchAlerts extends SitewideSearchBase {
           'aggs' => [
             'type' => [
               'terms' => [
-                'field' => 'news_type.keyword',
+                'field' => 'news_type',
                 'order' => ['_term' => 'asc'],
                 'size' => 10000,
               ],
