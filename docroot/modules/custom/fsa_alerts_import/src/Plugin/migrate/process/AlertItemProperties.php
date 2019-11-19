@@ -58,6 +58,7 @@ class AlertItemProperties extends ProcessPluginBase {
     if (isset($item['previousAlert'])) {
       $previous_alert_notation = AlertImportHelpers::getIdFromUri($item['previousAlert']['@id']);
       $previous_alerts = AlertImportHelpers::getNodePreviousAlerts($previous_alert_notation);
+      array_unshift($previous_alerts, $previous_alert_notation);
       $row->setDestinationProperty('field_alert_previous_multiple', $previous_alerts);
     }
 
@@ -153,7 +154,7 @@ class AlertItemProperties extends ProcessPluginBase {
 
   /**
    * Mapping nations IDs to taxonomy term.
-   * 
+   *
    * @param array $item
    *
    * @return array
