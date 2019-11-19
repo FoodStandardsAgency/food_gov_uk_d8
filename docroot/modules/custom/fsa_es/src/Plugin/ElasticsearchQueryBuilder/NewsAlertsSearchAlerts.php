@@ -54,7 +54,7 @@ class NewsAlertsSearchAlerts extends SitewideSearchBase {
     if (!empty($values['news_type'])) {
       $query_filter_filters[] = [
         'terms' => [
-          'news_type.keyword' => array_filter(array_values($values['news_type'])),
+          'news_type' => array_filter(array_values($values['news_type'])),
         ],
       ];
     }
