@@ -21,7 +21,7 @@ settings:
   id: fsa_link_tabs
   label: 'News/alerts search tabs'
   provider: fsa_custom
-  label_display: '0'
+  label_display: visible
   class: 'tab-row tab-row--capitalize'
   links:
     link-0:
