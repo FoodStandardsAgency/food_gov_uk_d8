@@ -184,6 +184,9 @@
             },
             "drupal/field_validation": {
                 "Declaration of (...)FieldValidationRuleAddForm::buildForm must be compatible with (...)FieldValidationRuleFormBase::buildForm": "https://www.drupal.org/files/issues/2941006-php-incompatible-buildform-signature.patch"
+            },
+            "drupal/honeypot": {
+              "Add label to honeypot fields" : "./src/patches/honeypot.patch"
             }
         },
         "dropin-paths": {
