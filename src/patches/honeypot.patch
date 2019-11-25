@@ -1,0 +1,35 @@
+diff --git a/honeypot.module b/honeypot.module
+index 55bec56..d523cb4 100644
+--- a/honeypot.module
++++ b/honeypot.module
+@@ -138,20 +138,18 @@ function honeypot_add_form_protection(&$form, FormStateInterface $form_state, ar
+ 
+     // Build the honeypot element.
+     $honeypot_class = $honeypot_element . '-textfield';
+-    $form[$honeypot_element] = [
+-      '#theme_wrappers' => [
+-        'container' => [
+-          '#id' => NULL,
+-          '#attributes' => [
+-            'class' => [
+-              $honeypot_class,
+-            ],
+-            'style' => [
+-              'display: none !important;',
+-            ],
+-          ],
++    $form['hp'] = [
++      '#type' => 'fieldset',
++      '#attributes' => [
++        'class' => [
++          $honeypot_class,
++        ],
++        'style' => [
++          'display: none !important;',
+         ],
+       ],
++    ];
++    $form['hp'][$honeypot_element] = [
+       '#type' => 'textfield',
+       '#title' => t('Leave this field blank'),
+       '#size' => 20,
