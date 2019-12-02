@@ -7,6 +7,7 @@ use Drupal\fsa_alerts_import\AlertImportHelpers;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\Row;
+use Drupal\node\Entity\Node;
 use GuzzleHttp\Exception\RequestException;
 
 /**
@@ -55,12 +56,37 @@ class AlertItemProperties extends ProcessPluginBase {
       $this->getNationsCids($item['country']));
 
     // Map previous alert, store only alert ID.
+    $previous_alerts = [];
     if (isset($item['previousAlert'])) {
-      $previous_alert_notation = AlertImportHelpers::getIdFromUri($item['previousAlert']['@id']);
-      $previous_alerts = AlertImportHelpers::getNodePreviousAlerts($previous_alert_notation);
-      array_unshift($previous_alerts, $previous_alert_notation);
-      $row->setDestinationProperty('field_alert_previous_multiple', $previous_alerts);
+      $previous_alerts[] = AlertImportHelpers::getIdFromUri($item['previousAlert']['@id']);
     }
+    if (isset($item['relatedAlerts'])) {
+      foreach ($item['relatedAlerts'] as $alert) {
+        $previous_alerts[] = AlertImportHelpers::getIdFromUri($alert['@id']);
+      }
+    }
+    $row->setDestinationProperty('field_alert_previous_multiple', $previous_alerts);
+
+    foreach ($previous_alerts as $alert) {
+      $query = \Drupal::database()->select('node__field_alert_notation', 'n')
+        ->condition('n.field_alert_notation_value', $alert, '=')
+        ->fields('n', ['entity_id']);
+      $results = $query->execute();
+
+      foreach ($results as $result) {
+        $n = Node::load($result->entity_id);
+        $values = [];
+        if (!empty($n->field_alert_previous_multiple)) {
+          $values = $n->field_alert_previous_multiple->getValue();
+        }
+        array_unshift($values, ["value" => $value]);
+        var_dump($result->entity_id); var_dump($values);
+        $n->field_alert_previous_multiple = $values;
+        $n->save();
+      }
+    }
+
+
 
     // Map single textfield values.
     $mapping = [
