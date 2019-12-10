@@ -79,17 +79,18 @@ function stickyElement (containers, stickyElements) {
     // Get header element to check if in viewport.
     const headerElement = document.getElementsByClassName('hero-wrapper')
     const header  = new Area(headerElement[0])
-    
+
     containerArray.forEach(function (container) {
 
-      // Check if element is bottom of the content area
+      // Check if element is bottom of the content area  and header is not in
+      // view.
       if (container.isBottom  && !header.inview) {
         container.relatedInstance.element.classList.add('is-bottom')
       } else {
         container.relatedInstance.element.classList.remove('is-bottom')
       }
 
-      // Check if element is in view and header is not in view.
+      // Check if element is in view.
       if (container.inview && container.offset < 0) {
         container.relatedInstance.element.classList.add('is-sticky')
       } else {
