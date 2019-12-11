@@ -26,7 +26,7 @@
     padding-right: 2.5em;
     padding-left: 2.5em;
     border-bottom: 0;
-    padding-top: 1em;
+    /*padding-top: 1em;*/
     padding-bottom: 1em;
   }
 
@@ -100,8 +100,9 @@
 .header__topbar {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #bfc1c3;
+  /* border-bottom: 1px solid #bfc1c3; */
   font-size: 1em;
+  flex-direction: row-reverse;
 
   @media (--breakpoint-sm) {
     font-size: 0.8999em;
@@ -118,6 +119,7 @@
 
     @media (--breakpoint-sm) {
       display: flex;
+      padding: 0.7em 0;
     }
   }
 
