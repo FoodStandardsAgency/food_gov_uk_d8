@@ -95,7 +95,10 @@ class FSAFormErrorHandler extends CoreFormErrorHandler {
         unset($errors[$name]);
       }
       elseif ($is_visible_element && $has_title && $has_id) {
-        $error_links[] = Link::fromTextAndUrl($title, Url::fromRoute('<none>', [], ['fragment' => $form_element['#id'], 'external' => TRUE]))->toRenderable();
+        $error_links[] = [
+          '#markup' => '<div class="error-name-label">'.$errors[$name].'</div>',
+          'link' => Link::fromTextAndUrl($title, Url::fromRoute('<none>', [], ['fragment' => $form_element['#id'], 'external' => TRUE]))->toRenderable(),
+        ];
         unset($errors[$name]);
       }
     }
@@ -108,12 +111,9 @@ class FSAFormErrorHandler extends CoreFormErrorHandler {
     if (!empty($error_links)) {
       $render_array = [
         [
-          '#markup' => $this->formatPlural(count($error_links), '1 Error has been found: ', '@count Errors have been found: '),
-        ],
-        [
           '#theme' => 'item_list',
           '#items' => $error_links,
-          '#context' => ['list_style' => 'comma-list'],
+          '#context' => ['list_style' => 'list'],
         ],
       ];
       $message = $this->renderer->renderPlain($render_array);
