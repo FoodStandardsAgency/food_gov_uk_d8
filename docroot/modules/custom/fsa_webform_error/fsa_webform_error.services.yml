@@ -1,4 +1,0 @@
-services:
-  fsa_webform_error.messenger:
-    class: Drupal\fsa_webform_error\FSAFormErrorMessenger
-    arguments: ['@session.flash_bag', '@page_cache_kill_switch']
