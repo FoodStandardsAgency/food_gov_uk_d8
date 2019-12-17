@@ -21,6 +21,7 @@ import toc from './component/toc/toc'
 import { changeAriaRoleOnToggle, autoOpenFormError, scrollToMultiStepForm } from './component/form/form'
 import autoOpenFirstSearchFilter from './component/search/search'
 import toggleSidebarDocumentMenu from './component/document-menu-side-bar/document-menu-side-bar';
+import webFormError from './component/webform-error/webform-error'
 
 // Require every image asset inside of img folder
 require.context('./img/', true, /\.(gif|png|svg|jpe?g)$/)
@@ -57,6 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
   changeAriaRoleOnToggle()
   autoOpenFormError()
   scrollToMultiStepForm()
+
+  webFormError()
 
   // Auto-open first search filter (on desktop only)
   autoOpenFirstSearchFilter()

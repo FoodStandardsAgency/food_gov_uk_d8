@@ -237,6 +237,7 @@
 {#          <div class="layout__content layout__content--main {% if page.sidebar_first or page.sidebar_second %}layout__content--with-sidebar{% endif %} js-content">#}
           {% if page.content_header %}
             <div class="layout__content layout__content--main layout__content--header {% if page.sidebar_first or page.sidebar_second %}layout__content--with-sidebar{% endif %} js-content">
+              {{ status_messages }}
               {{ page.content_header }}
             </div>
           {% endif %}
@@ -290,7 +291,7 @@
         <div class="layout__content footer-top-wrapper__content">
           <div class="footer-top">
 <div class="page-feedback">
-  <p class="page-feedback--p"><span class="page-feeback--useful">Is this page useful?</span> 
+  <p class="page-feedback--p"><span class="page-feeback--useful">Is this page useful?</span>
   <a class="page-feedback--yes" aria-expanded="false" role="button" href="/webform/page-feedback">
     Yes <span class="visually-hidden">this page is useful</span>
   </a>

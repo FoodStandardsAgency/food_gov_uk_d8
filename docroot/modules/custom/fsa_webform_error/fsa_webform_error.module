@@ -1,0 +1,26 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter.
+ *
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $formState
+ * @param $formId
+ */
+function fsa_webform_error_form_alter(&$form, FormStateInterface $formState, $formId) {
+  $form['#attributes']['novalidate'] = 'novalidate';
+}
+
+/**
+ * Implements hook_preprocess_page.
+ *
+ * @param array $variables
+ */
+function fsa_webform_error_preprocess_page(array &$variables) {
+  if ($variables['page']['content']['messages']) {
+    $variables['status_messages'] = $variables['page']['content']['messages'];
+    unset($variables['page']['content']['messages']);
+  }
+}

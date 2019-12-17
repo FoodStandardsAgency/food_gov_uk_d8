@@ -32,13 +32,14 @@
       'message-list__item--' ~ type,
     ]
   %}
-  <div role="contentinfo" aria-label="{{ status_headings[type] }}"{{ attributes.addClass(classes)|without('role', 'aria-label') }}>
-    {% if type == 'error' %}
-      <div role="alert">
-    {% endif %}
-      {% if status_headings[type] %}
-        <h2 class="visually-hidden">{{ status_headings[type] }}</h2>
-      {% endif %}
+  {% if type == 'error' %}
+    <div role="alert" class="error-summary" aria-labelledby="error-summary-heading" tabindex="-1">
+      <h2 id="error-summary-heading" class="error-summary-heading">
+        {% trans %}There is a problem with your submission{% endtrans %}
+      </h2>
+  {% else %}
+    <div role="contentinfo" aria-label="{{ status_headings[type] }}"{{ attributes.addClass(classes)|without('role', 'aria-label') }}>
+  {% endif %}
       {% if messages|length > 1 %}
         <ul class="messages__list">
           {% for message in messages %}
@@ -48,12 +49,10 @@
       {% else %}
         {{ messages|first }}
       {% endif %}
-    {% if type == 'error' %}
-      </div>
-    {% endif %}
   </div>
   {# Remove type specific classes. #}
   {% set attributes = attributes.removeClass(classes) %}
 {% endfor %}
 </div>
 {% endblock messages %}
+
