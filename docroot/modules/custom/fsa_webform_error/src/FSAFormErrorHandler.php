@@ -3,16 +3,52 @@
 namespace Drupal\fsa_webform_error;
 
 use Drupal\Core\Form\FormElementHelper;
+use Drupal\Core\Form\FormErrorHandler as CoreFormErrorHandler;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
+use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Render\Element;
+use Drupal\Core\Render\RendererInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\Core\StringTranslation\TranslationInterface;
 use Drupal\Core\Url;
-use Drupal\inline_form_errors\FormErrorHandler;
 
 /**
  * Produces inline form errors.
  */
-class FSAFormErrorHandler extends FormErrorHandler {
+class FSAFormErrorHandler extends CoreFormErrorHandler {
+
+  use StringTranslationTrait;
+
+  /**
+   * The renderer service.
+   *
+   * @var \Drupal\Core\Render\RendererInterface
+   */
+  protected $renderer;
+
+  /**
+   * The messenger.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface
+   */
+  protected $messenger;
+
+  /**
+   * Constructs a new FormErrorHandler.
+   *
+   * @param \Drupal\Core\StringTranslation\TranslationInterface $string_translation
+   *   The string translation service.
+   * @param \Drupal\Core\Render\RendererInterface $renderer
+   *   The renderer service.
+   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
+   *   The messenger.
+   */
+  public function __construct(TranslationInterface $string_translation, RendererInterface $renderer, MessengerInterface $messenger) {
+    $this->stringTranslation = $string_translation;
+    $this->renderer = $renderer;
+    $this->messenger = $messenger;
+  }
 
   /**
    * Loops through and displays all form errors.
@@ -72,12 +108,12 @@ class FSAFormErrorHandler extends FormErrorHandler {
     if (!empty($error_links)) {
       $render_array = [
         [
-          '#markup' => $this->formatPlural(count($error_links), 'One Error has been found: ', '@count Errors have been found: '),
+          '#markup' => $this->formatPlural(count($error_links), '1 Error has been found: ', '@count Errors have been found: '),
         ],
         [
           '#theme' => 'item_list',
           '#items' => $error_links,
-          '#context' => ['list_style' => 'list'],
+          '#context' => ['list_style' => 'comma-list'],
         ],
       ];
       $message = $this->renderer->renderPlain($render_array);

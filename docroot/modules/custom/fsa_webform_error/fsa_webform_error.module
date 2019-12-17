@@ -24,3 +24,41 @@ function fsa_webform_error_preprocess_page(array &$variables) {
     unset($variables['page']['content']['messages']);
   }
 }
+
+/**
+ * Implements hook_preprocess_HOOK() for form element templates.
+ */
+function fsa_webform_error_preprocess_form_element(&$variables) {
+  _fsa_webform_error_set_errors($variables);
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for details element templates.
+ */
+function fsa_webform_error_preprocess_details(&$variables) {
+  _fsa_webform_error_set_errors($variables);
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for fieldset element templates.
+ */
+function fsa_webform_error_preprocess_fieldset(&$variables) {
+  _fsa_webform_error_set_errors($variables);
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for datetime form wrapper templates.
+ */
+function fsa_webform_error_preprocess_datetime_wrapper(&$variables) {
+  _fsa_webform_error_set_errors($variables);
+}
+
+/**
+ * Populates form errors in the template.
+ */
+function _fsa_webform_error_set_errors(&$variables) {
+  $element = $variables['element'];
+  if (!empty($element['#errors']) && empty($element['#error_no_message'])) {
+    $variables['errors'] = $element['#errors'];
+  }
+}
