@@ -75,6 +75,7 @@ class FSAFormErrorHandler extends CoreFormErrorHandler {
     }
 
     $error_links = [];
+    $required_links = [];
     $errors = $form_state->getErrors();
     // Loop through all form errors and check if we need to display a link.
     foreach ($errors as $name => $error) {
@@ -95,10 +96,24 @@ class FSAFormErrorHandler extends CoreFormErrorHandler {
         unset($errors[$name]);
       }
       elseif ($is_visible_element && $has_title && $has_id) {
-        $error_links[] = [
-          '#markup' => '<div class="error-name-label">'.$errors[$name].'</div>',
+        $errorText = $error;
+        $required = FALSE;
+        if (preg_match('/field is required/', $error)) {
+          $errorText = '';
+          $required = TRUE;
+        }
+        $error_link = [
+          '#markup' => !empty($errorText) ? '<div class="error-name-label">' . $errorText . '</div>' : '',
           'link' => Link::fromTextAndUrl($title, Url::fromRoute('<none>', [], ['fragment' => $form_element['#id'], 'external' => TRUE]))->toRenderable(),
         ];
+
+        if ($required) {
+          $required_links[] = $error_link;
+        }
+        else {
+          $error_links[] = $error_link;
+        }
+
         unset($errors[$name]);
       }
     }
@@ -107,6 +122,12 @@ class FSAFormErrorHandler extends CoreFormErrorHandler {
     foreach ($errors as $error) {
       $this->messenger->addError($error);
     }
+
+    if (!empty($required_links)) {
+      $string = 'Please complete the following required field';
+      $required_links[0]['#markup'] = '<div class="error-name-label">' . \Drupal::translation()->formatPlural(count($required_links), $string, $string . 's') . '</div>';
+    }
+    $error_links = array_merge($error_links, $required_links);
 
     if (!empty($error_links)) {
       $render_array = [

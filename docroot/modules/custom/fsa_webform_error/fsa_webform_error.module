@@ -59,6 +59,11 @@ function fsa_webform_error_preprocess_datetime_wrapper(&$variables) {
 function _fsa_webform_error_set_errors(&$variables) {
   $element = $variables['element'];
   if (!empty($element['#errors']) && empty($element['#error_no_message'])) {
-    $variables['errors'] = $element['#errors'];
+    $e = $element['#errors'];
+    if (preg_match('/field is required/', $e->getUntranslatedString())) {
+      $e = t('This information is required');
+    }
+    //var_dump($e->getUntranslatedString()); die();
+    $variables['errors'] = $e;
   }
 }
