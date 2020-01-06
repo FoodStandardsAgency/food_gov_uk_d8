@@ -159,6 +159,14 @@ function navigation () {
       menuButtonOpenElement.focus()
     })
 
+    // Add click listener for menu button
+    navigationElementArray[0].addEventListener('mobileNavClose', function (e) {
+      if (navigationMode.getMode()) {
+        mobileNavigation.off()
+        menuButtonOpenElement.focus()
+      }
+    })
+
     // Item togglers for screen readers.
     navigationItemTogglersArray.forEach((element) => {
       // Content element
