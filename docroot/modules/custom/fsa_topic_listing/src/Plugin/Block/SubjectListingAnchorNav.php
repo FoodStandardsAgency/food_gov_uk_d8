@@ -38,13 +38,10 @@ class SubjectListingAnchorNav extends BlockBase {
         }
       }
     }
-
-    // Landing page sidebar links need a different ToC type to term pages.
-    $toc_type = $node->bundle() !== 'lander' ? 'term_group_anchors' : 'landing_page_sidebar_navigation';
-
+    
     /** @var \Drupal\fsa_toc\FsaTocService $fsa_toc_service */
     $fsa_toc_service = \Drupal::service('fsa_toc.service');
-    $build = $fsa_toc_service->renderAnchors($content, $toc_type);
+    $build = $fsa_toc_service->renderAnchors($content, 'landing_page_sidebar_navigation');
 
     return $build;
 
