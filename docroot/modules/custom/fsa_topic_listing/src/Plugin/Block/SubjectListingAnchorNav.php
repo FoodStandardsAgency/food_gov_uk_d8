@@ -25,6 +25,7 @@ class SubjectListingAnchorNav extends BlockBase {
 
     $node = \Drupal::routeMatch()->getParameter('node');
     $node = Node::load($node->id());
+
     $content = '';
     foreach ($node->get('field_lander_row')->referencedEntities() as $rows) {
       if (!empty($rows->field_subject_listing) && count($rows->field_subject_listing) >= 2) {
@@ -37,10 +38,10 @@ class SubjectListingAnchorNav extends BlockBase {
         }
       }
     }
-
+    
     /** @var \Drupal\fsa_toc\FsaTocService $fsa_toc_service */
     $fsa_toc_service = \Drupal::service('fsa_toc.service');
-    $build = $fsa_toc_service->renderAnchors($content, 'term_group_anchors');
+    $build = $fsa_toc_service->renderAnchors($content, 'landing_page_sidebar_navigation');
 
     return $build;
 

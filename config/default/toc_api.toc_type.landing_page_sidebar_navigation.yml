@@ -1,0 +1,27 @@
+uuid: efaa8b73-a91d-4052-b3db-164c4fec44e0
+langcode: en
+status: true
+dependencies: {  }
+id: landing_page_sidebar_navigation
+label: 'Landing page sidebar navigation'
+options:
+  template: responsive
+  title: 'In this topic'
+  block: false
+  header_count: 1
+  header_min: 2
+  header_max: 2
+  header_allowed_tags: ''
+  header_id: title
+  header_id_prefix: ''
+  top_min: 1
+  top_max: 1
+  top_label: ''
+  default:
+    number_type: none
+    number_prefix: ''
+    number_suffix: ''
+  number_path_separator: ''
+  number_path: true
+  number_path_truncate: true
+  headers: {  }
