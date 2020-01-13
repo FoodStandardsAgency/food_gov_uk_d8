@@ -27,6 +27,10 @@ fieldset.error .js-webform-radios {
   margin-bottom: 4em;
 }
 
+.error-summary:focus {
+  outline: 0;
+}
+
 .error-summary::after, .error-summary::before{
   display: none;
 }
