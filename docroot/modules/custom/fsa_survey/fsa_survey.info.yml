@@ -1,0 +1,6 @@
+name: FSA annual survey
+type: module
+description: Injects javascript for the FSA annual survey on page.
+core: 8.x
+package: FSA
+dependencies:
