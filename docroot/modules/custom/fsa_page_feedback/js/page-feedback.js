@@ -5,7 +5,7 @@
 
       var radios_fieldset = '.page-feedback fieldset.is_useful',
           wrapper_fieldset = '.page-feedback fieldset.feedback_wrapper',
-          submit = '.page-feedback form #edit-actions-submit',
+          submit = '.page-feedback form input[type="submit"]',
           radio_yes = '#edit-is-useful-yes',
           radio_no = '#edit-is-useful-no',
           open_text = Drupal.t('Is there anything wrong with this page?'),

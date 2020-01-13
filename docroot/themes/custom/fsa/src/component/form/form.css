@@ -941,7 +941,6 @@ input[type="password"] {
     justify-content: flex-start;
 
     .form-submit.button.button--primary {
-      display: none;
       margin: 0em;
       margin-bottom: 2em;
       @mixin responsive-declaration padding-right, 1em, 2em;
