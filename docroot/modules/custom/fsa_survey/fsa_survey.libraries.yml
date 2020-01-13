@@ -1,0 +1,4 @@
+survey_popup:
+  version: 1.x
+  js:
+    js/fsa_survey.js: {}
