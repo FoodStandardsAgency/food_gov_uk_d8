@@ -693,6 +693,10 @@ blockquote {
     font-weight: 500;
   }
 
+  div[role="heading"] {
+    font-family: var(--font-family-heading);
+  }
+
   &:after {
     content: '';
     position: absolute;
