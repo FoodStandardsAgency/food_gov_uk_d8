@@ -10,6 +10,15 @@
  */
 function fsa_survey_preprocess_page(&$variables) {
   if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
-    $variables['#attached']['library'][] =  'fsa_survey/survey_popup';
+    $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    switch ($language) {
+      case 'en':
+        $variables['#attached']['library'][] =  'fsa_survey/survey_en';
+        break;
+
+      case 'cy':
+        $variables['#attached']['library'][] =  'fsa_survey/survey_cy';
+        break;
+    }
   }
 }
