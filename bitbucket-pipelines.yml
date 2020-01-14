@@ -8,7 +8,6 @@ pipelines:
           name: Build Drupal
           image: wodby/drupal-php:7.2-dev
           caches:
-            - composer
             - drush
           script:
             - make pipelines-build-drupal
