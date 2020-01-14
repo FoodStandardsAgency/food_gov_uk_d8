@@ -1,0 +1,9 @@
+survey_en:
+  version: 1.x
+  js:
+    js/fsa_survey.en.js: {}
+
+survey_cy:
+  version: 1.x
+  js:
+    js/fsa_survey.cy.js: {}
