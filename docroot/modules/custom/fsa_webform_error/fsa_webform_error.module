@@ -63,7 +63,6 @@ function _fsa_webform_error_set_errors(&$variables) {
     if (preg_match('/field is required/', $e->getUntranslatedString())) {
       $e = t('This information is required');
     }
-    //var_dump($e->getUntranslatedString()); die();
     $variables['errors'] = $e;
   }
 }

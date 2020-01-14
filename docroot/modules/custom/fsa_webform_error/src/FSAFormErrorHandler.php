@@ -98,7 +98,7 @@ class FSAFormErrorHandler extends CoreFormErrorHandler {
       elseif ($is_visible_element && $has_title && $has_id) {
         $errorText = $error;
         $required = FALSE;
-        if (preg_match('/field is required/', $error)) {
+        if (preg_match('/field is required/', $error->getUntranslatedString())) {
           $errorText = '';
           $required = TRUE;
         }
@@ -124,8 +124,8 @@ class FSAFormErrorHandler extends CoreFormErrorHandler {
     }
 
     if (!empty($required_links)) {
-      $string = 'Please complete the following required field';
-      $required_links[0]['#markup'] = '<div class="error-name-label">' . \Drupal::translation()->formatPlural(count($required_links), $string, $string . 's') . '</div>';
+      $string = 'This information is required';
+      $required_links[0]['#markup'] = '<div class="error-name-label">' . t($string) . '</div>';
     }
     $error_links = array_merge($error_links, $required_links);
 
