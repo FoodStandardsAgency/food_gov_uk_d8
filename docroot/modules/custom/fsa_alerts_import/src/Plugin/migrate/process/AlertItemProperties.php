@@ -40,6 +40,9 @@ class AlertItemProperties extends ProcessPluginBase {
 
       $item = Json::decode($response->getBody());
 
+      \Drupal::logger('fsa_alert_import')->notice('Getting value for @value URL from @url', ['@url' => $api_url, '@value' => $value]);
+
+
       // API always return only one item here, set item for easy access.
       $item = $item['items'][0];
 
