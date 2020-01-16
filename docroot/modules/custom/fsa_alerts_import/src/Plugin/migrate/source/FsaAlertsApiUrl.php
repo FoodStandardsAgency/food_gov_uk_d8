@@ -30,7 +30,17 @@ class FsaAlertsApiUrl extends Url {
 
     // Build full Alerts API URL.
     // @todo: Extend to a loop if need to fetch paged alerts.
-    $configuration['urls'][] = $api_base_path . $api_resource;
+
+    $since = '';
+    if ($api_resource === '/id') {
+      $date = new \DateTime('-1 day');
+      $date->setTimeZone(new \DateTimeZone('UTC'));
+      $time_iso = $date->format('Y-m-d\TH:i:s\Z');
+      $since = '?since=' . $time_iso;
+    }
+    $url = $api_base_path . $api_resource . $since;
+    \Drupal::logger('fsa_alert_import')->notice('Using url for fetch: @url', ['@url' => $url]);
+    $configuration['urls'][] = $url;
 
     // Pass API URL(s) for source processor.
     $this->sourceUrls = $configuration['urls'];

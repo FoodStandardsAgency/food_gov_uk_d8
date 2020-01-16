@@ -1,0 +1,21 @@
+uuid: 63b97d47-b8f1-4ee8-ab0c-18a8797e5f93
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_alert_previous_multiple
+field_name: field_alert_previous_multiple
+entity_type: node
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

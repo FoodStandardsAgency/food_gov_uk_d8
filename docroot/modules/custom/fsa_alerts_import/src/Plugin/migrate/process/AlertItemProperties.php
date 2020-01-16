@@ -39,6 +39,9 @@ class AlertItemProperties extends ProcessPluginBase {
 
       $item = Json::decode($response->getBody());
 
+      \Drupal::logger('fsa_alert_import')->notice('Getting value for @value URL from @url', ['@url' => $api_url, '@value' => $value]);
+
+
       // API always return only one item here, set item for easy access.
       $item = $item['items'][0];
 
@@ -53,8 +56,9 @@ class AlertItemProperties extends ProcessPluginBase {
 
     // Map previous alert, store only alert ID.
     if (isset($item['previousAlert'])) {
-      $prev = AlertImportHelpers::getIdFromUri($item['previousAlert']['@id']);
-      $row->setDestinationProperty('field_alert_previous', $prev);
+      $previous_alert_notation = AlertImportHelpers::getIdFromUri($item['previousAlert']['@id']);
+      $previous_alerts = AlertImportHelpers::getNodePreviousAlerts($previous_alert_notation);
+      $row->setDestinationProperty('field_alert_previous_multiple', $previous_alerts);
     }
 
     // Map single textfield values.

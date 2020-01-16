@@ -143,7 +143,7 @@ class UnsubscribeForm extends FormBase {
       $mailManager = \Drupal::service('plugin.manager.mail');
 
       // @todo: Format nice message for the user?
-      $params['message'] = $this->t('You have been have unsubscribed from all alerts on FSA website.');
+      $params['message'] = $this->t('You have unsubscribed from all alerts on FSA website.');
       $params['message'] .= "\r\n\r\n--\r\n";
       $params['message'] .= $config->get('name');
 

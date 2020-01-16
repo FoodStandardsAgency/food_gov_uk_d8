@@ -10,6 +10,8 @@
  */
 $settings['container_yamls'][] = __DIR__ . '/services.yml';
 
+$settings['hash_salt'] = 'sRJ4omYhJ7xaICpk3tWriN3AzrLF5J3zFSWJlEMWS81B7BYX2BKrYvP_t4qpXfXlpp_0lFRo2A';
+
 if (SETTINGS_PLATFORM === D_PLATFORM_ACQUIA) {
   $env_services = $app_root . '/' . $site_path . '/' . SETTINGS_ENVIRONMENT . '.services.yml';
 
@@ -18,9 +20,9 @@ if (SETTINGS_PLATFORM === D_PLATFORM_ACQUIA) {
   }
 
   $settings['container_yamls'][] = $env_services;
-}
 
-$settings['hash_salt'] = 'B081u6MDeLm3bRi5niieR-797DOulNMA-SGCoprrcy5Gjn-hDNAkiy1k8Pnb9y8n1zSXWu4aQQ';
+  $settings['hash_salt'] = getenv('CORE_HASH_SALT');
+}
 
 if ( (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) == "on")
   || (isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) && $_SERVER["HTTP_X_FORWARDED_PROTO"] == "https")
