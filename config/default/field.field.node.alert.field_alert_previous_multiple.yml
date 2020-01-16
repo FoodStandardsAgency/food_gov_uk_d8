@@ -9,7 +9,7 @@ id: node.alert.field_alert_previous_multiple
 field_name: field_alert_previous_multiple
 entity_type: node
 bundle: alert
-label: 'Previous alerts'
+label: 'Related alerts'
 description: ''
 required: false
 translatable: false

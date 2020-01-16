@@ -33,19 +33,22 @@ function fsa_alerts_update_8001(&$sandbox) {
     // Get previous alert notation from parent alert node.
     $parent_alert = \Drupal::entityTypeManager()->getStorage('node')->load($parent_nid);
     $previous_alert_notation = $parent_alert->field_alert_previous->value;
+    $alert_notation = $parent_alert->field_alert_notation->value;
 
     // Only continue if the previous alert field has a value.
     if (isset($previous_alert_notation)) {
       // Get array of previous alert notations using helper class.
       $previous_notations = AlertImportHelpers::getNodePreviousAlerts($previous_alert_notation);
+      array_unshift($previous_notations, $previous_alert_notation);
     }
 
-    // Populate new field, reset old field and save.
-    if (!empty($previous_notations)) {
-      array_unshift($previous_notations, $previous_alert_notation);
+    $future_notations = AlertImportHelpers::getNodeFutureAlerts($alert_notation);
+    $notations = array_merge(array_reverse($future_notations), $previous_notations);
 
+    // Populate new field, reset old field and save.
+    if (!empty($notations)) {
       try {
-        $parent_alert->field_alert_previous_multiple = $previous_notations;
+        $parent_alert->field_alert_previous_multiple = $notations;
         $parent_alert->save();
       }
       catch (EntityStorageException $e) {
