@@ -42,7 +42,7 @@
 }
 
 .footer-top-wrapper__container {
-  background-color: var(--color-light-gray);
+  background-color: var(--color-lightish-gray);
 }
 
 .footer-wrapper {
@@ -158,7 +158,7 @@
     margin-left: 0.5em;
     margin-right: 0.5em;
   }
-  #open-feedback {	   
+  #open-feedback {
     float: none;
     width: 100%;
     text-align: left;
@@ -167,7 +167,7 @@
       width: auto;
       float: right;
       line-height: 1.6;
-    } 
+    }
   }
   .page-feedback--p {
     padding: 1em 0;

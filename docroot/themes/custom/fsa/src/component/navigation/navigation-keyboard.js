@@ -335,6 +335,18 @@ function navigationKeyboard (actionItems, settings) {
             }
             break;
 
+          case keyboard.ESCAPE:
+            listItem = queryParents(item, settings.listItemSelector)
+            var linkElement = listItem.querySelectorAll(settings.menuItemActionSelector)
+            toggleEvent = new CustomEvent('navigation:close')
+
+            const top = traversing.top.topItem(listItem);
+            top.querySelector('a').dispatchEvent(toggleEvent);
+            console.log(top);
+            console.log(top.querySelector('a'));
+            //console.log(linkElement);
+            //console.log(listItem);
+            //console.log(settings);
             break;
         };
       }

@@ -126,3 +126,7 @@ body {
     transform: none;
   }
 }
+
+.video-embed-field-responsive-video iframe {
+  border: 0;
+}
