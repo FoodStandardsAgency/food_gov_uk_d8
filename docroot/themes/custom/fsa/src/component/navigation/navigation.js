@@ -159,6 +159,14 @@ function navigation () {
       menuButtonOpenElement.focus()
     })
 
+    // Add click listener for menu button
+    navigationElementArray[0].addEventListener('mobileNavClose', function (e) {
+      if (navigationMode.getMode()) {
+        mobileNavigation.off()
+        menuButtonOpenElement.focus()
+      }
+    })
+
     // Item togglers for screen readers.
     navigationItemTogglersArray.forEach((element) => {
       // Content element
@@ -296,23 +304,26 @@ function navigation () {
       }, true)
     })
 
+
+    const closeTest = function (e, element) {
+      if (!navigationMode.getMode()) {
+        if (!element.contains(e.relatedTarget) || [...e.relatedTarget.classList].indexOf('navigation__link--level-1') !== -1) {
+          firstLevelLinkArray.forEach((element) => {
+            if (e.relatedTarget != element) {
+              var toggleEvent = new CustomEvent('navigation:close')
+              element.dispatchEvent(toggleEvent)
+            }
+          })
+        }
+      }
+    };
     // Close nav element when mouse leaves navigation element
     // or enters another first level element (relatedTarget).
     // This includes items without children!
     navigationElementArray.forEach((element) => {
-      element.addEventListener('mouseout', function (e) {
-        if (!navigationMode.getMode()) {
-          if (!element.contains(e.relatedTarget) || [...e.relatedTarget.classList].indexOf('navigation__link--level-1') !== -1) {
-            firstLevelLinkArray.forEach((element) => {
-              if (e.relatedTarget != element) {
-                var toggleEvent = new CustomEvent('navigation:close')
-                element.dispatchEvent(toggleEvent)
-              }
-            })
-          }
-        }
-      }, true)
-    })
+      element.addEventListener('mouseout', function (e) { closeTest(e, element); }, true);
+      element.addEventListener('focusout', function (e) { closeTest(e, element); }, true);
+    });
 
     // Back link in mobile mode.
     navigationBackLinksArray.forEach((element) => {
