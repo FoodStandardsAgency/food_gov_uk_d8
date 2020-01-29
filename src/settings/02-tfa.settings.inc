@@ -6,7 +6,7 @@
  */
 
 // Enabled on Staging and Prod.
-if (SETTINGS_ENVIRONMENT === D_ENVIRONMENT_PROD || SETTINGS_ENVIRONMENT === D_ENVIRONMENT_TEST) {
+if (SETTINGS_ENVIRONMENT === D_ENVIRONMENT_PROD) {
   $config['tfa.settings']['enabled'] = TRUE;
 }
 else {
