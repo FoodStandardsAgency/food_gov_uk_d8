@@ -94,6 +94,10 @@ class FsaIndexBase extends ElasticsearchIndexBase {
           ->currentRevision()
           ->execute();
         if ($translation = entity_revision_load('node', key($result))) {
+          if ($langcode !== 'en') {
+            $translation = $translation->getTranslation($langcode);
+          }
+
           $exclude = 0;
           if ($translation->hasField('field_search_exclude')) {
             $exclude = $translation->get('field_search_exclude')->getValue()[0]['value'];

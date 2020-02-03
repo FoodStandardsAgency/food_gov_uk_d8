@@ -4,6 +4,7 @@ namespace Drupal\fsa_alerts_import\Plugin\migrate\process;
 
 use Drupal\Component\Serialization\Json;
 use Drupal\fsa_alerts_import\AlertImportHelpers;
+use Drupal\migrate\MigrateSkipRowException;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\Row;
@@ -46,10 +47,16 @@ class AlertItemProperties extends ProcessPluginBase {
       // API always return only one item here, set item for easy access.
       $item = $item['items'][0];
 
+      if (empty($item)) {
+        \Drupal::logger('fsa_alerts')->warning(t('Failed to fetch Alert properties: "%error"', ['%error' => $exception->getMessage()]));
+        throw new MigrateSkipRowException(t('Skipped row %alert', ['%alert' => $api_url]), FALSE);
+      }
+
     }
     catch (RequestException $exception) {
       // Log failure(s) to fetch individual alert data.
       \Drupal::logger('fsa_alerts')->warning(t('Failed to fetch Alert properties: "%error"', ['%error' => $exception->getMessage()]));
+      throw new MigrateSkipRowException(t('Skipped row %alert', ['%alert' => $api_url]), FALSE);
     }
 
     $row->setDestinationProperty('field_nation',
