@@ -10,7 +10,7 @@
       });
 
       $('#block-languageswitcher, #block-languageswitcher-2').attr('aria-label', 'Language selection');
-      $('nav[role="navigation"]').removeAttr('role');
+      $('nav[role="navigation"], article[role="article"]').removeAttr('role');
     }
   };
 }(jQuery));
