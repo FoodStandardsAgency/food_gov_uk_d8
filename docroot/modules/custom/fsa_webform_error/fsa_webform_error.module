@@ -19,7 +19,7 @@ function fsa_webform_error_form_alter(&$form, FormStateInterface $formState, $fo
  * @param array $variables
  */
 function fsa_webform_error_preprocess_page(array &$variables) {
-  if ($variables['page']['content']['messages']) {
+  if (!empty($variables['page']['content']['messages'])) {
     $variables['status_messages'] = $variables['page']['content']['messages'];
     unset($variables['page']['content']['messages']);
   }
