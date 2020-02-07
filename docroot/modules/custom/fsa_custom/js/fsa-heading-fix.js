@@ -8,6 +8,9 @@
         var level = $head.closest('.embedded-entity').prevAll('h3')[0].nodeName.substr(1);
         $head.attr('aria-level', parseInt(level) + 1);
       });
+
+      $('#block-languageswitcher, #block-languageswitcher-2').attr('aria-label', 'Language selection');
+      $('nav[role="navigation"]').removeAttr('role');
     }
   };
 }(jQuery));

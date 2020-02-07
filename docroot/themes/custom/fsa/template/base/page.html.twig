@@ -98,7 +98,7 @@
   <div class="layout navigation-wrapper js-navigation">
     <div class="layout__container navigation-wrapper__container">
       <div class="layout__content navigation-wrapper__content">
-        <header class="navigation-mobile-header">
+        <header class="navigation-mobile-header" aria-label="Mobile navigation">
           <button class="navigation-mobile-header__button js-menu-button-close">
             <span class="visually-hidden">{{ 'Close mobile navigation'|t }}</span>
             <div class="svg">
@@ -240,7 +240,7 @@
 
 
           {% if page.sidebar_first %}
-            <aside class="layout__sidebar js-sticky-element" role="complementary">
+            <aside class="layout__sidebar js-sticky-element">
               <div class="sidebar" {% if sidebarFirstRender|striptags|trim is empty %} style="display: none" {% endif %}>
                 <nav class="navigation-side">
 
