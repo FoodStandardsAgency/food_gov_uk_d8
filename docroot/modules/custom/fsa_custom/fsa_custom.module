@@ -112,7 +112,7 @@ function fsa_custom_preprocess_page(&$variables) {
   // Build the utility menu.
   $variables['utility_menu'] = [
     '#theme' => 'item_list',
-    '#prefix' => '<nav class="menu-utility-wrapper">',
+    '#prefix' => '<nav class="menu-utility-wrapper" aria-label="Secondary menu">',
     '#suffix' => '</nav>',
     '#list_type' => 'ul',
     '#wrapper_attributes' => [

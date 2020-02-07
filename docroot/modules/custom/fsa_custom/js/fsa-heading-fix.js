@@ -9,7 +9,8 @@
         $head.attr('aria-level', parseInt(level) + 1);
       });
 
-      $('#block-languageswitcher, #block-languageswitcher-2').attr('aria-label', 'Language selection');
+      $('#block-languageswitcher').attr('aria-label', 'Language selection');
+      $('#block-languageswitcher-2').attr('aria-label', 'Mobile language selection');
       $('nav[role="navigation"], article[role="article"]').removeAttr('role');
     }
   };
