@@ -70,6 +70,9 @@ function fsa_custom_preprocess_page(&$variables) {
   // Removed duplicate IDs in Search Block.
   $variables['#attached']['library'][] = 'fsa_custom/fsa-removeDuplicatedIDs';
 
+  // Hack heading levels.
+  $variables['#attached']['library'][] = 'fsa_custom/fsa-headingFix';
+
   // Move focus to popup after enabling addtoany popup.
   $variables['#attached']['library'][] = 'fsa_custom/fsa-addtoany-accesibility';
 
