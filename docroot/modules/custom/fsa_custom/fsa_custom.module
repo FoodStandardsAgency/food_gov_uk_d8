@@ -128,6 +128,25 @@ function fsa_custom_preprocess_page(&$variables) {
     '#items' => $items,
   ];
 
+  // Build the utility menu.
+  $variables['utility_menu_mobile'] = [
+    '#theme' => 'item_list',
+    '#prefix' => '<nav class="menu-utility-wrapper" aria-label="Mobile secondary menu">',
+    '#suffix' => '</nav>',
+    '#list_type' => 'ul',
+    '#wrapper_attributes' => [
+      'class' => [
+        'wrapper',
+      ],
+    ],
+    '#attributes' => [
+      'class' => [
+        'menu-utility',
+      ],
+    ],
+    '#items' => $items,
+  ];
+
 }
 
 /**
