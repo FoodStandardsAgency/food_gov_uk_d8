@@ -471,7 +471,18 @@ display:
           tokenize: false
           content: "<div class=\"link-to-archieve\">\n<span>Previous consultations</span> <a href=\"http://webarchive.nationalarchives.gov.uk/20171207145535/https://www.food.gov.uk/news-updates/consultations/search\">National Archives</a>\n</div>"
           plugin_id: text_custom
-      empty: {  }
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content: '<p>Unfortunately your search yielded no results.</p>'
+          plugin_id: text_custom
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
@@ -480,7 +491,7 @@ display:
         groups:
           1: AND
       use_ajax: false
-      css_class: listing
+      css_class: 'listing view-news-alerts-search'
     cache_metadata:
       max-age: -1
       contexts:
