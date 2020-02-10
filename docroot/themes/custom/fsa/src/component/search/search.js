@@ -17,12 +17,14 @@ function autoOpenFirstSearchFilter () {
 
 function hideSearchFiltersEmptyResults () {
   // Check if search page.
-  const searchPage = document.querySelector('.view-news-alerts-search')
-  if (!searchPage) return
+  const searchPage = document.querySelector('.view-news-alerts-search');
+  const globalSearchPage = document.querySelector('.search-listing');
+  if (!searchPage && !globalSearchPage) return;
 
   // Check whether view has output results.
-  const hasResults = document.querySelector('.view-news-alerts-search .views-row')
-  if (hasResults) return
+  const hasResults = document.querySelector('.view-news-alerts-search .views-row');
+  const hasGlobalResults = document.querySelector('.search-listing .views-row');
+  if (hasResults || hasGlobalResults) return
 
   const sidebar = document.querySelector('.layout__sidebar')
   const mainContent = document.querySelector('.layout--main.layout--with-sidebar')
