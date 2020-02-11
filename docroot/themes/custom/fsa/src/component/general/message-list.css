@@ -95,3 +95,9 @@
   background-repeat: no-repeat;
   padding: 1em;
 }
+
+.messaging-top {
+  .message-list__item:last-child {
+    margin-bottom: 0;
+  }
+}
