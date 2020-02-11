@@ -96,7 +96,7 @@
   padding: 1em;
 }
 
-.messaging-top {
+.messaging {
   .message-list__item:last-child {
     margin-bottom: 0;
   }
