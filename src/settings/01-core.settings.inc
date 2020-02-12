@@ -71,6 +71,8 @@ $settings['config_readonly_whitelist_patterns'] = [
   'webform.webform.foreign_object',
   'webform.webform.poor_hygiene_practices',
   'webform.webform.contact',
+  'webform.webform.user_satification',
+  'webform.webform.page_feedback',
 ];
 
 /**
