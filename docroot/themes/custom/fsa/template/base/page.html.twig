@@ -98,7 +98,7 @@
   <div class="layout navigation-wrapper js-navigation">
     <div class="layout__container navigation-wrapper__container">
       <div class="layout__content navigation-wrapper__content">
-        <header class="navigation-mobile-header">
+        <header class="navigation-mobile-header" aria-label="Mobile navigation">
           <button class="navigation-mobile-header__button js-menu-button-close">
             <span class="visually-hidden">{{ 'Close mobile navigation'|t }}</span>
             <div class="svg">
@@ -116,14 +116,15 @@
           {{ page.header_2 }}
         </header>
 
-        {{ utility_menu }}
+        {{ utility_menu_mobile }}
 
         <div class="navigation-wrapper__main">
           {{ page.primary_menu }}
         </div>
 
-        <footer class="navigation-mobile-footer" role="contentinfo">
+        <div class="navigation-mobile-footer" role="contentinfo" aria-label="Mobile footer navigation">
           <div class="navigation-mobile-footer__content">
+
             <div class="header__region">
               {{ page.header_mobile }}
             </div>
@@ -171,14 +172,14 @@
               </div>
             </div>
           </div>
-        </footer>
+        </div>
       </div>
     </div>
   </div>
   {% endif %}
 
   <a id="main-content" tabindex="-1"></a>
-  <main  role="main">
+  <main>
 
     {% if (page.hero is defined and page.hero|render|striptags|trim) or (page.secondary_menu) %}
     <div class="layout hero-wrapper">
@@ -239,9 +240,9 @@
 
 
           {% if page.sidebar_first %}
-            <aside class="layout__sidebar js-sticky-element" role="complementary">
+            <aside class="layout__sidebar js-sticky-element">
               <div class="sidebar" {% if sidebarFirstRender|striptags|trim is empty %} style="display: none" {% endif %}>
-                <nav role="navigation" class="navigation-side">
+                <nav class="navigation-side">
 
                   {% if sidebarFirstRender|striptags %}
                     {{ sidebarFirstRender }}
@@ -258,7 +259,7 @@
           </div>
 
           {% if page.sidebar_second %}
-            <aside class="layout__sidebar layout__sidebar--secondary js-sticky-element" role="complementary">
+            <aside class="layout__sidebar layout__sidebar--secondary js-sticky-element">
               <div class="sidebar">
                 <div role="navigation" class="navigation-side">
 
@@ -286,7 +287,7 @@
         <div class="layout__content footer-top-wrapper__content">
           <div class="footer-top">
 <div class="page-feedback">
-  <p class="page-feedback--p"><span class="page-feeback--useful">Is this page useful?</span> 
+  <p class="page-feedback--p"><span class="page-feeback--useful">Is this page useful?</span>
   <a class="page-feedback--yes" aria-expanded="false" role="button" href="/webform/page-feedback">
     Yes <span class="visually-hidden">this page is useful</span>
   </a>
@@ -304,7 +305,7 @@
 
   </main>
 
-  <footer class="layout footer-wrapper" role="contentinfo">
+  <footer class="layout footer-wrapper">
 
     <div class="layout__container">
       <div class="layout__content footer-wrapper__content">

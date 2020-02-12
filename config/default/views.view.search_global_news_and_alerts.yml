@@ -457,7 +457,20 @@ display:
           empty: false
           content: '<span class="search-result-page-count">Showing @start-@end of @total</span>'
           plugin_id: result
-      empty: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: '<p>Unfortunately your search yielded no results.</p>'
+            format: full_html
+          plugin_id: text
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
@@ -466,7 +479,7 @@ display:
         groups:
           1: AND
       use_ajax: false
-      css_class: listing
+      css_class: listing search-listing
     cache_metadata:
       max-age: -1
       contexts:

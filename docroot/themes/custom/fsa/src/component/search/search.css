@@ -176,7 +176,6 @@
       width: 3.75em;
       height: 3.75em;
       border-radius: 0;
-      color: transparent;
       overflow: hidden;
       border: 0;
       box-shadow: none;
@@ -184,7 +183,7 @@
       @media (--breakpoint-sm) {
         padding-right: 1.5em;
         padding-left: 1.5em;
-        color: transparent;
+        color: var(--color-white);
         width: 3em;
         height: 3em;
         background-color: var(--dark-primary-color);
@@ -258,6 +257,15 @@
           border-top-left-radius: 0;
           border-bottom-left-radius: 0;
         }
+      }
+
+      &.search > span {
+        position: absolute;
+        left: -10000px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
       }
     }
   }

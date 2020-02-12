@@ -222,8 +222,8 @@ class SearchKeyword extends BlockBase implements FormInterface, ContainerFactory
 
     if ($this->configuration['form_submit_button']) {
       $form['submit'] = [
-        '#markup' => '<button class="button search">' . $this->t('Submit') . '</button>',
-        '#allowed_tags' => ['button'],
+        '#markup' => '<button class="button search"><span>' . $this->t('Submit search') . '</span></button>',
+        '#allowed_tags' => ['button', 'span'],
       ];
     }
 

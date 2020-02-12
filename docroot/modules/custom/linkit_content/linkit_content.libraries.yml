@@ -18,3 +18,10 @@ selector:
   dependencies:
     - core/drupalSettings
     - core/jquery.once
+
+accessibility:
+  version: 3.x
+  js:
+    js/linkit_content.accessibility.js: {}
+  dependencies:
+    - core/jquery

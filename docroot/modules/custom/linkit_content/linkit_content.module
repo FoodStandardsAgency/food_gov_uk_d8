@@ -36,6 +36,24 @@ function linkit_content_form_editor_link_dialog_alter(&$form, FormStateInterface
     . t('For internal link, start typing the content title to find content.') . '<hr />'
     . t('To link directly to anchors or for additional search options, use advanced search.');
 
+  $user_input = $form_state->getUserInput();
+  $input = isset($user_input['editor_object']) ? $user_input['editor_object'] : [];
+
+  $form['attributes']['data-doctype'] = [
+    '#type' => 'select',
+    '#title' => 'Document type',
+    '#description' => 'Select the document type (if applicable) for accessibility',
+    '#options' => [
+      '' => '- None -',
+      'pdf' => 'PDF',
+      'word' => 'Word',
+      'excel' => 'Excel',
+      'ppt' => 'Powerpoint',
+      'csv' => 'CSV',
+    ],
+    '#default_value' => $input['data-doctype'] ?? '',
+  ];
+
   // Custom button that opens dialog with content browser view iframe.
   $form['select_content'] = [
     '#type' => 'button',
@@ -132,4 +150,11 @@ function linkit_content_theme($existing, $type, $theme, $path) {
       'preprocess functions' => ['template_preprocess_page'],
     ],
   ];
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function linkit_content_page_attachments(&$page) {
+  $page['#attached']['library'][] = 'linkit_content/accessibility';
 }

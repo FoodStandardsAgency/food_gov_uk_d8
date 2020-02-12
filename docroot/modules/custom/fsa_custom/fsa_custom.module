@@ -70,6 +70,9 @@ function fsa_custom_preprocess_page(&$variables) {
   // Removed duplicate IDs in Search Block.
   $variables['#attached']['library'][] = 'fsa_custom/fsa-removeDuplicatedIDs';
 
+  // Hack heading levels.
+  $variables['#attached']['library'][] = 'fsa_custom/fsa-headingFix';
+
   // Move focus to popup after enabling addtoany popup.
   $variables['#attached']['library'][] = 'fsa_custom/fsa-addtoany-accesibility';
 
@@ -109,7 +112,26 @@ function fsa_custom_preprocess_page(&$variables) {
   // Build the utility menu.
   $variables['utility_menu'] = [
     '#theme' => 'item_list',
-    '#prefix' => '<nav class="menu-utility-wrapper">',
+    '#prefix' => '<nav class="menu-utility-wrapper" aria-label="Secondary menu">',
+    '#suffix' => '</nav>',
+    '#list_type' => 'ul',
+    '#wrapper_attributes' => [
+      'class' => [
+        'wrapper',
+      ],
+    ],
+    '#attributes' => [
+      'class' => [
+        'menu-utility',
+      ],
+    ],
+    '#items' => $items,
+  ];
+
+  // Build the utility menu.
+  $variables['utility_menu_mobile'] = [
+    '#theme' => 'item_list',
+    '#prefix' => '<nav class="menu-utility-wrapper" aria-label="Mobile secondary menu">',
     '#suffix' => '</nav>',
     '#list_type' => 'ul',
     '#wrapper_attributes' => [

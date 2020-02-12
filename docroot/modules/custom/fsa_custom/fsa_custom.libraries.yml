@@ -47,6 +47,13 @@ fsa-removeDuplicatedIDs:
   dependencies:
     - core/drupal
     - core/jquery.once
+fsa-headingFix:
+  version: 1.x
+  js:
+    js/fsa-heading-fix.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery.once
 fsa-addtoany-accesibility:
   version: 1.x
   js:

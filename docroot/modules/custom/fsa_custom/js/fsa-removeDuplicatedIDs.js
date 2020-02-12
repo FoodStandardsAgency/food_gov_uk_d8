@@ -9,7 +9,9 @@
         'edit-fax',
         'search-keyword',
         'edit-actions',
-        'edit-fax--2'
+        'edit-fax--2',
+        'edit-hp',
+        'edit-hp--2',
       ];
 
       ids.forEach(function(existingid) {
