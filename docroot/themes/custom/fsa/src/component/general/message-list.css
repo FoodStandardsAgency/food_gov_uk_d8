@@ -97,7 +97,22 @@
 }
 
 .messaging {
-  .message-list__item:last-child {
-    margin-bottom: 0;
+  .message-list {
+    @mixin responsive-declaration padding-left, 0, 4em;
+    @mixin responsive-declaration padding-right, 0, 4em;
+  }
+
+  .message-list__item {
+    font-size: 0.9em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    @mixin responsive-declaration margin-bottom, 0, 0.5em;
+    @mixin responsive-declaration padding-left, 0, 3.5em;
+    @mixin responsive-declaration padding-right, 0, 3.5em;
+  }
+
+  .message-list__item::before {
+    left: 1.1em;
+    top: 1em;
   }
 }
