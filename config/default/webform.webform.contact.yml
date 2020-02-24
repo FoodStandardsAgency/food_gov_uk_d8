@@ -1,6 +1,6 @@
 uuid: 70a8a697-de9f-4948-b36c-31866373b980
 langcode: en
-status: closed
+status: open
 dependencies: {  }
 open: null
 close: null
@@ -9,20 +9,20 @@ uid: 1
 template: false
 archive: false
 id: contact
-title: Contact
-description: ''
-category: ''
-elements: null
+title: 'FSA complaints form'
+description: complaints
+category: Feedback
+elements: "your_complaint1:\n  '#type': webform_wizard_page\n  '#title': 'Your complaint'\n  what_would_you_like_to_complain_about_:\n    '#type': select\n    '#title': 'What would you like to complain about?'\n    '#options':\n      1: 'The conduct or behaviour of an FSA staff member or contractor'\n      2: 'A decision made by the FSA'\n      3: 'Communications from the FSA'\n      4: 'A service provided by the FSA'\n      5: 'Other issue'\n    '#empty_option': Select\n    '#empty_value': '0'\n    '#required': true\n  markup_01:\n    '#type': webform_markup\n    '#states':\n      visible-slide:\n        ':input[name=\"what_would_you_like_to_complain_about_\"]':\n          value: '5'\n    '#markup': \"<p>If you&rsquo;d like to complain about a food issue, use our <a href=\\\"https://www.food.gov.uk/contact/consumers/report-problem\\\">Report a food problem service</a>.<br />\\r\\n<br />\\r\\nFor other enquiries:<br />\\r\\n&bull;&nbsp;&nbsp; &nbsp;email <a href=\\\"mailto:helpline@food.gov.uk?subject=Complain%20about%20the%20FSA\\\">helpline@food.gov.uk</a><br />\\r\\n&bull;&nbsp;&nbsp; &nbsp;call 0330 332 7149 (9am to 5pm, Monday to Friday)</p>\"\nyour_complaint:\n  '#type': webform_wizard_page\n  '#title': 'Your complaint'\n  '#states':\n    invisible:\n      ':input[name=\"what_would_you_like_to_complain_about_\"]':\n        value: '5'\n  '#prev_button_label': Previous\n  '#next_button_label': Next\n  what_is_the_issue_you_would_like_to_complain_about_:\n    '#type': textarea\n    '#title': 'What is the issue you would like to complain about?'\n    '#description': \"<span style=\\\"font-size:11pt\\\"><span style=\\\"font-family:Calibri,sans-serif\\\"><span lang=\\\"EN-US\\\" style=\\\"font-size:12.0pt\\\"><span style=\\\"font-family:&quot;Arial&quot;,sans-serif\\\"><span style=\\\"color:black\\\">Please give us as much detail as possible to help investigate the issue, including any relevant dates and the names of witnesses or individuals involved. </span></span></span></span></span><br />\\r\\n&nbsp;\"\n    '#autocomplete': 'off'\n    '#required': true\n  when_did_the_issue_first_occur_:\n    '#type': date\n    '#title': 'When did the issue first occur? '\n    '#required': true\n    '#date_date_max': today\n    '#datepicker': true\n  have_you_raised_this_issue_with_anyone_in_the_fsa_previously_:\n    '#type': radios\n    '#title': 'Have you raised this issue with anyone in the FSA previously?'\n    '#options': yes_no\n    '#required': true\n  who_have_you_raised_this_issue_with_:\n    '#type': textfield\n    '#title': 'Who have you raised this issue with?'\n    '#required': true\n    '#states':\n      visible:\n        ':input[name=\"have_you_raised_this_issue_with_anyone_in_the_fsa_previously_\"]':\n          value: 'Yes'\n  what_resolution_are_you_seeking_to_your_complaint_:\n    '#type': textarea\n    '#title': 'What resolution are you seeking to your complaint?'\n    '#required': true\nyour_contact_details:\n  '#type': webform_wizard_page\n  '#title': 'Your contact details'\n  '#states':\n    invisible:\n      ':input[name=\"what_would_you_like_to_complain_about_\"]':\n        value: '5'\n  '#prev_button_label': Previous\n  '#next_button_label': Next\n  your_name_:\n    '#type': textfield\n    '#title': 'Your name '\n    '#required': true\n  if_relevant_position_held_and_the_name_of_the_business:\n    '#type': textfield\n    '#title': 'Position held and the name of the business, if relevant'\n  your_email:\n    '#type': email\n    '#title': 'Your email'\n    '#required': true\n  postal_address_including_postcode:\n    '#type': textarea\n    '#title': 'Postal address including postcode'\n    '#description': \"<span style=\\\"font-size:11pt\\\"><span style=\\\"font-family:Calibri,sans-serif\\\"><span lang=\\\"EN-US\\\" style=\\\"font-size:12.0pt\\\"><span style=\\\"font-family:&quot;Arial&quot;,sans-serif\\\"><span style=\\\"color:black\\\">Complete if you prefer us to contact you via post rather than by email. </span></span></span></span></span><br />\\r\\n&nbsp;\"\n  telephone_number_s_in_order_of_preference_:\n    '#type': textfield\n    '#title': 'Telephone number(s) (in order of preference)  '\n  what_is_the_best_time_best_days_to_contact_you_:\n    '#type': textfield\n    '#title': 'What is the best time/ best days to contact you?'\n  confidential:\n    '#type': radios\n    '#title': 'Do you want your details as complainant to be kept confidential?'\n    '#options':\n      'Yes': 'Yes'\n      'No': 'No'\n    '#required': true\n  confidential_explanation:\n    '#type': webform_markup\n    '#states':\n      visible:\n        ':input[name=\"confidential\"]':\n          value: 'Yes'\n    '#markup': '<span style=\"font-size:12.0pt\"><span style=\"font-family:&quot;Arial&quot;,sans-serif\"><span style=\"color:black\">In order to progress a complaint, confidentiality cannot always be guaranteed but we would discuss this with you first.</span></span></span>'\nrepresentation:\n  '#type': webform_wizard_page\n  '#title': Representation\n  '#states':\n    invisible:\n      ':input[name=\"what_would_you_like_to_complain_about_\"]':\n        value: '5'\n  are_you_raising_the_complaint_on_behalf_of_someone_else_:\n    '#type': radios\n    '#title': 'Are you raising the complaint on behalf of someone else? '\n    '#options': yes_no\n    '#required': true\n  have_you_got_the_permission_of_the_person_you_are_representing_:\n    '#type': radios\n    '#title': 'Have you got the permission of the person you are representing? '\n    '#options': yes_no\n    '#states':\n      visible:\n        ':input[name=\"are_you_raising_the_complaint_on_behalf_of_someone_else_\"]':\n          value: 'Yes'\n      required:\n        ':input[name=\"are_you_raising_the_complaint_on_behalf_of_someone_else_\"]':\n          value: 'Yes'\n  markup:\n    '#type': webform_markup\n    '#states':\n      visible:\n        ':input[name=\"have_you_got_the_permission_of_the_person_you_are_representing_\"]':\n          value: 'No'\n    '#markup': '<span lang=\"EN-US\" style=\"font-size:12.0pt\"><span style=\"font-family:&quot;Arial&quot;,sans-serif\"><span style=\"color:black\">In order for the FSA to progress the complaint, you must obtain the permission of the person you are representing.&nbsp; </span></span></span>'\n  details_of_the_person_you_re_representing:\n    '#type': textfield\n    '#title': 'Details of the person you’re representing'\n    '#description': '<span lang=\"EN-US\" style=\"font-size:12.0pt\"><span style=\"font-family:&quot;Arial&quot;,sans-serif\"><span style=\"color:black\">Enter their full name and where relevant, position held and name of business.</span></span></span>'\n    '#states':\n      visible:\n        ':input[name=\"have_you_got_the_permission_of_the_person_you_are_representing_\"]':\n          value: 'Yes'\n      required:\n        ':input[name=\"have_you_got_the_permission_of_the_person_you_are_representing_\"]':\n          value: 'Yes'\n  fsa_privacy_link_complaints:\n    '#type': webform_markup\n    '#markup': '<a href=\"https://www.food.gov.uk/about-us/privacy-notice-for-external-complaints-made-against-the-fsa\" target=\"_blank\">Privacy notice</a>'\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#states':\n    disabled:\n      - ':input[name=\"have_you_got_the_permission_of_the_person_you_are_representing_\"]':\n          value: 'No'\n      - or\n      - ':input[name=\"what_would_you_like_to_complain_about_\"]':\n          value: '5'"
 css: ''
 javascript: ''
 settings:
   ajax: false
   ajax_scroll_top: form
   page: true
-  page_submit_path: ''
-  page_confirm_path: ''
-  form_title: both
-  form_submit_once: false
+  page_submit_path: help/report-food-problem/complain
+  page_confirm_path: help/report-food-problem/complain/confirmation
+  form_title: webform
+  form_submit_once: true
   form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
@@ -31,7 +31,7 @@ settings:
   form_confidential_message: ''
   form_remote_addr: true
   form_convert_anonymous: false
-  form_prepopulate: false
+  form_prepopulate: true
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
@@ -40,7 +40,7 @@ settings:
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
+  form_unsaved: true
   form_disable_back: false
   form_submit_back: false
   form_autofocus: false
@@ -70,18 +70,18 @@ settings:
   autofill: false
   autofill_message: ''
   autofill_excluded_elements: {  }
-  wizard_progress_bar: true
-  wizard_progress_pages: false
+  wizard_progress_bar: false
+  wizard_progress_pages: true
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
-  wizard_track: ''
-  preview: 0
-  preview_label: ''
-  preview_title: ''
+  wizard_track: name
+  preview: 2
+  preview_label: Summary
+  preview_title: Summary
   preview_message: ''
   preview_attributes: {  }
   preview_excluded_elements: {  }
@@ -92,9 +92,9 @@ settings:
   draft_auto_save: false
   draft_saved_message: ''
   draft_loaded_message: ''
-  confirmation_type: page
+  confirmation_type: inline
   confirmation_title: ''
-  confirmation_message: ''
+  confirmation_message: "<h2>Report complete</h2>\r\n\r\n<p>Thank you for your report, which will be forwarded to FOI, Complaints and Transparency (FCT) Team</p>\r\n\r\n<p>If you need to contact us about your report, you can do so at&nbsp;<span lang=\"EN-US\" style=\"font-size:11.0pt\"><span style=\"font-family:&quot;Calibri&quot;,sans-serif\"><a href=\"mailto:fct@food.gov.uk\" style=\"color:#1f4e79; text-decoration:underline\"><span style=\"font-size:12.0pt\"><span style=\"font-family:&quot;Arial&quot;,sans-serif\"><span style=\"color:black\">fct@food.gov.uk</span></span></span></a></span></span></p>\r\n\r\n<p>A confirmation email has been sent to your inbox.</p>"
   confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
@@ -166,4 +166,72 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers: {  }
+handlers:
+  email:
+    id: email
+    label: Email
+    handler_id: email
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: fct@food.gov.uk
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: 'Food Standards Agency'
+      subject: 'Complaint web form submission [webform_submission:source-entity]'
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+  email_1:
+    id: email
+    label: Email
+    handler_id: email_1
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:your_email:raw]'
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: 'Food Standards Agency'
+      subject: 'Complaint web form submission [webform_submission:source-entity]'
+      body: '<p><span style="font-size:12.0pt"><span style="font-family:&quot;Arial&quot;,sans-serif"><span style="color:#44546a">Thank you for registering your complaint about the FSA with the FOI, Complaints and Transparency (FCT) Team. We will contact you shortly. </span></span></span></p>'
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''

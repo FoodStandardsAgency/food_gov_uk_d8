@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Research programme'
 vid: research_programme
 description: 'Research programmes to add the research projects to.'
-hierarchy: 0
 weight: 0

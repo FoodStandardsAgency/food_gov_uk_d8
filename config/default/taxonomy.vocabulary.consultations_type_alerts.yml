@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Consultation types for alert subscriptions'
 vid: consultations_type_alerts
 description: 'For alerts subscription preferences'
-hierarchy: 0
 weight: 0
