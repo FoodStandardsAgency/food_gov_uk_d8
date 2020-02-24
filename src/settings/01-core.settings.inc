@@ -37,6 +37,10 @@ if ( (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) == "on")
 if (SETTINGS_PLATFORM === D_PLATFORM_ACQUIA && isset($_SERVER['REMOTE_ADDR'])) {
   $settings['reverse_proxy'] = TRUE;
   $settings['reverse_proxy_addresses'] = array($_SERVER['REMOTE_ADDR']);
+
+  // Tell Drupal we're using HTTPS (url() for one depends on this).
+  $_SERVER["HTTPS"] = "on";
+  $settings['https'] = TRUE;
 }
 
 # Private filesystem
