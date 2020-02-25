@@ -55,6 +55,7 @@
     @media (--breakpoint-lg) {
       margin-right: 4em;
       margin-left: 4em;
+      margin-top: -3.5em;
     }
 
     & > h2 {

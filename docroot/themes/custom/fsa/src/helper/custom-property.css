@@ -46,6 +46,7 @@ Plugin documentation:
   --color-light-yellow: #ffdfa2;
   --color-green: #6cb33d;
   --color-dark-blue: #18262c;
+  --colour-medium-blue: #165c7d;
   --color-blue: #007fb2;
   --color-lighter-blue: #fafcfd;
 
@@ -57,6 +58,7 @@ Plugin documentation:
   --dark-secondary-color: var(--color-dark-purple);
   --secondary-color: var(--color-purple);
   --light-secondary-color: var(--color-light-purple);
+  --new-darker-primary-color: var(--colour-medium-blue);
 
   /* Typography */
   --font-size-base: 112.5%;
