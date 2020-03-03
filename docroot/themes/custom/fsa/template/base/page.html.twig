@@ -287,12 +287,12 @@
         <div class="layout__content footer-top-wrapper__content">
           <div class="footer-top">
 <div class="page-feedback">
-  <p class="page-feedback--p"><span class="page-feeback--useful">{{ 'Is this page useful?'|t }}</span>
+  <p class="page-feedback--p"><span class="page-feeback--useful">{{ 'Is this page useful?'|trans }}</span>
   <a class="page-feedback--yes" aria-expanded="false" role="button" href="/webform/page-feedback">
-    {{ 'Yes'|t }} <span class="visually-hidden">{{ 'this page is useful'|t }}</span>
+    {{ 'Yes <span class="visually-hidden">this page is useful</span>'|trans }}
   </a>
   <a class="page-feedback--no" aria-controls="block-webform-page-feedback" aria-expanded="false" role="button" href="/webform/page-feedback">
-    {{ 'No'|t }} <span class="visually-hidden">{{ 'this page is not useful'|t }}</span>
+    {{ 'No <span class="visually-hidden">this page is not useful</span>'|trans }}
   </a>
   <button id="open-feedback" type="button" value="open" class="toggler open-feedback">{{ 'Is there anything wrong with this page?'|t }}</button>
   </p>
