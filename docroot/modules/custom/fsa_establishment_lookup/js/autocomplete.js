@@ -87,15 +87,20 @@
             return map;
         },
         placeMarker: function(event) {
+            var _this = Drupal.behaviors.mybehavior;
+
             // Only place markers for actual Google places.
             if (!event.hasOwnProperty('placeId')) {
                 return false;
             }
 
             // Look up address of Google place and set address inputs.
-            Drupal.behaviors.mybehavior.getPlaceAddress(event.placeId).then(function(place) {
+            _this.getPlaceAddress(event.placeId).then(function(place) {
+                var element_id = drupalSettings.fsa_establishment_lookup.googleplaces.element_id;
+
                 // Set address input.
-                $('input[data-drupal-selector="edit-where-lookup"]').val(place.formatted_address);
+                var nameAddress = place.name + ', ' + place.formatted_address;
+                $('#'+element_id).val(nameAddress);
 
                 // Loop through address components and extract postcode.
                 $(place.address_components).each(function(index, component) {
@@ -115,7 +120,7 @@
                     // Google places API request object.
                     var request = {
                         placeId: placeId,
-                        fields: ['address_component', 'formatted_address']
+                        fields: ['address_component', 'formatted_address', 'name']
                     };
 
                     // Query Google places API.
