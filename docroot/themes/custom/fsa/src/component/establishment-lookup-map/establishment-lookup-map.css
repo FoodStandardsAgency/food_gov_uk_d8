@@ -1,0 +1,47 @@
+.establishment-lookup-map {
+  margin: 1em 0;
+
+  @media (--breakpoint-sm) {
+    margin: 2em 0;
+  }
+
+  .establishment-lookup-map_picker {
+    display: none;
+    height:100%;
+    margin-top: 2em;
+    min-height: 18.75em;
+
+    @media (--breakpoint-sm) {
+      margin: 2em -100% 0;
+      min-height: 28.58em;
+    }
+  }
+
+  .establishment-lookup-map__cta {
+    align-items: center;
+    display: flex;
+  }
+
+  .establishment-lookup-map__cta__icon {
+    background: url('img/icon/map-icon-rounded.png') no-repeat center;
+    height: 3em;
+    width: 3em;
+
+    @media (--breakpoint-sm) {
+      height: 2.25em;
+      width: 1.75em;
+    }
+  }
+
+  .establishment-lookup-map__cta__text {
+    padding-left: 0.5em;
+  }
+
+  .establishment-lookup-map__cta__icon,
+  .establishment-lookup-map__cta__text {
+  }
+}
+
+form.webform-submission-food-poisoning-form .form-actions {
+  padding-top: 0;
+}
