@@ -11,9 +11,12 @@
  */
 #}
 <input{{ attributes }} />{{ children }}
-<div class="google-map-address">
-  <div class="google-map-address__cta">
-    Unsure where you purchased the food? <a href="#" id="map-trigger">Look on our map.</a>
+<div class="establishment-lookup-map">
+  <div class="establishment-lookup-map__cta">
+    <div class="establishment-lookup-map__cta__icon"></div>
+    <div class="establishment-lookup-map__cta__text">
+      Unsure where you purchased the food? <a href="#" id="map-trigger">Look on our map.</a>
+    </div>
   </div>
-  <div class="google-map-address_picker" id="map" style="display: none; height:100%; min-height: 30em;"></div>
+  <div class="establishment-lookup-map_picker" id="map"></div>
 </div>

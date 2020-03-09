@@ -25,6 +25,27 @@
                         postal_town = '';
                     var place = autocomplete.getPlace(),
                         establishment = place.name;
+
+                    console.log(place);
+                    //google.maps.event.trigger(place, 'click')
+                    var geocoder = new google.maps.Geocoder;
+                    var infowindow = new google.maps.InfoWindow;
+                    geocoder.geocode({'placeId': place.place_id}, function(results, status) {
+                        if (status === 'OK') {
+                            if (results[0]) {
+                                $('#map').show();
+                                map.setZoom(11);
+                                map.setCenter(results[0].geometry.location);
+                                var marker = new google.maps.Marker({
+                                    map: map,
+                                    position: results[0].geometry.location
+                                });
+                                infowindow.setContent(results[0].formatted_address);
+                                infowindow.open(map, marker);
+                            }
+                        }
+                    });
+
                     for (var i = 0; i < place.address_components.length; i++) {
                         for (var j = 0; j < place.address_components[i].types.length; j++) {
                             switch (place.address_components[i].types[j]) {
@@ -69,7 +90,8 @@
             $('#map').show();
             var map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: 51.5074, lng: 0.1278},
-                zoom: 10
+                mapTypeControl: false,
+                zoom: 15
             });
 
             // If user allows address access then set their position on map.
@@ -80,7 +102,7 @@
                         lng: position.coords.longitude
                     };
                     map.setCenter(pos);
-                    map.setZoom(14);
+                    map.setZoom(15);
                 });
             }
 
