@@ -1,0 +1,68 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter.
+ *
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $formState
+ * @param $formId
+ */
+function fsa_webform_error_form_alter(&$form, FormStateInterface $formState, $formId) {
+  $form['#attributes']['novalidate'] = 'novalidate';
+}
+
+/**
+ * Implements hook_preprocess_page.
+ *
+ * @param array $variables
+ */
+function fsa_webform_error_preprocess_page(array &$variables) {
+  if (!empty($variables['page']['content']['messages'])) {
+    $variables['status_messages'] = $variables['page']['content']['messages'];
+    unset($variables['page']['content']['messages']);
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for form element templates.
+ */
+function fsa_webform_error_preprocess_form_element(&$variables) {
+  _fsa_webform_error_set_errors($variables);
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for details element templates.
+ */
+function fsa_webform_error_preprocess_details(&$variables) {
+  _fsa_webform_error_set_errors($variables);
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for fieldset element templates.
+ */
+function fsa_webform_error_preprocess_fieldset(&$variables) {
+  _fsa_webform_error_set_errors($variables);
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for datetime form wrapper templates.
+ */
+function fsa_webform_error_preprocess_datetime_wrapper(&$variables) {
+  _fsa_webform_error_set_errors($variables);
+}
+
+/**
+ * Populates form errors in the template.
+ */
+function _fsa_webform_error_set_errors(&$variables) {
+  $element = $variables['element'];
+  if (!empty($element['#errors']) && empty($element['#error_no_message'])) {
+    $e = $element['#errors'];
+    if (preg_match('/field is required/', $e->getUntranslatedString())) {
+      $e = t('This information is required');
+    }
+    $variables['errors'] = $e;
+  }
+}
