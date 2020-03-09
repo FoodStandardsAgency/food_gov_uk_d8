@@ -48,6 +48,7 @@
 @import "component/toc/toc.css";
 @import "component/temporary-messaging/temporary-messaging.css";
 
+@import "component/webform-error/webform-error.css";
 
 
 * {

@@ -234,6 +234,7 @@
 {#          <div class="layout__content layout__content--main {% if page.sidebar_first or page.sidebar_second %}layout__content--with-sidebar{% endif %} js-content">#}
           {% if page.content_header %}
             <div class="layout__content layout__content--main layout__content--header {% if page.sidebar_first or page.sidebar_second %}layout__content--with-sidebar{% endif %} js-content">
+              {{ status_messages }}
               {{ page.content_header }}
             </div>
           {% endif %}

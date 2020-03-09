@@ -76,6 +76,11 @@ description_display == 'invisible' ? 'visually-hidden',
             {{ description.content }}
         </div>
     {% endif %}
+    {% if errors %}
+      <div class="form-item--error-message">
+        {{ errors }}
+      </div>
+    {% endif %}
     {{ children }}
     {% if prefix is not empty %}
         </div>
@@ -85,11 +90,6 @@ description_display == 'invisible' ? 'visually-hidden',
     {% endif %}
     {% if label_display == 'after' %}
         {{ label }}
-    {% endif %}
-    {% if errors %}
-        <div class="form-item--error-message">
-            {{ errors }}
-        </div>
     {% endif %}
     {% if description_display in ['after', 'invisible'] and description.content %}
         <div{{ description.attributes.addClass(description_classes) }}>
