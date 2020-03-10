@@ -1,24 +1,25 @@
 ignored_config_entities:
-  0: system.site
-  2: config.fsa_ratings
-  4: config.fsa_consultations
-  6: fsa_content_reminder.settings
-  8: fsa_messaging.settings
-  10: 'embed.button.document:icon_uuid'
-  12: 'embed.button.document:dependencies.content'
-  14: 'embed.button.media_entity_embed:icon_uuid'
-  16: 'embed.button.media_entity_embed:dependencies.content'
-  18: 'embed.button.image:icon_uuid'
-  20: 'embed.button.image:dependencies.content'
-  22: 'embed.button.node:icon_uuid'
-  24: 'embed.button.node:dependencies.content'
-  26: webform.webform.food_fraud_crime
-  28: webform.webform.food_poisoning
-  30: webform.webform.foreign_object
-  32: webform.webform.poor_hygiene_practices
-  34: 'lockr.settings:cert_path'
-  36: webform.webform.contact
-  38: webform.webform.user_satification
-  40: webform.webform.page_feedback
+  - system.site
+  - config.fsa_ratings
+  - config.fsa_consultations
+  - fsa_content_reminder.settings
+  - fsa_messaging.settings
+  - 'embed.button.document:icon_uuid'
+  - 'embed.button.document:dependencies.content'
+  - 'embed.button.media_entity_embed:icon_uuid'
+  - 'embed.button.media_entity_embed:dependencies.content'
+  - 'embed.button.image:icon_uuid'
+  - 'embed.button.image:dependencies.content'
+  - 'embed.button.node:icon_uuid'
+  - 'embed.button.node:dependencies.content'
+  - webform.webform.food_fraud_crime
+  - webform.webform.food_poisoning
+  - webform.webform.foreign_object
+  - webform.webform.poor_hygiene_practices
+  - 'lockr.settings:cert_path'
+  - webform.webform.contact
+  - webform.webform.user_satification
+  - webform.webform.page_feedback
+  - webform.webform.ecoli_decision_tree
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
