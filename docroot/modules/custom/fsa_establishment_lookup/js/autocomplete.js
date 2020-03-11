@@ -5,6 +5,9 @@
     var map,
         markersArray = [],
         autocomplete,
+        geocoder,
+        infoWindow,
+        infoWindowsArray = [],
         element_id;
 
     Drupal.behaviors.mybehavior = {
@@ -50,12 +53,19 @@
             // Show map and set default location to London.
             map =  new google.maps.Map(document.getElementById('map'), {
                 center: {lat: 51.5074, lng: 0.1278},
+                clickableIcons: false,
                 mapTypeControl: false,
                 zoom: 15
             });
 
+            // Init Geocoder service object.
+            geocoder = new google.maps.Geocoder;
+
+            // Init Geocoder and InfoWindow objects.
+            infoWindow = new google.maps.InfoWindow;
+
             // Adds Google maps event listener to place marker.
-            map.addListener('click', _this.handlePlaceClick);
+            map.addListener('click', _this.handleMapClick);
         },
         // Detect user location.
         detectUserLocation: function () {
@@ -74,19 +84,15 @@
         handleAutocompleteChange: function () {
             var _this = Drupal.behaviors.mybehavior;
 
-            // Init Geocoder and InfoWindow objects.
-            var geocoder = new google.maps.Geocoder;
-            var infowindow = new google.maps.InfoWindow;
+            // Check if map hasn't already been initialised.
+            if (typeof map === 'undefined') {
+                _this.initMap();
+            }
 
             var place = autocomplete.getPlace();
             geocoder.geocode({'placeId': place.place_id}, function (results, status) {
                 if (status === 'OK') {
                     if (results[0]) {
-                        // Check if map hasn't already been initialised.
-                        if (typeof map === 'undefined') {
-                            _this.initMap();
-                        }
-
                         // Remove previous markers.
                         _this.removeMapMarkers();
 
@@ -94,16 +100,13 @@
                         $('#map').show();
                         map.setZoom(17);
                         map.setCenter(results[0].geometry.location);
-                        var marker = new google.maps.Marker({
-                            map: map,
-                            position: results[0].geometry.location
-                        });
-                        markersArray.push(marker);
+
+                        // Add marker to map.
+                        var marker = _this.addMapMarker(results[0].geometry.location);
 
                         // Set info window content.
-                        var infoContent = _this.formatInfoWindowAddress(place);
-                        infowindow.setContent(infoContent);
-                        infowindow.open(map, marker);
+                        var infoContent = _this.formatInfoWindowAddress(place.name, place.address_components);
+                        _this.addInfoBox(marker, infoContent);
                     }
                 }
             });
@@ -119,33 +122,28 @@
 
         },
         // Event handler for clicking Google place within map.
-        handlePlaceClick: function (event) {
+        handleMapClick: function (event) {
             var _this = Drupal.behaviors.mybehavior;
 
-            // Only place markers for actual Google places.
-            if (!event.hasOwnProperty('placeId')) {
-                return false;
-            }
-
             // Look up address of Google place and set address inputs.
-            _this.getPlaceAddress(event.placeId).then(function (place) {
+            _this.getLatLngAddress(event).then(function (results) {
                 // Removes previous markers.
                 _this.removeMapMarkers();
 
-                // Add new marker.
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: event.latLng
-                });
-                markersArray.push(marker);
+                // Add marker to map.
+                var marker = _this.addMapMarker(results[0].geometry.location);
+
+                // Set info window content.
+                var infoContent = _this.formatInfoWindowAddress(null, results[0].address_components);
+                _this.addInfoBox(marker, infoContent);
 
                 // Set address input.
-                var nameAddress = place.name + ', ' + place.formatted_address;
+                var nameAddress = results[0].formatted_address;
                 element_id = drupalSettings.fsa_establishment_lookup.googleplaces.element_id;
                 $('#'+element_id).val(nameAddress);
 
                 // Set hidden field with postcode.
-                var postCode = _this.getPlacePostcode(place);
+                var postCode = _this.getPlacePostcode(results[0].address_components);
                 $('input[data-drupal-selector="edit-fsa-establishment-postal-code"]').val(postCode);
 
             })
@@ -154,20 +152,13 @@
             });
         },
         // Returns a promise while querying Google Places service.
-        getPlaceAddress: function (placeId) {
+        getLatLngAddress: function (event) {
             return new Promise(
                 function (resolve, reject) {
-                    // Google places API request object.
-                    var request = {
-                        placeId: placeId,
-                        fields: ['address_component', 'formatted_address', 'name']
-                    };
-
                     // Query Google places API.
-                    var service = new google.maps.places.PlacesService(map);
-                    service.getDetails(request, function (place, status) {
-                        if (status === google.maps.places.PlacesServiceStatus.OK) {
-                            resolve(place);
+                    geocoder.geocode({'latLng': event.latLng}, function (results, status) {
+                        if (status === google.maps.GeocoderStatus.OK) {
+                            resolve(results);
                         }
                         else {
                             reject(new Error('Error occurred during place lookup.'))
@@ -175,6 +166,16 @@
                     });
                 }
             );
+        },
+        // Adds a marker to the map.
+        addMapMarker: function (latLng) {
+            var marker = new google.maps.Marker({
+                map: map,
+                position: latLng
+            });
+            markersArray.push(marker);
+
+            return marker;
         },
         // Removes all markers from Google map.
         removeMapMarkers: function () {
@@ -185,16 +186,28 @@
                 markersArray.length = 0;
             }
         },
+        // Opens info box above marker.
+        addInfoBox: function (marker, content) {
+            var _this = Drupal.behaviors.mybehavior;
+
+            var infoWindow = new google.maps.InfoWindow;
+            infoWindow.setContent(content);
+            infoWindow.open(map, marker);
+            infoWindowsArray.push(infoWindow);
+
+            return infoWindow;
+        },
         // Formats marker address to match the format default markers use.
-        formatInfoWindowAddress: function (place) {
+        formatInfoWindowAddress: function (name, address_components) {
             var _this = Drupal.behaviors.mybehavior,
-                formattedAddress,
+                formattedAddress = '',
                 numberStreet = '',
-                boroughCity = '',
+                borough = '',
+                city = '',
                 postCode ='';
 
             // Loop through address components and format parts.
-            $(place.address_components).each(function (index, component) {
+            $(address_components).each(function (index, component) {
                 switch (component.types[0]) {
                     case 'street_number':
                         numberStreet += component.long_name;
@@ -203,26 +216,38 @@
                         numberStreet += ' ' + component.long_name;
                         break;
                     case 'neighborhood':
-                        boroughCity += component.long_name;
+                        borough = component.long_name;
                         break;
                     case 'postal_town':
-                        boroughCity += ', ' + component.long_name;
+                        city = component.long_name;
                         break;
                     case 'postal_code':
                         postCode = component.long_name;
                         break;
                 }
             });
-            formattedAddress = '<strong>' + place.name + '</strong><br>';
+
+
+            if (name !== null) {
+                formattedAddress = '<strong>' + name + '</strong><br>';
+            }
+
             formattedAddress += numberStreet + '<br>';
-            formattedAddress += boroughCity + '<br>';
+
+            if (borough !== '') {
+                formattedAddress += borough + ', ' + city + '<br>';;
+            }
+            else {
+                formattedAddress += city + '<br>';
+            }
+
             formattedAddress += postCode;
 
             return formattedAddress;
         },
         // Extracts postcode from Google place object.
-        getPlacePostcode: function (place) {
-            $(place.address_components).each(function (index, component) {
+        getPlacePostcode: function (address_components) {
+            $(address_components).each(function (index, component) {
                 if (component.types[0] === 'postal_code') {
                     return component.long_name;
                 }
