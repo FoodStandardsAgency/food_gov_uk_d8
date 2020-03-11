@@ -70,6 +70,7 @@
                 });
             }
         },
+        // Sets markers and infobox on map when address autocomplete is changed.
         handleAutocompleteChange: function () {
             var _this = Drupal.behaviors.mybehavior;
 
@@ -85,7 +86,7 @@
                         if (typeof map === 'undefined') {
                             _this.initMap();
                         }
-                        
+
                         // Remove previous markers.
                         _this.removeMapMarkers();
 
