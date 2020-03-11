@@ -240,7 +240,7 @@ p {
 
 a {
   color: var(--dark-primary-color);
-  text-decoration: none;
+  text-decoration: underline;
 
   &.back {
     background-image: var(--icon-arrow-left-primary);
