@@ -27,6 +27,7 @@ Plugin documentation:
   --color-white: #fff;
   --color-dark-gray: #2c3a40;
   --color-gray: #70787A;
+  --color-grey-darker: #535A5A;
   --color-light-gray: #dee2e5;
   --color-lightish-gray: #e8ebed;
   --color-lighter-gray: #f0f3f5;
@@ -47,6 +48,7 @@ Plugin documentation:
   --color-green: #6cb33d;
   --color-dark-blue: #18262c;
   --color-blue: #007fb2;
+  --color-contrast-blue: #0079a8;
   --color-lighter-blue: #fafcfd;
 
   /* Usage colors */
