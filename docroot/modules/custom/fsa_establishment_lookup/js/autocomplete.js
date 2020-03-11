@@ -53,7 +53,6 @@
             // Show map and set default location to London.
             map =  new google.maps.Map(document.getElementById('map'), {
                 center: {lat: 51.5074, lng: 0.1278},
-                clickableIcons: false,
                 mapTypeControl: false,
                 zoom: 15
             });
@@ -133,9 +132,11 @@
                 // Add marker to map.
                 var marker = _this.addMapMarker(results[0].geometry.location);
 
-                // Set info window content.
-                var infoContent = _this.formatInfoWindowAddress(null, results[0].address_components);
-                _this.addInfoBox(marker, infoContent);
+                // Set info window content if user hasn't clicked on a place.
+                if (!event.hasOwnProperty('placeId')) {
+                    var infoContent = _this.formatInfoWindowAddress(null, results[0].address_components);
+                    _this.addInfoBox(marker, infoContent);
+                }
 
                 // Set address input.
                 var nameAddress = results[0].formatted_address;
