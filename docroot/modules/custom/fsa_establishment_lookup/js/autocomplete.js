@@ -128,25 +128,30 @@
             _this.getLatLngAddress(event).then(function (results) {
                 // Removes previous markers.
                 _this.removeMapMarkers();
-
+                
                 // Add marker to map.
                 var marker = _this.addMapMarker(results[0].geometry.location);
+
+                var nameAddress = '';
 
                 // Set info window content if user hasn't clicked on a place.
                 if (!event.hasOwnProperty('placeId')) {
                     var infoContent = _this.formatInfoWindowAddress(null, results[0].address_components);
                     _this.addInfoBox(marker, infoContent);
+
+                    nameAddress = results[0].formatted_address;
+                    _this.updateInputAddressComponents(nameAddress, results[0].address_components);
                 }
-
-                // Set address input.
-                var nameAddress = results[0].formatted_address;
-                element_id = drupalSettings.fsa_establishment_lookup.googleplaces.element_id;
-                $('#'+element_id).val(nameAddress);
-
-                // Set hidden field with postcode.
-                var postCode = _this.getPlacePostcode(results[0].address_components);
-                $('input[data-drupal-selector="edit-fsa-establishment-postal-code"]').val(postCode);
-
+                else {
+                    // Get place name via Google Places API.
+                    _this.getPlaceName(event.placeId).then(function (name) {
+                        nameAddress = name + ', ' + results[0].formatted_address;
+                        _this.updateInputAddressComponents(nameAddress, results[0].address_components);
+                    })
+                    .catch(function (error) {
+                        console.log(error.message);
+                    });
+                }
             })
             .catch(function (error) {
                 console.log(error.message);
@@ -167,6 +172,41 @@
                     });
                 }
             );
+        },
+        // Returns a place name using the Google Places API.
+        getPlaceName: function (placeId) {
+            return new Promise(
+                function (resolve, reject) {
+                    // Google places API request object.
+                    var request = {
+                        placeId: placeId,
+                        fields: ['name']
+                    };
+
+                    // Query Google places API.
+                    var service = new google.maps.places.PlacesService(map);
+                    service.getDetails(request, function (place, status) {
+                        if (status === google.maps.places.PlacesServiceStatus.OK) {
+                            resolve(place.name);
+                        }
+                        else {
+                            reject(new Error('Error occurred during place lookup.'))
+                        }
+                    });
+                }
+            );
+        },
+        // Update address input and hidden postcode field.
+        updateInputAddressComponents: function (nameAddress, addressComponents) {
+            var _this = Drupal.behaviors.mybehavior;
+
+            // Set address input.
+            element_id = drupalSettings.fsa_establishment_lookup.googleplaces.element_id;
+            $('#'+element_id).val(nameAddress);
+
+            // Set hidden field with postcode.
+            var postCode = _this.getPlacePostcode(addressComponents);
+            $('input[data-drupal-selector="edit-fsa-establishment-postal-code"]').val(postCode);
         },
         // Adds a marker to the map.
         addMapMarker: function (latLng) {
