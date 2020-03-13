@@ -23,7 +23,7 @@
   }
 
   .establishment-lookup-map__cta__icon {
-    background: url('img/icon/map-icon-rounded.png') no-repeat center;
+    background: url('/themes/custom/fsa/src/img/icon/map-icon-rounded.png') no-repeat center;
     height: 3em;
     width: 3em;
 
