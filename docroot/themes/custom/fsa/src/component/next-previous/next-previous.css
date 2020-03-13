@@ -44,7 +44,7 @@
 .next-previous__nav__item {
   a {
     display: block;
-    color: var(--primary-color);
+    color: var(--color-dark-teal);
     &:hover {
       color: var(--color-darker-teal);
      }
