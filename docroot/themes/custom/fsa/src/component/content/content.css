@@ -1547,3 +1547,9 @@ but they are inserted in DOM outside container and with inline styles.
   padding: 1rem;
   z-index: 9999;
 }
+
+.consultation-standard-text {
+  a {
+    text-decoration: underline;
+  }
+}
