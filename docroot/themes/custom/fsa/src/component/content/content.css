@@ -240,7 +240,7 @@ p {
 
 a {
   color: var(--dark-primary-color);
-  text-decoration: underline;
+  text-decoration: none;
 
   &.back {
     background-image: var(--icon-arrow-left-primary);
@@ -1542,4 +1542,10 @@ but they are inserted in DOM outside container and with inline styles.
   background: var(--color-white);
   padding: 1rem;
   z-index: 9999;
+}
+
+.consultation-standard-text {
+  a {
+    text-decoration: underline;
+  }
 }
