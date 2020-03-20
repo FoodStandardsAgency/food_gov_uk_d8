@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Content type'
 vid: content_type
 description: 'The main category of the content.'
-hierarchy: 0
 weight: 0
