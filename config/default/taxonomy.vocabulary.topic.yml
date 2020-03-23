@@ -5,5 +5,4 @@ dependencies: {  }
 name: Topic
 vid: topic
 description: 'The topic (subject) of a piece of content'
-hierarchy: 1
 weight: 0

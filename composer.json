@@ -23,8 +23,8 @@
     "require": {
         "composer/installers": "^1.2",
         "drupal-composer/drupal-scaffold": "^2.2",
-        "cweagans/composer-patches": "~1.0",
-        "drupal/core": "8.7.9",
+        "cweagans/composer-patches": "1.6.7",
+        "drupal/core": "8.7.12",
         "drush/drush": "~8",
         "drupal/console": "~1.0",
         "drupal/config_installer": "~1.0",
@@ -80,11 +80,11 @@
         "drupal/google_tag": "^1.0",
         "drupal/datalayer": "^1.0@beta",
         "drupal/seo_checklist": "^4.1",
-        "drupal/cookieconsent": "^1.3",
+        "drupal/cookieconsent": "1.4.0",
         "drupal/view_unpublished": "1.0-alpha1",
         "drupal/path_redirect_import": "^1.0@beta",
         "drupal/content_moderation_notifications": "^3.0@RC",
-        "drupal/role_delegation": "1.x-dev",
+        "drupal/role_delegation": "1.1.0",
         "drupal/scheduler": "^1.0",
         "drupal/administration_language_negotiation": "^1.5",
         "drupal/force_password_change": "^1.3",
@@ -149,10 +149,6 @@
                 "Cache buster for CKEditors editor.css": "https://www.drupal.org/files/issues/2019-03-13/2888723-12.patch",
                 "Fatal error on config form with translation enabled when config is missing": "https://www.drupal.org/files/issues/2018-10-17/core-typed_config_handle_missing_config-2925297-7.patch"
             },
-            "drupal/administration_language_negotiation": {
-                "Fix admin_routes": "https://www.drupal.org/files/issues/2018-06-06/admin-routes-config-2972446-2.patch",
-                "Restore the default language configuration": "https://cgit.drupalcode.org/administration_language_negotiation/patch/?id=426d504296dfa44a726b27bc73f270421816560d"
-            },
             "drupal/migrate_plus": {
                 "Allow setting request headers": "https://www.drupal.org/files/issues/fix_headers-2849153-3.patch"
             },
@@ -162,28 +158,14 @@
             "drupal/media_entity_image": {
                 "Reset media thumbnails while changing media entity. Required by inline images.": "https://www.drupal.org/files/issues/2749695_14_media_entity_image.patch"
             },
-            "drupal/term_reference_tree": {
-                "Undefined index: #select_parents": "https://www.drupal.org/files/issues/term_reference_tree-2837754-2.patch",
-                "Taxonomy term hierarchy table error": "https://www.drupal.org/files/issues/2018-10-25/term_reference_tree-taxonomy_term_hierarchy_table_error-2996263-20.patch"
-            },
             "drupal/linkit": {
                 "Linkit filter should honour the URL query and fragment": "https://www.drupal.org/files/issues/linkit_substitution_query_fragment-2895153-10.patch"
             },
             "drupal/redirect": {
-                "Allow wildcards": "https://www.drupal.org/files/issues/2018-03-16/support_for_wildcards-2831605-11.patch"
-            },
-            "drupal/role_delegation": {
-                "Lock assignable permissions in VBO": "https://www.drupal.org/files/issues/2018-04-29/2862360-Lock-down-assignable-permissions-in-the-VBO-action-15.patch",
-                "Allow to delegate roles on user creation": "https://www.drupal.org/files/issues/role-delegation-user-forms-2811851-27.patch"
-            },
-            "drupal/cookieconsent": {
-                "Language prefix fix": "https://www.drupal.org/files/issues/cookieconsent-policy_link_language_aware-2937005-3-d8.patch"
+                "Allow wildcards": "https://www.drupal.org/files/issues/2019-07-02/redirect-wildcard-support-2831605-22.patch"
             },
             "drupal/force_password_change": {
                 "A role with an expiration of 0 requires a password change on every login": "https://www.drupal.org/files/issues/force_password_change-2884243-2_0.patch"
-            },
-            "drupal/field_validation": {
-                "Declaration of (...)FieldValidationRuleAddForm::buildForm must be compatible with (...)FieldValidationRuleFormBase::buildForm": "https://www.drupal.org/files/issues/2941006-php-incompatible-buildform-signature.patch"
             },
             "drupal/honeypot": {
               "Add label to honeypot fields" : "./src/patches/honeypot.patch"
@@ -191,6 +173,9 @@
         },
         "dropin-paths": {
             "web/": ["type:web-dropin"]
+        },
+        "patchLevel": {
+            "drupal/core": "-p2"
         }
     },
     "scripts": {

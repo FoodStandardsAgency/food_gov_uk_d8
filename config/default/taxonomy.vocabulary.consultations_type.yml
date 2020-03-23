@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Consultations type'
 vid: consultations_type
 description: 'For consultation content search filters tagging and categorization'
-hierarchy: 0
 weight: 0
