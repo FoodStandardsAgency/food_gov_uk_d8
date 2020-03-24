@@ -11,6 +11,9 @@
 function fsa_consultations_preprocess_node(&$variables) {
   $node = $variables['node'];
   if ($node->getType() == 'consultation' && $variables['view_mode'] == 'full') {
+    $variables['content']['#prefix'] = '<div class="consultation-standard-text">';
+    $variables['content']['#suffix'] = '</div>';
+
     $tid = $node->field_consultations_type;
     if (isset($tid->target_id) && $tid->target_id == '215') {
       // // Get the consultation standard text and append to the bottom of

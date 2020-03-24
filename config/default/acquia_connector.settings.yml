@@ -188,7 +188,7 @@ subscription_data:
   uuid: 561e1f12-97b5-4248-a93b-48bc1cd7ec26
   subscription_name: 'Food Standards Agency'
   expiration_date:
-    value: '2019-11-19T00:00:00'
+    value: '2020-11-19T00:00:00'
   product:
     view: 'Acquia Network'
   derived_key_salt: a3fdf7702518d5343da54a893443fdc4

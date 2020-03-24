@@ -479,7 +479,7 @@ display:
         groups:
           1: AND
       use_ajax: false
-      css_class: listing search-listing
+      css_class: 'listing search-listing'
     cache_metadata:
       max-age: -1
       contexts:

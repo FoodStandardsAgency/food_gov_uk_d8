@@ -1,0 +1,5 @@
+name: FSA Webform Error
+description: Adds support for custom webform error handling
+type: module
+core: 8.x
+package: FSA

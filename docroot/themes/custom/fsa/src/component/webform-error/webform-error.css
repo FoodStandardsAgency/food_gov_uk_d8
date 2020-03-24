@@ -1,0 +1,61 @@
+.form-item--error, fieldset.error{
+  border-left: solid 5px #e60f31;
+  padding-left: 1em !important;
+}
+
+.form-item--error label, fieldset.error > legend{
+  color: #e60f31;
+}
+
+.form-item--error .error, fieldset.error .js-webform-radios {
+  box-shadow: none;
+  border: solid 4px #e60f31;
+}
+
+fieldset.error .js-webform-radios {
+  padding-left: 5px;
+}
+
+.form-item--error-message {
+  margin-bottom: 0.5em;
+}
+
+.error-summary {
+  color: #000000;
+  padding: 2em;
+  border: solid 4px #e60f31;
+  margin-bottom: 4em;
+}
+
+.error-summary:focus {
+  outline: 0;
+}
+
+.error-summary::after, .error-summary::before{
+  display: none;
+}
+
+.error-summary ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.error-summary ul li {
+  display: list-item;
+  list-style-type: none;
+  margin-bottom: 1.1em;
+}
+
+.error-summary ul li > a {
+  color: #e60f31;
+  text-decoration: underline;
+}
+
+h2.error-summary-heading {
+  color: #000000;
+  font-size: 1.25em;
+  @media (--breakpoint-md) {
+    font-size: 1.5em;
+  }
+}

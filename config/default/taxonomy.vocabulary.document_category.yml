@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Document category'
 vid: document_category
 description: 'Taxonomy to categorize documents in media library'
-hierarchy: 0
 weight: 0

@@ -5,5 +5,4 @@ dependencies: {  }
 name: Nation
 vid: nation
 description: 'The nation a piece of content applies to'
-hierarchy: 0
 weight: 0
