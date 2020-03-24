@@ -169,6 +169,9 @@
             },
             "drupal/honeypot": {
               "Add label to honeypot fields" : "./src/patches/honeypot.patch"
+            },
+            "drupal/webform": {
+              "Form elements keys (machine name) to be in all cases not just lowercase": "https://www.drupal.org/files/issues/2019-07-16/3066994-13.patch"
             }
         },
         "dropin-paths": {

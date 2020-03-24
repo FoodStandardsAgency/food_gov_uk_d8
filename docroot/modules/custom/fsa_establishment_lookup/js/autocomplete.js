@@ -39,11 +39,17 @@
                     _this.initMap();
                 }
 
-                // Default to users location with their permission.
-                _this.detectUserLocation();
-
-                // Show map.
-                $('#map').show();
+                // Attempt to geocode partial user input into a postcode area.
+                var userInput = $('#' + element_id).val();
+                if ($.trim(userInput)) {
+                    _this.handlePartialUserInput(userInput);
+                }
+                // Default to users location with their permission if input empty.
+                else {
+                    _this.detectUserLocation();
+                    // Show map.
+                    $('#map').show();
+                }
             });
         },
         // Initialises google maps object when map shown or autocomplete used.
@@ -65,6 +71,11 @@
 
             // Adds Google maps event listener to place marker.
             map.addListener('click', _this.handleMapClick);
+
+            // Add iframe title for SiteImprove audit.
+            map.addListener('idle', function () {
+                $('#map iframe').attr('title', 'Google Map');
+            });
         },
         // Detect user location.
         detectUserLocation: function () {
@@ -78,6 +89,41 @@
                     map.setZoom(15);
                 });
             }
+        },
+        // Handles partial user input geocoding.
+        handlePartialUserInput: function (userInput) {
+            var _this = Drupal.behaviors.mybehavior;
+
+            // Query Google Geocoding API using partial user input.
+            _this.geocodeUserInput(userInput).then(function (result) {
+                // Show map and zoom into postcode bounds.
+                map.setZoom(17);
+                map.setCenter(result[0].geometry.location);
+                $('#map').show();
+            })
+            .catch(function (error) {
+                // If no results resolved revert back to user location.
+                _this.detectUserLocation();
+                // Show map.
+                $('#map').show();
+                console.log(error);
+            });
+        },
+        // Returns a promise while attempting to geocode user input.
+        geocodeUserInput: function (userInput) {
+            return new Promise(
+                function (resolve, reject) {
+                    // Query Google places API.
+                    geocoder.geocode({'address': userInput}, function (results, status) {
+                        if (status === google.maps.GeocoderStatus.OK) {
+                            resolve(results);
+                        }
+                        else {
+                            reject(new Error('Error occurred during user input geocoding.'))
+                        }
+                    });
+                }
+            );
         },
         // Sets markers and infobox on map when address autocomplete is changed.
         handleAutocompleteChange: function () {
@@ -106,19 +152,19 @@
                         // Set info window content.
                         var infoContent = _this.formatInfoWindowAddress(place.name, place.address_components);
                         _this.addInfoBox(marker, infoContent);
+
+                        // Set address input.
+                        var nameAddress = place.name + ', ' + place.formatted_address;
+                        $('#'+element_id).val(nameAddress);
+
+                        // Get coordinates and set hidden webform field.
+                        var coords = results[0].geometry.location.lat() + ', ' + results[0].geometry.location.lng();
+
+                        // Set hidden field with postcode.
+                        _this.updateInputAddressComponents(nameAddress, place.address_components, coords);
                     }
                 }
             });
-
-            // Set address input.
-            var nameAddress = place.name + ', ' + place.formatted_address;
-            $('#'+element_id).val(nameAddress);
-
-            // Set hidden field with postcode.
-            // @todo: instead of creating the hidden field via configs extend the custom webform plugin.
-            var postCode = _this.getPlacePostcode(place);
-            $('input[data-drupal-selector="edit-fsa-establishment-postal-code"]').val(postCode);
-
         },
         // Event handler for clicking Google place within map.
         handleMapClick: function (event) {
@@ -137,16 +183,29 @@
                 // Set info window content if user hasn't clicked on a place.
                 if (!event.hasOwnProperty('placeId')) {
                     var infoContent = _this.formatInfoWindowAddress(null, results[0].address_components);
+
+                    // Add infobox to map.
                     _this.addInfoBox(marker, infoContent);
 
                     nameAddress = results[0].formatted_address;
-                    _this.updateInputAddressComponents(nameAddress, results[0].address_components);
+
+                    // Get coordinates and set hidden webform field.
+                    var coords = results[0].geometry.location.lat() + ', ' + results[0].geometry.location.lng();
+
+                    // Update address fields.
+                    _this.updateInputAddressComponents(nameAddress, results[0].address_components, coords);
                 }
                 else {
                     // Get place name via Google Places API.
                     _this.getPlaceName(event.placeId).then(function (name) {
+
                         nameAddress = name + ', ' + results[0].formatted_address;
-                        _this.updateInputAddressComponents(nameAddress, results[0].address_components);
+
+                        // Get coordinates and set hidden webform field.
+                        var coords = results[0].geometry.location.lat() + ', ' + results[0].geometry.location.lng();
+
+                        // Update address fields.
+                        _this.updateInputAddressComponents(nameAddress, results[0].address_components, coords);
                     })
                     .catch(function (error) {
                         console.log(error.message);
@@ -197,7 +256,7 @@
             );
         },
         // Update address input and hidden postcode field.
-        updateInputAddressComponents: function (nameAddress, addressComponents) {
+        updateInputAddressComponents: function (nameAddress, addressComponents, coords) {
             var _this = Drupal.behaviors.mybehavior;
 
             // Set address input.
@@ -207,6 +266,9 @@
             // Set hidden field with postcode.
             var postCode = _this.getPlacePostcode(addressComponents);
             $('input[data-drupal-selector="edit-fsa-establishment-postal-code"]').val(postCode);
+
+            // Set hidden coord field.
+            $('input[data-drupal-selector="edit-fsa-establishment-coords"]').val(coords);
         },
         // Adds a marker to the map.
         addMapMarker: function (latLng) {
@@ -288,11 +350,15 @@
         },
         // Extracts postcode from Google place object.
         getPlacePostcode: function (address_components) {
+            var postCode;
+
             $(address_components).each(function (index, component) {
                 if (component.types[0] === 'postal_code') {
-                    return component.long_name;
+                    postCode = component.long_name;
                 }
             });
+
+            return postCode;
         }
     };
 
