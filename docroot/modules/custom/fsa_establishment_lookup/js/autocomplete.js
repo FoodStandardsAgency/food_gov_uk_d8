@@ -76,6 +76,8 @@
             map.addListener('idle', function () {
                 $('#map iframe').attr('title', 'Google Map');
             });
+
+            $('#map-trigger').text('Refresh our map.');
         },
         // Detect user location.
         detectUserLocation: function () {
