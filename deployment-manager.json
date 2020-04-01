@@ -3,6 +3,7 @@
     "master",
     "develop",
     "UAT",
-    "accessibility"
+    "accessibility",
+    "hotfix"
   ]
 }
