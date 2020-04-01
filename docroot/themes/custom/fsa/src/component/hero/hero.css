@@ -645,7 +645,8 @@
 .theme--news-alerts,
 .theme--content-type-business-guidance,
 .theme--content-type-about-us,
-.theme--subscribe {
+.theme--subscribe,
+.theme--help-centre {
   /* Hero container */
   .hero__content-container {
 
@@ -806,12 +807,48 @@
 
 /* Adjust container for all landing pages. */
 .theme--lander,
-.theme--subscribe {
+.theme--subscribe,
+.theme--help-centre
+{
   /* Allows the border radius arc to hide behind content divs */
   .layout--content-top,
   .layout--main {
     position: relative;
     z-index: 25;
+  }
+}
+
+/* Contact us */
+.theme--help-centre {
+  .hero__content h2 {
+    /* Tablet */
+    @media (--breakpoint-sm) {
+      padding: 0;
+      padding-right: 1em;
+      text-align: left;
+    }
+
+    &::after {
+      bottom: -0.4em;
+
+      @media (--breakpoint-sm) {
+        left: 46%;
+        width: 90%;
+      }
+    }
+  }
+
+  .sub-navigation {
+    @media (--breakpoint-md) {
+      margin: 0;
+      transform: translateY(0);
+    }
+
+    > .menu {
+      @media (--breakpoint-md) {
+        padding-bottom: 6em;
+      }
+    }
   }
 }
 
