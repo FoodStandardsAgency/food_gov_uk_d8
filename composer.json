@@ -168,7 +168,10 @@
                 "A role with an expiration of 0 requires a password change on every login": "https://www.drupal.org/files/issues/force_password_change-2884243-2_0.patch"
             },
             "drupal/honeypot": {
-              "Add label to honeypot fields" : "./src/patches/honeypot.patch"
+                "Add label to honeypot fields" : "./src/patches/honeypot.patch"
+            },
+            "drupal/field_validation": {
+                "Declaration of (...)FieldValidationRuleAddForm::buildForm must be compatible with (...)FieldValidationRuleFormBase::buildForm" : "https://www.drupal.org/files/issues/2941006-php-incompatible-buildform-signature.patch"
             }
         },
         "dropin-paths": {
