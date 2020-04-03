@@ -167,6 +167,9 @@
             "drupal/force_password_change": {
                 "A role with an expiration of 0 requires a password change on every login": "https://www.drupal.org/files/issues/force_password_change-2884243-2_0.patch"
             },
+            "drupal/term_reference_tree": {
+              "Fix an error in compatibility with latest core" : "https://www.drupal.org/files/issues/2018-10-25/term_reference_tree-taxonomy_term_hierarchy_table_error-2996263-20.patch"
+            },
             "drupal/honeypot": {
                 "Add label to honeypot fields" : "./src/patches/honeypot.patch"
             },
