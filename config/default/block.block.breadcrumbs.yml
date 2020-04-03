@@ -13,7 +13,7 @@ third_party_settings:
 id: breadcrumbs
 theme: fsa
 region: secondary_menu
-weight: -15
+weight: -24
 provider: null
 plugin: system_breadcrumb_block
 settings:

@@ -181,24 +181,27 @@
   <a id="main-content" tabindex="-1"></a>
   <main>
 
-    {% if (page.hero is defined and page.hero|render|striptags|trim) or (page.secondary_menu) %}
+    {% if (page.hero is defined and page.hero|render|striptags|trim) %}
     <div class="layout hero-wrapper">
       <div class="layout__container">
         <div class="layout__content hero-wrapper__content">
             <section class="hero{% if page.hero is defined and page.hero|render|striptags|trim %} hero--with-content{% endif %}">
-              {% if page.secondary_menu %}
-                {{ page.secondary_menu }}
-              {% endif %}
-
               {% if page.hero is defined and page.hero|render|striptags|trim %}
-                {% if hero_image_url %}
-                  <div class="hero__background hero__background--image" style="background-image: url({{ hero_image_url }});">
+                {% set has_photo = hero_image_url ? 'has-photo' : 'no-photo' %}
+                <div class="hero__content-container {{ has_photo }}">
+                  <div class="hero__background__wrapper">
+                    {% if hero_image_url %}
+                      <div class="hero__background hero__background--image" style="background-image: url({{ hero_image_url }});">
+                      </div>
+                    {% else %}
+                      <div class="hero__background hero__background--pattern">
+                      </div>
+                    {% endif %}
                   </div>
-                {% else %}
-                  <div class="hero__background hero__background--pattern">
+                  <div class="hero__region-wrapper">
+                    {{ page.hero }}
                   </div>
-                {% endif %}
-                {{ page.hero }}
+                </div>
               {% endif %}
             </section>
         </div>
@@ -215,6 +218,16 @@
     {% if page.help %}
       <div class="site-highlighted">
         {{ page.help }}
+      </div>
+    {% endif %}
+
+    {% if page.secondary_menu %}
+      <div class="layout layout--content-top">
+        <div class="layout__container">
+          <div class="layout__content">
+            {{ page.secondary_menu }}
+          </div>
+        </div>
       </div>
     {% endif %}
 

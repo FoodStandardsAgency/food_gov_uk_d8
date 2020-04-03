@@ -5,8 +5,11 @@
       // Excluding social media icons.
       $('div[role=heading]').each(function () {
         var $head = jQuery(this);
-        var level = $head.closest('.embedded-entity').prevAll('h3')[0].nodeName.substr(1);
-        $head.attr('aria-level', parseInt(level) + 1);
+
+        if (typeof $head.closest('.embedded-entity').prevAll('h3')[0] !== "undefined") {
+          var level = $head.closest('.embedded-entity').prevAll('h3')[0].nodeName.substr(1);
+          $head.attr('aria-level', parseInt(level) + 1);
+        }
       });
 
       $('#block-languageswitcher').attr('aria-label', 'Language selection');

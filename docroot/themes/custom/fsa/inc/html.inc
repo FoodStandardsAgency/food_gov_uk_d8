@@ -97,12 +97,14 @@ function fsa_preprocess_html(&$variables) {
   $routes = [
     'fsa_signin.default_controller_signInPage',
     'fsa_signin.default_controller_myAccountPage',
+    'fsa_signin.default_controller_accountSettingsPage'
   ];
   foreach ($routes as $route) {
     try {
+      $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
       $service_url = Url::fromRoute($route)->toString();
       $service_url = explode('/', $service_url);
-      $service_urls[] = $service_url[1];
+      $service_urls[] = $language === 'en' ? $service_url[1] : $service_url[2];
     }
     catch (\Exception $e) {
       // Just do nothing.
@@ -111,5 +113,4 @@ function fsa_preprocess_html(&$variables) {
   if (in_array($uri_segments[1], $service_urls)) {
     $variables['attributes']['class'][] = 'theme--subscribe';
   }
-
 }

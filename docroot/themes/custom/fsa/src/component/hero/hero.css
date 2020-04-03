@@ -17,7 +17,7 @@
   &.hero--with-content {
     &:before {
       content: '';
-      background-color: var(--dark-primary-color);
+      background-color: var(--new-darker-primary-color);
       position: absolute;
       z-index: var(--z-bottom);
       top: 0;
@@ -238,8 +238,6 @@
 
   &.hero__background--pattern {
     background-image: url('/themes/custom/fsa/src/img/background/pattern.svg');
-
-    /* background-image: url('/themes/custom/fsa/dist/sprite.svg#pattern-usage'); */
     background-size: 1024px 426.6666666px;
     background-position: 50% 50%;
     background-repeat: repeat;
@@ -337,55 +335,21 @@
   z-index: var(--z-top);
   padding-top: 1em;
   padding-bottom: 1em;
-  display: none;
-
-  @media (--breakpoint-md) {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-flow: row wrap;
-  }
 
   @media (--breakpoint-lg) {
     min-height: 3.5em;
   }
-
-  .hero.hero--with-content & {
-    @media (--breakpoint-md) {
-      border-bottom: 0;
-    }
-  }
 }
 
 .breadcrumb__item {
-  @mixin responsive-declaration margin, 0.5em, 0;
-
-  position: relative;
-  font-weight: 400;
-  text-align: left;
-  padding-right: 1.5em;
+  align-items: center;
   color: var(--color-black);
-
-  @media (--breakpoint-sm) {
-    font-size: 0.8em;
-    text-align: center;
-    display: flex;
-    align-items: center;
-  }
-
-  @media (--breakpoint-lg) {
-    font-size: 0.9em;
-    text-align: left;
-    display: inline-block;
-  }
-
-  .hero.hero--with-content & {
-    color: var(--color-white);
-
-    .theme--term & {
-      color: var(--color-black);
-    }
-  }
+  display: inline-block;
+  font-size: 0.9em;
+  font-weight: 400;
+  padding-right: 1.5em;
+  position: relative;
+  text-align: left;
 
   &:not(:last-child):after {
     content: '';
@@ -397,14 +361,6 @@
     text-align: center;
     background-color: var(--color-black);
     transform: skew(-25deg);
-
-    .hero.hero--with-content & {
-      background-color: var(--color-white);
-
-      .theme--term & {
-        background-color: var(--color-light-gray);
-      }
-    }
   }
 }
 
@@ -427,10 +383,15 @@
 
 /* Manage subcriptions */
 .manage-subcriptions {
-  padding-top: 1em;
+  padding-top: 0;
   padding-bottom: 1em;
   margin: 0 auto;
   flex: 0 0 auto;
+
+  @media (--breakpoint-sm) {
+    padding-bottom: 0;
+    padding-top: 0;
+  }
 
   @media (--breakpoint-md) {
     margin: 0;
@@ -438,22 +399,18 @@
 
   a {
     position: relative;
-    color: var(--color-white);
+    color: var(--dark-primary-color);
     font-size: 0.8889em;
     text-decoration: underline;
 
-    .hero:not(.hero--with-content) & {
-      color: var(--dark-primary-color);
-    }
-
     &.gear {
-      padding-left: 2.25em;
+      padding-left: 1.5em;
     }
 
     &.gear:before {
       content: '';
       position: absolute;
-      left: 0;
+      left: -0.5em;
       top: 50%;
       width: 1.75em;
       height: 1.75em;
@@ -478,5 +435,434 @@
     :--not-touch &:--enter {
       text-decoration: underline;
     }
+  }
+}
+
+/* New hero styling */
+.hero__content-container {
+  width: 100%;
+
+  /* Wrapper */
+  .hero__region-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content:  space-between;
+    min-height: 22em;
+    overflow: hidden;
+
+    /* Tablet */
+    @media (--breakpoint-sm) {
+      flex-direction: row;
+      height: 150%;
+    }
+
+    /* Desktop small */
+    @media (--breakpoint-md) {
+      height: 120%;
+    }
+  }
+
+  /* Blue content area */
+  .hero__region {
+    background-color: var(--new-darker-primary-color);
+    border-radius: 100% 100% 0 0;
+    margin-top: auto;
+    min-height: auto;
+    padding: 1.5em 3em;
+    right: 10%;
+    width: 120%;
+
+    /* Custom breakpoint (680px) to keep radius "arc" as per design. */
+    @media (min-width: 42.5em) {
+      border-radius: 75% 75% 0 0;
+      right: 0;
+      width: 100%;
+    }
+
+    /* Tablet */
+    @media (--breakpoint-sm) {
+      border-radius: 0 75% 75% 0;
+      margin: 0;
+      max-width: 100%;
+      padding: 0 4em 1em 3em;
+      top: -15%;
+      width: 50%;
+    }
+
+    /* Desktop small */
+    @media (--breakpoint-lg) {
+      border-radius: 0 50% 50% 0;
+      padding: 0 2em 2em 4em;
+      width: 43%;
+    }
+  }
+
+  /* Views content wrapper */
+  .hero__content {
+    /* Tablet */
+    @media (--breakpoint-sm) {
+      text-align: left;
+    }
+
+    /* Desktop small */
+    @media (--breakpoint-lg) {
+      padding: 6em 3em 5em 0;
+    }
+  }
+
+  /* Background image */
+  .hero__background.hero__background--image {
+    background-size: 100%;
+    background-position: 50% -1em;
+
+    /* Mobile (large) */
+    @media (--breakpoint-xs) {
+      background-position: 50% -2.5em;
+    }
+
+    /* Tablet */
+    @media (--breakpoint-sm) {
+      background-position: 15em -5em;
+    }
+
+    /* Desktop medium */
+    @media (--breakpoint-lg) {
+      background-position: 20em -5em;
+    }
+
+    &::after {
+       background-color: transparent;
+    }
+  }
+
+  /* Heading */
+  .hero__heading {
+    font-size: 2.0em;
+
+    &::after {
+      bottom: -0.4em;
+
+      @media (--breakpoint-sm) {
+        width: 100%;
+      }
+    }
+
+    /* Tablet */
+    @media (--breakpoint-sm) {
+      padding: 0;
+      text-align: left;
+    }
+
+    /* Desktop small */
+    @media (--breakpoint-md) {
+      font-size: 2.75em;
+    }
+
+    /* Desktop medium */
+    @media (--breakpoint-lg) {
+      font-size: 3.8em;
+    }
+  }
+
+  .hero__title h1 {
+    /* Tablet */
+    @media (--breakpoint-sm) {
+      padding: 0;
+      padding-right: 1em;
+      text-align: left;
+    }
+
+    &::after {
+      bottom: -0.4em;
+
+      @media (--breakpoint-sm) {
+        left: 46%;
+        width: 90%;
+      }
+    }
+  }
+
+  /* Content text */
+  .hero__region p {
+    font-size: 0.9em;
+    margin: 0 auto;
+    max-width: 90%;
+    padding: 0;
+
+    /* Custom breakpoint (680px) to keep radius "arc" as per design. */
+    @media (min-width: 42.5em) {
+      max-width: 100%;
+    }
+
+    /* Tablet */
+    @media (--breakpoint-sm) {
+      text-align: left;
+    }
+
+    /* Desktop medium */
+    @media (--breakpoint-lg) {
+      font-size: 1.1em;
+    }
+  }
+
+  /* Adjustments when no background photo present */
+  &.no-photo {
+    .hero__region-wrapper {
+      min-height: auto;
+
+      /* Tablet */
+      @media (--breakpoint-sm) {
+        min-height: 22em;
+      }
+    }
+
+    .hero__region {
+      margin-top: 0;
+
+      /* Tablet */
+      @media (--breakpoint-sm) {
+        margin: 0;
+      }
+    }
+
+    .hero__background--pattern {
+      background: #fff;
+      opacity: 1;
+
+      /* Tablet */
+      @media (--breakpoint-sm) {
+        background-image: url('/themes/custom/fsa/src/img/background/pattern.svg');
+        background-size: cover;
+        background-position: 50% 50%;
+        background-repeat: repeat;
+        opacity: 0.1;
+      }
+    }
+  }
+}
+
+/* Landing page tweaks */
+.theme--news-alerts,
+.theme--content-type-business-guidance,
+.theme--content-type-about-us,
+.theme--subscribe,
+.theme--help-centre {
+  /* Hero container */
+  .hero__content-container {
+
+    /* Blue content area */
+    .hero__region {
+      /* Desktop medium */
+      @media (--breakpoint-lg) {
+        border-radius: 0 50% 50% 0;
+      }
+    }
+
+    .hero__region-wrapper {
+      /* Desktop small */
+      @media (--breakpoint-md) {
+        height: 150%;
+      }
+    }
+
+    /* Block content within region wrapper */
+    .hero__region-wrapper__content {
+      /* Tablet */
+      @media (--breakpoint-sm) {
+        position: relative;
+        top: -8%;
+      }
+
+      /* Desktop small */
+      @media (--breakpoint-md) {
+        top: -5%;
+      }
+    }
+
+    /* Background image */
+    .hero__background.hero__background--image {
+      background-position: 50% -5.5em;
+
+      /* Mobile large */
+      @media (--breakpoint-xs) {
+        background-position: 50% -8em;
+      }
+
+      /* Tablet */
+      @media (--breakpoint-sm) {
+        background-position: 19em -8em;
+      }
+
+      /* Desktop medium */
+      @media (--breakpoint-lg) {
+        background-position: 18em -4em;
+        background-size: 87%;
+      }
+    }
+
+    /* Views content wrapper */
+    .hero__content {
+      /* Desktop small */
+      @media (--breakpoint-lg) {
+        padding: 2em 3em 0 0;
+      }
+    }
+
+    /* CTA button within hero. */
+    .hero__cta {
+      /* Tablet */
+      @media (--breakpoint-sm) {
+        padding-top: 1em;
+        text-align: left;
+      }
+
+      a.button {
+        padding: 0.5em 1.25em;
+      }
+    }
+  }
+}
+
+/* News and alerts. */
+.theme--news-alerts,
+.theme--subscribe {
+  /* Override legacy rule. */
+  .hero.hero--with-content .hero__region {
+    padding-top: 2em;
+
+    /* Tablet */
+    @media (--breakpoint-sm) {
+      padding-top: 4em;
+    }
+  }
+}
+
+/* Food safety and hygiene. */
+.theme--content-type-business-guidance {
+  /* Hero container */
+  .hero__content-container {
+
+    .hero__content {
+      /* Desktop medium */
+      @media (--breakpoint-lg) {
+        padding: 2em 3em 1em 0;
+      }
+    }
+
+    /* Region wrapper */
+    .hero__region-wrapper {
+      min-height: 25em;
+    }
+
+    /* Block content within region wrapper */
+    .hero__region-wrapper__content {
+      /* Tablet */
+      @media (--breakpoint-sm) {
+        top: 0;
+      }
+    }
+
+    /* Background image */
+    .hero__background.hero__background--image {
+      background-position: 50% 0;
+
+      /* Mobile large */
+      @media (--breakpoint-xs) {
+        background-position: 50% -3em;
+      }
+
+      /* Tablet */
+      @media (--breakpoint-sm) {
+        background-position: 15em -7em;
+      }
+
+      /* Desktop medium */
+      @media (--breakpoint-lg) {
+        background-position: 15em -12em;
+        background-size: 100%;
+      }
+    }
+  }
+}
+
+/* About */
+.theme--content-type-about-us {
+  .hero__region::after {
+    bottom: -0.3em;
+  }
+
+  .hero--with-content::before,
+  .hero__region {
+    background-color: var(--dark-primary-color);
+  }
+
+  /* Block content within region wrapper */
+  .hero__region-wrapper__content {
+    /* Tablet */
+    @media (--breakpoint-sm) {
+      top: 0;
+    }
+  }
+}
+
+/* Adjust container for all landing pages. */
+.theme--lander,
+.theme--subscribe,
+.theme--help-centre
+{
+  /* Allows the border radius arc to hide behind content divs */
+  .layout--content-top,
+  .layout--main {
+    position: relative;
+    z-index: 25;
+  }
+}
+
+/* Contact us */
+.theme--help-centre {
+  .hero__content h2 {
+    /* Tablet */
+    @media (--breakpoint-sm) {
+      padding: 0;
+      padding-right: 1em;
+      text-align: left;
+    }
+
+    &::after {
+      bottom: -0.4em;
+
+      @media (--breakpoint-sm) {
+        left: 46%;
+        width: 90%;
+      }
+    }
+  }
+
+  .sub-navigation {
+    @media (--breakpoint-md) {
+      margin: 0;
+      transform: translateY(0);
+    }
+
+    > .menu {
+      @media (--breakpoint-md) {
+        padding-bottom: 6em;
+      }
+    }
+  }
+}
+
+/* Alignment of breadcrumbs and subscription link on desktop */
+#block-breadcrumbs {
+  /* Tablet */
+  @media (--breakpoint-sm) {
+    display:inline-block;
+  }
+}
+#block-manage-subscription-cta {
+  /* Tablet */
+  @media (--breakpoint-sm) {
+    float: right;
+    margin-top: 1em;
   }
 }

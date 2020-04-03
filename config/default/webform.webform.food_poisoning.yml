@@ -1,4 +1,3 @@
-uuid: 1b027889-9647-413d-a7b3-fadb84da9e1c
 langcode: en
 status: open
 dependencies: {  }
@@ -333,3 +332,4 @@ handlers:
       sender_mail: ''
       sender_name: ''
       theme_name: ''
+uuid: 1b027889-9647-413d-a7b3-fadb84da9e1c
