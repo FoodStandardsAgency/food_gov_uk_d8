@@ -171,17 +171,13 @@
               "Fix an error in compatibility with latest core" : "https://www.drupal.org/files/issues/2018-10-25/term_reference_tree-taxonomy_term_hierarchy_table_error-2996263-20.patch"
             },
             "drupal/honeypot": {
-<<<<<<< HEAD
               "Add label to honeypot fields" : "./src/patches/honeypot.patch"
             },
             "drupal/webform": {
               "Form elements keys (machine name) to be in all cases not just lowercase": "https://www.drupal.org/files/issues/2019-07-16/3066994-13.patch"
-=======
-                "Add label to honeypot fields" : "./src/patches/honeypot.patch"
             },
             "drupal/field_validation": {
                 "Declaration of (...)FieldValidationRuleAddForm::buildForm must be compatible with (...)FieldValidationRuleFormBase::buildForm" : "https://www.drupal.org/files/issues/2941006-php-incompatible-buildform-signature.patch"
->>>>>>> master
             }
         },
         "dropin-paths": {
