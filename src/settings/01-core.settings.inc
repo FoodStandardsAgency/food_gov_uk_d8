@@ -72,6 +72,7 @@ $settings['config_readonly_whitelist_patterns'] = [
   'key.*',
   'encrypt.*',
   'tfa.*',
+  'cloudflare.*',
   'webform.webform.food_fraud_crime',
   'webform.webform.food_poisoning',
   'webform.webform.foreign_object',
