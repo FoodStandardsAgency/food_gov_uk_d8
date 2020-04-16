@@ -933,3 +933,19 @@ function fsa_custom_preprocess_video_embed_iframe__youtube(&$vars) {
     $vars['attributes']->setAttribute('title', 'Embedded video' . $title);
   }
 }
+
+/**
+ * Implements hook_mail_alter().
+ *
+ * Temp hack to force HTTPS in email content while we investigate Cloudflare
+ * issue.
+ *
+ * TODO: remove after CF resolution.
+ */
+function fsa_custom_mail_alter(&$message) {
+  if (!empty($message['body']) && is_array($message['body'])) {
+    foreach ($message['body'] as $index => $body) {
+      $message['body'][$index] = str_replace('http://', 'https://', $body);
+    }
+  }
+}
