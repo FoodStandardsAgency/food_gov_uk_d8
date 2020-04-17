@@ -1,5 +1,6 @@
 ignored_config_entities:
   - system.site
+  - cloudflare.*
   - config.fsa_ratings
   - config.fsa_consultations
   - fsa_content_reminder.settings
