@@ -22,6 +22,7 @@ const D_PLATFORM_PLATFORMSH = 'platformsh';
 $base_domains = [
   getenv('D4D_HOSTNAME') => 'local',
   'docker.local' => 'local',
+  'staging.food.gov.uk' => 'test',
   'www.food.gov.uk' => 'prod',
 ];
 
