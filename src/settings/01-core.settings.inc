@@ -29,6 +29,7 @@ if ( (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) == "on")
   || (isset($_SERVER["HTTP_HTTPS"]) && $_SERVER["HTTP_HTTPS"] == "on")
 ) {
   $_SERVER["HTTPS"] = "on";
+  $_SERVER['REQUEST_SCHEME'] = 'https';
 
   // Tell Drupal we're using HTTPS (url() for one depends on this).
   $settings['https'] = TRUE;
@@ -37,6 +38,7 @@ if ( (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) == "on")
 if (SETTINGS_PLATFORM === D_PLATFORM_ACQUIA && isset($_SERVER['REMOTE_ADDR'])) {
   $settings['reverse_proxy'] = TRUE;
   $settings['reverse_proxy_addresses'] = array($_SERVER['REMOTE_ADDR']);
+  $settings['reverse_proxy_trusted_headers'] = \Symfony\Component\HttpFoundation\Request::HEADER_X_FORWARDED_ALL;
 
   // Tell Drupal we're using HTTPS (url() for one depends on this).
   //if ($env === D_ENVIRONMENT_PROD) {
