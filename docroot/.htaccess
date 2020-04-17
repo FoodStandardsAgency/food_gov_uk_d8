@@ -109,6 +109,7 @@ AddEncoding gzip svgz
   # uncomment the following:
   RewriteCond %{HTTP_HOST} .
   RewriteCond %{HTTP_HOST} !^www\. [NC]
+  RewriteCond %{HTTP_HOST} !^staging\. [NC]
   RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
   #
   # To redirect all users to access the site WITHOUT the 'www.' prefix,
