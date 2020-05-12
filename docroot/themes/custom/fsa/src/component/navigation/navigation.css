@@ -497,8 +497,10 @@
     color: var(--primary-color);
 
     @media (--breakpoint-sm) {
-      color: transparent;
+      color: var(--color-white);
+      display: block;
       position: relative;
+      text-indent: -9999px;
       width: 4em;
     }
 
@@ -510,7 +512,7 @@
       color: var(--color-black);
 
       @media (--breakpoint-sm) {
-        color: transparent;
+        color: var(--color-white);
       }
     }
 
