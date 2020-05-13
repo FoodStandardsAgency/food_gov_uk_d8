@@ -86,10 +86,21 @@ class AlertItemProperties extends ProcessPluginBase {
         if (!empty($n->field_alert_previous_multiple)) {
           $values = $n->field_alert_previous_multiple->getValue();
         }
-        array_unshift($values, ["value" => $value]);
-        var_dump($result->entity_id); var_dump($values);
-        $n->field_alert_previous_multiple = $values;
-        $n->save();
+
+        // Prevent duplicate entries.
+        $duplicate = FALSE;
+        foreach ($values as $prev_value) {
+          if ($prev_value['value'] === $value) {
+            $duplicate = TRUE;
+            break;
+          }
+        }
+
+        if (!$duplicate) {
+          array_unshift($values, ["value" => $value]);
+          $n->field_alert_previous_multiple = $values;
+          $n->save();
+        }
       }
     }
 
