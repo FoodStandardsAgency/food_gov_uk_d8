@@ -808,8 +808,7 @@ blockquote {
   font-size: 0.8889em;
 
   & > a,
-  & > button,
-  .addtoany_share {
+  & > button {
     position: relative;
     display: block;
     font-family: var(--font-family-content);
@@ -878,25 +877,6 @@ blockquote {
     button {
       &:before {
         background-image: var(--icon-print-primary);
-      }
-    }
-  }
-
-  &.content-toolbar__item--share {
-
-    .addtoany_share {
-
-      &:before {
-        background-image: var(--icon-share-primary);
-      }
-
-      img, span {
-        position: absolute !important;
-        clip: rect(1px, 1px, 1px, 1px);
-        overflow: hidden;
-        height: 1px !important;
-        width: 1px !important;
-        word-wrap: normal;
       }
     }
   }
