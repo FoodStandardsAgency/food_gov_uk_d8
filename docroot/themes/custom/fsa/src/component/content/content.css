@@ -663,7 +663,7 @@ blockquote {
   @mixin responsive-declaration margin-bottom, 1em, 2em;
 
   position: relative;
-  background-color: var(--color-lighter-gray);
+  background-color: var(--color-grey-darker);
   border: 1px solid var(--color-light-gray);
 
   a {
