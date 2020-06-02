@@ -498,6 +498,7 @@
 
     @media (--breakpoint-sm) {
       color: var(--color-white);
+      display: block;
       position: relative;
       text-indent: -9999px;
       width: 4em;
