@@ -77,16 +77,13 @@ class PageContentHeader extends BlockBase {
       // Set rules when to display print/share links and buttons.
       if ($entity_type == 'node' && !in_array($entity->getType(), self::CONTENT_TYPES_TO_HIDE)) {
         $print_actions = TRUE;
-        $share = TRUE;
       }
       elseif ($entity_type == 'taxonomy_term' && $entity->getVocabularyId() == 'research_programme') {
         // Limit to research programmes.
         $print_actions = TRUE;
-        $share = TRUE;
       }
       else {
         $print_actions = FALSE;
-        $share = FALSE;
       }
 
       if ($print_actions) {
@@ -119,16 +116,6 @@ class PageContentHeader extends BlockBase {
         $link_print = NULL;
       }
 
-      if ($share) {
-        $block = Block::load('addtoany');
-        if (is_object($block)) {
-          $share = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block);
-        }
-        else {
-          $share = '';
-        }
-      }
-
       $attributes = ['class' => 'page-content-header'];
 
       $build['page_content_header'] = [
@@ -137,8 +124,7 @@ class PageContentHeader extends BlockBase {
         '#intro' => $intro,
         '#update_date' => $date,
         '#link_pdf' => $link_pdf,
-        '#link_print' => $link_print,
-        '#share' => $share,
+        '#link_print' => $link_print
       ];
     }
 
