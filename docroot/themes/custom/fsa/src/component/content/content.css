@@ -1049,7 +1049,7 @@ but they are inserted in DOM outside container and with inline styles.
     padding: 0;
 
     :--not-touch &:--enter {
-      color: var(--color-darker-teal);
+      color: var(--color-darkest-teal);
     }
   }
 
