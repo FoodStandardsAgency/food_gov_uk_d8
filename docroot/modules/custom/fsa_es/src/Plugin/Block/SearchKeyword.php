@@ -136,7 +136,7 @@ class SearchKeyword extends BlockBase implements FormInterface, ContainerFactory
     $form['form_submit_button'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Display submit button'),
-      '#default_value' => $this->configuration['form_submit_button'],
+      '#default_value' => isset($this->configuration['form_submit_button']) ? $this->configuration['form_submit_button'] : 0,
     ];
 
     return $form;
