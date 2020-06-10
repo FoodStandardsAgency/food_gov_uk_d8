@@ -131,3 +131,7 @@ body {
 .video-embed-field-responsive-video iframe {
   border: 0;
 }
+
+.w-100 {
+  width: 100%;
+}
