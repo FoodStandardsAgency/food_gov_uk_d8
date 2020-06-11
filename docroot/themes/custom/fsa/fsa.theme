@@ -101,14 +101,16 @@ function fsa_page_attachments_alter(&$variables) {
   if ($parameters->has('node')) {
     $node = $parameters->get('node');
 
-    if (\Drupal\fsa_multipage_guide\FSAMultiPageGuide::IsGuide($node)) {
-      $guide = \Drupal\fsa_multipage_guide\FSAMultiPageGuide::Get($node);
-      $first_page_url = $guide->getFirstPageUrl();
+    if ($node instanceof \Drupal\Core\Entity\EntityInterface) {
+      if (\Drupal\fsa_multipage_guide\FSAMultiPageGuide::IsGuide($node)) {
+        $guide = \Drupal\fsa_multipage_guide\FSAMultiPageGuide::Get($node);
+        $first_page_url = $guide->getFirstPageUrl();
 
-      if (!empty($first_page_url)) {
-        foreach ($variables['#attached']['html_head'] as $ref => $head_attachment) {
-          if (!empty($head_attachment[1]) && $head_attachment[1] === 'canonical_url') {
-            $variables['#attached']['html_head'][$ref][0]['#attributes']['href'] = $first_page_url;
+        if (!empty($first_page_url)) {
+          foreach ($variables['#attached']['html_head'] as $ref => $head_attachment) {
+            if (!empty($head_attachment[1]) && $head_attachment[1] === 'canonical_url') {
+              $variables['#attached']['html_head'][$ref][0]['#attributes']['href'] = $first_page_url;
+            }
           }
         }
       }

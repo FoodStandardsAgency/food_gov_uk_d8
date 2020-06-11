@@ -75,6 +75,8 @@ permissions:
   - 'export alerts monitor data'
   - 'link to any page'
   - 'manage multipage guides'
+  - 'moderated content bulk publish'
+  - 'moderated content bulk unpublish'
   - 'notify of path changes'
   - 'revert help revisions'
   - 'revert lander revisions'

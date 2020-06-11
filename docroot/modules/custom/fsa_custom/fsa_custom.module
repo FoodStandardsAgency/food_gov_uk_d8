@@ -339,7 +339,7 @@ function fsa_custom_preprocess_page_title(&$variables) {
     }
   }
 
-  if ($entity) {
+  if ($entity && $entity instanceof \Drupal\Core\Entity\EntityInterface) {
     if (FSAMultiPageGuide::IsGuide($entity)) {
       $variables['this_is_guide'] = TRUE;
     }

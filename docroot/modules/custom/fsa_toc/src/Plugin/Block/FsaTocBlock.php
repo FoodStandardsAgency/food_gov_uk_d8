@@ -7,6 +7,7 @@ use Drupal\Core\Cache\Cache;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Block\BlockBase;
 use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
 
 /**
  * Provides a 'FSA Table of contents' block.
@@ -58,7 +59,7 @@ class FsaTocBlock extends BlockBase {
   protected function blockAccess(AccountInterface $account) {
     $node = \Drupal::routeMatch()->getParameter('node');
 
-    if (empty($node)) {
+    if (empty($node) || !$node instanceof NodeInterface) {
       return AccessResult::forbidden();
     }
 
