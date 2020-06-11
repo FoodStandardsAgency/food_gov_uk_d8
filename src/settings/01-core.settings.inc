@@ -84,6 +84,11 @@ $settings['config_readonly_whitelist_patterns'] = [
   'webform.webform.page_feedback',
   'webform.webform.page_feedback',
   'webform.webform.ecoli_decision_tree',
+  'webform.webform.form_1',
+  'webform.webform.form_2',
+  'webform.webform.form_3',
+  'webform.webform.form_4',
+  'webform.webform.form_5',
 ];
 
 /**
