@@ -12,11 +12,14 @@
         'edit-fax--2',
         'edit-hp',
         'edit-hp--2',
+        'edit-consultation-year--wrapper',
+        'edit-year--wrapper',
+        'content-moderation-entity-moderation-form'
       ];
 
       ids.forEach(function(existingid) {
         var index = 1;
-        $('#' + existingid).each(function () {
+        $("[id='" + existingid + "']").each(function () {
           var newid = '#' + existingid + '--' + index;
           // Make sure the new id is non-existent.
           while ($(newid).length > 0) {
