@@ -25,10 +25,6 @@
       bottom: 0;
       left: 0;
       display: block;
-
-      .theme--term & {
-        background-color: var(--color-lighter-gray);
-      }
     }
   }
 }
@@ -201,10 +197,10 @@
   }
 
   .theme--term & {
-    @mixin responsive-declaration font-size, 1.8em, 2em;
+    @mixin responsive-declaration font-size, 1.8em, 3.8em;
     @mixin responsive-declaration line-height, 1.2, 1.1;
 
-    color: var(--dark-primary-color);
+    color: var(--color-white);
     margin-bottom: 0;
   }
 }
@@ -249,10 +245,6 @@
 
     @media (--breakpoint-lg) {
       background-size: 1920px 800px;
-    }
-
-    .theme--term & {
-      display: none;
     }
 
     .svg {
@@ -636,6 +628,7 @@
         background-position: 50% 50%;
         background-repeat: repeat;
         opacity: 0.1;
+        background-color: var(--dark-primary-color);
       }
     }
   }
