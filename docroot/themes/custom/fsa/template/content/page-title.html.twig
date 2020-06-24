@@ -27,7 +27,13 @@
     </h1>
   </div>
 {% elseif title %}
-  <h1{{ title_attributes }}>{{ title }}</h1>
+  <div class="topic__title">
+    <div class="hero__title">
+      <h1{{ title_attributes }}>{{ title }}</h1>
+
+    </div>
+  </div>
+
 {% endif %}
 {{ title_prefix }}
 {{ title_suffix }}
