@@ -147,9 +147,8 @@
 
   .theme--term & {
     @media (--breakpoint-md) {
-      display: flex;
-      justify-content: space-between;
       width: 100%;
+      margin-bottom: 1em;
     }
 
     h1 {
@@ -197,7 +196,7 @@
   }
 
   .theme--term & {
-    @mixin responsive-declaration font-size, 1.8em, 3.8em;
+    @mixin responsive-declaration font-size, 2.75em, 3.8em;
     @mixin responsive-declaration line-height, 1.2, 1.1;
 
     color: var(--color-white);
@@ -273,7 +272,8 @@
 }
 
 /* Hero cta */
-.hero__cta {
+.hero__cta,
+.hero__region {
   @mixin responsive-declaration padding-top, 1em, 2em;
 
   text-align: center;
@@ -560,8 +560,10 @@
     /* Tablet */
     @media (--breakpoint-sm) {
       padding: 0;
-      padding-right: 1em;
       text-align: left;
+      border-bottom: 10px dotted #fff;
+      padding-bottom: .5rem;
+      padding-top: 3rem;
     }
 
     &::after {
@@ -618,7 +620,6 @@
     }
 
     .hero__background--pattern {
-      background: #fff;
       opacity: 1;
 
       /* Tablet */
@@ -628,7 +629,6 @@
         background-position: 50% 50%;
         background-repeat: repeat;
         opacity: 0.1;
-        background-color: var(--dark-primary-color);
       }
     }
   }
@@ -798,10 +798,56 @@
   }
 }
 
+.theme--term {
+  .hero__region-wrapper {
+    margin: 0 auto;
+
+    /* Desktop small */
+    @media (--breakpoint-sm) {
+      height: 150%;
+    }
+  }
+  .hero__region-wrapper__content {
+    margin: 0 auto;
+
+    /* Desktop small */
+    @media (--breakpoint-sm) {
+      margin: 0;
+    }
+
+    &.w-100 {
+      width:auto;
+    }
+  }
+  .hero__title h1 {
+    border-bottom: 9px dotted #fff;
+    font-size: 2.0em;
+    margin-bottom: 0.5em;
+    padding-bottom: 0.25em;
+    padding-top: 0;
+
+    /* Tablet */
+    @media (--breakpoint-sm) {
+      text-align: left;
+    }
+
+    /* Desktop small */
+    @media (--breakpoint-md) {
+      font-size: 2.75em;
+    }
+
+    /* Desktop medium */
+    @media (--breakpoint-lg) {
+      font-size: 3.8em;
+    }
+  }
+}
+
 /* Adjust container for all landing pages. */
 .theme--lander,
 .theme--subscribe,
-.theme--help-centre
+.theme--help-centre,
+.theme--term
 {
   /* Allows the border radius arc to hide behind content divs */
   .layout--content-top,
