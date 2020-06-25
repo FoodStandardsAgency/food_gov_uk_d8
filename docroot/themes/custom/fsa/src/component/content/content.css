@@ -843,7 +843,7 @@ blockquote {
 
   &.content-toolbar__item--date {
     margin-right: auto;
-    color: var(--color-gray);
+    color: var(--color-gray-contrast);
     flex: 1 1 100%;
     margin-bottom: 1em;
 
