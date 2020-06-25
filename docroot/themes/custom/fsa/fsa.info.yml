@@ -6,7 +6,8 @@ base theme: stable
 regions:
   header: 'Header row 1'
   header_mobile: 'Header row 1 (Mobile)'
-  header_2: 'Header row 2'
+  header_2: 'Header row 2 (desktop)'
+  header_2_mobile: 'Header row 2 (mobile)'
   messaging: 'Messaging'
   primary_menu: 'Primary menu'
   secondary_menu: 'Secondary menu'

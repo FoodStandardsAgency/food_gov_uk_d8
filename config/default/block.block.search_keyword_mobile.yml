@@ -1,4 +1,4 @@
-uuid: 704dfe7f-fd09-4750-812e-6be1f83aa62e
+uuid: 80e2c19e-97ea-4d72-8530-ea1c35986ce1
 langcode: en
 status: true
 dependencies:
@@ -10,17 +10,17 @@ dependencies:
 third_party_settings:
   block_class:
     classes: search-block
-id: search_keyword
+id: search_keyword_mobile
 theme: fsa
-region: header_2
-weight: -25
+region: header_2_mobile
+weight: 0
 provider: null
 plugin: search_keyword
 settings:
   id: search_keyword
   label: Search
   provider: fsa_es
-  label_display: '0'
+  label_display: visible
   action_url: /search
   form_method: get
   form_element:
