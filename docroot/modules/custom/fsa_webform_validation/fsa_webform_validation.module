@@ -52,13 +52,10 @@ function fsa_webform_validation_form_alter(&$form, FormStateInterface $form_stat
         $name = t('@name Council', [
           '@name' => $form_state->getValue('fsa_establishment_la_name'),
         ]);
+        $form['elements']['#markup'] = t('Your report will be sent to @la to investigate.', [
+          '@la' => $name,
+        ]);
       }
-      else {
-        $name = t('the relevant Local Authority');
-      }
-      $form['elements']['#markup'] = t('Your report will be sent to @la to investigate.', [
-        '@la' => $name,
-      ]);
     }
   }
 }

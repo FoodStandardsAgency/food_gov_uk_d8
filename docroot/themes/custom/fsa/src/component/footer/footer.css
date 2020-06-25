@@ -173,7 +173,7 @@
     padding: 1em 0;
   }
   a, button {
-    color: #005e59;
+    color: var(--color-darkest-teal);
     text-decoration: underline;
     cursor: pointer;
   }
