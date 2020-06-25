@@ -33,7 +33,7 @@ Plugin documentation:
   --color-lighter-gray: #f0f3f5;
   --color-darkest-teal: #014b4c;
   --color-darker-teal: #005e59;
-  --color-dark-teal: #00615b;
+  --color-dark-teal: #007C75;
   --color-teal: #00938c;
   --color-light-teal: #00b2a9;
   --color-dark-purple: #2a0247;
@@ -55,7 +55,7 @@ Plugin documentation:
   /* Usage colors */
   --darker-primary-color: var(--color-darker-teal);
   --dark-primary-color: var(--color-dark-teal);
-  --primary-color: var(--color-teal);
+  --primary-color: var(--color-dark-teal);
   --light-primary-color: var(--color-light-teal);
   --dark-secondary-color: var(--color-dark-purple);
   --secondary-color: var(--color-purple);
