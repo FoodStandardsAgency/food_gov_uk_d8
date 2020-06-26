@@ -103,13 +103,13 @@
                 map.setCenter(result[0].geometry.location);
                 $('#map').show();
             })
-            .catch(function (error) {
-                // If no results resolved revert back to user location.
-                _this.detectUserLocation();
-                // Show map.
-                $('#map').show();
-                console.log(error);
-            });
+                .catch(function (error) {
+                    // If no results resolved revert back to user location.
+                    _this.detectUserLocation();
+                    // Show map.
+                    $('#map').show();
+                    console.log(error);
+                });
         },
         // Returns a promise while attempting to geocode user input.
         geocodeUserInput: function (userInput) {
@@ -176,7 +176,7 @@
             _this.getLatLngAddress(event).then(function (results) {
                 // Removes previous markers.
                 _this.removeMapMarkers();
-                
+
                 // Add marker to map.
                 var marker = _this.addMapMarker(results[0].geometry.location);
 
@@ -209,14 +209,14 @@
                         // Update address fields.
                         _this.updateInputAddressComponents(nameAddress, results[0].address_components, coords);
                     })
-                    .catch(function (error) {
-                        console.log(error.message);
-                    });
+                        .catch(function (error) {
+                            console.log(error.message);
+                        });
                 }
             })
-            .catch(function (error) {
-                console.log(error.message);
-            });
+                .catch(function (error) {
+                    console.log(error.message);
+                });
         },
         // Returns a promise while querying Google Places service.
         getLatLngAddress: function (event) {

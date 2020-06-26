@@ -52,9 +52,6 @@ function fsa_custom_preprocess_page(&$variables) {
   // (".page-print-trigger" html class).
   $variables['#attached']['library'][] = 'fsa_custom/page_print';
 
-  // Attach addToAny js(workaround to set main share button label transalted)
-  $variables['#attached']['library'][] = 'fsa_custom/add_to_any';
-
   // Attach search filter js (forces filter settings to be visible when user
   // visits a URL path with parameters).
   $variables['#attached']['library'][] = 'fsa_custom/search_filters';
@@ -72,9 +69,6 @@ function fsa_custom_preprocess_page(&$variables) {
 
   // Hack heading levels.
   $variables['#attached']['library'][] = 'fsa_custom/fsa-headingFix';
-
-  // Move focus to popup after enabling addtoany popup.
-  $variables['#attached']['library'][] = 'fsa_custom/fsa-addtoany-accesibility';
 
   // Hardcoded "utility menu" links.
   // Get the contact link from settings. Default to 58 which happened to be the

@@ -351,7 +351,7 @@ table {
     text-decoration: underline;
 
     :--not-touch &:--enter {
-      color: var(--darker-primary-color);
+      color: var(--primary-color);
     }
   }
 
@@ -566,7 +566,7 @@ blockquote {
   margin-left: calc(-1em - 1px) !important;
   margin-right: -1em !important;
   margin-right: calc(-1em - 1px) !important;
-  background-color: var(--color-dark-teal);
+  background-color: var(--primary-color);
   border-bottom: 4px solid var(--fsa-primary_dark-green);
   color: var(--color-white);
   padding-top: 1em;
@@ -665,10 +665,6 @@ blockquote {
   position: relative;
   background-color: var(--color-lighter-gray);
   border: 1px solid var(--color-light-gray);
-
-  a {
-    color: var(--color-dark-teal);
-  }
 
   .important & {
     background-color: var(--color-white);
@@ -812,8 +808,7 @@ blockquote {
   font-size: 0.8889em;
 
   & > a,
-  & > button,
-  .addtoany_share {
+  & > button {
     position: relative;
     display: block;
     font-family: var(--font-family-content);
@@ -848,7 +843,7 @@ blockquote {
 
   &.content-toolbar__item--date {
     margin-right: auto;
-    color: var(--color-grey-darker);
+    color: var(--color-gray-contrast);
     flex: 1 1 100%;
     margin-bottom: 1em;
 
@@ -882,25 +877,6 @@ blockquote {
     button {
       &:before {
         background-image: var(--icon-print-primary);
-      }
-    }
-  }
-
-  &.content-toolbar__item--share {
-
-    .addtoany_share {
-
-      &:before {
-        background-image: var(--icon-share-primary);
-      }
-
-      img, span {
-        position: absolute !important;
-        clip: rect(1px, 1px, 1px, 1px);
-        overflow: hidden;
-        height: 1px !important;
-        width: 1px !important;
-        word-wrap: normal;
       }
     }
   }
@@ -961,7 +937,7 @@ but they are inserted in DOM outside container and with inline styles.
 }
 
 .content-type--consultation {
-  color: var(--color-contrast-blue);
+  color: var(--color-blue);
 }
 
 .content-type--alert {
@@ -1013,7 +989,7 @@ but they are inserted in DOM outside container and with inline styles.
   @mixin responsive-declaration padding-right, 1.25em, 2em;
   @mixin responsive-declaration padding-left, 1.25em, 2em;
 
-  background-color: transparent;
+  background-color: var(--color-lighter-gray);
   padding-top: 1em;
   padding-bottom: 1em;
   border: 1px solid var(--color-light-gray);
@@ -1043,7 +1019,7 @@ but they are inserted in DOM outside container and with inline styles.
   }
 
   a {
-    color: var(--color-dark-teal);
+    color: var(--color-black);
     text-decoration: underline;
     background: none;
     padding: 0;

@@ -22,7 +22,7 @@ function stickyElement (containers, stickyElements) {
     }
 
     calcOffset () {
-      return this.element.getBoundingClientRect().top
+      return this.element ? this.element.getBoundingClientRect().top : null;
     }
 
     get inview () {
@@ -30,11 +30,14 @@ function stickyElement (containers, stickyElements) {
     }
 
     calcInview () {
-      var rect = this.element.getBoundingClientRect()
-      return (
-        rect.top - window.innerHeight <= 0 &&
-        rect.bottom >= 0
-      )
+      if (this.element) {
+        var rect = this.element.getBoundingClientRect();
+        return (
+          rect.top - window.innerHeight <= 0 &&
+          rect.bottom >= 0
+        )
+      }
+      return;
     }
 
     get isBottom () {
@@ -43,7 +46,7 @@ function stickyElement (containers, stickyElements) {
 
     calcBottom () {
       var elementHeight = this._relatedInstance.element.offsetHeight
-      return this.element.getBoundingClientRect().bottom <= elementHeight
+      return this.element ? this.element.getBoundingClientRect().bottom <= elementHeight : null;
     }
   }
 
@@ -76,15 +79,17 @@ function stickyElement (containers, stickyElements) {
 
   // Function to toggle sticky navigation
   const toggleStickyElement = () => {
+
     // Get header element to check if in viewport.
     const headerElement = document.getElementsByClassName('hero-wrapper')
-    const header  = new Area(headerElement[0])
-
+    const relatedContentElement = document.getElementById('block-node-field-related-content');
+    const header  = headerElement ? new Area(headerElement[0]) : null;
+    const relatedContent = relatedContentElement ? new Area(relatedContentElement) : null;
     containerArray.forEach(function (container) {
 
       // Check if element is bottom of the content area  and header is not in
       // view.
-      if (container.isBottom  && !header.inview) {
+      if (container.isBottom  && header && !header.inview && relatedContent.inview) {
         container.relatedInstance.element.classList.add('is-bottom')
       } else {
         container.relatedInstance.element.classList.remove('is-bottom')

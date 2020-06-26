@@ -26,14 +26,14 @@ Plugin documentation:
   --color-black: #000;
   --color-white: #fff;
   --color-dark-gray: #2c3a40;
+  --color-gray-contrast: #585858;
   --color-gray: #70787A;
-  --color-grey-darker: #535A5A;
   --color-light-gray: #dee2e5;
   --color-lightish-gray: #e8ebed;
   --color-lighter-gray: #f0f3f5;
   --color-darkest-teal: #014b4c;
   --color-darker-teal: #005e59;
-  --color-dark-teal: #00615b;
+  --color-dark-teal: #007C75;
   --color-teal: #00938c;
   --color-light-teal: #00b2a9;
   --color-dark-purple: #2a0247;
@@ -49,14 +49,13 @@ Plugin documentation:
   --color-green: #6cb33d;
   --color-dark-blue: #18262c;
   --colour-medium-blue: #165c7d;
-  --color-blue: #007fb2;
-  --color-contrast-blue: #0079a8;
+  --color-blue: #0079A8;
   --color-lighter-blue: #fafcfd;
 
   /* Usage colors */
   --darker-primary-color: var(--color-darker-teal);
   --dark-primary-color: var(--color-dark-teal);
-  --primary-color: var(--color-teal);
+  --primary-color: var(--color-dark-teal);
   --light-primary-color: var(--color-light-teal);
   --dark-secondary-color: var(--color-dark-purple);
   --secondary-color: var(--color-purple);
