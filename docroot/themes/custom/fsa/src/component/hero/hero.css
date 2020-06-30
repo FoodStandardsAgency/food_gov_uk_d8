@@ -799,10 +799,56 @@
   }
 }
 
+.theme--term {
+  .hero__region-wrapper {
+    margin: 0 auto;
+
+    /* Desktop small */
+    @media (--breakpoint-sm) {
+      height: 150%;
+    }
+
+    /* Desktop small */
+    @media (--breakpoint-md) {
+      height: 118%;
+    }
+  }
+  .hero__region-wrapper__content {
+    margin: 0 auto;
+
+    /* Desktop small */
+    @media (--breakpoint-sm) {
+      margin: 0;
+    }
+  }
+  .hero__title h1 {
+    border-bottom: 9px dotted #fff;
+    font-size: 2.0em;
+    padding-bottom: 0.25em;
+    padding-top: 0;
+
+    /* Tablet */
+    @media (--breakpoint-sm) {
+      text-align: left;
+    }
+
+    /* Desktop small */
+    @media (--breakpoint-md) {
+      font-size: 2.75em;
+    }
+
+    /* Desktop medium */
+    @media (--breakpoint-lg) {
+      font-size: 3.8em;
+    }
+  }
+}
+
 /* Adjust container for all landing pages. */
 .theme--lander,
 .theme--subscribe,
-.theme--help-centre
+.theme--help-centre,
+.theme--term
 {
   /* Allows the border radius arc to hide behind content divs */
   .layout--content-top,
