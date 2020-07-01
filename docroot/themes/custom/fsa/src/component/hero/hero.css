@@ -807,11 +807,6 @@
     @media (--breakpoint-sm) {
       height: 150%;
     }
-
-    /* Desktop small */
-    @media (--breakpoint-md) {
-      height: 118%;
-    }
   }
   .hero__region-wrapper__content {
     margin: 0 auto;
@@ -819,6 +814,10 @@
     /* Desktop small */
     @media (--breakpoint-sm) {
       margin: 0;
+    }
+
+    &.w-100 {
+      width:auto;
     }
   }
   .hero__title h1 {
