@@ -29,3 +29,8 @@ if (in_array(SETTINGS_ENVIRONMENT, [D_ENVIRONMENT_TEST, D_ENVIRONMENT_PROD])) {
   $config['system.performance']['js']['gzip'] = TRUE;
   $config['system.performance']['js']['preprocess'] = TRUE;
 }
+
+// Changing this value forces APC to invalidate all PHP code cache on deployment.
+// This ensures that no fatal errors occur on deployment when classes move or
+// are renamed. Using the release tag here for transparency.
+$settings['deployment_identifier'] = '1.19.0';
