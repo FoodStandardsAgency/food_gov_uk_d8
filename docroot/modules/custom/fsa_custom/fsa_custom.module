@@ -659,7 +659,7 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
       if ($block->id() == 'menu_help_secondary') {
         // Help nodes and nodes with "Content type" term should always show the
         // left hand menu.
-        if ($entity instanceof NodeInterface && $term_id == 27 || $entity->getType() == 'help') {
+        if ($entity instanceof NodeInterface && ($term_id == 27 || $entity->getType() == 'help')) {
           return AccessResult::allowed()
             ->addCacheableDependency($block);
         }

@@ -1080,6 +1080,10 @@ but they are inserted in DOM outside container and with inline styles.
       display: none;
     }
   }
+
+  svg.ext {
+    display: none;
+  }
 }
 
 /* Team contact */

@@ -11,8 +11,8 @@ dependencies:
     - field.field.media.document.field_nation
     - media.type.document
   module:
-    - file
     - fsa_custom
+    - fsa_document_library
 id: media.document.document_link
 targetEntityType: media
 bundle: document
@@ -20,11 +20,10 @@ mode: document_link
 content:
   field_document:
     weight: 2
-    label: above
-    settings:
-      use_description_as_link_text: true
+    label: hidden
+    settings: {  }
     third_party_settings: {  }
-    type: file_default
+    type: fsa_document_mime_type_formatter
     region: content
   field_nation:
     type: fsa_regional_variation
