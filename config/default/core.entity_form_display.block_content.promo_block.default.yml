@@ -11,7 +11,6 @@ dependencies:
     - field.field.block_content.promo_block.field_title
     - image.style.thumbnail
   module:
-    - content_moderation
     - image
     - link
     - text
@@ -27,6 +26,7 @@ content:
       rows: 9
       placeholder: ''
       summary_rows: 3
+      show_summary: false
     third_party_settings: {  }
     region: content
   field_image:
@@ -51,6 +51,7 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+      match_limit: 10
     third_party_settings: {  }
     type: entity_reference_autocomplete_tags
     region: content

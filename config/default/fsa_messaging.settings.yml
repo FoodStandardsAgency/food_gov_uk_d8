@@ -1,0 +1,5 @@
+fsa_messaging_active: true
+fsa_messaging_style: default
+fsa_messaging_message:
+  value: "<p>Coronavirus (COVID-19): It is very unlikely that you can catch coronavirus from food. We have further <a href=\"https://www.food.gov.uk/business-guidance/reopening-and-adapting-your-food-business-during-covid-19\">guidance for food businesses affected by coronavirus</a>&nbsp;and <a data-doctype=\"\" href=\"https://www.gov.uk/government/publications/guidance-for-consumers-on-coronavirus-covid-19-and-food\">for consumers</a>. See the <a href=\"https://www.gov.uk/government/topical-events/coronavirus-covid-19-uk-government-response\">government response to coronavirus</a>&nbsp;on GOV.UK and&nbsp;visit NHS UK&nbsp;for <a href=\"https://www.nhs.uk/conditions/coronavirus-covid-19/\">health information</a>.</p>\r\n"
+  format: full_html

@@ -10,7 +10,6 @@ dependencies:
     - image.style.thumbnail
     - media_entity.bundle.image
   module:
-    - content_moderation
     - field_group
     - image_widget_crop
     - path
@@ -116,6 +115,7 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+      match_limit: 10
     region: content
     third_party_settings: {  }
 hidden: {  }

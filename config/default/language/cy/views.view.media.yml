@@ -12,6 +12,11 @@ display:
           expose:
             items_per_page_label: 'Eitemau pob tudalen'
             offset_label: Ongli
+          tags:
+            previous: '‹ Blaenorol'
+            next: 'Nesaf ›'
+            first: '« Gyntaf'
+            last: 'Diwethaf »'
       fields:
         thumbnail__target_id:
           label: 'Disgrifiad Cryno'
@@ -19,8 +24,6 @@ display:
           label: Awdur
         status:
           label: Statws
-          settings:
-            format_custom_true: 'Wedi ei gyhoeddi'
         changed:
           label: Newidwyd
         operations:
@@ -29,10 +32,6 @@ display:
         status:
           expose:
             label: Gwir
-          group_info:
-            group_items:
-              1:
-                title: 'Wedi ei gyhoeddi'
         langcode:
           expose:
             label: Iaith

@@ -10,7 +10,6 @@ dependencies:
     - field.field.media.document.field_nation
     - media_entity.bundle.document
   module:
-    - content_moderation
     - field_group
     - fsa_document_library
     - path

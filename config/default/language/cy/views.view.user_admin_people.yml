@@ -9,6 +9,11 @@ display:
           exposed_sorts_label: 'Dosbarthu drwy'
       pager:
         options:
+          tags:
+            previous: '‹ Blaenorol'
+            next: 'Nesaf ›'
+            first: '« Gyntaf'
+            last: 'Diwethaf »'
           expose:
             items_per_page_label: 'Eitemau pob tudalen'
             offset_label: Ongli

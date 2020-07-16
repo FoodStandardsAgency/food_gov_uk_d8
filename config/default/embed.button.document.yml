@@ -3,12 +3,12 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.media.document_link
+    - entity_browser.browser.media_entity_browser_document
     - media_entity.bundle.document
   module:
     - entity_embed
     - media_entity
-  content:
-    - 'file:file:414ffd8c-c242-4340-befc-707b79c75c3a'
 label: Document
 id: document
 type_id: entity
@@ -21,4 +21,7 @@ type_settings:
   entity_browser: media_entity_browser_document
   entity_browser_settings:
     display_review: false
-icon_uuid: 414ffd8c-c242-4340-befc-707b79c75c3a
+icon:
+  data: ''
+  uri: 'public://embed_buttons/doc-add_0.png'
+icon_uuid: null

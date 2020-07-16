@@ -5,8 +5,8 @@ dependencies:
   config:
     - field.storage.managed_link.field_managed_link_url
   module:
-    - managed_links
     - link
+    - managed_links
     - user
 id: managed_links
 label: 'Managed Links'
@@ -15,7 +15,6 @@ description: ''
 tag: ''
 base_table: managed_link_field_data
 base_field: id
-core: 8.x
 display:
   default:
     display_plugin: default
@@ -688,6 +687,8 @@ display:
               fsa_admin: '0'
               administrator: '0'
             placeholder: ''
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -732,6 +733,8 @@ display:
               advanced_editor: '0'
               fsa_admin: '0'
               administrator: '0'
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
