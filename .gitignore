@@ -34,3 +34,4 @@ web
 # Ignore built frontend assets, these get built in pipelines
 docroot/themes/custom/fsa/dist
 docroot/themes/custom/fsa/node_modules
+/.gitattributes
