@@ -4,7 +4,7 @@ display:
     display_options:
       exposed_form:
         options:
-          submit_button: Ceisio
+          submit_button: Hidlydd
           reset_button_label: Ailosod
           exposed_sorts_label: 'Dosbarthu drwy'
       pager:

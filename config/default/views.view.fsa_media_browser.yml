@@ -8,8 +8,8 @@ dependencies:
     - field.storage.media.field_nation
     - field.storage.media.field_topic
     - image.style.media_entity_browser_thumbnail
-    - media_entity.bundle.document
-    - media_entity.bundle.image
+    - media.type.document
+    - media.type.image
     - taxonomy.vocabulary.document_category
     - taxonomy.vocabulary.nation
     - taxonomy.vocabulary.topic
@@ -18,7 +18,7 @@ dependencies:
     - entity_browser
     - file
     - image
-    - media_entity
+    - media
     - taxonomy
     - user
 _core:

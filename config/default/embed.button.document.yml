@@ -5,10 +5,10 @@ dependencies:
   config:
     - core.entity_view_mode.media.document_link
     - entity_browser.browser.media_entity_browser_document
-    - media_entity.bundle.document
+    - media.type.document
   module:
     - entity_embed
-    - media_entity
+    - media
 label: Document
 id: document
 type_id: entity

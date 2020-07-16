@@ -8,7 +8,7 @@ dependencies:
     - field.field.media.image.field_long_description
     - field.field.media.image.field_topic
     - image.style.thumbnail
-    - media_entity.bundle.image
+    - media.type.image
   module:
     - field_group
     - image_widget_crop

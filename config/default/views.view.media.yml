@@ -10,7 +10,7 @@ dependencies:
     - better_exposed_filters
     - file
     - image
-    - media_entity
+    - media
     - taxonomy
     - user
 _core:

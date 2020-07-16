@@ -30,7 +30,7 @@ display:
       exposed_form:
         type: bef
         options:
-          submit_button: Filter
+          submit_button: Apply
           reset_button: true
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
@@ -586,7 +586,7 @@ display:
             operator_list: {  }
           is_grouped: true
           group_info:
-            label: 'Published status'
+            label: 'Publishing status'
             description: ''
             identifier: status
             optional: true

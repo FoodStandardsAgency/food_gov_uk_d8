@@ -6,8 +6,10 @@ dependencies:
     - core.entity_view_mode.media.header_image
     - field.field.media.image.field_description
     - field.field.media.image.field_image
+    - field.field.media.image.field_long_description
+    - field.field.media.image.field_topic
     - image.style.header
-    - media_entity.bundle.image
+    - media.type.image
   module:
     - image
 id: media.image.header_image
@@ -30,6 +32,7 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_description: true
+  field_long_description: true
   field_topic: true
   langcode: true
   name: true

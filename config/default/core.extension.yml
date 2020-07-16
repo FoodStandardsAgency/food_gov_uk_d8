@@ -62,7 +62,6 @@ module:
   fsa_contactus_data: 0
   fsa_content_reminder: 0
   fsa_custom: 0
-  fsa_document_library: 0
   fsa_es: 0
   fsa_establishment_lookup: 0
   fsa_gtm: 0
@@ -107,10 +106,8 @@ module:
   lockr: 0
   mailsystem: 0
   managed_links: 0
-  media_entity: 0
+  media: 0
   media_entity_browser: 0
-  media_entity_document: 0
-  media_entity_image: 0
   memcache: 0
   memcache_admin: 0
   menu_block: 0
