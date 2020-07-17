@@ -112,7 +112,8 @@
         "maijs/elasticsearch_helper_views": "dev-8.x-1.x",
         "php-http/guzzle6-adapter": "^1.1",
         "wunderio/drupal-ping": "^1.0",
-        "zaporylie/composer-drupal-optimizations": "^1.0"
+        "zaporylie/composer-drupal-optimizations": "^1.0",
+        "drupal/libraries": "^3.0@alpha"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
