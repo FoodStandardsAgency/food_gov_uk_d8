@@ -1058,7 +1058,8 @@ but they are inserted in DOM outside container and with inline styles.
     }
   }
 
-  & > .file__type_application-msword {
+  & > .file__type_application-msword,
+  & > .file__type_application-vndopenxmlformats-officedocumentwordprocessingmldocument {
     &:before {
       content: 'Word';
       background-color: #2c5798;
