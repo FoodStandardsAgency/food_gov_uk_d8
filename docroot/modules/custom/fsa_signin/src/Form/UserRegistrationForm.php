@@ -43,6 +43,7 @@ class UserRegistrationForm extends FormBase {
       '#type' => 'email',
       '#title' => $this->t('Email address'),
       '#required' => TRUE,
+      '#attributes' => ['autocomplete' => 'email'],
     ];
 
     $form['language_container'] = [

@@ -40,6 +40,7 @@ class TeamFinder extends FormBase {
       '#description_display' => 'before',
       '#size' => 9,
       '#maxlength' => 9,
+      '#attributes' => ['autocomplete' => 'off'],
     ];
 
     // The AJAX result placeholder.
