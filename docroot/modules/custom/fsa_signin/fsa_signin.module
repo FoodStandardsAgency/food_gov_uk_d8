@@ -47,6 +47,9 @@ function fsa_signin_form_alter(&$form, FormStateInterface $form_state, $form_id)
           t('Forgot or do not have a password?')
       ),
     ];
+
+    $form['name']['#attributes']['autocomplete'] = 'username';
+    $form['pass']['#attributes']['autocomplete'] = 'off';
   }
 
   if ($form_id == 'user_pass_reset') {
