@@ -474,16 +474,16 @@
     /* Tablet */
     @media (--breakpoint-sm) {
       border-radius: 0 75% 75% 0;
-      margin: -10em 0 0 0;
+      margin: 0;
       max-width: 100%;
-      padding: 0 4em 3em 3em;
+      padding: 0 4em 1em 3em;
       top: -15%;
       width: 50%;
     }
 
-    /* Desktop large */
+    /* Desktop small */
     @media (--breakpoint-lg) {
-      border-radius: 0 43% 50% 0;
+      border-radius: 0 50% 50% 0;
       padding: 0 2em 2em 4em;
       width: 43%;
     }
@@ -634,33 +634,6 @@
   }
 }
 
-/* Frontpage tweaks */
-.theme--frontpage {
-  .hero__region {
-    /* Tablet */
-    @media (--breakpoint-sm) {
-      margin: -10em 0 0 0;
-    }
-
-    @media (--breakpoint-md) {
-      margin: -4em 0 0 0;
-    }
-  }
-
-  .hero__content-container {
-    /* Desktop medium */
-    @media (--breakpoint-lg) {
-      padding-bottom: 2em;
-    }
-
-    .hero__content {
-      @media (--breakpoint-lg) {
-        padding: 6em 3em 7em 0;
-      }
-    }
-  }
-}
-
 /* Landing page tweaks */
 .theme--news-alerts,
 .theme--content-type-business-guidance,
@@ -744,20 +717,15 @@
 }
 
 /* News and alerts. */
-.theme--news-alerts {
+.theme--news-alerts,
+.theme--subscribe {
   /* Override legacy rule. */
   .hero.hero--with-content .hero__region {
     padding-top: 2em;
 
     /* Tablet */
     @media (--breakpoint-sm) {
-      padding-top: 8em;
-    }
-
-    .hero__region-wrapper__content {
-      @media (--breakpoint-sm) {
-        padding-bottom: 3.5em;
-      }
+      padding-top: 4em;
     }
   }
 }
@@ -812,16 +780,6 @@
 
 /* About */
 .theme--content-type-about-us {
-  .hero__region {
-    @media (--breakpoint-sm) {
-      margin-top: -9em !important;
-    }
-
-    @media (--breakpoint-lg) {
-      margin-top: -10em !important;
-    }
-  }
-
   .hero__region::after {
     bottom: -0.3em;
   }
@@ -840,43 +798,7 @@
   }
 }
 
-/* Subscribe page */
-.theme--subscribe {
-  .hero__region {
-    @media (--breakpoint-sm) {
-      margin-top: -7em !important;
-    }
-
-    @media (--breakpoint-lg) {
-      margin-top: -5em !important;
-    }
-
-    h1 {
-      margin-bottom: 0.25em;
-
-      &::after {
-        display: none;
-      }
-    }
-
-    .hero__region-wrapper__content {
-      @media (--breakpoint-lg) {
-        padding-bottom: 2.5em;
-      }
-    }
-  }
-}
-
 .theme--term {
-  .hero__region {
-    @media (--breakpoint-sm) {
-      margin-top: -9em !important;
-    }
-
-    @media (--breakpoint-lg) {
-      margin-top: -8em !important;
-    }
-  }
   .hero__region-wrapper {
     margin: 0 auto;
 
@@ -917,11 +839,6 @@
     /* Desktop medium */
     @media (--breakpoint-lg) {
       font-size: 3.8em;
-    }
-  }
-  .cta {
-    @media (--breakpoint-sm) {
-      text-align: left;
     }
   }
 }
