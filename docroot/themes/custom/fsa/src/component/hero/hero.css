@@ -483,9 +483,9 @@
 
     /* Desktop large */
     @media (--breakpoint-lg) {
-      border-radius: 0 43% 50% 0;
-      padding: 0 2em 2em 4em;
-      width: 43%;
+      border-radius: 0 71% 83% 0;
+      padding: 0 2.5em 2em 4em;
+      width: 44%;
     }
   }
 
@@ -643,7 +643,7 @@
     }
 
     @media (--breakpoint-md) {
-      margin: -4em 0 0 0;
+      margin: -5em 0 0 0;
     }
   }
 
@@ -674,7 +674,7 @@
     .hero__region {
       /* Desktop medium */
       @media (--breakpoint-lg) {
-        border-radius: 0 50% 50% 0;
+        border-radius: 0 71% 83% 0;
       }
     }
 
