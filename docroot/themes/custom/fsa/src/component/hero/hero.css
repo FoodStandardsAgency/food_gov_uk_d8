@@ -674,14 +674,14 @@
     .hero__region {
       /* Desktop medium */
       @media (--breakpoint-lg) {
-        border-radius: 0 71% 83% 0;
+        border-radius: 0 90% 83% 0;
       }
     }
 
     .hero__region-wrapper {
       /* Desktop small */
       @media (--breakpoint-md) {
-        height: 150%;
+        height: 135%;
       }
     }
 
@@ -764,6 +764,13 @@
 
 /* Food safety and hygiene. */
 .theme--content-type-business-guidance {
+  .hero__region {
+    @media (--breakpoint-lg) {
+      padding-top: 6em;
+      padding-bottom: 6em;
+    }
+  }
+
   /* Hero container */
   .hero__content-container {
 
@@ -776,7 +783,7 @@
 
     /* Region wrapper */
     .hero__region-wrapper {
-      min-height: 25em;
+      min-height: 24em;
     }
 
     /* Block content within region wrapper */
@@ -814,11 +821,11 @@
 .theme--content-type-about-us {
   .hero__region {
     @media (--breakpoint-sm) {
-      margin-top: -9em !important;
+      margin-top: -5em !important;
     }
 
     @media (--breakpoint-lg) {
-      margin-top: -10em !important;
+      margin-top: -6em !important;
     }
   }
 
@@ -843,6 +850,9 @@
 /* Subscribe page */
 .theme--subscribe {
   .hero__region {
+    padding-top: 3em;
+    padding-bottom: 3em;
+
     @media (--breakpoint-sm) {
       margin-top: -7em !important;
     }
