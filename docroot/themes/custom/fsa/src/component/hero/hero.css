@@ -657,8 +657,14 @@
 
     .hero__content {
       @media (--breakpoint-lg) {
-        padding: 6em 3em 7em 0;
+        padding: 6em 1em 10em 0;
       }
+    }
+  }
+
+  .hero__heading {
+    @media (--breakpoint-lg) {
+      width: 100%;
     }
   }
 }
