@@ -808,11 +808,17 @@
         background-position: 15em -7em;
       }
 
-      /* Desktop medium */
+      /* Desktop large */
       @media (--breakpoint-lg) {
         background-position: 15em -12em;
         background-size: 100%;
       }
+    }
+  }
+
+  h1.hero__heading {
+    @media (--breakpoint-lg) {
+      width: 368px;
     }
   }
 }
