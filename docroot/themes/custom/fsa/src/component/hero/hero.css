@@ -817,6 +817,10 @@
   }
 
   h1.hero__heading {
+    @media (--breakpoint-md) {
+      width: 332px;
+    }
+
     @media (--breakpoint-lg) {
       width: 368px;
     }
