@@ -545,7 +545,7 @@
       text-align: left;
     }
 
-    /* Desktop small */
+    /* Desktop medium */
     @media (--breakpoint-md) {
       font-size: 2.75em;
       width: 332px;
@@ -982,6 +982,19 @@
       @media (--breakpoint-md) {
         padding-bottom: 6em;
       }
+    }
+  }
+}
+
+.node-57 {
+  .hero__heading {
+    @media (--breakpoint-md) {
+      width: 370px;
+    }
+
+    /* Desktop large */
+    @media (--breakpoint-lg) {
+      width: 390px;
     }
   }
 }
