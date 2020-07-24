@@ -110,7 +110,8 @@
         "drupal/captcha": "^1.0@beta",
         "drupal/recaptcha": "^2.4",
         "drupal/reroute_email": "^1.1",
-        "drupal/cloudflare": "^1.0@alpha"
+        "drupal/cloudflare": "^1.0@alpha",
+        "drupal/moderated_content_bulk_publish": "^1.0@beta"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
