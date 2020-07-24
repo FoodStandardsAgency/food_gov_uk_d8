@@ -548,11 +548,13 @@
     /* Desktop small */
     @media (--breakpoint-md) {
       font-size: 2.75em;
+      width: 332px;
     }
 
     /* Desktop medium */
     @media (--breakpoint-lg) {
       font-size: 3.8em;
+      width: 368px;
     }
   }
 
@@ -813,16 +815,6 @@
         background-position: 15em -12em;
         background-size: 100%;
       }
-    }
-  }
-
-  h1.hero__heading {
-    @media (--breakpoint-md) {
-      width: 332px;
-    }
-
-    @media (--breakpoint-lg) {
-      width: 368px;
     }
   }
 }
