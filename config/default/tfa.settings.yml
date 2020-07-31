@@ -1,4 +1,4 @@
-enabled: 0
+enabled: 1
 required_roles:
   fsa_admin: fsa_admin
   administrator: administrator
@@ -12,12 +12,12 @@ default_validation_plugin: tfa_totp
 validation_plugin_settings:
   tfa_hotp:
     counter_window: 25
-    site_name_prefix: 0
+    site_name_prefix: 1
     name_prefix: TFA
     issuer: Drupal
   tfa_totp:
     time_skew: 30
-    site_name_prefix: 1
+    site_name_prefix: 0
     name_prefix: TFA
     issuer: Drupal
 allowed_validation_plugins:
