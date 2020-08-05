@@ -176,6 +176,9 @@
             },
             "drupal/entity_embed": {
                 "Remove media not found image for deleted embedded media": "./src/patches/entity_embed_media_not_found_node_content_image.patch"
+            },
+            "drupal/icon_select": {
+                "Fixes duplicate element IDs for SVG IE11 fixes" : "src/patches/icon_select-duplicate_element_ids.patch"
             }
         },
         "dropin-paths": {
