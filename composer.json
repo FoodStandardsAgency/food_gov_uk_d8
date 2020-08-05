@@ -179,6 +179,9 @@
             },
             "drupal/field_validation": {
                 "Declaration of (...)FieldValidationRuleAddForm::buildForm must be compatible with (...)FieldValidationRuleFormBase::buildForm" : "https://www.drupal.org/files/issues/2941006-php-incompatible-buildform-signature.patch"
+            },
+            "drupal/icon_select": {
+                "Fixes duplicate element IDs for SVG IE11 fixes" : "src/patches/icon_select-duplicate_element_ids.patch"
             }
         },
         "dropin-paths": {
