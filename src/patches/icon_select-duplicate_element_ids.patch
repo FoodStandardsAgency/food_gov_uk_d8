@@ -1,8 +1,8 @@
 diff --git a/js/icon_select_frontend.js b/js/icon_select_frontend.js
-index e0f0ece..1fd5ef3 100644
+index e0f0ece..762e2e6 100644
 --- a/js/icon_select_frontend.js
 +++ b/js/icon_select_frontend.js
-@@ -19,6 +19,13 @@
+@@ -19,6 +19,15 @@
          }
          var svg = xhr.responseXML.documentElement;
          svg = document.importNode(svg, true);
@@ -10,7 +10,9 @@ index e0f0ece..1fd5ef3 100644
 +        var gElements = svg.querySelectorAll('g');
 +        if (gElements) {
 +          gElements.forEach(function (element, index) {
-+            element.id = element.id + '_' + Date.now();
++            if (element.hasAttribute('id')) {
++              element.id = element.id + '_' + Date.now();
++            }
 +          });
 +        }
          document.body.appendChild(svg);
