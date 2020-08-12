@@ -881,8 +881,11 @@ function template_preprocess_fsa_custom_media_image_formatter(&$variables) {
   $media = $variables['media_entity'];
   $lang_code = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
-  if ($lang_code !== 'en') {
+  if ($lang_code !== 'en' && $media->hasTranslation($lang_code)) {
     $media = $media->getTranslation($lang_code);
+  }
+  else {
+    return;
   }
 
   if ($media->hasField('field_long_description')) {
