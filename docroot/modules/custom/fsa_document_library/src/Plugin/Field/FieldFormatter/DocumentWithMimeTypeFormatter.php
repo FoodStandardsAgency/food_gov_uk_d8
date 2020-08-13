@@ -52,7 +52,7 @@ class DocumentWithMimeTypeFormatter extends FileFormatterBase {
       $ms_word = preg_match('/(ms-?word|wordprocessing)/i', $cleanMime);
       $open_office = strpos($cleanMime, 'WORDPROCESSINGML');
 
-      if ($ms_word || $open_office === TRUE) {
+      if ($ms_word || $open_office !== FALSE) {
         $cleanMime = 'Word';
         $mime = 'application/msword';
       }
