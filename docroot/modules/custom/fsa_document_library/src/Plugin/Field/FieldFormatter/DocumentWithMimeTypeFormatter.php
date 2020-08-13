@@ -48,20 +48,28 @@ class DocumentWithMimeTypeFormatter extends FileFormatterBase {
       $mime = $file->getMimeType();
       $cleanMime = strtoupper(preg_replace(':^application/:i', '', $mime));
       $cleanMime = strtoupper(preg_replace(':^text/:i', '', $cleanMime));
-      if (preg_match('/(ms-?word|wordprocessing)/i', $cleanMime)) {
+
+      $ms_word = preg_match('/(ms-?word|wordprocessing)/i', $cleanMime);
+      $open_office = strpos($cleanMime, 'WORDPROCESSINGML');
+
+      if ($ms_word || $open_office === TRUE) {
         $cleanMime = 'Word';
+        $mime = 'application/msword';
       }
       if (preg_match('/(ms-?excel|spreadsheet)/i', $cleanMime)) {
         $cleanMime = 'Excel';
+        $mime = $file->getMimeType();
       }
       if (preg_match('/(powerpoint|presentation)/i', $cleanMime)) {
         $cleanMime = 'PPT';
+        $mime = $file->getMimeType();
       }
+
       $markup = '<span class="visuallyhidden">View </span>' . $link_text . '<span class="visuallyhidden"> as ' . $cleanMime . '</span>';
 
       $link = Link::fromTextAndUrl(Markup::create($markup), $url)->toString();
 
-      $attributes['class'] = 'file__type_' . Html::cleanCssIdentifier($file->getMimeType());
+      $attributes['class'] = 'file__type_' . Html::cleanCssIdentifier($mime);
 
       $elements[$delta] = [
         '#theme' => 'fsa_file_download',
