@@ -46,11 +46,9 @@ class UserRegistrationForm extends FormBase {
     ];
 
     $form['language_container'] = [
-      '#type' => 'container',
+      '#type' => 'fieldset',
+      '#title' => $this->t('Choose language'),
       '#attributes' => ['class' => ['language-info']],
-    ];
-    $form['language_container']['title'] = [
-      '#markup' => '<h3>' . $this->t('Choose language') . '</h3>',
     ];
     $form['language_container']['language'] = [
       '#type' => 'radios',
