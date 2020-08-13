@@ -96,7 +96,6 @@
             href="{{ item.url }}"
             title="{{ item.title }}"
             class="{{ 'navigation__link navigation__link--level-' ~ (menu_level + 1) }}{% if (item.is_expanded) %} js-nav-item-with-child{% endif %}"
-            {% if menu_level == 0 and item.is_expanded %}aria-hidden="true"{% endif %}
             >{{ item.title }}</a>
 
         {% else %}
