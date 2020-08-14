@@ -65,7 +65,7 @@ class FsaPageIndex extends FsaIndexBase {
                   'id' => ['type' => 'keyword'],
                   'label' => [
                     'type' => 'text',
-                    'index' => 'not_analyzed',
+                    'index' => false,
                     'fields' => [
                       'keyword' => [
                         'type' => 'keyword',
@@ -80,7 +80,7 @@ class FsaPageIndex extends FsaIndexBase {
                   'depth' => ['type' => 'integer'],
                   'label' => [
                     'type' => 'text',
-                    'index' => 'not_analyzed',
+                    'index' => false,
                     'fields' => [
                       'keyword' => [
                         'type' => 'keyword',
@@ -94,7 +94,7 @@ class FsaPageIndex extends FsaIndexBase {
                   'id' => ['type' => 'keyword'],
                   'label' => [
                     'type' => 'text',
-                    'index' => 'not_analyzed',
+                    'index' => false,
                     'fields' => [
                       'keyword' => [
                         'type' => 'keyword',
