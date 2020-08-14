@@ -766,8 +766,17 @@
 
 /* Food safety and hygiene. */
 .theme--content-type-business-guidance {
-  .hero__region {
+  .hero__content-container.no-photo .hero__region {
+    @media (--breakpoint-sm) {
+      margin-top: -10em;
+    }
+
+    @media (--breakpoint-md) {
+      margin-top: -6em;
+    }
+
     @media (--breakpoint-lg) {
+      margin-top: -10em;
       padding-top: 6em;
       padding-bottom: 6em;
     }
@@ -954,6 +963,12 @@
 
 /* Contact us */
 .theme--help-centre {
+  .hero__content-container.no-photo .hero__region {
+    @media (--breakpoint-sm) {
+      margin-top: -6em;
+    }
+  }
+
   .hero__content h2 {
     /* Tablet */
     @media (--breakpoint-sm) {
@@ -1011,5 +1026,32 @@
   @media (--breakpoint-sm) {
     float: right;
     margin-top: 1em;
+  }
+}
+
+.layout.hero-wrapper {
+  overflow: hidden;
+}
+
+.theme--search {
+  .hero__content-container .hero__title h1 {
+    @media (--breakpoint-sm) {
+      margin-bottom: 0;
+      padding-top: 0;
+    }
+  }
+  .hero__content-container .hero__region-wrapper {
+    @media (--breakpoint-sm) {
+      height: 120%;
+    }
+  }
+  .hero__content-container.no-photo .hero__region {
+    @media (--breakpoint-sm) {
+      margin-top: -3em;
+      padding-left: 0;
+    }
+    @media (--breakpoint-lg) {
+      width: 40%;
+    }
   }
 }
