@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   module:
-    - media_entity
+    - media
 id: media.promo_image
 label: 'Promo image'
 targetEntityType: media

@@ -26,7 +26,6 @@ module:
   contextual: 0
   cookieconsent: 0
   crop: 0
-  crop_media_entity: 0
   ctools: 0
   datalayer: 0
   datetime: 0
@@ -108,10 +107,8 @@ module:
   lockr: 0
   mailsystem: 0
   managed_links: 0
-  media_entity: 0
+  media: 0
   media_entity_browser: 0
-  media_entity_document: 0
-  media_entity_image: 0
   memcache: 0
   memcache_admin: 0
   menu_block: 0
@@ -137,6 +134,7 @@ module:
   password_policy_characters: 0
   password_policy_length: 0
   path: 0
+  path_alias: 0
   path_redirect_import: 0
   permissions_filter: 0
   rdf: 0

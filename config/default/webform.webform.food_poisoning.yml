@@ -11,16 +11,20 @@ id: food_poisoning
 title: 'Report suspected food poisoning'
 description: 'Food poisoning report form'
 category: 'Food problem'
-elements: "business:\n  '#type': webform_wizard_page\n  '#title': Business\n  business_intro:\n    '#type': webform_markup\n    '#markup': \"<p>Food poisoning is an illness caused by eating contaminated food. It&#39;s not usually serious and most people get better within a few days without treatment.</p>\\n\\n<p>The symptoms of food poisoning usually begin within one to two days after eating contaminated food, although they may start at any point between a few hours and several weeks later.</p>\\n\\n<p>For more details and advice on when to see your GP please check <a href=\\\"https://www.nhs.uk/conditions/Food-poisoning/\\\" target=\\\"_blank\\\">NHS Choices</a>.</p>\\n\"\n  where_lookup:\n    '#type': webform_googleplace\n    '#title': 'Where did you purchase the food?'\n    '#description': '<p>Enter the name and address of the UK business and select from the dropdown list.</p>'\n    '#required': true\n  fsa_establishment_la_name:\n    '#type': hidden\n    '#title': 'Local authority name'\n  fsa_establishment_postal_code:\n    '#type': hidden\n    '#title': 'Postal code'\n  fsa_establishment_la_email:\n    '#type': textfield\n    '#title': 'Local authority email'\n    '#help': 'Use the <em>Find a food safety team</em> lookup, below. Enter a local authority email. Check <em>Manually sent to local authority</em>. Continue and save. Visit the <em>Resend</em> tab, above, to send the data.'\n    '#access_create_roles': {  }\n    '#access_update_roles':\n      - fsa_admin\n      - administrator\n    '#access_view_roles':\n      - fsa_admin\n      - administrator\n  fsa_establishment_la_email_overridden:\n    '#type': hidden\n    '#title': 'Local authority email overridden'\n  fsa_establishment_la_email_alt:\n    '#type': hidden\n    '#title': 'Local authority alternative email'\n  manually_sent:\n    '#type': checkbox\n    '#title': 'Manually sent to local authority'\n    '#access_create_roles': {  }\n    '#access_update_roles':\n      - fsa_admin\n      - administrator\n    '#access_view_roles':\n      - fsa_admin\n      - administrator\nextra_business_info:\n  '#type': webform_wizard_page\n  '#title': Extra_business_info\n  '#states':\n    invisible:\n      ':input[name=\"where_lookup\"]':\n        value:\n          pattern: '((\\D[0-9]{1,2})|((\\D\\D[0-9]{1,2})|((\\D[0-9]\\D)|(\\D\\D[0-9]?\\D]))))(| )[0-9]\\D{2}'\n  processed_text:\n    '#type': processed_text\n    '#text': \"<h4><strong>Information about the food business</strong></h4>\\r\\n\\r\\n<p>Please provide extra information about the food business. This will help us send your report to the correct local authority who will investigate further.</p>\\r\\n\\r\\n<ul>\\r\\n\\t<li>If you used an online delivery service such as Just Eat or Deliveroo, please provide the address of the restaurant the food came from.&nbsp;</li>\\r\\n\\t<li>If you bought the food online from a supermarket such as Tesco or Morrisons, please provide the delivery postcode or the address of a branch of the supermarket near to where you live.</li>\\r\\n\\t<li>If you bought the food from a business that only operates online, or on social media, &nbsp;please provide the business name and town or city where they operate, or the delivery postcode.</li>\\r\\n</ul>\\r\\n\\r\\n<p>You can only report businesses based in the UK. If you bought the food in another country (including at an airport outside the UK) or it was sent to you from another country, you should contact the relevant authorities in that country.</p>\\r\\n\"\n    '#format': full_html\n  business_name:\n    '#type': textfield\n    '#title': 'Business name'\n    '#required': true\n  street:\n    '#type': textfield\n    '#title': Street\n  town_or_city:\n    '#type': textfield\n    '#title': 'Town or city'\n    '#required': true\n  postcode:\n    '#type': textfield\n    '#title': Postcode\npage_description:\n  '#type': webform_wizard_page\n  '#title': Description\n  '#prev_button_label': Previous\n  '#next_button_label': Continue\n  details_of_consumed_food:\n    '#type': textarea\n    '#title': 'What did you eat?'\n    '#description': 'Please tell us what you ate before falling ill.'\n    '#required': true\n  when_did_you_eat_it_:\n    '#type': textfield\n    '#title': 'When did you eat it?'\n    '#description': 'Please provide date and time'\n    '#required': true\n  symptoms_details:\n    '#type': textarea\n    '#title': 'What are your symptoms?'\n    '#required': true\n  when_did_you_illness_start_and_end_:\n    '#type': textfield\n    '#title': 'When did the symptoms start and end?'\n    '#required': true\n  has_visited_gp:\n    '#type': radios\n    '#title': 'Have you visited your GP?'\n    '#options':\n      'Yes': 'Yes'\n      'No': 'No'\n    '#required': true\npage_contact_Details:\n  '#type': webform_wizard_page\n  '#title': 'Contact details'\n  '#prev_button_label': Previous\n  '#next_button_label': Continue\n  header_contact_info:\n    '#type': webform_markup\n    '#markup': \"<h3>Your contact details</h3>\\r\\n\\r\\n<p>This information will only be used by the local authority to contact you about your issue, and to send you a confirmation email about your report. To fully investigate the issue it may be necessary to contact you to seek clarification.</p>\"\n  name:\n    '#type': textfield\n    '#title': 'Full name'\n  email:\n    '#type': email\n    '#title': 'Email address'\n    '#required': true\n  telephone:\n    '#type': tel\n    '#title': 'Phone number'\n  fsa_privacy_link_rafp:\n    '#type': webform_markup\n  captcha:\n    '#type': captcha\n"
+elements: "business:\n  '#type': webform_wizard_page\n  '#title': Business\n  business_intro:\n    '#type': webform_markup\n    '#markup': |\n      <p>Food poisoning is an illness caused by eating contaminated food. It&#39;s not usually serious and most people get better within a few days without treatment.</p>\n      \n      <p>The symptoms of food poisoning usually begin within one to two days after eating contaminated food, although they may start at any point between a few hours and several weeks later.</p>\n      \n      <p>For more details and advice on when to see your GP please check <a href=\"https://www.nhs.uk/conditions/Food-poisoning/\" target=\"_blank\">NHS Choices</a>.</p>\n      \n  where_lookup:\n    '#type': webform_googleplace\n    '#title': 'Where did you purchase the food?'\n    '#description': '<p>Enter the name and address of the UK business and select from the dropdown list.</p>'\n    '#required': true\n  fsa_establishment_la_name:\n    '#type': hidden\n    '#title': 'Local authority name'\n  fsa_establishment_postal_code:\n    '#type': hidden\n    '#title': 'Postal code'\n  fsa_establishment_la_email:\n    '#type': textfield\n    '#title': 'Local authority email'\n    '#help': 'Use the <em>Find a food safety team</em> lookup, below. Enter a local authority email. Check <em>Manually sent to local authority</em>. Continue and save. Visit the <em>Resend</em> tab, above, to send the data.'\n    '#access_create_roles': {  }\n    '#access_update_roles':\n      - fsa_admin\n      - administrator\n    '#access_view_roles':\n      - fsa_admin\n      - administrator\n  fsa_establishment_la_email_overridden:\n    '#type': hidden\n    '#title': 'Local authority email overridden'\n  fsa_establishment_la_email_alt:\n    '#type': hidden\n    '#title': 'Local authority alternative email'\n  manually_sent:\n    '#type': checkbox\n    '#title': 'Manually sent to local authority'\n    '#access_create_roles': {  }\n    '#access_update_roles':\n      - fsa_admin\n      - administrator\n    '#access_view_roles':\n      - fsa_admin\n      - administrator\nextra_business_info:\n  '#type': webform_wizard_page\n  '#title': Extra_business_info\n  '#states':\n    invisible:\n      ':input[name=\"where_lookup\"]':\n        value:\n          pattern: '((\\D[0-9]{1,2})|((\\D\\D[0-9]{1,2})|((\\D[0-9]\\D)|(\\D\\D[0-9]?\\D]))))(| )[0-9]\\D{2}'\n  processed_text:\n    '#type': processed_text\n    '#text': \"<h4><strong>Information about the food business</strong></h4>\\r\\n\\r\\n<p>Please provide extra information about the food business. This will help us send your report to the correct local authority who will investigate further.</p>\\r\\n\\r\\n<ul>\\r\\n\\t<li>If you used an online delivery service such as Just Eat or Deliveroo, please provide the address of the restaurant the food came from.&nbsp;</li>\\r\\n\\t<li>If you bought the food online from a supermarket such as Tesco or Morrisons, please provide the delivery postcode or the address of a branch of the supermarket near to where you live.</li>\\r\\n\\t<li>If you bought the food from a business that only operates online, or on social media, &nbsp;please provide the business name and town or city where they operate, or the delivery postcode.</li>\\r\\n</ul>\\r\\n\\r\\n<p>You can only report businesses based in the UK. If you bought the food in another country (including at an airport outside the UK) or it was sent to you from another country, you should contact the relevant authorities in that country.</p>\\r\\n\"\n    '#format': full_html\n  business_name:\n    '#type': textfield\n    '#title': 'Business name'\n    '#required': true\n  street:\n    '#type': textfield\n    '#title': Street\n  town_or_city:\n    '#type': textfield\n    '#title': 'Town or city'\n    '#required': true\n  postcode:\n    '#type': textfield\n    '#title': Postcode\npage_description:\n  '#type': webform_wizard_page\n  '#title': Description\n  '#prev_button_label': Previous\n  '#next_button_label': Continue\n  details_of_consumed_food:\n    '#type': textarea\n    '#title': 'What did you eat?'\n    '#description': 'Please tell us what you ate before falling ill.'\n    '#required': true\n  when_did_you_eat_it_:\n    '#type': textfield\n    '#title': 'When did you eat it?'\n    '#description': 'Please provide date and time'\n    '#required': true\n  symptoms_details:\n    '#type': textarea\n    '#title': 'What are your symptoms?'\n    '#required': true\n  when_did_you_illness_start_and_end_:\n    '#type': textfield\n    '#title': 'When did the symptoms start and end?'\n    '#required': true\n  has_visited_gp:\n    '#type': radios\n    '#title': 'Have you visited your GP?'\n    '#options':\n      'Yes': 'Yes'\n      'No': 'No'\n    '#required': true\npage_contact_Details:\n  '#type': webform_wizard_page\n  '#title': 'Contact details'\n  '#prev_button_label': Previous\n  '#next_button_label': Continue\n  header_contact_info:\n    '#type': webform_markup\n    '#markup': \"<h3>Your contact details</h3>\\r\\n\\r\\n<p>This information will only be used by the local authority to contact you about your issue, and to send you a confirmation email about your report. To fully investigate the issue it may be necessary to contact you to seek clarification.</p>\"\n  name:\n    '#type': textfield\n    '#title': 'Full name'\n  email:\n    '#type': email\n    '#title': 'Email address'\n    '#required': true\n  telephone:\n    '#type': tel\n    '#title': 'Phone number'\n  fsa_privacy_link_rafp:\n    '#type': webform_markup\n  captcha:\n    '#type': captcha"
 css: ''
 javascript: ''
 settings:
   ajax: false
   ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
   page: true
   page_submit_path: help/report-food-problem/poisoning
   page_confirm_path: help/report-food-problem/poisoning/summary
-  form_title: both
+  page_theme_name: ''
+  form_title: source_entity_webform
   form_submit_once: true
   form_exception_message: ''
   form_open_message: ''
@@ -49,6 +53,11 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
   submission_label: ''
   submission_log: false
   submission_views: {  }
@@ -84,11 +93,18 @@ settings:
   wizard_progress_pages: true
   wizard_progress_percentage: false
   wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_auto_forward: true
   wizard_start_label: ''
   wizard_preview_link: false
-  wizard_confirmation: true
+  wizard_confirmation: false
   wizard_confirmation_label: ''
   wizard_track: name
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
   preview: 2
   preview_label: Summary
   preview_title: ''
@@ -108,7 +124,9 @@ settings:
   draft_auto_save: false
   draft_saved_message: ''
   draft_loaded_message: ''
-  confirmation_type: inline
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
   confirmation_title: ''
   confirmation_message: "<h2>Report complete</h2>\r\n\r\n<p>Thank you for your report, which will be forwarded to: <strong>[webform_submission:values:fsa_establishment_la_name:value] Council</strong>.</p>\r\n\r\n<p>If you need to contact [webform_submission:values:fsa_establishment_la_name:value] Council about your report, you can do so at: <a href=\"mailto:[webform_submission:values:fsa_establishment_la_email:value]\">[webform_submission:values:fsa_establishment_la_email:value]</a></p>\r\n\r\n<p>A confirmation email was sent to your inbox.</p>"
   confirmation_url: ''
@@ -118,6 +136,7 @@ settings:
   confirmation_back_attributes: {  }
   confirmation_exclude_query: false
   confirmation_exclude_token: false
+  confirmation_update: false
   limit_total: null
   limit_total_interval: null
   limit_total_message: ''
@@ -134,6 +153,8 @@ settings:
   purge_days: 12
   results_disabled: false
   results_disabled_ignore: false
+  results_customize: false
+  token_view: false
   token_update: false
 access:
   create:
@@ -185,11 +206,14 @@ access:
 handlers:
   copy_of_report:
     id: email
-    label: 'Copy of report'
+    label: 'Send report to the user - automatically matched LA'
     handler_id: copy_of_report
     status: true
-    conditions: {  }
-    weight: 0
+    conditions:
+      enabled:
+        ':input[name="fsa_establishment_la_name"]':
+          filled: true
+    weight: -46
     settings:
       states:
         - completed
@@ -203,11 +227,12 @@ handlers:
       from_options: {  }
       from_name: _default
       subject: 'Thank you for reporting a food problem'
-      body: "{% if (webform_token('[webform_submission:values:where_lookup:value]', webform_submission) is empty) or (webform_token('[webform_submission:values:fsa_establishment_la_name:value]', webform_submission) is empty) %}\r\n  <p>Thank you for your report. It has been forwarded to the relevant Local Authority.</p>\r\n{% else %}\r\n  <p>Thank you for reporting a food problem at: {{ webform_token('[webform_submission:values:where_lookup:value]', webform_submission) }}</p>\r\n  <p>Your report has been forwarded to {{ webform_token('[webform_submission:values:fsa_establishment_la_name:value]', webform_submission) }} Council</p>\r\n  <p>Please do not reply to this email.</p>\r\n{% endif %}\r\n"
+      body: "  <p>Thank you for reporting a food problem at: {{ webform_token('[webform_submission:values:where_lookup:value]', webform_submission) }}</p>\r\n  <p>Your report has been forwarded to {{ webform_token('[webform_submission:values:fsa_establishment_la_name:value]', webform_submission) }} Council</p>\r\n  <p>Please do not reply to this email.</p>\r\n"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false
+      exclude_attachments: false
       html: true
       attachments: false
       twig: true
@@ -217,6 +242,7 @@ handlers:
       sender_mail: ''
       sender_name: ''
       theme_name: ''
+      parameters: {  }
   copy_to_la:
     id: email
     label: 'Copy to local authority'
@@ -231,7 +257,7 @@ handlers:
         -
           ':input[name="fsa_establishment_la_email_alt"]':
             empty: true
-    weight: 0
+    weight: -48
     settings:
       states:
         - completed
@@ -245,8 +271,8 @@ handlers:
       from_mail: report@food.gov.uk
       from_options: {  }
       from_name: _default
-      subject: 'This is a food problem report from a consumer via beta.food.gov.uk'
-      body: "<p>This is a food problem report from <strong><a href=\"[current-page:url:unaliased:absolute]\">[current-page:title]</a></strong> via beta.food.gov.uk.</p>\r\n\r\n<div>[webform_submission:values]</div>\r\n\r\n<p>Please do not reply to this email.</p>\r\n\r\n<p>Protect privacy: make sure you keep the information in this email appropriately secure and only use it for the purpose of investigating the complaint against the food business. If this issue is for another local authority to consider and take appropriate action, please securely share the information in this email with that local authority. Ensure that the personal details of the person who made the complaint are not revealed to the food business.</p>"
+      subject: 'This is a food problem report from a consumer via food.gov.uk'
+      body: "<p>This is a food problem report from <strong><a href=\"[current-page:url:unaliased:absolute]\">[current-page:title]</a></strong> via food.gov.uk.</p>\r\n\r\n<div>[webform_submission:values]</div>\r\n\r\n<p>Please do not reply to this email.</p>\r\n\r\n<p>Protect privacy: make sure you keep the information in this email appropriately secure and only use it for the purpose of investigating the complaint against the food business. If this issue is for another local authority to consider and take appropriate action, please securely share the information in this email with that local authority. Ensure that the personal details of the person who made the complaint are not revealed to the food business.</p>"
       excluded_elements:
         fsa_establishment_la_name: fsa_establishment_la_name
         fsa_establishment_postal_code: fsa_establishment_postal_code
@@ -257,15 +283,17 @@ handlers:
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false
+      exclude_attachments: false
       html: true
       attachments: false
       twig: false
       debug: false
-      reply_to: ''
+      reply_to: '[webform_submission:values:email:raw]'
       return_path: ''
       sender_mail: ''
       sender_name: ''
       theme_name: ''
+      parameters: {  }
   remove_personal_data:
     id: action
     label: 'Remove personal data'
@@ -275,7 +303,7 @@ handlers:
       disabled:
         ':input[name="fsa_establishment_la_email"]':
           empty: true
-    weight: 3
+    weight: -43
     settings:
       states:
         - completed
@@ -298,7 +326,7 @@ handlers:
           value: '1'
         ':input[name="fsa_establishment_la_email_alt"]':
           filled: true
-    weight: 2
+    weight: -47
     settings:
       states:
         - completed
@@ -311,8 +339,8 @@ handlers:
       from_mail: report@food.gov.uk
       from_options: {  }
       from_name: _default
-      subject: 'This is a food problem report from a consumer via beta.food.gov.uk'
-      body: "<p>This is a food problem report from <strong><a href=\"[current-page:url:unaliased:absolute]\">[current-page:title]</a></strong> via beta.food.gov.uk.</p>\r\n\r\n<div>[webform_submission:values]</div>\r\n\r\n<p>Please do not reply to this email.</p>\r\n\r\n<p>Protect privacy: make sure you keep the information in this email appropriately secure and only use it for the purpose of investigating the complaint against the food business. If this issue is for another local authority to consider and take appropriate action, please securely share the information in this email with that local authority. Ensure that the personal details of the person who made the complaint are not revealed to the food business.</p>"
+      subject: 'This is a food problem report from a consumer via food.gov.uk'
+      body: "<p>This is a food problem report from <strong><a href=\"[current-page:url:unaliased:absolute]\">[current-page:title]</a></strong> via food.gov.uk.</p>\r\n\r\n<div>[webform_submission:values]</div>\r\n\r\n<p>Please do not reply to this email.</p>\r\n\r\n<p>Protect privacy: make sure you keep the information in this email appropriately secure and only use it for the purpose of investigating the complaint against the food business. If this issue is for another local authority to consider and take appropriate action, please securely share the information in this email with that local authority. Ensure that the personal details of the person who made the complaint are not revealed to the food business.</p>"
       excluded_elements:
         fsa_establishment_la_name: fsa_establishment_la_name
         fsa_establishment_postal_code: fsa_establishment_postal_code
@@ -323,13 +351,138 @@ handlers:
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false
+      exclude_attachments: false
       html: true
       attachments: false
       twig: false
+      debug: false
+      reply_to: '[webform_submission:values:email:raw]'
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+      parameters: {  }
+  send_report_to_the_user_automatically_matched_la:
+    id: email
+    label: 'Send report to the user - manually matched LA'
+    handler_id: send_report_to_the_user_automatically_matched_la
+    status: true
+    conditions:
+      enabled:
+        ':input[name="fsa_establishment_la_name"]':
+          empty: true
+        ':input[name="fsa_establishment_la_email"]':
+          '!value': webmaster@food.gov.uk
+        ':input[name="manually_sent"]':
+          checked: true
+    weight: -45
+    settings:
+      states:
+        - completed
+        - updated
+      to_mail: '[webform_submission:values:email:raw]'
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      subject: 'Thank you for reporting a food problem'
+      body: "<p>Thank you for your report. It has been forwarded to the relevant local authority.</p>\r\n"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: true
       debug: false
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
       theme_name: ''
+      parameters: {  }
+  send_report_to_the_user_manually_matched_la:
+    id: email
+    label: 'Send report to the user - couldn''t match LA'
+    handler_id: send_report_to_the_user_manually_matched_la
+    status: true
+    conditions:
+      enabled:
+        ':input[name="fsa_establishment_la_name"]':
+          empty: true
+        ':input[name="fsa_establishment_la_email"]':
+          value: webmaster@food.gov.uk
+        ':input[name="manually_sent"]':
+          unchecked: true
+    weight: -44
+    settings:
+      states:
+        - completed
+        - updated
+      to_mail: '[webform_submission:values:email:raw]'
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      subject: 'Thank you for reporting a food problem'
+      body: "<p>Thank you for your report. Unfortunately, we were not able to identify the local authority responsible for taking your report forward.</p>\r\n\r\n<p>If you wish to report a problem with food bought online and delivered, please re-submit your report and provide a delivery postcode.</p>\r\n\r\n<p>At the moment, we are unable to process reports about nationwide chains, if the report is not about individual branch.</p>\r\n\r\n<p>You can only report businesses based in the UK.</p>\r\n"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: true
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+      parameters: {  }
+  settings:
+    id: settings
+    label: 'Confirmation page, if manually sent'
+    handler_id: settings
+    status: true
+    conditions:
+      enabled:
+        ':input[name="fsa_establishment_la_name"]':
+          empty: true
+    weight: -50
+    settings:
+      preview_title: ''
+      preview_message: ''
+      confirmation_url: ''
+      confirmation_title: 'Report suspected food poisoning'
+      confirmation_message: "<h2>Report complete</h2>\r\n\r\n<p>Thank you for your report. You will receive email notification once it has been processed.</p>"
+      debug: ''
+  settings_1:
+    id: settings
+    label: 'Confirmation page, if automatically sent'
+    handler_id: settings_1
+    status: true
+    conditions:
+      enabled:
+        ':input[name="fsa_establishment_la_name"]':
+          filled: true
+    weight: -49
+    settings:
+      preview_title: ''
+      preview_message: ''
+      confirmation_url: ''
+      confirmation_title: 'Report suspected food poisoning'
+      confirmation_message: "<h2>Report complete</h2>\r\n\r\n<p>Thank you for your report, which will be forwarded to: <strong>[webform_submission:values:fsa_establishment_la_name:value] Council</strong>.</p>\r\n\r\n<p>If you need to contact [webform_submission:values:fsa_establishment_la_name:value] Council about your report, you can do so at: <a href=\"mailto:[webform_submission:values:fsa_establishment_la_email:value]\">[webform_submission:values:fsa_establishment_la_email:value]</a></p>\r\n\r\n<p>A confirmation email has been sent to your inbox.</p>"
+      debug: ''
+variants: {  }
 uuid: 1b027889-9647-413d-a7b3-fadb84da9e1c

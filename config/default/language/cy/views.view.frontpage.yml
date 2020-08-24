@@ -11,6 +11,11 @@ display:
           expose:
             items_per_page_label: 'Eitemau pob tudalen'
             offset_label: Ongli
+          tags:
+            previous: '‹ Blaenorol'
+            next: 'Nesaf ›'
+            first: '« Gyntaf'
+            last: 'Diwethaf »'
   feed_1:
     display_title: Porth
   page_1:

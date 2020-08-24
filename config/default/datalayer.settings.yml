@@ -4,15 +4,15 @@ output_fields: false
 group: false
 lib_helper: false
 entity_meta:
-  langcode: langcode
-  vid: vid
-  uid: uid
   created: created
+  langcode: langcode
   status: status
-  roles: roles
+  uid: uid
+  vid: vid
   name: '0'
+  uuid: '0'
 enable_ia: false
-ia_depth: '3'
+ia_depth: 3
 ia_category_primary: primaryCategory
 ia_category_sub: subCategory
 vocabs:
@@ -36,6 +36,7 @@ expose_user_details_roles:
   authenticated: '0'
   author: '0'
   editor: '0'
+  advanced_editor: '0'
   fsa_admin: '0'
   administrator: '0'
 expose_user_details_fields: false
@@ -50,3 +51,9 @@ site_name: siteName
 key_replacements: {  }
 _core:
   default_config_hash: 5HzMwTFN-AaoQ2r_UmGvyMhvIwmbgyWKsPiB11y-MwU
+current_user_meta:
+  name: name
+  mail: '0'
+  roles: '0'
+  created: '0'
+  access: '0'

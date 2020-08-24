@@ -1,4 +1,4 @@
-smtp_on: true
+smtp_on: false
 smtp_host: smtp.example.com
 smtp_hostbackup: smtp1.example.com
 smtp_port: '25'
@@ -15,3 +15,6 @@ smtp_debugging: false
 prev_mail_system: php_mail
 _core:
   default_config_hash: WEa5Ex_IeAcm6Bm0hmQ4vU_nDwJDB8hW-vxT1qpGIbM
+smtp_autotls: true
+smtp_keepalive: false
+smtp_timeout: 30

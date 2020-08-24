@@ -7,5 +7,7 @@ settings:
   warn_multiple_usages: false
   show_default_crop: true
   show_crop_area: true
+  notify_update: true
+  notify_apply: false
 _core:
   default_config_hash: QjLJUHJAzic-efSYtJnhoz7in-eT3A1PriLW3i11DFg

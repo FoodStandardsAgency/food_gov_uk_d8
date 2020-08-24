@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.multipage_guide.field_guide_pages
     - field.field.node.multipage_guide.field_nation
     - node.type.multipage_guide
+    - workflows.workflow.editorial
   module:
     - content_moderation
     - field_group
@@ -57,6 +58,7 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+      match_limit: 10
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
@@ -132,6 +134,7 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+      match_limit: 10
     region: content
     third_party_settings: {  }
   unpublish_on:

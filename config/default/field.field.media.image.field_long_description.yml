@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.media.field_long_description
-    - media_entity.bundle.image
+    - media.type.image
 id: media.image.field_long_description
 field_name: field_long_description
 entity_type: media

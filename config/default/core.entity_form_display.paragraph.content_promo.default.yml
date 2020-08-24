@@ -7,7 +7,6 @@ dependencies:
     - field.field.paragraph.content_promo.field_title
     - paragraphs.paragraphs_type.content_promo
   module:
-    - content_moderation
     - entity_browser_entity_form
     - inline_entity_form
 id: paragraph.content_promo.default

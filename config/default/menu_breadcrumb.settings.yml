@@ -6,7 +6,6 @@ append_member_page: false
 member_page_as_link: false
 remove_home: false
 add_home: true
-home_as_site_name: false
 menu_breadcrumb_menus:
   main:
     enabled: 1
@@ -40,3 +39,4 @@ menu_breadcrumb_menus:
     langhandle: 0
 _core:
   default_config_hash: cQ5PlGtatt2RcAsy3ZvFrnpvCRT-VdbdrFEV-XUpEAI
+front_title: 1

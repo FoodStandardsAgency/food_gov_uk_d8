@@ -8,13 +8,7 @@ spi:
   server: 'https://nspi.acquia.com'
   ssl_override: false
   ssl_verify: true
-  def_vars:
-    preprocess_css:
-      optional: 0
-      description: ''
   def_waived_vars: {  }
-  def_timestamp: 1374783288
-  new_optional_data: 1
   admin_priv: 1
   send_node_user: 1
   send_watchdog: 1
@@ -182,30 +176,3 @@ mapping:
     - http.response.debug_cacheability_headers
 _core:
   default_config_hash: wxTqZpydlDKlPxO8i3OqgtM9BwmL6dLY_8T0x_HLxns
-subscription_data:
-  active: true
-  href: 'https://insight.acquia.com/node/uuid/561e1f12-97b5-4248-a93b-48bc1cd7ec26/dashboard'
-  uuid: 561e1f12-97b5-4248-a93b-48bc1cd7ec26
-  subscription_name: 'Food Standards Agency'
-  expiration_date:
-    value: '2020-11-19T00:00:00'
-  product:
-    view: 'Acquia Network'
-  derived_key_salt: a3fdf7702518d5343da54a893443fdc4
-  update_service: '1'
-  search_service_enabled: 1
-  rpc_version: '3.1'
-  update: {  }
-  heartbeat_data:
-    acquia_lift:
-      status: false
-      decision:
-        public_key: ''
-        private_key: ''
-      profile:
-        account_name: ''
-        hostname: ''
-        public_key: ''
-        secret_key: ''
-        js_path: ''
-    search_service_enabled: 1
