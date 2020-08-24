@@ -1,0 +1,95 @@
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+index 842e621..c1e85b2 100644
+--- a/.idea/workspace.xml
++++ b/.idea/workspace.xml
+@@ -1,7 +1,9 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="faaf52f2-6302-4266-ada3-5ecb58055709" name="Default" comment="" />
++    <list default="true" id="faaf52f2-6302-4266-ada3-5ecb58055709" name="Default" comment="">
++      <change beforePath="$PROJECT_DIR$/src/Plugin/Filter/EntityEmbedFilter.php" afterPath="$PROJECT_DIR$/src/Plugin/Filter/EntityEmbedFilter.php" />
++    </list>
+     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+     <option name="TRACKING_ENABLED" value="true" />
+     <option name="SHOW_DIALOG" value="false" />
+@@ -17,11 +19,11 @@
+       <file leaf-file-name="EntityEmbedFilter.php" pinned="false" current-in-tab="true">
+         <entry file="file://$PROJECT_DIR$/src/Plugin/Filter/EntityEmbedFilter.php">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="653">
+-              <caret line="136" column="28" lean-forward="true" selection-start-line="136" selection-start-column="28" selection-end-line="136" selection-end-column="28" />
++            <state relative-caret-position="397">
++              <caret line="220" column="58" lean-forward="false" selection-start-line="220" selection-start-column="58" selection-end-line="220" selection-end-column="58" />
+               <folding>
+-                <marker date="1598280248317" expanded="false" signature="9480:9484" ph="&lt;" />
+-                <marker date="1598280248317" expanded="false" signature="9603:9607" ph="&gt;" />
++                <marker date="1598280473159" expanded="false" signature="9763:9767" ph="&lt;" />
++                <marker date="1598280473159" expanded="false" signature="9886:9890" ph="&gt;" />
+               </folding>
+             </state>
+           </provider>
+@@ -131,12 +133,12 @@
+       <option name="number" value="Default" />
+       <option name="presentableId" value="Default" />
+       <updated>1598280144165</updated>
+-      <workItem from="1598280145301" duration="165000" />
++      <workItem from="1598280145301" duration="368000" />
+     </task>
+     <servers />
+   </component>
+   <component name="TimeTrackingManager">
+-    <option name="totallyTimeSpent" value="165000" />
++    <option name="totallyTimeSpent" value="368000" />
+   </component>
+   <component name="ToolWindowManager">
+     <frame x="67" y="25" width="1533" height="875" extended-state="6" />
+@@ -175,11 +177,11 @@
+   <component name="editorHistoryManager">
+     <entry file="file://$PROJECT_DIR$/src/Plugin/Filter/EntityEmbedFilter.php">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="653">
+-          <caret line="136" column="28" lean-forward="true" selection-start-line="136" selection-start-column="28" selection-end-line="136" selection-end-column="28" />
++        <state relative-caret-position="397">
++          <caret line="220" column="58" lean-forward="false" selection-start-line="220" selection-start-column="58" selection-end-line="220" selection-end-column="58" />
+           <folding>
+-            <marker date="1598280248317" expanded="false" signature="9480:9484" ph="&lt;" />
+-            <marker date="1598280248317" expanded="false" signature="9603:9607" ph="&gt;" />
++            <marker date="1598280473159" expanded="false" signature="9763:9767" ph="&lt;" />
++            <marker date="1598280473159" expanded="false" signature="9886:9890" ph="&gt;" />
+           </folding>
+         </state>
+       </provider>
+diff --git a/src/Plugin/Filter/EntityEmbedFilter.php b/src/Plugin/Filter/EntityEmbedFilter.php
+index de0b619..41a47b2 100644
+--- a/src/Plugin/Filter/EntityEmbedFilter.php
++++ b/src/Plugin/Filter/EntityEmbedFilter.php
+@@ -135,6 +135,7 @@ class EntityEmbedFilter extends FilterBase implements ContainerFactoryPluginInte
+         $entity_type = $node->getAttribute('data-entity-type');
+         $entity = NULL;
+         $entity_output = '';
++        $entity_not_found = FALSE;
+ 
+         // data-entity-embed-settings is deprecated, make sure we convert it to
+         // data-entity-embed-display-settings.
+@@ -164,6 +165,7 @@ class EntityEmbedFilter extends FilterBase implements ContainerFactoryPluginInte
+         }
+         catch (EntityNotFoundException $e) {
+           watchdog_exception('entity_embed', $e);
++          $entity_not_found = TRUE;
+         }
+ 
+         if ($entity instanceof EntityInterface) {
+@@ -215,6 +217,12 @@ class EntityEmbedFilter extends FilterBase implements ContainerFactoryPluginInte
+           }
+         }
+ 
++        // We need to reset this output since it will resolve as an image for
++        // media not found within content (not-found.png).
++        if ($entity_not_found) {
++          $entity_output = '';
++        }
++
+         $this->replaceNodeContent($node, $entity_output);
+       }
+ 
