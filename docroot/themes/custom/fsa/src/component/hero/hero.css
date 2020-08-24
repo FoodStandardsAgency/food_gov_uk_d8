@@ -160,7 +160,7 @@
 .hero__title h1,
 .hero__heading,
 .hero__content h2 {
-  @mixin responsive-declaration font-size, 2.2em, 3.9em;
+  @mixin responsive-declaration font-size, 2.2em, 3em;
 
   position: relative;
   display: inline-block;
@@ -543,18 +543,19 @@
     @media (--breakpoint-sm) {
       padding: 0;
       text-align: left;
+      width: 355px;
     }
 
     /* Desktop medium */
     @media (--breakpoint-md) {
       font-size: 2.75em;
-      width: 332px;
+      width: 360px;
     }
 
     /* Desktop medium */
     @media (--breakpoint-lg) {
-      font-size: 3.8em;
-      width: 368px;
+      font-size: 3em;
+      width: 430px;
     }
   }
 
@@ -597,7 +598,7 @@
 
     /* Desktop medium */
     @media (--breakpoint-lg) {
-      font-size: 1.1em;
+      font-size: 1em;
     }
   }
 
@@ -772,8 +773,17 @@
 
 /* Food safety and hygiene. */
 .theme--content-type-business-guidance {
-  .hero__region {
+  .hero__content-container.no-photo .hero__region {
+    @media (--breakpoint-sm) {
+      margin-top: -10em;
+    }
+
+    @media (--breakpoint-md) {
+      margin-top: -6em;
+    }
+
     @media (--breakpoint-lg) {
+      margin-top: -10em;
       padding-top: 6em;
       padding-bottom: 6em;
     }
@@ -791,7 +801,9 @@
 
     /* Region wrapper */
     .hero__region-wrapper {
-      min-height: 24em;
+      @media (--breakpoint-sm) {
+        min-height: 24em;
+      }
     }
 
     /* Block content within region wrapper */
@@ -960,12 +972,26 @@
 
 /* Contact us */
 .theme--help-centre {
+  .hero__content-container.no-photo .hero__region {
+    @media (--breakpoint-sm) {
+      margin-top: -6em;
+    }
+  }
+
   .hero__content h2 {
     /* Tablet */
     @media (--breakpoint-sm) {
       padding: 0;
       padding-right: 1em;
       text-align: left;
+    }
+
+    @media (--breakpoint-md) {
+      width: 400px;
+    }
+
+    @media (--breakpoint-lg) {
+      width: 455px;
     }
 
     &::after {
@@ -992,19 +1018,6 @@
   }
 }
 
-.node-57 {
-  .hero__heading {
-    @media (--breakpoint-md) {
-      width: 370px;
-    }
-
-    /* Desktop large */
-    @media (--breakpoint-lg) {
-      width: 390px;
-    }
-  }
-}
-
 /* Alignment of breadcrumbs and subscription link on desktop */
 #block-breadcrumbs {
   /* Tablet */
@@ -1017,5 +1030,32 @@
   @media (--breakpoint-sm) {
     float: right;
     margin-top: 1em;
+  }
+}
+
+.layout.hero-wrapper {
+  overflow: hidden;
+}
+
+.theme--search {
+  .hero__content-container .hero__title h1 {
+    @media (--breakpoint-sm) {
+      margin-bottom: 0;
+      padding-top: 0;
+    }
+  }
+  .hero__content-container .hero__region-wrapper {
+    @media (--breakpoint-sm) {
+      height: 120%;
+    }
+  }
+  .hero__content-container.no-photo .hero__region {
+    @media (--breakpoint-sm) {
+      margin-top: -3em;
+      padding-left: 0;
+    }
+    @media (--breakpoint-lg) {
+      width: 40%;
+    }
   }
 }

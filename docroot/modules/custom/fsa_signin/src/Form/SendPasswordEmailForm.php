@@ -46,6 +46,7 @@ class SendPasswordEmailForm extends FormBase {
       '#default_value' => $email,
       '#disabled' => $disabled,
       '#description' => $description,
+      '#attributes' => ['autocomplete' => 'email'],
     ];
     $form['submit'] = [
       '#type' => 'submit',

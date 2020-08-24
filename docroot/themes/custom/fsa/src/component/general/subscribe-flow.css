@@ -99,3 +99,7 @@
 :--not-touch .profile-manage-form .form-actions .button.black.left:--enter {
   color: var(--color-white);
 }
+
+.profile-manage-form fieldset.form-item {
+  margin-bottom: 0;
+}
