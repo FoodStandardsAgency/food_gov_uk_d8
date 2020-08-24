@@ -62,7 +62,7 @@ class FsaRatingsIndex extends FsaIndexBase {
                   'id' => ['type' => 'integer'],
                   'label' => [
                     'type' => 'text',
-                    'index' => 'not_analyzed',
+                    'index' => FALSE,
                     'fields' => [
                       'keyword' => [
                         'type' => 'keyword',
@@ -79,7 +79,7 @@ class FsaRatingsIndex extends FsaIndexBase {
                   'id' => ['type' => 'integer'],
                   'label' => [
                     'type' => 'text',
-                    'index' => 'not_analyzed',
+                    'index' => FALSE,
                     'fields' => [
                       'keyword' => [
                         'type' => 'keyword',
@@ -93,11 +93,11 @@ class FsaRatingsIndex extends FsaIndexBase {
               ],
               'phone' => [
                 'type' => 'text',
-                'index' => 'not_analyzed',
+                'index' => FALSE,
               ],
               'postcode' => [
                 'type' => 'text',
-                'index' => 'not_analyzed',
+                'index' => FALSE,
               ],
               'postcode_tokenized' => [
                 'type' => 'text',
@@ -108,7 +108,7 @@ class FsaRatingsIndex extends FsaIndexBase {
               ],
               'ratingvalue' => [
                 'type' => 'text',
-                'index' => 'not_analyzed',
+                'index' => FALSE,
                 'fields' => [
                   'keyword' => [
                     'type' => 'keyword',
@@ -117,7 +117,7 @@ class FsaRatingsIndex extends FsaIndexBase {
               ],
               'fhrs_ratingvalue' => [
                 'type' => 'text',
-                'index' => 'not_analyzed',
+                'index' => FALSE,
                 'fields' => [
                   'keyword' => [
                     'type' => 'keyword',
@@ -126,7 +126,7 @@ class FsaRatingsIndex extends FsaIndexBase {
               ],
               'fhis_ratingvalue' => [
                 'type' => 'text',
-                'index' => 'not_analyzed',
+                'index' => FALSE,
                 'fields' => [
                   'keyword' => [
                     'type' => 'keyword',
