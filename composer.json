@@ -173,6 +173,9 @@
             },
             "drupal/field_validation": {
                 "Declaration of (...)FieldValidationRuleAddForm::buildForm must be compatible with (...)FieldValidationRuleFormBase::buildForm" : "https://www.drupal.org/files/issues/2941006-php-incompatible-buildform-signature.patch"
+            },
+            "drupal/entity_embed": {
+                "Remove media not found image for deleted embedded media": "./src/patches/entity_embed_media_not_found_node_content_image.patch"
             }
         },
         "dropin-paths": {
