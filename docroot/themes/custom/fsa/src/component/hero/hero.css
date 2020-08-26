@@ -1078,4 +1078,8 @@
 
 .theme--frontpage .hero__heading {
   width: auto;
+
+  @media (--breakpoint-lg) {
+    width: 390px;
+  }
 }
