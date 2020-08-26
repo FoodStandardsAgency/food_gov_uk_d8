@@ -650,8 +650,9 @@
     }
 
     @media (--breakpoint-lg) {
-      border-radius: 0 95% 83% 0;
-      padding: 0 2.5em 3em 4em;
+      border-radius: 0 73% 100% 0;
+      padding: 0 5.5em 5em 4em;
+      width: 45%;
     }
   }
 
@@ -663,8 +664,14 @@
 
     .hero__content {
       @media (--breakpoint-lg) {
-        padding: 6em 3em 7em 0;
+        padding: 4em 3em 7em 0;
       }
+    }
+  }
+
+  .hero__region-wrapper {
+    @media (--breakpoint-lg) {
+      height: 130%;
     }
   }
 
