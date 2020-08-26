@@ -1080,6 +1080,6 @@
   width: auto;
 
   @media (--breakpoint-lg) {
-    width: 460px;
+    width: 390px;
   }
 }
