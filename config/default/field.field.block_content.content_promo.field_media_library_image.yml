@@ -5,7 +5,7 @@ dependencies:
   config:
     - block_content.type.content_promo
     - field.storage.block_content.field_media_library_image
-    - media_entity.bundle.image
+    - media.type.image
 id: block_content.content_promo.field_media_library_image
 field_name: field_media_library_image
 entity_type: block_content

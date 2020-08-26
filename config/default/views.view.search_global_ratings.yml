@@ -14,7 +14,6 @@ description: ''
 tag: search_global
 base_table: elasticsearch_result
 base_field: id
-core: 8.x
 display:
   default:
     display_plugin: default
@@ -202,6 +201,8 @@ display:
               administrator: '0'
               author: '0'
             placeholder: ''
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -243,6 +244,8 @@ display:
               administrator: '0'
               author: '0'
             reduce: 0
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -284,6 +287,8 @@ display:
               administrator: '0'
               author: '0'
             reduce: 0
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -325,6 +330,8 @@ display:
               administrator: '0'
               author: '0'
             reduce: 0
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -366,6 +373,8 @@ display:
               administrator: '0'
               author: '0'
             reduce: 0
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''

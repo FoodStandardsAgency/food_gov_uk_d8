@@ -1,0 +1,24 @@
+status: true
+id: primary
+label: Primary
+weight: 0
+container_id: GTM-TH697XV
+path_toggle: 'exclude listed'
+path_list: ''
+role_toggle: 'exclude listed'
+role_list:
+  anonymous: '0'
+  authenticated: '0'
+  author: '0'
+  editor: '0'
+  fsa_admin: '0'
+  administrator: '0'
+status_toggle: 'exclude listed'
+status_list: ''
+data_layer: dataLayer
+include_classes: false
+whitelist_classes: "google\nnonGooglePixels\nnonGoogleScripts\nnonGoogleIframes"
+blacklist_classes: "customScripts\ncustomPixels"
+include_environment: true
+environment_id: env-7
+environment_token: a4fGxt3oZ4lNeD1SjVDqdA

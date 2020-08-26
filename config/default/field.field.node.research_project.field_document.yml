@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_document
-    - media_entity.bundle.document
+    - media.type.document
     - node.type.research_project
 id: node.research_project.field_document
 field_name: field_document

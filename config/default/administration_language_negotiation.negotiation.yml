@@ -1,4 +1,3 @@
-default_language: en
 paths:
   - /admin
   - '/admin/*'

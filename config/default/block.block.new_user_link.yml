@@ -8,9 +8,6 @@ dependencies:
     - system
   theme:
     - fsa
-third_party_settings:
-  block_class:
-    classes: ''
 id: new_user_link
 theme: fsa
 region: sidebar_second

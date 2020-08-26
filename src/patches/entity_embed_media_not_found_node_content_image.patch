@@ -1,0 +1,33 @@
+diff --git a/src/Plugin/Filter/EntityEmbedFilter.php b/src/Plugin/Filter/EntityEmbedFilter.php
+index de0b619..41a47b2 100644
+--- a/src/Plugin/Filter/EntityEmbedFilter.php
++++ b/src/Plugin/Filter/EntityEmbedFilter.php
+@@ -135,6 +135,7 @@ class EntityEmbedFilter extends FilterBase implements ContainerFactoryPluginInte
+         $entity_type = $node->getAttribute('data-entity-type');
+         $entity = NULL;
+         $entity_output = '';
++        $entity_not_found = FALSE;
+ 
+         // data-entity-embed-settings is deprecated, make sure we convert it to
+         // data-entity-embed-display-settings.
+@@ -164,6 +165,7 @@ class EntityEmbedFilter extends FilterBase implements ContainerFactoryPluginInte
+         }
+         catch (EntityNotFoundException $e) {
+           watchdog_exception('entity_embed', $e);
++          $entity_not_found = TRUE;
+         }
+ 
+         if ($entity instanceof EntityInterface) {
+@@ -215,6 +217,12 @@ class EntityEmbedFilter extends FilterBase implements ContainerFactoryPluginInte
+           }
+         }
+ 
++        // We need to reset this output since it will resolve as an image for
++        // media not found within content (not-found.png).
++        if ($entity_not_found) {
++          $entity_output = '';
++        }
++
+         $this->replaceNodeContent($node, $entity_output);
+       }
+ 

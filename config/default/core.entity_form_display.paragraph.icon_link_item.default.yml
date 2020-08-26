@@ -7,7 +7,6 @@ dependencies:
     - field.field.paragraph.icon_link_item.field_link
     - paragraphs.paragraphs_type.icon_link_item
   module:
-    - content_moderation
     - icon_select
     - link
 id: paragraph.icon_link_item.default

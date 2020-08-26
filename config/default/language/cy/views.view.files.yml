@@ -9,6 +9,9 @@ display:
           exposed_sorts_label: 'Dosbarthu drwy'
       pager:
         options:
+          tags:
+            previous: '‹ Blaenorol'
+            next: 'Nesaf ›'
           expose:
             items_per_page_label: 'Eitemau pob tudalen'
             offset_label: Ongli
@@ -39,6 +42,9 @@ display:
     display_options:
       pager:
         options:
+          tags:
+            previous: '‹ Blaenorol'
+            next: 'Nesaf ›'
           expose:
             items_per_page_label: 'Eitemau pob tudalen'
             offset_label: Ongli

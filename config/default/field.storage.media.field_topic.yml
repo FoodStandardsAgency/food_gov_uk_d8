@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   module:
-    - media_entity
+    - media
     - taxonomy
 id: media.field_topic
 field_name: field_topic

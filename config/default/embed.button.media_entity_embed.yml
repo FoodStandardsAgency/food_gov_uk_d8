@@ -4,7 +4,7 @@ status: true
 dependencies:
   module:
     - entity_embed
-    - media_entity
+    - media
 _core:
   default_config_hash: yDF6LgE9PjFsaJNdFK5ULMMfUz9LaTu15HpoyUREzbA
 label: 'Media Entity Embed'

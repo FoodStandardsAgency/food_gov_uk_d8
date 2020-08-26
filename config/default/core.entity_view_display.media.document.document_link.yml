@@ -9,7 +9,7 @@ dependencies:
     - field.field.media.document.field_document
     - field.field.media.document.field_document_category
     - field.field.media.document.field_nation
-    - media_entity.bundle.document
+    - media.type.document
   module:
     - fsa_custom
     - fsa_document_library
@@ -19,7 +19,7 @@ bundle: document
 mode: document_link
 content:
   field_document:
-    weight: 1
+    weight: 2
     label: hidden
     settings: {  }
     third_party_settings: {  }

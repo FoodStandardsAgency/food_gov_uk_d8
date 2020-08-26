@@ -1,4 +1,5 @@
 label: 'Term tacsonomi'
+description: 'Content belonging to a certain taxonomy term. Modified to be used for topic listing pages.'
 display:
   default:
     display_options:
