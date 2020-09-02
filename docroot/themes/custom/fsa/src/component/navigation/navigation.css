@@ -330,7 +330,7 @@
 
 /* Navigation link */
 .navigation__link {
-  appearance: none; // Remove button appearance.
+  appearance: none;
   background-color: var(--color-white);
   display: block;
   font-family: var(--font-family-content);

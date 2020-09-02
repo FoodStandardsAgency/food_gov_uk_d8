@@ -814,7 +814,7 @@ a.field__field_content_promo__item {
   @mixin responsive-declaration margin-left, 1em, 1.5em;
   @mixin responsive-declaration margin-bottom, 1em, 1.5em;
 
-  flex: 1 1 1;
+  flex: 1 1;
 
   @media (--breakpoint-xs) {
     width: calc(50% - 1.5em);
