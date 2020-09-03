@@ -72,7 +72,7 @@ $settings['config_readonly_whitelist_patterns'] = [
   'force_password_change.settings',
   'fsa_content_reminder.settings',
   'google_tag.settings',
-  'google_tag.settings.*',
+  'google_tag.container.*',
   'key.*',
   'encrypt.*',
   'tfa.*',
