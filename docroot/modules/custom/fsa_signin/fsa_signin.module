@@ -49,7 +49,7 @@ function fsa_signin_form_alter(&$form, FormStateInterface $form_state, $form_id)
     ];
 
     $form['name']['#attributes']['autocomplete'] = 'username';
-    $form['pass']['#attributes']['autocomplete'] = 'current-password';
+    $form['pass']['#attributes']['autocomplete'] = 'off';
   }
 
   if ($form_id == 'user_pass_reset') {
