@@ -15,7 +15,6 @@ function addHeading () {
     heading.classList.add(`heading`);
     heading.classList.add(`regional-variation__heading`);
     heading.id = id;
-    heading.setAttribute(`role`, 'heading');
     if (element.classList.contains('js-england')) {
       heading.classList.add(`heading--small`);
       heading.innerHTML = hasDrupal ? Drupal.t(`England`) : 'England';
