@@ -121,13 +121,15 @@ class GuidanceAudience extends TaxonomyIndexTid {
     // Load.
     foreach ($this->termStorage->loadTree($this->options['vid'], 0, $this->depth, TRUE) as $term) {
       // Get translated term.
-      $term = $term->getTranslation($current_language->getId());
+      if ($term->hasTranslation($current_language->getId())) {
+        $term = $term->getTranslation($current_language->getId());
 
-      // Store name and depth in options array.
-      $options[$term->label()] = [
-        'name' => $term->label(),
-        'depth' => $term->depth,
-      ];
+        // Store name and depth in options array.
+        $options[$term->label()] = [
+          'name' => $term->label(),
+          'depth' => $term->depth,
+        ];
+      }
     }
 
     // Get options from Elasticsearch aggregations.

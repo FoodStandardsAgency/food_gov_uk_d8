@@ -149,7 +149,6 @@
     @media (--breakpoint-md) {
       width: 100%;
       margin-bottom: 1em;
-
     }
 
     h1 {
@@ -161,7 +160,7 @@
 .hero__title h1,
 .hero__heading,
 .hero__content h2 {
-  @mixin responsive-declaration font-size, 2.2em, 3.9em;
+  @mixin responsive-declaration font-size, 2.2em, 3em;
 
   position: relative;
   display: inline-block;
@@ -475,18 +474,18 @@
     /* Tablet */
     @media (--breakpoint-sm) {
       border-radius: 0 75% 75% 0;
-      margin: 0;
+      margin: -10em 0 0 0;
       max-width: 100%;
-      padding: 0 4em 1em 3em;
-      top: -15%;
+      padding: 0 4em 3em 3em;
+      /*top: -15%;*/
       width: 50%;
     }
 
-    /* Desktop small */
+    /* Desktop large */
     @media (--breakpoint-lg) {
-      border-radius: 0 50% 50% 0;
-      padding: 0 2em 2em 4em;
-      width: 43%;
+      border-radius: 0 71% 83% 0;
+      padding: 0 2.5em 2em 4em;
+      width: 44%;
     }
   }
 
@@ -544,16 +543,19 @@
     @media (--breakpoint-sm) {
       padding: 0;
       text-align: left;
-    }
-
-    /* Desktop small */
-    @media (--breakpoint-md) {
-      font-size: 2.75em;
+      width: 355px;
     }
 
     /* Desktop medium */
+    @media (--breakpoint-md) {
+      font-size: 2.75em;
+      width: 360px;
+    }
+
+    /* Desktop large */
     @media (--breakpoint-lg) {
-      font-size: 3.8em;
+      font-size: 3em;
+      width: 440px;
     }
   }
 
@@ -596,7 +598,7 @@
 
     /* Desktop medium */
     @media (--breakpoint-lg) {
-      font-size: 1.1em;
+      font-size: 1em;
     }
   }
 
@@ -635,6 +637,51 @@
   }
 }
 
+/* Frontpage tweaks */
+.theme--frontpage {
+  .hero__region {
+    /* Tablet */
+    @media (--breakpoint-sm) {
+      margin: -10em 0 0 0;
+    }
+
+    @media (--breakpoint-md) {
+      margin: -5em 0 0 0;
+    }
+
+    @media (--breakpoint-lg) {
+      border-radius: 0 73% 100% 0;
+      padding: 0 5.5em 5em 4em;
+      width: 45%;
+    }
+  }
+
+  .hero__content-container {
+    /* Desktop medium */
+    @media (--breakpoint-lg) {
+      padding-bottom: 2em;
+    }
+
+    .hero__content {
+      @media (--breakpoint-lg) {
+        padding: 4em 3em 7em 0;
+      }
+    }
+  }
+
+  .hero__region-wrapper {
+    @media (--breakpoint-lg) {
+      height: 130%;
+    }
+  }
+
+  .hero__heading {
+    @media (--breakpoint-lg) {
+      width: 100%;
+    }
+  }
+}
+
 /* Landing page tweaks */
 .theme--news-alerts,
 .theme--content-type-business-guidance,
@@ -648,14 +695,18 @@
     .hero__region {
       /* Desktop medium */
       @media (--breakpoint-lg) {
-        border-radius: 0 50% 50% 0;
+        border-radius: 0 90% 83% 0;
       }
     }
 
     .hero__region-wrapper {
-      /* Desktop small */
+      /* Desktop medium */
       @media (--breakpoint-md) {
-        height: 150%;
+        height: 135%;
+      }
+
+      @media (--breakpoint-lg) {
+        min-height: 24em;
       }
     }
 
@@ -718,21 +769,42 @@
 }
 
 /* News and alerts. */
-.theme--news-alerts,
-.theme--subscribe {
+.theme--news-alerts {
   /* Override legacy rule. */
   .hero.hero--with-content .hero__region {
     padding-top: 2em;
 
     /* Tablet */
     @media (--breakpoint-sm) {
-      padding-top: 4em;
+      padding-top: 8em;
+    }
+
+    .hero__region-wrapper__content {
+      @media (--breakpoint-sm) {
+        padding-bottom: 3.5em;
+      }
     }
   }
 }
 
 /* Food safety and hygiene. */
 .theme--content-type-business-guidance {
+  .hero__content-container.no-photo .hero__region {
+    @media (--breakpoint-sm) {
+      margin-top: -10em;
+    }
+
+    @media (--breakpoint-md) {
+      margin-top: -6em;
+    }
+
+    @media (--breakpoint-lg) {
+      margin-top: -10em;
+      padding-top: 6em;
+      padding-bottom: 6em;
+    }
+  }
+
   /* Hero container */
   .hero__content-container {
 
@@ -745,7 +817,9 @@
 
     /* Region wrapper */
     .hero__region-wrapper {
-      min-height: 25em;
+      @media (--breakpoint-sm) {
+        min-height: 24em;
+      }
     }
 
     /* Block content within region wrapper */
@@ -770,7 +844,7 @@
         background-position: 15em -7em;
       }
 
-      /* Desktop medium */
+      /* Desktop large */
       @media (--breakpoint-lg) {
         background-position: 15em -12em;
         background-size: 100%;
@@ -781,6 +855,16 @@
 
 /* About */
 .theme--content-type-about-us {
+  .hero__region {
+    @media (--breakpoint-sm) {
+      margin-top: -5em !important;
+    }
+
+    @media (--breakpoint-lg) {
+      margin-top: -6em !important;
+    }
+  }
+
   .hero__region::after {
     bottom: -0.3em;
   }
@@ -799,7 +883,46 @@
   }
 }
 
+/* Subscribe page */
+.theme--subscribe {
+  .hero__region {
+    padding-top: 3em;
+    padding-bottom: 3em;
+
+    @media (--breakpoint-sm) {
+      margin-top: -7em !important;
+    }
+
+    @media (--breakpoint-lg) {
+      margin-top: -5em !important;
+    }
+
+    h1 {
+      margin-bottom: 0.25em;
+
+      &::after {
+        display: none;
+      }
+    }
+
+    .hero__region-wrapper__content {
+      @media (--breakpoint-lg) {
+        padding-bottom: 2.5em;
+      }
+    }
+  }
+}
+
 .theme--term {
+  .hero__region {
+    @media (--breakpoint-sm) {
+      margin-top: -9em !important;
+    }
+
+    @media (--breakpoint-lg) {
+      margin-top: -8em !important;
+    }
+  }
   .hero__region-wrapper {
     margin: 0 auto;
 
@@ -842,6 +965,11 @@
       font-size: 3.8em;
     }
   }
+  .cta {
+    @media (--breakpoint-sm) {
+      text-align: left;
+    }
+  }
 }
 
 /* Adjust container for all landing pages. */
@@ -860,12 +988,26 @@
 
 /* Contact us */
 .theme--help-centre {
+  .hero__content-container.no-photo .hero__region {
+    @media (--breakpoint-sm) {
+      margin-top: -6em;
+    }
+  }
+
   .hero__content h2 {
     /* Tablet */
     @media (--breakpoint-sm) {
       padding: 0;
       padding-right: 1em;
       text-align: left;
+    }
+
+    @media (--breakpoint-md) {
+      width: 400px;
+    }
+
+    @media (--breakpoint-lg) {
+      width: 455px;
     }
 
     &::after {
@@ -905,4 +1047,40 @@
     float: right;
     margin-top: 1em;
   }
+}
+
+.layout.hero-wrapper {
+  overflow: hidden;
+}
+
+.theme--search {
+  .hero__content-container .hero__title h1 {
+    @media (--breakpoint-sm) {
+      margin-bottom: 0;
+      padding-top: 0;
+    }
+  }
+  .hero__content-container .hero__region-wrapper {
+    @media (--breakpoint-sm) {
+      height: 120%;
+    }
+  }
+  .hero__content-container.no-photo .hero__region {
+    @media (--breakpoint-sm) {
+      margin-top: -3em;
+      padding-left: 0;
+    }
+    @media (--breakpoint-lg) {
+      width: 40%;
+    }
+  }
+}
+
+.theme--frontpage .hero__heading {
+  width: auto;
+
+  @media (--breakpoint-lg) {
+    width: 390px;
+  }
+  
 }

@@ -1,26 +1,27 @@
-container_id: GTM-TH697XV
-path_toggle: 'exclude listed'
-path_list: ''
-role_toggle: 'exclude listed'
-role_list:
-  anonymous: '0'
-  authenticated: '0'
-  author: '0'
-  editor: '0'
-  fsa_admin: '0'
-  administrator: '0'
-status_toggle: 'exclude listed'
-status_list: ''
+uri: 'public:/'
 compact_snippet: true
 include_file: true
 rebuild_snippets: true
+flush_snippets: false
 debug_output: false
-data_layer: dataLayer
-include_classes: false
-whitelist_classes: "google\nnonGooglePixels\nnonGoogleScripts\nnonGoogleIframes"
-blacklist_classes: "customScripts\ncustomPixels"
-include_environment: true
-environment_id: env-7
-environment_token: a4fGxt3oZ4lNeD1SjVDqdA
-_core:
-  default_config_hash: UyNPbddlLO3s8kwBAYs5ubS74V4uBRmWxfrE9yEGeGM
+_default_container:
+  container_id: ''
+  path_toggle: 'exclude listed'
+  path_list: ''
+  role_toggle: 'exclude listed'
+  role_list:
+    anonymous: '0'
+    authenticated: '0'
+    author: '0'
+    editor: '0'
+    fsa_admin: '0'
+    administrator: '0'
+  status_toggle: 'exclude listed'
+  status_list: ''
+  data_layer: dataLayer
+  include_classes: false
+  whitelist_classes: "google\nnonGooglePixels\nnonGoogleScripts\nnonGoogleIframes"
+  blacklist_classes: "customScripts\ncustomPixels"
+  include_environment: true
+  environment_id: env-7
+  environment_token: a4fGxt3oZ4lNeD1SjVDqdA

@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.media.field_nation
-    - media_entity.bundle.document
+    - media.type.document
     - taxonomy.vocabulary.nation
 id: media.document.field_nation
 field_name: field_nation

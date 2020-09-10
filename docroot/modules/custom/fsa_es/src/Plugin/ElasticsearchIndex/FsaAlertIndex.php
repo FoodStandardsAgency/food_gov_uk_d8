@@ -70,7 +70,7 @@ class FsaAlertIndex extends FsaIndexBase {
                 'id' => ['type' => 'keyword'],
                 'label' => [
                   'type' => 'text',
-                  'index' => 'not_analyzed',
+                  'index' => FALSE,
                   'fields' => [
                     'keyword' => [
                       'type' => 'keyword',

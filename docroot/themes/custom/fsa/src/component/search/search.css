@@ -281,7 +281,7 @@
   width: 100%;
   font-weight: 600;
   padding: 1em;
-  transition: backround-color var(--transition-enter);
+  transition: background-color var(--transition-enter);
 
   .heading {
     text-transform: none;

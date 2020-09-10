@@ -1,0 +1,20 @@
+diff --git a/js/icon_select_frontend.js b/js/icon_select_frontend.js
+index 7ab3716..a7fe4f0 100644
+--- a/js/icon_select_frontend.js
++++ b/js/icon_select_frontend.js
+@@ -34,6 +34,15 @@
+     try {
+       var svg = xhr.responseXML.documentElement;
+       svg = document.importNode(svg, true);
++      // Ensures that SVG groups appended to end of page have unique ids.
++      var gElements = svg.querySelectorAll('g');
++      if (gElements) {
++        gElements.forEach(function (element, index) {
++          if (element.hasAttribute('id')) {
++            element.id = element.id + '_' + Date.now();
++          }
++        });
++      }
+       svg.id = 'svg-icon-sprite';
+       document.body.appendChild(svg);
+ 

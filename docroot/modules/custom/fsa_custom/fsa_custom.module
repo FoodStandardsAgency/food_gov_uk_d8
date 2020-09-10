@@ -160,7 +160,7 @@ function fsa_custom_preprocess_page_title(&$variables) {
     $entity = $route->getParameter('media');
   }
 
-  if (!$is_admin && is_object($entity)) {
+  if (!$is_admin && is_object($entity) && $entity instanceof NodeInterface) {
     $nodetype = $entity->getType();
 
     // Init the custom title prefix.
@@ -339,7 +339,7 @@ function fsa_custom_preprocess_page_title(&$variables) {
     }
   }
 
-  if ($entity) {
+  if ($entity && $entity instanceof \Drupal\Core\Entity\EntityInterface) {
     if (FSAMultiPageGuide::IsGuide($entity)) {
       $variables['this_is_guide'] = TRUE;
     }
@@ -629,7 +629,7 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
         // Page title above content visibility.
         if ($block->id() == 'pagetitle') {
           // Hide page title on lander and help nodes.
-          if (in_array($entity->getType(), ['lander', 'help'])) {
+          if ($entity instanceof NodeInterface && in_array($entity->getType(), ['lander', 'help'])) {
             return AccessResult::forbidden()
               ->addCacheableDependency($block);
           }
@@ -659,7 +659,7 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
       if ($block->id() == 'menu_help_secondary') {
         // Help nodes and nodes with "Content type" term should always show the
         // left hand menu.
-        if ($term_id == 27 || $entity->getType() == 'help') {
+        if ($entity instanceof NodeInterface && ($term_id == 27 || $entity->getType() == 'help')) {
           return AccessResult::allowed()
             ->addCacheableDependency($block);
         }
@@ -871,18 +871,21 @@ function fsa_custom_media_embed_alter(&$build, $entity, $context) {
  *     placed in the img tag.
  *   - image_style: An optional image style.
  *   - url: An optional \Drupal\Core\Url object.
- *   - media_entity: \Drupal\media_entity\Entity\Media image object
+ *   - media_entity: \Drupal\media\Entity\Media image object
  */
 function template_preprocess_fsa_custom_media_image_formatter(&$variables) {
   module_load_include('inc', 'image', 'image.field');
   template_preprocess_image_formatter($variables);
 
-  /** @var \Drupal\media_entity\Entity\Media $media */
+  /** @var \Drupal\media\Entity\Media $media */
   $media = $variables['media_entity'];
   $lang_code = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
-  if ($lang_code !== 'en') {
+  if ($lang_code !== 'en' && $media->hasTranslation($lang_code)) {
     $media = $media->getTranslation($lang_code);
+  }
+  else {
+    return;
   }
 
   if ($media->hasField('field_long_description')) {
@@ -898,6 +901,11 @@ function template_preprocess_fsa_custom_media_image_formatter(&$variables) {
         '#markup' => $description_field[0]['value'],
       ];
     }
+  }
+
+  // Add alt text from Media browser.
+  if ($media->hasField('field_image')) {
+    $variables['image']['#attributes']['alt'] = $media->field_image->alt;
   }
 }
 

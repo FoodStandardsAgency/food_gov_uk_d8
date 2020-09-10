@@ -78,6 +78,8 @@ permissions:
   - 'edit terms in topic'
   - 'link to any page'
   - 'manage multipage guides'
+  - 'moderated content bulk publish'
+  - 'moderated content bulk unpublish'
   - 'notify of path changes'
   - 'revert all revisions'
   - 'revert consultation revisions'

@@ -1,6 +1,5 @@
-uuid: d8bd3b20-4b66-47f0-a0b8-a856576bf299
 langcode: en
-status: open
+status: closed
 dependencies: {  }
 open: null
 close: null
@@ -12,8 +11,8 @@ id: ecoli_decision_tree
 title: 'eColi decision tree'
 description: ''
 category: ''
-elements: '{  }'
-css: ''
+elements: "do_you_store_prepare_or_handle_open_raw_and_ready_to_eat_food_in:\n  '#type': select\n  '#title': 'Do you store, prepare or handle open raw and ready-to-eat food in your premises?'\n  '#options': yes_no\n  '#empty_option': Select\n  '#empty_value': select\n  '#required': true\nprocessed_text_01:\n  '#type': processed_text\n  '#states':\n    visible:\n      ':input[name=\"do_you_store_prepare_or_handle_open_raw_and_ready_to_eat_food_in\"]':\n        value: 'No'\n  '#display_on': both\n  '#text': \"<p style=\\\"background-color:#ededed; padding:15px; border:1px solid black;\\\">This guidance may not apply. Check with your local authority.</p>\\r\\n\"\n  '#format': full_html\nprocessed_text:\n  '#type': processed_text\n  '#states':\n    visible:\n      ':input[name=\"do_you_store_prepare_or_handle_open_raw_and_ready_to_eat_food_in\"]':\n        value: 'Yes'\n  '#text': \"<hr />\\r\\n<div style=\\\"padding:15px; background-color:#e1fae1;\\\">\\r\\n<h3>Separation by room</h3>\\r\\n\\r\\n<p>The most effective method to prevent cross-contamination, which could potentially lead to an E.coli O157 incident.</p>\\r\\n</div>\\r\\n\"\n  '#format': full_html\ncan_you_provide_a_separate_room_for_ready_to_eat_food_and_dedica:\n  '#type': select\n  '#title': 'Can you provide a separate room for ready-to-eat food and dedicated staff, sink, equipment and utensils?'\n  '#options': yes_no\n  '#empty_option': Select\n  '#states':\n    visible:\n      ':input[name=\"do_you_store_prepare_or_handle_open_raw_and_ready_to_eat_food_in\"]':\n        value: 'Yes'\n    required:\n      ':input[name=\"do_you_store_prepare_or_handle_open_raw_and_ready_to_eat_food_in\"]':\n        value: 'Yes'\nprocessed_text_02:\n  '#type': processed_text\n  '#states':\n    visible:\n      ':input[name=\"can_you_provide_a_separate_room_for_ready_to_eat_food_and_dedica\"]':\n        value: 'Yes'\n  '#text': \"<p style=\\\"background-color:#ededed; padding:15px; border:1px solid black;\\\">This is the best way to maintain separation and protect ready-to-eat food from the risk of cross-contamination. This option should be achieved where possible. This guidance outlines procedures and other advice that will still need to be considered.</p>\\r\\n\"\n  '#format': full_html\nprocessed_text_03:\n  '#type': processed_text\n  '#states':\n    visible:\n      ':input[name=\"can_you_provide_a_separate_room_for_ready_to_eat_food_and_dedica\"]':\n        value: 'No'\n  '#text': \"<hr />\\r\\n<div style=\\\"background-color:#faecca; padding:15px;\\\">\\r\\n\\r\\n\\r\\n<h3>Separation by area</h3>\\r\\n\\r\\n<p>If separation by room cannot be achieved, separation by area is a suitable alternative.</p>\\r\\n\\r\\n\\r\\n</div>\\r\\n\"\n  '#format': full_html\ncan_you_provide_an_area_designated_for_the_handling_and_preparat:\n  '#type': select\n  '#title': 'Can you provide an area designated for the handling and preparation of ready to eat food (clean area) on a permanent basis?'\n  '#description': 'For example, a specific worktop in the kitchen, equipment and seperate utensils.'\n  '#options': yes_no\n  '#empty_option': Select\n  '#required': true\n  '#states':\n    visible:\n      ':input[name=\"can_you_provide_a_separate_room_for_ready_to_eat_food_and_dedica\"]':\n        value: 'No'\nprocessed_text_04:\n  '#type': processed_text\n  '#states':\n    visible:\n      ':input[name=\"can_you_provide_an_area_designated_for_the_handling_and_preparat\"]':\n        value: 'Yes'\n  '#text': \"<p style=\\\"background-color:#ededed; padding:15px; border:1px solid black;\\\">If a permanent ready-to-eat area is achievable then this should be provided. The area will require strict supervision to ensure it is kept free from any source of E.coli O157 (such as raw meat and vegetables with soil on them. See 'Sources of E.coli in food'). This guidance outlines the procedures to be considered.</p>\\r\\n\"\n  '#format': full_html\nprocessed_text_05:\n  '#type': processed_text\n  '#states':\n    visible:\n      ':input[name=\"can_you_provide_an_area_designated_for_the_handling_and_preparat\"]':\n        value: 'No'\n  '#text': \"<hr />\\r\\n<div style=\\\"background-color:#fff0f0; padding:15px;\\\">\\r\\n\\r\\n\\r\\n<h3>Separation by time</h3>\\r\\n\\r\\n<p>Time separation should only be used if separate rooms and areas cannot be achieved. Time separation is the hardest to achieve as it requires staff to be supervised as well as effective cleaning and disinfection between uses of the same surfaces / equipment etc.</p>\\r\\n\\r\\n\\r\\n</div>\\r\\n\"\n  '#format': full_html\ncan_you_provide_a_seperate_area_table_designated_fir_the_handlin:\n  '#type': select\n  '#title': 'Can you provide a seperate area / table designated fir the handling of ready-to-eat food (''clean area'') on a temporary basis?'\n  '#description': 'For example, an area used for raw food that must be fully cleansed ad disinfected before use with ready-to-eat food.'\n  '#options': yes_no\n  '#empty_option': Select\n  '#required': true\n  '#states':\n    visible:\n      ':input[name=\"can_you_provide_an_area_designated_for_the_handling_and_preparat\"]':\n        value: 'No'\nprocessed_text_06:\n  '#type': processed_text\n  '#states':\n    visible:\n      ':input[name=\"can_you_provide_a_seperate_area_table_designated_fir_the_handlin\"]':\n        value: 'Yes'\n  '#text': \"<p style=\\\"background-color:#ededed; padding:15px; border:1px solid black;\\\">A temporary area for both raw and ready-to-eat food should only be used as a last resort. The area will require strict supervision to ensure that it is kept free from any source of E.coli O157. The use of separate chopping boards for raw and ready to eat food should be used as a barrier as well as cleaning and disinfection. This guidance outlines the procedures to be considered.</p>\\r\\n\"\n  '#format': full_html\nprocessed_text_07:\n  '#type': processed_text\n  '#states':\n    visible:\n      ':input[name=\"can_you_provide_a_seperate_area_table_designated_fir_the_handlin\"]':\n        value: 'No'\n  '#text': \"<div style=\\\"background-color:#ededed; padding:15px; border:1px solid red;\\\">\\r\\n<p>Until these improvements are made you are not allowed to produce both raw and ready to eat food. You may change your activities so that only raw or only ready-to-eat food is handled.</p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p>If the circumstances of your business don't allow for separation by room, area or time than it is not possible to prevent the possibility of contamination of ready-to-eat food with E.coli O157.</p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p>Design, layout or working practice changes are necessary.</p>\\r\\n</div>\"\n  '#format': full_html\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#states':\n    disabled:\n      - ':input[name=\"do_you_store_prepare_or_handle_open_raw_and_ready_to_eat_food_in\"]':\n          value: 'No'\n      - or\n      - ':input[name=\"can_you_provide_a_separate_room_for_ready_to_eat_food_and_dedica\"]':\n          value: 'Yes'\n  '#submit_hide': true\n  '#reset_hide': true\n  '#preview_prev_hide': true\n  '#preview_next_hide': true"
+css: '.select {width:100%;}'
 javascript: ''
 settings:
   ajax: false
@@ -24,8 +23,8 @@ settings:
   page: true
   page_submit_path: ''
   page_confirm_path: ''
-  page_admin_theme: false
-  form_title: both
+  page_theme_name: ''
+  form_title: source_entity_webform
   form_submit_once: false
   form_exception_message: ''
   form_open_message: ''
@@ -39,7 +38,7 @@ settings:
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: false
+  form_reset: true
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
@@ -54,6 +53,11 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
   submission_label: ''
   submission_log: false
   submission_views: {  }
@@ -74,18 +78,24 @@ settings:
   autofill: false
   autofill_message: ''
   autofill_excluded_elements: {  }
-  wizard_progress_bar: true
+  wizard_progress_bar: false
   wizard_progress_pages: false
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
+  wizard_auto_forward: true
   wizard_start_label: ''
   wizard_preview_link: false
-  wizard_confirmation: true
+  wizard_confirmation: false
   wizard_confirmation_label: ''
   wizard_track: ''
-  preview: 0
-  preview_label: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  preview: 2
+  preview_label: Summary
   preview_title: ''
   preview_message: ''
   preview_attributes: {  }
@@ -126,6 +136,7 @@ settings:
   purge_days: null
   results_disabled: false
   results_disabled_ignore: false
+  results_customize: false
   token_view: false
   token_update: false
 access:
@@ -177,3 +188,4 @@ access:
     permissions: {  }
 handlers: {  }
 variants: {  }
+uuid: d8bd3b20-4b66-47f0-a0b8-a856576bf299

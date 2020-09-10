@@ -49,11 +49,17 @@ class AlertJsonToHtml extends FormatterBase {
 
       // Loop through each product entry.
       foreach ($data as $key => $value) {
-        $table_caption = '';
+        $table_header = [];
         $table_rows = [];
 
         if (isset($value['productName'])) {
-          $table_caption = $this->itemWrapper(FALSE, nl2br($value['productName']), 'p');
+          $table_header = [
+            [
+              'data' => nl2br($value['productName']),
+              'colspan' => 2,
+              'scope' => 'colgroup',
+            ],
+          ];
         }
 
         // Optional product code(s).
@@ -127,8 +133,7 @@ class AlertJsonToHtml extends FormatterBase {
 
         $elements[$key] = [
           '#theme' => 'table',
-          '#caption' => $table_caption,
-          '#header' => NULL,
+          '#header' => $table_header,
           '#rows' => $table_rows,
         ];
       }

@@ -1,0 +1,207 @@
+diff --git a/config/install/webform.settings.yml b/config/install/webform.settings.yml
+index 2a341004..21205405 100644
+--- a/config/install/webform.settings.yml
++++ b/config/install/webform.settings.yml
+@@ -127,6 +127,7 @@ batch:
+ purge:
+   cron_size: 100
+ element:
++  machine_name_pattern: 'a-z0-9_'
+   empty_message: '{Empty}'
+   allowed_tags: admin
+   wrapper_classes: |
+diff --git a/config/schema/webform.settings.schema.yml b/config/schema/webform.settings.schema.yml
+index ebc8d10f..c590340d 100644
+--- a/config/schema/webform.settings.schema.yml
++++ b/config/schema/webform.settings.schema.yml
+@@ -254,6 +254,9 @@ webform.settings:
+       type: mapping
+       label: 'Element default settings'
+       mapping:
++        machine_name_pattern:
++          type: string
++          label: 'Element key pattern'
+         empty_message:
+           type: label
+           label: 'Empty element message/placeholder'
+diff --git a/includes/webform.install.update.inc b/includes/webform.install.update.inc
+index e960bd63..5fb6f207 100644
+--- a/includes/webform.install.update.inc
++++ b/includes/webform.install.update.inc
+@@ -3125,3 +3125,10 @@ function webform_update_8168() {
+ function webform_update_8169() {
+   _webform_update_webform_settings();
+ }
++
++/**
++ * Issue #3066994: Form elements keys (machine name) to be in all cases not just lowercase.
++ */
++function webform_update_8198() {
++  _webform_update_admin_settings();
++}
+diff --git a/modules/webform_ui/src/Form/WebformUiElementFormBase.php b/modules/webform_ui/src/Form/WebformUiElementFormBase.php
+index e06e4251..2831e1de 100644
+--- a/modules/webform_ui/src/Form/WebformUiElementFormBase.php
++++ b/modules/webform_ui/src/Form/WebformUiElementFormBase.php
+@@ -247,14 +247,38 @@ abstract class WebformUiElementFormBase extends FormBase implements WebformUiEle
+       ];
+     }
+ 
+-    // Set element key.
++    // Set element key with custom machine name pattern.
++    // @see \Drupal\webform\WebformEntityElementsValidator::validateNames
++    $machine_name_pattern = $this->config('webform.settings')->get('element.machine_name_pattern') ?: 'a-z0-9_';
++    switch ($machine_name_pattern) {
++      case 'a-z0-9_':
++        $machine_name_requirements = $this->t('lowercase letters, numbers, and underscores');
++        break;
++
++      case 'a-zA-Z0-9_':
++        $machine_name_requirements = $this->t('letters, numbers, and underscores');
++        break;
++
++      case 'a-z0-9_-':
++        $machine_name_requirements = $this->t('lowercase letters, numbers, and underscores');
++        break;
++
++      case 'a-zA-Z0-9_-':
++        $machine_name_requirements = $this->t('letters, numbers, underscores, and dashes');
++        break;
++    }
++    $t_args = ['@requirements' => $machine_name_requirements];
++
+     $form['properties']['element']['key'] = [
+       '#type' => 'machine_name',
+       '#title' => $this->t('Key'),
++      '#description' => $this->t('A unique element key. Can only contain @requirements.', $t_args),
+       '#machine_name' => [
+         'label' => '<br/>' . $this->t('Key'),
+         'exists' => [$this, 'exists'],
+         'source' => ['title'],
++        'replace_pattern' => '[^' . $machine_name_pattern . ']+',
++        'error' => $this->t('The element key name must contain only @requirements.', $t_args),
+       ],
+       '#required' => TRUE,
+       '#parents' => ['key'],
+diff --git a/src/Form/AdminConfig/WebformAdminConfigElementsForm.php b/src/Form/AdminConfig/WebformAdminConfigElementsForm.php
+index aa7e3735..fe66f887 100644
+--- a/src/Form/AdminConfig/WebformAdminConfigElementsForm.php
++++ b/src/Form/AdminConfig/WebformAdminConfigElementsForm.php
+@@ -104,6 +104,20 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
+       '#open' => TRUE,
+       '#tree' => TRUE,
+     ];
++    $form['element']['machine_name_pattern'] = [
++      '#type' => 'select',
++      '#title' => $this->t('Element key pattern'),
++      '#description' => $this->t('The element key pattern is used to limit the format of element keys.') . '<br/><br/>' .
++        $this->t('Please note: Automatically generated element keys are lowercased letters, numbers, and underscores'),
++      '#options' => [
++        'a-z0-9_' => $this->t('Lowercase letters, numbers, and underscores. (i.e. element_key)'),
++        'a-zA-Z0-9_' => $this->t('Letters, numbers, and underscores. (i.e. element_KEY)'),
++        'a-z0-9_-' => $this->t('Lowercase letters, numbers, and underscores. (i.e. element-key)'),
++        'a-zA-Z0-9_-' => $this->t('Letters, numbers, underscores, and dashes. (i.e. element-KEY)'),
++      ],
++      '#required' => TRUE,
++      '#default_value' => $config->get('element.machine_name_pattern'),
++    ];
+     $form['element']['empty_message'] = [
+       '#type' => 'textfield',
+       '#title' => $this->t('Empty element message/placeholder'),
+diff --git a/src/WebformEntityElementsValidator.php b/src/WebformEntityElementsValidator.php
+index 294bf586..b7fe1428 100644
+--- a/src/WebformEntityElementsValidator.php
++++ b/src/WebformEntityElementsValidator.php
+@@ -2,6 +2,7 @@
+ 
+ namespace Drupal\webform;
+ 
++use Drupal\Core\Config\ConfigFactoryInterface;
+ use Drupal\Core\Entity\EntityTypeManagerInterface;
+ use Drupal\Core\Form\FormBuilderInterface;
+ use Drupal\Core\Render\RendererInterface;
+@@ -90,6 +91,13 @@ class WebformEntityElementsValidator implements WebformEntityElementsValidatorIn
+    */
+   protected $formBuilder;
+ 
++  /**
++   * The configuration object factory.
++   *
++   * @var \Drupal\Core\Config\ConfigFactoryInterface
++   */
++  protected $configFactory;
++
+   /**
+    * Element keys/names that are reserved.
+    *
+@@ -114,12 +122,17 @@ class WebformEntityElementsValidator implements WebformEntityElementsValidatorIn
+    *   The 'entity_type.manager' service.
+    * @param \Drupal\Core\Form\FormBuilderInterface $form_builder
+    *   The 'form_builder' service.
++   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
++   *   The configuration object factory.
++   *
++   * @todo Webform 8.x-6.x: Move $config_factory before $renderer.
+    */
+-  public function __construct(RendererInterface $renderer, WebformElementManagerInterface $element_manager, EntityTypeManagerInterface $entity_type_manager, FormBuilderInterface $form_builder) {
++  public function __construct(RendererInterface $renderer, WebformElementManagerInterface $element_manager, EntityTypeManagerInterface $entity_type_manager, FormBuilderInterface $form_builder, ConfigFactoryInterface $config_factory = NULL) {
+     $this->renderer = $renderer;
+     $this->elementManager = $element_manager;
+     $this->entityTypeManager = $entity_type_manager;
+     $this->formBuilder = $form_builder;
++    $this->configFactory = $config_factory ?: \Drupal::configFactory();
+   }
+ 
+   /**
+@@ -244,15 +257,36 @@ class WebformEntityElementsValidator implements WebformEntityElementsValidatorIn
+    *   If not valid, an array of error messages.
+    */
+   protected function validateNames() {
++    // @see \Drupal\webform_ui\Form\WebformUiElementFormBase::buildForm
++    $machine_name_pattern = $this->configFactory->get('webform.settings')->get('element.machine_name_pattern') ?: 'a-z0-9_';
++    switch ($machine_name_pattern) {
++      case 'a-z0-9_':
++        $machine_name_requirement = $this->t('lowercase letters, numbers, and underscores');
++        break;
++
++      case 'a-zA-Z0-9_':
++        $machine_name_requirement = $this->t('letters, numbers, and underscores');
++        break;
++
++      case 'a-z0-9_-':
++        $machine_name_requirement = $this->t('lowercase letters, numbers, and underscores');
++        break;
++
++      case 'a-zA-Z0-9_-':
++        $machine_name_requirement = $this->t('letters, numbers, underscores, and dashes');
++        break;
++    }
++
+     $messages = [];
+     foreach ($this->elementKeys as $name) {
+-      if (!preg_match('/^[_a-z0-9]+$/', $name)) {
++      if (!preg_match('/^[' . $machine_name_pattern . ']+$/', $name)) {
+         $line_numbers = $this->getLineNumbers('/^\s*(["\']?)' . preg_quote($name, '/') . '\1\s*:/');
+         $t_args = [
+           '%name' => $name,
+           '@line_number' => WebformArrayHelper::toString($line_numbers),
++          '@requirement' => $machine_name_requirement,
+         ];
+-        $messages[] = $this->t('The element key %name on line @line_number must contain only lowercase letters, numbers, and underscores.', $t_args);
++        $messages[] = $this->t('The element key %name on line @line_number must contain only @requirement.', $t_args);
+       }
+       elseif (in_array($name, static::$reservedNames)) {
+         $line_numbers = $this->getLineNumbers('/^\s*(["\']?)' . preg_quote($name, '/') . '\1\s*:/');
+diff --git a/webform.services.yml b/webform.services.yml
+index 18827402..ea6d0ca1 100644
+--- a/webform.services.yml
++++ b/webform.services.yml
+@@ -41,7 +41,7 @@ services:
+ 
+   webform.elements_validator:
+     class: Drupal\webform\WebformEntityElementsValidator
+-    arguments: ['@renderer', '@plugin.manager.webform.element', '@entity_type.manager', '@form_builder']
++    arguments: ['@renderer', '@plugin.manager.webform.element', '@entity_type.manager', '@form_builder', '@config.factory']
+ 
+   webform.email_provider:
+     class: Drupal\webform\WebformEmailProvider

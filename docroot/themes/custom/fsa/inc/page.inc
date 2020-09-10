@@ -5,7 +5,7 @@
  * Includes FSA theme page preprocess functionality.
  */
 
-use Drupal\media_entity\Entity\Media;
+use Drupal\media\Entity\Media;
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
 

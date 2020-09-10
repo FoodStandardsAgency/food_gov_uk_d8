@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.media.field_document_category
-    - media_entity.bundle.document
+    - media.type.document
     - taxonomy.vocabulary.document_category
 id: media.document.field_document_category
 field_name: field_document_category
