@@ -1,0 +1,12 @@
+services:
+  # Custom route subscriber to add access check to "/media/add".
+  fsa_workflows.route_subscriber:
+    class: Drupal\fsa_workflows\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
+
+  # Access check for "/media/add" for authors.
+  fsa_workflows.access_checker:
+      class: Drupal\fsa_workflows\Access\MediaAccessCheck
+      tags:
+        - { name: access_check }
