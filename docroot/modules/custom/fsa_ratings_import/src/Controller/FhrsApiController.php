@@ -47,6 +47,7 @@ class FhrsApiController extends ControllerBase {
       'headers' => [
         'accept' => 'application/json',
         'x-api-version' => 2,
+        'Authorization' => 'Bearer ' . getenv('FSA_RATINGS_API_KEY')
       ],
     ];
     return $headers;
