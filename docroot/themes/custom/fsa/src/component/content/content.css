@@ -274,6 +274,10 @@ a {
     display: none;
   }
 
+  svg.ext {
+    display: none;
+  }
+
   /* Hide the extra spans when printing. */
   @media print {
     span.ext,
