@@ -1,3 +1,4 @@
+uuid: 3ffb57ad-56e4-42f1-99be-682e823a5f39
 langcode: en
 status: open
 dependencies: {  }
@@ -8,10 +9,10 @@ uid: 1
 template: false
 archive: false
 id: form_1
-title: 'Form 1'
+title: 'Allergen and ingredients labelling decision tree'
 description: ''
 category: Feedback
-elements: '{  }'
+elements: "is_the_food_presented_to_the_consumer_in_packaging_:\n  '#type': select\n  '#title': 'Is the food presented to the consumer in packaging*?'\n  '#help': '* A single item (the food and its packaging) presented to the consumer. The food is completely or partially enclosed and cannot be altered without opening or changing the packaging. Foods in such packaging sold to other businesses are Prepacked food and already require allergen labelling. (See Article 1(2)(e) of the FIC)'\n  '#options': yes_no\n  '#empty_option': Select\n  '#empty_value': Select\n  '#required': true\n  '#default_value': Select\nprocessed_text_01:\n  '#type': processed_text\n  '#states':\n    visible:\n      ':input[name=\"is_the_food_presented_to_the_consumer_in_packaging_\"]':\n        value: 'No'\n  '#text': |\n    <hr />\n    <div style=\"padding:15px; background-color:#e1fae1;\">\n    <h3>Non-prepacked food</h3>\n    \n    <p>This is <strong>non-prepacked food</strong>.</p>\n    </div>\n    \n  '#format': full_html\nprocessed_text:\n  '#type': processed_text\n  '#states':\n    visible:\n      ':input[name=\"is_the_food_presented_to_the_consumer_in_packaging_\"]':\n        value: 'Yes'\n  '#text': |\n    <hr />\n    <div style=\"padding:15px; background-color:#faecca;\">\n    <p>The food is <strong>packed</strong>.</p>\n    </div>\n    \n  '#format': full_html\nis_it_packaged_before_the_consumer_selects_or_orders_it_:\n  '#type': select\n  '#title': 'Is it packaged before the consumer selects or orders it?'\n  '#options': yes_no\n  '#states':\n    visible:\n      ':input[name=\"is_the_food_presented_to_the_consumer_in_packaging_\"]':\n        value: 'Yes'\n    required:\n      ':input[name=\"is_the_food_presented_to_the_consumer_in_packaging_\"]':\n        value: 'Yes'\nprocessed_text_02:\n  '#type': processed_text\n  '#states':\n    visible:\n      ':input[name=\"is_it_packaged_before_the_consumer_selects_or_orders_it_\"]':\n        value: 'No'\n  '#text': |\n    <hr />\n    <div style=\"padding:15px; background-color:#e1fae1;\">\n    <h3>Non-prepacked food</h3>\n    \n    <p>This is <strong>non-prepacked food</strong>.</p>\n    </div>\n    \n  '#format': full_html\nprocessed_text_03:\n  '#type': processed_text\n  '#states':\n    visible:\n      ':input[name=\"is_it_packaged_before_the_consumer_selects_or_orders_it_\"]':\n        value: 'Yes'\n  '#text': |\n    <hr />\n    <div style=\"padding:15px; background-color:#faecca;\">\n    <p>The food is <strong>prepacked.</strong></p>\n    </div>\n    \n  '#format': full_html\nis_it_packaged_at_the_same_place_it_is_sold_:\n  '#type': select\n  '#title': 'Is it packaged at the same place* it is sold?'\n  '#help': '* Food (a) packaged by the same food business on the same site from which it is sold or (b) sold from temporary or moveable premises (such as a food truck or market stall) by the same food business that packaged it.'\n  '#options': yes_no\n  '#empty_option': Select\n  '#empty_value': Select\n  '#states':\n    visible:\n      ':input[name=\"is_it_packaged_before_the_consumer_selects_or_orders_it_\"]':\n        value: 'Yes'\n    required:\n      ':input[name=\"is_it_packaged_before_the_consumer_selects_or_orders_it_\"]':\n        value: 'Yes'\n  '#default_value': Select\nprocessed_text_04:\n  '#type': processed_text\n  '#states':\n    visible:\n      ':input[name=\"is_it_packaged_at_the_same_place_it_is_sold_\"]':\n        value: 'No'\n  '#text': |\n    <hr />\n    <div style=\"padding:15px; background-color:#e1fae1;\">\n    <h3>Prepacked food</h3>\n    \n    <p>This is <strong>prepacked food</strong>.</p>\n    </div>\n    \n  '#format': full_html\nprocessed_text_05:\n  '#type': processed_text\n  '#states':\n    visible:\n      ':input[name=\"is_it_packaged_at_the_same_place_it_is_sold_\"]':\n        value: 'Yes'\n  '#text': |\n    <hr />\n    <div style=\"padding:15px; background-color:#e1fae1;\">\n    <h3>Prepacked for direct sale</h3>\n    \n    <p>This&nbsp;food is <strong>prepacked for direct sale</strong>.</p>\n    </div>\n    \n  '#format': full_html"
 css: ''
 javascript: ''
 settings:
@@ -188,4 +189,3 @@ access:
     permissions: {  }
 handlers: {  }
 variants: {  }
-uuid: 3ffb57ad-56e4-42f1-99be-682e823a5f39
