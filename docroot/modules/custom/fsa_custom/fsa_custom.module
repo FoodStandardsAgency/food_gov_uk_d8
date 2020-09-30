@@ -671,7 +671,19 @@ function fsa_custom_block_access(Block $block, $operation, AccountInterface $acc
 
     }
     else {
-      $routename = $routematch->getParentRouteMatch()->getRouteName();
+      // Drush causes a TypeError exception here since request stack service not
+      // available via dependency injection.
+      try {
+        $routename = $routematch->getParentRouteMatch()->getRouteName();
+      }
+      catch (TypeError $e) {
+        $routename = FALSE;
+      }
+
+      if (!$routename) {
+        return AccessResult::forbidden()
+          ->addCacheableDependency($block);
+      }
 
       // Page title in content area.
       if ($block->id() == 'pagetitle') {
