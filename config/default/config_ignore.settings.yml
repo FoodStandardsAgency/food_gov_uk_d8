@@ -22,10 +22,5 @@ ignored_config_entities:
   - webform.webform.user_satification
   - webform.webform.page_feedback
   - webform.webform.ecoli_decision_tree
-  - webform.webform.form_1
-  - webform.webform.form_2
-  - webform.webform.form_3
-  - webform.webform.form_4
-  - webform.webform.form_5
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
