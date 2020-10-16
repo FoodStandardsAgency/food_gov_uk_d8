@@ -5,3 +5,9 @@ channels:
       - 0
       - 2
       - 3
+  -
+    id: queue
+    grants:
+      - 0
+      - 2
+      - 3
