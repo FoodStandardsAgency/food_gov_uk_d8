@@ -1,5 +1,6 @@
 module:
   acquia_connector: 0
+  acquia_purge: 0
   addtoany: 0
   admin_toolbar: 0
   admin_toolbar_links_access_filter: 0
@@ -14,6 +15,7 @@ module:
   checklistapi: 0
   ckeditor: 0
   cloudflare: 0
+  cloudflarepurger: 0
   config: 0
   config_filter: 0
   config_ignore: 0
@@ -30,7 +32,6 @@ module:
   datalayer: 0
   datetime: 0
   datetime_range: 0
-  dblog: 0
   diff: 0
   editor: 0
   elasticsearch_helper: 0
@@ -137,6 +138,7 @@ module:
   path_alias: 0
   path_redirect_import: 0
   permissions_filter: 0
+  purge: 0
   rdf: 0
   real_aes: 0
   redirect: 0
