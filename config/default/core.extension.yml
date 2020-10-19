@@ -15,7 +15,6 @@ module:
   checklistapi: 0
   ckeditor: 0
   cloudflare: 0
-  cloudflarepurger: 0
   config: 0
   config_filter: 0
   config_ignore: 0
@@ -141,6 +140,7 @@ module:
   purge: 0
   purge_drush: 0
   purge_processor_cron: 0
+  purge_processor_lateruntime: 0
   purge_queuer_coretags: 0
   purge_ui: 0
   rdf: 0
