@@ -84,6 +84,8 @@ class RegionalVariationFormatter extends EntityReferenceFormatterBase {
         $cachetags = $entity->getCacheTags();
       }
 
+      sort($labels);
+
       if (count($labels) == 1) {
         // Only one label.
         if ($style == 'attachment') {
@@ -96,6 +98,7 @@ class RegionalVariationFormatter extends EntityReferenceFormatterBase {
         }
       }
       elseif (count($labels) == 2) {
+
         // When two regions assigned.
         if ($style == 'attachment') {
           // The short mode.
