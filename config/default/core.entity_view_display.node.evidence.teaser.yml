@@ -1,0 +1,42 @@
+uuid: bdc41fb7-3ea5-413d-8de2-1847e1305443
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.evidence.body
+    - field.field.node.evidence.field_evidence_type
+    - field.field.node.evidence.field_intro
+    - field.field.node.evidence.field_nation
+    - field.field.node.evidence.field_topic
+    - node.type.evidence
+  module:
+    - text
+    - user
+id: node.evidence.teaser
+targetEntityType: node
+bundle: evidence
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_evidence_type: true
+  field_intro: true
+  field_nation: true
+  field_topic: true
+  langcode: true

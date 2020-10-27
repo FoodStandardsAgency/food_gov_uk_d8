@@ -1,0 +1,22 @@
+uuid: c0a77dda-1659-4c01-a4e5-e31bb38626a3
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.evidence
+id: node.evidence.status
+field_name: status
+entity_type: node
+bundle: evidence
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

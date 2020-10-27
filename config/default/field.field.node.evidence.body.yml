@@ -1,0 +1,23 @@
+uuid: 7b323554-0e2b-45b2-8cc1-1c36680a6cae
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.evidence
+  module:
+    - text
+id: node.evidence.body
+field_name: body
+entity_type: node
+bundle: evidence
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary
