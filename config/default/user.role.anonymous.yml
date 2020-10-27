@@ -14,6 +14,7 @@ permissions:
   - 'access site-wide contact form'
   - 'entity print access bundle alert'
   - 'entity print access bundle consultation'
+  - 'entity print access bundle evidence'
   - 'entity print access bundle generic'
   - 'entity print access bundle help'
   - 'entity print access bundle lander'
