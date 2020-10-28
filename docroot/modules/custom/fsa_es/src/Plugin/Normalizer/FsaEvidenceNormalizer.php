@@ -84,7 +84,7 @@ class FsaEvidenceNormalizer extends NormalizerBase {
           'id' => $item->id(),
           'label' => $this->getTranslatedLabel($item),
         ];
-      }, $object->get('field_topic')->referencedEntities()),
+      }, $object->get('field_research_topics')->referencedEntities()),
       'type' => array_map(function ($item) {
         return [
           'id' => $item->id(),
