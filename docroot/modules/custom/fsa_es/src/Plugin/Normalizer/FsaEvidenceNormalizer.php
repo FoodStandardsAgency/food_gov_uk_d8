@@ -38,7 +38,7 @@ class FsaEvidenceNormalizer extends NormalizerBase {
   protected $dateFormatter;
 
   /**
-   * FsaPageNormalizer constructor.
+   * FsaEvidenceNormalizer constructor.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   Entity manager interface.
