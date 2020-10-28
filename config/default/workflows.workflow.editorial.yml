@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - node.type.consultation
+    - node.type.evidence
     - node.type.multipage_guide
     - node.type.page
     - node.type.research_project
@@ -86,6 +87,8 @@ type_settings:
   entity_types:
     node:
       - consultation
+      - evidence
       - multipage_guide
       - page
       - research_project
+  default_moderation_state: draft
