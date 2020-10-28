@@ -5,7 +5,7 @@ namespace Drupal\fsa_es\Plugin\ElasticsearchQueryBuilder;
 /**
  * @ElasticsearchQueryBuilder(
  *   id = "sitewide_search_research",
- *   label = @Translation("Global search: Research"),
+ *   label = @Translation("Global search: Research and Evidence"),
  *   description = @Translation("Provides query builder for site-wide guidance search.")
  * )
  */
@@ -30,7 +30,10 @@ class SitewideSearchResearch extends SitewideSearchBase {
     $query_filter_filters = [];
 
     $query = [
-      'index' => ['research-' . $this->currentLanguage->getId()],
+      'index' => [
+        'research-' . $this->currentLanguage->getId(),
+        'evidence-' . $this->currentLanguage->getId(),
+      ],
       'body' => [],
     ];
 
