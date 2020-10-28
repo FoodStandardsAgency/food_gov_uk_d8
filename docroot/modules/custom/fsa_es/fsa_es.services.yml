@@ -16,6 +16,12 @@ services:
       - { name: normalizer, priority: 50 }
     arguments: ['@entity_type.manager', '@date.formatter']
 
+  fsa_es.normalizer.fsa_evidence_normalizer:
+    class: Drupal\fsa_es\Plugin\Normalizer\FsaEvidenceNormalizer
+    tags:
+      - { name: normalizer, priority: 50 }
+    arguments: ['@entity_type.manager', '@date.formatter']
+
   fsa_es.normalizer.fsa_news_normalizer:
     class: Drupal\fsa_es\Plugin\Normalizer\FsaNewsNormalizer
     tags:
