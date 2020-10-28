@@ -1,16 +1,16 @@
-uuid: 33ac77fd-a826-464e-9267-3b703866d362
+uuid: cfb104ad-5132-4f49-810f-be96069ab310
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_topic
+    - field.storage.node.field_research_topics
     - node.type.evidence
-    - taxonomy.vocabulary.topic
-id: node.evidence.field_topic
-field_name: field_topic
+    - taxonomy.vocabulary.research_topic
+id: node.evidence.field_research_topics
+field_name: field_research_topics
 entity_type: node
 bundle: evidence
-label: Topic
+label: 'Research topics'
 description: ''
 required: false
 translatable: true
@@ -20,7 +20,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      topic: topic
+      research_topic: research_topic
     sort:
       field: name
       direction: asc
