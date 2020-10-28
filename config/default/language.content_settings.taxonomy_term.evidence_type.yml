@@ -1,0 +1,16 @@
+uuid: 82b98dd1-b6a0-494f-9a06-25dc1f866738
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.evidence_type
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.evidence_type
+target_entity_type_id: taxonomy_term
+target_bundle: evidence_type
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,45 @@
+uuid: 6e7292e8-3f45-40ef-bbc3-7fd43a30fa94
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.evidence.body
+    - field.field.node.evidence.field_evidence_type
+    - field.field.node.evidence.field_intro
+    - field.field.node.evidence.field_nation
+    - field.field.node.evidence.field_research_topics
+    - node.type.evidence
+  module:
+    - text
+    - user
+id: node.evidence.default
+targetEntityType: node
+bundle: evidence
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  content_moderation_control:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  links:
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_evidence_type: true
+  field_intro: true
+  field_nation: true
+  field_research_topics: true
+  langcode: true

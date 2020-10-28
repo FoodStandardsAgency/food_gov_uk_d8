@@ -1,0 +1,33 @@
+uuid: 2edbfb7a-b4c3-4573-8d2c-4100043117c4
+langcode: en
+status: true
+dependencies:
+  module:
+    - language
+    - node
+id: evidence_english_
+label: 'Evidence (English)'
+type: 'canonical_entities:node'
+pattern: 'evidence/[node:title]'
+selection_criteria:
+  944a0eee-a119-4032-985b-05380db7afce:
+    id: node_type
+    bundles:
+      evidence: evidence
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 944a0eee-a119-4032-985b-05380db7afce
+  c04b7884-65a3-41cb-9b09-d04363eb7c6e:
+    id: language
+    langcodes:
+      en: en
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    uuid: c04b7884-65a3-41cb-9b09-d04363eb7c6e
+selection_logic: and
+weight: -10
+relationships:
+  'node:langcode:language':
+    label: Language

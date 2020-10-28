@@ -1,0 +1,8 @@
+uuid: 53e45a66-2624-48d2-a751-2111153b0ea3
+langcode: en
+status: true
+dependencies: {  }
+name: 'Evidence type'
+vid: evidence_type
+description: ''
+weight: 0

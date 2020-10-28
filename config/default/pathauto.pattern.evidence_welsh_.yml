@@ -1,0 +1,33 @@
+uuid: 54bb1438-7bcb-44de-bbb7-cd47c5543d4c
+langcode: en
+status: true
+dependencies:
+  module:
+    - language
+    - node
+id: evidence_welsh_
+label: 'Evidence (Welsh)'
+type: 'canonical_entities:node'
+pattern: 'tystiolaeth/[node:title]'
+selection_criteria:
+  6a6896f6-4ece-460d-bab5-b3e0abc85991:
+    id: node_type
+    bundles:
+      evidence: evidence
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 6a6896f6-4ece-460d-bab5-b3e0abc85991
+  e4306ef0-89ad-420c-b415-7a08e4d58c51:
+    id: language
+    langcodes:
+      cy: cy
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    uuid: e4306ef0-89ad-420c-b415-7a08e4d58c51
+selection_logic: and
+weight: -10
+relationships:
+  'node:langcode:language':
+    label: Language
