@@ -54,7 +54,7 @@ class FsaEvidenceNormalizer extends NormalizerBase {
    * {@inheritdoc}
    */
   public function supportsNormalization($data, $format = NULL) {
-    return is_a($data, '\Drupal\node\Entity\Node') && $data->bundle() == 'page';
+    return is_a($data, '\Drupal\node\Entity\Node') && $data->bundle() == 'evidence';
   }
 
   /**
@@ -62,6 +62,10 @@ class FsaEvidenceNormalizer extends NormalizerBase {
    */
   public function normalize($object, $format = NULL, array $context = []) {
     $parent_data = parent::normalize($object, $format, $context);
+
+    // Updated value is going to be either from "field_update_date" or from
+    // "changed" field.
+    $date_updated = $object->get('field_update_date')->value;
 
     // Get dates.
     $entity_dates = [];
@@ -92,7 +96,7 @@ class FsaEvidenceNormalizer extends NormalizerBase {
         ];
       }, $object->get('field_evidence_type')->referencedEntities()),
       'created' => $entity_dates['created'],
-      'updated' => $entity_dates['changed'],
+      'updated' => $date_updated ? $date_updated : $entity_dates['changed'],
     ] + $parent_data;
 
     return $data;

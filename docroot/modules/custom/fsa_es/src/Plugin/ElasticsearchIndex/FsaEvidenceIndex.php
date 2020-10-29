@@ -20,7 +20,7 @@ class FsaEvidenceIndex extends FsaIndexBase {
   public function setup() {
     // Create one index per language, so that we can have different analyzers.
     foreach ($this->languageManager->getLanguages() as $langcode => $language) {
-      $index_name = 'page-' . $langcode;
+      $index_name = 'evidence-' . $langcode;
 
       if (!$this->client->indices()->exists(['index' => $index_name])) {
         $this->client->indices()->create([
@@ -36,7 +36,7 @@ class FsaEvidenceIndex extends FsaIndexBase {
 
         $mapping = [
           'index' => $index_name,
-          'type' => 'page',
+          'type' => 'evidence',
           'body' => [
             'properties' => [
               'id' => [
