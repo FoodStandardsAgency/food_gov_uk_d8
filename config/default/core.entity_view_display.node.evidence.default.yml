@@ -8,8 +8,10 @@ dependencies:
     - field.field.node.evidence.field_intro
     - field.field.node.evidence.field_nation
     - field.field.node.evidence.field_research_topics
+    - field.field.node.evidence.field_update_date
     - node.type.evidence
   module:
+    - datetime
     - text
     - user
 id: node.evidence.default
@@ -29,6 +31,15 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_update_date:
+    weight: 3
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
   links:
     weight: 1
     region: content
