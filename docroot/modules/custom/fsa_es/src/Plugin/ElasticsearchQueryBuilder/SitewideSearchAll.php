@@ -130,6 +130,7 @@ class SitewideSearchAll extends SitewideSearchBase {
       'alert',
       'consultation-' . $langcode,
       'research-' . $langcode,
+      'evidence-' . $langcode,
     ];
   }
 
