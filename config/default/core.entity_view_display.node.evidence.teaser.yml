@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.evidence.field_intro
     - field.field.node.evidence.field_nation
     - field.field.node.evidence.field_research_topics
+    - field.field.node.evidence.field_update_date
     - node.type.evidence
   module:
     - text
@@ -44,4 +45,5 @@ hidden:
   field_intro: true
   field_nation: true
   field_research_topics: true
+  field_update_date: true
   langcode: true
