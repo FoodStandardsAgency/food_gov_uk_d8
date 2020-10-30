@@ -5,10 +5,22 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.evidence.body
+    - field.field.node.evidence.field_audience
+    - field.field.node.evidence.field_content_reminder
+    - field.field.node.evidence.field_content_type
+    - field.field.node.evidence.field_document
     - field.field.node.evidence.field_evidence_type
+    - field.field.node.evidence.field_fsa_toc
     - field.field.node.evidence.field_intro
+    - field.field.node.evidence.field_liftup_summary
+    - field.field.node.evidence.field_liftup_title
+    - field.field.node.evidence.field_media_library_liftup_image
     - field.field.node.evidence.field_nation
+    - field.field.node.evidence.field_related
     - field.field.node.evidence.field_research_topics
+    - field.field.node.evidence.field_search_exclude
+    - field.field.node.evidence.field_team_contacts
+    - field.field.node.evidence.field_topic
     - field.field.node.evidence.field_update_date
     - node.type.evidence
   module:
@@ -41,9 +53,21 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_audience: true
+  field_content_reminder: true
+  field_content_type: true
+  field_document: true
   field_evidence_type: true
+  field_fsa_toc: true
   field_intro: true
+  field_liftup_summary: true
+  field_liftup_title: true
+  field_media_library_liftup_image: true
   field_nation: true
+  field_related: true
   field_research_topics: true
+  field_search_exclude: true
+  field_team_contacts: true
+  field_topic: true
   field_update_date: true
   langcode: true

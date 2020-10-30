@@ -1,0 +1,28 @@
+uuid: eeec1588-361f-498e-bd3c-44092676c564
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_document
+    - media.type.document
+    - node.type.evidence
+id: node.evidence.field_document
+field_name: field_document
+entity_type: node
+bundle: evidence
+label: Resources
+description: 'Create a list of downloadable attachments at the bottom of this page by referencing to items in document library.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      document: document
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
