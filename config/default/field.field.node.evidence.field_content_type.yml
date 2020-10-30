@@ -1,0 +1,29 @@
+uuid: b7679317-2898-4854-bd12-2403ff87b0f1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content_type
+    - node.type.evidence
+    - taxonomy.vocabulary.content_type
+id: node.evidence.field_content_type
+field_name: field_content_type
+entity_type: node
+bundle: evidence
+label: 'Content type'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      content_type: content_type
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
