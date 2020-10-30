@@ -1,0 +1,23 @@
+uuid: 3281d493-a45b-49ee-8e87-d3e5b64779d3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_fsa_toc
+    - node.type.evidence
+id: node.evidence.field_fsa_toc
+field_name: field_fsa_toc
+entity_type: node
+bundle: evidence
+label: 'Display table of contents'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
