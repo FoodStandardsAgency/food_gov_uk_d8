@@ -35,7 +35,7 @@ pipelines:
     develop:
       - step:
           name: Build Drupal
-          image: wodby/drupal-php:7.2-dev
+          image: deeson/drupal-php:1.0
           caches:
             - composer
             - drush
@@ -65,7 +65,7 @@ pipelines:
     UAT:
       - step:
           name: Build Drupal
-          image: wodby/drupal-php:7.2-dev
+          image: deeson/drupal-php:1.0
           caches:
             - composer
             - drush
@@ -95,7 +95,7 @@ pipelines:
     accessibility:
       - step:
           name: Build Drupal
-          image: wodby/drupal-php:7.2-dev
+          image: deeson/drupal-php:1.0
           caches:
             - drush
           script:
@@ -124,7 +124,7 @@ pipelines:
     release/*:
       - step:
           name: Build Drupal
-          image: wodby/drupal-php:7.2-dev
+          image: deeson/drupal-php:1.0
           caches:
             - drush
           script:
