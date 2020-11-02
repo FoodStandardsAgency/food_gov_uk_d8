@@ -305,7 +305,7 @@ display:
             group_items: {  }
           plugin_id: fsa_nation
       sorts: {  }
-      title: Research
+      title: 'Research and Evidence'
       header:
         result:
           id: result
@@ -367,7 +367,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: search/research
+      path: search/research-evidence
       exposed_block: true
     cache_metadata:
       max-age: -1
