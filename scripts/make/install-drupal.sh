@@ -9,7 +9,7 @@ repo_root=$(pwd)
 source "$repo_root/.build.env"
 
 if [ "$drupal_build_composer_install" == "Y" ]; then
-  composer self-update 1.10.8 && composer install
+  composer install
 fi
 
 if [ "$drupal_build_drush_make" == "Y" ]; then
