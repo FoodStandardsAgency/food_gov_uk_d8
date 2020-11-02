@@ -1,0 +1,237 @@
+uuid: 418e7a5d-603d-4ba7-9a6f-d285256e4ddf
+langcode: en
+status: open
+dependencies: {  }
+open: null
+close: null
+weight: 0
+uid: 31736
+template: false
+archive: false
+id: regulated_products_submit
+title: 'Regulated products'
+description: 'Submissions for regulated products.'
+category: ''
+elements: "markup:\n  '#type': webform_markup\n  '#markup': \"<h2>Contact details</h2>\\r\\n\\r\\n<p>Enter the contact details for the person or organisation who is the main point of contact for this application.</p>\"\nreg_products_first_name:\n  '#type': textfield\n  '#title': 'First name'\n  '#required': true\nreg_products_last_name:\n  '#type': textfield\n  '#title': 'Last name'\n  '#required': true\nreg_products_emails_confirm:\n  '#type': webform_email_confirm\n  '#title': 'Email address'\n  '#description': 'We&#39;ll only use this to contact you about your application.'\n  '#required': true\n  '#confirm__title': 'Confirm email address'\nmarkup_01:\n  '#type': webform_markup\n  '#markup': \"<h2>Product details</h2>\\r\\n\\r\\n<p>Tell us a little bit more about the product or process you are submitting.</p>\"\nreg_products_organisation_name:\n  '#type': textfield\n  '#title': Manufacturer\n  '#required': true\nreg_products_product_type:\n  '#type': select\n  '#title': 'Product type'\n  '#options':\n    'Extraction solvents': 'Extraction solvents'\n    'Feed additives': 'Feed additives'\n    'Feed for particular nutritional uses (PARNUTS)': 'Feed for particular nutritional uses (PARNUTS)'\n    'Feed (detoxification processes)': 'Feed (detoxification processes)'\n    Flavourings: Flavourings\n    'Food contact materials (active/intelligent materials)': 'Food contact materials (active/intelligent materials)'\n    'Food contact materials (plastic additives)': 'Food contact materials (plastic additives)'\n    'Food contact materials (recycled processes)': 'Food contact materials (recycled processes)'\n    'Food additives': 'Food additives'\n    'Food enzymes': 'Food enzymes'\n    'Genetically modified organisms as food and feed': 'Genetically modified organisms as food and feed'\n    'Irradiated food': 'Irradiated food'\n    'Novel foods (full application)': 'Novel foods (full application)'\n    'Novel foods (traditional food notification)': 'Novel foods (traditional food notification)'\n    'Smoke flavourings': 'Smoke flavourings'\n    Other: Other\n  '#empty_option': select\n  '#empty_value': select\n  '#required': true\nreg_products_product_name:\n  '#type': textfield\n  '#title': 'Product for authorisation'\n  '#description': '<p>This can be an internal name you are using or the final product name.</p>'\n  '#required': true\nreg_products_product_summary:\n  '#type': textarea\n  '#title': 'Product summary'\n  '#description': '<p>Tell us a bit more about the product or process you are requesting authorisation for.</p>'\n  '#required': true\ncaptcha:\n  '#type': captcha"
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  page: true
+  page_submit_path: apply-for-regulated-product-authorisation
+  page_confirm_path: apply-for-regulated-product-authorisation/thanks
+  form_title: both
+  form_submit_once: true
+  form_exception_message: ''
+  form_open_message: ''
+  form_close_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_remote_addr: true
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_reset: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  submission_label: ''
+  submission_log: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_track: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  confirmation_type: page
+  confirmation_title: 'Thanks for submitting your application'
+  confirmation_message: "<h2>What happens next</h2>\r\n\r\n<p>We&#39;ll email you with your application number as well as a secure link where you can upload your supporting documents.</p>\r\n\r\n<p>Make sure you upload your documents as soon as possible so we can start processing your application.</p>"
+  confirmation_url: ''
+  confirmation_attributes: {  }
+  confirmation_back: false
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  token_update: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email:
+    id: email
+    label: Email
+    handler_id: email
+    status: false
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: FSAregulatedfoods@food.gov.uk
+      to_options: {  }
+      cc_mail: regulatedproducts@food.gov.uk
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      subject: _default
+      body: '<FirstName>[webform_submission:values:reg_products_first_name:raw]<FirstName><LastName>[webform_submission:values:reg_products_last_name:raw]<LastName><Email>[webform_submission:values:reg_products_emails_confirm:raw]<Email><ProductType>[webform_submission:values:reg_products_product_type:raw]<ProductType><ProductName>[webform_submission:values:reg_products_product_name:raw]<ProductName><SummaryText>[webform_submission:values:reg_products_product_summary:raw]<SummaryText><OrganisationName>[webform_submission:values:reg_products_organisation_name:raw]<OrganisationName>'
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      html: false
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+  email_1:
+    id: email
+    label: Email
+    handler_id: email_1
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: FSAregulatedfoods@food.gov.uk
+      to_options: {  }
+      cc_mail: regulatedproducts@food.gov.uk
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      subject: _default
+      body: '&lt;FirstName&gt;[webform_submission:values:reg_products_first_name:raw]&lt;FirstName&gt;&lt;LastName&gt;[webform_submission:values:reg_products_last_name:raw]&lt;LastName&gt;&lt;Email&gt;[webform_submission:values:reg_products_emails_confirm:raw]&lt;Email&gt;&lt;ProductType&gt;[webform_submission:values:reg_products_product_type:raw]&lt;ProductType&gt;&lt;ProductName&gt;[webform_submission:values:reg_products_product_name:raw]&lt;ProductName&gt;&lt;SummaryText&gt;[webform_submission:values:reg_products_product_summary:raw]&lt;SummaryText&gt;&lt;OrganisationName&gt;[webform_submission:values:reg_products_organisation_name:raw]&lt;OrganisationName&gt;'
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
