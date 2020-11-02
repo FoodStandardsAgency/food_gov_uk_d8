@@ -3,14 +3,10 @@ langcode: en
 status: true
 dependencies:
   module:
-    - block_class
     - fsa_custom
     - system
   theme:
     - fsa
-third_party_settings:
-  block_class:
-    classes: ''
 id: search_link_tabs
 theme: fsa
 region: content_top
@@ -45,8 +41,8 @@ settings:
       route_parameters: ''
       query: '{"keywords": "[current-page:query:keywords]"}'
     link-4:
-      url: /search/research
-      text: Research
+      url: /search/research-evidence
+      text: 'Research and Evidence'
       route_parameters: ''
       query: '{"keywords": "[current-page:query:keywords]"}'
 visibility:
