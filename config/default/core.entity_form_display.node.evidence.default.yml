@@ -6,7 +6,6 @@ dependencies:
     - field.field.node.evidence.body
     - field.field.node.evidence.field_audience
     - field.field.node.evidence.field_content_reminder
-    - field.field.node.evidence.field_content_type
     - field.field.node.evidence.field_document
     - field.field.node.evidence.field_evidence_type
     - field.field.node.evidence.field_fsa_toc
@@ -38,9 +37,9 @@ third_party_settings:
   field_group:
     group_taxonomies:
       children:
+        - field_evidence_type
         - field_content_type
         - field_audience
-        - field_evidence_type
         - field_nation
         - field_research_topics
         - field_topic
@@ -117,7 +116,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_audience:
-    weight: 9
+    weight: 12
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
@@ -127,12 +126,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
-    region: content
-  field_content_type:
-    weight: 8
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
     region: content
   field_document:
     weight: 8
@@ -201,7 +194,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_nation:
-    weight: 11
+    weight: 13
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
@@ -226,7 +219,7 @@ content:
     type: paragraphs
     region: content
   field_research_topics:
-    weight: 12
+    weight: 14
     settings:
       display_node_count: false
       create_new_items: false
@@ -253,7 +246,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_topic:
-    weight: 13
+    weight: 15
     settings:
       display_node_count: false
       create_new_items: false
