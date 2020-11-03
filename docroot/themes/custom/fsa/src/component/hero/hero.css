@@ -884,7 +884,8 @@
 }
 
 /* Subscribe page */
-.theme--subscribe {
+.theme--subscribe,
+.theme--webform {
   .hero__region {
     padding-top: 3em;
     padding-bottom: 3em;
@@ -976,7 +977,8 @@
 .theme--lander,
 .theme--subscribe,
 .theme--help-centre,
-.theme--term
+.theme--term,
+.theme--webform
 {
   /* Allows the border radius arc to hide behind content divs */
   .layout--content-top,
@@ -1083,4 +1085,12 @@
     width: 390px;
   }
   
+}
+
+.theme--webform {
+  .hero__region {
+    @media (--breakpoint-lg) {
+      padding-right: 4em;
+    }
+  }
 }

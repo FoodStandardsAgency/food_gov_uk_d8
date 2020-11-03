@@ -21,9 +21,11 @@ function fsa_contactus_webform_element_alter(array &$element, FormStateInterface
     if (isset($element['#format'])) {
       $extra_classes[] = $element['#format'];
     }
-    $extra_classes[] = $element['#webform_key'];
-    foreach ($extra_classes as $c) {
-      $element['#attributes']['class'][] = $c;
+    if (isset($element['#webform_key'])) {
+      $extra_classes[] = $element['#webform_key'];
+      foreach ($extra_classes as $c) {
+        $element['#attributes']['class'][] = $c;
+      }
     }
   }
 
@@ -34,16 +36,17 @@ function fsa_contactus_webform_element_alter(array &$element, FormStateInterface
     $element['#title'] = $element['#title'] . ' <span class="optional">(' . t('optional') . ')</span>';
   }
 
-  // Rewrite rafp privacy notice field to the required link.
-  if ($element['#webform_key'] == 'fsa_privacy_link_rafp') {
-    $element['#markup'] = FsaCustomHelper::privacyNoticeLink('rafp');
-  }
+  if (isset($element['#webform_key'])) {
+    // Rewrite rafp privacy notice field to the required link.
+    if ($element['#webform_key'] == 'fsa_privacy_link_rafp') {
+      $element['#markup'] = FsaCustomHelper::privacyNoticeLink('rafp');
+    }
 
-  // Rewrite ncfu privacy notice field to the required link.
-  if ($element['#webform_key'] == 'fsa_privacy_link_nfcu') {
-    $element['#markup'] = FsaCustomHelper::privacyNoticeLink('nfcu');
+    // Rewrite ncfu privacy notice field to the required link.
+    if ($element['#webform_key'] == 'fsa_privacy_link_nfcu') {
+      $element['#markup'] = FsaCustomHelper::privacyNoticeLink('nfcu');
+    }
   }
-
 }
 
 /**
