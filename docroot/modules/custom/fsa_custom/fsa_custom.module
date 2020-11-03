@@ -279,6 +279,7 @@ function fsa_custom_preprocess_page_title(&$variables) {
       'alert',
       'consultation',
       'research_project',
+      'evidence',
     ];
 
     if (in_array($nodetype, $content_type_label)) {
@@ -292,6 +293,13 @@ function fsa_custom_preprocess_page_title(&$variables) {
       elseif ($nodetype == 'consultation' && $entity->field_consultations_type) {
         // Consultations display their consultation type taxonomy label.
         $field = $entity->get('field_consultations_type')->entity;
+        $label = $field->hasTranslation($lang)
+          ? $field->getTranslation($lang)->label()
+          : $field->label();
+      }
+      elseif ($nodetype == 'evidence' && $entity->field_evidence_type) {
+        // Evidence display their type taxonomy label.
+        $field = $entity->get('field_evidence_type')->entity;
         $label = $field->hasTranslation($lang)
           ? $field->getTranslation($lang)->label()
           : $field->label();
