@@ -113,4 +113,8 @@ function fsa_preprocess_html(&$variables) {
   if (in_array($uri_segments[1], $service_urls)) {
     $variables['attributes']['class'][] = 'theme--subscribe';
   }
+
+  if ($routename === 'entity.webform.canonical') {
+    $variables['attributes']['class'][] = 'theme--webform';
+  }
 }
