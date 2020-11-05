@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.node.evidence.body
-    - field.field.node.evidence.field_audience
     - field.field.node.evidence.field_content_reminder
     - field.field.node.evidence.field_document
     - field.field.node.evidence.field_evidence_type
@@ -115,12 +114,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_audience:
-    weight: 12
-    settings: {  }
-    third_party_settings: {  }
-    type: options_buttons
-    region: content
   field_content_reminder:
     weight: 21
     settings: {  }

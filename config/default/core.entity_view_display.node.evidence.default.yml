@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.node.evidence.body
-    - field.field.node.evidence.field_audience
     - field.field.node.evidence.field_content_reminder
     - field.field.node.evidence.field_document
     - field.field.node.evidence.field_evidence_type
@@ -61,7 +60,6 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
-  field_audience: true
   field_content_reminder: true
   field_evidence_type: true
   field_fsa_toc: true
