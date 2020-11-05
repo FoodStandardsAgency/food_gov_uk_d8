@@ -24,3 +24,9 @@ display:
       exposed_form:
         options:
           submit_button: Chwilio
+      title: 'Ymchwil a thystiolaeth'
+      empty:
+        area:
+          content:
+            value: "<p>Unfortunately your search yielded no results.</p>\r\n"
+            format: full_html
