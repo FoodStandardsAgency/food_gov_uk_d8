@@ -60,7 +60,7 @@ class FsaEvidenceIndex extends FsaIndexBase {
                 'type' => 'text',
                 'analyzer' => $text_analyzer,
               ],
-              'type' => [
+              'evidence_type' => [
                 'properties' => [
                   'id' => ['type' => 'keyword'],
                   'label' => [
