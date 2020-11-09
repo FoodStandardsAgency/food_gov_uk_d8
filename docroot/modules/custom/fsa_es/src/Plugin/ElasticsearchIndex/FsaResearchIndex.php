@@ -36,7 +36,7 @@ class FsaResearchIndex extends FsaIndexBase {
 
         $mapping = [
           'index' => $index_name,
-          'type' => 'news',
+          'type' => 'research',
           'body' => [
             'properties' => [
               'id' => [

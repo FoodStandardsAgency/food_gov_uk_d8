@@ -124,4 +124,12 @@ function fsa_es_views_data_alter(array &$data) {
     ],
   ];
 
+  $data['elasticsearch_result']['evidence_type'] = [
+    'title' => t('Evidence type'),
+    'help' => t('Evidence type'),
+    'filter' => [
+      'id' => 'fsa_evidence_type',
+    ],
+  ];
+
 }
