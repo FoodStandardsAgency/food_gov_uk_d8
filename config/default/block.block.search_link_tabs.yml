@@ -37,12 +37,12 @@ settings:
       query: '{"keywords": "[current-page:query:keywords]"}'
     link-3:
       url: /search/news-alerts
-      text: 'News and alerts'
+      text: 'News & alerts'
       route_parameters: ''
       query: '{"keywords": "[current-page:query:keywords]"}'
     link-4:
       url: /search/research-evidence
-      text: 'Research and Evidence'
+      text: 'Research & Evidence'
       route_parameters: ''
       query: '{"keywords": "[current-page:query:keywords]"}'
 visibility:
