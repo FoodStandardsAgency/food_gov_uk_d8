@@ -785,6 +785,17 @@
       }
     }
   }
+  .hero__title {
+    h1 {
+      @media (--breakpoint-md) {
+        padding-top: 0;
+      }
+
+      &:after {
+        background: none;
+      }
+    }
+  }
 }
 
 /* Food safety and hygiene. */
@@ -1059,6 +1070,7 @@
   .hero__content-container .hero__title h1 {
     @media (--breakpoint-sm) {
       margin-bottom: 0;
+      margin-left: 1em;
       padding-top: 0;
     }
   }
@@ -1091,6 +1103,20 @@
   .hero__region {
     @media (--breakpoint-lg) {
       padding-right: 4em;
+    }
+  }
+}
+
+.node-994 {
+  .hero__region-wrapper {
+    @media (--breakpoint-lg) {
+      min-height: 24em;
+    }
+  }
+
+  .hero__region {
+    @media (--breakpoint-md) {
+      padding-top: 5em;
     }
   }
 }

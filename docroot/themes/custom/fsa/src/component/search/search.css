@@ -295,3 +295,17 @@
 #block-researchpagebacklink {
   margin-bottom: 1em;
 }
+
+#block-search-link-tabs {
+  ul {
+    @media (--breakpoint-lg) {
+      padding-left: 3.25em;
+    }
+  }
+}
+
+.theme--search {
+  aside.layout__sidebar.js-sticky-element {
+    overflow: hidden;
+  }
+}
