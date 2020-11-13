@@ -9,6 +9,8 @@ dependencies:
     - field.field.node.research_project.field_content_reminder
     - field.field.node.research_project.field_date_range
     - field.field.node.research_project.field_document
+    - field.field.node.research_project.field_evidence_type
+    - field.field.node.research_project.field_fsa_toc
     - field.field.node.research_project.field_intro
     - field.field.node.research_project.field_nation
     - field.field.node.research_project.field_planned_completion_date
@@ -64,6 +66,8 @@ hidden:
   field_content_reminder: true
   field_date_range: true
   field_document: true
+  field_evidence_type: true
+  field_fsa_toc: true
   field_nation: true
   field_planned_completion_date: true
   field_related: true

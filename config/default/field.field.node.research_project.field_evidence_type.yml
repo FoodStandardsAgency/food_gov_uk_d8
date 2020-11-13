@@ -1,18 +1,18 @@
-uuid: 6552ddc8-3efb-4e1b-9b7c-94e0a90fc90c
+uuid: eb1e76c9-3802-4008-8ceb-91b67fe20a00
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_evidence_type
-    - node.type.evidence
+    - node.type.research_project
     - taxonomy.vocabulary.evidence_type
-id: node.evidence.field_evidence_type
+id: node.research_project.field_evidence_type
 field_name: field_evidence_type
 entity_type: node
-bundle: evidence
+bundle: research_project
 label: 'Research and evidence type'
 description: ''
-required: true
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''

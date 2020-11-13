@@ -1,26 +1,26 @@
-uuid: 6552ddc8-3efb-4e1b-9b7c-94e0a90fc90c
+uuid: d2b63d18-b2a9-474d-9b14-5c8abb2e7d90
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_evidence_type
+    - field.storage.node.field_audience
     - node.type.evidence
-    - taxonomy.vocabulary.evidence_type
-id: node.evidence.field_evidence_type
-field_name: field_evidence_type
+    - taxonomy.vocabulary.audience
+id: node.evidence.field_audience
+field_name: field_audience
 entity_type: node
 bundle: evidence
-label: 'Research and evidence type'
+label: Audience
 description: ''
-required: true
-translatable: true
+required: false
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      evidence_type: evidence_type
+      audience: audience
     sort:
       field: name
       direction: asc
