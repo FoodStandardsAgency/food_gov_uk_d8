@@ -51,14 +51,7 @@ function drush_fsa_research_populate_evidence_type() {
 
     $term->save();
   }
-
-  $tid = \Drupal::entityQuery('taxonomy_term')
-    ->condition('vid','evidence_type')
-    ->condition('name','Research project')
-    ->execute();
-
-
-
+  
   // Instantiate our research queue.
   $queue = \Drupal::queue('fsa_research_evidence_type');
   $queue->createQueue();
