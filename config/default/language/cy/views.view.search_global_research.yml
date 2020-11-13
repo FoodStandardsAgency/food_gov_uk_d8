@@ -15,6 +15,9 @@ display:
         nation:
           expose:
             label: Rhanbarth
+        evidence_type:
+          expose:
+            label: Math
       header:
         result:
           content: '<h2 class="visually-hidden">Canlyniadau chwilio</h2><div class="visually-hidden" aria-live="polite">Dangos @start-@end o @total gyda’r dewisiadau hidlo presennol</div>'
