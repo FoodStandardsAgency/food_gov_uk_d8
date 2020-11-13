@@ -297,7 +297,7 @@ function fsa_custom_preprocess_page_title(&$variables) {
           ? $field->getTranslation($lang)->label()
           : $field->label();
       }
-      elseif ($nodetype == 'evidence' && $entity->field_evidence_type) {
+      elseif (($nodetype == 'evidence' || $nodetype == 'research_project') && $entity->field_evidence_type) {
         // Evidence display their type taxonomy label.
         $field = $entity->get('field_evidence_type')->entity;
         if (isset($field)) {
