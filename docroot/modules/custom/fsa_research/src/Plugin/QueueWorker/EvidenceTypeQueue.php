@@ -38,6 +38,13 @@ class EvidenceTypeQueue extends QueueWorkerBase {
     // Update node with evidence type.
     $node->set('field_evidence_type', $tid);
     $node->save();
+
+    // Handle translated nodes.
+    if ($node->hasTranslation('cy')) {
+      $translation = $node->getTranslation('cy');
+      $translation->set('field_evidence_type', $tid);
+      $translation->save();
+    }
   }
 
 }
