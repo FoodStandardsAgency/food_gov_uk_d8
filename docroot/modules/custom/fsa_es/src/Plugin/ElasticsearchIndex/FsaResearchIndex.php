@@ -77,6 +77,20 @@ class FsaResearchIndex extends FsaIndexBase {
                   ],
                 ],
               ],
+              'evidence_type' => [
+                'properties' => [
+                  'id' => ['type' => 'keyword'],
+                  'label' => [
+                    'type' => 'text',
+                    'index' => FALSE,
+                    'fields' => [
+                      'keyword' => [
+                        'type' => 'keyword',
+                      ],
+                    ],
+                  ],
+                ],
+              ],
               'nation' => [
                 'properties' => [
                   'id' => ['type' => 'keyword'],
