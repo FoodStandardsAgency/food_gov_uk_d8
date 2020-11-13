@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.research_project.field_content_reminder
     - field.field.node.research_project.field_date_range
     - field.field.node.research_project.field_document
+    - field.field.node.research_project.field_evidence_type
     - field.field.node.research_project.field_fsa_toc
     - field.field.node.research_project.field_intro
     - field.field.node.research_project.field_nation
@@ -21,6 +22,7 @@ dependencies:
     - field.field.node.research_project.field_team_contacts
     - field.field.node.research_project.field_update_date
     - node.type.research_project
+    - workflows.workflow.editorial
   module:
     - content_moderation
     - datetime
@@ -43,7 +45,7 @@ third_party_settings:
         - field_planned_completion_date
         - field_conducted_by
       parent_name: ''
-      weight: 4
+      weight: 5
       format_type: tab
       format_settings:
         label: 'Project metadata'
@@ -57,7 +59,7 @@ third_party_settings:
       children:
         - field_related
       parent_name: ''
-      weight: 10
+      weight: 11
       format_type: tab
       format_settings:
         id: ''
@@ -70,7 +72,7 @@ third_party_settings:
       children:
         - field_search_exclude
       parent_name: ''
-      weight: 5
+      weight: 6
       format_type: tab
       format_settings:
         id: ''
@@ -86,7 +88,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 8
+    weight: 9
     settings:
       rows: 9
       summary_rows: 3
@@ -96,7 +98,7 @@ content:
     region: content
   created:
     type: datetime_timestamp
-    weight: 13
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -109,7 +111,7 @@ content:
     type: string_textfield
     region: content
   field_content_reminder:
-    weight: 22
+    weight: 23
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
@@ -121,7 +123,7 @@ content:
     type: daterange_default
     region: content
   field_document:
-    weight: 9
+    weight: 10
     settings:
       form_mode: default
       label_singular: ''
@@ -130,20 +132,30 @@ content:
       allow_existing: true
       match_operator: CONTAINS
       override_labels: false
+      revision: false
+      collapsible: false
+      collapsed: false
+      allow_duplicate: false
     third_party_settings:
       entity_browser_entity_form:
         entity_browser_id: media_entity_browser_document
     type: inline_entity_form_complex
     region: content
+  field_evidence_type:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
   field_fsa_toc:
-    weight: 7
+    weight: 8
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_intro:
-    weight: 6
+    weight: 7
     settings:
       rows: 3
       placeholder: ''
@@ -215,7 +227,7 @@ content:
     type: boolean_checkbox
     region: content
   field_team_contacts:
-    weight: 11
+    weight: 12
     settings:
       match_operator: CONTAINS
       size: 60
@@ -232,26 +244,26 @@ content:
     region: content
   langcode:
     type: language_select
-    weight: 15
+    weight: 16
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 19
+    weight: 20
     settings: {  }
     region: content
     third_party_settings: {  }
   path:
     type: path
-    weight: 14
+    weight: 15
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 21
+    weight: 22
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -259,7 +271,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 17
+    weight: 18
     region: content
     third_party_settings: {  }
   title:
@@ -271,13 +283,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 16
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 12
+    weight: 13
     settings:
       match_operator: CONTAINS
       size: 60
@@ -287,12 +299,12 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 20
+    weight: 21
     region: content
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 18
+    weight: 19
     region: content
     settings: {  }
     third_party_settings: {  }
