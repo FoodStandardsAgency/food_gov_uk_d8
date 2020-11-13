@@ -300,9 +300,11 @@ function fsa_custom_preprocess_page_title(&$variables) {
       elseif ($nodetype == 'evidence' && $entity->field_evidence_type) {
         // Evidence display their type taxonomy label.
         $field = $entity->get('field_evidence_type')->entity;
-        $label = $field->hasTranslation($lang)
-          ? $field->getTranslation($lang)->label()
-          : $field->label();
+        if (isset($field)) {
+          $label = $field->hasTranslation($lang)
+            ? $field->getTranslation($lang)->label()
+            : $field->label();
+        }
       }
       else {
         // Rest are fine displaying their content type human readable name.
