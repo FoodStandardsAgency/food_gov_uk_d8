@@ -26,6 +26,7 @@ settings:
   label_display: '0'
   views_label: ''
   filters:
+    type: type
     topic: topic
     region: region
     keywords: 0
