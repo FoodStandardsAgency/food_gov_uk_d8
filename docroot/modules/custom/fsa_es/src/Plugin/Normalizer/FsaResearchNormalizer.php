@@ -92,6 +92,12 @@ class FsaResearchNormalizer extends NormalizerBase {
           'label' => $this->getTranslatedLabel($item),
         ];
       }, $object->get('field_nation')->referencedEntities()),
+      'evidence_type' => array_map(function ($item) {
+        return [
+          'id' => $item->id(),
+          'label' => $this->getTranslatedLabel($item),
+        ];
+      }, $object->get('field_evidence_type')->referencedEntities()),
       'created' => $entity_dates['created'],
       'updated' => $date_updated ? $date_updated : $entity_dates['changed'],
     ] + $parent_data;
