@@ -51,7 +51,7 @@ function drush_fsa_research_populate_evidence_type() {
 
     $term->save();
   }
-  
+
   // Instantiate our research queue.
   $queue = \Drupal::queue('fsa_research_evidence_type');
   $queue->createQueue();

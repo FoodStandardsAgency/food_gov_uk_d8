@@ -67,9 +67,6 @@ function fsa_preprocess_node(&$variables) {
         break;
 
       case 'research_project':
-        $tag = t('Research project');
-        break;
-
       case 'evidence':
         if ($node->hasField('field_evidence_type')) {
           $term = $node->get('field_evidence_type')->entity;
