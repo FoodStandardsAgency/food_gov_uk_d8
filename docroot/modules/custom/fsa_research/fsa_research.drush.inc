@@ -45,9 +45,13 @@ function drush_fsa_research_populate_evidence_type() {
     ];
     $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')
                                         ->create($values);
+    $term->addTranslation('cy', [
+      'name' => 'Prosiect ymchwil',
+    ]);
+
     $term->save();
   }
-
+  
   // Instantiate our research queue.
   $queue = \Drupal::queue('fsa_research_evidence_type');
   $queue->createQueue();
