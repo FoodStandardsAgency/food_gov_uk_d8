@@ -117,6 +117,10 @@ class RegionalVariationFormatter extends EntityReferenceFormatterBase {
               ]);
         }
       }
+
+      // Hardcoded welsh language edge cases.
+      $region = fsa_custom_welsh_exceptions_replace($region);
+
       $elements[$delta] = ['#markup' => $region];
       $elements[$delta]['#cache']['tags'] = $cachetags;
     }
