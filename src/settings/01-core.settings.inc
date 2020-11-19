@@ -91,6 +91,8 @@ $settings['config_readonly_whitelist_patterns'] = [
   'webform.webform.form_3',
   'webform.webform.form_4',
   'webform.webform.form_5',
+  'webform.webform.form_5',
+  'webform.webform.regulated_products_submit',
 ];
 
 /**
