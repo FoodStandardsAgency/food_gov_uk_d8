@@ -5,7 +5,7 @@ namespace Drupal\fsa_es\Plugin\ElasticsearchQueryBuilder;
 /**
  * @ElasticsearchQueryBuilder(
  *   id = "sitewide_search_research",
- *   label = @Translation("Global search: Research"),
+ *   label = @Translation("Global search: Research and Evidence"),
  *   description = @Translation("Provides query builder for site-wide guidance search.")
  * )
  */
@@ -30,7 +30,10 @@ class SitewideSearchResearch extends SitewideSearchBase {
     $query_filter_filters = [];
 
     $query = [
-      'index' => ['research-' . $this->currentLanguage->getId()],
+      'index' => [
+        'research-' . $this->currentLanguage->getId(),
+        'evidence-' . $this->currentLanguage->getId(),
+      ],
       'body' => [],
     ];
 
@@ -67,6 +70,14 @@ class SitewideSearchResearch extends SitewideSearchBase {
       ];
     }
 
+    if (!empty($values['evidence_type'])) {
+      $query_filter_filters[] = [
+        'terms' => [
+          'evidence_type.label.keyword' => array_filter(array_values($values['evidence_type'])),
+        ],
+      ];
+    }
+
     // Assign the text search filters to the query in the 'must' section.
     foreach ($query_must_filters as $filter) {
       $query['body']['query']['bool']['must'][] = $filter;
@@ -99,7 +110,10 @@ class SitewideSearchResearch extends SitewideSearchBase {
   public function getAggregations() {
     if (!is_array($this->aggregations)) {
       $query = [
-        'index' => ['research-' . $this->currentLanguage->getId()],
+        'index' => [
+          'research-' . $this->currentLanguage->getId(),
+          'evidence-' . $this->currentLanguage->getId(),
+        ],
         'size' => 0,
         'body' => [
           'aggs' => [
@@ -117,6 +131,13 @@ class SitewideSearchResearch extends SitewideSearchBase {
                 'size' => 10000,
               ],
             ],
+            'evidence_type' => [
+              'terms' => [
+                'field' => 'evidence_type.label.keyword',
+                'order' => ['_term' => 'asc'],
+                'size' => 10000,
+              ],
+            ],
           ],
         ],
       ];
@@ -128,6 +149,7 @@ class SitewideSearchResearch extends SitewideSearchBase {
       $this->aggregations = [
         'topics' => $result['aggregations']['topics']['buckets'],
         'nation' => $result['aggregations']['nation']['buckets'],
+        'evidence_type'   => $result['aggregations']['evidence_type']['buckets'],
       ];
     }
 
@@ -146,4 +168,15 @@ class SitewideSearchResearch extends SitewideSearchBase {
     return $this->aggsToOptions($aggregations['topics']);
   }
 
+  /**
+   * Returns a list of evidence types.
+   *
+   * @return array
+   *   Array of evidence types.
+   */
+  public function getEvidenceTypeFilterOptions() {
+    $aggregations = $this->getAggregations();
+
+    return $this->aggsToOptions($aggregations['evidence_type']);
+  }
 }

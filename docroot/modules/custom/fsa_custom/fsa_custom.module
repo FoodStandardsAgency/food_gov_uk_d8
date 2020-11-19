@@ -260,6 +260,9 @@ function fsa_custom_preprocess_page_title(&$variables) {
             break;
         }
 
+        // Hardcoded welsh language edge cases.
+        $nation_label = fsa_custom_welsh_exceptions_replace($nation_label);
+
         if ($nation_label != '') {
           $title_prefix[] = [
             '#theme' => 'fsa_label',
@@ -279,6 +282,7 @@ function fsa_custom_preprocess_page_title(&$variables) {
       'alert',
       'consultation',
       'research_project',
+      'evidence',
     ];
 
     if (in_array($nodetype, $content_type_label)) {
@@ -295,6 +299,15 @@ function fsa_custom_preprocess_page_title(&$variables) {
         $label = $field->hasTranslation($lang)
           ? $field->getTranslation($lang)->label()
           : $field->label();
+      }
+      elseif (($nodetype == 'evidence' || $nodetype == 'research_project') && $entity->field_evidence_type) {
+        // Evidence display their type taxonomy label.
+        $field = $entity->get('field_evidence_type')->entity;
+        if (isset($field)) {
+          $label = $field->hasTranslation($lang)
+            ? $field->getTranslation($lang)->label()
+            : $field->label();
+        }
       }
       else {
         // Rest are fine displaying their content type human readable name.
@@ -962,4 +975,26 @@ function fsa_custom_mail_alter(&$message) {
       $message['body'][$index] = str_replace('http://', 'https://', $body);
     }
   }
+}
+
+/**
+ * Custom welsh language exceptions.
+ */
+function fsa_custom_welsh_exceptions_replace($phrase) {
+  // Hardcoded welsh language edge cases.
+  switch ($phrase) {
+    case 'Penodol i Cymru':
+      $phrase = 'Penodol i Gymru';
+      break;
+
+    case 'Lloegr a Cymru':
+      $phrase = 'Cymru a Lloegr';
+      break;
+
+    case 'Penodol i Canllawiau Gogledd a Cymru':
+      $phrase = 'Penodol i Gymru a Gogledd Iwerddon';
+      break;
+  }
+
+  return $phrase;
 }

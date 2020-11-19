@@ -20,6 +20,8 @@ display:
       fields:
         thumbnail__target_id:
           label: 'Disgrifiad Cryno'
+        bundle:
+          label: Math
         uid:
           label: Awdur
         status:
@@ -29,6 +31,9 @@ display:
         operations:
           label: Gweithrediad
       filters:
+        bundle:
+          expose:
+            label: Math
         status:
           expose:
             label: Gwir

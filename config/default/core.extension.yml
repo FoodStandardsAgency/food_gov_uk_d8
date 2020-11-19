@@ -30,7 +30,6 @@ module:
   datalayer: 0
   datetime: 0
   datetime_range: 0
-  dblog: 0
   diff: 0
   editor: 0
   elasticsearch_helper: 0

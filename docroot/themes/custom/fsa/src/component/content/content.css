@@ -269,6 +269,10 @@ a {
   span.mailto {
     display: none;
   }
+  
+  svg.ext {
+    display: none;
+  }
 
   svg.ext {
     display: none;

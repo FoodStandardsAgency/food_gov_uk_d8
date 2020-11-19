@@ -194,7 +194,7 @@ The quickest way to do this is to disable TFA **/admin/config/people/tfa**.*
 
 ## CAB release statement.
 
-In order to get approval for a release you will need to provide the following on the Jirs ticket for the release:
+In order to get approval for a release you will need to provide the following on the Jira ticket for the release:
 
 ### Justification.
 

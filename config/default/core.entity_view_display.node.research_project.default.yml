@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.research_project.field_content_reminder
     - field.field.node.research_project.field_date_range
     - field.field.node.research_project.field_document
+    - field.field.node.research_project.field_evidence_type
     - field.field.node.research_project.field_fsa_toc
     - field.field.node.research_project.field_intro
     - field.field.node.research_project.field_nation
@@ -137,6 +138,7 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_content_reminder: true
+  field_evidence_type: true
   field_fsa_toc: true
   field_intro: true
   field_nation: true

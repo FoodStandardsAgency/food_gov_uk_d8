@@ -39,7 +39,7 @@ function fsa_preprocess_page(&$variables) {
         $url = file_create_url($uri);
       }
 
-      $variables['hero_image_url'] = $url;
+      $variables['hero_image_url'] = preg_replace('~http:~', 'https:', $url);
     }
   }
 }

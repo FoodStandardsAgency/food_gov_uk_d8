@@ -216,6 +216,51 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           plugin_id: fsa_keyword
+        evidence_type:
+          id: evidence_type
+          table: elasticsearch_result
+          field: evidence_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: evidence_type_op
+            label: Type
+            description: ''
+            use_operator: false
+            operator: evidence_type_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: type
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              author: '0'
+              editor: '0'
+              advanced_editor: '0'
+              fsa_admin: '0'
+              administrator: '0'
+            reduce: 0
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: fsa_evidence_type
         research_topic:
           id: research_topic
           table: elasticsearch_result
@@ -305,7 +350,7 @@ display:
             group_items: {  }
           plugin_id: fsa_nation
       sorts: {  }
-      title: Research
+      title: 'Research and Evidence'
       header:
         result:
           id: result
@@ -367,7 +412,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: search/research
+      path: search/research-evidence
       exposed_block: true
     cache_metadata:
       max-age: -1

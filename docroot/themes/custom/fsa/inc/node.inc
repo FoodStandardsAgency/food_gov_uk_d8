@@ -41,6 +41,7 @@ function fsa_preprocess_node(&$variables) {
         if (is_numeric($tid) && $term = Term::load($tid)) {
           $tag = $term->label();
         }
+
         break;
 
       case 'alert':
@@ -66,7 +67,15 @@ function fsa_preprocess_node(&$variables) {
         break;
 
       case 'research_project':
-        $tag = t('Research project');
+      case 'evidence':
+        if ($node->hasField('field_evidence_type')) {
+          $term = $node->get('field_evidence_type')->entity;
+          if (isset($term)) {
+            $tag = $term->hasTranslation($lang)
+              ? $term->getTranslation($lang)->label()
+              : $term->label();
+          }
+        }
         break;
 
     }

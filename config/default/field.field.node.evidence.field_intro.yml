@@ -1,0 +1,19 @@
+uuid: c5d73000-f7f6-4155-87e9-bd18a39b092b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_intro
+    - node.type.evidence
+id: node.evidence.field_intro
+field_name: field_intro
+entity_type: node
+bundle: evidence
+label: Intro
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

@@ -6,6 +6,7 @@
  */
 
 // Shield config.
+$config['shield.settings']['credential_provider'] = 'shield';
 $config['shield.settings']['credentials']['shield']['user'] = getenv('HTTP_AUTH_USER');
 $config['shield.settings']['credentials']['shield']['pass'] = getenv('HTTP_AUTH_PWD');
 
@@ -13,5 +14,5 @@ if (SETTINGS_ENVIRONMENT === D_ENVIRONMENT_PROD) {
   $config['shield.settings']['credentials']['shield']['user'] = NULL;
 }
 elseif (SETTINGS_ENVIRONMENT === D_ENVIRONMENT_LOCAL) {
-  $config['shield.settings']['credentials']['shield']['user'] = NULL;
+//  $config['shield.settings']['credentials']['shield']['user'] = NULL;
 }

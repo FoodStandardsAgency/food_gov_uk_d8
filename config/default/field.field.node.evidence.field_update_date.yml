@@ -1,0 +1,21 @@
+uuid: 3c6022b0-8330-4b0b-88a9-f505d94fb399
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_update_date
+    - node.type.evidence
+  module:
+    - datetime
+id: node.evidence.field_update_date
+field_name: field_update_date
+entity_type: node
+bundle: evidence
+label: 'Last updated'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime
