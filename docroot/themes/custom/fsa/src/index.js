@@ -68,6 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Hide search facets for empty result sets.
   hideSearchFiltersEmptyResults()
 
+  // Toggle desktop sidebar overflow for long Topics search filters.
+  toggleTopicFilterOverflow()
+
   // Add the toggle to the document menu.
   toggleSidebarDocumentMenu();
 })
