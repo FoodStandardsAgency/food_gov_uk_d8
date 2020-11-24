@@ -1,6 +1,6 @@
 uuid: 418e7a5d-603d-4ba7-9a6f-d285256e4ddf
 langcode: en
-status: open
+status: closed
 dependencies: {  }
 open: null
 close: null
@@ -143,7 +143,6 @@ settings:
 access:
   create:
     roles:
-      - anonymous
       - authenticated
     users: {  }
     permissions: {  }
