@@ -27,6 +27,6 @@ ignored_config_entities:
   - webform.webform.form_3
   - webform.webform.form_4
   - webform.webform.form_5
-  - webform.regulated_products_submit
+  - webform.webform.regulated_products_submit
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
