@@ -5,14 +5,14 @@ dependencies: {  }
 open: null
 close: null
 weight: 0
-uid: 31736
+uid: 1
 template: false
 archive: false
 id: regulated_products_submit
 title: 'Regulated products'
 description: 'Submissions for regulated products.'
 category: ''
-elements: "markup:\n  '#type': webform_markup\n  '#markup': \"<h2>Contact details</h2>\\r\\n\\r\\n<p>Enter the contact details for the person or organisation who is the main point of contact for this application.</p>\"\nreg_products_first_name:\n  '#type': textfield\n  '#title': 'First name'\n  '#required': true\nreg_products_last_name:\n  '#type': textfield\n  '#title': 'Last name'\n  '#required': true\nreg_products_emails_confirm:\n  '#type': webform_email_confirm\n  '#title': 'Email address'\n  '#description': 'We&#39;ll only use this to contact you about your application.'\n  '#required': true\n  '#confirm__title': 'Confirm email address'\nmarkup_01:\n  '#type': webform_markup\n  '#markup': \"<h2>Product details</h2>\\r\\n\\r\\n<p>Tell us a little bit more about the product or process you are submitting.</p>\"\nreg_products_organisation_name:\n  '#type': textfield\n  '#title': Manufacturer\n  '#required': true\nreg_products_product_type:\n  '#type': select\n  '#title': 'Product type'\n  '#options':\n    'Extraction solvents': 'Extraction solvents'\n    'Feed additives': 'Feed additives'\n    'Feed for particular nutritional uses (PARNUTS)': 'Feed for particular nutritional uses (PARNUTS)'\n    'Feed (detoxification processes)': 'Feed (detoxification processes)'\n    Flavourings: Flavourings\n    'Food contact materials (active/intelligent materials)': 'Food contact materials (active/intelligent materials)'\n    'Food contact materials (plastic additives)': 'Food contact materials (plastic additives)'\n    'Food contact materials (recycled processes)': 'Food contact materials (recycled processes)'\n    'Food additives': 'Food additives'\n    'Food enzymes': 'Food enzymes'\n    'Genetically modified organisms as food and feed': 'Genetically modified organisms as food and feed'\n    'Irradiated food': 'Irradiated food'\n    'Novel foods (full application)': 'Novel foods (full application)'\n    'Novel foods (traditional food notification)': 'Novel foods (traditional food notification)'\n    'Smoke flavourings': 'Smoke flavourings'\n    Other: Other\n  '#empty_option': select\n  '#empty_value': select\n  '#required': true\nreg_products_product_name:\n  '#type': textfield\n  '#title': 'Product for authorisation'\n  '#description': '<p>This can be an internal name you are using or the final product name.</p>'\n  '#required': true\nreg_products_product_summary:\n  '#type': textarea\n  '#title': 'Product summary'\n  '#description': '<p>Tell us a bit more about the product or process you are requesting authorisation for.</p>'\n  '#required': true\ncaptcha:\n  '#type': captcha"
+elements: "markup:\n  '#type': webform_markup\n  '#markup': |\n    <p><span style=\"font-size:12pt\"><span style=\"background:white\"><span style=\"line-height:normal\"><span style=\"font-family:Arial,sans-serif\"><span style=\"color:black\"><span style=\"letter-spacing:.2pt\">Use this service to apply for an authorisation of a food or feed product requiring approval before it can be placed on the market. </span></span></span></span></span></span></p>\n    \n    <h2><span style=\"font-size:12pt\"><span style=\"background:white\"><span style=\"line-height:normal\"><span style=\"font-family:Arial,sans-serif\"><strong><span style=\"font-size:14.0pt\"><span style=\"color:black\"><span style=\"letter-spacing:.2pt\">Before you start</span></span></span></strong></span></span></span></span></h2>\n    \n    <p><span style=\"font-size:12pt\"><span style=\"background:white\"><span style=\"line-height:normal\"><span style=\"font-family:Arial,sans-serif\"><span style=\"color:black\"><span style=\"letter-spacing:.2pt\">Read our </span></span><span style=\"color:black\"><a href=\"https://www.food.gov.uk/business-guidance/submitting-a-regulated-product-authorisation-application-from-1-january-2021\" style=\"color:blue; text-decoration:underline\"><span style=\"letter-spacing:.2pt\">advice on the authorisation process</span></a></span><span style=\"color:black\"><span style=\"letter-spacing:.2pt\">, including what types of products need to be approved, and the </span></span><span style=\"color:black\"><a href=\"https://www.food.gov.uk/business-guidance/requirements-for-regulated-product-applications-from-1-january-2021\" style=\"color:blue; text-decoration:underline\"><span style=\"letter-spacing:.2pt\">guidance on the application requirements</span></a></span><span style=\"color:black\"><span style=\"letter-spacing:.2pt\">.</span></span></span></span></span></span><br />\n    <br />\n    <span style=\"font-size:12pt\"><span style=\"background:white\"><span style=\"line-height:normal\"><span style=\"font-family:Arial,sans-serif\"><span style=\"color:black\"><span style=\"letter-spacing:.2pt\">If you have any questions on the process or the requirements, you can contact us at </span></span><span style=\"color:black\"><a href=\"mailto:regulatedproducts@food.gov.uk\" style=\"color:blue; text-decoration:underline\"><span style=\"letter-spacing:.2pt\">regulatedproducts@food.gov.uk</span></a></span> </span></span></span></span></p>\n    \n    <h2><span style=\"font-size:12pt\"><span style=\"background:white\"><span style=\"line-height:normal\"><span style=\"font-family:Arial,sans-serif\"><strong><span style=\"font-size:14.0pt\"><span style=\"color:black\"><span style=\"letter-spacing:.2pt\">Application form</span></span></span></strong></span></span></span></span></h2>\n    \n    <p><span style=\"font-size:12pt\"><span style=\"background:white\"><span style=\"line-height:normal\"><span style=\"font-family:Arial,sans-serif\"><span style=\"color:black\"><span style=\"letter-spacing:.2pt\">Submit the form to receive your application number and a secure link where you can upload your supporting documents.</span></span></span></span></span></span><br />\n    &nbsp;</p>\n    \nmarkup_02:\n  '#type': webform_markup\n  '#markup': |\n    <h3>Contact details</h3>\n    \n    <p><span style=\"font-size:12pt\"><span style=\"background:white\"><span style=\"line-height:normal\"><span style=\"font-family:Arial,sans-serif\"><span style=\"color:black\"><span style=\"letter-spacing:.2pt\">Enter the contact details for the person who is the main point of contact for this application.</span></span></span></span></span></span></p>\n    \nreg_products_first_name:\n  '#type': textfield\n  '#title': 'First name'\n  '#required': true\nreg_products_last_name:\n  '#type': textfield\n  '#title': 'Last name'\n  '#required': true\nreg_products_emails_confirm:\n  '#type': webform_email_confirm\n  '#title': 'Email address'\n  '#description': 'We&#39;ll only use this to contact you about your application.'\n  '#required': true\n  '#confirm__title': 'Confirm email address'\nmarkup_01:\n  '#type': webform_markup\n  '#markup': |\n    <h3>Product details</h3>\n    \n    <p><span style=\"font-size:12pt\"><span style=\"background:white\"><span style=\"line-height:normal\"><span style=\"font-family:Arial,sans-serif\"><span style=\"color:black\"><span style=\"letter-spacing:.2pt\">Tell us about the product or process you are requesting authorisation for</span></span></span></span></span></span></p>\n    \nreg_products_organisation_name:\n  '#type': textfield\n  '#title': 'Product owner'\n  '#required': true\nreg_products_product_type:\n  '#type': select\n  '#title': 'Product type'\n  '#options':\n    'Extraction solvents': 'Extraction solvents'\n    'Feed additives': 'Feed additives'\n    'Feed for particular nutritional uses (PARNUTS)': 'Feed for particular nutritional uses (PARNUTS)'\n    'Feed (detoxification processes)': 'Feed (detoxification processes)'\n    Flavourings: Flavourings\n    'Food contact materials (active/intelligent materials)': 'Food contact materials (active/intelligent materials)'\n    'Food contact materials (plastic additives)': 'Food contact materials (plastic additives)'\n    'Food contact materials (recycled processes)': 'Food contact materials (recycled processes)'\n    'Food additives': 'Food additives'\n    'Food enzymes': 'Food enzymes'\n    'Genetically modified organisms as food and feed': 'Genetically modified organisms as food and feed'\n    'Irradiated food': 'Irradiated food'\n    'Novel foods (full application)': 'Novel foods (full application)'\n    'Novel foods (traditional food notification)': 'Novel foods (traditional food notification)'\n    'Smoke flavourings': 'Smoke flavourings'\n    Other: Other\n  '#empty_option': select\n  '#empty_value': select\n  '#required': true\n  '#attributes':\n    style: 'width:100%'\nreg_products_product_name:\n  '#type': textfield\n  '#title': 'Name of the product'\n  '#description': '<p>This can be an internal name you are using or the final product name.</p>'\n  '#required': true\nreg_products_product_summary:\n  '#type': textarea\n  '#title': 'Product summary'\n  '#description': '<p>Tell us a bit more about the product or process you are requesting authorisation for.</p>'\n  '#maxlength': 500\n  '#required': true\n  '#counter_type': character\n  '#counter_maximum': 500\neu_subm:\n  '#type': select\n  '#title': 'Have you previously submitted this application for approval in the European Union?'\n  '#options':\n    'Yes': 'Yes'\n    'No': 'No'\n  '#empty_option': Select\n  '#empty_value': select\n  '#required': true\n  '#attributes':\n    style: 'width:100%'\nefsa_number:\n  '#type': textfield\n  '#title': 'Please supply the EFSA Question number that applies to this application'\n  '#required': true\n  '#states':\n    visible:\n      ':input[name=\"eu_subm\"]':\n        value: 'Yes'\n  '#attributes':\n    style: 'width:100%'\nmarkup_03:\n  '#type': webform_markup\n  '#markup': 'Privacy notice [link]'\ncaptcha:\n  '#type': captcha\nlang:\n  '#type': textfield\n  '#title': lang\n  '#default_value': '[webform_submission:language]'\n  '#wrapper_attributes':\n    style: 'display:none;'"
 css: ''
 javascript: ''
 settings:
@@ -21,7 +21,7 @@ settings:
   page: true
   page_submit_path: apply-for-regulated-product-authorisation
   page_confirm_path: apply-for-regulated-product-authorisation/thanks
-  form_title: both
+  form_title: source_entity_webform
   form_submit_once: true
   form_exception_message: ''
   form_open_message: ''
@@ -94,7 +94,7 @@ settings:
   draft_loaded_message: ''
   confirmation_type: page
   confirmation_title: 'Thanks for submitting your application'
-  confirmation_message: "<h2>What happens next</h2>\r\n\r\n<p>We&#39;ll email you with your application number as well as a secure link where you can upload your supporting documents.</p>\r\n\r\n<p>Make sure you upload your documents as soon as possible so we can start processing your application.</p>"
+  confirmation_message: "<h2>What happens next</h2>\r\n\r\n<p><span style=\"font-size:12pt\"><span style=\"background:white\"><span style=\"line-height:normal\"><span style=\"font-family:Arial,sans-serif\"><span style=\"color:black\"><span style=\"letter-spacing:.2pt\">We will email you with your application number and a secure link where you can upload your supporting documents. </span></span></span></span></span></span><br />\r\n<br />\r\n<span style=\"font-size:12pt\"><span style=\"background:white\"><span style=\"line-height:normal\"><span style=\"font-family:Arial,sans-serif\"><span style=\"color:black\"><span style=\"letter-spacing:.2pt\">Upload your documents as soon as possible so we can start processing your application. Once you receive your secure link it will expire in 7 days.</span></span></span></span></span></span></p>"
   confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: false
@@ -114,11 +114,32 @@ settings:
   entity_limit_total_interval: null
   entity_limit_user: null
   entity_limit_user_interval: null
-  purge: none
-  purge_days: null
+  purge: all
+  purge_days: 28
   results_disabled: false
   results_disabled_ignore: false
   token_update: false
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page_theme_name: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  wizard_progress_states: false
+  wizard_auto_forward: true
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: true
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_update: false
+  results_customize: false
+  token_view: false
 access:
   create:
     roles:
@@ -201,6 +222,8 @@ handlers:
       sender_mail: ''
       sender_name: ''
       theme_name: ''
+      exclude_attachments: false
+      parameters: {  }
   email_1:
     id: email
     label: Email
@@ -221,7 +244,7 @@ handlers:
       from_options: {  }
       from_name: _default
       subject: _default
-      body: '&lt;FirstName&gt;[webform_submission:values:reg_products_first_name:raw]&lt;FirstName&gt;&lt;LastName&gt;[webform_submission:values:reg_products_last_name:raw]&lt;LastName&gt;&lt;Email&gt;[webform_submission:values:reg_products_emails_confirm:raw]&lt;Email&gt;&lt;ProductType&gt;[webform_submission:values:reg_products_product_type:raw]&lt;ProductType&gt;&lt;ProductName&gt;[webform_submission:values:reg_products_product_name:raw]&lt;ProductName&gt;&lt;SummaryText&gt;[webform_submission:values:reg_products_product_summary:raw]&lt;SummaryText&gt;&lt;OrganisationName&gt;[webform_submission:values:reg_products_organisation_name:raw]&lt;OrganisationName&gt;'
+      body: '&lt;FirstName&gt;[webform_submission:values:reg_products_first_name:raw]&lt;FirstName&gt;&lt;LastName&gt;[webform_submission:values:reg_products_last_name:raw]&lt;LastName&gt;&lt;Email&gt;[webform_submission:values:reg_products_emails_confirm:raw]&lt;Email&gt;&lt;ProductType&gt;[webform_submission:values:reg_products_product_type:raw]&lt;ProductType&gt;&lt;ProductName&gt;[webform_submission:values:reg_products_product_name:raw]&lt;ProductName&gt;&lt;SummaryText&gt;[webform_submission:values:reg_products_product_summary:raw]&lt;SummaryText&gt;&lt;OrganisationName&gt;[webform_submission:values:reg_products_organisation_name:raw]&lt;OrganisationName&gt;&lt;Lang&gt;[webform_submission:values:lang:raw]&lt;Lang&gt;&lt;EUreg&gt;[webform_submission:values:eu_subm:raw]&lt;EUreg&gt;&lt;EFSAno&gt;[webform_submission:values:efsa_number:raw]&lt;EFSAno&gt;'
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
@@ -235,3 +258,6 @@ handlers:
       sender_mail: ''
       sender_name: ''
       theme_name: ''
+      exclude_attachments: false
+      parameters: {  }
+variants: {  }
