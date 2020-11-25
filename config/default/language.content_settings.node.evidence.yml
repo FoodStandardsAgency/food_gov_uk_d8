@@ -1,0 +1,16 @@
+uuid: cb99d837-7112-4b8d-af5b-fc0101b36760
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.evidence
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: node.evidence
+target_entity_type_id: node
+target_bundle: evidence
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,24 @@
+uuid: 045239bc-2eeb-4214-b6b1-f8d37013f406
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content_reminder
+    - node.type.evidence
+  module:
+    - datetime
+id: node.evidence.field_content_reminder
+field_name: field_content_reminder
+entity_type: node
+bundle: evidence
+label: 'Content reminder'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    default_date_type: relative
+    default_date: '+1 year'
+default_value_callback: ''
+settings: {  }
+field_type: datetime

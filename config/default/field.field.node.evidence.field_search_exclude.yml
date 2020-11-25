@@ -1,0 +1,23 @@
+uuid: 8b19882a-15fd-42a3-9c9b-795b198a84af
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_search_exclude
+    - node.type.evidence
+id: node.evidence.field_search_exclude
+field_name: field_search_exclude
+entity_type: node
+bundle: evidence
+label: 'Exclude from search'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

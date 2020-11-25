@@ -38,5 +38,29 @@ function hideSearchFiltersEmptyResults () {
   mainContent.classList.remove('layout--with-sidebar');
 }
 
+/**
+ * Toggles scrollable sidebar on desktop for Research and Evidence search's
+ * large amount of Topic filters.
+ */
+function toggleTopicFilterOverflow () {
+  // Check if desktop size (ie. not 'xs' or 's')
+  if (checkMediaQuery().includes('s')) return
+
+  const topicLegend = document.querySelector('#edit-topic--2--wrapper legend');
+
+  topicLegend.addEventListener('click', function (e) {
+    const aside = document.querySelector('aside.layout__sidebar.js-sticky-element');
+
+    if (topicLegend.classList.contains('is-open')) {
+      console.log(topicLegend.classList);
+      aside.style.overflow = 'auto';
+    }
+    else {
+      aside.style.overflow = 'hidden';
+    }
+  });
+}
+
 module.exports = autoOpenFirstSearchFilter
 module.exports = hideSearchFiltersEmptyResults
+module.exports = toggleTopicFilterOverflow

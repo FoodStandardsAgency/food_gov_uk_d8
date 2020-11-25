@@ -279,6 +279,7 @@ function fsa_custom_preprocess_page_title(&$variables) {
       'alert',
       'consultation',
       'research_project',
+      'evidence',
     ];
 
     if (in_array($nodetype, $content_type_label)) {
@@ -295,6 +296,15 @@ function fsa_custom_preprocess_page_title(&$variables) {
         $label = $field->hasTranslation($lang)
           ? $field->getTranslation($lang)->label()
           : $field->label();
+      }
+      elseif (($nodetype == 'evidence' || $nodetype == 'research_project') && $entity->field_evidence_type) {
+        // Evidence display their type taxonomy label.
+        $field = $entity->get('field_evidence_type')->entity;
+        if (isset($field)) {
+          $label = $field->hasTranslation($lang)
+            ? $field->getTranslation($lang)->label()
+            : $field->label();
+        }
       }
       else {
         // Rest are fine displaying their content type human readable name.

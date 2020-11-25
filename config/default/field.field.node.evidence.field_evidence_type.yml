@@ -1,0 +1,29 @@
+uuid: 6552ddc8-3efb-4e1b-9b7c-94e0a90fc90c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_evidence_type
+    - node.type.evidence
+    - taxonomy.vocabulary.evidence_type
+id: node.evidence.field_evidence_type
+field_name: field_evidence_type
+entity_type: node
+bundle: evidence
+label: 'Research and evidence type'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      evidence_type: evidence_type
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

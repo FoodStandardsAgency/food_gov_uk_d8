@@ -36,7 +36,7 @@ class FsaResearchIndex extends FsaIndexBase {
 
         $mapping = [
           'index' => $index_name,
-          'type' => 'news',
+          'type' => 'research',
           'body' => [
             'properties' => [
               'id' => [
@@ -64,6 +64,20 @@ class FsaResearchIndex extends FsaIndexBase {
                 'analyzer' => $text_analyzer,
               ],
               'topics' => [
+                'properties' => [
+                  'id' => ['type' => 'keyword'],
+                  'label' => [
+                    'type' => 'text',
+                    'index' => FALSE,
+                    'fields' => [
+                      'keyword' => [
+                        'type' => 'keyword',
+                      ],
+                    ],
+                  ],
+                ],
+              ],
+              'evidence_type' => [
                 'properties' => [
                   'id' => ['type' => 'keyword'],
                   'label' => [
