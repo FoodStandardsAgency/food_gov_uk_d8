@@ -61,3 +61,10 @@ fsa-addtoany-accesibility:
   dependencies:
     - core/drupal
     - core/jquery.once
+fsa-webform:
+  version: 1.x
+  js:
+    js/fsa-webform.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery.once
