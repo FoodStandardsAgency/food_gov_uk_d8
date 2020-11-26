@@ -1,13 +1,17 @@
-.form-item--error, fieldset.error{
+.form-item--error,
+fieldset.error {
   border-left: solid 5px #e60f31;
   padding-left: 1em !important;
 }
 
-.form-item--error label, fieldset.error > legend{
+.form-item--error label,
+fieldset.error > legend {
   color: #e60f31;
 }
 
-.form-item--error .error, fieldset.error .js-webform-radios {
+.form-item--error .error,
+fieldset.error .js-webform-radios,
+.form-email.error {
   box-shadow: none;
   border: solid 4px #e60f31;
 }
@@ -31,7 +35,8 @@ fieldset.error .js-webform-radios {
   outline: 0;
 }
 
-.error-summary::after, .error-summary::before{
+.error-summary::after,
+.error-summary::before {
   display: none;
 }
 
