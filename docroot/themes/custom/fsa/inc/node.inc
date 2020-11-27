@@ -78,15 +78,6 @@ function fsa_preprocess_node(&$variables) {
         }
         break;
 
-      case 'evidence':
-        if ($node->hasField('field_evidence_type')) {
-          $term = $node->get('field_evidence_type')->entity;
-          $tag = $term->hasTranslation($lang)
-            ? $term->getTranslation($lang)->label()
-            : $term->label();
-        }
-        break;
-
     }
     $variables['tag'] = $tag;
   }
