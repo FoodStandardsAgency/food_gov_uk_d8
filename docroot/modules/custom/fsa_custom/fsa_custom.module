@@ -70,6 +70,9 @@ function fsa_custom_preprocess_page(&$variables) {
   // Hack heading levels.
   $variables['#attached']['library'][] = 'fsa_custom/fsa-headingFix';
 
+  // Webform removing aria-describedby on confirm email.
+  $variables['#attached']['library'][] = 'fsa_custom/fsa-webform';
+
   // Hardcoded "utility menu" links.
   // Get the contact link from settings. Default to 58 which happened to be the
   // first version contact lander.
