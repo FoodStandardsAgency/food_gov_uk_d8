@@ -114,7 +114,7 @@ function fsa_preprocess_html(&$variables) {
     $variables['attributes']['class'][] = 'theme--subscribe';
   }
 
-  if ($routename === 'entity.webform.canonical') {
+  if ($routename === 'entity.webform.canonical' || $routename === 'entity.webform.confirmation') {
     $variables['attributes']['class'][] = 'theme--webform';
   }
 }
