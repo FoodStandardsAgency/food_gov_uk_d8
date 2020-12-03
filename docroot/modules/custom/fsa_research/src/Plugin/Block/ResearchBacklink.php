@@ -35,7 +35,7 @@ class ResearchBacklink extends BlockBase {
     if (is_object($node) && in_array($node->getType(), self::CONTENT_TYPES_TO_ENABLE)) {
       // Link research nodes back to search.
       // @todo: Get path from route.
-      $path = '/search/research-evidence';
+      $path = '/search/research-projects';
       $text = $this->t('Back to search');
     }
     else {
