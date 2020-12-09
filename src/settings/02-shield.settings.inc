@@ -6,6 +6,7 @@
  */
 
 // Shield config.
+$config['shield.settings']['credential_provider'] = 'shield';
 $config['shield.settings']['credentials']['shield']['user'] = getenv('HTTP_AUTH_USER');
 $config['shield.settings']['credentials']['shield']['pass'] = getenv('HTTP_AUTH_PWD');
 

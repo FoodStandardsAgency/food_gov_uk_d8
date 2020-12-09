@@ -41,8 +41,8 @@
         "drupal/console": "~1.0",
         "drupal/content_moderation_notifications": "^3.0@RC",
         "drupal/cookieconsent": "1.4.0",
-        "drupal/core-composer-scaffold": "8.9.9",
-        "drupal/core-recommended": "8.9.9",
+        "drupal/core-composer-scaffold": "8.9.10",
+        "drupal/core-recommended": "8.9.10",
         "drupal/crop": "2.0",
         "drupal/datalayer": "^1.0@beta",
         "drupal/devel": "^1.2",
@@ -168,7 +168,10 @@
               "Fix an error in compatibility with latest core" : "https://www.drupal.org/files/issues/2018-10-25/term_reference_tree-taxonomy_term_hierarchy_table_error-2996263-20.patch"
             },
             "drupal/honeypot": {
-                "Add label to honeypot fields" : "./src/patches/honeypot.patch"
+              "Add label to honeypot fields" : "./src/patches/honeypot.patch"
+            },
+            "drupal/webform": {
+              "Form elements keys (machine name) to be in all cases not just lowercase - based on drupal.org/node/3066994": "./src/patches/webform-uppercase.patch"
             },
             "drupal/field_validation": {
                 "Declaration of (...)FieldValidationRuleAddForm::buildForm must be compatible with (...)FieldValidationRuleFormBase::buildForm" : "https://www.drupal.org/files/issues/2941006-php-incompatible-buildform-signature.patch"
