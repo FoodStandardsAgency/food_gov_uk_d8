@@ -6,7 +6,7 @@ pipelines:
     master:
       - step:
           name: Build Drupal
-          image: deeson/drupal-php:1.0
+          image: wodby/drupal-php:7.2-dev
           caches:
             - drush
           script:
