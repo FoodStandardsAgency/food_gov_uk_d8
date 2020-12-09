@@ -1,5 +1,5 @@
 .back-to-top {
-  color: var(--color-dark-teal);
+  color: var(--primary-color);
   background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAhCAIAAAC5nnd6AAAACXBIWXMAABYlAAAWJQFJUiTwAAAA4klEQVRIx2P4jxsceXhfoqPp1ZcveNQwMeAARx89sJk97cWXz3pT+l5//YpLGRMezRA2fiOY8GsmaAQTQc34jWAiRjMeI5hwaT6SmgVnNzq54TKCCZdmazkFODfO0BhuHJoRTAQ1Q4C1nAJWVzARoxkC6hxdMI1gmnryGDGasRqRv20jE/GaMY1gYGBgyTa38lHX1BWX1BWXYCAO1Dm6qAgLzz93JkbfiPH///+41DHWlkEY94srFQQESUj/xINR/aP6R/WP6scGJHh4IQxuVjacivDU7a++fJHoaDry8D4eNQCDhwVPtvbizgAAAABJRU5ErkJggg==");
   background-position: left 0 top 50%;
   background-size: 0.6em auto;
