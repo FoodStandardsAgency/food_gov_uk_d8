@@ -194,5 +194,10 @@
                 "web-root": "docroot/"
             }
         }
+    },
+    "scripts": {
+      "post-drupal-scaffold-cmd": [
+        "patch -p0 < ./src/patches/cache_ttl.patch"
+      ]
     }
 }
