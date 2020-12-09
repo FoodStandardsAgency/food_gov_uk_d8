@@ -20,13 +20,13 @@ function addHeading () {
       heading.innerHTML = hasDrupal ? Drupal.t(`England`) : 'England';
     } else if (element.classList.contains('js-england-wales')) {
       heading.classList.add(`heading--small`);
-      heading.innerHTML = hasDrupal ? Drupal.t(`England and Wales`) : 'England and Wales';
+      heading.innerHTML = hasDrupal ? Drupal.t(`England and wales`) : 'England and Wales';
     } else if (element.classList.contains('js-england-northern-ireland')) {
       heading.classList.add(`heading--small`);
       heading.innerHTML = hasDrupal ? Drupal.t(`England and Northern Ireland`) : 'England and Northern Ireland';
     } else if (element.classList.contains('js-northern-ireland-wales')) {
       heading.classList.add(`heading--small`);
-      heading.innerHTML = hasDrupal ? Drupal.t('Northern Ireland and Wales') : 'Northern Ireland and wales';
+      heading.innerHTML = hasDrupal ? Drupal.t('Northern Ireland and wales') : 'Northern Ireland and wales';
     } else if (element.classList.contains('js-wales')) {
       heading.classList.add(`heading--small`);
       heading.innerHTML = hasDrupal ? Drupal.t(`Wales`) : 'Wales';
