@@ -8,6 +8,10 @@ index 46b09e28..6f9123d1 100644
    # Cache all files for 2 weeks after access (A).
 -  ExpiresDefault A1209600
 +  ExpiresDefault A300
++  <FilesMatch "\.(csv|xml|pdf|docx|doc|xls|xlsx|ppt|pptx)$">
++    Header set Cache-Control "max-age=3600, public"
++  </FilesMatch>
+
  
    <FilesMatch \.php$>
      # Do not allow PHP scripts to be cached unless they explicitly send cache
