@@ -47,6 +47,9 @@ function toggleTopicFilterOverflow () {
   if (checkMediaQuery().includes('s')) return
 
   const topicLegend = document.querySelector('#edit-topic--2--wrapper legend');
+  if (!topicLegend) {
+    return;
+  }
 
   topicLegend.addEventListener('click', function (e) {
     const aside = document.querySelector('aside.layout__sidebar.js-sticky-element');

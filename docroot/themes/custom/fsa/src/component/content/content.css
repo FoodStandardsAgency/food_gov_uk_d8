@@ -255,6 +255,26 @@ a {
     }
   }
 
+  &.buttonStyle { 
+    display: inline-block;
+    font-family: var(--font-family-content);
+    letter-spacing: 0.02em;
+    background-color: var(--dark-primary-color);
+    color: var(--color-white);
+    border: 0;
+    border-radius: 2em;
+    padding: 0.6em 2.5em;
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    text-decoration: none !important;
+    transition: background-color var(--transition-enter-fast);
+
+    :--not-touch &:--enter {
+      text-decoration: none;
+      background-color: var(--darker-primary-color);
+    }
+  }
+
   /* External link */
   &.ext {
     background-image: var(--icon-external-link-white);
