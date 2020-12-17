@@ -47,19 +47,18 @@ function toggleTopicFilterOverflow () {
   if (checkMediaQuery().includes('s')) return
 
   const topicLegend = document.querySelector('#edit-topic--2--wrapper legend');
-  if (topicLegend) {
-    topicLegend.addEventListener('click', function (e) {
-      const aside = document.querySelector('aside.layout__sidebar.js-sticky-element');
+  if (!topicLegend) return
+  topicLegend.addEventListener('click', function (e) {
+    const aside = document.querySelector('aside.layout__sidebar.js-sticky-element');
 
-      if (topicLegend.classList.contains('is-open')) {
-        console.log(topicLegend.classList);
-        aside.style.overflow = 'auto';
-      }
-      else {
-        aside.style.overflow = 'hidden';
-      }
-    });
-  }
+    if (topicLegend.classList.contains('is-open')) {
+      console.log(topicLegend.classList);
+      aside.style.overflow = 'auto';
+    }
+    else {
+      aside.style.overflow = 'hidden';
+    }
+  });
 }
 
 module.exports = autoOpenFirstSearchFilter
