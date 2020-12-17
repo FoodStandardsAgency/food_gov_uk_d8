@@ -3,7 +3,7 @@
   'use strict';
   Drupal.behaviors.fsaRandomLinks = {
     attach: function (context, settings) {
-      function randomlinks(){
+      function randomLinks() {
           var myrandom=Math.round(Math.random()*4)
           var links=new Array()
           links[0]="https://forms.office.com/Pages/ResponsePage.aspx?id=-VAcircBikym-pDrkG8Y6XugaYrj8fNHhyCFRWGmjRJURVNPWlNZRjU0NUpHWlpTN1BCUkw4VVo0WiQlQCN0PWcu";
@@ -13,7 +13,7 @@
           links[4]="https://forms.office.com/Pages/ResponsePage.aspx?id=-VAcircBikym-pDrkG8Y6XugaYrj8fNHhyCFRWGmjRJUMkIwRDYzQTRHTVJZMkhaNTFCSE5KNEpLNyQlQCN0PWcu";
           return links[myrandom];
       }
-      $("input.randomLink").each(function () {
+      $("a.randomLink").each(function () {
         $(this).click(function() { window.open(randomLinks()); });
       });
     }

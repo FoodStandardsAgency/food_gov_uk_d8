@@ -268,6 +268,9 @@ a {
     cursor: pointer;
     text-decoration: none !important;
     transition: background-color var(--transition-enter-fast);
+    &:hover {
+      color: var(--color-white) !important;
+    }
 
     :--not-touch &:--enter {
       text-decoration: none;
