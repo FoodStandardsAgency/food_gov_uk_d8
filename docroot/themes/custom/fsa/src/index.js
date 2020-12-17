@@ -23,6 +23,7 @@ import autoOpenFirstSearchFilter from './component/search/search'
 import toggleSidebarDocumentMenu from './component/document-menu-side-bar/document-menu-side-bar';
 import hideSearchFiltersEmptyResults from './component/search/search'
 import webFormError from './component/webform-error/webform-error'
+import toggleTopicFilterOverflow from './component/search/search'
 
 // Require every image asset inside of img folder
 require.context('./img/', true, /\.(gif|png|svg|jpe?g)$/)
