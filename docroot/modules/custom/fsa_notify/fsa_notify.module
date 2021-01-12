@@ -70,6 +70,9 @@ function fsa_notify_node_presave(NodeInterface $node) {
   if (!in_array($node->getType(), $types_to_send)) {
     return;
   }
+  if (!$node->isPublished()) {
+    return;
+  }
 
   if ($node->hasField('field_alert_send') && $node->field_alert_send->value) {
 
