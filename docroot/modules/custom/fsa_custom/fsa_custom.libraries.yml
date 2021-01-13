@@ -68,3 +68,10 @@ fsa-webform:
   dependencies:
     - core/drupal
     - core/jquery.once
+fsa-random-link:
+  version: 1.x
+  js:
+    js/fsa-randomlinks.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
